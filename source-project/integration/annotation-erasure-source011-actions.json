@@ -1,0 +1,48 @@
+{
+  "created_at": "2026-10-27T03:46:53.200672+00:00",
+  "candidate": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/catalog-source011-hidl-annotations",
+  "base": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/catalog-source011-hidl",
+  "requires_prior_hidl_integration": "integration/hidl-source011-actions.json",
+  "patch": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/integration/annotation-erasure-source011.patch",
+  "patch_sha256": "7a1db0c46a5527d8492875c93b6c2bdb62bd3e5dc6de72140e1c86c8a873c40d",
+  "files": [
+    {
+      "file": "tooling/annotation_link.py",
+      "base_sha256": "8a1c34c532c91175dc3be51a255cb28a9bf9098e6614d71b7f6c8daabb2897b4",
+      "candidate_sha256": "76683d117cbf5b3883abcffd03ba18e172d1bae03ab0f0e593e80d3f579461e8"
+    },
+    {
+      "file": "tooling/build_catalog.py",
+      "base_sha256": "e2047e5eb221b9f2fda8f26415d848f21929e91b890a243e8f2674dac06b86b2",
+      "candidate_sha256": "77f17760af757b86460d3ac6becff5de45fbbf116efaef3e0a547b90f71f4c2e"
+    },
+    {
+      "file": "tests/test_annotation_jvm_erasure.py",
+      "base_sha256": null,
+      "candidate_sha256": "4fca71f6c2342e826de0bd676a2eee2ac56285097174840d94d850a4d369ca65"
+    },
+    {
+      "file": "tests/test_annotation_jvm_erasure_import.py",
+      "base_sha256": null,
+      "candidate_sha256": "8b954a0f7314b2a8ce4be83f2b2f7cdbef4711dc1ad57040e67d4ac4f13170b2"
+    }
+  ],
+  "tests_passed": 225,
+  "log": "integration/source011-hidl-annotations-regression.log",
+  "current_sdk_type_only_owner_map_verified": true,
+  "prior_unresolved_current_annotations_with_exact_descriptor": 268,
+  "of_which_permission_annotations": 119,
+  "feasibility": "integration/annotation-generic-erasure-current-feasibility.json",
+  "changes": [
+    "Exact full JVM descriptor fallback for qualified known generic outer types in the same platform index",
+    "Unknown variables, guessed java.lang aliases, malformed types and cross-platform fallback rejected",
+    "A same-name regular method with a return type is not mistaken for a constructor"
+  ],
+  "not_yet_production": true,
+  "expected_remaining_prior_unmatched": 578,
+  "limitations": [
+    "Production annotation comparison must confirm counts after a fresh immutable build",
+    "SDK37.0 uses its existing strict same-snapshot matching; no SDK37.2 index borrowed",
+    "No wire codec, OS grant or per-client authority inferred"
+  ]
+}

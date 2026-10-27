@@ -1,0 +1,99 @@
+{
+  "duration_api_ms": 1648024,
+  "stop_reason": "end_turn",
+  "session_id": "33d842cc-ba0b-4b01-9ee9-b1731ea2363a",
+  "total_cost_usd": 10.803606,
+  "usage": {
+    "input_tokens": 8,
+    "cache_creation_input_tokens": 216889,
+    "cache_read_input_tokens": 82584,
+    "output_tokens": 128902,
+    "output_tokens_details": {
+      "thinking_tokens": 120939
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 216889,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 4,
+        "output_tokens": 902,
+        "cache_read_input_tokens": 78490,
+        "cache_creation_input_tokens": 64065,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 64065
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-fable-5-1": {
+      "inputTokens": 8,
+      "outputTokens": 128902,
+      "cacheReadInputTokens": 82584,
+      "cacheCreationInputTokens": 216889,
+      "webSearchRequests": 0,
+      "costUSD": 10.803606,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 64000,
+      "thinkingTokens": 120939,
+      "canonicalModel": "claude-fable-5-1",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 3,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "6. DELETE followed by a PUT carrying the pre-delete ETag must return 412.\n7. A local POST followed by an import of the same signature is undefined, see C-05.\n8. A cursor used after a publish must return 410, and reconstructing an older view requires reading entry_history because overlays are mutated in place.\n9. DELETE on an entry already in conflict state is unspecified.\n10. A missing If-Match cannot produce 428 while the parameter is marked required.\n\n**Cannot be verified without implementation, runtime or device tests.**\n- An Android-compatible HTTP engine, SQLite native loading and Keystore HMAC behavior on each shipped ABI and AOT mode.\n- Foreground service type eligibility, boot start, notification visibility and recovery after process kill or force stop.\n- The loopback address family that device-side adb forwarding connects to, and the display-ID semantics of screencap and input on target API levels.\n- Same-device wireless debugging pairing and whether the pairing survives reboot and network changes.\n- Upstream RemoteControl API names, transport details and the release label the design cites.\n- Compatibility of any MCP SDK with the 2025-11-25 baseline the design pins.\n- Non-SDK restriction behavior for reflection or JNI against cataloged members.\n- Transaction codes and parcel layouts for any interface.\n- The format version and content of the acquired signature files, and every hash in input-manifest.json.\n- Existence and results of the unit tests, and the content of the coverage manifest.\n- The Google release facts and the archived mirror status asserted in the readme.\n\n**Limitations of this review.** Every finding comes from reading frozen text. Extractor behavior was traced by hand, not executed, so line-level claims such as the assertion failure should be confirmed with a fixture that contains one annotation type. The progress counts were accepted as given and not audited against the manifest.\n\n**Recap.** The design needs one identity model, one policy evaluator and one admin API before implementation starts, and it has no bridge DDL or dispatch generator. The contracts need the registry enum unified, NOT NULL on every key, one ETag composition and serialized compare-and-swap on all mutations. The extractor must not run for publication until the annotation-type, reconciliation and symbolic-constant defects are fixed and representative fixtures exist. No production data exists, and the 37.0 baseline must be labeled as a declared gap against 37.2 in any future catalog.",
+  "ttft_ms": 833269,
+  "type": "result",
+  "duration_ms": 1654428,
+  "uuid": "522060e7-5c85-46a9-b4f9-5647e76fb17e",
+  "ttft_stream_ms": 3314,
+  "time_to_request_ms": 99,
+  "first_content_frame_ms": 3314,
+  "queued_turn_count": 0,
+  "result_index": 0
+}

@@ -1,0 +1,79 @@
+// Copyright (C) 2024 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+// Apex to store C++ and Rust lifecycle samples.
+apex {
+    name: "com.android.sdv.sample.lifecycle",
+    native_shared_libs: [
+        // C++ service bundle to be included in the apex.
+        "liboem_service_bundle_cpp_sample",
+        // C++ service bundle to be included in the apex for use in integration tests
+        "liblifecycle_cpp_service_bundle_test",
+
+        // Multi bundle Rust library to be included in the apex.
+        "liboem_rust_multi_bundle_sample",
+
+        // Rust deadline scheduling service bundle sample.
+        "liboem_deadline_sched_service_bundle_rust_sample",
+    ],
+    // Security contexts to files in the APEX.
+    file_contexts: "lifecycle_sample_apex_file_contexts",
+    // Json manifest file describing meta info of this APEX bundle.
+    // The 'name' filed from this json is used for mounting point.
+    manifest: "apex_manifest.json",
+    prebuilts: [
+        // SDV service bundles manifest file.
+        "com.android.sdv.sample.lifecycle.manifest",
+        // Service bundle scheduling config file with SCHED_DEADLINE policy.
+        "com.sdv.google.sample.lifecycle.scheduling_deadline_config",
+        // Service bundle scheduling config file with setting CPU affinity.
+        "com.sdv.google.sample.lifecycle.scheduling_affinity_config",
+        // Linker configuration to enable loading library from apex.
+        "com.sdv.google.sample.lifecycle.linker-config",
+        "LifecycleCppSampleServiceBundle-permissions",
+    ],
+    // Name of the apex_key module that provides the private key to sign the APEX bundle.
+    key: "com.android.sdv.sample.lifecycle_key",
+    // This APEX cannot be updated outside of full OTA/full system update, because some of the
+    // included bundles use unstable AIDL interfaces.
+    updatable: false,
+    // The minimum sdk version supported by the APEX and all of (in)direct dependencies.
+    min_sdk_version: "34",
+    // Sample(s) package is installed into /product partition.
+    product_specific: true,
+}
+
+// SDV manifest file with the metadata information about service bundles stored in the apex.
+prebuilt_etc {
+    name: "com.android.sdv.sample.lifecycle.manifest",
+    // The source name of the manifest file.
+    src: "sdv_service_bundles_manifest.textproto",
+    // The name of the installed file shall be `sdv_service_bundles_manifest.textproto`.
+    filename: "sdv_service_bundles_manifest.textproto",
+    // Disable direct installation of the manifest to one of the partitions.
+    // The manifest will be used only inside of service bundles registry apexes.
+    installable: false,
+}
+
+// File with the Authz permissions of LifecycleCppSampleServiceBundle stored in the apex.
+prebuilt_etc {
+    name: "LifecycleCppSampleServiceBundle-permissions",
+    src: "permissions/LifecycleCppSampleServiceBundle.textproto",
+    filename: "LifecycleCppSampleServiceBundle.textproto",
+    sub_dir: "permissions",
+    installable: false,
+}

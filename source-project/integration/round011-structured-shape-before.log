@@ -1,0 +1,73 @@
+test_hidl_enum_expression_changes_digest (test_structured_type_source_scopes.StructuredSourceScopes.test_hidl_enum_expression_changes_digest) ... FAIL
+test_hidl_enum_storage_type_changes_digest (test_structured_type_source_scopes.StructuredSourceScopes.test_hidl_enum_storage_type_changes_digest) ... FAIL
+test_hidl_field_type_changes_semantic_digest (test_structured_type_source_scopes.StructuredSourceScopes.test_hidl_field_type_changes_semantic_digest) ... FAIL
+test_hidl_typedef_target_changes_digest (test_structured_type_source_scopes.StructuredSourceScopes.test_hidl_typedef_target_changes_digest) ... FAIL
+test_raw_header_comments_and_proof_prose_do_not_change_digest (test_structured_type_source_scopes.StructuredSourceScopes.test_raw_header_comments_and_proof_prose_do_not_change_digest) ... ok
+test_serialized_field_order_changes_digest (test_structured_type_source_scopes.StructuredSourceScopes.test_serialized_field_order_changes_digest) ... FAIL
+test_versioned_source_fields_are_not_combined (test_structured_type_source_scopes.StructuredSourceScopes.test_versioned_source_fields_are_not_combined) ... FAIL
+
+======================================================================
+FAIL: test_hidl_enum_expression_changes_digest (test_structured_type_source_scopes.StructuredSourceScopes.test_hidl_enum_expression_changes_digest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/catalog-integrated011v3/tests/test_structured_type_source_scopes.py", line 28, in test_hidl_enum_expression_changes_digest
+    result=self.project([dict(fields=[('A','p@1.0::Data','1')]),dict(fields=[('A','p@1.0::Data','2')])],lang='hidl',kind='enum',extra=dict(hidl_declaration_kind='enum'));self.assertNotEqual(result[0][1],result[1][1])
+                                                                                                                                                                          ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'e0239bae00dfc2225bf6282e3cc6053cd6cb0ea3518d5a22ec66ebc8a78c991e' == 'e0239bae00dfc2225bf6282e3cc6053cd6cb0ea3518d5a22ec66ebc8a78c991e'
+
+======================================================================
+FAIL: test_hidl_enum_storage_type_changes_digest (test_structured_type_source_scopes.StructuredSourceScopes.test_hidl_enum_storage_type_changes_digest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/catalog-integrated011v3/tests/test_structured_type_source_scopes.py", line 26, in test_hidl_enum_storage_type_changes_digest
+    result=self.project([dict(fields=[],extra=dict(storage_type_raw=':uint32_t')),dict(fields=[],extra=dict(storage_type_raw=':uint64_t'))],lang='hidl',kind='enum',extra=dict(hidl_declaration_kind='enum'));self.assertNotEqual(result[0][1],result[1][1])
+                                                                                                                                                                                                              ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'e0239bae00dfc2225bf6282e3cc6053cd6cb0ea3518d5a22ec66ebc8a78c991e' == 'e0239bae00dfc2225bf6282e3cc6053cd6cb0ea3518d5a22ec66ebc8a78c991e'
+
+======================================================================
+FAIL: test_hidl_field_type_changes_semantic_digest (test_structured_type_source_scopes.StructuredSourceScopes.test_hidl_field_type_changes_semantic_digest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/catalog-integrated011v3/tests/test_structured_type_source_scopes.py", line 20, in test_hidl_field_type_changes_semantic_digest
+    result=self.project([dict(fields=[('x','int32_t')]),dict(fields=[('x','int64_t')])],lang='hidl',kind='type',extra=dict(hidl_declaration_kind='struct'));self.assertNotEqual(result[0][1],result[1][1])
+                                                                                                                                                            ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'fca10b3d2b9b8483cb7549cdac3a2e0d40aa8088dc95263c781285a410f96171' == 'fca10b3d2b9b8483cb7549cdac3a2e0d40aa8088dc95263c781285a410f96171'
+
+======================================================================
+FAIL: test_hidl_typedef_target_changes_digest (test_structured_type_source_scopes.StructuredSourceScopes.test_hidl_typedef_target_changes_digest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/catalog-integrated011v3/tests/test_structured_type_source_scopes.py", line 24, in test_hidl_typedef_target_changes_digest
+    result=self.project([dict(fields=[],extra=dict(target_type_raw='int32_t')),dict(fields=[],extra=dict(target_type_raw='int64_t'))],lang='hidl',kind='type',extra=dict(hidl_declaration_kind='typedef'));self.assertNotEqual(result[0][1],result[1][1])
+                                                                                                                                                                                                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'fca10b3d2b9b8483cb7549cdac3a2e0d40aa8088dc95263c781285a410f96171' == 'fca10b3d2b9b8483cb7549cdac3a2e0d40aa8088dc95263c781285a410f96171'
+
+======================================================================
+FAIL: test_serialized_field_order_changes_digest (test_structured_type_source_scopes.StructuredSourceScopes.test_serialized_field_order_changes_digest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/catalog-integrated011v3/tests/test_structured_type_source_scopes.py", line 22, in test_serialized_field_order_changes_digest
+    result=self.project([dict(fields=[('x','int'),('y','long')]),dict(fields=[('y','long'),('x','int')])]);self.assertNotEqual(result[0][1],result[1][1])
+                                                                                                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '5236cd86dbc15fdae358638516da1b00bfd424f0be9bb109fdd6e708c3ca864a' == '5236cd86dbc15fdae358638516da1b00bfd424f0be9bb109fdd6e708c3ca864a'
+
+======================================================================
+FAIL: test_versioned_source_fields_are_not_combined (test_structured_type_source_scopes.StructuredSourceScopes.test_versioned_source_fields_are_not_combined)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/catalog-integrated011v3/tests/test_structured_type_source_scopes.py", line 18, in test_versioned_source_fields_are_not_combined
+    result=self.project([dict(fields=[('x','int')]),dict(fields=[('x','long')])]);self.assertEqual([len(doc['extensions']['declared_type_shape']['fields']) for doc,h in result],[1,1]);self.assertNotEqual(result[0][1],result[1][1])
+                                                                                  ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [2, 2] != [1, 1]
+
+First differing element 0:
+2
+1
+
+- [2, 2]
++ [1, 1]
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.009s
+
+FAILED (failures=6)

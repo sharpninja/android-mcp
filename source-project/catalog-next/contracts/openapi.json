@@ -1,0 +1,1892 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Android Binding Catalog Administration Contract",
+    "version": "1.1.0",
+    "description": "Specification only. No HTTP server, authentication provider or remote listener enabled. Catalog administration never grants Android invocation permission. Normative state, ETag and publication semantics: ../API-CONTRACT.md."
+  },
+  "paths": {
+    "/v1/catalog/entries": {
+      "get": {
+        "operationId": "searchEntries",
+        "description": "Bounded indexed search of effective catalog view. Inclusion of suppressed records requires admin scope. Stable ordering by entry_id within pinned view. include_suppressed=true includes suppressed, deleted and conflict states; default excludes all three. Any registry/overlay generation change expires the cursor with 410.",
+        "security": [
+          {
+            "catalogAuth": [
+              "catalog:read"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 500,
+              "default": 100
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Opaque cursor pinned to registry and overlay view generation; never an offset"
+          },
+          {
+            "name": "package",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "owner",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "include_suppressed",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Scope denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Tombstoned or expired cursor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createLocalEntry",
+        "description": "Create local overlay entry only. Server derives canonical ID. Imported ID collision returns 409; use PUT with current ETag to create an override.",
+        "security": [
+          {
+            "catalogAuth": [
+              "catalog:admin"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 200
+            },
+            "description": "Same key and same canonical request hash returns original result. Different hash returns 409."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "headers": {
+              "ETag": {
+                "description": "Strong opaque revision token for this representation",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Entry"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Scope denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Schema, source or semantic validation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mutation"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/catalog/entries/{entry_id}": {
+      "get": {
+        "operationId": "readEffectiveEntry",
+        "description": "Return effective entry plus ETag. Suppressed/deleted entries return 410; history remains available to admins. Current entry preconditions always use the cat1 ETag in API-CONTRACT.md.",
+        "security": [
+          {
+            "catalogAuth": [
+              "catalog:read"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "entry_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "headers": {
+              "ETag": {
+                "description": "Strong opaque revision token for this representation",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Entry"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Scope denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Tombstoned or expired cursor",
+            "headers": {
+              "ETag": {
+                "description": "Strong opaque revision token for this representation",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "replaceOverlay",
+        "description": "Full validated Mutation replacement of local overlay only; canonical identity and imported evidence cannot change. Conflicts require x-resolution with current base hash; tombstones require current cat1 ETag and restore to active. Atomic history/revision append. See API-CONTRACT.md.",
+        "security": [
+          {
+            "catalogAuth": [
+              "catalog:admin"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "entry_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Semantically required. Missing returns 428 before generic validation; malformed/weak/list/wildcard returns 400; stale cat1 tag returns 412 with current tag. Obtain current tag from entry GET or history, including conflict/tombstone."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "headers": {
+              "ETag": {
+                "description": "Strong opaque revision token for this representation",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Entry"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Scope denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "Current cat1 ETag does not match If-Match",
+            "headers": {
+              "ETag": {
+                "description": "Strong opaque revision token for this representation",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Schema, source or semantic validation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "428": {
+            "description": "If-Match required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mutation"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "suppressEntry",
+        "description": "Create and return suppression/deletion tombstone Entry with new cat1 ETag (200). Already tombstoned and matching tag returns identical tombstone, unchanged revision (200). Conflicts return 409 until explicitly resolved. No recursive cascade.",
+        "security": [
+          {
+            "catalogAuth": [
+              "catalog:admin"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "entry_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Semantically required. Missing returns 428 before generic validation; malformed/weak/list/wildcard returns 400; stale cat1 tag returns 412 with current tag. Obtain current tag from entry GET or history, including conflict/tombstone."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "headers": {
+              "ETag": {
+                "description": "Strong opaque revision token for this representation",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Entry"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Scope denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "Current cat1 ETag does not match If-Match",
+            "headers": {
+              "ETag": {
+                "description": "Strong opaque revision token for this representation",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Schema, source or semantic validation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "428": {
+            "description": "If-Match required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/catalog/entries/{entry_id}/history": {
+      "get": {
+        "operationId": "readEntryHistory",
+        "description": "Append-only history, paginated with generation-bound cursors. Response ETag is the current administrative cat1 ETag, not a historical revision. Existing imported entries without overlays return empty history plus their current ETag.",
+        "security": [
+          {
+            "catalogAuth": [
+              "catalog:admin"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "entry_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 500,
+              "default": 100
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Opaque cursor pinned to registry and overlay view generation; never an offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "headers": {
+              "ETag": {
+                "description": "Strong opaque revision token for this representation",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoryPage"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Scope denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Tombstoned or expired cursor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/catalog/imports": {
+      "post": {
+        "operationId": "stageImport",
+        "description": "Stage hash-pinned artifact already present locally. No URL fetching or file-system path traversal. Validate hashes, source signatures, references, schema and full coverage report before eligible publication. Retry is idempotent; no active-view changes.",
+        "security": [
+          {
+            "catalogAuth": [
+              "catalog:admin"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 200
+            },
+            "description": "Same key and same canonical request hash returns original result. Different hash returns 409."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Registry"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Scope denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Schema, source or semantic validation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/catalog/registries/{registry_id}": {
+      "get": {
+        "operationId": "readRegistry",
+        "description": "",
+        "security": [
+          {
+            "catalogAuth": [
+              "catalog:admin"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "registry_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Registry"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Scope denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/catalog/registries/{registry_id}/publish": {
+      "post": {
+        "operationId": "publishRegistry",
+        "description": "Atomically publish a validated immutable registry only. Compare expected_active_registry_id under BEGIN IMMEDIATE; mark overlay collisions/rebases/conflicts, retire old registry, switch active pointer, increment registry generation and append history/audit/outbox. Same principal/operation/idempotency-key+request replays original result. Failed transaction leaves all state unchanged. No registry If-Match is required because immutable registry ID, validated state and expected active pointer form the CAS precondition.",
+        "security": [
+          {
+            "catalogAuth": [
+              "catalog:admin"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "registry_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 200
+            },
+            "description": "Same key and same canonical request hash returns original result. Different hash returns 409."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Registry"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Scope denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Schema, source or semantic validation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PublishRequest"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "catalogAuth": {
+        "type": "oauth2",
+        "description": "Abstract scope contract; deployment and issuer remain unspecified. Do not enable remote access from this document.",
+        "flows": {
+          "clientCredentials": {
+            "tokenUrl": "https://catalog.invalid/not-configured/token",
+            "scopes": {
+              "catalog:read": "Read catalog metadata",
+              "catalog:admin": "Manage local overlays and imports; no invocation grant"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "PermissionExpression": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "permission"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "op",
+              "name"
+            ],
+            "additionalProperties": false,
+            "patternProperties": {
+              "^x-": {}
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "all"
+              },
+              "children": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/components/schemas/PermissionExpression"
+                }
+              }
+            },
+            "required": [
+              "op",
+              "children"
+            ],
+            "additionalProperties": false,
+            "patternProperties": {
+              "^x-": {}
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "any"
+              },
+              "children": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/components/schemas/PermissionExpression"
+                }
+              }
+            },
+            "required": [
+              "op",
+              "children"
+            ],
+            "additionalProperties": false,
+            "patternProperties": {
+              "^x-": {}
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "conditional"
+              },
+              "condition": {
+                "$ref": "#/components/schemas/PermissionExpression"
+              },
+              "requirement": {
+                "$ref": "#/components/schemas/PermissionExpression"
+              }
+            },
+            "required": [
+              "op",
+              "condition",
+              "requirement"
+            ],
+            "additionalProperties": false,
+            "patternProperties": {
+              "^x-": {}
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "access"
+              },
+              "access": {
+                "enum": [
+                  "read",
+                  "write"
+                ]
+              },
+              "requirement": {
+                "$ref": "#/components/schemas/PermissionExpression"
+              }
+            },
+            "required": [
+              "op",
+              "access",
+              "requirement"
+            ],
+            "additionalProperties": false,
+            "patternProperties": {
+              "^x-": {}
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "manual"
+              },
+              "reason": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "op",
+              "reason"
+            ],
+            "additionalProperties": false,
+            "patternProperties": {
+              "^x-": {}
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "explicit-none"
+              }
+            },
+            "required": [
+              "op"
+            ],
+            "additionalProperties": false,
+            "patternProperties": {
+              "^x-": {}
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "op": {
+                "const": "unknown"
+              },
+              "reason": {
+                "type": "string"
+              },
+              "raw": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "op",
+              "reason"
+            ],
+            "additionalProperties": false,
+            "patternProperties": {
+              "^x-": {}
+            }
+          }
+        ]
+      },
+      "TypeReference": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "resolved_binding_id": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "status": {
+            "enum": [
+              "resolved",
+              "primitive",
+              "unknown",
+              "unsupported"
+            ]
+          },
+          "reason": {
+            "type": "string"
+          },
+          "codec_status": {
+            "enum": [
+              "known",
+              "unknown",
+              "unsupported"
+            ]
+          },
+          "codec_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "text",
+          "status",
+          "codec_status"
+        ],
+        "additionalProperties": false,
+        "patternProperties": {
+          "^x-": {}
+        }
+      },
+      "Source": {
+        "type": "object",
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "path": {
+            "type": "string"
+          },
+          "revision": {
+            "type": "string"
+          },
+          "retrieved_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "api_level": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1
+          },
+          "channel": {
+            "enum": [
+              "stable",
+              "preview",
+              "development"
+            ]
+          },
+          "kind": {
+            "type": "string"
+          },
+          "license": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "source_id",
+          "url",
+          "path",
+          "revision",
+          "retrieved_at",
+          "sha256",
+          "api_level",
+          "channel",
+          "kind",
+          "license"
+        ],
+        "additionalProperties": false,
+        "patternProperties": {
+          "^x-": {}
+        }
+      },
+      "Provenance": {
+        "type": "object",
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "line": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "raw_signature": {
+            "type": "string"
+          },
+          "source_revision": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "source_id",
+          "raw_signature",
+          "source_revision"
+        ],
+        "additionalProperties": false,
+        "patternProperties": {
+          "^x-": {}
+        }
+      },
+      "Entry": {
+        "type": "object",
+        "properties": {
+          "schema_version": {
+            "type": "string",
+            "pattern": "^1\\.[0-9]+\\.[0-9]+$"
+          },
+          "entry_id": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "canonical_signature": {
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "package",
+              "class",
+              "interface",
+              "enum",
+              "annotation",
+              "constructor",
+              "method",
+              "field",
+              "property",
+              "aidl-interface",
+              "aidl-member",
+              "unsupported"
+            ]
+          },
+          "package": {
+            "type": "string"
+          },
+          "owner": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "arguments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TypeReference"
+            }
+          },
+          "return_type": {
+            "$ref": "#/components/schemas/TypeReference"
+          },
+          "permission": {
+            "$ref": "#/components/schemas/PermissionExpression"
+          },
+          "provenance": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Provenance"
+            }
+          },
+          "origin": {
+            "enum": [
+              "imported",
+              "local",
+              "overlay"
+            ]
+          },
+          "state": {
+            "enum": [
+              "active",
+              "suppressed",
+              "deleted",
+              "conflict"
+            ]
+          },
+          "registry_version": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "overlay_revision": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "codec_status": {
+            "enum": [
+              "known",
+              "unknown",
+              "unsupported"
+            ]
+          },
+          "unresolved": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "extensions": {
+            "type": "object"
+          },
+          "required_semantics": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "schema_version",
+          "entry_id",
+          "canonical_signature",
+          "kind",
+          "name",
+          "permission",
+          "provenance",
+          "origin",
+          "state",
+          "registry_version",
+          "overlay_revision",
+          "codec_status",
+          "unresolved",
+          "required_semantics"
+        ],
+        "additionalProperties": false,
+        "patternProperties": {
+          "^x-": {}
+        }
+      },
+      "Mutation": {
+        "type": "object",
+        "properties": {
+          "schema_version": {
+            "type": "string",
+            "pattern": "^1\\.[0-9]+\\.[0-9]+$"
+          },
+          "canonical_signature": {
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "package",
+              "class",
+              "interface",
+              "enum",
+              "annotation",
+              "constructor",
+              "method",
+              "field",
+              "property",
+              "aidl-interface",
+              "aidl-member",
+              "unsupported"
+            ]
+          },
+          "package": {
+            "type": "string"
+          },
+          "owner": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "arguments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TypeReference"
+            }
+          },
+          "return_type": {
+            "$ref": "#/components/schemas/TypeReference"
+          },
+          "permission": {
+            "$ref": "#/components/schemas/PermissionExpression"
+          },
+          "codec_status": {
+            "enum": [
+              "known",
+              "unknown",
+              "unsupported"
+            ]
+          },
+          "unresolved": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "extensions": {
+            "type": "object"
+          },
+          "required_semantics": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "reason": {
+            "type": "string"
+          },
+          "x-resolution": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "const": "rebase"
+                  },
+                  "expected_imported_record_sha256": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{64}$"
+                  }
+                },
+                "required": [
+                  "action",
+                  "expected_imported_record_sha256"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "const": "retain-local"
+                  },
+                  "expected_imported_record_sha256": {
+                    "type": "null"
+                  }
+                },
+                "required": [
+                  "action",
+                  "expected_imported_record_sha256"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          }
+        },
+        "required": [
+          "schema_version",
+          "canonical_signature",
+          "kind",
+          "name",
+          "permission",
+          "codec_status",
+          "unresolved",
+          "required_semantics",
+          "reason"
+        ],
+        "additionalProperties": false,
+        "patternProperties": {
+          "^x-": {}
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "enum": [
+              "invalid_request",
+              "unauthorized",
+              "forbidden",
+              "not_found",
+              "gone",
+              "conflict",
+              "precondition_failed",
+              "precondition_required",
+              "unsupported_schema",
+              "unknown_semantics",
+              "validation_failed",
+              "idempotency_conflict",
+              "cursor_expired"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "request_id": {
+            "type": "string"
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "reason": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "reason"
+              ],
+              "additionalProperties": false,
+              "patternProperties": {
+                "^x-": {}
+              }
+            }
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "request_id"
+        ],
+        "additionalProperties": false,
+        "patternProperties": {
+          "^x-": {}
+        }
+      },
+      "Page": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "maxItems": 500,
+            "items": {
+              "$ref": "#/components/schemas/Entry"
+            }
+          },
+          "next_cursor": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "registry_version": {
+            "type": "integer"
+          },
+          "view_version": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "items",
+          "next_cursor",
+          "registry_version",
+          "view_version"
+        ],
+        "additionalProperties": false,
+        "patternProperties": {
+          "^x-": {}
+        }
+      },
+      "HistoryEvent": {
+        "type": "object",
+        "properties": {
+          "entry_id": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "operation": {
+            "enum": [
+              "create",
+              "update",
+              "suppress",
+              "delete",
+              "restore",
+              "rebase",
+              "conflict"
+            ]
+          },
+          "actor": {
+            "type": "string"
+          },
+          "occurred_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "document": {
+            "$ref": "#/components/schemas/Entry"
+          }
+        },
+        "required": [
+          "entry_id",
+          "revision",
+          "operation",
+          "actor",
+          "occurred_at",
+          "document"
+        ],
+        "additionalProperties": false,
+        "patternProperties": {
+          "^x-": {}
+        }
+      },
+      "HistoryPage": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "maxItems": 500,
+            "items": {
+              "$ref": "#/components/schemas/HistoryEvent"
+            }
+          },
+          "next_cursor": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "items",
+          "next_cursor"
+        ],
+        "additionalProperties": false,
+        "patternProperties": {
+          "^x-": {}
+        }
+      },
+      "ImportRequest": {
+        "type": "object",
+        "properties": {
+          "schema_version": {
+            "type": "string",
+            "pattern": "^1\\.[0-9]+\\.[0-9]+$"
+          },
+          "android_version": {
+            "type": "string"
+          },
+          "api_level": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "source_set_hash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "sources": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/Source"
+            }
+          },
+          "records_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "local_artifact_id": {
+            "type": "string"
+          },
+          "registry_version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "coverage": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "schema_version",
+          "android_version",
+          "api_level",
+          "source_set_hash",
+          "sources",
+          "records_sha256",
+          "local_artifact_id",
+          "registry_version",
+          "coverage"
+        ],
+        "additionalProperties": false,
+        "patternProperties": {
+          "^x-": {}
+        }
+      },
+      "Registry": {
+        "type": "object",
+        "properties": {
+          "registry_id": {
+            "type": "string"
+          },
+          "registry_version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "schema_version": {
+            "type": "string"
+          },
+          "android_version": {
+            "type": "string"
+          },
+          "api_level": {
+            "type": "integer"
+          },
+          "source_set_hash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "state": {
+            "enum": [
+              "staged",
+              "validated",
+              "rejected",
+              "published",
+              "retired"
+            ]
+          },
+          "validation": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "registry_id",
+          "registry_version",
+          "schema_version",
+          "android_version",
+          "api_level",
+          "source_set_hash",
+          "state",
+          "validation"
+        ],
+        "additionalProperties": false,
+        "patternProperties": {
+          "^x-": {}
+        }
+      },
+      "PublishRequest": {
+        "type": "object",
+        "properties": {
+          "expected_active_registry_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "conflict_policy": {
+            "const": "mark-conflict"
+          }
+        },
+        "required": [
+          "expected_active_registry_id",
+          "conflict_policy"
+        ],
+        "additionalProperties": false,
+        "patternProperties": {
+          "^x-": {}
+        }
+      }
+    }
+  }
+}

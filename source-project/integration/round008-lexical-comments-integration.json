@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-26T23:51:52.670175+00:00",
+  "action": "R8 source lexical reconciliation corrective delta",
+  "reproduction": "camera/aidl/android/hardware/ICameraClient.aidl comment-only body counted as one statement",
+  "fixture_before": "round008-lexical-comments-before.txt:2 failed",
+  "regression_after": "round008-integrated-tests-after-comments.txt:147 passed",
+  "patch": "integration/round008-lexical-comments.patch",
+  "sha256": "424e20a90371d903f035b418e58cb04f762f74508e8e3f737b34b7a132ed07ed",
+  "java_cache_fingerprint_unchanged": true,
+  "reason": "aidl_lex.py excluded from Java producer semantics; do not regenerate fresh Java scan again",
+  "production_audit_status": "20210/20210 matched, no reconciliation failures; audit v3 checks aidl-member return spelling explicitly",
+  "production_evidence": "aidl-corpus-audit-round008-comments-v2.json"
+}

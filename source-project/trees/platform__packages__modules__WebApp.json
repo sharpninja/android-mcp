@@ -1,0 +1,1477 @@
+{
+  "repo": "platform/packages/modules/WebApp",
+  "requested_revision": "refs/tags/android-17.0.0_r1",
+  "revision": "551872e35de50df9fa39fa871129db512c18565b",
+  "entries": [
+    {
+      "path": "OWNERS",
+      "kind": "blob",
+      "oid": "7ebbf32204efc3cdd06f88c9eabf058c34da3e8a",
+      "mode": "100644"
+    },
+    {
+      "path": "PREUPLOAD.cfg",
+      "kind": "blob",
+      "oid": "75e889b4303705ec392aa9640618713a8fa350d5",
+      "mode": "100644"
+    },
+    {
+      "path": "TEST_MAPPING",
+      "kind": "blob",
+      "oid": "776b5f52efd6c8c385e6a70062a83f060c39996f",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/Android.bp",
+      "kind": "blob",
+      "oid": "b75a169439b637234145d645eead7df4b5eaefc4",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/boot-image-profile.txt",
+      "kind": "blob",
+      "oid": "263da7e573aa79a6466a8c31a2d4bc4cb655270c",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/com.android.webapp.avbpubkey",
+      "kind": "blob",
+      "oid": "5fa8298df6c570c1765a1d848307f6b68a74f001",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/com.android.webapp.pem",
+      "kind": "blob",
+      "oid": "3671249c25afa52cb860eea49e1ed1e13699c327",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/com.android.webapp.pk8",
+      "kind": "blob",
+      "oid": "d624a42c8f28d6119937124fb6cee6fda61bc7fb",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/com.android.webapp.x509.pem",
+      "kind": "blob",
+      "oid": "b9c5caa89063e2846b5fd36aa59297152ddd2116",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/manifest.json",
+      "kind": "blob",
+      "oid": "4e6716f956f4b11439483651ca667d68a65c2921",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/permissions/Android.bp",
+      "kind": "blob",
+      "oid": "67c605c33463a9bdabc66014861bee014d688d89",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/permissions/OWNERS",
+      "kind": "blob",
+      "oid": "95220605d248f302c7a3d3c6bd2042d268a9086b",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/permissions/com.android.webapp.service.xml",
+      "kind": "blob",
+      "oid": "729685bed3894f761623f21f314eff75edb3bcfe",
+      "mode": "100644"
+    },
+    {
+      "path": "checkstyle.xml",
+      "kind": "blob",
+      "oid": "2a50339f887c8a9cbf48366d63424228bbcee558",
+      "mode": "100644"
+    },
+    {
+      "path": "flags/Android.bp",
+      "kind": "blob",
+      "oid": "2298626f59159f7ca6cd8442336917d864b8539c",
+      "mode": "100644"
+    },
+    {
+      "path": "flags/flags.aconfig",
+      "kind": "blob",
+      "oid": "13602f3368af044d76a3a5150dc696488c6b3d64",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/Android.bp",
+      "kind": "blob",
+      "oid": "cd6b7bdebf837cf12bb8c2f7424c68f25f9e6120",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/aidl/com/android/webapp/IWebAppInstallCallback.aidl",
+      "kind": "blob",
+      "oid": "330adac0843a9db739dafdbd72c815cf86acff56",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/aidl/com/android/webapp/IWebAppQueryCallback.aidl",
+      "kind": "blob",
+      "oid": "d7c61fe48403086ddbf83d7fed2615b46c8123a9",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/aidl/com/android/webapp/IWebAppService.aidl",
+      "kind": "blob",
+      "oid": "1d2430ba95547f54bd29ff60590da6400dc7b50c",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/current.txt",
+      "kind": "blob",
+      "oid": "e74cbdc2bac80be45b2aec96bb1903d2edf4c579",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/module-lib-current.txt",
+      "kind": "blob",
+      "oid": "77d4d615c6576a428878795e7472cd05df7134f1",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/module-lib-removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/system-current.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/system-removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/content/pm/webapp/WebAppFrameworkInitializer.java",
+      "kind": "blob",
+      "oid": "092edeb21ae1634bcbfe815a82ed7d928e4c2af0",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/content/pm/webapp/WebAppInstallRequest.java",
+      "kind": "blob",
+      "oid": "df7886d3c2a5451934db27ee85a65546380971ff",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/content/pm/webapp/WebAppManager.java",
+      "kind": "blob",
+      "oid": "fca40309282484ad0389b9e4ae8d8401f5a268e4",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/content/pm/webapp/WebAppQueryRequest.java",
+      "kind": "blob",
+      "oid": "9c02af993e80a29174a71f1f3ffca936a3cbd44c",
+      "mode": "100644"
+    },
+    {
+      "path": "service/Android.bp",
+      "kind": "blob",
+      "oid": "a3e4741653bd7b49aa2c476d5a104a30ec6fdb23",
+      "mode": "100644"
+    },
+    {
+      "path": "service/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "4370ddbcf836887f678a9a73256579b53bfa56f4",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/webapp/service/InstallContinuationManager.kt",
+      "kind": "blob",
+      "oid": "b2572e9a23a6f691536aa66be5000056b722d008",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/webapp/service/NotificationReceiver.kt",
+      "kind": "blob",
+      "oid": "6699397c67eab448423c4be7d8185b7832397e17",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/webapp/service/PackageManagerReceiver.kt",
+      "kind": "blob",
+      "oid": "7b150350af03dc1ebd4bc92faad9703229d570e5",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/webapp/service/WebAppInstaller.kt",
+      "kind": "blob",
+      "oid": "8d62bb972634fdf351826832fd8ae729320ea2df",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/webapp/service/WebAppService.kt",
+      "kind": "blob",
+      "oid": "5682f9eeabb037c6e97561377cd0333fe9752ef9",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/webapp/service/minter/ApkInfo.kt",
+      "kind": "blob",
+      "oid": "f177b7a8769b0b55a5060cc1ac4f17d74ad92aca",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/webapp/service/minter/ApkKeyStore.kt",
+      "kind": "blob",
+      "oid": "ff00868671c69199aa7ddb1d2ea6ab6c8703a74f",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/webapp/service/minter/ApkMinter.kt",
+      "kind": "blob",
+      "oid": "d183f7e1f6269336f62b11788ff4273ac9f2fd3e",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/webapp/service/model/InstallRequest.kt",
+      "kind": "blob",
+      "oid": "e147234a617a2dde955d730308669111d387dbb9",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/webapp/service/model/PwaManifest.kt",
+      "kind": "blob",
+      "oid": "9d38a06a8de7bb8aa24d5ad5c8355cce5e2b1e40",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/webapp/service/view/ColorScheme.kt",
+      "kind": "blob",
+      "oid": "873bccfec4665394ee9da1569c9e8bf38bc6b1da",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/webapp/service/view/InstallConfirmActivity.kt",
+      "kind": "blob",
+      "oid": "b39f01994fc82bf775a35de8ef44468fcf67f05a",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/webapp/service/view/InstallConfirmDialog.kt",
+      "kind": "blob",
+      "oid": "f3a33ef7a32f49687aa72e810eacd6a2dc0d03b3",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/webapp/service/view/InstallErrorActivity.kt",
+      "kind": "blob",
+      "oid": "2bbb49df750db6ff9bde189731f73edd434e958f",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/webapp/service/view/InstallErrorDialog.kt",
+      "kind": "blob",
+      "oid": "659fb009198d3f2647fee8f4a830f30b17764616",
+      "mode": "100644"
+    },
+    {
+      "path": "service/preinstalled-packages-com.android.webapp.service.xml",
+      "kind": "blob",
+      "oid": "afb629b435a05a618a6f559f585c9ce196c112ce",
+      "mode": "100644"
+    },
+    {
+      "path": "service/proguard.flags",
+      "kind": "blob",
+      "oid": "8d9bfce455c3104c0c403eff0079db23e839ee23",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-af/strings.xml",
+      "kind": "blob",
+      "oid": "fbda35a88c1f063c0dcdec1ad69e3d8bd8852644",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-am/strings.xml",
+      "kind": "blob",
+      "oid": "6fea8cbb6cb78fa5d0c5e0d3bf880e715e9e5802",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-ar/strings.xml",
+      "kind": "blob",
+      "oid": "1343873bea03541f9c3d3e581e4b49295a12e8d5",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-as/strings.xml",
+      "kind": "blob",
+      "oid": "00f4b3694f8b05987b40e117a116910fa36f4f94",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-az/strings.xml",
+      "kind": "blob",
+      "oid": "3951f41e84c10209ad4d2a3272d2df7110259a0d",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-b+sr+Latn/strings.xml",
+      "kind": "blob",
+      "oid": "01435547417137e332ef772f551265695ecc6e2b",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-be/strings.xml",
+      "kind": "blob",
+      "oid": "c914c699cb99dfa1e086615c1b0c08b77a0b5e6d",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-bg/strings.xml",
+      "kind": "blob",
+      "oid": "e9efcbce7fc06bac5d7fbc120e40f6033bf74ed8",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-bn/strings.xml",
+      "kind": "blob",
+      "oid": "d83cad0d9c836d3fef3651e03daf37c6a1b5a951",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-bs/strings.xml",
+      "kind": "blob",
+      "oid": "a193fa91a2a1ea3140ed8880088cab82787e03c6",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-ca/strings.xml",
+      "kind": "blob",
+      "oid": "21e7662d2c5ea94fb23ccfc741bad19a34ec1539",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-cs/strings.xml",
+      "kind": "blob",
+      "oid": "43a1623b676568d16a4613725ba4e4c606ac7dd1",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-da/strings.xml",
+      "kind": "blob",
+      "oid": "81d977199166da1c7c5f2c1307aa26cd2430f1e1",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-de/strings.xml",
+      "kind": "blob",
+      "oid": "568d509c26fbd92465be1122f78a4d4ffdb90dbf",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-el/strings.xml",
+      "kind": "blob",
+      "oid": "b50ecd7215bcaf6110622a82b358765cfed875eb",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-en-rAU/strings.xml",
+      "kind": "blob",
+      "oid": "ca216558e5cab34cf83a6dfd7e63eb6bb603c6fe",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-en-rCA/strings.xml",
+      "kind": "blob",
+      "oid": "87fd9968c52869bce1e38f0542a548a8160c4511",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-en-rGB/strings.xml",
+      "kind": "blob",
+      "oid": "ca216558e5cab34cf83a6dfd7e63eb6bb603c6fe",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-en-rIN/strings.xml",
+      "kind": "blob",
+      "oid": "ca216558e5cab34cf83a6dfd7e63eb6bb603c6fe",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-es-rUS/strings.xml",
+      "kind": "blob",
+      "oid": "9b2711d25e8100f5079f47558e5fc2a7ed408dc0",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-es/strings.xml",
+      "kind": "blob",
+      "oid": "7fca56b90349a8076ad5d76a06a671984ff4d04c",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-et/strings.xml",
+      "kind": "blob",
+      "oid": "d47da9c3bd10b97bed5ca654da3e28f59491cceb",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-eu/strings.xml",
+      "kind": "blob",
+      "oid": "a4a65772ef1bcaf88397d5dcc9e5438136145ae8",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-fa/strings.xml",
+      "kind": "blob",
+      "oid": "9ea37d8da52a305aa63be8802f12427d13e5eb10",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-fi/strings.xml",
+      "kind": "blob",
+      "oid": "2f904db987804245a43999f551581cee8346bb59",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-fr-rCA/strings.xml",
+      "kind": "blob",
+      "oid": "b54421aa2b2b64b9bb815babbf242c246cb987d7",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-fr/strings.xml",
+      "kind": "blob",
+      "oid": "5d5519bfadfa55769f41fb25917346eeb4086dc5",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-gl/strings.xml",
+      "kind": "blob",
+      "oid": "6955a870e988910e3209aa213b5e3de4ef0565c8",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-gu/strings.xml",
+      "kind": "blob",
+      "oid": "119f39d87115ba784f342289ea4b08720bc323c8",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-hi/strings.xml",
+      "kind": "blob",
+      "oid": "9c2b31b59e49bb90267de34162702893a3b9f2e6",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-hr/strings.xml",
+      "kind": "blob",
+      "oid": "0e03d915ffa09f35d3bc4a5b9b97e04da25cf335",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-hu/strings.xml",
+      "kind": "blob",
+      "oid": "d890358835179f0cc999bc5e1e02a9ce770de78e",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-hy/strings.xml",
+      "kind": "blob",
+      "oid": "79970c1162c99d056396efdfbb57713623d52bf6",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-in/strings.xml",
+      "kind": "blob",
+      "oid": "a95ad1ab4cf221c2c524357ab85e44507da14d24",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-is/strings.xml",
+      "kind": "blob",
+      "oid": "49bc30f81d90b4e243a3b35dadcad3a202b2aba9",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-it/strings.xml",
+      "kind": "blob",
+      "oid": "4d74e45d0cd4dadd7663e5fa1f47ea36bcf2c0fd",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-iw/strings.xml",
+      "kind": "blob",
+      "oid": "55972a128e351157fedc49f4eb3045ae219a350b",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-ja/strings.xml",
+      "kind": "blob",
+      "oid": "db0ae7908e37f39f5aad29a187f7e43ebd363f29",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-ka/strings.xml",
+      "kind": "blob",
+      "oid": "19adcbdfdcda547ccee49d67cd44d70604f9ce3a",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-kk/strings.xml",
+      "kind": "blob",
+      "oid": "6062c3594aa26f6aa6fd4689552d6e40a7936eee",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-km/strings.xml",
+      "kind": "blob",
+      "oid": "5483e55ae1059237cbfcf86d3cbbda020a8b1af7",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-kn/strings.xml",
+      "kind": "blob",
+      "oid": "cea1b4cbe08e3eac32d6c9f54ec6466913605498",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-ko/strings.xml",
+      "kind": "blob",
+      "oid": "6393e4c77c794318f554cca1df8791a5559cc075",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-ky/strings.xml",
+      "kind": "blob",
+      "oid": "d2a5e21d11baea4d006acd9123d248b0272d719c",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-lo/strings.xml",
+      "kind": "blob",
+      "oid": "5baaff9a068c122b7fc2cf27bb526084f16a665e",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-lt/strings.xml",
+      "kind": "blob",
+      "oid": "45414e3414bf42756359e60e6521c9b767367923",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-lv/strings.xml",
+      "kind": "blob",
+      "oid": "0a34e96b4122850c1e6b586555d6ea77fcfd5532",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-mk/strings.xml",
+      "kind": "blob",
+      "oid": "776a08f008bd6f9c09f1b1cb34a17932aaa2409a",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-ml/strings.xml",
+      "kind": "blob",
+      "oid": "a593e0c549f738e2f309d4bf9126dee18e7c277a",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-mn/strings.xml",
+      "kind": "blob",
+      "oid": "9491e95b33b5fb0a2156b45d1f8863c5862ac42f",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-mr/strings.xml",
+      "kind": "blob",
+      "oid": "ffc05a671cad3b61f98b3994bac60f0c636dc2e3",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-ms/strings.xml",
+      "kind": "blob",
+      "oid": "30fde9ef20fb0ef86b386f5b5a5347702f8801d5",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-my/strings.xml",
+      "kind": "blob",
+      "oid": "c8cd0c1b6e4c58882dd8962b1840b52ba0e52f3e",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-nb/strings.xml",
+      "kind": "blob",
+      "oid": "ba5d154186a7670560293309ff77c9efbf1271f9",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-ne/strings.xml",
+      "kind": "blob",
+      "oid": "7dc491878b07a1b3d959eb962e6a3ba3649818aa",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-nl/strings.xml",
+      "kind": "blob",
+      "oid": "d004b11ff00aff928c1c83f7d62d59dd844436d8",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-or/strings.xml",
+      "kind": "blob",
+      "oid": "6520b1a80ba27d8a632e08cea30edc60d243c83b",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-pa/strings.xml",
+      "kind": "blob",
+      "oid": "32e7f270a53ae26cb1ca165dc3894b453373e1aa",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-pl/strings.xml",
+      "kind": "blob",
+      "oid": "701f96cf3664a981c5e4570a393209211625b204",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-pt-rPT/strings.xml",
+      "kind": "blob",
+      "oid": "fe7b1cd240a2d43e641679207961e713a629ebc5",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-pt/strings.xml",
+      "kind": "blob",
+      "oid": "a99aec2eedfd4a333f0c2971efc6842aefce88bd",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-ro/strings.xml",
+      "kind": "blob",
+      "oid": "d4647a77eced604527bf5ba5b40e43b57c32c324",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-ru/strings.xml",
+      "kind": "blob",
+      "oid": "300fddb3192836d516af333f7395c59e61356f70",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-si/strings.xml",
+      "kind": "blob",
+      "oid": "89bf2a28ae4ca7de8ad733d6077606f59730cf7c",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-sk/strings.xml",
+      "kind": "blob",
+      "oid": "867339e58ec64d670d890f971eccb8e579d9f58a",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-sl/strings.xml",
+      "kind": "blob",
+      "oid": "4cc9ce8b9024812833df320d46554fd8b3e50198",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-sq/strings.xml",
+      "kind": "blob",
+      "oid": "b03b4dc07120756d441a00299adc25caff81a268",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-sr/strings.xml",
+      "kind": "blob",
+      "oid": "714be9db2f3deb21c72256c4c1acf58449a53ebc",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-sv/strings.xml",
+      "kind": "blob",
+      "oid": "0ead7b5f2cba788f37bb02e5ec9004f0f89962ed",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-sw/strings.xml",
+      "kind": "blob",
+      "oid": "564d669819e7d7112d3001a15f802097b4697030",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-ta/strings.xml",
+      "kind": "blob",
+      "oid": "47f2cf8a1862230ac7368373722a9e741ac07195",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-te/strings.xml",
+      "kind": "blob",
+      "oid": "932e6d3a558228ca4261596169308a0535de73c3",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-th/strings.xml",
+      "kind": "blob",
+      "oid": "b4547d4403d0846827652f3019973b72f8db2209",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-tl/strings.xml",
+      "kind": "blob",
+      "oid": "47aaae71e2a9b097455cc417f2b60469e7fa3c05",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-tr/strings.xml",
+      "kind": "blob",
+      "oid": "6c0f54497ec678c4f09119daee10afeb871a7f29",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-uk/strings.xml",
+      "kind": "blob",
+      "oid": "6b22c4440ee7da700cc3aaf2fa2113a32981d513",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-ur/strings.xml",
+      "kind": "blob",
+      "oid": "2721db3a7a12caaecce9270ae9f4a059fe1b393a",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-uz/strings.xml",
+      "kind": "blob",
+      "oid": "796e4b0b5111cd8c35b49c5982f816289bd414d8",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-vi/strings.xml",
+      "kind": "blob",
+      "oid": "ca2094c0e4f4c45c17f8fd728dc4e7b841354b07",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-zh-rCN/strings.xml",
+      "kind": "blob",
+      "oid": "94b7563a5cff4c49b571dbd32eaf2833925b4f32",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-zh-rHK/strings.xml",
+      "kind": "blob",
+      "oid": "cb49cccfafc62d98a64f5d0fd3161d9053bf778e",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-zh-rTW/strings.xml",
+      "kind": "blob",
+      "oid": "72f38393d9cfa183f10d94d473bb4ab56665b951",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values-zu/strings.xml",
+      "kind": "blob",
+      "oid": "03041bc2ac8d216255279228e3b33f594d4c130e",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values/strings.xml",
+      "kind": "blob",
+      "oid": "bec5114b0213eac1bbb511d8902a454a918c19b0",
+      "mode": "100644"
+    },
+    {
+      "path": "template/Android.bp",
+      "kind": "blob",
+      "oid": "a165e35cb6d69ffcb62b04b0b1cc6a9446cf00c9",
+      "mode": "100644"
+    },
+    {
+      "path": "template/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "aeb8b0a68a9e55abf088f2a8ffc4041091d25ba9",
+      "mode": "100644"
+    },
+    {
+      "path": "template/AndroidManifest.xml.mustache",
+      "kind": "blob",
+      "oid": "bdc1fb0d02ab4f5aae98523e276150f95ba6ffd7",
+      "mode": "100644"
+    },
+    {
+      "path": "template/colors.xml.mustache",
+      "kind": "blob",
+      "oid": "36acf671d5e2c532bac04ff5ed45186a4558a09c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/ic_launcher.xml",
+      "kind": "blob",
+      "oid": "ae116946604ccf7d1e36700f009897ff64854b67",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-af/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-am/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-ar/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-as/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-az/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-b+sr+Latn/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-be/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-bg/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-bn/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-bs/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-ca/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-cs/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-da/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-de/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-el/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-en-rAU/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-en-rCA/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-en-rGB/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-en-rIN/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-es-rUS/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-es/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-et/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-eu/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-fa/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-fi/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-fr-rCA/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-fr/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-gl/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-gu/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-hi/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-hr/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-hu/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-hy/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-in/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-is/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-it/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-iw/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-ja/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-ka/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-kk/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-km/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-kn/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-ko/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-ky/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-lo/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-lt/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-lv/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-mk/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-ml/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-mn/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-mr/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-ms/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-my/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-nb/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-ne/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-nl/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-or/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-pa/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-pl/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-pt-rPT/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-pt/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-ro/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-ru/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-si/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-sk/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-sl/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-sq/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-sr/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-sv/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-sw/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-ta/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-te/strings.xml",
+      "kind": "blob",
+      "oid": "3faff9fbe822098ef36832fa4e2d3e450a400183",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-th/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-tl/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-tr/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-uk/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-ur/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-uz/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-vi/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-zh-rCN/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-zh-rHK/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-zh-rTW/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values-zu/strings.xml",
+      "kind": "blob",
+      "oid": "bade8dcd74c7bf20b8179359f67c879708c3009c",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values/colors.xml",
+      "kind": "blob",
+      "oid": "04aea4d971ffb8edf152008bbb2e7e9b964ce3eb",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/values/strings.xml",
+      "kind": "blob",
+      "oid": "b23a65bd78262eaeb484827536ecbbe107a8e0b5",
+      "mode": "100644"
+    },
+    {
+      "path": "template/res/xml/filepaths.xml",
+      "kind": "blob",
+      "oid": "aa492db90f3c286335333630c72cc3c84fecc033",
+      "mode": "100644"
+    },
+    {
+      "path": "template/webapp-template-builder.py",
+      "kind": "blob",
+      "oid": "fa2d38fe6c57bec872f5bc287312a2ae06a31ae6",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/Android.bp",
+      "kind": "blob",
+      "oid": "833d707d41876b55e43716800a9931401bd04172",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "d9a03bd87ca617753340862e45828ac386418455",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "bb1610b9bdacb597d7c734c22bff309934fb72ce",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/assets/icon.png",
+      "kind": "blob",
+      "oid": "61bf357895281f23533c674cd292fba6b8c40b04",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/assets/index.html",
+      "kind": "blob",
+      "oid": "075c1c8bd31c8956324c899663f22144644a0452",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/assets/manifest.json",
+      "kind": "blob",
+      "oid": "27de018d5d78d667bf4abf37740384006a89acc2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/assets/manifest_no_icon.json",
+      "kind": "blob",
+      "oid": "3bc0ae94f49f8800e98da9b981645d3d75e76bdb",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/assets/service_worker.js",
+      "kind": "blob",
+      "oid": "7a93677253ef63e2e2ef89768e04cff766674d1b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/ineligible_app/Android.bp",
+      "kind": "blob",
+      "oid": "8caa03d7459abe791d1563bcdfcfbd1759fdacd4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/ineligible_app/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "2923e90c801cf28095c83db18ec5987558c2c1ec",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/ineligible_app/src/android/webapp/tests/ineligible/IneligibleActivity.kt",
+      "kind": "blob",
+      "oid": "a05ffba010628470e8587340f86d6473183c7c36",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/query_helper_app/Android.bp",
+      "kind": "blob",
+      "oid": "d35e1ae3c9f541b3de4d1c924da057cf529b0f43",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/query_helper_app/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "9891e7d85e12020966fec3929313e70f10c193bb",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/query_helper_app/src/android/webapp/tests/query/QueryActivity.kt",
+      "kind": "blob",
+      "oid": "13dd7c9c3243f6077405b21ee5bb028a8a47ba9f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/res/xml/network_security_config.xml",
+      "kind": "blob",
+      "oid": "2439f15c2cb7d1046af45236a2fe03358d2153ca",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/src/android/webapp/tests/MockBrowserActivity.kt",
+      "kind": "blob",
+      "oid": "3841e7f9b1ff61f3efdaee73f867fefbd2d0d941",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/src/android/webapp/tests/WebAppInstallTest.kt",
+      "kind": "blob",
+      "oid": "3b60c9f3e4d3a9d80ef7ee179233cf3a7bb77273",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/src/android/webapp/tests/WebAppManagerTest.kt",
+      "kind": "blob",
+      "oid": "95871340efb6bce2e0a2bc71a9f916a963a2972f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/src/android/webapp/tests/WebAppQueryTest.kt",
+      "kind": "blob",
+      "oid": "cb4bc7b921bcf6f1111cf7eafb37ba570f149be6",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/src/android/webapp/tests/WebAppTestBase.kt",
+      "kind": "blob",
+      "oid": "91d78f4ab90ac11acb1845512c77be3fae23efe4",
+      "mode": "100644"
+    }
+  ]
+}

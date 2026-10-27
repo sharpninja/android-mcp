@@ -1,0 +1,44 @@
+test_import_in_frozen_layout_creates_no_data_directories (test_stage_import_purity.StageImportPurity.test_import_in_frozen_layout_creates_no_data_directories) ... FAIL
+test_runtime_paths_are_injected_and_small_extraction_is_atomic (test_stage_import_purity.StageImportPurity.test_runtime_paths_are_injected_and_small_extraction_is_atomic) ... ERROR
+
+======================================================================
+ERROR: test_runtime_paths_are_injected_and_small_extraction_is_atomic (test_stage_import_purity.StageImportPurity.test_runtime_paths_are_injected_and_small_extraction_is_atomic)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/catalog-integrated/tests/test_stage_import_purity.py", line 14, in test_runtime_paths_are_injected_and_small_extraction_is_atomic
+    root=pathlib.Path(td);script=root/'stage.py';shutil.copyfile(STAGE,script);spec=importlib.util.spec_from_file_location('isolated_stage',script);stage=importlib.util.module_from_spec(spec);spec.loader.exec_module(stage)
+                                                                                                                                                                                                ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "<frozen importlib._bootstrap_external>", line 759, in exec_module
+  File "<frozen importlib._bootstrap>", line 491, in _call_with_frames_removed
+  File "/tmp/tmpuk2z4o2w/stage.py", line 8, in <module>
+  File "/usr/lib/python3.14/pathlib/__init__.py", line 1011, in mkdir
+    os.mkdir(self, mode)
+    ~~~~~~~~^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmpuk2z4o2w/sdk37.2/java-cache'
+
+======================================================================
+FAIL: test_import_in_frozen_layout_creates_no_data_directories (test_stage_import_purity.StageImportPurity.test_import_in_frozen_layout_creates_no_data_directories)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/catalog-integrated/tests/test_stage_import_purity.py", line 11, in test_import_in_frozen_layout_creates_no_data_directories
+    self.assertEqual(run.returncode,0,run.stderr);self.assertEqual({str(p.relative_to(root)) for p in root.rglob('*')},before)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    import importlib.util,sys; s=importlib.util.spec_from_file_location("isolated_stage",sys.argv[1]); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)
+                                                                                                                                             ~~~~~~~~~~~~~~~~~~~~^^^
+  File "<frozen importlib._bootstrap_external>", line 759, in exec_module
+  File "<frozen importlib._bootstrap>", line 491, in _call_with_frames_removed
+  File "/tmp/tmpfb4khh97/stage.py", line 8, in <module>
+    D=R/'sdk37.2';CACHE=D/'java-cache';CACHE.mkdir(exist_ok=True);B=R/'snapshots/blobs';B.mkdir(exist_ok=True)
+                                       ~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/pathlib/__init__.py", line 1011, in mkdir
+    os.mkdir(self, mode)
+    ~~~~~~~~^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmpfb4khh97/sdk37.2/java-cache'
+
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.131s
+
+FAILED (failures=1, errors=1)

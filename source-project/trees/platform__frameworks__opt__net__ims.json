@@ -1,0 +1,901 @@
+{
+  "repo": "platform/frameworks/opt/net/ims",
+  "requested_revision": "refs/tags/android-17.0.0_r1",
+  "revision": "314c843f3627f936c46c9e6d61cb30017bd71fd3",
+  "entries": [
+    {
+      "path": "Android.bp",
+      "kind": "blob",
+      "oid": "e5f7666af3938915469129aefa16fb6b898b4416",
+      "mode": "100644"
+    },
+    {
+      "path": "CleanSpec.mk",
+      "kind": "blob",
+      "oid": "419a2488e93fe292ce10b1c5c044d33da63380b1",
+      "mode": "100644"
+    },
+    {
+      "path": "LICENSE_BSD",
+      "kind": "blob",
+      "oid": "47664b8ace768792592af7bc5db6b8765198d593",
+      "mode": "100644"
+    },
+    {
+      "path": "OWNERS",
+      "kind": "blob",
+      "oid": "cbe2bd47f6af68050f90474259ebb9c3712afe44",
+      "mode": "100644"
+    },
+    {
+      "path": "README.txt",
+      "kind": "blob",
+      "oid": "f7271f647ee4ad813531a0eacb99c53cc94858d8",
+      "mode": "100644"
+    },
+    {
+      "path": "TEST_MAPPING",
+      "kind": "blob",
+      "oid": "edb25a6fb2967debfed03337904b02716c33d78e",
+      "mode": "100644"
+    },
+    {
+      "path": "jarjar-rules-shared.txt",
+      "kind": "blob",
+      "oid": "aa761180d1a8d26aab704fd6ea2f32325c1ffe33",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/FeatureConnection.java",
+      "kind": "blob",
+      "oid": "6fee444b0a9e78541f2043a5caee20fbc540d5fe",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/FeatureConnector.java",
+      "kind": "blob",
+      "oid": "c6094acc88c3764e21e88b9411622a3d097db58e",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/FeatureUpdates.java",
+      "kind": "blob",
+      "oid": "550b6046a8c2fdb2e7987f196cb018199fcf4cf0",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/ImsCall.java",
+      "kind": "blob",
+      "oid": "c076f7c9b69fd4415e88d6811680865f587688fb",
+      "mode": "100755"
+    },
+    {
+      "path": "src/java/com/android/ims/ImsCallbackAdapterManager.java",
+      "kind": "blob",
+      "oid": "931ce579749c8b81d9cb7e6a3c8941e92ebb520e",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/ImsConnectionStateListener.java",
+      "kind": "blob",
+      "oid": "1594c805f7066b80b63f08a73a5391a14f1ea064",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/ImsEcbm.java",
+      "kind": "blob",
+      "oid": "e0624f2fe6aca175ee8e138afa07a4bc870c7ad3",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/ImsEcbmStateListener.java",
+      "kind": "blob",
+      "oid": "814ba5fed9f41f37d51c6d5a9f96d094f916ee84",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/ImsExternalCallStateListener.java",
+      "kind": "blob",
+      "oid": "880710a568e99f59156ceb083c94ec57ad72763a",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/ImsFeatureBinderRepository.java",
+      "kind": "blob",
+      "oid": "5c352b1ef79e2eaac37eaf712baeda41372542f5",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/ImsManager.java",
+      "kind": "blob",
+      "oid": "b4fca3bbcf60809482dc388faf37526b15602222",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/ImsMultiEndpoint.java",
+      "kind": "blob",
+      "oid": "7c225379af98459735709a71b9fd62de271ef66a",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/ImsServiceClass.java",
+      "kind": "blob",
+      "oid": "8677b9d9a819b423a1201546b19cf9b8714ea9e4",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/ImsUt.java",
+      "kind": "blob",
+      "oid": "17e341541ef256276b7826eeab0344973cdf8f12",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/MmTelFeatureConnection.java",
+      "kind": "blob",
+      "oid": "8d9ad0658f25921226ed4d04073c12e74f9e4999",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/RcsFeatureConnection.java",
+      "kind": "blob",
+      "oid": "11c7344289d9b4849384f4c614f261737df1ce71",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/RcsFeatureManager.java",
+      "kind": "blob",
+      "oid": "e3f50c348f17d29962bd38a03f4330aee6fbf626",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/internal/ConferenceParticipant.java",
+      "kind": "blob",
+      "oid": "d48ecf63b7ffb82c4194b70a2781e0d5f7c757c6",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/internal/ICall.java",
+      "kind": "blob",
+      "oid": "e38b6e6429c823a81f19e84a023b34701ebb26ce",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/internal/ImsStreamMediaSession.java",
+      "kind": "blob",
+      "oid": "5814891f8b0608fc805ec66b172c9cc68e6c83dc",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/internal/ImsVideoCallProviderWrapper.java",
+      "kind": "blob",
+      "oid": "d0592e16a73cd83e83ce553eb9e4f123906efb9a",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/internal/VideoPauseTracker.java",
+      "kind": "blob",
+      "oid": "5ecf2ecdcd410148941530c6d8534f0189748c0e",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/ControllerBase.java",
+      "kind": "blob",
+      "oid": "57f0fc7f9fcba59296c6ac366a242efcca2dff1a",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/OWNERS",
+      "kind": "blob",
+      "oid": "dff71c494c5aeacbaac5eaf5da054f633769fa25",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/UceController.java",
+      "kind": "blob",
+      "oid": "ecf924b5a8f4d50baee277ab64aa9d7eddd869da",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/UceDeviceState.java",
+      "kind": "blob",
+      "oid": "93445dbf57c0c01a9233cde60f98527de3f0833b",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/UceStatsWriter.java",
+      "kind": "blob",
+      "oid": "1db9040cb4e174dca9a80f18e3b6dd0f59df616e",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/eab/EabBulkCapabilityUpdater.java",
+      "kind": "blob",
+      "oid": "c407a90ed11abec7c3ae39e4b20af8dc72c5e4bf",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/eab/EabCapabilityResult.java",
+      "kind": "blob",
+      "oid": "0e5e01f3007df04de9f89f2d7002912da8d31aab",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/eab/EabContactSyncController.java",
+      "kind": "blob",
+      "oid": "6f148a8ad82924317523b03cfc16714a16b900af",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/eab/EabController.java",
+      "kind": "blob",
+      "oid": "b03e46597baceccf1265f16a9f985d54918a9b77",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/eab/EabControllerImpl.java",
+      "kind": "blob",
+      "oid": "aaab0a9f1596d0acd18b51e46239968f82d581f8",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/eab/EabProvider.java",
+      "kind": "blob",
+      "oid": "e2a83086250537174d4b849c8be62f87319426c3",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/eab/EabUtil.java",
+      "kind": "blob",
+      "oid": "e2c21cdbb80a4946dfa60c4e99e21fa4160b40ca",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/eab/RcsUceCapabilityBuilderWrapper.java",
+      "kind": "blob",
+      "oid": "8e42b6131a591f8b1793c81a1e5799a3a38001d4",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/options/OptionsController.java",
+      "kind": "blob",
+      "oid": "b4b3260d8a92f2cc81dc4181ccb5bd4f778b7292",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/options/OptionsControllerImpl.java",
+      "kind": "blob",
+      "oid": "e3b708f7f75cefe71846e92da357c84f3cb8c046",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/pidfparser/ElementBase.java",
+      "kind": "blob",
+      "oid": "6a03f69deacf03d11981b44cdb6a2cc36bb15a15",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/pidfparser/PidfParser.java",
+      "kind": "blob",
+      "oid": "10b43a56405b4c941d079bfaa8ed0ddd69e50358",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/pidfparser/PidfParserConstant.java",
+      "kind": "blob",
+      "oid": "07fde38d6a1b9c88495e0f620f9e20c72b223b8f",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/pidfparser/PidfParserUtils.java",
+      "kind": "blob",
+      "oid": "d43819ecac655f0d9b310af9b200f4c7ae6b302d",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/pidfparser/RcsContactUceCapabilityWrapper.java",
+      "kind": "blob",
+      "oid": "3b2f163fba2c94ea97be20bbf00801041ee0a99a",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/pidfparser/capabilities/Audio.java",
+      "kind": "blob",
+      "oid": "e3fe7ab5aab0836ff93e7a92a9f3cd9f74e3c921",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/pidfparser/capabilities/CapsConstant.java",
+      "kind": "blob",
+      "oid": "2b809b20b9ed90c47cdc1fa8d5d159743fa4306b",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/pidfparser/capabilities/Duplex.java",
+      "kind": "blob",
+      "oid": "af55a424dcccad9a570ccdaef7d4220040d76401",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/pidfparser/capabilities/ServiceCaps.java",
+      "kind": "blob",
+      "oid": "16b52cdb59acad563094bb23da2e17710b5eb6e4",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/pidfparser/capabilities/Video.java",
+      "kind": "blob",
+      "oid": "290b61417a13b889ebda847696697aea7bf88936",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/pidfparser/omapres/Description.java",
+      "kind": "blob",
+      "oid": "8b4b86145e01720ae81f6bd66c1aceaf2f42b003",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/pidfparser/omapres/OmaPresConstant.java",
+      "kind": "blob",
+      "oid": "668a1b384f81e7611e9b804b81c7bd6b09450e83",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/pidfparser/omapres/ServiceDescription.java",
+      "kind": "blob",
+      "oid": "1a4eedadad844d42ee09a6992b91db0ca95f0ffd",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/pidfparser/omapres/ServiceId.java",
+      "kind": "blob",
+      "oid": "db821fb581557592ad62098daf553abb421fb2ba",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/pidfparser/omapres/Version.java",
+      "kind": "blob",
+      "oid": "8e0a7211eb4d088cf005fa3b35e1ad58e6f50fee",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/pidfparser/pidf/Basic.java",
+      "kind": "blob",
+      "oid": "a4f487a610b0ddc4fc26ac55d792b4bee0ee1eb9",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/pidfparser/pidf/Contact.java",
+      "kind": "blob",
+      "oid": "df5c800d5767f30f1e74f0683fee653bffd58353",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/pidfparser/pidf/Note.java",
+      "kind": "blob",
+      "oid": "ef13b5bcb61a2d2d038647cf372cc9703be2fec4",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/pidfparser/pidf/PidfConstant.java",
+      "kind": "blob",
+      "oid": "ac9c9da12c310026f7c6ea1d4dd73fce4ff403ff",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/pidfparser/pidf/Presence.java",
+      "kind": "blob",
+      "oid": "b2173145a7376abc6b652692f4f7d6f5beaedb8d",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/pidfparser/pidf/Status.java",
+      "kind": "blob",
+      "oid": "92ad5d68832c3902e7e2d3aff769bfafd02072ae",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/pidfparser/pidf/Timestamp.java",
+      "kind": "blob",
+      "oid": "4c0d81050fa940b7f79c5c75bfb24f76026cc307",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/pidfparser/pidf/Tuple.java",
+      "kind": "blob",
+      "oid": "e2744660d8e2193ec8ab2134c1408bf3c5c99791",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/publish/DeviceCapabilityInfo.java",
+      "kind": "blob",
+      "oid": "49291484b8ec80dc551633067af3b421c3d07e2f",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/publish/DeviceCapabilityListener.java",
+      "kind": "blob",
+      "oid": "bc3720546c162e429f62de236e4be815450ebfc4",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/publish/PublishController.java",
+      "kind": "blob",
+      "oid": "732a558ba8bdfedb94ce8ee4a2b1bb46964c3a52",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/publish/PublishControllerImpl.java",
+      "kind": "blob",
+      "oid": "101aa810c3d7f1a590d63842fe5112b2ed837391",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/publish/PublishProcessor.java",
+      "kind": "blob",
+      "oid": "c239dd5ae91655026ee90393d9aea79ee84dbebc",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/publish/PublishProcessorState.java",
+      "kind": "blob",
+      "oid": "0e9adfad6d0a360044e17625a1f0491f360e5942",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/publish/PublishRequestResponse.java",
+      "kind": "blob",
+      "oid": "aa1b27c1c88b3c2b88ee6cc0f79d9d6c8d463663",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/publish/PublishServiceDescTracker.java",
+      "kind": "blob",
+      "oid": "7f7ea3e68c6e72c5b17e4207517067280b348cf4",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/publish/PublishUtils.java",
+      "kind": "blob",
+      "oid": "1a67a40ad24e056f0b29fa8b286f156b264dbc51",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/publish/ServiceDescription.java",
+      "kind": "blob",
+      "oid": "e175f2a44e259d25f2b43c8e1884faebd4579ec2",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/subscribe/SubscribeController.java",
+      "kind": "blob",
+      "oid": "83e864b499c2a2adbcf4e04478d2f8f10e736d02",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/presence/subscribe/SubscribeControllerImpl.java",
+      "kind": "blob",
+      "oid": "be4bd7448650b2cfe2ff17d0b3e7ff4b5bb772e7",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/request/CapabilityRequest.java",
+      "kind": "blob",
+      "oid": "248b0799082fb17e93cd9da4d390f7bba8bbf711",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/request/CapabilityRequestResponse.java",
+      "kind": "blob",
+      "oid": "6da31301a89f90fad2eb73dee227e0bbb8daab38",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/request/ContactThrottlingList.java",
+      "kind": "blob",
+      "oid": "da67f6c91f483f3871fa85e10d0262d89ab62344",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/request/OptionsRequest.java",
+      "kind": "blob",
+      "oid": "df5cebbb6266aa3ad4dfbc36092755d439815256",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/request/OptionsRequestCoordinator.java",
+      "kind": "blob",
+      "oid": "b2db17889da1fe62ce4c8fe74880e15e54df20e9",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/request/RemoteOptionsCoordinator.java",
+      "kind": "blob",
+      "oid": "5a3e33bbc7b6c1b24973af12cf473d4001961c06",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/request/RemoteOptionsRequest.java",
+      "kind": "blob",
+      "oid": "17e59ef1e9d669cdcb17286f02ca030a5210036c",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/request/SubscribeRequest.java",
+      "kind": "blob",
+      "oid": "74c23435fbb2af373998327cf932d8b8e7e9a0a1",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/request/SubscribeRequestCoordinator.java",
+      "kind": "blob",
+      "oid": "4232704d215b62338a2a15015792fa72d9907e19",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/request/SubscriptionTerminatedHelper.java",
+      "kind": "blob",
+      "oid": "074d6e5b943009b0418929767fd62eeaa0ae1024",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/request/UceRequest.java",
+      "kind": "blob",
+      "oid": "c2b0160bb44a8d1ae7014923439be20467de4230",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/request/UceRequestCoordinator.java",
+      "kind": "blob",
+      "oid": "5d3a35daf06f18961a5c49bff44459dfe9555b4d",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/request/UceRequestDispatcher.java",
+      "kind": "blob",
+      "oid": "76bde85a8ffd8558c4d48c00d046a2d84afc11c7",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/request/UceRequestManager.java",
+      "kind": "blob",
+      "oid": "bfa8a581c14d5cb180f1eb13ba91153c6dc6d937",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/request/UceRequestRepository.java",
+      "kind": "blob",
+      "oid": "f50c5e4460d99714791554bdbb8970df7f6293ea",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/util/FeatureTags.java",
+      "kind": "blob",
+      "oid": "ed2eef4aff8872e1796ca452e2a62fdcd00e47c8",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/util/NetworkSipCode.java",
+      "kind": "blob",
+      "oid": "30099f3b08dd67f44c5ea772cad20dab8cc3b3fd",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java/com/android/ims/rcs/uce/util/UceUtils.java",
+      "kind": "blob",
+      "oid": "dadf5825276c0d7fa5447b8bf325507ee513949f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/Android.bp",
+      "kind": "blob",
+      "oid": "7690eef695533e624e136e51e4c8f31698b12f10",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "88831aa487ad51d582a4a1512b2fb89a85e666a3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "4610122ecd3b56dad07f81c3f77ad9fb21c7dbf7",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/res/values/donottranslate_strings.xml",
+      "kind": "blob",
+      "oid": "64e55132002bcf426f864894db05379400eecb0c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/ContextFixture.java",
+      "kind": "blob",
+      "oid": "21dd6348c72044e803a7b79eb475f1421a7c1de5",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/FeatureConnectionTest.java",
+      "kind": "blob",
+      "oid": "532c07b964db3bc2752a615c01ad1b89d90498e7",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/FeatureConnectorTest.java",
+      "kind": "blob",
+      "oid": "0f9a33a218f33eabeefc1d748b7bcf737dae8931",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/ImsConfigTest.java",
+      "kind": "blob",
+      "oid": "519557f10fe5b8a12b9cc7591dd4a656e76c144a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/ImsFeatureBinderRepositoryTest.java",
+      "kind": "blob",
+      "oid": "bc7c75811d4660d4256ea1da4e8de2b41510f94a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/ImsFeatureContainerTest.java",
+      "kind": "blob",
+      "oid": "e6a599757aa5f994010c169f53f954bf3e4063cd",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/ImsManagerTest.java",
+      "kind": "blob",
+      "oid": "db4e758ac7ab1048350b7fcf295e5d2ed65b6cf6",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/ImsTestBase.java",
+      "kind": "blob",
+      "oid": "5d7694026a7e3730238b147625328b36585d4e07",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/ImsUtTest.java",
+      "kind": "blob",
+      "oid": "71722cedc9172a8768da1524e31d93423cc23ad7",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/MmTelFeatureConnectionTest.java",
+      "kind": "blob",
+      "oid": "f11483847e152aad70b047e92c3b5ee4fb59735b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/OWNERS",
+      "kind": "blob",
+      "oid": "dff71c494c5aeacbaac5eaf5da054f633769fa25",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/UceControllerTest.java",
+      "kind": "blob",
+      "oid": "6f7104b8f74eac8f789139a67cec464a4be63451",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/UceStatsWriterTest.java",
+      "kind": "blob",
+      "oid": "49edf1985bd13770cb1411cd1e5b3915223e2093",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/eab/EabBulkCapabilityUpdaterTest.java",
+      "kind": "blob",
+      "oid": "5c2a04bea3e294b8fc97af03d2bd3db7be98f632",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/eab/EabContactSyncControllerTest.java",
+      "kind": "blob",
+      "oid": "0b70a92e914d23661082056a310d39d5c47c3fdb",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/eab/EabControllerTest.java",
+      "kind": "blob",
+      "oid": "0040dc9e922bf20c85f1e446093028f866eb840f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/eab/EabProviderTest.java",
+      "kind": "blob",
+      "oid": "46171d0c8a385e7bf14d1201595731a6ab53c6fd",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/eab/EabProviderTestable.java",
+      "kind": "blob",
+      "oid": "79ebd549020c10d452f84480151668b93c7f80b4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/presence/pidfparser/PidfParserTest.java",
+      "kind": "blob",
+      "oid": "fd29d5b39542709d832ab0cdb2617465bc165a36",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/presence/pidfparser/RcsContactUceCapabilityWrapperTest.java",
+      "kind": "blob",
+      "oid": "9497e1984d0703d4f7bda0f2f3810440143cbca2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/presence/pidfparser/capabilities/AudioTest.java",
+      "kind": "blob",
+      "oid": "5bf97153f3e952a347b4bda895cb0f15963fab7d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/presence/pidfparser/capabilities/DuplexTest.java",
+      "kind": "blob",
+      "oid": "8852c3d564d312af39f9ceda0ac2c24bfd688a85",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/presence/pidfparser/capabilities/ServiceCapsTest.java",
+      "kind": "blob",
+      "oid": "d18a7ebd5731e023fe0215aa588bf22942ccaa36",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/presence/pidfparser/capabilities/VideoTest.java",
+      "kind": "blob",
+      "oid": "c102176ce281976d0a97c053c0671c3b06f08b11",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/presence/pidfparser/omapres/DescriptionTest.java",
+      "kind": "blob",
+      "oid": "d60b664dc2e351fb06c1b47f7e346e4e317cb48e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/presence/pidfparser/omapres/ServiceDescriptionTest.java",
+      "kind": "blob",
+      "oid": "5e064cf834099388a282c5726bc999d3d3ebb9c5",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/presence/pidfparser/omapres/ServiceIdTest.java",
+      "kind": "blob",
+      "oid": "d648ccf012561d6782cadcd93c02b5e5e131cc90",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/presence/pidfparser/omapres/VersionTest.java",
+      "kind": "blob",
+      "oid": "ae7d0c49a47df5ccb4788faf1336a67c9681e255",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/presence/pidfparser/pidf/BasicTest.java",
+      "kind": "blob",
+      "oid": "cb0ec0cf3fa4d874b38a1eebf2ec86ae40bf8a81",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/presence/pidfparser/pidf/ContactTest.java",
+      "kind": "blob",
+      "oid": "cfab77af6cb1f4f719cea4519df4994a7f06312f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/presence/pidfparser/pidf/NoteTest.java",
+      "kind": "blob",
+      "oid": "8ee5ce4b2371491df7a7177cf1edd06c525d3820",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/presence/pidfparser/pidf/PresenceTest.java",
+      "kind": "blob",
+      "oid": "3a4c9f93c3e140134888da45f630ce39c32850a9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/presence/pidfparser/pidf/StatusTest.java",
+      "kind": "blob",
+      "oid": "945cb0966a6732a6f49732ff7f2554fbb069acab",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/presence/pidfparser/pidf/TimestampTest.java",
+      "kind": "blob",
+      "oid": "1dc76e6cbb5d7892a03e64d05be3957093a6e3d6",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/presence/pidfparser/pidf/TupleTest.java",
+      "kind": "blob",
+      "oid": "dc5edaa8f61a0941a0d162ed2e6b9c5130e25421",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/presence/publish/DeviceCapabilityInfoTest.java",
+      "kind": "blob",
+      "oid": "de045de476514b646c185c582d55a22072c69ec8",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/presence/publish/DeviceCapabilityListenerTest.java",
+      "kind": "blob",
+      "oid": "113503939b52308247cd5359d268f3e547cdbd05",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/presence/publish/PublishControllerImplTest.java",
+      "kind": "blob",
+      "oid": "aa145c7cd0e216c7c9b36bc3c624d3a87a807472",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/presence/publish/PublishProcessorTest.java",
+      "kind": "blob",
+      "oid": "2de47146884e99780ec245c9c9a5a95169226617",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/presence/publish/PublishServiceDescTrackerTest.java",
+      "kind": "blob",
+      "oid": "52017c7a8d9adac5176370a3ff22df09fc1db110",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/request/CapabilityRequestTest.java",
+      "kind": "blob",
+      "oid": "bfeb55ace5b74b960d8b4a1108d7b70389f00f14",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/request/OptionsCoordinatorTest.java",
+      "kind": "blob",
+      "oid": "1759de5dd5f8638c72310c52f0d84ce05e24c835",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/request/OptionsRequestTest.java",
+      "kind": "blob",
+      "oid": "54a025253b1da506b3af81bfd50685344599295f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/request/RemoteOptionsCoordinatorTest.java",
+      "kind": "blob",
+      "oid": "80077114d3ed883653027cbbb2163233b3fe8044",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/request/RemoteOptionsRequestTest.java",
+      "kind": "blob",
+      "oid": "13777f37c182ac781138a286aacdcd282f66bac5",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/request/SubscribeCoordinatorTest.java",
+      "kind": "blob",
+      "oid": "2c0042ea5de2cf31de14305d6abe1179b25a6235",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/request/SubscribeRequestTest.java",
+      "kind": "blob",
+      "oid": "cc0d04fd1c75126ef89dfeb27c9e7cdf3c637a6e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/com/android/ims/rcs/uce/request/UceRequestManagerTest.java",
+      "kind": "blob",
+      "oid": "16bfd22b1163287bab0a40d6766205905bd199c9",
+      "mode": "100644"
+    }
+  ]
+}

@@ -1,0 +1,636 @@
+{
+  "at": "2026-10-27T07:26:12.151363+00:00",
+  "root": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026",
+  "upload_status": "NOT AUTHORIZED: explicit consent still pending; no new upload",
+  "owner_scope": "sources/extractor/runtime data, not canonical design/schema/CRUD/Claude",
+  "release007": {
+    "session": 92984,
+    "status": "Complete validation, exports, reconciliation and local evidence components",
+    "entries": 796212,
+    "sources": 42620,
+    "acquisition_gaps_at_freeze": 508,
+    "annotation_unresolved": 846,
+    "archive_comparison": "annotation-archive-comparison-006-to-007.json",
+    "source_reconciliation_session": 69670,
+    "export_reconciliation_session": 22948,
+    "local_followup_session": 51303,
+    "source_reconciliation": "Passed; all 552 legacy variants retained",
+    "export_reconciliation": "Passed; JSON and JSONL byte equivalent"
+  },
+  "release008": {
+    "candidate": "catalog-round008v2",
+    "integrated_tests": 148,
+    "input": "source-inventory-release008.json",
+    "source_paths": 43128,
+    "downloaded": 43128,
+    "permission_preflight_session": 3985,
+    "permission_preflight_pid": 2183032,
+    "java_cache_generation": "cache-build-round008",
+    "java_files": 16893,
+    "java_records": 530212,
+    "java_errors": 0,
+    "cache_sha": "a75ac91a0098e484029faae8a8c7b39e4bbff36a26f752f30935ae4fda86caf9",
+    "full_aidl_audit": "aidl-corpus-audit-round008-v2-final.json",
+    "aidl_files": 20210,
+    "aidl_reconciliation_failures": 0,
+    "malformed_return_types": 0,
+    "build_launched": true,
+    "next": "Wait for preflight success, coordinate new startup applicability contract; use run_catalog_release_v3.py for next frozen build",
+    "build_session": 84392,
+    "status": "Complete validation, exports, reconciliation and local evidence components",
+    "started_at": "2026-10-27T00:10:31.040982+00:00",
+    "code_snapshot": "build-snapshots/release008",
+    "permission_preflight": {
+      "status": "passed",
+      "declarations": 1122576,
+      "expressions": 1794825,
+      "schema_failures": 0
+    },
+    "local_followup_session": 32367,
+    "source_contract_owner": "Startup resolver behavior pending separate remediation owner; all 93,681 raw lifecycle nodes frozen beside release008",
+    "entries": 799527,
+    "sources": 43128,
+    "declarations": 1122576,
+    "primary_sha256": "8cd8db1d52abb7e98586c5a387af7fc919dba37c7a21c3e8dcd42b4a23c49ccc",
+    "manifest": "release008-evidence/release-manifest.json",
+    "components": "deliverables/release008-evidence-components.json"
+  },
+  "hidl": {
+    "status": "Complete acquisition",
+    "paths": 962,
+    "unique_objects": 948,
+    "inventory": "outside-corpus-audit/source-inventory-batchhidl1087-acquired001.json"
+  },
+  "availability": {
+    "evidence": "startup-availability-evidence-v1/manifest.json",
+    "source_note": "integration/startup-availability-source-evidence.json",
+    "resolver_owner": "separate remediation task; no device access"
+  },
+  "known_limitations": [
+    "Release007 nested AIDL bug remains in immutable snapshot; corrected008notyetbuilt",
+    "732 additional repositories semantically unknown despite all pinned trees enumerated",
+    "HIDL parser/wire semantics and native/generated completeness unverified",
+    "98/98review agreement not achieved; reviewer loop owned separately"
+  ],
+  "native_candidates": {
+    "inventory": "outside-corpus-audit/source-inventory-batchnative-manual-v1.json",
+    "scope": "All four explicit manual-implementation markers across 20,210 AIDL files",
+    "candidate_paths": 7,
+    "semantic_status": "Native evidence only; wire identity unproven"
+  },
+  "next009": {
+    "status": "Integrating latest reviewed projection/storage and identity baseline; no build launched",
+    "java_generation": "cache-build-next009/sdk37.2/java-cache-v5",
+    "java_records": 530212,
+    "java_fingerprint": "f8c7323d5733ff12256e200046e032926ffbc8561e8c8e8eb59e089965524e7c",
+    "sdk_index_records": 93681,
+    "current_sdk_index_records": 90272,
+    "sdk_index_fingerprint": "13c14950fa2bc2313bffe702497818c0809dcb58ca9ea32e05b1338e554cf9e9",
+    "producer_note": "Further reviewed parser changes require a fresh exact producer/cache generation; no relabeling",
+    "tests": "171 source candidate regressions plus4 standalone permission reference fixtures",
+    "doc_facts": "permission-reference-source/parsed-facts-v1.json"
+  },
+  "native_search": {
+    "status": "Complete acquisition after single503retry",
+    "discovery_paths": 303,
+    "pinned_paths": 301,
+    "unresolved_baseline_paths": 2,
+    "inventory": "outside-corpus-audit/source-inventory-batchnative-search303-acquired002.json"
+  },
+  "current_blockers": [
+    "No upload consent; no uploads attempted",
+    "Next publication awaits integrated and tested latest producer/projection/storage baseline",
+    "Static HIDL/native normalization and public hash/build metadata remain actionable; runtime/OEM/private facts remain unknown"
+  ],
+  "release009": {
+    "candidate": "catalog-integrated009v3",
+    "integrated_tests": 197,
+    "status": "Stopped before SQLite creation: HIDL acquisition records lacked channel; failed snapshot preserved",
+    "cache_generation": "cache-build-integrated009",
+    "baseline": "integration/latest-remediation-baseline-009-copy.json",
+    "actual_build_launched": true,
+    "index_cache_generation": "cache-index-integrated009v3",
+    "scope_closure_plan": "outside-corpus-audit/native-generated-scope-closure-plan-v1.json",
+    "inventory": "source-inventory-release009.json",
+    "source_paths": 44397,
+    "downloaded": 44397,
+    "java_files": 16893,
+    "java_records": 530212,
+    "java_parse_errors": 0,
+    "preflight_session": 41652,
+    "full_sdk_lifecycle_records": 93681,
+    "sdk_current_at_37_2": 90272,
+    "permission_preflight": {
+      "declarations": 1125985,
+      "aidl_declaration_roots": 22895,
+      "aidl_status:field-metadata-parsed": 15955,
+      "expressions": 1800352,
+      "op:unknown": 1792949,
+      "aidl_status:declaration-only": 1876,
+      "aidl_status:methods-parsed": 5064,
+      "op:all": 1263,
+      "op:conditional": 1587,
+      "op:any": 1601,
+      "op:permission": 1466,
+      "op:access": 178,
+      "op:explicit-none": 1264,
+      "op:manual": 44
+    },
+    "schema_failures": 0,
+    "reproduction": "reproducibility-smoke-release009-v2/result.json",
+    "source_freeze_sha256": "66ef1da7bdab802996c183bcbd88f32e8bed84db053760eff457959ebe89727b",
+    "terminal_report": "build-release009-status.json"
+  },
+  "interface_metadata_followup": {
+    "inventory": "outside-corpus-audit/source-inventory-batchinterface-metadata-v1-acquired002.json",
+    "pinned_trees": 1087,
+    "source_paths": 1301,
+    "stable_aidl_hashes": 530,
+    "hidl_hash_index_candidates": 9,
+    "nearest_build_files": 762,
+    "semantic_status": "source evidence, no installed device facts inferred",
+    "at": "2026-10-27T03:35:17.721661+00:00",
+    "paths": 1301,
+    "unique_git_objects": 1300,
+    "downloaded": 1301,
+    "all_object_hashes_and_receipts_reconciled": true,
+    "inventory_sha256": "081636194fd770ed35595d997b50a56f069111e733560d0cb23bec914f7f4931",
+    "by_reason": {
+      "stable AIDL version hash": 530,
+      "nearest selected-interface build ancestor": 762,
+      "HIDL ancestor hash-index candidate": 9
+    },
+    "global_semantic_completeness": false,
+    "status": "All declared metadata source paths acquired and receipt/hash reconciled"
+  },
+  "release010": {
+    "candidate": "catalog-integrated009v3",
+    "catalog_tests": 197,
+    "source_admission_tests": 6,
+    "source_paths": 44397,
+    "downloaded": 44397,
+    "status": "Complete primary publication, independent validation, permissions, source/export/startup-inventory reconciliation; local evidence components recovered after cap",
+    "inventory": "source-inventory-release010.json",
+    "inventory_sha256": "fcfb6e51eef44e472fb92e34b57b4cf2b059de2bb2e19f3d6c0c3bb290fc0a20",
+    "source_change": "Missing HIDL channel explicitly unknown, no data/body/cache changes",
+    "preflight_reuse_evidence": "permission-preflight-reuse009-to010.json",
+    "session": 40150,
+    "permission_preflight_schema_failures": 0,
+    "no_uploaded_artifacts": true,
+    "actual_build_started_at": "2026-10-27T02:36:05.396014+00:00",
+    "actual_build_launched": true,
+    "terminal_status": "Read build-release010-status.json for exact current pipeline substep",
+    "entries": 802936,
+    "declarations": 1125985,
+    "permission_names": 1721,
+    "primary_sqlite": {
+      "path": "catalog/output/release-010/catalog.sqlite",
+      "bytes": 10276548608,
+      "sha256": "3eb7a2d1ae0fdeeb2743aa1814fe3bf9d2ac5f167d3dec1bde3ac900c0497eb7"
+    },
+    "manifest": "release010-evidence/release-manifest.json",
+    "components": "deliverables/release010-evidence-components.json",
+    "uploaded": false
+  },
+  "latest_public_source_revision_check": {
+    "at": "2026-10-27T02:40:27.422821+00:00",
+    "manifest_commit": "ad156f32caaa06dae91c02d443f6a8fe210eaa54",
+    "superproject_commit": "329d792f6d5e33e8a6fc5a02809c795ce17774ab",
+    "selected_project_commits_equal_latest": 1087,
+    "selected_projects_checked": 1087,
+    "core_permission_source_commit_unchanged": true,
+    "report": "outside-corpus-audit/latest-release-source-closure-v1/project-pin-reconciliation.json",
+    "semantic_completeness": false
+  },
+  "hidl_structural_candidate": {
+    "candidate": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/catalog-source011-hidl",
+    "catalog_tests_passed": 214,
+    "full_corpus_audit": "outside-corpus-audit/hidl-structural-audit-v3/report.json",
+    "paths": 962,
+    "structural_records": 22757,
+    "by_kind": {
+      "package": 962,
+      "interface": 765,
+      "method": 3694,
+      "type": 1526,
+      "enum": 1291,
+      "field": 14511,
+      "unsupported": 8
+    },
+    "unsupported_statements": 8,
+    "unsupported_only_in_explicit_compiler_error_fixtures": true,
+    "compiler_validation": false,
+    "normalizer_complete": false,
+    "handoff": "integration/hidl-source011-actions.json"
+  },
+  "annotation_candidate": {
+    "candidate": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/catalog-source011-hidl-annotations",
+    "tests_passed": 225,
+    "prior_unresolved_current_annotations_with_exact_descriptor": 268,
+    "of_which_permission_annotations": 119,
+    "not_yet_production": true,
+    "expected_remaining_prior_unmatched": 578,
+    "handoff": "integration/annotation-erasure-source011-actions.json"
+  },
+  "release011_preparation": {
+    "at": "2026-10-27T04:14:09.300643+00:00",
+    "candidate": "catalog-integrated011v3",
+    "owner_handoff": "round011-v1 then round011-v2, strict input/output hashes checked",
+    "source_merge": "integration/round011-source-merge-report.json",
+    "test_hidl_import_resolution": "Kept reviewer fixture rewrite: same assertions and source facts, removes dependency on optional test helper. No production semantic difference.",
+    "source_adapters": "integration/round011-source-adapter-reconciliation.json",
+    "tests_passed": 258,
+    "log": "integration/round011-merged-adapters-regression.log",
+    "log_sha256": "6b6b7950255a9025f712c739f3370bbbd105920c726633dd7de1b799a0715f96",
+    "next_full_build_launched": false,
+    "blocking_type_shape_reproductions": [
+      "integration/hidl-type-shape-round011-reproduction.json",
+      "integration/aidl-version-type-shape-round011-reproduction.json"
+    ],
+    "active_release010_modified": false,
+    "owner_originals_modified": false,
+    "source_paths": 45768,
+    "downloaded": 45768,
+    "status": "Full permission preflight passed; immutable publication pipeline running",
+    "current_session": 76970,
+    "shape_fix": "integration/source011-structured-shapes-actions.json",
+    "source_freeze": "source-inventory-release011.json",
+    "permission_expressions": 1827553,
+    "permission_schema_failures": 0,
+    "build_status": {
+      "status": "running",
+      "code_snapshot": "build-snapshots/release011",
+      "steps": [
+        {
+          "step": "catalog/tests",
+          "started_at": "2026-10-27T04:46:44.813770+00:00",
+          "completed_at": "2026-10-27T04:48:17.229084+00:00",
+          "returncode": 0
+        },
+        {
+          "step": "catalog/tooling/build_catalog.py",
+          "started_at": "2026-10-27T04:48:17.229660+00:00",
+          "completed_at": "2026-10-27T05:47:44.814822+00:00",
+          "returncode": 0
+        }
+      ],
+      "current_step": {
+        "step": "catalog/tooling/validate_catalog.py",
+        "started_at": "2026-10-27T05:47:44.820171+00:00",
+        "pid": 121,
+        "command": [
+          "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/.venv/bin/python",
+          "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/build-snapshots/release011/catalog/tooling/validate_catalog.py",
+          "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/catalog/output/release-011",
+          "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/source-inventory-release011.json",
+          "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/validation-report-release011.json"
+        ]
+      }
+    },
+    "followup_session": 93020,
+    "followup": "followup_local_release_v3.py",
+    "snapshot": "build-snapshots/release011"
+  },
+  "native_registry_followup": {
+    "paths": 70,
+    "unique_objects": 9,
+    "inventory": "outside-corpus-audit/source-inventory-batchnative-registry-followup-v1-acquired001.json",
+    "status": "all70 paths acquired; semantic source analysis complete, evidence native-registry-followup-semantic-evidence-v1.json"
+  },
+  "interface_module_producer": {
+    "at": "2026-10-27T05:05:41.874208+00:00",
+    "directory": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/integration/interface-module-producer-v1",
+    "archive": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/integration/interface-module-producer-v1.zip",
+    "archive_bytes": 3237141,
+    "archive_sha256": "6646233f03ebd2b6b1b903e9ea80f47ca0af74f150d751ced9a27eea49a19631",
+    "counts": {
+      "sources": 21172,
+      "declared_module": 16691,
+      "sources_with_published_hash_candidates": 10284,
+      "published_hash_candidate_links": 11061,
+      "apex_availability_selector_links": 510,
+      "cross_context_hidl_hash_candidates_not_admitted": 2
+    },
+    "tests": 24,
+    "uploaded": false
+  },
+  "round012_candidate": {
+    "at": "2026-10-27T05:06:35.331500+00:00",
+    "candidate": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/catalog-integrated012-sourcev1",
+    "active011_unchanged": true,
+    "files": [
+      {
+        "file": "tooling/build_catalog.py",
+        "before_sha256": "5194078b1dc21a95044e3c82d6d8d77616a39979bdcc1ac94e0db81bf4c59170",
+        "after_sha256": "9ecc89c8cf3c549844791d79ad463f0dfc4aefae9a3d47f99c59f6b12923dd3b"
+      },
+      {
+        "file": "tests/test_round11.py",
+        "before_sha256": "ceb10453ca116f7a4b7dd21def54b438314dd85dacb2a14f8d54c496d1c6a74c",
+        "after_sha256": "d8a367efac4145f51c7e05514b4f94abffea6943c77981ce256b40e766b31772"
+      },
+      {
+        "file": "bridge-config.sql",
+        "before_sha256": "b98dcbf8e768a0484d3960408a3295c708349aa3794834f5fa787492ad646a38",
+        "after_sha256": "0aef40b1a277ed87862c932a9925dd8721836fac5ed7ef135f13fac0bf1c89f6"
+      },
+      {
+        "file": "API-CONTRACT.md",
+        "before_sha256": "8333d3210d5224bbbd2176a4f1698ad4fa4cd925ae65d91115eaaeb73a9d394e",
+        "after_sha256": "9bb8427b9d3005ee19797133da582916d2f39694f57ba057978e1df2fad191a2"
+      },
+      {
+        "file": "tooling/wire_proof_reference.py",
+        "before_sha256": null,
+        "after_sha256": "a347aa198cc3204f4d6c2c75f396a185f431290bcbe433cd908a06fe41ad0103"
+      },
+      {
+        "file": "tests/test_postfreeze12_wire_evidence.py",
+        "before_sha256": null,
+        "after_sha256": "67de30565b887bfdbf40ab25a1b9e2118524c5508a99fbdc5b26728ddb6a9373"
+      }
+    ],
+    "source_processing_changed": true,
+    "parser_cache_fingerprints_changed": false,
+    "full_build_launched": false,
+    "remaining_gate": "Interface/module producer activation mapping must be integrated with canonical resolver contract before next full build",
+    "normal_tests_passed": 263,
+    "regression_log": "integration/round012-source-local-regression.log",
+    "optimized_tests_passed": 263
+  },
+  "hidl_source_constraints": {
+    "directory": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/integration/hidl-source-constraints-v1",
+    "archive": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/integration/hidl-source-constraints-v1.zip",
+    "bytes": 63222,
+    "sha256": "7270eccf9ebb459b403c4e2bb005cc3f008356f3d33b8e6cf66ac14a2ada8eea",
+    "counts": {
+      "interface_declarations": 765,
+      "exact_source_constraints": 592
+    },
+    "tests": 10,
+    "uploaded": false
+  },
+  "authoritative_implementation_language": "Kotlin server and Kotlin UI; Python remains offline build/reference tooling",
+  "current_source_handoffs": {
+    "interface-module-producer-v1": {
+      "at": "2026-10-27T05:05:41.874208+00:00",
+      "directory": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/integration/interface-module-producer-v1",
+      "archive": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/integration/interface-module-producer-v1.zip",
+      "archive_bytes": 3237141,
+      "archive_sha256": "6646233f03ebd2b6b1b903e9ea80f47ca0af74f150d751ced9a27eea49a19631",
+      "counts": {
+        "sources": 21172,
+        "declared_module": 16691,
+        "sources_with_published_hash_candidates": 10284,
+        "published_hash_candidate_links": 11061,
+        "apex_availability_selector_links": 510,
+        "cross_context_hidl_hash_candidates_not_admitted": 2
+      },
+      "tests": 24,
+      "uploaded": false
+    },
+    "exact-interface-constraints-v1": {
+      "at": "2026-10-27T05:28:15.361060+00:00",
+      "directory": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/integration/exact-interface-constraints-v1",
+      "archive": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/integration/exact-interface-constraints-v1.zip",
+      "bytes": 751969,
+      "sha256": "ee4762b61e3bed4547808d4a710ea47e31d4fd9e7ceab9fa8cad1dd23b900923",
+      "aidl_verified_dump_directories": 530,
+      "aidl_exact_interface_constraints": 1199,
+      "hidl_exact_interface_constraints": 592,
+      "uploaded": false,
+      "active_release011_unchanged": true
+    },
+    "callback-functional-producer-v1": {
+      "at": "2026-10-27T05:24:22.374975+00:00",
+      "directory": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/integration/callback-functional-producer-v1",
+      "archive": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/integration/callback-functional-producer-v1.zip",
+      "bytes": 26651629,
+      "sha256": "e1da6f0bd889a6e4bba4f0e93cd8e626b02e2af6bbeaeba5f9b65668d2436755",
+      "tests": {
+        "callback": 10,
+        "functional": 6
+      },
+      "callback_counts": {
+        "declared_types_scanned": 59254,
+        "type_candidates": 6582,
+        "methods_scanned": 392593,
+        "parameters_scanned": 441514,
+        "nonprimitive_parameters": 240556,
+        "parameter_candidates": 16405,
+        "candidate_endpoint_methods": 32231,
+        "unregistration-candidate": 2142,
+        "registration-candidate": 5755,
+        "callback-parameter-candidate": 8508,
+        "lifecycle_pair_candidates": 3079,
+        "nonprimitive_parameters_without_callback_classification": 224151
+      },
+      "functional_counts": {
+        "types_scanned": 59254,
+        "unclassified-searchable": 59050,
+        "evidence-present": 204,
+        "explicit-android-annotation": 204
+      },
+      "uploaded": false
+    },
+    "apex-module-producer-v2": {
+      "at": "2026-10-27T05:34:00.616673+00:00",
+      "directory": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/integration/apex-module-producer-v2",
+      "archive": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/integration/apex-module-producer-v2.zip",
+      "bytes": 386411,
+      "sha256": "0f9f15b9b99196c7d3f9351f470ebf2ffe265a4eccc5401fb35e8c732f45597a",
+      "counts": {
+        "manifest_sources": 163,
+        "source-manifest-literals-parsed": 163,
+        "build_sources": 138,
+        "build_modules": 160,
+        "apex": 141,
+        "apex_defaults": 19,
+        "explicit_build_manifest_links": 114
+      },
+      "tests": 12,
+      "uploaded": false
+    },
+    "callback-functional-producer-v2": {
+      "at": "2026-10-27T06:00:23.181707+00:00",
+      "supersedes": "integration/callback-functional-producer-v1-actions.json only for callback reply semantics; old files preserved",
+      "code_archive": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/integration/callback-functional-producer-v2-code-evidence.zip",
+      "code_archive_bytes": 51979,
+      "code_archive_sha256": "ff73cfd662d038fc097a6a0e6fff3da135a5116f6b922f13e04bd0bd7b78ace5",
+      "full_callback_baseline": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/integration/callback-audit-release010-v2",
+      "callback_counts": {
+        "declared_types_scanned": 59254,
+        "type_candidates": 6582,
+        "methods_scanned": 392593,
+        "parameters_scanned": 441514,
+        "nonprimitive_parameters": 240556,
+        "parameter_candidates": 16405,
+        "candidate_endpoint_methods": 32231,
+        "unregistration-candidate": 2142,
+        "registration-candidate": 5755,
+        "callback-parameter-candidate": 8508,
+        "lifecycle_pair_candidates": 3079,
+        "nonprimitive_parameters_without_callback_classification": 224151
+      },
+      "full_baseline_files": [
+        {
+          "path": "endpoint-methods.jsonl",
+          "bytes": 90561068,
+          "sha256": "43804328672c05767159cd57b8d9b27098dfc9e6e55360797d53c57063b60524"
+        },
+        {
+          "path": "lifecycle-pair-candidates.jsonl",
+          "bytes": 976043,
+          "sha256": "f141b3aca60361aa190c0d61b453cdc292475e8c27460e8fc63d228a99499998"
+        },
+        {
+          "path": "parameter-candidates.jsonl",
+          "bytes": 41383288,
+          "sha256": "946f6f4502258c1e22b3a75ad9465a0cdede3f0295041ae233cb94435944eb7d"
+        },
+        {
+          "path": "type-candidates.jsonl",
+          "bytes": 9512584,
+          "sha256": "1bbb5cc21320dd3a3cd31cf6e74d57410c0272f534c843d5e1e1838a48f37d7d"
+        }
+      ],
+      "tests": {
+        "callback": 13,
+        "functional": 6
+      },
+      "active011_unchanged": true,
+      "uploaded": false,
+      "latest_callback_baseline": "integration/callback-audit-release011-v2/report.json",
+      "latest_functional_baseline": "integration/functional-audit-release011-v1/report.json"
+    },
+    "permission-reference-only-v1.1": {
+      "at": "2026-10-27T06:10:46.709596+00:00",
+      "archive": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/integration/permission-reference-only-v1.1-evidence.zip",
+      "bytes": 7849,
+      "sha256": "8fe038d8c29146926253126a0d6355cdc8d8cde09407cfa5e1523683f533d606",
+      "coverage": {
+        "schema_version": "1.1.0",
+        "source_catalog": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/catalog/output/release-011",
+        "source_registry_id": "6bc01858164f7d1a27c610dfdf4105a97759927d827800808070a6d7b170f020",
+        "payload_sha256": "f0a733d47218f588d6f8881f03de65dbb0d22f36e4769f7413b614a2301b9494",
+        "known_definition_or_constant_names": 1721,
+        "reference_only_names": 2,
+        "known_plus_reference_names": 1723,
+        "relation_expressions_scanned": 13468,
+        "reference_occurrences": 12,
+        "complete": false,
+        "status": "supplemental source evidence; does not claim these permissions exist on an OS",
+        "primary_permission_summary_unchanged": true
+      },
+      "tests": 4,
+      "uploaded": false
+    },
+    "native-source-semantics-v1": {
+      "at": "2026-10-27T06:54:52.021446+00:00",
+      "archive": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/integration/native-source-semantics-v1.zip",
+      "bytes": 3799412,
+      "sha256": "a5a98a4db9d9f500af66d10313fa694e0d37ab8b685fe09da4cf4185cb010a8e",
+      "tests": {
+        "abi": 7,
+        "descriptor": 8
+      },
+      "source_registry_id": "6bc01858164f7d1a27c610dfdf4105a97759927d827800808070a6d7b170f020",
+      "production011_modified": false,
+      "uploaded": false
+    }
+  },
+  "apex_metadata_followup": {
+    "paths": 301,
+    "downloaded": 301,
+    "unique_objects": 300,
+    "receipt_inventory": "outside-corpus-audit/source-inventory-batchapex-metadata-v1-acquired002.json",
+    "normalized_report": "integration/apex-source-facts-v2/report.json",
+    "transient_503_recovered": true
+  },
+  "next_candidate": {
+    "path": "catalog-integrated012-sourcev2",
+    "normal_tests_passed": 272,
+    "optimized_tests_passed": 272,
+    "active011_unchanged": true,
+    "build_launched": false,
+    "remaining": "Canonical interface/callback/group producer-schema integration and coordinated fixture before next full production build",
+    "manifest_source_receipt": "integration/manifest-source012-actions.json",
+    "new_manifest_tests": "tests/test_manifest_builder.py"
+  },
+  "release011_staging_observation": {
+    "at": "2026-10-27T05:45:22.077003+00:00",
+    "scope": "Unpublished committed staging observations; independent validation and exports pending",
+    "counts": {
+      "sources": 45768,
+      "bindings": 824994,
+      "binding_declarations": 1148742,
+      "registry_entries": 824994,
+      "registry_inventory": 824994,
+      "permission_definitions": 1500,
+      "annotation_evidence": 13334
+    },
+    "unmatched_annotations": 578
+  },
+  "next_acquisition_draft": {
+    "at": "2026-10-27T05:46:45.853314+00:00",
+    "inventory": "source-inventory-next012-acquisition-v1.json",
+    "sha256": "89fe85e1bf24c5ef3c0354a1a02e63bb4212a3e7ebc40e80890916f6818da4ca",
+    "sources": 46075,
+    "all_selected_paths_downloaded": true,
+    "by_kind": {
+      "evidence": 3176,
+      "aidl": 20210,
+      "source-signature": 317,
+      "manifest": 5328,
+      "sdk-history": 75,
+      "sdk-signature": 73,
+      "sdk-annotations": 2,
+      "java-source": 16893,
+      "sdk-api-index": 1
+    },
+    "build_launched": false,
+    "active011_unchanged": true,
+    "global_semantic_complete": false,
+    "producer_readiness": "Acquisition-only draft: canonical interface/callback/group/schema integration and full fixture gates must precede a new immutable build"
+  },
+  "new_requirement_boundaries": "Kotlin server/UI; Gradle project management; internal Kotlin ARC retains protocol; Markdown/StructurizrSVG docs owned by design task. Source producer remains language-neutral offline tooling.",
+  "release011": {
+    "status": "complete local validation and packaging recovery; no upload",
+    "counts": {
+      "sources": 45768,
+      "bindings": 824994,
+      "occurrences": 1148742,
+      "binding_declarations": 1148742,
+      "permission_definitions": 1500,
+      "permission_symbols": 3310,
+      "permission_relations": 1151128,
+      "aidl_schemas": 20210,
+      "annotation_evidence": 13334,
+      "registry_entries": 824994,
+      "registry_inventory": 824994
+    },
+    "primary_sqlite": {
+      "path": "catalog/output/release-011/catalog.sqlite",
+      "bytes": 10546720768,
+      "sha256": "5a25eff25c33cf475df465588996d4e4ed8f6d0f40a512d0e4580dcbd4ffa9e4"
+    },
+    "manifest": "release011-evidence/release-manifest.json",
+    "validation": "validation-report-release011.json",
+    "device_inventory": "device-inventory-reconciliation-release011.json",
+    "permission_export": "permission-export-release011",
+    "recovery": "local-followups-release011-recovery001.json",
+    "annotation_unmatched": 578,
+    "global_complete": false
+  },
+  "review_status": "User narrowed Claude HV to design only; Google API surface/corpus analysis excluded. Source task remains separate. No Claude run or corpus transfer from source task.",
+  "combined_review_manifest": {
+    "path": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/integration/combined-hv-source-inputs-v3.json",
+    "sha256": "d5d46cb57081ecb769f3c1bf2cfb81ff545a407d43ebf058b56e04570f12266c"
+  },
+  "native_abi_source_facts": "integration/native-abi-source-facts-v1/report.json",
+  "native_descriptor_source_facts": "integration/native-descriptor-source-facts-v1/report.json",
+  "producer_field_contract": "integration/PRODUCER-FIELD-CONTRACT.md",
+  "remaining_local_integration": "Canonical schema/reference owner restarted for tested interface/callback/group field mapping; proposed PRODUCER-FIELD-CONTRACT.md supplied. No nextproduction build launched before that mapping.",
+  "current_activity": "Validated release011 preserved; source producer integration checkpoint retained independently of design review",
+  "design_review_dependency": "None: acquisition, extraction, population and source metadata integration do not block design-only HV"
+}

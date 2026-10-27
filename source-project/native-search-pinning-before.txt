@@ -1,0 +1,20 @@
+E
+======================================================================
+ERROR: test_map_native_search_sources (unittest.loader._FailedTest.test_map_native_search_sources)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_map_native_search_sources
+Traceback (most recent call last):
+  File "/usr/lib/python3.14/unittest/loader.py", line 433, in _find_test_path
+    module = self._get_module_from_name(name)
+  File "/usr/lib/python3.14/unittest/loader.py", line 374, in _get_module_from_name
+    __import__(name)
+    ~~~~~~~~~~^^^^^^
+  File "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/test_map_native_search_sources.py", line 2, in <module>
+    from map_native_search_sources import project_for_path
+ModuleNotFoundError: No module named 'map_native_search_sources'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)

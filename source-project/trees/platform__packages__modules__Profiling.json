@@ -1,0 +1,1177 @@
+{
+  "repo": "platform/packages/modules/Profiling",
+  "requested_revision": "refs/tags/android-17.0.0_r1",
+  "revision": "8b3abe8eebc0e97890977d9658038f4966aa7df6",
+  "entries": [
+    {
+      "path": ".gitignore",
+      "kind": "blob",
+      "oid": "645cb01f7f45c48e697e5f12e99fbfea64b624ed",
+      "mode": "100644"
+    },
+    {
+      "path": "OWNERS",
+      "kind": "blob",
+      "oid": "9ae8cf50b8c6ce7997e3d6a9ba1004b2aea4f0e2",
+      "mode": "100644"
+    },
+    {
+      "path": "PREUPLOAD.cfg",
+      "kind": "blob",
+      "oid": "87bff970c67083f51b75f4727ea782f55faef453",
+      "mode": "100644"
+    },
+    {
+      "path": "TEST_MAPPING",
+      "kind": "blob",
+      "oid": "7d21b9a38f6cc07ef3c559524bb090e1dc290c4f",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl/Android.bp",
+      "kind": "blob",
+      "oid": "f0d60754d1ed1342a880b5d77a44061b3ee133d2",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl/android/os/IProfilingAnomalyCallback.aidl",
+      "kind": "blob",
+      "oid": "b1e66b010939b69c7cd94dedd1ec59cb0547a6b0",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl/android/os/IProfilingResultCallback.aidl",
+      "kind": "blob",
+      "oid": "1686bc60558f5b12c102bd05c6b3cab5885ecbf3",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl/android/os/IProfilingService.aidl",
+      "kind": "blob",
+      "oid": "08f3b6203751ac05beee343eed72c07254caef8f",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl/android/os/IProfilingTriggerCallback.aidl",
+      "kind": "blob",
+      "oid": "f384dda7f743c2798d044b8da0aebd4a4e80764a",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl/android/os/ProfilingTriggerValueParcel.aidl",
+      "kind": "blob",
+      "oid": "efdb758fadf84f8b425025376b0e4b2d22094bec",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/OWNERS",
+      "kind": "blob",
+      "oid": "d3d33166e24a9bf0eccf944991d71eabefdee5b6",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/aidl/Android.bp",
+      "kind": "blob",
+      "oid": "4c4445a6184e01d3a22404e9613f56c637a902ea",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/aidl/android/os/profiling/anomaly/IAnomalyDetectorService.aidl",
+      "kind": "blob",
+      "oid": "2f16b60d27add26081edd58a5a4fe5a2f3f3f30f",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/aidl/android/os/profiling/anomaly/RuleParcel.aidl",
+      "kind": "blob",
+      "oid": "f37dda268e4f419f42d60d262b08e767e7324786",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/flags/Android.bp",
+      "kind": "blob",
+      "oid": "ad6e1f5e17976a10f5fdf0cf2fb75bca056a65b7",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/flags/flags.aconfig",
+      "kind": "blob",
+      "oid": "de8136123359603848d7c532af22e4842de74c6d",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/framework/Android.bp",
+      "kind": "blob",
+      "oid": "fa3915d14d7a7aa68269bad35e2c2b5ee4c37814",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/framework/api/current.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/framework/api/module-lib-current.txt",
+      "kind": "blob",
+      "oid": "3a0ddd7589263ce435b623eef07a011ebb3b991c",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/framework/api/module-lib-removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/framework/api/removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/framework/api/system-current.txt",
+      "kind": "blob",
+      "oid": "de5d0c6aaa38f621ec85ae60177389650e3de0f6",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/framework/api/system-removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/framework/jarjar-rules.txt",
+      "kind": "blob",
+      "oid": "638cda7d315eae93b979e3cd99340e0053ce1400",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/framework/java/android/os/profiling/anomaly/AnomalyDetectorFrameworkInitializer.java",
+      "kind": "blob",
+      "oid": "cf5135cd26bc46f89d6d12f9fd3381aba8b14d1c",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/framework/java/android/os/profiling/anomaly/AnomalyDetectorManager.java",
+      "kind": "blob",
+      "oid": "e1ee6b555983c1b59716bb4041759f30e33cf295",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/framework/java/android/os/profiling/anomaly/Rule.java",
+      "kind": "blob",
+      "oid": "f4cc8b4e09ff5919f6461623afe4ddcef3ab0958",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/framework/java/android/os/profiling/anomaly/RuleInternal.java",
+      "kind": "blob",
+      "oid": "ef6f4eff612d0440e4d05c20e367362cf75c619a",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/proto/Android.bp",
+      "kind": "blob",
+      "oid": "045ad0f70345b9fe5eb141048edd2c4c3aee0f3c",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/proto/com/android/os/profiling/anomaly/ratelimiter/rate_limiter_state.proto",
+      "kind": "blob",
+      "oid": "94ff9dc5dfa982c4343899b97bb67654b34a4665",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/proto/com/android/os/profiling/anomaly/ratelimiter/signature_cooldown_config.proto",
+      "kind": "blob",
+      "oid": "ddb7cf82c588a74db71e073031dd6dd08d6f7d44",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/proto/com/android/server/anomaly/AnomalyRules.proto",
+      "kind": "blob",
+      "oid": "176029b68daddb788fea0d8d1250896df0be19ef",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/Android.bp",
+      "kind": "blob",
+      "oid": "6e17185ce6916cf560b94024cb0eb0ffee2a5d7a",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/api/current.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/api/removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/api/system-server-current.txt",
+      "kind": "blob",
+      "oid": "7ac56a1fc512a2569fa98636b27c85fded414f7f",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/api/system-server-removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/jarjar-rules.txt",
+      "kind": "blob",
+      "oid": "e677e7d39f3fbe32f389d34398296d3e9f5a3607",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/AnomalyDetectorManagerLocal.java",
+      "kind": "blob",
+      "oid": "18af954e553bd9115d1136a8667808db209ef29a",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/AnomalyDetectorService.java",
+      "kind": "blob",
+      "oid": "91dbc3548a6d50d5db021064dd786be64dc5c722",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/AnomalyDetectorShellCommandHandler.java",
+      "kind": "blob",
+      "oid": "14d6ead44c4c031ee2fb79aa58cf0c85d18d9ec8",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/attribute/AnomalyDetailsAttribute.java",
+      "kind": "blob",
+      "oid": "638f1071aba2775aced6eba7057370dc75b12385",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/attribute/ProfilingParamsAttribute.java",
+      "kind": "blob",
+      "oid": "ed57b7cec443fdfce25e28e3e2e19d8bf8ca8e4d",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/attribute/RateLimitSignatureAttribute.java",
+      "kind": "blob",
+      "oid": "ceb9c290da6fe2a3ddba7f5727f3c6b60179fd65",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/attribute/SummaryAttribute.java",
+      "kind": "blob",
+      "oid": "ce6b19babc78527de76cbb58266f9fd9a82b26b9",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/attribute/UidAttribute.java",
+      "kind": "blob",
+      "oid": "e90dd170b320d2f7c9c9a25dd4d1cf76bd3c3f08",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/collector/SignalCollector.java",
+      "kind": "blob",
+      "oid": "43e035509a5d2d8b61f14fa5e08e43f4b8c62acd",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/collector/SignalCollectorConfig.java",
+      "kind": "blob",
+      "oid": "bd10ff3280ebca306f60ddda45422750afb3a541",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/collector/SignalCollectorData.java",
+      "kind": "blob",
+      "oid": "99a0114b4440849373b33f72d31ae6f85934ae09",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/collector/SubscriptionId.java",
+      "kind": "blob",
+      "oid": "b6db3fed82fdd4b5f58c4702b84f3edb849514db",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/collector/binder/BinderSpamConfig.java",
+      "kind": "blob",
+      "oid": "ec4cf35c65b083d38eec294c7624aafa647f6f78",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/collector/binder/BinderSpamConfigList.java",
+      "kind": "blob",
+      "oid": "92a8530efb1b87c757ff4620c188e3d004eb099a",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/collector/binder/BinderSpamData.java",
+      "kind": "blob",
+      "oid": "5610f89dd10028c90b320bebb1bb6fa58d814b25",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/config/AnomalyDetectorProperties.java",
+      "kind": "blob",
+      "oid": "55fb3cc1d9d52ee6a799e0384b7de107f62145d9",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/config/ProfilingConcurrencyConfig.java",
+      "kind": "blob",
+      "oid": "7259d4d5ce086d308fcab3aba22713d1019c7ede",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/config/ProfilingConcurrencyConfigImpl.java",
+      "kind": "blob",
+      "oid": "e9815c3edca8137557980dacbec167b3f429c976",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/core/AnomalyAttribute.java",
+      "kind": "blob",
+      "oid": "a346266fc8e3e7e4dd365b6c04ae1a4e58c6cceb",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/core/AnomalyDetector.java",
+      "kind": "blob",
+      "oid": "f8adf400387f905eefc15adf23ab30506bde17cc",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/core/AnomalyDetectorController.java",
+      "kind": "blob",
+      "oid": "5a15881c491be3c00a7f762e08ce10a5387aec74",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/core/AnomalyDetectorRegistry.java",
+      "kind": "blob",
+      "oid": "065736e4f4f79f2ae10a86b980ba382bd00ac81d",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/core/AnomalyHandler.java",
+      "kind": "blob",
+      "oid": "1ecac7dc165327f232747dcb50c9ba87c68b3672",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/core/AnomalyHandlerRegistry.java",
+      "kind": "blob",
+      "oid": "1dc35e58cff2ec98427c5527a92be2aa02ce8fa3",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/core/AnomalyReport.java",
+      "kind": "blob",
+      "oid": "9841d2aeaba12e1e4cc2b77908d93e17c258fd39",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/core/RuleStorage.java",
+      "kind": "blob",
+      "oid": "c9df51faeaba4a2e91c9e7ab8c29521d569a7af5",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/core/SignalCollectorRegistry.java",
+      "kind": "blob",
+      "oid": "b67e8377acf916b714c64beeff4259978eb79c8e",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/core/SignalTypeId.java",
+      "kind": "blob",
+      "oid": "b8dc834a7d35a73abcfbfc0ed07e92bcbad72ae4",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/detector/BinderSpamAnomalyDetector.java",
+      "kind": "blob",
+      "oid": "0241d1cb8571831b9252bd45b231c51fca8ee0f2",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/handler/LogAnomalyHandler.java",
+      "kind": "blob",
+      "oid": "89f33b12900b54628cb2dc3f9e2f8e1df8e07eab",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/handler/ProfileAnomalyHandler.java",
+      "kind": "blob",
+      "oid": "18ba81f1c952b6864848a265aae4ed83154bf382",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/handler/ProfilingSessionHelper.java",
+      "kind": "blob",
+      "oid": "25818e7d123546c19c22f2ea990de883bbfb2896",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/internal/AnomalyDetectorControllerImpl.java",
+      "kind": "blob",
+      "oid": "8b69f656a36588c07b06ab94af88e34e6df9d269",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/internal/AnomalyDetectorRegistryImpl.java",
+      "kind": "blob",
+      "oid": "031f7e51ef25a38c3382f130432bceb289a6e15d",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/internal/AnomalyHandlerRegistryImpl.java",
+      "kind": "blob",
+      "oid": "03f44d8293aa5c0df29ab1f490c8fc389453b2a9",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/internal/AnomalyReportImpl.java",
+      "kind": "blob",
+      "oid": "a38ec1512091f7cd462328dc6e4a3137ed93b5f3",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/internal/RuleStorageImpl.java",
+      "kind": "blob",
+      "oid": "c2eabb96708f634702b4a6c92df692a699802cc7",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/internal/SignalCollectorRegistryImpl.java",
+      "kind": "blob",
+      "oid": "bca568c9411e80d20ab2140294a7fa8fa9ddcece",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/ratelimiter/ProfilingRateLimiter.java",
+      "kind": "blob",
+      "oid": "23d49507a740f1037e6eb6a9e85f4bcd8d93bbde",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/ratelimiter/ProfilingRateLimiterImpl.java",
+      "kind": "blob",
+      "oid": "07f3d723eba2cc41d4ca236278eaadda2cb193b6",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/ratelimiter/RateLimiterClock.java",
+      "kind": "blob",
+      "oid": "4064429bd473102113f7c2a48563ce59fc76bee4",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/ratelimiter/RateLimiterConfig.java",
+      "kind": "blob",
+      "oid": "dbd0bd2556eea46e4e52061a896ee60dbb9263cf",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/ratelimiter/RateLimiterConfigImpl.java",
+      "kind": "blob",
+      "oid": "322fea1275af0d5f07ff4edddfdcb453fdcec130",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/ratelimiter/SystemClockImpl.java",
+      "kind": "blob",
+      "oid": "8657bf0dc1b06880dbbd5f3b92c67efbd6cc9267",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/ratelimiter/persistence/ProtoStateStore.java",
+      "kind": "blob",
+      "oid": "f87b33b411a8f8124d451a6066e8dacecd2adef2",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/ratelimiter/persistence/RateLimiterState.java",
+      "kind": "blob",
+      "oid": "2e546c516fa88549a914833d290ccf1ab2f1c3a9",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/ratelimiter/persistence/RateLimiterStateStore.java",
+      "kind": "blob",
+      "oid": "aa7f378276363d42e6c718b7c67cbe6fbd9c337d",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/util/LogUtil.java",
+      "kind": "blob",
+      "oid": "20aa5157f9b7929fc28e849935dd49969a32283a",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/util/Logger.java",
+      "kind": "blob",
+      "oid": "28b9e128fa41abe94c71bf2c06791f8fdacaf16f",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/util/SlogLogger.java",
+      "kind": "blob",
+      "oid": "70f86537336559472a521a4e3b3dd46d190ea9a7",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/wrapper/ContextSystemServiceFetcher.java",
+      "kind": "blob",
+      "oid": "f28ba33f566259df426ae7e16b91536c15cd02f6",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/wrapper/ExecutorServiceWrapper.java",
+      "kind": "blob",
+      "oid": "36c830bc9baf7175365901a79775ae83316303a4",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/service/java/com/android/os/profiling/anomaly/wrapper/SystemServiceFetcher.java",
+      "kind": "blob",
+      "oid": "393f68a2858238c264fa977bc24c7ecbfc26765f",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/cts/Android.bp",
+      "kind": "blob",
+      "oid": "286ddffb99bc528988e6ce1ee59339a20a5cad73",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/cts/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "5513158fb7f8e614002bf5956f746841a339264d",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/cts/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "0bedc24bb03127a49242b06fb6ecf878c0e32b7f",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/cts/jarjar-rules.txt",
+      "kind": "blob",
+      "oid": "770dd9d8c1e4c6991e2d450de3fe290ed4e873e1",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/cts/src/android/os/cts/AnomalyDetectorManagerTest.java",
+      "kind": "blob",
+      "oid": "17486dc92561fa8576d1387867b7e499d27ea907",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/cts/src/android/os/cts/RuleTest.java",
+      "kind": "blob",
+      "oid": "581042a7343ddcad777076fb3d129dab07e6ec8b",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/mts/Android.bp",
+      "kind": "blob",
+      "oid": "0461fb5c5f480db18fe06f8a3f158e3630cd1c7e",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/mts/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "cbcd68f4bbc912e6d727d7152b1122cf1dd1e681",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/mts/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "16d42c90056e239da5d57112a1d55fcf25bbd109",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/mts/OWNERS",
+      "kind": "blob",
+      "oid": "ab0feeaffa527d4c2518c550820bdd912c161442",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/mts/jarjar-rules.txt",
+      "kind": "blob",
+      "oid": "22c6654933980e0bac45ff2aa454b602ffb4106e",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/mts/src/android/os/profiling/anomaly/AnomalyDetectorFrameworkInitializerTests.java",
+      "kind": "blob",
+      "oid": "6ef33f9d71ce1fbdf41805e6383f2104103a7476",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/mts/src/android/os/profiling/anomaly/PerfettoMetadataTest.java",
+      "kind": "blob",
+      "oid": "f6031793af184d3e7fa1ec90e4971f44c369910b",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/mts/src/android/os/profiling/anomaly/RuleInternalTests.java",
+      "kind": "blob",
+      "oid": "68a8f64b73c776ce5491a2951f08bc25396d9e48",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/mts/src/com/android/os/profiling/anomaly/AnomalyDetectorServiceTests.java",
+      "kind": "blob",
+      "oid": "a3c7da7c512643f4cd77a76705fc905772c22e06",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/mts/src/com/android/os/profiling/anomaly/AnomalyDetectorShellCommandHandlerTest.java",
+      "kind": "blob",
+      "oid": "f392f9c8e4a88f9326e7d1e3826add9e5f787f41",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/mts/src/com/android/os/profiling/anomaly/collector/SubscriptionIdTests.java",
+      "kind": "blob",
+      "oid": "d509e9cfd2ee2611056b947ff16b5b507bfcf0e1",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/mts/src/com/android/os/profiling/anomaly/collector/binder/BinderSpamConfigListTest.java",
+      "kind": "blob",
+      "oid": "624ce9e1cb20884db9ca670e009c7dbe885e26b6",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/mts/src/com/android/os/profiling/anomaly/collector/binder/BinderSpamConfigTests.java",
+      "kind": "blob",
+      "oid": "5f6878f442476409a1c86850e49fedeae0ff1047",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/mts/src/com/android/os/profiling/anomaly/collector/binder/BinderSpamDataTests.java",
+      "kind": "blob",
+      "oid": "99a39e1d32c7341dbb3d7b77ff566178c548c727",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/mts/src/com/android/os/profiling/anomaly/config/AnomalyDetectorPropertiesTest.java",
+      "kind": "blob",
+      "oid": "7426d958a0a52852f3f4ddc9e160f13cd3a83add",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/mts/src/com/android/os/profiling/anomaly/config/ProfilingConcurrencyConfigImplTest.java",
+      "kind": "blob",
+      "oid": "bae43f7c8bd8d491493ce03a8ce0417542b8e02f",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/mts/src/com/android/os/profiling/anomaly/core/SignalTypeIdTests.java",
+      "kind": "blob",
+      "oid": "9b1b626194f91f253747f0c9c8582004af17e1cb",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/mts/src/com/android/os/profiling/anomaly/detector/BinderSpamAnomalyDetectorTests.java",
+      "kind": "blob",
+      "oid": "9029d1ba97a21fea9db257769f48ed7eea01ceb5",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/mts/src/com/android/os/profiling/anomaly/detector/BinderSpamRuleEvaluatorTests.java",
+      "kind": "blob",
+      "oid": "502d2fb1a85ed6a8db99ef23fbf1e75640b9b954",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/mts/src/com/android/os/profiling/anomaly/handler/AnomalyHandlerRegistryImplTests.java",
+      "kind": "blob",
+      "oid": "bb40e98b21e6310e5fd45c9bb74f082718f36d98",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/mts/src/com/android/os/profiling/anomaly/handler/LogAnomalyHandlerTests.java",
+      "kind": "blob",
+      "oid": "1ff398103feaff2549d28ad7d2a6170709855fb3",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/mts/src/com/android/os/profiling/anomaly/handler/ProfileAnomalyHandlerTests.java",
+      "kind": "blob",
+      "oid": "3d24bab8cf3c19026356a93be4e4f1e1d525f4d2",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/mts/src/com/android/os/profiling/anomaly/handler/ProfilingSessionHelperTests.java",
+      "kind": "blob",
+      "oid": "aa99e649cb91b76fb1567156e8d08828b89ed3ae",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/mts/src/com/android/os/profiling/anomaly/internal/AnomalyDetectorControllerImplTests.java",
+      "kind": "blob",
+      "oid": "73a13d801fff575539d7168cc407c2d9422a3ea8",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/mts/src/com/android/os/profiling/anomaly/internal/AnomalyDetectorRegistryImplTests.java",
+      "kind": "blob",
+      "oid": "0f45fa3da849496e50c3ba9ed814d3d34dac9425",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/mts/src/com/android/os/profiling/anomaly/internal/RuleStorageImplTests.java",
+      "kind": "blob",
+      "oid": "3b66388f777ea1ada55a02a2ae5332ee30b3f585",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/mts/src/com/android/os/profiling/anomaly/internal/SignalCollectorRegistryImplTests.java",
+      "kind": "blob",
+      "oid": "3c27891b335ba79f169df4030a4d03daa8ab436e",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/mts/src/com/android/os/profiling/anomaly/ratelimiter/ProfilingRateLimiterImplTest.java",
+      "kind": "blob",
+      "oid": "d3cda44245a8c4d2d865679a97ee4d4d043568bd",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/mts/src/com/android/os/profiling/anomaly/ratelimiter/RateLimiterConfigImplTest.java",
+      "kind": "blob",
+      "oid": "8aae110cda0bd8bf9588580f0ed875e16851713f",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/mts/src/com/android/os/profiling/anomaly/ratelimiter/persistence/ProtoStateStoreTest.java",
+      "kind": "blob",
+      "oid": "9ad837b44802f9230ae60b2157e951bcadfa97d4",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/mts/src/com/android/os/profiling/anomaly/util/LogUtilTests.java",
+      "kind": "blob",
+      "oid": "aaf2202274f875c545e6448ec24d8f2b967fe918",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/scripts/README.md",
+      "kind": "blob",
+      "oid": "95781d62d5b6a1835dd10455b0e72014f2ad5741",
+      "mode": "100644"
+    },
+    {
+      "path": "anomaly-detector/tests/scripts/generate_anomaly_rules.py",
+      "kind": "blob",
+      "oid": "1b7c763263696bb53dcc859f24c5dc38a0b0dab7",
+      "mode": "100755"
+    },
+    {
+      "path": "anomaly-detector/tests/scripts/rules_example.yaml",
+      "kind": "blob",
+      "oid": "0c50f27d001b169579ecd8b516192d550bbfd8c5",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/Android.bp",
+      "kind": "blob",
+      "oid": "bfe0138256978f57e91879ab6553cac51f72f437",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/com.android.profiling.avbpubkey",
+      "kind": "blob",
+      "oid": "aba0c244aea6c6384451035ce47a575d098c6410",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/com.android.profiling.pem",
+      "kind": "blob",
+      "oid": "4b51b05fbfc884b2f5bb6a696720a01150035bfe",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/com.android.profiling.pk8",
+      "kind": "blob",
+      "oid": "9141193070ca5ff9fc9d4d091a6a4e84f28979d7",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/com.android.profiling.x509.pem",
+      "kind": "blob",
+      "oid": "6598ec93db25170af8ffdbe7dd98094f8f3ec0c4",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/manifest.json",
+      "kind": "blob",
+      "oid": "918d0aa84835626ebb9d6a01547c81aeb20ffaea",
+      "mode": "100644"
+    },
+    {
+      "path": "checkstyle_suppressions.xml",
+      "kind": "blob",
+      "oid": "4b74e01c6bc2a4e33d57a20e5695026db8c3697c",
+      "mode": "100644"
+    },
+    {
+      "path": "flags/Android.bp",
+      "kind": "blob",
+      "oid": "98bf4981d37ac1bfb52d1d8871c985932e93b029",
+      "mode": "100644"
+    },
+    {
+      "path": "flags/flags.aconfig",
+      "kind": "blob",
+      "oid": "624f2c118455ede24ee4cb35f09ee7c5f29614e7",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/Android.bp",
+      "kind": "blob",
+      "oid": "78c15eabdfe7c5c9e82b3e801521332a7cec3ec8",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/current.txt",
+      "kind": "blob",
+      "oid": "f4d9ad3568be9a01c80393510c2c6c7d5b37853b",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/module-lib-current.txt",
+      "kind": "blob",
+      "oid": "903556bc5d1e9dbbfaf26713dd037dbc0aca5fc8",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/module-lib-removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/system-current.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/system-removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/jarjar-rules.txt",
+      "kind": "blob",
+      "oid": "81d44bb745657c81135e826312f81c77796f8d7a",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/os/AnomalyProfilingClient.java",
+      "kind": "blob",
+      "oid": "2fbc8a0b8fab8438141585f3b9aaf61d5f2e15ff",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/os/AnomalyProfilingManager.java",
+      "kind": "blob",
+      "oid": "e21be8be14e6c5fe2802fc38bba3781daecb7667",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/os/AnomalyRequestResult.java",
+      "kind": "blob",
+      "oid": "f6eb7b5958b2378797d88a7d95d3fe9bb40cbb9e",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/os/ProfilingFrameworkInitializer.java",
+      "kind": "blob",
+      "oid": "06552534ff791a08149fb9418f9a7f58c943584b",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/os/ProfilingManager.java",
+      "kind": "blob",
+      "oid": "74ac57476f0e9fd0691c5c625f29f4ae98d03a45",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/os/ProfilingResult.java",
+      "kind": "blob",
+      "oid": "820d436f224404375f6a7056e1887c48eb6b5214",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/os/ProfilingServiceHelper.java",
+      "kind": "blob",
+      "oid": "b58a60c92b1f878eeb45593ad16c1201c154b1b0",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/os/ProfilingTrigger.java",
+      "kind": "blob",
+      "oid": "dfcf3dff153ff4faa4134adb27ca1447c653e0e4",
+      "mode": "100644"
+    },
+    {
+      "path": "service/Android.bp",
+      "kind": "blob",
+      "oid": "dbe7e2d20923ac0e510b0e9b12d2bba56786cc8d",
+      "mode": "100644"
+    },
+    {
+      "path": "service/jarjar-rules.txt",
+      "kind": "blob",
+      "oid": "ee3b05c32f596da9fb48b92d89c60bf3b63eb14f",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/os/profiling/Configs.java",
+      "kind": "blob",
+      "oid": "7d2d095ecf8fcf747461a4b830bd343bea8f3eb9",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/os/profiling/DeviceConfigHelper.java",
+      "kind": "blob",
+      "oid": "20c46dec62b365596674f2b5c64c6b5ddd0748e5",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/os/profiling/LoggingHelper.java",
+      "kind": "blob",
+      "oid": "ec66b301c91e4f041711a9c5e9b4a11c063696f2",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/os/profiling/MemoryAnomalyRateLimiter.java",
+      "kind": "blob",
+      "oid": "a45ab997eef269447e557c6560330294819f3bb7",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/os/profiling/ProcessMap.java",
+      "kind": "blob",
+      "oid": "247c5ef2e4418b682c553b6167e9054ab2cbfca3",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/os/profiling/ProfilingService.java",
+      "kind": "blob",
+      "oid": "503e67870c33d5869d9a41a357d76d8c586221a0",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/os/profiling/ProfilingTriggerData.java",
+      "kind": "blob",
+      "oid": "5ef8f3fbacb28579f6986b49983051df041c095b",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/os/profiling/RateLimiter.java",
+      "kind": "blob",
+      "oid": "2b11bffbf7ad1bddf1b0f2233cb2b730e0d3a23b",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/os/profiling/TracingSession.java",
+      "kind": "blob",
+      "oid": "4725db660f9d5c90d26006ea545a684a13697c78",
+      "mode": "100644"
+    },
+    {
+      "path": "service/proto/android/os/queue.proto",
+      "kind": "blob",
+      "oid": "f4f0368a21768f1b0af9b70141ae0827761cb747",
+      "mode": "100644"
+    },
+    {
+      "path": "service/proto/android/os/trigger.proto",
+      "kind": "blob",
+      "oid": "20ac364b41ce163f7c4a6f77531625c4be56bac1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/Android.bp",
+      "kind": "blob",
+      "oid": "b158d326eb914c4a27c9ca9dbf3edf2bb7c982a4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "b41efe0f3a0fffa7ebb70810a18c033260031878",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "8e369b92d13553c2ff9d9e1b3ad8770136968092",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/OWNERS",
+      "kind": "blob",
+      "oid": "0be5b21043fb983e5da490ea753e78e60ee93aec",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/README",
+      "kind": "blob",
+      "oid": "1b3a2130f24618c4e4de53ce3452babd45f525c4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/jarjar-rules.txt",
+      "kind": "blob",
+      "oid": "2860889cf45782511c3c29dab4455cafb1a32ffa",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/jni/Android.bp",
+      "kind": "blob",
+      "oid": "add2c2a1b596885a0d94e998e852f3d872e849dc",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/jni/target.c",
+      "kind": "blob",
+      "oid": "d977650f02eef530dffd450881a578a07c6f95c4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/src/android/profiling/cts/ConfigsTests.java",
+      "kind": "blob",
+      "oid": "74e71ee78434e68b0b4b1740751b0cd60db5bdb2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/src/android/profiling/cts/EmptyActivity.java",
+      "kind": "blob",
+      "oid": "8220fb346650ebf5374e33a0b2c9b4d83402d6e3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/src/android/profiling/cts/LoggingHelperTests.java",
+      "kind": "blob",
+      "oid": "fcb10875fbb5cd24a27fd3fd8edd78a4c1508cf7",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/src/android/profiling/cts/ProfilingAppTriggeredTests.java",
+      "kind": "blob",
+      "oid": "2c235c0d5f2a01c2d778304f687d707a37488555",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/src/android/profiling/cts/ProfilingFrameworkInitializerTests.java",
+      "kind": "blob",
+      "oid": "ee44a0ac922f475b6a7912a21e9d39fa48cc65bb",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/src/android/profiling/cts/ProfilingFrameworkTests.java",
+      "kind": "blob",
+      "oid": "69532f865e3f79eb0c5d7c5372e084213b32ff17",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/src/android/profiling/cts/ProfilingMemoryLimiterTests.java",
+      "kind": "blob",
+      "oid": "d0eb97431ce41f8152e1b710ab706d56a679a4f0",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/src/android/profiling/cts/ProfilingServiceManagerTest.java",
+      "kind": "blob",
+      "oid": "4ee6b00b3e5a35cfa275421fd54490769cf61a36",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/src/android/profiling/cts/ProfilingServiceTests.java",
+      "kind": "blob",
+      "oid": "cd4cd217b8cbeea38054b0b660c22c3ac322289c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/src/android/profiling/cts/ProfilingTestConstants.java",
+      "kind": "blob",
+      "oid": "d4da204cf24663ed1b7f7730f094c39602a5d86d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/src/android/profiling/cts/ProfilingTestUtils.java",
+      "kind": "blob",
+      "oid": "aa635c7a9fc5bbb1f3d4be4f7b11db9ce8b58f46",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/src/android/profiling/cts/profilingapp/AndroidManifestProfilingApp.xml",
+      "kind": "blob",
+      "oid": "1c72b41eb143d0f0a2477a7795338d12f77c57bd",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/src/android/profiling/cts/profilingapp/ProfilingAppUtils.java",
+      "kind": "blob",
+      "oid": "88dd43719692935f7c0e1b235fddc5ebed6ee1fb",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/src/android/profiling/cts/profilingapp/ProfilingTriggerTestActivity.java",
+      "kind": "blob",
+      "oid": "1b11046f9d691e9c0390e559ceea9ab800e44b6e",
+      "mode": "100644"
+    },
+    {
+      "path": "util/Android.bp",
+      "kind": "blob",
+      "oid": "b2369a6682fc7184e65429c280dfaef7d5ca1052",
+      "mode": "100644"
+    },
+    {
+      "path": "util/proto/android/profiling/util/ratelimiter.proto",
+      "kind": "blob",
+      "oid": "51c7eb078a470b4e05af1eb03bce79074df91b70",
+      "mode": "100644"
+    },
+    {
+      "path": "util/src/com/android/profiling/utils/PerfettoMetadata.java",
+      "kind": "blob",
+      "oid": "edca903d6f0361328f2a7ccc35cf41b0fe6c47c0",
+      "mode": "100644"
+    },
+    {
+      "path": "util/src/com/android/profiling/utils/RateLimiterBase.java",
+      "kind": "blob",
+      "oid": "4c3654faeb9baf1d152526ff147ddfb2da1331b5",
+      "mode": "100644"
+    }
+  ]
+}

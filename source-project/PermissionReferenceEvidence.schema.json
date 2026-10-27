@@ -1,0 +1,29 @@
+{
+ "$schema":"https://json-schema.org/draft/2020-12/schema",
+ "$id":"urn:android-binding-source-evidence:1.1.0:PermissionReferenceEvidence",
+ "type":"object",
+ "required":["schema_version","kind","source_registry_id","permission_id","name","manifest_definition_proven","constant_value_proven","protection_level","references","os_authority","mcp_client_grants"],
+ "properties":{
+  "schema_version":{"const":"1.1.0"},
+  "kind":{"const":"reference-only-permission-evidence"},
+  "source_registry_id":{"type":"string","pattern":"^[0-9a-f]{64}$"},
+  "permission_id":{"type":"string","pattern":"^[0-9a-f]{64}$"},
+  "name":{"type":"string","minLength":1},
+  "manifest_definition_proven":{"const":false},
+  "constant_value_proven":{"const":false},
+  "protection_level":{"type":"null"},
+  "os_authority":{"const":"unknown"},
+  "mcp_client_grants":{"const":"not-inferred"},
+  "references":{"type":"array","minItems":1,"items":{
+   "type":"object","required":["binding_id","source_id","line","permission_expression","raw_annotation"],
+   "properties":{
+    "binding_id":{"type":"string","pattern":"^[0-9a-f]{64}$"},
+    "source_id":{"type":"string","pattern":"^[0-9a-f]{64}$"},
+    "line":{"type":"integer","minimum":1},
+    "permission_expression":{"type":"object","required":["op"],"properties":{"op":{"type":"string","minLength":1}}},
+    "raw_annotation":{}
+   },"additionalProperties":false
+  }}
+ },
+ "additionalProperties":false,"patternProperties":{"^x-":{}}
+}

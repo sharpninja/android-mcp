@@ -1,0 +1,595 @@
+{
+  "repo": "platform/frameworks/opt/car/services",
+  "requested_revision": "refs/tags/android-17.0.0_r1",
+  "revision": "2bb3349c1a84b9b15c5ef05ef9c2e3dc6dde427a",
+  "entries": [
+    {
+      "path": ".gitignore",
+      "kind": "blob",
+      "oid": "b61e3aaab62cffaa5ed45a55871ccd309d787f0e",
+      "mode": "100644"
+    },
+    {
+      "path": "OWNERS",
+      "kind": "blob",
+      "oid": "1cb20fafc4ae399470e622774eb111810c9f6ebe",
+      "mode": "100644"
+    },
+    {
+      "path": "PREUPLOAD.cfg",
+      "kind": "blob",
+      "oid": "1c7c842f2f93a2a7e5315fbcee9202fd381e8dd4",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/Android.bp",
+      "kind": "blob",
+      "oid": "26a134585d13fe9660bf4289bc928b1c224e0ba4",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/TEST_MAPPING",
+      "kind": "blob",
+      "oid": "445ba66dbb9542ec925192e276de0f8a74e252c2",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/api/current.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/api/module-lib-current.txt",
+      "kind": "blob",
+      "oid": "d813bb8ade7d763e67f92d45bc761010fa59cb4b",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/api/module-lib-removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/api/removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/api/system-current.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/api/system-removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/api/test-current.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/api/test-removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/host_tests/Android.bp",
+      "kind": "blob",
+      "oid": "809d51578d2503876d10a8c4c85e753a336fbe4a",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/host_tests/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "93c0ece0e3cf27566de2c09d934adfccb88d0493",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/host_tests/src/com/android/internal/car/test/CarServiceCrashDumpTest.java",
+      "kind": "blob",
+      "oid": "bf19a3cb58477d6649b4d5e323b129cac3400aa3",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/jni/Android.bp",
+      "kind": "blob",
+      "oid": "291c3097b2c6c427056d85eb0644b0e5a19f196c",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/jni/com_android_internal_car_os_Util.cpp",
+      "kind": "blob",
+      "oid": "43c485ed633632123f84d08570380e5c545b11dc",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/jni/onload.cpp",
+      "kind": "blob",
+      "oid": "d64f1678467dc65a13b643ec78241ced8e978179",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/proto/Android.bp",
+      "kind": "blob",
+      "oid": "d5af5e643818b7ec29d9f13812af276ae82521d0",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/proto/jarjar-rules.txt",
+      "kind": "blob",
+      "oid": "caa4764d86a1b84d830deeacbb0f1d4112963b53",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/proto/src/atoms.proto",
+      "kind": "blob",
+      "oid": "198b2125abcada37c06b91695b26ec1ea528d55f",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/src/android/content/res/CompatScaleWrapper.java",
+      "kind": "blob",
+      "oid": "410052a6b46eed08cbbc0aa785659b992842648d",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/src/com/android/annotation/AddedIn.java",
+      "kind": "blob",
+      "oid": "6cfceb4f1c9b84542f7b9bc0e5a35f3959d3b537",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/src/com/android/internal/car/CarActivityInterceptor.java",
+      "kind": "blob",
+      "oid": "4243674f827915ec7a9fa66cb16c9edddd42586b",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/src/com/android/internal/car/CarDevicePolicySafetyChecker.java",
+      "kind": "blob",
+      "oid": "2ae2e63b7b60e7556a5c8f04295ed76af89bdd06",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/src/com/android/internal/car/CarServiceHelperInterface.java",
+      "kind": "blob",
+      "oid": "3050173bc8007b5ac2fce8f7d8e9dd1c582db747",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/src/com/android/internal/car/CarServiceHelperService.java",
+      "kind": "blob",
+      "oid": "005903a920ce9cb781af38928f4578d8ca7ec494",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/src/com/android/internal/car/CarServiceHelperServiceUpdatable.java",
+      "kind": "blob",
+      "oid": "4e0f1a598bbc6dd01716912ce209812d905e83c2",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/src/com/android/internal/car/os/Util.java",
+      "kind": "blob",
+      "oid": "707ed5b9b24ecfe10c665a8ad770ea89c9aa0c45",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/src/com/android/server/wm/ActivityInterceptResultWrapper.java",
+      "kind": "blob",
+      "oid": "5812a383936f8e917b3d8e69d0ffe4a27db5af06",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/src/com/android/server/wm/ActivityInterceptorInfoWrapper.java",
+      "kind": "blob",
+      "oid": "7ee7621f0b549c3b8c9d1e81d3d0e75ddfa16eec",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/src/com/android/server/wm/ActivityOptionsWrapper.java",
+      "kind": "blob",
+      "oid": "088c68c2d0cd738fc9c16dc704af4bc17ddfeb64",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/src/com/android/server/wm/ActivityRecordWrapper.java",
+      "kind": "blob",
+      "oid": "be956891c262291a14a1999a43920b52554e21ee",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/src/com/android/server/wm/CalculateParams.java",
+      "kind": "blob",
+      "oid": "dfb1598720ff30bd1569968dc6f29723e14302d6",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/src/com/android/server/wm/CarActivityInterceptorInterface.java",
+      "kind": "blob",
+      "oid": "bf8ec09ead7c105f32c6f83c3bff8f8b98dee26a",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/src/com/android/server/wm/CarActivityInterceptorUpdatable.java",
+      "kind": "blob",
+      "oid": "4a26fe655eddc592abc1d82ef3bcffe92f365389",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/src/com/android/server/wm/CarDisplayAreaPolicyProvider.java",
+      "kind": "blob",
+      "oid": "51b1df124163a065dcf9e80a0ecc056172ed4336",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/src/com/android/server/wm/CarDisplayCompatHelper.java",
+      "kind": "blob",
+      "oid": "1de87103cc6444746352eb0b0a1a1fab0093d28c",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/src/com/android/server/wm/CarDisplayCompatHelperInterface.java",
+      "kind": "blob",
+      "oid": "411925a468b5d5af7fb7ef1bec066ce7ab180846",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/src/com/android/server/wm/CarDisplayCompatScaleProvider.java",
+      "kind": "blob",
+      "oid": "cbd42571e7360762a16037650f4ebff962c7fef2",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/src/com/android/server/wm/CarDisplayCompatScaleProviderUpdatable.java",
+      "kind": "blob",
+      "oid": "91cf9b30e5e3e50bd21df9a344a92860778311c6",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/src/com/android/server/wm/CarLaunchParamsModifier.java",
+      "kind": "blob",
+      "oid": "74a3737e8d0c31ccaac87842adf61c219f2eebba",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/src/com/android/server/wm/CarLaunchParamsModifierInterface.java",
+      "kind": "blob",
+      "oid": "1a7e38ba3ac4cdb75462f3e36762d92c98a1cb09",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/src/com/android/server/wm/CarLaunchParamsModifierUpdatable.java",
+      "kind": "blob",
+      "oid": "cfdfda3d3cf62e769bff167bb2684fc87d4bcda7",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/src/com/android/server/wm/LaunchParamsWrapper.java",
+      "kind": "blob",
+      "oid": "666e29c3e4927a133f2565fa728ec7dc109bf795",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/src/com/android/server/wm/MediaTemplateActivityInterceptorForSuspension.java",
+      "kind": "blob",
+      "oid": "196606c65932144781e075bd39805c3994c93e56",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/src/com/android/server/wm/RequestWrapper.java",
+      "kind": "blob",
+      "oid": "69430c9a6b88f3ac66ce7292c763f82fd7262e11",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/src/com/android/server/wm/TaskDisplayAreaWrapper.java",
+      "kind": "blob",
+      "oid": "3db38dc8ee919553a438c23e47b3bb0e10454842",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/src/com/android/server/wm/TaskWrapper.java",
+      "kind": "blob",
+      "oid": "8686b6aecf82228c3d165fa3edecd817bdb34116",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/src/com/android/server/wm/WindowLayoutWrapper.java",
+      "kind": "blob",
+      "oid": "21bbc679ca193ede5f21e7c71270239c18b67d0a",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/src/com/android/server/wm/WindowProcessControllerHelper.java",
+      "kind": "blob",
+      "oid": "0b7f5dd63f39555193efcf40b33819492b16930b",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/tests/Android.bp",
+      "kind": "blob",
+      "oid": "93c24be2a544e5ddaf58908a95da906d92317695",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/tests/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "edce0fd981273b2a9f15f26830d56722048d122e",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/tests/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "c27c3f80be1514062dacc94d5f648183e2bc48e1",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/tests/assets/CarServiceHelperServiceTest/proc/1/stat",
+      "kind": "blob",
+      "oid": "88dc0457bce6c0f4166665c4d88523bf0261652b",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/tests/assets/CarServiceHelperServiceTest/proc/2/stat",
+      "kind": "blob",
+      "oid": "fd414051508d6e0683a0314ee259d609424072e1",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/tests/assets/CarServiceHelperServiceTest/proc/3/stat",
+      "kind": "blob",
+      "oid": "4ae85a4b99ed693e0cc843d4e7a15f4c193b7826",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/tests/assets/CarServiceHelperServiceTest/proc/4/stat",
+      "kind": "blob",
+      "oid": "6075c4258e1a56a7cd2690b1ead8854ee1539646",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/tests/res/raw/CSHS_classes.txt",
+      "kind": "blob",
+      "oid": "51de1590b6db2f3af0136eb2ae967b1a3c26cb4a",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/tests/src/com/android/car/rotary/ActivityResolverTest.java",
+      "kind": "blob",
+      "oid": "657367bcb4aa63ec475ebd24a2f5ba5d45e9f5ba",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/tests/src/com/android/internal/car/CarDevicePolicySafetyCheckerTest.java",
+      "kind": "blob",
+      "oid": "ef50f92d9255c84047c87186b69e522488cffa10",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/tests/src/com/android/internal/car/CarServiceHelperServiceTest.java",
+      "kind": "blob",
+      "oid": "c96f76bd836c9932e996bbaa9030153eec12db4b",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/tests/src/com/android/server/wm/ActivityOptionsWrapperTest.java",
+      "kind": "blob",
+      "oid": "a7859dbc039a6a7258d423aafc14171de84d0df9",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/tests/src/com/android/server/wm/ActivityRecordWrapperTest.java",
+      "kind": "blob",
+      "oid": "302f974773f1978c7940db8452a064cd77989cef",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/tests/src/com/android/server/wm/CalculateParamsTest.java",
+      "kind": "blob",
+      "oid": "8f4d77029bebe199450356fa9728f2265bb85be0",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/tests/src/com/android/server/wm/LaunchParamsWrapperTest.java",
+      "kind": "blob",
+      "oid": "3a19199ed7356b7a430c93f85e860848f7324936",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/tests/src/com/android/server/wm/MediaTemplateActivityInterceptorForSuspensionTest.java",
+      "kind": "blob",
+      "oid": "3908eaf1bef71a06fb72efa2bfa7c1a0265cb620",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/tests/src/com/android/server/wm/RequestWrapperTest.java",
+      "kind": "blob",
+      "oid": "7e81390f6d1e5b8cc10efe17402273c9686b1102",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/tests/src/com/android/server/wm/TaskDisplayAreaWrapperTest.java",
+      "kind": "blob",
+      "oid": "53c100ffae4d143e1ec43e7ca97ebc2329cfb256",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/tests/src/com/android/server/wm/TaskWrapperTest.java",
+      "kind": "blob",
+      "oid": "ce29cd623d63d24a3147913102103ce4c5af4a2e",
+      "mode": "100644"
+    },
+    {
+      "path": "builtInServices/tests/src/com/android/server/wm/WindowLayoutWrapperTest.java",
+      "kind": "blob",
+      "oid": "0d04d698d281967392033ebc19b2fa1f255ae4e0",
+      "mode": "100644"
+    },
+    {
+      "path": "tools/OWNERS",
+      "kind": "blob",
+      "oid": "e1e884aec7f7d267226006135517399889af8c1a",
+      "mode": "100644"
+    },
+    {
+      "path": "tools/repohookScript/annotation_classlist_repohook.py",
+      "kind": "blob",
+      "oid": "788696f6589019059ca0699e4b943a56c5c07361",
+      "mode": "100755"
+    },
+    {
+      "path": "updatableServices/Android.bp",
+      "kind": "blob",
+      "oid": "4856e1cae9d68387aa958db1c00c16836c4f96e3",
+      "mode": "100644"
+    },
+    {
+      "path": "updatableServices/TEST_MAPPING",
+      "kind": "blob",
+      "oid": "6572ab88bf5717b5e11eb52e442aedc69653acfe",
+      "mode": "100644"
+    },
+    {
+      "path": "updatableServices/src/com/android/internal/car/updatable/CarServiceHelperServiceUpdatableImpl.java",
+      "kind": "blob",
+      "oid": "8952f338ff6b442511dbc76ca34dbd9d751387d6",
+      "mode": "100644"
+    },
+    {
+      "path": "updatableServices/src/com/android/internal/car/updatable/CarServiceProxy.java",
+      "kind": "blob",
+      "oid": "a0a98969ae93ba05ea0984f6ff568db7c0e446ba",
+      "mode": "100644"
+    },
+    {
+      "path": "updatableServices/src/com/android/internal/car/updatable/ExtraDisplayMonitor.java",
+      "kind": "blob",
+      "oid": "ed2a7d0b19c603cfe084e9d368e27d65afe9d95e",
+      "mode": "100644"
+    },
+    {
+      "path": "updatableServices/src/com/android/internal/car/updatable/UserMetrics.java",
+      "kind": "blob",
+      "oid": "15b159a6347f43ae2edbb42f6eed90bd0463473c",
+      "mode": "100644"
+    },
+    {
+      "path": "updatableServices/src/com/android/server/wm/CarActivityInterceptorUpdatableImpl.java",
+      "kind": "blob",
+      "oid": "dd2f7c44d5f46f825c8314808da11880cd83f12a",
+      "mode": "100644"
+    },
+    {
+      "path": "updatableServices/src/com/android/server/wm/CarDisplayCompatConfig.java",
+      "kind": "blob",
+      "oid": "f900d87ea1e62d8722b209c5d219d59f8de1ea9d",
+      "mode": "100644"
+    },
+    {
+      "path": "updatableServices/src/com/android/server/wm/CarDisplayCompatScaleProviderUpdatableImpl.java",
+      "kind": "blob",
+      "oid": "7c61930232bbc295483f5ad9a08bb6b7454aca45",
+      "mode": "100644"
+    },
+    {
+      "path": "updatableServices/src/com/android/server/wm/CarLaunchParamsModifierUpdatableImpl.java",
+      "kind": "blob",
+      "oid": "f21d352b31ffeb2ccacec11521773c6c76d67661",
+      "mode": "100644"
+    },
+    {
+      "path": "updatableServices/src/com/android/server/wm/CarLaunchRedirectActivityInterceptor.java",
+      "kind": "blob",
+      "oid": "4d828ce32ff14dda2838a5e50734d043204caae0",
+      "mode": "100644"
+    },
+    {
+      "path": "updatableServices/src/com/android/server/wm/CarServiceHelperTaskStackRepository.java",
+      "kind": "blob",
+      "oid": "27272f5343939714a86c5a115ecd02cbf85fceb2",
+      "mode": "100644"
+    },
+    {
+      "path": "updatableServices/tests/Android.bp",
+      "kind": "blob",
+      "oid": "5df0af15e077a2792cd93ca564b6fc6b7237dab6",
+      "mode": "100644"
+    },
+    {
+      "path": "updatableServices/tests/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "2a3e07f82e853b98f920bf3b346305efe0d1bcb6",
+      "mode": "100644"
+    },
+    {
+      "path": "updatableServices/tests/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "9c98aa042f87c77668bffb10af9b80c5edb9e0f5",
+      "mode": "100644"
+    },
+    {
+      "path": "updatableServices/tests/src/com/android/internal/car/updatable/CarServiceHelperServiceUpdatableImplTest.java",
+      "kind": "blob",
+      "oid": "956e6301c3be7d1b417a6ee67d16d4d8c43861ba",
+      "mode": "100644"
+    },
+    {
+      "path": "updatableServices/tests/src/com/android/internal/car/updatable/CarServiceProxyTest.java",
+      "kind": "blob",
+      "oid": "f71ed7388ba8f1b684576a0c86cc6dcb259e39b4",
+      "mode": "100644"
+    },
+    {
+      "path": "updatableServices/tests/src/com/android/internal/car/updatable/ExtraDisplayMonitorTest.java",
+      "kind": "blob",
+      "oid": "4e3eff04c0aa9e03d3268a19eace86286e50c487",
+      "mode": "100644"
+    },
+    {
+      "path": "updatableServices/tests/src/com/android/internal/car/updatable/UserMetricsTest.java",
+      "kind": "blob",
+      "oid": "b778de493964a1f00a42d23a1b851ff19306489d",
+      "mode": "100644"
+    },
+    {
+      "path": "updatableServices/tests/src/com/android/server/wm/CarActivityInterceptorUpdatableTest.java",
+      "kind": "blob",
+      "oid": "95b84f71820dd7a73cb042503ced4344a7252e69",
+      "mode": "100644"
+    },
+    {
+      "path": "updatableServices/tests/src/com/android/server/wm/CarDisplayCompatConfigTest.java",
+      "kind": "blob",
+      "oid": "6ac5a0256ac2c310a60747274fb86a0dbb0cc7a6",
+      "mode": "100644"
+    },
+    {
+      "path": "updatableServices/tests/src/com/android/server/wm/CarDisplayCompatScaleProviderUpdatableTest.java",
+      "kind": "blob",
+      "oid": "8b4af384b5a2ae1dc8dd65885b17c8d64271d328",
+      "mode": "100644"
+    },
+    {
+      "path": "updatableServices/tests/src/com/android/server/wm/CarLaunchParamsModifierUpdatableTest.java",
+      "kind": "blob",
+      "oid": "ddffeec8fddbe824c176948954c27804ed69ee65",
+      "mode": "100644"
+    },
+    {
+      "path": "updatableServices/tests/src/com/android/server/wm/CarLaunchRedirectActivityInterceptorTest.java",
+      "kind": "blob",
+      "oid": "c3147627ca04ed61f7f8ecaed867ba3ebd2cf30b",
+      "mode": "100644"
+    }
+  ]
+}

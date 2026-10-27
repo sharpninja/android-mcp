@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:android-binding-catalog:1.1.0:PermissionSummary",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "permission_id",
+    "name",
+    "manifest_definitions",
+    "symbols",
+    "metadata_status",
+    "os_authority",
+    "mcp_client_grants"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.1.0"
+    },
+    "permission_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "manifest_definitions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "source_id",
+          "protection_level",
+          "metadata"
+        ],
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "protection_level": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "metadata": {
+            "type": "object"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "symbols": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "symbol",
+          "source_id",
+          "line"
+        ],
+        "properties": {
+          "symbol": {
+            "type": "string"
+          },
+          "source_id": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "line": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "metadata_status": {
+      "enum": [
+        "manifest-evidence-present",
+        "constant-only; protection-level-and-attributes-unknown"
+      ]
+    },
+    "os_authority": {
+      "const": "unknown"
+    },
+    "mcp_client_grants": {
+      "const": "not-inferred"
+    }
+  },
+  "additionalProperties": false,
+  "patternProperties": {
+    "^x-": {}
+  }
+}

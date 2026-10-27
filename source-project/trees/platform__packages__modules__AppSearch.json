@@ -1,0 +1,3451 @@
+{
+  "repo": "platform/packages/modules/AppSearch",
+  "requested_revision": "refs/tags/android-17.0.0_r1",
+  "revision": "85ee215beafd0236559a12b8764d6f78421db215",
+  "entries": [
+    {
+      "path": ".gitignore",
+      "kind": "blob",
+      "oid": "c749986c22770407690abd84a55ca817e72ca59e",
+      "mode": "100644"
+    },
+    {
+      "path": "Android.bp",
+      "kind": "blob",
+      "oid": "a6c6adb8c038c1747de48c5e61cda27bf671c09c",
+      "mode": "100644"
+    },
+    {
+      "path": "AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "c8eb01e09240bb203e881e03dca75530f0029bd7",
+      "mode": "100644"
+    },
+    {
+      "path": "AppSearchAiSealConfig/Android.bp",
+      "kind": "blob",
+      "oid": "8e5e578125c2e74efc1c687594a0c9e166930fce",
+      "mode": "100644"
+    },
+    {
+      "path": "AppSearchAiSealConfig/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "751e0a08f025c0876a494ccd463fefe67f07a636",
+      "mode": "100644"
+    },
+    {
+      "path": "AppSearchAiSealConfig/assets/Android.bp",
+      "kind": "blob",
+      "oid": "920c285c9465d3936f8fad2ba9cdcda54b3e6e53",
+      "mode": "100644"
+    },
+    {
+      "path": "AppSearchAiSealConfig/assets/aiseal_config.json",
+      "kind": "blob",
+      "oid": "93eba50485d445c87dbda9dc0785648c1c837f14",
+      "mode": "100644"
+    },
+    {
+      "path": "AppSearchAiSealConfig/assets/vm_config.json",
+      "kind": "blob",
+      "oid": "35c3ef1216a46033a29454ed5e26d5d2bf547ee1",
+      "mode": "100644"
+    },
+    {
+      "path": "NOTICE",
+      "kind": "blob",
+      "oid": "32a74b92d7f51432f396fc64fede0703eb9809e1",
+      "mode": "100644"
+    },
+    {
+      "path": "OWNERS",
+      "kind": "blob",
+      "oid": "de6a4b58bb29bbbfc7dd1af931875bcebb9c12da",
+      "mode": "100644"
+    },
+    {
+      "path": "PREUPLOAD.cfg",
+      "kind": "blob",
+      "oid": "9696d2fae4725d51ff1bff86924d507de65f5328",
+      "mode": "100644"
+    },
+    {
+      "path": "TEST_MAPPING",
+      "kind": "blob",
+      "oid": "34b3af9acecc53a1b87a17fd825e484a6f992d0c",
+      "mode": "100644"
+    },
+    {
+      "path": "apex_manifest.json",
+      "kind": "blob",
+      "oid": "ef7582fb2a3ba7744e4b25632668cd0078bd8045",
+      "mode": "100644"
+    },
+    {
+      "path": "apk/Android.bp",
+      "kind": "blob",
+      "oid": "8d278f3e20a660bb2d41ab78e43ee88d3b81fcde",
+      "mode": "100644"
+    },
+    {
+      "path": "apk/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "6bac0ef53af8e3b2fc972173d6f98b58f2ddb1b6",
+      "mode": "100644"
+    },
+    {
+      "path": "apk/aidl/Android.bp",
+      "kind": "blob",
+      "oid": "a74d43c7777c287af0746832f68ef54731465ce2",
+      "mode": "100644"
+    },
+    {
+      "path": "apk/aidl/com/android/server/appsearch/isolated_storage_service/IIsolatedStorageService.aidl",
+      "kind": "blob",
+      "oid": "282737a61c396b7eb40e0981c4440b5a226d4be5",
+      "mode": "100644"
+    },
+    {
+      "path": "apk/aidl/com/android/server/appsearch/isolated_storage_service/ServiceConfig.aidl",
+      "kind": "blob",
+      "oid": "e47c8974b94f2938f0f5b4be64e9f30b29bacdd0",
+      "mode": "100644"
+    },
+    {
+      "path": "apk/aidl/com/android/server/appsearch/isolated_storage_service/VmStartResult.aidl",
+      "kind": "blob",
+      "oid": "c34eaac49b5925db37798cce44f20a759e01714e",
+      "mode": "100644"
+    },
+    {
+      "path": "apk/com.android.appsearch.apk.pk8",
+      "kind": "blob",
+      "oid": "f86a478bde264d0682f94ac8c75a6cba21181944",
+      "mode": "100644"
+    },
+    {
+      "path": "apk/com.android.appsearch.apk.x509.pem",
+      "kind": "blob",
+      "oid": "409cf1096ffc2c940933f4e1a9ef9146b73161c4",
+      "mode": "100644"
+    },
+    {
+      "path": "apk/src/com/android/server/appsearch/isolated_storage_service/IsolatedStorageService.java",
+      "kind": "blob",
+      "oid": "e3e19c61e728c43a76ad0074606e39ec0528325e",
+      "mode": "100644"
+    },
+    {
+      "path": "apk/src/com/android/server/appsearch/stats/IsolateStorageServiceLogger.java",
+      "kind": "blob",
+      "oid": "8dec12f0fe3824d67fa743d1c4deef9b9e7f6b0d",
+      "mode": "100644"
+    },
+    {
+      "path": "apk/src/com/android/server/appsearch/stats/VMPayloadStats.java",
+      "kind": "blob",
+      "oid": "97304c1038f623b91765493d4545af5aceb0de74",
+      "mode": "100644"
+    },
+    {
+      "path": "apk/src/com/android/server/appsearch/util/LogUtil.java",
+      "kind": "blob",
+      "oid": "5e493e7d0adaf1f7d932c85fad89669b66eb4329",
+      "mode": "100644"
+    },
+    {
+      "path": "apk/sysconfig/preinstalled-packages-com.android.appsearch.xml",
+      "kind": "blob",
+      "oid": "6614678382035aeec233f5a9ec6a1eccda540950",
+      "mode": "100644"
+    },
+    {
+      "path": "com.android.appsearch.avbpubkey",
+      "kind": "blob",
+      "oid": "4e5acae9c1e4db9246388b7d0caf3210dfce212d",
+      "mode": "100644"
+    },
+    {
+      "path": "com.android.appsearch.pem",
+      "kind": "blob",
+      "oid": "4ed5945acc8668c409bf8829e571444ebe2b4ad9",
+      "mode": "100644"
+    },
+    {
+      "path": "com.android.appsearch.pk8",
+      "kind": "blob",
+      "oid": "77e98b20877b18e14212c14832c97091e0fb7075",
+      "mode": "100644"
+    },
+    {
+      "path": "com.android.appsearch.x509.pem",
+      "kind": "blob",
+      "oid": "e37c4b9fceadadefd7a5aa331a242164d5f98117",
+      "mode": "100644"
+    },
+    {
+      "path": "flags/Android.bp",
+      "kind": "blob",
+      "oid": "ef4b7e61c32bbdf2393b31cfdfc71382cd44998b",
+      "mode": "100644"
+    },
+    {
+      "path": "flags/appsearch.aconfig",
+      "kind": "blob",
+      "oid": "281ac8a5e5d64c8bf13b336f4e64d77ebed27c99",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/Android.bp",
+      "kind": "blob",
+      "oid": "f8da63ff36503317181c65f2c05004e30185a3e6",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/current.txt",
+      "kind": "blob",
+      "oid": "255545694eb633c109a852d044ec8877595e4a2a",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/lint-baseline.txt",
+      "kind": "blob",
+      "oid": "1745bb3ca07f0337215bae8d65b5d346b73d0ea8",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/module-lib-current.txt",
+      "kind": "blob",
+      "oid": "77e38dcdb1c87d18b7799d69da3404103e9704d4",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/module-lib-lint-baseline.txt",
+      "kind": "blob",
+      "oid": "1745bb3ca07f0337215bae8d65b5d346b73d0ea8",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/module-lib-removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/system-current.txt",
+      "kind": "blob",
+      "oid": "eb7e4605f2593be3520f52852dfccd8be59bb193",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/system-lint-baseline.txt",
+      "kind": "blob",
+      "oid": "1745bb3ca07f0337215bae8d65b5d346b73d0ea8",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/system-removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/jarjar-rules.txt",
+      "kind": "blob",
+      "oid": "f397f2a3024069906a41e49aecc617ddfff1a7eb",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/AppSearchEnvironmentFactory.java",
+      "kind": "blob",
+      "oid": "7db6e8872231fa350c953bdc72351f7460fe1d6e",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/AppSearchManager.java",
+      "kind": "blob",
+      "oid": "0a135a7c60b260f1985464ec09d9b0eaa8acd080",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/AppSearchManagerFrameworkInitializer.java",
+      "kind": "blob",
+      "oid": "11878b1ff8fa37b86860c27eaad04c27ded35cbc",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/AppSearchMigrationHelper.java",
+      "kind": "blob",
+      "oid": "3c4f05100633ff4ad44366d2f0863a65d31540ab",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/AppSearchSchema.aidl",
+      "kind": "blob",
+      "oid": "766a414179444ad0b56853bc589af2f013015709",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/AppSearchSession.java",
+      "kind": "blob",
+      "oid": "be94cc0c97bf27f2bd8766865753cabc00dcac15",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/BatchResultCallback.java",
+      "kind": "blob",
+      "oid": "7ba95f4981c8e9b120c7199129c989773c97e16d",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/EnterpriseGlobalSearchSession.java",
+      "kind": "blob",
+      "oid": "b9a9325505f0011ad21974d5fccd034521cf3a93",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/FrameworkAppSearchEnvironment.java",
+      "kind": "blob",
+      "oid": "fa85edd45a2be806d226276c5d5c4cf12b8ebd76",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/GlobalSearchSession.java",
+      "kind": "blob",
+      "oid": "15e4e32b436ace7d30ba3e771133d25759384c4d",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/InternalVisibilityConfig.aidl",
+      "kind": "blob",
+      "oid": "abdd13705fc6dbffe72ac6992b5ed2dfd4af46fa",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/ParcelableUtil.java",
+      "kind": "blob",
+      "oid": "dead15c70499a6c8bd8f80107b0439694b4060ef",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/ReadOnlyGlobalSearchSession.java",
+      "kind": "blob",
+      "oid": "1178530160bdc8bcae3c00e20d79085920b066b4",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/SearchResults.java",
+      "kind": "blob",
+      "oid": "7d88106fd48d1ab6eddddf16b23f7e40f4d607db",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/SearchSessionUtil.java",
+      "kind": "blob",
+      "oid": "e17f99f088eb5d9e3af8966e863b388803744c56",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/SearchSpec.aidl",
+      "kind": "blob",
+      "oid": "b685eaf220e378cdc865f0406900d6086a3ff0eb",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/SearchSuggestionSpec.aidl",
+      "kind": "blob",
+      "oid": "8ad1f5ca1706dc7cbeb5a8d757c28af602fd9237",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/AppSearchAttributionSource.aidl",
+      "kind": "blob",
+      "oid": "d1f08a9684b69e5a2b493692fca0d059e964cb50",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/AppSearchAttributionSource.java",
+      "kind": "blob",
+      "oid": "94382cde753d3f6b88a8363da550235bfda27c0c",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/AppSearchBatchResultParcel.aidl",
+      "kind": "blob",
+      "oid": "19b8f529d8aa11b64905f22a22dc6959928779f3",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/AppSearchBatchResultParcel.java",
+      "kind": "blob",
+      "oid": "7c207d26658a3dad782556c932178ccdbc064222",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/AppSearchBatchResultParcelV2.aidl",
+      "kind": "blob",
+      "oid": "7ecc078e57878bbe220578a047f0ae909fd1e5da",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/AppSearchBatchResultParcelV2.java",
+      "kind": "blob",
+      "oid": "8b26a527a4e6c7c39f114572e8a684572c4c28ec",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/AppSearchResultCallback.java",
+      "kind": "blob",
+      "oid": "abb47d9b487f34a5b47da4719d9efbf2f1920ed2",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/AppSearchResultParcel.aidl",
+      "kind": "blob",
+      "oid": "26ccd3af80df79362c1bdd94054bc31308cff28b",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/AppSearchResultParcel.java",
+      "kind": "blob",
+      "oid": "6d2258247367ae16b4287f5ef78ccf429bc3dbfd",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/AppSearchResultParcelV2.aidl",
+      "kind": "blob",
+      "oid": "804325386ff51cdfd837893885540306cdd1e638",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/AppSearchResultParcelV2.java",
+      "kind": "blob",
+      "oid": "6e5ad776642ca2904648eeef88124359e2f7f954",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/CommitBlobAidlRequest.aidl",
+      "kind": "blob",
+      "oid": "54c6742a8601cf51aa70c3cdb5ea5e35536a9cc6",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/CommitBlobAidlRequest.java",
+      "kind": "blob",
+      "oid": "4b4b7050ff15bef71d8ffc8b2f80d8e06c2a8367",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/DocumentsParcel.aidl",
+      "kind": "blob",
+      "oid": "26eb30ebc87107b1b41332a24df7b940dc9bb36c",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/DocumentsParcel.java",
+      "kind": "blob",
+      "oid": "297f8c40fccbfc8702889ebab6ca6ec394d59216",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/ExecuteAppFunctionAidlRequest.aidl",
+      "kind": "blob",
+      "oid": "c975bfdba7d7d3852723776af0566a60f79e12c8",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/GetDocumentsAidlRequest.aidl",
+      "kind": "blob",
+      "oid": "9a18e6a7e4b5348bf76a6a0b9530149a9f6daefe",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/GetDocumentsAidlRequest.java",
+      "kind": "blob",
+      "oid": "f29354b43604a15aca2f943cf3c33caf40f8b2ad",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/GetNamespacesAidlRequest.aidl",
+      "kind": "blob",
+      "oid": "4146df9ab1c3b90fc8071b591570a21c0a6f992f",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/GetNamespacesAidlRequest.java",
+      "kind": "blob",
+      "oid": "4ab9fc661c0ab059bbe3cce585807f12c31b63ae",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/GetNextPageAidlRequest.aidl",
+      "kind": "blob",
+      "oid": "5bac4c3c54b1216adbf3d5a594d3d45ba7b98bc0",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/GetNextPageAidlRequest.java",
+      "kind": "blob",
+      "oid": "034d7fdb0d4ce9fa078d4aac4c07e77c17483c48",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/GetSchemaAidlRequest.aidl",
+      "kind": "blob",
+      "oid": "c771a2dcf6336963b6480454b89559a478f10883",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/GetSchemaAidlRequest.java",
+      "kind": "blob",
+      "oid": "98cf3040320064a3bc8301116cf2e4585ef4357a",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/GetStorageInfoAidlRequest.aidl",
+      "kind": "blob",
+      "oid": "6decbb8f25db958a70ca0c76ea0be0466f2b91e3",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/GetStorageInfoAidlRequest.java",
+      "kind": "blob",
+      "oid": "08e72008605b6f8a53d7f57cba241c4dc18223ef",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/GlobalSearchAidlRequest.aidl",
+      "kind": "blob",
+      "oid": "36396b2814ba0dbfc4c5609435c4a19dd05b6689",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/GlobalSearchAidlRequest.java",
+      "kind": "blob",
+      "oid": "d28617076007b11ef533e8d388fb9a4adcbeddeb",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/IAppSearchBatchResultCallback.aidl",
+      "kind": "blob",
+      "oid": "e30b9a773a6b2df5dc036099894bbf089fc0fee1",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/IAppSearchManager.aidl",
+      "kind": "blob",
+      "oid": "78d16bd747f30598b651bec035b89b88ceb21ed2",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/IAppSearchObserverProxy.aidl",
+      "kind": "blob",
+      "oid": "2ba0911fa13dec913e0d06c4ed6fdc896b3733ad",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/IAppSearchResultCallback.aidl",
+      "kind": "blob",
+      "oid": "a3f3fed5a8944bb7fb7887e7703d9426e6b7d7c2",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/InitializeAidlRequest.aidl",
+      "kind": "blob",
+      "oid": "de477aafc9629000b4981a7bd5f0f89e5c208e9e",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/InitializeAidlRequest.java",
+      "kind": "blob",
+      "oid": "e23072334703e7842b9edc0992e93b9312864fda",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/InvalidateNextPageTokenAidlRequest.aidl",
+      "kind": "blob",
+      "oid": "a3b983d075b5ed0a740c186b0788dc4ac1ccd86a",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/InvalidateNextPageTokenAidlRequest.java",
+      "kind": "blob",
+      "oid": "927de9d1bf53684cb624453b84c2a1153edf88ec",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/OpenBlobForReadAidlRequest.aidl",
+      "kind": "blob",
+      "oid": "08b4abb685aa7ee3dc1dd1ed734cca88c66b3fdf",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/OpenBlobForReadAidlRequest.java",
+      "kind": "blob",
+      "oid": "f98cbb0cc795be1a4b42f01bccdda13e494f6c0e",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/OpenBlobForWriteAidlRequest.aidl",
+      "kind": "blob",
+      "oid": "014b7eaa9908b24aadb5b5a1c314694e88f441ff",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/OpenBlobForWriteAidlRequest.java",
+      "kind": "blob",
+      "oid": "017baf120e37f19ae31850874623698f41c72592",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/PersistToDiskAidlRequest.aidl",
+      "kind": "blob",
+      "oid": "98a1075bc6569afccda3ed24201070a02f255b13",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/PersistToDiskAidlRequest.java",
+      "kind": "blob",
+      "oid": "d63d6a20ca043ce66426d830bf03a86d9d31ea87",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/PutDocumentsAidlRequest.aidl",
+      "kind": "blob",
+      "oid": "13cb4d55b174cbb61ab53907ab19b4d0479a2488",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/PutDocumentsAidlRequest.java",
+      "kind": "blob",
+      "oid": "ff6e1328a3b258b5da5dc5bb3e3db9361594d542",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/PutDocumentsFromFileAidlRequest.aidl",
+      "kind": "blob",
+      "oid": "b2a1959a60908646881eb5c05599f7ab1ffb0639",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/PutDocumentsFromFileAidlRequest.java",
+      "kind": "blob",
+      "oid": "347167889c4eafcd5e2b198fd78762f8814a8d2b",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/RegisterObserverCallbackAidlRequest.aidl",
+      "kind": "blob",
+      "oid": "c18d8c45af731d4f55d68660098c5f4df5a6cacd",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/RegisterObserverCallbackAidlRequest.java",
+      "kind": "blob",
+      "oid": "5e61ad5a86593b5b15ad79f9755f28435dc94c72",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/RemoveBlobAidlRequest.aidl",
+      "kind": "blob",
+      "oid": "6b3669834c760e6bb1f0d48b4175520aaabda717",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/RemoveBlobAidlRequest.java",
+      "kind": "blob",
+      "oid": "56a37c2046773051ee3f10b0acbbdc43772ba1a6",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/RemoveByDocumentIdAidlRequest.aidl",
+      "kind": "blob",
+      "oid": "b249e8780d590e165cbb53e8358c3e7eaaf2b6bc",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/RemoveByDocumentIdAidlRequest.java",
+      "kind": "blob",
+      "oid": "8a42dfeeac22ef2bbd34eec2f199cb7a9a2f965c",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/RemoveByQueryAidlRequest.aidl",
+      "kind": "blob",
+      "oid": "99175f8cec48c2683e39513483896fca381e568c",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/RemoveByQueryAidlRequest.java",
+      "kind": "blob",
+      "oid": "eb6bc32ae6fe7c636a40b2c8ac6eb8280426976a",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/ReportUsageAidlRequest.aidl",
+      "kind": "blob",
+      "oid": "2dbe865405ee0291f3a9de7882bd2f568fb02b74",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/ReportUsageAidlRequest.java",
+      "kind": "blob",
+      "oid": "f0ac4321374c1df3906416e96362cee494c83b1f",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/SearchAidlRequest.aidl",
+      "kind": "blob",
+      "oid": "c10e492c14665b1f3500af7ec95eb3c52ebac68a",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/SearchAidlRequest.java",
+      "kind": "blob",
+      "oid": "c0e6b6f5a46137710a44e977a9c50e038acb60b3",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/SearchSuggestionAidlRequest.aidl",
+      "kind": "blob",
+      "oid": "25a20a92ddfa0a7265301fce5f02b9c345eedd46",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/SearchSuggestionAidlRequest.java",
+      "kind": "blob",
+      "oid": "e8e3aa5d98f0d7f4c25af31e3c15e89d9b89a0e7",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/SetBlobVisibilityAidlRequest.aidl",
+      "kind": "blob",
+      "oid": "c3101c8799a04b5a6d74857b3c11037241cc0f0b",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/SetBlobVisibilityAidlRequest.java",
+      "kind": "blob",
+      "oid": "3e169217587e299c300dbc277f3e091e95f92a1d",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/SetSchemaAidlRequest.aidl",
+      "kind": "blob",
+      "oid": "ebf0c1fecaac233b25d7dcdcef3a2d881c6a3ed0",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/SetSchemaAidlRequest.java",
+      "kind": "blob",
+      "oid": "f7e0293e522c6d9e80c00b2226f55dbde1729d2a",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/UnregisterObserverCallbackAidlRequest.aidl",
+      "kind": "blob",
+      "oid": "cca352259b85758f176bb0e902b7eb82a0b4cb2a",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/UnregisterObserverCallbackAidlRequest.java",
+      "kind": "blob",
+      "oid": "0f164692620c12bcb6c1bb0dfecf5bee0f2f403d",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/WriteSearchResultsToFileAidlRequest.aidl",
+      "kind": "blob",
+      "oid": "55dba064a2fe4cfde64ce03cdbab9305c9521eb6",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/aidl/WriteSearchResultsToFileAidlRequest.java",
+      "kind": "blob",
+      "oid": "51c9706c0e416493c614799320ab54d84b427162",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/observer/ObserverSpec.aidl",
+      "kind": "blob",
+      "oid": "a19cd7718a99e18fcca141a4c160f776f70ec6dd",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/safeparcel/AbstractSafeParcelable.java",
+      "kind": "blob",
+      "oid": "fecfc6a6198d1d417a8f9d9a59dbc4c08555b037",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/safeparcel/ReflectedParcelable.java",
+      "kind": "blob",
+      "oid": "4d9ec5253ea53f769ad93b6f58ea16de15a64c51",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/safeparcel/SafeParcelReader.java",
+      "kind": "blob",
+      "oid": "96a5c4777b482a1c323f855a3110550f287cccbb",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/safeparcel/SafeParcelWriter.java",
+      "kind": "blob",
+      "oid": "d66a5cef5b73ac7fb59f0956a387ed37a052c068",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/safeparcel/SafeParcelable.java",
+      "kind": "blob",
+      "oid": "003f38213e0e6edd4c167a1606bc75c3feba89fc",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/stats/SchemaMigrationStats.aidl",
+      "kind": "blob",
+      "oid": "07c242a2537ec458a97c1e18317b7ae9d65f11fd",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/appsearch/util/ExceptionUtil.java",
+      "kind": "blob",
+      "oid": "47e260f35481e8da202c478e923581c17be0f45a",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/AppSearchAccount.java",
+      "kind": "blob",
+      "oid": "1d09833e0c3a724191e3bfb4eb996e9c53aca5c9",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/AppSearchBatchResult.java",
+      "kind": "blob",
+      "oid": "9b3cffa6aeb5fa218c06d187fe2f245e1ce42121",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/AppSearchBlobHandle.java",
+      "kind": "blob",
+      "oid": "ba91aa9ac89946732a8f8a0225475ffec16feb35",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/AppSearchEnvironment.java",
+      "kind": "blob",
+      "oid": "9791b4ab6722de7e50376c79a5a54ca60d75081d",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/AppSearchResult.java",
+      "kind": "blob",
+      "oid": "270cce481254a6577bb98e8c58a3e956f5e90197",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/AppSearchSchema.java",
+      "kind": "blob",
+      "oid": "510f68bff22dcb79f22a7c490d09512f6bddc751",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/CommitBlobResponse.java",
+      "kind": "blob",
+      "oid": "39fbb906f505898fd9cbb7341778493123de548e",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/EmbeddingVector.java",
+      "kind": "blob",
+      "oid": "d26fa5c1e35b02b0a29a8037468650d82d4318f6",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/FeatureConstants.java",
+      "kind": "blob",
+      "oid": "8cde916112baefebe7256797ab42d6528a5670b3",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/GenericDocument.java",
+      "kind": "blob",
+      "oid": "c179a4089481fb9d814440cc59a87853f408cb9a",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/GetByDocumentIdRequest.java",
+      "kind": "blob",
+      "oid": "65f59a1fe9467cb48011d82cc61c71ef2c55578e",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/GetSchemaResponse.java",
+      "kind": "blob",
+      "oid": "1f386e74cf5edd942d840b2a868752aaf5839811",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/InternalPutDocumentResponse.java",
+      "kind": "blob",
+      "oid": "423926178c987303e908fe1f37693fe3e3d469ae",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/InternalSetSchemaResponse.java",
+      "kind": "blob",
+      "oid": "6579d559d659135f3392e9693cfb79452202055f",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/InternalVisibilityConfig.java",
+      "kind": "blob",
+      "oid": "153da2977a021f7609b9f8ef7682e2f00cd7596e",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/JoinSpec.java",
+      "kind": "blob",
+      "oid": "27f5b928a0b7fc772b89543e1842ee89bd8a6eb2",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/Migrator.java",
+      "kind": "blob",
+      "oid": "a661f80a4f2e1976898109c1a926af920a40b465",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/OpenBlobForReadResponse.java",
+      "kind": "blob",
+      "oid": "bc731b0a6932d11ffb13e3bb6658a979fb74ada0",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/OpenBlobForWriteResponse.java",
+      "kind": "blob",
+      "oid": "3a3c69502a8623c671fd46e74952051bb62769fa",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/PackageIdentifier.java",
+      "kind": "blob",
+      "oid": "f8eed3933fcfc6fccca19061bf235dc3c9d57b58",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/PropertyPath.java",
+      "kind": "blob",
+      "oid": "3dfcf1dfbf5276c0b1f6bd8279d20111245f909b",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/PutDocumentsRequest.java",
+      "kind": "blob",
+      "oid": "acb157c8d1ffc01886a1333b131452df73527e14",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/RemoveBlobResponse.java",
+      "kind": "blob",
+      "oid": "6deb017760986cab1b71fa7372715af5b0cb90ad",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/RemoveByDocumentIdRequest.java",
+      "kind": "blob",
+      "oid": "db208236d05df709f4d36576998d7edc38a5b4b6",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/ReportSystemUsageRequest.java",
+      "kind": "blob",
+      "oid": "766516bb276180fa287840e764f2cdcc7bf16010",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/ReportUsageRequest.java",
+      "kind": "blob",
+      "oid": "53c603e24bdf8f27ec00020ee05ca36bf72f4eaa",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/SchemaVisibilityConfig.java",
+      "kind": "blob",
+      "oid": "1c640369ee68c674e33da1f9d1df3ccf0378e397",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/SearchResult.java",
+      "kind": "blob",
+      "oid": "694d17fe5386516f1aa66ef7477c1e7ad1f2c4fe",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/SearchResultPage.java",
+      "kind": "blob",
+      "oid": "7d0e56c5a3425f33a0fc6819877799229a28c461",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/SearchSpec.java",
+      "kind": "blob",
+      "oid": "ebb89178ff682c44a3466c0916047fdcb632dd68",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/SearchSuggestionResult.java",
+      "kind": "blob",
+      "oid": "818bd00d4bd2dfa6398989bc65badc7f8d0ed02f",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/SearchSuggestionSpec.java",
+      "kind": "blob",
+      "oid": "9c35bf3fbdbd0955d8cef292f9432f68bb5feeb6",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/SetBlobVisibilityRequest.java",
+      "kind": "blob",
+      "oid": "aebb0e99bca20a124d90e3126b9d14dbbb2c346c",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/SetSchemaRequest.java",
+      "kind": "blob",
+      "oid": "87a7a7a3e76f33a54061fe67a060983a432deb9e",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/SetSchemaResponse.java",
+      "kind": "blob",
+      "oid": "c1c810f9a323837795abafb4802f843651dd79bd",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/StorageInfo.java",
+      "kind": "blob",
+      "oid": "633d3dc446e201c90b15a9d662ef8b2a055406dd",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/VisibilityPermissionConfig.java",
+      "kind": "blob",
+      "oid": "9bc7a36bdd84afc6b9a05d8c88a30fe15364e33d",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/annotation/CanIgnoreReturnValue.java",
+      "kind": "blob",
+      "oid": "e9b74b2ef8d9fd14b98cd99d9b76b76c5aafd33a",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/ast/FunctionNode.java",
+      "kind": "blob",
+      "oid": "aabbdb1bb4aa6d11b54fb46284faa9227f2adcb6",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/ast/NegationNode.java",
+      "kind": "blob",
+      "oid": "20e4907791f299e867f2cbcb62897ddb181e387e",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/ast/Node.java",
+      "kind": "blob",
+      "oid": "d3698f8395412ea9690045f9071823e59ef329dd",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/ast/TextNode.java",
+      "kind": "blob",
+      "oid": "e0af0b91091b9498336be459dff7eb0ffdc994f5",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/ast/operators/AndNode.java",
+      "kind": "blob",
+      "oid": "bc5c02cd22d9750180d41a7d727ff38235ade630",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/ast/operators/ComparatorNode.java",
+      "kind": "blob",
+      "oid": "e1face2c4a69b917d3b79360889707ead4cf1916",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/ast/operators/OrNode.java",
+      "kind": "blob",
+      "oid": "aa5113daa7d27ba4df716edc5b4d217c9aa79315",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/ast/operators/PropertyRestrictNode.java",
+      "kind": "blob",
+      "oid": "e30d5ad61b17d86f35e1c3bd61ae5cb951d643eb",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/ast/query/GetSearchStringParameterNode.java",
+      "kind": "blob",
+      "oid": "004b120b34470c2ab76460b01fef5572b7c393e3",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/ast/query/HasPropertyNode.java",
+      "kind": "blob",
+      "oid": "52bab5a271c4543ced825046ce5aa05f07b12289",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/ast/query/PropertyDefinedNode.java",
+      "kind": "blob",
+      "oid": "2020a5f581355764ee2a906bcfbf14df36585c49",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/ast/query/SearchNode.java",
+      "kind": "blob",
+      "oid": "2ce49ac31424691a3c2d4ea900169c2b40e6d953",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/ast/query/SemanticSearchNode.java",
+      "kind": "blob",
+      "oid": "72b4f985e951799a3bfec3279882909ab32d2e72",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/checker/initialization/qual/UnderInitialization.java",
+      "kind": "blob",
+      "oid": "48ede80e1cf8059ab70fa610354c39732ec08208",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/checker/initialization/qual/UnknownInitialization.java",
+      "kind": "blob",
+      "oid": "34f9353a77ab2423b6c60c0149069a783a64dadc",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/checker/nullness/qual/RequiresNonNull.java",
+      "kind": "blob",
+      "oid": "a84ee7a6eef1c611ec658b33af04fa3ee9c10276",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/exceptions/AppSearchException.java",
+      "kind": "blob",
+      "oid": "15b7281005e547578d8235273a76d2f5799de5d2",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/exceptions/IllegalSchemaException.java",
+      "kind": "blob",
+      "oid": "72220ece59f8ca2b90405117db7a415f5be525a0",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/observer/DocumentChangeInfo.java",
+      "kind": "blob",
+      "oid": "bb5683c7a22645a51160436d419ba166b7d0827d",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/observer/ObserverCallback.java",
+      "kind": "blob",
+      "oid": "b09856732f3dfe348853d4e1fcc3411a19fd8c18",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/observer/ObserverSpec.java",
+      "kind": "blob",
+      "oid": "9d1a4f5d0fddb05efc13e1f91c4614dde67e87e6",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/observer/SchemaChangeInfo.java",
+      "kind": "blob",
+      "oid": "dee5f865cf3967f1370f69287e41ddd668a8f274",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/safeparcel/GenericDocumentParcel.java",
+      "kind": "blob",
+      "oid": "1cf292bdf61037a84309a1988ae388545d52d837",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/safeparcel/PackageIdentifierParcel.java",
+      "kind": "blob",
+      "oid": "71054b9d12c7d5ca62ccfea15a0501d56fddbe63",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/safeparcel/PropertyConfigParcel.java",
+      "kind": "blob",
+      "oid": "1bff2e977a685ead98ab19d2c2204ba0aff43377",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/safeparcel/PropertyParcel.java",
+      "kind": "blob",
+      "oid": "37334720bd3925545546f539580792e61500283c",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/stats/BaseStats.java",
+      "kind": "blob",
+      "oid": "eb67d536c231dcb55e97f50657fc6592c9e13d8e",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/stats/SchemaMigrationStats.java",
+      "kind": "blob",
+      "oid": "87f37c9193cd0663df949ad624621ed0ebab9a2f",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/usagereporting/ActionConstants.java",
+      "kind": "blob",
+      "oid": "ea6aee422330e05d892fe94ab2bc25cbd14207d4",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/util/BundleUtil.java",
+      "kind": "blob",
+      "oid": "ee906c28f4a12c85ad2041f123fe5409d0684cbf",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/util/DocumentIdUtil.java",
+      "kind": "blob",
+      "oid": "9eafdd801ec7174c44b87590b06fad338299d10c",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/util/IndentingStringBuilder.java",
+      "kind": "blob",
+      "oid": "2032a401914e4121f337f2dc11a08b1a237db927",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/util/LogUtil.java",
+      "kind": "blob",
+      "oid": "b0b090a380d82448aa9dd6bf1ca6ef438c127843",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/util/SchemaMigrationUtil.java",
+      "kind": "blob",
+      "oid": "0ba04737f39e9cddac1595161999068b9520eb68",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/external/android/app/appsearch/util/SchemaUtil.java",
+      "kind": "blob",
+      "oid": "d680d626c3bb8560e182483f06f203524044ee37",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/lint-baseline.xml",
+      "kind": "blob",
+      "oid": "ab9ba9d2c87ee17aeede9fed6baa9ef902eeed5a",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/proguard.flags",
+      "kind": "blob",
+      "oid": "4fa7fc58b44c0944c2f06090c26df66d93b7a1b3",
+      "mode": "100644"
+    },
+    {
+      "path": "safeparcel-processor/Android.bp",
+      "kind": "blob",
+      "oid": "c5fcd6bb9ee192b4bf4b6c7636800fdf573f79c5",
+      "mode": "100644"
+    },
+    {
+      "path": "safeparcel-processor/resources/META-INF/services/javax.annotation.processing.Processor",
+      "kind": "blob",
+      "oid": "f9e1c9c5ca5202b676dff4e74968aa5cf9d7ad42",
+      "mode": "100644"
+    },
+    {
+      "path": "safeparcel-processor/resources/templates/template.cs",
+      "kind": "blob",
+      "oid": "b291048f95372530df55c1788d3fdba4130e0947",
+      "mode": "100644"
+    },
+    {
+      "path": "safeparcel-processor/resources/templates/templateWithIndicator.cs",
+      "kind": "blob",
+      "oid": "b46771576fb0202a953f53473b721e43b27a3a62",
+      "mode": "100644"
+    },
+    {
+      "path": "safeparcel-processor/src/android/app/appsearch/safeparcel/SafeParcelProcessor.java",
+      "kind": "blob",
+      "oid": "c92f392f1f6ede59adf8f7de4592d41b1ae4e26e",
+      "mode": "100644"
+    },
+    {
+      "path": "safeparcel-processor/src/android/app/appsearch/safeparcel/SafeParcelable.java",
+      "kind": "blob",
+      "oid": "fcb5954a57b6f410128c850f227f32c80d6a084c",
+      "mode": "100644"
+    },
+    {
+      "path": "service/Android.bp",
+      "kind": "blob",
+      "oid": "72a56035cc1a5ce8408327659fb59896780920f0",
+      "mode": "100644"
+    },
+    {
+      "path": "service/art-profile",
+      "kind": "blob",
+      "oid": "8c2b9e5f77da027d6da4f731634dac0bf1546ebd",
+      "mode": "100644"
+    },
+    {
+      "path": "service/com_android_server_appsearch_isolated_storage_service_VmStateSignaler.cpp",
+      "kind": "blob",
+      "oid": "ef686d93b6a79bee4e7706c3a45fa70fb60117c7",
+      "mode": "100644"
+    },
+    {
+      "path": "service/jarjar-rules.txt",
+      "kind": "blob",
+      "oid": "ca06b9889cf5a1f82d93b611e1bb1bc88daa4042",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/AppSearchComponentFactory.java",
+      "kind": "blob",
+      "oid": "43e6ebcf62c6a0a2fb0df856b421b32e24dfce92",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/AppSearchMaintenanceService.java",
+      "kind": "blob",
+      "oid": "819e4c5635a3044e42ceb79f6e75ee468a210c31",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/AppSearchManagerService.java",
+      "kind": "blob",
+      "oid": "9a3d9bed16bbe3ac85577fa02ca9071fc4868b1d",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/AppSearchModule.java",
+      "kind": "blob",
+      "oid": "a14c96d20c2a6dba0e20c68230bf895f622219de",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/AppSearchRateLimitConfig.java",
+      "kind": "blob",
+      "oid": "cfbf21499e5fa69622df1124620bdb4640674032",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/AppSearchUserInstance.java",
+      "kind": "blob",
+      "oid": "6f3178a2ea50f2e56e41b5e1e73b48348f03201f",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/AppSearchUserInstanceManager.java",
+      "kind": "blob",
+      "oid": "1784a56d64a20d5fc205394c09a6c8181599df1e",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/Denylist.java",
+      "kind": "blob",
+      "oid": "679fb6e0b85c691503f2b253c53faa00f91864d3",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/FrameworkRevocableFileDescriptor.java",
+      "kind": "blob",
+      "oid": "6d77ef4c0e5e2a7d7619cdf43f0da9553d289cba",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/FrameworkRevocableFileDescriptorStore.java",
+      "kind": "blob",
+      "oid": "9efde34d42e44fc6ae621d242f3929a98ca1f946",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/FrameworkServiceAppSearchConfig.java",
+      "kind": "blob",
+      "oid": "d31597b922b07cf405c3a48415b5b7c8fd132375",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/HandleExpiredDocumentsAlarmListener.java",
+      "kind": "blob",
+      "oid": "e3ecdd3b381c93ce65a1a6a66f6526208412b4f4",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/InternalAppSearchLogger.java",
+      "kind": "blob",
+      "oid": "042a63ed8ec10f52eb03d259e74337e546e5077f",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/ServiceAppSearchConfig.java",
+      "kind": "blob",
+      "oid": "f63544da8f583bdd0e81fd5339d2b5ae7be73b74",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/ServiceOptimizeStrategy.java",
+      "kind": "blob",
+      "oid": "bff4d9d5b6a5ab4bdd16189d8bc0605bc8ff0de9",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/UserStorageInfo.java",
+      "kind": "blob",
+      "oid": "2ff4ecdd91b021826e8bcc91754126debedc2e9d",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/AppFunctionDiffCalculator.java",
+      "kind": "blob",
+      "oid": "efe25171bbce77c0036601afaf9e4295f095e28f",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/AppFunctionDocumentParser.java",
+      "kind": "blob",
+      "oid": "7dcf8cd506b14e50a9c1e2608eada23ddf245a07",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/AppFunctionDocumentParserImpl.java",
+      "kind": "blob",
+      "oid": "ba01bdee64df00c4663804c10fcdffe93e3af434",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/AppFunctionResolveInfo.java",
+      "kind": "blob",
+      "oid": "299e0d5eb5b6abd39a87fc357fe88451816e8990",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/AppFunctionSchemaParser.java",
+      "kind": "blob",
+      "oid": "95f239ec2bc7f1337c5bea5501e924d90fe25360",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/AppFunctionsIndexerUtil.java",
+      "kind": "blob",
+      "oid": "06986dda37e2d77ada926272ba949171695e1701",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/AppIndexerVersions.java",
+      "kind": "blob",
+      "oid": "2eb6188973ce5d044d76dbd930621b684ef473f6",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/AppOpenEventIndexerConfig.java",
+      "kind": "blob",
+      "oid": "4b058ee8cae9bc44186c9ee891863255d5cac9d4",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/AppOpenEventIndexerImpl.java",
+      "kind": "blob",
+      "oid": "9fa748930cf442c809c192908165dacf9a5bd43f",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/AppOpenEventIndexerManagerService.java",
+      "kind": "blob",
+      "oid": "d24df3c3109899a83dd429a654738e9bc249735e",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/AppOpenEventIndexerSettings.java",
+      "kind": "blob",
+      "oid": "a5b4c62b157dbeefd28c267a6278ab0547b5817e",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/AppOpenEventIndexerUserInstance.java",
+      "kind": "blob",
+      "oid": "6855b5c031c4dcf291847430502baf91c225beb0",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/AppOpenEventStats.java",
+      "kind": "blob",
+      "oid": "f220946eeb220598a9e62beb7d17bf9267be834b",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/AppSearchHelper.java",
+      "kind": "blob",
+      "oid": "9301e4c146109eb5294b0d379920944c5c0bdfe4",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/AppsIndexerConfig.java",
+      "kind": "blob",
+      "oid": "18c3cc74d8b7a05519a186820cf7edc48544d3f0",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/AppsIndexerImpl.java",
+      "kind": "blob",
+      "oid": "863eb3749b369bca20e9fa5776213c1132d0a098",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/AppsIndexerManagerService.java",
+      "kind": "blob",
+      "oid": "10717f853b72b62266340426074a230083670ce0",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/AppsIndexerSettings.java",
+      "kind": "blob",
+      "oid": "1833e81821afd3136cf27e3f94bb95c9704aafba",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/AppsIndexerUserInstance.java",
+      "kind": "blob",
+      "oid": "710e951f1e9848f520beebd84517a243ee18f9f8",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/AppsIndexerUserInstanceManager.java",
+      "kind": "blob",
+      "oid": "299eb519539aa3bf8d8039ff8938654284e1c035",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/AppsUpdateStats.java",
+      "kind": "blob",
+      "oid": "0c157111193a6fad4701d33d00cc5dca8e9a92ea",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/AppsUtil.java",
+      "kind": "blob",
+      "oid": "29c8b4acf39648553f5ab8dd463066c4655880e2",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/FrameworkAppOpenEventIndexerConfig.java",
+      "kind": "blob",
+      "oid": "7cbf9559696414ad103ad2a2d2ea7ff219df2807",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/FrameworkAppOpenEventIndexerForceUpdateConfig.java",
+      "kind": "blob",
+      "oid": "a3552fd2f97e617e16389c560793dc7d32b6f728",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/FrameworkAppOpenEventIndexerMaintenanceConfig.java",
+      "kind": "blob",
+      "oid": "1ccd487f22a7221aa0ca67720c9dd2c3cf80eadd",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/FrameworkAppsIndexerConfig.java",
+      "kind": "blob",
+      "oid": "5938d0bad2d14306b23447f7d2f269283f92668d",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/FrameworkAppsIndexerForceUpdateConfig.java",
+      "kind": "blob",
+      "oid": "2e99f81f4dc17b7074693ef97ccec9042db19ae7",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/FrameworkAppsIndexerMaintenanceConfig.java",
+      "kind": "blob",
+      "oid": "921d1aad269de2becfc81da67c12af0600670c72",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/ResolveInfos.java",
+      "kind": "blob",
+      "oid": "489eabf5e3c9889d465e85fdb59afc9801457b48",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/appsearchtypes/AppFunctionDocument.java",
+      "kind": "blob",
+      "oid": "9312a05cb58425b84dd8b541992ee9adc49db8a6",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/appsearchtypes/AppFunctionPackageMetadata.java",
+      "kind": "blob",
+      "oid": "939556b9abc1502e3cd8657d437f7f65e8870493",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/appsearchtypes/AppFunctionServiceState.java",
+      "kind": "blob",
+      "oid": "4dd0ff5c14159f4832706596b35e32154496726e",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/appsearchtypes/AppFunctionStaticMetadata.java",
+      "kind": "blob",
+      "oid": "04ed19e30a7a2a967d4bece86ca324a9a805ed72",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/appsearchtypes/AppOpenEvent.java",
+      "kind": "blob",
+      "oid": "a472c0f99aecf7c1903a387e779267dd0ce927ed",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/appsearchtypes/MobileApplication.java",
+      "kind": "blob",
+      "oid": "edaa3844ca6faf652a4a0aa6d92ad00e224afc2f",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/appsindexer/package-info.java",
+      "kind": "blob",
+      "oid": "6f9d4460dfd918a10330edc5d3a0d563e573bece",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/contactsindexer/AppSearchHelper.java",
+      "kind": "blob",
+      "oid": "3ec4c6bc751e3d6bc66d5f874843a46d0f8812d0",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/contactsindexer/ContactDataHandler.java",
+      "kind": "blob",
+      "oid": "2f6a79d2cd600c21d05e44314758741a6d641e51",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/contactsindexer/ContactsIndexerConfig.java",
+      "kind": "blob",
+      "oid": "b1f16a67ce05d139273f3cdf2f0f477886d56758",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/contactsindexer/ContactsIndexerImpl.java",
+      "kind": "blob",
+      "oid": "5504c78c5f2f0689e5505799e7a8963ac0000c50",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/contactsindexer/ContactsIndexerMaintenanceService.java",
+      "kind": "blob",
+      "oid": "41608a5e5fee84497442a33c2536bf79ff2a04f7",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/contactsindexer/ContactsIndexerManagerService.java",
+      "kind": "blob",
+      "oid": "cf56d0f737f37314fe465cb3fc95e247ecd520ea",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/contactsindexer/ContactsIndexerPhoneNumberUtils.java",
+      "kind": "blob",
+      "oid": "41e6c074c2d32721286020aa6a0ca5834b24d4c2",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/contactsindexer/ContactsIndexerSettings.java",
+      "kind": "blob",
+      "oid": "01113dfda2ddb748b578dcea2e09242b46544f95",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/contactsindexer/ContactsIndexerUserInstance.java",
+      "kind": "blob",
+      "oid": "2d309e1589e8995f191882ceff3c98bebfc6d112",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/contactsindexer/ContactsProviderUtil.java",
+      "kind": "blob",
+      "oid": "86ce5eff27d417730cb28414fdc0246d7fc9e57f",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/contactsindexer/ContactsUpdateStats.java",
+      "kind": "blob",
+      "oid": "611815500d2218675f4c60f0dbd6cfd7ffa08b92",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/contactsindexer/CountryCodeToRegionCodeMap.java",
+      "kind": "blob",
+      "oid": "0301d289a304e97d7401fb19003d3a3b2b239572",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/contactsindexer/CountryCodeUtils.java",
+      "kind": "blob",
+      "oid": "9e9309e7ae081f626595c442ba8c402712db42e4",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/contactsindexer/FrameworkContactsIndexerConfig.java",
+      "kind": "blob",
+      "oid": "2f5446be3402020847e576a861a6b0c87ae02070",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/contactsindexer/FrameworkContactsIndexerForceUpdateConfig.java",
+      "kind": "blob",
+      "oid": "174e016bce2d1a2ce52254f3f14594e902d8fa35",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/contactsindexer/FrameworkContactsIndexerMaintenanceConfig.java",
+      "kind": "blob",
+      "oid": "0f993fe515d0522283143b06f399d82864f19ee8",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/contactsindexer/PersonBuilderHelper.java",
+      "kind": "blob",
+      "oid": "263c91c38543e64046a058311ec2934a4bfba70c",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/contactsindexer/appsearchtypes/ContactPoint.java",
+      "kind": "blob",
+      "oid": "e9802ac4a32585f6945b6bc75d1ae1fd0b1d1303",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/contactsindexer/appsearchtypes/ContactRelation.java",
+      "kind": "blob",
+      "oid": "fe8ab9d78c604c489e31ea55f013d55b231b47a4",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/contactsindexer/appsearchtypes/Person.java",
+      "kind": "blob",
+      "oid": "c602b285dc564a96a66634cd65c13a736480a915",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/contactsindexer/appsearchtypes/SignificantDate.java",
+      "kind": "blob",
+      "oid": "663a2e0dd484f60f0dc420742509110e72250346",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/AccountStore.java",
+      "kind": "blob",
+      "oid": "1c8b24ad217165181e3060327058557fac3347bf",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/AppSearchConfig.java",
+      "kind": "blob",
+      "oid": "56fa6cf5b4989b78bbf1f0c2b1cd30b9add4215c",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/AppSearchImpl.java",
+      "kind": "blob",
+      "oid": "a339220a5a810b9cc27d7a1a752c615274a84564",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/AppSearchLogger.java",
+      "kind": "blob",
+      "oid": "477e1312431c1371579a6b89ac0f829374be4ac4",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/AppSearchLoggerHelper.java",
+      "kind": "blob",
+      "oid": "f3f022abdfd85185f50c2608c32e332b044fb09c",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/AppSearchRevocableFileDescriptor.java",
+      "kind": "blob",
+      "oid": "f81425c3cb1c80c2154b204515a42ed21b701fe0",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/DocumentLimiter.java",
+      "kind": "blob",
+      "oid": "61c81b8bc1106ae3d8afa514d1d12b9e2aeb5c06",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/IcingOptionsConfig.java",
+      "kind": "blob",
+      "oid": "2e9149c6fa0069c927b657fe5145eb036c1f704c",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/LimitConfig.java",
+      "kind": "blob",
+      "oid": "442611001f64df82e5bad74b1a6c3db9fc103471",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/NamespaceCache.java",
+      "kind": "blob",
+      "oid": "4c18b56f1c236cc129356dd7f12537f6b38886e3",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/ObserverManager.java",
+      "kind": "blob",
+      "oid": "a943f7450f9590cd0c4d751ff402ebb5a3d66a0c",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/OptimizeStrategy.java",
+      "kind": "blob",
+      "oid": "4a357e75b6672602d14da4d6f83f12a4931f13a3",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/RevocableFileDescriptorStore.java",
+      "kind": "blob",
+      "oid": "85677b23c829f90cddbeee2888490835bfb78d23",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/SchemaCache.java",
+      "kind": "blob",
+      "oid": "dd1b62b63ef74a6278a92ade31ccb1065cb5e33b",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/converter/AccountToProtoConverter.java",
+      "kind": "blob",
+      "oid": "2c5e4e011887cde4df2942eba5fa231c2f6e8a41",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/converter/BlobHandleToProtoConverter.java",
+      "kind": "blob",
+      "oid": "a6a7b97d9facc1ce756e504dbd3befe8685e832f",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/converter/GenericDocumentToProtoConverter.java",
+      "kind": "blob",
+      "oid": "7ffe3b9abe10f4eef041be9c6f4e028771962d1f",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/converter/ResultCodeToProtoConverter.java",
+      "kind": "blob",
+      "oid": "293f07fdd9e664aebf893ace61da14d2556efef2",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/converter/SchemaToProtoConverter.java",
+      "kind": "blob",
+      "oid": "5331a2fe3a697d2228a19a8da3c71344edefb6ae",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/converter/SearchResultToProtoConverter.java",
+      "kind": "blob",
+      "oid": "f182a52335e78a5968e8cdf6c48383a119f85205",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/converter/SearchSpecToProtoConverter.java",
+      "kind": "blob",
+      "oid": "e56ff72bcf1d8acce83184e68c3b98884dd0d43a",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/converter/SearchSpecToProtoConverterUtil.java",
+      "kind": "blob",
+      "oid": "5c4a5d9ecf145bbd6da6b579031de89688cb5bc5",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/converter/SearchSuggestionSpecToProtoConverter.java",
+      "kind": "blob",
+      "oid": "6df16f89c03b0dd0417977fa366b32ff39215811",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/converter/SetSchemaResponseToProtoConverter.java",
+      "kind": "blob",
+      "oid": "dfe8058e5f943ea5808a180394a5f2e51bc883c3",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/converter/TypePropertyPathToProtoConverter.java",
+      "kind": "blob",
+      "oid": "e7ff286c6dc0c87faaca2fca372dc015a53bf219",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/stats/CallStats.java",
+      "kind": "blob",
+      "oid": "764cbda8e992aefedcfe319f3ca7c350eb7e8c90",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/stats/ClickStats.java",
+      "kind": "blob",
+      "oid": "7c77409052f1578b6e14b7fe5d0398027b4a5daa",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/stats/InitializeStats.java",
+      "kind": "blob",
+      "oid": "05c288378ddec81db1d0e791f095289aee4fda68",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/stats/OptimizeStats.java",
+      "kind": "blob",
+      "oid": "a3ae7fc884efdeb83729eae08e5acba4f14f627d",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/stats/PersistToDiskStats.java",
+      "kind": "blob",
+      "oid": "77a784dc0e274123f68f347ad7b9f4a5b867ef90",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/stats/PutDocumentStats.java",
+      "kind": "blob",
+      "oid": "d1eab25aba0085f1c0077ab272d5cabe75083198",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/stats/QueryStats.java",
+      "kind": "blob",
+      "oid": "1fff6ad82be7fc31b88d43a22c6d2d854901c641",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/stats/RemoveStats.java",
+      "kind": "blob",
+      "oid": "0e66e4e832916f383a2391388f11070a52922367",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/stats/SearchIntentStats.java",
+      "kind": "blob",
+      "oid": "47ad8c402352fe756a27f0374f00f0152544abf7",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/stats/SearchSessionStats.java",
+      "kind": "blob",
+      "oid": "41a08aa0bb436d52ebc510a58bd007e48ba079cb",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/stats/SearchStats.java",
+      "kind": "blob",
+      "oid": "e494c8c5e40293e613ea371bcf7d1d5343551375",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/stats/SetSchemaStats.java",
+      "kind": "blob",
+      "oid": "7c119a623f49fc3d98df837422e126e547e1d0f9",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/usagereporting/ClickActionGenericDocument.java",
+      "kind": "blob",
+      "oid": "26bfc27ed1fead906ac1213adb1a8f90533fc36e",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/usagereporting/SearchActionGenericDocument.java",
+      "kind": "blob",
+      "oid": "aa2714dd18f454f15e46c4d3a77a529bdf617446",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/usagereporting/SearchSessionStatsExtractor.java",
+      "kind": "blob",
+      "oid": "14da8bd5213b02a493c041337562e560828ad594",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/usagereporting/TakenActionGenericDocument.java",
+      "kind": "blob",
+      "oid": "82bc2235c825689f289903eec0c691a48f4b5e79",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/util/MapUtil.java",
+      "kind": "blob",
+      "oid": "bbcd791dd329e24fe25eaf857554188348e66e6e",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/util/PrefixUtil.java",
+      "kind": "blob",
+      "oid": "156edb600c10f275e4c7f5d532335677b97a118b",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/visibilitystore/CallerAccess.java",
+      "kind": "blob",
+      "oid": "9e3e8ebd031088026a9876fa246e93a1aa72dab9",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/visibilitystore/VisibilityChecker.java",
+      "kind": "blob",
+      "oid": "15ba4291f60fabe9bee4bfbf2112c7f712a5bf14",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/visibilitystore/VisibilityDocumentV1.java",
+      "kind": "blob",
+      "oid": "5469f1e75af94db6408d4ad1bb00e35d00fd7e73",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/visibilitystore/VisibilityStore.java",
+      "kind": "blob",
+      "oid": "080a332b5f0761b1f750c3483dac5f0cf8599569",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/visibilitystore/VisibilityStoreMigrationHelperFromV0.java",
+      "kind": "blob",
+      "oid": "1bd77d9a0208987451949ecb57876d1f5001db7e",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/visibilitystore/VisibilityStoreMigrationHelperFromV1.java",
+      "kind": "blob",
+      "oid": "3cf7c6c018577cdc00a3825e3894e27a655e7a3d",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/visibilitystore/VisibilityToDocumentConverter.java",
+      "kind": "blob",
+      "oid": "2d55b372e2b1c698cf2c652f42a2491fd0c3ca88",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/external/localstorage/visibilitystore/VisibilityUtil.java",
+      "kind": "blob",
+      "oid": "7ae7a52cbbac6d7c2892af52ac9b0e9421a12f6a",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/indexer/BaseSettings.java",
+      "kind": "blob",
+      "oid": "587e2e74d19c758bf0f0b438b81d42ed18cc346d",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/indexer/FrameworkIndexerJobHandler.java",
+      "kind": "blob",
+      "oid": "ac2df3c4d3f0b0a09e9b85e8ce99395cb8238170",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/indexer/FrameworkIndexerMaintenanceConfig.java",
+      "kind": "blob",
+      "oid": "a3e0b30c92f683d5e250886d09e67481f5f4c374",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/indexer/FrameworkIndexerMaintenanceService.java",
+      "kind": "blob",
+      "oid": "5822b59b35bc2cbd7b44f8d5e48fd9a35bbc0b75",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/indexer/IndexerForceUpdateConfig.java",
+      "kind": "blob",
+      "oid": "0b6495af85deb89d87d61e9abf4235324e6e1eff",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/indexer/IndexerJobHandler.java",
+      "kind": "blob",
+      "oid": "acf504a2061b1a9254903c17f1a3b9807e1ac95d",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/indexer/IndexerLocalService.java",
+      "kind": "blob",
+      "oid": "3685754fa0906c0ccf88a3890c9a7e5d439dae2c",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/indexer/PersistableBundleSettingsStore.java",
+      "kind": "blob",
+      "oid": "6bc0ab92b71840390d1fb316335059a08d30056c",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/indexer/ProtoSettingsStore.java",
+      "kind": "blob",
+      "oid": "83cfcf63389bdb4a58c61910c0cb793b77633147",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/indexer/SettingsStore.java",
+      "kind": "blob",
+      "oid": "e5958eff948d2964942f45d2d9d403b6a46c30a0",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/indexer/settings.proto",
+      "kind": "blob",
+      "oid": "17419edf6e4a73215ebee1efd501c6014a9cfd57",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/isolated_storage_service/DataMigrationStats.java",
+      "kind": "blob",
+      "oid": "7e580b5766f3c759e3b4bfaa37d3af3aefd58f2d",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/isolated_storage_service/DataMigrationUtil.java",
+      "kind": "blob",
+      "oid": "c3ad791c0d3ad0d34d264d2b108143fecbfceeb9",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/isolated_storage_service/IcingSearchEngine.java",
+      "kind": "blob",
+      "oid": "8883e33015301cacb0e7dbf02cc14c6487ea5aed",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/isolated_storage_service/IsolatedStorageServiceManager.java",
+      "kind": "blob",
+      "oid": "e99862dc79377d3d7418bd9f6c50b6d5097d8157",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/isolated_storage_service/VmStateSignaler.java",
+      "kind": "blob",
+      "oid": "d171df3798aa3f4b40c3ec95f5738a1e08bd3de6",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/metrics/appsearch.proto",
+      "kind": "blob",
+      "oid": "054d5d0d10defd5e3e8a01ae035d0e62d02f6f65",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/observer/AppSearchObserverProxy.java",
+      "kind": "blob",
+      "oid": "11837325f7f47df7dbc8b80406d9a5bafbfc9462",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/stats/PlatformLogger.java",
+      "kind": "blob",
+      "oid": "26d5ec0c5fb0a59a80e93c8fd13f2d5701599c4b",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/stats/StatsCollector.java",
+      "kind": "blob",
+      "oid": "85ef2f50450732d3a8eb5ec31d35b74485c548c9",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/stats/VmInitializationStats.java",
+      "kind": "blob",
+      "oid": "fa7ef04bc191f8b05e4cdb45853e3bcfb5ce3835",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/stats/VmStartAttemptStats.java",
+      "kind": "blob",
+      "oid": "4b14f543dd0c622851b31b24bb9fa5ccc744ffc6",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/sync/SyncAppSearchBase.java",
+      "kind": "blob",
+      "oid": "ed1e953eca77353e326c4ca30594bfd3b734d37c",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/sync/SyncAppSearchSession.java",
+      "kind": "blob",
+      "oid": "d59a497b5127355d6967661699c97af8ce2c9282",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/sync/SyncAppSearchSessionImpl.java",
+      "kind": "blob",
+      "oid": "a83ebe0749df20f3035d42dc2120faccd90ca569",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/sync/SyncGlobalSearchSession.java",
+      "kind": "blob",
+      "oid": "a1477698783e596e1d60c149343286759a775a1e",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/sync/SyncGlobalSearchSessionImpl.java",
+      "kind": "blob",
+      "oid": "ba1eb6b0c9516cbe260971bf5dcd161290352ad5",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/sync/SyncSearchResults.java",
+      "kind": "blob",
+      "oid": "278477df061b547dc8ce1feaf7c76ee49031662b",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/sync/SyncSearchResultsImpl.java",
+      "kind": "blob",
+      "oid": "d5b3eca5f75b382476bf236f31898ff86d14cefc",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/transformer/EnterpriseSearchResultPageTransformer.java",
+      "kind": "blob",
+      "oid": "92c64a63135f6f2866a989376471d7e3bf34a79d",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/transformer/EnterpriseSearchSpecTransformer.java",
+      "kind": "blob",
+      "oid": "60ae2e6fd10efc28ea0ee4bc17259591f11b9e47",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/transformer/PersonEnterpriseTransformer.java",
+      "kind": "blob",
+      "oid": "aeaa7d769725cd2fe0b6589fc51c08403e6fd678",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/util/AdbDumpUtil.java",
+      "kind": "blob",
+      "oid": "32a66f13d061d5d0f7ed72bcbfa4ebfdf68449d2",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/util/ApiCallRecord.java",
+      "kind": "blob",
+      "oid": "63346896b2646af6041db5635efe92d3bb04f9f4",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/util/ExecutorManager.java",
+      "kind": "blob",
+      "oid": "2eb6d1ac2167a3e75a21aed0a80cc4c6d01ba8aa",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/util/MemInfoReader.java",
+      "kind": "blob",
+      "oid": "412037df10785815c89162d2d7735722abfb0884",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/util/PackageManagerUtil.java",
+      "kind": "blob",
+      "oid": "76235e920f1a2422739ef69ad61673cfd00a5260",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/util/PackageUtil.java",
+      "kind": "blob",
+      "oid": "fbaebdb2fa98e15492bdb897f6b13728bb71eb0d",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/util/RateLimitedExecutor.java",
+      "kind": "blob",
+      "oid": "fea1cdb88ebbe87b543819f22c6c98caff8aab1b",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/util/ServiceImplHelper.java",
+      "kind": "blob",
+      "oid": "03fc3412f2dcff1f4c85082ffdc73f160e13ab88",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/util/StatsUtil.java",
+      "kind": "blob",
+      "oid": "f3bb14618b8080e0b5c2655b42c2f2bcf7379b03",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/visibilitystore/FrameworkCallerAccess.java",
+      "kind": "blob",
+      "oid": "6ee5f01fb8e30221060161fbe7636c5a8531125e",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/visibilitystore/PolicyChecker.java",
+      "kind": "blob",
+      "oid": "31c9c5d17d345cb97a47544df8f5ae79d67cb6c5",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/visibilitystore/PolicyCheckerImpl.java",
+      "kind": "blob",
+      "oid": "3a8834caa4f14b96c085731677510e2a2684b3b9",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/appsearch/visibilitystore/VisibilityCheckerImpl.java",
+      "kind": "blob",
+      "oid": "d0dc69816559eeb6230db00b25e4967a21354266",
+      "mode": "100644"
+    },
+    {
+      "path": "service/lint-baseline.xml",
+      "kind": "blob",
+      "oid": "0954a3905ecaa1e9bfbbc1ff3ae725d0a8fe09b4",
+      "mode": "100644"
+    },
+    {
+      "path": "service/proguard.flags",
+      "kind": "blob",
+      "oid": "14b1ab4117da675774645ff7b0b8f45ebc2a796d",
+      "mode": "100644"
+    },
+    {
+      "path": "synced_jetpack_sha.txt",
+      "kind": "blob",
+      "oid": "5f9b0665b55ac17b76601f506aa524bac9d63dcb",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/Android.bp",
+      "kind": "blob",
+      "oid": "32b1db7fa94f5e9108a50f82e38be7945a3c18f2",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "f3d51c36cd93e49b52eb32cc21b98c41cb70b472",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "536c4843e1a0ad5e29c1a535a4622ef290bb3240",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/AppFunctionDiffCalculatorTest.java",
+      "kind": "blob",
+      "oid": "c15cb3095c14fb7bdb3bc327d90ae1696fdf2734",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/AppFunctionDocumentParserImplTest.java",
+      "kind": "blob",
+      "oid": "6e1a64782a3441c9b1c084ee94f7c333158ff320",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/AppFunctionResolveInfoTest.java",
+      "kind": "blob",
+      "oid": "386a92a5c40030026d40101ec286db1989e52748",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/AppFunctionSchemaParserTest.java",
+      "kind": "blob",
+      "oid": "f5193d9a9e27a5e93d079c30ead159e5e68098cc",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/AppOpenEventIndexerImplTest.java",
+      "kind": "blob",
+      "oid": "8b971fc23b7f4ae58306c503aef8869636543417",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/AppOpenEventIndexerRealDocumentsTest.java",
+      "kind": "blob",
+      "oid": "288ec7fcbb4f18e6d2eb1d79442e38c4ef5f2e62",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/AppOpenEventIndexerSettingsTest.java",
+      "kind": "blob",
+      "oid": "d24471713cfadd6554158c5b59d6ebd036ecc2cd",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/AppOpenEventIndexerUserInstanceTest.java",
+      "kind": "blob",
+      "oid": "0ec5a5e27a7f828fcb8ae8caf44788273ffa3da9",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/AppSearchHelperTest.java",
+      "kind": "blob",
+      "oid": "e4bc5c08dbd1b28752abfcd7af3f98f67856b3dc",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/AppsIndexerImplTest.java",
+      "kind": "blob",
+      "oid": "0ca030b71be0a9b04f6e4beca2df22984943d158",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/AppsIndexerManagerServiceTest.java",
+      "kind": "blob",
+      "oid": "55861a24487d707d770c2a49457cccfb4653c955",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/AppsIndexerRealDocumentsTest.java",
+      "kind": "blob",
+      "oid": "64ac861264f68c7cb2914587810ba2f08a8bba05",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/AppsIndexerSettingsTest.java",
+      "kind": "blob",
+      "oid": "ccd6debaf57de0721255b0a64cc2c5285c7a9a38",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/AppsIndexerTestBase.java",
+      "kind": "blob",
+      "oid": "bad2645310dfb178e1508922e7242be1846d04ac",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/AppsIndexerUserInstanceTest.java",
+      "kind": "blob",
+      "oid": "f7de930607b9ed4dfcfc56886193a5eb54d2f272",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/AppsUtilTest.java",
+      "kind": "blob",
+      "oid": "930668fa17ea80f407c1b142d0dfe0372ba566e3",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/FrameworkAppOpenEventIndexerForceUpdateConfigTest.java",
+      "kind": "blob",
+      "oid": "bf5ba069f17dbf6145e9fe56c65d464368929cff",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/FrameworkAppOpenEventIndexerMaintenanceTest.java",
+      "kind": "blob",
+      "oid": "252845b4b5849a1ce6ceb729030a024927467c7f",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/FrameworkAppsIndexerForceUpdateConfigTest.java",
+      "kind": "blob",
+      "oid": "4a405a0f60807dd5dc8a4dafe9c6d359fd790fb3",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/FrameworkAppsIndexerMaintenanceTest.java",
+      "kind": "blob",
+      "oid": "8eca12541c4b5a29ccd85f9bbadcd397046d0fdf",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/MainActivity.java",
+      "kind": "blob",
+      "oid": "acb3c6c317bda9bbdf5d77324149bac19137c3dd",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/PersistableBundleAppOpenEventIndexerSettingsTest.java",
+      "kind": "blob",
+      "oid": "50adedfbdef62c7139ce50e076540db1c894297a",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/PersistableBundleAppsIndexerSettingsTest.java",
+      "kind": "blob",
+      "oid": "e142bea54c09cc024e77bdd0c2c217a0b0b0c141",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/ProtoAppOpenEventIndexerSettingsTest.java",
+      "kind": "blob",
+      "oid": "934f66f4a305d0e53bf308200c7015363bcabd1c",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/ProtoAppsIndexerSettingsTest.java",
+      "kind": "blob",
+      "oid": "84e194d2a5a02b84253bdba75de923eceb7e077a",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/ResolveInfosTest.java",
+      "kind": "blob",
+      "oid": "bb7cfff3f085bd25efe8771b1b87c536cbf51a8e",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/SyncAppSearchImplTest.java",
+      "kind": "blob",
+      "oid": "bddb3155707560e68e8b21cb2d8e6ee320338a69",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/TestAppOpenEventIndexerConfig.java",
+      "kind": "blob",
+      "oid": "0551e7d88c9961757b19fa01885a41662aaa05a2",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/TestAppOpenEventIndexerForceUpdateConfig.java",
+      "kind": "blob",
+      "oid": "f9c4a424571d8725f2916529e2e553e276cb8ce7",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/TestAppsIndexerConfig.java",
+      "kind": "blob",
+      "oid": "621447e1ad3bb8148b66c5b532efad43362011d3",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/TestAppsIndexerForceUpdateConfig.java",
+      "kind": "blob",
+      "oid": "d97b972feed742b772fab8c42784d746c726ec04",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/TestUtils.java",
+      "kind": "blob",
+      "oid": "4a96d369731d885e4f472217d05200276ad40b3a",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/appsearchtypes/AppFunctionDocumentTest.java",
+      "kind": "blob",
+      "oid": "2f7478bc887c3c9b89bb3831d450a3b57cd47029",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/appsearchtypes/AppFunctionStaticMetadataTest.java",
+      "kind": "blob",
+      "oid": "001f715e027de1639ca5edb57ce9e9f983748913",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/appsindexertests/src/com/android/server/appsearch/appsindexer/appsearchtypes/AppsIndexerSchemaTests.java",
+      "kind": "blob",
+      "oid": "f087ddf3e9a71b25b1ea9103e45d1efe778fd465",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/contactsindexertests/Android.bp",
+      "kind": "blob",
+      "oid": "007ea02644fd7cc89dc76e002c5d3f26e0f65e08",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/contactsindexertests/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "97e230af9edfdbaec85cc3072b7aabac450e5567",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/contactsindexertests/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "778f5ecd62842cfc926f0057c61b67569d2287f3",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/contactsindexertests/src/com/android/server/appsearch/contactsindexer/AppSearchHelperTest.java",
+      "kind": "blob",
+      "oid": "9d52e8b06e8951bcd2fe9f345813827ba8635dc5",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/contactsindexertests/src/com/android/server/appsearch/contactsindexer/ContactDataHandlerTest.java",
+      "kind": "blob",
+      "oid": "f008e598df0089f347dce3cab71e8ee30196bb89",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/contactsindexertests/src/com/android/server/appsearch/contactsindexer/ContactsIndexerImplTest.java",
+      "kind": "blob",
+      "oid": "7cb44d815cb2f89aa3dd64c98982c7a7b8497577",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/contactsindexertests/src/com/android/server/appsearch/contactsindexer/ContactsIndexerPhoneNumberUtilsTest.java",
+      "kind": "blob",
+      "oid": "11496e8fc2d450e32a6c42b5222489c3bc8fd717",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/contactsindexertests/src/com/android/server/appsearch/contactsindexer/ContactsIndexerSettingsTest.java",
+      "kind": "blob",
+      "oid": "8966abf4a32ee1356c881bc8c8b0c2367926c453",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/contactsindexertests/src/com/android/server/appsearch/contactsindexer/ContactsIndexerUserInstanceTest.java",
+      "kind": "blob",
+      "oid": "9bd42f4fafba3bfd925e7151309f81024119cadb",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/contactsindexertests/src/com/android/server/appsearch/contactsindexer/ContactsProviderUtilTest.java",
+      "kind": "blob",
+      "oid": "198be11c36941a384aa04ae12e468f82865f49da",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/contactsindexertests/src/com/android/server/appsearch/contactsindexer/CountryCodeUtilsTest.java",
+      "kind": "blob",
+      "oid": "b0633786d6c0205d43e52cfb7b35dc0ec90b5c6d",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/contactsindexertests/src/com/android/server/appsearch/contactsindexer/EnterpriseContactsTest.java",
+      "kind": "blob",
+      "oid": "fbd92657d7d422c9f091846ea6a6b888ffc251f3",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/contactsindexertests/src/com/android/server/appsearch/contactsindexer/FakeAppSearchHelper.java",
+      "kind": "blob",
+      "oid": "a304b87428ab386e1b219dbf8ab4c8768eeadbcb",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/contactsindexertests/src/com/android/server/appsearch/contactsindexer/FakeContactsProvider.java",
+      "kind": "blob",
+      "oid": "8987357f17fd9ec94946793515034d2b782c61d1",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/contactsindexertests/src/com/android/server/appsearch/contactsindexer/FakeContactsProviderTestBase.java",
+      "kind": "blob",
+      "oid": "c1205d7dffb0c74a5b17c8ee4d607fe3dd8cdae0",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/contactsindexertests/src/com/android/server/appsearch/contactsindexer/FrameworkContactsIndexerForceUpdateConfigTest.java",
+      "kind": "blob",
+      "oid": "21cbc639971c84392c0da1d0008315f650ddc006",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/contactsindexertests/src/com/android/server/appsearch/contactsindexer/FrameworkContactsIndexerMaintenanceTest.java",
+      "kind": "blob",
+      "oid": "1c6730b7e81fb9c147852335c58fd8622e02b41b",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/contactsindexertests/src/com/android/server/appsearch/contactsindexer/FrameworkContactsIndexerManagerServiceTest.java",
+      "kind": "blob",
+      "oid": "6de1daadb10fb800ccb6962eafb1124f72503edd",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/contactsindexertests/src/com/android/server/appsearch/contactsindexer/PersistableBundleContactsIndexerSettingsTest.java",
+      "kind": "blob",
+      "oid": "01572f94a106c36925b3537074b8c6a1e834aa29",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/contactsindexertests/src/com/android/server/appsearch/contactsindexer/PersonBuilderHelperTest.java",
+      "kind": "blob",
+      "oid": "5341522c090aa0c715a44953186f603c18b6f97a",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/contactsindexertests/src/com/android/server/appsearch/contactsindexer/ProtoContactsIndexerSettingsTest.java",
+      "kind": "blob",
+      "oid": "be34c21ea862ce55b2515fd4e098e6aa40e0b66f",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/contactsindexertests/src/com/android/server/appsearch/contactsindexer/TestContactsIndexerForceUpdateConfig.java",
+      "kind": "blob",
+      "oid": "8fac873e0c7770dbcfb8b362de6ad01daa0e46cb",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/contactsindexertests/src/com/android/server/appsearch/contactsindexer/TestUtils.java",
+      "kind": "blob",
+      "oid": "7f34eef4849985e23af56d6199cc2b1a8c812c9a",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/contactsindexertests/src/com/android/server/appsearch/contactsindexer/appsearchtypes/ContactPointTest.java",
+      "kind": "blob",
+      "oid": "eb0049308c6c0f1c4e366e602367566dc146f6c9",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/contactsindexertests/src/com/android/server/appsearch/contactsindexer/appsearchtypes/PersonTest.java",
+      "kind": "blob",
+      "oid": "aa5094f3a9d6c96cca63466d7fd86fe07a8c4ad7",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/coretests/Android.bp",
+      "kind": "blob",
+      "oid": "50e4320fa993af77abc63ac5a941d80d1e07f4e4",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/coretests/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "9c02c0c3316323790e7bbc8ede7b7331ac44cbdc",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/coretests/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "3b7f0e1ecf9b5e3fb7f5ba47e3c10ee264b8276b",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/coretests/res/xml/authenticator.xml",
+      "kind": "blob",
+      "oid": "c78dd7c36c7abc753898a6a83fb0c382bcf4b8bb",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/coretests/src/android/app/appsearch/AppSearchAttributionSourceUnitTest.java",
+      "kind": "blob",
+      "oid": "a1ea68450276b943507ed390302101742e9e4c8c",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/coretests/src/android/app/appsearch/AppSearchSessionInternalTest.java",
+      "kind": "blob",
+      "oid": "1668e23b52f9f6ecc37c1df3442aff181dcc1efd",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/coretests/src/android/app/appsearch/AppSearchSessionUnitTest.java",
+      "kind": "blob",
+      "oid": "9b68697906a83a27a3e36c5502a4e2ffd4c9947e",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/coretests/src/android/app/appsearch/EnterpriseGlobalSearchSessionUnitTest.java",
+      "kind": "blob",
+      "oid": "b85cf488d7600e870656af26e7d13c41db84fe95",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/coretests/src/android/app/appsearch/GlobalSearchSessionUnitTest.java",
+      "kind": "blob",
+      "oid": "a9556bdce6c527e8b2165786443702642093056f",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/coretests/src/android/app/appsearch/MockAccountService.java",
+      "kind": "blob",
+      "oid": "be48204b97b132f4804769ac63f93a1a340b4ec0",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/coretests/src/android/app/appsearch/OWNERS",
+      "kind": "blob",
+      "oid": "24f6b0b6b2b6101f98e505aa0659d3e1308333db",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/coretests/src/android/app/appsearch/ParcelableUtilUnitTest.java",
+      "kind": "blob",
+      "oid": "50a52d02c6e652cb9816d778da342b404041c64e",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/coretests/src/android/app/appsearch/external/app/AppSearchBatchResultInternalTest.java",
+      "kind": "blob",
+      "oid": "ee00c8103593327cb3db4c0e25b075bc19dc5f04",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/coretests/src/android/app/appsearch/external/app/AppSearchResultInternalTest.java",
+      "kind": "blob",
+      "oid": "6f92dc0da245c73b8357a405a0f2e57f779a6399",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/coretests/src/android/app/appsearch/external/app/AppSearchSessionInternalTestBase.java",
+      "kind": "blob",
+      "oid": "c74bece56d6ff31b12a662ac6e58b89b07614d8e",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/coretests/src/android/app/appsearch/external/app/GenericDocumentInternalTest.java",
+      "kind": "blob",
+      "oid": "9e45a49e520418c2d595dc5382981b434a6f6e98",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/coretests/src/android/app/appsearch/external/app/InternalVisibilityConfigTest.java",
+      "kind": "blob",
+      "oid": "d6bbd7bccfb0c54039090999336d6327a818ff66",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/coretests/src/android/app/appsearch/external/app/JoinSpecInternalTest.java",
+      "kind": "blob",
+      "oid": "49953c4a98f51397a74777d61e77fb3d3bf74e19",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/coretests/src/android/app/appsearch/external/app/SearchResultInternalTest.java",
+      "kind": "blob",
+      "oid": "85c9edc78ff8bc0b0e897d6c93774567547cf256",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/coretests/src/android/app/appsearch/external/app/SearchResultPageInternalTest.java",
+      "kind": "blob",
+      "oid": "aa180b1992f036db51926ba1162c2e0f6a55a0bd",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/coretests/src/android/app/appsearch/external/app/SearchSpecInternalTest.java",
+      "kind": "blob",
+      "oid": "d1bee81377eff2834e2de6870e2547f99af694af",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/coretests/src/android/app/appsearch/external/app/SetSchemaResponseInternalTest.java",
+      "kind": "blob",
+      "oid": "2a9e90c6d0c660492535b77afa902053295c4d1a",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/coretests/src/android/app/appsearch/external/app/aidl/AppSearchBatchResultParcelV2Test.java",
+      "kind": "blob",
+      "oid": "1c55454989e3d5f3027fbcb9cec15981d1bfb3ab",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/coretests/src/android/app/appsearch/external/exceptions/IllegalSchemaExceptionTest.java",
+      "kind": "blob",
+      "oid": "1774d72c110a80678c2af78a233228160a6cb75d",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/coretests/src/android/app/appsearch/external/flags/FlagsTest.java",
+      "kind": "blob",
+      "oid": "232e921e919c9c640eca6bb914f816696703ac3b",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/coretests/src/android/app/appsearch/external/safeparcel/GenericDocumentParcelTest.java",
+      "kind": "blob",
+      "oid": "e15d7bba815286d12a50424f1dd7ca998b86c67e",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/coretests/src/android/app/appsearch/external/safeparcel/PropertyParcelTest.java",
+      "kind": "blob",
+      "oid": "ebc4673267d035ad6cada36534f02b31ec0c81d3",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/coretests/src/android/app/appsearch/external/util/BundleUtilTest.java",
+      "kind": "blob",
+      "oid": "680ce52be4d64585cc6f2b962e8dfd1b285886fc",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/coretests/src/android/app/appsearch/external/util/IndentingStringBuilderTest.java",
+      "kind": "blob",
+      "oid": "057ecbd9dfe9f3068fb5faca5f62aebe6b067a21",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/coretests/src/android/app/appsearch/external/util/SchemaUtilTest.java",
+      "kind": "blob",
+      "oid": "c74a284b1a158028bf9e81aec09be46982dfb09b",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/mem.pbtx",
+      "kind": "blob",
+      "oid": "5b16d707e573445a9c97f8244620c94df8283900",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/mockingservicestests/Android.bp",
+      "kind": "blob",
+      "oid": "44e36be532191d22132d942ca0ec0c8da6aa5241",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/mockingservicestests/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "e23ccb28b82a2f25ca6f0a333f9f4921295cc84f",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/mockingservicestests/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "6df85c700ecc20f840bf03e213cb81d5c29a6e9f",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/mockingservicestests/src/com/android/server/appsearch/AppSearchMaintenanceServiceTest.java",
+      "kind": "blob",
+      "oid": "e1732bfa192161ec9d9e0ce9c3054839dbf6bc21",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/mockingservicestests/src/com/android/server/appsearch/AppSearchManagerServiceReceiverTest.java",
+      "kind": "blob",
+      "oid": "86b9411863dc30cd1c7279a363d06d079bd4e5f1",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/mockingservicestests/src/com/android/server/appsearch/AppSearchManagerServiceTest.java",
+      "kind": "blob",
+      "oid": "7199a6e944ae2f72392e72b678aaba774c1e1936",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/mockingservicestests/src/com/android/server/appsearch/AppSearchModuleTest.java",
+      "kind": "blob",
+      "oid": "ab9a5dbcd933f31195e3d37164127cba9c512841",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/mockingservicestests/src/com/android/server/appsearch/AppSearchUserInstanceManagerTest.java",
+      "kind": "blob",
+      "oid": "2f957a67de08e296320c001bd017ac0bce624788",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/mockingservicestests/src/com/android/server/appsearch/ContactsIndexer/FrameworkContactsIndexerConfigTest.java",
+      "kind": "blob",
+      "oid": "a7675104e620e703e4b868e2fc15fa686db09e18",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/mockingservicestests/src/com/android/server/appsearch/MockingServiceOptimizeStrategyTest.java",
+      "kind": "blob",
+      "oid": "7e37d2e6c6dda929fb33ff20d6d063f49281f4b4",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/mockingservicestests/src/com/android/server/appsearch/OWNERS",
+      "kind": "blob",
+      "oid": "24f6b0b6b2b6101f98e505aa0659d3e1308333db",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/mockingservicestests/src/com/android/server/appsearch/ServiceAppSearchConfigTest.java",
+      "kind": "blob",
+      "oid": "3bf03c1b2786fd2eb5ea412a276b460ab5b27122",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/mockingservicestests/src/com/android/server/appsearch/ServiceTestUtil.java",
+      "kind": "blob",
+      "oid": "aed9d117943d52de5c39c9610df86ce90b3ceadc",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/mockingservicestests/src/com/android/server/appsearch/stats/MockingIsolatedStorageServiceLoggerTest.java",
+      "kind": "blob",
+      "oid": "e3b965075d22027cfca8eeeeeefad52131fef9fc",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/mockingservicestests/src/com/android/server/appsearch/stats/MockingPlatformLoggerTest.java",
+      "kind": "blob",
+      "oid": "b77c9fe27c9f7d93abfc675035542649de114657",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/safeparceltests/Android.bp",
+      "kind": "blob",
+      "oid": "48443ac3b675d2938b7a85c61c4cc2fdf1cbf67a",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/safeparceltests/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "90ff883460f56de11d0ce96936cf5e6b971a1d00",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/safeparceltests/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "46e37ed22832aa7f64f48de31cbd5d520286c4fc",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/safeparceltests/src/android/app/appsearch/safeparcel/SafeParcelablePendingIntentTest.java",
+      "kind": "blob",
+      "oid": "f6c78d8ccd71817393bca914071376637a86ba49",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/safeparceltests/src/android/app/appsearch/safeparcel/SafeParcelableSparseArrayTest.java",
+      "kind": "blob",
+      "oid": "918b7e964e3aa582b606ccbbf73c6cafe069219d",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/safeparceltests/src/android/app/appsearch/safeparcel/SafeParcelableTest.java",
+      "kind": "blob",
+      "oid": "07e064639ef97b8743877c62b1364a39285bc3db",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/safeparceltests/src/android/app/appsearch/safeparcel/TestParcelable.java",
+      "kind": "blob",
+      "oid": "19b2bbbc0db517ec05cf94747706d56631265ebd",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/safeparceltests/src/android/app/appsearch/safeparcel/TestSafeParcelable.java",
+      "kind": "blob",
+      "oid": "fd5f049b6a8487a89abf698a92898137d7a22752",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/safeparceltests/src/android/app/appsearch/safeparcel/TestSafeParcelableV2.java",
+      "kind": "blob",
+      "oid": "1b5ba400c7be134eed9e6751873838928a1ecd7f",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/safeparceltests/src/android/app/appsearch/safeparcel/TestSafeParcelableV3.java",
+      "kind": "blob",
+      "oid": "9f9c9f64a7fb08fb583f79d29275959f84d6b957",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/safeparceltests/src/android/app/appsearch/safeparcel/TestSafeParcelableV4.java",
+      "kind": "blob",
+      "oid": "93096d4823954a2c6c2b924761db539059d10631",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/safeparceltests/src/android/app/appsearch/safeparcel/TestSafeParcelableV5.java",
+      "kind": "blob",
+      "oid": "20cef26d8dad9982b2352646e512d88601ecfa0d",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/safeparceltests/src/android/app/appsearch/safeparcel/TestSafeParcelableWithDoNotParcelTypeDefaultValues.java",
+      "kind": "blob",
+      "oid": "d7abf5598de5caf5e84b6d1d3da05832e490e239",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/safeparceltests/src/android/app/appsearch/safeparcel/TestSafeParcelableWithIndicator.java",
+      "kind": "blob",
+      "oid": "d0d4fbea0a9341586c3a60ef51d1827ac1ac8eda",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/safeparceltests/src/android/app/appsearch/safeparcel/TestSafeParcelableWithParcelTypeDefaultValues.java",
+      "kind": "blob",
+      "oid": "1f66e37142f1e57ed58e4becca2beb2df1920762",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/safeparceltests/src/android/app/appsearch/safeparcel/TestSafeParcelableWithRemovedParam.java",
+      "kind": "blob",
+      "oid": "4d1c24abd6dddfd5d6fad0477f315de581f7fb47",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/safeparceltests/src/android/app/appsearch/safeparcel/TestSafeParcelableWithRequiresApi.kt",
+      "kind": "blob",
+      "oid": "9fc05161fcb386d957c55dffe701480f82ebc5bb",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/safeparceltests/src/android/app/appsearch/safeparcel/TestSafeParcelableWithSparseArray.java",
+      "kind": "blob",
+      "oid": "db1e869881e58a870ab0d9b18ebf0c99a7e130a0",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/safeparceltests/src/android/app/appsearch/safeparcel/TestSafeParcelableWithTypeUseAnnotation.java",
+      "kind": "blob",
+      "oid": "4dd86d6e29a698ae15f1079aa886d4febf471c34",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/safeparceltests/src/android/app/appsearch/safeparcel/TestSafeParcelableWithoutRemovedParam.java",
+      "kind": "blob",
+      "oid": "c858f98fb41de3cfe8c091354b4ae01bd592f1d1",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/Android.bp",
+      "kind": "blob",
+      "oid": "fc751ffd416aa29a833b2b9015b43d49ac89db8a",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "c4b4b4c642fd3db914fa42feff47a9f8801c6790",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "e5071e089feb9df79444c61af38e14ecce75838a",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/jarjar-rules.txt",
+      "kind": "blob",
+      "oid": "5d20b694ace14a1da33cc752a47df1498b605a86",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/android/app/appsearch/testutil/external/testutil/AppSearchEmailTest.java",
+      "kind": "blob",
+      "oid": "8d3429b6cb72869f4cfa0f0635755e9766d7a580",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/android/app/appsearch/testutil/external/testutil/SimpleTestLoggerTest.java",
+      "kind": "blob",
+      "oid": "e6eeea3b5606af0fbdf7d1110812079071df54a9",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/AdbDumpUtilTest.java",
+      "kind": "blob",
+      "oid": "f0cb0dff39fa544676186a9a0361b372a8bebaa7",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/AppSearchRateLimitConfigTest.java",
+      "kind": "blob",
+      "oid": "39b8a67cb4038906cc68c9dc2650d24a001889f0",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/DenylistTest.java",
+      "kind": "blob",
+      "oid": "e294cc539b168ea201c13857c97929f5c1d90c3a",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/OWNERS",
+      "kind": "blob",
+      "oid": "ebe9e4ec087f85ef7aba2c8bc6369c6b55f34e21",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/RateLimitedExecutorTest.java",
+      "kind": "blob",
+      "oid": "d6ade1924ccf9afeaee9768df7172db3abb77f4f",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/ServiceOptimizeStrategyTest.java",
+      "kind": "blob",
+      "oid": "69784a1e0ec7bcbfee1f4e59e2848126a6047613",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/UserStorageInfoTest.java",
+      "kind": "blob",
+      "oid": "c79671fa9bfe5f9636d14b79702c9a8eef413db2",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/VmInitializationStatsTest.java",
+      "kind": "blob",
+      "oid": "7b6aa39ea659dfbf18d87fed02be214e21e9d553",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/VmStartAttemptStatsTest.java",
+      "kind": "blob",
+      "oid": "409e224d44736c536bb71e338203d9390bb2a45a",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/external/localstorage/AccountStoreTest.java",
+      "kind": "blob",
+      "oid": "503da9c26d2cfbb6cec9c589cbca18aba22e69bb",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/external/localstorage/AppSearchImplTest.java",
+      "kind": "blob",
+      "oid": "42b62d1faa7e12ffd52f9dbc4f9566295680f9af",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/external/localstorage/AppSearchLoggerTest.java",
+      "kind": "blob",
+      "oid": "aa3a1ce4d51a758606aa4fb519e2fa187e6bdabf",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/external/localstorage/SchemaCacheTest.java",
+      "kind": "blob",
+      "oid": "aba93424dcff610ebe4bd546d5bead4c4e0bf33e",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/external/localstorage/converter/AccountToProtoConverterTest.java",
+      "kind": "blob",
+      "oid": "306e6a0ce5ac86a53bb2d1abda062471cd2ca960",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/external/localstorage/converter/BlobHandleToProtoConverterTest.java",
+      "kind": "blob",
+      "oid": "65f861f57f6315c7a499e0d5c73b037a36cd0094",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/external/localstorage/converter/GenericDocumentToProtoConverterTest.java",
+      "kind": "blob",
+      "oid": "14ca317943dfac65a35f0f4fb57f1d868f9c53fc",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/external/localstorage/converter/SchemaToProtoConverterTest.java",
+      "kind": "blob",
+      "oid": "55bcaad4c136ef89598d71ab5d4b89b27fd2941d",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/external/localstorage/converter/SearchResultToProtoConverterTest.java",
+      "kind": "blob",
+      "oid": "4c82be9e4db64fe6e4897b7086450c196bfc7e99",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/external/localstorage/converter/SearchSpecToProtoConverterTest.java",
+      "kind": "blob",
+      "oid": "99a7e5118a8757e00b429c103ccf3cf0282584ee",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/external/localstorage/converter/SearchSuggestionSpecToProtoConverterTest.java",
+      "kind": "blob",
+      "oid": "817a9de9adf2285a3700e103f18dcd451568a573",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/external/localstorage/converter/SnippetTest.java",
+      "kind": "blob",
+      "oid": "b77a06f17fdc2b9b78dace8164aa5ac9f9256511",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/external/localstorage/stats/AppSearchStatsTest.java",
+      "kind": "blob",
+      "oid": "ee09f57267ecfa0625134c8a615812aab5924422",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/external/localstorage/stats/ClickStatsTest.java",
+      "kind": "blob",
+      "oid": "24275e2325352740b6bc20c32ee690fff87b577c",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/external/localstorage/stats/SearchIntentStatsTest.java",
+      "kind": "blob",
+      "oid": "ccc51c91303dc8bb8b15df61047b2ea8a9afdaa9",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/external/localstorage/stats/SearchSessionStatsTest.java",
+      "kind": "blob",
+      "oid": "b1a9cb1e3ac96fa60acf4fefb1bc2212f4147fd8",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/external/localstorage/usagereporting/ClickActionGenericDocumentTest.java",
+      "kind": "blob",
+      "oid": "7d4e028feaa84ce05a06f3e151f016688901e8e0",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/external/localstorage/usagereporting/SearchActionGenericDocumentTest.java",
+      "kind": "blob",
+      "oid": "e4449a44a2e1c777a0126b72135a5f82a744a33a",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/external/localstorage/usagereporting/SearchSessionStatsExtractorTest.java",
+      "kind": "blob",
+      "oid": "7d0ded48bebee89e5226589ded0cc0a8c17fe851",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/external/localstorage/util/PrefixUtilTest.java",
+      "kind": "blob",
+      "oid": "78d1ea8e48d0bd36b5a5b28d01eb8e03f6bb273f",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/external/localstorage/visibilitystore/VisibilityStoreMigrationFromV2Test.java",
+      "kind": "blob",
+      "oid": "12e9d34b46396b16169304cccc5080d941524839",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/external/localstorage/visibilitystore/VisibilityStoreMigrationHelperFromV0Test.java",
+      "kind": "blob",
+      "oid": "a69f32b0b18fbe3ff9416dec55682a27959f5fcf",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/external/localstorage/visibilitystore/VisibilityStoreMigrationHelperFromV1Test.java",
+      "kind": "blob",
+      "oid": "30a90bf24b109936919d8a73d33007f345ce27fa",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/external/localstorage/visibilitystore/VisibilityStoreTest.java",
+      "kind": "blob",
+      "oid": "545d51c6d600ae553ce8f52b1c5bcd57fb678eba",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/external/localstorage/visibilitystore/VisibilityToDocumentConverterTest.java",
+      "kind": "blob",
+      "oid": "3dc43697f446bee6f50b0686d538dd2b741162d3",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/external/localstorage/visibilitystore/VisibilityUtilTest.java",
+      "kind": "blob",
+      "oid": "b8d1ca11de69a1e8f42b07dedb3973a76e1962fa",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/isolated_storage_service/DataMigrationStatsTest.java",
+      "kind": "blob",
+      "oid": "6fdce6dabef78692f4a5fb6d6af33d65a7f8b105",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/isolated_storage_service/DataMigrationUtilTest.java",
+      "kind": "blob",
+      "oid": "95415c2b167d53b6beb256a17398017685e6e9c8",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/stats/IsolatedStorageServiceLoggerTest.java",
+      "kind": "blob",
+      "oid": "830d56075d16cb5d9f5cda80f1e6e725e77b9a6c",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/stats/PlatformLoggerTest.java",
+      "kind": "blob",
+      "oid": "6070ead85bec9d81a4277bc3d40fe30e30e7f397",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/stats/StatsUtilTest.java",
+      "kind": "blob",
+      "oid": "1e8a1cddf2951b4b1aedab21242267742a43f5c4",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/transformer/EnterpriseSearchResultPageTransformerTest.java",
+      "kind": "blob",
+      "oid": "c4a77566d2971c371d02adc03aea2cfa8fb04598",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/transformer/EnterpriseSearchSpecTransformerTest.java",
+      "kind": "blob",
+      "oid": "c0b8115aad33cafa7bb2dda491229833ab52b91c",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/transformer/PersonEnterpriseTransformerTest.java",
+      "kind": "blob",
+      "oid": "c2a71591c08951fdb0b377ab3853b78afe3736d7",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/visibilitystore/PccVisibilityCheckerImplTest.java",
+      "kind": "blob",
+      "oid": "32a26219794b68f05526dd4d7ec88ab67aa6d2ff",
+      "mode": "100644"
+    },
+    {
+      "path": "testing/servicestests/src/com/android/server/appsearch/visibilitystore/VisibilityCheckerImplTest.java",
+      "kind": "blob",
+      "oid": "60211e8120d1ac0dbc813ca685e7e18025fa0a31",
+      "mode": "100644"
+    },
+    {
+      "path": "tools/check_external_changes.py",
+      "kind": "blob",
+      "oid": "bacc6bd34e74118b8d526c76a3f9cfc9c5ddcc38",
+      "mode": "100755"
+    }
+  ]
+}

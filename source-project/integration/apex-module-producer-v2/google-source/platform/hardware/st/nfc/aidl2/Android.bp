@@ -1,0 +1,94 @@
+package {
+    // See: http://go/android-license-faq
+    // A large-scale-change added 'default_applicable_licenses' to import
+    // all of the 'license_kinds' from "hardware_st_nfc_license"
+    // to get the below license kinds:
+    //   SPDX-license-identifier-Apache-2.0
+    default_applicable_licenses: ["hardware_st_nfc_license"],
+    default_team: "trendy_team_fwk_nfc",
+}
+
+cc_defaults {
+    name: "android.hardware.nfc2-service.st_default",
+    cflags: [
+        "-Wall",
+        "-Wextra",
+    ],
+    shared_libs: [
+        "libbase",
+        "liblog",
+        "libutils",
+        "libbinder_ndk",
+        "android.hardware.nfc-V2-ndk",
+        "nfc_nci.st21nfc.base",
+    ],
+    srcs: [
+        "Nfc.cpp",
+        "hal_st21nfc.cc",
+    ],
+    arch: {
+        arm: {
+            cflags: ["-DST_LIB_32"],
+        },
+    },
+}
+
+cc_binary {
+    name: "android.hardware.nfc2-service.st",
+    defaults: ["android.hardware.nfc2-service.st_default"],
+    relative_install_path: "hw",
+    init_rc: ["nfc2-service-default.rc"],
+    vintf_fragment_modules: ["nfc2-service-default.xml"],
+    vendor: true,
+    cflags: [
+        "-Wall",
+        "-Wextra",
+    ],
+    shared_libs: [
+        "libbase",
+        "liblog",
+        "libutils",
+        "libbinder_ndk",
+        "android.hardware.nfc-V2-ndk",
+        "nfc_nci.st21nfc.base",
+    ],
+    srcs: [
+        "main.cpp",
+    ],
+    arch: {
+        arm: {
+            cflags: ["-DST_LIB_32"],
+        },
+    },
+}
+
+vintf_fragment {
+    name: "nfc2-service-default.xml",
+    src: "nfc2-service-default.xml",
+    vendor: true,
+}
+
+cc_fuzz {
+    name: "nfc_service_base_fuzzer",
+    defaults: [
+        "android.hardware.nfc2-service.st_default",
+        "service_fuzzer_defaults",
+    ],
+    srcs: [
+        "fuzzer/NfcServiceFuzzer.cpp",
+    ],
+    vendor: true,
+}
+
+genrule {
+    name: "com.google.android.hardware.nfc2.st.rc-gen",
+    srcs: ["nfc2-service-default.rc"],
+    out: ["com.google.android.hardware.nfc2.st.rc"],
+    cmd: "sed -E 's@/vendor/bin@/apex/com.google.android.hardware.nfc2.st/bin@' $(in) > $(out)",
+}
+
+prebuilt_etc {
+    name: "com.google.android.hardware.nfc2.st.rc",
+    src: ":com.google.android.hardware.nfc2.st.rc-gen",
+    installable: false,
+}

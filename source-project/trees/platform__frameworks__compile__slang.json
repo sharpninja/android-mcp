@@ -1,0 +1,5155 @@
+{
+  "repo": "platform/frameworks/compile/slang",
+  "requested_revision": "refs/tags/android-17.0.0_r1",
+  "revision": "4080160ebeff7fef5d5ce7062b571830c8cc937e",
+  "entries": [
+    {
+      "path": ".clang-format",
+      "kind": "blob",
+      "oid": "00c22f5f8f0b1cbe8d05b2e27ebebf3a9953c939",
+      "mode": "100644"
+    },
+    {
+      "path": "Android.bp",
+      "kind": "blob",
+      "oid": "6cad2a53fa430a647ddcd4fd9ae348dfb18591ae",
+      "mode": "100644"
+    },
+    {
+      "path": "BitWriter_2_9/Android.bp",
+      "kind": "blob",
+      "oid": "e47a0d6333d29dd95b7158948d237d3e1f72b1d2",
+      "mode": "100644"
+    },
+    {
+      "path": "BitWriter_2_9/BitcodeWriter.cpp",
+      "kind": "blob",
+      "oid": "8942e4747c6c212c2feefdb0bb6a753c81d59266",
+      "mode": "100644"
+    },
+    {
+      "path": "BitWriter_2_9/BitcodeWriterPass.cpp",
+      "kind": "blob",
+      "oid": "d43d690983dd481e2878f5c1b79c92eafd8fead8",
+      "mode": "100644"
+    },
+    {
+      "path": "BitWriter_2_9/CMakeLists.txt",
+      "kind": "blob",
+      "oid": "f097b097c3371d5e8124293c3892ec5f5aac8e0e",
+      "mode": "100644"
+    },
+    {
+      "path": "BitWriter_2_9/Makefile",
+      "kind": "blob",
+      "oid": "7b0bd72159add299227cbc2c172e207f30c5bf75",
+      "mode": "100644"
+    },
+    {
+      "path": "BitWriter_2_9/ReaderWriter_2_9.h",
+      "kind": "blob",
+      "oid": "997e9c7e1a7f94a83bf8f8f5725b4dc49ec82c78",
+      "mode": "100644"
+    },
+    {
+      "path": "BitWriter_2_9/ValueEnumerator.cpp",
+      "kind": "blob",
+      "oid": "8d6475cbdf82094b4378e2f13d40bdfe8cbca12d",
+      "mode": "100644"
+    },
+    {
+      "path": "BitWriter_2_9/ValueEnumerator.h",
+      "kind": "blob",
+      "oid": "1812cd81d07cae8d6d9aaa9d48bc953239a4c489",
+      "mode": "100644"
+    },
+    {
+      "path": "BitWriter_2_9_func/Android.bp",
+      "kind": "blob",
+      "oid": "b4b7c4746a1c5d61139a4bb1c7a63131e09042c9",
+      "mode": "100644"
+    },
+    {
+      "path": "BitWriter_2_9_func/BitcodeWriter.cpp",
+      "kind": "blob",
+      "oid": "30b8e7d69f67d434e864a9da76fa3211e9955696",
+      "mode": "100644"
+    },
+    {
+      "path": "BitWriter_2_9_func/BitcodeWriterPass.cpp",
+      "kind": "blob",
+      "oid": "fe807d3aa373e673be072b731afcc615cd612efd",
+      "mode": "100644"
+    },
+    {
+      "path": "BitWriter_2_9_func/ReaderWriter_2_9_func.h",
+      "kind": "blob",
+      "oid": "24ecc4907daeb11b284fd8ced3c8332e82527af1",
+      "mode": "100644"
+    },
+    {
+      "path": "BitWriter_2_9_func/ValueEnumerator.cpp",
+      "kind": "blob",
+      "oid": "0690af7df1d3239c0cd4f85ca8f10fa80243cb3e",
+      "mode": "100644"
+    },
+    {
+      "path": "BitWriter_2_9_func/ValueEnumerator.h",
+      "kind": "blob",
+      "oid": "f26b986cc987e5640fabe92c29c6a8c1c763780a",
+      "mode": "100644"
+    },
+    {
+      "path": "BitWriter_3_2/Android.bp",
+      "kind": "blob",
+      "oid": "f87a2fa221aeaa94868da56398f8c51db276f760",
+      "mode": "100644"
+    },
+    {
+      "path": "BitWriter_3_2/BitcodeWriter.cpp",
+      "kind": "blob",
+      "oid": "2099ac06f64bad6afcec265d955544f6dbf8ef2e",
+      "mode": "100644"
+    },
+    {
+      "path": "BitWriter_3_2/BitcodeWriterPass.cpp",
+      "kind": "blob",
+      "oid": "cc105c9167353b6c8154ef18925ca37cc7877405",
+      "mode": "100644"
+    },
+    {
+      "path": "BitWriter_3_2/ReaderWriter_3_2.h",
+      "kind": "blob",
+      "oid": "d192ad6f1c9758b8f4fd4e0d969bdeaf10d37bd2",
+      "mode": "100644"
+    },
+    {
+      "path": "BitWriter_3_2/ValueEnumerator.cpp",
+      "kind": "blob",
+      "oid": "9d74d75eb7c02175b4e9f5a38d94df42a1b10893",
+      "mode": "100644"
+    },
+    {
+      "path": "BitWriter_3_2/ValueEnumerator.h",
+      "kind": "blob",
+      "oid": "124272f35a7c8f0a806dca2dbfd7ee325e38d942",
+      "mode": "100644"
+    },
+    {
+      "path": "METADATA",
+      "kind": "blob",
+      "oid": "d97975ca3b99b2c09e1d43944d83625c0aee561e",
+      "mode": "100644"
+    },
+    {
+      "path": "MODULE_LICENSE_APACHE2",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "NOTICE",
+      "kind": "blob",
+      "oid": "485fde9957c6fc4815c53fc2992dbaa1e0961cd7",
+      "mode": "100644"
+    },
+    {
+      "path": "OWNERS",
+      "kind": "blob",
+      "oid": "1f31354bf5935bff0af0f17f564fa8d298e8c9de",
+      "mode": "100644"
+    },
+    {
+      "path": "README.html",
+      "kind": "blob",
+      "oid": "d17c23b88e12453ed70896f1bba611c89491e44c",
+      "mode": "100644"
+    },
+    {
+      "path": "README.rst",
+      "kind": "blob",
+      "oid": "48651a4a6cf56e2dc1236e688b1dba699cf65daa",
+      "mode": "100644"
+    },
+    {
+      "path": "RSCCOptions.td",
+      "kind": "blob",
+      "oid": "2339cd7f38eb31a79ed3497e1859c1675fa366ab",
+      "mode": "100644"
+    },
+    {
+      "path": "StripUnkAttr/Android.bp",
+      "kind": "blob",
+      "oid": "6dcdbcc9da832b2733f22821100be6d9f0ba6c6d",
+      "mode": "100644"
+    },
+    {
+      "path": "StripUnkAttr/strip_unknown_attributes.cpp",
+      "kind": "blob",
+      "oid": "5657e04d4635d8848d0712d1e782be3432fad0e7",
+      "mode": "100644"
+    },
+    {
+      "path": "StripUnkAttr/strip_unknown_attributes.h",
+      "kind": "blob",
+      "oid": "c6df22af3605f2ca86d52bf7c65be677f5ffab01",
+      "mode": "100644"
+    },
+    {
+      "path": "StripUnkAttr/strip_unknown_attributes_pass.cpp",
+      "kind": "blob",
+      "oid": "31c46f50e0043dad7b3e4f84db90376023a78af3",
+      "mode": "100644"
+    },
+    {
+      "path": "StripUnkAttr/strip_unknown_attributes_pass.h",
+      "kind": "blob",
+      "oid": "95d99cd352ea504331b2684292541ed686200615",
+      "mode": "100644"
+    },
+    {
+      "path": "legacy_bitcode.h",
+      "kind": "blob",
+      "oid": "5d45a1b62db303e837c485b88699bc14f6d17d18",
+      "mode": "100644"
+    },
+    {
+      "path": "lit-tests/P_alloc_in_struct/alloc_in_struct.rscript",
+      "kind": "blob",
+      "oid": "24742fb254778b8d116b127845a4e4ebc1ace930",
+      "mode": "100644"
+    },
+    {
+      "path": "lit-tests/P_array_init/array_init.rscript",
+      "kind": "blob",
+      "oid": "789b27fada916b57abc3e8a56fd3c31203021664",
+      "mode": "100644"
+    },
+    {
+      "path": "lit-tests/P_compute/compute.rscript",
+      "kind": "blob",
+      "oid": "49405b8f72650e8cd2583fcbee2e675e9c55fe29",
+      "mode": "100644"
+    },
+    {
+      "path": "lit-tests/P_ref_count/func_params.rscript",
+      "kind": "blob",
+      "oid": "56597ee56492608057a53142b1a396da51542d30",
+      "mode": "100644"
+    },
+    {
+      "path": "lit-tests/P_ref_count/ref_count.rscript",
+      "kind": "blob",
+      "oid": "7f6dae8969a09d5db842d988b35ff9f271a6abaf",
+      "mode": "100644"
+    },
+    {
+      "path": "lit-tests/P_ref_count/ref_count2.rscript",
+      "kind": "blob",
+      "oid": "8ac2d81993cc9bccc9c7e3f8350f292c7c7dde8a",
+      "mode": "100644"
+    },
+    {
+      "path": "lit-tests/README",
+      "kind": "blob",
+      "oid": "78fea67e97f5a2902b65bc8beb1a550d324a3307",
+      "mode": "100644"
+    },
+    {
+      "path": "lit-tests/bitcode_wrapper/bitcode_wrapper_test.ll",
+      "kind": "blob",
+      "oid": "77e32c0ce2800f4c3fba465c00341268b7f57863",
+      "mode": "100644"
+    },
+    {
+      "path": "lit-tests/debug/debug_disabled.rscript",
+      "kind": "blob",
+      "oid": "d3ddd579e34e846b2f79e3328bd061e4ab9cdc7d",
+      "mode": "100644"
+    },
+    {
+      "path": "lit-tests/debug/debug_enabled.rscript",
+      "kind": "blob",
+      "oid": "7f2856afa22ccb6e603ea9002481efcbe7f81c83",
+      "mode": "100644"
+    },
+    {
+      "path": "lit-tests/lit.cfg",
+      "kind": "blob",
+      "oid": "09d304e090a7fe9440d8f2fd66ea314e1fa7d904",
+      "mode": "100644"
+    },
+    {
+      "path": "lit-tests/opt/locals_opt_0.rscript",
+      "kind": "blob",
+      "oid": "1c1f7de829a9491701895aa742ad453a8dd7d2ce",
+      "mode": "100644"
+    },
+    {
+      "path": "lit-tests/opt/locals_opt_3.rscript",
+      "kind": "blob",
+      "oid": "e90a5384a25e2c274a260e5a4e9f7d63f69a0e22",
+      "mode": "100644"
+    },
+    {
+      "path": "lit-tests/opt/locals_opt_default.rscript",
+      "kind": "blob",
+      "oid": "f491956a5bd9e364b2af2e7aff0ff683aaf161b5",
+      "mode": "100644"
+    },
+    {
+      "path": "lit-tests/padding/bitfield.rscript",
+      "kind": "blob",
+      "oid": "2975c6b226fe9c94c68e8805c73092afac6ed5b9",
+      "mode": "100644"
+    },
+    {
+      "path": "lit-tests/padding/more_structs.rscript",
+      "kind": "blob",
+      "oid": "aabbc91f3af4e2ef5e3a58bfe56c6401dcf0c8ae",
+      "mode": "100644"
+    },
+    {
+      "path": "lit-tests/padding/small_struct.rscript",
+      "kind": "blob",
+      "oid": "95057f71a6fe0d4d60e9096a216ed707426fff63",
+      "mode": "100644"
+    },
+    {
+      "path": "lit-tests/padding/small_struct_2.rscript",
+      "kind": "blob",
+      "oid": "b622cc5dd99e5f783fbe45f3278264862f12b713",
+      "mode": "100644"
+    },
+    {
+      "path": "lit-tests/rs-filecheck-wrapper.sh",
+      "kind": "blob",
+      "oid": "fb37f023c01d57ece3379945c04c90d5d5cf2e27",
+      "mode": "100755"
+    },
+    {
+      "path": "lit-tests/run-lit-tests.sh",
+      "kind": "blob",
+      "oid": "28a9696f6e35a895236533840a483562a54c0fdb",
+      "mode": "100755"
+    },
+    {
+      "path": "lit-tests/scriptc-filecheck-wrapper.sh",
+      "kind": "blob",
+      "oid": "9485f2b3c25372020e9584e14d6155ffe7b70f21",
+      "mode": "100755"
+    },
+    {
+      "path": "lld_main.cpp",
+      "kind": "blob",
+      "oid": "5ed14836f1330c5ca223497368aec73ad339b844",
+      "mode": "100644"
+    },
+    {
+      "path": "llvm-rs-as.cpp",
+      "kind": "blob",
+      "oid": "d64061e1da7f386a4a86af040d693535cffef00b",
+      "mode": "100644"
+    },
+    {
+      "path": "llvm-rs-cc.cpp",
+      "kind": "blob",
+      "oid": "0c1143d20eb535f9c1526b3165724d2e63bf66c1",
+      "mode": "100644"
+    },
+    {
+      "path": "os_sep.h",
+      "kind": "blob",
+      "oid": "b7f7346e9d6748924e57c8767d8e9af98c1bbfd1",
+      "mode": "100644"
+    },
+    {
+      "path": "rs_cc_options.cpp",
+      "kind": "blob",
+      "oid": "89720a36687590f7898caa204530b35143dffe74",
+      "mode": "100644"
+    },
+    {
+      "path": "rs_cc_options.h",
+      "kind": "blob",
+      "oid": "cc60560a1da9be00c7e17f8bae7c5aca2e58300b",
+      "mode": "100644"
+    },
+    {
+      "path": "rs_version.mk",
+      "kind": "blob",
+      "oid": "63b882281e68ee0761bc0548ea3151c988cb50ae",
+      "mode": "100644"
+    },
+    {
+      "path": "slang.cpp",
+      "kind": "blob",
+      "oid": "25d518b97942a6b89d765089427dced59d596c1f",
+      "mode": "100644"
+    },
+    {
+      "path": "slang.h",
+      "kind": "blob",
+      "oid": "55a9ec2a4a1b8a5978c2425238b8d6e594f8d6d0",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_assert.h",
+      "kind": "blob",
+      "oid": "c3ea84f3fdc00bbe6f1e1b83971d6e210a76eaaa",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_backend.cpp",
+      "kind": "blob",
+      "oid": "02069987a211aab167997c12cf3da9ded6d80daf",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_backend.h",
+      "kind": "blob",
+      "oid": "4bb596fcaaeb420a8104d548685e02675d6a9f91",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_bitcode_gen.cpp",
+      "kind": "blob",
+      "oid": "dc0eb8d9d0e234434f31037221032020354c3cdc",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_bitcode_gen.h",
+      "kind": "blob",
+      "oid": "b1f97c966809b6e43026967d3565a2e93cf0d5ca",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_diagnostic_buffer.cpp",
+      "kind": "blob",
+      "oid": "d6afabf94a56513add741e05f35d47f328ffa712",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_diagnostic_buffer.h",
+      "kind": "blob",
+      "oid": "500f345644e41d773eacf9b2f98c4606cc86d5c0",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_pragma_list.h",
+      "kind": "blob",
+      "oid": "a972b56e273b7748630e45c744c1c7d0274fdccc",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_ast_replace.cpp",
+      "kind": "blob",
+      "oid": "92e142861411dd3235860726fe7bcb12b0f9d432",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_ast_replace.h",
+      "kind": "blob",
+      "oid": "58f9bd9f79a7bb1afd7a93458f46b1741fa60106",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_check_ast.cpp",
+      "kind": "blob",
+      "oid": "61a218d21180bfde283e1d26c3bc2231c4d6a307",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_check_ast.h",
+      "kind": "blob",
+      "oid": "e4b0dff3e973f6e5c4d32963571ccca69ce782b2",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_context.cpp",
+      "kind": "blob",
+      "oid": "ed2c47e2d3968a1a1d04f3ce31d1f87571c81071",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_context.h",
+      "kind": "blob",
+      "oid": "a1017d11aa342e0fcf8a0203f50930f18ba0178a",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_export_element.cpp",
+      "kind": "blob",
+      "oid": "15902c29e17a642b190593f486dfc1bf5cadceb1",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_export_element.h",
+      "kind": "blob",
+      "oid": "5f7006cf588de457029620ac9426dc2618168e82",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_export_foreach.cpp",
+      "kind": "blob",
+      "oid": "8fc693bed975f5c17133f75f43d3218a1d458b20",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_export_foreach.h",
+      "kind": "blob",
+      "oid": "d5928f5a0b15a294fcd6540718c4d0ba72e8cafb",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_export_func.cpp",
+      "kind": "blob",
+      "oid": "780390812dbe0adce36ed474a63f755908fb3e6c",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_export_func.h",
+      "kind": "blob",
+      "oid": "b6c4f01cd0219908a23cde34a83806a5448270e8",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_export_reduce.cpp",
+      "kind": "blob",
+      "oid": "c2804b60c1470e4568f8a251ceddd803dd865bd0",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_export_reduce.h",
+      "kind": "blob",
+      "oid": "ea00b6315bb23b45a9f3b533b585440dafe68cbe",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_export_type.cpp",
+      "kind": "blob",
+      "oid": "ffe8ffc7bd16a6eb433d229ececb392a48acfda3",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_export_type.h",
+      "kind": "blob",
+      "oid": "f55afcc08cca123d36221ba9593ff403516f2b8b",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_export_var.cpp",
+      "kind": "blob",
+      "oid": "a2b4c6808120595e797e989f8d835421b059c53c",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_export_var.h",
+      "kind": "blob",
+      "oid": "84d607c40e456236a459eea88e82c49eb9912358",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_exportable.cpp",
+      "kind": "blob",
+      "oid": "134038c0d3ef7149054584f919a5e4e92737411b",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_exportable.h",
+      "kind": "blob",
+      "oid": "7ea982b5df0e25adfa46ad15f370f4a58f3df7df",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_foreach_lowering.cpp",
+      "kind": "blob",
+      "oid": "743833df700649520467c4f0b85cbd8d8a807e29",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_foreach_lowering.h",
+      "kind": "blob",
+      "oid": "42f476d9741137789c6185c51300fdd360b9e3c9",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_metadata.h",
+      "kind": "blob",
+      "oid": "b84a8cd84fa9c2b8741692aebbf67f019de62312",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_object_ref_count.cpp",
+      "kind": "blob",
+      "oid": "a948a455f85a25027dc62c4767408933d93cc414",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_object_ref_count.h",
+      "kind": "blob",
+      "oid": "fe3154646851c4f1dad33c51b41032d937c38a7d",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_pragma_handler.cpp",
+      "kind": "blob",
+      "oid": "de9ba92f9f1bc9a0105152012d8ae19fbe94bd3a",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_pragma_handler.h",
+      "kind": "blob",
+      "oid": "1b6fbe61238684c4291ca5064c223b15b977ad61",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_reflect_utils.cpp",
+      "kind": "blob",
+      "oid": "c67a1a864c0f4b4ca46baef5202c3e4043c46b5a",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_reflect_utils.h",
+      "kind": "blob",
+      "oid": "1cbc09891d853fa289b457ef1514172d8816ee53",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_reflection.cpp",
+      "kind": "blob",
+      "oid": "875d84b7553f679834d3c66c2045c8cd1f198b6a",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_reflection.h",
+      "kind": "blob",
+      "oid": "4d2f795d20de8bfb28dae3660788bb02467286ea",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_reflection_cpp.cpp",
+      "kind": "blob",
+      "oid": "1d5201be567c8d3094af537bab4e420599007503",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_reflection_cpp.h",
+      "kind": "blob",
+      "oid": "c613d79d232ca23b60b3a8abc1602a4e308b5bde",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_reflection_state.cpp",
+      "kind": "blob",
+      "oid": "9bc067a9eac447fae342a6fc1413afe2964475c0",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_reflection_state.h",
+      "kind": "blob",
+      "oid": "d937be8476a9e35cd631f7f8c541f13a542525ee",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_special_func.cpp",
+      "kind": "blob",
+      "oid": "e89b83afda470f418f7296ebd7eae7cc91f4c8bd",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_special_func.h",
+      "kind": "blob",
+      "oid": "739087107c480d33364b3e15cee29dbe467308f7",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_special_kernel_param.cpp",
+      "kind": "blob",
+      "oid": "aa67d811faf95ffbfe4babe09482e04da6a6e0b5",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_rs_special_kernel_param.h",
+      "kind": "blob",
+      "oid": "b753c7420897172b87a0faeaaddbc7f32befaf31",
+      "mode": "100644"
+    },
+    {
+      "path": "slang_version.h",
+      "kind": "blob",
+      "oid": "311f9a49e99616ba95f1f8c9027286f8e76fe876",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_Werror/Werror.rscript",
+      "kind": "blob",
+      "oid": "f069d88272c358ff5ce9ff4a3e97a645c0917683",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_Werror/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "4569c10c087e749f8ffb02649e4817d237ac41c3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_Werror/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_anon_struct/anon_struct.rscript",
+      "kind": "blob",
+      "oid": "46bd8cbaa45eb4887f921396015a87775b78812b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_anon_struct/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "f3bc6632f44a3fc0883161be2d820fa183659b8a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_anon_struct/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_anon_struct_kernel_sig/anon_struct_kernel_sig.rscript",
+      "kind": "blob",
+      "oid": "028a3282d16a12337d8f981ef0b6045ea01d1a8b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_anon_struct_kernel_sig/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e613db559d041d76da61f64202128c05bad70299",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_anon_struct_kernel_sig/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_anon_struct_typedef/anon_struct_typedef.rscript",
+      "kind": "blob",
+      "oid": "dcd12f44b866908480b9e982dfd916ef2c57c6c7",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_anon_struct_typedef/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "ac34039ce3d7d01fe128a1076ae7fe8132783d91",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_anon_struct_typedef/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_anon_struct_usrdata/anon_struct_usrdata.rscript",
+      "kind": "blob",
+      "oid": "1aca542ea2b60cb4fef3c578e24ad73f2e9d1f33",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_anon_struct_usrdata/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "1ced3a5bb13e1a841749e70975544fc76b6a0823",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_anon_struct_usrdata/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_bad_pragmas/bad_pragmas.rscript",
+      "kind": "blob",
+      "oid": "2ccd9a984ac75e481f568b6599749e6428058332",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_bad_pragmas/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e215ee7c1640cce464c162b56fdf42476c7230b0",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_bad_pragmas/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_bad_version_pragma/bad_version_pragma.rscript",
+      "kind": "blob",
+      "oid": "10bdf7ea6bc5255eb7310f98bba16b6ab60d6acf",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_bad_version_pragma/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "c768616e1968f60ee3deecdf1309b013745a375e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_bad_version_pragma/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_const_array_arg/const_array_arg.rscript",
+      "kind": "blob",
+      "oid": "0cbb776afb0d3c9cc9207f2a5cdd911df14e3559",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_const_array_arg/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "b294bed73aea48c8337c13ec89f217d4932041b4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_const_array_arg/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_ctxt_wrong_api/ctxt_wrong_api.rscript",
+      "kind": "blob",
+      "oid": "cabf40e2ba68834bafc69551140101c3a936a512",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_ctxt_wrong_api/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e357f6cafd75740839999473131d7dc6e16dc6de",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_ctxt_wrong_api/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_ctxt_wrong_name/context.rscript",
+      "kind": "blob",
+      "oid": "d39fbed97fbf30fce03eaa3298e35f1f1a58217f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_ctxt_wrong_name/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "fa24b6d809520d5aa3c12ae92c6b7b2fd49a7121",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_ctxt_wrong_name/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_ctxt_wrong_place/ctxt_wrong_place.rscript",
+      "kind": "blob",
+      "oid": "29298ff0d98f0b62ca7e3eb505055e3810ace06d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_ctxt_wrong_place/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "176119202946c7049030b068e853adc8711b3863",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_ctxt_wrong_place/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_ctxt_wrong_type/ctxt_wrong_type.rscript",
+      "kind": "blob",
+      "oid": "11d2433b4ed591aafda41756d255532e14d6354c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_ctxt_wrong_type/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "4ec646709a4d6a1c8ad7d70b5b92735da5b75710",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_ctxt_wrong_type/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_extern_const/extern_const.rscript",
+      "kind": "blob",
+      "oid": "bf630debed468e936ddba0811c936f76474f197d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_extern_const/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "157fd754e2255d368666a652f2cecbf1e9ce0449",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_extern_const/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_float3_array/float3_array.rscript",
+      "kind": "blob",
+      "oid": "b928569071fc37db25cbe6ccfe0205ed0fde0f6d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_float3_array/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "fa27c92ef6c2b98cfbaa277a225ada128a25e1de",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_float3_array/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_float3_v13/float3_v13.rscript",
+      "kind": "blob",
+      "oid": "69572227f63df5e2a4b89c0672602f634eb02b28",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_float3_v13/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "5cbf82f0d0a2fb12bfe695e267ad6b2acffe3a1f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_float3_v13/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_foreach_forward_reference/foreach_forward_reference.rscript",
+      "kind": "blob",
+      "oid": "904f6e9b34a893d932b47b96c13ef06245fb113d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_foreach_forward_reference/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "48e338eb7e7f1e03a7b80eeaa80c636a3a525688",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_foreach_forward_reference/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_foreach_from_kernel/foreach_from_kernel.rscript",
+      "kind": "blob",
+      "oid": "911170c65694d965a13b45cb988ae5575c8b7a1b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_foreach_from_kernel/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "9465fbd010b71016e274ee9650514f3fb7373109",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_foreach_from_kernel/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_foreach_non_kernel/foreach_non_kernel.rscript",
+      "kind": "blob",
+      "oid": "dafce3c655af06253fd44c1f5381f4b6be336392",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_foreach_non_kernel/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "83efdf19dfb1feddc3c54bd0a9b3abc8f6203bd2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_foreach_non_kernel/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_foreach_unexpected_allocs/foreach_unexpected_allocs.rscript",
+      "kind": "blob",
+      "oid": "c77b8206584a77cb8848718a8638420bae2f8fde",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_foreach_unexpected_allocs/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "ddde50acf8f2f2b36a5361114977e6c862c5f85c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_foreach_unexpected_allocs/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_foreach_unexpected_kernel_arg/foreach_unexpected_kernel_arg.rscript",
+      "kind": "blob",
+      "oid": "338d7f2cb3b9b5e74973aa7ff3548b3734364c2c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_foreach_unexpected_kernel_arg/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e401c0912cc12a38cbf8d8e279645e9d31373bb3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_foreach_unexpected_kernel_arg/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_fp16_wrong_api/fp16_wrong_api.rscript",
+      "kind": "blob",
+      "oid": "f51b242f676c5fe4a664607767468b91a5178e14",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_fp16_wrong_api/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "9b48f78d6b16180b310fa4c615217c97f428982f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_fp16_wrong_api/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_fs_oldkernel/fs_oldkernel.fs",
+      "kind": "blob",
+      "oid": "4f607a59826ef47474eadc024428b0e03d48437d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_fs_oldkernel/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "5b53b56707aa92b653eabadba667c2790ef1cbc0",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_fs_oldkernel/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_fs_ptr/fs_ptr.fs",
+      "kind": "blob",
+      "oid": "b6789ba352ab052fa5e8a6e39d225325a3ea6c13",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_fs_ptr/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "2ff21f955cd8d12fabad1a4dcfad16c23fa69650",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_fs_ptr/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_fs_types/fs_types.fs",
+      "kind": "blob",
+      "oid": "0fae06374cd0a31f286900e4b73912692991519a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_fs_types/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "f0d36a3e25e5bab69ea12cc8aab04628dc072fa3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_fs_types/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_global_init/global_init.rscript",
+      "kind": "blob",
+      "oid": "8d35184c182ae169459ac476ffa7cc1cf670450f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_global_init/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "7de0c78ba42089c9696c0e4044115d91f189ffc4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_global_init/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_incompatible_handles/incompatible_handles.rscript",
+      "kind": "blob",
+      "oid": "13f24fd2bb5131cae83256011319a22c821ab0e7",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_incompatible_handles/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "b258d0048112a252a81f7178e33b09bf8c03dde4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_incompatible_handles/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_init_nonvoid/init_nonvoid.rscript",
+      "kind": "blob",
+      "oid": "7a1295c799252eef77d134b43405f35db3ddde52",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_init_nonvoid/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "ea1194c9b70d11896089404f331fb3d7fb79b7f4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_init_nonvoid/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_init_params/init_params.rscript",
+      "kind": "blob",
+      "oid": "1438c45219cdcde12ec23bd30d449e7a9fa83ca1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_init_params/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "1502c14bd33878ae9b36937bfe964e725964209a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_init_params/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_int_ptr_ptr/int_ptr_ptr.rscript",
+      "kind": "blob",
+      "oid": "8ab7bb8563b05afcb1b2d18dd9e38145ed385831",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_int_ptr_ptr/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "023f23f6c55e5c1a32f6e9dc39a12d2f03685523",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_int_ptr_ptr/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_invoke_return/invoke_return.rscript",
+      "kind": "blob",
+      "oid": "906b1f0fdae41b7612598fd919a3353a0f111f16",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_invoke_return/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "73d6b76b0b010c961f8d52096292887999092747",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_invoke_return/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_kernel_16/kernel_16.rscript",
+      "kind": "blob",
+      "oid": "77bd71880f3034ed991f74917f68b850480d1e9c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_kernel_16/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "8571c1655a530503ed0c0d07e539761820a7b217",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_kernel_16/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_kernel_badattr/kernel_badattr.rscript",
+      "kind": "blob",
+      "oid": "ef43d441a6ee1ccfed2834dfd8a446d2a0b8a5f2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_kernel_badattr/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "946ce1dd3bd978b1247dc0ab42cdb23e1efc6a42",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_kernel_badattr/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_kernel_badsig/kernel_badsig.rscript",
+      "kind": "blob",
+      "oid": "394e9c94dd8762260000434af52e6e870f3eba1a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_kernel_badsig/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "b226f2b4a6706dac7cef0a7f983b8a44e1635575",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_kernel_badsig/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_kernel_noattr/kernel_noattr.rscript",
+      "kind": "blob",
+      "oid": "27c5dcd3aabb928648cdd1fde0ffc6c3c06a581b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_kernel_noattr/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "2c0a8257a5cf27dd1ea495c84ce8c925876c438e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_kernel_noattr/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_kernel_ptr_param/kernel_ptr_param.rscript",
+      "kind": "blob",
+      "oid": "fc897177194a9943cfde7fb0680054d7cc3928e2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_kernel_ptr_param/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "abdbc4f8f016e25b6d761285f82547975c55076c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_kernel_ptr_param/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_kernel_ptr_ret_val/kernel_ptr_ret_val.rscript",
+      "kind": "blob",
+      "oid": "82fbd2ea72c252c13003b2f9a93a97858ded9092",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_kernel_ptr_ret_val/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "9d7ca1c8ecf16790f5ed2f1be32e476ebabae7cd",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_kernel_ptr_ret_val/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_kernel_static/kernel_static.rscript",
+      "kind": "blob",
+      "oid": "c160cd96281135c6e09ab2a2bdb0e35908453e6d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_kernel_static/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "56d97e0629e26f361ae281724ba7a0d267a3454d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_kernel_static/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_large_array/large_array.rscript",
+      "kind": "blob",
+      "oid": "db53e2ef102af7e294eef2126b153c29bb907765",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_large_array/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "c14f783dd40ebfbbc8721b5a38cb7160700f81e4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_large_array/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_mix_vector/mix_vector.rscript",
+      "kind": "blob",
+      "oid": "23114799833495a37daad0ae8f365edf3a187188",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_mix_vector/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "baf3eb5bf9d6a22a625b2eabcc82947302e61b62",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_mix_vector/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_multi_export_errors/multi_export_errors.rscript",
+      "kind": "blob",
+      "oid": "020fa140043d4b192c142b286728a4dd62475680",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_multi_export_errors/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "5d0d1c4becd1a1abc61fca9ebbd2866628641137",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_multi_export_errors/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_multi_in_target_version/multi_in_target_version.rscript",
+      "kind": "blob",
+      "oid": "429bf5b1665cab59d888b888fdd2b02f4b0f93a3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_multi_in_target_version/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "f75c658504eb82abe88419ad6f6892b3de02ed0a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_multi_in_target_version/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_multidim_array/multidim_array.rscript",
+      "kind": "blob",
+      "oid": "cf967e00f2737caa32958a51e3928b2c3f99ac4c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_multidim_array/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "f28e59f33480afbd7e604524fd96edbaedf2722e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_multidim_array/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_no_java_package_name/no_java_package_name.rscript",
+      "kind": "blob",
+      "oid": "bfa6f9ddae7d7244e58f907ff730de06336f76b6",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_no_java_package_name/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "19381c1e3f8350f4f2d641593b82483db007c427",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_no_java_package_name/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_no_pragma/first.rscript",
+      "kind": "blob",
+      "oid": "a53bf9073d95f052e64b4d00398129a662ecbcd7",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_no_pragma/second.rscript",
+      "kind": "blob",
+      "oid": "a746ce1e0721d0ad2d46361420f3ef3313a975e2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_no_pragma/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "01bb8f41380f3e188b4c8a5fcde81b9224f6753a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_no_pragma/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_no_version_pragma/no_version_pragma.rscript",
+      "kind": "blob",
+      "oid": "9b928ceb11e771ed5a7ea8655a28cbf46065420a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_no_version_pragma/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "f41d53712e2b7931be076cca3c33aee4ca34c8ef",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_no_version_pragma/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_1/odr1.rscript",
+      "kind": "blob",
+      "oid": "a7370f4cc05d1712f22ddaf041c16d71913600cd",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_1/odr2.rscript",
+      "kind": "blob",
+      "oid": "51cc0aa33543e42767dbecc70e3fd8d992c129fa",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_1/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "842671484944967601df9dbf73d10f446b8cb42f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_1/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_2/odr1.rscript",
+      "kind": "blob",
+      "oid": "3a0ef61f4592d6f37d55a076995628be42c1b3d9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_2/odr2.rscript",
+      "kind": "blob",
+      "oid": "94780ed6a2ae2e89389e41c4ce85397eeb06ec7a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_2/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "00da8eb0589d8fa52f47f47837574ee67f818018",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_2/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_3/odr1.rscript",
+      "kind": "blob",
+      "oid": "8fcafb3cffa3c73505c1400a02cf99f7de39f4f9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_3/odr2.rscript",
+      "kind": "blob",
+      "oid": "ac852b5b0efe0f71e1e5ef3ef053b991786129aa",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_3/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "00da8eb0589d8fa52f47f47837574ee67f818018",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_3/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_4/odr1.rscript",
+      "kind": "blob",
+      "oid": "cc1034affb8361392e1c8a5b4d413962e9365b1b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_4/odr2.rscript",
+      "kind": "blob",
+      "oid": "f313e425ddd2a48bc7572f52f7333c27e7783b60",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_4/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "3da3e3b41beb52d8e602ece45eee77f28c41d14f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_4/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_5/odr1.rscript",
+      "kind": "blob",
+      "oid": "d986772fe592e74a2b3ff35514f9efaa2e4ccdaf",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_5/odr2.rscript",
+      "kind": "blob",
+      "oid": "ed95b19a5b6a6e8664d04951602f1d52891cbb07",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_5/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "00da8eb0589d8fa52f47f47837574ee67f818018",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_5/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_6/odr1.rscript",
+      "kind": "blob",
+      "oid": "0598b12af0fcafdfbb3b8d26eb6195611bbde3be",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_6/odr2.rscript",
+      "kind": "blob",
+      "oid": "8f7e85de41d06b4185209b43d915e9dc975e1845",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_6/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "00da8eb0589d8fa52f47f47837574ee67f818018",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_6/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_7/odr1.rscript",
+      "kind": "blob",
+      "oid": "70b07a3c14288122b6f170356ed35253ae73d1ce",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_7/odr2.rscript",
+      "kind": "blob",
+      "oid": "4ea0c2a8ff52d399dcad9e8423c02cd669f5a1ea",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_7/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "842671484944967601df9dbf73d10f446b8cb42f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_7/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_8/odr1.rscript",
+      "kind": "blob",
+      "oid": "3abe25b4171c23f7c2a199a2c778f770d0ef5f6c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_8/odr2.rscript",
+      "kind": "blob",
+      "oid": "fe56776a33cbf5680a7ecfc4c594084ea5040e2f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_8/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "842671484944967601df9dbf73d10f446b8cb42f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_8/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_9/odr1.rscript",
+      "kind": "blob",
+      "oid": "c45897890d936f752622aeb68d90b1a8a1ca7a4b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_9/odr2.rscript",
+      "kind": "blob",
+      "oid": "be9efc95c8eafefae31848d9a010347d6b9ed3dd",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_9/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "00da8eb0589d8fa52f47f47837574ee67f818018",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_odr_nested_records_9/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_one_definition_rule1/def1.rscript",
+      "kind": "blob",
+      "oid": "7b0b2254f6f6350cf1c50d8a0580b79a1169be9b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_one_definition_rule1/def2.rscript",
+      "kind": "blob",
+      "oid": "f770a5e3d4dd07254172c244a39305de5ab273d9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_one_definition_rule1/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "c493a59a6717d2ab2c5e8f5f35c20c7508966561",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_one_definition_rule1/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_one_definition_rule2/def1.rscript",
+      "kind": "blob",
+      "oid": "7c8cd97b15a7af2baaec732980e6eb0cdf0eb321",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_one_definition_rule2/def2.rscript",
+      "kind": "blob",
+      "oid": "1d64772981c662a1d4b4fdd840e6aa7d740e685c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_one_definition_rule2/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "82c01a6b7c1852ccaea324c0a9c50657170b05ea",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_one_definition_rule2/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_one_definition_rule3/def1.rscript",
+      "kind": "blob",
+      "oid": "8a8d15b71eeaa2668879fc63cb2a738fe4cf1bf5",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_one_definition_rule3/def2.rscript",
+      "kind": "blob",
+      "oid": "b574be3aece58e6b98619e0791227b7b2de00cd7",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_one_definition_rule3/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "75056627a58854a568a89b47e1c32007398ccfaa",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_one_definition_rule3/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_one_definition_rule4/def1.rscript",
+      "kind": "blob",
+      "oid": "52b63953a7afab8aeaeaee18079fe8aca71cafb1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_one_definition_rule4/def2.rscript",
+      "kind": "blob",
+      "oid": "54157b3c4f76db78336cadf61612f80dbdaf6ace",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_one_definition_rule4/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "74d3ab17962f19e26a739ce98c784b231080a2a5",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_one_definition_rule4/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_one_definition_rule5/def1.rscript",
+      "kind": "blob",
+      "oid": "203cdbe192c30559d9110e2ba5255d20e021957b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_one_definition_rule5/def2.rscript",
+      "kind": "blob",
+      "oid": "02a76b462aab27dc3802b9b41409e9ab008c11a3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_one_definition_rule5/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "7e1684757e2c2238b10c337491938c1f68d9405a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_one_definition_rule5/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_one_definition_rule6/def1.rscript",
+      "kind": "blob",
+      "oid": "2bc8b04282d27f06ad713f3b76875acee537a911",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_one_definition_rule6/def2.rscript",
+      "kind": "blob",
+      "oid": "7d46c56ac138e978169b1205096aa65b29d66372",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_one_definition_rule6/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "d61eb94dcea9b53a71cada59e2552a2e6324122e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_one_definition_rule6/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_one_definition_rule7/def1.rscript",
+      "kind": "blob",
+      "oid": "1edda1630d521efe95495ce2166e5f60fab85a09",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_one_definition_rule7/def2.rscript",
+      "kind": "blob",
+      "oid": "e071fb5c2fbbc3ca748e5735ef1ddbc4b33b9b8f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_one_definition_rule7/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "23c4be7af74f9d413a30d21a23ce990c8a3fb375",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_one_definition_rule7/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_one_definition_rule8/def1.rscript",
+      "kind": "blob",
+      "oid": "60f6447dd8050e13ff4b96e335f9933604a64feb",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_one_definition_rule8/def2.rscript",
+      "kind": "blob",
+      "oid": "8ab9fc2227b0010b2839cd88e333381a0ad5f03c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_one_definition_rule8/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "23c4be7af74f9d413a30d21a23ce990c8a3fb375",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_one_definition_rule8/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_ptr_in_struct/ptr_in_struct.rscript",
+      "kind": "blob",
+      "oid": "943270b5a4c49c110737eb0c3bf95f1ae49fc869",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_ptr_in_struct/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "62f49c43652d332e8051f9aecdc6d2c02a89a61d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_ptr_in_struct/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_ptr_in_struct_for_call/ptr_in_struct_for_call.rscript",
+      "kind": "blob",
+      "oid": "eed96972f18287a7010837a63be9fd6b308723f8",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_ptr_in_struct_for_call/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "3b11d9ce02ef5a1a5aa313570dbae2dcf53e9e35",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_ptr_in_struct_for_call/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_ptr_to_array/ptr_to_array.rscript",
+      "kind": "blob",
+      "oid": "9f8bdf4ed4a3862530b596bb1014ad4dde1e9417",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_ptr_to_array/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "605ea05680ce0219a4e1f31866d535f87c2c2f82",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_ptr_to_array/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_ptr_to_fn_noproto/ptr_to_fn_noproto.rscript",
+      "kind": "blob",
+      "oid": "b5fcdb0711124a332ae16b94989acae5602331fe",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_ptr_to_fn_noproto/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "dde8e0b3cf1b445fe76194e96ad61aaeebbc2c0d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_ptr_to_fn_noproto/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_ptr_to_fn_proto/ptr_to_fn_proto.rscript",
+      "kind": "blob",
+      "oid": "d8167175faed91099e25066e6b0f658e594f78a4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_ptr_to_fn_proto/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "2ee7b906244544344104a519abf3a7e4e00f4171",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_ptr_to_fn_proto/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reduce_general_bad_accumulator/reduce_general_bad_accumulator.rscript",
+      "kind": "blob",
+      "oid": "5c16ad31a7c7f7584cea86aec48bcee481fc5cdb",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reduce_general_bad_accumulator/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "2d7be5b6ba2099ffa13fff208785c8ab45a3243c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reduce_general_bad_accumulator/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reduce_general_bad_function/reduce_general_bad_function.rscript",
+      "kind": "blob",
+      "oid": "b59800af175a05585312ceb72e03591fe9478a18",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reduce_general_bad_function/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "caa56525d7be757b3c69a492851b284b230e4761",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reduce_general_bad_function/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reduce_general_bad_halter/reduce_general_bad_halter.rscript",
+      "kind": "blob",
+      "oid": "b7de60c1e23133ccc7950e012cabc2b69eeff0a6",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reduce_general_bad_halter/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "40d1264389db80bbc21b9a796157ec2fbc43a3d8",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reduce_general_bad_halter/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reduce_general_bad_result/reduce_general_bad_result.rscript",
+      "kind": "blob",
+      "oid": "e403f6e150a755ea36d642528208acecc6f0dc6a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reduce_general_bad_result/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "890a7b4b8ea5abf9e78634d82555812513964145",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reduce_general_bad_result/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reduce_general_parse/reduce_general_parse.rscript",
+      "kind": "blob",
+      "oid": "6606d83d4547420db1453098add28ad60a82dc26",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reduce_general_parse/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "bd02416d2a95f15717d9d82efb1f1ecfd60514de",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reduce_general_parse/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reduce_general_void/reduce_general_void.rscript",
+      "kind": "blob",
+      "oid": "b39fa56f7ec5128174cbef8a1afd6f764bc6d3ca",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reduce_general_void/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "c3451194ed03b2977044ec195295bcbc1064c28e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reduce_general_void/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reduce_general_wrong_api/reduce_general_wrong_api.rscript",
+      "kind": "blob",
+      "oid": "5da3239742451d5afa6d6f8be5e2f2d8dc636707",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reduce_general_wrong_api/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "2b981d1331aee972d5d7481e5b9f621a1665e568",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reduce_general_wrong_api/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_refcount_15/refcount_15.rscript",
+      "kind": "blob",
+      "oid": "b3e3a1706a284cf2e32a60d9f32435a63d4b22c9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_refcount_15/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "25551c6dc85b21cc1996723be52e1ef40f58a515",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_refcount_15/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_foreach_mismatch/reflection3264_foreach_mismatch.rscript",
+      "kind": "blob",
+      "oid": "c8e4a6dea3e3d24df60b395736ed7d7201ae1d71",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_foreach_mismatch/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "b620d57d6efd916f9cd09960b7ba496d5bbb71fc",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_foreach_mismatch/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_foreach_mismatch_extra32/reflection3264_foreach_mismatch_extra32.rscript",
+      "kind": "blob",
+      "oid": "8bf08c3cf24ede4893c05b7ae10d8787a96a822a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_foreach_mismatch_extra32/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "65ea06533e31880ba0ea4f3ea2d4e841b332c5e1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_foreach_mismatch_extra32/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_foreach_mismatch_extra64/reflection3264_foreach_mismatch_extra64.rscript",
+      "kind": "blob",
+      "oid": "469ec9918bd478c1004b78949cc00bce063a2bd8",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_foreach_mismatch_extra64/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "b305ab215c17401469e97aa2595927326497887c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_foreach_mismatch_extra64/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_foreach_mismatch_name32/reflection3264_foreach_mismatch_name32.rscript",
+      "kind": "blob",
+      "oid": "89b597bbb5f94bc2267f23b9843528b415db72e9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_foreach_mismatch_name32/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "dfcc60848f04927e790e06b6b03c22de960b2f65",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_foreach_mismatch_name32/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_foreach_mismatch_name64/reflection3264_foreach_mismatch_name64.rscript",
+      "kind": "blob",
+      "oid": "59646f5557eddbac3513b2bee0be81055b33da25",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_foreach_mismatch_name64/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "c12aa38ab1219d6c90f751c922c4d2c87e5ed1fe",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_foreach_mismatch_name64/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_invokable_extra32/reflection3264_invokable_extra32.rscript",
+      "kind": "blob",
+      "oid": "18ce97f25d753784c31080dfbdd927ff50539ba7",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_invokable_extra32/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "d1bff28a81ea1981c199ea46ded7e0ce89c333b1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_invokable_extra32/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_invokable_extra64/reflection3264_invokable_extra64.rscript",
+      "kind": "blob",
+      "oid": "e9c1e1f331dd351c82b136006a2d7205204928a3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_invokable_extra64/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "1353b7df870e5bd6e89ed4a88cd29f65989b13b8",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_invokable_extra64/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_invokable_mismatch/reflection3264_invokable_mismatch.rscript",
+      "kind": "blob",
+      "oid": "5b3527bc00306b4cf0db7efc27fba692b647a87e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_invokable_mismatch/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "317ac35af3430548ef0c3f1eabde41e2f6151b18",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_invokable_mismatch/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_multifile/reflection3264_multifile_1.rscript",
+      "kind": "blob",
+      "oid": "8ea14185f1f08dbdb8774e45fc781900e7b8c825",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_multifile/reflection3264_multifile_2.rscript",
+      "kind": "blob",
+      "oid": "2b5be5897a16c959f51406d82621f1393f052cc1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_multifile/reflection3264_multifile_3.rscript",
+      "kind": "blob",
+      "oid": "7bf27881255475a42086b3b77863c0ac124165fd",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_multifile/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "8fccee484e5ff38e3eb0896600d3875829ad5724",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_multifile/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_package_mismatch/reflection3264_package_mismatch.rscript",
+      "kind": "blob",
+      "oid": "d0452f859129be24fe1d8db5d0b7bd6058c25e97",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_package_mismatch/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "77893d07d6d8012688dbe54e83cec26511cc3ae9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_package_mismatch/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_reduce_extra32/reflection3264_reduce_extra32.rscript",
+      "kind": "blob",
+      "oid": "e7341586112932f8f1f0be080eb05da948a84bf6",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_reduce_extra32/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "f0a7997b276cbd8a06efea74360edb00f4dc596b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_reduce_extra32/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_reduce_extra64/reflection3264_reduce_extra64.rscript",
+      "kind": "blob",
+      "oid": "c653d50047f241ff69feea463435b1984acbff32",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_reduce_extra64/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "1039de1280073f83b818d8db3c833c63cc508aa9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_reduce_extra64/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_reduce_mismatch/reflection3264_reduce_mismatch.rscript",
+      "kind": "blob",
+      "oid": "10b3d85882ec073a0eca327e3323472798f759cd",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_reduce_mismatch/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e3256867ff85da3990dc121217cd5b86ae5c7e29",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_reduce_mismatch/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_reduce_mismatch_name_exp/reflection3264_reduce_mismatch_name_exp.rscript",
+      "kind": "blob",
+      "oid": "7548cfe8a197f5d0c4483117496ef09916fc0818",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_reduce_mismatch_name_exp/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "fdcd9ce2360b28eaffd25a898600ae4107e63d73",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_reduce_mismatch_name_exp/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_reduce_mismatch_name_noexp/reflection3264_reduce_mismatch_name_noexp.rscript",
+      "kind": "blob",
+      "oid": "496ff011160ba53cb168ff0ac00a984d1ccd85a4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_reduce_mismatch_name_noexp/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "7c9077270b4bf03e684f76d34ef4c5eca19fa534",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_reduce_mismatch_name_noexp/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_struct_mismatch/reflection3264_struct_mismatch.rscript",
+      "kind": "blob",
+      "oid": "5858add85647d5aef0bb8f2790d787d6e4e4410c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_struct_mismatch/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "07acc799a0b836f1f1ae5fd7fdb6a3dbea81229c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_struct_mismatch/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_variable_extra32/reflection3264_variable_extra32.rscript",
+      "kind": "blob",
+      "oid": "a26178f17167a41ff5be76204aedee350062f6ce",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_variable_extra32/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "98333be218d5918144082c3284179867fad411f3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_variable_extra32/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_variable_extra64/reflection3264_variable_extra64.rscript",
+      "kind": "blob",
+      "oid": "4b9e9464dfb1eac294696d781dd60bff68056744",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_variable_extra64/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "d88bad4e670f87fd20a52e8bd450a222fe350e88",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_variable_extra64/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_variable_mismatch/reflection3264_variable_mismatch.rscript",
+      "kind": "blob",
+      "oid": "b203751155d592586c90b55f69de2fb1e13e94b2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_variable_mismatch/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "a892a656551f668594d8670fe38ebffc3369ff70",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_variable_mismatch/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_variable_mismatch_init/reflection3264_variable_mismatch_init.rscript",
+      "kind": "blob",
+      "oid": "2aa142c54b42ac0af87cf8e9bb5f588b1a51e41a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_variable_mismatch_init/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "2aa9e724be01581767acafe26efe8618e4867ae2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_reflection3264_variable_mismatch_init/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_11_ox/root_11_ox.rscript",
+      "kind": "blob",
+      "oid": "00278d22c294bc7445f6dcc4c6a46d17535c4583",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_11_ox/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "85b4cc697ed9316552870a5169bd09ffad6fcb1d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_11_ox/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_compute_int_in/root_compute_int_in.rscript",
+      "kind": "blob",
+      "oid": "b2560b4b6f571da3581bffee79e084c4aa947a83",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_compute_int_in/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "64be2e2bc1a6d157a7fb286ddf3b33c221943168",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_compute_int_in/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_compute_non_const_usrData/root_compute_non_const_usrData.rscript",
+      "kind": "blob",
+      "oid": "46dc642ab7d483f5c6793f183516c384cb57e267",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_compute_non_const_usrData/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "28e79fc4b2fb6c752a6eda79a282d07026176052",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_compute_non_const_usrData/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_compute_non_ptr_usrData/root_compute_non_ptr_usrData.rscript",
+      "kind": "blob",
+      "oid": "ce67f8a1d329816ecc695f9e353471dd33c955e5",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_compute_non_ptr_usrData/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "b6b20bd6c09b02f3295ba3357e53be178cafb835",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_compute_non_ptr_usrData/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_compute_non_uint32_t_xyzar/root_compute_non_uint32_t_xyzar.rscript",
+      "kind": "blob",
+      "oid": "da45b861a21ab2eca4c09071f6c01065978ffd52",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_compute_non_uint32_t_xyzar/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "f3aa16693aa5e15e57e33614ec5c1f8ec1cba926",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_compute_non_uint32_t_xyzar/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_compute_non_uint32_t_xyzwar/root_compute_non_uint32_t_xyzwar.rscript",
+      "kind": "blob",
+      "oid": "b3a00adbe1cb3130ddf5096c89a7a28383a525ad",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_compute_non_uint32_t_xyzwar/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "82cc5336f8ca33a9159a0bfed8da76d6483b388b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_compute_non_uint32_t_xyzwar/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_compute_non_void_ret/root_compute_non_void_ret.rscript",
+      "kind": "blob",
+      "oid": "b1dd4faa24b527e5b08c4f8b358ea93c44a9fe39",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_compute_non_void_ret/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "c89bb9700abd2956449bc386045709a2df41521c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_compute_non_void_ret/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_compute_really_bad/root_compute_really_bad.rscript",
+      "kind": "blob",
+      "oid": "47d6b4885fe8130e7d74b21e9c64fe54a66cceac",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_compute_really_bad/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "7236edbe34bbfe7382df8e622f5c027f848c24fa",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_compute_really_bad/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_compute_too_many_args/root_compute_too_many_args.rscript",
+      "kind": "blob",
+      "oid": "52e917f7d72848cb5cef3569e1db4039cad6fe52",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_compute_too_many_args/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "5dca714e77a22f20c0bd15befb6b6726582820ff",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_compute_too_many_args/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_graphics/root_graphics.rscript",
+      "kind": "blob",
+      "oid": "970cc9a7963f41bf46466c2c34d41e8ebb950d05",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_graphics/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "2314c92859cab35870228baf96b04111c581fbba",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_graphics/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_graphics_13/root_graphics_13.rscript",
+      "kind": "blob",
+      "oid": "c6c1fbd3ee7fca00d1d681ae489fb5fe943222cc",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_graphics_13/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "d8ead4c03d5e45c230f022c04fd34400f2a0d81d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_root_graphics_13/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_rs_fp_two_pragmas/rs_fp_two_pragmas.rscript",
+      "kind": "blob",
+      "oid": "b07091cff4d0825a1a9a99d70ae1d715a3992e71",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_rs_fp_two_pragmas/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "7edfd1ea5471721d77945067ed5647be28a1189a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_rs_fp_two_pragmas/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_rs_prefix/rs_prefix.rscript",
+      "kind": "blob",
+      "oid": "99ae9aa940ef207f7811fffe77283aee5d2b8a09",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_rs_prefix/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "54027a7b1a30aa191e074154fde5f96380ae51ce",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_rs_prefix/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_set_target_api_10/set_target_api_10.rscript",
+      "kind": "blob",
+      "oid": "53bda21cdbcdc72fa3f052e35b1f00b3c8ed3d03",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_set_target_api_10/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "2f0da2adf8ba38a41c8bfaf3072e37641c722c95",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_set_target_api_10/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_set_target_api_9000/set_target_api_9000.rscript",
+      "kind": "blob",
+      "oid": "26e40ac9587589853fe172f4e1c5ee9e9ad88544",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_set_target_api_9000/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "4d30c06f7c685713671586453d7a666de8c6b7a7",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_set_target_api_9000/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_set_target_api_foo/set_target_api_foo.rscript",
+      "kind": "blob",
+      "oid": "e818a5a75d99ac4df5f2e88f1402d87c73ef3490",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_set_target_api_foo/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "1c56599bac727e54c4f3a6c6f30849767c507ab1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_set_target_api_foo/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_struct_array_copy/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "cad62dacfd626a206734e33c168e4308b4c83959",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_struct_array_copy/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_struct_array_copy/struct_array_copy.rscript",
+      "kind": "blob",
+      "oid": "1b55100b6cef2464a712723a9fcfc52e8ab12297",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_struct_bitfield/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "0c994e477d6a5d9c55107fc53fbf313b8f0428f5",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_struct_bitfield/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_struct_bitfield/struct_bitfield.rscript",
+      "kind": "blob",
+      "oid": "95e3418ed2f8e0efde0e6b022944d86c3eb18b76",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_struct_field_ptr_to_array/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "a41ca9c6afc8d662d2ed8ec0453974b6c50065bd",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_struct_field_ptr_to_array/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_struct_field_ptr_to_array/struct_field_ptr_to_array.rscript",
+      "kind": "blob",
+      "oid": "5923f9ad302187ffe468b26cd3b5b1c5a170d5c3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_struct_field_ptr_to_fn_noproto/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "9eca5e6978c8030e4ecfb015a00d66b8f0f212b2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_struct_field_ptr_to_fn_noproto/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_struct_field_ptr_to_fn_noproto/struct_field_ptr_to_fn_noproto.rscript",
+      "kind": "blob",
+      "oid": "e301a339a8acba08d5d11ab83237e17da0a8bc4b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_struct_field_ptr_to_fn_proto/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "76a2bb70042a7f7dee2f8a7447a252cc603237aa",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_struct_field_ptr_to_fn_proto/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_struct_field_ptr_to_fn_proto/struct_field_ptr_to_fn_proto.rscript",
+      "kind": "blob",
+      "oid": "dcccd57910a987766c0aaccd21ae43d1addcec70",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_struct_float3_array/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "44e86c41b38f5466f7f71a1831c32fb138094f61",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_struct_float3_array/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_struct_float3_array/struct_float3_array.rscript",
+      "kind": "blob",
+      "oid": "58d6d64a740eb233f0df6e7f9df815428f71402f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_struct_ptr/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "cbeb83849f7198d2ae8b3b3606db0f9fe6ae726a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_struct_ptr/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_struct_ptr/struct_ptr.rscript",
+      "kind": "blob",
+      "oid": "15eee65ff2c6ae0a344097708495713630102a2b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_too_many_inputs/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "335453d6e4d64a45cafc3d13e902f55761171d9e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_too_many_inputs/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_too_many_inputs/too_many_inputs.rscript",
+      "kind": "blob",
+      "oid": "248ee4f1b31827db4a9994c39c4f3b20659a55a9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_union/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "ba7c6636b60d4ce635eb4ddba2e818c9b1728ded",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_union/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_union/union.rscript",
+      "kind": "blob",
+      "oid": "a6fa48da25fa9c8830466f273f82b19f588039c1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_unknown_function/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "2a42af9ae7b8cf9e926823dbf9bc1ea8b9e6c0ef",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_unknown_function/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_unknown_function/unknown_function.rscript",
+      "kind": "blob",
+      "oid": "8127993b195d8a9b35da10d8e3dc31e9968eb8a3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_unknown_function/zzz.rscript",
+      "kind": "blob",
+      "oid": "54929dc199e9f0a76687fab6078d4ceb0019f20c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_v15_non_root_kernel/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "658d002597a0a6e3253e4189e681118049cf34d8",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_v15_non_root_kernel/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_v15_non_root_kernel/v15_non_root_kernel.rscript",
+      "kind": "blob",
+      "oid": "d8b903e027f841c3e4d8165bd73c8b9286e6c14e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_vector_cast/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "52c2aecf824feb418de57b0b49abf092b4e0baca",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_vector_cast/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_vector_cast/vector_cast.rscript",
+      "kind": "blob",
+      "oid": "fa49d9775d71078d250efdeaa9fdd52b259b700f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_void_ptr/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "b9f22d2033ff03eadd3d611efa7df3c4158b83b1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_void_ptr/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_void_ptr/void_ptr.rscript",
+      "kind": "blob",
+      "oid": "1fc1737e328ca8e48d6990eed6fef0cd9aa149ac",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_warnings_as_error/deprecated.rscript",
+      "kind": "blob",
+      "oid": "b06f6afd815234ecc017e10c611df42f2998948b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_warnings_as_error/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "fd4b3ac6c94a78714222c2e5902e56e4c96c98f7",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_warnings_as_error/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_z_wrong_api/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "4bfe3cad5271433c4777a9247af3cd7c3b868f95",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_z_wrong_api/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/F_z_wrong_api/z_wrong_api.rscript",
+      "kind": "blob",
+      "oid": "42b08a2ddd6c03d69ae909f91ad808a39f33e98a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_11/all11.rscript",
+      "kind": "blob",
+      "oid": "2c0dc0e130ea428c40e19a211413e9cd91bc8e2d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_11/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_11/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_12/all12.rscript",
+      "kind": "blob",
+      "oid": "98268c92ba393f5e14750dc9af5344c01db74506",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_12/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_12/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_13/all13.rscript",
+      "kind": "blob",
+      "oid": "0e14e1a5fe39c8348e839e7542d5d3bb5036bd29",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_13/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_13/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_14/all14.rscript",
+      "kind": "blob",
+      "oid": "9e697674c2c533ecc181eb5f8b99244c59f45e9a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_14/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_14/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_15/all15.rscript",
+      "kind": "blob",
+      "oid": "1ce27984ec6a72b970c5782d7e6338f99ebced65",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_15/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_15/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_16/all16.rscript",
+      "kind": "blob",
+      "oid": "b6b79548961f3e88946d071585703754d4f941ed",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_16/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_16/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_17/all17.rscript",
+      "kind": "blob",
+      "oid": "be84dd1bba1dbad92df705daa97be49f7d115f39",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_17/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_17/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_18/all18.rscript",
+      "kind": "blob",
+      "oid": "d07107eca1d438eaf611c3487b3cc87f1cb69628",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_18/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_18/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_19/all19.rscript",
+      "kind": "blob",
+      "oid": "da44c86b17db7d08ae9d11c88c78bb042025c716",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_19/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_19/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_20/all20.rscript",
+      "kind": "blob",
+      "oid": "d3a53e4afaa96d048a91a0d32dd332aa9e0d8503",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_20/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_20/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_21/all21.rscript",
+      "kind": "blob",
+      "oid": "cd0b0c86f2d358ae8f36cdc514c06cd5f775e607",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_21/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_21/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_22/all22.rscript",
+      "kind": "blob",
+      "oid": "9d20f7b929942d1f6c26a2e3fb2964aa1c8892b6",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_22/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_22/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_23/all23.rscript",
+      "kind": "blob",
+      "oid": "cabfa44e2e69d55f9538eb1b568f14614ca3ebae",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_23/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_23/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_24/all24.rscript",
+      "kind": "blob",
+      "oid": "408185da16f7096f4c07673f8a855f72caffba10",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_24/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_all_api_24/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_alloc_in_struct/alloc_in_struct.rscript",
+      "kind": "blob",
+      "oid": "eaefd87da61bdf85d62777f0dbce6cc802bf7229",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_alloc_in_struct/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_alloc_in_struct/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_array_cpp/array.rscript",
+      "kind": "blob",
+      "oid": "9a36c6d0e0a35a1ac59de813fcae0607a09b3cf3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_array_cpp/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_array_cpp/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_array_init/array_init.rscript",
+      "kind": "blob",
+      "oid": "2a4fe0f09435d033ba1160d4a6b6b33851065e26",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_array_init/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e0dd67ecd8ac9d16e7ac058b6d3e07230c5c9688",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_array_init/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_compute/compute.rscript",
+      "kind": "blob",
+      "oid": "9ed58b870935f8da68d05fe205c1a3a44995ae16",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_compute/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_compute/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_constant/constant.rscript",
+      "kind": "blob",
+      "oid": "4457e37554e4d6a8fc5c4311c1d4a52368fd7b1f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_constant/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "a8c08039951857290404822f00b95bf8d222cc01",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_constant/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_debug/debug.rscript",
+      "kind": "blob",
+      "oid": "69ede2a3a1f246e253463a113376ae84069099c1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_debug/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_debug/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_dummy_root/dummy_root.rscript",
+      "kind": "blob",
+      "oid": "7731d94414ae242d351c9ae0b207989b42785050",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_dummy_root/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_dummy_root/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_export_types/export_types.rscript",
+      "kind": "blob",
+      "oid": "8c725f13c76dcddc2d95500993dac57c57e1d10b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_export_types/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_export_types/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_export_types_v20/export_types.rscript",
+      "kind": "blob",
+      "oid": "61d55e1c3b492220626d130b5f6e4edecb223943",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_export_types_v20/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_export_types_v20/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_extern_const/extern_const.rscript",
+      "kind": "blob",
+      "oid": "e80906ac5556980d828ce7133b3afb06d382bab3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_extern_const/rs_core.rsh",
+      "kind": "blob",
+      "oid": "4332ed09f44c674d6e4c10ea07e0404ef86ee9b0",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_extern_const/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_extern_const/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_float3/float3.rscript",
+      "kind": "blob",
+      "oid": "125599217f108288ec7b737608489c83e935cea3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_float3/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_float3/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_foreach/foreach.rscript",
+      "kind": "blob",
+      "oid": "c23fb810541ae94fc825e13e8dd39a702def589b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_foreach/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_foreach/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_foreach_multi/foreach_multi.rscript",
+      "kind": "blob",
+      "oid": "e8a597e01ee87e02a6e0ffa8c178f5f93023984e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_foreach_multi/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_foreach_multi/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_foreach_options/foreach_options.rscript",
+      "kind": "blob",
+      "oid": "cb15b7374cbeb1d16fb6939cafdf6d2b2216b9eb",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_foreach_options/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_foreach_options/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_fp16/fp16.rscript",
+      "kind": "blob",
+      "oid": "074c9884c62e70cfdc7054b6dcf622df99e4f96d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_fp16/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_fp16/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_fs_kernel/fs_kernel.fs",
+      "kind": "blob",
+      "oid": "fbf92858a1661d3be5ae9c0456b79be9bbc1bc32",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_fs_kernel/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_fs_kernel/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_ignore_warnings/ignore_warnings.rscript",
+      "kind": "blob",
+      "oid": "76704d6febad99560df838c051b2f60cd03542a2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_ignore_warnings/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_ignore_warnings/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_invoke_half_parameter/invoke_half_parameter.rscript",
+      "kind": "blob",
+      "oid": "f68f742bae11954a04df9ad13cbf440f69c1e7f5",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_invoke_half_parameter/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_invoke_half_parameter/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_kernel/kernel.rscript",
+      "kind": "blob",
+      "oid": "fa962dde1c536631a4caa23efceda010f3707bd2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_kernel/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_kernel/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_kernel_cpp/kernel_cpp.rscript",
+      "kind": "blob",
+      "oid": "9e582b347e693a6f5e95f5f9c6e0d85480d2b30e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_kernel_cpp/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_kernel_cpp/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_kernel_multi_in/kernel_multi_in.rscript",
+      "kind": "blob",
+      "oid": "f38757b32ea07194dc00708c9a79795cf4f3b680",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_kernel_multi_in/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_kernel_multi_in/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_kernel_noalloc/kernel_noalloc.rscript",
+      "kind": "blob",
+      "oid": "ab64847e6b91ffddd7609c1ef23243815f8aa10f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_kernel_noalloc/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_kernel_noalloc/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_kernel_noalloc_noarg/kernel_noalloc_noarg.rscript",
+      "kind": "blob",
+      "oid": "e1ccb0961e85ba3b19169aaf3c719ec1b707e912",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_kernel_noalloc_noarg/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_kernel_noalloc_noarg/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_license/license.rscript",
+      "kind": "blob",
+      "oid": "0ee1ae62c6023ac01e5d5a92c8df93b62c1d07d0",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_license/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_license/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_local_ref_after_return/local_ref_after_return.rscript",
+      "kind": "blob",
+      "oid": "977fab7df6b6c048e82be44f013fd0cc914c35c9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_local_ref_after_return/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_local_ref_after_return/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_long64/long64.rscript",
+      "kind": "blob",
+      "oid": "f530aa0fc81d41269d527f259e8f342ed7f911c9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_long64/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_long64/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_math_fp/math_fp.rscript",
+      "kind": "blob",
+      "oid": "0bedd6ea80061a354797cc1c7cd7cdba24c59873",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_math_fp/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_math_fp/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_math_int/math_int.rscript",
+      "kind": "blob",
+      "oid": "59ef57f915f2c076ce20eed0f6dfa66bb26c5a9e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_math_int/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_math_int/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_matrix_cpp/matrix.rscript",
+      "kind": "blob",
+      "oid": "4847b54cc90625e0ceeeb1bc919279441c714609",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_matrix_cpp/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_matrix_cpp/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_multi_in_target_version/multi_in_target_version.rscript",
+      "kind": "blob",
+      "oid": "2128778583039ad64c58cb7321efbd3ef3b7aa4d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_multi_in_target_version/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_multi_in_target_version/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_odr_array/def1.rscript",
+      "kind": "blob",
+      "oid": "501a96b887a309c0391e46181aef9b2bd12fcdb1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_odr_array/def2.rscript",
+      "kind": "blob",
+      "oid": "501a96b887a309c0391e46181aef9b2bd12fcdb1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_odr_array/inc.rsh",
+      "kind": "blob",
+      "oid": "6374850052961e2f0c432362fbb2d550ead8fd8f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_odr_array/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_odr_array/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_odr_nested_records_1/odr1.rscript",
+      "kind": "blob",
+      "oid": "4b86c4e0f8ff9e0267b73a9ef0cd5e538fd583e2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_odr_nested_records_1/odr2.rscript",
+      "kind": "blob",
+      "oid": "4b86c4e0f8ff9e0267b73a9ef0cd5e538fd583e2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_odr_nested_records_1/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_odr_nested_records_1/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_odr_nested_records_2/odr1.rscript",
+      "kind": "blob",
+      "oid": "00fbe2e2d12cc23fb300e623f6094460fcb92c28",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_odr_nested_records_2/odr2.rscript",
+      "kind": "blob",
+      "oid": "769060d885cd8faea5a410f2a90521e3e1da1935",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_odr_nested_records_2/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_odr_nested_records_2/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_odr_nested_records_3/odr1.rscript",
+      "kind": "blob",
+      "oid": "0edef03096b843258b66837c4421935773eb3bc1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_odr_nested_records_3/odr2.rscript",
+      "kind": "blob",
+      "oid": "00d0f0ff2d38dddb0f77902fdf639cd5a193820d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_odr_nested_records_3/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_odr_nested_records_3/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_one_definition_rule/def1.rscript",
+      "kind": "blob",
+      "oid": "1e0cebe7cadb98b064ff57792280e8616cb6a3cd",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_one_definition_rule/def2.rscript",
+      "kind": "blob",
+      "oid": "1e0cebe7cadb98b064ff57792280e8616cb6a3cd",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_one_definition_rule/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_one_definition_rule/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_ooo_compute/ooo_compute.rscript",
+      "kind": "blob",
+      "oid": "961bcd2d88cf1e8533d457c492ccfa23f1f194b2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_ooo_compute/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_ooo_compute/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_overload/overload.rscript",
+      "kind": "blob",
+      "oid": "ba3be6eac1b0b1187cac677afd3c39253c5d9c49",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_overload/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_overload/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_redefine_RS_VERSION/redefine_RS_VERSION.rscript",
+      "kind": "blob",
+      "oid": "08f96ab752010580835b23259696fb39d80b8446",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_redefine_RS_VERSION/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e2b93c9e896ed47db3ce5cb73d3c8b5900987bf2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_redefine_RS_VERSION/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_accumulator/ScriptC_reduce_general_accumulator.java.expect",
+      "kind": "blob",
+      "oid": "e4ec85a41ff3baaa3a590bedf2fd94d9552277bd",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_accumulator/gen-accumulator.pl",
+      "kind": "blob",
+      "oid": "46329e8a0fb33f70394ba23b26f56c2e18d44538",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/P_reduce_general_accumulator/reduce_general_accumulator.rscript",
+      "kind": "blob",
+      "oid": "cec196d985c1dd32dff7888322c7c54e26d5c128",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_accumulator/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_accumulator/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_duplicate_array/ScriptC_reduce_general_duplicate_array.java.expect",
+      "kind": "blob",
+      "oid": "d49da09e509aee9ebca543f9cb1c370fe02b0ab8",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_duplicate_array/reduce_general_duplicate_array.rscript",
+      "kind": "blob",
+      "oid": "9c806a68658e24ab7921c52ceefacf28b57c9f0c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_duplicate_array/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_duplicate_array/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_examples/ScriptC_reduce_general_examples.java.expect",
+      "kind": "blob",
+      "oid": "fc487c1d57b72b01af55c3c54075a6383c3c441b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_examples/reduce_general_examples.rscript",
+      "kind": "blob",
+      "oid": "17b6a276cf6b65b6798fe25174ce2f969e289885",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_examples/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_examples/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_examples_backward/ScriptC_reduce_general_examples_backward.java.expect",
+      "kind": "blob",
+      "oid": "7a56004b013786e1d812b22152f3f2ac6a2379ee",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_examples_backward/reduce_general_examples_backward.rscript",
+      "kind": "blob",
+      "oid": "00d3323f3ab48369a3fe304b199ebf6590984d66",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_examples_backward/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_examples_backward/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_examples_explicit/ScriptC_reduce_general_examples_explicit.java.expect",
+      "kind": "blob",
+      "oid": "f53ada1a9cd386d556036e908de71ce5ef55fafa",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_examples_explicit/reduce_general_examples_explicit.rscript",
+      "kind": "blob",
+      "oid": "bd76c8eb7386a9e73bdaa2c67b2a108f194687c7",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_examples_explicit/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_examples_explicit/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_examples_halter/ScriptC_reduce_general_examples_halter.java.expect",
+      "kind": "blob",
+      "oid": "d55c17ad23c35a82a2d47fb357dc30ab8522201f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_examples_halter/reduce_general_examples_halter.rscript",
+      "kind": "blob",
+      "oid": "8e35fe057fb4a37cc1ba8a9978ee2ed648df083b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_examples_halter/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_examples_halter/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_input/ScriptC_reduce_general_input.java.expect",
+      "kind": "blob",
+      "oid": "eb1e8dde10e72934527d3712dace5c80c640a32c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_input/ScriptField_MyStruct.java.expect",
+      "kind": "blob",
+      "oid": "56fe1215feeba8b47f9c8f5bc4ba5cc344ee3f9a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_input/gen-input.pl",
+      "kind": "blob",
+      "oid": "4be2e838b896b88d4763dc6a61e9940c14aae460",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/P_reduce_general_input/reduce_general_input.rscript",
+      "kind": "blob",
+      "oid": "e0fa90f47e33405ea973fc735afbe8975b21c369",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_input/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_input/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_inputs/ScriptC_reduce_general_inputs.java.expect",
+      "kind": "blob",
+      "oid": "eff2274d5d59bd07060f34192b242a2e8146a043",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_inputs/ScriptField_MyStruct.java.expect",
+      "kind": "blob",
+      "oid": "359f9945f163887c6315a79c437f52114f9b55e3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_inputs/gen-inputs.pl",
+      "kind": "blob",
+      "oid": "136ec27cce155870c74b7e90f8fc9d6fe4eb79d8",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/P_reduce_general_inputs/reduce_general_inputs.rscript",
+      "kind": "blob",
+      "oid": "aa7aae7173a3eb5fa6a964b842ae0b1f7df1a689",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_inputs/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_inputs/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_reflect/reduce_general_reflect.rscript",
+      "kind": "blob",
+      "oid": "a7ef61964d3e10acafc59baa4868b48c4522f0c0",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_reflect/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_reflect/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_result/ScriptC_reduce_general_result.java.expect",
+      "kind": "blob",
+      "oid": "c259fa36f01b7e20b2bd25bc894f7195f0e94d19",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_result/ScriptField_MyStruct.java.expect",
+      "kind": "blob",
+      "oid": "7026fe55bd7557d7fa42f3cd310a09d5463d8192",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_result/gen-result.pl",
+      "kind": "blob",
+      "oid": "66dad3453fbe148ffb2a5f3edd19f3da5ca52d87",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/P_reduce_general_result/reduce_general_result.rscript",
+      "kind": "blob",
+      "oid": "06c38bc4c559293f3c6043353a91c93ee24e53cf",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_result/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_result/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_struct/ScriptC_reduce_general_struct.java.expect",
+      "kind": "blob",
+      "oid": "892dc56016f0a1d347bbf5af967fc3e97bb0cf98",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_struct/reduce_general_struct.rscript",
+      "kind": "blob",
+      "oid": "ac6951e094bb81541a13f6c5187c25dd5a0572ac",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_struct/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reduce_general_struct/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_refcount/refcount.rscript",
+      "kind": "blob",
+      "oid": "96cb9d61bfd68b1a6ecc3a58f3f513046381bf7a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_refcount/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_refcount/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reflection3264_divergent/ScriptC_reflection3264_divergent.java.expect",
+      "kind": "blob",
+      "oid": "0a1ebd804a9a092fbb5b8b4568f89c6c3392d34c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reflection3264_divergent/ScriptField_Divergent.java.expect",
+      "kind": "blob",
+      "oid": "d03cb134cc35168bddd7e0e6bdad6b536753445f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reflection3264_divergent/ScriptField_DivergentNest.java.expect",
+      "kind": "blob",
+      "oid": "dcfa278c85679cc4feaa61699432205d98bdaf3c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reflection3264_divergent/ScriptField_NonDivergent.java.expect",
+      "kind": "blob",
+      "oid": "4aa188f0081a7f08631b6f0889ff1c5d1c7ca024",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reflection3264_divergent/reflection3264_divergent.rscript",
+      "kind": "blob",
+      "oid": "86779878b605f6639734dad9eb4719359675f710",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reflection3264_divergent/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reflection3264_divergent/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reflection3264_divergent_support/ScriptC_reflection3264_divergent.java.expect",
+      "kind": "blob",
+      "oid": "75e3cfa470d951eb93cd20cb8f95f0eafe106018",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reflection3264_divergent_support/ScriptField_Divergent.java.expect",
+      "kind": "blob",
+      "oid": "42f99e744c36fc3eb20130afa95fe3d2e81c182f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reflection3264_divergent_support/ScriptField_DivergentNest.java.expect",
+      "kind": "blob",
+      "oid": "0dadb0f37663aeed32a0dee69e2f0516cf74e0d6",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reflection3264_divergent_support/ScriptField_NonDivergent.java.expect",
+      "kind": "blob",
+      "oid": "a01cab05b52c65e3648f07ce7f09946219b41438",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reflection3264_divergent_support/reflection3264_divergent.rscript",
+      "kind": "blob",
+      "oid": "a77b11972bf191ea9453aaa5b687183507898b77",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reflection3264_divergent_support/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reflection3264_divergent_support/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reflection3264_multifile/ScriptC_reflection3264_multifile_1.java.expect",
+      "kind": "blob",
+      "oid": "403a9fb74c9e76309edfc07ea2dbeea9d515e3be",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reflection3264_multifile/ScriptC_reflection3264_multifile_2.java.expect",
+      "kind": "blob",
+      "oid": "37474f9154f96039043ba4b0a836bd67272473de",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reflection3264_multifile/ScriptC_reflection3264_multifile_3.java.expect",
+      "kind": "blob",
+      "oid": "5acde1e93a4af0e54e3bfd3f0a1e6146cf848b46",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reflection3264_multifile/reflection3264_multifile_1.rscript",
+      "kind": "blob",
+      "oid": "e43fc93f81902e3704921f04433f166b82f6f40d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reflection3264_multifile/reflection3264_multifile_2.rscript",
+      "kind": "blob",
+      "oid": "2b54e08cdf931f9a58cc5123b7e73054480d7c09",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reflection3264_multifile/reflection3264_multifile_3.rscript",
+      "kind": "blob",
+      "oid": "b34096abe8d0b6427180c4b01ce4407439c68d30",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reflection3264_multifile/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_reflection3264_multifile/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_root_11_i/root_11_i.rscript",
+      "kind": "blob",
+      "oid": "105569f68edf0771b7c2b69f4a6be6a5ee03fc4f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_root_11_i/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_root_11_i/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_root_11_iouxy/root_11_iouxy.rscript",
+      "kind": "blob",
+      "oid": "2cd0667ff28d75dd4d1f49d094026cb59c56c4c7",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_root_11_iouxy/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_root_11_iouxy/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_root_compute/root_compute.rscript",
+      "kind": "blob",
+      "oid": "e6683808ac3a98e4db09998b42a30afe750eb4dc",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_root_compute/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_root_compute/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_root_compute_int32_xy/root_compute_int32_xy.rscript",
+      "kind": "blob",
+      "oid": "37df4816190d6a02ca19e44c44615573077339da",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_root_compute_int32_xy/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_root_compute_int32_xy/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_root_compute_non_void_ptr_usrData/root_compute_non_void_ptr_usrData.rscript",
+      "kind": "blob",
+      "oid": "cf7f318fd8ed595b9880245229d010b8c900c7ec",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_root_compute_non_void_ptr_usrData/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_root_compute_non_void_ptr_usrData/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_root_graphics/root_graphics.rscript",
+      "kind": "blob",
+      "oid": "62ec241e3ada634235a7362b4078f4e4e28b923f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_root_graphics/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_root_graphics/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_root_graphics_13/root_graphics_13.rscript",
+      "kind": "blob",
+      "oid": "882bea1afe39fa699e685321e5c17c3cc9ba17f1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_root_graphics_13/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_root_graphics_13/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_root_void/root_void.rscript",
+      "kind": "blob",
+      "oid": "13bed224cd3cba83e46d4f48b51eb1822ea5792a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_root_void/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_root_void/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_rs_fp_full/rs_fp_full.rscript",
+      "kind": "blob",
+      "oid": "35050fca8908e99b918a0e04b456baeb37b468b7",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_rs_fp_full/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_rs_fp_full/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_rs_fp_imprecise/rs_fp_imprecise.rscript",
+      "kind": "blob",
+      "oid": "98c4c9177a7b703b9ea9885ac24b1f36890ac9aa",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_rs_fp_imprecise/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "7a98ebc6ebb0161945bc47dfe908b195d225a488",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_rs_fp_imprecise/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_rs_fp_relaxed/rs_fp_relaxed.rscript",
+      "kind": "blob",
+      "oid": "dfa8c82119f07016b6b7649cd4a8535769af8825",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_rs_fp_relaxed/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_rs_fp_relaxed/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_rs_package_name/rs_package_name.rscript",
+      "kind": "blob",
+      "oid": "ac623246a84ab3bf4fbf638281d9121df0c17715",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_rs_package_name/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_rs_package_name/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_11/IN_CTS",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_11/set_target_api_11.rscript",
+      "kind": "blob",
+      "oid": "412b21d4d6c5878c108974f900d4f197764bbb91",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_11/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_11/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_12/IN_CTS",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_12/set_target_api_12.rscript",
+      "kind": "blob",
+      "oid": "69e36a441ab5903f2ee061ef7a8dd5877b325fd7",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_12/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_12/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_13/IN_CTS",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_13/set_target_api_13.rscript",
+      "kind": "blob",
+      "oid": "64c8cac99e4cbc881fe224785b50714f4faa89c9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_13/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_13/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_14/IN_CTS",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_14/set_target_api_14.rscript",
+      "kind": "blob",
+      "oid": "b2be55415ab1ef0ff548f080b79b5b2484b63fee",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_14/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_14/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_15/IN_CTS",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_15/set_target_api_15.rscript",
+      "kind": "blob",
+      "oid": "f9d2b59e627e664b7863807946c6aed6f3b1a605",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_15/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_15/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_16/IN_CTS",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_16/set_target_api_16.rscript",
+      "kind": "blob",
+      "oid": "a0f823f21f361563915381a1d4b2bc81881f1f2c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_16/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_16/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_17/IN_CTS",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_17/set_target_api_17.rscript",
+      "kind": "blob",
+      "oid": "3361c48620ced1b1fcb8c5431ca5ccf92b3f14d2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_17/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_17/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_18/IN_CTS",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_18/set_target_api_18.rscript",
+      "kind": "blob",
+      "oid": "a898735865710f07de080f54f0d40c3343a6ed6f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_18/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_18/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_19/IN_CTS",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_19/set_target_api_19.rscript",
+      "kind": "blob",
+      "oid": "6d290b939cd9126cd2914a8d74b36169d2502eee",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_19/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_19/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_development/set_target_api_development.rscript",
+      "kind": "blob",
+      "oid": "0bcad66ab5be033837e858c0d733f131c26e10e8",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_development/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_set_target_api_development/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_static_struct/static_struct.rscript",
+      "kind": "blob",
+      "oid": "0b3e9ec2e20cfddc2aa0089de7b5fe57d3bca78f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_static_struct/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_static_struct/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_str_escape/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_str_escape/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_str_escape/str\\\\escape.rscript",
+      "kind": "blob",
+      "oid": "b2072d58fd2e5a26dff4d76772a5d80a18b1bf19",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_struct_field/ScriptC_struct_field.java.expect",
+      "kind": "blob",
+      "oid": "35aa267f75bfa0f90e69a638c537df67dcab90b0",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_struct_field/ScriptField_InnerOne.java.expect",
+      "kind": "blob",
+      "oid": "09548543cc897065c9f241fbc3c9361c4da1fe91",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_struct_field/ScriptField_InnerTwo.java.expect",
+      "kind": "blob",
+      "oid": "d1211e54a253eb3ac80871fe8f7ed3335161ec3e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_struct_field/ScriptField_Outer.java.expect",
+      "kind": "blob",
+      "oid": "7f3892a51324837e1403bbe5e131235d71a1d944",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_struct_field/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_struct_field/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_struct_field/struct_field.rscript",
+      "kind": "blob",
+      "oid": "025a3ae0eba022d24860d20a160a4650f23fb7ff",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_struct_matrix/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_struct_matrix/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_struct_matrix/struct_matrix.rscript",
+      "kind": "blob",
+      "oid": "353238b7fab34480382e3de0b2ad096f3e8d51a0",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_use_RS_VERSION/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_use_RS_VERSION/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_use_RS_VERSION/use_RS_VERSION.rscript",
+      "kind": "blob",
+      "oid": "ae7a3ad057059c824ff0ceb98a9dc3fc96b15b30",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_verbose/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_verbose/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "bb8a171d31a913924d674d968e127f44ae102f93",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_verbose/verbose.rscript",
+      "kind": "blob",
+      "oid": "7815a775a034886a110ef499ad2d1f68643a8863",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_warnings/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "6015a44dd39413bb7f84cfbe71dbbe0401116d45",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_warnings/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_warnings/warnings.rscript",
+      "kind": "blob",
+      "oid": "f419d9ca4fe1976ab6dba49ce3e4c86e972789d9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_warnings_deprecated/deprecated.rscript",
+      "kind": "blob",
+      "oid": "03f0185c4ba9d1cd5f083524cbb68bb8a18bbed1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_warnings_deprecated/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "4241202f6623b158634cb5092f6a29e9d76d340c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_warnings_deprecated/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_warnings_rsSetElementAt/setelementat.rscript",
+      "kind": "blob",
+      "oid": "032a4560fd9139ee0503e7dad82349fd2f8fb1c0",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_warnings_rsSetElementAt/stderr.txt.expect",
+      "kind": "blob",
+      "oid": "91a072e89960a461cfb99a080032e514d57a2a16",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/P_warnings_rsSetElementAt/stdout.txt.expect",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/run_slang_tests.sh",
+      "kind": "blob",
+      "oid": "f6d5b831c7a7baa8d5b410fd91863eaa3422e32d",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/slang_test.py",
+      "kind": "blob",
+      "oid": "628ec7f9a81709d9fcce0b3703148d70a34c6d1d",
+      "mode": "100755"
+    }
+  ]
+}

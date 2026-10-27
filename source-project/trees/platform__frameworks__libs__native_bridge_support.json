@@ -1,0 +1,2461 @@
+{
+  "repo": "platform/frameworks/libs/native_bridge_support",
+  "requested_revision": "refs/tags/android-17.0.0_r1",
+  "revision": "3d6ed1bcc2f0be54f92cf40458253647e8891176",
+  "entries": [
+    {
+      "path": ".clang-format",
+      "kind": "blob",
+      "oid": "59a02f9256b7bd5843065078f5c37bd99ca8ced0",
+      "mode": "100644"
+    },
+    {
+      "path": "Android.bp",
+      "kind": "blob",
+      "oid": "340bb1c4f6b26f1d56a1a532b5d158e7502cd435",
+      "mode": "100644"
+    },
+    {
+      "path": "OWNERS",
+      "kind": "blob",
+      "oid": "b0bc793f2ec8bf509a26b6bd1b965d845ba314bd",
+      "mode": "100644"
+    },
+    {
+      "path": "PREUPLOAD.cfg",
+      "kind": "blob",
+      "oid": "416a2236403dcc6787f1a93b6c40e266f1e32407",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/api_analysis.py",
+      "kind": "blob",
+      "oid": "76de9cdfee292ff50b15aa1f53cd93eea0c37537",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/api_analysis_test.py",
+      "kind": "blob",
+      "oid": "69bfa2ad92e69a4706653f7a1e28e9cc3d8883b9",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/app_process/Android.bp",
+      "kind": "blob",
+      "oid": "fa3abb66c3b7a247eb1ac52b3ee8d9251bbb8674",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/app_process/app_process.cc",
+      "kind": "blob",
+      "oid": "f997a7e75b93407aacf83ee53aed074f4c9d2b67",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/check_proxy_libraries.py",
+      "kind": "blob",
+      "oid": "4f3504f836356058a7fc8d3105293e387404093f",
+      "mode": "100755"
+    },
+    {
+      "path": "android_api/gen_known_trampolines.py",
+      "kind": "blob",
+      "oid": "45b641b1d31d42b6f0ce3ba557910fca115585fe",
+      "mode": "100755"
+    },
+    {
+      "path": "android_api/gen_proxy_libraries.py",
+      "kind": "blob",
+      "oid": "534eb0baf39f33fa0ed52217a356f87530f832f8",
+      "mode": "100755"
+    },
+    {
+      "path": "android_api/libEGL/Android.bp",
+      "kind": "blob",
+      "oid": "39b8a4042ae0f27a8809a3d59a0a803ca1f811d8",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libEGL/proxy/api_arm.json",
+      "kind": "blob",
+      "oid": "b8601461af21a50562b68b633ef08142ddc2663b",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libEGL/proxy/api_arm64.json",
+      "kind": "blob",
+      "oid": "d8c4b437a8e48bd07e15790721980cd074ef98b0",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libEGL/proxy/api_riscv64.json",
+      "kind": "blob",
+      "oid": "d8c4b437a8e48bd07e15790721980cd074ef98b0",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libEGL/proxy/api_x86.json",
+      "kind": "blob",
+      "oid": "96cf4cd934d4feabc6a9bb0c437f91a13cae6c5d",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libEGL/proxy/api_x86_64.json",
+      "kind": "blob",
+      "oid": "3a0c549180e1e5385ef4af41ff421542acf9b4a6",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libEGL/proxy/custom_trampolines_arm64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "14ae29130face1c1fbb284186b228b709d480230",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libEGL/proxy/custom_trampolines_arm_to_x86.json",
+      "kind": "blob",
+      "oid": "14ae29130face1c1fbb284186b228b709d480230",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libEGL/proxy/custom_trampolines_riscv64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "14ae29130face1c1fbb284186b228b709d480230",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libEGL/proxy/egl_trampolines.cc",
+      "kind": "blob",
+      "oid": "06ec287ab66c53a78ff57550bb86a95c2eedb1ef",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libEGL/proxy/include/native_bridge_proxy/android_api/libEGL/gl_common_defs.h",
+      "kind": "blob",
+      "oid": "e9523f26c7fca1326008b2828e28a83c24ac5016",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libEGL/proxy/opengl_trampolines-inl.h",
+      "kind": "blob",
+      "oid": "e5c38a21ff4a577c809c1216c1ac8bef223dca39",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libEGL/proxy/trampolines_arm64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "c60bcba63a4850a6e1d0f92897960904313d42f5",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libEGL/proxy/trampolines_arm_to_x86-inl.h",
+      "kind": "blob",
+      "oid": "72659b9538336f846390f7d76d624e859941e0cb",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libEGL/proxy/trampolines_riscv64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "c60bcba63a4850a6e1d0f92897960904313d42f5",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libEGL/stubs_arm.cc",
+      "kind": "blob",
+      "oid": "3f13ebb92ec8330ab4d882e11f2d4584e3b886e3",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libEGL/stubs_arm64.cc",
+      "kind": "blob",
+      "oid": "9cb8a9eed4fa37d9a20b1eae3f87efd2800bbd84",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libEGL/stubs_riscv64.cc",
+      "kind": "blob",
+      "oid": "9cb8a9eed4fa37d9a20b1eae3f87efd2800bbd84",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv1_CM/Android.bp",
+      "kind": "blob",
+      "oid": "a6f106dacc44d4b3ab92a52c76b63444ea992923",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv1_CM/proxy/api_arm.json",
+      "kind": "blob",
+      "oid": "5f83608f7bdc1a2e7a857d82f3f1d8e205daaa00",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv1_CM/proxy/api_arm64.json",
+      "kind": "blob",
+      "oid": "eb88458f11813ccdb82f433cc224d6b9b0fc0ca2",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv1_CM/proxy/api_riscv64.json",
+      "kind": "blob",
+      "oid": "eb88458f11813ccdb82f433cc224d6b9b0fc0ca2",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv1_CM/proxy/api_x86.json",
+      "kind": "blob",
+      "oid": "b8bfbbeb4ef0c7b0437d6e2b3e23b292f693d53c",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv1_CM/proxy/api_x86_64.json",
+      "kind": "blob",
+      "oid": "a1aa317a488d2747d3b26d2a61fea29dda8eadee",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv1_CM/proxy/custom_trampolines_arm64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "20330756c63dc0a0d0b6600233d805e1d6a8b95d",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv1_CM/proxy/custom_trampolines_arm_to_x86.json",
+      "kind": "blob",
+      "oid": "20330756c63dc0a0d0b6600233d805e1d6a8b95d",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv1_CM/proxy/custom_trampolines_riscv64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "20330756c63dc0a0d0b6600233d805e1d6a8b95d",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv1_CM/proxy/gles_trampolines.cc",
+      "kind": "blob",
+      "oid": "98c15ab1c7a716ffd40f144e868bd04b3c565390",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv1_CM/proxy/trampolines_arm64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "d47c82aeb21a80dec7f2ef375ce0f8fe08dc66a2",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv1_CM/proxy/trampolines_arm_to_x86-inl.h",
+      "kind": "blob",
+      "oid": "7ad41c9ddb624c2d5b3f68dc15d7944c69021653",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv1_CM/proxy/trampolines_riscv64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "d47c82aeb21a80dec7f2ef375ce0f8fe08dc66a2",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv1_CM/stubs_arm.cc",
+      "kind": "blob",
+      "oid": "1c7b3db7345890eaa8c31c01b51fded43eab5733",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv1_CM/stubs_arm64.cc",
+      "kind": "blob",
+      "oid": "1c7b3db7345890eaa8c31c01b51fded43eab5733",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv1_CM/stubs_riscv64.cc",
+      "kind": "blob",
+      "oid": "1c7b3db7345890eaa8c31c01b51fded43eab5733",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv2/Android.bp",
+      "kind": "blob",
+      "oid": "57cbf5b8a96cf85aac1df891834582eedacf7c14",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv2/proxy/api_arm.json",
+      "kind": "blob",
+      "oid": "9cb667b6cb16dac18cab57c0196ef8a0da8da744",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv2/proxy/api_arm64.json",
+      "kind": "blob",
+      "oid": "32f307793287b2e8bc26d716d6f1e2ab36864f89",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv2/proxy/api_riscv64.json",
+      "kind": "blob",
+      "oid": "32f307793287b2e8bc26d716d6f1e2ab36864f89",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv2/proxy/api_x86.json",
+      "kind": "blob",
+      "oid": "d668d4a65eb92246b2d91268885fcaf40050a6bc",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv2/proxy/api_x86_64.json",
+      "kind": "blob",
+      "oid": "23d89bd58991b09d6ed7175a6cb9500c2475162c",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv2/proxy/custom_trampolines_arm64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "9a735683b2968aa2cca7aebf08a3b252fd2ae17f",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv2/proxy/custom_trampolines_arm_to_x86.json",
+      "kind": "blob",
+      "oid": "9a735683b2968aa2cca7aebf08a3b252fd2ae17f",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv2/proxy/custom_trampolines_riscv64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "9a735683b2968aa2cca7aebf08a3b252fd2ae17f",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv2/proxy/gles2_trampolines.cc",
+      "kind": "blob",
+      "oid": "fb0f456809a920ba9b166d77d95a145fb3f1daae",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv2/proxy/trampolines_arm64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "3d0bd6fa0ccf717bc89df7e8cafd9297b988ed42",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv2/proxy/trampolines_arm_to_x86-inl.h",
+      "kind": "blob",
+      "oid": "5dc948d6a093b5f8d9ee20e79986286c4c766142",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv2/proxy/trampolines_riscv64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "3d0bd6fa0ccf717bc89df7e8cafd9297b988ed42",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv2/stubs_arm.cc",
+      "kind": "blob",
+      "oid": "866832239c74e14b5cb627e6d961228c83154189",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv2/stubs_arm64.cc",
+      "kind": "blob",
+      "oid": "866832239c74e14b5cb627e6d961228c83154189",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv2/stubs_riscv64.cc",
+      "kind": "blob",
+      "oid": "866832239c74e14b5cb627e6d961228c83154189",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv3/Android.bp",
+      "kind": "blob",
+      "oid": "86cf0b9c377c8de7aaeb8df93f293659b3c0d923",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv3/proxy/api_arm.json",
+      "kind": "blob",
+      "oid": "9cb667b6cb16dac18cab57c0196ef8a0da8da744",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv3/proxy/api_arm64.json",
+      "kind": "blob",
+      "oid": "32f307793287b2e8bc26d716d6f1e2ab36864f89",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv3/proxy/api_riscv64.json",
+      "kind": "blob",
+      "oid": "32f307793287b2e8bc26d716d6f1e2ab36864f89",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv3/proxy/api_x86.json",
+      "kind": "blob",
+      "oid": "d668d4a65eb92246b2d91268885fcaf40050a6bc",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv3/proxy/api_x86_64.json",
+      "kind": "blob",
+      "oid": "23d89bd58991b09d6ed7175a6cb9500c2475162c",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv3/proxy/custom_trampolines_arm64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "9a735683b2968aa2cca7aebf08a3b252fd2ae17f",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv3/proxy/custom_trampolines_arm_to_x86.json",
+      "kind": "blob",
+      "oid": "9a735683b2968aa2cca7aebf08a3b252fd2ae17f",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv3/proxy/custom_trampolines_riscv64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "9a735683b2968aa2cca7aebf08a3b252fd2ae17f",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv3/proxy/gles3_trampolines.cc",
+      "kind": "blob",
+      "oid": "f2ec3dd921da1b2d6c1f04cea451c4398653cb7b",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv3/proxy/trampolines_arm64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "3d0bd6fa0ccf717bc89df7e8cafd9297b988ed42",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv3/proxy/trampolines_arm_to_x86-inl.h",
+      "kind": "blob",
+      "oid": "5dc948d6a093b5f8d9ee20e79986286c4c766142",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv3/proxy/trampolines_riscv64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "3d0bd6fa0ccf717bc89df7e8cafd9297b988ed42",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv3/stubs_arm.cc",
+      "kind": "blob",
+      "oid": "8ca9200fa6576ed625b81714fa95ba1547466ab7",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv3/stubs_arm64.cc",
+      "kind": "blob",
+      "oid": "8ca9200fa6576ed625b81714fa95ba1547466ab7",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libGLESv3/stubs_riscv64.cc",
+      "kind": "blob",
+      "oid": "8ca9200fa6576ed625b81714fa95ba1547466ab7",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libOpenMAXAL/Android.bp",
+      "kind": "blob",
+      "oid": "92971eae7cfbd844b8e59a97b9bde28deee46a2e",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libOpenMAXAL/proxy/api_arm.json",
+      "kind": "blob",
+      "oid": "d9d793b09d4763368d983b2e8b0cd7f7fa613b1f",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libOpenMAXAL/proxy/api_arm64.json",
+      "kind": "blob",
+      "oid": "ba4b942f0b3e50928179f5afc25cf042abdfa0b6",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libOpenMAXAL/proxy/api_riscv64.json",
+      "kind": "blob",
+      "oid": "ba4b942f0b3e50928179f5afc25cf042abdfa0b6",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libOpenMAXAL/proxy/api_x86.json",
+      "kind": "blob",
+      "oid": "d9d793b09d4763368d983b2e8b0cd7f7fa613b1f",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libOpenMAXAL/proxy/api_x86_64.json",
+      "kind": "blob",
+      "oid": "ba4b942f0b3e50928179f5afc25cf042abdfa0b6",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libOpenMAXAL/proxy/custom_trampolines_arm64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "e4f20f07acb95b571358dbab1f86de38de67326b",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libOpenMAXAL/proxy/custom_trampolines_arm_to_x86.json",
+      "kind": "blob",
+      "oid": "e4f20f07acb95b571358dbab1f86de38de67326b",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libOpenMAXAL/proxy/custom_trampolines_riscv64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "e4f20f07acb95b571358dbab1f86de38de67326b",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libOpenMAXAL/proxy/maxal_translation.cc",
+      "kind": "blob",
+      "oid": "220898d467f7c95c36ea36e884a9afd28528e6dc",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libOpenMAXAL/proxy/trampolines_arm64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "1371164ba5afa6606ff63d6eccb62d2aebae048e",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libOpenMAXAL/proxy/trampolines_arm_to_x86-inl.h",
+      "kind": "blob",
+      "oid": "63252ada7a1e583cef96ca4b653067db8627d0d3",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libOpenMAXAL/proxy/trampolines_riscv64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "1371164ba5afa6606ff63d6eccb62d2aebae048e",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libOpenMAXAL/stubs_arm.cc",
+      "kind": "blob",
+      "oid": "f017563cb71ca5eb78d839d1b29c1d62b733472c",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libOpenMAXAL/stubs_arm64.cc",
+      "kind": "blob",
+      "oid": "f017563cb71ca5eb78d839d1b29c1d62b733472c",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libOpenMAXAL/stubs_riscv64.cc",
+      "kind": "blob",
+      "oid": "f017563cb71ca5eb78d839d1b29c1d62b733472c",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libOpenSLES/Android.bp",
+      "kind": "blob",
+      "oid": "c332f2f0bb9da4dec86ac63ea6cebbe089e6ea00",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libOpenSLES/proxy/api_arm.json",
+      "kind": "blob",
+      "oid": "f5da1d9aa8b7c1e16109554e661e6e7b477ad15b",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libOpenSLES/proxy/api_arm64.json",
+      "kind": "blob",
+      "oid": "f79b9f07bf58cde473f6d8a07a043bc3594e66a8",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libOpenSLES/proxy/api_riscv64.json",
+      "kind": "blob",
+      "oid": "f79b9f07bf58cde473f6d8a07a043bc3594e66a8",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libOpenSLES/proxy/api_x86.json",
+      "kind": "blob",
+      "oid": "f5da1d9aa8b7c1e16109554e661e6e7b477ad15b",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libOpenSLES/proxy/api_x86_64.json",
+      "kind": "blob",
+      "oid": "f79b9f07bf58cde473f6d8a07a043bc3594e66a8",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libOpenSLES/proxy/custom_trampolines_arm64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "4619ea0bec9942680410a0c15b69f8d4d6a7695d",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libOpenSLES/proxy/custom_trampolines_arm_to_x86.json",
+      "kind": "blob",
+      "oid": "4619ea0bec9942680410a0c15b69f8d4d6a7695d",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libOpenSLES/proxy/custom_trampolines_riscv64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "4619ea0bec9942680410a0c15b69f8d4d6a7695d",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libOpenSLES/proxy/sles_trampolines.cc",
+      "kind": "blob",
+      "oid": "c92f595aacf1b67dcdc5efcea929dd3c0912772d",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libOpenSLES/proxy/trampolines_arm64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "abe41f340057b01208fedfe6fd9b2b12ceb2c528",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libOpenSLES/proxy/trampolines_arm_to_x86-inl.h",
+      "kind": "blob",
+      "oid": "60236ada3d867e664c83deeb6f1eeb7226f5ef4e",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libOpenSLES/proxy/trampolines_riscv64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "abe41f340057b01208fedfe6fd9b2b12ceb2c528",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libOpenSLES/stubs_arm.cc",
+      "kind": "blob",
+      "oid": "f7871f4c476ebedbb0117eb3048fd5cb99e3d026",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libOpenSLES/stubs_arm64.cc",
+      "kind": "blob",
+      "oid": "f7871f4c476ebedbb0117eb3048fd5cb99e3d026",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libOpenSLES/stubs_riscv64.cc",
+      "kind": "blob",
+      "oid": "f7871f4c476ebedbb0117eb3048fd5cb99e3d026",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libaaudio/Android.bp",
+      "kind": "blob",
+      "oid": "6d0d87cf09a006a487b258a2a19d92861224b5dd",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libaaudio/proxy/android_audio_trampolines.cc",
+      "kind": "blob",
+      "oid": "0f4757497833b60cbf1e5917752ab6230a5bda3f",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libaaudio/proxy/api_arm.json",
+      "kind": "blob",
+      "oid": "13e7be6373309843c8ca22ba1661a736c64adf03",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libaaudio/proxy/api_arm64.json",
+      "kind": "blob",
+      "oid": "5ef98eee20b665e7195df3d858f0b186d5117228",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libaaudio/proxy/api_riscv64.json",
+      "kind": "blob",
+      "oid": "5ef98eee20b665e7195df3d858f0b186d5117228",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libaaudio/proxy/api_x86.json",
+      "kind": "blob",
+      "oid": "845d7ef7484ae4c6b168e67345d183399c7c0639",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libaaudio/proxy/api_x86_64.json",
+      "kind": "blob",
+      "oid": "f6148180eae721655c5138797f6e18c143ea7596",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libaaudio/proxy/custom_trampolines_arm64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "2078c7d54f6023499b023c66b6c60b284b8a009a",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libaaudio/proxy/custom_trampolines_arm_to_x86.json",
+      "kind": "blob",
+      "oid": "2078c7d54f6023499b023c66b6c60b284b8a009a",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libaaudio/proxy/custom_trampolines_riscv64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "2078c7d54f6023499b023c66b6c60b284b8a009a",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libaaudio/proxy/trampolines_arm64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "57197c3d5bf4b009cbf57fa49d6a8b8369ebefad",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libaaudio/proxy/trampolines_arm_to_x86-inl.h",
+      "kind": "blob",
+      "oid": "57197c3d5bf4b009cbf57fa49d6a8b8369ebefad",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libaaudio/proxy/trampolines_riscv64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "57197c3d5bf4b009cbf57fa49d6a8b8369ebefad",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libaaudio/stubs_arm.cc",
+      "kind": "blob",
+      "oid": "af8f53f88032e54bb31bf88b5077d77ace7e57b7",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libaaudio/stubs_arm64.cc",
+      "kind": "blob",
+      "oid": "af8f53f88032e54bb31bf88b5077d77ace7e57b7",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libaaudio/stubs_riscv64.cc",
+      "kind": "blob",
+      "oid": "af8f53f88032e54bb31bf88b5077d77ace7e57b7",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libamidi/Android.bp",
+      "kind": "blob",
+      "oid": "2ae70735a2716a10548ec1e89afd578113979e0b",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libamidi/proxy/api_arm.json",
+      "kind": "blob",
+      "oid": "9c3dccd91bf82c7b9c870beae20124105c81bd20",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libamidi/proxy/api_arm64.json",
+      "kind": "blob",
+      "oid": "574f5c18cfc2554815e25af1a89f3254f90d6471",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libamidi/proxy/api_riscv64.json",
+      "kind": "blob",
+      "oid": "574f5c18cfc2554815e25af1a89f3254f90d6471",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libamidi/proxy/api_x86.json",
+      "kind": "blob",
+      "oid": "98ce050532b254243ed0be1f9ae3843c7af488fd",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libamidi/proxy/api_x86_64.json",
+      "kind": "blob",
+      "oid": "76a58231d4aacb72499b46cc36d5b9e4384a8ee9",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libamidi/proxy/custom_trampolines_arm64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "48fb74620e91fe14ac8c33d4389f41bac3a52a18",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libamidi/proxy/custom_trampolines_arm_to_x86.json",
+      "kind": "blob",
+      "oid": "48fb74620e91fe14ac8c33d4389f41bac3a52a18",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libamidi/proxy/custom_trampolines_riscv64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "48fb74620e91fe14ac8c33d4389f41bac3a52a18",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libamidi/proxy/libamidi_trampolines.cc",
+      "kind": "blob",
+      "oid": "f0ac38d63287f2a0a3f1d00c85971e98cc4e9735",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libamidi/proxy/trampolines_arm64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "1cf48930476bec3eeede16738636dce82bfc61e0",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libamidi/proxy/trampolines_arm_to_x86-inl.h",
+      "kind": "blob",
+      "oid": "dac234bfaab986ad75d9e0aad29b99b7d3a3a857",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libamidi/proxy/trampolines_riscv64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "1cf48930476bec3eeede16738636dce82bfc61e0",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libamidi/stubs_arm.cc",
+      "kind": "blob",
+      "oid": "54dbaf63412688e7e92699fa70e1f7eb879b68a6",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libamidi/stubs_arm64.cc",
+      "kind": "blob",
+      "oid": "54dbaf63412688e7e92699fa70e1f7eb879b68a6",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libamidi/stubs_riscv64.cc",
+      "kind": "blob",
+      "oid": "54dbaf63412688e7e92699fa70e1f7eb879b68a6",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libandroid/Android.bp",
+      "kind": "blob",
+      "oid": "600161c99f39991039ffb09e97cc1c3ac38d0a50",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libandroid/proxy/api_arm.json",
+      "kind": "blob",
+      "oid": "e9b0d1606947e440f745fe9f58632742bcc6f9ce",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libandroid/proxy/api_arm64.json",
+      "kind": "blob",
+      "oid": "5d97581f45335c9ea4168a9c51a3c6971c790bcc",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libandroid/proxy/api_riscv64.json",
+      "kind": "blob",
+      "oid": "5d97581f45335c9ea4168a9c51a3c6971c790bcc",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libandroid/proxy/api_x86.json",
+      "kind": "blob",
+      "oid": "76d5c5c2b11e31764eb792e58d4b5e0088d99a16",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libandroid/proxy/api_x86_64.json",
+      "kind": "blob",
+      "oid": "c69f159c0df30eff2f34550e11f3774943a62b09",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libandroid/proxy/custom_trampolines_arm64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "c8380ae1a884b1b3d7d8962c915a6bc0b631e359",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libandroid/proxy/custom_trampolines_arm_to_x86.json",
+      "kind": "blob",
+      "oid": "f5a6ca10a55b73882c94babca36a8c965982bf4f",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libandroid/proxy/custom_trampolines_riscv64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "c8380ae1a884b1b3d7d8962c915a6bc0b631e359",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libandroid/proxy/libandroid_trampolines.cc",
+      "kind": "blob",
+      "oid": "c796a755be30a9fb8470d8797ac2a139712040a1",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libandroid/proxy/trampolines_arm64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "40d18c41503e763ac222fa243f2985085180c261",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libandroid/proxy/trampolines_arm_to_x86-inl.h",
+      "kind": "blob",
+      "oid": "69cf581dc870afbdd51839c1f6a4289007b99737",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libandroid/proxy/trampolines_riscv64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "40d18c41503e763ac222fa243f2985085180c261",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libandroid/stubs_arm.cc",
+      "kind": "blob",
+      "oid": "2eafd445eadc09a9c09998fd5a08b06e5f6ca20a",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libandroid/stubs_arm64.cc",
+      "kind": "blob",
+      "oid": "2eafd445eadc09a9c09998fd5a08b06e5f6ca20a",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libandroid/stubs_riscv64.cc",
+      "kind": "blob",
+      "oid": "2eafd445eadc09a9c09998fd5a08b06e5f6ca20a",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libandroid_runtime/Android.bp",
+      "kind": "blob",
+      "oid": "c87a397c803a1c305159c13b7a1788726c4d46b7",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libandroid_runtime/proxy/android_runtime_trampolines.cc",
+      "kind": "blob",
+      "oid": "f55786bda0cd890afb933ac915726ccd5c02e509",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libandroid_runtime/proxy/api_arm.json",
+      "kind": "blob",
+      "oid": "48aedbc1bafda99f996228e49d1a57ea540e5661",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libandroid_runtime/proxy/api_arm64.json",
+      "kind": "blob",
+      "oid": "a9f36212ecef0276fdfb15acc029b163cbc56bc6",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libandroid_runtime/proxy/api_riscv64.json",
+      "kind": "blob",
+      "oid": "a9f36212ecef0276fdfb15acc029b163cbc56bc6",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libandroid_runtime/proxy/api_x86.json",
+      "kind": "blob",
+      "oid": "ea0e5d3f71639e8240b451e6ec7b7356f253456b",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libandroid_runtime/proxy/api_x86_64.json",
+      "kind": "blob",
+      "oid": "5ded2a9b47a520e6f78d04fea8c8a0625e929819",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libandroid_runtime/proxy/custom_trampolines_arm64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "bf25a819f12f0d830da961ee16ab8c6ba38eab5d",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libandroid_runtime/proxy/custom_trampolines_arm_to_x86.json",
+      "kind": "blob",
+      "oid": "bf25a819f12f0d830da961ee16ab8c6ba38eab5d",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libandroid_runtime/proxy/custom_trampolines_riscv64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "bf25a819f12f0d830da961ee16ab8c6ba38eab5d",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libandroid_runtime/proxy/trampolines_arm64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "5dae7da28faa08f9a9d2af8b265fe925fdb74a1a",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libandroid_runtime/proxy/trampolines_arm_to_x86-inl.h",
+      "kind": "blob",
+      "oid": "dbc2eb2b63231c7924f05de9de40a6875f943cd3",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libandroid_runtime/proxy/trampolines_riscv64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "5dae7da28faa08f9a9d2af8b265fe925fdb74a1a",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libandroid_runtime/stubs_arm.cc",
+      "kind": "blob",
+      "oid": "a1b7f6e8aed8167bd7a7f476da04d6f660c20bea",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libandroid_runtime/stubs_arm64.cc",
+      "kind": "blob",
+      "oid": "bd9f8a17854961edbfa4fbb83efdfa2dbf85bc23",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libandroid_runtime/stubs_riscv64.cc",
+      "kind": "blob",
+      "oid": "bd9f8a17854961edbfa4fbb83efdfa2dbf85bc23",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libbinder_ndk/Android.bp",
+      "kind": "blob",
+      "oid": "de17a9cc98cd5732f3d5526553b79bc2ecb51165",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libbinder_ndk/proxy/api_arm.json",
+      "kind": "blob",
+      "oid": "413066a4502b8730c473f5fdf223235eb73110ce",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libbinder_ndk/proxy/api_arm64.json",
+      "kind": "blob",
+      "oid": "625b73120bdb3e1f2c25c5d3018d02c19421559e",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libbinder_ndk/proxy/api_riscv64.json",
+      "kind": "blob",
+      "oid": "625b73120bdb3e1f2c25c5d3018d02c19421559e",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libbinder_ndk/proxy/api_x86.json",
+      "kind": "blob",
+      "oid": "46e87b39d3732e8f654340c8f0184a0df3639374",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libbinder_ndk/proxy/api_x86_64.json",
+      "kind": "blob",
+      "oid": "7431480d7aa080aa15996d9fd64f38b7a2183905",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libbinder_ndk/proxy/custom_trampolines_arm64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "d83652e4267f6487a20a79d1aae6d9ce1671f211",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libbinder_ndk/proxy/custom_trampolines_arm_to_x86.json",
+      "kind": "blob",
+      "oid": "d83652e4267f6487a20a79d1aae6d9ce1671f211",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libbinder_ndk/proxy/custom_trampolines_riscv64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "d83652e4267f6487a20a79d1aae6d9ce1671f211",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libbinder_ndk/proxy/libbinder_ndk_trampolines.cc",
+      "kind": "blob",
+      "oid": "0eb0eb974765983ebfaee40977cc4ba168dec746",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libbinder_ndk/proxy/trampolines_arm64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "7d68c451267e2c2e1ac6f58a5f3d4a33644a9510",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libbinder_ndk/proxy/trampolines_arm_to_x86-inl.h",
+      "kind": "blob",
+      "oid": "04412d3e91c12ce5ed68a0669d24916fa6255c30",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libbinder_ndk/proxy/trampolines_riscv64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "7d68c451267e2c2e1ac6f58a5f3d4a33644a9510",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libbinder_ndk/stubs_arm.cc",
+      "kind": "blob",
+      "oid": "8f2f3a6b3d691a34cc1d313370db942f0c22b7d0",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libbinder_ndk/stubs_arm64.cc",
+      "kind": "blob",
+      "oid": "8f2f3a6b3d691a34cc1d313370db942f0c22b7d0",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libbinder_ndk/stubs_riscv64.cc",
+      "kind": "blob",
+      "oid": "8f2f3a6b3d691a34cc1d313370db942f0c22b7d0",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/Android.bp",
+      "kind": "blob",
+      "oid": "be8bb5a9fa57deae0447f470a7cd351cc487d45c",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/__cxa_thread_atexit_impl.cpp",
+      "kind": "blob",
+      "oid": "64af1f5bc16eaa58ad54384007543eaf914c68ee",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/__libc_add_main_thread.cpp",
+      "kind": "blob",
+      "oid": "5dc934d6fb1cf1f7318a92e830a28b0a0efa89ed",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/__libc_init_scudo.cpp",
+      "kind": "blob",
+      "oid": "4891ab1176d2b3d90600f10f1fa96aed16cf57e1",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/__libc_set_target_sdk_version.cpp",
+      "kind": "blob",
+      "oid": "2ca07e344afe0bc08656d272e0ac5a3471690d3d",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/exit.c",
+      "kind": "blob",
+      "oid": "e7a92f6e6f239af1c2dd7c9091ff81c766482371",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/malloc_init.cpp",
+      "kind": "blob",
+      "oid": "0bf5b47adb2e278db636c4598c012f63993d6ca0",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/proxy/api_arm.json",
+      "kind": "blob",
+      "oid": "82f0787c33f8b531c8ad7114ad5e82f45717f189",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/proxy/api_arm64.json",
+      "kind": "blob",
+      "oid": "5d86a874fef7e9a432d88c07608049c3ef961dc5",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/proxy/api_riscv64.json",
+      "kind": "blob",
+      "oid": "5d86a874fef7e9a432d88c07608049c3ef961dc5",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/proxy/api_x86.json",
+      "kind": "blob",
+      "oid": "803020946e034e9207a311753269822e8977f804",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/proxy/api_x86_64.json",
+      "kind": "blob",
+      "oid": "b9b05345c0c7e6be496b0850375fa3a62f672176",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/proxy/custom_trampolines_arm64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "b035876782ecb7f7fc86dee272e48d54f5d50d10",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/proxy/custom_trampolines_arm_to_x86.json",
+      "kind": "blob",
+      "oid": "25c0e01343138088745908a5e3992c4858c1a9c4",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/proxy/custom_trampolines_riscv64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "b035876782ecb7f7fc86dee272e48d54f5d50d10",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/proxy/cxa_trampolines.cc",
+      "kind": "blob",
+      "oid": "deddb182fc82d7e13a7a43ce2d971caca6b8aa7d",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/proxy/cxa_trampolines.h",
+      "kind": "blob",
+      "oid": "9c18e211e4686f4ed7d519146277b789bb13a57e",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/proxy/libc_translation.cc",
+      "kind": "blob",
+      "oid": "b2d7df78657ea6347653697b1793a37960fae6c0",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/proxy/long_double.h",
+      "kind": "blob",
+      "oid": "35bbc4db10461aebdaa3b041d79c1ed57c428b30",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/proxy/malloc_translation.cc",
+      "kind": "blob",
+      "oid": "c985d231f07caac4794417c4804b1d65abfab0be",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/proxy/malloc_translation.h",
+      "kind": "blob",
+      "oid": "aac8b3ad54a4737378feafac36296b43e473fdf8",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/proxy/pthread_translation.cc",
+      "kind": "blob",
+      "oid": "bf71e10d1ba0ad0b00cccb047a1dfb89de079220",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/proxy/pthread_translation.h",
+      "kind": "blob",
+      "oid": "1892ff7606c8244f841bb7382286b378ff0c523b",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/proxy/setjmp_thunks.cc",
+      "kind": "blob",
+      "oid": "c139616212a5e627efde73a70356d1e7f8e2b964",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/proxy/setjmp_thunks.h",
+      "kind": "blob",
+      "oid": "0dfe84775a0fde5f64c1f4d48f1e77f3ca621dd4",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/proxy/system_properties_trampolines.cc",
+      "kind": "blob",
+      "oid": "fb954ac867c4b8d64c627194f0ccde469eaa5eb0",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/proxy/system_properties_trampolines.h",
+      "kind": "blob",
+      "oid": "3351d8facd9ca44df80a185cddcf5132f8d6ab98",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/proxy/trampolines_arm64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "9f1573be4263e914319ed80cc296dcdd08e47691",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/proxy/trampolines_arm_to_x86-inl.h",
+      "kind": "blob",
+      "oid": "253ce62ee4258bb997edf630551eb010209e8848",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/proxy/trampolines_riscv64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "9f1573be4263e914319ed80cc296dcdd08e47691",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/proxy/unistd_thunks.cc",
+      "kind": "blob",
+      "oid": "cfaf5ea1614cbb09a3a3ba829b229654da39b233",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/proxy/unistd_thunks.h",
+      "kind": "blob",
+      "oid": "1286601bfd2cdb0d835d8462c9950a8f48afb299",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/stubs_arm.cpp",
+      "kind": "blob",
+      "oid": "e8a6d580d3ffd3cd7f89e1e2c9d03231a2c740b5",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/stubs_arm64.cpp",
+      "kind": "blob",
+      "oid": "db44d88983d82cd4dafc01f237fab5b9187d7f21",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libc/stubs_riscv64.cpp",
+      "kind": "blob",
+      "oid": "db44d88983d82cd4dafc01f237fab5b9187d7f21",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libcamera2ndk/Android.bp",
+      "kind": "blob",
+      "oid": "3db4c3e414d5e8145ef5ccf3702368c12ea5f8de",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libcamera2ndk/proxy/android_camera_checks.h",
+      "kind": "blob",
+      "oid": "d77f9b9b34987dc8126cc6132d000031479b3212",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libcamera2ndk/proxy/android_camera_trampolines.cc",
+      "kind": "blob",
+      "oid": "2ae55cd0a84ed8f92f6bb720503e5072416bb134",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libcamera2ndk/proxy/api_arm.json",
+      "kind": "blob",
+      "oid": "805dc45c53062a2994eb12dd5f4074dd81d7a6f5",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libcamera2ndk/proxy/api_arm64.json",
+      "kind": "blob",
+      "oid": "46df198b0c34b5b779f11dc653c84a022bf1d935",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libcamera2ndk/proxy/api_riscv64.json",
+      "kind": "blob",
+      "oid": "46df198b0c34b5b779f11dc653c84a022bf1d935",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libcamera2ndk/proxy/api_x86.json",
+      "kind": "blob",
+      "oid": "a86feda31513ec93a1acc817980857b5cde7476b",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libcamera2ndk/proxy/api_x86_64.json",
+      "kind": "blob",
+      "oid": "735737a1f6337803925f5ea5030421b2d423a4e6",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libcamera2ndk/proxy/custom_trampolines_arm64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "7df192b29a2dbfee4ec1c2fb7217c2647d3d3510",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libcamera2ndk/proxy/custom_trampolines_arm_to_x86.json",
+      "kind": "blob",
+      "oid": "7df192b29a2dbfee4ec1c2fb7217c2647d3d3510",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libcamera2ndk/proxy/custom_trampolines_riscv64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "7df192b29a2dbfee4ec1c2fb7217c2647d3d3510",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libcamera2ndk/proxy/emulated_api_checker.cc",
+      "kind": "blob",
+      "oid": "0dab59cfca9df7b83d347e896ec95714023ade92",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libcamera2ndk/proxy/trampolines_arm64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "5b059246540d7aa39ba2746c9c52c6abfde72987",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libcamera2ndk/proxy/trampolines_arm_to_x86-inl.h",
+      "kind": "blob",
+      "oid": "5b059246540d7aa39ba2746c9c52c6abfde72987",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libcamera2ndk/proxy/trampolines_riscv64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "5b059246540d7aa39ba2746c9c52c6abfde72987",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libcamera2ndk/stubs_arm.cc",
+      "kind": "blob",
+      "oid": "d34dfdb01e992683a427404c82da93dfb156eafe",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libcamera2ndk/stubs_arm64.cc",
+      "kind": "blob",
+      "oid": "d34dfdb01e992683a427404c82da93dfb156eafe",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libcamera2ndk/stubs_riscv64.cc",
+      "kind": "blob",
+      "oid": "d34dfdb01e992683a427404c82da93dfb156eafe",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libjnigraphics/Android.bp",
+      "kind": "blob",
+      "oid": "5e21123077becc02c0be64cfaa4f1115bc30d029",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libjnigraphics/proxy/api_arm.json",
+      "kind": "blob",
+      "oid": "b86d829b0f6106d1aa88385b832e0095013623c6",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libjnigraphics/proxy/api_arm64.json",
+      "kind": "blob",
+      "oid": "4d5f00201b7fa800d614d34748f1900127e446c8",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libjnigraphics/proxy/api_riscv64.json",
+      "kind": "blob",
+      "oid": "4d5f00201b7fa800d614d34748f1900127e446c8",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libjnigraphics/proxy/api_x86.json",
+      "kind": "blob",
+      "oid": "63e9c3e3d40b8d197774d4aa26a0964aa0bb33ce",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libjnigraphics/proxy/api_x86_64.json",
+      "kind": "blob",
+      "oid": "e94b5ef8eb5f8e794b766202fed6bd9fb08435e4",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libjnigraphics/proxy/custom_trampolines_arm64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "af2fb45d2a7205e060ae04510a20a397a24b68ba",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libjnigraphics/proxy/custom_trampolines_arm_to_x86.json",
+      "kind": "blob",
+      "oid": "af2fb45d2a7205e060ae04510a20a397a24b68ba",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libjnigraphics/proxy/custom_trampolines_riscv64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "af2fb45d2a7205e060ae04510a20a397a24b68ba",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libjnigraphics/proxy/libjnigraphics_trampolines.cc",
+      "kind": "blob",
+      "oid": "b62c0a1f4580bf40efdb7a33cbcff7e5c14cf853",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libjnigraphics/proxy/trampolines_arm64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "9d68b38246a582c28cbe35b515fd9ba58d91923c",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libjnigraphics/proxy/trampolines_arm_to_x86-inl.h",
+      "kind": "blob",
+      "oid": "b5b0b0ef128dba2c8d35c1327bf8eb2cd90c7b0c",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libjnigraphics/proxy/trampolines_riscv64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "9d68b38246a582c28cbe35b515fd9ba58d91923c",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libjnigraphics/stubs_arm.cc",
+      "kind": "blob",
+      "oid": "8fc9884bc71cd58a5f96a96875d6be1d90fd9b15",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libjnigraphics/stubs_arm64.cc",
+      "kind": "blob",
+      "oid": "8fc9884bc71cd58a5f96a96875d6be1d90fd9b15",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libjnigraphics/stubs_riscv64.cc",
+      "kind": "blob",
+      "oid": "8fc9884bc71cd58a5f96a96875d6be1d90fd9b15",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libm/Android.bp",
+      "kind": "blob",
+      "oid": "dcbaf490ad9164b7cf1009efaee5a7f3db1817cf",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libm/proxy/api_arm.json",
+      "kind": "blob",
+      "oid": "1c9a54d96582435dcb30bd3d16f45d40fcfebbd4",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libm/proxy/api_arm64.json",
+      "kind": "blob",
+      "oid": "fb7f59872dd5bc7ff1be12aeb48b4708ae1a25c7",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libm/proxy/api_riscv64.json",
+      "kind": "blob",
+      "oid": "fb7f59872dd5bc7ff1be12aeb48b4708ae1a25c7",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libm/proxy/api_x86.json",
+      "kind": "blob",
+      "oid": "b99904b6663a50ca8bc2b9d420f04ec950759428",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libm/proxy/api_x86_64.json",
+      "kind": "blob",
+      "oid": "d596a4edf6acaf134d3b6e3de5a145169cc8176d",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libm/proxy/custom_trampolines_arm64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "dd91b498aebad651ff58e005e9896a124d18f4de",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libm/proxy/custom_trampolines_arm_to_x86.json",
+      "kind": "blob",
+      "oid": "dd91b498aebad651ff58e005e9896a124d18f4de",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libm/proxy/custom_trampolines_riscv64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "dd91b498aebad651ff58e005e9896a124d18f4de",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libm/proxy/libm_trampolines.cc",
+      "kind": "blob",
+      "oid": "54dd3a547d672e92331694e2d2f9258a840c69f2",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libm/proxy/trampolines_arm64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "207fbffea090611409271bda65fcf3490b2f052f",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libm/proxy/trampolines_arm_to_x86-inl.h",
+      "kind": "blob",
+      "oid": "207fbffea090611409271bda65fcf3490b2f052f",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libm/proxy/trampolines_riscv64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "207fbffea090611409271bda65fcf3490b2f052f",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libm/stubs_arm.cpp",
+      "kind": "blob",
+      "oid": "a7b833a38580f4ab511246f6e94b8426a4a2d3de",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libm/stubs_arm64.cpp",
+      "kind": "blob",
+      "oid": "a7b833a38580f4ab511246f6e94b8426a4a2d3de",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libm/stubs_riscv64.cpp",
+      "kind": "blob",
+      "oid": "a7b833a38580f4ab511246f6e94b8426a4a2d3de",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libmediandk/Android.bp",
+      "kind": "blob",
+      "oid": "0f8145f38db77f2127a2f0386dff9d11b53ddcbd",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libmediandk/proxy/api_arm.json",
+      "kind": "blob",
+      "oid": "6aede3136ceaed2d509cd9ff97e0e62f2de4cbd9",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libmediandk/proxy/api_arm64.json",
+      "kind": "blob",
+      "oid": "845eb85dc4dba2f097873571df1df38a7c37f877",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libmediandk/proxy/api_riscv64.json",
+      "kind": "blob",
+      "oid": "845eb85dc4dba2f097873571df1df38a7c37f877",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libmediandk/proxy/api_x86.json",
+      "kind": "blob",
+      "oid": "60e3e7bacfc17a9ed82b2457975bc5d820000f29",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libmediandk/proxy/api_x86_64.json",
+      "kind": "blob",
+      "oid": "8670d680abea23fa36b6655c4a338c747c5d0913",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libmediandk/proxy/custom_trampolines_arm64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "197815089317bbce7c50fdc5d84bc5e3b6f1e1a5",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libmediandk/proxy/custom_trampolines_arm_to_x86.json",
+      "kind": "blob",
+      "oid": "197815089317bbce7c50fdc5d84bc5e3b6f1e1a5",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libmediandk/proxy/custom_trampolines_riscv64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "70056374a704eedd113b99574eea85c8fb7f70f0",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libmediandk/proxy/media_trampolines.cc",
+      "kind": "blob",
+      "oid": "0801cd3498b1607de20a852b3c2a0df39e6054b6",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libmediandk/proxy/trampolines_arm64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "31007ee9b23659faa8e81d7b4dd7d3aa7e611c17",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libmediandk/proxy/trampolines_arm_to_x86-inl.h",
+      "kind": "blob",
+      "oid": "ef8e49e2e27da5030708ce737d6ee9d582da4716",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libmediandk/proxy/trampolines_riscv64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "31007ee9b23659faa8e81d7b4dd7d3aa7e611c17",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libmediandk/stubs_arm.cc",
+      "kind": "blob",
+      "oid": "fe9a7db0a50e3c26cd70bc120c8156f237fe1aad",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libmediandk/stubs_arm64.cc",
+      "kind": "blob",
+      "oid": "fe9a7db0a50e3c26cd70bc120c8156f237fe1aad",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libmediandk/stubs_riscv64.cc",
+      "kind": "blob",
+      "oid": "fe9a7db0a50e3c26cd70bc120c8156f237fe1aad",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libnativehelper/Android.bp",
+      "kind": "blob",
+      "oid": "f77149e94292e07b2a0c2b9ab1dd4e71c8151623",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libnativehelper/proxy/api_arm.json",
+      "kind": "blob",
+      "oid": "b64b3f4bb6aa3066c2f9210706d2d9dbea1af458",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libnativehelper/proxy/api_arm64.json",
+      "kind": "blob",
+      "oid": "3cdb2aa2c8a4250746cb52961b11bd9fb495c074",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libnativehelper/proxy/api_riscv64.json",
+      "kind": "blob",
+      "oid": "3cdb2aa2c8a4250746cb52961b11bd9fb495c074",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libnativehelper/proxy/api_x86.json",
+      "kind": "blob",
+      "oid": "9d51d2244097fb80df5fa601ff7deaf29d639257",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libnativehelper/proxy/api_x86_64.json",
+      "kind": "blob",
+      "oid": "bd98be7d8423a187e6300f88c46c22b9c49c4eb5",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libnativehelper/proxy/custom_trampolines_arm64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "9292d47975b527a0093fe5b21e46de403cb98ae9",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libnativehelper/proxy/custom_trampolines_arm_to_x86.json",
+      "kind": "blob",
+      "oid": "9292d47975b527a0093fe5b21e46de403cb98ae9",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libnativehelper/proxy/custom_trampolines_riscv64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "9292d47975b527a0093fe5b21e46de403cb98ae9",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libnativehelper/proxy/nativehelper_trampolines.cc",
+      "kind": "blob",
+      "oid": "266c9461227d54381c3afab3a21171d920ef2023",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libnativehelper/proxy/trampolines_arm64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "4c0b5f261a3062895f4d3d5ef2f7ae1efc4113df",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libnativehelper/proxy/trampolines_arm_to_x86-inl.h",
+      "kind": "blob",
+      "oid": "4c0b5f261a3062895f4d3d5ef2f7ae1efc4113df",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libnativehelper/proxy/trampolines_riscv64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "4c0b5f261a3062895f4d3d5ef2f7ae1efc4113df",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libnativehelper/stubs_arm.cc",
+      "kind": "blob",
+      "oid": "afb845374a65740bcb9aa9ea1712d990ff3f31a6",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libnativehelper/stubs_arm64.cc",
+      "kind": "blob",
+      "oid": "afb845374a65740bcb9aa9ea1712d990ff3f31a6",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libnativehelper/stubs_riscv64.cc",
+      "kind": "blob",
+      "oid": "afb845374a65740bcb9aa9ea1712d990ff3f31a6",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libnativewindow/Android.bp",
+      "kind": "blob",
+      "oid": "835a6926adf3c3b1acc6917c95f90ecb2593c106",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libnativewindow/proxy/api_arm.json",
+      "kind": "blob",
+      "oid": "d4d28aecefc83dccd212bbc5703c019c08541cea",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libnativewindow/proxy/api_arm64.json",
+      "kind": "blob",
+      "oid": "644acbd488b178d0df0ed727482fa4379a85f03c",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libnativewindow/proxy/api_riscv64.json",
+      "kind": "blob",
+      "oid": "644acbd488b178d0df0ed727482fa4379a85f03c",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libnativewindow/proxy/api_x86.json",
+      "kind": "blob",
+      "oid": "d588faa903b9c9e3b3b83ba25f1ba8db78f1f604",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libnativewindow/proxy/api_x86_64.json",
+      "kind": "blob",
+      "oid": "8278e3b6ef69e743cf21fb1d576bf8e5dcd9d54b",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libnativewindow/proxy/custom_trampolines_arm64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "8c7affca5898c713931122623aecbc49d38525c7",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libnativewindow/proxy/custom_trampolines_arm_to_x86.json",
+      "kind": "blob",
+      "oid": "8c7affca5898c713931122623aecbc49d38525c7",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libnativewindow/proxy/custom_trampolines_riscv64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "8c7affca5898c713931122623aecbc49d38525c7",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libnativewindow/proxy/nativewindow_trampolines.cc",
+      "kind": "blob",
+      "oid": "5e314d161bb2f199a214fea82c527631230877ce",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libnativewindow/proxy/trampolines_arm64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "723a6d510346efbff16e0b101eaba4dcc8698771",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libnativewindow/proxy/trampolines_arm_to_x86-inl.h",
+      "kind": "blob",
+      "oid": "a1106c05fa748b10d9021cfdb6bfb0025c172c17",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libnativewindow/proxy/trampolines_riscv64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "723a6d510346efbff16e0b101eaba4dcc8698771",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libnativewindow/stubs_arm.cc",
+      "kind": "blob",
+      "oid": "cfce4abf6479a9c110815d82accbfbfd31199462",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libnativewindow/stubs_arm64.cc",
+      "kind": "blob",
+      "oid": "e707bf41a94ef3292dc37cc4fe927152d74cf8da",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libnativewindow/stubs_riscv64.cc",
+      "kind": "blob",
+      "oid": "e707bf41a94ef3292dc37cc4fe927152d74cf8da",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libneuralnetworks/Android.bp",
+      "kind": "blob",
+      "oid": "6024bda36a3978ee7f71c30d8a84575df57a852d",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libneuralnetworks/proxy/api_arm.json",
+      "kind": "blob",
+      "oid": "505969a20f2f9e55a7992e21f10329c8c0ad467b",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libneuralnetworks/proxy/api_arm64.json",
+      "kind": "blob",
+      "oid": "9362ed8fed3a290db166a69c4082bc7d379dd903",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libneuralnetworks/proxy/api_riscv64.json",
+      "kind": "blob",
+      "oid": "9362ed8fed3a290db166a69c4082bc7d379dd903",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libneuralnetworks/proxy/api_x86.json",
+      "kind": "blob",
+      "oid": "1dad2aaec811afc73f96f7679a9022bf71d46725",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libneuralnetworks/proxy/api_x86_64.json",
+      "kind": "blob",
+      "oid": "724a6a3e84108beccef2e4693ea94acb50037f4a",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libneuralnetworks/proxy/custom_trampolines_arm64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "20330756c63dc0a0d0b6600233d805e1d6a8b95d",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libneuralnetworks/proxy/custom_trampolines_arm_to_x86.json",
+      "kind": "blob",
+      "oid": "20330756c63dc0a0d0b6600233d805e1d6a8b95d",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libneuralnetworks/proxy/custom_trampolines_riscv64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "20330756c63dc0a0d0b6600233d805e1d6a8b95d",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libneuralnetworks/proxy/neuralnetworks_trampolines.cc",
+      "kind": "blob",
+      "oid": "5c0f1ed0c10b040334286055f62fefbc6b30eab0",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libneuralnetworks/proxy/trampolines_arm64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "bc681c12b74f7b28114cdf83bc9ecc16b7546333",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libneuralnetworks/proxy/trampolines_arm_to_x86-inl.h",
+      "kind": "blob",
+      "oid": "5680a5d05a22e4a0731be6b0fd8958c8a091713b",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libneuralnetworks/proxy/trampolines_riscv64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "bc681c12b74f7b28114cdf83bc9ecc16b7546333",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libneuralnetworks/stubs_arm.cc",
+      "kind": "blob",
+      "oid": "d2d948074f0b5db318e5a948fb964197064cd0d9",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libneuralnetworks/stubs_arm64.cc",
+      "kind": "blob",
+      "oid": "d2d948074f0b5db318e5a948fb964197064cd0d9",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libneuralnetworks/stubs_riscv64.cc",
+      "kind": "blob",
+      "oid": "d2d948074f0b5db318e5a948fb964197064cd0d9",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libvulkan/Android.bp",
+      "kind": "blob",
+      "oid": "7ad9decf236554b4078b220545dd7767309301f6",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libvulkan/proxy/api_arm.json",
+      "kind": "blob",
+      "oid": "0028dff78bebcd8a3d2599264ac3f33e21786663",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libvulkan/proxy/api_arm64.json",
+      "kind": "blob",
+      "oid": "4db50d13d897df24fc46223d6c55d67a62bf59a8",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libvulkan/proxy/api_riscv64.json",
+      "kind": "blob",
+      "oid": "4db50d13d897df24fc46223d6c55d67a62bf59a8",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libvulkan/proxy/api_x86.json",
+      "kind": "blob",
+      "oid": "7b8752001baa0cae7367625215f017a20d700a4b",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libvulkan/proxy/api_x86_64.json",
+      "kind": "blob",
+      "oid": "7345545baa921c9c4942942cdee078f5124f4c0a",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libvulkan/proxy/binary_search.h",
+      "kind": "blob",
+      "oid": "11d239b821efc50b0920da0c67ae8373b9456419",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libvulkan/proxy/cpp_types.go",
+      "kind": "blob",
+      "oid": "c5aa3c81bcd5c2fb71490a04df9247929699d877",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libvulkan/proxy/cpp_types_test.go",
+      "kind": "blob",
+      "oid": "5776f6695d69b8c29b02bc94da1f4ef31a21291e",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libvulkan/proxy/custom_trampolines_arm64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "18e65158224a3ca0f9017772c2718e92221c4d30",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libvulkan/proxy/custom_trampolines_arm_to_x86.json",
+      "kind": "blob",
+      "oid": "638c2110983a323d5f9896a9d4628b654ef7e7f9",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libvulkan/proxy/custom_trampolines_riscv64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "18e65158224a3ca0f9017772c2718e92221c4d30",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libvulkan/proxy/emulated_api_checker.cc",
+      "kind": "blob",
+      "oid": "3c57d07d5560243ca7d838dcef7795514407eb9b",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libvulkan/proxy/gen_vulkan.go",
+      "kind": "blob",
+      "oid": "c2779e97a851dec95814a9d91387fd6b36c3b545",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libvulkan/proxy/gen_vulkan_test.go",
+      "kind": "blob",
+      "oid": "1fa6d85515eb21f6b3462efb8f40b4e83fad9229",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libvulkan/proxy/trampolines_arm64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "e3f329b1071b19f3ae65214cc062565682967c94",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libvulkan/proxy/trampolines_arm_to_x86-inl.h",
+      "kind": "blob",
+      "oid": "b72c74cf5cd9e3afc7d035b13cad3f8d2bcbc6bb",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libvulkan/proxy/trampolines_riscv64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "e3f329b1071b19f3ae65214cc062565682967c94",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libvulkan/proxy/vulkan_trampolines.cc",
+      "kind": "blob",
+      "oid": "5a70841f08f539b97bf5d8a82d29bd95efc077e0",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libvulkan/proxy/vulkan_types.go",
+      "kind": "blob",
+      "oid": "a7557be2dee44a68086827f8f977ad0b7464d927",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libvulkan/proxy/vulkan_xml.go",
+      "kind": "blob",
+      "oid": "d591665995415ce7638181839762660dcbdd9965",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libvulkan/proxy/vulkan_xml.h",
+      "kind": "blob",
+      "oid": "57068108ae92913439b1012090f49453df555291",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libvulkan/proxy/vulkan_xml_define.h",
+      "kind": "blob",
+      "oid": "51838731553c1a96d27a2bdec1fefd163909cba0",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libvulkan/proxy/vulkan_xml_test.go",
+      "kind": "blob",
+      "oid": "83ac8db63ecb8355a2319cd6f831e087ae4eb302",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libvulkan/stubs_arm.cc",
+      "kind": "blob",
+      "oid": "43835b6561abfdded9406e10773d60012a76c04a",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libvulkan/stubs_arm64.cc",
+      "kind": "blob",
+      "oid": "43835b6561abfdded9406e10773d60012a76c04a",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libvulkan/stubs_riscv64.cc",
+      "kind": "blob",
+      "oid": "43835b6561abfdded9406e10773d60012a76c04a",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libwebviewchromium_plat_support/Android.bp",
+      "kind": "blob",
+      "oid": "9fb0809b5420d13de5abe5f8beda657ef1b8c941",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libwebviewchromium_plat_support/proxy/api_arm.json",
+      "kind": "blob",
+      "oid": "4c3d33cbe240aa3a508012c12595aa64d783c396",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libwebviewchromium_plat_support/proxy/api_arm64.json",
+      "kind": "blob",
+      "oid": "a303132da2daaef6595e7b583f60c4d3fa6e2018",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libwebviewchromium_plat_support/proxy/api_riscv64.json",
+      "kind": "blob",
+      "oid": "a303132da2daaef6595e7b583f60c4d3fa6e2018",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libwebviewchromium_plat_support/proxy/api_x86.json",
+      "kind": "blob",
+      "oid": "65bbca7036c5b7fdd48bf1e9ab977af88f0da12e",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libwebviewchromium_plat_support/proxy/api_x86_64.json",
+      "kind": "blob",
+      "oid": "4d5a17f08a3abc8e5922c1ab95414416379f78d4",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libwebviewchromium_plat_support/proxy/custom_trampolines_arm64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "5c657802a3af87f3da0326a6e9c0db1a09cf6f46",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libwebviewchromium_plat_support/proxy/custom_trampolines_arm_to_x86.json",
+      "kind": "blob",
+      "oid": "5c657802a3af87f3da0326a6e9c0db1a09cf6f46",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libwebviewchromium_plat_support/proxy/custom_trampolines_riscv64_to_x86_64.json",
+      "kind": "blob",
+      "oid": "5c657802a3af87f3da0326a6e9c0db1a09cf6f46",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libwebviewchromium_plat_support/proxy/libwebviewchromium_plat_support_trampolines.cc",
+      "kind": "blob",
+      "oid": "9d9d9f0a3d4dcd783865131bce9de452ad1a44c0",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libwebviewchromium_plat_support/proxy/trampolines_arm64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "df68f9026efd5e25ffb9f373d73db6ef91a17f63",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libwebviewchromium_plat_support/proxy/trampolines_arm_to_x86-inl.h",
+      "kind": "blob",
+      "oid": "df68f9026efd5e25ffb9f373d73db6ef91a17f63",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libwebviewchromium_plat_support/proxy/trampolines_riscv64_to_x86_64-inl.h",
+      "kind": "blob",
+      "oid": "df68f9026efd5e25ffb9f373d73db6ef91a17f63",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libwebviewchromium_plat_support/stubs_arm.cc",
+      "kind": "blob",
+      "oid": "ad25b8cc8df21e7d7d9f259ed3473b9ae755212d",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libwebviewchromium_plat_support/stubs_arm64.cc",
+      "kind": "blob",
+      "oid": "ad25b8cc8df21e7d7d9f259ed3473b9ae755212d",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/libwebviewchromium_plat_support/stubs_riscv64.cc",
+      "kind": "blob",
+      "oid": "ad25b8cc8df21e7d7d9f259ed3473b9ae755212d",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/linker/Android.bp",
+      "kind": "blob",
+      "oid": "14f8afa6312f15b0f3764f258dd49a31e81fbec6",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/linker/__libc_init_main_thread.cpp",
+      "kind": "blob",
+      "oid": "69618513152526a6b3cd413ff01542a8c1ca97e0",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/linker/include/native_bridge_support/linker/guest_arch_constant.h",
+      "kind": "blob",
+      "oid": "04fea067391d54a24641ebcc13900ed4fbd1c090",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/linker/include/native_bridge_support/linker/static_tls_config.h",
+      "kind": "blob",
+      "oid": "d28198c8a4b785b619b9b17dc18f20b874e26dae",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/linker/init_static_tls_arm.S",
+      "kind": "blob",
+      "oid": "4e5132606117e0e862b198972d0a414627af75c3",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/linker/init_static_tls_arm64.S",
+      "kind": "blob",
+      "oid": "553e7a29896d7fbab15bee2a16981110096c219b",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/linker/init_static_tls_riscv64.cc",
+      "kind": "blob",
+      "oid": "23cde8d12cb23936b731c068265c77d99d7b0a10",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/linker/linker.arm.map",
+      "kind": "blob",
+      "oid": "e37261612a7c7557e2d5cd953d414bf4ae4548b2",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/linker/linker.generic.map",
+      "kind": "blob",
+      "oid": "c1beb2fa70b62a188c1f112fc6e2d1cbc4270b08",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/linker/linker_tls.cpp",
+      "kind": "blob",
+      "oid": "9326e02b0dc1cc035d6547723ede4b73199cb548",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/linker/linker_translate_path.cpp",
+      "kind": "blob",
+      "oid": "6f69645233cf6c289a9be6f3515b82e98e19b295",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/vdso/Android.bp",
+      "kind": "blob",
+      "oid": "a6befce0d74e668a788f3d18ed59c6018546e6b0",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/vdso/include/native_bridge_support/vdso/interceptable_functions.h",
+      "kind": "blob",
+      "oid": "31e8e9d0e05b97a7e2b85073540d7011caf05399",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/vdso/include/native_bridge_support/vdso/vdso.h",
+      "kind": "blob",
+      "oid": "25cee0239949374e82ef6382de20ddd9702c27d4",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/vdso/vdso_arm.S",
+      "kind": "blob",
+      "oid": "11a910b64fa44d1b166f69207a172c702ff13f41",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/vdso/vdso_arm64.S",
+      "kind": "blob",
+      "oid": "c6880d3fb8e89c9b811033d5ce4b1f6ba0163994",
+      "mode": "100644"
+    },
+    {
+      "path": "android_api/vdso/vdso_riscv64.S",
+      "kind": "blob",
+      "oid": "1f142e89df447786eab85a57d7d6e9fc23f7f14a",
+      "mode": "100644"
+    },
+    {
+      "path": "guest_state/Android.bp",
+      "kind": "blob",
+      "oid": "c8173b2976485b253d2c30b739b2b2dde8b7b29d",
+      "mode": "100644"
+    },
+    {
+      "path": "guest_state/include/native_bridge_support/arm/guest_state/guest_state_cpu_state.h",
+      "kind": "blob",
+      "oid": "cd2a54989fb9b3af661c6a9c25926cf5f4af3f5c",
+      "mode": "100644"
+    },
+    {
+      "path": "guest_state/include/native_bridge_support/arm64/guest_state/guest_state_cpu_state.h",
+      "kind": "blob",
+      "oid": "df678942ea6ab766160d46f7c982fdc143d33fdf",
+      "mode": "100644"
+    },
+    {
+      "path": "guest_state/include/native_bridge_support/riscv64/guest_state/guest_state_cpu_state.h",
+      "kind": "blob",
+      "oid": "a6c8f169bcd06ef05d7822a974b1366b9e2e2102",
+      "mode": "100644"
+    },
+    {
+      "path": "guest_state_accessor/Android.bp",
+      "kind": "blob",
+      "oid": "ba895c9ec1533f7d56600bedb295704ee82887a9",
+      "mode": "100644"
+    },
+    {
+      "path": "guest_state_accessor/accessor_proxy.cc",
+      "kind": "blob",
+      "oid": "31e92615f40a58c51247eda16e51ecd62900de38",
+      "mode": "100644"
+    },
+    {
+      "path": "guest_state_accessor/accessor_tests.cc",
+      "kind": "blob",
+      "oid": "230475fdbd3128758a2f6fe55ce6a247cd32f621",
+      "mode": "100644"
+    },
+    {
+      "path": "guest_state_accessor/include/native_bridge_support/guest_state_accessor/accessor.h",
+      "kind": "blob",
+      "oid": "8feceba22fd8220154bb5dc452e3ac942bb8a5f8",
+      "mode": "100644"
+    },
+    {
+      "path": "guest_state_accessor/include/native_bridge_support/guest_state_accessor/dlext_namespaces.h",
+      "kind": "blob",
+      "oid": "42ab1cb56530da57b255764826e6144f1d348bae",
+      "mode": "100644"
+    },
+    {
+      "path": "native_bridge_support.mk",
+      "kind": "blob",
+      "oid": "35d516a722f52acad79466b2c6f94c4906c194f6",
+      "mode": "100644"
+    },
+    {
+      "path": "tools/check_disallowed_words.py",
+      "kind": "blob",
+      "oid": "e2065e658563bf22a8676a25353e1cb08985b7ad",
+      "mode": "100755"
+    }
+  ]
+}

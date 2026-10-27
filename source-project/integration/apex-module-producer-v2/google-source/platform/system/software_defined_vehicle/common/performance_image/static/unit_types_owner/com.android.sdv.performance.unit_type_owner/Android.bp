@@ -1,0 +1,75 @@
+// Copyright (C) 2026 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+apex {
+    name: "com.android.sdv.performance.unit_type_owner",
+    manifest: "apex_manifest.json",
+    key: "com.android.sdv.performance.unit_type_owner.key",
+    certificate: ":com.android.sdv.performance.unit_type_owner.certificate",
+    file_contexts: "file_contexts",
+    prebuilts: [
+        "com.android.sdv.performance.unit_type_owner.manifest",
+        "com.android.sdv.performance.unit_type_owner.linker-config",
+        "com.android.sdv.performance.unit_type_owner.performance.unit_type_ownerServiceBundle.acl_policy",
+        "custom_modes_dispatcher.textproto",
+    ],
+    product_specific: true,
+    updatable: true,
+    min_sdk_version: "35",
+}
+
+apex_key {
+    name: "com.android.sdv.performance.unit_type_owner.key",
+    public_key: "com.android.sdv.performance.unit_type_owner.avbpubkey",
+    private_key: "com.android.sdv.performance.unit_type_owner.pem",
+}
+
+android_app_certificate {
+    name: "com.android.sdv.performance.unit_type_owner.certificate",
+    certificate: "com.android.sdv.performance.unit_type_owner",
+}
+
+prebuilt_etc {
+    name: "com.android.sdv.performance.unit_type_owner.manifest",
+    src: "sdv_service_bundles_manifest.textproto",
+    filename: "sdv_service_bundles_manifest.textproto",
+    installable: false,
+    visibility: ["//visibility:private"],
+}
+
+prebuilt_etc {
+    name: "com.android.sdv.performance.unit_type_owner.performance.unit_type_ownerServiceBundle.acl_policy",
+    src: "acl.textproto",
+    sub_dir: "PerformanceUnitTypeOwnerServiceBundle",
+    filename: "acl.textproto",
+    installable: false,
+}
+
+prebuilt_etc {
+    name: "custom_modes_dispatcher.textproto",
+    sub_dir: "orch/performance",
+    src: "custom_modes_dispatcher.textproto",
+    installable: false,
+}
+
+// The linker config to allow libraries for the apex to be linkable.
+linker_config {
+    name: "com.android.sdv.performance.unit_type_owner.linker-config",
+    src: "linker.config.json",
+    installable: false,
+}

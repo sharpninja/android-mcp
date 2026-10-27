@@ -1,0 +1,37 @@
+--- a/catalog/tooling/build_catalog.py
++++ b/catalog/tooling/build_catalog.py
+@@ -9,7 +9,7 @@
+ def js(x):return json.dumps(x,sort_keys=True,separators=(',',':'),ensure_ascii=False)
+ def hb(b):return hashlib.sha256(b).hexdigest()
+ def processing_fingerprint():
+- return sha(js({name:hb((P/name).read_bytes()) for name in ('tooling/build_catalog.py','tooling/cache_fingerprint.py','tooling/parsers.py','tooling/aidl_members.py','tooling/aidl_lex.py','tooling/hidl_source.py','tooling/foundation_extract.py','tooling/java_source.py','tooling/sdk_api_index.py','tooling/jvm_source_link.py','tooling/java_context.py','tooling/annotation_link.py','tooling/catalog_projection.py','tooling/dispatch_manifest.py','tooling/permission_reference.py','contracts/DeviceResolution.schema.json','contracts/Entry.schema.json','contracts/PermissionExpression.schema.json')}))
++ return sha(js({name:hb((P/name).read_bytes()) for name in ('tooling/build_catalog.py','tooling/cache_fingerprint.py','tooling/parsers.py','tooling/aidl_members.py','tooling/aidl_lex.py','tooling/hidl_source.py','tooling/foundation_extract.py','tooling/java_source.py','tooling/sdk_api_index.py','tooling/jvm_source_link.py','tooling/java_context.py','tooling/annotation_link.py','tooling/catalog_projection.py','tooling/dispatch_manifest.py','tooling/permission_reference.py','tooling/manifest_source.py','contracts/DeviceResolution.schema.json','contracts/Entry.schema.json','contracts/PermissionExpression.schema.json')}))
+ def ref(text):return dict(text=text,status='unknown',codec_status='unknown',reason='Source type retained; runtime resolver/codec not verified')
+ def cached_records(s,root):
+  cache=s.get('metadata_cache')
+@@ -141,15 +141,21 @@
+    report.update(expected_declarations=s['metadata_cache']['records'],status='partial' if report['unsupported'] else 'parsed',semantic_scope='Source declarations; public membership not inferred from visibility' if kind=='java-source' else 'All versioned lifecycle records; native current-target lookup separate; field types and type kinds may be unknown')
+   elif kind=='manifest':
+    try:
+-    xml=ET.fromstring(path.read_bytes());ns='{http://schemas.android.com/apk/res/android}'
+-    defs=list(xml.iter('permission'));report['permission_elements']=len(defs)
++    from manifest_source import parse as parse_manifest
++    xml,manifest_report=parse_manifest(path.read_bytes());report.update(manifest_report);ns='{http://schemas.android.com/apk/res/android}'
++    defs=list(xml.iter('permission')) if xml is not None else [];report['permission_elements']=len(defs)
+     for node in defs:
+      name=node.attrib.get(ns+'name')
+      if name is None:issue(s,None,'Permission element lacks name',ET.tostring(node,encoding='unicode'));continue
+      try:db.execute('INSERT INTO permission_definitions VALUES (?,?,?,?)',(name,sid,node.attrib.get(ns+'protectionLevel'),js(dict(attributes=node.attrib,children=[ET.tostring(c,encoding='unicode') for c in node]))))
+      except sqlite3.IntegrityError:issue(s,None,'Duplicate permission name in one manifest; raw element retained',ET.tostring(node,encoding='unicode'),'duplicate')
+-    report['status']='parsed'
+-   except ET.ParseError as e:issue(s,None,'Manifest XML unresolved: '+str(e),path.read_text(errors='replace'));report['status']='unsupported'
++   except ET.ParseError as e:
++    payload=path.read_bytes()
++    try:raw_manifest=payload.decode('utf-8');encoding='utf-8'
++    except UnicodeDecodeError:
++     import base64
++     raw_manifest=base64.b64encode(payload).decode('ascii');encoding='base64'
++    issue(s,None,'Manifest XML unresolved: '+str(e),raw_manifest);report.update(status='unsupported',raw_source_encoding=encoding,raw_source_retained_in_issues=True)
+   elif kind=='aidl':
+    text=path.read_text()
+    try:

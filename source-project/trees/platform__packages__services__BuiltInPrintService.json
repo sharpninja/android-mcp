@@ -1,0 +1,1465 @@
+{
+  "repo": "platform/packages/services/BuiltInPrintService",
+  "requested_revision": "refs/tags/android-17.0.0_r1",
+  "revision": "eddcc1ee8095ff98bcdbfdcf3084cd13e9391ee2",
+  "entries": [
+    {
+      "path": ".gitignore",
+      "kind": "blob",
+      "oid": "623d6ab28feefa46c79898d75163cbe771c0565e",
+      "mode": "100644"
+    },
+    {
+      "path": "Android.bp",
+      "kind": "blob",
+      "oid": "3c72521ff8aceafd7346932d951c8ccd8c10b582",
+      "mode": "100644"
+    },
+    {
+      "path": "AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "d128f935bc3af41f1aac1d54611219b96a7a5cb5",
+      "mode": "100644"
+    },
+    {
+      "path": "CleanSpec.mk",
+      "kind": "blob",
+      "oid": "839e30c7586509f873923c26a505c2906624a992",
+      "mode": "100644"
+    },
+    {
+      "path": "OWNERS",
+      "kind": "blob",
+      "oid": "3d9c23e18793582124c320d4fefd768d80c57bc3",
+      "mode": "100644"
+    },
+    {
+      "path": "PREUPLOAD.cfg",
+      "kind": "blob",
+      "oid": "84f086bf574908ebe2f093dddc39a88053e03f16",
+      "mode": "100644"
+    },
+    {
+      "path": "TEST_MAPPING",
+      "kind": "blob",
+      "oid": "2e0e6d1163e7f90d1cc506fdbfeecebb9f384139",
+      "mode": "100644"
+    },
+    {
+      "path": "default-permissions_bips.xml",
+      "kind": "blob",
+      "oid": "fd20fa85dae0b521eae27a9a1eee645f744ccace",
+      "mode": "100644"
+    },
+    {
+      "path": "flags/Android.bp",
+      "kind": "blob",
+      "oid": "08ad74ce91f80d41a0288d37fb69ecd2d653988e",
+      "mode": "100644"
+    },
+    {
+      "path": "flags/flags.aconfig",
+      "kind": "blob",
+      "oid": "ffda8f0df90915bac35dc393c124d599abfd07b9",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/Android.bp",
+      "kind": "blob",
+      "oid": "971a8133ddedc10b0c95db6b105a466faf4821d9",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/include/ifc_print_job.h",
+      "kind": "blob",
+      "oid": "c64a8072b7d4d6bf18146c6194ed4b34d7932052",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/include/ifc_printer_capabilities.h",
+      "kind": "blob",
+      "oid": "c816bd36037d5b6d0267dfeda33c4b1239baa04f",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/include/ifc_status_monitor.h",
+      "kind": "blob",
+      "oid": "77324f3ba5800ebf10d7410f0ad4f89ea1ae6ae8",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/include/ifc_wprint.h",
+      "kind": "blob",
+      "oid": "2d1262f105526ad56b1e2cbc9784a4c0dc14b95e",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/include/lib_printable_area.h",
+      "kind": "blob",
+      "oid": "6ecf16e8c2c5601ca5c9c53066630cba9858f47a",
+      "mode": "100755"
+    },
+    {
+      "path": "jni/include/lib_wprint.h",
+      "kind": "blob",
+      "oid": "b8bea17b7155cee205b8a2b531dd545743749cc2",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/include/media_sizes.h",
+      "kind": "blob",
+      "oid": "9fead93750e8255e01d22331f6be45a80ffbda7d",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/include/media_tray_types.h",
+      "kind": "blob",
+      "oid": "a2db783e697b2c1feafcccd4229ecb288d7c95f7",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/include/mime_types.h",
+      "kind": "blob",
+      "oid": "da4f918a98c767510c6d220d87071830a7f8a5fe",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/include/printer_capabilities_types.h",
+      "kind": "blob",
+      "oid": "6d23b5478b53b8198605b5afae8c47c30264aa78",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/include/wprint_debug.h",
+      "kind": "blob",
+      "oid": "46ec404c05d95e49e6f9875ed025f224baac3eb0",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/include/wprint_df_types.h",
+      "kind": "blob",
+      "oid": "04760035a1eda1b19daa6c1f41d8d3aaf5200c17",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/include/wprint_io_plugin.h",
+      "kind": "blob",
+      "oid": "83318534f3b712a80be566cab4fd5c94d370465d",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/include/wprint_msgq.h",
+      "kind": "blob",
+      "oid": "627c01010840ea52d850785c8e3966ee61ec5f36",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/include/wprint_status_types.h",
+      "kind": "blob",
+      "oid": "ef7093e493cda2d9fd90db9c33a3c69764473e82",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/include/wtypes.h",
+      "kind": "blob",
+      "oid": "7044a672416caf808e5e09991181a0cda749fbba",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/ipphelper/ipp_print.c",
+      "kind": "blob",
+      "oid": "178142c47e07340fdcd831c93b9132aa82bd74a9",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/ipphelper/ipp_print.h",
+      "kind": "blob",
+      "oid": "d8925e7d543b05ac612afd21bab1520d82365760",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/ipphelper/ipphelper.c",
+      "kind": "blob",
+      "oid": "8ad04470f8d70888d3be7443fcd9209c00acb28d",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/ipphelper/ipphelper.h",
+      "kind": "blob",
+      "oid": "4a5617679e9af40faa57df4469a6fbc974024667",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/ipphelper/ippstatus.h",
+      "kind": "blob",
+      "oid": "95a0a7ef3887c96e2065ea0abf137ef19f9d3a88",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/ipphelper/ippstatus_capabilities.c",
+      "kind": "blob",
+      "oid": "df0b3a47c5f984f67980fab4dbdb95b482496eb4",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/ipphelper/ippstatus_capabilities.h",
+      "kind": "blob",
+      "oid": "34ea0873ffca7313fe178fe476c4629a78df6696",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/ipphelper/ippstatus_monitor.c",
+      "kind": "blob",
+      "oid": "edf3a56241de1eb39da247086c866fc854fa917f",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/ipphelper/ippstatus_monitor.h",
+      "kind": "blob",
+      "oid": "a89039378d49a6172cfe34be62e117a13376f81f",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/lib/lib_wprint.c",
+      "kind": "blob",
+      "oid": "483caa9edf097230f021f1c12d642bd03e52030f",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/lib/plugin_db.c",
+      "kind": "blob",
+      "oid": "eecf38b3c14a9ddc90bbc1d641be4751865f170f",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/lib/plugin_db.h",
+      "kind": "blob",
+      "oid": "298a1676892c6f4cc933469d231cb3e396b5ba6f",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/lib/printable_area.c",
+      "kind": "blob",
+      "oid": "d3b4f85023d84d9744fa8e51ac247c4fe052374d",
+      "mode": "100755"
+    },
+    {
+      "path": "jni/lib/printer.c",
+      "kind": "blob",
+      "oid": "1dd380d88c72a316c2f794f13d10a8836f580dc8",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/lib/wprintJNI.c",
+      "kind": "blob",
+      "oid": "b5d8c8609fa8c22dff6e33df60a64df044861b60",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/lib/wprint_msgq.c",
+      "kind": "blob",
+      "oid": "0e20de0999706736f16c0fddcd840bbe3f1930e7",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/plugins/genPCLm/inc/PCLmGenerator.h",
+      "kind": "blob",
+      "oid": "70db90ee07843240e70533cb3a4d439ff7addf12",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/plugins/genPCLm/inc/common_defines.h",
+      "kind": "blob",
+      "oid": "0b9f3f0920f73fcfb999caa05013d3b28e59ad71",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/plugins/genPCLm/inc/genPCLm.h",
+      "kind": "blob",
+      "oid": "60eae57299dfc28c3b5253980d55c7988219bef3",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/plugins/genPCLm/src/genJPEGStrips.cpp",
+      "kind": "blob",
+      "oid": "4734135a3e204b9764c42bef28a01432bdbc4049",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/plugins/genPCLm/src/genPCLm.cpp",
+      "kind": "blob",
+      "oid": "a9a6ac470085bdc40fe89b48b37bd2abfe333e1a",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/plugins/lib_pcl.h",
+      "kind": "blob",
+      "oid": "4f02725c64aba8e2ba62129df5c93b1a76b96d03",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/plugins/lib_pclm.c",
+      "kind": "blob",
+      "oid": "ae44bd662a828c0c5f8619a1cd23312359b403a1",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/plugins/lib_pclm.h",
+      "kind": "blob",
+      "oid": "09e43aa8af6ee98184aa31f82cb691a8928ccdd7",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/plugins/lib_pwg.c",
+      "kind": "blob",
+      "oid": "54d934051cdad48412a6006fc6bd17d928bc7771",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/plugins/media.h",
+      "kind": "blob",
+      "oid": "b49a43e4d4e733c35495e5d3127bd9e652992964",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/plugins/pclm_wrapper_api.cpp",
+      "kind": "blob",
+      "oid": "ef0a0d437257985c9146d0a39b834cfd944f5bbe",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/plugins/pclm_wrapper_api.h",
+      "kind": "blob",
+      "oid": "b3fb51598fcfa6861edf740c0d86d43818615f83",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/plugins/pdf_render.c",
+      "kind": "blob",
+      "oid": "a17dc887a0fa7933d1ad33e702679b8ca7fabcd1",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/plugins/plugin_pcl.c",
+      "kind": "blob",
+      "oid": "55c333f23adb8de9691b26399515ea15f35d594a",
+      "mode": "100755"
+    },
+    {
+      "path": "jni/plugins/plugin_pdf.c",
+      "kind": "blob",
+      "oid": "4c54fd7b9ac08de9f13b6e25de9016c3591360a4",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/plugins/wprint_image.c",
+      "kind": "blob",
+      "oid": "6bf1e3b702fdf7a618dba84cd3652a301ce50780",
+      "mode": "100755"
+    },
+    {
+      "path": "jni/plugins/wprint_image.h",
+      "kind": "blob",
+      "oid": "4b29d8e19a11d9fe98d4fdf8f4d102e3e6114268",
+      "mode": "100755"
+    },
+    {
+      "path": "jni/plugins/wprint_image_platform.c",
+      "kind": "blob",
+      "oid": "76fb3fcea967ac60097b1098232c7a68833654d4",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/plugins/wprint_image_platform.h",
+      "kind": "blob",
+      "oid": "a45b4ec048243f1bcec0dfe2b70683f180068116",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/plugins/wprint_mupdf.c",
+      "kind": "blob",
+      "oid": "2a3b1689d14b02cd4b6188b63e8a1c67d0e44914",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/plugins/wprint_mupdf.h",
+      "kind": "blob",
+      "oid": "d086819f2f6da48360ab75bc8a5c9e8fa4564282",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/plugins/wprint_scaler.c",
+      "kind": "blob",
+      "oid": "129aa180a49e342d784f532a3e03f9741188334b",
+      "mode": "100644"
+    },
+    {
+      "path": "jni/plugins/wprint_scaler.h",
+      "kind": "blob",
+      "oid": "6adaba165b524f6a40d78fdbbf7c55ec263094f5",
+      "mode": "100644"
+    },
+    {
+      "path": "proguard.flags",
+      "kind": "blob",
+      "oid": "c7e100969b8dabeb110d628222717fbe21766387",
+      "mode": "100644"
+    },
+    {
+      "path": "res/drawable/ic_download_from_market.xml",
+      "kind": "blob",
+      "oid": "44a5edf5c9f857f14926c99a0c2001c437ba1b3f",
+      "mode": "100644"
+    },
+    {
+      "path": "res/drawable/ic_info.xml",
+      "kind": "blob",
+      "oid": "efa1020be4e01643055b697d6d93d9251f1b15d0",
+      "mode": "100644"
+    },
+    {
+      "path": "res/drawable/ic_menu_add.xml",
+      "kind": "blob",
+      "oid": "b271aee0b4206826b3ce6a1b6446f5236bfc3c4b",
+      "mode": "100644"
+    },
+    {
+      "path": "res/drawable/ic_menu_search.xml",
+      "kind": "blob",
+      "oid": "54ac76477a518335eda78b76df7eab0ca0260af4",
+      "mode": "100644"
+    },
+    {
+      "path": "res/drawable/ic_printer.xml",
+      "kind": "blob",
+      "oid": "369d884fff38910eb29b13e830ebcc14d9746c59",
+      "mode": "100644"
+    },
+    {
+      "path": "res/drawable/ic_printservice.xml",
+      "kind": "blob",
+      "oid": "49b63a31c81a1373f20dfe356ead6e1e509791c1",
+      "mode": "100644"
+    },
+    {
+      "path": "res/drawable/ic_settings_gear.xml",
+      "kind": "blob",
+      "oid": "df029170517810648b3445a87ebd83e1f9aa9603",
+      "mode": "100644"
+    },
+    {
+      "path": "res/drawable/ic_supply_marker_warning.xml",
+      "kind": "blob",
+      "oid": "8316dcaea076d82be016853642d96743a7f3038c",
+      "mode": "100644"
+    },
+    {
+      "path": "res/drawable/supply_marker_shape.xml",
+      "kind": "blob",
+      "oid": "deee6fc4aeba1934fec91992b573c3f214364de0",
+      "mode": "100644"
+    },
+    {
+      "path": "res/layout/combined_info_recs.xml",
+      "kind": "blob",
+      "oid": "abe6bb8af0e094deeb62da39ce27069b7fd06eb3",
+      "mode": "100644"
+    },
+    {
+      "path": "res/layout/item_marker_type.xml",
+      "kind": "blob",
+      "oid": "c4f6c73e8b61ee11d7df1816bc78ddad93f640b7",
+      "mode": "100644"
+    },
+    {
+      "path": "res/layout/manual_printer_add.xml",
+      "kind": "blob",
+      "oid": "1dfbbe7a349d2a10a6c57052ee33bdaa4534619d",
+      "mode": "100644"
+    },
+    {
+      "path": "res/layout/printer_information.xml",
+      "kind": "blob",
+      "oid": "347b40560340ab094753da062ebceec1185598ed",
+      "mode": "100644"
+    },
+    {
+      "path": "res/layout/printer_item.xml",
+      "kind": "blob",
+      "oid": "42e3f7936c5e5a393219c60c2a0059a8d6563d35",
+      "mode": "100644"
+    },
+    {
+      "path": "res/layout/progress_preference.xml",
+      "kind": "blob",
+      "oid": "2bb9830173b66026ebfa8e65165b752abee3d02f",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-af/strings.xml",
+      "kind": "blob",
+      "oid": "fda66cc30232d2748c7d96de8f1566214b42c831",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-am/strings.xml",
+      "kind": "blob",
+      "oid": "724b1c81398744598733bf9e5891f29340d66a24",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-ar/strings.xml",
+      "kind": "blob",
+      "oid": "cea50eae0fa08ba048afafd891ca825893a8684c",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-as/strings.xml",
+      "kind": "blob",
+      "oid": "1fdde626d049e6b875d5b42547052ffdd14a6883",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-az/strings.xml",
+      "kind": "blob",
+      "oid": "3b51d6659f7d41aafc5c3379e8c3e7a8554bdd68",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-b+sr+Latn/strings.xml",
+      "kind": "blob",
+      "oid": "806636b9b93108cb9335be711bc3fd0a5f6d3f54",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-be/strings.xml",
+      "kind": "blob",
+      "oid": "ff2d22d64f866a7351cf47d9091fcf82f9f072ae",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-bg/strings.xml",
+      "kind": "blob",
+      "oid": "9a1dba9f1e1246d8eb790e406ea03a84c5b23c4f",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-bn/strings.xml",
+      "kind": "blob",
+      "oid": "15bb07c7c9ce00360de05c752fe335942665f0fe",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-bs/strings.xml",
+      "kind": "blob",
+      "oid": "813820187ec92852e01425ee2aa872c302faf4de",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-ca/strings.xml",
+      "kind": "blob",
+      "oid": "64d017da7eff529b12c6857824fbc24981cc0063",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-cs/strings.xml",
+      "kind": "blob",
+      "oid": "f9f349abef63c8a40b67928973d71bf6a7d61868",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-da/strings.xml",
+      "kind": "blob",
+      "oid": "47cf29ef5db8d52f0e2659bc9cb072c1fb245a0a",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-de/strings.xml",
+      "kind": "blob",
+      "oid": "6f15e088799956c969d8697f19017794252a8f10",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-el/strings.xml",
+      "kind": "blob",
+      "oid": "774a57d7c5966cf53025b0c10f8bf0304fc9d946",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-en-rAU/strings.xml",
+      "kind": "blob",
+      "oid": "1dd5eea3d8cbe2a9e6af5aad238b717f78e97c56",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-en-rCA/strings.xml",
+      "kind": "blob",
+      "oid": "551da8eed71fb8895f60fbffeef8b6a1f000fd49",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-en-rGB/strings.xml",
+      "kind": "blob",
+      "oid": "1dd5eea3d8cbe2a9e6af5aad238b717f78e97c56",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-en-rIN/strings.xml",
+      "kind": "blob",
+      "oid": "4338c34db4d78ce849e34b66590926e44467421f",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-en-rXC/strings.xml",
+      "kind": "blob",
+      "oid": "f8ff1e4231acf4f9a4ad89d8572fddd3b7767590",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-es-rUS/strings.xml",
+      "kind": "blob",
+      "oid": "1d18570b75b8cb19a8a3a316bc0369b896db87ba",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-es/strings.xml",
+      "kind": "blob",
+      "oid": "518fe3fdca790b51fdc986b965389c0d02843393",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-et/strings.xml",
+      "kind": "blob",
+      "oid": "8325d4af72dadc0d04d0754e169fef22916e5418",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-eu/strings.xml",
+      "kind": "blob",
+      "oid": "a77a4631209c6ba9d2c4bcd526898c5d4b66b965",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-fa/strings.xml",
+      "kind": "blob",
+      "oid": "ad600eac350e647c5e536aceb0706d047983b621",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-fi/strings.xml",
+      "kind": "blob",
+      "oid": "81a239e9666e694c06c7c249522527c6b68daf8a",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-fr-rCA/strings.xml",
+      "kind": "blob",
+      "oid": "15cf8944a46d5a61f4567b8e5651b875c0af911f",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-fr/strings.xml",
+      "kind": "blob",
+      "oid": "eacdf7f02b89fc43e0fb62188b53af7cb0122284",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-gl/strings.xml",
+      "kind": "blob",
+      "oid": "99290a5a67fa857a006a8c11756bf68a5a7b17dd",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-gu/strings.xml",
+      "kind": "blob",
+      "oid": "f6178011d38b97a9eaea31b98daeef78c3b0c0e7",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-hi/strings.xml",
+      "kind": "blob",
+      "oid": "b48572534ca6a607cf7f28df7c43c8ff0a59efb7",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-hr/strings.xml",
+      "kind": "blob",
+      "oid": "78e12e81a1e59ed4fb94871525680e85e6567596",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-hu/strings.xml",
+      "kind": "blob",
+      "oid": "8790b165007c0a268ef7daf8099f6969da2952ac",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-hy/strings.xml",
+      "kind": "blob",
+      "oid": "ce83a219a4bbcfc1c12a3af03a5e80c6d0bddc55",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-in/strings.xml",
+      "kind": "blob",
+      "oid": "f6be71fa48a555e153ff439d9657acdd0586629a",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-is/strings.xml",
+      "kind": "blob",
+      "oid": "d7b233b2dcd8d4f67efd5c4070a2f780bcdde79b",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-it/strings.xml",
+      "kind": "blob",
+      "oid": "5abd839964b9aa10f5f5eafb1221d590e1223c1c",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-iw/strings.xml",
+      "kind": "blob",
+      "oid": "d544ca97e9fa4e1492ebe8e667669e7ff1e6f6b8",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-ja/strings.xml",
+      "kind": "blob",
+      "oid": "c326608f567844f1a96a07da43e9ab3a4c122208",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-ka/strings.xml",
+      "kind": "blob",
+      "oid": "c27e5fae71a092f2ed77195a3dacbcfaa2ff8720",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-kk/strings.xml",
+      "kind": "blob",
+      "oid": "d08a8d99cd13d7be45d7fe8d1acace759a86aa30",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-km/strings.xml",
+      "kind": "blob",
+      "oid": "4dd942db9b99d0c5c2e85a87e750fb9e5de87631",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-kn/strings.xml",
+      "kind": "blob",
+      "oid": "1612037c8ab95ec43f9b4ba2085470b13b7c8108",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-ko/strings.xml",
+      "kind": "blob",
+      "oid": "a949a17f6d13ce85ee133a00ddece3426414e55b",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-ky/strings.xml",
+      "kind": "blob",
+      "oid": "b1eef87baf84267a5476a5b101f085901b09fe5f",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-lo/strings.xml",
+      "kind": "blob",
+      "oid": "4b2a73b651c1b115cdc305b7f6f7d983f7f96685",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-lt/strings.xml",
+      "kind": "blob",
+      "oid": "fa5e04c89f6cc8e291dad2c896dad9268bbe6337",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-lv/strings.xml",
+      "kind": "blob",
+      "oid": "2de8265dca5b31ce8165b21e4fd6087a9da632a4",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-mk/strings.xml",
+      "kind": "blob",
+      "oid": "5305a7eea98381a586e9dbf1dee801dbbe38b97e",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-ml/strings.xml",
+      "kind": "blob",
+      "oid": "510d9ebe890381f5122c48c485b7468d6ac6de00",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-mn/strings.xml",
+      "kind": "blob",
+      "oid": "4da7d8a5a56cd0de828c31683041b76815548fcd",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-mr/strings.xml",
+      "kind": "blob",
+      "oid": "07c8455444b6120eb9399284dad6cdccbfe361d7",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-ms/strings.xml",
+      "kind": "blob",
+      "oid": "1fe8542abae583662bdf13ea91e9618a6ffe3fa0",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-my/strings.xml",
+      "kind": "blob",
+      "oid": "5a2fd04975f704f17367ba5a16f057144adc62a8",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-nb/strings.xml",
+      "kind": "blob",
+      "oid": "58444ec2ffe1fe9bef01891418ab0d0a2e4bdc80",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-ne/strings.xml",
+      "kind": "blob",
+      "oid": "583c6ea955fb56900f7b75ec8afd4189eb2a21aa",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-nl/strings.xml",
+      "kind": "blob",
+      "oid": "df2ee2c16680337151c9733c01ed1ba0b1251d22",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-or/strings.xml",
+      "kind": "blob",
+      "oid": "392ae1ab9c976b742a87e25607af05ec3f0689c9",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-pa/strings.xml",
+      "kind": "blob",
+      "oid": "5f7046204a850125a3727119e673166a628bfb12",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-pl/strings.xml",
+      "kind": "blob",
+      "oid": "e98298ec7ca872fcf0867d28c9f76fa675d0cdf2",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-pt-rBR/strings.xml",
+      "kind": "blob",
+      "oid": "1e49cdde1f508bd9716385b7bb31eaf55b5209ab",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-pt-rPT/strings.xml",
+      "kind": "blob",
+      "oid": "2565d63286ce85fb74775ae268088435009af08e",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-pt/strings.xml",
+      "kind": "blob",
+      "oid": "1e49cdde1f508bd9716385b7bb31eaf55b5209ab",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-ro/strings.xml",
+      "kind": "blob",
+      "oid": "d1dd0a71208feb0572bd350bfc31565c037940f7",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-ru/strings.xml",
+      "kind": "blob",
+      "oid": "f3696bbf8775fe169658c6be49914559a8eca50f",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-si/strings.xml",
+      "kind": "blob",
+      "oid": "c1354ce7888473400642a3b0231f69c1d6dc442b",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-sk/strings.xml",
+      "kind": "blob",
+      "oid": "3f7c8ee24d1e74b4ad1a12853c55ea8f5a0f55b7",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-sl/strings.xml",
+      "kind": "blob",
+      "oid": "321c7b7670a3f4d05ac824dabc9249087ceebf7a",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-sq/strings.xml",
+      "kind": "blob",
+      "oid": "449f8aeb5cd5ce0d30d5e40f00e114d306afc6d8",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-sr/strings.xml",
+      "kind": "blob",
+      "oid": "94c4f17850d9e4a51863e631e1312cbd097a2fa9",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-sv/strings.xml",
+      "kind": "blob",
+      "oid": "4247416c924a7a958f989b1a8703128c5fdee33b",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-sw/strings.xml",
+      "kind": "blob",
+      "oid": "c99126ccdbc4db544aa64d68ab7269ad5fda517d",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-ta/strings.xml",
+      "kind": "blob",
+      "oid": "a1af7cfa9770a02294b39e67892e9b1491416af7",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-te/strings.xml",
+      "kind": "blob",
+      "oid": "9424ddf9fded8f6698d2c74dd301c62343d191b7",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-th/strings.xml",
+      "kind": "blob",
+      "oid": "a22d03866931b7e573a14fcfb8530c13016d1b04",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-tl/strings.xml",
+      "kind": "blob",
+      "oid": "092ece2d181a7acd1bc8e0d77131ed6b3427a64d",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-tr/strings.xml",
+      "kind": "blob",
+      "oid": "10f114905f2a7a9054ec371b1b6f3d8f5d5980b6",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-uk/strings.xml",
+      "kind": "blob",
+      "oid": "778f6857decd9acf0ea12887a069cc1cc8b1defb",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-ur/strings.xml",
+      "kind": "blob",
+      "oid": "36335cd6169b61239eeaa0d6953e5b5388731b3d",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-uz/strings.xml",
+      "kind": "blob",
+      "oid": "78b415c7734cdd1aedcf87459595b8de0448da40",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-vi/strings.xml",
+      "kind": "blob",
+      "oid": "d1402c3af97edc1d962c6a2785d652bae3be55d8",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-zh-rCN/strings.xml",
+      "kind": "blob",
+      "oid": "8fd162831d1571e96ac37a5cccf3e3a82846fb5a",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-zh-rHK/strings.xml",
+      "kind": "blob",
+      "oid": "10891ec1c23fb698d7f1e1b5b52d432a86310213",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-zh-rTW/strings.xml",
+      "kind": "blob",
+      "oid": "8f3015a79a3ea791821b3a2886017514d9c5d08f",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values-zu/strings.xml",
+      "kind": "blob",
+      "oid": "048ed22e36435d343aaa4e573b41840d96396d34",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values/colors.xml",
+      "kind": "blob",
+      "oid": "4c566d2c1953582c86e8aa43412a98522059c0d5",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values/dimens.xml",
+      "kind": "blob",
+      "oid": "7a47a8a75645aa3bce6d02edfcfa24fb471b1edc",
+      "mode": "100644"
+    },
+    {
+      "path": "res/values/strings.xml",
+      "kind": "blob",
+      "oid": "d4a1b658f8ace7b1d75d7098d69cea68d1c498a0",
+      "mode": "100644"
+    },
+    {
+      "path": "res/xml/add_printers_prefs.xml",
+      "kind": "blob",
+      "oid": "2f6d9817814f02b00ec3f0d7799d69e59910e0ab",
+      "mode": "100644"
+    },
+    {
+      "path": "res/xml/find_p2p_prefs.xml",
+      "kind": "blob",
+      "oid": "5254566dc13124ec78838375fed229b560fe254c",
+      "mode": "100644"
+    },
+    {
+      "path": "res/xml/more_options_prefs.xml",
+      "kind": "blob",
+      "oid": "4c4d4d9143221781896549d1004caf9cef48ae8e",
+      "mode": "100644"
+    },
+    {
+      "path": "res/xml/printservice.xml",
+      "kind": "blob",
+      "oid": "bcc7b9727430981e7a184ab48b60a58faad66747",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/BuiltInPrintService.java",
+      "kind": "blob",
+      "oid": "5b41434c0a2bf335a7a3ad5e1414fb8e8c6340d6",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/DelayedAction.java",
+      "kind": "blob",
+      "oid": "d5d4b7acea65cd11899ed9eb951c35d1b70c9717",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/ImagePrintActivity.java",
+      "kind": "blob",
+      "oid": "75e4d2f67983f415ad587726f29e9c7d532eb1df",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/ImageToPdfTask.java",
+      "kind": "blob",
+      "oid": "65e523c2de5b8fe9583671b55247d97d73545379",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/JobQueue.java",
+      "kind": "blob",
+      "oid": "f34dcdf4d230966046178c07028649a4575aa425",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/LocalDiscoverySession.java",
+      "kind": "blob",
+      "oid": "85e20220515fd9e079a03ef2cf5e3ada562e6dbf",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/LocalDiscoverySessionInfo.java",
+      "kind": "blob",
+      "oid": "47d571f4b2a34651571c0791887bc223486e01a2",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/LocalPrintJob.java",
+      "kind": "blob",
+      "oid": "3655168ffdc92e83d14be182b734761ba66d677f",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/LocalPrinter.java",
+      "kind": "blob",
+      "oid": "2fe6f9b76a7b178307853fc623f7277fd1dc90c7",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/P2pPermissionManager.java",
+      "kind": "blob",
+      "oid": "3cdbc0c92b248ccd0dbbaec90edae629892ecf66",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/PdfPrintActivity.java",
+      "kind": "blob",
+      "oid": "fa582bcd48cee4cdf348ce0357dec660201f573b",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/discovery/ConnectionListener.java",
+      "kind": "blob",
+      "oid": "ea681b4f4f5fa78e171baf166546b62c8ec2251f",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/discovery/DelayedDiscovery.java",
+      "kind": "blob",
+      "oid": "a0d22eb5d2de69fc1ed41c372a2a4ac69f7cabe9",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/discovery/DiscoveredPrinter.java",
+      "kind": "blob",
+      "oid": "13898abb3235ef50261bd130343f506d5cc3692f",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/discovery/Discovery.java",
+      "kind": "blob",
+      "oid": "deb3d6568c9f8f2f55bad937749cf1edb7639bec",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/discovery/ManualDiscovery.java",
+      "kind": "blob",
+      "oid": "efef3857b745d609f08c33c4f9493a30623a48c7",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/discovery/MdnsDiscovery.java",
+      "kind": "blob",
+      "oid": "3fe066fd32fddfec1a5822d9ac591d719f9a8969",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/discovery/MultiDiscovery.java",
+      "kind": "blob",
+      "oid": "93f68b4fc7ac7ffab00db6cf362110761d18140d",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/discovery/NsdResolveQueue.java",
+      "kind": "blob",
+      "oid": "327915e061dcc3ff70c2a34468e2fa4e51b0a82c",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/discovery/P2pDiscovery.java",
+      "kind": "blob",
+      "oid": "083e88df19b74008ee354ead0df37c63d41b0272",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/discovery/SavedDiscovery.java",
+      "kind": "blob",
+      "oid": "01597edd7a06e90ffe2d7371feaf89069ec46f37",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/ipp/Backend.java",
+      "kind": "blob",
+      "oid": "5f2241652d8b57a367dafba37935f05f157f47c6",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/ipp/CancelJobTask.java",
+      "kind": "blob",
+      "oid": "eaaf536dea945efab65e4e6594ccab205b9bb2dd",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/ipp/CapabilitiesCache.java",
+      "kind": "blob",
+      "oid": "374d9276a7472b9ed76a65bc8929910d7a0bb7c9",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/ipp/CertificateStore.java",
+      "kind": "blob",
+      "oid": "76e086863dc7013a67c968d80e2bdbfafe47d8c4",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/ipp/GetCapabilitiesTask.java",
+      "kind": "blob",
+      "oid": "d72df55b4a4c02718c0e69b40968e662f347ff47",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/ipp/JobStatus.java",
+      "kind": "blob",
+      "oid": "b804587b45b8fa22c7bb732cf1d047ff9103b676",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/ipp/StartJobTask.java",
+      "kind": "blob",
+      "oid": "8a71b476f1533a5f2dbe9f32c63f5d4ff7f37d77",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/jni/BackendConstants.java",
+      "kind": "blob",
+      "oid": "899f1889017cbb3443d3dd7438ca219e72675002",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/jni/JobCallback.java",
+      "kind": "blob",
+      "oid": "a8393c5bd60d3d03742f1e4c3e7cdb8c9e972899",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/jni/JobCallbackParams.java",
+      "kind": "blob",
+      "oid": "f0b9aee1a9fcf86fe22c7a80dbc12aec3703d5fb",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/jni/LocalJobParams.java",
+      "kind": "blob",
+      "oid": "b83b73e6e97bfce84ea2b8df29f9b8308175cdf4",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/jni/LocalPrinterCapabilities.java",
+      "kind": "blob",
+      "oid": "7abed53616cd2e4b84978ce46cb33bd04cbc057f",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/jni/MediaSizes.java",
+      "kind": "blob",
+      "oid": "059dead5dce1408c6756bf3e97bfeebdc3c2d736",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/jni/PdfRender.java",
+      "kind": "blob",
+      "oid": "fb84d8ddc7ab8246e1037926a1a529aef7431eee",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/jni/PrinterStatusMonitor.kt",
+      "kind": "blob",
+      "oid": "ad9f17f48cc657232e3b2842adf28a06929061af",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/jni/SizeD.aidl",
+      "kind": "blob",
+      "oid": "09334aad3f6893079ccb6e56b92dd2578ffb3365",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/jni/SizeD.java",
+      "kind": "blob",
+      "oid": "944bb62969743df2d7776fe761a547005260f1cf",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/p2p/P2pConnectionListener.java",
+      "kind": "blob",
+      "oid": "1cfff1d4d3ccd0897bad528c1078292bfedc3438",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/p2p/P2pConnectionProcedure.java",
+      "kind": "blob",
+      "oid": "5b2df946294968b713bf3d220d4058f1637e19ad",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/p2p/P2pDiscoveryProcedure.java",
+      "kind": "blob",
+      "oid": "45daf850963828c980ac9cb4ced94b3e244e9a9d",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/p2p/P2pMonitor.java",
+      "kind": "blob",
+      "oid": "625beeb698ca812a23863c9df33b753945bc5c64",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/p2p/P2pPeerListener.java",
+      "kind": "blob",
+      "oid": "f26ebb6690d0fe29183184ffd7c10d4ca3ae65ae",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/p2p/P2pPrinterConnection.java",
+      "kind": "blob",
+      "oid": "207941d423829f0679932386514acd7f0a5b7ed9",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/p2p/P2pUtils.java",
+      "kind": "blob",
+      "oid": "4a7179bca593a18d8071c98f86d6c55771c74e41",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/render/IPdfRender.aidl",
+      "kind": "blob",
+      "oid": "0b16e1e7e164a338543d81b0830ad032a229ada1",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/render/PdfRenderService.java",
+      "kind": "blob",
+      "oid": "8a6d076cdcb94aef238c69ee24176ff6fdc379ba",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/stats/StatsAsyncLogger.kt",
+      "kind": "blob",
+      "oid": "a134f2af1589eb4203c21af74d89b9f24e4680d4",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/stats/StatsLogWrapper.kt",
+      "kind": "blob",
+      "oid": "e8c45d5862231e036b80d987cf1c2f51ce339f01",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/ui/AddManualPrinterDialog.java",
+      "kind": "blob",
+      "oid": "a46f5fd84f4ea7ebe66309c0dab32ce3c308c8ca",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/ui/AddP2pPrinterDialog.java",
+      "kind": "blob",
+      "oid": "3ff0e50ba184dd461cff6caeb437c58a89788a94",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/ui/AddPrintersActivity.java",
+      "kind": "blob",
+      "oid": "7e0d9f292368e19558f943172cf9b24adf6ecb2a",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/ui/AddPrintersFragment.java",
+      "kind": "blob",
+      "oid": "1bb3703c3c9e5de7ecc8bbd62769b860767ae824",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/ui/FindP2pPrintersFragment.java",
+      "kind": "blob",
+      "oid": "39b949570f26c48a47d260f7f9bd6544ab05993e",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/ui/MarkerAdapter.kt",
+      "kind": "blob",
+      "oid": "7d43bfee58e157706b3ddb111597a3dbb720ce9e",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/ui/MarkerInfo.kt",
+      "kind": "blob",
+      "oid": "8385e31d0856a49805840c0507a5859c0b501594",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/ui/MoreOptionsActivity.java",
+      "kind": "blob",
+      "oid": "0ddd8d9e8217d8235371b978469d90aec46f2920",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/ui/MoreOptionsFragment.java",
+      "kind": "blob",
+      "oid": "86c345907f14b571bf4fff2312aaf09b1a81003f",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/ui/PrinterInformationFragment.kt",
+      "kind": "blob",
+      "oid": "25f8481fb52c5ce34296e67182efd9b8d7eba67b",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/ui/PrinterInformationViewModel.kt",
+      "kind": "blob",
+      "oid": "9e44786f93029e245afee3e52092d4f3dab805a2",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/ui/PrinterPreference.java",
+      "kind": "blob",
+      "oid": "36cce3c1b4ad9ddd9ef45e1d378ebd43c0f84572",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/ui/ViewUtil.java",
+      "kind": "blob",
+      "oid": "36737ecbd3901bd7e661737e7e51971a96875c10",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/util/BroadcastMonitor.java",
+      "kind": "blob",
+      "oid": "8a68dbfe5cf9115bf094822b88d6fab2688395ae",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/util/FileUtils.java",
+      "kind": "blob",
+      "oid": "8e1f6c06de41e10547432393dfed0400f2f248fc",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/util/PriorityLock.java",
+      "kind": "blob",
+      "oid": "ee9e0bffb883eaf0fa1740725b6d6489a549bec0",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/bips/util/WifiMonitor.java",
+      "kind": "blob",
+      "oid": "817132c631403357b6c278b40782291e704dc093",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/robolectric/config/robolectric.properties",
+      "kind": "blob",
+      "oid": "c1d5b17711f41f92c28f56f50e8128a1dd210640",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/robolectric/src/com/android/bips/stats/StatsAsyncLoggerTest.kt",
+      "kind": "blob",
+      "oid": "c8cd0202292051b44f77627921a1360148f09d48",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/robolectric/src/com/android/bips/ui/MarkerAdapterTest.kt",
+      "kind": "blob",
+      "oid": "21196a8bcc54466cc0fb6c8c0a46bbb299c63045",
+      "mode": "100644"
+    }
+  ]
+}

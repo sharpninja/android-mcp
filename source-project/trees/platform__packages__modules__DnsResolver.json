@@ -1,0 +1,2161 @@
+{
+  "repo": "platform/packages/modules/DnsResolver",
+  "requested_revision": "refs/tags/android-17.0.0_r1",
+  "revision": "0aeaf9d222ec761b9e0443a01c7a06590b9d1b4f",
+  "entries": [
+    {
+      "path": ".clang-format",
+      "kind": "blob",
+      "oid": "973b2fabde4eb62d0dc75e424a262e37c9103161",
+      "mode": "120000"
+    },
+    {
+      "path": ".editorconfig",
+      "kind": "blob",
+      "oid": "9777c605e8e77c8a896accd901838ce711388bf3",
+      "mode": "100644"
+    },
+    {
+      "path": "Android.bp",
+      "kind": "blob",
+      "oid": "6ad4fa4c71a07dddd410e7a6a713be28ac05893a",
+      "mode": "100644"
+    },
+    {
+      "path": "Dns64Configuration.cpp",
+      "kind": "blob",
+      "oid": "69605b51ee75835b580f51bb2ad62921ef3edec0",
+      "mode": "100644"
+    },
+    {
+      "path": "Dns64Configuration.h",
+      "kind": "blob",
+      "oid": "35d3afed41b9b3ec109d0aa14a5466303b5fc1db",
+      "mode": "100644"
+    },
+    {
+      "path": "DnsProxy.cpp",
+      "kind": "blob",
+      "oid": "5b19075c894f54505de3d3405e75b7e0d531e944",
+      "mode": "100644"
+    },
+    {
+      "path": "DnsProxy.h",
+      "kind": "blob",
+      "oid": "8d1fed43b035df85f59b259a2c1759b2116d9f04",
+      "mode": "100644"
+    },
+    {
+      "path": "DnsProxyListener.cpp",
+      "kind": "blob",
+      "oid": "f55d2c5df3d2fd83ff56efbc579bd28f70e19608",
+      "mode": "100644"
+    },
+    {
+      "path": "DnsProxyListener.h",
+      "kind": "blob",
+      "oid": "32672ce5918d44dc3f67dc23adea6ea4a9a3cfb2",
+      "mode": "100644"
+    },
+    {
+      "path": "DnsQueryLog.cpp",
+      "kind": "blob",
+      "oid": "52f444da553d2b83dc8ce4d1ed791dc7a585c3a1",
+      "mode": "100644"
+    },
+    {
+      "path": "DnsQueryLog.h",
+      "kind": "blob",
+      "oid": "c46ab4e8b3bab218e38662e59fb28482903d7c6c",
+      "mode": "100644"
+    },
+    {
+      "path": "DnsQueryLogTest.cpp",
+      "kind": "blob",
+      "oid": "f164e98cc0ca49facd22697152348338c0b9e49a",
+      "mode": "100644"
+    },
+    {
+      "path": "DnsResolver.cpp",
+      "kind": "blob",
+      "oid": "9f7dbcc3963293406583a9b878a08ddf2b158565",
+      "mode": "100644"
+    },
+    {
+      "path": "DnsResolver.h",
+      "kind": "blob",
+      "oid": "6baf2ba1d5a91d6847f947023e907bbaab837ac4",
+      "mode": "100644"
+    },
+    {
+      "path": "DnsResolverService.cpp",
+      "kind": "blob",
+      "oid": "92204340d2c6e66b2a973aec90c42d624e8713a5",
+      "mode": "100644"
+    },
+    {
+      "path": "DnsResolverService.h",
+      "kind": "blob",
+      "oid": "29ecb929f3f2e93606484e8772ced587577d9e83",
+      "mode": "100644"
+    },
+    {
+      "path": "DnsStats.cpp",
+      "kind": "blob",
+      "oid": "4cc8035973861794fd18dd8d506ae71ca5ae7baf",
+      "mode": "100644"
+    },
+    {
+      "path": "DnsStats.h",
+      "kind": "blob",
+      "oid": "c985462ad06b632a2b98018c0f27b29fab2a5e30",
+      "mode": "100644"
+    },
+    {
+      "path": "DnsStatsTest.cpp",
+      "kind": "blob",
+      "oid": "a4906860e6ab6d15c83d1c3206d798b06e7f6bb3",
+      "mode": "100644"
+    },
+    {
+      "path": "DnsTlsDispatcher.cpp",
+      "kind": "blob",
+      "oid": "6e0ced2adc70cd20a94902e69b84a20495c8dcaf",
+      "mode": "100644"
+    },
+    {
+      "path": "DnsTlsDispatcher.h",
+      "kind": "blob",
+      "oid": "72b3db79fdc490d3acba7fb9b097ab905957f3a3",
+      "mode": "100644"
+    },
+    {
+      "path": "DnsTlsQueryMap.cpp",
+      "kind": "blob",
+      "oid": "6792b96458b02bbcc8ade5a44282fb39e425b4db",
+      "mode": "100644"
+    },
+    {
+      "path": "DnsTlsQueryMap.h",
+      "kind": "blob",
+      "oid": "f3ff963a688df2e6bd6415d5e45e4edc1c33b7ba",
+      "mode": "100644"
+    },
+    {
+      "path": "DnsTlsServer.cpp",
+      "kind": "blob",
+      "oid": "76825317cb78dfdbacae8af5998ea482863a27f6",
+      "mode": "100644"
+    },
+    {
+      "path": "DnsTlsServer.h",
+      "kind": "blob",
+      "oid": "9d2ac5e68476c7248d8ec2868e03076998178358",
+      "mode": "100644"
+    },
+    {
+      "path": "DnsTlsSessionCache.cpp",
+      "kind": "blob",
+      "oid": "b88b2ddae41a74ec4853735ab65c7692a23898c7",
+      "mode": "100644"
+    },
+    {
+      "path": "DnsTlsSessionCache.h",
+      "kind": "blob",
+      "oid": "e1a88cfd186cf5c6156d92b75eb435b43737a81b",
+      "mode": "100644"
+    },
+    {
+      "path": "DnsTlsSocket.cpp",
+      "kind": "blob",
+      "oid": "2d1eeb85ca09c2de873597dc9bafd00b1a0996b4",
+      "mode": "100644"
+    },
+    {
+      "path": "DnsTlsSocket.h",
+      "kind": "blob",
+      "oid": "f6736f8dfd7d253cd6dd5f0402354ae7ed41397e",
+      "mode": "100644"
+    },
+    {
+      "path": "DnsTlsSocketFactory.h",
+      "kind": "blob",
+      "oid": "af4011dd85c8474cb89e27035a3172a6c6d974e0",
+      "mode": "100644"
+    },
+    {
+      "path": "DnsTlsTransport.cpp",
+      "kind": "blob",
+      "oid": "f526396b45d5b2efc452dd58d23977c2f04b9f02",
+      "mode": "100644"
+    },
+    {
+      "path": "DnsTlsTransport.h",
+      "kind": "blob",
+      "oid": "7b7f81f17483c236efc2b21e61cd8b566a45395c",
+      "mode": "100644"
+    },
+    {
+      "path": "Experiments.cpp",
+      "kind": "blob",
+      "oid": "cf297b4b50f71c136707a60c9b535e0e312bb874",
+      "mode": "100644"
+    },
+    {
+      "path": "Experiments.h",
+      "kind": "blob",
+      "oid": "04d8a36d7e85163ace8cf22cb519005d7aa70962",
+      "mode": "100644"
+    },
+    {
+      "path": "ExperimentsTest.cpp",
+      "kind": "blob",
+      "oid": "6ff74668651277fe74278fc47874b152dc765a83",
+      "mode": "100644"
+    },
+    {
+      "path": "IDnsTlsSocket.h",
+      "kind": "blob",
+      "oid": "8d2be8a10922f95a389d45fc5a69a1ba91d8e346",
+      "mode": "100644"
+    },
+    {
+      "path": "IDnsTlsSocketFactory.h",
+      "kind": "blob",
+      "oid": "a391f591afe264ac73f4c55deb40f9421cdd8f03",
+      "mode": "100644"
+    },
+    {
+      "path": "IDnsTlsSocketObserver.h",
+      "kind": "blob",
+      "oid": "980f74a6538079a24d420ff391f22c635a9df75e",
+      "mode": "100644"
+    },
+    {
+      "path": "LockedQueue.h",
+      "kind": "blob",
+      "oid": "8694f2d8c223c8333b6bedb0dc5dd593758a50eb",
+      "mode": "100644"
+    },
+    {
+      "path": "NOTICE",
+      "kind": "blob",
+      "oid": "7504f4d7047afc9be0d7dbb130c53e7131bc87d3",
+      "mode": "100644"
+    },
+    {
+      "path": "OWNERS",
+      "kind": "blob",
+      "oid": "b0e134e2a5e42bcb938afe632277f45d356be2b8",
+      "mode": "100644"
+    },
+    {
+      "path": "OperationLimiter.h",
+      "kind": "blob",
+      "oid": "335ec5a3119896b309ffa746c83668398881046c",
+      "mode": "100644"
+    },
+    {
+      "path": "OperationLimiterTest.cpp",
+      "kind": "blob",
+      "oid": "ad8c81438dbeec4701afab78d944ae03d438f71b",
+      "mode": "100644"
+    },
+    {
+      "path": "PREUPLOAD.cfg",
+      "kind": "blob",
+      "oid": "a1ccc2e824f9838d96805ef195321ad491d80abd",
+      "mode": "100644"
+    },
+    {
+      "path": "PrivateDnsCommon.h",
+      "kind": "blob",
+      "oid": "919fc43018669f6754f333356c072075c48321cd",
+      "mode": "100644"
+    },
+    {
+      "path": "PrivateDnsConfiguration.cpp",
+      "kind": "blob",
+      "oid": "bbed734bf17d1bf36695eef1b7a438ba0c06e2a9",
+      "mode": "100644"
+    },
+    {
+      "path": "PrivateDnsConfiguration.h",
+      "kind": "blob",
+      "oid": "4cae0c25e02819a4d93c8079cf07b35f630c85b2",
+      "mode": "100644"
+    },
+    {
+      "path": "PrivateDnsConfigurationTest.cpp",
+      "kind": "blob",
+      "oid": "f0ea72ae104d220510a0c9861cdcad31c46a4e55",
+      "mode": "100644"
+    },
+    {
+      "path": "PrivateDnsValidationObserver.h",
+      "kind": "blob",
+      "oid": "b0cd5e26fdccfdd97877280815b9c7ba540cff18",
+      "mode": "100644"
+    },
+    {
+      "path": "README-DoT.md",
+      "kind": "blob",
+      "oid": "56fe7721013a229876160d68651e689297aef182",
+      "mode": "100644"
+    },
+    {
+      "path": "README.md",
+      "kind": "blob",
+      "oid": "35371ad2657812364bd3c07e8f297995dba7e176",
+      "mode": "100644"
+    },
+    {
+      "path": "ResolverController.cpp",
+      "kind": "blob",
+      "oid": "1821f5d772002c5a23ccae3ea1154c2e062619a0",
+      "mode": "100644"
+    },
+    {
+      "path": "ResolverController.h",
+      "kind": "blob",
+      "oid": "2a19b2af2464d5a9561636a8116b2d31ae39ae92",
+      "mode": "100644"
+    },
+    {
+      "path": "ResolverEventReporter.cpp",
+      "kind": "blob",
+      "oid": "a809c88c9a8e4bd2fc3840876ec0ebe90b02625d",
+      "mode": "100644"
+    },
+    {
+      "path": "ResolverEventReporter.h",
+      "kind": "blob",
+      "oid": "39663b7bd7197289aaa81e3cb1b615715fef725d",
+      "mode": "100644"
+    },
+    {
+      "path": "ResolverStats.h",
+      "kind": "blob",
+      "oid": "9140af8a35c42b1480f932f48683293080a67d9b",
+      "mode": "100644"
+    },
+    {
+      "path": "TEST_MAPPING",
+      "kind": "blob",
+      "oid": "7db1a46cc18733d9c233ff256a0fed0d619d4850",
+      "mode": "100644"
+    },
+    {
+      "path": "addrlabel.cpp",
+      "kind": "blob",
+      "oid": "a68e0ccc93aca3a43a12544d2b50dd411ee30af8",
+      "mode": "100644"
+    },
+    {
+      "path": "addrlabel.h",
+      "kind": "blob",
+      "oid": "0a1c466d86adebc029b55eb2e8f1ff5e197fbf51",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/1/.hash",
+      "kind": "blob",
+      "oid": "e529a3ada10b8d4ba0f97576d97441b1aa57b66e",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/1/android/net/IDnsResolver.aidl",
+      "kind": "blob",
+      "oid": "c4b2b6d2297949754cb858b846186abf532f8ef0",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/1/android/net/ResolverParamsParcel.aidl",
+      "kind": "blob",
+      "oid": "5333f31d2909ed529e689816a26271024018eb0b",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/10/.hash",
+      "kind": "blob",
+      "oid": "de44dfc00a2a637860da3168dff2362cd3d0f0a2",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/10/android/net/IDnsResolver.aidl",
+      "kind": "blob",
+      "oid": "08f3e3a4de20f52d17ec8f48a89a9ffd85704410",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/10/android/net/ResolverHostsParcel.aidl",
+      "kind": "blob",
+      "oid": "c24eb619ea2af56ca6cb0f03c8222cc973b45029",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/10/android/net/ResolverOptionsParcel.aidl",
+      "kind": "blob",
+      "oid": "e806d0400562e308f7c5e525265ee8f409035b84",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/10/android/net/ResolverParamsParcel.aidl",
+      "kind": "blob",
+      "oid": "8d0bf75e5989e94b18cfdf8b415afe447ec1b5e5",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/10/android/net/resolv/aidl/DnsHealthEventParcel.aidl",
+      "kind": "blob",
+      "oid": "d32be9193b39b52781d58d528c59c4bb9b4354e9",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/10/android/net/resolv/aidl/IDnsResolverUnsolicitedEventListener.aidl",
+      "kind": "blob",
+      "oid": "32963dfd623599c9a1e6bcef1fece9e5da8df436",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/10/android/net/resolv/aidl/Nat64PrefixEventParcel.aidl",
+      "kind": "blob",
+      "oid": "2daccb0e81a7cfe4b2f34c3e954a4dc250607d00",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/10/android/net/resolv/aidl/PrivateDnsValidationEventParcel.aidl",
+      "kind": "blob",
+      "oid": "f3bfbc763274420bd7ce0288a166b0fd26d75375",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/11/.hash",
+      "kind": "blob",
+      "oid": "2fbee125a5b8d7ae9a5f1115f4aef1996505fa8a",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/11/android/net/IDnsResolver.aidl",
+      "kind": "blob",
+      "oid": "19313e407eb8b408dbc7b5aaca16126f5aaad5f0",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/11/android/net/ResolverHostsParcel.aidl",
+      "kind": "blob",
+      "oid": "c24eb619ea2af56ca6cb0f03c8222cc973b45029",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/11/android/net/ResolverOptionsParcel.aidl",
+      "kind": "blob",
+      "oid": "e806d0400562e308f7c5e525265ee8f409035b84",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/11/android/net/ResolverParamsParcel.aidl",
+      "kind": "blob",
+      "oid": "8d0bf75e5989e94b18cfdf8b415afe447ec1b5e5",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/11/android/net/resolv/aidl/DnsHealthEventParcel.aidl",
+      "kind": "blob",
+      "oid": "d32be9193b39b52781d58d528c59c4bb9b4354e9",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/11/android/net/resolv/aidl/IDnsResolverUnsolicitedEventListener.aidl",
+      "kind": "blob",
+      "oid": "32963dfd623599c9a1e6bcef1fece9e5da8df436",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/11/android/net/resolv/aidl/Nat64PrefixEventParcel.aidl",
+      "kind": "blob",
+      "oid": "2daccb0e81a7cfe4b2f34c3e954a4dc250607d00",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/11/android/net/resolv/aidl/PrivateDnsValidationEventParcel.aidl",
+      "kind": "blob",
+      "oid": "f3bfbc763274420bd7ce0288a166b0fd26d75375",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/12/.hash",
+      "kind": "blob",
+      "oid": "788aef8799ee68eaf07d4bd7133552abef6ab1c5",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/12/android/net/IDnsResolver.aidl",
+      "kind": "blob",
+      "oid": "6b539c47c9e20798ae49d555d5974f4bb47bef64",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/12/android/net/ResolverHostsParcel.aidl",
+      "kind": "blob",
+      "oid": "c24eb619ea2af56ca6cb0f03c8222cc973b45029",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/12/android/net/ResolverOptionsParcel.aidl",
+      "kind": "blob",
+      "oid": "e806d0400562e308f7c5e525265ee8f409035b84",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/12/android/net/ResolverParamsParcel.aidl",
+      "kind": "blob",
+      "oid": "8a7bf997bbfd9c35dd0dec1a92de8a3854569e54",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/12/android/net/resolv/aidl/DnsHealthEventParcel.aidl",
+      "kind": "blob",
+      "oid": "d32be9193b39b52781d58d528c59c4bb9b4354e9",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/12/android/net/resolv/aidl/IDnsResolverUnsolicitedEventListener.aidl",
+      "kind": "blob",
+      "oid": "32963dfd623599c9a1e6bcef1fece9e5da8df436",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/12/android/net/resolv/aidl/Nat64PrefixEventParcel.aidl",
+      "kind": "blob",
+      "oid": "2daccb0e81a7cfe4b2f34c3e954a4dc250607d00",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/12/android/net/resolv/aidl/PrivateDnsValidationEventParcel.aidl",
+      "kind": "blob",
+      "oid": "f3bfbc763274420bd7ce0288a166b0fd26d75375",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/13/.hash",
+      "kind": "blob",
+      "oid": "6b78f7b1597163c1d1375d3b310faed33393b7e1",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/13/android/net/IDnsResolver.aidl",
+      "kind": "blob",
+      "oid": "6b539c47c9e20798ae49d555d5974f4bb47bef64",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/13/android/net/ResolverHostsParcel.aidl",
+      "kind": "blob",
+      "oid": "2a1c748f60fad6fbd0bfdb781d65d1666e253b37",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/13/android/net/ResolverOptionsParcel.aidl",
+      "kind": "blob",
+      "oid": "b07263f85c918e38996fb547231898e713726f6e",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/13/android/net/ResolverParamsParcel.aidl",
+      "kind": "blob",
+      "oid": "2dd93dd53531cb6b7ff2340f1f5e17e287a38f3a",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/13/android/net/resolv/aidl/DnsHealthEventParcel.aidl",
+      "kind": "blob",
+      "oid": "d32be9193b39b52781d58d528c59c4bb9b4354e9",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/13/android/net/resolv/aidl/DohParamsParcel.aidl",
+      "kind": "blob",
+      "oid": "ba1ea74783eaa58a25c35b0402cde55cb42889a9",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/13/android/net/resolv/aidl/IDnsResolverUnsolicitedEventListener.aidl",
+      "kind": "blob",
+      "oid": "32963dfd623599c9a1e6bcef1fece9e5da8df436",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/13/android/net/resolv/aidl/Nat64PrefixEventParcel.aidl",
+      "kind": "blob",
+      "oid": "2daccb0e81a7cfe4b2f34c3e954a4dc250607d00",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/13/android/net/resolv/aidl/PrivateDnsValidationEventParcel.aidl",
+      "kind": "blob",
+      "oid": "f3bfbc763274420bd7ce0288a166b0fd26d75375",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/14/.hash",
+      "kind": "blob",
+      "oid": "178f03ede055dca1aa1661d18a801ea4d7dbdf45",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/14/android/net/IDnsResolver.aidl",
+      "kind": "blob",
+      "oid": "5f1adbb62c6c6e78eb0ff610b997037e579760de",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/14/android/net/ResolverHostsParcel.aidl",
+      "kind": "blob",
+      "oid": "2a1c748f60fad6fbd0bfdb781d65d1666e253b37",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/14/android/net/ResolverOptionsParcel.aidl",
+      "kind": "blob",
+      "oid": "b07263f85c918e38996fb547231898e713726f6e",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/14/android/net/ResolverParamsParcel.aidl",
+      "kind": "blob",
+      "oid": "2dd93dd53531cb6b7ff2340f1f5e17e287a38f3a",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/14/android/net/resolv/aidl/DnsHealthEventParcel.aidl",
+      "kind": "blob",
+      "oid": "d32be9193b39b52781d58d528c59c4bb9b4354e9",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/14/android/net/resolv/aidl/DohParamsParcel.aidl",
+      "kind": "blob",
+      "oid": "ba1ea74783eaa58a25c35b0402cde55cb42889a9",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/14/android/net/resolv/aidl/IDnsResolverUnsolicitedEventListener.aidl",
+      "kind": "blob",
+      "oid": "32963dfd623599c9a1e6bcef1fece9e5da8df436",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/14/android/net/resolv/aidl/Nat64PrefixEventParcel.aidl",
+      "kind": "blob",
+      "oid": "2daccb0e81a7cfe4b2f34c3e954a4dc250607d00",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/14/android/net/resolv/aidl/PrivateDnsValidationEventParcel.aidl",
+      "kind": "blob",
+      "oid": "f3bfbc763274420bd7ce0288a166b0fd26d75375",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/15/.hash",
+      "kind": "blob",
+      "oid": "4762c0630fb891732e6fe55775c4b5437e7d1860",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/15/android/net/IDnsResolver.aidl",
+      "kind": "blob",
+      "oid": "5f1adbb62c6c6e78eb0ff610b997037e579760de",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/15/android/net/ResolverHostsParcel.aidl",
+      "kind": "blob",
+      "oid": "2a1c748f60fad6fbd0bfdb781d65d1666e253b37",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/15/android/net/ResolverOptionsParcel.aidl",
+      "kind": "blob",
+      "oid": "b07263f85c918e38996fb547231898e713726f6e",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/15/android/net/ResolverParamsParcel.aidl",
+      "kind": "blob",
+      "oid": "f0dfbdc38c86f02cedac55010a0858414859ff2a",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/15/android/net/resolv/aidl/DnsHealthEventParcel.aidl",
+      "kind": "blob",
+      "oid": "d32be9193b39b52781d58d528c59c4bb9b4354e9",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/15/android/net/resolv/aidl/DohParamsParcel.aidl",
+      "kind": "blob",
+      "oid": "ba1ea74783eaa58a25c35b0402cde55cb42889a9",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/15/android/net/resolv/aidl/IDnsResolverUnsolicitedEventListener.aidl",
+      "kind": "blob",
+      "oid": "32963dfd623599c9a1e6bcef1fece9e5da8df436",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/15/android/net/resolv/aidl/Nat64PrefixEventParcel.aidl",
+      "kind": "blob",
+      "oid": "2daccb0e81a7cfe4b2f34c3e954a4dc250607d00",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/15/android/net/resolv/aidl/PrivateDnsValidationEventParcel.aidl",
+      "kind": "blob",
+      "oid": "f3bfbc763274420bd7ce0288a166b0fd26d75375",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/16/.hash",
+      "kind": "blob",
+      "oid": "6595053f4baa68d6c2aa6e38b427c081b49991c1",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/16/android/net/IDnsResolver.aidl",
+      "kind": "blob",
+      "oid": "5c4e970c04a1a6756f8dde03f6b1df93a4828a46",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/16/android/net/ResolverHostsParcel.aidl",
+      "kind": "blob",
+      "oid": "2a1c748f60fad6fbd0bfdb781d65d1666e253b37",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/16/android/net/ResolverOptionsParcel.aidl",
+      "kind": "blob",
+      "oid": "b07263f85c918e38996fb547231898e713726f6e",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/16/android/net/ResolverParamsParcel.aidl",
+      "kind": "blob",
+      "oid": "f0dfbdc38c86f02cedac55010a0858414859ff2a",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/16/android/net/resolv/aidl/DnsHealthEventParcel.aidl",
+      "kind": "blob",
+      "oid": "d32be9193b39b52781d58d528c59c4bb9b4354e9",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/16/android/net/resolv/aidl/DohParamsParcel.aidl",
+      "kind": "blob",
+      "oid": "ba1ea74783eaa58a25c35b0402cde55cb42889a9",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/16/android/net/resolv/aidl/IDnsResolverUnsolicitedEventListener.aidl",
+      "kind": "blob",
+      "oid": "32963dfd623599c9a1e6bcef1fece9e5da8df436",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/16/android/net/resolv/aidl/Nat64PrefixEventParcel.aidl",
+      "kind": "blob",
+      "oid": "2daccb0e81a7cfe4b2f34c3e954a4dc250607d00",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/16/android/net/resolv/aidl/PrivateDnsValidationEventParcel.aidl",
+      "kind": "blob",
+      "oid": "f3bfbc763274420bd7ce0288a166b0fd26d75375",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/17/.hash",
+      "kind": "blob",
+      "oid": "a37c8addc2efc80b13ab7ad7dd288e04d3495cfc",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/17/android/net/IDnsResolver.aidl",
+      "kind": "blob",
+      "oid": "476e3ed5563fe88c941ba2c02c5b981db2f68c5f",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/17/android/net/ResolverHostsParcel.aidl",
+      "kind": "blob",
+      "oid": "2a1c748f60fad6fbd0bfdb781d65d1666e253b37",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/17/android/net/ResolverOptionsParcel.aidl",
+      "kind": "blob",
+      "oid": "b07263f85c918e38996fb547231898e713726f6e",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/17/android/net/ResolverParamsParcel.aidl",
+      "kind": "blob",
+      "oid": "f0dfbdc38c86f02cedac55010a0858414859ff2a",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/17/android/net/resolv/aidl/DnsForwardingParamsParcel.aidl",
+      "kind": "blob",
+      "oid": "b4ae19828dbef6e37ab91a7a908e217aaf0b10e2",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/17/android/net/resolv/aidl/DnsHealthEventParcel.aidl",
+      "kind": "blob",
+      "oid": "d32be9193b39b52781d58d528c59c4bb9b4354e9",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/17/android/net/resolv/aidl/DohParamsParcel.aidl",
+      "kind": "blob",
+      "oid": "ba1ea74783eaa58a25c35b0402cde55cb42889a9",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/17/android/net/resolv/aidl/IDnsResolverUnsolicitedEventListener.aidl",
+      "kind": "blob",
+      "oid": "32963dfd623599c9a1e6bcef1fece9e5da8df436",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/17/android/net/resolv/aidl/Nat64PrefixEventParcel.aidl",
+      "kind": "blob",
+      "oid": "2daccb0e81a7cfe4b2f34c3e954a4dc250607d00",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/17/android/net/resolv/aidl/PrivateDnsValidationEventParcel.aidl",
+      "kind": "blob",
+      "oid": "f3bfbc763274420bd7ce0288a166b0fd26d75375",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/2/.hash",
+      "kind": "blob",
+      "oid": "03e0b39c14f2d2c869a3f2177e52a648e7c2da87",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/2/android/net/IDnsResolver.aidl",
+      "kind": "blob",
+      "oid": "846bbecf29cf783f7a8c66cb53425c2b9f72ab3c",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/2/android/net/ResolverParamsParcel.aidl",
+      "kind": "blob",
+      "oid": "5c8161607c3f31454e4e96661b84ca5b528c985b",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/3/.hash",
+      "kind": "blob",
+      "oid": "b2560b21c28aa7188f15f21f112fed6e1ce6bd8b",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/3/android/net/IDnsResolver.aidl",
+      "kind": "blob",
+      "oid": "7ab70039a717aff2154259fbc506afa475543651",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/3/android/net/ResolverParamsParcel.aidl",
+      "kind": "blob",
+      "oid": "ce31f1ade1b1d81f765000b4a23dee6aebf6ec7d",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/4/.hash",
+      "kind": "blob",
+      "oid": "c0a6b10e144dd60311e4df27d5ffec54fe3ae98d",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/4/android/net/IDnsResolver.aidl",
+      "kind": "blob",
+      "oid": "9eb65de3e803f541d11e16768183b80f99e2c4ab",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/4/android/net/ResolverHostsParcel.aidl",
+      "kind": "blob",
+      "oid": "3ab0533c2a2d5836a6775c1cbc6a6f767650a050",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/4/android/net/ResolverOptionsParcel.aidl",
+      "kind": "blob",
+      "oid": "a13216a4abcb040120f6d567472677644f843b04",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/4/android/net/ResolverParamsParcel.aidl",
+      "kind": "blob",
+      "oid": "5dae1ca4edec0716df73933c311f2b390fec4efa",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/5/.hash",
+      "kind": "blob",
+      "oid": "a6c97c5f492c65dee5fe595c205d0aaa5800211b",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/5/android/net/IDnsResolver.aidl",
+      "kind": "blob",
+      "oid": "863927b1951aed223b4a8047811dfb863a7f5e07",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/5/android/net/ResolverHostsParcel.aidl",
+      "kind": "blob",
+      "oid": "3ab0533c2a2d5836a6775c1cbc6a6f767650a050",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/5/android/net/ResolverOptionsParcel.aidl",
+      "kind": "blob",
+      "oid": "a13216a4abcb040120f6d567472677644f843b04",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/5/android/net/ResolverParamsParcel.aidl",
+      "kind": "blob",
+      "oid": "5dae1ca4edec0716df73933c311f2b390fec4efa",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/6/.hash",
+      "kind": "blob",
+      "oid": "77b34a47a5d34ba582bedb1101555bb5f042ffc9",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/6/android/net/IDnsResolver.aidl",
+      "kind": "blob",
+      "oid": "863927b1951aed223b4a8047811dfb863a7f5e07",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/6/android/net/ResolverHostsParcel.aidl",
+      "kind": "blob",
+      "oid": "3ab0533c2a2d5836a6775c1cbc6a6f767650a050",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/6/android/net/ResolverOptionsParcel.aidl",
+      "kind": "blob",
+      "oid": "d55ae46bdc41ec30a1a674ce6604287e869c3b6b",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/6/android/net/ResolverParamsParcel.aidl",
+      "kind": "blob",
+      "oid": "5dae1ca4edec0716df73933c311f2b390fec4efa",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/7/.hash",
+      "kind": "blob",
+      "oid": "75f2e385cd30193ccca428e1cc631940cba8ee4e",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/7/android/net/IDnsResolver.aidl",
+      "kind": "blob",
+      "oid": "1f80545fec13fa50bf739c3bf026a6325b723491",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/7/android/net/ResolverHostsParcel.aidl",
+      "kind": "blob",
+      "oid": "c24eb619ea2af56ca6cb0f03c8222cc973b45029",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/7/android/net/ResolverOptionsParcel.aidl",
+      "kind": "blob",
+      "oid": "e806d0400562e308f7c5e525265ee8f409035b84",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/7/android/net/ResolverParamsParcel.aidl",
+      "kind": "blob",
+      "oid": "8fec710cae08dd0c6e976560cf576933ed423677",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/7/android/net/resolv/aidl/DnsHealthEventParcel.aidl",
+      "kind": "blob",
+      "oid": "d32be9193b39b52781d58d528c59c4bb9b4354e9",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/7/android/net/resolv/aidl/IDnsResolverUnsolicitedEventListener.aidl",
+      "kind": "blob",
+      "oid": "d8accd1fefe79b841a9d983c26fea11fd6167fb7",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/7/android/net/resolv/aidl/Nat64PrefixEventParcel.aidl",
+      "kind": "blob",
+      "oid": "2daccb0e81a7cfe4b2f34c3e954a4dc250607d00",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/7/android/net/resolv/aidl/PrivateDnsValidationEventParcel.aidl",
+      "kind": "blob",
+      "oid": "e66e21c1a438b3ad60ca8f0f6cd018c0e1dfa678",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/8/.hash",
+      "kind": "blob",
+      "oid": "535f6f78ffc9f21a3da351ddd736138239d2bb24",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/8/android/net/IDnsResolver.aidl",
+      "kind": "blob",
+      "oid": "a8b3b86de4ab94e2f1f331b8f565c1b6feb26cc7",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/8/android/net/ResolverHostsParcel.aidl",
+      "kind": "blob",
+      "oid": "c24eb619ea2af56ca6cb0f03c8222cc973b45029",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/8/android/net/ResolverOptionsParcel.aidl",
+      "kind": "blob",
+      "oid": "e806d0400562e308f7c5e525265ee8f409035b84",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/8/android/net/ResolverParamsParcel.aidl",
+      "kind": "blob",
+      "oid": "8fec710cae08dd0c6e976560cf576933ed423677",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/8/android/net/resolv/aidl/DnsHealthEventParcel.aidl",
+      "kind": "blob",
+      "oid": "d32be9193b39b52781d58d528c59c4bb9b4354e9",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/8/android/net/resolv/aidl/IDnsResolverUnsolicitedEventListener.aidl",
+      "kind": "blob",
+      "oid": "d8accd1fefe79b841a9d983c26fea11fd6167fb7",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/8/android/net/resolv/aidl/Nat64PrefixEventParcel.aidl",
+      "kind": "blob",
+      "oid": "2daccb0e81a7cfe4b2f34c3e954a4dc250607d00",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/8/android/net/resolv/aidl/PrivateDnsValidationEventParcel.aidl",
+      "kind": "blob",
+      "oid": "e66e21c1a438b3ad60ca8f0f6cd018c0e1dfa678",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/9/.hash",
+      "kind": "blob",
+      "oid": "5b95881812dcfb736036777177e3bfd1af96d8da",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/9/android/net/IDnsResolver.aidl",
+      "kind": "blob",
+      "oid": "08f3e3a4de20f52d17ec8f48a89a9ffd85704410",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/9/android/net/ResolverHostsParcel.aidl",
+      "kind": "blob",
+      "oid": "c24eb619ea2af56ca6cb0f03c8222cc973b45029",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/9/android/net/ResolverOptionsParcel.aidl",
+      "kind": "blob",
+      "oid": "e806d0400562e308f7c5e525265ee8f409035b84",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/9/android/net/ResolverParamsParcel.aidl",
+      "kind": "blob",
+      "oid": "8d0bf75e5989e94b18cfdf8b415afe447ec1b5e5",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/9/android/net/resolv/aidl/DnsHealthEventParcel.aidl",
+      "kind": "blob",
+      "oid": "d32be9193b39b52781d58d528c59c4bb9b4354e9",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/9/android/net/resolv/aidl/IDnsResolverUnsolicitedEventListener.aidl",
+      "kind": "blob",
+      "oid": "d8accd1fefe79b841a9d983c26fea11fd6167fb7",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/9/android/net/resolv/aidl/Nat64PrefixEventParcel.aidl",
+      "kind": "blob",
+      "oid": "2daccb0e81a7cfe4b2f34c3e954a4dc250607d00",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/9/android/net/resolv/aidl/PrivateDnsValidationEventParcel.aidl",
+      "kind": "blob",
+      "oid": "e66e21c1a438b3ad60ca8f0f6cd018c0e1dfa678",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/current/android/net/IDnsResolver.aidl",
+      "kind": "blob",
+      "oid": "476e3ed5563fe88c941ba2c02c5b981db2f68c5f",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/current/android/net/ResolverHostsParcel.aidl",
+      "kind": "blob",
+      "oid": "2a1c748f60fad6fbd0bfdb781d65d1666e253b37",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/current/android/net/ResolverOptionsParcel.aidl",
+      "kind": "blob",
+      "oid": "b07263f85c918e38996fb547231898e713726f6e",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/current/android/net/ResolverParamsParcel.aidl",
+      "kind": "blob",
+      "oid": "f0dfbdc38c86f02cedac55010a0858414859ff2a",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/current/android/net/resolv/aidl/DnsForwardingParamsParcel.aidl",
+      "kind": "blob",
+      "oid": "b4ae19828dbef6e37ab91a7a908e217aaf0b10e2",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/current/android/net/resolv/aidl/DnsHealthEventParcel.aidl",
+      "kind": "blob",
+      "oid": "d32be9193b39b52781d58d528c59c4bb9b4354e9",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/current/android/net/resolv/aidl/DohParamsParcel.aidl",
+      "kind": "blob",
+      "oid": "ba1ea74783eaa58a25c35b0402cde55cb42889a9",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/current/android/net/resolv/aidl/IDnsResolverUnsolicitedEventListener.aidl",
+      "kind": "blob",
+      "oid": "32963dfd623599c9a1e6bcef1fece9e5da8df436",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/current/android/net/resolv/aidl/Nat64PrefixEventParcel.aidl",
+      "kind": "blob",
+      "oid": "2daccb0e81a7cfe4b2f34c3e954a4dc250607d00",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl_api/dnsresolver_aidl_interface/current/android/net/resolv/aidl/PrivateDnsValidationEventParcel.aidl",
+      "kind": "blob",
+      "oid": "f3bfbc763274420bd7ce0288a166b0fd26d75375",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/Android.bp",
+      "kind": "blob",
+      "oid": "31c6003028625ccea5a53625aacb01a8a49cdd01",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "e888718e47070c1ef94ec5569fe3071a3274735d",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/com.android.resolv.avbpubkey",
+      "kind": "blob",
+      "oid": "e0af34cf2a9843c923b8fd4ec96b5463dda8d674",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/com.android.resolv.pem",
+      "kind": "blob",
+      "oid": "6eb688da664f4fe9f59727f315b2dda1e1d1a828",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/com.android.resolv.pk8",
+      "kind": "blob",
+      "oid": "adfc5896b97429b9ad77cf7a24c0edfbb5be8a50",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/com.android.resolv.x509.pem",
+      "kind": "blob",
+      "oid": "cba30d61b840bb547713035db8f9f2d9a3f6d54d",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/manifest.json",
+      "kind": "blob",
+      "oid": "875e95fba559fdb817faa9971b7dd3987db6b22e",
+      "mode": "100644"
+    },
+    {
+      "path": "binder/android/net/IDnsResolver.aidl",
+      "kind": "blob",
+      "oid": "718cb2752113d103137d9c307ab2d1fe1c95fd5f",
+      "mode": "100644"
+    },
+    {
+      "path": "binder/android/net/ResolverHostsParcel.aidl",
+      "kind": "blob",
+      "oid": "c46080a83c7a86dbe0b7a96f5eb94c8f0b869f29",
+      "mode": "100644"
+    },
+    {
+      "path": "binder/android/net/ResolverOptionsParcel.aidl",
+      "kind": "blob",
+      "oid": "3c953e0ab838e3c10ba337e76dfc5afc780cf55e",
+      "mode": "100644"
+    },
+    {
+      "path": "binder/android/net/ResolverParamsParcel.aidl",
+      "kind": "blob",
+      "oid": "b51e899d684814203d740e1e24b7a62c439876ef",
+      "mode": "100644"
+    },
+    {
+      "path": "binder/android/net/TEST_MAPPING",
+      "kind": "blob",
+      "oid": "0e7336c158b7f3b0def253693d063c81b53e297a",
+      "mode": "100644"
+    },
+    {
+      "path": "binder/android/net/resolv/aidl/DnsForwardingParamsParcel.aidl",
+      "kind": "blob",
+      "oid": "ba5504814cb569bfedbc240dd02763103bd920f8",
+      "mode": "100644"
+    },
+    {
+      "path": "binder/android/net/resolv/aidl/DnsHealthEventParcel.aidl",
+      "kind": "blob",
+      "oid": "6be49bf628753dd3bb7fdd29efd677f6e73f06d4",
+      "mode": "100644"
+    },
+    {
+      "path": "binder/android/net/resolv/aidl/DohParamsParcel.aidl",
+      "kind": "blob",
+      "oid": "1cc17d2db361823d2c13e4d3d16592faff6a4c70",
+      "mode": "100644"
+    },
+    {
+      "path": "binder/android/net/resolv/aidl/IDnsResolverUnsolicitedEventListener.aidl",
+      "kind": "blob",
+      "oid": "d58a640b99b70e4a34dd6ecaa7f054bf05e89faf",
+      "mode": "100644"
+    },
+    {
+      "path": "binder/android/net/resolv/aidl/Nat64PrefixEventParcel.aidl",
+      "kind": "blob",
+      "oid": "587b5c44f7d11c7daa2bc6908acf676787ecf57e",
+      "mode": "100644"
+    },
+    {
+      "path": "binder/android/net/resolv/aidl/PrivateDnsValidationEventParcel.aidl",
+      "kind": "blob",
+      "oid": "e16733b3e1d42c9fa130b657708b2d76c7785f7f",
+      "mode": "100644"
+    },
+    {
+      "path": "cbindgen.toml",
+      "kind": "blob",
+      "oid": "c9074692e5c71ca21211821d9ca355217b8e366a",
+      "mode": "100644"
+    },
+    {
+      "path": "doh.h",
+      "kind": "blob",
+      "oid": "6f82bea5021347c1d514fc45bb4c108a3edb7509",
+      "mode": "100644"
+    },
+    {
+      "path": "getaddrinfo.cpp",
+      "kind": "blob",
+      "oid": "6738d9b217a64a6cd390e07e6372dbca2f8e879f",
+      "mode": "100644"
+    },
+    {
+      "path": "getaddrinfo.h",
+      "kind": "blob",
+      "oid": "3651c0c5dfefbd88f1b3fb6698d5821a5eb9cdbd",
+      "mode": "100644"
+    },
+    {
+      "path": "gethnamaddr.cpp",
+      "kind": "blob",
+      "oid": "9a4e0ed48582b988223c91dace77c3e64a532a16",
+      "mode": "100644"
+    },
+    {
+      "path": "gethnamaddr.h",
+      "kind": "blob",
+      "oid": "b65973b887df8abcf80d37682fe5ccd86b773f9a",
+      "mode": "100644"
+    },
+    {
+      "path": "hostent.h",
+      "kind": "blob",
+      "oid": "562fc41e031396f4f070f3f1c8aa78a32ecf04a8",
+      "mode": "100644"
+    },
+    {
+      "path": "include/dnsproxyd_protocol/DnsProxydProtocol.h",
+      "kind": "blob",
+      "oid": "5e6b16b5722cd342bccb346b297865fb5f85e5e5",
+      "mode": "100644"
+    },
+    {
+      "path": "include/netd_resolv/resolv.h",
+      "kind": "blob",
+      "oid": "1772d1756b00067289ff183f57e040bfd2668f53",
+      "mode": "100644"
+    },
+    {
+      "path": "libnetd_resolv.map.txt",
+      "kind": "blob",
+      "oid": "c23d9f62f29a41d72d9bb2ab848e7e94baa4be9f",
+      "mode": "100644"
+    },
+    {
+      "path": "params.h",
+      "kind": "blob",
+      "oid": "82cd058a63f21ac3e8a91151e295673ce2bd1873",
+      "mode": "100644"
+    },
+    {
+      "path": "res_cache.cpp",
+      "kind": "blob",
+      "oid": "85a01ebe4132eb22c52f83fbca46b66736933bad",
+      "mode": "100644"
+    },
+    {
+      "path": "res_comp.cpp",
+      "kind": "blob",
+      "oid": "4d3faecabdd5c978ddbceb13282dfe574cf50ad9",
+      "mode": "100644"
+    },
+    {
+      "path": "res_comp.h",
+      "kind": "blob",
+      "oid": "6022838da8acafe5da287989f3c6ff53bb97a054",
+      "mode": "100644"
+    },
+    {
+      "path": "res_debug.cpp",
+      "kind": "blob",
+      "oid": "4210f48caa55715861ef3e9106c3021fc3d75764",
+      "mode": "100644"
+    },
+    {
+      "path": "res_debug.h",
+      "kind": "blob",
+      "oid": "08c3810df8d151363431d070fb981d6111f118da",
+      "mode": "100644"
+    },
+    {
+      "path": "res_mkquery.cpp",
+      "kind": "blob",
+      "oid": "24cee30e485184768e5f36f009cd2351cede146b",
+      "mode": "100644"
+    },
+    {
+      "path": "res_query.cpp",
+      "kind": "blob",
+      "oid": "c893db0f8ac3064344c2c8c140e7ebdc4ff57508",
+      "mode": "100644"
+    },
+    {
+      "path": "res_send.cpp",
+      "kind": "blob",
+      "oid": "4a479ed05509947ee6c0b8cee2f7ef52e7441916",
+      "mode": "100644"
+    },
+    {
+      "path": "res_send.h",
+      "kind": "blob",
+      "oid": "c817370f2fbbd52145065eaaa3b1447876bfebf7",
+      "mode": "100644"
+    },
+    {
+      "path": "res_stats.cpp",
+      "kind": "blob",
+      "oid": "34f4737e71bf255d11781e269a84dbee131aa9dc",
+      "mode": "100644"
+    },
+    {
+      "path": "resolv_cache.h",
+      "kind": "blob",
+      "oid": "e6574a0a72463f3fc739b68dab0b82ce01ddd36b",
+      "mode": "100644"
+    },
+    {
+      "path": "resolv_private.h",
+      "kind": "blob",
+      "oid": "bbeceaa8e102155d76211334a905c1faf887089e",
+      "mode": "100644"
+    },
+    {
+      "path": "resolv_test_config_template.xml",
+      "kind": "blob",
+      "oid": "e649970bc99eef98a61755b08194b8a1654a8e2f",
+      "mode": "100644"
+    },
+    {
+      "path": "resolv_test_config_without_root_template.xml",
+      "kind": "blob",
+      "oid": "ffc88ca151685fe1c31047d51a1f1aee41d44dff",
+      "mode": "100644"
+    },
+    {
+      "path": "resolv_test_default.map",
+      "kind": "blob",
+      "oid": "e342e43eab2ff3a790c0bf56cdfd0246686c5736",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/Android.bp",
+      "kind": "blob",
+      "oid": "aa4b217afa5a09e7cb3322860d52405383c26e5a",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/Cargo.toml",
+      "kind": "blob",
+      "oid": "6d7c606230974c6d31d632a2760a5c2bd98c016f",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/lib/resolvrs_utils/Android.bp",
+      "kind": "blob",
+      "oid": "1b7c4e532a6cb8a09f844327fe7e979af17fcf50",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/lib/resolvrs_utils/Cargo.toml",
+      "kind": "blob",
+      "oid": "dd17b770823e1d390c9d2c7b3096d0bbe782fd67",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/lib/resolvrs_utils/src/lib.rs",
+      "kind": "blob",
+      "oid": "04f7f9126bb6ef5d2e0e3755b75699505f238975",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/lib/resolvrs_utils/src/socket/mod.rs",
+      "kind": "blob",
+      "oid": "dc72face89f8937e5aa0855d84e9378542a91771",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/lib/resolvrs_utils/src/socket/sync.rs",
+      "kind": "blob",
+      "oid": "5ba17f4f179919b2876ca3a3af483e68b49056d7",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/lib/resolvrs_utils/src/socket/tokio.rs",
+      "kind": "blob",
+      "oid": "640a5b1b1f8992de48207d9bd5c2c322a609bbeb",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/lib/statslog_dns_resolver/Android.bp",
+      "kind": "blob",
+      "oid": "7010826a9959b4185e53317161caf00c52a72a7d",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/lib/statslog_dns_resolver/statslog_wrapper.rs",
+      "kind": "blob",
+      "oid": "93dc84a321bade4513b30257e87ebbbbb73b499f",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/socketbroker/Android.bp",
+      "kind": "blob",
+      "oid": "1401fd460306fad38d88b97e04a49fec39ba7582",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/socketbroker/Cargo.toml",
+      "kind": "blob",
+      "oid": "80d1879070ac8309d142f552faa7c2313d2ebe44",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/socketbroker/socketbroker.c",
+      "kind": "blob",
+      "oid": "678be2df8b8ab2910996fb28189d510a29cd55ee",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/socketbroker/src/main.rs",
+      "kind": "blob",
+      "oid": "adc38c98cab4bdef6272c2c31dfcda393b7b2b6f",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/dns_proxy/ffi.rs",
+      "kind": "blob",
+      "oid": "5e5142f42171045e624e24b8eb850953223e212a",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/dns_proxy/mod.rs",
+      "kind": "blob",
+      "oid": "da98517c6dd692cb0d742dc9ce533eb9f2d24c61",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/dns_proxy/net_context_client.cpp",
+      "kind": "blob",
+      "oid": "6d14a098e59661b3e9341840b8fcc9b064def00c",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/dns_proxy/net_context_client.h",
+      "kind": "blob",
+      "oid": "1490f29264644509dbd9871703739ddafef25b5a",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/dns_proxy/packet.rs",
+      "kind": "blob",
+      "oid": "d99da321cfbaba7ccb4fe8d377e549776dabc2f1",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/dns_proxy/server/driver.rs",
+      "kind": "blob",
+      "oid": "8d02aab817c0d69e06dcad73c8953b70f7f2ea6d",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/dns_proxy/server/driver/socket.rs",
+      "kind": "blob",
+      "oid": "2ea589692ae66cb4efab5eb1ebad9b10e55b81d2",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/dns_proxy/server/mod.rs",
+      "kind": "blob",
+      "oid": "468de02bbe27a77293595a80f04d4ce67cd95ed9",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/dns_proxy/socketbroker.rs",
+      "kind": "blob",
+      "oid": "68073a885bbdf0c659dc475f9a1f01a91039357c",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/doh/boot_time.rs",
+      "kind": "blob",
+      "oid": "58eaea4ab9ac263c646b3c3d733f3c50f913c6fa",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/doh/config.rs",
+      "kind": "blob",
+      "oid": "cc818f696b513ec0ed718c03d7493345f31b256c",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/doh/connection/driver.rs",
+      "kind": "blob",
+      "oid": "fad7091f7fca686b7ef88b707dc07f1daafef099",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/doh/connection/mod.rs",
+      "kind": "blob",
+      "oid": "c10ec3473375faa8ea620c03ad9036d738cd5cef",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/doh/dispatcher/driver.rs",
+      "kind": "blob",
+      "oid": "52061a5dcd5607ed9cc05dc43498bc16ac843530",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/doh/dispatcher/mod.rs",
+      "kind": "blob",
+      "oid": "46d8a5e1eb23efbbd970b8d63356353385b54a70",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/doh/encoding.rs",
+      "kind": "blob",
+      "oid": "c535c82768841602cf631005606a9259298d5189",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/doh/ffi.rs",
+      "kind": "blob",
+      "oid": "38b741e26a3611d759565c9916da4f5b025df249",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/doh/metrics.rs",
+      "kind": "blob",
+      "oid": "6d52485d2af724e95b156beb8538a7cb59870705",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/doh/mod.rs",
+      "kind": "blob",
+      "oid": "42152a2ca6e960ac195df75a445deddbe6747cc7",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/doh/network/driver.rs",
+      "kind": "blob",
+      "oid": "d5318de821515cd8fd5317119010826eafc749b9",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/doh/network/mod.rs",
+      "kind": "blob",
+      "oid": "71e56b256bd47e9a1b6216c919a054de3306c46f",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/doh/tests/doh_frontend/Android.bp",
+      "kind": "blob",
+      "oid": "8f52253fdcdf5920d41cd4d9941f881ececd8456",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/doh/tests/doh_frontend/cbindgen.toml",
+      "kind": "blob",
+      "oid": "85b1f4dfe4bb748f8a29f66354ee9c5c115b32e7",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/doh/tests/doh_frontend/include/lib.rs.h",
+      "kind": "blob",
+      "oid": "e340a56bf0e0f03704150b53d97cc4eb73c1ab7e",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/doh/tests/doh_frontend/mod.rs",
+      "kind": "blob",
+      "oid": "0facabac04df433c9247d25902a65757402bd534",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/doh/tests/doh_frontend/src/client.rs",
+      "kind": "blob",
+      "oid": "b0399a9e2ef7c5d1285479848ae0ba3a2b3ab78e",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/doh/tests/doh_frontend/src/config.rs",
+      "kind": "blob",
+      "oid": "0ee87506a45e2f7f03e6af98479fc2d5692da28e",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/doh/tests/doh_frontend/src/dns_https_frontend.rs",
+      "kind": "blob",
+      "oid": "1fe555dc4e16c597f2ff8a63cdc1e76828bca7b0",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/doh/tests/doh_frontend/src/ffi.rs",
+      "kind": "blob",
+      "oid": "bc16b9546f3842285e4f590e046d164abdbb18c6",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/doh/tests/doh_frontend/src/mod.rs",
+      "kind": "blob",
+      "oid": "edcc85588b89e76bdcc1e4c6974624d4755d860b",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/doh/tests/doh_frontend/src/stats.rs",
+      "kind": "blob",
+      "oid": "5f71e9e00d4663a93c69b646ef9996a62b804c0d",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/doh/tests/mod.rs",
+      "kind": "blob",
+      "oid": "6e89ae17a1cb449c7aaeb576ad5cf968dee38954",
+      "mode": "100644"
+    },
+    {
+      "path": "rust/src/lib.rs",
+      "kind": "blob",
+      "oid": "3c38d96fb485082da8b3faee5c0cc3eec9f2e101",
+      "mode": "100644"
+    },
+    {
+      "path": "rustfmt.toml",
+      "kind": "blob",
+      "oid": "475ba8fde76f71f9974bbc4626091747e35ec757",
+      "mode": "120000"
+    },
+    {
+      "path": "sethostent.cpp",
+      "kind": "blob",
+      "oid": "1bd8ab4cc2912042149a80f5df5b1c4cedc6f663",
+      "mode": "100644"
+    },
+    {
+      "path": "stats.h",
+      "kind": "blob",
+      "oid": "698c8c29c5a50ad827a9bc60e7258555cad554fa",
+      "mode": "100644"
+    },
+    {
+      "path": "stats.proto",
+      "kind": "blob",
+      "oid": "11782861e9b92bf4b09933e2e696fa030f0063a5",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/Android.bp",
+      "kind": "blob",
+      "oid": "ca361fdab24e29f575a7920679493d0f07279944",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/dns_metrics_listener/Android.bp",
+      "kind": "blob",
+      "oid": "91fdf8d55c0f94d8f06ea884e0686320911dc93d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/dns_metrics_listener/base_metrics_listener.cpp",
+      "kind": "blob",
+      "oid": "acd73103d5439e30f83c1dc9b650cbdffef99fd2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/dns_metrics_listener/base_metrics_listener.h",
+      "kind": "blob",
+      "oid": "e0b403f3056a2aedcd445d3def8c9c4d70750d28",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/dns_metrics_listener/dns_metrics_listener.cpp",
+      "kind": "blob",
+      "oid": "c1d4883d8e14f28f812dcf7c52ff2a6eb1b52fa4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/dns_metrics_listener/dns_metrics_listener.h",
+      "kind": "blob",
+      "oid": "e34662b2c4b8002e3d1312ab4323a25d0dc9367d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/dns_metrics_listener/test_metrics.cpp",
+      "kind": "blob",
+      "oid": "036abe86e5507cfdf8f19f2fe5a8915eae289094",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/dns_metrics_listener/test_metrics.h",
+      "kind": "blob",
+      "oid": "03c98427029be618de51a317cf543ca830d5f22d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/dns_responder/Android.bp",
+      "kind": "blob",
+      "oid": "3d63b689a904f1156390df3c0d541b9c644b8d27",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/dns_responder/dns_responder.cpp",
+      "kind": "blob",
+      "oid": "03a53e2186c338fb5cf435debec7506787c1a3c1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/dns_responder/dns_responder.h",
+      "kind": "blob",
+      "oid": "2a9a00e082a997714f4b21036936b9433446692d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/dns_responder/dns_responder_client_ndk.cpp",
+      "kind": "blob",
+      "oid": "5fc888c5f58927bd24061de173e4ce37805c68a4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/dns_responder/dns_responder_client_ndk.h",
+      "kind": "blob",
+      "oid": "0713a7ca980bcf991084faec46bb01293f9ed30d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/dns_responder/dns_tls_certificate.h",
+      "kind": "blob",
+      "oid": "79a4b0f83def8a4324358ba5742df76892dd8540",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/dns_responder/dns_tls_frontend.cpp",
+      "kind": "blob",
+      "oid": "c93cecd329e8ec98e49a7dbdfc2a4d717ce80b32",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/dns_responder/dns_tls_frontend.h",
+      "kind": "blob",
+      "oid": "8033446d65e5f323500f5ca5aa27eab28dfb83f9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/dnsresolver_binder_test.cpp",
+      "kind": "blob",
+      "oid": "01af6a085c6bf27d4bc922e922427c2c4445d2db",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/doh_ffi_test.cpp",
+      "kind": "blob",
+      "oid": "6d5b04922aea368ead10459cad0c7997228c0894",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/doh_ffi_test_config.xml",
+      "kind": "blob",
+      "oid": "02dcfe0a7a6165dcb5f451d079634a49da42d21c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/doh_frontend.cpp",
+      "kind": "blob",
+      "oid": "353ba31deef9818798a5ba7ad3ef601691586abc",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/doh_frontend.h",
+      "kind": "blob",
+      "oid": "306aff334e47ed7fe1d2dce7e0d498d15c11f467",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/fuzzer/resolv_fuzzer_utils.cpp",
+      "kind": "blob",
+      "oid": "8a903d5908fdfe0103a988da885906203a45ffc8",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/fuzzer/resolv_fuzzer_utils.h",
+      "kind": "blob",
+      "oid": "2a15a3036e0028d462ff27d382d82dba9adbc06b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/fuzzer/resolv_getaddrinfo_fuzzer.cpp",
+      "kind": "blob",
+      "oid": "6b368e8665ba414a6b020b100136e05173071f01",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/fuzzer/resolv_gethostbyaddr_fuzzer.cpp",
+      "kind": "blob",
+      "oid": "159cda73d647c48029dfc24f6366907dbca9b5f3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/fuzzer/resolv_gethostbyname_fuzzer.cpp",
+      "kind": "blob",
+      "oid": "b6dc946cdce907146cd24a8ef23b7a8f3e363638",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/fuzzer/resolv_service_fuzzer.cpp",
+      "kind": "blob",
+      "oid": "cdd892d04cac07c276e4978e0b9a30e5f8f3df1e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/golddata.proto",
+      "kind": "blob",
+      "oid": "3a512b41e6afe4f8697d98e6a92e28da55e8d664",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/pbtxt2pb_converter_host.cpp",
+      "kind": "blob",
+      "oid": "2b88971ee1f77a9779f834054429271cd90531c7",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/resolv_cache_unit_test.cpp",
+      "kind": "blob",
+      "oid": "e8792770ca71d1bc2e3efa21eba78191569591fe",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/resolv_callback_unit_test.cpp",
+      "kind": "blob",
+      "oid": "ceaa117ab8add538feca597269dd08f7c4ce8158",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/resolv_gold_test.cpp",
+      "kind": "blob",
+      "oid": "84bc00bc7d403041ff4af248e87ffb2f183fcb83",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/resolv_gold_test_config.xml",
+      "kind": "blob",
+      "oid": "270dc0b0a9cbeade00328334c5655d8ae288b73c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/resolv_integration_test.cpp",
+      "kind": "blob",
+      "oid": "8e2ca4e61a005eec21a42399a3237e35fec66de5",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/resolv_private_dns_test.cpp",
+      "kind": "blob",
+      "oid": "ceb0c1e829b57c3ae95fb5ef178effd8aeb428ef",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/resolv_stats_test_utils.cpp",
+      "kind": "blob",
+      "oid": "1704922c80d10f9cfce773e47c5d5c95466a7ca2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/resolv_stats_test_utils.h",
+      "kind": "blob",
+      "oid": "24e46858e82c1447be29f78f5ca6c71f65f67da6",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/resolv_stats_test_utils_test.cpp",
+      "kind": "blob",
+      "oid": "af67796ccb1a9be9dbbd63718d2cf6e37d94258d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/resolv_stress_test.cpp",
+      "kind": "blob",
+      "oid": "6ad45ae1513e8a3a34fe38c64d9b5717c6650c14",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/resolv_test_callbacks.cpp",
+      "kind": "blob",
+      "oid": "6d147356e61860a5456a94030f1fb9b2c3156f30",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/resolv_test_callbacks.h",
+      "kind": "blob",
+      "oid": "c5bdf116c33b6a599b005fd7917c271ecfff3d03",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/resolv_test_utils.cpp",
+      "kind": "blob",
+      "oid": "9ac732fd7a07abfb3f9892fd38aac8896fa1b443",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/resolv_test_utils.h",
+      "kind": "blob",
+      "oid": "1ffc7c8139351d4be0191578f8ee7e69ecaa5a59",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/resolv_tls_unit_test.cpp",
+      "kind": "blob",
+      "oid": "3cad3d89186ac3e71e7a83e955979519ed188a9a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/resolv_unit_test.cpp",
+      "kind": "blob",
+      "oid": "79f9b7f8a7a417d0e9b27d2c77a36278aab5f234",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/testdata/README.md",
+      "kind": "blob",
+      "oid": "4ebd2b0e70a863a6a18785304929cc243887b1d9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/testdata/getaddrinfo.tls.topsite.google.pbtxt",
+      "kind": "blob",
+      "oid": "a4c166181389b7dfc210cb7f646627b292e93b00",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/testdata/getaddrinfo.topsite.amazon.pbtxt",
+      "kind": "blob",
+      "oid": "4b305f15fe80212d0fb317d0511f2bc3f6f8e668",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/testdata/getaddrinfo.topsite.bing.pbtxt",
+      "kind": "blob",
+      "oid": "b7bfb50c9d9ba0af6bc4430c8a409a8449552f80",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/testdata/getaddrinfo.topsite.ebay.pbtxt",
+      "kind": "blob",
+      "oid": "2f562f0a62bae6ca097835174367f6ef17153236",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/testdata/getaddrinfo.topsite.facebook.pbtxt",
+      "kind": "blob",
+      "oid": "9f910f212c21e6d5c29cf944f2a21e38ef61dabe",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/testdata/getaddrinfo.topsite.google.pbtxt",
+      "kind": "blob",
+      "oid": "bc40a33587cf1fc8fd36642b0ceeca6cd6d0a7b9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/testdata/getaddrinfo.topsite.netflix.pbtxt",
+      "kind": "blob",
+      "oid": "1b12eb4de64d36e9f9e1e9bdabdc6918d7a1af58",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/testdata/getaddrinfo.topsite.reddit.pbtxt",
+      "kind": "blob",
+      "oid": "3ccf721779cb6dd6844de831864ea239b4d5cafc",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/testdata/getaddrinfo.topsite.wikipedia.pbtxt",
+      "kind": "blob",
+      "oid": "c6415f09cbdea0d87f55808588cb550a67ad1c30",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/testdata/getaddrinfo.topsite.yahoo.pbtxt",
+      "kind": "blob",
+      "oid": "9223dadb328037bebaf1916125a3decb51ee5b98",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/testdata/getaddrinfo.topsite.youtube.pbtxt",
+      "kind": "blob",
+      "oid": "6ee64e482654ca07833663043fe012f1fb1955db",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/testdata/gethostbyname.tls.topsite.youtube.pbtxt",
+      "kind": "blob",
+      "oid": "5f32518881d643eeb74ae3daa2f3faa23d60605f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/testdata/gethostbyname.topsite.youtube.pbtxt",
+      "kind": "blob",
+      "oid": "d113e5513109e7f6e4e5a4763441eddeddf4732b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/tun_forwarder.cpp",
+      "kind": "blob",
+      "oid": "a349b8f38ee726e9dd65b6094b9758a415622bef",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/tun_forwarder.h",
+      "kind": "blob",
+      "oid": "d5d84732cda0657789f8eae67990056e6d900c5b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unsolicited_listener/Android.bp",
+      "kind": "blob",
+      "oid": "22688e2c6e01d4080007bfb1876f6b89adac346d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unsolicited_listener/unsolicited_event_listener.cpp",
+      "kind": "blob",
+      "oid": "b337496fa12571fa1ddad91b119ff7d474ee97f8",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unsolicited_listener/unsolicited_event_listener.h",
+      "kind": "blob",
+      "oid": "dbc563291215e5aec378ee33cfdc74089977afb0",
+      "mode": "100644"
+    },
+    {
+      "path": "util.cpp",
+      "kind": "blob",
+      "oid": "458f3c6bb9e10467a5bb7aabfa3b3e9f971e947b",
+      "mode": "100644"
+    },
+    {
+      "path": "util.h",
+      "kind": "blob",
+      "oid": "33aefddc239b3d57eb53fa43fba22cdc564800d6",
+      "mode": "100644"
+    }
+  ]
+}

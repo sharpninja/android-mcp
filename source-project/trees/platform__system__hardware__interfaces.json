@@ -1,0 +1,5023 @@
+{
+  "repo": "platform/system/hardware/interfaces",
+  "requested_revision": "refs/tags/android-17.0.0_r1",
+  "revision": "9c3469aa3d4aeec5b2bc8e8ae8fdb4437dab4edb",
+  "entries": [
+    {
+      "path": ".clang-format",
+      "kind": "blob",
+      "oid": "9b3f9d991909537a86fee5bf14d2350cdc2599af",
+      "mode": "100644"
+    },
+    {
+      "path": "Android.bp",
+      "kind": "blob",
+      "oid": "8d506030b8453df9ad064949b925aa1d6e498003",
+      "mode": "100644"
+    },
+    {
+      "path": "NOTICE",
+      "kind": "blob",
+      "oid": "93f3d52c848cb8e27a2866c7e21280c7054670b6",
+      "mode": "100644"
+    },
+    {
+      "path": "OWNERS",
+      "kind": "blob",
+      "oid": "2488b0f48ab2fe82a8ff659d5d70320f2cf9be40",
+      "mode": "100644"
+    },
+    {
+      "path": "PREUPLOAD.cfg",
+      "kind": "blob",
+      "oid": "213c93ac0f2de0bdf9ee89bdb7e03d5960518aff",
+      "mode": "100644"
+    },
+    {
+      "path": "README.default.md",
+      "kind": "blob",
+      "oid": "28acc6c4a10c2e6520cfc53c1c0e6e1fe3dbaa28",
+      "mode": "100644"
+    },
+    {
+      "path": "TEST_MAPPING",
+      "kind": "blob",
+      "oid": "1993efe9cf664a7b8833a193190446fe159712ab",
+      "mode": "100644"
+    },
+    {
+      "path": "current.txt",
+      "kind": "blob",
+      "oid": "287e5969e50dfa661ccfb79b3cd6ab04b5d782f8",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/OWNERS",
+      "kind": "blob",
+      "oid": "f09d658f482268bfed70ae4145873bdaa8132d77",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/Android.bp",
+      "kind": "blob",
+      "oid": "f08e2459a5eb963d57a795861050c24189ea9314",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/1/.hash",
+      "kind": "blob",
+      "oid": "256f639ede83a7805b66fd3efa733c32084ab0b2",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/1/android/system/keystore2/AuthenticatorSpec.aidl",
+      "kind": "blob",
+      "oid": "61b45d73d2abf772e169d2733fb3f46ff62a524b",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/1/android/system/keystore2/Authorization.aidl",
+      "kind": "blob",
+      "oid": "0b8c91968038c0228c007c0a4e5275a5e001df3a",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/1/android/system/keystore2/CreateOperationResponse.aidl",
+      "kind": "blob",
+      "oid": "e37facbde8bae160a2d07ecdb1ad8c4ca09bb77a",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/1/android/system/keystore2/Domain.aidl",
+      "kind": "blob",
+      "oid": "4fd54aa5b96a1ce8350f47a5bb8aa27b05dc6a87",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/1/android/system/keystore2/EphemeralStorageKeyResponse.aidl",
+      "kind": "blob",
+      "oid": "963af7bfe104c5032580c4448b07453fcb9eb941",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/1/android/system/keystore2/IKeystoreOperation.aidl",
+      "kind": "blob",
+      "oid": "df911cd3930be4d2a668dc6888bc640d61e1b161",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/1/android/system/keystore2/IKeystoreSecurityLevel.aidl",
+      "kind": "blob",
+      "oid": "a14ee85e0c48ab8b76854c99862328aab8449d17",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/1/android/system/keystore2/IKeystoreService.aidl",
+      "kind": "blob",
+      "oid": "5ed5d37a3f7a496c08f2fa0b922d7c40c1be4dc7",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/1/android/system/keystore2/KeyDescriptor.aidl",
+      "kind": "blob",
+      "oid": "895a92777a4a4ced29eb51c13020f09249eed944",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/1/android/system/keystore2/KeyEntryResponse.aidl",
+      "kind": "blob",
+      "oid": "ea313b3d0f87ac443450e08fe357c88e1fe92c2c",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/1/android/system/keystore2/KeyMetadata.aidl",
+      "kind": "blob",
+      "oid": "5c8df716a4ca1b597df5397ad36ab2d1ed9357d3",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/1/android/system/keystore2/KeyParameters.aidl",
+      "kind": "blob",
+      "oid": "f9c836a5548e2dbd547818f6e9f394982d047e89",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/1/android/system/keystore2/KeyPermission.aidl",
+      "kind": "blob",
+      "oid": "d023e245a85eaa28a1f0eb65a80e8ac890d34366",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/1/android/system/keystore2/OperationChallenge.aidl",
+      "kind": "blob",
+      "oid": "0a079fb143fff36c449e785f458b6050a32684e9",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/1/android/system/keystore2/ResponseCode.aidl",
+      "kind": "blob",
+      "oid": "bbeb5d24646d6b0d749405b56bf39d33f6f81422",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/2/.hash",
+      "kind": "blob",
+      "oid": "a445b3789649bd4afdc6db217cb461eddd897be4",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/2/android/system/keystore2/AuthenticatorSpec.aidl",
+      "kind": "blob",
+      "oid": "49a3b2c80270ad1efb436f4abc018edf01d0e5f7",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/2/android/system/keystore2/Authorization.aidl",
+      "kind": "blob",
+      "oid": "3efeb68cfd77b30680edcbae48f4186dd167c7fe",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/2/android/system/keystore2/CreateOperationResponse.aidl",
+      "kind": "blob",
+      "oid": "e37facbde8bae160a2d07ecdb1ad8c4ca09bb77a",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/2/android/system/keystore2/Domain.aidl",
+      "kind": "blob",
+      "oid": "4fd54aa5b96a1ce8350f47a5bb8aa27b05dc6a87",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/2/android/system/keystore2/EphemeralStorageKeyResponse.aidl",
+      "kind": "blob",
+      "oid": "963af7bfe104c5032580c4448b07453fcb9eb941",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/2/android/system/keystore2/IKeystoreOperation.aidl",
+      "kind": "blob",
+      "oid": "df911cd3930be4d2a668dc6888bc640d61e1b161",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/2/android/system/keystore2/IKeystoreSecurityLevel.aidl",
+      "kind": "blob",
+      "oid": "a14ee85e0c48ab8b76854c99862328aab8449d17",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/2/android/system/keystore2/IKeystoreService.aidl",
+      "kind": "blob",
+      "oid": "5ed5d37a3f7a496c08f2fa0b922d7c40c1be4dc7",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/2/android/system/keystore2/KeyDescriptor.aidl",
+      "kind": "blob",
+      "oid": "79478aace581c5775f7d1a74d119a1999f3f2eb3",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/2/android/system/keystore2/KeyEntryResponse.aidl",
+      "kind": "blob",
+      "oid": "ea313b3d0f87ac443450e08fe357c88e1fe92c2c",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/2/android/system/keystore2/KeyMetadata.aidl",
+      "kind": "blob",
+      "oid": "fef45314aeb2502b875b652380e06ed812ae9340",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/2/android/system/keystore2/KeyParameters.aidl",
+      "kind": "blob",
+      "oid": "f9c836a5548e2dbd547818f6e9f394982d047e89",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/2/android/system/keystore2/KeyPermission.aidl",
+      "kind": "blob",
+      "oid": "d023e245a85eaa28a1f0eb65a80e8ac890d34366",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/2/android/system/keystore2/OperationChallenge.aidl",
+      "kind": "blob",
+      "oid": "0a079fb143fff36c449e785f458b6050a32684e9",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/2/android/system/keystore2/ResponseCode.aidl",
+      "kind": "blob",
+      "oid": "bbeb5d24646d6b0d749405b56bf39d33f6f81422",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/3/.hash",
+      "kind": "blob",
+      "oid": "f3645c8e197bedde791ec16fe214850226128bf7",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/3/android/system/keystore2/AuthenticatorSpec.aidl",
+      "kind": "blob",
+      "oid": "49a3b2c80270ad1efb436f4abc018edf01d0e5f7",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/3/android/system/keystore2/Authorization.aidl",
+      "kind": "blob",
+      "oid": "3efeb68cfd77b30680edcbae48f4186dd167c7fe",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/3/android/system/keystore2/CreateOperationResponse.aidl",
+      "kind": "blob",
+      "oid": "e37facbde8bae160a2d07ecdb1ad8c4ca09bb77a",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/3/android/system/keystore2/Domain.aidl",
+      "kind": "blob",
+      "oid": "4fd54aa5b96a1ce8350f47a5bb8aa27b05dc6a87",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/3/android/system/keystore2/EphemeralStorageKeyResponse.aidl",
+      "kind": "blob",
+      "oid": "963af7bfe104c5032580c4448b07453fcb9eb941",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/3/android/system/keystore2/IKeystoreOperation.aidl",
+      "kind": "blob",
+      "oid": "df911cd3930be4d2a668dc6888bc640d61e1b161",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/3/android/system/keystore2/IKeystoreSecurityLevel.aidl",
+      "kind": "blob",
+      "oid": "4b2eab46af18f350fdd2675c24fe3bc486cab91b",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/3/android/system/keystore2/IKeystoreService.aidl",
+      "kind": "blob",
+      "oid": "d2f03cfec72e809cc7f5d3bd09f18a7c3588d437",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/3/android/system/keystore2/KeyDescriptor.aidl",
+      "kind": "blob",
+      "oid": "79478aace581c5775f7d1a74d119a1999f3f2eb3",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/3/android/system/keystore2/KeyEntryResponse.aidl",
+      "kind": "blob",
+      "oid": "ea313b3d0f87ac443450e08fe357c88e1fe92c2c",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/3/android/system/keystore2/KeyMetadata.aidl",
+      "kind": "blob",
+      "oid": "fef45314aeb2502b875b652380e06ed812ae9340",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/3/android/system/keystore2/KeyParameters.aidl",
+      "kind": "blob",
+      "oid": "f9c836a5548e2dbd547818f6e9f394982d047e89",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/3/android/system/keystore2/KeyPermission.aidl",
+      "kind": "blob",
+      "oid": "3009fb6ab504a78b64a6abbcd4007830f491f059",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/3/android/system/keystore2/OperationChallenge.aidl",
+      "kind": "blob",
+      "oid": "0a079fb143fff36c449e785f458b6050a32684e9",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/3/android/system/keystore2/ResponseCode.aidl",
+      "kind": "blob",
+      "oid": "9a486e053ec59c9ab23529a5c469bcc37e95a943",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/4/.hash",
+      "kind": "blob",
+      "oid": "6cc947a76806863945d26232726a9a317ae2dd52",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/4/android/system/keystore2/AuthenticatorSpec.aidl",
+      "kind": "blob",
+      "oid": "49a3b2c80270ad1efb436f4abc018edf01d0e5f7",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/4/android/system/keystore2/Authorization.aidl",
+      "kind": "blob",
+      "oid": "3efeb68cfd77b30680edcbae48f4186dd167c7fe",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/4/android/system/keystore2/CreateOperationResponse.aidl",
+      "kind": "blob",
+      "oid": "e37facbde8bae160a2d07ecdb1ad8c4ca09bb77a",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/4/android/system/keystore2/Domain.aidl",
+      "kind": "blob",
+      "oid": "4fd54aa5b96a1ce8350f47a5bb8aa27b05dc6a87",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/4/android/system/keystore2/EphemeralStorageKeyResponse.aidl",
+      "kind": "blob",
+      "oid": "963af7bfe104c5032580c4448b07453fcb9eb941",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/4/android/system/keystore2/IKeystoreOperation.aidl",
+      "kind": "blob",
+      "oid": "df911cd3930be4d2a668dc6888bc640d61e1b161",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/4/android/system/keystore2/IKeystoreSecurityLevel.aidl",
+      "kind": "blob",
+      "oid": "4b2eab46af18f350fdd2675c24fe3bc486cab91b",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/4/android/system/keystore2/IKeystoreService.aidl",
+      "kind": "blob",
+      "oid": "d2f03cfec72e809cc7f5d3bd09f18a7c3588d437",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/4/android/system/keystore2/KeyDescriptor.aidl",
+      "kind": "blob",
+      "oid": "79478aace581c5775f7d1a74d119a1999f3f2eb3",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/4/android/system/keystore2/KeyEntryResponse.aidl",
+      "kind": "blob",
+      "oid": "ea313b3d0f87ac443450e08fe357c88e1fe92c2c",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/4/android/system/keystore2/KeyMetadata.aidl",
+      "kind": "blob",
+      "oid": "fef45314aeb2502b875b652380e06ed812ae9340",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/4/android/system/keystore2/KeyParameters.aidl",
+      "kind": "blob",
+      "oid": "f9c836a5548e2dbd547818f6e9f394982d047e89",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/4/android/system/keystore2/KeyPermission.aidl",
+      "kind": "blob",
+      "oid": "3009fb6ab504a78b64a6abbcd4007830f491f059",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/4/android/system/keystore2/OperationChallenge.aidl",
+      "kind": "blob",
+      "oid": "0a079fb143fff36c449e785f458b6050a32684e9",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/4/android/system/keystore2/ResponseCode.aidl",
+      "kind": "blob",
+      "oid": "e1ff0bbeb07d56af98b70c2b49eac692feae564e",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/5/.hash",
+      "kind": "blob",
+      "oid": "98322286012b61a96be3d0fed6c88ebf92e027a9",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/5/android/system/keystore2/AuthenticatorSpec.aidl",
+      "kind": "blob",
+      "oid": "49a3b2c80270ad1efb436f4abc018edf01d0e5f7",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/5/android/system/keystore2/Authorization.aidl",
+      "kind": "blob",
+      "oid": "3efeb68cfd77b30680edcbae48f4186dd167c7fe",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/5/android/system/keystore2/CreateOperationResponse.aidl",
+      "kind": "blob",
+      "oid": "e37facbde8bae160a2d07ecdb1ad8c4ca09bb77a",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/5/android/system/keystore2/Domain.aidl",
+      "kind": "blob",
+      "oid": "4fd54aa5b96a1ce8350f47a5bb8aa27b05dc6a87",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/5/android/system/keystore2/EphemeralStorageKeyResponse.aidl",
+      "kind": "blob",
+      "oid": "963af7bfe104c5032580c4448b07453fcb9eb941",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/5/android/system/keystore2/IKeystoreOperation.aidl",
+      "kind": "blob",
+      "oid": "df911cd3930be4d2a668dc6888bc640d61e1b161",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/5/android/system/keystore2/IKeystoreSecurityLevel.aidl",
+      "kind": "blob",
+      "oid": "4b2eab46af18f350fdd2675c24fe3bc486cab91b",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/5/android/system/keystore2/IKeystoreService.aidl",
+      "kind": "blob",
+      "oid": "0c292c8458e357c32935612569b61cc7b77fd727",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/5/android/system/keystore2/KeyDescriptor.aidl",
+      "kind": "blob",
+      "oid": "79478aace581c5775f7d1a74d119a1999f3f2eb3",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/5/android/system/keystore2/KeyEntryResponse.aidl",
+      "kind": "blob",
+      "oid": "ea313b3d0f87ac443450e08fe357c88e1fe92c2c",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/5/android/system/keystore2/KeyMetadata.aidl",
+      "kind": "blob",
+      "oid": "fef45314aeb2502b875b652380e06ed812ae9340",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/5/android/system/keystore2/KeyParameters.aidl",
+      "kind": "blob",
+      "oid": "f9c836a5548e2dbd547818f6e9f394982d047e89",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/5/android/system/keystore2/KeyPermission.aidl",
+      "kind": "blob",
+      "oid": "3009fb6ab504a78b64a6abbcd4007830f491f059",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/5/android/system/keystore2/OperationChallenge.aidl",
+      "kind": "blob",
+      "oid": "0a079fb143fff36c449e785f458b6050a32684e9",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/5/android/system/keystore2/ResponseCode.aidl",
+      "kind": "blob",
+      "oid": "51dddf0e7cb84054bb4cc59d2ab00c161ad0f58a",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/6/.hash",
+      "kind": "blob",
+      "oid": "5b90ec43509e85ac8a17f672021a72573510b49a",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/6/android/system/keystore2/AuthenticatorSpec.aidl",
+      "kind": "blob",
+      "oid": "49a3b2c80270ad1efb436f4abc018edf01d0e5f7",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/6/android/system/keystore2/Authorization.aidl",
+      "kind": "blob",
+      "oid": "3efeb68cfd77b30680edcbae48f4186dd167c7fe",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/6/android/system/keystore2/CreateOperationResponse.aidl",
+      "kind": "blob",
+      "oid": "e37facbde8bae160a2d07ecdb1ad8c4ca09bb77a",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/6/android/system/keystore2/Domain.aidl",
+      "kind": "blob",
+      "oid": "4fd54aa5b96a1ce8350f47a5bb8aa27b05dc6a87",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/6/android/system/keystore2/EphemeralStorageKeyResponse.aidl",
+      "kind": "blob",
+      "oid": "963af7bfe104c5032580c4448b07453fcb9eb941",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/6/android/system/keystore2/IKeystoreOperation.aidl",
+      "kind": "blob",
+      "oid": "df911cd3930be4d2a668dc6888bc640d61e1b161",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/6/android/system/keystore2/IKeystoreSecurityLevel.aidl",
+      "kind": "blob",
+      "oid": "4b2eab46af18f350fdd2675c24fe3bc486cab91b",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/6/android/system/keystore2/IKeystoreService.aidl",
+      "kind": "blob",
+      "oid": "0c292c8458e357c32935612569b61cc7b77fd727",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/6/android/system/keystore2/KeyDescriptor.aidl",
+      "kind": "blob",
+      "oid": "79478aace581c5775f7d1a74d119a1999f3f2eb3",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/6/android/system/keystore2/KeyEntryResponse.aidl",
+      "kind": "blob",
+      "oid": "ea313b3d0f87ac443450e08fe357c88e1fe92c2c",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/6/android/system/keystore2/KeyMetadata.aidl",
+      "kind": "blob",
+      "oid": "fef45314aeb2502b875b652380e06ed812ae9340",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/6/android/system/keystore2/KeyParameters.aidl",
+      "kind": "blob",
+      "oid": "f9c836a5548e2dbd547818f6e9f394982d047e89",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/6/android/system/keystore2/KeyPermission.aidl",
+      "kind": "blob",
+      "oid": "3009fb6ab504a78b64a6abbcd4007830f491f059",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/6/android/system/keystore2/OperationChallenge.aidl",
+      "kind": "blob",
+      "oid": "0a079fb143fff36c449e785f458b6050a32684e9",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/6/android/system/keystore2/ResponseCode.aidl",
+      "kind": "blob",
+      "oid": "e8423279d4386fe2be498612f4483921f93fd05f",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/current/android/system/keystore2/AuthenticatorSpec.aidl",
+      "kind": "blob",
+      "oid": "49a3b2c80270ad1efb436f4abc018edf01d0e5f7",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/current/android/system/keystore2/Authorization.aidl",
+      "kind": "blob",
+      "oid": "3efeb68cfd77b30680edcbae48f4186dd167c7fe",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/current/android/system/keystore2/CreateOperationResponse.aidl",
+      "kind": "blob",
+      "oid": "e37facbde8bae160a2d07ecdb1ad8c4ca09bb77a",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/current/android/system/keystore2/Domain.aidl",
+      "kind": "blob",
+      "oid": "4fd54aa5b96a1ce8350f47a5bb8aa27b05dc6a87",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/current/android/system/keystore2/EphemeralStorageKeyResponse.aidl",
+      "kind": "blob",
+      "oid": "963af7bfe104c5032580c4448b07453fcb9eb941",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/current/android/system/keystore2/IKeystoreOperation.aidl",
+      "kind": "blob",
+      "oid": "df911cd3930be4d2a668dc6888bc640d61e1b161",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/current/android/system/keystore2/IKeystoreSecurityLevel.aidl",
+      "kind": "blob",
+      "oid": "4b2eab46af18f350fdd2675c24fe3bc486cab91b",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/current/android/system/keystore2/IKeystoreService.aidl",
+      "kind": "blob",
+      "oid": "0c292c8458e357c32935612569b61cc7b77fd727",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/current/android/system/keystore2/KeyDescriptor.aidl",
+      "kind": "blob",
+      "oid": "79478aace581c5775f7d1a74d119a1999f3f2eb3",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/current/android/system/keystore2/KeyEntryResponse.aidl",
+      "kind": "blob",
+      "oid": "ea313b3d0f87ac443450e08fe357c88e1fe92c2c",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/current/android/system/keystore2/KeyMetadata.aidl",
+      "kind": "blob",
+      "oid": "fef45314aeb2502b875b652380e06ed812ae9340",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/current/android/system/keystore2/KeyParameters.aidl",
+      "kind": "blob",
+      "oid": "f9c836a5548e2dbd547818f6e9f394982d047e89",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/current/android/system/keystore2/KeyPermission.aidl",
+      "kind": "blob",
+      "oid": "3009fb6ab504a78b64a6abbcd4007830f491f059",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/current/android/system/keystore2/OperationChallenge.aidl",
+      "kind": "blob",
+      "oid": "0a079fb143fff36c449e785f458b6050a32684e9",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/aidl_api/android.system.keystore2/current/android/system/keystore2/ResponseCode.aidl",
+      "kind": "blob",
+      "oid": "e8423279d4386fe2be498612f4483921f93fd05f",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/android/system/keystore2/AuthenticatorSpec.aidl",
+      "kind": "blob",
+      "oid": "44cb062975acbecc289b64c74bdb50601bdfabcc",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/android/system/keystore2/Authorization.aidl",
+      "kind": "blob",
+      "oid": "eb0e1ae73556a9e43cb3393eb065f58a785bf2ea",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/android/system/keystore2/CreateOperationResponse.aidl",
+      "kind": "blob",
+      "oid": "2f416dc1f169fba8a93174f5ca574806cb755bdd",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/android/system/keystore2/Domain.aidl",
+      "kind": "blob",
+      "oid": "cfe5bb11f0bcac0dbe24d89653e7d2d3de120dc4",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/android/system/keystore2/EphemeralStorageKeyResponse.aidl",
+      "kind": "blob",
+      "oid": "91ce4d0bed74e991bb558935c86636c523604f3d",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/android/system/keystore2/IKeystoreOperation.aidl",
+      "kind": "blob",
+      "oid": "559f92d5bc32cb6189379862ff22d180730dda7a",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/android/system/keystore2/IKeystoreSecurityLevel.aidl",
+      "kind": "blob",
+      "oid": "7aa422a139fb417bd379bcc32975d3b541e577ea",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/android/system/keystore2/IKeystoreService.aidl",
+      "kind": "blob",
+      "oid": "886047d5b0e65a6c8798563fa37acd9f23f00d30",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/android/system/keystore2/KeyDescriptor.aidl",
+      "kind": "blob",
+      "oid": "1f8d986200db64e65d66fad852d6f9d582264469",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/android/system/keystore2/KeyEntryResponse.aidl",
+      "kind": "blob",
+      "oid": "56d0042a727e50de6295a7854a9df822eeeedf5f",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/android/system/keystore2/KeyMetadata.aidl",
+      "kind": "blob",
+      "oid": "df0aa3b899fa002da98556d485488fea6d72dcbf",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/android/system/keystore2/KeyParameters.aidl",
+      "kind": "blob",
+      "oid": "8e3ff5e5ad64396c231998111a4f31c4af9ec75a",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/android/system/keystore2/KeyPermission.aidl",
+      "kind": "blob",
+      "oid": "2f623fb34b59ac8131113ea9d714ed8fde6c860c",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/android/system/keystore2/OperationChallenge.aidl",
+      "kind": "blob",
+      "oid": "bf8638b675acd2491eb564491997a3e4b603f20c",
+      "mode": "100644"
+    },
+    {
+      "path": "keystore2/aidl/android/system/keystore2/ResponseCode.aidl",
+      "kind": "blob",
+      "oid": "4069c4d719ba2aa42049c4734140ce65d3c210d1",
+      "mode": "100644"
+    },
+    {
+      "path": "media/Android.bp",
+      "kind": "blob",
+      "oid": "a0239992601046a9966ae094a3912a88b46d18da",
+      "mode": "100644"
+    },
+    {
+      "path": "media/OWNERS",
+      "kind": "blob",
+      "oid": "4e59260c9f3e0f8f41528a7e219f0043c7006cf7",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioAttributes.aidl",
+      "kind": "blob",
+      "oid": "300ebff0833b14b423c4f64709eb9808d9952a62",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioChannelLayout.aidl",
+      "kind": "blob",
+      "oid": "4da9c5cd759360559e1dc8a0cb985e908bafde5c",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioConfig.aidl",
+      "kind": "blob",
+      "oid": "0c545562f105c6b3b9e4b5079d4cba185f236ef2",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioConfigBase.aidl",
+      "kind": "blob",
+      "oid": "bde77a5f6a58894267b4ebb8a7289419029b46a8",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioContentType.aidl",
+      "kind": "blob",
+      "oid": "1d480589f45411b287ffde688d1fb4176eb5fe49",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioDevice.aidl",
+      "kind": "blob",
+      "oid": "1317137bf4df57412d132cec8fb4b1dfd3701ee4",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioDeviceAddress.aidl",
+      "kind": "blob",
+      "oid": "37afa5b69a7e94f8c7bc9637496a5fe3211175ac",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioDeviceDescription.aidl",
+      "kind": "blob",
+      "oid": "3568fd6fb895bffb00cf1c058649bdf26bf49843",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioDeviceType.aidl",
+      "kind": "blob",
+      "oid": "ae358ae4b29bfa51cda68dae54b22c14d6af577d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioDualMonoMode.aidl",
+      "kind": "blob",
+      "oid": "ac1bb0ef240bb17d0184584313ef78a6d860e82e",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioEncapsulationMetadataType.aidl",
+      "kind": "blob",
+      "oid": "3747521f5f80dc78aa0595594b9633aaa503bde0",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioEncapsulationMode.aidl",
+      "kind": "blob",
+      "oid": "9400e08404c5ef858017e114a621c7278c8cefee",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioEncapsulationType.aidl",
+      "kind": "blob",
+      "oid": "0f5c04270dc70b34aab84b2a34db8aca0d4b3480",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioFlag.aidl",
+      "kind": "blob",
+      "oid": "72626f07dce0418d23936a12f352115ce0bdadee",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioFormatDescription.aidl",
+      "kind": "blob",
+      "oid": "698b4899cd3f2914ba2a409b64b3d6ed08d8ff2a",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioFormatType.aidl",
+      "kind": "blob",
+      "oid": "f0ad6b7af23e2986e675366017b5406d45c742ef",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioGain.aidl",
+      "kind": "blob",
+      "oid": "1bc7e8e176808c0536a848d77d0fbfd64e8de8aa",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioGainConfig.aidl",
+      "kind": "blob",
+      "oid": "16b42da372c7ba756be67946f17583e8a3c4788a",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioGainMode.aidl",
+      "kind": "blob",
+      "oid": "6b911106f83363f005446ddad489f71643372112",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioHalAttributesGroup.aidl",
+      "kind": "blob",
+      "oid": "86bcb630358d0c66f9f1fa7d0daf1b790417e963",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioHalCapConfiguration.aidl",
+      "kind": "blob",
+      "oid": "87772500666e134498d813d0585527f87e4154f6",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioHalCapCriterion.aidl",
+      "kind": "blob",
+      "oid": "03fc535f8ab0270fa2472542e0617d4d9635c331",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioHalCapCriterionType.aidl",
+      "kind": "blob",
+      "oid": "c4e5de8250a226556b14c1adf2a8b04917675796",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioHalCapCriterionV2.aidl",
+      "kind": "blob",
+      "oid": "f45ec4c130c0ab7cc35be3816425a9cd1067dc6f",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioHalCapDomain.aidl",
+      "kind": "blob",
+      "oid": "4e14db9ff24327e0f7857f5e0a1ccd6e9b9e5609",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioHalCapParameter.aidl",
+      "kind": "blob",
+      "oid": "f823a76422bb5c5ba8303cc7006ed79755159070",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioHalCapRule.aidl",
+      "kind": "blob",
+      "oid": "be3316ff07104fa38cb13c33e7e640507cdae4db",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioHalEngineConfig.aidl",
+      "kind": "blob",
+      "oid": "a4a6dda33aa0eb4c33d1ecae1ab25c8fe9a02ba2",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioHalProductStrategy.aidl",
+      "kind": "blob",
+      "oid": "3a5c7f7c3d43fa794ee6a4590e4675b77755b8c3",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioHalVolumeCurve.aidl",
+      "kind": "blob",
+      "oid": "feeccd67b7c77f649cfd67430ac1cd206dfc76da",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioHalVolumeGroup.aidl",
+      "kind": "blob",
+      "oid": "bba707d330f62766a8dde2f81fa16cc63b3d51ab",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioInputFlags.aidl",
+      "kind": "blob",
+      "oid": "3b7059577725b1c92b089f6cbf8a205303d12367",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioIoFlags.aidl",
+      "kind": "blob",
+      "oid": "8b21370c39b3870d781ddf53b0e169d29dc9df0b",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioLatencyMode.aidl",
+      "kind": "blob",
+      "oid": "a34df04e94391a377299052f131f23a8a9e08046",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioMMapPolicy.aidl",
+      "kind": "blob",
+      "oid": "c63bca393057285ae1cd423442901b2feefbe9f0",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioMMapPolicyInfo.aidl",
+      "kind": "blob",
+      "oid": "105e0acfe596b61271d5e0a8fd0e1862b311da8f",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioMMapPolicyType.aidl",
+      "kind": "blob",
+      "oid": "82e1c92407135ffde83f469b6fd657beed9ab055",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioMode.aidl",
+      "kind": "blob",
+      "oid": "e1df7c3acd95e3ed4e068f4f827655a97cdf33b5",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioOffloadInfo.aidl",
+      "kind": "blob",
+      "oid": "70be5d00b0493483559136bea69b66923efd2f8c",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioOutputFlags.aidl",
+      "kind": "blob",
+      "oid": "33a5e409fece2557c3cff2874b63cbfb75b4e914",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioPlaybackRate.aidl",
+      "kind": "blob",
+      "oid": "6d42514ed8ba07884cedf0f4258645f84ef3af38",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioPolicyForceUse.aidl",
+      "kind": "blob",
+      "oid": "e31641080947650ca98362eb9b5af57431c2121c",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioPort.aidl",
+      "kind": "blob",
+      "oid": "6028820c2c02fb817abdd06a6b61bb38cfccbfe6",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioPortConfig.aidl",
+      "kind": "blob",
+      "oid": "3fe2a792a2ad9ec8da68d780f6c0adc3d88ac181",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioPortDeviceExt.aidl",
+      "kind": "blob",
+      "oid": "0b02fa327c02b52712938ca3bc51376f5518e959",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioPortExt.aidl",
+      "kind": "blob",
+      "oid": "262888e6e1eb87a175c594cbbe641ee36b52d453",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioPortMixExt.aidl",
+      "kind": "blob",
+      "oid": "f4140d6a6017b5448259db174430eed7ee69d9ab",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioPortMixExtUseCase.aidl",
+      "kind": "blob",
+      "oid": "6c1dedd17d4024b513444b774607b79926e71d86",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioProductStrategyType.aidl",
+      "kind": "blob",
+      "oid": "c10376f6bcb5ee606ae477d8720c3670a4326dcf",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioProfile.aidl",
+      "kind": "blob",
+      "oid": "4e005eb00d042985fe953b2055143cc6322b0310",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioSource.aidl",
+      "kind": "blob",
+      "oid": "eef71e7e017839e9b3ef00db52a12af97a682a37",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioStandard.aidl",
+      "kind": "blob",
+      "oid": "2dbf2ad92ac59ff7bfe3301b6557cc6488af1cfd",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioStreamType.aidl",
+      "kind": "blob",
+      "oid": "c88ea5d3bb307caa2c22af78a68c58e158c0ab58",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioUsage.aidl",
+      "kind": "blob",
+      "oid": "9a516c41732fd60e3e9940214ff5ebab8084330d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioUuid.aidl",
+      "kind": "blob",
+      "oid": "2ce4e58c6325bef2815422bdb35b553925362e3b",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/AudioVolumeGroupChangeEvent.aidl",
+      "kind": "blob",
+      "oid": "21fbd616ebcd82915b511eba316ebd5a05b7bf97",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/Boolean.aidl",
+      "kind": "blob",
+      "oid": "dc7a3648550073de24f68e47c5df11d508c0add6",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/Byte.aidl",
+      "kind": "blob",
+      "oid": "ae21a49abf4ea72df5852f870aef2846b6220d59",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/Double.aidl",
+      "kind": "blob",
+      "oid": "562acbd75c626b8cc42bb4028f5d6a4b1e9da8c8",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/ExtraAudioDescriptor.aidl",
+      "kind": "blob",
+      "oid": "abf2767a243d88d621663475cfb25546d24c38ad",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/Float.aidl",
+      "kind": "blob",
+      "oid": "061283e63bba57118b8d9a5240d143a9f48b71f7",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/FlushFromFrameAccuracy.aidl",
+      "kind": "blob",
+      "oid": "5b00c4cce0ca7be024ce7c872fbd9b34b98b016f",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/FlushFromFrameSupport.aidl",
+      "kind": "blob",
+      "oid": "c3a03af0746813171b4ca3752cd546bebf17a4bd",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/HeadTracking.aidl",
+      "kind": "blob",
+      "oid": "347b59e4c5e3e2329aeada45c87340966ce2d1ba",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/Int.aidl",
+      "kind": "blob",
+      "oid": "5540ea050b8817bef1cd2f2d437a4f3fe056051e",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/Long.aidl",
+      "kind": "blob",
+      "oid": "0036a029b44ae55f8fc7c60927013821ef174b6a",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/MicrophoneDynamicInfo.aidl",
+      "kind": "blob",
+      "oid": "01afee710f52393175971b720e73f4cf9af444bd",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/MicrophoneInfo.aidl",
+      "kind": "blob",
+      "oid": "ccc6514bf123d4326aad57f5ae0db06e52c2118d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/PcmType.aidl",
+      "kind": "blob",
+      "oid": "53182dc7f9cfe4ca9d309ec36a9c65f69dcf0f0c",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/Spatialization.aidl",
+      "kind": "blob",
+      "oid": "0b6d98e1192964cae549049aeaa80f1ffd2b95c5",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/common/Void.aidl",
+      "kind": "blob",
+      "oid": "648530dfedd3ef957f509321e871c4d7b5cb6cfb",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/eraser/Capability.aidl",
+      "kind": "blob",
+      "oid": "a7627e5437d70330b36bd62529341b53efbd9c32",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/eraser/Classification.aidl",
+      "kind": "blob",
+      "oid": "16aa1cee638663843f73270e973e3bf4f02e9cec",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/eraser/ClassificationConfig.aidl",
+      "kind": "blob",
+      "oid": "ab5191e342a4d27187d0748d6e4242988854d837",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/eraser/ClassificationMetadata.aidl",
+      "kind": "blob",
+      "oid": "cc79c37b082736b65047ad42db06d04848e5e05c",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/eraser/ClassificationMetadataList.aidl",
+      "kind": "blob",
+      "oid": "3a5dd16831dcb1b322e7589a400c9c4107cdd6be",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/eraser/ClassifierCapability.aidl",
+      "kind": "blob",
+      "oid": "5348086c30a2e7699a90e6ce9ced9f26c3a1ff8a",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/eraser/Configuration.aidl",
+      "kind": "blob",
+      "oid": "b693244b1045f5b0f372593ada26cd4ebf66afab",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/eraser/IEraserCallback.aidl",
+      "kind": "blob",
+      "oid": "4863ba51241b94ccee8777fc7b1f76d23273f878",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/eraser/Mode.aidl",
+      "kind": "blob",
+      "oid": "30745c5e37a1259eb129d8bc145b06e2f50faed0",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/eraser/RemixerCapability.aidl",
+      "kind": "blob",
+      "oid": "0c89fc188f3884a1764bd3951eaab1fd881c780c",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/eraser/SeparatorCapability.aidl",
+      "kind": "blob",
+      "oid": "93b959cbf3557e02710190704125fee395a585ec",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/audio/eraser/SoundClassification.aidl",
+      "kind": "blob",
+      "oid": "6ec9b43ce14d5d7453b982f066c9d2d317e8ae4a",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/soundtrigger/AudioCapabilities.aidl",
+      "kind": "blob",
+      "oid": "7b0825b1e6cb46fb890777b264b2b2b2c517594b",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/soundtrigger/ConfidenceLevel.aidl",
+      "kind": "blob",
+      "oid": "35d324a70312f6f3288e701beee4be178373d293",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/soundtrigger/ModelParameter.aidl",
+      "kind": "blob",
+      "oid": "7cf9d6de8e3329a3dc2069e4a92eecf63be8d5e0",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/soundtrigger/ModelParameterRange.aidl",
+      "kind": "blob",
+      "oid": "5906ddb41cfe7e8382db3178d24f118f974eb7a2",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/soundtrigger/Phrase.aidl",
+      "kind": "blob",
+      "oid": "b9039ec441a76177e4d45d565de5970054c177fe",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/soundtrigger/PhraseRecognitionEvent.aidl",
+      "kind": "blob",
+      "oid": "87429b7cefb8a09914fd18f3747d56dc548ed2e2",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/soundtrigger/PhraseRecognitionExtra.aidl",
+      "kind": "blob",
+      "oid": "47708df52a475c4dc1f45a433bee2dfa85b423cb",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/soundtrigger/PhraseSoundModel.aidl",
+      "kind": "blob",
+      "oid": "e4404c68b0412cb9208041c1d06f59a72e50c84d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/soundtrigger/Properties.aidl",
+      "kind": "blob",
+      "oid": "cc8a1d71fd68ba54a17f6b97ec022ccaf55c6a19",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/soundtrigger/RecognitionConfig.aidl",
+      "kind": "blob",
+      "oid": "b48c7c52d52bf80d7e13afeea737758722d2aba3",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/soundtrigger/RecognitionEvent.aidl",
+      "kind": "blob",
+      "oid": "f8a19cadd6a45380e7afd705cfdae391c2955764",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/soundtrigger/RecognitionMode.aidl",
+      "kind": "blob",
+      "oid": "c2c12447d4861b84ca8fcc596c13d2a25403393f",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/soundtrigger/RecognitionStatus.aidl",
+      "kind": "blob",
+      "oid": "61221d50cfe6365b57603cab91803880d254de98",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/soundtrigger/SoundModel.aidl",
+      "kind": "blob",
+      "oid": "d882c4b96d5bf697d60b502d01aca73995e83219",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/soundtrigger/SoundModelType.aidl",
+      "kind": "blob",
+      "oid": "87a4e1ab50d012a048f03777c24c520e631bc303",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl/android/media/soundtrigger/Status.aidl",
+      "kind": "blob",
+      "oid": "03a52ee830aeb48f6026b5e86a2c8fe5c2f755e4",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/.hash",
+      "kind": "blob",
+      "oid": "328aab4b355c299bfe8ba78d7d8bbadde7dd0fd1",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioChannelLayout.aidl",
+      "kind": "blob",
+      "oid": "6845ac1f6e1fcf0b49408895bb85221801888784",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioConfig.aidl",
+      "kind": "blob",
+      "oid": "6b8686ce2c967d6e3a19ecc61150c853c4eb63fc",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioConfigBase.aidl",
+      "kind": "blob",
+      "oid": "f3e716b1d3b440c87995d1cbb3febf202df25dd8",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioContentType.aidl",
+      "kind": "blob",
+      "oid": "f9ac61426fa3378a9f8651bdedb794e6cfe56425",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioDevice.aidl",
+      "kind": "blob",
+      "oid": "fb5cb62281e272f8c3d37fb1984359aa3c0f3431",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioDeviceAddress.aidl",
+      "kind": "blob",
+      "oid": "905d3aa5fb0db491575ccde4a3134feade9a5a41",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioDeviceDescription.aidl",
+      "kind": "blob",
+      "oid": "1c66a8f98b1edf0c4e289aec4c0336c226064c41",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioDeviceType.aidl",
+      "kind": "blob",
+      "oid": "6a7b6864b801c3231b835acbe45e03d9378921ee",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioEncapsulationMetadataType.aidl",
+      "kind": "blob",
+      "oid": "0ee0dbb0d8c3196deb4c23e9ba9c6c9f56b190f1",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioEncapsulationMode.aidl",
+      "kind": "blob",
+      "oid": "0cf2f31217aa5c6211603c27968fff3f3b7ee786",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioEncapsulationType.aidl",
+      "kind": "blob",
+      "oid": "8a31fc4eb61cd5d835704964e5e1720ea9b8e8d1",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioFormatDescription.aidl",
+      "kind": "blob",
+      "oid": "58c75ebc1ae2f3da108c38fa9339209bfa8dca22",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioFormatType.aidl",
+      "kind": "blob",
+      "oid": "7f55abeeaf0cece33b58bc4d3dc645266c65ff9c",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioGain.aidl",
+      "kind": "blob",
+      "oid": "adc5b672eec9d761c6780e6c2d2d6f6c614aea2d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioGainConfig.aidl",
+      "kind": "blob",
+      "oid": "01877c78ede4480de87903345286799548ad9501",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioGainMode.aidl",
+      "kind": "blob",
+      "oid": "fddc20c308d2ddce6b16984e5decc7fe18925f24",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioInputFlags.aidl",
+      "kind": "blob",
+      "oid": "37aa64ae4cee8bb1b6404207c5d3f553ea1e66b8",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioIoFlags.aidl",
+      "kind": "blob",
+      "oid": "4a4672506edb3ed330d493dd859cd3ac643c8a3f",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioMMapPolicy.aidl",
+      "kind": "blob",
+      "oid": "98bf0e5849e3db86bbcd5213a581422ef09d4afc",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioMMapPolicyInfo.aidl",
+      "kind": "blob",
+      "oid": "7c4f75e9098a9d58db0f6b899422586c0904ea51",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioMMapPolicyType.aidl",
+      "kind": "blob",
+      "oid": "efe8826bba447d212bfc62473e7d14d61b2e8dc3",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioMode.aidl",
+      "kind": "blob",
+      "oid": "8256c1c81b77bfbdb7946fe9e2d0ded956a46b9c",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioOffloadInfo.aidl",
+      "kind": "blob",
+      "oid": "40bd53b2eb31c8c190c42fa5a5a5012dc30f65bb",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioOutputFlags.aidl",
+      "kind": "blob",
+      "oid": "4a512a8049a2744b13c698c751ce81f85bf09cfe",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioPort.aidl",
+      "kind": "blob",
+      "oid": "970bbc06890f6cd55e95aef78996a3178c899c5e",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioPortConfig.aidl",
+      "kind": "blob",
+      "oid": "18e6406117dcc949206c7d6492278b1e2e021c2f",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioPortDeviceExt.aidl",
+      "kind": "blob",
+      "oid": "37d7041731bfa4d01c52b017a9d46edfd18e26fb",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioPortExt.aidl",
+      "kind": "blob",
+      "oid": "af9d9c4d56716ac187e9ba624660361f296cecb1",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioPortMixExt.aidl",
+      "kind": "blob",
+      "oid": "5b74c0d9f7e401f1c7285178d06b7fef50726443",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioPortMixExtUseCase.aidl",
+      "kind": "blob",
+      "oid": "e9acb40a1ab15f1965336f0201dffd37001ed72d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioProfile.aidl",
+      "kind": "blob",
+      "oid": "134cdd98c418b3302dee0c64f8ba6559c698e8a8",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioSource.aidl",
+      "kind": "blob",
+      "oid": "acf822e5e0a54f12bb18ae9a587ced29da68740a",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioStandard.aidl",
+      "kind": "blob",
+      "oid": "6c4490f0a4494d8c850cdb85a921fa90a2330b77",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioStreamType.aidl",
+      "kind": "blob",
+      "oid": "bcfd374cb2049cbf17e1bab8ab4cd3cf0d941a5e",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioUsage.aidl",
+      "kind": "blob",
+      "oid": "4c7245543cfdcddf4e7f36b70882c06c451e4ced",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/AudioUuid.aidl",
+      "kind": "blob",
+      "oid": "af307dadf3a366ff0e6b9d1e38f01c68c59afef3",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/ExtraAudioDescriptor.aidl",
+      "kind": "blob",
+      "oid": "2ae2405f544e4f9edf82520b6889480f1caaebae",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/Int.aidl",
+      "kind": "blob",
+      "oid": "b0d3c49225317f2b5c66a42fa3eb3904cd3b66de",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/1/android/media/audio/common/PcmType.aidl",
+      "kind": "blob",
+      "oid": "79bfa625ba8efe31c22a354650fc8b4f0c3a3c48",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/.hash",
+      "kind": "blob",
+      "oid": "d4d3311933659e2bb4d6c6cb637198bb0b67fe7d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioAttributes.aidl",
+      "kind": "blob",
+      "oid": "8d5ba4e2620f73380a2c11a97680ae40a3255696",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioChannelLayout.aidl",
+      "kind": "blob",
+      "oid": "60e8e66de54c7237e58197dd5d71e0bdbc742436",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioConfig.aidl",
+      "kind": "blob",
+      "oid": "6b8686ce2c967d6e3a19ecc61150c853c4eb63fc",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioConfigBase.aidl",
+      "kind": "blob",
+      "oid": "f3e716b1d3b440c87995d1cbb3febf202df25dd8",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioContentType.aidl",
+      "kind": "blob",
+      "oid": "f9ac61426fa3378a9f8651bdedb794e6cfe56425",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioDevice.aidl",
+      "kind": "blob",
+      "oid": "fb5cb62281e272f8c3d37fb1984359aa3c0f3431",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioDeviceAddress.aidl",
+      "kind": "blob",
+      "oid": "905d3aa5fb0db491575ccde4a3134feade9a5a41",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioDeviceDescription.aidl",
+      "kind": "blob",
+      "oid": "a17f46d22625304170e794a93a34fa5d496f7d67",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioDeviceType.aidl",
+      "kind": "blob",
+      "oid": "6a7b6864b801c3231b835acbe45e03d9378921ee",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioDualMonoMode.aidl",
+      "kind": "blob",
+      "oid": "7c800682628148e269215a5aff89d9e22f54dc5d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioEncapsulationMetadataType.aidl",
+      "kind": "blob",
+      "oid": "0ee0dbb0d8c3196deb4c23e9ba9c6c9f56b190f1",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioEncapsulationMode.aidl",
+      "kind": "blob",
+      "oid": "0747dba632335f5670e03277826f595093550293",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioEncapsulationType.aidl",
+      "kind": "blob",
+      "oid": "ed58fcf484984d999a7f90da01186450e98cc958",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioFlag.aidl",
+      "kind": "blob",
+      "oid": "88afa430721a2f81223e779568a785b2f1a6d620",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioFormatDescription.aidl",
+      "kind": "blob",
+      "oid": "58c75ebc1ae2f3da108c38fa9339209bfa8dca22",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioFormatType.aidl",
+      "kind": "blob",
+      "oid": "e60794f323032d4576d644033e62908275aeb26c",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioGain.aidl",
+      "kind": "blob",
+      "oid": "adc5b672eec9d761c6780e6c2d2d6f6c614aea2d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioGainConfig.aidl",
+      "kind": "blob",
+      "oid": "01877c78ede4480de87903345286799548ad9501",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioGainMode.aidl",
+      "kind": "blob",
+      "oid": "fddc20c308d2ddce6b16984e5decc7fe18925f24",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioHalAttributesGroup.aidl",
+      "kind": "blob",
+      "oid": "b0bcad555f42ccf8ee3e530f765adeab5249dc21",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioHalCapCriterion.aidl",
+      "kind": "blob",
+      "oid": "d5f31dee5fdc0fe77aee55bfb571fc333a558ec5",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioHalCapCriterionType.aidl",
+      "kind": "blob",
+      "oid": "8a5e67951e3ce6a65818526a4f896014abc59ff9",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioHalEngineConfig.aidl",
+      "kind": "blob",
+      "oid": "3c5a81c3a521c5fbc2c7823f23f3fe3a104f6f7e",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioHalProductStrategy.aidl",
+      "kind": "blob",
+      "oid": "a7accd18ec54baf98622450d30bf7f4692b8e4f5",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioHalVolumeCurve.aidl",
+      "kind": "blob",
+      "oid": "d3ac5364ed22c4d420f7d9f310d7c2fe84a89ea0",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioHalVolumeGroup.aidl",
+      "kind": "blob",
+      "oid": "ee34490faf034743d38839cb1eaa937f5cd92212",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioInputFlags.aidl",
+      "kind": "blob",
+      "oid": "e6a57e99b5c85442944e5da89708fedde388f452",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioIoFlags.aidl",
+      "kind": "blob",
+      "oid": "4a4672506edb3ed330d493dd859cd3ac643c8a3f",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioLatencyMode.aidl",
+      "kind": "blob",
+      "oid": "2a4e380303422783794d1c3cabfcae640fa2bb34",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioMMapPolicy.aidl",
+      "kind": "blob",
+      "oid": "98bf0e5849e3db86bbcd5213a581422ef09d4afc",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioMMapPolicyInfo.aidl",
+      "kind": "blob",
+      "oid": "7c4f75e9098a9d58db0f6b899422586c0904ea51",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioMMapPolicyType.aidl",
+      "kind": "blob",
+      "oid": "efe8826bba447d212bfc62473e7d14d61b2e8dc3",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioMode.aidl",
+      "kind": "blob",
+      "oid": "1b4cdc4c581427b4d15c6789f444fccf5dc1956b",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioOffloadInfo.aidl",
+      "kind": "blob",
+      "oid": "40bd53b2eb31c8c190c42fa5a5a5012dc30f65bb",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioOutputFlags.aidl",
+      "kind": "blob",
+      "oid": "268e635248a4d1683b177b86f54c323c385be709",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioPlaybackRate.aidl",
+      "kind": "blob",
+      "oid": "a559f558cd03cea0cf6e7836ebff7a0d6854894a",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioPort.aidl",
+      "kind": "blob",
+      "oid": "970bbc06890f6cd55e95aef78996a3178c899c5e",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioPortConfig.aidl",
+      "kind": "blob",
+      "oid": "18e6406117dcc949206c7d6492278b1e2e021c2f",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioPortDeviceExt.aidl",
+      "kind": "blob",
+      "oid": "66336202a29794ecd9a20f9a8e58103a7343af3f",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioPortExt.aidl",
+      "kind": "blob",
+      "oid": "af9d9c4d56716ac187e9ba624660361f296cecb1",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioPortMixExt.aidl",
+      "kind": "blob",
+      "oid": "5b74c0d9f7e401f1c7285178d06b7fef50726443",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioPortMixExtUseCase.aidl",
+      "kind": "blob",
+      "oid": "e9acb40a1ab15f1965336f0201dffd37001ed72d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioProductStrategyType.aidl",
+      "kind": "blob",
+      "oid": "9dd6bc5b288fe0994e10c61ed8f62b5d212cf37d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioProfile.aidl",
+      "kind": "blob",
+      "oid": "134cdd98c418b3302dee0c64f8ba6559c698e8a8",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioSource.aidl",
+      "kind": "blob",
+      "oid": "522adeb640ff132a14556ae4cae439252cca40e1",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioStandard.aidl",
+      "kind": "blob",
+      "oid": "704d3406640f43a495a4fcd8b78ccdece0baa0aa",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioStreamType.aidl",
+      "kind": "blob",
+      "oid": "aa170b799c8df9b39bf1b7a52a2e27c5c9f04f93",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioUsage.aidl",
+      "kind": "blob",
+      "oid": "7c30cd38584b7b733e0defcf9589a2c94831efaa",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/AudioUuid.aidl",
+      "kind": "blob",
+      "oid": "af307dadf3a366ff0e6b9d1e38f01c68c59afef3",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/Boolean.aidl",
+      "kind": "blob",
+      "oid": "bc996e441ba36d1a0716c819a3eacf60b6c20c7a",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/Byte.aidl",
+      "kind": "blob",
+      "oid": "604e74dbf56030b2b73b3406db2d2bb61084bb4a",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/Double.aidl",
+      "kind": "blob",
+      "oid": "a525629f2753bde374738745f23410ff1c760bea",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/ExtraAudioDescriptor.aidl",
+      "kind": "blob",
+      "oid": "2ae2405f544e4f9edf82520b6889480f1caaebae",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/Float.aidl",
+      "kind": "blob",
+      "oid": "af98eab83dfd8b95f37116b1e53e10d4053bb538",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/Int.aidl",
+      "kind": "blob",
+      "oid": "b0d3c49225317f2b5c66a42fa3eb3904cd3b66de",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/Long.aidl",
+      "kind": "blob",
+      "oid": "e403dd3fd4ea9cb73bc3adc2bb356ad774330445",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/MicrophoneDynamicInfo.aidl",
+      "kind": "blob",
+      "oid": "1a6ec45ab27d91f7601305effa75c2f9b1d79366",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/MicrophoneInfo.aidl",
+      "kind": "blob",
+      "oid": "26c109fd72ef51ffcdbe7990edbcb0741d907a62",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/PcmType.aidl",
+      "kind": "blob",
+      "oid": "fbe3aeaf7507752e661c43ec541f780a70566ee5",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/2/android/media/audio/common/Void.aidl",
+      "kind": "blob",
+      "oid": "2e8afd4b88656fcdcfbf07400dc00681061ffe71",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/.hash",
+      "kind": "blob",
+      "oid": "9b06a85c68855ba585ce35670037f61f2f078927",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioAttributes.aidl",
+      "kind": "blob",
+      "oid": "d52cbe5d218bab6fcada386ff0d0c5544e320929",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioChannelLayout.aidl",
+      "kind": "blob",
+      "oid": "33596ea6685d3b8df1828aa3a56844ede27cd4f4",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioConfig.aidl",
+      "kind": "blob",
+      "oid": "6b8686ce2c967d6e3a19ecc61150c853c4eb63fc",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioConfigBase.aidl",
+      "kind": "blob",
+      "oid": "f3e716b1d3b440c87995d1cbb3febf202df25dd8",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioContentType.aidl",
+      "kind": "blob",
+      "oid": "f9ac61426fa3378a9f8651bdedb794e6cfe56425",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioDevice.aidl",
+      "kind": "blob",
+      "oid": "fb5cb62281e272f8c3d37fb1984359aa3c0f3431",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioDeviceAddress.aidl",
+      "kind": "blob",
+      "oid": "905d3aa5fb0db491575ccde4a3134feade9a5a41",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioDeviceDescription.aidl",
+      "kind": "blob",
+      "oid": "d1bcfedaecb2e578782760f031d526e45fca1eeb",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioDeviceType.aidl",
+      "kind": "blob",
+      "oid": "f7d1b772341a57fd3b6fd46405717a757ac0b79e",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioDualMonoMode.aidl",
+      "kind": "blob",
+      "oid": "77773f09ccbe772d3eb57f96de6f655544b8241b",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioEncapsulationMetadataType.aidl",
+      "kind": "blob",
+      "oid": "0ee0dbb0d8c3196deb4c23e9ba9c6c9f56b190f1",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioEncapsulationMode.aidl",
+      "kind": "blob",
+      "oid": "0747dba632335f5670e03277826f595093550293",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioEncapsulationType.aidl",
+      "kind": "blob",
+      "oid": "ed58fcf484984d999a7f90da01186450e98cc958",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioFlag.aidl",
+      "kind": "blob",
+      "oid": "1c8cbf57e7e910bcb4c1e63cf00e3995cf0b4fb1",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioFormatDescription.aidl",
+      "kind": "blob",
+      "oid": "58c75ebc1ae2f3da108c38fa9339209bfa8dca22",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioFormatType.aidl",
+      "kind": "blob",
+      "oid": "e60794f323032d4576d644033e62908275aeb26c",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioGain.aidl",
+      "kind": "blob",
+      "oid": "adc5b672eec9d761c6780e6c2d2d6f6c614aea2d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioGainConfig.aidl",
+      "kind": "blob",
+      "oid": "01877c78ede4480de87903345286799548ad9501",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioGainMode.aidl",
+      "kind": "blob",
+      "oid": "fddc20c308d2ddce6b16984e5decc7fe18925f24",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioHalAttributesGroup.aidl",
+      "kind": "blob",
+      "oid": "1062bdb9527d64acb1e2a7aca6f58299050584dd",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioHalCapCriterion.aidl",
+      "kind": "blob",
+      "oid": "3b0003178f223903a1c26bf68517211d097f87d0",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioHalCapCriterionType.aidl",
+      "kind": "blob",
+      "oid": "12457611cd51e0429c4168e735d46eaf4c8e1a77",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioHalEngineConfig.aidl",
+      "kind": "blob",
+      "oid": "807dd25ff316efc9d55d99aca2f9f5b069adb80e",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioHalProductStrategy.aidl",
+      "kind": "blob",
+      "oid": "9615961948d994baae7dd67503325a9ed0400e06",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioHalVolumeCurve.aidl",
+      "kind": "blob",
+      "oid": "bcc7324ccc16b380a16adddf89df86d0c972e4aa",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioHalVolumeGroup.aidl",
+      "kind": "blob",
+      "oid": "f741e69e4ce9a385a63435c9aa37caa32773890d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioInputFlags.aidl",
+      "kind": "blob",
+      "oid": "e6a57e99b5c85442944e5da89708fedde388f452",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioIoFlags.aidl",
+      "kind": "blob",
+      "oid": "4a4672506edb3ed330d493dd859cd3ac643c8a3f",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioLatencyMode.aidl",
+      "kind": "blob",
+      "oid": "f6949d26eca107062ff5ce4bc977154168567383",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioMMapPolicy.aidl",
+      "kind": "blob",
+      "oid": "98bf0e5849e3db86bbcd5213a581422ef09d4afc",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioMMapPolicyInfo.aidl",
+      "kind": "blob",
+      "oid": "7c4f75e9098a9d58db0f6b899422586c0904ea51",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioMMapPolicyType.aidl",
+      "kind": "blob",
+      "oid": "efe8826bba447d212bfc62473e7d14d61b2e8dc3",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioMode.aidl",
+      "kind": "blob",
+      "oid": "1b4cdc4c581427b4d15c6789f444fccf5dc1956b",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioOffloadInfo.aidl",
+      "kind": "blob",
+      "oid": "40bd53b2eb31c8c190c42fa5a5a5012dc30f65bb",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioOutputFlags.aidl",
+      "kind": "blob",
+      "oid": "268e635248a4d1683b177b86f54c323c385be709",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioPlaybackRate.aidl",
+      "kind": "blob",
+      "oid": "310b2af40dfe226300053cec0c6b7982c510b3b4",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioPort.aidl",
+      "kind": "blob",
+      "oid": "970bbc06890f6cd55e95aef78996a3178c899c5e",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioPortConfig.aidl",
+      "kind": "blob",
+      "oid": "18e6406117dcc949206c7d6492278b1e2e021c2f",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioPortDeviceExt.aidl",
+      "kind": "blob",
+      "oid": "24d9b2929177392974f5d7f815f5cc17724d03e5",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioPortExt.aidl",
+      "kind": "blob",
+      "oid": "af9d9c4d56716ac187e9ba624660361f296cecb1",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioPortMixExt.aidl",
+      "kind": "blob",
+      "oid": "5b74c0d9f7e401f1c7285178d06b7fef50726443",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioPortMixExtUseCase.aidl",
+      "kind": "blob",
+      "oid": "e9acb40a1ab15f1965336f0201dffd37001ed72d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioProductStrategyType.aidl",
+      "kind": "blob",
+      "oid": "ba59d40c8c1abeeef75b536d754b977242744c2d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioProfile.aidl",
+      "kind": "blob",
+      "oid": "134cdd98c418b3302dee0c64f8ba6559c698e8a8",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioSource.aidl",
+      "kind": "blob",
+      "oid": "522adeb640ff132a14556ae4cae439252cca40e1",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioStandard.aidl",
+      "kind": "blob",
+      "oid": "704d3406640f43a495a4fcd8b78ccdece0baa0aa",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioStreamType.aidl",
+      "kind": "blob",
+      "oid": "aa170b799c8df9b39bf1b7a52a2e27c5c9f04f93",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioUsage.aidl",
+      "kind": "blob",
+      "oid": "7c30cd38584b7b733e0defcf9589a2c94831efaa",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/AudioUuid.aidl",
+      "kind": "blob",
+      "oid": "af307dadf3a366ff0e6b9d1e38f01c68c59afef3",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/Boolean.aidl",
+      "kind": "blob",
+      "oid": "bc996e441ba36d1a0716c819a3eacf60b6c20c7a",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/Byte.aidl",
+      "kind": "blob",
+      "oid": "604e74dbf56030b2b73b3406db2d2bb61084bb4a",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/Double.aidl",
+      "kind": "blob",
+      "oid": "a525629f2753bde374738745f23410ff1c760bea",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/ExtraAudioDescriptor.aidl",
+      "kind": "blob",
+      "oid": "2ae2405f544e4f9edf82520b6889480f1caaebae",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/Float.aidl",
+      "kind": "blob",
+      "oid": "af98eab83dfd8b95f37116b1e53e10d4053bb538",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/HeadTracking.aidl",
+      "kind": "blob",
+      "oid": "39518cda00b21bf0f1876abf724f12c105dc1d52",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/Int.aidl",
+      "kind": "blob",
+      "oid": "b0d3c49225317f2b5c66a42fa3eb3904cd3b66de",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/Long.aidl",
+      "kind": "blob",
+      "oid": "e403dd3fd4ea9cb73bc3adc2bb356ad774330445",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/MicrophoneDynamicInfo.aidl",
+      "kind": "blob",
+      "oid": "f0a9b8bcaccd0a62c9ea4da39252b8a60b613d67",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/MicrophoneInfo.aidl",
+      "kind": "blob",
+      "oid": "d23031e431ba45bd888d2ced90f3d2e6de6adade",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/PcmType.aidl",
+      "kind": "blob",
+      "oid": "fbe3aeaf7507752e661c43ec541f780a70566ee5",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/Spatialization.aidl",
+      "kind": "blob",
+      "oid": "d916c8cf202d2e76b8275ea775864520ec4c2529",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/3/android/media/audio/common/Void.aidl",
+      "kind": "blob",
+      "oid": "2e8afd4b88656fcdcfbf07400dc00681061ffe71",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/.hash",
+      "kind": "blob",
+      "oid": "21938ff88750f5b3ae466f6ea3f67fc90ffb4f9a",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioAttributes.aidl",
+      "kind": "blob",
+      "oid": "d52cbe5d218bab6fcada386ff0d0c5544e320929",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioChannelLayout.aidl",
+      "kind": "blob",
+      "oid": "c833f1cb53810a2f28bdffc717a76ff5b154b5fb",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioConfig.aidl",
+      "kind": "blob",
+      "oid": "6b8686ce2c967d6e3a19ecc61150c853c4eb63fc",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioConfigBase.aidl",
+      "kind": "blob",
+      "oid": "f3e716b1d3b440c87995d1cbb3febf202df25dd8",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioContentType.aidl",
+      "kind": "blob",
+      "oid": "f9ac61426fa3378a9f8651bdedb794e6cfe56425",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioDevice.aidl",
+      "kind": "blob",
+      "oid": "fb5cb62281e272f8c3d37fb1984359aa3c0f3431",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioDeviceAddress.aidl",
+      "kind": "blob",
+      "oid": "905d3aa5fb0db491575ccde4a3134feade9a5a41",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioDeviceDescription.aidl",
+      "kind": "blob",
+      "oid": "d1bcfedaecb2e578782760f031d526e45fca1eeb",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioDeviceType.aidl",
+      "kind": "blob",
+      "oid": "f31a7074e8e5390722b58d2d8a1693157463607f",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioDualMonoMode.aidl",
+      "kind": "blob",
+      "oid": "77773f09ccbe772d3eb57f96de6f655544b8241b",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioEncapsulationMetadataType.aidl",
+      "kind": "blob",
+      "oid": "0ee0dbb0d8c3196deb4c23e9ba9c6c9f56b190f1",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioEncapsulationMode.aidl",
+      "kind": "blob",
+      "oid": "0747dba632335f5670e03277826f595093550293",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioEncapsulationType.aidl",
+      "kind": "blob",
+      "oid": "ed58fcf484984d999a7f90da01186450e98cc958",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioFlag.aidl",
+      "kind": "blob",
+      "oid": "1c8cbf57e7e910bcb4c1e63cf00e3995cf0b4fb1",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioFormatDescription.aidl",
+      "kind": "blob",
+      "oid": "58c75ebc1ae2f3da108c38fa9339209bfa8dca22",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioFormatType.aidl",
+      "kind": "blob",
+      "oid": "e60794f323032d4576d644033e62908275aeb26c",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioGain.aidl",
+      "kind": "blob",
+      "oid": "adc5b672eec9d761c6780e6c2d2d6f6c614aea2d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioGainConfig.aidl",
+      "kind": "blob",
+      "oid": "01877c78ede4480de87903345286799548ad9501",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioGainMode.aidl",
+      "kind": "blob",
+      "oid": "fddc20c308d2ddce6b16984e5decc7fe18925f24",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioHalAttributesGroup.aidl",
+      "kind": "blob",
+      "oid": "1062bdb9527d64acb1e2a7aca6f58299050584dd",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioHalCapConfiguration.aidl",
+      "kind": "blob",
+      "oid": "255b10a71e6b24c1902140590662f9e85665d8aa",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioHalCapCriterion.aidl",
+      "kind": "blob",
+      "oid": "3b0003178f223903a1c26bf68517211d097f87d0",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioHalCapCriterionType.aidl",
+      "kind": "blob",
+      "oid": "12457611cd51e0429c4168e735d46eaf4c8e1a77",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioHalCapCriterionV2.aidl",
+      "kind": "blob",
+      "oid": "b5ceee33eb63a4ef7033f3b190fb4a61edef69ec",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioHalCapDomain.aidl",
+      "kind": "blob",
+      "oid": "9c20abe22c5b9eaa1cb43f95abd824420ec0d3df",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioHalCapParameter.aidl",
+      "kind": "blob",
+      "oid": "c0b1a72f9e6e76a04d799b59c7af3860ab731523",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioHalCapRule.aidl",
+      "kind": "blob",
+      "oid": "e1060506ddb03297cbe4a91b4d56b9efb4b0af55",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioHalEngineConfig.aidl",
+      "kind": "blob",
+      "oid": "bc856da022ac7ff459c04760afea162bd587787f",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioHalProductStrategy.aidl",
+      "kind": "blob",
+      "oid": "9878e37875a5fdb8a341b23c8b4993d00f382202",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioHalVolumeCurve.aidl",
+      "kind": "blob",
+      "oid": "bcc7324ccc16b380a16adddf89df86d0c972e4aa",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioHalVolumeGroup.aidl",
+      "kind": "blob",
+      "oid": "f741e69e4ce9a385a63435c9aa37caa32773890d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioInputFlags.aidl",
+      "kind": "blob",
+      "oid": "e6a57e99b5c85442944e5da89708fedde388f452",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioIoFlags.aidl",
+      "kind": "blob",
+      "oid": "4a4672506edb3ed330d493dd859cd3ac643c8a3f",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioLatencyMode.aidl",
+      "kind": "blob",
+      "oid": "f6949d26eca107062ff5ce4bc977154168567383",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioMMapPolicy.aidl",
+      "kind": "blob",
+      "oid": "98bf0e5849e3db86bbcd5213a581422ef09d4afc",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioMMapPolicyInfo.aidl",
+      "kind": "blob",
+      "oid": "7c4f75e9098a9d58db0f6b899422586c0904ea51",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioMMapPolicyType.aidl",
+      "kind": "blob",
+      "oid": "efe8826bba447d212bfc62473e7d14d61b2e8dc3",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioMode.aidl",
+      "kind": "blob",
+      "oid": "1b4cdc4c581427b4d15c6789f444fccf5dc1956b",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioOffloadInfo.aidl",
+      "kind": "blob",
+      "oid": "40bd53b2eb31c8c190c42fa5a5a5012dc30f65bb",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioOutputFlags.aidl",
+      "kind": "blob",
+      "oid": "268e635248a4d1683b177b86f54c323c385be709",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioPlaybackRate.aidl",
+      "kind": "blob",
+      "oid": "310b2af40dfe226300053cec0c6b7982c510b3b4",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioPolicyForceUse.aidl",
+      "kind": "blob",
+      "oid": "eb883e9760e00799f011501a4f4896a0d34d516d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioPort.aidl",
+      "kind": "blob",
+      "oid": "970bbc06890f6cd55e95aef78996a3178c899c5e",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioPortConfig.aidl",
+      "kind": "blob",
+      "oid": "18e6406117dcc949206c7d6492278b1e2e021c2f",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioPortDeviceExt.aidl",
+      "kind": "blob",
+      "oid": "2b3e72c2e4b7be0af2de859d79d1879d48699e4f",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioPortExt.aidl",
+      "kind": "blob",
+      "oid": "af9d9c4d56716ac187e9ba624660361f296cecb1",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioPortMixExt.aidl",
+      "kind": "blob",
+      "oid": "5b74c0d9f7e401f1c7285178d06b7fef50726443",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioPortMixExtUseCase.aidl",
+      "kind": "blob",
+      "oid": "e9acb40a1ab15f1965336f0201dffd37001ed72d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioProductStrategyType.aidl",
+      "kind": "blob",
+      "oid": "ba59d40c8c1abeeef75b536d754b977242744c2d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioProfile.aidl",
+      "kind": "blob",
+      "oid": "134cdd98c418b3302dee0c64f8ba6559c698e8a8",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioSource.aidl",
+      "kind": "blob",
+      "oid": "522adeb640ff132a14556ae4cae439252cca40e1",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioStandard.aidl",
+      "kind": "blob",
+      "oid": "704d3406640f43a495a4fcd8b78ccdece0baa0aa",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioStreamType.aidl",
+      "kind": "blob",
+      "oid": "aa170b799c8df9b39bf1b7a52a2e27c5c9f04f93",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioUsage.aidl",
+      "kind": "blob",
+      "oid": "3074b9da6e5a0ccdb6c41374072a7e2951bc50d0",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioUuid.aidl",
+      "kind": "blob",
+      "oid": "af307dadf3a366ff0e6b9d1e38f01c68c59afef3",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/AudioVolumeGroupChangeEvent.aidl",
+      "kind": "blob",
+      "oid": "3a2bc5be494de2af776a04b905afe48c35bf0473",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/Boolean.aidl",
+      "kind": "blob",
+      "oid": "bc996e441ba36d1a0716c819a3eacf60b6c20c7a",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/Byte.aidl",
+      "kind": "blob",
+      "oid": "604e74dbf56030b2b73b3406db2d2bb61084bb4a",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/Double.aidl",
+      "kind": "blob",
+      "oid": "a525629f2753bde374738745f23410ff1c760bea",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/ExtraAudioDescriptor.aidl",
+      "kind": "blob",
+      "oid": "2ae2405f544e4f9edf82520b6889480f1caaebae",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/Float.aidl",
+      "kind": "blob",
+      "oid": "af98eab83dfd8b95f37116b1e53e10d4053bb538",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/HeadTracking.aidl",
+      "kind": "blob",
+      "oid": "39518cda00b21bf0f1876abf724f12c105dc1d52",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/Int.aidl",
+      "kind": "blob",
+      "oid": "b0d3c49225317f2b5c66a42fa3eb3904cd3b66de",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/Long.aidl",
+      "kind": "blob",
+      "oid": "e403dd3fd4ea9cb73bc3adc2bb356ad774330445",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/MicrophoneDynamicInfo.aidl",
+      "kind": "blob",
+      "oid": "f0a9b8bcaccd0a62c9ea4da39252b8a60b613d67",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/MicrophoneInfo.aidl",
+      "kind": "blob",
+      "oid": "d23031e431ba45bd888d2ced90f3d2e6de6adade",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/PcmType.aidl",
+      "kind": "blob",
+      "oid": "fbe3aeaf7507752e661c43ec541f780a70566ee5",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/Spatialization.aidl",
+      "kind": "blob",
+      "oid": "d916c8cf202d2e76b8275ea775864520ec4c2529",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/4/android/media/audio/common/Void.aidl",
+      "kind": "blob",
+      "oid": "2e8afd4b88656fcdcfbf07400dc00681061ffe71",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/.hash",
+      "kind": "blob",
+      "oid": "bebf86d6c3ed0f51ba651af258fa5aed8b90331f",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioAttributes.aidl",
+      "kind": "blob",
+      "oid": "d52cbe5d218bab6fcada386ff0d0c5544e320929",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioChannelLayout.aidl",
+      "kind": "blob",
+      "oid": "aa6b6130b467f66ba63eea67364b640f4b4eb741",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioConfig.aidl",
+      "kind": "blob",
+      "oid": "6b8686ce2c967d6e3a19ecc61150c853c4eb63fc",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioConfigBase.aidl",
+      "kind": "blob",
+      "oid": "f3e716b1d3b440c87995d1cbb3febf202df25dd8",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioContentType.aidl",
+      "kind": "blob",
+      "oid": "f9ac61426fa3378a9f8651bdedb794e6cfe56425",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioDevice.aidl",
+      "kind": "blob",
+      "oid": "fb5cb62281e272f8c3d37fb1984359aa3c0f3431",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioDeviceAddress.aidl",
+      "kind": "blob",
+      "oid": "905d3aa5fb0db491575ccde4a3134feade9a5a41",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioDeviceDescription.aidl",
+      "kind": "blob",
+      "oid": "d1bcfedaecb2e578782760f031d526e45fca1eeb",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioDeviceType.aidl",
+      "kind": "blob",
+      "oid": "75b3dc8b4fac6f713d183546ac4e63a4e3d50d18",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioDualMonoMode.aidl",
+      "kind": "blob",
+      "oid": "77773f09ccbe772d3eb57f96de6f655544b8241b",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioEncapsulationMetadataType.aidl",
+      "kind": "blob",
+      "oid": "0ee0dbb0d8c3196deb4c23e9ba9c6c9f56b190f1",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioEncapsulationMode.aidl",
+      "kind": "blob",
+      "oid": "0747dba632335f5670e03277826f595093550293",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioEncapsulationType.aidl",
+      "kind": "blob",
+      "oid": "ed58fcf484984d999a7f90da01186450e98cc958",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioFlag.aidl",
+      "kind": "blob",
+      "oid": "1c8cbf57e7e910bcb4c1e63cf00e3995cf0b4fb1",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioFormatDescription.aidl",
+      "kind": "blob",
+      "oid": "58c75ebc1ae2f3da108c38fa9339209bfa8dca22",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioFormatType.aidl",
+      "kind": "blob",
+      "oid": "e60794f323032d4576d644033e62908275aeb26c",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioGain.aidl",
+      "kind": "blob",
+      "oid": "adc5b672eec9d761c6780e6c2d2d6f6c614aea2d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioGainConfig.aidl",
+      "kind": "blob",
+      "oid": "01877c78ede4480de87903345286799548ad9501",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioGainMode.aidl",
+      "kind": "blob",
+      "oid": "fddc20c308d2ddce6b16984e5decc7fe18925f24",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioHalAttributesGroup.aidl",
+      "kind": "blob",
+      "oid": "1062bdb9527d64acb1e2a7aca6f58299050584dd",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioHalCapConfiguration.aidl",
+      "kind": "blob",
+      "oid": "255b10a71e6b24c1902140590662f9e85665d8aa",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioHalCapCriterion.aidl",
+      "kind": "blob",
+      "oid": "3b0003178f223903a1c26bf68517211d097f87d0",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioHalCapCriterionType.aidl",
+      "kind": "blob",
+      "oid": "12457611cd51e0429c4168e735d46eaf4c8e1a77",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioHalCapCriterionV2.aidl",
+      "kind": "blob",
+      "oid": "b5ceee33eb63a4ef7033f3b190fb4a61edef69ec",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioHalCapDomain.aidl",
+      "kind": "blob",
+      "oid": "9c20abe22c5b9eaa1cb43f95abd824420ec0d3df",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioHalCapParameter.aidl",
+      "kind": "blob",
+      "oid": "c0b1a72f9e6e76a04d799b59c7af3860ab731523",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioHalCapRule.aidl",
+      "kind": "blob",
+      "oid": "e1060506ddb03297cbe4a91b4d56b9efb4b0af55",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioHalEngineConfig.aidl",
+      "kind": "blob",
+      "oid": "bc856da022ac7ff459c04760afea162bd587787f",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioHalProductStrategy.aidl",
+      "kind": "blob",
+      "oid": "9878e37875a5fdb8a341b23c8b4993d00f382202",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioHalVolumeCurve.aidl",
+      "kind": "blob",
+      "oid": "bcc7324ccc16b380a16adddf89df86d0c972e4aa",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioHalVolumeGroup.aidl",
+      "kind": "blob",
+      "oid": "f741e69e4ce9a385a63435c9aa37caa32773890d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioInputFlags.aidl",
+      "kind": "blob",
+      "oid": "e6a57e99b5c85442944e5da89708fedde388f452",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioIoFlags.aidl",
+      "kind": "blob",
+      "oid": "4a4672506edb3ed330d493dd859cd3ac643c8a3f",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioLatencyMode.aidl",
+      "kind": "blob",
+      "oid": "f6949d26eca107062ff5ce4bc977154168567383",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioMMapPolicy.aidl",
+      "kind": "blob",
+      "oid": "98bf0e5849e3db86bbcd5213a581422ef09d4afc",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioMMapPolicyInfo.aidl",
+      "kind": "blob",
+      "oid": "7c4f75e9098a9d58db0f6b899422586c0904ea51",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioMMapPolicyType.aidl",
+      "kind": "blob",
+      "oid": "efe8826bba447d212bfc62473e7d14d61b2e8dc3",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioMode.aidl",
+      "kind": "blob",
+      "oid": "1b4cdc4c581427b4d15c6789f444fccf5dc1956b",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioOffloadInfo.aidl",
+      "kind": "blob",
+      "oid": "40bd53b2eb31c8c190c42fa5a5a5012dc30f65bb",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioOutputFlags.aidl",
+      "kind": "blob",
+      "oid": "268e635248a4d1683b177b86f54c323c385be709",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioPlaybackRate.aidl",
+      "kind": "blob",
+      "oid": "310b2af40dfe226300053cec0c6b7982c510b3b4",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioPolicyForceUse.aidl",
+      "kind": "blob",
+      "oid": "eb883e9760e00799f011501a4f4896a0d34d516d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioPort.aidl",
+      "kind": "blob",
+      "oid": "970bbc06890f6cd55e95aef78996a3178c899c5e",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioPortConfig.aidl",
+      "kind": "blob",
+      "oid": "18e6406117dcc949206c7d6492278b1e2e021c2f",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioPortDeviceExt.aidl",
+      "kind": "blob",
+      "oid": "2b3e72c2e4b7be0af2de859d79d1879d48699e4f",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioPortExt.aidl",
+      "kind": "blob",
+      "oid": "af9d9c4d56716ac187e9ba624660361f296cecb1",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioPortMixExt.aidl",
+      "kind": "blob",
+      "oid": "5b74c0d9f7e401f1c7285178d06b7fef50726443",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioPortMixExtUseCase.aidl",
+      "kind": "blob",
+      "oid": "e9acb40a1ab15f1965336f0201dffd37001ed72d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioProductStrategyType.aidl",
+      "kind": "blob",
+      "oid": "37264e5e6824f400d674004a3eee9d2f2e25d7ff",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioProfile.aidl",
+      "kind": "blob",
+      "oid": "134cdd98c418b3302dee0c64f8ba6559c698e8a8",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioSource.aidl",
+      "kind": "blob",
+      "oid": "522adeb640ff132a14556ae4cae439252cca40e1",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioStandard.aidl",
+      "kind": "blob",
+      "oid": "704d3406640f43a495a4fcd8b78ccdece0baa0aa",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioStreamType.aidl",
+      "kind": "blob",
+      "oid": "aa170b799c8df9b39bf1b7a52a2e27c5c9f04f93",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioUsage.aidl",
+      "kind": "blob",
+      "oid": "0449f55e435e1ecb6722e6d51c037f951b94a24a",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioUuid.aidl",
+      "kind": "blob",
+      "oid": "af307dadf3a366ff0e6b9d1e38f01c68c59afef3",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/AudioVolumeGroupChangeEvent.aidl",
+      "kind": "blob",
+      "oid": "3a2bc5be494de2af776a04b905afe48c35bf0473",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/Boolean.aidl",
+      "kind": "blob",
+      "oid": "bc996e441ba36d1a0716c819a3eacf60b6c20c7a",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/Byte.aidl",
+      "kind": "blob",
+      "oid": "604e74dbf56030b2b73b3406db2d2bb61084bb4a",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/Double.aidl",
+      "kind": "blob",
+      "oid": "a525629f2753bde374738745f23410ff1c760bea",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/ExtraAudioDescriptor.aidl",
+      "kind": "blob",
+      "oid": "2ae2405f544e4f9edf82520b6889480f1caaebae",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/Float.aidl",
+      "kind": "blob",
+      "oid": "af98eab83dfd8b95f37116b1e53e10d4053bb538",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/FlushFromFrameAccuracy.aidl",
+      "kind": "blob",
+      "oid": "a70c996a172a88e1ad1e14345602b570ba27c096",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/FlushFromFrameSupport.aidl",
+      "kind": "blob",
+      "oid": "e02d41b21bf310914e80c9f0d80314f68373bcdf",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/HeadTracking.aidl",
+      "kind": "blob",
+      "oid": "39518cda00b21bf0f1876abf724f12c105dc1d52",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/Int.aidl",
+      "kind": "blob",
+      "oid": "b0d3c49225317f2b5c66a42fa3eb3904cd3b66de",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/Long.aidl",
+      "kind": "blob",
+      "oid": "e403dd3fd4ea9cb73bc3adc2bb356ad774330445",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/MicrophoneDynamicInfo.aidl",
+      "kind": "blob",
+      "oid": "f0a9b8bcaccd0a62c9ea4da39252b8a60b613d67",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/MicrophoneInfo.aidl",
+      "kind": "blob",
+      "oid": "d23031e431ba45bd888d2ced90f3d2e6de6adade",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/PcmType.aidl",
+      "kind": "blob",
+      "oid": "fbe3aeaf7507752e661c43ec541f780a70566ee5",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/Spatialization.aidl",
+      "kind": "blob",
+      "oid": "d916c8cf202d2e76b8275ea775864520ec4c2529",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/5/android/media/audio/common/Void.aidl",
+      "kind": "blob",
+      "oid": "2e8afd4b88656fcdcfbf07400dc00681061ffe71",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioAttributes.aidl",
+      "kind": "blob",
+      "oid": "d52cbe5d218bab6fcada386ff0d0c5544e320929",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioChannelLayout.aidl",
+      "kind": "blob",
+      "oid": "aa6b6130b467f66ba63eea67364b640f4b4eb741",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioConfig.aidl",
+      "kind": "blob",
+      "oid": "6b8686ce2c967d6e3a19ecc61150c853c4eb63fc",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioConfigBase.aidl",
+      "kind": "blob",
+      "oid": "f3e716b1d3b440c87995d1cbb3febf202df25dd8",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioContentType.aidl",
+      "kind": "blob",
+      "oid": "f9ac61426fa3378a9f8651bdedb794e6cfe56425",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioDevice.aidl",
+      "kind": "blob",
+      "oid": "fb5cb62281e272f8c3d37fb1984359aa3c0f3431",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioDeviceAddress.aidl",
+      "kind": "blob",
+      "oid": "905d3aa5fb0db491575ccde4a3134feade9a5a41",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioDeviceDescription.aidl",
+      "kind": "blob",
+      "oid": "d1bcfedaecb2e578782760f031d526e45fca1eeb",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioDeviceType.aidl",
+      "kind": "blob",
+      "oid": "75b3dc8b4fac6f713d183546ac4e63a4e3d50d18",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioDualMonoMode.aidl",
+      "kind": "blob",
+      "oid": "77773f09ccbe772d3eb57f96de6f655544b8241b",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioEncapsulationMetadataType.aidl",
+      "kind": "blob",
+      "oid": "0ee0dbb0d8c3196deb4c23e9ba9c6c9f56b190f1",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioEncapsulationMode.aidl",
+      "kind": "blob",
+      "oid": "0747dba632335f5670e03277826f595093550293",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioEncapsulationType.aidl",
+      "kind": "blob",
+      "oid": "ed58fcf484984d999a7f90da01186450e98cc958",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioFlag.aidl",
+      "kind": "blob",
+      "oid": "1c8cbf57e7e910bcb4c1e63cf00e3995cf0b4fb1",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioFormatDescription.aidl",
+      "kind": "blob",
+      "oid": "58c75ebc1ae2f3da108c38fa9339209bfa8dca22",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioFormatType.aidl",
+      "kind": "blob",
+      "oid": "e60794f323032d4576d644033e62908275aeb26c",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioGain.aidl",
+      "kind": "blob",
+      "oid": "adc5b672eec9d761c6780e6c2d2d6f6c614aea2d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioGainConfig.aidl",
+      "kind": "blob",
+      "oid": "01877c78ede4480de87903345286799548ad9501",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioGainMode.aidl",
+      "kind": "blob",
+      "oid": "fddc20c308d2ddce6b16984e5decc7fe18925f24",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioHalAttributesGroup.aidl",
+      "kind": "blob",
+      "oid": "1062bdb9527d64acb1e2a7aca6f58299050584dd",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioHalCapConfiguration.aidl",
+      "kind": "blob",
+      "oid": "255b10a71e6b24c1902140590662f9e85665d8aa",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioHalCapCriterion.aidl",
+      "kind": "blob",
+      "oid": "3b0003178f223903a1c26bf68517211d097f87d0",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioHalCapCriterionType.aidl",
+      "kind": "blob",
+      "oid": "12457611cd51e0429c4168e735d46eaf4c8e1a77",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioHalCapCriterionV2.aidl",
+      "kind": "blob",
+      "oid": "b5ceee33eb63a4ef7033f3b190fb4a61edef69ec",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioHalCapDomain.aidl",
+      "kind": "blob",
+      "oid": "9c20abe22c5b9eaa1cb43f95abd824420ec0d3df",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioHalCapParameter.aidl",
+      "kind": "blob",
+      "oid": "c0b1a72f9e6e76a04d799b59c7af3860ab731523",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioHalCapRule.aidl",
+      "kind": "blob",
+      "oid": "e1060506ddb03297cbe4a91b4d56b9efb4b0af55",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioHalEngineConfig.aidl",
+      "kind": "blob",
+      "oid": "bc856da022ac7ff459c04760afea162bd587787f",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioHalProductStrategy.aidl",
+      "kind": "blob",
+      "oid": "9878e37875a5fdb8a341b23c8b4993d00f382202",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioHalVolumeCurve.aidl",
+      "kind": "blob",
+      "oid": "bcc7324ccc16b380a16adddf89df86d0c972e4aa",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioHalVolumeGroup.aidl",
+      "kind": "blob",
+      "oid": "f741e69e4ce9a385a63435c9aa37caa32773890d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioInputFlags.aidl",
+      "kind": "blob",
+      "oid": "e6a57e99b5c85442944e5da89708fedde388f452",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioIoFlags.aidl",
+      "kind": "blob",
+      "oid": "4a4672506edb3ed330d493dd859cd3ac643c8a3f",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioLatencyMode.aidl",
+      "kind": "blob",
+      "oid": "f6949d26eca107062ff5ce4bc977154168567383",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioMMapPolicy.aidl",
+      "kind": "blob",
+      "oid": "98bf0e5849e3db86bbcd5213a581422ef09d4afc",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioMMapPolicyInfo.aidl",
+      "kind": "blob",
+      "oid": "7c4f75e9098a9d58db0f6b899422586c0904ea51",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioMMapPolicyType.aidl",
+      "kind": "blob",
+      "oid": "efe8826bba447d212bfc62473e7d14d61b2e8dc3",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioMode.aidl",
+      "kind": "blob",
+      "oid": "1b4cdc4c581427b4d15c6789f444fccf5dc1956b",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioOffloadInfo.aidl",
+      "kind": "blob",
+      "oid": "40bd53b2eb31c8c190c42fa5a5a5012dc30f65bb",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioOutputFlags.aidl",
+      "kind": "blob",
+      "oid": "268e635248a4d1683b177b86f54c323c385be709",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioPlaybackRate.aidl",
+      "kind": "blob",
+      "oid": "310b2af40dfe226300053cec0c6b7982c510b3b4",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioPolicyForceUse.aidl",
+      "kind": "blob",
+      "oid": "eb883e9760e00799f011501a4f4896a0d34d516d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioPort.aidl",
+      "kind": "blob",
+      "oid": "970bbc06890f6cd55e95aef78996a3178c899c5e",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioPortConfig.aidl",
+      "kind": "blob",
+      "oid": "18e6406117dcc949206c7d6492278b1e2e021c2f",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioPortDeviceExt.aidl",
+      "kind": "blob",
+      "oid": "2b3e72c2e4b7be0af2de859d79d1879d48699e4f",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioPortExt.aidl",
+      "kind": "blob",
+      "oid": "af9d9c4d56716ac187e9ba624660361f296cecb1",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioPortMixExt.aidl",
+      "kind": "blob",
+      "oid": "5b74c0d9f7e401f1c7285178d06b7fef50726443",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioPortMixExtUseCase.aidl",
+      "kind": "blob",
+      "oid": "e9acb40a1ab15f1965336f0201dffd37001ed72d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioProductStrategyType.aidl",
+      "kind": "blob",
+      "oid": "37264e5e6824f400d674004a3eee9d2f2e25d7ff",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioProfile.aidl",
+      "kind": "blob",
+      "oid": "134cdd98c418b3302dee0c64f8ba6559c698e8a8",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioSource.aidl",
+      "kind": "blob",
+      "oid": "522adeb640ff132a14556ae4cae439252cca40e1",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioStandard.aidl",
+      "kind": "blob",
+      "oid": "704d3406640f43a495a4fcd8b78ccdece0baa0aa",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioStreamType.aidl",
+      "kind": "blob",
+      "oid": "aa170b799c8df9b39bf1b7a52a2e27c5c9f04f93",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioUsage.aidl",
+      "kind": "blob",
+      "oid": "0449f55e435e1ecb6722e6d51c037f951b94a24a",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioUuid.aidl",
+      "kind": "blob",
+      "oid": "af307dadf3a366ff0e6b9d1e38f01c68c59afef3",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/AudioVolumeGroupChangeEvent.aidl",
+      "kind": "blob",
+      "oid": "3a2bc5be494de2af776a04b905afe48c35bf0473",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/Boolean.aidl",
+      "kind": "blob",
+      "oid": "bc996e441ba36d1a0716c819a3eacf60b6c20c7a",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/Byte.aidl",
+      "kind": "blob",
+      "oid": "604e74dbf56030b2b73b3406db2d2bb61084bb4a",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/Double.aidl",
+      "kind": "blob",
+      "oid": "a525629f2753bde374738745f23410ff1c760bea",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/ExtraAudioDescriptor.aidl",
+      "kind": "blob",
+      "oid": "2ae2405f544e4f9edf82520b6889480f1caaebae",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/Float.aidl",
+      "kind": "blob",
+      "oid": "af98eab83dfd8b95f37116b1e53e10d4053bb538",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/FlushFromFrameAccuracy.aidl",
+      "kind": "blob",
+      "oid": "a70c996a172a88e1ad1e14345602b570ba27c096",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/FlushFromFrameSupport.aidl",
+      "kind": "blob",
+      "oid": "e02d41b21bf310914e80c9f0d80314f68373bcdf",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/HeadTracking.aidl",
+      "kind": "blob",
+      "oid": "39518cda00b21bf0f1876abf724f12c105dc1d52",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/Int.aidl",
+      "kind": "blob",
+      "oid": "b0d3c49225317f2b5c66a42fa3eb3904cd3b66de",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/Long.aidl",
+      "kind": "blob",
+      "oid": "e403dd3fd4ea9cb73bc3adc2bb356ad774330445",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/MicrophoneDynamicInfo.aidl",
+      "kind": "blob",
+      "oid": "f0a9b8bcaccd0a62c9ea4da39252b8a60b613d67",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/MicrophoneInfo.aidl",
+      "kind": "blob",
+      "oid": "d23031e431ba45bd888d2ced90f3d2e6de6adade",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/PcmType.aidl",
+      "kind": "blob",
+      "oid": "fbe3aeaf7507752e661c43ec541f780a70566ee5",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/Spatialization.aidl",
+      "kind": "blob",
+      "oid": "d916c8cf202d2e76b8275ea775864520ec4c2529",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.common.types/current/android/media/audio/common/Void.aidl",
+      "kind": "blob",
+      "oid": "2e8afd4b88656fcdcfbf07400dc00681061ffe71",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/1/.hash",
+      "kind": "blob",
+      "oid": "62758f5527d2da8d3f76394f8b1aece4f87cd4c7",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/1/android/media/audio/eraser/Capability.aidl",
+      "kind": "blob",
+      "oid": "a415a42a7662d1ffbb0075115b59a4d611a25260",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/1/android/media/audio/eraser/Classification.aidl",
+      "kind": "blob",
+      "oid": "f90f1c10171e7f297af9193071e4f2a0abf438c3",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/1/android/media/audio/eraser/ClassificationConfig.aidl",
+      "kind": "blob",
+      "oid": "763352ddd61f9cf8a5b224dfc439be25aa6fbed2",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/1/android/media/audio/eraser/ClassificationMetadata.aidl",
+      "kind": "blob",
+      "oid": "cfdbe5b0a7ad87a93b5bf284367b671a5a389a1e",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/1/android/media/audio/eraser/ClassificationMetadataList.aidl",
+      "kind": "blob",
+      "oid": "36cef5913e4af5841962cd639d005326f4b6f9ac",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/1/android/media/audio/eraser/ClassifierCapability.aidl",
+      "kind": "blob",
+      "oid": "fadf920348ebb85d619ea254edea0f9b31459c82",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/1/android/media/audio/eraser/Configuration.aidl",
+      "kind": "blob",
+      "oid": "8da4032406fac6c4444fba77836b6fc1c1a016e3",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/1/android/media/audio/eraser/IEraserCallback.aidl",
+      "kind": "blob",
+      "oid": "8d53405af16ade8e54a6f0e5baf07144b7560b7c",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/1/android/media/audio/eraser/Mode.aidl",
+      "kind": "blob",
+      "oid": "916b314418c92bbe8b4fc00348d05250c5f18edc",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/1/android/media/audio/eraser/RemixerCapability.aidl",
+      "kind": "blob",
+      "oid": "82707b1d9d20fbb5ab74c9b46adee1145c1b1090",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/1/android/media/audio/eraser/SeparatorCapability.aidl",
+      "kind": "blob",
+      "oid": "2e983ac3ef5aa55b436c26e4722e9b79ee4ed118",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/1/android/media/audio/eraser/SoundClassification.aidl",
+      "kind": "blob",
+      "oid": "e5483b4c536e37f2b16b8011886879c046c7c7e2",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/2/.hash",
+      "kind": "blob",
+      "oid": "42f531dec7d4b2dc2cfdc93c6bba130eee1a3b6e",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/2/android/media/audio/eraser/Capability.aidl",
+      "kind": "blob",
+      "oid": "a415a42a7662d1ffbb0075115b59a4d611a25260",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/2/android/media/audio/eraser/Classification.aidl",
+      "kind": "blob",
+      "oid": "f90f1c10171e7f297af9193071e4f2a0abf438c3",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/2/android/media/audio/eraser/ClassificationConfig.aidl",
+      "kind": "blob",
+      "oid": "763352ddd61f9cf8a5b224dfc439be25aa6fbed2",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/2/android/media/audio/eraser/ClassificationMetadata.aidl",
+      "kind": "blob",
+      "oid": "cfdbe5b0a7ad87a93b5bf284367b671a5a389a1e",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/2/android/media/audio/eraser/ClassificationMetadataList.aidl",
+      "kind": "blob",
+      "oid": "36cef5913e4af5841962cd639d005326f4b6f9ac",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/2/android/media/audio/eraser/ClassifierCapability.aidl",
+      "kind": "blob",
+      "oid": "fadf920348ebb85d619ea254edea0f9b31459c82",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/2/android/media/audio/eraser/Configuration.aidl",
+      "kind": "blob",
+      "oid": "8da4032406fac6c4444fba77836b6fc1c1a016e3",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/2/android/media/audio/eraser/IEraserCallback.aidl",
+      "kind": "blob",
+      "oid": "8d53405af16ade8e54a6f0e5baf07144b7560b7c",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/2/android/media/audio/eraser/Mode.aidl",
+      "kind": "blob",
+      "oid": "916b314418c92bbe8b4fc00348d05250c5f18edc",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/2/android/media/audio/eraser/RemixerCapability.aidl",
+      "kind": "blob",
+      "oid": "82707b1d9d20fbb5ab74c9b46adee1145c1b1090",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/2/android/media/audio/eraser/SeparatorCapability.aidl",
+      "kind": "blob",
+      "oid": "2e983ac3ef5aa55b436c26e4722e9b79ee4ed118",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/2/android/media/audio/eraser/SoundClassification.aidl",
+      "kind": "blob",
+      "oid": "e5483b4c536e37f2b16b8011886879c046c7c7e2",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/current/android/media/audio/eraser/Capability.aidl",
+      "kind": "blob",
+      "oid": "a415a42a7662d1ffbb0075115b59a4d611a25260",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/current/android/media/audio/eraser/Classification.aidl",
+      "kind": "blob",
+      "oid": "f90f1c10171e7f297af9193071e4f2a0abf438c3",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/current/android/media/audio/eraser/ClassificationConfig.aidl",
+      "kind": "blob",
+      "oid": "763352ddd61f9cf8a5b224dfc439be25aa6fbed2",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/current/android/media/audio/eraser/ClassificationMetadata.aidl",
+      "kind": "blob",
+      "oid": "cfdbe5b0a7ad87a93b5bf284367b671a5a389a1e",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/current/android/media/audio/eraser/ClassificationMetadataList.aidl",
+      "kind": "blob",
+      "oid": "36cef5913e4af5841962cd639d005326f4b6f9ac",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/current/android/media/audio/eraser/ClassifierCapability.aidl",
+      "kind": "blob",
+      "oid": "fadf920348ebb85d619ea254edea0f9b31459c82",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/current/android/media/audio/eraser/Configuration.aidl",
+      "kind": "blob",
+      "oid": "8da4032406fac6c4444fba77836b6fc1c1a016e3",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/current/android/media/audio/eraser/IEraserCallback.aidl",
+      "kind": "blob",
+      "oid": "8d53405af16ade8e54a6f0e5baf07144b7560b7c",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/current/android/media/audio/eraser/Mode.aidl",
+      "kind": "blob",
+      "oid": "916b314418c92bbe8b4fc00348d05250c5f18edc",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/current/android/media/audio/eraser/RemixerCapability.aidl",
+      "kind": "blob",
+      "oid": "82707b1d9d20fbb5ab74c9b46adee1145c1b1090",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/current/android/media/audio/eraser/SeparatorCapability.aidl",
+      "kind": "blob",
+      "oid": "2e983ac3ef5aa55b436c26e4722e9b79ee4ed118",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.audio.eraser.types/current/android/media/audio/eraser/SoundClassification.aidl",
+      "kind": "blob",
+      "oid": "e5483b4c536e37f2b16b8011886879c046c7c7e2",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/1/.hash",
+      "kind": "blob",
+      "oid": "52fd9ff1c0530e94df71e2f07019ee100a89bed6",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/1/android/media/soundtrigger/AudioCapabilities.aidl",
+      "kind": "blob",
+      "oid": "5d88305484d04928e7bed0ed71e23d486784da58",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/1/android/media/soundtrigger/ConfidenceLevel.aidl",
+      "kind": "blob",
+      "oid": "5127a110efc5206acd940a88b00c215452dce568",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/1/android/media/soundtrigger/ModelParameter.aidl",
+      "kind": "blob",
+      "oid": "aadbf80b4f969a2211ba88636c0dec51be8b7abb",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/1/android/media/soundtrigger/ModelParameterRange.aidl",
+      "kind": "blob",
+      "oid": "f29b7284a275704a77793b507dc67fbc743d87a1",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/1/android/media/soundtrigger/Phrase.aidl",
+      "kind": "blob",
+      "oid": "11029ba9d25f11f5778be6ebc01fd8816d3a8f76",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/1/android/media/soundtrigger/PhraseRecognitionEvent.aidl",
+      "kind": "blob",
+      "oid": "b75d1b83c72aec545570cdd7264b0d8e96fb9e21",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/1/android/media/soundtrigger/PhraseRecognitionExtra.aidl",
+      "kind": "blob",
+      "oid": "e417c69454a5bf087dd99b1843dd96acb2907847",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/1/android/media/soundtrigger/PhraseSoundModel.aidl",
+      "kind": "blob",
+      "oid": "b4b3854d49267a6926630bd0d3f76f62e30b87e0",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/1/android/media/soundtrigger/Properties.aidl",
+      "kind": "blob",
+      "oid": "068db52a2a6ba046a7498f121558795129856518",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/1/android/media/soundtrigger/RecognitionConfig.aidl",
+      "kind": "blob",
+      "oid": "63cd2cbbb797d7561df5ba8a723d436ba61bda4f",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/1/android/media/soundtrigger/RecognitionEvent.aidl",
+      "kind": "blob",
+      "oid": "0209602a1535b8845157a28ee86a2979295c685d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/1/android/media/soundtrigger/RecognitionMode.aidl",
+      "kind": "blob",
+      "oid": "588291084f4a20b9f720fe517907cd718e58ed84",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/1/android/media/soundtrigger/RecognitionStatus.aidl",
+      "kind": "blob",
+      "oid": "7881c28c7ecf5feab731f86c1c8bf6c7a7b6d5a0",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/1/android/media/soundtrigger/SoundModel.aidl",
+      "kind": "blob",
+      "oid": "fe382643f3d2d9aa96a79193ecd48e153e4026ca",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/1/android/media/soundtrigger/SoundModelType.aidl",
+      "kind": "blob",
+      "oid": "ac78641705353a930aad39d54429d2ee58e10221",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/1/android/media/soundtrigger/Status.aidl",
+      "kind": "blob",
+      "oid": "29f3167ac196d31b326f814fd903a31e53698b33",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/2/.hash",
+      "kind": "blob",
+      "oid": "4d6db0d903e754ce44a3039fd68b7b399e2a22e3",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/2/android/media/soundtrigger/AudioCapabilities.aidl",
+      "kind": "blob",
+      "oid": "47119b90227469187fba79db03268d55724f7d9e",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/2/android/media/soundtrigger/ConfidenceLevel.aidl",
+      "kind": "blob",
+      "oid": "5127a110efc5206acd940a88b00c215452dce568",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/2/android/media/soundtrigger/ModelParameter.aidl",
+      "kind": "blob",
+      "oid": "bcfe93d574a155636b81bd974c7014bc7a9f8399",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/2/android/media/soundtrigger/ModelParameterRange.aidl",
+      "kind": "blob",
+      "oid": "f29b7284a275704a77793b507dc67fbc743d87a1",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/2/android/media/soundtrigger/Phrase.aidl",
+      "kind": "blob",
+      "oid": "11029ba9d25f11f5778be6ebc01fd8816d3a8f76",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/2/android/media/soundtrigger/PhraseRecognitionEvent.aidl",
+      "kind": "blob",
+      "oid": "b75d1b83c72aec545570cdd7264b0d8e96fb9e21",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/2/android/media/soundtrigger/PhraseRecognitionExtra.aidl",
+      "kind": "blob",
+      "oid": "e417c69454a5bf087dd99b1843dd96acb2907847",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/2/android/media/soundtrigger/PhraseSoundModel.aidl",
+      "kind": "blob",
+      "oid": "b4b3854d49267a6926630bd0d3f76f62e30b87e0",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/2/android/media/soundtrigger/Properties.aidl",
+      "kind": "blob",
+      "oid": "068db52a2a6ba046a7498f121558795129856518",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/2/android/media/soundtrigger/RecognitionConfig.aidl",
+      "kind": "blob",
+      "oid": "63cd2cbbb797d7561df5ba8a723d436ba61bda4f",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/2/android/media/soundtrigger/RecognitionEvent.aidl",
+      "kind": "blob",
+      "oid": "0209602a1535b8845157a28ee86a2979295c685d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/2/android/media/soundtrigger/RecognitionMode.aidl",
+      "kind": "blob",
+      "oid": "1899a3397d0b3d3955570c31f1534f34a4119786",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/2/android/media/soundtrigger/RecognitionStatus.aidl",
+      "kind": "blob",
+      "oid": "8101ffdbdf3fb13c58b61608ea8f9933342e8140",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/2/android/media/soundtrigger/SoundModel.aidl",
+      "kind": "blob",
+      "oid": "fe382643f3d2d9aa96a79193ecd48e153e4026ca",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/2/android/media/soundtrigger/SoundModelType.aidl",
+      "kind": "blob",
+      "oid": "c0927a53734e9a1c9d90ccb2385ea6c4c0555f20",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/2/android/media/soundtrigger/Status.aidl",
+      "kind": "blob",
+      "oid": "4cd4c8e47ea08f6ba549808f62014ef14b4fcb85",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/3/.hash",
+      "kind": "blob",
+      "oid": "4e2c77cc0761ad350f6bad5a1d63e937e5eb50df",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/3/android/media/soundtrigger/AudioCapabilities.aidl",
+      "kind": "blob",
+      "oid": "47119b90227469187fba79db03268d55724f7d9e",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/3/android/media/soundtrigger/ConfidenceLevel.aidl",
+      "kind": "blob",
+      "oid": "5127a110efc5206acd940a88b00c215452dce568",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/3/android/media/soundtrigger/ModelParameter.aidl",
+      "kind": "blob",
+      "oid": "bcfe93d574a155636b81bd974c7014bc7a9f8399",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/3/android/media/soundtrigger/ModelParameterRange.aidl",
+      "kind": "blob",
+      "oid": "f29b7284a275704a77793b507dc67fbc743d87a1",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/3/android/media/soundtrigger/Phrase.aidl",
+      "kind": "blob",
+      "oid": "11029ba9d25f11f5778be6ebc01fd8816d3a8f76",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/3/android/media/soundtrigger/PhraseRecognitionEvent.aidl",
+      "kind": "blob",
+      "oid": "b75d1b83c72aec545570cdd7264b0d8e96fb9e21",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/3/android/media/soundtrigger/PhraseRecognitionExtra.aidl",
+      "kind": "blob",
+      "oid": "e417c69454a5bf087dd99b1843dd96acb2907847",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/3/android/media/soundtrigger/PhraseSoundModel.aidl",
+      "kind": "blob",
+      "oid": "b4b3854d49267a6926630bd0d3f76f62e30b87e0",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/3/android/media/soundtrigger/Properties.aidl",
+      "kind": "blob",
+      "oid": "068db52a2a6ba046a7498f121558795129856518",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/3/android/media/soundtrigger/RecognitionConfig.aidl",
+      "kind": "blob",
+      "oid": "63cd2cbbb797d7561df5ba8a723d436ba61bda4f",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/3/android/media/soundtrigger/RecognitionEvent.aidl",
+      "kind": "blob",
+      "oid": "0209602a1535b8845157a28ee86a2979295c685d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/3/android/media/soundtrigger/RecognitionMode.aidl",
+      "kind": "blob",
+      "oid": "1899a3397d0b3d3955570c31f1534f34a4119786",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/3/android/media/soundtrigger/RecognitionStatus.aidl",
+      "kind": "blob",
+      "oid": "8101ffdbdf3fb13c58b61608ea8f9933342e8140",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/3/android/media/soundtrigger/SoundModel.aidl",
+      "kind": "blob",
+      "oid": "fe382643f3d2d9aa96a79193ecd48e153e4026ca",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/3/android/media/soundtrigger/SoundModelType.aidl",
+      "kind": "blob",
+      "oid": "c0927a53734e9a1c9d90ccb2385ea6c4c0555f20",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/3/android/media/soundtrigger/Status.aidl",
+      "kind": "blob",
+      "oid": "4cd4c8e47ea08f6ba549808f62014ef14b4fcb85",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/4/.hash",
+      "kind": "blob",
+      "oid": "0745d7fa39ebb6bc3307b99be8b68c0dd9f67b77",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/4/android/media/soundtrigger/AudioCapabilities.aidl",
+      "kind": "blob",
+      "oid": "47119b90227469187fba79db03268d55724f7d9e",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/4/android/media/soundtrigger/ConfidenceLevel.aidl",
+      "kind": "blob",
+      "oid": "5127a110efc5206acd940a88b00c215452dce568",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/4/android/media/soundtrigger/ModelParameter.aidl",
+      "kind": "blob",
+      "oid": "bcfe93d574a155636b81bd974c7014bc7a9f8399",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/4/android/media/soundtrigger/ModelParameterRange.aidl",
+      "kind": "blob",
+      "oid": "f29b7284a275704a77793b507dc67fbc743d87a1",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/4/android/media/soundtrigger/Phrase.aidl",
+      "kind": "blob",
+      "oid": "11029ba9d25f11f5778be6ebc01fd8816d3a8f76",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/4/android/media/soundtrigger/PhraseRecognitionEvent.aidl",
+      "kind": "blob",
+      "oid": "b75d1b83c72aec545570cdd7264b0d8e96fb9e21",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/4/android/media/soundtrigger/PhraseRecognitionExtra.aidl",
+      "kind": "blob",
+      "oid": "e417c69454a5bf087dd99b1843dd96acb2907847",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/4/android/media/soundtrigger/PhraseSoundModel.aidl",
+      "kind": "blob",
+      "oid": "b4b3854d49267a6926630bd0d3f76f62e30b87e0",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/4/android/media/soundtrigger/Properties.aidl",
+      "kind": "blob",
+      "oid": "068db52a2a6ba046a7498f121558795129856518",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/4/android/media/soundtrigger/RecognitionConfig.aidl",
+      "kind": "blob",
+      "oid": "63cd2cbbb797d7561df5ba8a723d436ba61bda4f",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/4/android/media/soundtrigger/RecognitionEvent.aidl",
+      "kind": "blob",
+      "oid": "0209602a1535b8845157a28ee86a2979295c685d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/4/android/media/soundtrigger/RecognitionMode.aidl",
+      "kind": "blob",
+      "oid": "1899a3397d0b3d3955570c31f1534f34a4119786",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/4/android/media/soundtrigger/RecognitionStatus.aidl",
+      "kind": "blob",
+      "oid": "8101ffdbdf3fb13c58b61608ea8f9933342e8140",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/4/android/media/soundtrigger/SoundModel.aidl",
+      "kind": "blob",
+      "oid": "fe382643f3d2d9aa96a79193ecd48e153e4026ca",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/4/android/media/soundtrigger/SoundModelType.aidl",
+      "kind": "blob",
+      "oid": "c0927a53734e9a1c9d90ccb2385ea6c4c0555f20",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/4/android/media/soundtrigger/Status.aidl",
+      "kind": "blob",
+      "oid": "4cd4c8e47ea08f6ba549808f62014ef14b4fcb85",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/current/android/media/soundtrigger/AudioCapabilities.aidl",
+      "kind": "blob",
+      "oid": "5d88305484d04928e7bed0ed71e23d486784da58",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/current/android/media/soundtrigger/ConfidenceLevel.aidl",
+      "kind": "blob",
+      "oid": "5127a110efc5206acd940a88b00c215452dce568",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/current/android/media/soundtrigger/ModelParameter.aidl",
+      "kind": "blob",
+      "oid": "aadbf80b4f969a2211ba88636c0dec51be8b7abb",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/current/android/media/soundtrigger/ModelParameterRange.aidl",
+      "kind": "blob",
+      "oid": "f29b7284a275704a77793b507dc67fbc743d87a1",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/current/android/media/soundtrigger/Phrase.aidl",
+      "kind": "blob",
+      "oid": "11029ba9d25f11f5778be6ebc01fd8816d3a8f76",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/current/android/media/soundtrigger/PhraseRecognitionEvent.aidl",
+      "kind": "blob",
+      "oid": "b75d1b83c72aec545570cdd7264b0d8e96fb9e21",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/current/android/media/soundtrigger/PhraseRecognitionExtra.aidl",
+      "kind": "blob",
+      "oid": "e417c69454a5bf087dd99b1843dd96acb2907847",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/current/android/media/soundtrigger/PhraseSoundModel.aidl",
+      "kind": "blob",
+      "oid": "b4b3854d49267a6926630bd0d3f76f62e30b87e0",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/current/android/media/soundtrigger/Properties.aidl",
+      "kind": "blob",
+      "oid": "068db52a2a6ba046a7498f121558795129856518",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/current/android/media/soundtrigger/RecognitionConfig.aidl",
+      "kind": "blob",
+      "oid": "63cd2cbbb797d7561df5ba8a723d436ba61bda4f",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/current/android/media/soundtrigger/RecognitionEvent.aidl",
+      "kind": "blob",
+      "oid": "0209602a1535b8845157a28ee86a2979295c685d",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/current/android/media/soundtrigger/RecognitionMode.aidl",
+      "kind": "blob",
+      "oid": "588291084f4a20b9f720fe517907cd718e58ed84",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/current/android/media/soundtrigger/RecognitionStatus.aidl",
+      "kind": "blob",
+      "oid": "7881c28c7ecf5feab731f86c1c8bf6c7a7b6d5a0",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/current/android/media/soundtrigger/SoundModel.aidl",
+      "kind": "blob",
+      "oid": "fe382643f3d2d9aa96a79193ecd48e153e4026ca",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/current/android/media/soundtrigger/SoundModelType.aidl",
+      "kind": "blob",
+      "oid": "ac78641705353a930aad39d54429d2ee58e10221",
+      "mode": "100644"
+    },
+    {
+      "path": "media/aidl_api/android.media.soundtrigger.types/current/android/media/soundtrigger/Status.aidl",
+      "kind": "blob",
+      "oid": "29f3167ac196d31b326f814fd903a31e53698b33",
+      "mode": "100644"
+    },
+    {
+      "path": "media/lint-baseline.xml",
+      "kind": "blob",
+      "oid": "e875cef762e406b07dc1ccc925f1ba75394e26b9",
+      "mode": "100644"
+    },
+    {
+      "path": "net/netd/1.0/Android.bp",
+      "kind": "blob",
+      "oid": "438d52788e726baecbab6493578e5c35271b40c4",
+      "mode": "100644"
+    },
+    {
+      "path": "net/netd/1.0/INetd.hal",
+      "kind": "blob",
+      "oid": "3f69892a959b659d8d0af1bcf5e186cb48f3f3ce",
+      "mode": "100644"
+    },
+    {
+      "path": "net/netd/1.0/vts/functional/Android.bp",
+      "kind": "blob",
+      "oid": "b175644bb2254160fe73430f141cd04bc323c83f",
+      "mode": "100644"
+    },
+    {
+      "path": "net/netd/1.0/vts/functional/VtsHalNetNetdV1_0TargetTest.cpp",
+      "kind": "blob",
+      "oid": "b6edead807f69928540741bdaa09fd7186b388a4",
+      "mode": "100644"
+    },
+    {
+      "path": "net/netd/1.1/Android.bp",
+      "kind": "blob",
+      "oid": "e60ef0d849846caf4f1e3b255fb19c49a1d92757",
+      "mode": "100644"
+    },
+    {
+      "path": "net/netd/1.1/INetd.hal",
+      "kind": "blob",
+      "oid": "5dc6dbc9ea5b3fabe6ae21ce28f074d532988c56",
+      "mode": "100644"
+    },
+    {
+      "path": "net/netd/1.1/vts/functional/Android.bp",
+      "kind": "blob",
+      "oid": "e89b373ce5a4579422716638b542adea0b87a2fb",
+      "mode": "100644"
+    },
+    {
+      "path": "net/netd/1.1/vts/functional/VtsHalNetNetdV1_1TargetTest.cpp",
+      "kind": "blob",
+      "oid": "1b23064bda91974f45a1efdea74b2ac5e5453979",
+      "mode": "100644"
+    },
+    {
+      "path": "net/netd/aidl/Android.bp",
+      "kind": "blob",
+      "oid": "d65df8e2570890f57030fb62d003b3348e3ba6ae",
+      "mode": "100644"
+    },
+    {
+      "path": "net/netd/aidl/aidl_api/android.system.net.netd/1/.hash",
+      "kind": "blob",
+      "oid": "92b70b9cc37eadbd8624b66b8bd87af3316c6b64",
+      "mode": "100644"
+    },
+    {
+      "path": "net/netd/aidl/aidl_api/android.system.net.netd/1/android/system/net/netd/INetd.aidl",
+      "kind": "blob",
+      "oid": "c374a5ceec816a9ce829125ece58397cf3033650",
+      "mode": "100644"
+    },
+    {
+      "path": "net/netd/aidl/aidl_api/android.system.net.netd/current/android/system/net/netd/INetd.aidl",
+      "kind": "blob",
+      "oid": "c374a5ceec816a9ce829125ece58397cf3033650",
+      "mode": "100644"
+    },
+    {
+      "path": "net/netd/aidl/android/system/net/netd/INetd.aidl",
+      "kind": "blob",
+      "oid": "58110dedc4b9d46a7f84027c75a587d79ec1ffe2",
+      "mode": "100644"
+    },
+    {
+      "path": "net/netd/aidl/vts/Android.bp",
+      "kind": "blob",
+      "oid": "eed2fc96318df6dc71dd3e92311045f2e12e03e8",
+      "mode": "100644"
+    },
+    {
+      "path": "net/netd/aidl/vts/VtsHalNetNetdV1TargetTest.cpp",
+      "kind": "blob",
+      "oid": "d949f957a4a5878ed7b75a3fea883b5944983230",
+      "mode": "100644"
+    },
+    {
+      "path": "net/netd/testutils/Android.bp",
+      "kind": "blob",
+      "oid": "e4cdbca25e2c3a539f9d1c03e48a5a3ce589c66e",
+      "mode": "100644"
+    },
+    {
+      "path": "net/netd/testutils/VtsHalNetNetdTestUtils.cpp",
+      "kind": "blob",
+      "oid": "0d4189dd9185c8e76756113fbacfd6235db66b06",
+      "mode": "100644"
+    },
+    {
+      "path": "net/netd/testutils/VtsHalNetNetdTestUtils.h",
+      "kind": "blob",
+      "oid": "ef0c7ed3ef01fa6136fd1a7720d81996a3c62468",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/OWNERS",
+      "kind": "blob",
+      "oid": "88693bf66ee5d8553b52b77032d332569d78d7d7",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/TEST_MAPPING",
+      "kind": "blob",
+      "oid": "a937485caabd5888f29d3183a9ebbe2f955e5044",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/Android.bp",
+      "kind": "blob",
+      "oid": "088f11dde6e71476cee3b0d0ce507893e162fad6",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/aidl_api/android.system.suspend.control/1/.hash",
+      "kind": "blob",
+      "oid": "68139ca8d2efe0262c4bf4aabd7505693d9f434a",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/aidl_api/android.system.suspend.control/1/android/system/suspend/ISuspendCallback.aidl",
+      "kind": "blob",
+      "oid": "d3662efd42027034fb525ec94e626c7c9ea32ca7",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/aidl_api/android.system.suspend.control/1/android/system/suspend/ISuspendControlService.aidl",
+      "kind": "blob",
+      "oid": "32cfd143e0528880c31b5a5dec4982a9969c2af5",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/aidl_api/android.system.suspend.control/1/android/system/suspend/IWakelockCallback.aidl",
+      "kind": "blob",
+      "oid": "c1649f38636313d1fe6262cbb44e6b87188f914e",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/aidl_api/android.system.suspend.control/current/android/system/suspend/ISuspendCallback.aidl",
+      "kind": "blob",
+      "oid": "e46a7d55f19d8551724ea8570b491e54847c69b8",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/aidl_api/android.system.suspend.control/current/android/system/suspend/ISuspendControlService.aidl",
+      "kind": "blob",
+      "oid": "22361a83dbd0341d7ecf7336ae0d053183e4162e",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/aidl_api/android.system.suspend.control/current/android/system/suspend/IWakelockCallback.aidl",
+      "kind": "blob",
+      "oid": "13cda5593452ff899af915d44e54c4e6adf07e58",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/aidl_api/android.system.suspend/1/.hash",
+      "kind": "blob",
+      "oid": "c794a4ac19b76b36b8f166002c3a02b7fbc37607",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/aidl_api/android.system.suspend/1/android/system/suspend/ISystemSuspend.aidl",
+      "kind": "blob",
+      "oid": "227351146ca13d9f8980cd9ef505d7763d983d66",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/aidl_api/android.system.suspend/1/android/system/suspend/IWakeLock.aidl",
+      "kind": "blob",
+      "oid": "27d427b2c403969f6d5f15566d663da2ddc88f83",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/aidl_api/android.system.suspend/1/android/system/suspend/WakeLockType.aidl",
+      "kind": "blob",
+      "oid": "b103832e3a0c1d48e8d18a868a9b341cd9ed25bd",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/aidl_api/android.system.suspend/current/android/system/suspend/ISystemSuspend.aidl",
+      "kind": "blob",
+      "oid": "227351146ca13d9f8980cd9ef505d7763d983d66",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/aidl_api/android.system.suspend/current/android/system/suspend/IWakeLock.aidl",
+      "kind": "blob",
+      "oid": "27d427b2c403969f6d5f15566d663da2ddc88f83",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/aidl_api/android.system.suspend/current/android/system/suspend/WakeLockType.aidl",
+      "kind": "blob",
+      "oid": "b103832e3a0c1d48e8d18a868a9b341cd9ed25bd",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/android/system/suspend/ISuspendCallback.aidl",
+      "kind": "blob",
+      "oid": "530c6b623b14357f8b95fa7fce3d12c82aeb4298",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/android/system/suspend/ISuspendControlService.aidl",
+      "kind": "blob",
+      "oid": "9864dd22e246b49b369902e2237bd26267574dde",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/android/system/suspend/ISystemSuspend.aidl",
+      "kind": "blob",
+      "oid": "defb8cf3d30ff785ef98509be600561282bb2c36",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/android/system/suspend/IWakeLock.aidl",
+      "kind": "blob",
+      "oid": "d305b85afb4b2563c4d7dca9bf3fbbf25bace3e3",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/android/system/suspend/IWakelockCallback.aidl",
+      "kind": "blob",
+      "oid": "8c95a87650d005466c9b6150aff2d313a319e30b",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/android/system/suspend/WakeLockType.aidl",
+      "kind": "blob",
+      "oid": "f78198cc4f8a22a6d5e134c1fe8a196b9946e28a",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/android/system/suspend/internal/AggregatedKernelWakelockInfo.aidl",
+      "kind": "blob",
+      "oid": "75fd49149d9be4e1ed030c229c2d80d0f02efa63",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/android/system/suspend/internal/ISuspendControlServiceInternal.aidl",
+      "kind": "blob",
+      "oid": "64d94cf21bab4c175efeb4ba540ec9db694300c0",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/android/system/suspend/internal/SuspendInfo.aidl",
+      "kind": "blob",
+      "oid": "6f6d5ac96da58b8c4e4fa0369898f7e74950a7a7",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/android/system/suspend/internal/WakeLockInfo.aidl",
+      "kind": "blob",
+      "oid": "34ed45ea37ad1823d31e60a9362b93539a420082",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/android/system/suspend/internal/WakeupInfo.aidl",
+      "kind": "blob",
+      "oid": "d77099a90327349121ef8aaac9b1c761c87c3f7b",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/default/Android.bp",
+      "kind": "blob",
+      "oid": "ff4795518d26e37d5eda87ed5d2b6f9c3ae0cf3b",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/default/SuspendControlService.cpp",
+      "kind": "blob",
+      "oid": "678417469e6f98d63fe0a247f10fd783d5065cee",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/default/SuspendControlService.h",
+      "kind": "blob",
+      "oid": "73314fd6ec8352467ec8aa9c8d774f84198db7fa",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/default/SuspendInfoHistogram.h",
+      "kind": "blob",
+      "oid": "f24c5f23b91da6a92adf890b396cefadb3e269cc",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/default/SuspendInfoHistogramUnitTest.cpp",
+      "kind": "blob",
+      "oid": "4560ba15959f2916c2ef4ea11711824f3e1c5cf0",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/default/SuspendProperties.sysprop",
+      "kind": "blob",
+      "oid": "a3ad55c0388ae53183e070f798459f456f622dd9",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/default/SuspendSepolicyTests.sh",
+      "kind": "blob",
+      "oid": "a6ecc4aa715ed952c51d8d80627d0229deb56a18",
+      "mode": "100755"
+    },
+    {
+      "path": "suspend/aidl/default/SystemSuspend.cpp",
+      "kind": "blob",
+      "oid": "5e16ebacc494cc68f3919574679e6e5ae7c01e48",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/default/SystemSuspend.h",
+      "kind": "blob",
+      "oid": "a1352798bb3f6268a7e5c731b92eaede8b4b8064",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/default/SystemSuspendAidl.cpp",
+      "kind": "blob",
+      "oid": "f11932d1b0623f60c22e1f4b03075e73cf942cec",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/default/SystemSuspendAidl.h",
+      "kind": "blob",
+      "oid": "5a81a6e0027e40c4baccbe5eb9cddd22216d053c",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/default/SystemSuspendAidlTest.cpp",
+      "kind": "blob",
+      "oid": "f7936a257e929e5b2f6ff014759ad2c4366a1965",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/default/SystemSuspendBenchmark.cpp",
+      "kind": "blob",
+      "oid": "fca12a43f35a2aba96f5307b066518255baabd01",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/default/SystemSuspendUnitTest.cpp",
+      "kind": "blob",
+      "oid": "d67683393f935ce6f481c32fd84c419a586718d9",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/default/TEST_MAPPING",
+      "kind": "blob",
+      "oid": "0173ca8fbfa4f39ca3fec76483351f31960f898e",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/default/WakeLockEntryList.cpp",
+      "kind": "blob",
+      "oid": "377bf47d64563df4f2769efc46f279940e898601",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/default/WakeLockEntryList.h",
+      "kind": "blob",
+      "oid": "7cd9370ac95236a04a854254ed916ab778fc5c0e",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/default/WakeupList.cpp",
+      "kind": "blob",
+      "oid": "1adc91561879f5078ac6797fe473293d1fa13113",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/default/WakeupList.h",
+      "kind": "blob",
+      "oid": "cc8f2d9dbdbf6950e0099ff19b192f99d507d798",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/default/android.system.suspend-service.rc",
+      "kind": "blob",
+      "oid": "6aa9de6c06f918da3e52cad0e74d754ee24c919d",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/default/android.system.suspend-service.xml",
+      "kind": "blob",
+      "oid": "9801024e07a021972915575920dc9475f48a8df0",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/default/flags.aconfig",
+      "kind": "blob",
+      "oid": "2fc2ec6fbe0e79cd6cb2afd24236b7d7ca2d593f",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/default/fuzzers/SuspendServiceFuzzer.cpp",
+      "kind": "blob",
+      "oid": "226fce032329e53716e0ce494396dec06dabce1e",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/default/fuzzers/SuspendServiceInternalFuzzer.cpp",
+      "kind": "blob",
+      "oid": "78b3f793a893d590a6b99d58cb1ffbe7fb69685c",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/default/main.cpp",
+      "kind": "blob",
+      "oid": "bfc6743b3c6d054af10955762b03426b5d945380",
+      "mode": "100644"
+    },
+    {
+      "path": "suspend/aidl/default/suspend-sepolicy-tests.xml",
+      "kind": "blob",
+      "oid": "b97ca0de90e36bd899961aa20eb9dd52b70a666c",
+      "mode": "100644"
+    },
+    {
+      "path": "update-makefiles.sh",
+      "kind": "blob",
+      "oid": "2d07689ff1b2e1de8d1ef94dfb8ac400b559fa12",
+      "mode": "100755"
+    },
+    {
+      "path": "vold/Android.bp",
+      "kind": "blob",
+      "oid": "f2d167ae0dc473d1eb1484c34d441b5082b2591a",
+      "mode": "100644"
+    },
+    {
+      "path": "vold/aidl_api/android.system.vold/1/.hash",
+      "kind": "blob",
+      "oid": "9ddffeb9097d1c6d44d1e169ed4a64d494ba6c5f",
+      "mode": "100644"
+    },
+    {
+      "path": "vold/aidl_api/android.system.vold/1/android/system/vold/CheckpointingState.aidl",
+      "kind": "blob",
+      "oid": "040b40e02acd4bda7a416b96a33b03d87fd5dbea",
+      "mode": "100644"
+    },
+    {
+      "path": "vold/aidl_api/android.system.vold/1/android/system/vold/IVold.aidl",
+      "kind": "blob",
+      "oid": "85bcd3b6808397f7a44d5226e802fe6c270703e4",
+      "mode": "100644"
+    },
+    {
+      "path": "vold/aidl_api/android.system.vold/1/android/system/vold/IVoldCheckpointListener.aidl",
+      "kind": "blob",
+      "oid": "434fbd2894e1b8e527bd2d0ea6126704d332473a",
+      "mode": "100644"
+    },
+    {
+      "path": "vold/aidl_api/android.system.vold/current/android/system/vold/CheckpointingState.aidl",
+      "kind": "blob",
+      "oid": "040b40e02acd4bda7a416b96a33b03d87fd5dbea",
+      "mode": "100644"
+    },
+    {
+      "path": "vold/aidl_api/android.system.vold/current/android/system/vold/IVold.aidl",
+      "kind": "blob",
+      "oid": "85bcd3b6808397f7a44d5226e802fe6c270703e4",
+      "mode": "100644"
+    },
+    {
+      "path": "vold/aidl_api/android.system.vold/current/android/system/vold/IVoldCheckpointListener.aidl",
+      "kind": "blob",
+      "oid": "434fbd2894e1b8e527bd2d0ea6126704d332473a",
+      "mode": "100644"
+    },
+    {
+      "path": "vold/android/system/vold/CheckpointingState.aidl",
+      "kind": "blob",
+      "oid": "e69bc95ced61affc4ce532a1be89ed3272d8318c",
+      "mode": "100644"
+    },
+    {
+      "path": "vold/android/system/vold/IVold.aidl",
+      "kind": "blob",
+      "oid": "2bcce4b102c4db39c7e48f6029e30ed7fd43c096",
+      "mode": "100644"
+    },
+    {
+      "path": "vold/android/system/vold/IVoldCheckpointListener.aidl",
+      "kind": "blob",
+      "oid": "6a3511ed8e3fb2557cbdfe48beb9d4dd9145d1e2",
+      "mode": "100644"
+    },
+    {
+      "path": "vold/vts/Android.bp",
+      "kind": "blob",
+      "oid": "37e1ab838c74fb12b7337d960b0330aae2f7b3ac",
+      "mode": "100644"
+    },
+    {
+      "path": "vold/vts/VtsHalVendorVoldTest.cpp",
+      "kind": "blob",
+      "oid": "9e15878d3958e62b731bdbe31232ad156ad73f3f",
+      "mode": "100644"
+    },
+    {
+      "path": "wifi/keystore/1.0/Android.bp",
+      "kind": "blob",
+      "oid": "103efde4251f45e64420cffc6e809a172847dcdd",
+      "mode": "100644"
+    },
+    {
+      "path": "wifi/keystore/1.0/IKeystore.hal",
+      "kind": "blob",
+      "oid": "982b3464d74964d21c4fdaeb61f24bc8521f831f",
+      "mode": "100644"
+    },
+    {
+      "path": "wifi/keystore/1.0/default/Android.bp",
+      "kind": "blob",
+      "oid": "b2ff906ba69c04ee98275f4a8637d92a8d15f4d5",
+      "mode": "100644"
+    },
+    {
+      "path": "wifi/keystore/1.0/default/OWNERS",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "wifi/keystore/1.0/default/include/wifikeystorehal/keystore.h",
+      "kind": "blob",
+      "oid": "32607b6bd3dec3c85b6e083f89f6553f1d4e4c9d",
+      "mode": "100644"
+    },
+    {
+      "path": "wifi/keystore/1.0/default/keystore.cpp",
+      "kind": "blob",
+      "oid": "69bac184abddec0e3caf756ebb55f59907f86f25",
+      "mode": "100644"
+    },
+    {
+      "path": "wifi/keystore/1.0/default/test/Android.bp",
+      "kind": "blob",
+      "oid": "23e7772ff4d3a1c05a4bc1d041e4b95c7d8d8596",
+      "mode": "100644"
+    },
+    {
+      "path": "wifi/keystore/1.0/default/test/WifiLegacyKeystoreIntegrationTest.cpp",
+      "kind": "blob",
+      "oid": "68b993e08d09b4dd13bb565242ab0525906058e0",
+      "mode": "100644"
+    },
+    {
+      "path": "wifi/keystore/1.0/default/wifikeystorehal_utils.h",
+      "kind": "blob",
+      "oid": "d7a790e4a7772f2f1650617adb6f930e148a5517",
+      "mode": "100644"
+    },
+    {
+      "path": "wifi/keystore/1.0/vts/OWNERS",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "wifi/keystore/1.0/vts/functional/Android.bp",
+      "kind": "blob",
+      "oid": "d4e6c0378ac77543c246852046ba7f2cfb2c4df4",
+      "mode": "100644"
+    },
+    {
+      "path": "wifi/keystore/1.0/vts/functional/OWNERS",
+      "kind": "blob",
+      "oid": "dafbf3f136e248eb9be92158e694ea3c91cfe623",
+      "mode": "100644"
+    },
+    {
+      "path": "wifi/keystore/1.0/vts/functional/VtsHalWifiKeystoreV1_0TargetTest.cpp",
+      "kind": "blob",
+      "oid": "521b6bfe8920b7c29787b9e707a1572b87f88f3f",
+      "mode": "100644"
+    }
+  ]
+}

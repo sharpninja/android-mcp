@@ -1,0 +1,45 @@
+FF
+======================================================================
+FAIL: test_comment_delimiters_do_not_create_or_split_members (test_source_lexical_comments.SourceLexicalComments.test_comment_delimiters_do_not_create_or_split_members)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/catalog-round008/tests/test_source_lexical_comments.py", line 10, in test_comment_delimiters_do_not_create_or_split_members
+    self.assertEqual((counts['declarations'],counts['statements'],counts['expected_records']),(1,1,2))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Tuples differ: (1, 3, 4) != (1, 1, 2)
+
+First differing element 1:
+3
+1
+
+- (1, 3, 4)
+?     ^  ^
+
++ (1, 1, 2)
+?     ^  ^
+
+
+======================================================================
+FAIL: test_comment_only_interface_has_no_members (test_source_lexical_comments.SourceLexicalComments.test_comment_only_interface_has_no_members)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/catalog-round008/tests/test_source_lexical_comments.py", line 7, in test_comment_only_interface_has_no_members
+    self.assertEqual((counts['declarations'],counts['statements'],counts['expected_records']),(1,0,1))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Tuples differ: (1, 2, 3) != (1, 0, 1)
+
+First differing element 1:
+2
+0
+
+- (1, 2, 3)
+?     ^  ^
+
++ (1, 0, 1)
+?     ^  ^
+
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.002s
+
+FAILED (failures=2)

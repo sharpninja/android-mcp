@@ -1,0 +1,77 @@
+{
+  "created_at": "2026-10-27T03:14:53.550232+00:00",
+  "candidate": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/catalog-source011-hidl",
+  "base": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/catalog-integrated009v3",
+  "patch": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/integration/hidl-source011.patch",
+  "patch_sha256": "7fcbcf3b0b7ab78e12bbfd8100a6fc4d1265021dd289a7b7ebd96090e99829aa",
+  "catalog_tests_passed": 214,
+  "fixture_log": "integration/source011-hidl-regression.log",
+  "full_corpus_audit": "outside-corpus-audit/hidl-structural-audit-v3/report.json",
+  "paths": 962,
+  "structural_records": 22757,
+  "by_kind": {
+    "package": 962,
+    "interface": 765,
+    "method": 3694,
+    "type": 1526,
+    "enum": 1291,
+    "field": 14511,
+    "unsupported": 8
+  },
+  "unsupported_statements": 8,
+  "unsupported_only_in_explicit_compiler_error_fixtures": true,
+  "unresolved_lexical_type_declarations": 4,
+  "compiler_validation": false,
+  "normalizer_complete": false,
+  "files": [
+    {
+      "file": "tooling/build_catalog.py",
+      "base_sha256": "7386e121fce9679b53aa402106f887a1d5d7ec597ba4760d8b0ff341d4139af8",
+      "candidate_sha256": "e2047e5eb221b9f2fda8f26415d848f21929e91b890a243e8f2674dac06b86b2"
+    },
+    {
+      "file": "tooling/hidl_source.py",
+      "base_sha256": null,
+      "candidate_sha256": "a7b1975aaf7a65a7b5a15f68c00f09a8c827bb68dcd309b1594496dbd408deb2"
+    },
+    {
+      "file": "tests/test_hidl_source.py",
+      "base_sha256": null,
+      "candidate_sha256": "d011447f8f98071eecd1d269de3472ac901fa4fce04b8231aa19bbd5b67a080a"
+    },
+    {
+      "file": "tests/test_hidl_import.py",
+      "base_sha256": null,
+      "candidate_sha256": "a0de4aaf5a73d4459011c7792aaa24bc966cfd77e9c2bebe77db9111b696c47e"
+    },
+    {
+      "file": "tests/test_unnormalized_source_retention.py",
+      "base_sha256": "7dfc9e4f4665745355744b771f571c661b11396defd1977fbb23189e6129e5fa",
+      "candidate_sha256": "08e88e08a55ddb44a7a61f9992ad078a189ce1d00763af4f4ff8ad652f9fbd83"
+    }
+  ],
+  "required_integration_actions": [
+    {
+      "id": "HIDL-001",
+      "action": "Apply or merge source-only parser/import changes against exact base hashes; preserve newer owner contracts/projection code"
+    },
+    {
+      "id": "HIDL-002",
+      "action": "Before next full source freeze move HIDL acquisition api_level/platform_api_version to source_release_context; set actual Android applicability unknown. Import guard intentionally rejects stale inferred applicability."
+    },
+    {
+      "id": "HIDL-003",
+      "action": "Include hidl_source.py in processing fingerprint; Java and SDK cache fingerprints are unchanged by this parser/import addition"
+    },
+    {
+      "id": "HIDL-004",
+      "action": "Rerun complete merged fixtures and full declared corpus audit; retain every error fixture and raw body. No silent declaration loss, compiler validity, OS grants or codec claims"
+    }
+  ],
+  "limitations": [
+    "Current type/import resolution and inherited-method projection remain incomplete",
+    "No current release is modified; release010 continues independently",
+    "No further expensive full build launched before owner integration/active build reconciliation",
+    "No Library uploads or Claude invocations"
+  ]
+}

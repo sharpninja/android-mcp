@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/stage_deterministic_sdk_index.py", line 6, in <module>
+    inv=json.loads((R/'cache-build-round005/sdk37.2/metadata-source-inventory.json').read_text());source=next(s for s in inv['sources'] if s['kind']=='sdk-api-index');platform=source['platform_api_version'];raw=(R/'cache-build-round005'/source['local_path']).read_bytes()
+                                                                                                                                                                                ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'platform_api_version'

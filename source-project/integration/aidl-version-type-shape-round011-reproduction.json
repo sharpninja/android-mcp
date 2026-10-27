@@ -1,0 +1,85 @@
+{
+  "at": "2026-10-27T04:12:13.477769+00:00",
+  "projection_path": "/home/sharpninja/github/2026-10-26/task-3/remediation/integration/round011-v2/tooling/catalog_projection.py",
+  "projection_sha256": "ca2a01d085f3937bd32ff8762cf877eb59bf3206a6070540d0abe03aa1ce6d57",
+  "versioned_types": [
+    {
+      "source": {
+        "source_id": "version-1",
+        "repository": "fixture",
+        "revision": "same-immutable-project-commit",
+        "kind": "aidl",
+        "api_level": null,
+        "channel": "unknown",
+        "path": "aidl_api/module/1/p/Data.aidl"
+      },
+      "shape": {
+        "kind": "aidl-parcelable",
+        "qualified_name": "p.Data",
+        "fields": [
+          {
+            "name": "x",
+            "type": {
+              "text": "int",
+              "status": "primitive",
+              "codec_status": "unknown",
+              "reason": "Intrinsic language type; this does not prove a wire codec"
+            },
+            "constant": null
+          },
+          {
+            "name": "x",
+            "type": {
+              "text": "long",
+              "status": "primitive",
+              "codec_status": "unknown",
+              "reason": "Intrinsic language type; this does not prove a wire codec"
+            },
+            "constant": null
+          }
+        ]
+      },
+      "schema_hash": "d2036719136987b82c84bcb781af50e76ba4ac9b6cac4f9130940ffe4cd91e50"
+    },
+    {
+      "source": {
+        "source_id": "version-2",
+        "repository": "fixture",
+        "revision": "same-immutable-project-commit",
+        "kind": "aidl",
+        "api_level": null,
+        "channel": "unknown",
+        "path": "aidl_api/module/2/p/Data.aidl"
+      },
+      "shape": {
+        "kind": "aidl-parcelable",
+        "qualified_name": "p.Data",
+        "fields": [
+          {
+            "name": "x",
+            "type": {
+              "text": "int",
+              "status": "primitive",
+              "codec_status": "unknown",
+              "reason": "Intrinsic language type; this does not prove a wire codec"
+            },
+            "constant": null
+          },
+          {
+            "name": "x",
+            "type": {
+              "text": "long",
+              "status": "primitive",
+              "codec_status": "unknown",
+              "reason": "Intrinsic language type; this does not prove a wire codec"
+            },
+            "constant": null
+          }
+        ]
+      },
+      "schema_hash": "d2036719136987b82c84bcb781af50e76ba4ac9b6cac4f9130940ffe4cd91e50"
+    }
+  ],
+  "same_hash_despite_different_versioned_fields": true,
+  "action": "Direct type fields must be scoped to their declaration source; type-reference cohorts must preserve explicit interface-version/dump provenance. Retain ambiguity instead of merging different layouts."
+}

@@ -1,0 +1,908 @@
+[
+  {
+    "permission": "android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING",
+    "occurrences": [
+      {
+        "signature": "java-source:android.app.admin.DevicePolicyManager#isSecurityLoggingEnabled(android.content.ComponentName)",
+        "line": 15713,
+        "expression": {
+          "condition": {
+            "op": "unknown",
+            "reason": "Annotation marks conditional but does not identify runtime predicate"
+          },
+          "op": "conditional",
+          "requirement": {
+            "children": [
+              {
+                "op": "unknown",
+                "raw": "MANAGE_DEVICE_POLICY_SECURITY_LOGGING",
+                "reason": "Unresolved symbolic permission expression"
+              },
+              {
+                "name": "android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING",
+                "op": "permission"
+              },
+              {
+                "name": "android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING",
+                "op": "permission"
+              }
+            ],
+            "op": "any"
+          }
+        },
+        "raw_annotation": [
+          {
+            "arguments": "anyOf = {\n            MANAGE_DEVICE_POLICY_SECURITY_LOGGING,\n            \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\",\n            \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"\n    }, conditional = true",
+            "end": 262,
+            "name": "android.annotation.RequiresPermission",
+            "name_resolution": "explicit-import",
+            "raw": "@RequiresPermission(anyOf = {\n            MANAGE_DEVICE_POLICY_SECURITY_LOGGING,\n            \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\",\n            \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"\n    }, conditional = true)",
+            "source_arguments": "anyOf = {\n            MANAGE_DEVICE_POLICY_SECURITY_LOGGING,\n            \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\",\n            \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"\n    }, conditional = true",
+            "source_raw": "@RequiresPermission(anyOf = {\n            MANAGE_DEVICE_POLICY_SECURITY_LOGGING,\n            \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\",\n            \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"\n    }, conditional = true)",
+            "source_spelling": "RequiresPermission",
+            "start": 0
+          },
+          {
+            "arguments": "android.app.admin.flags.Flags.FLAG_POLICY_STREAMLINING_SECURITY_LOGGING_ENABLED",
+            "end": 335,
+            "name": "android.annotation.FlaggedApi",
+            "name_resolution": "explicit-import",
+            "raw": "@FlaggedApi(Flags.FLAG_POLICY_STREAMLINING_SECURITY_LOGGING_ENABLED)",
+            "source_arguments": "Flags.FLAG_POLICY_STREAMLINING_SECURITY_LOGGING_ENABLED",
+            "source_raw": "@FlaggedApi(Flags.FLAG_POLICY_STREAMLINING_SECURITY_LOGGING_ENABLED)",
+            "source_spelling": "FlaggedApi",
+            "start": 267
+          }
+        ],
+        "source": {
+          "repository": "google-sdk-source-distribution",
+          "revision": "sdk-artifact:sources;android-37.2:r1:sha1-e17cbd52887605a077121571b49ec3730ed0534e",
+          "path": "src/android/app/admin/DevicePolicyManager.java",
+          "platform_api_version": "37.2",
+          "api_level": 37,
+          "scope": "sdk-source",
+          "sha256": "ed6a9fcedaba5a8b6daee43db78a4608f0266cddafb4c18842232a4476196656"
+        }
+      },
+      {
+        "signature": "jvm:android/app/admin/DevicePolicyManager#isSecurityLoggingEnabled(Landroid/content/ComponentName;)Z",
+        "line": 15713,
+        "expression": {
+          "condition": {
+            "op": "unknown",
+            "reason": "Annotation marks conditional but does not identify runtime predicate"
+          },
+          "op": "conditional",
+          "requirement": {
+            "children": [
+              {
+                "op": "unknown",
+                "raw": "MANAGE_DEVICE_POLICY_SECURITY_LOGGING",
+                "reason": "Unresolved symbolic permission expression"
+              },
+              {
+                "name": "android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING",
+                "op": "permission"
+              },
+              {
+                "name": "android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING",
+                "op": "permission"
+              }
+            ],
+            "op": "any"
+          }
+        },
+        "raw_annotation": [
+          {
+            "arguments": "anyOf = {\n            MANAGE_DEVICE_POLICY_SECURITY_LOGGING,\n            \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\",\n            \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"\n    }, conditional = true",
+            "end": 262,
+            "name": "android.annotation.RequiresPermission",
+            "name_resolution": "explicit-import",
+            "raw": "@RequiresPermission(anyOf = {\n            MANAGE_DEVICE_POLICY_SECURITY_LOGGING,\n            \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\",\n            \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"\n    }, conditional = true)",
+            "source_arguments": "anyOf = {\n            MANAGE_DEVICE_POLICY_SECURITY_LOGGING,\n            \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\",\n            \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"\n    }, conditional = true",
+            "source_raw": "@RequiresPermission(anyOf = {\n            MANAGE_DEVICE_POLICY_SECURITY_LOGGING,\n            \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\",\n            \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"\n    }, conditional = true)",
+            "source_spelling": "RequiresPermission",
+            "start": 0
+          },
+          {
+            "arguments": "android.app.admin.flags.Flags.FLAG_POLICY_STREAMLINING_SECURITY_LOGGING_ENABLED",
+            "end": 335,
+            "name": "android.annotation.FlaggedApi",
+            "name_resolution": "explicit-import",
+            "raw": "@FlaggedApi(Flags.FLAG_POLICY_STREAMLINING_SECURITY_LOGGING_ENABLED)",
+            "source_arguments": "Flags.FLAG_POLICY_STREAMLINING_SECURITY_LOGGING_ENABLED",
+            "source_raw": "@FlaggedApi(Flags.FLAG_POLICY_STREAMLINING_SECURITY_LOGGING_ENABLED)",
+            "source_spelling": "FlaggedApi",
+            "start": 267
+          }
+        ],
+        "source": {
+          "repository": "google-sdk-source-distribution",
+          "revision": "sdk-artifact:sources;android-37.2:r1:sha1-e17cbd52887605a077121571b49ec3730ed0534e",
+          "path": "src/android/app/admin/DevicePolicyManager.java",
+          "platform_api_version": "37.2",
+          "api_level": 37,
+          "scope": "sdk-source",
+          "sha256": "ed6a9fcedaba5a8b6daee43db78a4608f0266cddafb4c18842232a4476196656"
+        }
+      },
+      {
+        "signature": "java-source:android.app.admin.DevicePolicyManager#retrieveSecurityLogs(android.content.ComponentName)",
+        "line": 15871,
+        "expression": {
+          "condition": {
+            "op": "unknown",
+            "reason": "Annotation marks conditional but does not identify runtime predicate"
+          },
+          "op": "conditional",
+          "requirement": {
+            "children": [
+              {
+                "op": "unknown",
+                "raw": "MANAGE_DEVICE_POLICY_SECURITY_LOGGING",
+                "reason": "Unresolved symbolic permission expression"
+              },
+              {
+                "name": "android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING",
+                "op": "permission"
+              },
+              {
+                "name": "android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING",
+                "op": "permission"
+              }
+            ],
+            "op": "any"
+          }
+        },
+        "raw_annotation": [
+          {
+            "arguments": "\"NullableCollection\"",
+            "end": 35,
+            "name": "android.annotation.SuppressLint",
+            "name_resolution": "explicit-import",
+            "raw": "@SuppressLint(\"NullableCollection\")",
+            "source_arguments": "\"NullableCollection\"",
+            "source_raw": "@SuppressLint(\"NullableCollection\")",
+            "source_spelling": "SuppressLint",
+            "start": 0
+          },
+          {
+            "arguments": "anyOf = {\n            MANAGE_DEVICE_POLICY_SECURITY_LOGGING,\n            \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\",\n            \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"\n    }, conditional = true",
+            "end": 302,
+            "name": "android.annotation.RequiresPermission",
+            "name_resolution": "explicit-import",
+            "raw": "@RequiresPermission(anyOf = {\n            MANAGE_DEVICE_POLICY_SECURITY_LOGGING,\n            \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\",\n            \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"\n    }, conditional = true)",
+            "source_arguments": "anyOf = {\n            MANAGE_DEVICE_POLICY_SECURITY_LOGGING,\n            \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\",\n            \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"\n    }, conditional = true",
+            "source_raw": "@RequiresPermission(anyOf = {\n            MANAGE_DEVICE_POLICY_SECURITY_LOGGING,\n            \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\",\n            \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"\n    }, conditional = true)",
+            "source_spelling": "RequiresPermission",
+            "start": 40
+          },
+          {
+            "arguments": "android.app.admin.flags.Flags.FLAG_POLICY_STREAMLINING_SECURITY_LOGGING_ENABLED",
+            "end": 375,
+            "name": "android.annotation.FlaggedApi",
+            "name_resolution": "explicit-import",
+            "raw": "@FlaggedApi(Flags.FLAG_POLICY_STREAMLINING_SECURITY_LOGGING_ENABLED)",
+            "source_arguments": "Flags.FLAG_POLICY_STREAMLINING_SECURITY_LOGGING_ENABLED",
+            "source_raw": "@FlaggedApi(Flags.FLAG_POLICY_STREAMLINING_SECURITY_LOGGING_ENABLED)",
+            "source_spelling": "FlaggedApi",
+            "start": 307
+          },
+          {
+            "arguments": "",
+            "end": 396,
+            "name": "android.annotation.Nullable",
+            "name_resolution": "explicit-import",
+            "raw": "@Nullable",
+            "source_arguments": "",
+            "source_raw": "@Nullable",
+            "source_spelling": "Nullable",
+            "start": 387
+          }
+        ],
+        "source": {
+          "repository": "google-sdk-source-distribution",
+          "revision": "sdk-artifact:sources;android-37.2:r1:sha1-e17cbd52887605a077121571b49ec3730ed0534e",
+          "path": "src/android/app/admin/DevicePolicyManager.java",
+          "platform_api_version": "37.2",
+          "api_level": 37,
+          "scope": "sdk-source",
+          "sha256": "ed6a9fcedaba5a8b6daee43db78a4608f0266cddafb4c18842232a4476196656"
+        }
+      },
+      {
+        "signature": "jvm:android/app/admin/DevicePolicyManager#retrieveSecurityLogs(Landroid/content/ComponentName;)Ljava/util/List;",
+        "line": 15871,
+        "expression": {
+          "condition": {
+            "op": "unknown",
+            "reason": "Annotation marks conditional but does not identify runtime predicate"
+          },
+          "op": "conditional",
+          "requirement": {
+            "children": [
+              {
+                "op": "unknown",
+                "raw": "MANAGE_DEVICE_POLICY_SECURITY_LOGGING",
+                "reason": "Unresolved symbolic permission expression"
+              },
+              {
+                "name": "android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING",
+                "op": "permission"
+              },
+              {
+                "name": "android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING",
+                "op": "permission"
+              }
+            ],
+            "op": "any"
+          }
+        },
+        "raw_annotation": [
+          {
+            "arguments": "\"NullableCollection\"",
+            "end": 35,
+            "name": "android.annotation.SuppressLint",
+            "name_resolution": "explicit-import",
+            "raw": "@SuppressLint(\"NullableCollection\")",
+            "source_arguments": "\"NullableCollection\"",
+            "source_raw": "@SuppressLint(\"NullableCollection\")",
+            "source_spelling": "SuppressLint",
+            "start": 0
+          },
+          {
+            "arguments": "anyOf = {\n            MANAGE_DEVICE_POLICY_SECURITY_LOGGING,\n            \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\",\n            \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"\n    }, conditional = true",
+            "end": 302,
+            "name": "android.annotation.RequiresPermission",
+            "name_resolution": "explicit-import",
+            "raw": "@RequiresPermission(anyOf = {\n            MANAGE_DEVICE_POLICY_SECURITY_LOGGING,\n            \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\",\n            \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"\n    }, conditional = true)",
+            "source_arguments": "anyOf = {\n            MANAGE_DEVICE_POLICY_SECURITY_LOGGING,\n            \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\",\n            \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"\n    }, conditional = true",
+            "source_raw": "@RequiresPermission(anyOf = {\n            MANAGE_DEVICE_POLICY_SECURITY_LOGGING,\n            \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\",\n            \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"\n    }, conditional = true)",
+            "source_spelling": "RequiresPermission",
+            "start": 40
+          },
+          {
+            "arguments": "android.app.admin.flags.Flags.FLAG_POLICY_STREAMLINING_SECURITY_LOGGING_ENABLED",
+            "end": 375,
+            "name": "android.annotation.FlaggedApi",
+            "name_resolution": "explicit-import",
+            "raw": "@FlaggedApi(Flags.FLAG_POLICY_STREAMLINING_SECURITY_LOGGING_ENABLED)",
+            "source_arguments": "Flags.FLAG_POLICY_STREAMLINING_SECURITY_LOGGING_ENABLED",
+            "source_raw": "@FlaggedApi(Flags.FLAG_POLICY_STREAMLINING_SECURITY_LOGGING_ENABLED)",
+            "source_spelling": "FlaggedApi",
+            "start": 307
+          },
+          {
+            "arguments": "",
+            "end": 396,
+            "name": "android.annotation.Nullable",
+            "name_resolution": "explicit-import",
+            "raw": "@Nullable",
+            "source_arguments": "",
+            "source_raw": "@Nullable",
+            "source_spelling": "Nullable",
+            "start": 387
+          }
+        ],
+        "source": {
+          "repository": "google-sdk-source-distribution",
+          "revision": "sdk-artifact:sources;android-37.2:r1:sha1-e17cbd52887605a077121571b49ec3730ed0534e",
+          "path": "src/android/app/admin/DevicePolicyManager.java",
+          "platform_api_version": "37.2",
+          "api_level": 37,
+          "scope": "sdk-source",
+          "sha256": "ed6a9fcedaba5a8b6daee43db78a4608f0266cddafb4c18842232a4476196656"
+        }
+      },
+      {
+        "signature": "jvm:android/app/admin/DevicePolicyManager#isSecurityLoggingEnabled(Landroid/content/ComponentName;)Z",
+        "line": 49,
+        "expression": {
+          "condition": {
+            "op": "unknown",
+            "reason": "Annotation marks conditional but does not identify runtime predicate"
+          },
+          "op": "conditional",
+          "requirement": {
+            "children": [
+              {
+                "name": "android.permission.MANAGE_DEVICE_POLICY_SECURITY_LOGGING",
+                "op": "permission"
+              },
+              {
+                "name": "android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING",
+                "op": "permission"
+              },
+              {
+                "name": "android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING",
+                "op": "permission"
+              }
+            ],
+            "op": "any"
+          }
+        },
+        "raw_annotation": [
+          {
+            "arguments": "anyOf={\"android.permission.MANAGE_DEVICE_POLICY_SECURITY_LOGGING\", \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\", \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"},conditional=true",
+            "name": "androidx.annotation.RequiresPermission",
+            "permission": {
+              "condition": {
+                "op": "unknown",
+                "reason": "Annotation marks conditional but does not identify runtime predicate"
+              },
+              "op": "conditional",
+              "requirement": {
+                "children": [
+                  {
+                    "name": "android.permission.MANAGE_DEVICE_POLICY_SECURITY_LOGGING",
+                    "op": "permission"
+                  },
+                  {
+                    "name": "android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING",
+                    "op": "permission"
+                  },
+                  {
+                    "name": "android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING",
+                    "op": "permission"
+                  }
+                ],
+                "op": "any"
+              }
+            },
+            "raw": "<annotation name=\"androidx.annotation.RequiresPermission\">\n      <val name=\"anyOf\" val=\"{&quot;android.permission.MANAGE_DEVICE_POLICY_SECURITY_LOGGING&quot;, &quot;android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING&quot;, &quot;android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING&quot;}\" />\n      <val name=\"conditional\" val=\"true\" />\n    </annotation>\n  ",
+            "values": [
+              {
+                "name": "anyOf",
+                "val": "{\"android.permission.MANAGE_DEVICE_POLICY_SECURITY_LOGGING\", \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\", \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"}"
+              },
+              {
+                "name": "conditional",
+                "val": "true"
+              }
+            ]
+          }
+        ],
+        "source": {
+          "repository": "google-sdk-platform-metadata",
+          "revision": "sdk-artifact:platforms;android-37.2:r1:published-sha1-4bec12a02162ff6852df50b5fcf8ee762b050966",
+          "path": "android-37.2/data/annotations.zip",
+          "platform_api_version": "37.2",
+          "api_level": 37,
+          "scope": "sdk-public",
+          "sha256": "130f5bde53fccea3708726e47abdea698db515cc6f6ca92a73acbf9d80238550"
+        }
+      },
+      {
+        "signature": "jvm:android/app/admin/DevicePolicyManager#retrieveSecurityLogs(Landroid/content/ComponentName;)Ljava/util/List;",
+        "line": 100,
+        "expression": {
+          "condition": {
+            "op": "unknown",
+            "reason": "Annotation marks conditional but does not identify runtime predicate"
+          },
+          "op": "conditional",
+          "requirement": {
+            "children": [
+              {
+                "name": "android.permission.MANAGE_DEVICE_POLICY_SECURITY_LOGGING",
+                "op": "permission"
+              },
+              {
+                "name": "android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING",
+                "op": "permission"
+              },
+              {
+                "name": "android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING",
+                "op": "permission"
+              }
+            ],
+            "op": "any"
+          }
+        },
+        "raw_annotation": [
+          {
+            "arguments": "anyOf={\"android.permission.MANAGE_DEVICE_POLICY_SECURITY_LOGGING\", \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\", \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"},conditional=true",
+            "name": "androidx.annotation.RequiresPermission",
+            "permission": {
+              "condition": {
+                "op": "unknown",
+                "reason": "Annotation marks conditional but does not identify runtime predicate"
+              },
+              "op": "conditional",
+              "requirement": {
+                "children": [
+                  {
+                    "name": "android.permission.MANAGE_DEVICE_POLICY_SECURITY_LOGGING",
+                    "op": "permission"
+                  },
+                  {
+                    "name": "android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING",
+                    "op": "permission"
+                  },
+                  {
+                    "name": "android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING",
+                    "op": "permission"
+                  }
+                ],
+                "op": "any"
+              }
+            },
+            "raw": "<annotation name=\"androidx.annotation.RequiresPermission\">\n      <val name=\"anyOf\" val=\"{&quot;android.permission.MANAGE_DEVICE_POLICY_SECURITY_LOGGING&quot;, &quot;android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING&quot;, &quot;android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING&quot;}\" />\n      <val name=\"conditional\" val=\"true\" />\n    </annotation>\n  ",
+            "values": [
+              {
+                "name": "anyOf",
+                "val": "{\"android.permission.MANAGE_DEVICE_POLICY_SECURITY_LOGGING\", \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\", \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"}"
+              },
+              {
+                "name": "conditional",
+                "val": "true"
+              }
+            ]
+          }
+        ],
+        "source": {
+          "repository": "google-sdk-platform-metadata",
+          "revision": "sdk-artifact:platforms;android-37.2:r1:published-sha1-4bec12a02162ff6852df50b5fcf8ee762b050966",
+          "path": "android-37.2/data/annotations.zip",
+          "platform_api_version": "37.2",
+          "api_level": 37,
+          "scope": "sdk-public",
+          "sha256": "130f5bde53fccea3708726e47abdea698db515cc6f6ca92a73acbf9d80238550"
+        }
+      }
+    ]
+  },
+  {
+    "permission": "android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING",
+    "occurrences": [
+      {
+        "signature": "java-source:android.app.admin.DevicePolicyManager#isSecurityLoggingEnabled(android.content.ComponentName)",
+        "line": 15713,
+        "expression": {
+          "condition": {
+            "op": "unknown",
+            "reason": "Annotation marks conditional but does not identify runtime predicate"
+          },
+          "op": "conditional",
+          "requirement": {
+            "children": [
+              {
+                "op": "unknown",
+                "raw": "MANAGE_DEVICE_POLICY_SECURITY_LOGGING",
+                "reason": "Unresolved symbolic permission expression"
+              },
+              {
+                "name": "android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING",
+                "op": "permission"
+              },
+              {
+                "name": "android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING",
+                "op": "permission"
+              }
+            ],
+            "op": "any"
+          }
+        },
+        "raw_annotation": [
+          {
+            "arguments": "anyOf = {\n            MANAGE_DEVICE_POLICY_SECURITY_LOGGING,\n            \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\",\n            \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"\n    }, conditional = true",
+            "end": 262,
+            "name": "android.annotation.RequiresPermission",
+            "name_resolution": "explicit-import",
+            "raw": "@RequiresPermission(anyOf = {\n            MANAGE_DEVICE_POLICY_SECURITY_LOGGING,\n            \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\",\n            \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"\n    }, conditional = true)",
+            "source_arguments": "anyOf = {\n            MANAGE_DEVICE_POLICY_SECURITY_LOGGING,\n            \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\",\n            \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"\n    }, conditional = true",
+            "source_raw": "@RequiresPermission(anyOf = {\n            MANAGE_DEVICE_POLICY_SECURITY_LOGGING,\n            \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\",\n            \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"\n    }, conditional = true)",
+            "source_spelling": "RequiresPermission",
+            "start": 0
+          },
+          {
+            "arguments": "android.app.admin.flags.Flags.FLAG_POLICY_STREAMLINING_SECURITY_LOGGING_ENABLED",
+            "end": 335,
+            "name": "android.annotation.FlaggedApi",
+            "name_resolution": "explicit-import",
+            "raw": "@FlaggedApi(Flags.FLAG_POLICY_STREAMLINING_SECURITY_LOGGING_ENABLED)",
+            "source_arguments": "Flags.FLAG_POLICY_STREAMLINING_SECURITY_LOGGING_ENABLED",
+            "source_raw": "@FlaggedApi(Flags.FLAG_POLICY_STREAMLINING_SECURITY_LOGGING_ENABLED)",
+            "source_spelling": "FlaggedApi",
+            "start": 267
+          }
+        ],
+        "source": {
+          "repository": "google-sdk-source-distribution",
+          "revision": "sdk-artifact:sources;android-37.2:r1:sha1-e17cbd52887605a077121571b49ec3730ed0534e",
+          "path": "src/android/app/admin/DevicePolicyManager.java",
+          "platform_api_version": "37.2",
+          "api_level": 37,
+          "scope": "sdk-source",
+          "sha256": "ed6a9fcedaba5a8b6daee43db78a4608f0266cddafb4c18842232a4476196656"
+        }
+      },
+      {
+        "signature": "jvm:android/app/admin/DevicePolicyManager#isSecurityLoggingEnabled(Landroid/content/ComponentName;)Z",
+        "line": 15713,
+        "expression": {
+          "condition": {
+            "op": "unknown",
+            "reason": "Annotation marks conditional but does not identify runtime predicate"
+          },
+          "op": "conditional",
+          "requirement": {
+            "children": [
+              {
+                "op": "unknown",
+                "raw": "MANAGE_DEVICE_POLICY_SECURITY_LOGGING",
+                "reason": "Unresolved symbolic permission expression"
+              },
+              {
+                "name": "android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING",
+                "op": "permission"
+              },
+              {
+                "name": "android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING",
+                "op": "permission"
+              }
+            ],
+            "op": "any"
+          }
+        },
+        "raw_annotation": [
+          {
+            "arguments": "anyOf = {\n            MANAGE_DEVICE_POLICY_SECURITY_LOGGING,\n            \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\",\n            \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"\n    }, conditional = true",
+            "end": 262,
+            "name": "android.annotation.RequiresPermission",
+            "name_resolution": "explicit-import",
+            "raw": "@RequiresPermission(anyOf = {\n            MANAGE_DEVICE_POLICY_SECURITY_LOGGING,\n            \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\",\n            \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"\n    }, conditional = true)",
+            "source_arguments": "anyOf = {\n            MANAGE_DEVICE_POLICY_SECURITY_LOGGING,\n            \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\",\n            \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"\n    }, conditional = true",
+            "source_raw": "@RequiresPermission(anyOf = {\n            MANAGE_DEVICE_POLICY_SECURITY_LOGGING,\n            \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\",\n            \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"\n    }, conditional = true)",
+            "source_spelling": "RequiresPermission",
+            "start": 0
+          },
+          {
+            "arguments": "android.app.admin.flags.Flags.FLAG_POLICY_STREAMLINING_SECURITY_LOGGING_ENABLED",
+            "end": 335,
+            "name": "android.annotation.FlaggedApi",
+            "name_resolution": "explicit-import",
+            "raw": "@FlaggedApi(Flags.FLAG_POLICY_STREAMLINING_SECURITY_LOGGING_ENABLED)",
+            "source_arguments": "Flags.FLAG_POLICY_STREAMLINING_SECURITY_LOGGING_ENABLED",
+            "source_raw": "@FlaggedApi(Flags.FLAG_POLICY_STREAMLINING_SECURITY_LOGGING_ENABLED)",
+            "source_spelling": "FlaggedApi",
+            "start": 267
+          }
+        ],
+        "source": {
+          "repository": "google-sdk-source-distribution",
+          "revision": "sdk-artifact:sources;android-37.2:r1:sha1-e17cbd52887605a077121571b49ec3730ed0534e",
+          "path": "src/android/app/admin/DevicePolicyManager.java",
+          "platform_api_version": "37.2",
+          "api_level": 37,
+          "scope": "sdk-source",
+          "sha256": "ed6a9fcedaba5a8b6daee43db78a4608f0266cddafb4c18842232a4476196656"
+        }
+      },
+      {
+        "signature": "java-source:android.app.admin.DevicePolicyManager#retrieveSecurityLogs(android.content.ComponentName)",
+        "line": 15871,
+        "expression": {
+          "condition": {
+            "op": "unknown",
+            "reason": "Annotation marks conditional but does not identify runtime predicate"
+          },
+          "op": "conditional",
+          "requirement": {
+            "children": [
+              {
+                "op": "unknown",
+                "raw": "MANAGE_DEVICE_POLICY_SECURITY_LOGGING",
+                "reason": "Unresolved symbolic permission expression"
+              },
+              {
+                "name": "android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING",
+                "op": "permission"
+              },
+              {
+                "name": "android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING",
+                "op": "permission"
+              }
+            ],
+            "op": "any"
+          }
+        },
+        "raw_annotation": [
+          {
+            "arguments": "\"NullableCollection\"",
+            "end": 35,
+            "name": "android.annotation.SuppressLint",
+            "name_resolution": "explicit-import",
+            "raw": "@SuppressLint(\"NullableCollection\")",
+            "source_arguments": "\"NullableCollection\"",
+            "source_raw": "@SuppressLint(\"NullableCollection\")",
+            "source_spelling": "SuppressLint",
+            "start": 0
+          },
+          {
+            "arguments": "anyOf = {\n            MANAGE_DEVICE_POLICY_SECURITY_LOGGING,\n            \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\",\n            \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"\n    }, conditional = true",
+            "end": 302,
+            "name": "android.annotation.RequiresPermission",
+            "name_resolution": "explicit-import",
+            "raw": "@RequiresPermission(anyOf = {\n            MANAGE_DEVICE_POLICY_SECURITY_LOGGING,\n            \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\",\n            \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"\n    }, conditional = true)",
+            "source_arguments": "anyOf = {\n            MANAGE_DEVICE_POLICY_SECURITY_LOGGING,\n            \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\",\n            \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"\n    }, conditional = true",
+            "source_raw": "@RequiresPermission(anyOf = {\n            MANAGE_DEVICE_POLICY_SECURITY_LOGGING,\n            \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\",\n            \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"\n    }, conditional = true)",
+            "source_spelling": "RequiresPermission",
+            "start": 40
+          },
+          {
+            "arguments": "android.app.admin.flags.Flags.FLAG_POLICY_STREAMLINING_SECURITY_LOGGING_ENABLED",
+            "end": 375,
+            "name": "android.annotation.FlaggedApi",
+            "name_resolution": "explicit-import",
+            "raw": "@FlaggedApi(Flags.FLAG_POLICY_STREAMLINING_SECURITY_LOGGING_ENABLED)",
+            "source_arguments": "Flags.FLAG_POLICY_STREAMLINING_SECURITY_LOGGING_ENABLED",
+            "source_raw": "@FlaggedApi(Flags.FLAG_POLICY_STREAMLINING_SECURITY_LOGGING_ENABLED)",
+            "source_spelling": "FlaggedApi",
+            "start": 307
+          },
+          {
+            "arguments": "",
+            "end": 396,
+            "name": "android.annotation.Nullable",
+            "name_resolution": "explicit-import",
+            "raw": "@Nullable",
+            "source_arguments": "",
+            "source_raw": "@Nullable",
+            "source_spelling": "Nullable",
+            "start": 387
+          }
+        ],
+        "source": {
+          "repository": "google-sdk-source-distribution",
+          "revision": "sdk-artifact:sources;android-37.2:r1:sha1-e17cbd52887605a077121571b49ec3730ed0534e",
+          "path": "src/android/app/admin/DevicePolicyManager.java",
+          "platform_api_version": "37.2",
+          "api_level": 37,
+          "scope": "sdk-source",
+          "sha256": "ed6a9fcedaba5a8b6daee43db78a4608f0266cddafb4c18842232a4476196656"
+        }
+      },
+      {
+        "signature": "jvm:android/app/admin/DevicePolicyManager#retrieveSecurityLogs(Landroid/content/ComponentName;)Ljava/util/List;",
+        "line": 15871,
+        "expression": {
+          "condition": {
+            "op": "unknown",
+            "reason": "Annotation marks conditional but does not identify runtime predicate"
+          },
+          "op": "conditional",
+          "requirement": {
+            "children": [
+              {
+                "op": "unknown",
+                "raw": "MANAGE_DEVICE_POLICY_SECURITY_LOGGING",
+                "reason": "Unresolved symbolic permission expression"
+              },
+              {
+                "name": "android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING",
+                "op": "permission"
+              },
+              {
+                "name": "android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING",
+                "op": "permission"
+              }
+            ],
+            "op": "any"
+          }
+        },
+        "raw_annotation": [
+          {
+            "arguments": "\"NullableCollection\"",
+            "end": 35,
+            "name": "android.annotation.SuppressLint",
+            "name_resolution": "explicit-import",
+            "raw": "@SuppressLint(\"NullableCollection\")",
+            "source_arguments": "\"NullableCollection\"",
+            "source_raw": "@SuppressLint(\"NullableCollection\")",
+            "source_spelling": "SuppressLint",
+            "start": 0
+          },
+          {
+            "arguments": "anyOf = {\n            MANAGE_DEVICE_POLICY_SECURITY_LOGGING,\n            \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\",\n            \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"\n    }, conditional = true",
+            "end": 302,
+            "name": "android.annotation.RequiresPermission",
+            "name_resolution": "explicit-import",
+            "raw": "@RequiresPermission(anyOf = {\n            MANAGE_DEVICE_POLICY_SECURITY_LOGGING,\n            \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\",\n            \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"\n    }, conditional = true)",
+            "source_arguments": "anyOf = {\n            MANAGE_DEVICE_POLICY_SECURITY_LOGGING,\n            \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\",\n            \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"\n    }, conditional = true",
+            "source_raw": "@RequiresPermission(anyOf = {\n            MANAGE_DEVICE_POLICY_SECURITY_LOGGING,\n            \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\",\n            \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"\n    }, conditional = true)",
+            "source_spelling": "RequiresPermission",
+            "start": 40
+          },
+          {
+            "arguments": "android.app.admin.flags.Flags.FLAG_POLICY_STREAMLINING_SECURITY_LOGGING_ENABLED",
+            "end": 375,
+            "name": "android.annotation.FlaggedApi",
+            "name_resolution": "explicit-import",
+            "raw": "@FlaggedApi(Flags.FLAG_POLICY_STREAMLINING_SECURITY_LOGGING_ENABLED)",
+            "source_arguments": "Flags.FLAG_POLICY_STREAMLINING_SECURITY_LOGGING_ENABLED",
+            "source_raw": "@FlaggedApi(Flags.FLAG_POLICY_STREAMLINING_SECURITY_LOGGING_ENABLED)",
+            "source_spelling": "FlaggedApi",
+            "start": 307
+          },
+          {
+            "arguments": "",
+            "end": 396,
+            "name": "android.annotation.Nullable",
+            "name_resolution": "explicit-import",
+            "raw": "@Nullable",
+            "source_arguments": "",
+            "source_raw": "@Nullable",
+            "source_spelling": "Nullable",
+            "start": 387
+          }
+        ],
+        "source": {
+          "repository": "google-sdk-source-distribution",
+          "revision": "sdk-artifact:sources;android-37.2:r1:sha1-e17cbd52887605a077121571b49ec3730ed0534e",
+          "path": "src/android/app/admin/DevicePolicyManager.java",
+          "platform_api_version": "37.2",
+          "api_level": 37,
+          "scope": "sdk-source",
+          "sha256": "ed6a9fcedaba5a8b6daee43db78a4608f0266cddafb4c18842232a4476196656"
+        }
+      },
+      {
+        "signature": "jvm:android/app/admin/DevicePolicyManager#isSecurityLoggingEnabled(Landroid/content/ComponentName;)Z",
+        "line": 49,
+        "expression": {
+          "condition": {
+            "op": "unknown",
+            "reason": "Annotation marks conditional but does not identify runtime predicate"
+          },
+          "op": "conditional",
+          "requirement": {
+            "children": [
+              {
+                "name": "android.permission.MANAGE_DEVICE_POLICY_SECURITY_LOGGING",
+                "op": "permission"
+              },
+              {
+                "name": "android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING",
+                "op": "permission"
+              },
+              {
+                "name": "android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING",
+                "op": "permission"
+              }
+            ],
+            "op": "any"
+          }
+        },
+        "raw_annotation": [
+          {
+            "arguments": "anyOf={\"android.permission.MANAGE_DEVICE_POLICY_SECURITY_LOGGING\", \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\", \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"},conditional=true",
+            "name": "androidx.annotation.RequiresPermission",
+            "permission": {
+              "condition": {
+                "op": "unknown",
+                "reason": "Annotation marks conditional but does not identify runtime predicate"
+              },
+              "op": "conditional",
+              "requirement": {
+                "children": [
+                  {
+                    "name": "android.permission.MANAGE_DEVICE_POLICY_SECURITY_LOGGING",
+                    "op": "permission"
+                  },
+                  {
+                    "name": "android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING",
+                    "op": "permission"
+                  },
+                  {
+                    "name": "android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING",
+                    "op": "permission"
+                  }
+                ],
+                "op": "any"
+              }
+            },
+            "raw": "<annotation name=\"androidx.annotation.RequiresPermission\">\n      <val name=\"anyOf\" val=\"{&quot;android.permission.MANAGE_DEVICE_POLICY_SECURITY_LOGGING&quot;, &quot;android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING&quot;, &quot;android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING&quot;}\" />\n      <val name=\"conditional\" val=\"true\" />\n    </annotation>\n  ",
+            "values": [
+              {
+                "name": "anyOf",
+                "val": "{\"android.permission.MANAGE_DEVICE_POLICY_SECURITY_LOGGING\", \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\", \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"}"
+              },
+              {
+                "name": "conditional",
+                "val": "true"
+              }
+            ]
+          }
+        ],
+        "source": {
+          "repository": "google-sdk-platform-metadata",
+          "revision": "sdk-artifact:platforms;android-37.2:r1:published-sha1-4bec12a02162ff6852df50b5fcf8ee762b050966",
+          "path": "android-37.2/data/annotations.zip",
+          "platform_api_version": "37.2",
+          "api_level": 37,
+          "scope": "sdk-public",
+          "sha256": "130f5bde53fccea3708726e47abdea698db515cc6f6ca92a73acbf9d80238550"
+        }
+      },
+      {
+        "signature": "jvm:android/app/admin/DevicePolicyManager#retrieveSecurityLogs(Landroid/content/ComponentName;)Ljava/util/List;",
+        "line": 100,
+        "expression": {
+          "condition": {
+            "op": "unknown",
+            "reason": "Annotation marks conditional but does not identify runtime predicate"
+          },
+          "op": "conditional",
+          "requirement": {
+            "children": [
+              {
+                "name": "android.permission.MANAGE_DEVICE_POLICY_SECURITY_LOGGING",
+                "op": "permission"
+              },
+              {
+                "name": "android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING",
+                "op": "permission"
+              },
+              {
+                "name": "android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING",
+                "op": "permission"
+              }
+            ],
+            "op": "any"
+          }
+        },
+        "raw_annotation": [
+          {
+            "arguments": "anyOf={\"android.permission.MANAGE_DEVICE_POLICY_SECURITY_LOGGING\", \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\", \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"},conditional=true",
+            "name": "androidx.annotation.RequiresPermission",
+            "permission": {
+              "condition": {
+                "op": "unknown",
+                "reason": "Annotation marks conditional but does not identify runtime predicate"
+              },
+              "op": "conditional",
+              "requirement": {
+                "children": [
+                  {
+                    "name": "android.permission.MANAGE_DEVICE_POLICY_SECURITY_LOGGING",
+                    "op": "permission"
+                  },
+                  {
+                    "name": "android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING",
+                    "op": "permission"
+                  },
+                  {
+                    "name": "android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING",
+                    "op": "permission"
+                  }
+                ],
+                "op": "any"
+              }
+            },
+            "raw": "<annotation name=\"androidx.annotation.RequiresPermission\">\n      <val name=\"anyOf\" val=\"{&quot;android.permission.MANAGE_DEVICE_POLICY_SECURITY_LOGGING&quot;, &quot;android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING&quot;, &quot;android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING&quot;}\" />\n      <val name=\"conditional\" val=\"true\" />\n    </annotation>\n  ",
+            "values": [
+              {
+                "name": "anyOf",
+                "val": "{\"android.permission.MANAGE_DEVICE_POLICY_SECURITY_LOGGING\", \"android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING\", \"android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING\"}"
+              },
+              {
+                "name": "conditional",
+                "val": "true"
+              }
+            ]
+          }
+        ],
+        "source": {
+          "repository": "google-sdk-platform-metadata",
+          "revision": "sdk-artifact:platforms;android-37.2:r1:published-sha1-4bec12a02162ff6852df50b5fcf8ee762b050966",
+          "path": "android-37.2/data/annotations.zip",
+          "platform_api_version": "37.2",
+          "api_level": 37,
+          "scope": "sdk-public",
+          "sha256": "130f5bde53fccea3708726e47abdea698db515cc6f6ca92a73acbf9d80238550"
+        }
+      }
+    ]
+  }
+]

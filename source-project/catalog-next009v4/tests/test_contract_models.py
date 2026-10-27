@@ -1,0 +1,61 @@
+import hashlib,itertools,json,pathlib,sqlite3,sys,unittest
+P=pathlib.Path(__file__).resolve().parents[1];sys.path.insert(0,str(P/'tooling'))
+from contract_reference import Catalog,Error,identity
+from policy_reference import Rule,evaluate,resolve_fixture_route
+from dispatch_manifest import generate
+
+class Models(unittest.TestCase):
+    def error(self,status,fn):
+        with self.assertRaises(Error) as e:fn()
+        self.assertEqual(e.exception.status,status)
+    def test_cas_tombstones_history_and_cursor(self):
+        c=Catalog();k=c.create('java:a.A#x()',{'v':1});old=c.tag(k);page=c.cursor()
+        self.error(428,lambda:c.put(k,None,{}));self.error(400,lambda:c.put(k,'*',{}))
+        deleted=c.delete(k,old);self.error(412,lambda:c.put(k,old,{}))
+        self.assertEqual(c.delete(k,deleted),deleted)
+        c.put(k,deleted,{'v':2});self.assertEqual(c.entries[k]['state'],'active')
+        self.error(410,lambda:c.continue_page(page));self.assertEqual(len(c.history[k]),3)
+    def test_import_both_collision_orders_and_rebase(self):
+        sig='java:a.A#x()';key=identity(sig);base={key:(sig,{'p':1})}
+        c=Catalog();c.create(sig,{});c.publish_fixture(base)
+        self.assertEqual(c.entries[key]['state'],'conflict');self.error(409,lambda:c.delete(key,c.tag(key)))
+        self.error(409,lambda:c.put(key,c.tag(key),{}));c.put(key,c.tag(key),{},dict(action='rebase',expected_imported_record_sha256=c.entries[key]['base_hash']))
+        d=Catalog();d.publish_fixture(base);self.error(409,lambda:d.create(sig,{}))
+        d.delete(key,d.tag(key));d.publish_fixture({key:(sig,{'p':2})});self.assertEqual(d.entries[key]['state'],'conflict')
+        d.publish_fixture({});d.put(key,d.tag(key),{},dict(action='retain-local',expected_imported_record_sha256=None));self.assertFalse(d.entries[key]['imported'])
+    def test_removed_base_without_overlay_is_absent(self):
+        c=Catalog();sig='java:a.A#x()';key=identity(sig);c.publish_fixture({key:(sig,{})});old=c.tag(key)
+        c.publish_fixture({});self.assertNotIn(key,c.entries);self.error(404,lambda:c.put(key,old,{}))
+    def test_rejected_registry_does_not_mutate_selected_view(self):
+        import copy
+        c=Catalog();sig='java:a.A#x()';key=identity(sig);c.publish_fixture({key:(sig,{})});before=copy.deepcopy(c.entries);cursor=c.cursor()
+        self.error(422,lambda:c.publish_fixture({'wrong-id':(sig,{})}));self.assertEqual(c.entries,before);self.assertEqual(c.cursor(),cursor)
+    def test_binding_rules_dominate_all_aliases(self):
+        aliases={'generated_x':('binding','s')};schemas={'binding':'s'};wire={('fixture.I',42):('binding','s')}
+        requests=[('generated',dict(tool_name='generated_x',target='t',items=2)),('generic',dict(binding_id='binding',schema_hash='s',target='t',items=2)),('raw',dict(descriptor='fixture.I',transaction_code=42,decoded_and_validated=True,target='t',items=2))]
+        plans=[resolve_fixture_route(route,request,aliases,schemas,wire) for route,request in requests]
+        self.assertEqual(plans[0],plans[1]);self.assertEqual(plans[0],plans[2]);plan=plans[0]
+        for effect,entry_effect,authority,emergency in itertools.product(('deny','ask','allow'),('deny','ask','allow'),(False,True),(False,True)):
+            rule=Rule(effect,'s',frozenset({'t'}),3);entry=Rule(entry_effect,'tool',frozenset({'t'}),3)
+            decisions=[evaluate(p,{'binding':rule},entry,entry_schema='tool',authority=authority,emergency=emergency) for p in plans]
+            self.assertEqual(len(set(decisions)),1)
+            if effect=='deny' or entry_effect=='deny' or emergency:self.assertEqual(decisions[0],'deny')
+        allow=Rule('allow','s',frozenset({'t'}),1)
+        self.assertEqual(evaluate(plan,{'binding':allow},allow,entry_schema='s',authority=True),'deny')
+        self.assertEqual(evaluate(plan,{},allow,entry_schema='s',authority=True),'deny')
+        self.assertEqual(evaluate([('raw:service','s','t',1)],{'binding':allow},allow,entry_schema='s',authority=True),'deny')
+        self.assertEqual(evaluate([('binding','s','t',1)],{'binding':allow},allow,entry_schema='stale-tool-schema',authority=True),'deny')
+        for raw in (dict(descriptor='fixture.I',transaction_code=42,target='t',items=1),dict(descriptor='fixture.I',transaction_code=99,target='t',items=1)):
+            with self.assertRaises(ValueError):resolve_fixture_route('raw',raw,aliases,schemas,wire)
+    def test_generated_alias_identity_and_default_deny(self):
+        sig='java:a.A#x()';e=dict(entry_id=identity(sig),canonical_signature=sig)
+        r=generate([e])['aliases'][0];self.assertEqual(r['binding_id'],r['generic_binding_id']);self.assertEqual(r['default_grant'],'deny')
+        with self.assertRaises(ValueError):generate([e,e])
+    def test_bridge_ddl_integrity_and_closed_enums(self):
+        db=sqlite3.connect(':memory:');self.addCleanup(db.close);db.executescript((P/'bridge-config.sql').read_text())
+        db.execute("INSERT INTO clients VALUES('fixture','fixture','active',0,1,0,0,NULL)")
+        with self.assertRaises(sqlite3.IntegrityError):db.execute("INSERT INTO credentials VALUES('fixture','missing',zeroblob(32),'fixture','active',0,NULL,NULL,0)")
+        with self.assertRaises(sqlite3.IntegrityError):db.execute("INSERT INTO client_logging_config(client_id,mode,paused,logging_revision,retention_seconds,byte_quota,record_byte_cap,redaction_profile_version,updated_at) VALUES('fixture','full-raw',0,1,1,1,1,1,0)")
+        self.assertEqual(db.execute('PRAGMA integrity_check').fetchone()[0],'ok');self.assertEqual(db.execute('PRAGMA foreign_key_check').fetchall(),[])
+
+if __name__=='__main__':unittest.main()

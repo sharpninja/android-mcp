@@ -1,0 +1,79 @@
+--- catalog/tooling/annotation_link.py
++++ catalog/tooling/annotation_link.py
+@@ -20,11 +20,17 @@
+    m=re.match(r'\s*([A-Za-z_$][\w$]*)',part)
+    if m:names.add(m.group(1))
+  return names
+-def fallback_supported(db,bid,xml_canonical,source_by_id,sha):
++def same_snapshot_source_ids(db,bid,annotation_source,source_by_id):
++ # An explicit platform version plus the same repository commit proves the
++ # legacy signature and annotation archives belong to one source snapshot.
++ if not all(annotation_source.get(k) for k in ('repository','revision','platform_api_version')):return set()
++ return {source_id for source_id, in db.execute('SELECT source_id FROM binding_declarations WHERE binding_id=?',(bid,)) if source_by_id[source_id]['kind']=='sdk-signature' and all(source_by_id[source_id].get(k)==annotation_source[k] for k in ('repository','revision','platform_api_version'))}
++def fallback_supported(db,bid,xml_canonical,source_by_id,sha,eligible_source_ids=None):
+  # The SDK's signature format supplies the abbreviation evidence. Do not
+  # infer a java.lang class from an identically spelled formal type variable.
+  roots=set(re.findall(r'(?<![\w.$])java\.lang\.([A-Za-z_$][\w$]*)',xml_canonical.split('(',1)[-1]));evidence=[]
+  for source_id,document in db.execute('SELECT source_id,document_json FROM binding_declarations WHERE binding_id=?',(bid,)):
++  if eligible_source_ids is not None and source_id not in eligible_source_ids:continue
+   if source_by_id[source_id]['kind']!='sdk-signature':continue
+   import json
+   doc=json.loads(document);owner=doc.get('owner');header=db.execute('SELECT document_json FROM binding_declarations WHERE binding_id=? AND source_id=?',(sha('java:'+owner),source_id)).fetchone() if owner else None
+--- catalog/tooling/build_catalog.py
++++ catalog/tooling/build_catalog.py
+@@ -197,13 +197,19 @@
+        package_candidate='java-source:package:'+owner;package_bid=sha(package_candidate)
+        if any(item['kind']=='java-source' and str(item.get('platform_api_version',''))==platform for item in sources) and db.execute('SELECT 1 FROM bindings WHERE binding_id=?',(package_bid,)).fetchone():matches.append((package_candidate,package_bid))
+       target_match_kind='current-sdk-index-exact'
++      if not matches and platform not in index_versions.values():
++       from annotation_link import fallback_supported,same_snapshot_source_ids
++       for candidate in dict.fromkeys(candidates):
++        candidate_bid=sha('java:'+candidate);eligible=same_snapshot_source_ids(db,candidate_bid,s,source_by_id)
++        if eligible and (candidate==canonical or not sep or fallback_supported(db,candidate_bid,canonical,source_by_id,sha,eligible)):matches.append((candidate,candidate_bid))
++       target_match_kind='same-snapshot-sdk-signature'
+      else:
+       from annotation_link import fallback_supported
+       matches=[(candidate,sha('java:'+candidate)) for candidate in dict.fromkeys(candidates) if db.execute('SELECT 1 FROM bindings WHERE binding_id=?',(sha('java:'+candidate),)).fetchone() and (candidate==canonical or not sep or fallback_supported(db,sha('java:'+candidate),canonical,source_by_id,sha))]
+      bid=None
+      if len(matches)==1:
+       matched_canonical,bid=matches[0]
+-      if matched_canonical!=canonical:target_match_kind='java-lang-spelling-equivalence' if sep else 'package-namespace'
++      if matched_canonical!=canonical:target_match_kind=('same-snapshot-sdk-signature-' if target_match_kind=='same-snapshot-sdk-signature' else '')+('java-lang-spelling-equivalence' if sep else 'package-namespace')
+      else:target_match_kind='unresolved-or-ambiguous'
+      anns=[]
+      for ai,node in enumerate(item.findall('annotation')):
+--- catalog/tests/test_versioned_signature_annotations.py
++++ catalog/tests/test_versioned_signature_annotations.py
+@@ -0,0 +1,32 @@
++import pathlib,sys,unittest,tempfile,json,sqlite3,hashlib,gzip
++P=pathlib.Path(__file__).resolve().parents[1];sys.path.insert(0,str(P/'tooling'))
++import build_catalog,sdk_api_index,test_source_annotation_targets
++
++class VersionedSignatureAnnotations(unittest.TestCase):
++    def fixture(self,root,signature_version='37.0',annotation_version='37.0',different_revision=False,index_present=False,shadow=False):
++        helper=test_source_annotation_targets.SourceTargets();inv=helper.fixture(root);spec=json.loads(inv.read_text());spec['sources'][0]['platform_api_version']=signature_version
++        if shadow:
++            source=spec['sources'][0];data=(root/source['local_path']).read_bytes().replace(b'public class A {',b'public class A<String> {');(root/source['local_path']).write_bytes(data);source.update(sha256=hashlib.sha256(data).hexdigest(),git_blob=hashlib.sha1(b'blob '+str(len(data)).encode()+b'\0'+data).hexdigest(),size_bytes=len(data))
++        helper.annotation(root,spec,platform_api_version=annotation_version)
++        if different_revision:spec['sources'][-1]['revision']='2'*40
++        if index_present:
++            data=b'<api version="4"><class name="a/A"/></api>';records=sdk_api_index.parse(data,target=annotation_version)['records'];cache=root/'index.gz'
++            with gzip.open(cache,'wt') as stream:
++                for row in records:stream.write(json.dumps(row)+'\n')
++            helper.source(root,spec,'sdk-api-index','index.xml',data,platform_api_version=annotation_version,metadata_cache=dict(path=cache.name,sha256=hashlib.sha256(cache.read_bytes()).hexdigest(),records=len(records)))
++        inv.write_text(json.dumps(spec));build_catalog.build(inv,root/'out')
++        with sqlite3.connect((root/'out/catalog.sqlite').as_uri()+'?mode=ro',uri=True) as db:
++            result=db.execute('SELECT binding_id FROM annotation_evidence').fetchone()[0]
++        db.close();return result
++    def test_matching_snapshot_and_version_resolves_legacy_signature(self):
++        with tempfile.TemporaryDirectory() as td:self.assertEqual(self.fixture(pathlib.Path(td)),hashlib.sha256(b'java:a.A#go(String)').hexdigest())
++    def test_different_snapshot_is_not_used_as_fallback(self):
++        with tempfile.TemporaryDirectory() as td:self.assertIsNone(self.fixture(pathlib.Path(td),different_revision=True))
++    def test_different_platform_is_not_used_as_fallback(self):
++        with tempfile.TemporaryDirectory() as td:self.assertIsNone(self.fixture(pathlib.Path(td),annotation_version='37.2'))
++    def test_existing_index_blocks_signature_backfill_for_absent_target(self):
++        with tempfile.TemporaryDirectory() as td:self.assertIsNone(self.fixture(pathlib.Path(td),index_present=True))
++    def test_same_snapshot_formal_type_variable_remains_ambiguous(self):
++        with tempfile.TemporaryDirectory() as td:self.assertIsNone(self.fixture(pathlib.Path(td),shadow=True))
++
++if __name__=='__main__':unittest.main()

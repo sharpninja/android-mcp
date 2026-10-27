@@ -1,0 +1,3001 @@
+{
+  "repo": "platform/frameworks/proto_logging",
+  "requested_revision": "refs/tags/android-17.0.0_r1",
+  "revision": "a07b791ea1e2a4dae1c535c8423235fdc22aaf02",
+  "entries": [
+    {
+      "path": "OWNERS",
+      "kind": "blob",
+      "oid": "ae8c3185ff29955e4aaf267a03eae73caea1a64e",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/.gitignore",
+      "kind": "blob",
+      "oid": "34da593f9f14526ba5f87d6899c77ddc9665f2bd",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/Android.bp",
+      "kind": "blob",
+      "oid": "d4bdac894b0046d419cecff4002cd77aaa37f280",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/PREUPLOAD.cfg",
+      "kind": "blob",
+      "oid": "8aa22010037c03ef4a2977d99090ddb421a2287e",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/TEST_MAPPING",
+      "kind": "blob",
+      "oid": "ce9ac40360236249d160fcc82f2fab80d0c76ec5",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atom_field_options.proto",
+      "kind": "blob",
+      "oid": "dddeca8830dd757ab1c5244d6dc2d99b49962ef6",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms.proto",
+      "kind": "blob",
+      "oid": "81bf7db04889f6d87a004e04bba86be33bf5e348",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/accessibility/accessibility_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "9ebad2ac4dbb9a6685db5a5c0a8df45108cb0d0c",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/accounts/accounts_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "02ae945648b5807c7e66e23cd1c26c8a567539ba",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/aconfig/aconfig_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "de94adc20d26b863ec423984019b28834af288b0",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/adaptiveauth/adaptiveauth_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "813b0c34e765c2ffc8f4ca7dd206621e37520046",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/adpf/adpf_atoms.proto",
+      "kind": "blob",
+      "oid": "66773c20ee39c062c422ff54d49f41f1368e7f94",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/adpf/adpf_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "63b552501f1b8244cff8c3e47c2c1393ceed714e",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/adservices/adservices_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "ecb9d1287acf597a7c80d12a17e199a3d6fd9a77",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/agif/agif_atoms.proto",
+      "kind": "blob",
+      "oid": "fe6c9b9e5a79a49e3d7bb45d99985d1960553425",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/aiwallpapers/aiwallpapers_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "502b7157096249ca770bf928110f3f799b9aff41",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/ambientcue/ambient_cue_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "34527c85fd1629802533644dbe8de2fe3d8ce610",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/anomalystats/anomaly_stats_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "d0b6a31570a6bda11244cae259ac8f2483a6ade8",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/apex/apex_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "40c9dfd9a226b6d8cdab34b258c85755969c3ab4",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/appfunctions/app_functions_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "b4a44c901dde4587482fce0a707db695ff5cf4dc",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/appsearch/appsearch_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "5f913b0825ab07f19924b79e429d6c217aedcc82",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/art/art_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "73e88b6862d87787d7501582d3810c163e341f48",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/art/background_dexopt_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "64a82879b669faf4644c0f8a2e9f2c5b7bb97725",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/art/odrefresh_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "35abeb3c25abf7e3f419ed0a031ffed791c9bc0a",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/audioproxy/audioproxy_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "43312b1e1e73f6095c526e56a1c61a2db50aad58",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/authenticationpolicy/secure_lock_device_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "71925ad03b8393fed66f98ba3705786a49c10fea",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/autofill/autofill_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "d6938af5e772c77d5bb4a3a73c0c02f03c207fbf",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/automotive/cardatasubscriptionlib/automotive_cardatasubscriptionlib_atoms.proto",
+      "kind": "blob",
+      "oid": "3fd6031f738e75bec30cc29619e686ca7ab40409",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/automotive/carlauncher/automotive_carlauncher_atoms.proto",
+      "kind": "blob",
+      "oid": "22fcf95a725118c769b45c33b689262ade158bba",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/automotive/carpower/automotive_carpower_atoms.proto",
+      "kind": "blob",
+      "oid": "2515faadcf968aeed5dff29dc806a737551a5fbb",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/automotive/carqclib/carqclib_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "bd794da5b1b5ef06f120d903c43d26a6ac4fe05e",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/automotive/carsettings/carsettings_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "eca09a727eab712b4775eeb0331f69588dad0293",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/automotive/carsystemui/carsystemui_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "26d2b86d81a3692dfeda517cbe42c3b9842b62c3",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/automotive/caruilib/automotive_caruilib_atoms.proto",
+      "kind": "blob",
+      "oid": "1889179a5e2fb158a37834990602f494fac202cc",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/automotive/sensitiveapplock/sensitiveapplock_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "3e10e8f961a685741f1c5d468e27b066f1614add",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/backported_fixes/backported_fixes_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "2b990df22aef950e9468b4b82e440c19f4eec5e4",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/battery/battery_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "e065ab820792a5da6d1c820d8f87598e9dc0857f",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/bluetooth/bluetooth_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "41c5d13213dc0902037bfdbba21e48048e4ef905",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/broadcasts/broadcasts_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "ae4a6a99d772fe4a9573c5b4ca25e0fb1e908c01",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/camera/camera_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "7271b818fc6ff81550c94f26628c0d0b602706a3",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/computercontrol/computercontrol_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "e5f08b98c18bff607abbdfa3765f57edb8e0bd88",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/conscrypt/conscrypt_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "87eec1c60fb5acb3e054790d1341dd7220a88215",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/contactspicker/contactspicker_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "520f9aea528411afcb755f7d22a2bb9016ee1486",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/coregraphics/coregraphics_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "3210d9c2727104d7ccca1e6080f92df5c3302535",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/corenetworking/captiveportallogin/captive_portal_login_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "eb78244bb3320b1b5f4468961260cb9457205730",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/corenetworking/certificatetransparency/certificate_transparency_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "7a05f0f8a07de12ea8348862e55c564ec736ab76",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/corenetworking/connectivity/connectivity_atoms.proto",
+      "kind": "blob",
+      "oid": "f8557caf67d047a9c4ad95dbdf0a8cacd3aa8f8d",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/corenetworking/connectivity/connectivity_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "f26071d5d2cc2bb5192563d842549ae709498a68",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/corenetworking/connectivity/critical_event_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "de5e2ba7afbe7328c73cde696ae77b83a84d880b",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/corenetworking/connectivity/netstats_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "26f0783a667f8078a20517bcf6aaa4cdaebbf95b",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/corenetworking/connectivity/terrible_error_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "088c2daa7a72a9eec56091f9e16cf8bca2cc19ad",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/corenetworking/networkstack/apf_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "03b82be9f4031aa907f96b57ff1026d57b28f0de",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/corenetworking/networkstack/ipclient_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "7f578ed82260eca102d5cfeb110f341872f88241",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/corenetworking/platform/vpn_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "55d050f3de41a46a5b9c3b7e2be6636a1fa3c911",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/cpu/cpu_atoms.proto",
+      "kind": "blob",
+      "oid": "58db5daed94f13763b90f9a31bd59a765c609014",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/credentials/credentials_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "40cd8be5e41106d0262882c197390a422009dec1",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/cronet/cronet_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "d596d1c43deded23e5256ba3d88307671154981b",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/crossdevicesync/crossdevicesync_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "af60bcafe7c003d0e1691ace73ad99d324c8d893",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/desktopmode/desktopmode_extensions_atoms.proto",
+      "kind": "blob",
+      "oid": "4608ed171c3a73c0c6de024dd37133deb4c06c89",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/devicelock/devicelock_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "2798023798eab253f14b196cc5a41061da131583",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/devicelogs/device_logs_atoms.proto",
+      "kind": "blob",
+      "oid": "eefd6c9865bc99885572ed2b4442952a49bcdf3c",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/devicepolicy/devicepolicy_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "9e17a01ca778c0e5a36a9074fc9ad354e64d5a4b",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/display/display_atoms.proto",
+      "kind": "blob",
+      "oid": "ba73df917c77156970be17d19714ba9ae4669b55",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/display/display_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "a5a496207619a0585d8a339fb0c84dc68278407d",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/display/external_display_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "a1f4c54a376f3eddf5a9cda771fed6eb5009d2bc",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/dnd/dnd_atoms.proto",
+      "kind": "blob",
+      "oid": "d1d91994e9cc6f58ea8bfdb8bc151b58469ae9fe",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/dnd/dnd_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "a805d7cc6b33c1bf4db2f6c49e56c2e6918a4b40",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/dream/dream_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "aacfcd7dfb674917c92dcf4f33db27d023a7264f",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/expresslog/expresslog_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "93f7f4c3cad7d2937215fe70f0377a15eeee5ddf",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/federatedcompute/OWNERS",
+      "kind": "blob",
+      "oid": "f236ec98ec378bc677b9f42949a6cce79a59bb6b",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/federatedcompute/federatedcompute_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "56966cd0442a52772f74061a093c9db639c54ba6",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/framework/framework_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "430d9841739aad364c876aa534c38568d90f4af5",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/framework/trust_token_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "ae745aa7f6b17aec5c49edf7ca553231b315f22c",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/gps/gps_atoms.proto",
+      "kind": "blob",
+      "oid": "dc6f8d27ff3a5828309c83dd6907ed5898dc7458",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/grammaticalinflection/grammatical_inflection_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "9d21889cc7036d11e2b557ea3f797aa0ebc94c73",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/hardware/biometrics/biometrics_atoms.proto",
+      "kind": "blob",
+      "oid": "338e260b034c406531028f1e1f22b06c7b584f08",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/hardware/biometrics/biometrics_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "438957a13956aae4b6428d345ba43621d17bde53",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/hardware/health/battery_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "a293cff53cc7bfd248d1b444c55d7c3d42703c48",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/hardware/health/storage_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "6099066cf6c316ee794a1207025ad36354547862",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/hdmi/hdmi_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "a9c89bba160a3381470834b13c353f7eac3c1532",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/healthfitness/api/api_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "90f95af3675051e49276397581ac2096ec08aaf9",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/healthfitness/ui/ui_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "f3e0dd30426185670ea53ec3eacae3b48e095157",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/hotword/hotword_atoms.proto",
+      "kind": "blob",
+      "oid": "5ea02edd0eac526e35c2c7ce7976f9838fb4c5fc",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/hotword/hotword_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "7b0642cb9df976b7373b4a8a4804c00d240b824d",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/ike/ike_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "8604b380231be85b8cf071d87ccf149ec24e1e92",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/input/input_atoms.proto",
+      "kind": "blob",
+      "oid": "ad74cef201c269809361ead8052cf01156b3e6a0",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/input/input_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "411b1fd713541290b8d1eab351cb66d158cda9be",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/kernel/kernel_atoms.proto",
+      "kind": "blob",
+      "oid": "7ace12e075057a225f20d77c0e67ba9b16c97eab",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/kernel/kernel_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "908c1372f9d3981ba1256194b477d478ee9c44f5",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/keystore/keystore_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "da042dde6382799f788d818a56d69ee66f8ca7a5",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/libcore/libcore_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "ed15b35b7326aa1c08fc9be7129bba6e4782293a",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/locale/locale_atoms.proto",
+      "kind": "blob",
+      "oid": "a1d72c87fca63a4b3f5c6d7ed30adf320e00686f",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/location/location_atoms.proto",
+      "kind": "blob",
+      "oid": "24de049cc1dab27fda2c0fc5746caf7e06f341eb",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/location/location_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "f3a4d37b38ae9dfbe500536c8b6216d30c1c5d31",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/locksettings/locksettings_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "885d64212d98c4fe9fdd670b4bfcc51aa5b832bc",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/media/audio_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "9283a90a35cb1b03627a54254986f40381d22d82",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/media/media_codec_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "7664539abfa74c9e794fe973dec571e1827596c6",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/media/media_drm_atoms.proto",
+      "kind": "blob",
+      "oid": "514ed042c000dd5040df39c2cdbf4ec6c9046aee",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/media/media_editing_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "c968c6228e6d4ceb6780568c1015c922ae9b0a50",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/media/media_processing_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "57483f13246db24746007816cb7d8b743a797a0a",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/media/media_router_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "25c64b1e500b953df3a52bac50a86d2e7173d7ff",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/media/media_session_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "c2416c6472aa70786f974331b8b4033983310cfd",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/memory/dmabuf_stats_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "f636cf1970ea4d41075b4d34a09966d3fb8ff98c",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/memory/memcg_memory_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "857c1859bc96a20391de7edd13ebd2a71b2feabf",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/memory/slabinfo_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "8362ced1ec00c780c2b382efc24d5ae2acda879f",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/memory/zram_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "687abb90e671988532861698a398c9bd046d5301",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/memorysafety/memorysafety_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "e7a4dfddd063666fcc0ce77d3ff611fe45d307d8",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/microxr/microxr_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "46583ae7f2c5c64723a378171474ceafb3d9251a",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/nfc/nfc_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "db2d2518f64891ba0c37a652bef2567e3ad81ab6",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/notification/notification_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "e3030b6d6716331f53742092a66af4e5b8d542ba",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/npu/npu_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "11aabe04c9939dd588167caa78b80d21cf944d8b",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/ondevicepersonalization/OWNERS",
+      "kind": "blob",
+      "oid": "115207436fe87eeb43878b77b6f97f8e3799b5b4",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/ondevicepersonalization/ondevicepersonalization_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "a359c65950d2be4efe668ed0b85a33f5058891b1",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/packagemanager/packagemanager_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "f4c457243a532adb0f1edd093568ca7d1086214e",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/pdf/pdfviewer_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "70079dbf6f90177a68f001a723d0c91e4c4dbc36",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/performance/performance_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "c8f234f4ba9cd6b0c89b3f9b1a942096568b588c",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/permissioncontroller/permissioncontroller_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "328ccac80c159dad20046f9c3a3567754bdbc483",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/photopicker/photopicker_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "0ecfe0c40ffca459233b14797d049f81795b9f39",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/placeholder/placeholder_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "09749e614056b3059e4c59b3b52338e93a11df19",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/power/power_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "f0dcef2558612686c744426f2040b3652456e0b1",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/printing/printing_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "0efd15e9af1bfac599c6c6189f5fb842eb5e8db5",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/privatecompute/privatecompute_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "b134f82293fd134bf50bdaad322ac9cdc871b8ae",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/privatespace/privatespace_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "32084636a519778188bfd55a91571df3a150fc22",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/profiling/profiling_atoms.proto",
+      "kind": "blob",
+      "oid": "db469ef97ff8cb1ad11c9ee113067b3b543bba4a",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/providers/mediaprovider/media_provider_atoms.proto",
+      "kind": "blob",
+      "oid": "2a29c74bfe2856c79e14f03c51c46b4c18f2f624",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/providers/mediaprovider/rollback_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "fb0f432b8a4d3b91fe6e566b4f86829ba73fc5a0",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/raisetrigger/raisetrigger_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "d469ea81e32effd946d5f15ca6bb0fe334257d9d",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/ranging/ranging_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "46902841dd887c672469d464760e8619efff887d",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/rkpd/rkpd_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "04060f9a9b6c0ac6d689fc92aa1132d674ca59a7",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/sdksandbox/sdksandbox_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "fd9cb2b83bbe62209f4489f6312119cf36876ba4",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/security/apksigverify/apksigverify_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "16ac233c041c0e2f99fa6b410be57648d00ab3c8",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/selinux/selinux_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "0e54815a41f38d9939de8290b773be7e95d0bad9",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/settings/settings_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "fb2e84deb2178238f5128b94111a1e25ddd5c4c6",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/signature/signature_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "2c7bf30b7e1f427a2f4915f50d6f4bda646ecfac",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/statsd/statsd_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "6a1aaa5ae14c1dc6c046e59793a962d0e8df601f",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/statusbar/statusbar_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "0879cf5db994b6c370c59e929523e1983c2b06bb",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/supervision/supervision_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "1e6329fe491757e9f71b158c876db154f2f12d45",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/sysui/sysui_atoms.proto",
+      "kind": "blob",
+      "oid": "8f52f5cc1be34bc73efba2287e6b7f623a3c3958",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/sysui/sysui_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "31e778f51ce7f9d01292c40dee37987041f2ad13",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/taskcontinuity/taskcontinuity_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "638c66da9f00e3883a33897b9f9e6089e7dad02b",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/telecomm/telecom_extension_atom.proto",
+      "kind": "blob",
+      "oid": "0d489ed83e40bc63abaea5a6d8d6765d433507cd",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/telephony/cellbroadcast/cellbroadcast_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "e0874787c4dc902741b21088de0fee9a3a25e56f",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/telephony/iwlan/iwlan_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "04e30dcb485edcc3dd85353ebab176ade9d1ee3d",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/telephony/qns/qns_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "a163965d3bd38d75537291aeb9e16bbfa4f2e3cd",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/telephony/satellite/satellite_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "b55d5727adb214b089094d2367fc84462a180a9d",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/telephony/security/security_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "f28e6e929fa3881e8f6985d3a74ed554d2943674",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/telephony/telephony_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "9b4db8beb6500ab5d4cb3dce888e81e557156d8d",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/threadnetwork/threadnetwork_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "a8ded0f34ea192025d8a4dc4034676963370f09c",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/transparency/boot_integrity_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "3276a44dbb40dd3e16f7e5e92b4d5ffba42f2ed7",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/tv/tv_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "eb237dc85017981546a78536904659668956e9ab",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/uprobestats/uprobestats_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "329a9fb365bf3a19eb72194c39ac5b5bbb78270a",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/usb/usb_atoms.proto",
+      "kind": "blob",
+      "oid": "e696bb72457bac9bab56b55228e2093ace6f90da",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/usb/usb_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "69fd87b9a236369124a7c61339d2ed02d899b174",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/users/users_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "7569241145676051cbe2eb3e6a60238976a92810",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/uwb/uwb_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "686d1c075344ca77126c49ce885f34601e1ee3f2",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/vcn/vcn_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "3fb30470dbd1c8dcec743ff339940285c8da51bd",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/view/inputmethod/inputmethod_atoms.proto",
+      "kind": "blob",
+      "oid": "1170235023bc08b9252dbc3de8945f729a1a14e2",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/virtualgamepad/virtualgamepad_extensions_atoms.proto",
+      "kind": "blob",
+      "oid": "cb39a94d89d4b72fe3f2a7387a9ea4da984720f5",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/virtualization/virtualization_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "5b44ada725f9c7db14b34637efb67415b242b3d3",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/wear/connectivity/wear_connectivity_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "e76e5b5c12ad67cdd1ed978e444125153945d7ec",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/wear/keyguard/wear_keyguard_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "8c6d1da8f4c18b773c2f02274768dd3186cd4acd",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/wear/media/wear_media_atoms.proto",
+      "kind": "blob",
+      "oid": "6f953a03b1bfee46b03b123ee0c6150f8e166496",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/wear/media/wear_media_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "0ae242a1b79d4e13188d52a81d98d1af26a8e7ca",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/wear/modes/wear_modes_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "a8172b6f267a0067885ae35a8ddd1b0ad72245e0",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/wear/notification/wear_notification_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "3b76281e32da073d378b6eda1c92adcf3f1e35ce",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/wear/physicalux/wear_physicalux_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "04c45af7113e35c0848bb96438b28231651ffe9d",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/wear/powermanager/powermanager_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "557e38eae76a47a4016362b6ef85e5bc3123463e",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/wear/prototiles/prototiles_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "1814e927ebc030e9765c829ce57fe250ea8e90e3",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/wear/setupwizard/wear_setup_wizard_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "b801e688667cddaa92210af5768ebaa50ff9b61b",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/wear/time/wear_time_sync_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "a2097b131d2cb3b6ee9551c8dbf59ac61a81d055",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/wear/wakeupmemory/wear_wakeup_memory_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "98a0cb821f35667e92e94f078608e567ca56d852",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/wear/watchface/wear_watchface_extention_atoms.proto",
+      "kind": "blob",
+      "oid": "6581f8e9c0801b79f0fb5fd8a0daae7bc9363712",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/wearpas/wearpas_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "3c4a8625cf3bed6420ae9a0fd5aeb0782e460dcc",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/wearservices/wearservices_atoms.proto",
+      "kind": "blob",
+      "oid": "a4d5caea2344e9fc6bd81e5f05bcb833a9792077",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/wearservices/wearservices_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "e24d93b04155a4918aeb5456b01857d8d59f3b30",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/wearsysui/wearsysui_atoms.proto",
+      "kind": "blob",
+      "oid": "b9d6b74995684fe57c113b199421d9503e3cb6ca",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/wearsysui/wearsysui_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "cda93392049d24cec07ed440ac32d2182da556e9",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/webapp/webapp_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "a2084e7442521dd078d8d3e2dfa6496697365ee1",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/webview/webview_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "e8ae5936e857e73a1c0d525be091333187da99a6",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/wifi/wifi_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "87ffb481a0307caf4d686380854f3f0841b23bda",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/atoms/xr/recorder/xr_recorder_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "bb45975480ac0bf64fbf0e1a57e9593205d14695",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/attribution_node.proto",
+      "kind": "blob",
+      "oid": "ec6f37e17ad43507fa9f909cb3fb844a1c43a7d2",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/accessibility/Android.bp",
+      "kind": "blob",
+      "oid": "8ab703e3325762b75b00453d48537134e9c8124a",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/accessibility/enums.proto",
+      "kind": "blob",
+      "oid": "7a2f465d62f6873b1620c1815960086a8611b26c",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/accounts/enums.proto",
+      "kind": "blob",
+      "oid": "4cef26aaa628f07c3b16b2848d9a1522b27b70be",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/aconfig/enums.proto",
+      "kind": "blob",
+      "oid": "2581cc588bfb41649b4a13e08f30381c92b6b6a7",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/adpf/enums.proto",
+      "kind": "blob",
+      "oid": "80652945faa8baae03fdceb31322b6f14420a01a",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/adservices/common/OWNERS",
+      "kind": "blob",
+      "oid": "7696fa69a971bb41495cca5eb6e29ca258155f42",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/adservices/common/adservices_api_metrics_enums.proto",
+      "kind": "blob",
+      "oid": "6cdf616d858f94361dc1fe63efb0ae0a351a5c81",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/adservices/common/adservices_cel_enums.proto",
+      "kind": "blob",
+      "oid": "cb15ff0a92e4e8c06ec0cd6b145cfa962e84b68a",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/adservices/common/adservices_enums.proto",
+      "kind": "blob",
+      "oid": "c23827a30ea93ecc6fed3e2aecf730a843e07149",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/adservices/enrollment/enums.proto",
+      "kind": "blob",
+      "oid": "840b4e630ab545968167125dbba43eec7f7bf44b",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/adservices/fledge/enums.proto",
+      "kind": "blob",
+      "oid": "6142929087a0a80c82051aa3f577679cbe2409dc",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/adservices/measurement/enums.proto",
+      "kind": "blob",
+      "oid": "47806eeb58721eec3031846420c2d2b00b30bcf9",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/anr/enums.proto",
+      "kind": "blob",
+      "oid": "a8d2cb09e1602a83f1f0e93e4d4da9e189076344",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/apex/enums.proto",
+      "kind": "blob",
+      "oid": "0a0ca4c4ceff76b34a04579cf5493a6424558fbe",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/app/job/job_enums.proto",
+      "kind": "blob",
+      "oid": "c68671da61a7f0c1097d75ab38a45a99b33c3ab0",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/app/media_output_enum.proto",
+      "kind": "blob",
+      "oid": "88376c62045d61e7a19feb5b2f12b6ea33d272e0",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/app/remoteprovisioner_enums.proto",
+      "kind": "blob",
+      "oid": "1cd747cdd879ce04290c961396a4792473d322a0",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/app/settings/OWNERS",
+      "kind": "blob",
+      "oid": "36c28d375a3ea7770191d51e02eb6968ae51d74e",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/app/settings/settings_enums.proto",
+      "kind": "blob",
+      "oid": "eceae53eb6dc07b030ec1b8e6f9bac2e7501430a",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/app/tvsettings_enums.proto",
+      "kind": "blob",
+      "oid": "6563e7f995ee5016e47c08f4efe20bd6b36e4bc3",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/app/wearservices/OWNERS",
+      "kind": "blob",
+      "oid": "4cf4fe4953136516ba07a1308598c5e79c99bf6f",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/app/wearservices/wearservices_enums.proto",
+      "kind": "blob",
+      "oid": "677da87b3ad6b5b3c7f3af5fd0b6ca6f7ae12713",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/app/wearsettings/OWNERS",
+      "kind": "blob",
+      "oid": "c3a511efb33a40edbb64430475eac5218bca5b57",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/app/wearsettings/wearsettings_enums.proto",
+      "kind": "blob",
+      "oid": "af56878c2df6df4c6c2caebd8ee03396505246a4",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/app/wearsysui/OWNERS",
+      "kind": "blob",
+      "oid": "b48380721f3af998eb26a3fc927712438a03d6c4",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/app/wearsysui/wearsysui_enums.proto",
+      "kind": "blob",
+      "oid": "58d8f861984e97d5cb3badf720bf4ec4b312176f",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/app_shared/OWNERS",
+      "kind": "blob",
+      "oid": "aeab36a5ce96a56dee9fbaa36cb9aaf106eab3e8",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/app_shared/app_enums.proto",
+      "kind": "blob",
+      "oid": "e4e13771602e0e8186246613933729528a7037ed",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/app_shared/app_op_enums.proto",
+      "kind": "blob",
+      "oid": "b55444bdb07429ae311c42feb4dcb240ae0ca795",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/appfunctions/OWNERS",
+      "kind": "blob",
+      "oid": "c7c63aed21bdf157259ee5d54a16ec17958a8b32",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/appfunctions/enums.proto",
+      "kind": "blob",
+      "oid": "738ed3b79f0fb514d4ddcc9282b1fcc4aa0f6511",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/appsearch/enums.proto",
+      "kind": "blob",
+      "oid": "14427cfb81448a346fed835ca61d8dd3a82562a2",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/art/OWNERS",
+      "kind": "blob",
+      "oid": "3c4438fca955d744d2ea14c052d53e7268b1725c",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/art/art_enums.proto",
+      "kind": "blob",
+      "oid": "bdce1a517cd7b17eb19667fddfd45058861f3e46",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/art/common_enums.proto",
+      "kind": "blob",
+      "oid": "7873229ac3b808856f3f455f9e910eaa6721f3d2",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/art/odrefresh_enums.proto",
+      "kind": "blob",
+      "oid": "331f43bd71d69ae9db56cb931500f780efd7bb8b",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/autofill/enums.proto",
+      "kind": "blob",
+      "oid": "acba8bcc296f2a0383d2f575dc38e4da887e55f3",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/bluetooth/Android.bp",
+      "kind": "blob",
+      "oid": "2660bf437632e6d735989d1d2240bddaea5b82c2",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/bluetooth/BUILD.gn",
+      "kind": "blob",
+      "oid": "3fd19f6bc66d75a2a1c5eef506ac6519dc8fcf14",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/bluetooth/OWNERS",
+      "kind": "blob",
+      "oid": "0cd6c47c31ecf5e4ce13e256b02bee09c73d570e",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/bluetooth/a2dp/enums.proto",
+      "kind": "blob",
+      "oid": "5a025bdd6c1020b662247e7512934cbce82c922f",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/bluetooth/enums.proto",
+      "kind": "blob",
+      "oid": "af1ea05e971a8a60c9361fbab03f60dfebc2aed5",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/bluetooth/gatt/enums.proto",
+      "kind": "blob",
+      "oid": "404fa341b5926cefcfe329a618c9f2017c95f6f2",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/bluetooth/hci/enums.proto",
+      "kind": "blob",
+      "oid": "68c0bb06ba147adcb9120f2d5fca6c013bcef2ad",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/bluetooth/hfp/enums.proto",
+      "kind": "blob",
+      "oid": "e2ff4fb1c05c78c8b2f1dce796d788667478ec2c",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/bluetooth/le/enums.proto",
+      "kind": "blob",
+      "oid": "c5ae84ddc935a4130e63535850ca7e7c3ae546b7",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/bluetooth/leaudio/enums.proto",
+      "kind": "blob",
+      "oid": "a76338842fc8eb90df0d65c80989bf3fece99b69",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/bluetooth/rfcomm/enums.proto",
+      "kind": "blob",
+      "oid": "7398936ccc3810df82a11bd5c79d5362b271ea18",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/bluetooth/smp/enums.proto",
+      "kind": "blob",
+      "oid": "b9f43dc698616347b089cc8dd88ba3cc044e0c63",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/conscrypt/OWNERS",
+      "kind": "blob",
+      "oid": "87a5dbee327a461574bbefa2d0b3b121c5be285d",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/conscrypt/enums.proto",
+      "kind": "blob",
+      "oid": "fc62fb1b2f935f0a5ae791d98bc086cd015e1678",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/contactspicker/OWNERS",
+      "kind": "blob",
+      "oid": "2a3236ff939b08b1961b29ee40aa47fe24179b70",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/contactspicker/contacts_picker_enums.proto",
+      "kind": "blob",
+      "oid": "dab1c9469b5fae9b37a743bb57c38bc457ab2e69",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/contexthub/enums.proto",
+      "kind": "blob",
+      "oid": "c3fb4723e05c56620e18c9baf707401091a286d5",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/coregraphics/enums.proto",
+      "kind": "blob",
+      "oid": "3b75bfc7425157bff18517b43eff73dc731c871e",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/corenetworking/OWNERS",
+      "kind": "blob",
+      "oid": "73a592f6abb913916dfbfb2983c67fc4147ba8f2",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/corenetworking/captiveportallogin/enums.proto",
+      "kind": "blob",
+      "oid": "7695c79e27fbbe4c690c69c552380704644704ce",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/corenetworking/certificatetransparency/OWNERS",
+      "kind": "blob",
+      "oid": "62cf4c0e713309c836eac0275557a340216117d8",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/corenetworking/certificatetransparency/enums.proto",
+      "kind": "blob",
+      "oid": "54e28f8a5b06c625ed2275c65920cfd429ee3dd8",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/corenetworking/connectivity/enums.proto",
+      "kind": "blob",
+      "oid": "437b858892f8325b9f4c854bde5dc444b914f1d5",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/corenetworking/platform/enums.proto",
+      "kind": "blob",
+      "oid": "42e15c48816be8aa82e6842b13defd51b2211dbd",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/crossdevicesync/enums.proto",
+      "kind": "blob",
+      "oid": "63fa5fb2993a920ac24f03eadac17ec860b1ab3f",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/debug/OWNERS",
+      "kind": "blob",
+      "oid": "b97f7956d1150840d7b6b2edd5f3d6e88ef2cc3e",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/debug/enums.proto",
+      "kind": "blob",
+      "oid": "4e2e31279d8fd6a8bc96943d5083f39f10469564",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/desktopmode/OWNERS",
+      "kind": "blob",
+      "oid": "ee079e8a6e1e82c66a7ec6506e07b2bb4c945ca6",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/desktopmode/enums.proto",
+      "kind": "blob",
+      "oid": "603c2a3dc9c9325a1a550e50c906fb3a00c1069a",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/devicepolicy/enums.proto",
+      "kind": "blob",
+      "oid": "38300b90e601c962dd89011d47484496582c160f",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/display/display_enums.proto",
+      "kind": "blob",
+      "oid": "a4dce7f37db052b2cd0ded0791e9325525db3174",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/dnd/dnd_enums.proto",
+      "kind": "blob",
+      "oid": "6edc32e2e18d645b24f73a14884721ff974ee10d",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/federatedcompute/OWNERS",
+      "kind": "blob",
+      "oid": "debeaa9a0598d06fb6c81bf2c7814cbf08f7b644",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/federatedcompute/enums.proto",
+      "kind": "blob",
+      "oid": "29bc07f72d47d078d164e20f0edbc1ab91f1a9a1",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/framework/compat/OWNERS",
+      "kind": "blob",
+      "oid": "46e7fdec49e94c8c267d9f712f33424fa906c387",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/framework/compat/enums.proto",
+      "kind": "blob",
+      "oid": "b5087c1cd7383e9a488bc9da150200274ad745bb",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/framework/trust_token_enums.proto",
+      "kind": "blob",
+      "oid": "c2344179efc7c0071e7cec20b9399cbd1b511504",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/hardware/biometrics/enums.proto",
+      "kind": "blob",
+      "oid": "0421b829c77db1d58cde7c7055e79f2434628a8e",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/hardware/health/enums.proto",
+      "kind": "blob",
+      "oid": "1652f657fce9ad81b3c581916cf15ed2a6a98612",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/hardware/sensor/assist/enums.proto",
+      "kind": "blob",
+      "oid": "012dcb2e937eab00d6a896d8be385e0a2d8816e8",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/healthfitness/OWNERS",
+      "kind": "blob",
+      "oid": "4d65ae50d271342ad779e2dafbd58fa55a3d3a7c",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/healthfitness/api/enums.proto",
+      "kind": "blob",
+      "oid": "2840caa9020322f195d171614c7551a7f83c15e4",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/healthfitness/ui/enums.proto",
+      "kind": "blob",
+      "oid": "3e9df463f8751631abb05a0039b8873164a2ce15",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/hotword/enums.proto",
+      "kind": "blob",
+      "oid": "8409a612291743c4bcd77872a27b5c540d5c7642",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/input/enums.proto",
+      "kind": "blob",
+      "oid": "def2118e0aa6c68a0c781788b1c37ce2cb0b97d6",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/jank/OWNERS",
+      "kind": "blob",
+      "oid": "2bc95caa0175bfcfa2a6d88d4e35840f85f869d1",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/jank/TEST_MAPPING",
+      "kind": "blob",
+      "oid": "1ab5d2de818d381aa3df3a1560abadd538abcb85",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/jank/enums.proto",
+      "kind": "blob",
+      "oid": "e18bc8168bb9e79b0730ec82d427f0052f3e7d53",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/media/OWNERS",
+      "kind": "blob",
+      "oid": "0ca62e389806b3885f0b821f8cf01b24418b9bc8",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/media/audio/OWNERS",
+      "kind": "blob",
+      "oid": "479b87bda0c59776fea8fe7edd4af89af6225c8c",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/media/audio/enums.proto",
+      "kind": "blob",
+      "oid": "aeded08614224b0163ce8938868649510eac75e8",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/media/codec/enums.proto",
+      "kind": "blob",
+      "oid": "511d26e30badd435f0d5a488e80c87ac6119983d",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/media/drm/enums.proto",
+      "kind": "blob",
+      "oid": "14e3663345241051550895d9deb1fc3f2e7a1b44",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/media/editing/enums.proto",
+      "kind": "blob",
+      "oid": "0ed3e267897343b13f68fb4fb5fa8235528212ba",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/media/enums.proto",
+      "kind": "blob",
+      "oid": "7a20b677c5d48cf264ca9d9bb14221ac0cca7da4",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/media/hdr/enums.proto",
+      "kind": "blob",
+      "oid": "2b89b16b3e3d3bff2c373a72dce86134277eb246",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/media/midi/enums.proto",
+      "kind": "blob",
+      "oid": "1553f2367e985b3d12a922c765dd733b07be8784",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/media/outputswitcher/enums.proto",
+      "kind": "blob",
+      "oid": "cf3a982303b1e88ecc994d5f25b5c52bd899d1dd",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/media/processing/enums.proto",
+      "kind": "blob",
+      "oid": "2613802ce2e1ee47302fa6b7e371bfb7f9148a59",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/media/router/OWNERS",
+      "kind": "blob",
+      "oid": "625207ee5fd97be4aa525314f9f456697ea95453",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/media/router/enums.proto",
+      "kind": "blob",
+      "oid": "d5b3972678afce7c04a619d8248629f0e6219199",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/media/session/enums.proto",
+      "kind": "blob",
+      "oid": "950929d9cfa2e34fe0c65bfd53c5e0a6572c4877",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/memory/enums.proto",
+      "kind": "blob",
+      "oid": "c28a7d1b7fe1b0bc147e65fc3a0a65f5fe894543",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/microxr/OWNERS",
+      "kind": "blob",
+      "oid": "f302ab8f1827727a6816a0efc478ab9bfb8631e0",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/microxr/enums.proto",
+      "kind": "blob",
+      "oid": "7721317f0d7f7150fd336b40e2650912b063883c",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/mms/enums.proto",
+      "kind": "blob",
+      "oid": "38a0958c8a616319faff0feb67bdd59d9d351910",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/nearby/enums.proto",
+      "kind": "blob",
+      "oid": "ae4b3e0bf1cb63d763c72dd970c00150f1c08b09",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/net/enums.proto",
+      "kind": "blob",
+      "oid": "4f0aeb3b16f595f4fbfdceaf6175375bb437a2b5",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/neuralnetworks/enums.proto",
+      "kind": "blob",
+      "oid": "90f82035c7b7ed4a8c940c3eea8fe9d31832982e",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/nfc/enums.proto",
+      "kind": "blob",
+      "oid": "92fa0d2b12cc99d6ddbba547caf7ad498b1d120e",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/notification/enums.proto",
+      "kind": "blob",
+      "oid": "8c1223057ed04353ee13f533bfe73c2065f74e3e",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/npu/enums.proto",
+      "kind": "blob",
+      "oid": "8b1b0f9ca64a0e32aa31536bf82639fe9fbadeaa",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/os/enums.proto",
+      "kind": "blob",
+      "oid": "c9e6ec99440d5dca924aba03513a0466bfb28642",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/pdf/enums.proto",
+      "kind": "blob",
+      "oid": "ad3b1af4113c83c7feefcfecf53fbbb23bba1419",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/performance/enums.proto",
+      "kind": "blob",
+      "oid": "8a7a4154b2c1e91ec4ec8b2262b05a0ab57a0861",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/photopicker/OWNERS",
+      "kind": "blob",
+      "oid": "fd36bf8ad499beb6ad8dd1045340ab6f57a58252",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/photopicker/enums.proto",
+      "kind": "blob",
+      "oid": "ff6e59c1e2784eaff9717283238edf61a892f8c6",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/printing/Android.bp",
+      "kind": "blob",
+      "oid": "b8dceb32409798b47c9de41aef4355be4ff20efa",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/printing/enums.proto",
+      "kind": "blob",
+      "oid": "e28216ab2c1e5514778d699d9070b11c1502a80d",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/privatespace/OWNERS",
+      "kind": "blob",
+      "oid": "2520f2f2c22d8f38833a158d9e265919fb854d3c",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/privatespace/private_space_enums.proto",
+      "kind": "blob",
+      "oid": "943e559c93407283e9bc3f4cd79bbd4a7695200a",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/profiling/OWNERS",
+      "kind": "blob",
+      "oid": "88af6bab90a1a6cb2f71e0036c25b64358a8a411",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/profiling/enums.proto",
+      "kind": "blob",
+      "oid": "d096c47dc4c7f4ffc19208bff6876e04935c234b",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/ranging/enums.proto",
+      "kind": "blob",
+      "oid": "5242f7f01bd3cbfdbaad4649286f310b4def7bfc",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/security/advancedprotection/OWNERS",
+      "kind": "blob",
+      "oid": "9bf5e58c01a9464094a1e52484b547a821208d16",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/security/advancedprotection/enums.proto",
+      "kind": "blob",
+      "oid": "95cbcff64ca95e1b36e029cf259a1e1594943c17",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/security/apksigverify/OWNERS",
+      "kind": "blob",
+      "oid": "7410ce34744f25b3a112bfb367189ba33376fb6e",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/security/apksigverify/enums.proto",
+      "kind": "blob",
+      "oid": "7b74d23c6fc15f4c5f212e343e6a4c6aaac556b3",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/server/connectivity/Android.bp",
+      "kind": "blob",
+      "oid": "8e2f45236005e5388e31be7f02a5c3046d30353b",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/server/connectivity/data_stall_event.proto",
+      "kind": "blob",
+      "oid": "0d5270e7837fb1d193f5ad17372a8a43301a56c8",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/server/display/enums.proto",
+      "kind": "blob",
+      "oid": "a9bec32f81ad8dec3512f2e9a9f419b0438049d6",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/server/enums.proto",
+      "kind": "blob",
+      "oid": "7432c44832b292b259e82379ff0bc0161ecf86a1",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/server/job/enums.proto",
+      "kind": "blob",
+      "oid": "e88a40db7e127b5c47180c187337e2ddbc5a6757",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/server/location/enums.proto",
+      "kind": "blob",
+      "oid": "943ff181fe14e3678e052f027c1688ec7cfc3c65",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/service/enums.proto",
+      "kind": "blob",
+      "oid": "f524b9422ee6090e8f5013b3735fcda784c1a487",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/service/procstats_enum.proto",
+      "kind": "blob",
+      "oid": "d254cca0ccf5fae17210dfaea62805dd91dcf4a5",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/signature/enums.proto",
+      "kind": "blob",
+      "oid": "e3ce03d3e8cdba392a047b1ce4d3147008fcbb46",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/accessibility/accessibility_enums.proto",
+      "kind": "blob",
+      "oid": "1aad072b2c2bacacc755700bed3f732c4ad6db70",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/connectivity/Android.bp",
+      "kind": "blob",
+      "oid": "89a53cf5ed9789a672c3b0f4139d33683b2545f0",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/connectivity/OWNERS",
+      "kind": "blob",
+      "oid": "73a592f6abb913916dfbfb2983c67fc4147ba8f2",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/connectivity/connectivity_service.proto",
+      "kind": "blob",
+      "oid": "b2df89bd2280c8cfcd6ff92c4488447fb8f75dea",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/connectivity/network_stack.proto",
+      "kind": "blob",
+      "oid": "a42451cddbc0dc5686fafb420781d4e17938d4bd",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/connectivity/tethering.proto",
+      "kind": "blob",
+      "oid": "e596fd8f0b523a1928ab58e67a2bbb7943e2747c",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/devicepolicy/Android.bp",
+      "kind": "blob",
+      "oid": "8dea9be6557064e3c81b992d3cc15b5b78d701fd",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/devicepolicy/device_policy_enums.proto",
+      "kind": "blob",
+      "oid": "a8312f7667673f86ceffb49fb787da61718d9f22",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/dnsresolver/Android.bp",
+      "kind": "blob",
+      "oid": "dbbed464dae1a3f340de497c742b93fbc88bcbfd",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/dnsresolver/dns_resolver_enums.proto",
+      "kind": "blob",
+      "oid": "7bc575312d7605bffa54e3b770824030e7039220",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/docsui/docsui_enums.proto",
+      "kind": "blob",
+      "oid": "5963f6a7f938c52249206b59f6557bcde160521a",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/enums.proto",
+      "kind": "blob",
+      "oid": "8f8055ed24514f950c370e0a753346e4df6434a7",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/hdmi/enums.proto",
+      "kind": "blob",
+      "oid": "db79de7df78d845f1502c1658bf638da15abf0d1",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/ike/ike.proto",
+      "kind": "blob",
+      "oid": "2fbc8f998a9afb541bf97c6f37bab24095a412a9",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/intelligence/enums.proto",
+      "kind": "blob",
+      "oid": "0c210e3fd08f4365762ecce937851c10716ddf41",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/launcher/Android.bp",
+      "kind": "blob",
+      "oid": "ba73d6acf4654884115acb5ad458cd284200d571",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/launcher/launcher.proto",
+      "kind": "blob",
+      "oid": "515fbbd758b472eebe15ffd841ba30272f7e5f70",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/location/location_enums.proto",
+      "kind": "blob",
+      "oid": "6d7f0e15ac0b549f60de88c2eb86a1dbcb2fb704",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/mediametrics/mediametrics.proto",
+      "kind": "blob",
+      "oid": "3d4984f8afda957c7ffaf488d78656bac4272f87",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/mediaprovider/mediaprovider_enums.proto",
+      "kind": "blob",
+      "oid": "3c3cb0082a356c2470c7823286ca7ef4193c402e",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/mobiledatadownload/enums.proto",
+      "kind": "blob",
+      "oid": "c4038fe3cf19ecc488d49e27712a382a2f98d2cf",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/otaupdate/updateengine_enums.proto",
+      "kind": "blob",
+      "oid": "a6e9919ba606f142cd6ebb8d23e4a3a5e258d4ec",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/privacysignals/enums.proto",
+      "kind": "blob",
+      "oid": "8ca8932d75e614463f3497136bb88c3bc363800c",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/safetycenter/enums.proto",
+      "kind": "blob",
+      "oid": "477a467e910536d43540a3094486f1ce2304960a",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/storage/storage_enums.proto",
+      "kind": "blob",
+      "oid": "6892e287472f185d3c0c209dda9659d5c666d3f5",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/style/Android.bp",
+      "kind": "blob",
+      "oid": "b9fd73d77065fb3ebe52283e8a689a7fc287bbd6",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/style/style_enums.proto",
+      "kind": "blob",
+      "oid": "cacb9c03f3fb0384384b966aaec83478f87b8ad5",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/sysui/notification_enums.proto",
+      "kind": "blob",
+      "oid": "b3c87f9d9c7138811ead332e157973df6b66b4ac",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/textclassifier/Android.bp",
+      "kind": "blob",
+      "oid": "a8a25dbef0f7e134bb289bee9201c432b46926da",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/textclassifier/textclassifier_enums.proto",
+      "kind": "blob",
+      "oid": "869ca37c2ccff3cb198c5b843bc9e0f74e786323",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/tls/enums.proto",
+      "kind": "blob",
+      "oid": "d1b10255a013b36f37292e4a35453d379775be5a",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/tv/tif_enums.proto",
+      "kind": "blob",
+      "oid": "8e0ffa26a38c90121b56784308f7e351cad4882d",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/vcn/OWNERS",
+      "kind": "blob",
+      "oid": "f6f57eb4c2371ff93cc412b937732c2ea97b0c57",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/vcn/vcn.proto",
+      "kind": "blob",
+      "oid": "5e31ca6f4b6ee198d1602130fc136e10e9ff2aff",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/stats/wm/enums.proto",
+      "kind": "blob",
+      "oid": "c6325de865138c477ea5d2747aa3da865104786d",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/statusbar/enums.proto",
+      "kind": "blob",
+      "oid": "b74b91278666648219ea64e1d4fe35a99dc5715e",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/system/security/keystore2/enums.proto",
+      "kind": "blob",
+      "oid": "98065f262185b05a061225f1890fcd02e3c6dbc0",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/telecomm/Android.bp",
+      "kind": "blob",
+      "oid": "0e8e0cd9c442592631dc83d41aafc016d04e8131",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/telecomm/enums.proto",
+      "kind": "blob",
+      "oid": "3b11aec36ad528f6f45aead3e87c135c88834277",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/telephony/cellbroadcast/enums.proto",
+      "kind": "blob",
+      "oid": "2e5b49d68433717355b694befdfc32f3b3b6e446",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/telephony/enums.proto",
+      "kind": "blob",
+      "oid": "5b0917ba07c3cc3f1067d3e80c941fbda92b029a",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/telephony/iwlan/OWNERS",
+      "kind": "blob",
+      "oid": "242d27659969f467f9277f4abe4b0619f5103a5b",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/telephony/iwlan/enums.proto",
+      "kind": "blob",
+      "oid": "d8277136d5f974a413ed7a504cb282b0f473c1e2",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/telephony/qns/enums.proto",
+      "kind": "blob",
+      "oid": "1ddcd411a7034d20ffc1b60d51e89c871711293a",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/telephony/satellite/enums.proto",
+      "kind": "blob",
+      "oid": "7fbafa2cbb6cf0d422e87bec6116e90224643bd6",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/telephony/security/enums.proto",
+      "kind": "blob",
+      "oid": "8b636b6a54a2fc18e54fac2a1aef4e725c670881",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/transparency/enums.proto",
+      "kind": "blob",
+      "oid": "91550024b520a30e63a1ff61c2ba56a5379d1302",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/usb/OWNERS",
+      "kind": "blob",
+      "oid": "65102cda38ed639eef67fd6738509aba69234ec2",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/usb/enums.proto",
+      "kind": "blob",
+      "oid": "b12b99325a993bd40abf7f7eb767cc5d0b11ad81",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/users/enums.proto",
+      "kind": "blob",
+      "oid": "67d419852d5b4a659e0b9e89c19886b149a29f68",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/uwb/enums.proto",
+      "kind": "blob",
+      "oid": "daf5aea583a84b2e7c8c2dfa38e8cda4fce59e35",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/view/enums.proto",
+      "kind": "blob",
+      "oid": "75ebc992122446852f41c6b028e5cb14739a52b5",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/view/inputmethod/OWNERS",
+      "kind": "blob",
+      "oid": "3870bb20eedcb10118e221a94053e8566033798e",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/view/inputmethod/enums.proto",
+      "kind": "blob",
+      "oid": "aaf43f332006ef77f31396120afd7e9f4022cef3",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/wear/connectivity/OWNERS",
+      "kind": "blob",
+      "oid": "411435786d1e2cd70a2fd9731c74fd2136694d90",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/wear/connectivity/enums.proto",
+      "kind": "blob",
+      "oid": "c64a0717391253ecf36cffd2d03fbd6c30649213",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/wear/media/enums.proto",
+      "kind": "blob",
+      "oid": "eab4ff4b44c0210d7222a43cc56b3cb4626f4d28",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/wear/modes/enums.proto",
+      "kind": "blob",
+      "oid": "8eb97399ddf140aa55dca995cf12ca547c23be5f",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/wear/notification/OWNERS",
+      "kind": "blob",
+      "oid": "eeaf32a23276ef97c2b6449e9ec754be5a3c39c7",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/wear/notification/enums.proto",
+      "kind": "blob",
+      "oid": "999bdf396d1a19b49e35479d72e4c4b725916446",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/wear/physicalux/enums.proto",
+      "kind": "blob",
+      "oid": "1fad4e5f12c523b3eb1f41dc55939d42bfa01a32",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/wear/setupwizard/enums.proto",
+      "kind": "blob",
+      "oid": "42eea53516f978b0ae05ab5f22b1997b90059283",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/wear/time/enums.proto",
+      "kind": "blob",
+      "oid": "475a65524f0ede78466727313948503936dcc3ac",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/wifi/OWNERS",
+      "kind": "blob",
+      "oid": "d3967205ca8512c26c3627ba1cb15fb6ae00a927",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/enums/wifi/enums.proto",
+      "kind": "blob",
+      "oid": "a26bd1233e5c62ef360af4bc71d77f9f1f6fa0ff",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/.clang-format",
+      "kind": "blob",
+      "oid": "cead3a079435208b34ac054f2804129eb6471083",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/Android.bp",
+      "kind": "blob",
+      "oid": "059100b84fb57088350ab2b8e41cbafdc7b64157",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/TEST_MAPPING",
+      "kind": "blob",
+      "oid": "9c88060d4323773562b17fd2716cf627d229c2e4",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/catalog/accessibility.cfg",
+      "kind": "blob",
+      "oid": "e9d0bbf74f60ab15310038fbb174fcf23ff44ad0",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/catalog/app.cfg",
+      "kind": "blob",
+      "oid": "c064285c761d73055a385e57c9261c8f59f15f16",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/catalog/automotive_os.cfg",
+      "kind": "blob",
+      "oid": "13d0c0b4c06d56e63dad69fdbf46b9259f745e39",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/catalog/battery.cfg",
+      "kind": "blob",
+      "oid": "57817b023055181ab5db22dc86b9c57f3e11db1a",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/catalog/binary_transparency.cfg",
+      "kind": "blob",
+      "oid": "b88e09ac69780b582c693482e30af5daa9abcbf1",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/catalog/biometric.cfg",
+      "kind": "blob",
+      "oid": "01ed5a1e47f475012a34d036b6a7090d7574a862",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/catalog/content_capture.cfg",
+      "kind": "blob",
+      "oid": "c1b29563e4c42caf08bc1d47961c020b03a1d7cc",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/catalog/core_networking.cfg",
+      "kind": "blob",
+      "oid": "2292534a0941e6f1b162e21ccb60703f78437a96",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/catalog/cpu.cfg",
+      "kind": "blob",
+      "oid": "523db77f4fafe284e93a6484f58cf900a9f8f759",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/catalog/device_lock.cfg",
+      "kind": "blob",
+      "oid": "2d08a21e7eae2d0fd46c9e5659d851271869e27a",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/catalog/input.cfg",
+      "kind": "blob",
+      "oid": "c71c7d7ab2bcdffde6cf5937a7c13fd8a61ed381",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/catalog/intents.cfg",
+      "kind": "blob",
+      "oid": "6d11ed922d051b6e2de1e10ed067f1a988b8528f",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/catalog/job_scheduler.cfg",
+      "kind": "blob",
+      "oid": "937f038560fdfdb1533e2c0f499bcd01297f720c",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/catalog/media_audio.cfg",
+      "kind": "blob",
+      "oid": "624628bd783d4838804f4a42c4bd5a474da6c061",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/catalog/notifications.cfg",
+      "kind": "blob",
+      "oid": "fe72aaba483326063b6622b57aa55fdbbce3eb48",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/catalog/screen.cfg",
+      "kind": "blob",
+      "oid": "2e3c7e12c771334ca1d1f23c6d6fed09621aec92",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/catalog/speech_recognition.cfg",
+      "kind": "blob",
+      "oid": "79f5de1c1615b9ebe06d48eb5f49459055cb020b",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/catalog/stability_anr.cfg",
+      "kind": "blob",
+      "oid": "a330f8ea7712d6f3af2afb70c953eb8216cf1657",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/catalog/stability_errors.cfg",
+      "kind": "blob",
+      "oid": "d08e027f85625f46043391048a964a5a942d6fb5",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/catalog/statsd.cfg",
+      "kind": "blob",
+      "oid": "b683ffe56927cb1566f7578efd0ba011a040dcd2",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/catalog/tex_test.cfg",
+      "kind": "blob",
+      "oid": "df3ef730cf3d1f4c775ec8a67ef4fcd1822fc9c8",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/catalog/vibrator.cfg",
+      "kind": "blob",
+      "oid": "aa12074071b9a4c4ba8e9241b2620359854fe2b8",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/catalog/virtual_devices.cfg",
+      "kind": "blob",
+      "oid": "8ba8d5cf5c2b27c7745b805283b81a41751e7d5e",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/catalog/wear_frameworks.cfg",
+      "kind": "blob",
+      "oid": "33a3946a89c30f1bc6c06c7ff6cedb9f14d741c2",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/catalog/wear_notifications.cfg",
+      "kind": "blob",
+      "oid": "16b18620cd11a7c11b483d6d457e07de1119b332",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/catalog/webview.cfg",
+      "kind": "blob",
+      "oid": "37bf951ccf38a7155c4cd57a5b5c9c661ce9697d",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/express_config.proto",
+      "kind": "blob",
+      "oid": "5d272ec2430b1a682eb7ce718dab1e72c86f5804",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/expresscatalog-code-gen/Android.bp",
+      "kind": "blob",
+      "oid": "ff5015460a2f1554750f51e750cf48f308c94a13",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/expresscatalog-code-gen/codegen.cpp",
+      "kind": "blob",
+      "oid": "1101bed636f30512836ac0c45b7626ac7ca85622",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/expresscatalog-code-gen/codegen.h",
+      "kind": "blob",
+      "oid": "ec05926fd85fd05be701aba60df79a910f45d20a",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/expresscatalog-code-gen/codegen_java.cpp",
+      "kind": "blob",
+      "oid": "e6a0b296d4f9267491576618ca4220f42a3e1db7",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/expresscatalog-code-gen/codegen_java.h",
+      "kind": "blob",
+      "oid": "668745d7d1ff1310ce5cc9c6a54821a403c01819",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/expresscatalog-code-gen/main.cpp",
+      "kind": "blob",
+      "oid": "082c22ad6000db41399ecad7781132e11efbf9a4",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/expresscatalogvalidator/Android.bp",
+      "kind": "blob",
+      "oid": "123eeb46cfa6f8e349840a1b681348a8778a2f57",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/expresscatalogvalidator/main.cpp",
+      "kind": "blob",
+      "oid": "39d994e64cbc063684210f342be452a778ddee4c",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/libexpresscatalog-utils/Android.bp",
+      "kind": "blob",
+      "oid": "b6e0fedfa8a50283d330a512da3e65242d112ce8",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/libexpresscatalog-utils/include/expresscatalog-utils.h",
+      "kind": "blob",
+      "oid": "501d62398211ebeba4425c68188fbc69e2eafbd2",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/libexpresscatalog/Android.bp",
+      "kind": "blob",
+      "oid": "468ebaf8ea6706359e2f073b8e14508a8b5b70c7",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/libexpresscatalog/catalog.cpp",
+      "kind": "blob",
+      "oid": "8a132baefbff8ffae80a9b69b623c67918fde0f1",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/express/libexpresscatalog/include/catalog.h",
+      "kind": "blob",
+      "oid": "58826105ae8ad6260c75b9c8e2e3a47294f99b46",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/message/connectivity/Android.bp",
+      "kind": "blob",
+      "oid": "d2152168630490819cf7c7753ce0fce54c9cf92b",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/message/connectivity/data_stall_event.proto",
+      "kind": "blob",
+      "oid": "058721f4e42f64e5102f79c7e0999431e805e199",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/message/connectivity/network_stack.proto",
+      "kind": "blob",
+      "oid": "5af6acf6abb831d0bf49d2d913ff2f3449a06373",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/message/devicepolicy/Android.bp",
+      "kind": "blob",
+      "oid": "34db6c55112565405ebfc9a8ffa21e9df9cf398e",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/message/devicepolicy/device_policy.proto",
+      "kind": "blob",
+      "oid": "c736d0e809f7d711d7d7b4e0d6b7fb75306a1e53",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/message/devicepolicy/jarjar-rules.txt",
+      "kind": "blob",
+      "oid": "40043a861ceb75ba1eeabd5cd0f128ba2b1d05cd",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/message/mediametrics/Android.bp",
+      "kind": "blob",
+      "oid": "6fe52e915b9449524bbf93219800aa019d878041",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/message/mediametrics/mediametrics_message.proto",
+      "kind": "blob",
+      "oid": "d2e21128b8e14658427e0b80175c07a1695d986c",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/.clang-format",
+      "kind": "blob",
+      "oid": "cead3a079435208b34ac054f2804129eb6471083",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/Android.bp",
+      "kind": "blob",
+      "oid": "e684783a4dc0ab9f88f7fbd9a0eb81a68c9a1ab3",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/Collation.cpp",
+      "kind": "blob",
+      "oid": "fcfb909f21e1f17d94a9b7a68a1398918b974b58",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/Collation.h",
+      "kind": "blob",
+      "oid": "b4fcf05536e5283b3ee6065fc508a68b584c8021",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/benchmark/Android.bp",
+      "kind": "blob",
+      "oid": "ab0780dc3db8a905a07b5f7c7f806e293b929244",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/benchmark/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "3ffdf6b400987836bca4a6ce8a33d7b93ea6d40b",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/benchmark/src/atom_large.proto",
+      "kind": "blob",
+      "oid": "1a75b7929b9af9f457c6fbcfadcc11a27a4084ae",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/benchmark/src/atom_medium.proto",
+      "kind": "blob",
+      "oid": "5cc4f7d1a3e60739e4f5c1634faff418a746e6b3",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/benchmark/src/atom_small.proto",
+      "kind": "blob",
+      "oid": "5694a39506976b9880ee88cc15633ccef8b2db49",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/benchmark/src/atoms_all.proto",
+      "kind": "blob",
+      "oid": "d67a49a4d42e8d5c2f0805995fd7511fc5f0400c",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/benchmark/src/generated_code_benchmark.cpp",
+      "kind": "blob",
+      "oid": "422e9cf7d602db64f7af613a7219159209d90577",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/benchmark/src/main.cpp",
+      "kind": "blob",
+      "oid": "a24f57c7a595026e3ff92a1ad87372c208efee88",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/benchmark/src/protobuf_benchmark.cpp",
+      "kind": "blob",
+      "oid": "9c9f4d73852e1e870ad74070a8ce620eeef2a5b8",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/benchmark/src/struct_benchmark.cpp",
+      "kind": "blob",
+      "oid": "816ee9e5d8e9aa11a3d58063adc50402977a763a",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/include_cc_hdrs/StatsHistogram.h",
+      "kind": "blob",
+      "oid": "0b00244a2bb4bcbdce30f9edc6cc5333fed5fec2",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/include_cc_hdrs/TEST_MAPPING",
+      "kind": "blob",
+      "oid": "97c45fdb9d559dcd48c1942c8132bfc526693a75",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/include_cc_srcs/StatsHistogram.cpp",
+      "kind": "blob",
+      "oid": "628717e09d6016b040a804d871ed878d6250eac8",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/include_cc_srcs/TEST_MAPPING",
+      "kind": "blob",
+      "oid": "97c45fdb9d559dcd48c1942c8132bfc526693a75",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/include_java/StatsHistogram.java",
+      "kind": "blob",
+      "oid": "0f15b2a887fbbebca5f5a8c5791e75883cbaeb66",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/include_java/TEST_MAPPING",
+      "kind": "blob",
+      "oid": "9eb08fdcad4e34a052d28e9fa40b9cc13ca504eb",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/java_writer.cpp",
+      "kind": "blob",
+      "oid": "c441ca4101118b12f34d2c93bacb053c4192e2f6",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/java_writer.h",
+      "kind": "blob",
+      "oid": "a86be034b8fe73aebc75a2186b60b91ba21551c2",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/java_writer_q.cpp",
+      "kind": "blob",
+      "oid": "7670e27254e2a37fd824c7ed40967a95a405debc",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/java_writer_q.h",
+      "kind": "blob",
+      "oid": "e7b600d489599ef551899809c13ebae6fcb73028",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/java_writer_vendor.cpp",
+      "kind": "blob",
+      "oid": "5c627fe1f9c10d39dafa30fb98de677f45a41d6a",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/java_writer_vendor.h",
+      "kind": "blob",
+      "oid": "b8302b524984233c471842a068869c74db13515b",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/main.cpp",
+      "kind": "blob",
+      "oid": "3c428ddb8ba7c8b9d20287f67ba6a52d60b57561",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/native_writer.cpp",
+      "kind": "blob",
+      "oid": "94f957f2b5d885b2124db5e0366d15bf6e480018",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/native_writer.h",
+      "kind": "blob",
+      "oid": "c955bd1c8eee08958be4dcfa140a518942757051",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/native_writer_vendor.cpp",
+      "kind": "blob",
+      "oid": "6cf554227e4d6d43fe5e3a22ada724f6332fefdf",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/native_writer_vendor.h",
+      "kind": "blob",
+      "oid": "f2423b6f6ae0f563deae57a52a15fabcc892b6c4",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/rust_header_wrapper.rs",
+      "kind": "blob",
+      "oid": "aa54b19713dee3fa54b403cb06f6319db29e5204",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/rust_wrapper.rs",
+      "kind": "blob",
+      "oid": "802979f8895d256cc38c19ac97596ae1aba7aff0",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/rust_writer.cpp",
+      "kind": "blob",
+      "oid": "ec9e20888769a8f1d38dbaa5d574f70f75fe731b",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/rust_writer.h",
+      "kind": "blob",
+      "oid": "f5fb40731c3a287dd1bee6627d758f1028a05732",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/settings_provider.cpp",
+      "kind": "blob",
+      "oid": "eac833c91f3c8d40f0f0a02f7ae2e93467deabc6",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/settings_provider.h",
+      "kind": "blob",
+      "oid": "733d3aad6cd74fc0e4a78ef08e6c2b6078bdfb6b",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/test.proto",
+      "kind": "blob",
+      "oid": "5f0c199edad163fe61200b961286365c9d4292c4",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/test_api_gen.cpp",
+      "kind": "blob",
+      "oid": "f39c49f7a2d9f464e8415fd709b44ecc4f9b6f95",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/test_api_gen.rs",
+      "kind": "blob",
+      "oid": "f5f7ff90b82d2bdb827eb8198a246090ae112b21",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/test_api_gen_external_atom.cpp",
+      "kind": "blob",
+      "oid": "e119711a410742cc3b5ad0a1f9ba1f0c81c6b394",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/test_api_gen_vendor.rs",
+      "kind": "blob",
+      "oid": "be41cc6fcabb1a026e283030dc3e915c5f918f68",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/test_cc/Android.bp",
+      "kind": "blob",
+      "oid": "010ae6e1c43f15f043126e291666b3e183c7cfe3",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/test_cc/AtomCodeGen_bootstrap_test.cpp",
+      "kind": "blob",
+      "oid": "9d11f1203513491a7a8f42383ec59d5db6c62528",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/test_cc/AtomCodeGen_bootstrap_typesafe.cpp",
+      "kind": "blob",
+      "oid": "2566600cfe4477eb098f5040c5db9cf3984e9405",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/test_cc/AtomCodeGen_platform_test.cpp",
+      "kind": "blob",
+      "oid": "b687f84ad4e5b4c691247d913babb5bad43da63e",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/test_cc/AtomCodeGen_platform_typesafe.cpp",
+      "kind": "blob",
+      "oid": "b0287a030409ddaccf47e4959c4a59c3734adb16",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/test_cc/AtomCodeGen_vendor.cpp",
+      "kind": "blob",
+      "oid": "cf582eb5921d013cf53acb73b8784b95dca06894",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/test_cc/AtomCodeGen_vendor_generic.cpp",
+      "kind": "blob",
+      "oid": "78e97109103b0b6515d8f49c7034fa98e98d155d",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/test_cc/AtomCodeGen_vendor_typesafe.cpp",
+      "kind": "blob",
+      "oid": "1c6df85f731b2e52d0cbea790b8d0fddf41d9f37",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/test_cc/host/StatsHistogram_test.cpp",
+      "kind": "blob",
+      "oid": "3a8d30fa3da28f0d5f91dbb0331d63dc7a2da841",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/test_collation.cpp",
+      "kind": "blob",
+      "oid": "9e8ca57306fd4bba0cc6f81b9adcff6377b149f6",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/test_external.proto",
+      "kind": "blob",
+      "oid": "722e176c52fca31f8f33535a6ef25e5cf8ff5fc9",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/test_feature_atoms.proto",
+      "kind": "blob",
+      "oid": "33a2fe0e3d604263daadc64ad0da2e77ae2a8eaf",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/test_java/Android.bp",
+      "kind": "blob",
+      "oid": "92ca4ad8c6527fd7ac838123554b9da23824cc1a",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/test_java/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "00d17a6e864bc7e7d9645a325e42e4364b849812",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/test_java/host/src/com/android/test/statslogapigen/StatsHistogramTest.java",
+      "kind": "blob",
+      "oid": "4fad18193bdc2eac5d8fbc24d62ab510c4620cf0",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/test_java/src/com/android/test/statslogapigen/AtomCodeGenTest.java",
+      "kind": "blob",
+      "oid": "f4352dfd41a604c86833e7188e29fdf3a1c032d9",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/test_java/src/com/android/test/statslogapigen/VendorAtomCodeGenTest.java",
+      "kind": "blob",
+      "oid": "e60b0732a1cc63190931597cfb9fd6d957363346",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/test_vendor_atoms.proto",
+      "kind": "blob",
+      "oid": "f7bb67ecbbff46ad83baac30ec133b1ebbc75891",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/test_vendor_extension_atoms.proto",
+      "kind": "blob",
+      "oid": "cb61cf6c63cab24b43eb83326b083871b45a770b",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/utils.cpp",
+      "kind": "blob",
+      "oid": "f60d8fee53952be3572e3fa4c54839bc85e9f141",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/stats_log_api_gen/utils.h",
+      "kind": "blob",
+      "oid": "78dad8de8b09ad666558694dee18eae5b193baca",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/test/.clang-format",
+      "kind": "blob",
+      "oid": "cead3a079435208b34ac054f2804129eb6471083",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/test/Android.bp",
+      "kind": "blob",
+      "oid": "e4bc1c0207f43669013ad3dd23725da1147fa3a5",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/test/test_atoms_protos.cpp",
+      "kind": "blob",
+      "oid": "e5c07902912d2f7dfc741a3671f7b90733be3ad7",
+      "mode": "100644"
+    },
+    {
+      "path": "stats/test/test_generic_vendor_protos.cpp",
+      "kind": "blob",
+      "oid": "0a96165028a2cc0a09a6e83bf1e838069d502efb",
+      "mode": "100644"
+    }
+  ]
+}

@@ -1,0 +1,5353 @@
+{
+  "repo": "platform/packages/modules/OnDevicePersonalization",
+  "requested_revision": "refs/tags/android-17.0.0_r1",
+  "revision": "cc93f1e4164d0a4bb76dd277abc221f4eaf32efb",
+  "entries": [
+    {
+      "path": ".gitignore",
+      "kind": "blob",
+      "oid": "5e6ab4b115c3186641f141f90c4286263909fcc3",
+      "mode": "100644"
+    },
+    {
+      "path": "Android.bp",
+      "kind": "blob",
+      "oid": "c74e758673c780ce5188efa4d7de923a30d0b60e",
+      "mode": "100644"
+    },
+    {
+      "path": "AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "77027b6b6d85badd9ab93315fb3e9e8dd3ead075",
+      "mode": "100644"
+    },
+    {
+      "path": "CONTRIBUTING",
+      "kind": "blob",
+      "oid": "bc23aaed4bebbd0c9ca0b82a1059b9c8a15aa9c9",
+      "mode": "100644"
+    },
+    {
+      "path": "EmptyManifest.xml",
+      "kind": "blob",
+      "oid": "53e5fda152222e0f5af2817a9abed2899702c043",
+      "mode": "100644"
+    },
+    {
+      "path": "LICENSE",
+      "kind": "blob",
+      "oid": "7a4a3ea2424c09fbe48d455aed1eaa94d9124835",
+      "mode": "100644"
+    },
+    {
+      "path": "OWNERS",
+      "kind": "blob",
+      "oid": "2561cb7625c510139dc5745bf9493b9d5d4f538f",
+      "mode": "100644"
+    },
+    {
+      "path": "PREUPLOAD.cfg",
+      "kind": "blob",
+      "oid": "e33b85dc4e0249cfc8dba93f6e2a46f610dbaf3f",
+      "mode": "100644"
+    },
+    {
+      "path": "README.md",
+      "kind": "blob",
+      "oid": "2095e6e34dbbf1eb6aa3f9702fb33ed6636440bc",
+      "mode": "100644"
+    },
+    {
+      "path": "TEST_MAPPING",
+      "kind": "blob",
+      "oid": "e9d744bf377c0b8c8097557c9bf646ef7d743fd3",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/Android.bp",
+      "kind": "blob",
+      "oid": "1abaaba8cf93341e0d47ecfd633920af0ad85cf1",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "ed712f77501148e472e9d7ac0735c631c5898203",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/com.android.ondevicepersonalization.avbpubkey",
+      "kind": "blob",
+      "oid": "4e74bb185bdd0869362d23dfac028fda0b85b2a8",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/com.android.ondevicepersonalization.pem",
+      "kind": "blob",
+      "oid": "7be17569acbe00609f5539166d8774445d1d4880",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/com.android.ondevicepersonalization.pk8",
+      "kind": "blob",
+      "oid": "ac25a416d7aacbc5cade83b32c534991e354c922",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/com.android.ondevicepersonalization.x509.pem",
+      "kind": "blob",
+      "oid": "074bca5f4f9893308247f04b8dfc38176a6cbc7b",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/manifest.json",
+      "kind": "blob",
+      "oid": "1ee4fe0891510df0b0db790d1de7757698999242",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/permissions/OWNERS",
+      "kind": "blob",
+      "oid": "8b7e2e5d0c25333b725b8895374a0c23759450da",
+      "mode": "100644"
+    },
+    {
+      "path": "common/Android.bp",
+      "kind": "blob",
+      "oid": "6018fb26cb837cb06561959264b5ea93912b7e88",
+      "mode": "100644"
+    },
+    {
+      "path": "common/java/com/android/odp/module/common/Clock.java",
+      "kind": "blob",
+      "oid": "1a8692b2ec8f95c1935c8ad53c5f2e63ac611d0f",
+      "mode": "100644"
+    },
+    {
+      "path": "common/java/com/android/odp/module/common/DeviceUtils.java",
+      "kind": "blob",
+      "oid": "f7972a480718660c53fa8b835e52b7538bcf3285",
+      "mode": "100644"
+    },
+    {
+      "path": "common/java/com/android/odp/module/common/EventLogger.java",
+      "kind": "blob",
+      "oid": "5765cc1105a10e48b3f73332483a2e21e3c10d31",
+      "mode": "100644"
+    },
+    {
+      "path": "common/java/com/android/odp/module/common/FileUtils.java",
+      "kind": "blob",
+      "oid": "db9cb75f58b5132e5d6abe74c31954b5f770f001",
+      "mode": "100644"
+    },
+    {
+      "path": "common/java/com/android/odp/module/common/MonotonicClock.java",
+      "kind": "blob",
+      "oid": "b832491f208f0874fa6553d5a05c5580191ed047",
+      "mode": "100644"
+    },
+    {
+      "path": "common/java/com/android/odp/module/common/PackageUtils.java",
+      "kind": "blob",
+      "oid": "79d7cf0ab9f2a10f47ae2a9cf532cf507d6bbdf6",
+      "mode": "100644"
+    },
+    {
+      "path": "common/java/com/android/odp/module/common/ProcessWrapper.java",
+      "kind": "blob",
+      "oid": "bbbbaabde45dd1fda50eaf3ceb6d9673c303e5f4",
+      "mode": "100644"
+    },
+    {
+      "path": "common/java/com/android/odp/module/common/data/ErrorReportingMetadataProtoDataStore.java",
+      "kind": "blob",
+      "oid": "e28aa33736d2438b3f270b1a51549132b4beb67c",
+      "mode": "100644"
+    },
+    {
+      "path": "common/java/com/android/odp/module/common/data/ErrorReportingMetadataStore.java",
+      "kind": "blob",
+      "oid": "3472596bc74fbea553b634bace3fa69276d039f2",
+      "mode": "100644"
+    },
+    {
+      "path": "common/java/com/android/odp/module/common/data/OdpAuthorizationToken.java",
+      "kind": "blob",
+      "oid": "72d9b8606f0e32d69dc9c3bbee604ac769c6fece",
+      "mode": "100644"
+    },
+    {
+      "path": "common/java/com/android/odp/module/common/data/OdpAuthorizationTokenContract.java",
+      "kind": "blob",
+      "oid": "0fb0104ed2ef53b5ad77a718401bff3f81f085cb",
+      "mode": "100644"
+    },
+    {
+      "path": "common/java/com/android/odp/module/common/data/OdpAuthorizationTokenDao.java",
+      "kind": "blob",
+      "oid": "ace0cf3b019523ef4178d5040329d3da90b2639e",
+      "mode": "100644"
+    },
+    {
+      "path": "common/java/com/android/odp/module/common/data/OdpEncryptionKeyDao.java",
+      "kind": "blob",
+      "oid": "05c19642cc84c979cfbb9f06578f21ccd2bad7d2",
+      "mode": "100644"
+    },
+    {
+      "path": "common/java/com/android/odp/module/common/data/OdpSQLiteOpenHelper.java",
+      "kind": "blob",
+      "oid": "e43e94e984debfaa4e02d7e6fc972338f861308f",
+      "mode": "100644"
+    },
+    {
+      "path": "common/java/com/android/odp/module/common/encryption/Encrypter.java",
+      "kind": "blob",
+      "oid": "8c01b049c43b3c518ef9a00cb189ecb08f1c826c",
+      "mode": "100644"
+    },
+    {
+      "path": "common/java/com/android/odp/module/common/encryption/HpkeJniEncrypter.java",
+      "kind": "blob",
+      "oid": "54f34441bbc45a15a314a3486d5e9dbbcc961672",
+      "mode": "100644"
+    },
+    {
+      "path": "common/java/com/android/odp/module/common/encryption/OdpEncryptionKey.java",
+      "kind": "blob",
+      "oid": "f1e0de250354386892443f31f9048a56d55f0b2e",
+      "mode": "100644"
+    },
+    {
+      "path": "common/java/com/android/odp/module/common/encryption/OdpEncryptionKeyContract.java",
+      "kind": "blob",
+      "oid": "e66ca4300c8cf5e58adc6663c588b10f18db9924",
+      "mode": "100644"
+    },
+    {
+      "path": "common/java/com/android/odp/module/common/encryption/OdpEncryptionKeyManager.java",
+      "kind": "blob",
+      "oid": "0912144a26c9059e7785fe719c144b0dd2c88821",
+      "mode": "100644"
+    },
+    {
+      "path": "common/java/com/android/odp/module/common/encryption/jni/HpkeJni.java",
+      "kind": "blob",
+      "oid": "5dddc4f1884d0a79822b8fa7ca1b7a445096905e",
+      "mode": "100644"
+    },
+    {
+      "path": "common/java/com/android/odp/module/common/http/HttpClient.java",
+      "kind": "blob",
+      "oid": "6d35a3ee3ec48e54dbb92cd07f092d7264c8a8ee",
+      "mode": "100644"
+    },
+    {
+      "path": "common/java/com/android/odp/module/common/http/HttpClientUtils.java",
+      "kind": "blob",
+      "oid": "dd6b095315c4c8312f483e171048feca810e582a",
+      "mode": "100644"
+    },
+    {
+      "path": "common/java/com/android/odp/module/common/http/OdpHttpRequest.java",
+      "kind": "blob",
+      "oid": "30a2e8ba58ec9e9fd91d0916a20ba809c570ad58",
+      "mode": "100644"
+    },
+    {
+      "path": "common/java/com/android/odp/module/common/http/OdpHttpResponse.java",
+      "kind": "blob",
+      "oid": "16710766f3a021fe5e23a0b5ddff5126a019fdc4",
+      "mode": "100644"
+    },
+    {
+      "path": "common/proto/error_reporting_metadata.proto",
+      "kind": "blob",
+      "oid": "ea221b5fc578e4cb3983212403339727ebbd63c1",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/Android.bp",
+      "kind": "blob",
+      "oid": "f30008d50b7a903cd219cee30f541dd1f46acaf7",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/OWNERS",
+      "kind": "blob",
+      "oid": "9a5cef0a0961e8c7f95f2c72d177161ef31b2584",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/PREUPLOAD.cfg",
+      "kind": "blob",
+      "oid": "bddc513988ae659dbbde93ad884c565d2af30691",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/apk/Android.bp",
+      "kind": "blob",
+      "oid": "376e32cf507dca3e537b6c718b4dcd9aaed4e7a4",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/apk/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "595bb58647a09e84794a5a641f96bc2b211e5c16",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/apk/com.android.federatedcompute.pk8",
+      "kind": "blob",
+      "oid": "5eabeedc470b0695383844df2909b95b89084cc4",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/apk/com.android.federatedcompute.x509.pem",
+      "kind": "blob",
+      "oid": "243d0472a253ac869a2d1cb06a77b85f121f1d30",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/apk/jarjar_rules.txt",
+      "kind": "blob",
+      "oid": "711d1d2c7bdb4ece0095a16daae7bb58a2645201",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/apk/proguard.flags",
+      "kind": "blob",
+      "oid": "db6acaed5c96b0ab924935c82e3032c2c18115fe",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/apk/res/values/config.xml",
+      "kind": "blob",
+      "oid": "03d218ea1b0801f3e9f216cf2156fde68e929652",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/jni/cpp/example_iterator_wrapper_impl.cc",
+      "kind": "blob",
+      "oid": "eb9f77d6b5d3b6fade7a85b79a99c28ac2b0fc5b",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/jni/cpp/example_iterator_wrapper_impl.h",
+      "kind": "blob",
+      "oid": "566755a7b482dbc83a31db2ed876793a97f472f2",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/jni/cpp/fl_runner_jni.cc",
+      "kind": "blob",
+      "oid": "10a373dae2fdb4cb7e1bd1e23d58d304dd3ed15e",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/jni/cpp/flags_impl.h",
+      "kind": "blob",
+      "oid": "7d0a5546c32328e28667018cd7ce523dce694b65",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/jni/cpp/hpke_jni.cc",
+      "kind": "blob",
+      "oid": "affcb61a325cda633ca98ac968f6e3cbd5b959bd",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/jni/cpp/log_manager_wrapper_impl.cc",
+      "kind": "blob",
+      "oid": "9dafa2d502f4acc343ccc40bf336c78006e1b5fa",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/jni/cpp/log_manager_wrapper_impl.h",
+      "kind": "blob",
+      "oid": "44f72171f2acb06fda82627dbc2dd81447cbe000",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/jni/cpp/more_jni_util.h",
+      "kind": "blob",
+      "oid": "34aace039b2fdfaf86376344b1220de45bae2ab8",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/jni/cpp/simple_task_environment_wrapper_impl.cc",
+      "kind": "blob",
+      "oid": "127bd81938bf5f38fa27817326e6d3b36c11cb38",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/jni/cpp/simple_task_environment_wrapper_impl.h",
+      "kind": "blob",
+      "oid": "5742f0862b93b938084d04d78bdbf5fa03fc2be7",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/jni/include/hpke_jni.h",
+      "kind": "blob",
+      "oid": "c15a99ea8dc9695b58224484aae79101ad21789b",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/jni/jni.lds",
+      "kind": "blob",
+      "oid": "73ec879edc3dfc53f3fa2b29d826d0cafe92d28e",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/FederatedComputeBroadcastReceiver.java",
+      "kind": "blob",
+      "oid": "94fb0c83c3fab1b865981543aea9da20cc0e8da7",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/FederatedComputeManagingServiceDelegate.java",
+      "kind": "blob",
+      "oid": "9de2cbd66fa1a7977b7a8f95548ecddc09f32f43",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/FederatedComputeManagingServiceImpl.java",
+      "kind": "blob",
+      "oid": "e8cf141488c7e60b1098875d824f6078fc56d576",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/common/BatteryInfo.java",
+      "kind": "blob",
+      "oid": "454ed1fb3efd198980a16f245cde5adbcabe3578",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/common/Constants.java",
+      "kind": "blob",
+      "oid": "e302f09de0939a943962ad2251707c862569b7e5",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/common/ErrorStatusException.java",
+      "kind": "blob",
+      "oid": "20f58c4864eb3582272a3c92819f5c045179b390",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/common/ExampleStats.java",
+      "kind": "blob",
+      "oid": "b257968a1a58c760b4a05e2c4249352f54fc91b3",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/common/FeatureStatusManager.java",
+      "kind": "blob",
+      "oid": "d0710a14bd58ddba6d565f078aef526a5ce6c9bd",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/common/FederatedComputeExecutors.java",
+      "kind": "blob",
+      "oid": "7c7ad51c6e49fb5cae3ad2fc2d31278a9a12f35b",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/common/FederatedComputeJobInfo.java",
+      "kind": "blob",
+      "oid": "089f7ba450b53d186242f0cc63f5c304bd0439bb",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/common/FederatedComputeJobUtil.java",
+      "kind": "blob",
+      "oid": "d2352074eb1a0fcfa1f541fd19b451d247fe7e28",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/common/Flags.java",
+      "kind": "blob",
+      "oid": "f5038659d06598b40d56143258e434032f8db749",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/common/FlagsConstants.java",
+      "kind": "blob",
+      "oid": "caeb33482d95b61112e622680d7caf2237def8dc",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/common/FlagsFactory.java",
+      "kind": "blob",
+      "oid": "77248e1329149bd97f8f1e11c740607f6e102732",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/common/NetworkStats.java",
+      "kind": "blob",
+      "oid": "6e7b04ec07a98bb4f4c984f4315abe20473f18d6",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/common/PhFlags.java",
+      "kind": "blob",
+      "oid": "69f49ab60c8aed0e175b5604685754238464fea6",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/common/TrainingEventLogger.java",
+      "kind": "blob",
+      "oid": "ac877c879dc3d72a4b69cdca6ddfefc88c6d101e",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/common/TrainingResult.java",
+      "kind": "blob",
+      "oid": "752c6ff1b0d781b2346e0a04a0ef33955c0e6016",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/data/FederatedComputeDbHelper.java",
+      "kind": "blob",
+      "oid": "dfa93302412b174ec4e60faba102c6c56a067cab",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/data/FederatedComputeEncryptionKeyDaoUtils.java",
+      "kind": "blob",
+      "oid": "e2cbeeaa3f536c672546cab98682224b1c078efd",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/data/FederatedTrainingTask.java",
+      "kind": "blob",
+      "oid": "3aa5b9d1481dbc8a8c72ef731129b88a4e079e0c",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/data/FederatedTrainingTaskContract.java",
+      "kind": "blob",
+      "oid": "98eeffd699ecc3308561bf5cc54e866f651e4ae7",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/data/FederatedTrainingTaskDao.java",
+      "kind": "blob",
+      "oid": "ff7f0b11318162eeaa83414bf8448ee173fd564b",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/data/TaskHistory.java",
+      "kind": "blob",
+      "oid": "415fe7d72ca0992735ae37e321124f48233be39e",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/data/TaskHistoryContract.java",
+      "kind": "blob",
+      "oid": "309d000687ec3fd7ca9913848c70ec2e79ebff52",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/data/fbs/TrainingTask.fbs",
+      "kind": "blob",
+      "oid": "77e992a5b452c040aa12c4da2ce84428ab5141ff",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/encryption/BackgroundKeyFetchJob.java",
+      "kind": "blob",
+      "oid": "b246304164fadc5e5179c51f49acc118ac7057fb",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/encryption/BackgroundKeyFetchJobEventLogger.java",
+      "kind": "blob",
+      "oid": "01dcdb4e041e1fb647b2d6e13d480d18d5e361a2",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/encryption/BackgroundKeyFetchJobService.java",
+      "kind": "blob",
+      "oid": "5935df29c436de4bc1bee369ce14690a1b103d4e",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/encryption/FederatedComputeEncryptionKeyManagerUtils.java",
+      "kind": "blob",
+      "oid": "df8420ac7e9b51ce98be96423eedeb26e3c80d15",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/examplestore/ExampleConsumptionRecorder.java",
+      "kind": "blob",
+      "oid": "cecddfdcc1ebd0aca2539b47af3f352da3c09cf7",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/examplestore/ExampleIterator.java",
+      "kind": "blob",
+      "oid": "85fd98d93cfa9c83957df4b2da46feb69a0065a1",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/examplestore/ExampleStoreServiceProvider.java",
+      "kind": "blob",
+      "oid": "f8f1d557714b4e7ae093b77825e1f978cde41db3",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/examplestore/FederatedExampleIterator.java",
+      "kind": "blob",
+      "oid": "9f35f975444057aaadca1babf277c433d2bd9ded",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/http/CheckinResult.java",
+      "kind": "blob",
+      "oid": "c765c4cc0886ee371d2d07ca2594121ef0759b80",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/http/HttpClientUtil.java",
+      "kind": "blob",
+      "oid": "bdfe1d161ca5771d986ec130a2a36832326e3cec",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/http/HttpFederatedProtocol.java",
+      "kind": "blob",
+      "oid": "08c3f82cc60cf480a9b754d2056971c91c1aecfc",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/http/ProtocolRequestCreator.java",
+      "kind": "blob",
+      "oid": "28535db9349c665110e4e4ce6817b7bce573330b",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/scheduling/DeleteExpiredJob.java",
+      "kind": "blob",
+      "oid": "395a7c2b46963524f348f8e5eb3ea0b7d3085e57",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/scheduling/DeleteExpiredJobService.java",
+      "kind": "blob",
+      "oid": "c62f40755ab065483c4a77fd4e68ae74749765d7",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/scheduling/FederatedComputeJobManager.java",
+      "kind": "blob",
+      "oid": "8403e936ced75685f5085eae27da4a43b8553a9d",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/scheduling/FederatedComputeLearningJobScheduleOrchestrator.java",
+      "kind": "blob",
+      "oid": "f9c43ea6954319b152b36e0d90b751c784770daf",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/scheduling/FederatedJobIdGenerator.java",
+      "kind": "blob",
+      "oid": "989e834e4ff515aedfc84b255ad0b956bf64d8b8",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/scheduling/JobSchedulerHelper.java",
+      "kind": "blob",
+      "oid": "bdc61a63913aa1613171e8dee8080a8204043777",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/scheduling/SchedulingUtil.java",
+      "kind": "blob",
+      "oid": "d0de4319f38a646ece7f41b188a511502fde67b2",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/security/AuthorizationContext.java",
+      "kind": "blob",
+      "oid": "19e7e3543018d4e87d9bfc573ea56cc16efd32be",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/security/KeyAttestation.java",
+      "kind": "blob",
+      "oid": "d4b3639297fac2c5d178218811b3ab1052c9a914",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/sharedlibrary/spe/FederatedComputeJobScheduler.java",
+      "kind": "blob",
+      "oid": "bec741895fac639c77983895fc6ef4cbd573b438",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/sharedlibrary/spe/FederatedComputeJobService.java",
+      "kind": "blob",
+      "oid": "7b9d4b16516352ce47200dde4519293103c24106",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/sharedlibrary/spe/FederatedComputeJobServiceFactory.java",
+      "kind": "blob",
+      "oid": "5e85772154b52aa2aafd1c8d1c79ed1ab3caa778",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/statsd/ApiCallStats.java",
+      "kind": "blob",
+      "oid": "a4df93868e9ce2eee158e453fe574a30898ce4f6",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/statsd/ClientErrorLogger.java",
+      "kind": "blob",
+      "oid": "2d2c24e79e070888de87169e2b0bb57ccff7f41c",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/statsd/ExampleIteratorLatency.java",
+      "kind": "blob",
+      "oid": "a2be5d736f7bbcabab08ade345fe0f582c27b5a5",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/statsd/FederatedComputeStatsdLogger.java",
+      "kind": "blob",
+      "oid": "f4ccc4e6a6636ed8c7e6445c3e2fe314ef36e451",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/statsd/TraceEventStats.java",
+      "kind": "blob",
+      "oid": "ef23a312b18d3608b157a1a2d5b3bb7b904327c7",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/statsd/TrainingEventReported.java",
+      "kind": "blob",
+      "oid": "a406749831201929752721f12a2d331fa4d42ded",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/statsd/joblogging/FederatedComputeJobServiceLogger.java",
+      "kind": "blob",
+      "oid": "c6bd280025b6fb73f303b982be953c564ed679d8",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/statsd/joblogging/FederatedComputeStatsdJobServiceLogger.java",
+      "kind": "blob",
+      "oid": "7094dfe8f8e84e4a274b2947c0c435639d01ea63",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/training/ComputationRunner.java",
+      "kind": "blob",
+      "oid": "e80fbf5c635e5484225b1fc24bd35ba3f995a5ca",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/training/EligibilityDecider.java",
+      "kind": "blob",
+      "oid": "e7aa76e26a33b35cf9ff2212f7a2b8dfa61e8b98",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/training/FederatedComputeWorker.java",
+      "kind": "blob",
+      "oid": "9119462d544a42d6e4c5c779bcac894823060f92",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/training/FederatedJobService.java",
+      "kind": "blob",
+      "oid": "dd6c80756346ef9ce18450cae3d0688ad4a3edc6",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/training/IsolatedTrainingService.java",
+      "kind": "blob",
+      "oid": "1d98500ea35fee17cba3a55cd406ed805ecf3038",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/training/IsolatedTrainingServiceImpl.java",
+      "kind": "blob",
+      "oid": "a49327554c1ef9b4a939a00d25b0dc6d92488571",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/training/ResultCallbackHelper.java",
+      "kind": "blob",
+      "oid": "0e460033af2bdd6d318fec92061197e3b848996f",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/training/aidl/IIsolatedTrainingService.aidl",
+      "kind": "blob",
+      "oid": "7f8b68147e424fde52944c113dc3ea5ddcf870d8",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/training/aidl/ITrainingResultCallback.aidl",
+      "kind": "blob",
+      "oid": "7b8911583e9e3cb34e46fa0bee86976954266dfb",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/training/jni/FlRunnerWrapper.java",
+      "kind": "blob",
+      "oid": "fe91d723644522ae5c571d9d40d437973eafcf57",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/training/jni/JavaExampleIterator.java",
+      "kind": "blob",
+      "oid": "b63f25badc291a16efd6c459c95a5abda7b59670",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/training/jni/JavaExampleStore.java",
+      "kind": "blob",
+      "oid": "f4a7a27d231f647bc1d7e174bfe0180b2e82e65c",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/training/jni/LogManager.java",
+      "kind": "blob",
+      "oid": "2fd1483b081ce4c960cb7311dc5b7bdbd62e3665",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/training/jni/LogManagerImpl.java",
+      "kind": "blob",
+      "oid": "3707694f9d51c2ee1aca77c4cfd53938036cb1eb",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/training/jni/SimpleTaskEnvironment.java",
+      "kind": "blob",
+      "oid": "5abd84cc1bb133d9dd97dbd60687fbeae65cc37a",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/training/jni/SimpleTaskEnvironmentImpl.java",
+      "kind": "blob",
+      "oid": "794c36b18191a819563385229faadaef6eed7649",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/training/util/ComputationResult.java",
+      "kind": "blob",
+      "oid": "652c9e9ae9510cf04ecc5a5c5302c95a91fda9a2",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/training/util/EligibilityResult.java",
+      "kind": "blob",
+      "oid": "31917112144d853f1147f639b9cb8b04d1105e41",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/training/util/ListenableSupplier.java",
+      "kind": "blob",
+      "oid": "977a0a024da0c3a9e2f0edf6729bd79d478a79f8",
+      "mode": "100644"
+    },
+    {
+      "path": "federatedcompute/src/com/android/federatedcompute/services/training/util/TrainingConditionsChecker.java",
+      "kind": "blob",
+      "oid": "c5fb0fcf09c1602800fa904c9e70df8bf0b9ed47",
+      "mode": "100644"
+    },
+    {
+      "path": "flags/Android.bp",
+      "kind": "blob",
+      "oid": "df2650dccbd9c8d171bdc529725eb43ce452c400",
+      "mode": "100644"
+    },
+    {
+      "path": "flags/ondevicepersonalization_flags.aconfig",
+      "kind": "blob",
+      "oid": "7518803a1ef0f050b5724840b24f421b97fd9b5e",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/Android.bp",
+      "kind": "blob",
+      "oid": "c1220337c55a3f5d6e23f6e57d088d3db0d4d064",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/current.txt",
+      "kind": "blob",
+      "oid": "a05e00f576bc3e1bd70f3c914fbab121e5f33c5d",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/lint-baseline.txt",
+      "kind": "blob",
+      "oid": "9531037f189e52480e45697d1508b71ad0cf2117",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/module-lib-current.txt",
+      "kind": "blob",
+      "oid": "256bd2b2af6918bf24a5b6486ac1779e901bfe77",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/module-lib-removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/system-current.txt",
+      "kind": "blob",
+      "oid": "d1d09f520039f6c0036636678f468aa503a002d7",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/system-removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/jarjar_rules.txt",
+      "kind": "blob",
+      "oid": "26fe71671dd2c080cb4947d846639c4ebef6d47f",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/AppInfo.aidl",
+      "kind": "blob",
+      "oid": "fa69edbeb6378541ef4a7049f09dcc0d8d99bad9",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/AppInfo.java",
+      "kind": "blob",
+      "oid": "179af54c699bfb683e6f188a4326c1b2202d67b3",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/CalleeMetadata.aidl",
+      "kind": "blob",
+      "oid": "3e936c9b1a943026d1358cc0a89b4c0673089a36",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/CalleeMetadata.java",
+      "kind": "blob",
+      "oid": "e83929f1e60f16e2ea68c0f580c76ebc4d7a0fcb",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/CallerMetadata.aidl",
+      "kind": "blob",
+      "oid": "d313206e7c8b953e7327574051a6dd8c25872780",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/CallerMetadata.java",
+      "kind": "blob",
+      "oid": "68a9cd86e11c3821f71035cbefb0de111b26f439",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/Constants.java",
+      "kind": "blob",
+      "oid": "05d5c404a3bd41a2aa18716bdf84000817292ad3",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/DownloadCompletedInput.java",
+      "kind": "blob",
+      "oid": "498a370a672afefd927227ff9623c2f8b2580940",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/DownloadCompletedOutput.java",
+      "kind": "blob",
+      "oid": "a743b0746fe37dbb44c964cdeb57f7968973f401",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/DownloadCompletedOutputParcel.java",
+      "kind": "blob",
+      "oid": "7a906f1d30c166c9cca1289fd5a835c053d72678",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/DownloadInputParcel.aidl",
+      "kind": "blob",
+      "oid": "a3136ff8f7cea0d35fa68c2e09da3328987dba50",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/DownloadInputParcel.java",
+      "kind": "blob",
+      "oid": "df8ce750ef822c094ad45803ec7491b0a68b8227",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/EventInput.java",
+      "kind": "blob",
+      "oid": "2da56462f9f1bb7f30eed96d63bd4693640811f3",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/EventInputParcel.java",
+      "kind": "blob",
+      "oid": "a94bd6658b28584b3d132ecc92eaeb14ab6d0997",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/EventLogRecord.aidl",
+      "kind": "blob",
+      "oid": "42bc3fb0fd9f16f6b57458b0c928e0209b0a48a4",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/EventLogRecord.java",
+      "kind": "blob",
+      "oid": "b3dbd60d93234324696f4ff8616e5ce892d83297",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/EventOutput.java",
+      "kind": "blob",
+      "oid": "8565837a25301305c7be1a0306987e1ffb835df8",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/EventOutputParcel.java",
+      "kind": "blob",
+      "oid": "5432a6c42a656099c8932621da6480dc75e62547",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/EventUrlProvider.java",
+      "kind": "blob",
+      "oid": "4f53e2b347e2a2274833be612a57dcbbc6c5fb72",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/ExecuteInIsolatedServiceRequest.java",
+      "kind": "blob",
+      "oid": "f649539c7f50dc7213134a30f70bbc0f9cf0b4fd",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/ExecuteInIsolatedServiceResponse.java",
+      "kind": "blob",
+      "oid": "4d9aabe0011cdbfaca0cf2e9a957825e572e8ba4",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/ExecuteInput.java",
+      "kind": "blob",
+      "oid": "d72fa15ba2fb2f42884266e0a71ec8f115f76c99",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/ExecuteInputParcel.java",
+      "kind": "blob",
+      "oid": "2058c133c1473b0974e6a2c01f9c516dfb0230b1",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/ExecuteOptionsParcel.aidl",
+      "kind": "blob",
+      "oid": "89a5ddd8fc8b728510a94930dae0e65907cbbb6f",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/ExecuteOptionsParcel.java",
+      "kind": "blob",
+      "oid": "e008b425a1aa1a0ff3b15f3dee210891d535bb24",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/ExecuteOutput.java",
+      "kind": "blob",
+      "oid": "f33d5bed118efab1491cb5d2096da0ce8d8d14d4",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/ExecuteOutputParcel.java",
+      "kind": "blob",
+      "oid": "394f2b13002499ef4cb0f43c252cbd6602d3aac7",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/FederatedComputeInput.aidl",
+      "kind": "blob",
+      "oid": "738f25dd11a1dbea516f833f17c3927228af568b",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/FederatedComputeInput.java",
+      "kind": "blob",
+      "oid": "d78d02fa4b6e6af1c86bcf6d1cd6b3ca73e92c52",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/FederatedComputeScheduleRequest.java",
+      "kind": "blob",
+      "oid": "d72387436038d9f20f68c9f828ed5e445c4defb1",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/FederatedComputeScheduleResponse.java",
+      "kind": "blob",
+      "oid": "ae57b8e491e000c78405097f19aedc3cd33e585d",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/FederatedComputeScheduler.java",
+      "kind": "blob",
+      "oid": "3fab82c86c76aafbe2c16303aa85800ab6de200b",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/InferenceInput.java",
+      "kind": "blob",
+      "oid": "d2b9f87d7c5fcd6f3aeff14c27bdc1e8c4da2e8c",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/InferenceInputParcel.java",
+      "kind": "blob",
+      "oid": "5cb3d2fc1b94cec0e2ae44f8602b7cc91dbb46ba",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/InferenceOutput.java",
+      "kind": "blob",
+      "oid": "891de446c5e0172cd5ad0fc86fa58c431c6e026e",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/InferenceOutputParcel.java",
+      "kind": "blob",
+      "oid": "c80409b65ee524b32cae80628c145eccfc184655",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/IsolatedService.java",
+      "kind": "blob",
+      "oid": "28da053926f429149e20fb6729ed93b56e7186cd",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/IsolatedServiceException.java",
+      "kind": "blob",
+      "oid": "1893e471a4c6f5ed5cfb6c7460cba2d2d6f24181",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/IsolatedWorker.java",
+      "kind": "blob",
+      "oid": "185bc5b7817f874e7a78cd1c720c21ca8855f400",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/JoinedLogRecord.aidl",
+      "kind": "blob",
+      "oid": "2139ba46c44060cf2c5bcf9242b2c03867abfa1c",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/JoinedLogRecord.java",
+      "kind": "blob",
+      "oid": "451c35a47b60e140731715f01de02c1eb868cea9",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/KeyValueStore.java",
+      "kind": "blob",
+      "oid": "89e2591aa188c12e33bb55d5df1409dff950e81f",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/LocalDataImpl.java",
+      "kind": "blob",
+      "oid": "c4fe3ec1b19346ecb24fc5a3d7f7c440fe4a1feb",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/LogReader.java",
+      "kind": "blob",
+      "oid": "4fb9b46eccf9d0f167a21aba6da5d11aa5d4b4a0",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/MeasurementWebTriggerEventParams.java",
+      "kind": "blob",
+      "oid": "371061d7c6913c2b51a11a9b100d6229f7f6a90f",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/MeasurementWebTriggerEventParamsParcel.java",
+      "kind": "blob",
+      "oid": "03f5eae7c8a26aac2399ef11d2e9d530bd3deae3",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/ModelId.java",
+      "kind": "blob",
+      "oid": "0d092a3860222834a2ba128fe477337d9a03ebdf",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/ModelManager.java",
+      "kind": "blob",
+      "oid": "1e7e0d470ff888952f15571c703dd01546400771",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/MutableKeyValueStore.java",
+      "kind": "blob",
+      "oid": "28ba62644257b42cc6a9d7c820958cfedd70a9e8",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/OSVersion.aidl",
+      "kind": "blob",
+      "oid": "9bff789499fd5e08d7c121c771061900eeec5d82",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/OSVersion.java",
+      "kind": "blob",
+      "oid": "946da8232eb66dd20fe2ef464914aeef9554a037",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/OnDevicePersonalizationConfigManager.java",
+      "kind": "blob",
+      "oid": "c2a1f3bac2bee9693636fbd3d7ee9128acfd561d",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/OnDevicePersonalizationDebugManager.java",
+      "kind": "blob",
+      "oid": "d05583852903c666a515e1f54e2e082ccf2ace59",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/OnDevicePersonalizationException.java",
+      "kind": "blob",
+      "oid": "94c284fa86a1331883196ccfb663bba6f5f087aa",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/OnDevicePersonalizationManager.java",
+      "kind": "blob",
+      "oid": "2768ddc9f017e6c4bbcb293a3e1e082752ecf894",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/OnDevicePersonalizationPermissions.java",
+      "kind": "blob",
+      "oid": "c09ecbffb944c7144eadf4472afd7efbcd6f9b13",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/OnDevicePersonalizationSystemEventManager.java",
+      "kind": "blob",
+      "oid": "0f40ad6df5f80a690461550cd122126bc6fdda4f",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/RemoteDataImpl.java",
+      "kind": "blob",
+      "oid": "fdbcb718362616c49d73ae8311454c8bf1c7579a",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/RenderInput.java",
+      "kind": "blob",
+      "oid": "071410944d7b38e55864489293d4ddc4298f608e",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/RenderInputParcel.java",
+      "kind": "blob",
+      "oid": "ad069bb4f59d1826700c5452bd79d3921cb5061e",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/RenderOutput.java",
+      "kind": "blob",
+      "oid": "e9a22aacf3f18aa3ecea01a19d2533d8d89b422f",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/RenderOutputParcel.java",
+      "kind": "blob",
+      "oid": "afd4cfaff43017eb5f51404945cf30d8dda35bc7",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/RenderingConfig.aidl",
+      "kind": "blob",
+      "oid": "26c9b556404825f3b824330a2263cd22aba7cc92",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/RenderingConfig.java",
+      "kind": "blob",
+      "oid": "abd73a39922fae22f12d613d6a8c4ed282a5b713",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/RequestLogRecord.aidl",
+      "kind": "blob",
+      "oid": "61f67d9c40e451320ed5c1dff47d1205e9c0118b",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/RequestLogRecord.java",
+      "kind": "blob",
+      "oid": "c0bd4ddc2e409ed9ec7a3e1a70c97c238ec17519",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/RequestToken.java",
+      "kind": "blob",
+      "oid": "a5f438c7f815fedf9c37ad5c1a3808ed540afab5",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/SurfacePackageToken.java",
+      "kind": "blob",
+      "oid": "95f666192b3585cc3f9757943175939a481b1ac2",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/TrainingExampleRecord.java",
+      "kind": "blob",
+      "oid": "88e259f6b1f15c2ca7c32cb8302a016ce94cc301",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/TrainingExamplesInput.java",
+      "kind": "blob",
+      "oid": "b0621005874eb73d478d15b8dc9b12264159e74c",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/TrainingExamplesInputParcel.java",
+      "kind": "blob",
+      "oid": "711a553f9c251dd24690560d51dcbe970f2a2f86",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/TrainingExamplesOutput.java",
+      "kind": "blob",
+      "oid": "89ad4948d49814ece4b4b8a6d278d05516d46f21",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/TrainingExamplesOutputParcel.java",
+      "kind": "blob",
+      "oid": "f62156534a064db49f0ee3b7e738d65981fa500b",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/TrainingInterval.aidl",
+      "kind": "blob",
+      "oid": "610e5808b84a80063fcd05efd3124f446e90490f",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/TrainingInterval.java",
+      "kind": "blob",
+      "oid": "f56f88def8db126df1e8a9bac329183afc0ea7fb",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/UserData.aidl",
+      "kind": "blob",
+      "oid": "57ec9e01d9aabe8dc9cf72873aad00b99ec997c5",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/UserData.java",
+      "kind": "blob",
+      "oid": "beca3fec7cf66f7ac56c9a421beb661d7bf9af1d",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/WebTriggerInput.java",
+      "kind": "blob",
+      "oid": "162bc330eb94240ce4270dc5c66d2a939aa43203",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/WebTriggerInputParcel.java",
+      "kind": "blob",
+      "oid": "71f44cc9a3cd8758c52e5f636cd75ea1d211c6bb",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/WebTriggerOutput.java",
+      "kind": "blob",
+      "oid": "a07871a9f0acdb5a6a9306d474994bec5ecdb11b",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/WebTriggerOutputParcel.java",
+      "kind": "blob",
+      "oid": "0671a31cd2e909103a96e8eabb3e17569837ba02",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/aidl/IDataAccessService.aidl",
+      "kind": "blob",
+      "oid": "cac4ab03e5730f0f84c5305e77cfcdc53273194a",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/aidl/IDataAccessServiceCallback.aidl",
+      "kind": "blob",
+      "oid": "40e3874f5e031a9b8f308cef018b0ae674dbbf5b",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/aidl/IExecuteCallback.aidl",
+      "kind": "blob",
+      "oid": "a6b86bb039035c351fbd0101f44651fa238f0209",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/aidl/IFederatedComputeCallback.aidl",
+      "kind": "blob",
+      "oid": "b224b5ee28ec2aa946f9dcdc8605d9452cffb942",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/aidl/IFederatedComputeService.aidl",
+      "kind": "blob",
+      "oid": "b81b7621a365b07519621bf3d9f29ef7334a235b",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/aidl/IIsFeatureEnabledCallback.aidl",
+      "kind": "blob",
+      "oid": "cc511199db608c6516e1aedfcab0ae08840e535b",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/aidl/IIsolatedModelService.aidl",
+      "kind": "blob",
+      "oid": "80b0a425bad6a4a0ee640b73011a3d69cb6d229a",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/aidl/IIsolatedModelServiceCallback.aidl",
+      "kind": "blob",
+      "oid": "cbdf2d049463ea0934f9ff3efefe1f32e11d557c",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/aidl/IIsolatedService.aidl",
+      "kind": "blob",
+      "oid": "2e257bdc6131aa3c0b1c8982250ddcd81eed830b",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/aidl/IIsolatedServiceCallback.aidl",
+      "kind": "blob",
+      "oid": "10fabeb92704af96cf702927f9b8c434e443ed49",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/aidl/IOnDevicePersonalizationDebugService.aidl",
+      "kind": "blob",
+      "oid": "c4e1de6a24d7ebf9f92e75a0208cc4cbcb329602",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/aidl/IOnDevicePersonalizationManagingService.aidl",
+      "kind": "blob",
+      "oid": "23437fe0f871e7d477baab802921974e601d41ba",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/aidl/IRegisterMeasurementEventCallback.aidl",
+      "kind": "blob",
+      "oid": "49652a546f6a6d3798ec2c1ab461b2e59d1b250a",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/aidl/IRegisterWebTriggerCallback.aidl",
+      "kind": "blob",
+      "oid": "1e4ea88978a909d5fce34b3ef1f719498a55e812",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/adservices/ondevicepersonalization/aidl/IRequestSurfacePackageCallback.aidl",
+      "kind": "blob",
+      "oid": "0e51830b4a01049a2f283356b80d158e52fb32f4",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/federatedcompute/ExampleStoreIterator.java",
+      "kind": "blob",
+      "oid": "cec1f539032e8568daadebc434356ed1f7d511d7",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/federatedcompute/ExampleStoreQueryCallbackImpl.java",
+      "kind": "blob",
+      "oid": "e993785317dea0fb0a9446c6789e05d01430c5ae",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/federatedcompute/ExampleStoreService.java",
+      "kind": "blob",
+      "oid": "2ca645992586920fbcb39daf6da755c7f6f9b241",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/federatedcompute/FederatedComputeException.java",
+      "kind": "blob",
+      "oid": "8fdfa2e66c84d636be4a332120001db1a4970e1b",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/federatedcompute/FederatedComputeManager.java",
+      "kind": "blob",
+      "oid": "cd45a56e8880ef4b78f1db7285134ae38c8ae5fe",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/federatedcompute/ResultHandlingService.java",
+      "kind": "blob",
+      "oid": "8b79e2c3c2c8175214b8045da7609a7cebad62f8",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/federatedcompute/aidl/IExampleStoreCallback.aidl",
+      "kind": "blob",
+      "oid": "986434e8acb1747c7d0b4f0ba2e3ec845530c9c2",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/federatedcompute/aidl/IExampleStoreIterator.aidl",
+      "kind": "blob",
+      "oid": "e1846cd9b61b9ea84aaed0afc53fee04641b8c27",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/federatedcompute/aidl/IExampleStoreIteratorCallback.aidl",
+      "kind": "blob",
+      "oid": "ae51972790cb971c4e26744f60f673c0586f9ab4",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/federatedcompute/aidl/IExampleStoreService.aidl",
+      "kind": "blob",
+      "oid": "8f33239adcd767d7f0117319d11a3585e53e9351",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/federatedcompute/aidl/IFederatedComputeCallback.aidl",
+      "kind": "blob",
+      "oid": "fd11931fef9e5555c81b3af58255e485c21da853",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/federatedcompute/aidl/IFederatedComputeService.aidl",
+      "kind": "blob",
+      "oid": "56ea78bf70aebf093db3b4bd83c59a0883dc9ab1",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/federatedcompute/aidl/IIsFeatureEnabledCallback.aidl",
+      "kind": "blob",
+      "oid": "74d6e92e63cdcfe0e01ba291bea0704baa2a18b6",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/federatedcompute/aidl/IResultHandlingService.aidl",
+      "kind": "blob",
+      "oid": "b07271a8cacb06abee25c1e84b6cea77281ebce9",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/federatedcompute/common/ClientConstants.java",
+      "kind": "blob",
+      "oid": "c68824171f2d5d39c1d88f433e19601fd6b48017",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/federatedcompute/common/ExampleConsumption.aidl",
+      "kind": "blob",
+      "oid": "c18233d14658f971d7452a63f438a1b9f6e45d1f",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/federatedcompute/common/ExampleConsumption.java",
+      "kind": "blob",
+      "oid": "eef7d16a3f27461bd9b297229104238a96c87876",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/federatedcompute/common/ScheduleFederatedComputeRequest.java",
+      "kind": "blob",
+      "oid": "dad42f5b96c323f3bb2849a31cecca0d96b5937b",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/federatedcompute/common/TrainingInterval.aidl",
+      "kind": "blob",
+      "oid": "5ee4320573348217ddfaae47d15d3f07f524800d",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/federatedcompute/common/TrainingInterval.java",
+      "kind": "blob",
+      "oid": "ba5f8dcd094d4a75d86689f91285df8c8924d77d",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/federatedcompute/common/TrainingOptions.aidl",
+      "kind": "blob",
+      "oid": "cbaad00c595ec19ccff9d72124098ba5e9e256e1",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/federatedcompute/common/TrainingOptions.java",
+      "kind": "blob",
+      "oid": "08bdab803c52aa73283182f59aa6c22e4ee3f42e",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/ondevicepersonalization/IOnDevicePersonalizationSystemService.aidl",
+      "kind": "blob",
+      "oid": "7ab14ed34b2fa00db53d81d07e836e03b4c26c35",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/ondevicepersonalization/IOnDevicePersonalizationSystemServiceCallback.aidl",
+      "kind": "blob",
+      "oid": "a2c90005cf29b738c227fe4499248d6226c5b38e",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/ondevicepersonalization/OnDevicePersonalizationFrameworkInitializer.java",
+      "kind": "blob",
+      "oid": "021ba9df0b8ff034276061150983216df19003e3",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/ondevicepersonalization/OnDevicePersonalizationSystemServiceManager.java",
+      "kind": "blob",
+      "oid": "235c0a937e0c7d07a3ff78f2e05bbe7be60dc197",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/com/android/federatedcompute/internal/util/AbstractServiceBinder.java",
+      "kind": "blob",
+      "oid": "9908470215507d73e5d3939ec5b9eebfaf5311ea",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/com/android/federatedcompute/internal/util/AndroidServiceBinder.java",
+      "kind": "blob",
+      "oid": "a88a774283a7d2afefca113f0ab6f9f9da37b0dd",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/com/android/federatedcompute/internal/util/LogUtil.java",
+      "kind": "blob",
+      "oid": "4c1db654a840e76ea54146078995b2d02bf2cfb3",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/com/android/ondevicepersonalization/internal/util/AnnotationValidations.java",
+      "kind": "blob",
+      "oid": "c344d42b02b0331ffdba55d405331d793181fabe",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/com/android/ondevicepersonalization/internal/util/BaseOdpParceledListSlice.java",
+      "kind": "blob",
+      "oid": "138d9b05dca12626614853c72aca217d504f05ac",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/com/android/ondevicepersonalization/internal/util/ByteArrayParceledListSlice.java",
+      "kind": "blob",
+      "oid": "3b502a8eefd365c4cf56754a98ab2cb684845377",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/com/android/ondevicepersonalization/internal/util/ByteArrayParceledSlice.java",
+      "kind": "blob",
+      "oid": "8450cacf623de9f7bd2d47f4bcff9caf071513df",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/com/android/ondevicepersonalization/internal/util/ByteArrayUtil.java",
+      "kind": "blob",
+      "oid": "4d99818787cfedbe9162717567282e552b70c633",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/com/android/ondevicepersonalization/internal/util/DataClass.java",
+      "kind": "blob",
+      "oid": "8df1c08a915063ee01750f34dba2f14efa987caf",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/com/android/ondevicepersonalization/internal/util/ExceptionInfo.java",
+      "kind": "blob",
+      "oid": "3482c333dafc9abe6a1a00c0ab14b048574f95c2",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/com/android/ondevicepersonalization/internal/util/LoggerFactory.java",
+      "kind": "blob",
+      "oid": "d900796a01477260cc11c8a3524cbae8c6e6af66",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/com/android/ondevicepersonalization/internal/util/OdpParceledListSlice.java",
+      "kind": "blob",
+      "oid": "14a89e0d4e543c2afc4acda66f8296ff2e2a8728",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/com/android/ondevicepersonalization/internal/util/Parcelling.java",
+      "kind": "blob",
+      "oid": "a03372c39cd786910a6384af33ac590f2b5930e7",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/com/android/ondevicepersonalization/internal/util/PersistableBundleUtils.java",
+      "kind": "blob",
+      "oid": "bcdf7371d3f7e92e1363611c26ae4d428c1aa6de",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/com/android/ondevicepersonalization/internal/util/TextUtils.java",
+      "kind": "blob",
+      "oid": "e928a145a1c078c6fd3287263673c2141ef734d5",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/lint-baseline.xml",
+      "kind": "blob",
+      "oid": "8919d0e72a717f148abfc1aeee8614505db2d067",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/Android.bp",
+      "kind": "blob",
+      "oid": "921807660909e2fab57cc17a9f95c15b0918d439",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "f18cdc70a67820e4efa7c9be0ae8effe6aad767a",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/src/com/android/ondevicepersonalization/libraries/plugin/FailureType.aidl",
+      "kind": "blob",
+      "oid": "d549497a8bdd1ece2edc4c38a009ef23e1587c81",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/src/com/android/ondevicepersonalization/libraries/plugin/FailureType.java",
+      "kind": "blob",
+      "oid": "084a1d9e0692e1220aa0eb78e10ae7a0e4861537",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/src/com/android/ondevicepersonalization/libraries/plugin/Plugin.java",
+      "kind": "blob",
+      "oid": "a83df3ad515d4ec14e5ade1b89a5accd9b5f146e",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/src/com/android/ondevicepersonalization/libraries/plugin/PluginApplication.java",
+      "kind": "blob",
+      "oid": "554ae882c50f5b2477731233730006181e11be39",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/src/com/android/ondevicepersonalization/libraries/plugin/PluginCallback.java",
+      "kind": "blob",
+      "oid": "67dade6a8a7e0d7bfd4f887216e706dc733a7a7e",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/src/com/android/ondevicepersonalization/libraries/plugin/PluginContext.java",
+      "kind": "blob",
+      "oid": "688cfb6800050e3c1af8a3deaa667b8fc66182fc",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/src/com/android/ondevicepersonalization/libraries/plugin/PluginController.java",
+      "kind": "blob",
+      "oid": "7e661e4b136b6afac05ae50624c1b6ed0c85c08f",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/src/com/android/ondevicepersonalization/libraries/plugin/PluginHost.java",
+      "kind": "blob",
+      "oid": "f2886d8ab22242addbf1988523b5c1100e3c8099",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/src/com/android/ondevicepersonalization/libraries/plugin/PluginInfo.java",
+      "kind": "blob",
+      "oid": "fa250b42856b1d7b95ea8890c21582a3fc749545",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/src/com/android/ondevicepersonalization/libraries/plugin/PluginManager.java",
+      "kind": "blob",
+      "oid": "c39e43e8deab13be836e4873dcfc44f33ae3fe92",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/src/com/android/ondevicepersonalization/libraries/plugin/PluginState.aidl",
+      "kind": "blob",
+      "oid": "c337af36019383dd21c43d44df86328c38a8ef0b",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/src/com/android/ondevicepersonalization/libraries/plugin/PluginState.java",
+      "kind": "blob",
+      "oid": "2f3a85bd2f57be071641e647d4b1d12358a475af",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/src/com/android/ondevicepersonalization/libraries/plugin/PluginStateCallback.java",
+      "kind": "blob",
+      "oid": "c8f9a06797419a7e6356acc2b8c5a3d7b3aeb8e4",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/src/com/android/ondevicepersonalization/libraries/plugin/impl/PluginControllerImpl.java",
+      "kind": "blob",
+      "oid": "a542b7ee235b02706403d33b6f9e0166d6c2b0e9",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/src/com/android/ondevicepersonalization/libraries/plugin/impl/PluginManagerImpl.java",
+      "kind": "blob",
+      "oid": "eaa94671b9dff441b3403130ae42ee1505de40c0",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/src/com/android/ondevicepersonalization/libraries/plugin/internal/CallbackConverter.java",
+      "kind": "blob",
+      "oid": "3b7d1264aeffaf3f54f1d56bf7d410e966e0a96e",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/src/com/android/ondevicepersonalization/libraries/plugin/internal/CloseableList.java",
+      "kind": "blob",
+      "oid": "5a287afc7a632e8c64d6cc0a8194edf185848a34",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/src/com/android/ondevicepersonalization/libraries/plugin/internal/IPluginCallback.aidl",
+      "kind": "blob",
+      "oid": "3d7dddbac8e3d3bcd9ff04189fa237f3bba869d6",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/src/com/android/ondevicepersonalization/libraries/plugin/internal/IPluginExecutorService.aidl",
+      "kind": "blob",
+      "oid": "08989a4e249cf2744e19a05f2f84fc6663795020",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/src/com/android/ondevicepersonalization/libraries/plugin/internal/IPluginStateCallback.aidl",
+      "kind": "blob",
+      "oid": "6051a1dfbc00c5c65da0108595bd0677f1287c33",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/src/com/android/ondevicepersonalization/libraries/plugin/internal/IsolationClassLoader.java",
+      "kind": "blob",
+      "oid": "8da33b775fc5832285e08fbdb67e8832b71af2b8",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/src/com/android/ondevicepersonalization/libraries/plugin/internal/PluginArchiveManager.java",
+      "kind": "blob",
+      "oid": "bc677bd5802cfb776ddae272330875deba0a410f",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/src/com/android/ondevicepersonalization/libraries/plugin/internal/PluginCode.java",
+      "kind": "blob",
+      "oid": "cacdd21ab37a458e7d080ba3a5f07fe64c1f04fc",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/src/com/android/ondevicepersonalization/libraries/plugin/internal/PluginExecutor.java",
+      "kind": "blob",
+      "oid": "1a6bace7ea19ac325f467b132046d8d268a7ecdd",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/src/com/android/ondevicepersonalization/libraries/plugin/internal/PluginExecutorService.java",
+      "kind": "blob",
+      "oid": "90e423aa2c3b2bf758bda9dc7ca50e3a7db22c66",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/src/com/android/ondevicepersonalization/libraries/plugin/internal/PluginExecutorServiceProvider.java",
+      "kind": "blob",
+      "oid": "bf60767737db0a5bb4fc68e68e2387c6c8eb4536",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/src/com/android/ondevicepersonalization/libraries/plugin/internal/PluginExecutorServiceProviderImpl.java",
+      "kind": "blob",
+      "oid": "00718f462ffb9f4fc72a05082b22451708f3d64e",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/src/com/android/ondevicepersonalization/libraries/plugin/internal/PluginInfoInternal.aidl",
+      "kind": "blob",
+      "oid": "2a34fd7a151b63490ea3d8f167e82d0f99cfa141",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/src/com/android/ondevicepersonalization/libraries/plugin/internal/PluginInfoInternal.java",
+      "kind": "blob",
+      "oid": "a033901b585520fdcbca6aa68c6116a9b3013348",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/src/com/android/ondevicepersonalization/libraries/plugin/internal/PluginLoader.java",
+      "kind": "blob",
+      "oid": "822a89e4a5e03f398afff679b6b35da42d9fd323",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/src/com/android/ondevicepersonalization/libraries/plugin/internal/PluginLoaderImpl.java",
+      "kind": "blob",
+      "oid": "0facaf7474b47cdaf4bed3c3a7472dabefc095a2",
+      "mode": "100644"
+    },
+    {
+      "path": "pluginlib/src/com/android/ondevicepersonalization/libraries/plugin/internal/util/ApkReader.java",
+      "kind": "blob",
+      "oid": "f68a6e823da00460f3eb58cccb9745e1caf83000",
+      "mode": "100644"
+    },
+    {
+      "path": "samples/odpclient/Android.bp",
+      "kind": "blob",
+      "oid": "799d20039ff96222041e7a318b4d443ba7d38f2b",
+      "mode": "100644"
+    },
+    {
+      "path": "samples/odpclient/src/main/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "a10e3d8a54dd5d0eb072a75a0eb916eb4f16f447",
+      "mode": "100644"
+    },
+    {
+      "path": "samples/odpclient/src/main/java/com/example/odpclient/MainActivity.java",
+      "kind": "blob",
+      "oid": "d3cf012f6c729777289cbd531c8239b719e517d5",
+      "mode": "100644"
+    },
+    {
+      "path": "samples/odpclient/src/main/res/drawable/border.xml",
+      "kind": "blob",
+      "oid": "b552f83881e09c9145b7638962bb8ceb28710542",
+      "mode": "100644"
+    },
+    {
+      "path": "samples/odpclient/src/main/res/layout/activity_main.xml",
+      "kind": "blob",
+      "oid": "7d48eff848c709c84964e317bc50d6f748d55170",
+      "mode": "100644"
+    },
+    {
+      "path": "samples/odpclient/src/main/res/values-v35/dimens.xml",
+      "kind": "blob",
+      "oid": "6125d30827a512e8c85d2caf8406293b6e6bcf9f",
+      "mode": "100644"
+    },
+    {
+      "path": "samples/odpclient/src/main/res/values/dimens.xml",
+      "kind": "blob",
+      "oid": "8360c2703c8e7366f6750de5da3347fc99c4a00a",
+      "mode": "100644"
+    },
+    {
+      "path": "samples/odpclient/src/main/res/values/strings.xml",
+      "kind": "blob",
+      "oid": "267d1445903e161072272c69a35439dcbee4f0ba",
+      "mode": "100644"
+    },
+    {
+      "path": "samples/odpsamplenetwork/Android.bp",
+      "kind": "blob",
+      "oid": "b341be2dfc45a5b66a54c0441ac926d1ba206430",
+      "mode": "100644"
+    },
+    {
+      "path": "samples/odpsamplenetwork/src/main/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "a7461a76cb70463da6c62ede552e070f6e5ebcb2",
+      "mode": "100644"
+    },
+    {
+      "path": "samples/odpsamplenetwork/src/main/java/com/example/odpsamplenetwork/CuckooFilterUtil.java",
+      "kind": "blob",
+      "oid": "294e2a0644b122632d84a5cb4a02687f79b7a084",
+      "mode": "100644"
+    },
+    {
+      "path": "samples/odpsamplenetwork/src/main/java/com/example/odpsamplenetwork/SampleHandler.java",
+      "kind": "blob",
+      "oid": "5ee62d371cceca261849867222ee1fc3fb084e84",
+      "mode": "100644"
+    },
+    {
+      "path": "samples/odpsamplenetwork/src/main/java/com/example/odpsamplenetwork/SampleService.java",
+      "kind": "blob",
+      "oid": "08f91123aac4bb98399d2f57a3547d085dc75d09",
+      "mode": "100644"
+    },
+    {
+      "path": "samples/odpsamplenetwork/src/main/res/raw/test_data1.json",
+      "kind": "blob",
+      "oid": "9482ea325b3398250e2701c703d52298d0b2a933",
+      "mode": "100644"
+    },
+    {
+      "path": "samples/odpsamplenetwork/src/main/res/xml/odpsettings.xml",
+      "kind": "blob",
+      "oid": "b6b03efe9915b41c4879620437c36f43f7a07d17",
+      "mode": "100644"
+    },
+    {
+      "path": "samples/odptargetingapp1/Android.bp",
+      "kind": "blob",
+      "oid": "49187b45e8e415941f971927eb9aef0cda9a75f7",
+      "mode": "100644"
+    },
+    {
+      "path": "samples/odptargetingapp1/src/main/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "8ad3364a13069ebe5c5bf9ed98b9a7f7bff9b91f",
+      "mode": "100644"
+    },
+    {
+      "path": "samples/odptargetingapp2/Android.bp",
+      "kind": "blob",
+      "oid": "31620d4878b1b886164b4d519f0daa90a8ce112e",
+      "mode": "100644"
+    },
+    {
+      "path": "samples/odptargetingapp2/src/main/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "90439c23650c77369b6109b015b634ce8c8c1dd8",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/analysis/CantripFactory.kt",
+      "kind": "blob",
+      "oid": "51aadf89379ac7f87bbbdab993a62a624c0df6fb",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/analysis/ChronicleContext.kt",
+      "kind": "blob",
+      "oid": "c4724029d1cfe8402eda7bfd2fb6c1dc6f63808c",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/analysis/DefaultChronicleContext.kt",
+      "kind": "blob",
+      "oid": "471ac9a3d775df9aba1c3478fb45cbbfca4e2d15",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/analysis/DefaultPolicySet.kt",
+      "kind": "blob",
+      "oid": "e155ea2a2e44ccb828fe6d359aea64704fa26678",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/analysis/PolicyEngine.kt",
+      "kind": "blob",
+      "oid": "a39b97a047cc03e2df52f5669fbe608fc432f755",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/analysis/PolicySet.kt",
+      "kind": "blob",
+      "oid": "73e2ea3022de6e25bca5869c5d89cc6cb15db668",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/analysis/Utils.kt",
+      "kind": "blob",
+      "oid": "249a83a15586b4a3cad04f67e2c23be401fe90b7",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/analysis/impl/Annotations.kt",
+      "kind": "blob",
+      "oid": "38ca03f5b148997998321e1fb3adf9d006d7d4bb",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/analysis/impl/CantripFactoryImpl.kt",
+      "kind": "blob",
+      "oid": "b500502952a93aa8e5c16423ee73e9e30d79367a",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/analysis/impl/ChroniclePolicyEngine.kt",
+      "kind": "blob",
+      "oid": "fc234980008706a8e47460f755d919d2176d03db",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/analysis/impl/ManagementStrategyValidation.kt",
+      "kind": "blob",
+      "oid": "e4d2343602fa32b02d7f6298ce8042e7c4035d6d",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/analysis/impl/PolicyContextVerification.kt",
+      "kind": "blob",
+      "oid": "cec7e82648b51fd717406be38649bedb4bc3acf0",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/Chronicle.kt",
+      "kind": "blob",
+      "oid": "aa684becc941c0b3c8b1b30f1eaced0e0b33eb1e",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/ChronicleAnalyticsClient.kt",
+      "kind": "blob",
+      "oid": "2b4db7052161ff1dd9139170c9e85b66029fd1bf",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/ChronicleDeletionListener.kt",
+      "kind": "blob",
+      "oid": "afb4ee98893f9344ea11ac0cc37797643336cb19",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/ChronicleDsl.kt",
+      "kind": "blob",
+      "oid": "22712c384d6b16a50d73814c2644c1b6a253a300",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/ChronicleHost.kt",
+      "kind": "blob",
+      "oid": "b9e824f27ce1c64631c792f2423920f60aa6c89d",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/Connection.kt",
+      "kind": "blob",
+      "oid": "787affda79649c4faf07ae625f916ed231c57eec",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/ConnectionProvider.kt",
+      "kind": "blob",
+      "oid": "e815bfe0754bcfd20987a3ba2146f58405077769",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/ConnectionRequest.kt",
+      "kind": "blob",
+      "oid": "d32a0ae22d6ba34d00ba1a6e19ea3a05aecdd9ee",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/ConnectionUtils.kt",
+      "kind": "blob",
+      "oid": "a006f888ec10e81758f71167743f432c9de30493",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/DataType.kt",
+      "kind": "blob",
+      "oid": "f698d3b0f61ed9b5ea8a08243b962d5b3b697e98",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/DataTypeDescriptor.kt",
+      "kind": "blob",
+      "oid": "5f5b0f0078b929841795ba88db85f8cd5c7e8962",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/DataTypeDescriptorSet.kt",
+      "kind": "blob",
+      "oid": "dafa5750b7bd8a75db3bd2a349c606b4aa1348c2",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/DeletionTrigger.kt",
+      "kind": "blob",
+      "oid": "51f45bd237e0ca524eaa4e01138b4ba095287c02",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/Flavor.kt",
+      "kind": "blob",
+      "oid": "828954f2ee19da02af66a3b589f500f34fad443c",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/ManagedDataType.kt",
+      "kind": "blob",
+      "oid": "e5e15579a607792b63f94b5f67fade8254d0fac0",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/ManagementStrategy.kt",
+      "kind": "blob",
+      "oid": "43d337bb9dd8dd571dc7282daa74fd36e298d8d9",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/ProcessorNode.kt",
+      "kind": "blob",
+      "oid": "3ac0b8236421794012bd7e70a1a06ac16b4e7f30",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/ReadConnection.kt",
+      "kind": "blob",
+      "oid": "e45d3fc5e81bc25296a10687a518fd73a5de73bd",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/SandboxProcessorNode.kt",
+      "kind": "blob",
+      "oid": "ded11d46980355152f345cd05e0b88a0a763e982",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/WriteConnection.kt",
+      "kind": "blob",
+      "oid": "c08efdebe08ca6942754c6b0424a7c24c0dc7318",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/cantrip/Cantrip.kt",
+      "kind": "blob",
+      "oid": "3d5c5e1c232be74117d6701c56cc167205230711",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/cantrip/MultiCantrip.kt",
+      "kind": "blob",
+      "oid": "edbd0ce8cfa97dc14c2d919d4d77fcb2fcb0fd04",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/cantrip/OpticalCantrip.kt",
+      "kind": "blob",
+      "oid": "ea8576763614d4f1b5f68f3f6050e6d96421c946",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/error/ChronicleError.kt",
+      "kind": "blob",
+      "oid": "2970885d0fd2e9c47b661729b4d47d14c2636c8f",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/error/ConnectionNotDeclared.kt",
+      "kind": "blob",
+      "oid": "febcee25f69f29b01dac0f0b6b67cd351086aece",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/error/ConnectionProviderNotFound.kt",
+      "kind": "blob",
+      "oid": "414d884242270dbd1f71414cdcef7b212d7e4c73",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/error/ConnectionTypeAmbiguity.kt",
+      "kind": "blob",
+      "oid": "39c3ee8240d00815313ddf2898f34d01d96623ac",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/error/Disabled.kt",
+      "kind": "blob",
+      "oid": "4f1e1c1e9018462d4f2795cffff42d60d2cc9e72",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/error/MalformedPolicySet.kt",
+      "kind": "blob",
+      "oid": "2a0d1c5c0173fe046ed6974d3c57949d87df7422",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/error/NoSuchDataInPolicy.kt",
+      "kind": "blob",
+      "oid": "9a81204f12a3bd7919724cb1445a60a24a99ad77",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/error/PolicyNotFound.kt",
+      "kind": "blob",
+      "oid": "308a3bd73d845bada27bb7f09fa323f634c40dba",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/error/PolicyViolation.kt",
+      "kind": "blob",
+      "oid": "5a2a9371ebc199fb09690f82b720fb4a7a34c587",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/flags/FakeFlagsReader.kt",
+      "kind": "blob",
+      "oid": "2e22b516e4159f1d6a6066aff762af007bd64919",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/flags/Flags.kt",
+      "kind": "blob",
+      "oid": "f294e2b90300ef2c2200acac1d34d512367b8984",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/flags/FlagsReader.kt",
+      "kind": "blob",
+      "oid": "0aa393bebeb59eba52bda4c889bc58fe4a0e68f7",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/integration/DefaultChronicle.kt",
+      "kind": "blob",
+      "oid": "7cd3e05db302926781850b22bd6493d6f762bd79",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/integration/DefaultDataTypeDescriptorSet.kt",
+      "kind": "blob",
+      "oid": "f69c794f8c6df7c896173d419005511f1fbf27af",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/integration/NoOpChronicle.kt",
+      "kind": "blob",
+      "oid": "2ff3aec839e7d74139e5e4540611160d9adce9e5",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/operation/Action.kt",
+      "kind": "blob",
+      "oid": "b2b20c36f2d0409649687500ef4ad24132378ac4",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/operation/DefaultOperationLibrary.kt",
+      "kind": "blob",
+      "oid": "93a04add9ec076ebe4395a6c9fcf406fa857bf1d",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/operation/Operation.kt",
+      "kind": "blob",
+      "oid": "e343a345eb705b5b4632dcf7f2125eaa0ca590d5",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/operation/OperationLibrary.kt",
+      "kind": "blob",
+      "oid": "0348e1a3464abaa4240f5a244faebe21100f5b84",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/optics/DefaultOpticsManifest.kt",
+      "kind": "blob",
+      "oid": "144256f5511d0e74bd504dba63af1c35a658080a",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/optics/Lens.kt",
+      "kind": "blob",
+      "oid": "197143dd593e0e88066a2a56c8110a96a12a7347",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/optics/OpticalAccessPath.kt",
+      "kind": "blob",
+      "oid": "bc941242c6f5117b699b03ab60a04b798fa526dc",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/optics/OpticsManifest.kt",
+      "kind": "blob",
+      "oid": "f2142f4d4ca69df94067b4e4d17044fd7ca23ebb",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/optics/Traversal.kt",
+      "kind": "blob",
+      "oid": "2fe4f48e77fb15cae76c8f7ca721fd21f786a9aa",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/policy/DefaultPolicyConformanceCheck.kt",
+      "kind": "blob",
+      "oid": "ced227b107b07fe9e9b915a26f0e9d74b3f871f5",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/policy/Policy.kt",
+      "kind": "blob",
+      "oid": "ae6581b9f94eb3125628c0457aa9d6e92cd7147f",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/policy/PolicyConformanceCheck.kt",
+      "kind": "blob",
+      "oid": "0b00af117760b880026719b997f24c907549984d",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/policy/annotation/Annotation.kt",
+      "kind": "blob",
+      "oid": "144d6da2d10c4c6bfbdc0e92a173ab68ac75d505",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/policy/annotation/AnnotationBuilder.kt",
+      "kind": "blob",
+      "oid": "8b7cd13b0d4471bf8e95e0279ce333fc16b3786c",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/policy/annotation/AnnotationParam.kt",
+      "kind": "blob",
+      "oid": "c5ea37c63df3b9dc6fdd27638ed5ee1431affcc3",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/policy/builder/ConditionalUsage.kt",
+      "kind": "blob",
+      "oid": "2b834d33c33752b411f0ddc0d2c3568af82e8495",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/policy/builder/Consent.kt",
+      "kind": "blob",
+      "oid": "27bf5c3dea00c81a3a48d22b9bfbb189acc75b8d",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/policy/builder/DataDsl.kt",
+      "kind": "blob",
+      "oid": "3768a64edc8a2101cf446647493ad5c5816d46f3",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/policy/builder/DeletionTriggerPolicyAnnotations.kt",
+      "kind": "blob",
+      "oid": "4588429d8587d7090399eaac97482a6ff9747d6a",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/policy/builder/FederatedComputePolicyConfig.kt",
+      "kind": "blob",
+      "oid": "d644be94b92f3b327318201d8085036d009dfc22",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/policy/builder/FlavoredPolicies.kt",
+      "kind": "blob",
+      "oid": "4199c282103732fa3c5d80e2eaf6e49dfe18e1e9",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/policy/builder/FlavoredPoliciesBuilder.kt",
+      "kind": "blob",
+      "oid": "52e0cac9e71fcdd09200589d83c4a0f03d1e87c3",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/policy/builder/PolicyBuilder.kt",
+      "kind": "blob",
+      "oid": "c6b163d90dbc040578531579ef5c22efd8d0883b",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/policy/builder/PolicyCheckResult.kt",
+      "kind": "blob",
+      "oid": "dcaa0a78881092099630816c42cad1f5355a9726",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/policy/builder/PolicyType.kt",
+      "kind": "blob",
+      "oid": "fb46f1898155079b168851e31f001b12aafdf142",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/policy/capabilities/Capabilities.kt",
+      "kind": "blob",
+      "oid": "85cef610c647c3c268ba78ebf475112c8ccb2316",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/policy/capabilities/Capability.kt",
+      "kind": "blob",
+      "oid": "96e7d867ba497753981ded240dd82230428946c2",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/policy/contextrules/PolicyContextRule.kt",
+      "kind": "blob",
+      "oid": "60620ec0816b6da2229bbea9805ea0c17d927a48",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/policy/proto/AnnotationProto.kt",
+      "kind": "blob",
+      "oid": "1c68be0ac458a4470122b934ba5db67bc30656f8",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/policy/proto/PolicyProto.kt",
+      "kind": "blob",
+      "oid": "e96fc0cc6456115a915c0501a05b3b008e63c36e",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/storage/Extensions.kt",
+      "kind": "blob",
+      "oid": "bba8f0ac276e2048a6e1552dbf3fb6f0f579bea3",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/storage/WrappedEntity.kt",
+      "kind": "blob",
+      "oid": "89f98665b511ba69fb66736a4c53c242d7565fd1",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/api/storage/entity_metadata.proto",
+      "kind": "blob",
+      "oid": "ced82ef3f526435aaa3103822611122f254e0d2b",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/util/Logcat.kt",
+      "kind": "blob",
+      "oid": "6e08e95fae9806d5c7b2e9c0d5360a787e867419",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/libraries/pcc/chronicle/util/TypedMap.kt",
+      "kind": "blob",
+      "oid": "97c3ec4e3c81e619e97d01b27f5215198d5cdfe8",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/FeatureStatusManager.java",
+      "kind": "blob",
+      "oid": "38b9c710fd2a75c2895bddbc431486bb336a9947",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/Flags.java",
+      "kind": "blob",
+      "oid": "a31cb0320710e31ebcec2af1e298dc355446d58e",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/FlagsConstants.java",
+      "kind": "blob",
+      "oid": "6dd98d3010e33e5ee603c0e92c64b5e5d8213a22",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/FlagsFactory.java",
+      "kind": "blob",
+      "oid": "a20b0dd06fe49992989a6ebbb46417fbc98e7c6c",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/OdpServiceException.java",
+      "kind": "blob",
+      "oid": "6089396055a3c4976ac20a948fbc897e93bdffe9",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/OnDevicePersonalizationApplication.java",
+      "kind": "blob",
+      "oid": "52b20ddd221d48875a847acb529debdcc72fe736",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/OnDevicePersonalizationBroadcastReceiver.java",
+      "kind": "blob",
+      "oid": "f965cb3fe022d2713882b8a7614024e168cc165c",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/OnDevicePersonalizationConfig.java",
+      "kind": "blob",
+      "oid": "398a6be63fdb8e4a12bbf286371f56dc04dbbbc5",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/OnDevicePersonalizationDebugServiceDelegate.java",
+      "kind": "blob",
+      "oid": "f3fb88cf22643b8465eb9c9a41bd7943cd7c6b51",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/OnDevicePersonalizationDebugServiceImpl.java",
+      "kind": "blob",
+      "oid": "b4a46259decac285a4f3c486266f61edc958de41",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/OnDevicePersonalizationExecutors.java",
+      "kind": "blob",
+      "oid": "5eb381901b82c9277591cbf29422c1a74b368f4f",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/OnDevicePersonalizationManagingServiceDelegate.java",
+      "kind": "blob",
+      "oid": "ebd48bdf9ab799e1f0b30229251b069142b6c309",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/OnDevicePersonalizationManagingServiceImpl.java",
+      "kind": "blob",
+      "oid": "748520d857cad57de588578ce02891db9d809b2f",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/PhFlags.java",
+      "kind": "blob",
+      "oid": "297a8c527490bf0f1862a0e6c24573ef37c38277",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/StableFlags.java",
+      "kind": "blob",
+      "oid": "2fa4da2537b9b1101510547c45ac7ff00e26c0f0",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/DataAccessPermission.java",
+      "kind": "blob",
+      "oid": "d16386f9cef6f7608f3cfaeea717190c35b9ae3a",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/DataAccessServiceImpl.java",
+      "kind": "blob",
+      "oid": "57fb83172b0ad1e98d288e8d3eed65f0302f9b10",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/DbUtils.java",
+      "kind": "blob",
+      "oid": "da1e7726688b532c93a464fd3f7cf072502e4e38",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/EncryptionUtils.java",
+      "kind": "blob",
+      "oid": "f376eab623fa427b218e71d33ed0176fcbd0eb12",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/OnDevicePersonalizationDbHelper.java",
+      "kind": "blob",
+      "oid": "0bcd5ddb426807b658c7ad28c66e0f8bf13da014",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/errors/AggregateErrorDataReportingJob.java",
+      "kind": "blob",
+      "oid": "fee34f55c22e474cf06eca6578ff5db98ab38d13",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/errors/AggregateErrorDataReportingService.java",
+      "kind": "blob",
+      "oid": "d8b5b93580ef931da8fc557414f767bf45b6ef08",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/errors/AggregatedErrorCodesContract.java",
+      "kind": "blob",
+      "oid": "c9632a118ccaa7a2be8bbc4814d4abc2dfd1ec14",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/errors/AggregatedErrorCodesLogger.java",
+      "kind": "blob",
+      "oid": "a8b47ac64f4c2274b71454cad046d707232b3034",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/errors/AggregatedErrorReportingProtocol.java",
+      "kind": "blob",
+      "oid": "71641c0f43824144dbd8d160ca0f47ab662282c5",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/errors/AggregatedErrorReportingWorker.java",
+      "kind": "blob",
+      "oid": "1620c9abee3227f17b9d64755175943913ea5a3f",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/errors/DateTimeUtils.java",
+      "kind": "blob",
+      "oid": "2664499c6e5373011b7a48c1d64c10385a4fd979",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/errors/ErrorData.java",
+      "kind": "blob",
+      "oid": "4ced42228fa09b5fda6b93ae3c8f9310c5ec561b",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/errors/OnDevicePersonalizationAggregatedErrorDataDao.java",
+      "kind": "blob",
+      "oid": "836b5834457e8bd241b4c8a817183667183e6706",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/errors/ReportingProtocol.java",
+      "kind": "blob",
+      "oid": "9e5da673f4397ffb29e70ca103a6b6df85a4eff2",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/events/ColumnSchema.java",
+      "kind": "blob",
+      "oid": "cad06bd9f78e90c37b1d67a99bb49800f4d6eaa7",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/events/Event.java",
+      "kind": "blob",
+      "oid": "6bcb9f7c13df1108187dfc5c0be853348c0b3e8b",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/events/EventState.java",
+      "kind": "blob",
+      "oid": "9d4069cec715c99780fb1b1b22b5db841a7562b4",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/events/EventStateContract.java",
+      "kind": "blob",
+      "oid": "8f96ebe9ec4ce0dd772c69f0624a03e93aa31c81",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/events/EventUrlHelper.java",
+      "kind": "blob",
+      "oid": "acbb2b610b81b6240b4a99331975b19d61906927",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/events/EventUrlPayload.java",
+      "kind": "blob",
+      "oid": "9accbaaa052fe4d87042c075f3ca84943d995173",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/events/EventsContract.java",
+      "kind": "blob",
+      "oid": "4b2c4ff9d10009f2938607245b1a3392d3db835b",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/events/EventsDao.java",
+      "kind": "blob",
+      "oid": "cbc43f41cad1fd45a97414894252d0040df54e13",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/events/JoinedEvent.java",
+      "kind": "blob",
+      "oid": "843f865cef865e08b781ea894a3d8513a3abc8ff",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/events/JoinedTableDao.java",
+      "kind": "blob",
+      "oid": "d5ab31bd0b17161248684ff1b2b955f47ad49401",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/events/QueriesContract.java",
+      "kind": "blob",
+      "oid": "6c099e516b7cd2e5cc24fa42a94a5b1190a6fff3",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/events/Query.java",
+      "kind": "blob",
+      "oid": "be4f236f62b6e7267c06ae81ff07b6360e3fff2b",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/user/AdServicesCommonStatesWrapper.java",
+      "kind": "blob",
+      "oid": "99677412a4897e4f1dd9ba4d03a32515d060e6e3",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/user/AdServicesCommonStatesWrapperImpl.java",
+      "kind": "blob",
+      "oid": "c6c881621303880822c90cb9f33edfc4df612dd0",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/user/Carrier.java",
+      "kind": "blob",
+      "oid": "86be5c9c3f740b8489c343c2d325eed3170228e1",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/user/RawUserData.java",
+      "kind": "blob",
+      "oid": "f93178b8e65b56b05eef062d45d4e506da0ef847",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/user/UserDataCollectionJob.java",
+      "kind": "blob",
+      "oid": "e20b22a85e7b41596b681ebfd65f68ca35ed8a40",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/user/UserDataCollectionJobService.java",
+      "kind": "blob",
+      "oid": "42945d2c469fd537095e3956d414c17fdf48aa6f",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/user/UserDataCollector.java",
+      "kind": "blob",
+      "oid": "de518982999c0abb605606fdde9e782841a3d1e7",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/user/UserDataContract.java",
+      "kind": "blob",
+      "oid": "1741371dc7f4cce0eab6c04a41a3a50720b3c4dd",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/user/UserDataDao.java",
+      "kind": "blob",
+      "oid": "e0ab9bf0fb86c10651d778979e441e2588f5710b",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/user/UserPrivacyStatus.java",
+      "kind": "blob",
+      "oid": "47ed50d4d5b48fd56e62573c302be79c944d2101",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/vendor/FileUtils.java",
+      "kind": "blob",
+      "oid": "451268c89cd7658c97f26a2298dda5bd14c8625f",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/vendor/LocalData.java",
+      "kind": "blob",
+      "oid": "c30cdf5f7955bfae7f5c0e144b08bae86f18819c",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/vendor/LocalDataContract.java",
+      "kind": "blob",
+      "oid": "a01211665cfcf19b12212c866a5ca5b681e131c9",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/vendor/OnDevicePersonalizationLocalDataDao.java",
+      "kind": "blob",
+      "oid": "04e3d87e4873b8682d86a347c0a4913ef56a5e56",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/vendor/OnDevicePersonalizationVendorDataDao.java",
+      "kind": "blob",
+      "oid": "2b8d57d4399c17853188e43fa8577530e7dc1a69",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/vendor/VendorData.java",
+      "kind": "blob",
+      "oid": "e7d943253f948d1599c284731e9931810b2b8678",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/vendor/VendorDataContract.java",
+      "kind": "blob",
+      "oid": "20a0edbaa477adab88d7fe815b6bed4b16178356",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/data/vendor/VendorSettingsContract.java",
+      "kind": "blob",
+      "oid": "105db456f301f0531ce40a6414cc8e4a89fc937d",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/display/DisplayHelper.java",
+      "kind": "blob",
+      "oid": "44c607eea9dc1886cf329a0f381a4e0655c1be66",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/display/OdpWebViewClient.java",
+      "kind": "blob",
+      "oid": "9f8ae908d5adee5f53d395b4a238f743d008d7f8",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/display/WebViewFlow.java",
+      "kind": "blob",
+      "oid": "605d749e51b47992b6fc24ca7ad657622e5fd241",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/display/velocity/OnDevicePersonalizationVelocityTool.java",
+      "kind": "blob",
+      "oid": "53945a124256adf3fa4bf5a9908c686995fd1b7e",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/display/velocity/VelocityEngineFactory.java",
+      "kind": "blob",
+      "oid": "3a1473d3d45db5a73b32f38b7f76a33d9ea5d5ee",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/download/DownloadFlow.java",
+      "kind": "blob",
+      "oid": "eb315b6da0f396a805f22bf05bb791360e2249f7",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/download/DownloadedFileParser.java",
+      "kind": "blob",
+      "oid": "712b78dd754bbb67c3d028584219a1abb80aab17",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/download/OnDevicePersonalizationDataProcessingAsyncCallable.java",
+      "kind": "blob",
+      "oid": "008f6cfde4df43815ba78e4a2d1ac9cdd16d78e5",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/download/OnDevicePersonalizationDownloadProcessingJob.java",
+      "kind": "blob",
+      "oid": "6cbdf241214630346d3827fb6c2fe8c1394cc3c8",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/download/OnDevicePersonalizationDownloadProcessingJobService.java",
+      "kind": "blob",
+      "oid": "5c2f1fc8ececb6649ab6918c70b9820722e473d9",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/download/ParsedFileContents.java",
+      "kind": "blob",
+      "oid": "43b67f778d8319f1642bb021aa6834b7ba4755d8",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/download/mdd/MddJob.java",
+      "kind": "blob",
+      "oid": "3c1cd6ab086ae2707ecb9bd577276cc5a5702f1c",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/download/mdd/MddJobService.java",
+      "kind": "blob",
+      "oid": "b300a69ec7e1a63350efeb3f5f68dc308ce3335c",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/download/mdd/MddLogger.java",
+      "kind": "blob",
+      "oid": "862928cbe29649be9b7ad82cfca441cb08adcb9f",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/download/mdd/MddTaskScheduler.java",
+      "kind": "blob",
+      "oid": "e658815c415a411fe3031c4236736d961afcfd59",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/download/mdd/MobileDataDownloadFactory.java",
+      "kind": "blob",
+      "oid": "21b969e2a67b6fff532c4da93dbeed5a3a4cd33d",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/download/mdd/OnDevicePersonalizationFileDownloader.java",
+      "kind": "blob",
+      "oid": "f2a5a57071836d8eb84c82ed00c1b48778a8829f",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/download/mdd/OnDevicePersonalizationFileGroupPopulator.java",
+      "kind": "blob",
+      "oid": "4cd0448566c4d0cde589db88cda6fb43a4f3c5df",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/download/mdd/OnDevicePersonalizationLocalFileDownloader.java",
+      "kind": "blob",
+      "oid": "9ff158cff5f2f82844e3dfe84d8578e0b7f43aac",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/download/mdd/OnDevicePersonalizationMddFlags.java",
+      "kind": "blob",
+      "oid": "4a88b38010b5ff62fb70093fbb4d85ad5a7ef6ca",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/enrollment/PartnerEnrollmentChecker.java",
+      "kind": "blob",
+      "oid": "9bdbd2720e3183a48f2696b9120e8d21dcd32793",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/fbs/EventFields.fbs",
+      "kind": "blob",
+      "oid": "2767c2b2782b6549e5d11c2d91f23b1ffa99429d",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/fbs/QueryData.fbs",
+      "kind": "blob",
+      "oid": "1a89767f805434df813c8eda4269c8523adfe418",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/fbs/UserData.fbs",
+      "kind": "blob",
+      "oid": "acdbee6c158695001f8ba81eba5f6a3559cfc106",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/federatedcompute/ContextData.java",
+      "kind": "blob",
+      "oid": "0541c54a79f71466707907e0ebced2387f6056d0",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/federatedcompute/FederatedComputeServiceImpl.java",
+      "kind": "blob",
+      "oid": "7ac4c0c5b7e88656fb807acd3ed3a9e0e2ab6d43",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/federatedcompute/OdpExampleStoreIterator.java",
+      "kind": "blob",
+      "oid": "d3a16a85275da9d9ebc2a4b20fe76f78197ace3d",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/federatedcompute/OdpExampleStoreIteratorFactory.java",
+      "kind": "blob",
+      "oid": "63a973cfe7c62d11361a46a3e3264e7d417df541",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/federatedcompute/OdpExampleStoreService.java",
+      "kind": "blob",
+      "oid": "8c19fdce446cdf3f1f6c5558e6664d181b26b8f9",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/federatedcompute/OdpResultHandlingService.java",
+      "kind": "blob",
+      "oid": "370b64669e8967900f44d149c6a186520de78bdf",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/inference/IsolatedModelService.java",
+      "kind": "blob",
+      "oid": "feac239f70c5563f035c40a5ea831798b75b71e2",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/inference/IsolatedModelServiceImpl.java",
+      "kind": "blob",
+      "oid": "1f95fdcc6db8a2fef796896e035ed429e5364d73",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/inference/IsolatedModelServiceProvider.java",
+      "kind": "blob",
+      "oid": "5737769f4499c12b93b81d289d01d820ae433087",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/maintenance/OnDevicePersonalizationMaintenanceJob.java",
+      "kind": "blob",
+      "oid": "c2aac9aa73bd991b4fbe8f10227cfd5bd012834e",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/maintenance/OnDevicePersonalizationMaintenanceJobService.java",
+      "kind": "blob",
+      "oid": "ee0080acdd13b7a33b2496bdcd1dec96271854a6",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/manifest/AppManifestConfig.java",
+      "kind": "blob",
+      "oid": "c5ac5bc9016cdb15185d6fc43a8e1ef7a6d0a916",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/manifest/AppManifestConfigHelper.java",
+      "kind": "blob",
+      "oid": "066a8714348f5e06dcdef9f6edc98e27c576fb61",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/manifest/AppManifestConfigParser.java",
+      "kind": "blob",
+      "oid": "21b6ad213b10f99bf0bd6a46b68a4490b71de3ac",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/policyengine/UserDataAccessor.kt",
+      "kind": "blob",
+      "oid": "207cf30509ac42e25dbf9d8b71ad84c934257ae7",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/policyengine/api/ChronicleManager.kt",
+      "kind": "blob",
+      "oid": "7f40efc0bc759bf33fd2cca3b6c98294e19e6911",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/policyengine/data/Connections.kt",
+      "kind": "blob",
+      "oid": "6b1f64781cba50b0e8d20f92e268e50fce53bc48",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/policyengine/data/GeneratedDTD.kt",
+      "kind": "blob",
+      "oid": "307189b4ddf314eeaf26ae70a37ae67dc96aee71",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/policyengine/data/UserData.kt",
+      "kind": "blob",
+      "oid": "6e6eddbecd2734b649e24f99ea4ded0942abdbdf",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/policyengine/data/impl/UserDataConnectionProvider.kt",
+      "kind": "blob",
+      "oid": "c128165b7f6e496735b72f7b49ab0db22edf5886",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/policyengine/policy/DataIngressPolicy.kt",
+      "kind": "blob",
+      "oid": "379b3a42ec2f127a8de423c8de1ef169c2a22e58",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/policyengine/policy/rules/NPAPolicyRuleKeys.kt",
+      "kind": "blob",
+      "oid": "29d43d73c1623e2732040b5185da2a5af11a3b92",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/policyengine/policy/rules/NPAPolicyRules.kt",
+      "kind": "blob",
+      "oid": "a659a377493ed75432b6076bb16dc0d3a517e2e8",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/process/IsolatedServiceBindingRunner.java",
+      "kind": "blob",
+      "oid": "becf3dbca116d64747a1ee0ec8cb358c23f7e47d",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/process/IsolatedServiceInfo.java",
+      "kind": "blob",
+      "oid": "3a942ca912d8d89a91d5fe8ede297c5f9ce6f182",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/process/OnDevicePersonalizationPlugin.java",
+      "kind": "blob",
+      "oid": "e4c6df56fc73fc66d932a46056f831cdfb1c9f94",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/process/OnDevicePersonalizationPluginHost.java",
+      "kind": "blob",
+      "oid": "8a775b9d8b07d5de91bce564d79c1eebb8fc9f1d",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/process/PluginProcessRunner.java",
+      "kind": "blob",
+      "oid": "6d66c18770ba9d1666eeca4cc2c9ddc3cd916de1",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/process/ProcessRunner.java",
+      "kind": "blob",
+      "oid": "53e844b03a8df41caaca5e9b0108369eaf43fa0e",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/process/ProcessRunnerFactory.java",
+      "kind": "blob",
+      "oid": "d8db93bb8275965b598137d5e342cc2d62db9a02",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/request/AppRequestFlow.java",
+      "kind": "blob",
+      "oid": "7545e2ad8422edddcf4ce727a5755b3f095024ad",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/request/RenderFlow.java",
+      "kind": "blob",
+      "oid": "bd2dd9a41310fa52d2656ff765af2e1c7b137281",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/request/SlotWrapper.java",
+      "kind": "blob",
+      "oid": "8bac9f95f01f4e7793fe94ea2cad39c4feac2c88",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/reset/ResetDataJob.java",
+      "kind": "blob",
+      "oid": "9a09624866296da7f3de15e47c68d3a24a34ba43",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/reset/ResetDataJobService.java",
+      "kind": "blob",
+      "oid": "da5ffdfb60ea336644d89a837c91280e5af9b1ae",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/reset/ResetDataTask.java",
+      "kind": "blob",
+      "oid": "7d2e74c1b2972cb6999b8c2617d62fad8d341b4a",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/serviceflow/ServiceFlow.java",
+      "kind": "blob",
+      "oid": "1397bc49a8d7e5073ba37d9c30c7c94e78871ef5",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/serviceflow/ServiceFlowFactory.java",
+      "kind": "blob",
+      "oid": "34f0ca92dbbf3304c4d52e66e1ef23556b134c0f",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/serviceflow/ServiceFlowOrchestrator.java",
+      "kind": "blob",
+      "oid": "d5b215e7828423197671f00dc2abf54110d975c6",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/serviceflow/ServiceFlowTask.java",
+      "kind": "blob",
+      "oid": "ff9722e12e3549d9ad96796c3beb98c29d1963d1",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/serviceflow/ServiceFlowType.java",
+      "kind": "blob",
+      "oid": "7af72adc892fbf7b1f98b89254994062723d91ab",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/sharedlibrary/spe/OdpJobScheduler.java",
+      "kind": "blob",
+      "oid": "fdd2189d3ec2c04baa650dd76458c469ae4e0f21",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/sharedlibrary/spe/OdpJobService.java",
+      "kind": "blob",
+      "oid": "967bf5111927a3f3ebe1c4e0eb96bf4fef6be8b7",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/sharedlibrary/spe/OdpJobServiceFactory.java",
+      "kind": "blob",
+      "oid": "adea583855861db26c5993ab1ff434ccc79c6091",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/statsd/ApiCallStats.java",
+      "kind": "blob",
+      "oid": "01b4ec99d64081ab4ef8fe1433107dc817a2a7bc",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/statsd/OdpStatsdLogger.java",
+      "kind": "blob",
+      "oid": "f7b7034667d3a372e126ff010cff3c770a2af863",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/statsd/TraceEventStats.java",
+      "kind": "blob",
+      "oid": "fcbe02736048fd14300a393636c575ad765a47f0",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/statsd/errorlogging/ClientErrorLogger.java",
+      "kind": "blob",
+      "oid": "c6a24f8c47f25e07d785aac2d87669e9605dde3e",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/statsd/joblogging/OdpJobServiceLogger.java",
+      "kind": "blob",
+      "oid": "063229a88d02f3c1eee7853b0d343fe88c1b933d",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/statsd/joblogging/OdpStatsdJobServiceLogger.java",
+      "kind": "blob",
+      "oid": "07caca49317c3696192a9fc221fee20f0a68fda3",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/util/AllowListUtils.java",
+      "kind": "blob",
+      "oid": "a9ccd561acd5416a76f0e749e97526a719196332",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/util/CryptUtils.java",
+      "kind": "blob",
+      "oid": "ce6586d30386a712fc228954dbac8df6c301707e",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/util/DebugUtils.java",
+      "kind": "blob",
+      "oid": "f431c6d597919a29e1b994ea50c2cdbe3d7fce24",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/util/IoUtils.java",
+      "kind": "blob",
+      "oid": "98c542878d34266fa7c21c6f0d8db26c26fe6733",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/util/LogUtils.java",
+      "kind": "blob",
+      "oid": "646e189be69e4cf69e2dd56a2be76328a50ce8ad",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/util/NoiseUtil.java",
+      "kind": "blob",
+      "oid": "bf57d14742f9d4848662b545f720c39f37af18c6",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/util/OnDevicePersonalizationFlatbufferUtils.java",
+      "kind": "blob",
+      "oid": "20de141270b861b7716d28ebfdf00f411f7b8f0c",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/util/ParcelWrapper.java",
+      "kind": "blob",
+      "oid": "97dafd4211dcba3afe589b9af8cec326fb77d749",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/util/StatsUtils.java",
+      "kind": "blob",
+      "oid": "9a41fbc07010eef4ee5955a115906d5c8035daf7",
+      "mode": "100644"
+    },
+    {
+      "path": "src/com/android/ondevicepersonalization/services/webtrigger/WebTriggerFlow.java",
+      "kind": "blob",
+      "oid": "71e7688e69d949ae92a08bb7a4e632dbc3d329f4",
+      "mode": "100644"
+    },
+    {
+      "path": "src/proguard.flags",
+      "kind": "blob",
+      "oid": "9f21a444ff8a82332be5f30ae760caf6d86fc223",
+      "mode": "100644"
+    },
+    {
+      "path": "systemservice/Android.bp",
+      "kind": "blob",
+      "oid": "4b0fa6712640b50dfe7e2b963788b64a87177583",
+      "mode": "100644"
+    },
+    {
+      "path": "systemservice/api/current.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "systemservice/api/removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "systemservice/api/system-server-current.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "systemservice/api/system-server-removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "systemservice/java/com/android/server/ondevicepersonalization/OnDevicePersonalizationSystemService.java",
+      "kind": "blob",
+      "oid": "294570938af154dd2a8db695d53a1a28cfd28b83",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/chronicletests/Android.bp",
+      "kind": "blob",
+      "oid": "766a99894395e7f25f01258db249cf0131674307",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/chronicletests/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "abf51afc73b0fc8dba24f66bb60b7851fb3cf6ab",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/chronicletests/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "74c3668b4cdf873616665b76303c2d0986865c82",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/chronicletests/src/com/android/libraries/pcc/chronicle/test/ChronicleApiPolicyAnnotationTest.kt",
+      "kind": "blob",
+      "oid": "97482b6af48a51f5a031b0778328c9bc9d9dd9fc",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/chronicletests/src/com/android/libraries/pcc/chronicle/test/ChronicleApiPolicyBuilderTest.kt",
+      "kind": "blob",
+      "oid": "39f53453b1c30a5c9ff74f04fc4672be96b0837a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/chronicletests/src/com/android/libraries/pcc/chronicle/test/ChronicleApiPolicyCapabilitiesTest.kt",
+      "kind": "blob",
+      "oid": "57b2a5bb7a0527ae34a1b3af32da5f055f3c290a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/chronicletests/src/com/android/libraries/pcc/chronicle/test/ChronicleApiPolicyFieldBuilderTest.kt",
+      "kind": "blob",
+      "oid": "00d079d09269dcbb3c9f308856de77dc3fc74cf4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/chronicletests/src/com/android/libraries/pcc/chronicle/test/ChronicleApiPolicyTargetBuilderTest.kt",
+      "kind": "blob",
+      "oid": "6fbdc5adfd5afd5f63408a162baf26bb0735adff",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/chronicletests/src/com/android/libraries/pcc/chronicle/test/ChronicleApiPolicyTest.kt",
+      "kind": "blob",
+      "oid": "62c0ba0fb8b8042139f4c7e1b8ded1fdca8f4169",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/chronicletests/src/com/android/libraries/pcc/chronicle/test/ChronicleApiStorageTest.kt",
+      "kind": "blob",
+      "oid": "eff445ba52d955a83a2d35517a626ef980731eed",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/chronicletests/src/com/android/libraries/pcc/chronicle/test/DefaultPolicyConformanceCheckTest.kt",
+      "kind": "blob",
+      "oid": "c54747ec55f1b92808f50e9b923787c067ba0672",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/chronicletests/src/com/android/libraries/pcc/chronicle/test/data/TestData.kt",
+      "kind": "blob",
+      "oid": "ea22ca2b4346f578c32ad7c3cd3f392627e7c586",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/commontests/Android.bp",
+      "kind": "blob",
+      "oid": "1109dc35bf4350a2ce1754a3b61e00978e1663ac",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/commontests/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "696aa97268ef207a781fa8f22b8deb6451851d19",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/commontests/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "fdd177d9ec672c1dc6ffc172cad937b4c0251539",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/commontests/src/com/android/odp/module/common/data/ErrorReportingMetadataProtoDataStoreTest.java",
+      "kind": "blob",
+      "oid": "abe9dcebbb522b41144bc7a27c6778045991293d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/commontests/src/com/android/odp/module/common/data/OdpAuthorizationTokenDaoTest.java",
+      "kind": "blob",
+      "oid": "cd3b79f1846e3c65d501359242e3363bd5a29bca",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/commontests/src/com/android/odp/module/common/data/OdpAuthorizationTokenTest.java",
+      "kind": "blob",
+      "oid": "97c61c45d5bc3dc72ccfaaeb58dba073564f799f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/commontests/src/com/android/odp/module/common/data/OdpEncryptionKeyDaoTest.java",
+      "kind": "blob",
+      "oid": "29350b51ec5de73beb3f1bbd17249488ce2d2234",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/commontests/src/com/android/odp/module/common/encryption/OdpEncryptionKeyManagerTest.java",
+      "kind": "blob",
+      "oid": "1020f0fe2079418f37d80331359c0be5301af39b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/commontests/src/com/android/odp/module/common/encryption/OdpEncryptionKeyTest.java",
+      "kind": "blob",
+      "oid": "dbe31938bfc01b46cbaf66bfddad69e020955e3c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/commontests/src/com/android/odp/module/common/encryption/jni/HpkeJniTest.java",
+      "kind": "blob",
+      "oid": "4744c48702709142b671426c4497913cdd1c156a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/commontests/src/com/android/odp/module/common/http/HttpClientTest.java",
+      "kind": "blob",
+      "oid": "a2c88d1df1bf07b83f24afe890da910bbc623fa3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/commontests/src/com/android/odp/module/common/http/HttpClientUtilsTest.java",
+      "kind": "blob",
+      "oid": "b90f145637eb02dcfec91542f2169f81ec906066",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/commontests/src/com/android/odp/module/common/http/OdpHttpRequestTest.java",
+      "kind": "blob",
+      "oid": "8cd631b17a052f5ad412fadc98ce651ad98cae3e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/commontests/src/com/android/odp/module/common/http/OdpHttpResponseTest.java",
+      "kind": "blob",
+      "oid": "fc8dc68b52116d8218d4e97de5ef0332933725a6",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/configtest/Android.bp",
+      "kind": "blob",
+      "oid": "51832da336170a336b99c08f72782538623f0619",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/configtest/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "4b4b7316427add429d4ff056c5dba13639df8e9d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/configtest/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "18cacd5fe13e60b2df40f7f89cb5634cd21a33e8",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/configtest/src/com/android/ondevicepersonalization/cts/configtest/OdpConfigManagerTests.java",
+      "kind": "blob",
+      "oid": "043acc9a14f5df1a610dd287be087be0f38f1151",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/endtoend/Android.bp",
+      "kind": "blob",
+      "oid": "38b9ae0ac7f101e472e4a042324be4bcb5ce8e06",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/endtoend/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "832a20205178a8425b901344a2d77e0e92ee77ea",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/endtoend/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "681c3d41ec413ed80c0e1f751317d006e1a5dc26",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/endtoend/res/layout/activity_main.xml",
+      "kind": "blob",
+      "oid": "5f390caf98c5f59547fac9507e150e286b803166",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/endtoend/res/raw/model.tflite",
+      "kind": "blob",
+      "oid": "3a7595ee55771ff2816b06e85399fb8461584932",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/endtoend/src/com/android/ondevicepersonalization/cts/e2e/CtsOdpManagerTests.java",
+      "kind": "blob",
+      "oid": "f241ab84b194ba0977b8c89348675838338fbb33",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/endtoend/src/com/android/ondevicepersonalization/cts/e2e/DataClassesTest.java",
+      "kind": "blob",
+      "oid": "b79adf87836ee37e41cbc65e415d44ec2c2b8e41",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/endtoend/src/com/android/ondevicepersonalization/cts/e2e/InferenceInputTest.java",
+      "kind": "blob",
+      "oid": "4f877dc28d681693508eff6fca59834ad9e44a7a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/endtoend/src/com/android/ondevicepersonalization/cts/e2e/InferenceOutputTest.java",
+      "kind": "blob",
+      "oid": "480bd81431b4f66d1649df6953d47456c68f6d1c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/endtoend/src/com/android/ondevicepersonalization/cts/e2e/IsolatedWorkerTest.java",
+      "kind": "blob",
+      "oid": "dda37b2f12a33970c1703be264d72a0d1c0cbcf8",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/endtoend/src/com/android/ondevicepersonalization/cts/e2e/OdpSystemEventManagerTests.java",
+      "kind": "blob",
+      "oid": "dd4a4ddb16993ba2d718ee38dc6a8da31d7e459d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/endtoend/src/com/android/ondevicepersonalization/cts/e2e/RequestSurfacePackageTests.java",
+      "kind": "blob",
+      "oid": "943234527fd030ede8c63f70e7fb0b1fd5862395",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/endtoend/src/com/android/ondevicepersonalization/cts/e2e/TestActivity.java",
+      "kind": "blob",
+      "oid": "22556a3de10fd930e435faa9c1d81fa42019f14d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/endtoend/src/com/android/ondevicepersonalization/cts/e2e/TestUtils.java",
+      "kind": "blob",
+      "oid": "14df0f0bab668c9c0ae370f4e93ae722a73bc62b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/sandbox/ondevicepersonalization/Android.bp",
+      "kind": "blob",
+      "oid": "939ab5b088981130f3e9b35e828c61907a1fcd14",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/sandbox/ondevicepersonalization/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "3c09e3e4aef36b82871605d7abdcfdb35dd3a06d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/sandbox/ondevicepersonalization/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "7faec503fa6b465eb77278a27da81e1e9e7fbadd",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/sandbox/ondevicepersonalization/providers/sdkondevicepersonalization/Android.bp",
+      "kind": "blob",
+      "oid": "5bd05bfe5b4cc922df22036aef92ddef73724b18",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/sandbox/ondevicepersonalization/providers/sdkondevicepersonalization/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "00e7b6ed13c7eb81a035d7b51ec32252677a1ad8",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/sandbox/ondevicepersonalization/providers/sdkondevicepersonalization/src/com/android/tests/providers/sdkondevicepersonalization/SdkOnDevicePersonalizationApi.java",
+      "kind": "blob",
+      "oid": "5dd44b9b74387049e45b155c7907356849ae6d5f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/sandbox/ondevicepersonalization/providers/sdkondevicepersonalization/src/com/android/tests/providers/sdkondevicepersonalization/SdkOnDevicePersonalizationProvider.java",
+      "kind": "blob",
+      "oid": "844108467b07943ffb00f0519415add456f27ac9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/sandbox/ondevicepersonalization/sdkinterfaces/Android.bp",
+      "kind": "blob",
+      "oid": "ed1d08b39817e814e032ffc5e5a5cb050f792e5d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/sandbox/ondevicepersonalization/sdkinterfaces/src/android/app/sdksandbox/interfaces/ISdkOnDevicePersonalizationApi.aidl",
+      "kind": "blob",
+      "oid": "cce3ace6c46a21e010be61c0c6442ed9bb3b33bb",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/sandbox/ondevicepersonalization/src/com/android/tests/sandbox/ondevicepersonalization/SandboxOnDevicePersonalizationManagerTest.java",
+      "kind": "blob",
+      "oid": "eeef875fadcdc57ff637484ce06bcfaadd9cef24",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/sandbox/ondevicepersonalization/src/com/android/tests/sandbox/ondevicepersonalization/SimpleActivity.java",
+      "kind": "blob",
+      "oid": "83655eb3747dd6bef53c6fa374cc0f7c30d54eb3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/service/Android.bp",
+      "kind": "blob",
+      "oid": "489d7b2a1d234c7a0d26bf9a95781ed7330c7ae8",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/service/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "b30eea88259b81d9e7f314d944637bb5c2b108cc",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/service/res/raw/test_data1.json",
+      "kind": "blob",
+      "oid": "b610eb1e0fe0c2b0c3b11ae8f984294820b6fe7e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/service/res/xml/OdpSettings.xml",
+      "kind": "blob",
+      "oid": "43d4757d9b6fc2ba0945c4d0bfe735977c0c5519",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/service/src/com/android/ondevicepersonalization/testing/sampleservice/SampleService.java",
+      "kind": "blob",
+      "oid": "78a8e604706e5e59339dab87ef6bef4265e3a51f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/service/src/com/android/ondevicepersonalization/testing/sampleservice/SampleWorker.java",
+      "kind": "blob",
+      "oid": "7067f85fe23e63ff7b68b4887a1260409c1d19ca",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/serviceapi/Android.bp",
+      "kind": "blob",
+      "oid": "625430c16248c251376d5743155af33276d77e86",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/serviceapi/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "771ff52fd2dbe9f6eaf892da630af28f09178e15",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/serviceapi/src/com/android/ondevicepersonalization/testing/sampleserviceapi/SampleServiceApi.java",
+      "kind": "blob",
+      "oid": "0975cf0e9431c7c6a5085b5593b25513bee0a75e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/endtoendtests/Android.bp",
+      "kind": "blob",
+      "oid": "60006261fff92fe257c01ee2bd9ff56146a52910",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/endtoendtests/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "6464b3e8e46b31f5b7231c2d805ba97b69a96856",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/endtoendtests/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "91b2f022497c271f8c88d62efb6cb40809594ed4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/endtoendtests/res/layout/activity_main.xml",
+      "kind": "blob",
+      "oid": "866d06067c218a524f308202eeca8af17a27e416",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/endtoendtests/res/raw/model.tflite",
+      "kind": "blob",
+      "oid": "3a7595ee55771ff2816b06e85399fb8461584932",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/endtoendtests/src/com/android/ondevicepersonalization/e2etests/OdpManagerTests.java",
+      "kind": "blob",
+      "oid": "60a499ee641fe2f813d7f5e05725c9aa5ab0734b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/endtoendtests/src/com/android/ondevicepersonalization/e2etests/OdpSystemEventManagerTests.java",
+      "kind": "blob",
+      "oid": "aef8bd8088d9c77aa7ad0628b08fb6700ee46e2e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/endtoendtests/src/com/android/ondevicepersonalization/e2etests/RequestSurfacePackageTests.java",
+      "kind": "blob",
+      "oid": "f0d8bb9e46c13d8516c1e59d8146278347643904",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/endtoendtests/src/com/android/ondevicepersonalization/e2etests/TestActivity.java",
+      "kind": "blob",
+      "oid": "6ef00e2f695e27973592bd7fa6eb41e16d10becb",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/Android.bp",
+      "kind": "blob",
+      "oid": "605143e7d99d37841b7ee3a86c7865462dd676ff",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "567a79dafa6c3bed9c2c4bb4ea1f6ff820120952",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "9d1b6e21bcdecbba3a45bcd4b246ca9693bf537e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/res/raw/federation_client_only_plan.pb",
+      "kind": "blob",
+      "oid": "03a0945c35f3014bebe4b75b1bd0d52d06cad771",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/res/raw/federation_proxy_train_examples.pb",
+      "kind": "blob",
+      "oid": "36237420bbe5605ce131514efdd012f8f7ec1023",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/res/raw/federation_test_checkpoint_client.ckp",
+      "kind": "blob",
+      "oid": "1a8858c425a0a0c76a22e4c75c665c6c57936886",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/FederatedComputeBroadcastReceiverTest.java",
+      "kind": "blob",
+      "oid": "991c32b537d6929172bc7d630539a66c15fa5a58",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/FederatedComputeManagingServiceDelegateTest.java",
+      "kind": "blob",
+      "oid": "ef2084d82e05038a0ba6d5ff0a9fb72960fc07ab",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/FederatedComputeManagingServiceImplTest.java",
+      "kind": "blob",
+      "oid": "f7a0d6969e4dc9b6c0f00e207617a8e2a1f1643f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/IsolatedServiceBinderTest.java",
+      "kind": "blob",
+      "oid": "f15cdf2ea19778fcd1f934a243b0fc38bb11b00e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/common/BatteryInfoTest.java",
+      "kind": "blob",
+      "oid": "461668afde88ac34a384512231f8b989b3626951",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/common/FeatureStatusManagerTest.java",
+      "kind": "blob",
+      "oid": "dd9d4f95a84d3d6ec72403ad6af1101ee60cc9fe",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/common/FederatedComputeExecutorsTest.java",
+      "kind": "blob",
+      "oid": "64358546c01927676856c461a2e30bf0c0de29e4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/common/MonotonicClockTest.java",
+      "kind": "blob",
+      "oid": "c149fcc4e93c8da612f45856d5415356ba74af92",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/common/PhFlagsTest.java",
+      "kind": "blob",
+      "oid": "2f23740c010ba29a45c0e0e1dd5bf7c64dbc8c7f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/common/PhFlagsTestUtil.java",
+      "kind": "blob",
+      "oid": "341296bd96ed3a9c534159d3bbfd9cfc24281660",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/data/DataTestUtil.java",
+      "kind": "blob",
+      "oid": "fc8566394471e6838d71df3ce45f86e046baab21",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/data/FederatedComputeDbHelperTest.java",
+      "kind": "blob",
+      "oid": "5b1975b4f0625686b038c9a69a793001ad8c2efc",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/data/FederatedComputeEncryptionKeyDaoUtilsTest.java",
+      "kind": "blob",
+      "oid": "616e466119c32861c3c4b841123b10cb99d30ef6",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/data/FederatedTrainingTaskDaoTest.java",
+      "kind": "blob",
+      "oid": "0af1f1d77bcf806ce73ef888dc00e259a7e32507",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/data/FederatedTrainingTaskTest.java",
+      "kind": "blob",
+      "oid": "d9d2e83c0d982401f8359eb8593c6af8b7c7838c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/encryption/BackgroundKeyFetchJobServiceTest.java",
+      "kind": "blob",
+      "oid": "5e1a2ddb838d5791b39d36b8d2436354c8aaa368",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/encryption/BackgroundKeyFetchJobTest.java",
+      "kind": "blob",
+      "oid": "13b5669d6ab174e84711e91d222fcb82f2734560",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/encryption/FederatedComputeEncryptionKeyManagerUtilsTest.java",
+      "kind": "blob",
+      "oid": "91e8c112955a39adaf2e4c5c39573058d3398e02",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/examplestore/ExampleConsumptionRecorderTest.java",
+      "kind": "blob",
+      "oid": "baa54121747e838338765154c0ec84bb6d9e2a88",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/examplestore/FederatedExampleIteratorTest.java",
+      "kind": "blob",
+      "oid": "288277a1ca50f8dc8e94a472f1cef590af414f1e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/examplestore/SampleExampleStoreService.java",
+      "kind": "blob",
+      "oid": "30d32c82bc536cc1d10d2ed20c01062577667f82",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/http/HttpClientUtilTest.java",
+      "kind": "blob",
+      "oid": "bc097b20ba2e49b4181a59b6045d77155b2ff149",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/http/HttpFederatedProtocolTest.java",
+      "kind": "blob",
+      "oid": "4f11d4f1ebc2c2b8ce8269af1fb9449d5a74cdab",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/http/ProtocolRequestCreatorTest.java",
+      "kind": "blob",
+      "oid": "1c5fa52b85e22145706deaab0d89cbeaca65836b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/scheduling/DeleteExpiredJobServiceTest.java",
+      "kind": "blob",
+      "oid": "4e29c48a7609c24706d5d75cf39295c90196a930",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/scheduling/DeleteExpiredJobTest.java",
+      "kind": "blob",
+      "oid": "a70e4b133259400c186542d54f605b97f80c8aa2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/scheduling/FederatedComputeJobManagerTest.java",
+      "kind": "blob",
+      "oid": "2740b31d2c02169fcca4d10cb99772f744898655",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/scheduling/FederatedComputeLearningJobScheduleOrchestratorTest.java",
+      "kind": "blob",
+      "oid": "a5b51343a9f9820027b9441ec7c45446eb8b785d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/scheduling/FederatedJobIdGeneratorTest.java",
+      "kind": "blob",
+      "oid": "b758131723738ff3bc82f9294812c567b4f52373",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/scheduling/JobSchedulerHelperTest.java",
+      "kind": "blob",
+      "oid": "9005c7443ab3659812e0085db9ed215c7c405428",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/security/AuthorizationContextTest.java",
+      "kind": "blob",
+      "oid": "509811ed0f09dd8b28dae2bf92ee76b28aae3045",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/security/KeyAttestationTest.java",
+      "kind": "blob",
+      "oid": "84c8b5dcf2aeb0d5aa1539873369a64de195c5c4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/sharedlibrary/spe/FederatedComputeJobServiceFactoryTest.java",
+      "kind": "blob",
+      "oid": "bd7ecf7c663d761bad88b80795f7c4301ef6dfee",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/sharedlibrary/spe/FederatedComputeJobServiceTest.java",
+      "kind": "blob",
+      "oid": "8f37af330d872883cb843f41686c46ac3d34b202",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/statsd/FederatedComputeStatsdLoggerTest.java",
+      "kind": "blob",
+      "oid": "b708a9c2b2ac6dafb04a9832250563fee3821c2e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/testutils/FakeExampleStoreIterator.java",
+      "kind": "blob",
+      "oid": "1c2c9b1aa2ee2b199a874a12c54c41cc313cb16d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/testutils/ResettingExampleIterator.java",
+      "kind": "blob",
+      "oid": "ede61f901e272f21299ca8bfdb26ed4298b915e4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/testutils/TrainingTestUtil.java",
+      "kind": "blob",
+      "oid": "01c434abc360a450ea427c360e926a2e179af023",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/training/EligibilityDeciderTest.java",
+      "kind": "blob",
+      "oid": "3edce5354becdb1928a4acf7ffb7998b9f3a35fa",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/training/FederatedComputeWorkerTest.java",
+      "kind": "blob",
+      "oid": "97ef3088114e394a3f007e54d872bd19d019ef15",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/training/FederatedJobServiceTest.java",
+      "kind": "blob",
+      "oid": "6e80839f4a59f3117b33a2bb6b2fa5672271813d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/training/IsolatedTrainingServiceImplTest.java",
+      "kind": "blob",
+      "oid": "0252727552c241133314d1311c2370902af0e2ad",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/training/ResultCallbackHelperTest.java",
+      "kind": "blob",
+      "oid": "bf80f883abfafab3a3c099a59430c6fd6dd51039",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/training/SampleResultHandlingService.java",
+      "kind": "blob",
+      "oid": "65df1e3d282ed0cd6437b5f4e4235ddc35fc33b7",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/training/jni/FlRunnerWrapperTest.java",
+      "kind": "blob",
+      "oid": "ea0073693000d39227dda2ab37ef27a7ae71f778",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/training/jni/JavaExampleStoreTest.java",
+      "kind": "blob",
+      "oid": "9511d245fa488d2400f97c5e560b28421f40157e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/training/jni/SimpleTaskEnvironmentImplTest.java",
+      "kind": "blob",
+      "oid": "fe087b79a96357027047b9c86d667d445aa0b068",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/federatedcomputetests/src/com/android/federatedcompute/services/training/util/TrainingConditionsCheckerTest.java",
+      "kind": "blob",
+      "oid": "f9391ff2e13fe37a468c38cac34cb552a4215118",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/Android.bp",
+      "kind": "blob",
+      "oid": "94c2dccc8d3c097a75667e21b6d8ec28847a8c01",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "9094e3913872a5ae8e098324a118795c47e764e5",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "ef6fa5db39e023b1f6df5623357af1c42054d509",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/android/adservices/ondevicepersonalization/EventUrlProviderTest.java",
+      "kind": "blob",
+      "oid": "289573efdc949672b8d0e903917ab01b92ffe519",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/android/adservices/ondevicepersonalization/ExecuteInIsolatedServiceRequestTest.java",
+      "kind": "blob",
+      "oid": "8cb7f69b75b8907209cb0c751087e398783cbc2b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/android/adservices/ondevicepersonalization/ExecuteInIsolatedServiceResponseTest.java",
+      "kind": "blob",
+      "oid": "5781f57e6a21de31bec2addd3ec3ecc27f35af97",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/android/adservices/ondevicepersonalization/FederatedComputeSchedulerTest.java",
+      "kind": "blob",
+      "oid": "59e3fd85c334cb3f40ada7463c959a0385db326c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/android/adservices/ondevicepersonalization/InferenceInputTest.java",
+      "kind": "blob",
+      "oid": "7e7a2f2edfe8476d695c68b65623ee278f6a95f4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/android/adservices/ondevicepersonalization/IsolatedServiceExceptionSafetyTest.java",
+      "kind": "blob",
+      "oid": "82bba521e8cece4771a0654d542e546638c026a1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/android/adservices/ondevicepersonalization/IsolatedServiceExceptionSafetyTestImpl.java",
+      "kind": "blob",
+      "oid": "0243bae2d276c13348efeaaddfa15166bc492a0d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/android/adservices/ondevicepersonalization/IsolatedServiceTest.java",
+      "kind": "blob",
+      "oid": "b44776c303408434f5b03f59de6b749ae26f83d5",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/android/adservices/ondevicepersonalization/LocalDataTest.java",
+      "kind": "blob",
+      "oid": "687bb2539844a2daa6b9c204c844ee0b94f83c35",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/android/adservices/ondevicepersonalization/LogReaderTest.java",
+      "kind": "blob",
+      "oid": "a771294c7c1448a6fa7c789de07d2aff6c87ec2b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/android/adservices/ondevicepersonalization/ModelManagerTest.java",
+      "kind": "blob",
+      "oid": "5899e60c9db2ca1b3a2402d635f5fcf89f74785b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/android/adservices/ondevicepersonalization/OnDevicePersonalizationConfigManagerTest.java",
+      "kind": "blob",
+      "oid": "dffa3d1107d880a32d1eb9a3daf7e33df8851e61",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/android/adservices/ondevicepersonalization/OnDevicePersonalizationFrameworkClassesTest.java",
+      "kind": "blob",
+      "oid": "152e7a4316dfd7a13af7fa1e00aca1c0eca2e520",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/android/adservices/ondevicepersonalization/OnDevicePersonalizationManagerTest.java",
+      "kind": "blob",
+      "oid": "a0019cfc762138fd965a0e57a3a6f7a61e13a93b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/android/adservices/ondevicepersonalization/OnDevicePersonalizationQueryFeatureAvailabilityManagerTest.java",
+      "kind": "blob",
+      "oid": "2ce7eb612b9be8016e9e36a8a49e8e6dee3a09b2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/android/adservices/ondevicepersonalization/OnDevicePersonalizationSystemEventManagerTest.java",
+      "kind": "blob",
+      "oid": "f8e711d6337da3169d23787040a471fda8834909",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/android/adservices/ondevicepersonalization/RemoteDataTest.java",
+      "kind": "blob",
+      "oid": "a7cdcc0909124055df098fb5125ce1ba277bd25a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/android/adservices/ondevicepersonalization/UserDataTest.java",
+      "kind": "blob",
+      "oid": "87e7710806744e9733e9264c7631b149ec2471ce",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/android/federatedcompute/ExampleStoreQueryCallbackImplTest.java",
+      "kind": "blob",
+      "oid": "b2bfce95c0371f64a79f685a4ca0d8513eb4111e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/android/federatedcompute/ExampleStoreServiceTest.java",
+      "kind": "blob",
+      "oid": "20a0c06fe23cf19f87ba7db459c6ad5ace16da78",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/android/federatedcompute/FederatedComputeIsFeatureEnabledManagerTest.java",
+      "kind": "blob",
+      "oid": "65592541e95da3bf3f40012a3f166b7afbfc3565",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/android/federatedcompute/FederatedComputeManagerTest.java",
+      "kind": "blob",
+      "oid": "e89165e8d84e4b5fa730f0f0dd37878cea54726d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/android/federatedcompute/ResultHandlingServiceTest.java",
+      "kind": "blob",
+      "oid": "c6469c3d8c2afeb290f37f38ba35fc8bf3d1d7d9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/android/federatedcompute/common/ExampleConsumptionTest.java",
+      "kind": "blob",
+      "oid": "95e2f3fbf6f1e60133c97686e69ef806595e9739",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/android/federatedcompute/common/ScheduleFederatedComputeRequestTest.java",
+      "kind": "blob",
+      "oid": "83e65e7e539f51310bc4603aa43426826718c362",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/android/federatedcompute/common/TrainingIntervalTest.java",
+      "kind": "blob",
+      "oid": "295986c816a49ef3276095cbcd020209b119ece8",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/android/federatedcompute/common/TrainingOptionsTest.java",
+      "kind": "blob",
+      "oid": "5eeda23399a06c7b1661ee5ac1e1e0f4433c87ef",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/android/ondevicepersonalization/OnDevicePersonalizationFrameworkInitializerTest.java",
+      "kind": "blob",
+      "oid": "d36cb9b924916564542377ed7d069582545cf84d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/com/android/federatedcompute/internal/util/AndroidServiceBinderTest.java",
+      "kind": "blob",
+      "oid": "187ff3d7a9ac4477ce8944c8393131e72c94c15b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/com/android/ondevicepersonalization/internal/util/ByteArrayParceledSliceTest.java",
+      "kind": "blob",
+      "oid": "ec0efe9e1933a357e41a55922c81ccdaf62fc46c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/com/android/ondevicepersonalization/internal/util/ExceptionInfoTest.java",
+      "kind": "blob",
+      "oid": "0971b49721e487bcbb7fcb9f717df55ebb0c96b5",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/com/android/ondevicepersonalization/internal/util/IEchoService.aidl",
+      "kind": "blob",
+      "oid": "aa827e5ed47bf590447aa5f8f5a37c780b0a42eb",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/com/android/ondevicepersonalization/internal/util/IEchoServiceCallback.aidl",
+      "kind": "blob",
+      "oid": "2e4fd079ee24d141c44807bad166f087c9ff7076",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/frameworktests/src/com/android/ondevicepersonalization/internal/util/PersistableBundleUtilsTest.java",
+      "kind": "blob",
+      "oid": "eff26e9a23881fc1bd27b63dbe5d7408ae7b2c7f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/manualtests/Android.bp",
+      "kind": "blob",
+      "oid": "8613e48769960174ff79043bd904b7bca7f5bcc8",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/manualtests/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "c05685a1ef9f13a55edaad26eae928e92ab03a97",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/manualtests/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "17aafecbf63602b03d97533e509f74c3e7da1f76",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/manualtests/res/xml/OdpSettings.xml",
+      "kind": "blob",
+      "oid": "0fe83ab78d69cb06f5c9608099d8d9374b41d51e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/manualtests/src/com/android/ondevicepersonalization/services/download/OnDevicePersonalizationDataProcessingAsyncCallableManualTests.java",
+      "kind": "blob",
+      "oid": "f28f24ae9146beb87a9ac980a5a859fda87a7840",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/manualtests/src/com/android/ondevicepersonalization/services/download/mdd/LocalFileDownloaderTest.java",
+      "kind": "blob",
+      "oid": "9e4f3549a3e9d01b3f046d4f5a28dc37ee3f3561",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/manualtests/src/com/android/ondevicepersonalization/services/download/mdd/MobileDataDownloadTest.java",
+      "kind": "blob",
+      "oid": "c407f7a97b6c8b131dc76f772d2aaf39d1c7d2d4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/manualtests/src/com/android/ondevicepersonalization/services/download/mdd/OnDevicePersonalizationFileGroupPopulatorTest.java",
+      "kind": "blob",
+      "oid": "69e3bee09738169de4667adadf039aa814cb3264",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/manualtests/src/com/test/TestPersonalizationHandler.java",
+      "kind": "blob",
+      "oid": "88b97ae786c79909ec00bfe4eae28de95decfe46",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/manualtests/src/com/test/TestPersonalizationService.java",
+      "kind": "blob",
+      "oid": "e340e89e14d87b01502669ce06fe152add066d0a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/perftests/scenarios/Android.bp",
+      "kind": "blob",
+      "oid": "fb752c544a797e0d4336111c3a6afae2ac704a0e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/perftests/scenarios/src/android/federatedcompute/test/scenario/federatedcompute/ScheduleAndCancelTraining.java",
+      "kind": "blob",
+      "oid": "cef7a7b98c7dc7995e798f859b9281c73ba40a39",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/perftests/scenarios/src/android/federatedcompute/test/scenario/federatedcompute/ScheduleAndForceEncryptionKeyFetchJob.java",
+      "kind": "blob",
+      "oid": "96db8486f63f396721720d289a4d3471a9394fc2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/perftests/scenarios/src/android/federatedcompute/test/scenario/federatedcompute/ScheduleAndForceTraining.java",
+      "kind": "blob",
+      "oid": "c653715577293592124e5a822298daadb25d1dcb",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/perftests/scenarios/src/android/federatedcompute/test/scenario/federatedcompute/ScheduleNonExistentPopulationForTraining.java",
+      "kind": "blob",
+      "oid": "04274057f3c1080b742ba38b0378bf2050e74e7a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/perftests/scenarios/src/android/federatedcompute/test/scenario/federatedcompute/ScheduleRecurrentTrainingAndExecute.java",
+      "kind": "blob",
+      "oid": "872decf2d809ab596852a4d6784062648dde48d5",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/perftests/scenarios/src/android/federatedcompute/test/scenario/federatedcompute/TestHelper.java",
+      "kind": "blob",
+      "oid": "da169b57b4e4ab800ed7ce4c076397fd7069eb94",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/perftests/scenarios/src/android/ondevicepersonalization/test/scenario/ondevicepersonalization/DownloadHelper.java",
+      "kind": "blob",
+      "oid": "499bea60c567bdec1384f58a18c35155464e527a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/perftests/scenarios/src/android/ondevicepersonalization/test/scenario/ondevicepersonalization/DownloadVendorData.java",
+      "kind": "blob",
+      "oid": "1029acafe35e721462a8af8b5ebb9daeed6fc27c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/perftests/scenarios/src/android/ondevicepersonalization/test/scenario/ondevicepersonalization/ReportConversion.java",
+      "kind": "blob",
+      "oid": "c928ecd2180e2525383645502354fdb1b47d4f96",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/perftests/scenarios/src/android/ondevicepersonalization/test/scenario/ondevicepersonalization/RequestAd.java",
+      "kind": "blob",
+      "oid": "ab90409c8ce3edc39ec6f24049388cbb909cc339",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/perftests/scenarios/src/android/ondevicepersonalization/test/scenario/ondevicepersonalization/RequestAdAndClickAd.java",
+      "kind": "blob",
+      "oid": "96d19620c7e768af316adc79d3fd22f371ae1486",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/perftests/scenarios/src/android/ondevicepersonalization/test/scenario/ondevicepersonalization/RequestAdWithTestAppRotations.java",
+      "kind": "blob",
+      "oid": "8c631afe9f968244e1da7706677c285eed072e84",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/perftests/scenarios/src/android/ondevicepersonalization/test/scenario/ondevicepersonalization/TestAppHelper.java",
+      "kind": "blob",
+      "oid": "4db3a6a7412990917569ebbaa144ba3b6a542f51",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/perftests/scenarios/tests/Android.bp",
+      "kind": "blob",
+      "oid": "7be79d1d2cbc25bd43780e5e87f7320ab9e1a045",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/perftests/scenarios/tests/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "2139198d5639cbef413fd87fdaecb88664c26ce5",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/perftests/scenarios/tests/src/android/federatedcompute/test/scenario/federatedcompute/ScheduleAndCancelTrainingMicrobenchmark.java",
+      "kind": "blob",
+      "oid": "e25e137cb2ac22d9954a19274e5d02bfcd60266d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/perftests/scenarios/tests/src/android/federatedcompute/test/scenario/federatedcompute/ScheduleAndForceEncryptionKeyFetchJobMicrobenchmark.java",
+      "kind": "blob",
+      "oid": "1ec2cf7cad6f4abc4abc070a191579d4ec76188e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/perftests/scenarios/tests/src/android/federatedcompute/test/scenario/federatedcompute/ScheduleAndForceTrainingMicrobenchmark.java",
+      "kind": "blob",
+      "oid": "48e36cf7f90b9071f02cc68854b3c68f93251636",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/perftests/scenarios/tests/src/android/federatedcompute/test/scenario/federatedcompute/ScheduleNonExistentPopulationForTrainingMicrobenchmark.java",
+      "kind": "blob",
+      "oid": "8150bf3d9a15358c9736cc415d49912a43a428b7",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/perftests/scenarios/tests/src/android/federatedcompute/test/scenario/federatedcompute/ScheduleRecurrentTrainingAndExecuteMicrobenchmark.java",
+      "kind": "blob",
+      "oid": "994e04ae40fe41a25b5ea4ec4ef9561297d8320f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/perftests/scenarios/tests/src/android/ondevicepersonalization/test/scenario/ondevicepersonalization/DownloadVendorDataMicrobenchmark.java",
+      "kind": "blob",
+      "oid": "c3af84ca4a0841ed52aae58b8594fc2168f6fba6",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/perftests/scenarios/tests/src/android/ondevicepersonalization/test/scenario/ondevicepersonalization/ReportConversionMicrobenchmark.java",
+      "kind": "blob",
+      "oid": "024436ea47fbcbd3684c5199bec1ca4d15060192",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/perftests/scenarios/tests/src/android/ondevicepersonalization/test/scenario/ondevicepersonalization/RequestAdAndClickAdMicrobenchmark.java",
+      "kind": "blob",
+      "oid": "0c74be8c48f437f8d35b81a1cc82fcd3238b33f0",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/perftests/scenarios/tests/src/android/ondevicepersonalization/test/scenario/ondevicepersonalization/RequestAdMicrobenchmark.java",
+      "kind": "blob",
+      "oid": "a33f039f49ea762186760440515ab89f7f0937f4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/perftests/scenarios/tests/src/android/ondevicepersonalization/test/scenario/ondevicepersonalization/RequestAdWithTestAppRotationsMicrobenchmark.java",
+      "kind": "blob",
+      "oid": "4fe02c785709e1c25a975ca8f4f98ffbdb0312f6",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/plugintests/Android.bp",
+      "kind": "blob",
+      "oid": "1b9228b16eb18b25cfe7b1c1c9d084c6e8d37008",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/plugintests/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "e2bd0cdd84add44bea7f80d056026f6e4d99eae6",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/plugintests/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "a5277db8dc4c2ae8bbedead9d24de18a598d0162",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/plugintests/src/com/android/ondevicepersonalization/libraries/plugin/PluginTests.java",
+      "kind": "blob",
+      "oid": "123644ac3049e3da88805629cfd3cc4843a4d8b9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/Android.bp",
+      "kind": "blob",
+      "oid": "0d5069aee8eaae99de5c1e24058bd0bbf7ad0d88",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "014f9d96ff470ef81f67427e77035d5ad4cf936a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "e1be4b31d360d74f158bbc46d1252be865aa766c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/res/raw/model.tflite",
+      "kind": "blob",
+      "oid": "ce3755f44d3143e3756e6539142e474603158ac3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/res/raw/test_data1.json",
+      "kind": "blob",
+      "oid": "913ac022f3a5d90dc20113f916d6946ef35e6214",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/res/xml/OdpSettings.xml",
+      "kind": "blob",
+      "oid": "316366732d567b4653733d91b71ab0676ef58c53",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/FeatureStatusManagerTest.java",
+      "kind": "blob",
+      "oid": "f222dc5bb71a062b389a957cd8117484bb56723b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/OnDevicePersonalizationBroadcastReceiverTests.java",
+      "kind": "blob",
+      "oid": "e5d61b8ca25ef9a931ce3e821fa074e6379dedd5",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/OnDevicePersonalizationDebugServiceTest.java",
+      "kind": "blob",
+      "oid": "10dfac2ccc0d1ef20357b336bfd5cbd0801995db",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/OnDevicePersonalizationExecutorsTests.java",
+      "kind": "blob",
+      "oid": "5f9f592f4f4bf94659c0af55817c21d3c01a9392",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/OnDevicePersonalizationManagingServiceTest.java",
+      "kind": "blob",
+      "oid": "ee26e7cca00fa47829b64601639162eed8a6190b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/PhFlagsTest.java",
+      "kind": "blob",
+      "oid": "952fe11ad93654fffddc3125a04bc1c16cd2de68",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/PhFlagsTestUtil.java",
+      "kind": "blob",
+      "oid": "0ae02c7c7bc56607d87f83512466ae12e7cb4dd5",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/StableFlagsTest.java",
+      "kind": "blob",
+      "oid": "199e1d6c701d530e03feb4ac1d771df2a992a11c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/data/DataAccessServiceImplTest.java",
+      "kind": "blob",
+      "oid": "aebc9f8646ef563d0a7d812eac97f56edab38912",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/data/OnDevicePersonalizationDbHelperTest.java",
+      "kind": "blob",
+      "oid": "e05e5cdce58d35564f894a454aa7635d05a04b6b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/data/errors/AggregateErrorDataReportingJobTest.java",
+      "kind": "blob",
+      "oid": "7656b386447c87197d017a05d3ca738123131898",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/data/errors/AggregateErrorDataReportingServiceTest.java",
+      "kind": "blob",
+      "oid": "9cc7e378b4dae0ee2c4303b7f643358299928005",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/data/errors/AggregatedErrorCodesLoggerTest.java",
+      "kind": "blob",
+      "oid": "68392c6b74cd122b33ce11cd90cc27b746b30ec0",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/data/errors/AggregatedErrorReportingProtocolTest.java",
+      "kind": "blob",
+      "oid": "5e7615cc98330aad67b10804a17328217a35f9a4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/data/errors/AggregatedErrorReportingWorkerTest.java",
+      "kind": "blob",
+      "oid": "0028d7334ba6cb299e4eca0d1133319b4eb0fb88",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/data/errors/DateTimeUtilsTest.java",
+      "kind": "blob",
+      "oid": "3b47a16c03ee911c8c36d779e57c32f4b35b83cc",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/data/errors/OnDevicePersonalizationAggregatedErrorDataDaoTest.java",
+      "kind": "blob",
+      "oid": "e074cd61726f7948b42d7e8a07dfaccc8103ac57",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/data/events/ColumnSchemaTest.java",
+      "kind": "blob",
+      "oid": "3192f7a212c56c6551f617637a99cdcba11ffeb0",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/data/events/EventStateTest.java",
+      "kind": "blob",
+      "oid": "61940514545e628c940960c20641131b1e3773ad",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/data/events/EventTest.java",
+      "kind": "blob",
+      "oid": "2c3bda6e3c87b2ab1dd72f04f9d4559e9e48e405",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/data/events/EventUrlHelperTest.java",
+      "kind": "blob",
+      "oid": "e8d57c36310b797c0ee7510414597a96369444bd",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/data/events/EventUrlPayloadTest.java",
+      "kind": "blob",
+      "oid": "d0e397d56779a224c4161011e70776c6d8072d84",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/data/events/EventsDaoTest.java",
+      "kind": "blob",
+      "oid": "25a5038855f5fe061fc615f9a6ac43699877623a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/data/events/JoinedEventTest.java",
+      "kind": "blob",
+      "oid": "967a9eb004fb472aa76419a0f6f26c6ceddce340",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/data/events/JoinedTableDaoTest.java",
+      "kind": "blob",
+      "oid": "b13e80cc5a215c17cdca5b468a3e8c1b71cbfdec",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/data/events/QueryTest.java",
+      "kind": "blob",
+      "oid": "cd44952bc799b616f11eda2f9933b879c89127ba",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/data/user/UserDataCollectionJobServiceTest.java",
+      "kind": "blob",
+      "oid": "d75650441a0a6618ef61a570c0d0e0f252576a78",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/data/user/UserDataCollectionJobTest.java",
+      "kind": "blob",
+      "oid": "e0135ef472a450590b1ef36ca327a73f128b7058",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/data/user/UserDataCollectorTest.java",
+      "kind": "blob",
+      "oid": "ee692871276d4ccc27f94ab93a45ab9fc332800d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/data/user/UserDataDaoTest.java",
+      "kind": "blob",
+      "oid": "3862fc5d850a38252cef37f8260ce8fa7d740293",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/data/user/UserPrivacyStatusTest.java",
+      "kind": "blob",
+      "oid": "1de17484abc2ac1658dfc447d7fc294f17fdb16f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/data/vendor/LocalDataTest.java",
+      "kind": "blob",
+      "oid": "e401edb326a9543d0b233c4bdb875acd0a06cba4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/data/vendor/OnDevicePersonalizationLocalDataDaoTest.java",
+      "kind": "blob",
+      "oid": "beec7a75cd6ac5e0643c7e2525e98a0e0c6dd85f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/data/vendor/OnDevicePersonalizationVendorDataDaoTest.java",
+      "kind": "blob",
+      "oid": "a736a74505328ac11ef31b045609a2040f3d8724",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/data/vendor/VendorDataTest.java",
+      "kind": "blob",
+      "oid": "3ba61d0d1477bbcb43a87445b7414d36d8f4c873",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/display/DisplayHelperTest.java",
+      "kind": "blob",
+      "oid": "034eb4e08a4fba0d88a81cfe06519de8979f47eb",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/display/OdpWebViewClientTests.java",
+      "kind": "blob",
+      "oid": "ffbe7582832cf70720658de9fe2f20854a5b9b1a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/display/velocity/OnDevicePersonalizationVelocityToolTest.java",
+      "kind": "blob",
+      "oid": "b19626d149242f402ea661e546327e00d1284161",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/display/velocity/VelocityEngineFactoryTests.java",
+      "kind": "blob",
+      "oid": "efa622f3ccf9bb577c47bf3b249835190926712c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/download/DownloadedFileParserTest.java",
+      "kind": "blob",
+      "oid": "1ecdd921946986033dbd9056070eb5144cde4ef5",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/download/OnDevicePersonalizationDataProcessingAsyncCallableTests.java",
+      "kind": "blob",
+      "oid": "14918cbd2f65241fa379419b63c494ca257e390a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/download/OnDevicePersonalizationDownloadProcessingJobServiceTests.java",
+      "kind": "blob",
+      "oid": "3d507f0242b8079001c69250701a46f47addb9b7",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/download/OnDevicePersonalizationDownloadProcessingJobTests.java",
+      "kind": "blob",
+      "oid": "22364310bac8f1e20439abdc33d2844f3c80f346",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/download/mdd/MddJobServiceTest.java",
+      "kind": "blob",
+      "oid": "c07f100ed0ed843f0811677cd065e5cf6db57d0c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/download/mdd/MddJobTest.java",
+      "kind": "blob",
+      "oid": "50b73f4089a84815bfc1a85c74f3cec8dc735173",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/download/mdd/MddLoggerTest.java",
+      "kind": "blob",
+      "oid": "a49c3c96ece9d637ee067d66305cb923e260e8fa",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/download/mdd/MddTaskSchedulerTest.java",
+      "kind": "blob",
+      "oid": "89d3eb0d23a156ba919508706a673bed56b18cfa",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/download/mdd/MobileDataDownloadFactoryTest.java",
+      "kind": "blob",
+      "oid": "7084549eb37c753cc0d31153da4a482fe85d1e95",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/download/mdd/OnDevicePersonalizationFileDownloaderTest.java",
+      "kind": "blob",
+      "oid": "d308ea6c2472210d9adb90fab7c7fa7813afb206",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/download/mdd/OnDevicePersonalizationFileGroupPopulatorTest.java",
+      "kind": "blob",
+      "oid": "98b333f8b9f576c0c21b795e67d9574e1374c0d7",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/download/mdd/OnDevicePersonalizationMddFlagsTests.java",
+      "kind": "blob",
+      "oid": "408df72cb1f4df20d948dc632edeb63bdce2b659",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/enrollment/PartnerEnrollmentCheckerTest.java",
+      "kind": "blob",
+      "oid": "b1f8e6adfcdd41bbe49a71d97fe2fecb27329729",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/federatedcompute/FederatedComputeServiceImplTest.java",
+      "kind": "blob",
+      "oid": "e7ab85a9001d481f05276fc4db83c26768e36527",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/federatedcompute/OdpExampleStoreIteratorFactoryTest.java",
+      "kind": "blob",
+      "oid": "2386648cf8a9021e38e60bc575cab82e10e6dc82",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/federatedcompute/OdpExampleStoreIteratorTest.java",
+      "kind": "blob",
+      "oid": "d6564484ea4a2583fd89f96e6aa18f7a1e402d62",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/federatedcompute/OdpExampleStoreServiceTests.java",
+      "kind": "blob",
+      "oid": "5f2c80e55b98adaf101b345d25de33dd4149a9b6",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/federatedcompute/OdpResultHandlingServiceTests.java",
+      "kind": "blob",
+      "oid": "66eda88d5340995adc19cdc3a6a8bae27bd70dca",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/inference/IsolatedModelServiceImplTest.java",
+      "kind": "blob",
+      "oid": "5f15f5ecb8c6d0b6824db6d98998d0d34bb7b677",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/maintenance/OnDevicePersonalizationMaintenanceJobServiceTest.java",
+      "kind": "blob",
+      "oid": "86717e60ce68ae90e0c57311d58f5539cca22ee6",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/maintenance/OnDevicePersonalizationMaintenanceJobTest.java",
+      "kind": "blob",
+      "oid": "c6c2a8a4daa5bf8cbf4570a7261f8584d0b36ae4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/manifest/AppManifestConfigParserTests.java",
+      "kind": "blob",
+      "oid": "80b2cb68b151beb5beec285c5e5e43e1b6acac88",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/manifest/AppManifestConfigTests.java",
+      "kind": "blob",
+      "oid": "50b1f03470ed93debc5c8c834cacec840b94b660",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/policyengine/UserDataReaderTest.kt",
+      "kind": "blob",
+      "oid": "e1c9408994cea7931825bfc3dd901e71e68148f1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/process/IsolatedServiceBindingRunnerTest.java",
+      "kind": "blob",
+      "oid": "0c69da8d89d8e4be0ba5e4a701cfe7f8b60900e6",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/process/PluginProcessRunnerTest.java",
+      "kind": "blob",
+      "oid": "de71a629d199139e00889d5c12b18663e3c561ba",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/reset/ResetDataJobServiceTest.java",
+      "kind": "blob",
+      "oid": "4178ccd2f17f789807bd20bd64bd2a3890649afc",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/reset/ResetDataJobTest.java",
+      "kind": "blob",
+      "oid": "f69a8de4b02855edfc30afc92aece65070da066d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/reset/ResetDataTaskTest.java",
+      "kind": "blob",
+      "oid": "370f63ac67d113f6ac24e98215ffc45fb5a29301",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/serviceflow/AppRequestFlowTest.java",
+      "kind": "blob",
+      "oid": "e2e6fad71674b40b8c5f86776dc2c3caeb9288bf",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/serviceflow/RenderFlowTest.java",
+      "kind": "blob",
+      "oid": "893aceaef49804808df112f3a40cb16e75dc684d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/serviceflow/ServiceFlowFactoryTest.java",
+      "kind": "blob",
+      "oid": "b8178ae17eaad4cc71d411bdd435cddb6a6db01b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/serviceflow/ServiceFlowTypeTest.java",
+      "kind": "blob",
+      "oid": "b5e900147755f8352b25be221a0f9fdb0deb4751",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/serviceflow/WebTriggerFlowTest.java",
+      "kind": "blob",
+      "oid": "8bf57036ca73a347e2d4c7630800de7fd0207241",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/serviceflow/WebViewFlowTest.java",
+      "kind": "blob",
+      "oid": "9f9bb4c0ad83c7f4ab985c6d7a03642187c12e6e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/sharedlibrary/spe/OdpJobServiceFactoryTest.java",
+      "kind": "blob",
+      "oid": "268ecacee62231bc89d4f7069158e0886d7ac8bb",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/sharedlibrary/spe/OdpJobServiceTest.java",
+      "kind": "blob",
+      "oid": "6d4cb8911156f4fbde4ad794101c53d5e81ae7a0",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/util/AllowListUtilsTest.java",
+      "kind": "blob",
+      "oid": "9bc75be6ae67c959b6525f5c9bb9e9701e1bbe0c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/util/CryptUtilsTest.java",
+      "kind": "blob",
+      "oid": "4add46b59c24eb47525db458c1e1e3820ad5a23d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/util/DebugUtilsTest.java",
+      "kind": "blob",
+      "oid": "5a7823f5f882e19c273e8e2a7c5bf81e6279ee19",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/util/IoUtilsTest.java",
+      "kind": "blob",
+      "oid": "1db9e0d84500e64a5e34375a90d3be03c9cb7db1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/util/LogUtilsTest.java",
+      "kind": "blob",
+      "oid": "2bc35b1059d493cfdf2824c2cacaf44532b9b1ac",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/util/NoiseUtilTest.java",
+      "kind": "blob",
+      "oid": "c5f13a0f68edc2f8837fa324811282ebe0383ee0",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/util/OnDevicePersonalizationFlatbufferUtilsTests.java",
+      "kind": "blob",
+      "oid": "b1b603e08bfdc4931788b682552ad061672c8f19",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/util/ParcelWrapperTest.java",
+      "kind": "blob",
+      "oid": "f2c896217b93d8fc47e430aeffce42cb3ca9643e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/android/ondevicepersonalization/services/util/StatsUtilsTest.java",
+      "kind": "blob",
+      "oid": "6eb4b66daf14a6f813a22c2239a027362f0fccee",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/test/TestPersonalizationHandler.java",
+      "kind": "blob",
+      "oid": "60a8b5fae4f1d960eab6bc1bfb3e6d1accf03f06",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/servicetests/src/com/test/TestPersonalizationService.java",
+      "kind": "blob",
+      "oid": "e340e89e14d87b01502669ce06fe152add066d0a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/systemserviceapitests/Android.bp",
+      "kind": "blob",
+      "oid": "4c6ead58c8a25ff3cf5e138bb52df5a4a030b389",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/systemserviceapitests/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "144bc296c018cd735ba8427583e7b359b3e6c28f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/systemserviceapitests/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "d030e35bd8407a91be5de39fb08c14e8dd3fe242",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/systemserviceapitests/src/com/android/ondevicepersonalization/systemserviceapitests/OdpSystemServiceApiTest.java",
+      "kind": "blob",
+      "oid": "08cee25410976965c87490bf9322c9e4ef83fbda",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/systemserviceimpltests/Android.bp",
+      "kind": "blob",
+      "oid": "916c5cfeb1489a7410a5eb5951dec92daabfff5a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/systemserviceimpltests/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "af2f2c934fa0f8514490204f7d6200392f4d60d5",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/systemserviceimpltests/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "db51a2ec4eea49462d0e121dcd024d20dcd5c272",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/systemserviceimpltests/src/com/android/server/ondevicepersonalization/OdpSystemServiceImplTest.java",
+      "kind": "blob",
+      "oid": "36af06cda18fc63b90b6a2aafb1f630a0b01a14e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/testutils/Android.bp",
+      "kind": "blob",
+      "oid": "14ca76df6ef9a4149b42ef547fe1e654de3dc5ff",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/testutils/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "88ff68a943d806fe09e885834d97005e1f62fd3b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/testutils/src/com/android/ondevicepersonalization/testing/utils/DeviceSupportHelper.java",
+      "kind": "blob",
+      "oid": "e3212d56355e1a9b905988d32816efbde37203fe",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/testutils/src/com/android/ondevicepersonalization/testing/utils/ResultReceiver.java",
+      "kind": "blob",
+      "oid": "9290c7c30a41b9b3120d919b3e9694110056a0e2",
+      "mode": "100644"
+    }
+  ]
+}

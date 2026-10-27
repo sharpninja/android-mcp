@@ -1,0 +1,20 @@
+E
+======================================================================
+ERROR: test_permission_reference (unittest.loader._FailedTest.test_permission_reference)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_permission_reference
+Traceback (most recent call last):
+  File "/usr/lib/python3.14/unittest/loader.py", line 433, in _find_test_path
+    module = self._get_module_from_name(name)
+  File "/usr/lib/python3.14/unittest/loader.py", line 374, in _get_module_from_name
+    __import__(name)
+    ~~~~~~~~~~^^^^^^
+  File "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/catalog-next009v4/tests/test_permission_reference.py", line 3, in <module>
+    from permission_reference import parse
+ModuleNotFoundError: No module named 'permission_reference'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)

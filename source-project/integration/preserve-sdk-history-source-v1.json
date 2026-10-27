@@ -1,0 +1,41 @@
+{
+  "at": "2026-10-27T00:35:55.093494+00:00",
+  "candidate": "catalog-next009",
+  "patch": {
+    "path": "integration/preserve-sdk-history-source-v1.patch",
+    "sha256": "46e5fe0da60ea00d3fc9087f47032ac8cc5493b4d995f222b4f2a2c6620acce3"
+  },
+  "files": [
+    {
+      "path": "tooling/sdk_api_index.py",
+      "sha256": "35f6d3ff1dfad7a37220e62702e8aefb4e37d6e242cc671217f558e1371731ec"
+    },
+    {
+      "path": "tooling/build_catalog.py",
+      "sha256": "834c28652f322be48d6748a6e1e2d991f09d145afbf9a6e74e5b6e707f304201"
+    },
+    {
+      "path": "tests/test_sdk_history_preservation.py",
+      "sha256": "2af1e7cb71e1ad0706255facbadc5762f20984582bf9d7db4f78322da23667e7"
+    },
+    {
+      "path": "tests/test_sdk_history_annotation_guard.py",
+      "sha256": "05e3591e91f85fe3e9dac1b2a10d2170faf07d703edfe308d916b31cb9d69717"
+    }
+  ],
+  "tests": "next009-startup-history-regression.txt:165 passed including copied13resolverfixtures and4newsourcefixtures",
+  "test_before": [
+    "sdk-history-fixtures-before.txt:3errors before feature",
+    "sdk-history-annotation-guard-before.txt:failed before inactive-target guard"
+  ],
+  "java_fingerprint": "a75ac91a0098e484029faae8a8c7b39e4bbff36a26f752f30935ae4fda86caf9",
+  "new_index_fingerprint": "10d1a0bf9b8ee0083f4bb0a5898738230788db4b10d9f8cbac506fd44e3d377f",
+  "production_status": "Not yet imported; frozen008untouched",
+  "rules": [
+    "All93681SDKlifecycle declarations can be retained; current-target view still available as default",
+    "Inactive/unknown records cannot enter current annotation/JVM source equivalence maps",
+    "Owner/member raw attributes and SDK-definition IDs preserved separately",
+    "Administrative Entry state active is not device availability",
+    "No automatic source identity aliases, type dependencies, codecs or grants inferred"
+  ]
+}

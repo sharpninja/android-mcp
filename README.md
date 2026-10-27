@@ -11,6 +11,6 @@ Latest complete independent HV: **round02292/89, NOT_ACCEPTED**. Corrected round
 - [Visible unified022 review](remediation/reviews/round-022/supervisor/unified-review-report.txt)
 - [Exact checkpoint inventory and sync remainder](publication-status.json)
 
-This first commit contains the sealed normal remediation checkpoint. Source-owner normal files and the refreshed all-file inclusion/remainder manifest are being collected for the next commit. The earlier complete inventory is retained in initial-full-inventory.json.gz. Large artifacts will use compressed release chunks with whole/part hashes and reconstruction tooling; they are not yet synchronized. No paid LFS/storage commitment is made.
+This first commit contains the sealed normal remediation checkpoint. Source-owner normal files are now included. The refreshed complete all-file inclusion/remainder inventory is in [publication-manifest.json](publication-manifest.json), with its compressed detailed ledger. The earlier stat inventory is retained in initial-full-inventory.json.gz. Large artifacts will use compressed release chunks with whole/part hashes and reconstruction tooling; they are not yet synchronized. No paid LFS/storage commitment is made.
 
 Visible review requests/responses are preserved in audited publication copies. Hidden reasoning, account-quota/plugin/operator metadata and credential/private-note files are excluded; local originals remain unchanged. Active review streams are captured prefixes, not completed verdicts. No root Actions workflow or deployment is enabled.

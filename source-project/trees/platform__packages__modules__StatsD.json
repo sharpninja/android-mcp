@@ -1,0 +1,3307 @@
+{
+  "repo": "platform/packages/modules/StatsD",
+  "requested_revision": "refs/tags/android-17.0.0_r1",
+  "revision": "8129a553528b0ef83e87e00c9f2604ed8afb2949",
+  "entries": [
+    {
+      "path": ".gitignore",
+      "kind": "blob",
+      "oid": "3c2d0cd6f8415c01eb5d155b759852c505ce9e0e",
+      "mode": "100644"
+    },
+    {
+      "path": "OWNERS",
+      "kind": "blob",
+      "oid": "b3c5f3eda0af18b9d89dda9b5a7dab18fdbdae16",
+      "mode": "100644"
+    },
+    {
+      "path": "PREUPLOAD.cfg",
+      "kind": "blob",
+      "oid": "cd0fbba5592ed0e1d8c404d48c8c008909f0f575",
+      "mode": "100644"
+    },
+    {
+      "path": "TEST_MAPPING",
+      "kind": "blob",
+      "oid": "1e2702f87bde5abaa34613fc399865f931ce59ea",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl/Android.bp",
+      "kind": "blob",
+      "oid": "e310c4ad5119abff8bef7c7101fd041637c64669",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl/android/os/IPendingIntentRef.aidl",
+      "kind": "blob",
+      "oid": "b913468690e6a2e9ff5e83f09b5fddc563c776f7",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl/android/os/IPullAtomCallback.aidl",
+      "kind": "blob",
+      "oid": "12ad85717255d9f5fa9495a3b0003b749b80e568",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl/android/os/IPullAtomResultReceiver.aidl",
+      "kind": "blob",
+      "oid": "7aafd69f27e744cc77499aeabbbdf5d9b871a184",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl/android/os/IStatsCompanionService.aidl",
+      "kind": "blob",
+      "oid": "3d004de02c2e454deb39d2eaa3c1a84b994ab007",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl/android/os/IStatsManagerService.aidl",
+      "kind": "blob",
+      "oid": "bf6147075c39735f58ea8f5ce43e6195a6a64a24",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl/android/os/IStatsQueryCallback.aidl",
+      "kind": "blob",
+      "oid": "1a1dba8d19ba3ea898e705333a809cde262c97b7",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl/android/os/IStatsSubscriptionCallback.aidl",
+      "kind": "blob",
+      "oid": "c4adec53dc46eafcfccbb3b1a1c13e8b07cd963d",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl/android/os/IStatsd.aidl",
+      "kind": "blob",
+      "oid": "af5becbec6b023b7bbb42c9bb77fef6e8ac63065",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl/android/os/StatsDimensionsValueParcel.aidl",
+      "kind": "blob",
+      "oid": "05f78d00348e6a9ff4d0fbabded5d44b404d1055",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl/android/os/StatsSubscriptionCallbackReason.aidl",
+      "kind": "blob",
+      "oid": "5e3a94576d9716e554120521661ab4b39b8c28de",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl/android/util/PropertyParcel.aidl",
+      "kind": "blob",
+      "oid": "38c45f34da883757979d51c4a9fd3994ce270ad6",
+      "mode": "100644"
+    },
+    {
+      "path": "aidl/android/util/StatsEventParcel.aidl",
+      "kind": "blob",
+      "oid": "add8bfb47b1ae56a44990518a2ab16add7210f8e",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/.clang-format",
+      "kind": "blob",
+      "oid": "cead3a079435208b34ac054f2804129eb6471083",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/Android.bp",
+      "kind": "blob",
+      "oid": "0cb3ede019ca8f21ef97a5dbeae4fad7f34ded5a",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/apex_manifest.json",
+      "kind": "blob",
+      "oid": "a8ea55c93425c89ce34be02476a11324a04ba83b",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/boot-image-profile.txt",
+      "kind": "blob",
+      "oid": "104dd8a6ed66510cf6a10b4a09417e98b81ce1df",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/com.android.os.statsd.avbpubkey",
+      "kind": "blob",
+      "oid": "d78af8b8bef2785c260675c87589f99453c6be46",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/com.android.os.statsd.pem",
+      "kind": "blob",
+      "oid": "558e17fd686465c02a322d129f341a3f5073e916",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/com.android.os.statsd.pk8",
+      "kind": "blob",
+      "oid": "49910f80a05c11a4c4ba160f1e0faa292100aea2",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/com.android.os.statsd.x509.pem",
+      "kind": "blob",
+      "oid": "e7b16b2048cbbf2245fe67010b1ac5ac06d80262",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/hiddenapi/OWNERS",
+      "kind": "blob",
+      "oid": "82b599dbf15eba9d93a2ea760452640c5acebe78",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/hiddenapi/hiddenapi-max-target-o-low-priority.txt",
+      "kind": "blob",
+      "oid": "7f8c1f081e6ec699333d3376fd80c970e67eda83",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/statsd.rc",
+      "kind": "blob",
+      "oid": "1cb92c4f15ad583e6b0bec72ae7e7d3216c3b69c",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/testing/Android.bp",
+      "kind": "blob",
+      "oid": "bbf206446fe7e62b51762123221cc7c8fe41729c",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/testing/test_manifest.json",
+      "kind": "blob",
+      "oid": "57343d3e6ae593955fd13640fa93ffabffb85f68",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/tests/libstatsconfigutils/Android.bp",
+      "kind": "blob",
+      "oid": "714b4c9c1172fb712174276f15c072b8974a68a5",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/tests/libstatsconfigutils/src/com/android/internal/os/statsdutils/StatsConfigUtils.java",
+      "kind": "blob",
+      "oid": "6a3c51fa857462d794bdc293b436cb66ca550aa0",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/tests/libstatsocket/Android.bp",
+      "kind": "blob",
+      "oid": "5e2ebfc3cacbec38892a683c25bec7c5b935189d",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/tests/libstatsocket/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "f83c0017439bb0ec5daed3bb10b3e1dec189810f",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/tests/libstatsocket/src/com/android/internal/os/statsd/libstatssocket/LibStatsSocketTests.java",
+      "kind": "blob",
+      "oid": "d6bb273904482b08041acb1dc16880b89f95d8a0",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/tests/libstatspull/Android.bp",
+      "kind": "blob",
+      "oid": "bde0d3f8ad0d943c74768efeabd1dbda4717e660",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/tests/libstatspull/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "6cc801f59662ec2d5b21f72533a3a08a5444d2fd",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/tests/libstatspull/jni/stats_pull_helper.cpp",
+      "kind": "blob",
+      "oid": "166592d351517f3b7952fd719df2156ee0f3a5bb",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/tests/libstatspull/protos/test_atoms.proto",
+      "kind": "blob",
+      "oid": "56c1b534a7cec5a31c51bffa7fb1348c1ed46847",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/tests/libstatspull/src/com/android/internal/os/statsd/libstats/LibStatsPullTests.java",
+      "kind": "blob",
+      "oid": "f5478749ad82af0b89b0db14f6d293f3155890f8",
+      "mode": "100644"
+    },
+    {
+      "path": "flags/Android.bp",
+      "kind": "blob",
+      "oid": "528cd827c01bd1afeafadabee1351bd8a2e75507",
+      "mode": "100644"
+    },
+    {
+      "path": "flags/libstatssocket_flags.aconfig",
+      "kind": "blob",
+      "oid": "64227b6b24c8b6da4e84a7fb35f1584f5b71087f",
+      "mode": "100644"
+    },
+    {
+      "path": "flags/stats_manager_flags.aconfig",
+      "kind": "blob",
+      "oid": "e4dab33afaa7e47490fa223719a5d772059f54d6",
+      "mode": "100644"
+    },
+    {
+      "path": "flags/statsd_flags.aconfig",
+      "kind": "blob",
+      "oid": "ca856cfc3010b124c1845d4507f296b7967469d0",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/.clang-format",
+      "kind": "blob",
+      "oid": "617f368a9ad1a0114aea6daf51f4032a05953d70",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/Android.bp",
+      "kind": "blob",
+      "oid": "faf6abd7c3cf6f88fca7e60270fae7750b2169f4",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/current.txt",
+      "kind": "blob",
+      "oid": "841f9f957366a454532a554c502ed1bacf821a79",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/lint-baseline.txt",
+      "kind": "blob",
+      "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/module-lib-current.txt",
+      "kind": "blob",
+      "oid": "370e28d7a170f43288fd4979eabffa0b6e55c938",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/module-lib-lint-baseline.txt",
+      "kind": "blob",
+      "oid": "2ae37de6ac36084ea799f2041167994291464a91",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/module-lib-removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/system-current.txt",
+      "kind": "blob",
+      "oid": "a43746c180f008b4ea167330f1c9ce4722e4f921",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/system-lint-baseline.txt",
+      "kind": "blob",
+      "oid": "2ae37de6ac36084ea799f2041167994291464a91",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/system-removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/framework-statsd-ravenwood-policies.txt",
+      "kind": "blob",
+      "oid": "9838ec7fd59409b507d6ab0dbd1dc282b57e1cb5",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/jarjar-rules.txt",
+      "kind": "blob",
+      "oid": "227c5c191700a25d55fcf8cff0b7a596fd0efcd9",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/StatsCursor.java",
+      "kind": "blob",
+      "oid": "29cd2414ddf481dc259425d0f0c49d3b11d9e1ee",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/StatsManager.java",
+      "kind": "blob",
+      "oid": "691e3681ddabf4b93c5ee9a778a746004b35752f",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/app/StatsQuery.java",
+      "kind": "blob",
+      "oid": "59f8597fa0eeb55d52ae92d841837e4f07f116b3",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/os/StatsDimensionsValue.java",
+      "kind": "blob",
+      "oid": "7d9349cefa48fc5d5468aecafedcdc179f3401f3",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/os/StatsFrameworkInitializer.java",
+      "kind": "blob",
+      "oid": "8dc91239c2e0bbbf6a7882a083698c6929ed543f",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/util/StatsEvent.java",
+      "kind": "blob",
+      "oid": "ab49ae957ac3b4628ac149fdf78078fb37d83726",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/util/StatsLog.java",
+      "kind": "blob",
+      "oid": "a765aafdc3eaafea23d3369699b0231fc343f5be",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/jni/android_util_StatsLog.cpp",
+      "kind": "blob",
+      "oid": "71ce94923c8da7de3c8720fe94d194776d03aee7",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/test/hostsidetests/Android.bp",
+      "kind": "blob",
+      "oid": "fe604f346a0a9f86d4a7be2f5583163bb2a86c2d",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/test/hostsidetests/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "4c83415cba028f511f78c17d8e1e147b0d39888c",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/test/hostsidetests/app/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "b350bdd18691ae37c538fab95fbda3285567cbce",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/test/hostsidetests/app/AndroidManifestNoPermission.xml",
+      "kind": "blob",
+      "oid": "eaeae6e980f5d5d077fdbf16f8c51c71ef00c059",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/test/hostsidetests/app/src/com/android/tests/statsd/framework/app/StatsdRestartTest.java",
+      "kind": "blob",
+      "oid": "26e303510d90845eddb240e6398b6c494fdaec54",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/test/hostsidetests/app/src/com/android/tests/statsd/framework/appnopermission/StatsdPermissionTest.java",
+      "kind": "blob",
+      "oid": "d42ab9e647a67825becc835e861040693d391f2a",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/test/hostsidetests/src/com/android/tests/statsd/host/StatsdPermissionTest.java",
+      "kind": "blob",
+      "oid": "0406560b4d13807b0d943d8dae05f3a428d1403d",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/test/hostsidetests/src/com/android/tests/statsd/host/StatsdRestartTest.java",
+      "kind": "blob",
+      "oid": "0eafef7466b9b7fe1e925f2ca40d5b65397a0999",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/test/unittests/Android.bp",
+      "kind": "blob",
+      "oid": "14424f8328e5c763e42a42d5edab59b8b475d1d5",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/test/unittests/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "bf87c57efb9a0005eefe92cf116aa45f925b49b9",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/test/unittests/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "4ab7b646dba86fea4a3661d6e004cc91aa1f885f",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/test/unittests/src/android/app/PullAtomMetadataTest.java",
+      "kind": "blob",
+      "oid": "fd386bd8e32ea5ed57cc722eddddc09dbf6919f9",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/test/unittests/src/android/os/StatsDimensionsValueTest.java",
+      "kind": "blob",
+      "oid": "8b956a61d94cb8180e137073973933d0e4c405cf",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/test/unittests/src/android/util/StatsEventTest.java",
+      "kind": "blob",
+      "oid": "6d7e92d9201ce2c6d07d481ef510066d6e2856b1",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/.clang-format",
+      "kind": "blob",
+      "oid": "cead3a079435208b34ac054f2804129eb6471083",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libkll/Android.bp",
+      "kind": "blob",
+      "oid": "156eadd2768b0f6add8e44353846b5b300e0309d",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libkll/compactor_stack.cpp",
+      "kind": "blob",
+      "oid": "0262d009b81c2bae964d10b6a04b130a1474d2b5",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libkll/encoding/Android.bp",
+      "kind": "blob",
+      "oid": "df2a4e2f0a8abdb56114c93d9e3d444454936d54",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libkll/encoding/bits_util.h",
+      "kind": "blob",
+      "oid": "5306e63c6096ebe1b9c3714b8e2f4a6b916681b5",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libkll/encoding/bits_util_test.cpp",
+      "kind": "blob",
+      "oid": "7d9ec6de1bbd64feafa0bdde036a8e7301094086",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libkll/encoding/encoder.cpp",
+      "kind": "blob",
+      "oid": "5ad6ff2cc885dcc3143cc4702eff7a7e7d978fed",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libkll/encoding/encoder.h",
+      "kind": "blob",
+      "oid": "2c67eb8267bee3e5c6d949965cedd03c23d2467a",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libkll/encoding/encoder_test.cpp",
+      "kind": "blob",
+      "oid": "49c091f7fc98b11c7bb56ec6195cc5ae5c730eaa",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libkll/encoding/varint.cpp",
+      "kind": "blob",
+      "oid": "971f6bcb2532adb2246dd6260c3a9f6b6208eafa",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libkll/encoding/varint.h",
+      "kind": "blob",
+      "oid": "5ca311a40317c8661c3bd208e00b2d89c3d5be7f",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libkll/encoding/varint_test.cpp",
+      "kind": "blob",
+      "oid": "c8e470788f745c6e24779f731aecc04138b443a3",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libkll/include/compactor_stack.h",
+      "kind": "blob",
+      "oid": "0070b12bb933a9c3363f0d30cd08aa961bcc3820",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libkll/include/kll.h",
+      "kind": "blob",
+      "oid": "13488b86415f65eae00bf54fa8aeb28b356b615c",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libkll/include/random_generator.h",
+      "kind": "blob",
+      "oid": "c66e76c9b6d3c7e820a92c2f6cc3e83e74322d35",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libkll/include/sampler.h",
+      "kind": "blob",
+      "oid": "60ad5af0a9c19645a842f9e05d648d6c9094ff18",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libkll/kll.cpp",
+      "kind": "blob",
+      "oid": "7cecd037af3dce42e64b0d59af2f94e3a04a83e8",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libkll/proto/Android.bp",
+      "kind": "blob",
+      "oid": "1f5bbb9f61176b7ecd53305c8ab766df17e97b46",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libkll/proto/aggregator.proto",
+      "kind": "blob",
+      "oid": "f458dbca694c92ed8802f6d6e292b9349ce987cf",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libkll/proto/kll-quantiles.proto",
+      "kind": "blob",
+      "oid": "a98100bac9383211f6c463bce3a26a38f2575df6",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libkll/sampler.cpp",
+      "kind": "blob",
+      "oid": "5e86b13e6104a43b06232b59b35667add0c070f0",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libkll/tests/compactor_stack_test.cpp",
+      "kind": "blob",
+      "oid": "2f95a43a268088314367ee5dd05e5633e3a0e4df",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libkll/tests/kll_test.cpp",
+      "kind": "blob",
+      "oid": "8f6c5f10362cde98ddbfbcc7ae593196b39b8d42",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libkll/tests/sampler_test.cpp",
+      "kind": "blob",
+      "oid": "dc7d9e45c18df0b5cff1b5b706beef5b4fa57b68",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatsd_shared_definitions/Android.bp",
+      "kind": "blob",
+      "oid": "1506ae307f12a7879ff137fd72c11887d184e9b3",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatsd_shared_definitions/include/StatsdLoggingControl.h",
+      "kind": "blob",
+      "oid": "9a8f154b84f213e28ea7b45157e05265b6ba7d13",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatsd_shared_definitions/include/StatsdSocketLoggingErrorCodes.h",
+      "kind": "blob",
+      "oid": "8a493203455396ba5b5e49b2c181163c278740a2",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatsgtestmatchers/Android.bp",
+      "kind": "blob",
+      "oid": "ae260666603ad51c2c20cb1cd924ce3bf4c16333",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatsgtestmatchers/include/gtest_matchers.h",
+      "kind": "blob",
+      "oid": "20616f3ed409ba98c75e40048b15643c3bb5db73",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatspull/Android.bp",
+      "kind": "blob",
+      "oid": "e5e6a672b11d599be4723da1f80e03778cf0ecfd",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatspull/fake/libstatspull.c",
+      "kind": "blob",
+      "oid": "0ed59f753b5913a70703d2d6055f8acf802c2816",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatspull/include/stats_pull_atom_callback.h",
+      "kind": "blob",
+      "oid": "17df58435011cad4edc6f53f8bcbc5b239fb9c23",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatspull/include/stats_subscription.h",
+      "kind": "blob",
+      "oid": "6509c2b344b188e78924f0871a93dc204cc8a887",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatspull/libstatspull.map.txt",
+      "kind": "blob",
+      "oid": "a76342c9426a2ddf15f9fcade1402812ec1cae5f",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatspull/libstatspull_test.xml",
+      "kind": "blob",
+      "oid": "5b06f1e482051039d8a275afd0cebdabdabdec1f",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatspull/libstatspull_test_default.map",
+      "kind": "blob",
+      "oid": "5157ea6eb131ae8a2e30878cf730d7f8fe1c4ef2",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatspull/stats_provider.cpp",
+      "kind": "blob",
+      "oid": "9dc5439fb744f50695d0e2b1b0f73f9233373c61",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatspull/stats_provider.h",
+      "kind": "blob",
+      "oid": "dcb9a1db5bade1c502c0b3df56e4dcd7dda5eb18",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatspull/stats_pull_atom_callback.cpp",
+      "kind": "blob",
+      "oid": "91791adf9dd4fdd34572b07a568b3f4d05f14fc7",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatspull/stats_subscription.cpp",
+      "kind": "blob",
+      "oid": "ba8ceec7de0fc7ffc11b4ba6590bf700a64680d9",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatspull/tests/pull_atom_metadata_test.cpp",
+      "kind": "blob",
+      "oid": "c3ebe5bd5f541344a71583304c49b746aa0c2e17",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatspull/tests/stats_subscription_test.cpp",
+      "kind": "blob",
+      "oid": "93e93c6c91f59b25c69961a5ed30a3ff6c66b950",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatspull/utils.cpp",
+      "kind": "blob",
+      "oid": "eee35990107b82774585fede0827fa4223aaee91",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatspull/utils.h",
+      "kind": "blob",
+      "oid": "58029a70e319e3e0ee7e8857344f225f9a6e765e",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/Android.bp",
+      "kind": "blob",
+      "oid": "3caba16034bb2f04a6c7e6548086d4f12bd3804d",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/Log.h",
+      "kind": "blob",
+      "oid": "afc00b23b73001f7fdbcfad320858dc2ae9e8787",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/atoms_in_use_provider.cpp",
+      "kind": "blob",
+      "oid": "69f3e85937ca80705089f0eb09bcaf7970815c1d",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/atoms_in_use_provider.h",
+      "kind": "blob",
+      "oid": "10bfcb6d9c77c3e0b968a25f4ced127147fdd308",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/fake/libstatssocket.c",
+      "kind": "blob",
+      "oid": "dd4d059f113d2a6110b0092e56c7d47c2e12ede8",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/fuzzers/stats_event_fuzzer.cpp",
+      "kind": "blob",
+      "oid": "b6afef532b17825581b3d3a9f6177d00c9bcaedc",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/include/stats_annotations.h",
+      "kind": "blob",
+      "oid": "2963db94caffd0f88373455892410a4a647f39ec",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/include/stats_buffer_writer.h",
+      "kind": "blob",
+      "oid": "5b41f0e04475736596911a06f2127b1669a0e7ef",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/include/stats_event.h",
+      "kind": "blob",
+      "oid": "1b4abcc8a569d90d900696d238d3b5348a6b14ef",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/include/stats_socket.h",
+      "kind": "blob",
+      "oid": "5a75fc0213c2f6b290b94d006d4fbf4e68b9be5d",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/libstatssocket.map.txt",
+      "kind": "blob",
+      "oid": "e1edee511435dd23829467b13e48534fd690e156",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/libstatssocket_test.xml",
+      "kind": "blob",
+      "oid": "d2694d1dd7368d9ba30aa51ae2880f70e2965185",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/libstatssocket_test_default.map",
+      "kind": "blob",
+      "oid": "5157ea6eb131ae8a2e30878cf730d7f8fe1c4ef2",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/logging_rate_limiter.h",
+      "kind": "blob",
+      "oid": "87ab6c39ec7910cdfacdb11a9f23cb262d566cc0",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/stats_buffer_writer.cpp",
+      "kind": "blob",
+      "oid": "6766962e6a48bcbe85c5fe54ea7f770ffb95c94e",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/stats_buffer_writer_impl.h",
+      "kind": "blob",
+      "oid": "da7a5e4ffc7883fedfa9527a424487791744f07f",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/stats_buffer_writer_queue.cpp",
+      "kind": "blob",
+      "oid": "2b29f69314e0650214982be7096e971edc9dfdaa",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/stats_buffer_writer_queue.h",
+      "kind": "blob",
+      "oid": "eb5fbe572707c3cc7227fbb77e7372a3ff6298ae",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/stats_buffer_writer_queue_impl.h",
+      "kind": "blob",
+      "oid": "ece552e98928e91080e244b4ed3490c672bd68aa",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/stats_event.cpp",
+      "kind": "blob",
+      "oid": "6eb6ab71e84bbe982bb664436344fd55bfb4e12b",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/stats_event_type.h",
+      "kind": "blob",
+      "oid": "ea8d875874dad4b8b5360a008ee1d8c6e238fe04",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/stats_socket.cpp",
+      "kind": "blob",
+      "oid": "6739443f3c95f17b54f35ccbadd1daaf84a65724",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/stats_socket_loss_reporter.cpp",
+      "kind": "blob",
+      "oid": "a691eb3deb03c49269324373338ebd0861c3de1d",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/stats_socket_loss_reporter.h",
+      "kind": "blob",
+      "oid": "492220360482f524c365de1fe70561a8040ddc36",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/statsd_writer.cpp",
+      "kind": "blob",
+      "oid": "68d7f12eda2095cca55375ec0c20bbd0733f6390",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/statsd_writer.h",
+      "kind": "blob",
+      "oid": "5912c721997e08e33c01c30009f80e2e4e8292fe",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/tests/atoms_in_use_provider_test.cpp",
+      "kind": "blob",
+      "oid": "0378ca3f0c1888dafa5c6b9ce527e03896a59980",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/tests/include/sdk_guard_util.h",
+      "kind": "blob",
+      "oid": "d289efa29667fb4549742dec3cb750c7f0f8c896",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/tests/logging_rate_limiter_test.cpp",
+      "kind": "blob",
+      "oid": "7bcc40923d32c48a4f6182a95da9df52aa1cbf54",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/tests/stats_buffer_writer_queue_test.cpp",
+      "kind": "blob",
+      "oid": "d404c631ec542ba82d20f1285553ae475b62b46b",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/tests/stats_event_test.cpp",
+      "kind": "blob",
+      "oid": "346456831a93b7bc21177a4955a203fca9484bca",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/tests/stats_socket_loss_reporter_test.cpp",
+      "kind": "blob",
+      "oid": "6c2705d7c3fa5bc159d0835355ce36e95a71fd14",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/tests/stats_socketlog_test.cpp",
+      "kind": "blob",
+      "oid": "b4bf723a2a5753944acd6d504f4db36cb61d5cce",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/tests/stats_writer_test.cpp",
+      "kind": "blob",
+      "oid": "9b4bcdb9b98fac4d04ec4b9e0575bff5e443e537",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/tests/utils_test.cpp",
+      "kind": "blob",
+      "oid": "00280f9c11afcdd55b2e863e714a4a0c244a5dd6",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/utils.cpp",
+      "kind": "blob",
+      "oid": "8f8775f919c3fe44b6c5f7aebcee791f3a9c94d4",
+      "mode": "100644"
+    },
+    {
+      "path": "lib/libstatssocket/utils.h",
+      "kind": "blob",
+      "oid": "9e6999059e967f1534029441d7de5997fbc9790b",
+      "mode": "100644"
+    },
+    {
+      "path": "perfetto/README.md",
+      "kind": "blob",
+      "oid": "765b743ff98e920a18d0bf27d218ced9d5d799d5",
+      "mode": "100644"
+    },
+    {
+      "path": "perfetto/atrace.pbtxt",
+      "kind": "blob",
+      "oid": "e5c512c5e850685c38e8db498d94700f63309c04",
+      "mode": "100644"
+    },
+    {
+      "path": "service/.clang-format",
+      "kind": "blob",
+      "oid": "617f368a9ad1a0114aea6daf51f4032a05953d70",
+      "mode": "100644"
+    },
+    {
+      "path": "service/Android.bp",
+      "kind": "blob",
+      "oid": "297a68eb68a59085b5113ec49cac0a9fa3c6361e",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/stats/StatsCompanion.java",
+      "kind": "blob",
+      "oid": "d0954eabbe2b6128b58b9abffb51d5792ab05ad9",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/stats/StatsCompanionService.java",
+      "kind": "blob",
+      "oid": "31ed68cb2ec5db7245c4c6e7f5c234b7eb03bec0",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/stats/StatsManagerService.java",
+      "kind": "blob",
+      "oid": "be00a7d6fb29b213ecc1699840159ad457871398",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/.clang-format",
+      "kind": "blob",
+      "oid": "cead3a079435208b34ac054f2804129eb6471083",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/Android.bp",
+      "kind": "blob",
+      "oid": "f07834dd0a35a71c4af3f7debb26a37f8bea91d9",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/benchmark/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "9e754cd99eebb9f6b3c9c8152313244ad878915c",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/benchmark/data_structures_benchmark.cpp",
+      "kind": "blob",
+      "oid": "e3b5e95b238bd558239bec57f5eaafc5d6a94c6c",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/benchmark/db_benchmark.cpp",
+      "kind": "blob",
+      "oid": "b9b16949a70e1c6eab6477805289b159c731923e",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/benchmark/duration_metric_benchmark.cpp",
+      "kind": "blob",
+      "oid": "a87b5eed8d8b8a4d6c8f3e754fad6b514d0322b2",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/benchmark/filter_value_benchmark.cpp",
+      "kind": "blob",
+      "oid": "064207067b4f6d89c09b8dc04e815ab0d763e505",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/benchmark/get_dimensions_for_condition_benchmark.cpp",
+      "kind": "blob",
+      "oid": "99570667a7920e9692c36151be244da5e5922e75",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/benchmark/hello_world_benchmark.cpp",
+      "kind": "blob",
+      "oid": "c732d394bf646cdb23eaa62024e5fd560aac0d1d",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/benchmark/log_event_benchmark.cpp",
+      "kind": "blob",
+      "oid": "d463e74c06e3046369e8f95cd7338e5a0992611e",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/benchmark/loss_info_container_benchmark.cpp",
+      "kind": "blob",
+      "oid": "27bfc95d7ac6621f8fe4ffec590bdc3a8e47f646",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/benchmark/main.cpp",
+      "kind": "blob",
+      "oid": "08921f3c3f52d01dbd8c4890ea901ffcc1d4cdb9",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/benchmark/on_log_event_benchmark.cpp",
+      "kind": "blob",
+      "oid": "7c6222e464c286ed8adb7c00624ed1ee86f35274",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/benchmark/state_manager_benchmark.cpp",
+      "kind": "blob",
+      "oid": "425959cfec2183ca7b1de64895f5066f09a438c7",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/benchmark/stats_write_benchmark.cpp",
+      "kind": "blob",
+      "oid": "b84b0cdec91076771f80ec9ff299ee701cd990ba",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/benchmark/string_transform_benchmark.cpp",
+      "kind": "blob",
+      "oid": "0c5f5c621de47f28576266fab6f71048e02d8baa",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/benchmark/tex_metric_benchmark.cpp",
+      "kind": "blob",
+      "oid": "101521a6c42354be68a691eaa21f57b619df3962",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/benchmark/utils.cpp",
+      "kind": "blob",
+      "oid": "707991954ba17b7da973559ba299873262e458f3",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/benchmark/utils.h",
+      "kind": "blob",
+      "oid": "399da81518f683ab1246e3ee837c66af4d94bc4a",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/benchmark/value_metric_benchmark.cpp",
+      "kind": "blob",
+      "oid": "ca52720cbc54497a76f932783c0e90ceba56766f",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/corpus/seed-2024-08-29-0",
+      "kind": "blob",
+      "oid": "773599862e739c6b6ae6c81e6ae6d70cd1da59f5",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/corpus/seed-2024-08-29-1",
+      "kind": "blob",
+      "oid": "32e0a610cbbfb52e619a8b1aa77e4d1a6b2a674d",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/corpus/seed-2024-08-29-10",
+      "kind": "blob",
+      "oid": "61e2255d3fe52be4df4a8e2589cc5ee1f60a9ee8",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/corpus/seed-2024-08-29-2",
+      "kind": "blob",
+      "oid": "5125a9ba5bf83d3e9516b6267fbb943cbb14577e",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/corpus/seed-2024-08-29-3",
+      "kind": "blob",
+      "oid": "2ed88679e8eceae7ca81d55e5ffc285f4ebdf481",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/corpus/seed-2024-08-29-4",
+      "kind": "blob",
+      "oid": "4bb7daaf8d6a1d1fc3e873d6a1c406e43c3c4043",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/corpus/seed-2024-08-29-5",
+      "kind": "blob",
+      "oid": "ed7b4f2d97205f96feb1f2848e1579040a296d11",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/corpus/seed-2024-08-29-6",
+      "kind": "blob",
+      "oid": "f71bccb1488e561e11cbff46b6942af3a5db7e1f",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/corpus/seed-2024-08-29-7",
+      "kind": "blob",
+      "oid": "1e2a0b9bfb18c64a494a8ae3cd73fb7a0a21cbcd",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/corpus/seed-2024-08-29-8",
+      "kind": "blob",
+      "oid": "33bea46bbb7ce8d86983cc731a80e04b43851aee",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/corpus/seed-2024-08-29-9",
+      "kind": "blob",
+      "oid": "d90658815b0f56cabed403fdb2320ec639ce6fe2",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/fuzzers/statsd_service_fuzzer.cpp",
+      "kind": "blob",
+      "oid": "90cbd69e0f49922c6912848991d641aee5951d94",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/fuzzers/statsd_socket_data_fuzzer.cpp",
+      "kind": "blob",
+      "oid": "96ad21135708ef25afa814644750563aa23e11c4",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/FieldValue.cpp",
+      "kind": "blob",
+      "oid": "a4877a031796b4157f10249134089f80b1034d81",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/FieldValue.h",
+      "kind": "blob",
+      "oid": "3c728ce392e115707f5ca010f7ed9ba006a525f4",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/HashableDimensionKey.cpp",
+      "kind": "blob",
+      "oid": "bdb2b4ffb4c2d1dd97d08b9be4418812056e4284",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/HashableDimensionKey.h",
+      "kind": "blob",
+      "oid": "d4b4ebafd2b529c89303aadb96f570f0ee5d7ffe",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/Log.h",
+      "kind": "blob",
+      "oid": "915252670397ed5813587141b49d25fe1ed43e9f",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/StatsLogProcessor.cpp",
+      "kind": "blob",
+      "oid": "2d430bf90748aa011623d0c628145b4989eabfbc",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/StatsLogProcessor.h",
+      "kind": "blob",
+      "oid": "ca657cd39639640eb811c71b81ec2ba7ff92cdc6",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/StatsService.cpp",
+      "kind": "blob",
+      "oid": "8b211c1f3ae48945056899bf19eaf20e3ded88f0",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/StatsService.h",
+      "kind": "blob",
+      "oid": "9deed29998c0aae577e78dfb43a216197abcaf0a",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/active_config_list.proto",
+      "kind": "blob",
+      "oid": "992983358ae6f69720212cb22d91c5636b878c0f",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/anomaly/AlarmMonitor.cpp",
+      "kind": "blob",
+      "oid": "a9d8b50e5734b33fa3299220e277fc6081782574",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/anomaly/AlarmMonitor.h",
+      "kind": "blob",
+      "oid": "7531924a4096ed39de6676203b8c052eff30e53c",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/anomaly/AlarmTracker.cpp",
+      "kind": "blob",
+      "oid": "57fc298814ffb2e76d1636428a1ae44b446ce737",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/anomaly/AlarmTracker.h",
+      "kind": "blob",
+      "oid": "3bbdcd032ab0f3428ed3a6e26347c9ed837da919",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/anomaly/AnomalyTracker.cpp",
+      "kind": "blob",
+      "oid": "f2d874d283ec41122691f685a52e289ce0b872a3",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/anomaly/AnomalyTracker.h",
+      "kind": "blob",
+      "oid": "5b06b3f6244c81895ce75745b41cb9f011ce08bb",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/anomaly/DurationAnomalyTracker.cpp",
+      "kind": "blob",
+      "oid": "a5e695c017481b4d72c0e5c74adb6ca6a0156ab5",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/anomaly/DurationAnomalyTracker.h",
+      "kind": "blob",
+      "oid": "d26062a4ed16c8cbbe8d9801fa18e74f03dc398e",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/anomaly/indexed_priority_queue.h",
+      "kind": "blob",
+      "oid": "99882d0337b199e377e3fae08c855dbac9b91e06",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/anomaly/subscriber_util.cpp",
+      "kind": "blob",
+      "oid": "1be5b40beeef1ddfd0e6522c44a29a32dcb949cf",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/anomaly/subscriber_util.h",
+      "kind": "blob",
+      "oid": "17620a1a4ccc774b70a92809ca53189c278cbe49",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/condition/CombinationConditionTracker.cpp",
+      "kind": "blob",
+      "oid": "bc340a00868acd13c5407fb703e84a6eac4cbca8",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/condition/CombinationConditionTracker.h",
+      "kind": "blob",
+      "oid": "888b443ed9f98a33e8b27d31efdd8e3bdb0ef4d0",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/condition/ConditionTimer.h",
+      "kind": "blob",
+      "oid": "565415de63265c7dea4786e11e1a72acfa942135",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/condition/ConditionTracker.h",
+      "kind": "blob",
+      "oid": "a1d35f945f02c551ec5f09137b1e63bfbb671743",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/condition/ConditionWizard.cpp",
+      "kind": "blob",
+      "oid": "181cfaa3fcf8f6e43792b44398cd47dce41cb02c",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/condition/ConditionWizard.h",
+      "kind": "blob",
+      "oid": "ffea098703fd4ccfd910d39022874c58b9f9b28e",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/condition/SimpleConditionTracker.cpp",
+      "kind": "blob",
+      "oid": "50da2b243c0d9f9ab29c031d2cc83570b0175d9e",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/condition/SimpleConditionTracker.h",
+      "kind": "blob",
+      "oid": "693b4fa37ddaefbaf67c0ea3eeb9460e0c2a31bd",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/condition/condition_util.cpp",
+      "kind": "blob",
+      "oid": "0c8e8f2b2f1b13e32f75988f70b9557548a7d8f6",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/condition/condition_util.h",
+      "kind": "blob",
+      "oid": "7db929d596b8491c42bd410c512196a883ba03b7",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/config/ConfigKey.cpp",
+      "kind": "blob",
+      "oid": "ada6814397e2d0d5b0a4c3fde4f2ccfd3ed8bf72",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/config/ConfigKey.h",
+      "kind": "blob",
+      "oid": "1b7ff881e448fbb07ed2b703f6645fb11dfe325d",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/config/ConfigKeyWithPackage.h",
+      "kind": "blob",
+      "oid": "9cf507b741012dfb772585160a98fe43e6879903",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/config/ConfigListener.cpp",
+      "kind": "blob",
+      "oid": "f0406fced74687b7a92154dce3f038070d6a5bde",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/config/ConfigListener.h",
+      "kind": "blob",
+      "oid": "fbebf829967e5a217be2063d0691244231e8a34d",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/config/ConfigManager.cpp",
+      "kind": "blob",
+      "oid": "b64850867ee81de60076bf4085c13a30bef939b5",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/config/ConfigManager.h",
+      "kind": "blob",
+      "oid": "ae8e10905bb2ad864fa9f4ed1c37a1d60722a581",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/config/ConfigMetadataProvider.h",
+      "kind": "blob",
+      "oid": "f1b24cb3da2aae15c2f61e18486fe57d175e2ab0",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/experiment_ids.proto",
+      "kind": "blob",
+      "oid": "c2036314cf587ba7a3b9e7b7eb30dfe00df5cae7",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/external/Perfetto.cpp",
+      "kind": "blob",
+      "oid": "d87c1fdb085916ad5279a61897d46690d913257a",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/external/Perfetto.h",
+      "kind": "blob",
+      "oid": "bcd699bd7fabbd1eb28c33f6ca2271efaa0778bc",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/external/PullDataReceiver.h",
+      "kind": "blob",
+      "oid": "47e1377347a7c8e323575767f401955d73669f9a",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/external/PullResultReceiver.cpp",
+      "kind": "blob",
+      "oid": "94f61a361b97701a26bef601547769fd228d7872",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/external/PullResultReceiver.h",
+      "kind": "blob",
+      "oid": "1721b8434073688cf3286f02cc7507cf72a18306",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/external/PullUidProvider.h",
+      "kind": "blob",
+      "oid": "741b76bb44e394039bc9d315fe15aa224b6948e8",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/external/StatsCallbackPuller.cpp",
+      "kind": "blob",
+      "oid": "c8b33ca094e4502b80264d4f417172f6b36c1c71",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/external/StatsCallbackPuller.h",
+      "kind": "blob",
+      "oid": "74564b649285a12d31e2972a5be59cf0e3db13eb",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/external/StatsPuller.cpp",
+      "kind": "blob",
+      "oid": "b9d3e27213b9061b6fbd3f9b214113d5ad74d07d",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/external/StatsPuller.h",
+      "kind": "blob",
+      "oid": "b191ee92e2592f5324daec74bd2f5c1ab83d7fb3",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/external/StatsPullerManager.cpp",
+      "kind": "blob",
+      "oid": "f60c0c52a05946a3a55ac1d6c7a09887f94fe5a5",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/external/StatsPullerManager.h",
+      "kind": "blob",
+      "oid": "c1eb2005e07c28ddfef01f7dcb984d88016ae6cd",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/external/ThreadSafeQueue.h",
+      "kind": "blob",
+      "oid": "f2e81c5f6733af39cc1d7d120e7f34fbe2c203a6",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/external/TrainInfoPuller.cpp",
+      "kind": "blob",
+      "oid": "512591ac9f65fd3cd1ee562f6c4c9bdb0a15d815",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/external/TrainInfoPuller.h",
+      "kind": "blob",
+      "oid": "95971f2114140523637e156759aaa23510bed39b",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/external/Uprobestats.cpp",
+      "kind": "blob",
+      "oid": "4f7e0e03941b2d0b2126909a4e2c163d86cb06dd",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/external/Uprobestats.h",
+      "kind": "blob",
+      "oid": "e045e8ff38ff8b52a8a9fb2af55b78c441f262ad",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/external/puller_util.cpp",
+      "kind": "blob",
+      "oid": "0a4db4257344003b02d6509f09fe871b99102633",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/external/puller_util.h",
+      "kind": "blob",
+      "oid": "7c3ec41097b53c247a40a220c5d4e0f1432f2d68",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/flags/FlagProvider.cpp",
+      "kind": "blob",
+      "oid": "81fee35d85cb0f863d588cb485bcb15bd6ddaaef",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/flags/FlagProvider.h",
+      "kind": "blob",
+      "oid": "75abcc2b7d189259927c226cd229da36c1d0003a",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/guardrail/LoggingRate.cpp",
+      "kind": "blob",
+      "oid": "8d205e65c61acbbb0d5baecdbffdc50975a6d274",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/guardrail/LoggingRate.h",
+      "kind": "blob",
+      "oid": "7c582849cffbe04262cbc94d80117a34dc398406",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/guardrail/StatsdStats.cpp",
+      "kind": "blob",
+      "oid": "798725d9c04166ec76dae4348d81c68be3d310a8",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/guardrail/StatsdStats.h",
+      "kind": "blob",
+      "oid": "b54642c71622591843b867aeb3fa15dea7f12860",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/guardrail/stats_log_enums.proto",
+      "kind": "blob",
+      "oid": "18a65687148d64446345b36757e498cfc80a6ba7",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/hash.cpp",
+      "kind": "blob",
+      "oid": "543a748adedb59c97eccbb104cfd76d5f02ef7dc",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/hash.h",
+      "kind": "blob",
+      "oid": "bd6b0cd47eaf094b72580a8911450231c12c7130",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/logd/LogEvent.cpp",
+      "kind": "blob",
+      "oid": "0a9d3f89e92e0672ef470552cea9502947fcdd09",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/logd/LogEvent.h",
+      "kind": "blob",
+      "oid": "5df8dfb939cba5af5a820528be88aefc3ad019d5",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/logd/LogEventQueue.cpp",
+      "kind": "blob",
+      "oid": "75a5e2ebccc89251aba1f8be9e59d417f0d77f3c",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/logd/LogEventQueue.h",
+      "kind": "blob",
+      "oid": "996dd702cd70160ca278b0e540439e767e11dccf",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/logd/logevent_util.cpp",
+      "kind": "blob",
+      "oid": "96c4788f329ce841561cf9485666cf300a2e5435",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/logd/logevent_util.h",
+      "kind": "blob",
+      "oid": "d03e071edf29e468add15940b2ad26865c088001",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/main.cpp",
+      "kind": "blob",
+      "oid": "e966443578ccc5219c92eb9d58dcda466552e8d7",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/matchers/AtomMatchingTracker.h",
+      "kind": "blob",
+      "oid": "26109616c59a35a6ef79d112c1c7ea21bad8f050",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/matchers/CombinationAtomMatchingTracker.cpp",
+      "kind": "blob",
+      "oid": "ad4984806565420cb8bfa15765edf50c42697a9c",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/matchers/CombinationAtomMatchingTracker.h",
+      "kind": "blob",
+      "oid": "a2411b97c2c40d93ee924441be2ebdbf9ffb75c1",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/matchers/EventMatcherWizard.cpp",
+      "kind": "blob",
+      "oid": "602196aaf25c97138e655c6c012196db86a19db8",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/matchers/EventMatcherWizard.h",
+      "kind": "blob",
+      "oid": "b2ef311d1627902eff26e30a7ed15206fe8e8c87",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/matchers/SimpleAtomMatchingTracker.cpp",
+      "kind": "blob",
+      "oid": "1edfb93a11a0b90b50cc534a6ef5de9a4734bd49",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/matchers/SimpleAtomMatchingTracker.h",
+      "kind": "blob",
+      "oid": "ace635545be7afd5ee1685b83519c89a6ebe0306",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/matchers/matcher_util.cpp",
+      "kind": "blob",
+      "oid": "0881e1c08ca0ebdf4cbed6a193df42ae215e6fb7",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/matchers/matcher_util.h",
+      "kind": "blob",
+      "oid": "5fb7c426497071d9032f501a9779770b776edea4",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metadata_util.cpp",
+      "kind": "blob",
+      "oid": "0075a58242650e7290b862de23f2e7d04cb9f461",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metadata_util.h",
+      "kind": "blob",
+      "oid": "cb925e44ea922414da5a3c1afebf3c97006f57de",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/CountMetricProducer.cpp",
+      "kind": "blob",
+      "oid": "6d2dbcadac4e7fd5917cb6d3451a165c0f0914b7",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/CountMetricProducer.h",
+      "kind": "blob",
+      "oid": "3d0a93fbb42def950cfa0af52e83a3590493f118",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/DurationMetricProducer.cpp",
+      "kind": "blob",
+      "oid": "029847c8180123b6c0a76b309defc5754905a3b7",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/DurationMetricProducer.h",
+      "kind": "blob",
+      "oid": "0e19bb09a94bfdb855ed5c90168073f37cca6bc2",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/EventMetricProducer.cpp",
+      "kind": "blob",
+      "oid": "d9022de99f33e403697c8d3c50a16230f6a48467",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/EventMetricProducer.h",
+      "kind": "blob",
+      "oid": "06bf3dfa5293e8a8e54e835c55649a397f5ef419",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/GaugeMetricProducer.cpp",
+      "kind": "blob",
+      "oid": "d2705fa15be96f1d05c7b62b0f3ed3963b18913d",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/GaugeMetricProducer.h",
+      "kind": "blob",
+      "oid": "7a02670fba0a5a3c5ade4e104eec5a728f6efbf0",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/HistogramValue.cpp",
+      "kind": "blob",
+      "oid": "93d9b61b2f7f7c0c934d05f07d7924d9369472bf",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/HistogramValue.h",
+      "kind": "blob",
+      "oid": "914ecbee7bdfa95fe7363bb4fabc36bd410cb921",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/KllMetricProducer.cpp",
+      "kind": "blob",
+      "oid": "5815b5bccf42c6f175a0ade1d34986b435a8a1ef",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/KllMetricProducer.h",
+      "kind": "blob",
+      "oid": "d82167bff0bf4d3771ecee0bd88124bc9bc24d4e",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/MetricProducer.cpp",
+      "kind": "blob",
+      "oid": "f18b26c0e3eb2bf26f6a8cb977035fd9251d28fa",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/MetricProducer.h",
+      "kind": "blob",
+      "oid": "d9b924d0b89c8bd779f80a8db52fbfab7a598d26",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/MetricsManager.cpp",
+      "kind": "blob",
+      "oid": "682a2bf16af0f3e037a86098f2375d70df39251d",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/MetricsManager.h",
+      "kind": "blob",
+      "oid": "273151f128ff579c73126ba980d905576f333958",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/NumericValue.cpp",
+      "kind": "blob",
+      "oid": "58d987d38db3d66255cfeae00cc3366d2ecb38cb",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/NumericValue.h",
+      "kind": "blob",
+      "oid": "69b5a2f059b122e1f468b805b8162e5e98fdc175",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/NumericValueMetricProducer.cpp",
+      "kind": "blob",
+      "oid": "35ee1131111cd065bdc40b1ddebfac22600fae85",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/NumericValueMetricProducer.h",
+      "kind": "blob",
+      "oid": "2f368392bdd8cbd1164c89d006aa9d8994970c01",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/RestrictedEventMetricProducer.cpp",
+      "kind": "blob",
+      "oid": "0a30200f4eb00552b6acd0aa358581e6ef8ea14d",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/RestrictedEventMetricProducer.h",
+      "kind": "blob",
+      "oid": "c7581353146a0da662857aa2b006c7e226331f8d",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/ValueMetricProducer.cpp",
+      "kind": "blob",
+      "oid": "a5b20f4c14b974add0c7ab89a25ab7a9a5413646",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/ValueMetricProducer.h",
+      "kind": "blob",
+      "oid": "80a5a7f739c03ef0f195cde28720e4799de62a58",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/duration_helper/DurationTracker.h",
+      "kind": "blob",
+      "oid": "b5adc4ebbe370209417080b89b8d142a662494a1",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/duration_helper/MaxDurationTracker.cpp",
+      "kind": "blob",
+      "oid": "f261c276a0b5f3de7054f8fb7b1f293afd3656c0",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/duration_helper/MaxDurationTracker.h",
+      "kind": "blob",
+      "oid": "4c839abb5b029e61455525c8855980fce37fc483",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/duration_helper/OringDurationTracker.cpp",
+      "kind": "blob",
+      "oid": "e47e1785954edf22ebe20f78b2e73216f60fadf5",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/duration_helper/OringDurationTracker.h",
+      "kind": "blob",
+      "oid": "a0449b1ac55d216373facfadefaa68110503ac4b",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/parsing_utils/config_update_utils.cpp",
+      "kind": "blob",
+      "oid": "95bab8729498cc689d171cdc92f8eef4d03ee1bf",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/parsing_utils/config_update_utils.h",
+      "kind": "blob",
+      "oid": "d776c015b94fbd069ef25df431cff794c2664c11",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/parsing_utils/histogram_parsing_utils.cpp",
+      "kind": "blob",
+      "oid": "77a939910855aafe763e7936bf226b62dfdaa478",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/parsing_utils/histogram_parsing_utils.h",
+      "kind": "blob",
+      "oid": "5feb9d33d514c9b895f2da867ba791b7f66a4d16",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/parsing_utils/metrics_manager_util.cpp",
+      "kind": "blob",
+      "oid": "6d73fb4059c9640f90cfdf7297a44ad8424822ec",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/metrics/parsing_utils/metrics_manager_util.h",
+      "kind": "blob",
+      "oid": "2327f1914fc6538566de6bff9d0e4285f5218186",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/packages/LogSourceHandler.cpp",
+      "kind": "blob",
+      "oid": "94a23bbdb6a48f756e016434be96449a05151506",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/packages/LogSourceHandler.h",
+      "kind": "blob",
+      "oid": "7868dfcc0cac561a5b59f14ef09b8fa1b573fbf3",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/packages/PackageInfoListener.h",
+      "kind": "blob",
+      "oid": "d796774c953936f8653bd527e901c02306d0a210",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/packages/UidMap.cpp",
+      "kind": "blob",
+      "oid": "4f2a7c88dce08ddb603932b00001156cbcd7ea4a",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/packages/UidMap.h",
+      "kind": "blob",
+      "oid": "1ec6bb2a9c5250e7bcec5b31681b707f1f305da4",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/shell/ShellSubscriber.cpp",
+      "kind": "blob",
+      "oid": "7e6e27be2074c3e562f4c5811994d5c8037114d9",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/shell/ShellSubscriber.h",
+      "kind": "blob",
+      "oid": "90260b78b31bd410ed0d9cdd96baef543bced664",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/shell/ShellSubscriberClient.cpp",
+      "kind": "blob",
+      "oid": "5983c9d68ae95c2e6ce3faf055b0e219a79d81cf",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/shell/ShellSubscriberClient.h",
+      "kind": "blob",
+      "oid": "08903301d8604875d370b9bcd7470f0df32ef981",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/shell/shell_config.proto",
+      "kind": "blob",
+      "oid": "fbe957321b86fa5d6833e442a78d966efac9e3a4",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/shell/shell_data.proto",
+      "kind": "blob",
+      "oid": "b483e834d1834ce91a41bc7e01050bdf36fbdca3",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/socket/AtomsInUseChangeListener.h",
+      "kind": "blob",
+      "oid": "bef0c0eb3ca0ff1bd1362f0f1e2cf4129f0cea89",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/socket/AtomsInUseListProducer.cpp",
+      "kind": "blob",
+      "oid": "4145ea2ae107233927f1daaf6f994117d903a432",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/socket/AtomsInUseListProducer.h",
+      "kind": "blob",
+      "oid": "294585d735f4d3df0ceeb5611e6048397add83c1",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/socket/BaseStatsSocketListener.cpp",
+      "kind": "blob",
+      "oid": "a4a8a693386932af6bde586a363ceecefc9772bb",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/socket/BaseStatsSocketListener.h",
+      "kind": "blob",
+      "oid": "bcf8df13112fd019eb2ac4e74c7b6b176a7ef845",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/socket/LogEventFilter.h",
+      "kind": "blob",
+      "oid": "747492555c05b27e502635557d285250d05a05de",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/socket/LogEventFilterUtils.h",
+      "kind": "blob",
+      "oid": "8734c34a4c45efdbfd352ea897de7669ecf47a45",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/socket/SocketLogEventControl.h",
+      "kind": "blob",
+      "oid": "d74aad33bc110e28ea678ff3f212e0145716d654",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/socket/StatsSocketListener.cpp",
+      "kind": "blob",
+      "oid": "007bb64065ea9c8b502accce6d96bf8960274ffb",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/socket/StatsSocketListener.h",
+      "kind": "blob",
+      "oid": "288d15ccbf0cf5e10a045df7a03b61aae427ee6b",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/socket/StatsSocketListenerIoUring.cpp",
+      "kind": "blob",
+      "oid": "e31b5de6b93d44c277d67ce9a1afe1617bb930d2",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/socket/StatsSocketListenerIoUring.h",
+      "kind": "blob",
+      "oid": "5ee0b7c1dda4c9ebbcab152fcc9b236306fdebe0",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/state/StateListener.h",
+      "kind": "blob",
+      "oid": "d47b8d50a63583383963ddfc15301fd96c02b7b3",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/state/StateManager.cpp",
+      "kind": "blob",
+      "oid": "ed57da7054a42d12531e05f5c85df62f738c0742",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/state/StateManager.h",
+      "kind": "blob",
+      "oid": "27076c60fc839415e040adf4c5c4f2324b3f9fd3",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/state/StateTracker.cpp",
+      "kind": "blob",
+      "oid": "1b9c802d9876acbb50665a207d0c601d201aee31",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/state/StateTracker.h",
+      "kind": "blob",
+      "oid": "053f31171b686d9bdc7de857eeed0532d4b3e6dd",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/stats_log.proto",
+      "kind": "blob",
+      "oid": "6b166fad7b918db32aeb797c99af44b75f737d95",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/stats_log_util.cpp",
+      "kind": "blob",
+      "oid": "95ed95f339b077db6db8097bb7ea483894365025",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/stats_log_util.h",
+      "kind": "blob",
+      "oid": "3a007ae74fb65893b2acb06f24e63f538469011f",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/stats_policy_config.proto",
+      "kind": "blob",
+      "oid": "c1ea446ffdf4963d66e1b02036685e380aa5eb0c",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/stats_util.h",
+      "kind": "blob",
+      "oid": "2be015376ab75941f3777a26d43657df7a3a43a5",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/statscompanion_util.cpp",
+      "kind": "blob",
+      "oid": "71ae3a97bc59c2d7b4ffced141724bc26f5bf087",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/statscompanion_util.h",
+      "kind": "blob",
+      "oid": "9236632811dd8744fe2907c26bf827c9579ff1bc",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/statsd_config.proto",
+      "kind": "blob",
+      "oid": "40e426ec281943de29dc20cc877245460cafa526",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/statsd_metadata.proto",
+      "kind": "blob",
+      "oid": "7d188948730c9e762100f504463a0a1dddd1fe8a",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/storage/StorageManager.cpp",
+      "kind": "blob",
+      "oid": "64297b5149c9f093097529caf79cc5a7dd99bbb6",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/storage/StorageManager.h",
+      "kind": "blob",
+      "oid": "221322b4198f01220e81b8cfa15447d6572279be",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/subscriber/IncidentdReporter.cpp",
+      "kind": "blob",
+      "oid": "4a40a9192343509276b8906a65247df904dcbd07",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/subscriber/IncidentdReporter.h",
+      "kind": "blob",
+      "oid": "03d79fae7fb71f6b0c16555f596c68be52a14fdd",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/subscriber/SubscriberReporter.cpp",
+      "kind": "blob",
+      "oid": "a5b9d58e853c10e29ef45ca01a6a4d3c26beefd3",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/subscriber/SubscriberReporter.h",
+      "kind": "blob",
+      "oid": "80dffeec5442fb8271565ef7dcbb2389979b6279",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/uid_data.proto",
+      "kind": "blob",
+      "oid": "e72d4340f6ba6e309832daea00ff891d95b5870f",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/utils/DbUtils.cpp",
+      "kind": "blob",
+      "oid": "6780b41b143ec5d24021f28772857cf38e5c8572",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/utils/DbUtils.h",
+      "kind": "blob",
+      "oid": "eac5df6f0969856dbf2abcccb3cdbc1c8b0efbe6",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/utils/MultiConditionTrigger.cpp",
+      "kind": "blob",
+      "oid": "f821c5df309f9c29b563a024f298ba8ab1ec4548",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/utils/MultiConditionTrigger.h",
+      "kind": "blob",
+      "oid": "e1591a0310c45b34635f45202b375b737867a527",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/utils/RateLimitedAsyncTrigger.cpp",
+      "kind": "blob",
+      "oid": "a145490229b0e235dfd9deebcfafcb6d99a72a69",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/utils/RateLimitedAsyncTrigger.h",
+      "kind": "blob",
+      "oid": "e1682e4c9cdd495fcb3c1e5f2a09c1a729f3d9cb",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/utils/Regex.cpp",
+      "kind": "blob",
+      "oid": "7c24dc83293a4982db919c009f63deb5da7f7815",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/utils/Regex.h",
+      "kind": "blob",
+      "oid": "f1931fac94abf52644baea8c81feba78a1babf5c",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/utils/RestrictedPolicyManager.cpp",
+      "kind": "blob",
+      "oid": "0c18a135bbc55b7dc68520c06c2f0cbd889db7b3",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/utils/RestrictedPolicyManager.h",
+      "kind": "blob",
+      "oid": "97956402de09b78360d6153627f6b2cf2fb60be0",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/utils/ShardOffsetProvider.cpp",
+      "kind": "blob",
+      "oid": "8894b4d46840ca78e1bf73132d5a82f2cd5e2487",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/utils/ShardOffsetProvider.h",
+      "kind": "blob",
+      "oid": "506e2306151204cd8fc61df872b746e5e1bb9072",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/src/utils/api_tracing.h",
+      "kind": "blob",
+      "oid": "5d00e716fb6ecf955c3d38bc70e9ebf2597e5517",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/statsd_test.xml",
+      "kind": "blob",
+      "oid": "8f9bb1cb6b2ab62c8d6dafc46cf31d83b8ad271b",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/statsd_test_default.map",
+      "kind": "blob",
+      "oid": "5157ea6eb131ae8a2e30878cf730d7f8fe1c4ef2",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/AlarmMonitor_test.cpp",
+      "kind": "blob",
+      "oid": "b6438390b2ce30dec17e239a0ba5b46e1d3c4042",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/AtomIdSetManager_test.cpp",
+      "kind": "blob",
+      "oid": "bd6735a2e55755d5f5fea399e223e736fb4fb495",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/ConfigManager_test.cpp",
+      "kind": "blob",
+      "oid": "e1c6d7d5a36b09998204b6205b811c9c1920a5ca",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/DataCorruptionReason_test.cpp",
+      "kind": "blob",
+      "oid": "60caea8a970197b9803ec98aa09055f8300a2dad",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/FieldValue_test.cpp",
+      "kind": "blob",
+      "oid": "26287b766f6fb1f277dd5ebcd875e6208c3f79fa",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/HashableDimensionKey_test.cpp",
+      "kind": "blob",
+      "oid": "ca32c7f84296cff642e515f5464b44b15bf57c85",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/LogEntryMatcher_test.cpp",
+      "kind": "blob",
+      "oid": "ff2244f950a721372289e0866006dd9e0bc2aa88",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/LogEventFilter_test.cpp",
+      "kind": "blob",
+      "oid": "0a7a4e70545298d1b0eee05d6fc7c9ea8d736d2f",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/LogEvent_test.cpp",
+      "kind": "blob",
+      "oid": "8e94ac3d73efad3b35bd6a855360545d90a81c5f",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/LogReader_test.cpp",
+      "kind": "blob",
+      "oid": "7ce1d6a71c8599bf0d7da57427db756da87812b7",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/MetricsManager_test.cpp",
+      "kind": "blob",
+      "oid": "6ec8c76dd9a05218a269261d93cf528db4a0ef45",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/StatsLogProcessor_test.cpp",
+      "kind": "blob",
+      "oid": "bea57ed49b84a2471f442e62430fadc9f5ffabe0",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/StatsService_test.cpp",
+      "kind": "blob",
+      "oid": "f399d290f532c34f1c0693d0278b1f11fbdaf77f",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/UidMap_test.cpp",
+      "kind": "blob",
+      "oid": "5294fd64a973bf06f047ea7a48b19401f3850aca",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/anomaly/AlarmTracker_test.cpp",
+      "kind": "blob",
+      "oid": "9a4863b2ec55eb70d25aaebd48aaf6afa165d2c5",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/anomaly/AnomalyTracker_test.cpp",
+      "kind": "blob",
+      "oid": "8edcd0338f970cb4643fa74744c8d4ae07a7076d",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/condition/CombinationConditionTracker_test.cpp",
+      "kind": "blob",
+      "oid": "492143b168ca24a829cc05d0ba3e78b87f8ec71a",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/condition/ConditionTimer_test.cpp",
+      "kind": "blob",
+      "oid": "51edf541cbd19636e7e9f26925877757e8d3286b",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/condition/SimpleConditionTracker_test.cpp",
+      "kind": "blob",
+      "oid": "be24f75dce2930fa36b9232798e0cf3f7e3d9cd1",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/e2e/Alarm_e2e_test.cpp",
+      "kind": "blob",
+      "oid": "1a1329d611f0e9a87d935eddd3ddbbf6935f5982",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/e2e/Anomaly_count_e2e_test.cpp",
+      "kind": "blob",
+      "oid": "c593b53a67d526004ae4dbbf107131c75986353c",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/e2e/Anomaly_duration_sum_e2e_test.cpp",
+      "kind": "blob",
+      "oid": "26dac910b06aae88e6523ade5851680253caf118",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/e2e/Attribution_e2e_test.cpp",
+      "kind": "blob",
+      "oid": "0d9cf36a3955a399eb14d9d54e153632ddddff01",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/e2e/ConfigTtl_e2e_test.cpp",
+      "kind": "blob",
+      "oid": "ce416012fc5dbe822d6187a126129b496dbc5a8d",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/e2e/ConfigUpdate_e2e_ab_test.cpp",
+      "kind": "blob",
+      "oid": "66bc794030c07d115b6e70e43803fb595ad9a403",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/e2e/ConfigUpdate_e2e_test.cpp",
+      "kind": "blob",
+      "oid": "22079fa6f2f7b8f36965db266f6dd4077d1398d6",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/e2e/CountMetric_e2e_test.cpp",
+      "kind": "blob",
+      "oid": "a7d4f120b4b099cb464fcac518c403838e02cef3",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/e2e/DurationMetric_e2e_test.cpp",
+      "kind": "blob",
+      "oid": "d77b53ff636558d4b531fbb234b2e2b181ae76d3",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/e2e/EventMetric_e2e_test.cpp",
+      "kind": "blob",
+      "oid": "6221cc8d5b2b09a8d11a18b0f1cecd572553c4ff",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/e2e/GaugeMetric_e2e_pull_test.cpp",
+      "kind": "blob",
+      "oid": "feb0d47f7b4ce478f82fbc977edad773b271f160",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/e2e/GaugeMetric_e2e_push_test.cpp",
+      "kind": "blob",
+      "oid": "97493f0eb5fb163a7355b88a81aa53bcb13e5390",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/e2e/KllMetric_e2e_test.cpp",
+      "kind": "blob",
+      "oid": "84d2c63a46b0e561a15a6fc8d6a12db9fd6868e1",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/e2e/MetricActivation_e2e_test.cpp",
+      "kind": "blob",
+      "oid": "3108b9d15819479a01ae097e7a1c9cfd81b9b9bf",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/e2e/MetricConditionLink_e2e_test.cpp",
+      "kind": "blob",
+      "oid": "8d89dea25d67247ba88210a96dc31b44f7111871",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/e2e/PartialBucket_e2e_test.cpp",
+      "kind": "blob",
+      "oid": "fbb475f7c325c79a8907c580044d51b4a27eebec",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/e2e/RestrictedConfig_e2e_test.cpp",
+      "kind": "blob",
+      "oid": "6d38e9ae1eaa009c9a1d2782cd951ba2b15ec94a",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/e2e/RestrictedEventMetric_e2e_test.cpp",
+      "kind": "blob",
+      "oid": "bbfc431e0fc3913fb89a1dd99e3b41984647b6f8",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/e2e/StringReplace_e2e_test.cpp",
+      "kind": "blob",
+      "oid": "8deb10399a4320652adb64b4c6433231f5548f65",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/e2e/ValueMetric_histogram_e2e_test.cpp",
+      "kind": "blob",
+      "oid": "7e89cf370fb1099ea59f440f9b6d4176bf7a7445",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/e2e/ValueMetric_pull_e2e_test.cpp",
+      "kind": "blob",
+      "oid": "3a5f61fabb5786874e10a55bf7b72080c9b8899f",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/e2e/WakelockDuration_e2e_test.cpp",
+      "kind": "blob",
+      "oid": "8543996d1f8f7def8c91daa5dbff276483ba5c42",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/external/StatsCallbackPuller_test.cpp",
+      "kind": "blob",
+      "oid": "5226510a143d14435384fc136d44dfec77b93491",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/external/StatsPullerManager_test.cpp",
+      "kind": "blob",
+      "oid": "c16277f026d16c51bdab3c5aa9ba80332c47a61f",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/external/StatsPuller_test.cpp",
+      "kind": "blob",
+      "oid": "ae241be2bcb0ff0c2600a14f9674ebdd9553fc3b",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/external/puller_util_test.cpp",
+      "kind": "blob",
+      "oid": "6914bf7686d9cc5fa4f4766aa5d0f51abb15052d",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/flags/FlagProvider_test.cpp",
+      "kind": "blob",
+      "oid": "bd790a3259905c106574bf6816a27768b88fe218",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/guardrail/StatsdStats_test.cpp",
+      "kind": "blob",
+      "oid": "da13f1dfe7aa721d811cc028584bcd9ad5343ce8",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/indexed_priority_queue_test.cpp",
+      "kind": "blob",
+      "oid": "1d365e8b435089e8c8b9567e70692e1cd161d9bc",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/log_event/LogEventQueue_test.cpp",
+      "kind": "blob",
+      "oid": "4db56fd249cf65bdffa314cc0f2bcf1b9a8960da",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/metadata_util_test.cpp",
+      "kind": "blob",
+      "oid": "7707890cbd0cc8844b51a71384df0c2c0ee6a62c",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/metrics/CountMetricProducer_test.cpp",
+      "kind": "blob",
+      "oid": "e84bc3338a26580aeece9421509004db74400aed",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/metrics/DurationMetricProducer_test.cpp",
+      "kind": "blob",
+      "oid": "e32804c0fbc4b34a9b7622abfecf4bc7aad4100f",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/metrics/EventMetricProducer_test.cpp",
+      "kind": "blob",
+      "oid": "cbfaf7bc9b79e01d7be7e18fe1ba4183397f3a8c",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/metrics/GaugeMetricProducer_test.cpp",
+      "kind": "blob",
+      "oid": "5a062c59997dba1df6787118722c08c808f014b0",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/metrics/HistogramValue_test.cpp",
+      "kind": "blob",
+      "oid": "017fdfa0278e70fefee972d8db9c1341ac8b128f",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/metrics/KllMetricProducer_test.cpp",
+      "kind": "blob",
+      "oid": "89e6c4b279c16172da205382feba2663ff26aa71",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/metrics/MaxDurationTracker_test.cpp",
+      "kind": "blob",
+      "oid": "5a69e27f84dd52d2442860f81803adb4c0b262e9",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/metrics/NumericValueMetricProducer_test.cpp",
+      "kind": "blob",
+      "oid": "bdda2a1ec65fcc8663c053ff97e74d6118bf97d7",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/metrics/OringDurationTracker_test.cpp",
+      "kind": "blob",
+      "oid": "fac13b8eb419c22b188b9ece52b0c70d7bf02b8d",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/metrics/RestrictedEventMetricProducer_test.cpp",
+      "kind": "blob",
+      "oid": "1dd0ec1fcdc7e106c1cc4fbedbf414c6d23dacb7",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/metrics/metrics_test_helper.cpp",
+      "kind": "blob",
+      "oid": "ee89487a6b79b27881c7f48c754ee334e16e3755",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/metrics/metrics_test_helper.h",
+      "kind": "blob",
+      "oid": "5af475ade83be5b308f5c39a9da59d9ea262ceb2",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/metrics/parsing_utils/config_update_utils_test.cpp",
+      "kind": "blob",
+      "oid": "c9c4ef96ea333c8476889c3a17219e97d63b061d",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/metrics/parsing_utils/histogram_parsing_utils_test.cpp",
+      "kind": "blob",
+      "oid": "ed5b9cc7e1a6d810658260a78401709d4a6ca3e1",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/metrics/parsing_utils/metrics_manager_util_test.cpp",
+      "kind": "blob",
+      "oid": "fe8e10783cd5d4103094dd3c071b9b06a91042a5",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/metrics/parsing_utils/parsing_test_utils.cpp",
+      "kind": "blob",
+      "oid": "bca5d310c1e063026ecf01d3ad451f9758fb263a",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/metrics/parsing_utils/parsing_test_utils.h",
+      "kind": "blob",
+      "oid": "865edd2888973433c84570155280504aa87a11ba",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/packages/LogSourceHandler_test.cpp",
+      "kind": "blob",
+      "oid": "8c3cc023b243d28167bcac94538fffaee9ba8d1e",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/shell/ShellSubscriber_test.cpp",
+      "kind": "blob",
+      "oid": "4830e5fca22f8884a2a9690b2a500da76559813b",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/socket/AtomsInUseListProducer_test.cpp",
+      "kind": "blob",
+      "oid": "fc4e66d12bb78aef8058320a57808d460b2aae5c",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/socket/SocketListener_test.cpp",
+      "kind": "blob",
+      "oid": "f235f73f1e19516b0265238c70e8fc3591f47459",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/socket/SocketLogEventControl_test.cpp",
+      "kind": "blob",
+      "oid": "dd1d98b70208fe362f9e785d76b0a95152162bb9",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/socket/socket_test_helpers.cpp",
+      "kind": "blob",
+      "oid": "0f0d56139a0b0dae0f5e2b599041b9c4e39606eb",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/socket/socket_test_helpers.h",
+      "kind": "blob",
+      "oid": "31d4c724b928f13004923f5ee67aacf11d07b664",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/state/StateTracker_test.cpp",
+      "kind": "blob",
+      "oid": "72e81237d7738363e83371dc62810514c224e4a6",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/statsd_test_util.cpp",
+      "kind": "blob",
+      "oid": "5303d1aae0cc16b2efca89af10198b9a6c7d21d2",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/statsd_test_util.h",
+      "kind": "blob",
+      "oid": "a94ed3956a1e4d8bbce7e142a4c24ad4b638e362",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/statsd_test_util_test.cpp",
+      "kind": "blob",
+      "oid": "941302063a95ab10f99910edb40fc0d728941563",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/storage/StorageManager_test.cpp",
+      "kind": "blob",
+      "oid": "c9c4436f35eeb88713fb16b16130a2d78e886206",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/subscriber/SubscriberReporter_test.cpp",
+      "kind": "blob",
+      "oid": "80cb1aec1f1228ec6d315920c5cedaa0a93567b3",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/utils/DbUtils_test.cpp",
+      "kind": "blob",
+      "oid": "5dbdaeabf0d1f0d54e4f7e09ed0a16ece3886741",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/utils/MultiConditionTrigger_test.cpp",
+      "kind": "blob",
+      "oid": "a20f5b4aaf8fb3b9fde69529fa52c20aca8b4a15",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tests/utils/RateLimitedAsyncTrigger_test.cpp",
+      "kind": "blob",
+      "oid": "8eb88c71d2a65f616aa05ebf0d466773a0ee0e33",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tools/localtools/Android.bp",
+      "kind": "blob",
+      "oid": "a7c03b78bb6d606e35fe0603df4db70027e65ec1",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tools/localtools/TEST_MAPPING",
+      "kind": "blob",
+      "oid": "866c77e629e66a22054f637376e45bc387eb02eb",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tools/localtools/localdrive_manifest.txt",
+      "kind": "blob",
+      "oid": "035cea1134bc5230329cda752de1010e7aef02cf",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tools/localtools/src/com/android/statsd/shelltools/ExtensionAtomsRegistry.java",
+      "kind": "blob",
+      "oid": "83860d343ade4216b8821602157e478a4939aca3",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tools/localtools/src/com/android/statsd/shelltools/Utils.java",
+      "kind": "blob",
+      "oid": "93293a81cf86a9ef78281ee250335fd658111bca",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tools/localtools/src/com/android/statsd/shelltools/localdrive/LocalDrive.java",
+      "kind": "blob",
+      "oid": "ec3c7df7bfba5a5383d523a21dca176f416e9ea4",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tools/localtools/src/com/android/statsd/shelltools/testdrive/TestDrive.java",
+      "kind": "blob",
+      "oid": "185cff1bf27c53bf969db32d3e83f2d1e66eead8",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tools/localtools/test/com/android/statsd/shelltools/testdrive/ConfigurationTest.java",
+      "kind": "blob",
+      "oid": "1dfc70d5311cd3ecc6971b1e073da5287ca1349a",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tools/localtools/test/com/android/statsd/shelltools/testdrive/TestDriveTest.java",
+      "kind": "blob",
+      "oid": "363fac0c78ba07ec621d07d272c1ef4a22b08830",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tools/localtools/test/data/atoms.proto",
+      "kind": "blob",
+      "oid": "78d04a5695c5d0652c6ed70c049a665252805bcc",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tools/localtools/test/data/atoms/external_atoms/external_test_atom.proto",
+      "kind": "blob",
+      "oid": "ae44b86be76cad94d82cdca526c53e05f7ea396b",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tools/localtools/test/data/enum.proto",
+      "kind": "blob",
+      "oid": "35c36a20616034f482f8de452957c304f9bb7f2c",
+      "mode": "100644"
+    },
+    {
+      "path": "statsd/tools/localtools/testdrive_manifest.txt",
+      "kind": "blob",
+      "oid": "625ebfa4312a364e95c1cea04a20a7c456a9ce5d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/.clang-format",
+      "kind": "blob",
+      "oid": "2b2c71ac319a359b8da3a5cb4745984311ce593f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/Android.bp",
+      "kind": "blob",
+      "oid": "5bfec265d22b19456403424c43c44c9d62f03cbf",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "5bc5e8335e2482d993d6d7ab5aac35bf0f79fc74",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/BATTERYSTATS_CONNECTIVITY_STATE_CHANGE_COUNT.pbtxt",
+      "kind": "blob",
+      "oid": "4bad614c08e848c1d556ff0462d7aa6ed3b0e4ab",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/BATTERYSTATS_SERVICE_LAUNCH_COUNT.pbtxt",
+      "kind": "blob",
+      "oid": "4f13941b986fb00b7045e511d8bb50df86596c24",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/BATTERYSTATS_SERVICE_START_COUNT.pbtxt",
+      "kind": "blob",
+      "oid": "87afb2dfb237be1d7e9f0e7ea6fe336cf4aed172",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/OWNERS",
+      "kind": "blob",
+      "oid": "6e97551f8ad6a9a56dbe00b8456ed03a2a7a78ae",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/PROCSTATSQ_PULL.pbtxt",
+      "kind": "blob",
+      "oid": "8444943db4f6e6a649f50c72afecba339cb1a8de",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/PROCSTATSQ_PULL_PKG_PROC.pbtxt",
+      "kind": "blob",
+      "oid": "1effda65d0b87d1e61819412e3be243513556503",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/atomstormapp/Android.bp",
+      "kind": "blob",
+      "oid": "d0342be72fc82a67c5c8927fbf3c32b12114014f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/atomstormapp/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "2993928fe2082a1c13f8034d7690e997981032e4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/atomstormapp/lint-baseline.xml",
+      "kind": "blob",
+      "oid": "9fc868f5dfcfb3fee8d87632ec337918fe9043df",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/atomstormapp/src/com/android/statsd/app/atomstorm/StatsdAtomStorm.java",
+      "kind": "blob",
+      "oid": "cf7471dd1a7025bcfe51ecd654d996b32a4e80fd",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/statsdapp/Android.bp",
+      "kind": "blob",
+      "oid": "234a77dc2d5740f1d472da7a8866c435c7204cae",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/statsdapp/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "8ed9a9300b3eb467a24603a2582e79d776542832",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/statsdapp/jni/alloc_stress_activity.cpp",
+      "kind": "blob",
+      "oid": "b98a04bce01ed88d1e39b4aaef8a4547edae56af",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/statsdapp/res/layout/activity_davey.xml",
+      "kind": "blob",
+      "oid": "bf43931f6edec6253638dbe1daf19d3cd97f6b54",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/statsdapp/res/layout/activity_main.xml",
+      "kind": "blob",
+      "oid": "a029c8089adbe947f4070bacfa80848bb0061bf2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/statsdapp/res/raw/colors_video.mp4",
+      "kind": "blob",
+      "oid": "0bec6704bd8cdb1d8d508fb7e460702c8bbd9dc3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/statsdapp/res/raw/good.mp3",
+      "kind": "blob",
+      "oid": "d20f77213346ec0ef04df89b2cb04579124f4454",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/statsdapp/res/values/attrs.xml",
+      "kind": "blob",
+      "oid": "e769146953b1b10c718ca750b806d0758668713e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/statsdapp/res/values/strings.xml",
+      "kind": "blob",
+      "oid": "e40d2acfdd87b38ac5f3b0ae5dc3245e40e0828b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/statsdapp/res/xml/authenticator.xml",
+      "kind": "blob",
+      "oid": "71c73d782e0bb600f7f40bb661ad53c670174a76",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/statsdapp/res/xml/syncadapter.xml",
+      "kind": "blob",
+      "oid": "d8cb52e4f8c704a307e9a80644326700ad482337",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/statsdapp/src/com/android/server/cts/device/statsd/ANRActivity.java",
+      "kind": "blob",
+      "oid": "78b2d2d5673c95708a936fa9a07d0a2bff4b128b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/statsdapp/src/com/android/server/cts/device/statsd/AtomTests.java",
+      "kind": "blob",
+      "oid": "5f6794aa6a677babeb4f49b138668835897abf6b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/statsdapp/src/com/android/server/cts/device/statsd/Checkers.java",
+      "kind": "blob",
+      "oid": "3728cef85d930a78ea350475d47e23c16be91f00",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/statsdapp/src/com/android/server/cts/device/statsd/DaveyActivity.java",
+      "kind": "blob",
+      "oid": "e2ec7f794bc467337dbcd123c0bd1fb83b4e0b44",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/statsdapp/src/com/android/server/cts/device/statsd/DaveyView.java",
+      "kind": "blob",
+      "oid": "bf1cd35d30bcb57b8a2c1d8fbe23f87cba5bd8e4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/statsdapp/src/com/android/server/cts/device/statsd/DirectoryTests.java",
+      "kind": "blob",
+      "oid": "7e972b00937ca2bc1fdd631a7668ff6ce45cbf08",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/statsdapp/src/com/android/server/cts/device/statsd/DummyCallscreeningService.java",
+      "kind": "blob",
+      "oid": "3e5234291909ce008fd51205c2f2c57c0b1525f1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/statsdapp/src/com/android/server/cts/device/statsd/RestrictedPermissionTests.java",
+      "kind": "blob",
+      "oid": "7896e5b55e95e1320b5dc2a8fe4259bffac31275",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/statsdapp/src/com/android/server/cts/device/statsd/StatsFrameworkInitializerTests.java",
+      "kind": "blob",
+      "oid": "317e8ac81c051ecf175b3192350ce9d25c989043",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/statsdapp/src/com/android/server/cts/device/statsd/StatsdAuthenticator.java",
+      "kind": "blob",
+      "oid": "85acd07dd94c3cb73d86a0b1a09c0b896861fdda",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/statsdapp/src/com/android/server/cts/device/statsd/StatsdCtsBackgroundService.java",
+      "kind": "blob",
+      "oid": "ad018f97692307049bc3c65ac1c55d14582942a1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/statsdapp/src/com/android/server/cts/device/statsd/StatsdCtsForegroundActivity.java",
+      "kind": "blob",
+      "oid": "1f14c3ad71c4889689fdfae518d8a718af4543fe",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/statsdapp/src/com/android/server/cts/device/statsd/StatsdCtsForegroundService.java",
+      "kind": "blob",
+      "oid": "ab46f5fdab6b68005a275ca59ae7134bd8cefad2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/statsdapp/src/com/android/server/cts/device/statsd/StatsdJobService.java",
+      "kind": "blob",
+      "oid": "d81040f4bad673559a8d563753761375e0b062e4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/statsdapp/src/com/android/server/cts/device/statsd/StatsdProvider.java",
+      "kind": "blob",
+      "oid": "bd652b20926192cd6e737e8c6c16232ba11de48b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/statsdapp/src/com/android/server/cts/device/statsd/StatsdStressLogging.java",
+      "kind": "blob",
+      "oid": "70f787e36b865eee6a8017cf402d19c14df582c1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/statsdapp/src/com/android/server/cts/device/statsd/StatsdSyncAdapter.java",
+      "kind": "blob",
+      "oid": "6968307374e487f0d3a3cf026c654124157f6c53",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/statsdapp/src/com/android/server/cts/device/statsd/StatsdSyncService.java",
+      "kind": "blob",
+      "oid": "ab06c6f3c96f7d5904f95ef84858b197ebe3e910",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/statsdapp/src/com/android/server/cts/device/statsd/VideoPlayerActivity.java",
+      "kind": "blob",
+      "oid": "ea1fcec564b3f86df05ec6a517edda0c3b0666a7",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/apps/statsdapp/src/com/android/server/cts/device/statsd/WakelockLoadTestRunnable.java",
+      "kind": "blob",
+      "oid": "1a3d32a69fe258102578feb0b85ebaf0f21bd24c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/jarjar-rules.txt",
+      "kind": "blob",
+      "oid": "00a7bfdd1af10586c1dc4b38b86b2814fbc5da86",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/android/cts/statsd/alarm/AlarmTests.java",
+      "kind": "blob",
+      "oid": "0f49e9a2e3fcb3006650bfcc598641c73d2659e9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/android/cts/statsd/alert/AnomalyDetectionTests.java",
+      "kind": "blob",
+      "oid": "f71e7358e6b26b422a905c1419dd9e3f54d9770f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/android/cts/statsd/apex/BootstrapApexTests.java",
+      "kind": "blob",
+      "oid": "53e4466f3edd3d414121ed653d57f1fcdbc9be59",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/android/cts/statsd/atom/AtomParsingTests.java",
+      "kind": "blob",
+      "oid": "d8a250113d6832a8eca341b3d3308d0b9dbdb78c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/android/cts/statsd/atom/BufferDebug.java",
+      "kind": "blob",
+      "oid": "2b35052cc9c99252c91a680c3a2a3788631dd1eb",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/android/cts/statsd/atom/ProcStateTestCase.java",
+      "kind": "blob",
+      "oid": "09c508bddcdcb1060140ef544c53ad22d141ec91",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/android/cts/statsd/metadata/MetadataTestCase.java",
+      "kind": "blob",
+      "oid": "ea64d32e65ff68b83db1ccb52e4bb3c076646e33",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/android/cts/statsd/metadata/MetadataTests.java",
+      "kind": "blob",
+      "oid": "331c547629ac76b7963659957f6b6d9f0fe4d57d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/android/cts/statsd/metric/CountMetricsTests.java",
+      "kind": "blob",
+      "oid": "8e9b5a3f2f40575ef63ec5f5b80804e19e7c01c2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/android/cts/statsd/metric/DurationMetricsTests.java",
+      "kind": "blob",
+      "oid": "89c9bbce3c21038123b473bd07ec4f3806ff35eb",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/android/cts/statsd/metric/GaugeMetricsTests.java",
+      "kind": "blob",
+      "oid": "63c2fb2c2fab2d6288c65a988662f07f10ef8562",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/android/cts/statsd/metric/MetricActivationTests.java",
+      "kind": "blob",
+      "oid": "b8e74887ce45938819e4fa8a50d574c890c6378a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/android/cts/statsd/metric/MetricsUtils.java",
+      "kind": "blob",
+      "oid": "010df49f860a5702a11fbb240ac6d97fb1bd49f6",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/android/cts/statsd/metric/ValueMetricsTests.java",
+      "kind": "blob",
+      "oid": "4ac1d5e362fea19cd361f317337f1677365fb151",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/android/cts/statsd/restricted/ReadRestrictedStatsPermissionTest.java",
+      "kind": "blob",
+      "oid": "8e563b935d98c2e58c646f9a559a5f65f02ef007",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/android/cts/statsd/subscriber/ShellSubscriberTest.java",
+      "kind": "blob",
+      "oid": "b17373aff88749ed8c2d7b8201392cc2d88d514f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/android/cts/statsd/uidmap/UidMapTests.java",
+      "kind": "blob",
+      "oid": "595a987b4497187ef502281cb18125644c54d577",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/android/cts/statsd/validation/DirectoryValidationTest.java",
+      "kind": "blob",
+      "oid": "7acaff11ee82b462e2be4f5fb6a0dd226678f6ba",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/android/cts/statsd/validation/ProcStatsValidationTests.java",
+      "kind": "blob",
+      "oid": "6b61497dd87fbf25f999130d22a901c6848c6da9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/android/cts/statsd/validation/StatsFrameworkInitializerTest.java",
+      "kind": "blob",
+      "oid": "2a67748e692f758b9561a6f298cc870a820caf86",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/android/cts/statsd/validation/ValidationTestUtil.java",
+      "kind": "blob",
+      "oid": "cb3a41eb2466c919fca5abbdb9532493d10a8eaa",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/src/android/cts/statsd/validation/ValidationTests.java",
+      "kind": "blob",
+      "oid": "4611b28fdb02b7d7756d729c55be319914238c4b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/utils/Android.bp",
+      "kind": "blob",
+      "oid": "12ef69716483330071c953bd59bc074a539a8bbc",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/utils/src/android/util/AtomPayloadParser.java",
+      "kind": "blob",
+      "oid": "b6cce0a06015d1efbc82d1230943fd32c84db4d8",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/utils/src/android/util/StatsEventTestUtils.java",
+      "kind": "blob",
+      "oid": "32a3adfed49d2cb57257e176b96762789ac5965a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/utils/tests/Android.bp",
+      "kind": "blob",
+      "oid": "58063ff4d373680ae1ed1cfb9cbd20b044b2f2d1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/utils/tests/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "219a0080929ed4553a1d09f31245b10061283e7f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/utils/tests/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "0438508106d9d35cfc4c55ee3694977f0c280961",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/utils/tests/src/android/util/StatsEventTestUtilsTest.java",
+      "kind": "blob",
+      "oid": "eaeda1b3b9d9e5ad7323962f6a132801ebe4a316",
+      "mode": "100644"
+    }
+  ]
+}

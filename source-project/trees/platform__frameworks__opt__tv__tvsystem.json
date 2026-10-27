@@ -1,0 +1,1027 @@
+{
+  "repo": "platform/frameworks/opt/tv/tvsystem",
+  "requested_revision": "refs/tags/android-17.0.0_r1",
+  "revision": "cedcb3021237950b50a40b14ea4bfd2816c46508",
+  "entries": [
+    {
+      "path": "Android.bp",
+      "kind": "blob",
+      "oid": "7b5c0e8b7c781a46a44d1d2351b49d6755371498",
+      "mode": "100644"
+    },
+    {
+      "path": "OWNERS",
+      "kind": "blob",
+      "oid": "2fa350c76cb8bd3186db216c93839a6c1e10ffba",
+      "mode": "100644"
+    },
+    {
+      "path": "api/current.txt",
+      "kind": "blob",
+      "oid": "0637502b4de3511838c3b3f7071fbaef291e9e22",
+      "mode": "100644"
+    },
+    {
+      "path": "api/removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "api/system-current.txt",
+      "kind": "blob",
+      "oid": "aa92409e148512e77e85bdd0aa10d3a73d89bd10",
+      "mode": "100644"
+    },
+    {
+      "path": "api/system-removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "api/test-current.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "api/test-removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "java/com/android/libraries/tv/tvsystem/display/DeviceProductInfo.java",
+      "kind": "blob",
+      "oid": "fb0bf712659329cb0fd6817f644810e0ff74fa27",
+      "mode": "100644"
+    },
+    {
+      "path": "java/com/android/libraries/tv/tvsystem/display/DisplayCompatUtil.java",
+      "kind": "blob",
+      "oid": "746f90b7b021119630dff18d2fb84ccff6d0c504",
+      "mode": "100644"
+    },
+    {
+      "path": "java/com/android/libraries/tv/tvsystem/display/WindowCompatUtil.java",
+      "kind": "blob",
+      "oid": "4a0fed99df1efd56b8081d6ec8000b3afc03d20b",
+      "mode": "100644"
+    },
+    {
+      "path": "java/com/android/libraries/tv/tvsystem/media/AudioDeviceAttributes.java",
+      "kind": "blob",
+      "oid": "581d18923eda815dc760dcf1a7cf0bb4823cc977",
+      "mode": "100644"
+    },
+    {
+      "path": "java/com/android/libraries/tv/tvsystem/media/TvAudioManager.java",
+      "kind": "blob",
+      "oid": "7b18200d7a0c4beff27b9125fe9ddb93e69fc9cf",
+      "mode": "100644"
+    },
+    {
+      "path": "java/com/android/libraries/tv/tvsystem/pm/TvPackageInstaller.java",
+      "kind": "blob",
+      "oid": "8cd21ec6403aaad858cf81b285ab2169095c7349",
+      "mode": "100644"
+    },
+    {
+      "path": "java/com/android/libraries/tv/tvsystem/user/ITvUserManager.java",
+      "kind": "blob",
+      "oid": "4a1081e18a91d1191b37bd8e2f6eed712422ea05",
+      "mode": "100644"
+    },
+    {
+      "path": "java/com/android/libraries/tv/tvsystem/user/TvUserManager.java",
+      "kind": "blob",
+      "oid": "b5a702464a92385b5caebf6211ffde57d8f8f2a3",
+      "mode": "100644"
+    },
+    {
+      "path": "java/com/android/libraries/tv/tvsystem/wifi/SoftApConfiguration.java",
+      "kind": "blob",
+      "oid": "2bc81afa98d3208a27b773963bba2549db1ebe7f",
+      "mode": "100644"
+    },
+    {
+      "path": "java/com/android/libraries/tv/tvsystem/wifi/TvWifiManager.java",
+      "kind": "blob",
+      "oid": "ad75ce539b0e43cf0657957f7e180ab3b52a15b3",
+      "mode": "100644"
+    },
+    {
+      "path": "lint-baseline.xml",
+      "kind": "blob",
+      "oid": "708c9a1f0df051eda8c4f7095a0ac6a4a11fb893",
+      "mode": "100644"
+    },
+    {
+      "path": "services/TvServicesOverlay/Android.bp",
+      "kind": "blob",
+      "oid": "d471f358a259915ca47e32bb18cb6add5a2a9c6c",
+      "mode": "100644"
+    },
+    {
+      "path": "services/TvServicesOverlay/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "57ff3688ff373044e93a06a14e1328b28d5244e9",
+      "mode": "100644"
+    },
+    {
+      "path": "services/TvServicesOverlay/res/values/config.xml",
+      "kind": "blob",
+      "oid": "0c20ed38b2217f2b25aee6c37d7fe47a6322389e",
+      "mode": "100644"
+    },
+    {
+      "path": "services/client/Android.bp",
+      "kind": "blob",
+      "oid": "3fb10c40e7a70653101a3f26fc6a2a8003ddba62",
+      "mode": "100644"
+    },
+    {
+      "path": "services/client/src/com/android/tv/tvservices/client/input/TvKeyEventActivityCallback.java",
+      "kind": "blob",
+      "oid": "a5ded7e1aa25aa46cd1d3ad066dae18b129ca3d7",
+      "mode": "100644"
+    },
+    {
+      "path": "services/client/src/com/android/tv/tvservices/client/input/TvKeyInputManager.java",
+      "kind": "blob",
+      "oid": "d215cd7086abea73bafbd706db74e242cf5f11a0",
+      "mode": "100644"
+    },
+    {
+      "path": "services/client/src/com/android/tv/tvservices/client/watchdog/IResourceOveruseListener.aidl",
+      "kind": "blob",
+      "oid": "618ed33a8ca8963df446832495aa7708cb4ea2f7",
+      "mode": "100644"
+    },
+    {
+      "path": "services/client/src/com/android/tv/tvservices/client/watchdog/ITvWatchdogService.aidl",
+      "kind": "blob",
+      "oid": "90831d3b6a665902647a5820388649f28e47638b",
+      "mode": "100644"
+    },
+    {
+      "path": "services/client/src/com/android/tv/tvservices/client/watchdog/IoOveruseAlertThreshold.aidl",
+      "kind": "blob",
+      "oid": "f7c89a4c2b9261d4fb3bffaedc67ca200039c78d",
+      "mode": "100644"
+    },
+    {
+      "path": "services/client/src/com/android/tv/tvservices/client/watchdog/IoOveruseAlertThreshold.java",
+      "kind": "blob",
+      "oid": "6f841dc84f37fa9ad0200beb9c8f8db9bba14f4c",
+      "mode": "100644"
+    },
+    {
+      "path": "services/client/src/com/android/tv/tvservices/client/watchdog/IoOveruseConfiguration.aidl",
+      "kind": "blob",
+      "oid": "3089dbd3f246f70f67a08dbdd7ab2a752a556d4a",
+      "mode": "100644"
+    },
+    {
+      "path": "services/client/src/com/android/tv/tvservices/client/watchdog/IoOveruseConfiguration.java",
+      "kind": "blob",
+      "oid": "45d8ad8edd8924a647dc4cba7407c6b72e796ca0",
+      "mode": "100644"
+    },
+    {
+      "path": "services/client/src/com/android/tv/tvservices/client/watchdog/IoOveruseStats.aidl",
+      "kind": "blob",
+      "oid": "b88059957b5e5a2ddfb23164e9ff94b6e906d531",
+      "mode": "100644"
+    },
+    {
+      "path": "services/client/src/com/android/tv/tvservices/client/watchdog/IoOveruseStats.java",
+      "kind": "blob",
+      "oid": "c86d87078c4de6bbb7e7b0de5720d3f7e9d26e38",
+      "mode": "100644"
+    },
+    {
+      "path": "services/client/src/com/android/tv/tvservices/client/watchdog/PackageKillableState.aidl",
+      "kind": "blob",
+      "oid": "1fd1d19cd2e4251720658e972b00a158c6498d50",
+      "mode": "100644"
+    },
+    {
+      "path": "services/client/src/com/android/tv/tvservices/client/watchdog/PackageKillableState.java",
+      "kind": "blob",
+      "oid": "c601aad8343df2af363785df5a2e8f5698f284a1",
+      "mode": "100644"
+    },
+    {
+      "path": "services/client/src/com/android/tv/tvservices/client/watchdog/PerStateBytes.aidl",
+      "kind": "blob",
+      "oid": "b299118bd6fb1a34258436dc7c066eac57115733",
+      "mode": "100644"
+    },
+    {
+      "path": "services/client/src/com/android/tv/tvservices/client/watchdog/PerStateBytes.java",
+      "kind": "blob",
+      "oid": "01e323d9496222927575cb51987ede2333e84e21",
+      "mode": "100644"
+    },
+    {
+      "path": "services/client/src/com/android/tv/tvservices/client/watchdog/Permission.java",
+      "kind": "blob",
+      "oid": "91db8473bff9a765e1e39067a98c3febedef4a4b",
+      "mode": "100644"
+    },
+    {
+      "path": "services/client/src/com/android/tv/tvservices/client/watchdog/ResourceOveruseConfiguration.aidl",
+      "kind": "blob",
+      "oid": "8002c7f5963cab5ce1abe0acf6b6880385330ac4",
+      "mode": "100644"
+    },
+    {
+      "path": "services/client/src/com/android/tv/tvservices/client/watchdog/ResourceOveruseConfiguration.java",
+      "kind": "blob",
+      "oid": "dd0a8700eeabcf01205d62e76db56c750947dd59",
+      "mode": "100644"
+    },
+    {
+      "path": "services/client/src/com/android/tv/tvservices/client/watchdog/ResourceOveruseStats.aidl",
+      "kind": "blob",
+      "oid": "80d0378c183cb81a37e79c528e0d7f86cf9eef1b",
+      "mode": "100644"
+    },
+    {
+      "path": "services/client/src/com/android/tv/tvservices/client/watchdog/ResourceOveruseStats.java",
+      "kind": "blob",
+      "oid": "1fe48f3e8c55abf25a7f09192dabb5f357059b6c",
+      "mode": "100644"
+    },
+    {
+      "path": "services/client/tvservicesapi/current.txt",
+      "kind": "blob",
+      "oid": "b4f52deb2cce600d368c389a4d5433501a8da2c4",
+      "mode": "100644"
+    },
+    {
+      "path": "services/client/tvservicesapi/removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "services/client/tvservicesapi/system-current.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "services/client/tvservicesapi/system-removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "services/client/tvservicesapi/test-current.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "services/client/tvservicesapi/test-removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "services/proto/Android.bp",
+      "kind": "blob",
+      "oid": "0ad57c174bcacd9b460741d2381962a1d246ec1a",
+      "mode": "100644"
+    },
+    {
+      "path": "services/proto/tvatoms.proto",
+      "kind": "blob",
+      "oid": "9ebcd7edb25c0d08db54cf51e67410eb5080bb0f",
+      "mode": "100644"
+    },
+    {
+      "path": "services/proto/watchdogservice_dump.proto",
+      "kind": "blob",
+      "oid": "c2917218a0141a64b883217aa268106273399765",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/Android.bp",
+      "kind": "blob",
+      "oid": "0d54faa15c1042fb468cf441da845c03531f4f8c",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "6f5b676449b33219526cd23469cea2c467159124",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-af/strings.xml",
+      "kind": "blob",
+      "oid": "5c5fa99464bbd710cf184c3539c5b0c45e9243ef",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-am/strings.xml",
+      "kind": "blob",
+      "oid": "5584a03b6bf1f5f02fe7a2ff0fe6ecd5d6d1e3d3",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-ar/strings.xml",
+      "kind": "blob",
+      "oid": "b21978b0b6dab98cdf90bf9ddc1fedfa29a7de2c",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-as/strings.xml",
+      "kind": "blob",
+      "oid": "7ef3a277da86737c4f6fb67d943ca01408651cb3",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-az/strings.xml",
+      "kind": "blob",
+      "oid": "55bc7632dac9b54ce3f50b10a29865564b2383c7",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-b+sr+Latn/strings.xml",
+      "kind": "blob",
+      "oid": "1e8acd17d4d5a3a677db8f712e8f163df2e57ad7",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-be/strings.xml",
+      "kind": "blob",
+      "oid": "e876fb3f4ac900ce1a6af9abdbfbbdb740febadd",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-bg/strings.xml",
+      "kind": "blob",
+      "oid": "c256eccf2b581aed9f19910c8ec377042ae27dc7",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-bn/strings.xml",
+      "kind": "blob",
+      "oid": "fbcf7e3a1e36d4d64bb4b9066aff840550bcb4db",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-bs/strings.xml",
+      "kind": "blob",
+      "oid": "2196c440acbb5d62dd0349ec6a5d1d0d9b8122f7",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-ca/strings.xml",
+      "kind": "blob",
+      "oid": "5ffd3b53e951038f23acb1adf934cb3580411540",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-cs/strings.xml",
+      "kind": "blob",
+      "oid": "42554f236dee344fc9eafb47db41b85bc4745728",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-da/strings.xml",
+      "kind": "blob",
+      "oid": "016fdfefdbcc7601c35987db5fae7966b94b4d70",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-de/strings.xml",
+      "kind": "blob",
+      "oid": "3a8fbee862e0bf69e2e4c5c014206cd338e39486",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-el/strings.xml",
+      "kind": "blob",
+      "oid": "f8ef76819f575e506a64925ff804569d65163a9d",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-en-rAU/strings.xml",
+      "kind": "blob",
+      "oid": "c93e48aac2cac1ac1a688ef631b6e27712800031",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-en-rCA/strings.xml",
+      "kind": "blob",
+      "oid": "4758a07c51dd46673e69c7fb6fd2a1010017c8b2",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-en-rGB/strings.xml",
+      "kind": "blob",
+      "oid": "c93e48aac2cac1ac1a688ef631b6e27712800031",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-en-rIN/strings.xml",
+      "kind": "blob",
+      "oid": "c93e48aac2cac1ac1a688ef631b6e27712800031",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-es-rUS/strings.xml",
+      "kind": "blob",
+      "oid": "efb087416dec7976173193126ba552614e7d5a99",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-es/strings.xml",
+      "kind": "blob",
+      "oid": "7c129df84919fa0ac2aa54cb963ce8a6f7bac159",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-et/strings.xml",
+      "kind": "blob",
+      "oid": "2fd2ea7d3214714db668a999fd0207f59215c785",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-eu/strings.xml",
+      "kind": "blob",
+      "oid": "0c4e1bc77252452dcc318eacd4520dfc5730c382",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-fa/strings.xml",
+      "kind": "blob",
+      "oid": "9edf5a53c04017f5ae0d2b5253fdd2c591120fb5",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-fi/strings.xml",
+      "kind": "blob",
+      "oid": "78bd68d57d56d7f19870a4f9a93ac2a818e6ce9d",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-fr-rCA/strings.xml",
+      "kind": "blob",
+      "oid": "861ab66db5539e051c248784f2f6cde7f5f3f001",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-fr/strings.xml",
+      "kind": "blob",
+      "oid": "1625ccd876768eb149eb3be2175320309b0abd5f",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-gl/strings.xml",
+      "kind": "blob",
+      "oid": "22a56317b63262d356fc396d92106891416cc556",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-gu/strings.xml",
+      "kind": "blob",
+      "oid": "3480ccdea45fdaa761791e7574c7adc0b29d0db6",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-hi/strings.xml",
+      "kind": "blob",
+      "oid": "9734f683fb5709e1b9c709587902dc02980062e8",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-hr/strings.xml",
+      "kind": "blob",
+      "oid": "895e216d36b86811cb371a96b0ccff780a5f7624",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-hu/strings.xml",
+      "kind": "blob",
+      "oid": "64e3e80e6a328e803dfa86aa42155c47827beaaf",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-hy/strings.xml",
+      "kind": "blob",
+      "oid": "4291d6cfcec5363d0e338097abb9be93a694f782",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-in/strings.xml",
+      "kind": "blob",
+      "oid": "dcee7dad66ef99de182c11f0c230917cff6e4b43",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-is/strings.xml",
+      "kind": "blob",
+      "oid": "1046a316de1f33ac584209f50b76f0c0ebd5be15",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-it/strings.xml",
+      "kind": "blob",
+      "oid": "29385d1220c26f023d21e0c9cfc0013ff690ed9a",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-iw/strings.xml",
+      "kind": "blob",
+      "oid": "9efbde2432288b037b0d5f50a6bb7b2146885954",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-ja/strings.xml",
+      "kind": "blob",
+      "oid": "a233c96edce72455fd5110a8d751b5a97a4848f1",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-ka/strings.xml",
+      "kind": "blob",
+      "oid": "b601be4c711811c86fbf56c85215e68f790dc0a6",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-kk/strings.xml",
+      "kind": "blob",
+      "oid": "af0a06f287824956550b628efb2dbcc3390ae6c8",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-km/strings.xml",
+      "kind": "blob",
+      "oid": "9928b7659c3ba89531944993c91eb3adee509e2f",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-kn/strings.xml",
+      "kind": "blob",
+      "oid": "835c074f0318fbf33efd21071641c61e4e40fc7e",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-ko/strings.xml",
+      "kind": "blob",
+      "oid": "8b7fbec01e03325314033f8d6ff425b2cef076e9",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-ky/strings.xml",
+      "kind": "blob",
+      "oid": "f05fe52e583414d257c55c1e83ecf70721baf6f5",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-lo/strings.xml",
+      "kind": "blob",
+      "oid": "7abe74eb943dbe6b88dd1273e7c99bc8b4819328",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-lt/strings.xml",
+      "kind": "blob",
+      "oid": "ae36f174db96601e7d2655a144b1ad3b124d4519",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-lv/strings.xml",
+      "kind": "blob",
+      "oid": "3d4a73fb5a8194d6e1af0f315b37e3ea76b1dc32",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-mk/strings.xml",
+      "kind": "blob",
+      "oid": "6edb8d54b8a6f912c7424799dab6534efe47c502",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-ml/strings.xml",
+      "kind": "blob",
+      "oid": "e2008cc8aa86a595c8a9fcaca6034730a6c2ce78",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-mn/strings.xml",
+      "kind": "blob",
+      "oid": "737be429ae80471fa8bd6c4fce7e3ed502b297e0",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-mr/strings.xml",
+      "kind": "blob",
+      "oid": "03cac2147173d022e0f8eb91cc374157090bfc92",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-ms/strings.xml",
+      "kind": "blob",
+      "oid": "1a89042d3b9ceb07b821470a4135c781e4dca87a",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-my/strings.xml",
+      "kind": "blob",
+      "oid": "115259b3ce1f6e8b8f7946e1e4f4abfc9825961d",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-nb/strings.xml",
+      "kind": "blob",
+      "oid": "bf9bff0b994a86af4ac7a2ad7f2f07e11536abae",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-ne/strings.xml",
+      "kind": "blob",
+      "oid": "7b71fa74588640c10f73fab22b036a36421c67e9",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-nl/strings.xml",
+      "kind": "blob",
+      "oid": "91a586d3be8347156463fbea260e04bdd60dbb34",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-or/strings.xml",
+      "kind": "blob",
+      "oid": "f02fcbdfe7a0b722b6bdc6b968a6783e6f711bbf",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-pa/strings.xml",
+      "kind": "blob",
+      "oid": "c0ee2fc172990c9b84aece4c0fe336f95b0fd151",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-pl/strings.xml",
+      "kind": "blob",
+      "oid": "6543d68ce1ef2b7c67702703e9e54f79773bbfd4",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-pt-rBR/strings.xml",
+      "kind": "blob",
+      "oid": "df8f46a4d37e67671835e12a78b08c066f4ced87",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-pt-rPT/strings.xml",
+      "kind": "blob",
+      "oid": "84055caed288c609a144cea95ab5566f933ac4ae",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-pt/strings.xml",
+      "kind": "blob",
+      "oid": "df8f46a4d37e67671835e12a78b08c066f4ced87",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-ro/strings.xml",
+      "kind": "blob",
+      "oid": "d32b0564829322419d89d8205eb14aefbb61d1f0",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-ru/strings.xml",
+      "kind": "blob",
+      "oid": "7b745dbe778285ef174485287d865529f9192ed7",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-si/strings.xml",
+      "kind": "blob",
+      "oid": "2e26ed78af07cb4c027a63347037fab520e7fb10",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-sk/strings.xml",
+      "kind": "blob",
+      "oid": "3255830de77e644b7eaa1184d5dbef83bec310e3",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-sl/strings.xml",
+      "kind": "blob",
+      "oid": "185822f31a8a69e6ee2391aba9fe1842c953baa0",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-sq/strings.xml",
+      "kind": "blob",
+      "oid": "e286ee18710b439115dd9caf72459061a56bf7b2",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-sr/strings.xml",
+      "kind": "blob",
+      "oid": "7b2eacaa97096bae5b792e06864987d530513c22",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-sv/strings.xml",
+      "kind": "blob",
+      "oid": "6d73a8f31211f2c329beb1662a0836f8a92d7674",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-sw/strings.xml",
+      "kind": "blob",
+      "oid": "2cfc626641e3264f0901bd308432bfc5917b1a60",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-ta/strings.xml",
+      "kind": "blob",
+      "oid": "f1b47fe5130d9f566df90d4b0a8a706439786e51",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-te/strings.xml",
+      "kind": "blob",
+      "oid": "fb9c6f2b05c5246c72c1762327ccf48a00a268eb",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-th/strings.xml",
+      "kind": "blob",
+      "oid": "d865a0ab9c529d190ef13a63c053eedf31377e73",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-tl/strings.xml",
+      "kind": "blob",
+      "oid": "f2eee0331a792bf5515849931dedfc4716e85c28",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-tr/strings.xml",
+      "kind": "blob",
+      "oid": "1011ec77b5434c1e63ef927b44258a6f3bfb6f29",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-uk/strings.xml",
+      "kind": "blob",
+      "oid": "31d9283349089403bf06bed630ae88396754c5e7",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-ur/strings.xml",
+      "kind": "blob",
+      "oid": "8b61f44459b10834806c4d8c42265322fb5b2186",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-uz/strings.xml",
+      "kind": "blob",
+      "oid": "36d85642b4b7d8c0871537855bd33a926958af80",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-vi/strings.xml",
+      "kind": "blob",
+      "oid": "d7173d08a2dcb50f7a4d8fa7f66ab57420ae0bb6",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-zh-rCN/strings.xml",
+      "kind": "blob",
+      "oid": "2885695515639b4c89795f11233000b0de7a78a7",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-zh-rHK/strings.xml",
+      "kind": "blob",
+      "oid": "74fcb8698613b5702001cd9227aa2037b0906e9a",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-zh-rTW/strings.xml",
+      "kind": "blob",
+      "oid": "09a4f3c8356895ed7753b8477c63edd7e6372957",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values-zu/strings.xml",
+      "kind": "blob",
+      "oid": "db92e22b0c39a0335cca1463c0979b5ee417e8d2",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values/config.xml",
+      "kind": "blob",
+      "oid": "5ff29d5e29f8769b4a5b59fa9a1ab86ecb65bf03",
+      "mode": "100644"
+    },
+    {
+      "path": "services/res/res/values/strings.xml",
+      "kind": "blob",
+      "oid": "8d580f3dfa3d29ed6f16ce1a222bc31ecdf1c42d",
+      "mode": "100644"
+    },
+    {
+      "path": "services/services/Android.bp",
+      "kind": "blob",
+      "oid": "1b855cf2ee7aba7ae7c2c20b870e41723ee4cf25",
+      "mode": "100644"
+    },
+    {
+      "path": "services/services/input/Android.bp",
+      "kind": "blob",
+      "oid": "1b275e16b1bbe2f4ed77f547112229fa93c6e904",
+      "mode": "100644"
+    },
+    {
+      "path": "services/services/input/src/com/android/server/tv/input/ITvKeyEventActivityCallback.aidl",
+      "kind": "blob",
+      "oid": "d57f2b51e55b7d62a6c767665c3617e99702b90e",
+      "mode": "100644"
+    },
+    {
+      "path": "services/services/input/src/com/android/server/tv/input/ITvKeyInputManagerService.aidl",
+      "kind": "blob",
+      "oid": "40058e922f94b4aad238efd0069fb4bad0af23f8",
+      "mode": "100644"
+    },
+    {
+      "path": "services/services/input/src/com/android/server/tv/input/TvKeyInputManagerService.java",
+      "kind": "blob",
+      "oid": "6a1b0d62fa7950d5e80686c604a078a39fccd192",
+      "mode": "100644"
+    },
+    {
+      "path": "services/services/input/src/com/android/server/tv/input/VolumeEventType.aidl",
+      "kind": "blob",
+      "oid": "55d7eb8292522bf196d2f5f91cae7ec0e9160a8f",
+      "mode": "100644"
+    },
+    {
+      "path": "services/services/jarjar-rules.txt",
+      "kind": "blob",
+      "oid": "bab48362e2b272b4a080b58379a53aa4190674cb",
+      "mode": "100644"
+    },
+    {
+      "path": "services/services/proguard.flags",
+      "kind": "blob",
+      "oid": "df29fbebe9bd98b0f7cda90db4bebf98181df1c5",
+      "mode": "100644"
+    },
+    {
+      "path": "services/services/watchdogservice/Android.bp",
+      "kind": "blob",
+      "oid": "988342e5ddb3f9f06732b3b852a55140f0499090",
+      "mode": "100644"
+    },
+    {
+      "path": "services/services/watchdogservice/src/com/android/server/tv/watchdogservice/CarWatchdogDaemonHelper.java",
+      "kind": "blob",
+      "oid": "24b91cb9c198b9175c620544d2163040250c9ba2",
+      "mode": "100644"
+    },
+    {
+      "path": "services/services/watchdogservice/src/com/android/server/tv/watchdogservice/IoOveruseHandler.java",
+      "kind": "blob",
+      "oid": "58c8bce61d1d0d9f7bde58599a544440591f76f9",
+      "mode": "100644"
+    },
+    {
+      "path": "services/services/watchdogservice/src/com/android/server/tv/watchdogservice/OveruseConfigurationCache.java",
+      "kind": "blob",
+      "oid": "a7136e33ed90540e43067bbf0c6ea1650f9387e2",
+      "mode": "100644"
+    },
+    {
+      "path": "services/services/watchdogservice/src/com/android/server/tv/watchdogservice/PackageInfoHandler.java",
+      "kind": "blob",
+      "oid": "79bfa37954f0e43cb9b3e76de68928226f32fcd3",
+      "mode": "100644"
+    },
+    {
+      "path": "services/services/watchdogservice/src/com/android/server/tv/watchdogservice/PackageIoUsage.java",
+      "kind": "blob",
+      "oid": "72c369be49b5b9f700b7b7a74ead26b94f40346e",
+      "mode": "100644"
+    },
+    {
+      "path": "services/services/watchdogservice/src/com/android/server/tv/watchdogservice/PackageManagerHelper.java",
+      "kind": "blob",
+      "oid": "af60e8f2abfeec2a18eaf3833359698dea04303c",
+      "mode": "100644"
+    },
+    {
+      "path": "services/services/watchdogservice/src/com/android/server/tv/watchdogservice/TimeSource.java",
+      "kind": "blob",
+      "oid": "ea0e54b3d131b86e55175b9b4126b603e94e73fb",
+      "mode": "100644"
+    },
+    {
+      "path": "services/services/watchdogservice/src/com/android/server/tv/watchdogservice/TvWatchdogHelper.java",
+      "kind": "blob",
+      "oid": "25e655a322631798d167bd3c8e99f686721359cd",
+      "mode": "100644"
+    },
+    {
+      "path": "services/services/watchdogservice/src/com/android/server/tv/watchdogservice/TvWatchdogService.java",
+      "kind": "blob",
+      "oid": "1b366650b0fc62abe36abe062340303a55b89003",
+      "mode": "100644"
+    },
+    {
+      "path": "services/services/watchdogservice/src/com/android/server/tv/watchdogservice/TvWatchdogSettings.java",
+      "kind": "blob",
+      "oid": "212c252fefb1752cc243c53615d718b8f1dbba4f",
+      "mode": "100644"
+    },
+    {
+      "path": "services/services/watchdogservice/src/com/android/server/tv/watchdogservice/WatchdogStorage.java",
+      "kind": "blob",
+      "oid": "d4a82b0c5c79716c21a1b1db4093bf14de4d059c",
+      "mode": "100644"
+    },
+    {
+      "path": "services/tests/TvServicesTests/Android.bp",
+      "kind": "blob",
+      "oid": "3a223c90afdd6ee03c1622192ef92ff338679c7d",
+      "mode": "100644"
+    },
+    {
+      "path": "services/tests/TvServicesTests/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "2acd524972f1af26226bb06cf2c16143a35389cb",
+      "mode": "100644"
+    },
+    {
+      "path": "services/tests/TvServicesTests/res/drawable/icon.png",
+      "kind": "blob",
+      "oid": "da28c1f497c433b30e297adf4f0f6f86ce6bccb6",
+      "mode": "100644"
+    },
+    {
+      "path": "services/tests/TvServicesTests/res/layout/main_activity.xml",
+      "kind": "blob",
+      "oid": "6b38475dd23517cb87be12986686b7efd35599f8",
+      "mode": "100644"
+    },
+    {
+      "path": "services/tests/TvServicesTests/res/values/strings.xml",
+      "kind": "blob",
+      "oid": "5a02260c3c4e1fa968ee06632e28d91b54cfd304",
+      "mode": "100644"
+    },
+    {
+      "path": "services/tests/TvServicesTests/src/com/google/android/tv/tests/tvservices/MainActivity.java",
+      "kind": "blob",
+      "oid": "654e6ca2a43ab203abfe7d3743d8501ba02bce16",
+      "mode": "100644"
+    },
+    {
+      "path": "services/tests/unittests/Android.bp",
+      "kind": "blob",
+      "oid": "38b82dc13aeffba4a0e1561d83a59e892b7fb524",
+      "mode": "100644"
+    },
+    {
+      "path": "services/tests/unittests/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "b0d44b9748407b07eb7436b703af2f5a2e8b4d00",
+      "mode": "100644"
+    },
+    {
+      "path": "services/tests/unittests/src/com/android/server/tv/input/TvKeyInputManagerServiceTest.java",
+      "kind": "blob",
+      "oid": "d446aa8a50d7eb24fc3207408c33b740a83c3a6a",
+      "mode": "100644"
+    },
+    {
+      "path": "services/tests/unittests/src/com/android/server/tv/watchdogservice/TvWatchdogHelperTest.java",
+      "kind": "blob",
+      "oid": "6985f7919cbf30fe3f0b0799ad86f8063883bc3c",
+      "mode": "100644"
+    },
+    {
+      "path": "services/tests/unittests/src/com/android/server/tv/watchdogservice/TvWatchdogServiceTest.java",
+      "kind": "blob",
+      "oid": "8d7e3113ead0cbaf4c97fa9317fddd33e062e9be",
+      "mode": "100644"
+    }
+  ]
+}

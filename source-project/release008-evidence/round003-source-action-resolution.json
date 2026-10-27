@@ -1,0 +1,16 @@
+{
+  "owner_actions": "/home/sharpninja/github/2026-10-26/task-3/remediation/integration/round003-source-actions.json",
+  "integration_candidate": "catalog-integrated/",
+  "owner_originals_modified": false,
+  "active_source_catalog_preserved": "catalog/",
+  "tests": {"result": "82 passed", "evidence": "catalog-integration-tests.txt"},
+  "resolutions": [
+    {"id":"R3-02","status":"implemented-and-fixture-tested; production reconciliation pending","evidence":"Owner method-spelling patch is already represented in the pinned candidate. Added formal-type-variable shadow rejection and exact SDK37.2 JVM-target fixture. No untyped source-field fallback."},
+    {"id":"R3-03","status":"implemented-and-fixture-tested; production export pending","evidence":"Pinned owner exporter emits1.1.0 and validates every permission document against PermissionSummary.schema.json; writes to a distinct output directory."},
+    {"id":"R3-09","status":"implemented-and-fixture-tested","evidence":"Pinned owner aggregation retains absence nodes with x-absence-of-annotation and x-occurrences beside positive evidence. Absence is not explicit-none. Source/locator associations remain visible."},
+    {"id":"N-package-identity","status":"implemented-and-fixture-tested","evidence":"Distinct java:package namespace and java-source:package namespace. Old release snapshots remain unchanged; no grant/overlay retargeting performed."},
+    {"id":"R3-04","status":"fresh semantic rebuild and validation pending","evidence":"Consumed owner's storage1.2.0 schemas/registry/provenance engine. Sources use explicit nullable API applicability and unknown channel where unproven; registry generation4. Source identityv3 includes processor provenance and provider-cache/context inputs. Declaration variants preserved. No copy migration is claimed as a semantic rebuild."}
+  ],
+  "additional_source_fixes": ["Indexed Tree-sitter Point access; original and regenerated caches retained", "No source-field permission transfer without descriptor proof", "Java per-file imports/wildcards retained in runtime source_details", "AIDL repeated-chunk source locators", "Full selected-corpus retrieval:37873/37873 paths;985 other projects remain outside that corpus and not claimed complete"],
+  "capacity": {"task_filesystem_free_gb_observed":136,"slash_tmp_free_gb_observed":3.4,"action":"Only this build's child processes use task-scoped SQLITE_TMPDIR/TMPDIR; no global settings or old artifacts changed","sqlite_io_failure_cause":"unconfirmed"}
+}

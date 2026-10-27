@@ -1,0 +1,1567 @@
+{
+  "repo": "platform/frameworks/wilhelm",
+  "requested_revision": "refs/tags/android-17.0.0_r1",
+  "revision": "cbc8f246cd0c18d3c286ab39620846badd0676fb",
+  "entries": [
+    {
+      "path": "Android.bp",
+      "kind": "blob",
+      "oid": "a961572b94e856e38b208cd4aa2b53ab4a9203bf",
+      "mode": "100644"
+    },
+    {
+      "path": "OWNERS",
+      "kind": "blob",
+      "oid": "9a86d14104211641e664b4525aab1f38d8388dac",
+      "mode": "100644"
+    },
+    {
+      "path": "TEST_MAPPING",
+      "kind": "blob",
+      "oid": "65fa610d6a2f672b561ea207bb59ce84269d35d8",
+      "mode": "100644"
+    },
+    {
+      "path": "doc/Doxyfile",
+      "kind": "blob",
+      "oid": "7f6ade73a531e4c6afa424b8caa45bd7d801f8df",
+      "mode": "100644"
+    },
+    {
+      "path": "doc/Makefile",
+      "kind": "blob",
+      "oid": "1ab6ceef0641bfce43832386abb746ba4cc07a12",
+      "mode": "100644"
+    },
+    {
+      "path": "doc/OpenMAX_AL_1_0_1_Specification.pdf",
+      "kind": "blob",
+      "oid": "a3380fd766a8597e15051e56bcc7ab7d5b61fbd2",
+      "mode": "100644"
+    },
+    {
+      "path": "doc/OpenSL_ES_Specification_1.0.1.pdf",
+      "kind": "blob",
+      "oid": "fe6b266367b9b64ae6d2f16df1ae658cb619562c",
+      "mode": "100644"
+    },
+    {
+      "path": "doc/README.txt",
+      "kind": "blob",
+      "oid": "7ed9498ee7b6a335d00273c3554b5cc4d771018c",
+      "mode": "100644"
+    },
+    {
+      "path": "include/OMXAL/NOTICE",
+      "kind": "blob",
+      "oid": "33709bcb788f09f9cbba48dbf440086c5b328e54",
+      "mode": "100644"
+    },
+    {
+      "path": "include/OMXAL/OpenMAXAL.h",
+      "kind": "blob",
+      "oid": "d31283c8115da26f4dce19ff01b80e1612da5620",
+      "mode": "100644"
+    },
+    {
+      "path": "include/OMXAL/OpenMAXAL_Android.h",
+      "kind": "blob",
+      "oid": "0ea22f07134e4aed9666fc7618a10a0d1b1e14bd",
+      "mode": "100644"
+    },
+    {
+      "path": "include/OMXAL/OpenMAXAL_Platform.h",
+      "kind": "blob",
+      "oid": "23be77e4eaf397348cd5605cba4955d6d7c62c4b",
+      "mode": "100644"
+    },
+    {
+      "path": "include/SLES/NOTICE",
+      "kind": "blob",
+      "oid": "fb221a01e26f42aa2854a5a2a7e49759cc6d6a2f",
+      "mode": "100644"
+    },
+    {
+      "path": "include/SLES/OpenSLES.h",
+      "kind": "blob",
+      "oid": "0cf5608d3262be17eb4abd73ba120fc9188ca652",
+      "mode": "100644"
+    },
+    {
+      "path": "include/SLES/OpenSLES_Android.h",
+      "kind": "blob",
+      "oid": "2aef7f1de91bc80f65bd6110f0e2c5b34e3ea859",
+      "mode": "100644"
+    },
+    {
+      "path": "include/SLES/OpenSLES_AndroidConfiguration.h",
+      "kind": "blob",
+      "oid": "ae12f77b5b17b94787ae530aa7d924c88fc7423c",
+      "mode": "100644"
+    },
+    {
+      "path": "include/SLES/OpenSLES_AndroidMetadata.h",
+      "kind": "blob",
+      "oid": "01e33b8d60dcd4c64e695c6b3530dcba2d291148",
+      "mode": "100644"
+    },
+    {
+      "path": "include/SLES/OpenSLES_Platform.h",
+      "kind": "blob",
+      "oid": "5dc30066605e07d209f101408848d60f9038a047",
+      "mode": "100644"
+    },
+    {
+      "path": "src/Android.bp",
+      "kind": "blob",
+      "oid": "06250c929a54641dfb756871908806e13465df2c",
+      "mode": "100644"
+    },
+    {
+      "path": "src/Configuration.h",
+      "kind": "blob",
+      "oid": "73dd6e8a305cf3f3da723ebbf522b9a4dc9f2ad2",
+      "mode": "100644"
+    },
+    {
+      "path": "src/MPH.h",
+      "kind": "blob",
+      "oid": "593994aa7e371c16a8870e24fa94685ff48e3ba0",
+      "mode": "100644"
+    },
+    {
+      "path": "src/MPH_to.c",
+      "kind": "blob",
+      "oid": "070c84ef1f930c79de846148384127e6ccef3533",
+      "mode": "100644"
+    },
+    {
+      "path": "src/MPH_to.h",
+      "kind": "blob",
+      "oid": "d922bcd19667a6b7f6ad1d37c41b8b093fe8f0b3",
+      "mode": "100644"
+    },
+    {
+      "path": "src/OpenSLES_IID.cpp",
+      "kind": "blob",
+      "oid": "7da03c7fb13cee996fe6e41b9a676215fba04870",
+      "mode": "100644"
+    },
+    {
+      "path": "src/README.txt",
+      "kind": "blob",
+      "oid": "8230d1b71977c036665e5b888ec351bb96db4db9",
+      "mode": "100644"
+    },
+    {
+      "path": "src/ThreadPool.cpp",
+      "kind": "blob",
+      "oid": "d9b3f8c78faec9e298ccbd90b4008ac908dbd36a",
+      "mode": "100644"
+    },
+    {
+      "path": "src/ThreadPool.h",
+      "kind": "blob",
+      "oid": "27031a3a9b0e88ab355f35719f8186507f5d48a8",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/AacBqToPcmCbRenderer.cpp",
+      "kind": "blob",
+      "oid": "407609104d3a029685123fac0c0eb89f9eabf495",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/AudioPlayer_to_android.cpp",
+      "kind": "blob",
+      "oid": "536d76f30f94ff0ce4ba6767409d24556087a1d5",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/AudioPlayer_to_android.h",
+      "kind": "blob",
+      "oid": "12113b58bc4802c5e36c76cd4083c9c54d3e72cf",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/AudioRecordCallback.h",
+      "kind": "blob",
+      "oid": "1503382a4a83307dc305b155bbebc362c6d126cf",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/AudioRecorder_to_android.cpp",
+      "kind": "blob",
+      "oid": "a49893beb93d714ca5dc5ecdb2551528b7bca216",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/AudioRecorder_to_android.h",
+      "kind": "blob",
+      "oid": "64f8e7474c472079b00509587f017f4696a9d139",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/AudioTrackCallback.h",
+      "kind": "blob",
+      "oid": "c2cb78c505d9792e6947261d04c1fdf92017be52",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/BufferQueueSource.cpp",
+      "kind": "blob",
+      "oid": "b37b616bf4325dba6f12f3e971d0058b55854a37",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/BufferQueueSource.h",
+      "kind": "blob",
+      "oid": "98cb6d2fee3b298a2e85612a01de9cd27f125397",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/CallbackProtector.cpp",
+      "kind": "blob",
+      "oid": "7b9f10733e037c9a5f2204aeeeb5d71f1febc4ed",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/CallbackProtector.h",
+      "kind": "blob",
+      "oid": "3b0cd19faf3319734dccd27072f25b211a7bd46b",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/MediaPlayer_to_android.cpp",
+      "kind": "blob",
+      "oid": "68cf044ee64a7729d36747e2de6eb26585816a65",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/MediaPlayer_to_android.h",
+      "kind": "blob",
+      "oid": "1b491cb859922886b39eb28de424db941a4216e0",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/OutputMix_to_android.cpp",
+      "kind": "blob",
+      "oid": "a7d11ef8df7006182a51629a45322ec98acd27cf",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/OutputMix_to_android.h",
+      "kind": "blob",
+      "oid": "d15fd571827308080af83f4d567631047094fade",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/VideoCodec_to_android.cpp",
+      "kind": "blob",
+      "oid": "729894ce874b773a34f695116e6867cb053461df",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/VideoCodec_to_android.h",
+      "kind": "blob",
+      "oid": "4faa03c1eb01f60c8cc3bb6f9dfe5726811d5ada",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/android_AudioSfDecoder.cpp",
+      "kind": "blob",
+      "oid": "0accb8065aa8d9fad0a491e1e25046aafa3c2055",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/android_AudioSfDecoder.h",
+      "kind": "blob",
+      "oid": "05e9071d8925632382127bdac7c671f785247590",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/android_AudioToCbRenderer.cpp",
+      "kind": "blob",
+      "oid": "970543c24390729b04ea903ac711b9312558a411",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/android_AudioToCbRenderer.h",
+      "kind": "blob",
+      "oid": "b166266113b3941e2c7f3c340e03af89307d521e",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/android_Effect.cpp",
+      "kind": "blob",
+      "oid": "8d7607ec012960b34a109ca10a8075bd0d26ac04",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/android_Effect.h",
+      "kind": "blob",
+      "oid": "a6694c32408c8ac54d92a3ef8a42a89533024090",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/android_GenericMediaPlayer.cpp",
+      "kind": "blob",
+      "oid": "a44461aefc64c0fd5c783409d7ada2b201e70ec4",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/android_GenericMediaPlayer.h",
+      "kind": "blob",
+      "oid": "17e20356a0e97d82401bf6d9b8271a4171af960e",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/android_GenericPlayer.cpp",
+      "kind": "blob",
+      "oid": "6f6091055c16539e8fb7296fd8103ef57fc9c80e",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/android_GenericPlayer.h",
+      "kind": "blob",
+      "oid": "d04448a29af6f428dce2d865ac72253131c9a8b1",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/android_LocAVPlayer.cpp",
+      "kind": "blob",
+      "oid": "67ec5c90f163f342b68a152a93613a3b0682bfa5",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/android_LocAVPlayer.h",
+      "kind": "blob",
+      "oid": "da961fbb6a3c573ba44826e760564dadaa384c26",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/android_StreamPlayer.cpp",
+      "kind": "blob",
+      "oid": "ac90f0e65804ad7d7fc344dca6d62b2c7e8612e5",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/android_StreamPlayer.h",
+      "kind": "blob",
+      "oid": "cb47dbd0edf54c7925285a0ef54959dc04d61627",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/android_defs.h",
+      "kind": "blob",
+      "oid": "daa7b701cf5583e085d8a43d438ab50d3fa2846c",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/android_prompts.h",
+      "kind": "blob",
+      "oid": "dfb363dacb759618d6e0fc097b84c04e0ab8a8d6",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/android_sles_conversions.h",
+      "kind": "blob",
+      "oid": "05b46995e414436a546a52529afa5f1f70b861e2",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/channels.cpp",
+      "kind": "blob",
+      "oid": "f0eeb7c2536bdc8f61f2e29e71dcca5b41d0cd97",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/channels.h",
+      "kind": "blob",
+      "oid": "7ba2dabdb0827ac48e8c4172f6da155b4a59e6e6",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/include/AacAdtsExtractor.h",
+      "kind": "blob",
+      "oid": "72633f88546c50534c13c43b4567e0b7a271eba6",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/include/AacBqToPcmCbRenderer.h",
+      "kind": "blob",
+      "oid": "62cbd6e9e3eb85b69a587d1ba503f3a7477e4b2b",
+      "mode": "100644"
+    },
+    {
+      "path": "src/android/util/AacAdtsExtractor.cpp",
+      "kind": "blob",
+      "oid": "cac8463ce93b8355c3c8f4706d1f13baaca84886",
+      "mode": "100644"
+    },
+    {
+      "path": "src/attr.h",
+      "kind": "blob",
+      "oid": "31533a24393c4c83b003c6328f8a2f56ab102c40",
+      "mode": "100644"
+    },
+    {
+      "path": "src/autogen/IID_to_MPH.cpp",
+      "kind": "blob",
+      "oid": "538d0e7c1c52bba1824608db9dcc1368bcff20c7",
+      "mode": "100644"
+    },
+    {
+      "path": "src/autogen/MPH_to_3DGroup.h",
+      "kind": "blob",
+      "oid": "109ccc0c8be5e1bf5128480ae25f0a542e50e90e",
+      "mode": "100644"
+    },
+    {
+      "path": "src/autogen/MPH_to_AudioPlayer.h",
+      "kind": "blob",
+      "oid": "f7256fa2feaf7eedb778d1b4d0fd1f63be7ba1bc",
+      "mode": "100644"
+    },
+    {
+      "path": "src/autogen/MPH_to_AudioRecorder.h",
+      "kind": "blob",
+      "oid": "b5564eb00c1627d763d9ee2039b5f256cfd48ccd",
+      "mode": "100644"
+    },
+    {
+      "path": "src/autogen/MPH_to_Engine.h",
+      "kind": "blob",
+      "oid": "b47d4f2966003d4d87b2d34d87356038ca156c14",
+      "mode": "100644"
+    },
+    {
+      "path": "src/autogen/MPH_to_LEDDevice.h",
+      "kind": "blob",
+      "oid": "8fab008d3a4452ac8b4b9340e7968cf3418acd65",
+      "mode": "100644"
+    },
+    {
+      "path": "src/autogen/MPH_to_Listener.h",
+      "kind": "blob",
+      "oid": "0ccb8d411607473983249f12d28039fbfd1271b0",
+      "mode": "100644"
+    },
+    {
+      "path": "src/autogen/MPH_to_MediaPlayer.h",
+      "kind": "blob",
+      "oid": "4dbd6006a9001cda496d65e3233d4553ba05a5aa",
+      "mode": "100644"
+    },
+    {
+      "path": "src/autogen/MPH_to_MetadataExtractor.h",
+      "kind": "blob",
+      "oid": "fcf01bb4ae1c4ae1126d0656c6368481a617b64e",
+      "mode": "100644"
+    },
+    {
+      "path": "src/autogen/MPH_to_MidiPlayer.h",
+      "kind": "blob",
+      "oid": "7effb5ea90fe45f6f32c7ad74bd9522917947fe0",
+      "mode": "100644"
+    },
+    {
+      "path": "src/autogen/MPH_to_OutputMix.h",
+      "kind": "blob",
+      "oid": "1624f851573cfa7e67b7df024cbd05a6ad23a88a",
+      "mode": "100644"
+    },
+    {
+      "path": "src/autogen/MPH_to_Vibra.h",
+      "kind": "blob",
+      "oid": "9947707fcc53d2e609e028add626282c603d3b00",
+      "mode": "100644"
+    },
+    {
+      "path": "src/classes.cpp",
+      "kind": "blob",
+      "oid": "50997ea575bdcf18b29ae55a26cb60e2e5974804",
+      "mode": "100644"
+    },
+    {
+      "path": "src/classes.h",
+      "kind": "blob",
+      "oid": "c42fde45daa0fb7b1d73dc03164f04550900bb8e",
+      "mode": "100644"
+    },
+    {
+      "path": "src/data.cpp",
+      "kind": "blob",
+      "oid": "fc6dffccf93fb41887cdb2b2bba3d0e001556a64",
+      "mode": "100644"
+    },
+    {
+      "path": "src/data.h",
+      "kind": "blob",
+      "oid": "8c685830fe59744153636e687a8463744d13e9e9",
+      "mode": "100644"
+    },
+    {
+      "path": "src/desktop/OutputMixExt.h",
+      "kind": "blob",
+      "oid": "aa4e3d90f5918df0b72828dc154511bb0f86f0e4",
+      "mode": "100644"
+    },
+    {
+      "path": "src/desktop/SDL.cpp",
+      "kind": "blob",
+      "oid": "edc27c9163a121ae1cef33f4c22d30b6e4bfafba",
+      "mode": "100644"
+    },
+    {
+      "path": "src/desktop/SLSndFile.h",
+      "kind": "blob",
+      "oid": "87504bba4b23dab0c02edeca90a2944f23fc7a2a",
+      "mode": "100644"
+    },
+    {
+      "path": "src/desktop/SndFile.cpp",
+      "kind": "blob",
+      "oid": "91d0e03a5050747c4e52028044cc31328cfa8396",
+      "mode": "100644"
+    },
+    {
+      "path": "src/devices.cpp",
+      "kind": "blob",
+      "oid": "ce7d323919332b6f929914f508ff322dcf50ec10",
+      "mode": "100644"
+    },
+    {
+      "path": "src/devices.h",
+      "kind": "blob",
+      "oid": "bf2814ee1045fcc8b88934c63e182b8676398fb9",
+      "mode": "100644"
+    },
+    {
+      "path": "src/entry.cpp",
+      "kind": "blob",
+      "oid": "692314dd8f61c10a458b85016b0b097c6a7a52d8",
+      "mode": "100644"
+    },
+    {
+      "path": "src/handler_bodies.cpp",
+      "kind": "blob",
+      "oid": "643d9e33e839519ff75418e6474008257b47b282",
+      "mode": "100644"
+    },
+    {
+      "path": "src/handlers.c",
+      "kind": "blob",
+      "oid": "d08c31a1a6c02e7d8230e722cb93166b716677fb",
+      "mode": "100644"
+    },
+    {
+      "path": "src/handlers.h",
+      "kind": "blob",
+      "oid": "c66cbb29e55a44ab89292c449b57486b242f082f",
+      "mode": "100644"
+    },
+    {
+      "path": "src/interfaces.cpp",
+      "kind": "blob",
+      "oid": "0785d10d67418431d0754bd5b15e6daa99faf9fb",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/I3DCommit.cpp",
+      "kind": "blob",
+      "oid": "7ad46012f30985b3883346136ac0fde6f90bd87a",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/I3DDoppler.cpp",
+      "kind": "blob",
+      "oid": "174bd7571e4b970ecf480450c62db559c8d024e2",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/I3DGrouping.cpp",
+      "kind": "blob",
+      "oid": "45172b3b928eb9b505f6b8e42b29724091cc80f9",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/I3DLocation.cpp",
+      "kind": "blob",
+      "oid": "d323232259934b1144092e52af022ee02534807e",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/I3DMacroscopic.cpp",
+      "kind": "blob",
+      "oid": "01da236deddb2b5bdec68381e3e9fe2fb71af70e",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/I3DSource.cpp",
+      "kind": "blob",
+      "oid": "fdc7d36c1dcb2dc40bd056cd56f98749def28a97",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IAcousticEchoCancellation.cpp",
+      "kind": "blob",
+      "oid": "da3ca014e813e019cb79c9aebbe95d2c5a2bd775",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IAndroidBufferQueue.cpp",
+      "kind": "blob",
+      "oid": "289fbc42dedf80b288b13c0246aa892a2efea032",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IAndroidConfiguration.cpp",
+      "kind": "blob",
+      "oid": "f3d23e1ff091fde40a3fdec0882c79f9d9c6a39b",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IAndroidEffect.cpp",
+      "kind": "blob",
+      "oid": "e17ad7bf672b7379f528aebd29930e4481e123a9",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IAndroidEffectCapabilities.cpp",
+      "kind": "blob",
+      "oid": "923b6a71a4bde502ac2957e33bb9695ec23f657b",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IAndroidEffectSend.cpp",
+      "kind": "blob",
+      "oid": "4fe3e3861f0c3f0c8b85afad40f759a1d17dda92",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IAudioDecoderCapabilities.cpp",
+      "kind": "blob",
+      "oid": "c332a653af7517fc37ec63e647deadc8652acbc0",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IAudioEncoder.cpp",
+      "kind": "blob",
+      "oid": "511a0080b9def1bbf60320bb63a08e11438df5d4",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IAudioEncoderCapabilities.cpp",
+      "kind": "blob",
+      "oid": "3f45118a339ac0716d0a2af174d42d7e37673078",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IAudioIODeviceCapabilities.cpp",
+      "kind": "blob",
+      "oid": "f667e9848c32ef18910eda8fcd63df88b00051bc",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IAutomaticGainControl.cpp",
+      "kind": "blob",
+      "oid": "8d4556d86db28fc8102eb308eb1f6364a6fec90f",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IBassBoost.cpp",
+      "kind": "blob",
+      "oid": "4fc8ffd7dbce8068b401550114dac7d9970c41ea",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IBufferQueue.cpp",
+      "kind": "blob",
+      "oid": "f195720d6363267bb51e659f5b2f31ebffecbeb1",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IDeviceVolume.cpp",
+      "kind": "blob",
+      "oid": "58e10ff9e77ec829ca49e373ae01a9065c4b9eb2",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IDynamicInterfaceManagement.cpp",
+      "kind": "blob",
+      "oid": "e810c855faf9b780d08034e50e14173a0c1b1de3",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IDynamicSource.cpp",
+      "kind": "blob",
+      "oid": "8a97e528eb119e34c62e03513972d7c596d75d59",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IEffectSend.cpp",
+      "kind": "blob",
+      "oid": "9d88efa2cd2676696d4bf2be6f9385e29138ce83",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IEngine.cpp",
+      "kind": "blob",
+      "oid": "be2d2b0be8a5b3ce7baa5d2bb03ac1781970ee7f",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IEngineCapabilities.cpp",
+      "kind": "blob",
+      "oid": "681d82d923f276378399261eb5c1cd3ed60337e7",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IEnvironmentalReverb.cpp",
+      "kind": "blob",
+      "oid": "9402b27f4cccbbf31af22ddb3b4b5b32832cc068",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IEqualizer.cpp",
+      "kind": "blob",
+      "oid": "13b1804db28a10bdaea4e1ed8dfb9320c4efdb15",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/ILEDArray.cpp",
+      "kind": "blob",
+      "oid": "57938cc4f5d137cf32ff0d14164d3d387c9d3af7",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IMIDIMessage.cpp",
+      "kind": "blob",
+      "oid": "1657bc344a23d350d8bef8449395abec361f6ca2",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IMIDIMuteSolo.cpp",
+      "kind": "blob",
+      "oid": "ceb7d7697dfb6667b9851f940ae935a5dc415537",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IMIDITempo.cpp",
+      "kind": "blob",
+      "oid": "831fda9e99ffad5916c91a2ffa1d65f2227d64e2",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IMIDITime.cpp",
+      "kind": "blob",
+      "oid": "312e4bc85b7dd7ae0ae3d7c0d6885a346e96c34b",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IMetadataExtraction.cpp",
+      "kind": "blob",
+      "oid": "bc0e341f886d84b5925519f4b5f69ba7c41404b9",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IMetadataTraversal.cpp",
+      "kind": "blob",
+      "oid": "2432b9a73c93f3b7d1e5be2f15d25f84950ce938",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IMuteSolo.cpp",
+      "kind": "blob",
+      "oid": "46608e881abe549d87e5526b4a7d5297b9231ba8",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/INoiseSuppression.cpp",
+      "kind": "blob",
+      "oid": "839f395aa3fd2e29a2fbd5595368deef9f10f9c8",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IObject.cpp",
+      "kind": "blob",
+      "oid": "da88845c2a40325819b48a5b2c17b3116e5bb601",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IOutputMix.cpp",
+      "kind": "blob",
+      "oid": "1594d7c5d32fd60bf2f6a8943d6a652fdc707da6",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IOutputMixExt.cpp",
+      "kind": "blob",
+      "oid": "7a72d28c7a86dcb128be80e82f38b9903db9b398",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IPitch.cpp",
+      "kind": "blob",
+      "oid": "8672972832495c87a135bd4ba8d8a915c96be36e",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IPlay.cpp",
+      "kind": "blob",
+      "oid": "3dcffcd010c1072a87c641c38b637c8be9af80c2",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IPlaybackRate.cpp",
+      "kind": "blob",
+      "oid": "092d13b72dd626f2d4612ce17c5b6810dc788829",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IPrefetchStatus.cpp",
+      "kind": "blob",
+      "oid": "906ba77c7ef4c5174d4e571affce52870c6fad1c",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IPresetReverb.cpp",
+      "kind": "blob",
+      "oid": "07214e59f4c0ae59b65045e55c6f49f51ca47ab4",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IRatePitch.cpp",
+      "kind": "blob",
+      "oid": "f83b5b401cb2d916973e6cb82c47d43e25937c4c",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IRecord.cpp",
+      "kind": "blob",
+      "oid": "3ac3f0c2fed63182b0b49f0cd779a79f7eef3b61",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/ISeek.cpp",
+      "kind": "blob",
+      "oid": "3422ae1a7b20dbe3d02a8d3fd9ff5a2f350c1d75",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IStreamInformation.cpp",
+      "kind": "blob",
+      "oid": "582bc2abd508a54b95c4a5146f9851a8ada58ad9",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IThreadSync.cpp",
+      "kind": "blob",
+      "oid": "09d52dff4949012375133559316e94aa4328bb99",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IVibra.cpp",
+      "kind": "blob",
+      "oid": "67b10166f9d3f6a5f6857d0e9955d74d06f1dfbb",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IVideoDecoderCapabilities.cpp",
+      "kind": "blob",
+      "oid": "c9649a9943c40576e9b6b068c0f7d23b587bd2a6",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IVirtualizer.cpp",
+      "kind": "blob",
+      "oid": "d6c12dac40aa1e0a847fabd2160601cf2e144147",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IVisualization.cpp",
+      "kind": "blob",
+      "oid": "6991d809a2d37b0b0b2a74c276f817586984c55b",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itf/IVolume.cpp",
+      "kind": "blob",
+      "oid": "32c9b0ae9c260a5064dad20ce6edd57fa1edfe1b",
+      "mode": "100644"
+    },
+    {
+      "path": "src/itfstruct.h",
+      "kind": "blob",
+      "oid": "ab8a4d0e4f2691362b30c09397c0f6159e032083",
+      "mode": "100644"
+    },
+    {
+      "path": "src/libOpenMAXAL.map.txt",
+      "kind": "blob",
+      "oid": "14fb324d7ad1123984d528021e40011228117601",
+      "mode": "100644"
+    },
+    {
+      "path": "src/libOpenSLES.map.txt",
+      "kind": "blob",
+      "oid": "2f9f43f516c8abc837a146eb4fdcad8488c0e522",
+      "mode": "100644"
+    },
+    {
+      "path": "src/locks.cpp",
+      "kind": "blob",
+      "oid": "d2d7cb5abb2e8a7850c7177aed6dbc4e759eee41",
+      "mode": "100644"
+    },
+    {
+      "path": "src/locks.h",
+      "kind": "blob",
+      "oid": "0bb95bbcaf1cd0918c94e736bbf945d545a0a77e",
+      "mode": "100644"
+    },
+    {
+      "path": "src/objects/C3DGroup.cpp",
+      "kind": "blob",
+      "oid": "ad3afeeadb60850878f7d18fcd7314d7953bdb18",
+      "mode": "100644"
+    },
+    {
+      "path": "src/objects/CAudioPlayer.cpp",
+      "kind": "blob",
+      "oid": "dcad95a5ee56662761292346b40ccbeca3b43d4d",
+      "mode": "100644"
+    },
+    {
+      "path": "src/objects/CAudioRecorder.cpp",
+      "kind": "blob",
+      "oid": "6eab0cfce229270ccaf56dedd7e03f1e01d95888",
+      "mode": "100644"
+    },
+    {
+      "path": "src/objects/CEngine.cpp",
+      "kind": "blob",
+      "oid": "f90d956ad0bc1a92b15fd18ff69e4cc1a9e9bde8",
+      "mode": "100644"
+    },
+    {
+      "path": "src/objects/CMediaPlayer.cpp",
+      "kind": "blob",
+      "oid": "f77720e1bb9674ac58c9eea9bc60bc7a145faf20",
+      "mode": "100644"
+    },
+    {
+      "path": "src/objects/COutputMix.cpp",
+      "kind": "blob",
+      "oid": "340da0ba0237030daf6163d0fc2b8587b6e2cf32",
+      "mode": "100644"
+    },
+    {
+      "path": "src/platform.h",
+      "kind": "blob",
+      "oid": "1a2b5b43eabb80a781be415b871d862e14bda8e6",
+      "mode": "100644"
+    },
+    {
+      "path": "src/sl_entry.cpp",
+      "kind": "blob",
+      "oid": "41f33f7e10bd97f305299de762ea280ddf5ecbf7",
+      "mode": "100644"
+    },
+    {
+      "path": "src/sl_iid.cpp",
+      "kind": "blob",
+      "oid": "b82a0fe8695358daf57eae06234062ce99a17e89",
+      "mode": "100644"
+    },
+    {
+      "path": "src/sles.cpp",
+      "kind": "blob",
+      "oid": "6b393dc585de9af920050d2b8685eb26ea4e3989",
+      "mode": "100644"
+    },
+    {
+      "path": "src/sles_allinclusive.h",
+      "kind": "blob",
+      "oid": "0e6d09a46424afb4d511d119ae89a24dbdbd277b",
+      "mode": "100644"
+    },
+    {
+      "path": "src/sllog.cpp",
+      "kind": "blob",
+      "oid": "4364499fc635cbd949c8c90f0f293932c9909698",
+      "mode": "100644"
+    },
+    {
+      "path": "src/sllog.h",
+      "kind": "blob",
+      "oid": "dd8f201dc44bd3d863f465c3ade0a4307e3d8a95",
+      "mode": "100644"
+    },
+    {
+      "path": "src/sync.cpp",
+      "kind": "blob",
+      "oid": "14acc6974075776832aaf8bef908cad6e0585bc8",
+      "mode": "100644"
+    },
+    {
+      "path": "src/trace.cpp",
+      "kind": "blob",
+      "oid": "32ab08032e10d3147ed8a497c94bf75f94e72014",
+      "mode": "100644"
+    },
+    {
+      "path": "src/trace.h",
+      "kind": "blob",
+      "oid": "242a4093f6e4ee5a3cac6a3341dd4830099a1424",
+      "mode": "100644"
+    },
+    {
+      "path": "src/ut/OpenSLESUT.c",
+      "kind": "blob",
+      "oid": "f6e736a6533ffa7143766d64c9fee087c811ab77",
+      "mode": "100644"
+    },
+    {
+      "path": "src/ut/OpenSLESUT.h",
+      "kind": "blob",
+      "oid": "59f38ceb08104cb50f74edac562373e608f6689b",
+      "mode": "100644"
+    },
+    {
+      "path": "src/ut/slesutResult.c",
+      "kind": "blob",
+      "oid": "03c0f70f7cff1b336ef7bfd9d12e7bf012d6c4b4",
+      "mode": "100644"
+    },
+    {
+      "path": "src/xa_entry.cpp",
+      "kind": "blob",
+      "oid": "b1cddd544f9b894d3333ac1022ffaee9360ab9d6",
+      "mode": "100644"
+    },
+    {
+      "path": "src/xa_iid.cpp",
+      "kind": "blob",
+      "oid": "0f51ae59dc9bbeef9c3d339004af7ccc4bc4620d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/Android.bp",
+      "kind": "blob",
+      "oid": "c081fdbf81f85cafb2e121cfbef4aea99ccf9749",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/automated/Android.bp",
+      "kind": "blob",
+      "oid": "26d5066cc3858e52b713ed2ca1dd49e1d9b104a4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/automated/BufferQueue_test.cpp",
+      "kind": "blob",
+      "oid": "123e481aed447824e5d9d7deef7e712ffebea292",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/automated/README.md",
+      "kind": "blob",
+      "oid": "9e22a22ce2bb9eb10cfcf8599a3ac8bfc3be8d05",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/examples/Android.bp",
+      "kind": "blob",
+      "oid": "08409a9fe68ec8975e789bd9eb082187e7f0cb92",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/examples/slesTestBassBoostPath.cpp",
+      "kind": "blob",
+      "oid": "96c3352119d00195b5c17ad4a143549cbc2ad882",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/examples/slesTestDecodeAac.cpp",
+      "kind": "blob",
+      "oid": "2773c38ff68fef3e3d3d872776a7cf4ecdc55a1a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/examples/slesTestDecodeToBuffQueue.cpp",
+      "kind": "blob",
+      "oid": "59a7316b78ba64f267c599e87c000fed1c50c1c4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/examples/slesTestEffectCapabilities.cpp",
+      "kind": "blob",
+      "oid": "e129a55c927d44ad3e27cd750b8b342da0de2976",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/examples/slesTestEqFdPath.cpp",
+      "kind": "blob",
+      "oid": "4d5a80fb4589c0546332ae439bfcb271c2c3415a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/examples/slesTestEqOutputPath.cpp",
+      "kind": "blob",
+      "oid": "072cd962815f95000dbbad4d7369d8a3a702cb48",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/examples/slesTestFeedback.cpp",
+      "kind": "blob",
+      "oid": "e90972c732e26bf3222072169b03ca2223aecd1f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/examples/slesTestPlayFdPath.cpp",
+      "kind": "blob",
+      "oid": "344fc26d3d223784cfcc3be9f1f1f25f94d97e60",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/examples/slesTestRecBuffQueue.cpp",
+      "kind": "blob",
+      "oid": "91235381937dacf2b6be43eceff26acb027d8134",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/examples/slesTestSawtoothBufferQueue.cpp",
+      "kind": "blob",
+      "oid": "ae9a4f3ce5a87b40f0b2e2ef4697b47a710928e2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/examples/slesTestSendToPresetReverb.cpp",
+      "kind": "blob",
+      "oid": "7487bfbe33190b8391f728349e0bf3b744ea12b1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/examples/slesTestVirtualizerPath.cpp",
+      "kind": "blob",
+      "oid": "e6b01b8dbb44992c802d0d91ebd799f3040892e0",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/examples/xaVideoDecoderCapabilities.cpp",
+      "kind": "blob",
+      "oid": "22605c4be8a348a082f1120b476f3390076b37bd",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/listening/Android.bp",
+      "kind": "blob",
+      "oid": "8da6adba20786af26e20f1add9934a7d59e7ee13",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/listening/seekTorture.c",
+      "kind": "blob",
+      "oid": "d89f5b531c01807415da394839d5d065b9bbf16b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/listening/slesTest_playMuteSolo.cpp",
+      "kind": "blob",
+      "oid": "77a34d66255bc32c0ff5452e8d303e630de177fd",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/mimeUri/Android.bp",
+      "kind": "blob",
+      "oid": "3c5bbafc059d42fac10ec977407dec3fc76a4c7f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/mimeUri/slesTestGetPositionUri.cpp",
+      "kind": "blob",
+      "oid": "18b60b9c192300ede7ecba7af0241c6e7ee54bf0",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/mimeUri/slesTestLoopUri.cpp",
+      "kind": "blob",
+      "oid": "3fe3ea3bf690d94f61edc2f15373165f523c4766",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/mimeUri/slesTestManyPlayers.cpp",
+      "kind": "blob",
+      "oid": "9811802cca939d3c1fdaa15be7693c64c896f5b3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/mimeUri/slesTestPlayStreamType.cpp",
+      "kind": "blob",
+      "oid": "2d80be7ea178233e5886770c340133ae7d67443b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/mimeUri/slesTestPlayUri.cpp",
+      "kind": "blob",
+      "oid": "998ddc9a96316cef5b6ff36c64e02ae183ddaf85",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/mimeUri/slesTestPlayUri2.cpp",
+      "kind": "blob",
+      "oid": "984e089ec97c07dd0f1cb66526764f026b2f4e6b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/mimeUri/slesTestSlowDownUri.cpp",
+      "kind": "blob",
+      "oid": "f85693a4499093cef2b069314979b24eea2e8bc0",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/mimeUri/slesTest_playStates.cpp",
+      "kind": "blob",
+      "oid": "e444d58ec05fdd5c70e43bbf6551f8275e1f986f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/mimeUri_test.cpp",
+      "kind": "blob",
+      "oid": "3280a85941add03ecd83e187125a0af3916120fb",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native-media/Android.bp",
+      "kind": "blob",
+      "oid": "709ff26dd3be2ac05e4f277b1b67de4b84f470d8",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native-media/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "ab94d1d7600d1177249cf1c17d2528bb699b9d7c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native-media/jni/Android.bp",
+      "kind": "blob",
+      "oid": "50ece7a3ae9546eeff03fd2f46b315a72b0d7c12",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native-media/jni/native-media-jni.c",
+      "kind": "blob",
+      "oid": "823fe338e11dd6d3f19fcd948c85beceffb34c9c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native-media/res/drawable/icon.png",
+      "kind": "blob",
+      "oid": "a07c69fa5a0f4da5d5efe96eea12a543154dbab6",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native-media/res/layout/main.xml",
+      "kind": "blob",
+      "oid": "d303b19633c51e5ade6d05d9712f0c36705ba34a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native-media/res/values/strings.xml",
+      "kind": "blob",
+      "oid": "2b5207e318b0ba3150f374712a2066778c4a1536",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native-media/src/com/example/nativemedia/MyGLSurfaceView.java",
+      "kind": "blob",
+      "oid": "688bea751dc6cac6f1e04abcffe2dedb8569a1c7",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native-media/src/com/example/nativemedia/NativeMedia.java",
+      "kind": "blob",
+      "oid": "816d01f30b7061e4dffe0266d6f1e9db6a6dcef3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/sandbox/Android.bp",
+      "kind": "blob",
+      "oid": "c9c37a7da10f0d103c09fe6d8578f0fd9913fbb1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/sandbox/configbq.c",
+      "kind": "blob",
+      "oid": "c13ae10a2bbf90d463321d3449eb829c680b5ca9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/sandbox/dim.c",
+      "kind": "blob",
+      "oid": "8e815df9cd03af3c4e3900c299559501f5eb31f9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/sandbox/dual.c",
+      "kind": "blob",
+      "oid": "42bd452d8d6c49b2afea2658ad5ae2fa45b8341d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/sandbox/engine.c",
+      "kind": "blob",
+      "oid": "9b17b3502a7444f48361b66053e386dfc7e4f4f1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/sandbox/getch.c",
+      "kind": "blob",
+      "oid": "446770a12013542c721dc4e20a1e93f24ba12fae",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/sandbox/getch.h",
+      "kind": "blob",
+      "oid": "41b050dffd7878d74fdb0e00e0c46ac02e227d1c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/sandbox/intbufq.c",
+      "kind": "blob",
+      "oid": "b3a9fd5d4931a10e7992783be5c985f493f8eea2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/sandbox/monkey.c",
+      "kind": "blob",
+      "oid": "03a808208c9b9e49da247de5771b2afad24070e8",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/sandbox/multiplay.c",
+      "kind": "blob",
+      "oid": "e4f42ce721b955b34054c85879a39dc32fa75e51",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/sandbox/multithread.c",
+      "kind": "blob",
+      "oid": "9e4b4c761f6eb01d2efccda61c0c3cb4ac955c1a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/sandbox/nativewindow.cpp",
+      "kind": "blob",
+      "oid": "e0a17663baced3cf07ffdddce8d9018a202ec318",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/sandbox/nativewindow.h",
+      "kind": "blob",
+      "oid": "24c9399922cdfc16729ce9766f308aabfa6f62b1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/sandbox/object.c",
+      "kind": "blob",
+      "oid": "993134ff3a8c50f8d33c45b0b73ce1015b9c2409",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/sandbox/outputmix.c",
+      "kind": "blob",
+      "oid": "74560b5ab975494b4e4f85bb2228d62665cf84d9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/sandbox/playbq.cpp",
+      "kind": "blob",
+      "oid": "c54202811f9942cd8cdc70177f4b2834410c8544",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/sandbox/reverb.c",
+      "kind": "blob",
+      "oid": "eedf2bde8919ad2732fb521f9003be5096c23847",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/sandbox/srcsink.c",
+      "kind": "blob",
+      "oid": "f78e651269ba59264d599d7020360f502defea56",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/sandbox/streamSource/Android.bp",
+      "kind": "blob",
+      "oid": "cd9b388cf09be8cf9374295059976728d40e0f95",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/sandbox/streamSource/slesTestPlayStream.cpp",
+      "kind": "blob",
+      "oid": "5b3eeb59f84a394e3b069dd9a602c16a9a45d99a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/sandbox/urimime.c",
+      "kind": "blob",
+      "oid": "20784bcd90a0887706208ae77a216acf44ed72e4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/sandbox/xa.c",
+      "kind": "blob",
+      "oid": "2d8f2a5d8fe91a6e12400df28faa76781b033108",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/sandbox/xaplay.c",
+      "kind": "blob",
+      "oid": "bcb01ac078ecadd0f96cd2e0758cc07b5dc5b0d4",
+      "mode": "100644"
+    },
+    {
+      "path": "tools/hashgen/MPH.h",
+      "kind": "blob",
+      "oid": "1411433f01fe0732d5914f2b4ed1fb627b40dc03",
+      "mode": "120000"
+    },
+    {
+      "path": "tools/hashgen/Makefile",
+      "kind": "blob",
+      "oid": "37188a383582d22f3ed539db97468a91dffcfea9",
+      "mode": "100644"
+    },
+    {
+      "path": "tools/hashgen/OpenSLES_IID.c",
+      "kind": "blob",
+      "oid": "01c15ccb86e348d8157a18a6fb969f9bab550bf9",
+      "mode": "120000"
+    },
+    {
+      "path": "tools/hashgen/README.txt",
+      "kind": "blob",
+      "oid": "4905bb93e48d12209994a03c3747e1c3df2865cb",
+      "mode": "100644"
+    },
+    {
+      "path": "tools/hashgen/frag1.c",
+      "kind": "blob",
+      "oid": "5424ed60ac240d03601752ae6246c10bc77f361e",
+      "mode": "100644"
+    },
+    {
+      "path": "tools/hashgen/frag2.c",
+      "kind": "blob",
+      "oid": "6880f37ccbc0e0041cb837e2fdafdb36b9d192a2",
+      "mode": "100644"
+    },
+    {
+      "path": "tools/hashgen/frag3.c",
+      "kind": "blob",
+      "oid": "99eb3a0afb1dd5d769486670b00930e51c357dea",
+      "mode": "100644"
+    },
+    {
+      "path": "tools/hashgen/hash.sed",
+      "kind": "blob",
+      "oid": "536e9014320c1fbe7c48f7cccdb883fed84fb325",
+      "mode": "100644"
+    },
+    {
+      "path": "tools/hashgen/interfaces.c",
+      "kind": "blob",
+      "oid": "4b75b6a51ffd4620b726de2eb07c383455cee72f",
+      "mode": "120000"
+    },
+    {
+      "path": "tools/hashgen/part1.c",
+      "kind": "blob",
+      "oid": "e4097beb23790ece10999cfdada0b08abb1ee120",
+      "mode": "100644"
+    },
+    {
+      "path": "tools/hashgen/part4.c",
+      "kind": "blob",
+      "oid": "272bcecf5e920111bdbccff99930d6e2b4871164",
+      "mode": "100644"
+    },
+    {
+      "path": "tools/hashgen/part6.c",
+      "kind": "blob",
+      "oid": "e639143b69a63675708b0ef84b0a58abd21c8c4b",
+      "mode": "100644"
+    },
+    {
+      "path": "tools/hashgen/part8.c",
+      "kind": "blob",
+      "oid": "79a88ab68e2443de2e356af53ecacdf600e81dbb",
+      "mode": "100644"
+    },
+    {
+      "path": "tools/hashgen/test.c",
+      "kind": "blob",
+      "oid": "4fe8ea2815ea21c68620f15e981ceee4eed6bd9e",
+      "mode": "100644"
+    },
+    {
+      "path": "tools/mphtogen/MPH.h",
+      "kind": "blob",
+      "oid": "1411433f01fe0732d5914f2b4ed1fb627b40dc03",
+      "mode": "120000"
+    },
+    {
+      "path": "tools/mphtogen/MPH_to.c",
+      "kind": "blob",
+      "oid": "e362396ec1d32e5980b73f18b82cd91351b0550d",
+      "mode": "120000"
+    },
+    {
+      "path": "tools/mphtogen/MPH_to.h",
+      "kind": "blob",
+      "oid": "9513f11530638f69d89ec6440e634ad933f3abfe",
+      "mode": "120000"
+    },
+    {
+      "path": "tools/mphtogen/Makefile",
+      "kind": "blob",
+      "oid": "788f4122fa8c4c80c400f0fb588f237d21d6b717",
+      "mode": "100644"
+    },
+    {
+      "path": "tools/mphtogen/README.txt",
+      "kind": "blob",
+      "oid": "4ff0a0994f3759af5f7a69ce8ab65facd1dbdb96",
+      "mode": "100644"
+    },
+    {
+      "path": "tools/mphtogen/mphtogen.c",
+      "kind": "blob",
+      "oid": "914920217f1350b472c8dd0c92017405d6c92ba5",
+      "mode": "100644"
+    },
+    {
+      "path": "tools/permute/Makefile",
+      "kind": "blob",
+      "oid": "8a07864d94892b24f8e209784ea0d67db0d02785",
+      "mode": "100644"
+    },
+    {
+      "path": "tools/permute/permute.c",
+      "kind": "blob",
+      "oid": "6997552e2568135574e6b5430372aaca6c5a86a9",
+      "mode": "100644"
+    },
+    {
+      "path": "tools/permute/readme.txt",
+      "kind": "blob",
+      "oid": "44f415931e49a204f6d610bb0e0d381bd55be5b7",
+      "mode": "100644"
+    }
+  ]
+}

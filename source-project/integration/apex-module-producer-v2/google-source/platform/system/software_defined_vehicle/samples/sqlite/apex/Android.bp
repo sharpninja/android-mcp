@@ -1,0 +1,61 @@
+// Copyright (C) 2026 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+apex {
+    name: "com.android.sdv.sample.sqlite",
+    native_shared_libs: [
+        "libsqlite_cpp_sample_service_bundle",
+        "libsqlite_rust_sample_service_bundle",
+    ],
+    // Json manifest file describing meta info of this APEX bundle.
+    // The 'name' field in this json is used as the mounting point.
+    manifest: "apex_manifest.json",
+    file_contexts: "file_contexts",
+    prebuilts: [
+        // SDV service bundles manifest file.
+        "com.android.sdv.sample.sqlite.sdv_manifest",
+        // Linker configuration to enable loading library from apex.
+        "com.android.sdv.sample.sqlite.linker-config",
+    ],
+    updatable: true,
+    min_sdk_version: "35",
+    // This module is installed into /product partition.
+    product_specific: true,
+    key: "com.android.sdv.samples.key",
+}
+
+// SDV manifest file with the metadata information about the service bundles stored in the APEX.
+prebuilt_etc {
+    name: "com.android.sdv.sample.sqlite.sdv_manifest",
+    // The source path to the manifest file.
+    src: "sdv_service_bundles_manifest.textproto",
+    // The name of the installed file shall be `sdv_service_bundles_manifest.textproto`.
+    filename: "sdv_service_bundles_manifest.textproto",
+    // Disable the direct installation of the manifest to any of the partitions.
+    // The manifest will only be used inside of service bundle APEXes.
+    installable: false,
+}
+
+// The linker config to allow libraries in the APEX to be linked from outside of the APEX.
+linker_config {
+    name: "com.android.sdv.sample.sqlite.linker-config",
+    src: "linker.config.json",
+    // Disable the direct installation of the manifest to any of the partitions.
+    // The linker configuration will only be used inside of service bundle APEXes.
+    installable: false,
+}

@@ -1,0 +1,52 @@
+parsed sources 0 / 5
+{
+  "counts": {
+    "sources": 5,
+    "bindings": 12,
+    "occurrences": 12,
+    "binding_declarations": 12,
+    "permission_definitions": 1,
+    "permission_symbols": 1,
+    "permission_relations": 13,
+    "aidl_schemas": 1,
+    "annotation_evidence": 1,
+    "issues": 1,
+    "effective_entries": 12
+  },
+  "integrity_check": "ok",
+  "unavailable_paths": 0
+}
+test_current_sdk_annotation_maps_to_exact_jvm_target (test_source_annotation_targets.SourceTargets.test_current_sdk_annotation_maps_to_exact_jvm_target) ... ok
+parsed sources 0 / 4
+{
+  "counts": {
+    "sources": 4,
+    "bindings": 10,
+    "occurrences": 10,
+    "binding_declarations": 10,
+    "permission_definitions": 1,
+    "permission_symbols": 1,
+    "permission_relations": 11,
+    "aidl_schemas": 1,
+    "annotation_evidence": 1,
+    "issues": 0,
+    "effective_entries": 10
+  },
+  "integrity_check": "ok",
+  "unavailable_paths": 0
+}
+test_shadowed_type_variable_does_not_match_java_lang_alias (test_source_annotation_targets.SourceTargets.test_shadowed_type_variable_does_not_match_java_lang_alias) ... FAIL
+
+======================================================================
+FAIL: test_shadowed_type_variable_does_not_match_java_lang_alias (test_source_annotation_targets.SourceTargets.test_shadowed_type_variable_does_not_match_java_lang_alias)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/catalog-integrated/tests/test_source_annotation_targets.py", line 16, in test_shadowed_type_variable_does_not_match_java_lang_alias
+    db=sqlite3.connect(r/'out/catalog.sqlite');self.addCleanup(db.close);self.assertIsNone(db.execute('SELECT binding_id FROM annotation_evidence').fetchone()[0])
+                                                                         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '64a1702820f1d56dc48fe90d91c59969a2e99706258a5364d1b397c8bd2a57d1' is not None
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.076s
+
+FAILED (failures=1)

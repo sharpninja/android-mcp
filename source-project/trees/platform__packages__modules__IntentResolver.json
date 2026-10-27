@@ -1,0 +1,3421 @@
+{
+  "repo": "platform/packages/modules/IntentResolver",
+  "requested_revision": "refs/tags/android-17.0.0_r1",
+  "revision": "514e2233f8c1183308e31c86386aa932003c307a",
+  "entries": [
+    {
+      "path": "Android.bp",
+      "kind": "blob",
+      "oid": "60d870dce9c41e4b45f4f722ce1112d00345f357",
+      "mode": "100644"
+    },
+    {
+      "path": "AndroidManifest-app.xml",
+      "kind": "blob",
+      "oid": "6e14f4f8636098bdbab994430be112f8ee8da81a",
+      "mode": "100644"
+    },
+    {
+      "path": "AndroidManifest-lib.xml",
+      "kind": "blob",
+      "oid": "86fa436d5bccea2cb8cde340e97be0daaf7c2f13",
+      "mode": "100644"
+    },
+    {
+      "path": "OWNERS",
+      "kind": "blob",
+      "oid": "13a6eeef69ad365d47a339c66f64a6804c4352c1",
+      "mode": "100644"
+    },
+    {
+      "path": "PREUPLOAD.cfg",
+      "kind": "blob",
+      "oid": "5059feb1ff43bb4ce380d1c88e700e1a42f08b87",
+      "mode": "100644"
+    },
+    {
+      "path": "README.md",
+      "kind": "blob",
+      "oid": "192f5ca1bfcbbcaef8d41ac9631bf19e8ab4b80b",
+      "mode": "100644"
+    },
+    {
+      "path": "TEST_MAPPING",
+      "kind": "blob",
+      "oid": "51c7bd43a2a9486698e4bc58691618916d035627",
+      "mode": "100644"
+    },
+    {
+      "path": "aconfig/Android.bp",
+      "kind": "blob",
+      "oid": "a56a8e2d3b41f24e40e5fa8703474311afa149bf",
+      "mode": "100644"
+    },
+    {
+      "path": "aconfig/FeatureFlags.aconfig",
+      "kind": "blob",
+      "oid": "0639edfbabbd73c164d0127884728b69dfaa1579",
+      "mode": "100644"
+    },
+    {
+      "path": "aconfig/README.md",
+      "kind": "blob",
+      "oid": "87a6651c725cf75b3b0f8ebb289644691d7d392c",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/anim/resolver_close_anim.xml",
+      "kind": "blob",
+      "oid": "18b52e074fde966c59957ce0dfda073fece83c74",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/anim/resolver_launch_anim.xml",
+      "kind": "blob",
+      "oid": "f59ed3f9c919ac812bfdf35ffe6627b4198bfc19",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/anim/slide_in_right.xml",
+      "kind": "blob",
+      "oid": "3d3cd91913cfe340773df866f186f6f063cdbdcb",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/anim/slide_out_left.xml",
+      "kind": "blob",
+      "oid": "b34715187c5d2b9ec9210551a46fe2f57b07d740",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/color/resolver_profile_tab_text.xml",
+      "kind": "blob",
+      "oid": "16a1d9e7309b098a567a9815cf49e123cd0972cb",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/drawable-h480dp/content_preview_badge_bg.xml",
+      "kind": "blob",
+      "oid": "98a17e0c74cc30602beff00b8d62ddb1f9dfcf49",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/drawable/bottomsheet_background.xml",
+      "kind": "blob",
+      "oid": "13585a9bbfc9cb1cdae93fb0f676977d8284c9fc",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/drawable/checkbox.xml",
+      "kind": "blob",
+      "oid": "189d01ffd735a9c4befbc887822eb9a19022e093",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/drawable/chevron_right.xml",
+      "kind": "blob",
+      "oid": "cfa3f744082ffa915f25233f1af1adf93f39bfc5",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/drawable/chooser_action_button_bg.xml",
+      "kind": "blob",
+      "oid": "70295ef2b9f363da7a5a5211055f47f8f102c281",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/drawable/chooser_content_preview_rounded.xml",
+      "kind": "blob",
+      "oid": "18ebd73eed118d70a185327b7d88c2d3563b9add",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/drawable/chooser_dialog_background.xml",
+      "kind": "blob",
+      "oid": "9c38cb370479a93071e40ba2c0bfc4b0348f48dd",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/drawable/chooser_direct_share_icon_placeholder.xml",
+      "kind": "blob",
+      "oid": "9642a0d5af50c2cbc6116c2205564a706f6e491b",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/drawable/chooser_file_generic.xml",
+      "kind": "blob",
+      "oid": "006dfba4a3bb54f83ba514b525ee5a7091298a65",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/drawable/chooser_group_background.xml",
+      "kind": "blob",
+      "oid": "036028de7bcb10979797f01180098f7483e011ea",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/drawable/chooser_pinned_background.xml",
+      "kind": "blob",
+      "oid": "e8c9910e4e4b118018c6837e6c640122ae2e985d",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/drawable/chooser_row_layer_list.xml",
+      "kind": "blob",
+      "oid": "f767113c13a50f75dce0b733494bbd160c74f69c",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/drawable/content_preview_badge_bg.xml",
+      "kind": "blob",
+      "oid": "56ac31cc0dd87b7ea69787a3d5d8ce6a78f49b07",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/drawable/dialog_bottom_background.xml",
+      "kind": "blob",
+      "oid": "59508652818e0d6bc4aeede52f5551d97efeba44",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/drawable/edit_action_background.xml",
+      "kind": "blob",
+      "oid": "ef45610f4dca1fa41e061df93f532ed33ceb7bbd",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/drawable/ic_chooser_group_arrow.xml",
+      "kind": "blob",
+      "oid": "35a835eecfd5d21631b625f48fd8f9493f757df8",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/drawable/ic_chooser_pin.xml",
+      "kind": "blob",
+      "oid": "cdb071e056b301adf8abe18d97a3f4203f951a57",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/drawable/ic_chooser_pin_dialog.xml",
+      "kind": "blob",
+      "oid": "2ac01c79e316932a11cafb1103e9ffff29ff0b2b",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/drawable/ic_close.xml",
+      "kind": "blob",
+      "oid": "053ee9a1091cff4e78dfea7faf5abc1a09d18bbc",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/drawable/ic_drag_handle.xml",
+      "kind": "blob",
+      "oid": "b7fe7f50b06f0ea6dcfe6de782c8ff07f62783f4",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/drawable/ic_file_copy.xml",
+      "kind": "blob",
+      "oid": "0667e47409d04865125cd0e3a8bd58ab1486b150",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/drawable/ic_file_video.xml",
+      "kind": "blob",
+      "oid": "3156c55a31e097928741df81633ebbc67fc5a873",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/drawable/ic_play_circle_filled_24px.xml",
+      "kind": "blob",
+      "oid": "f67127ca98e788815b3d7e467537ee415367a0fc",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/drawable/iconfactory_adaptive_icon_drawable_wrapper.xml",
+      "kind": "blob",
+      "oid": "7d6677a9886270cd27357d6a306689111a74d32b",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/drawable/inset_resolver_profile_tab_bg.xml",
+      "kind": "blob",
+      "oid": "bc62b0478047c85b3ecb045c1e71b497aca608af",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/drawable/resolver_button_bg.xml",
+      "kind": "blob",
+      "oid": "0ab15e82d6fdd2526cb3e336094fbc12d6d01124",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/drawable/resolver_icon_placeholder.xml",
+      "kind": "blob",
+      "oid": "7236fbe8a65524168b8864aef4fea2b958a52191",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/drawable/resolver_outlined_button_bg.xml",
+      "kind": "blob",
+      "oid": "36e392dcb2db6cc0a812d76cff5a2fed245f2372",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/drawable/resolver_profile_tab_bg.xml",
+      "kind": "blob",
+      "oid": "3b7407527fbc4c08264276575f6791fab9762061",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/drawable/single_file.xml",
+      "kind": "blob",
+      "oid": "af46c97e327e9f0960bdcf2dfb92c49c240cced4",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/layout-h480dp/image_preview_image_item.xml",
+      "kind": "blob",
+      "oid": "798cda42f04391b9f9514853d7a1452919e54ee4",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/layout-h480dp/image_preview_loading_item.xml",
+      "kind": "blob",
+      "oid": "69ad18ada52907f0dd56e4fa6d0e0bcf70a9ae09",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/layout-h480dp/image_preview_other_item.xml",
+      "kind": "blob",
+      "oid": "470f105af54bc5cdd56ec5a7957115f0aad1c5b9",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/layout/chooser_action_row.xml",
+      "kind": "blob",
+      "oid": "c228fd44fcaaac3555602a1ab936f50176baad71",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/layout/chooser_action_view.xml",
+      "kind": "blob",
+      "oid": "5489a96bd617398a272e3855946b88c0c7b03a3d",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/layout/chooser_dialog.xml",
+      "kind": "blob",
+      "oid": "66d24e9a303ca1c45986d8c6090fa03551b6ffa9",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/layout/chooser_dialog_item.xml",
+      "kind": "blob",
+      "oid": "66b251e43937e3c077eef0a137d08c740b71e745",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/layout/chooser_grid_item_hover.xml",
+      "kind": "blob",
+      "oid": "bdcd97fd84901fcaa6c2d63dad01176d0425f967",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/layout/chooser_grid_preview.xml",
+      "kind": "blob",
+      "oid": "978033e0bbc9f2ff177d9d5c01c8492164e041f8",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/layout/chooser_grid_preview_file.xml",
+      "kind": "blob",
+      "oid": "5be37481bf529a9663849ffb2775dd042d77eff4",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/layout/chooser_grid_preview_files_text.xml",
+      "kind": "blob",
+      "oid": "60e9e11d712222a1abf5f0279a4ba8bd25faa42c",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/layout/chooser_grid_preview_image.xml",
+      "kind": "blob",
+      "oid": "b14f6463d277f63cc779896a3959bcd0d227cd21",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/layout/chooser_grid_preview_text.xml",
+      "kind": "blob",
+      "oid": "242b9409e6cf11f6942a752dfea0b08e53996e3a",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/layout/chooser_grid_scrollable_preview.xml",
+      "kind": "blob",
+      "oid": "b00a85f20902e15c12bc5d695fcec9040a7d8c17",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/layout/chooser_headline_row.xml",
+      "kind": "blob",
+      "oid": "9c8e83a18965c1fffb5f4251db991dd7b676858d",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/layout/chooser_list_per_profile_wrap.xml",
+      "kind": "blob",
+      "oid": "d1574f3fcb155ffc9dc42ed7b116010a613b4b07",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/layout/chooser_profile_row.xml",
+      "kind": "blob",
+      "oid": "855ee9ad1789c6b849b859e175905e8990945566",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/layout/chooser_row.xml",
+      "kind": "blob",
+      "oid": "cb8a53f4467f4cc27a9b2b1c744cdc9218111405",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/layout/image_preview_image_item.xml",
+      "kind": "blob",
+      "oid": "442e9345fa957dcee4f591cf71023545c111096f",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/layout/image_preview_loading_item.xml",
+      "kind": "blob",
+      "oid": "3d1d73218d489a393856e3164c62e775bd40c437",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/layout/image_preview_other_item.xml",
+      "kind": "blob",
+      "oid": "db458656a9590dc7d832c6c8e0bb5355733a1310",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/layout/miniresolver.xml",
+      "kind": "blob",
+      "oid": "54ede3601fa195822d70b8aab4ae3da0b4f46a40",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/layout/resolve_grid_item.xml",
+      "kind": "blob",
+      "oid": "b7e970c65a426d83fea0a79b6f8e646392d19871",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/layout/resolve_list_item.xml",
+      "kind": "blob",
+      "oid": "9eca00311efa442b8134a1bbf7d2a8278b813fa4",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/layout/resolver_different_item_header.xml",
+      "kind": "blob",
+      "oid": "d1bd2cee85a0d9995928d11c6173b238b0786941",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/layout/resolver_empty_states.xml",
+      "kind": "blob",
+      "oid": "7e6b9e5fce94b6d638f11ecf7629a6675113a33f",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/layout/resolver_list.xml",
+      "kind": "blob",
+      "oid": "00e0ff72c961599310ac9647e0cfb728442ecb4a",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/layout/resolver_list_per_profile.xml",
+      "kind": "blob",
+      "oid": "384260e5b2e421d19c8ca6b8caf56c90f1480517",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/layout/resolver_list_with_default.xml",
+      "kind": "blob",
+      "oid": "42d2c2931da713ea961541fc055952fa4bb4513b",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/layout/resolver_profile_tab_button.xml",
+      "kind": "blob",
+      "oid": "7404dc33be7f31d9f9937976e7f8397976697ac5",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-af/strings.xml",
+      "kind": "blob",
+      "oid": "4bab5aa06c11693db545007a83e73d33e51c187a",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-am/strings.xml",
+      "kind": "blob",
+      "oid": "8444ce937883d4872a257a336ce031af929dc0f8",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-ar/strings.xml",
+      "kind": "blob",
+      "oid": "683485ef742ea3ea3b0615f8a68ef3f51b40e062",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-as/strings.xml",
+      "kind": "blob",
+      "oid": "13a1c5e57f815f8b527860aa2912e255f7694fab",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-az/strings.xml",
+      "kind": "blob",
+      "oid": "fc41b8975799e50ba76286b01e115228a7c020d9",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-b+sr+Latn/strings.xml",
+      "kind": "blob",
+      "oid": "3297d8862a1bee2ffc97bbe67a32651c507683f6",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-be/strings.xml",
+      "kind": "blob",
+      "oid": "51c5987a76900fc7c5226ff0bde2c7d39d79ade2",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-bg/strings.xml",
+      "kind": "blob",
+      "oid": "2472685e671699b918c674cf5964ab40e4447f6f",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-bn/strings.xml",
+      "kind": "blob",
+      "oid": "10f4cc3eaee3cf3b40d01ff3df13cd233ab680d7",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-bs/strings.xml",
+      "kind": "blob",
+      "oid": "2276ad1d463116d4dbf044962e039ac698d4da01",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-ca/strings.xml",
+      "kind": "blob",
+      "oid": "414461a823c104f7c50bf487b4e1aed8a8a577e7",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-cs/strings.xml",
+      "kind": "blob",
+      "oid": "6e6854b738fd0978c8d75e02dc51222d2e18153f",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-da/strings.xml",
+      "kind": "blob",
+      "oid": "4a7d3728a3352328338739fbc22aab167e075b09",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-de/strings.xml",
+      "kind": "blob",
+      "oid": "821e75c14e3bf43f411f33a229a91277e64f68dc",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-el/strings.xml",
+      "kind": "blob",
+      "oid": "9dcc8d082ca160766e364a7437593245a15f4488",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-en-rAU/strings.xml",
+      "kind": "blob",
+      "oid": "e18d57c56481c260d55e21688b20d18808f84d17",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-en-rCA/strings.xml",
+      "kind": "blob",
+      "oid": "241602cf732147f19336e0660d420ff9ccc81d85",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-en-rGB/strings.xml",
+      "kind": "blob",
+      "oid": "e18d57c56481c260d55e21688b20d18808f84d17",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-en-rIN/strings.xml",
+      "kind": "blob",
+      "oid": "e18d57c56481c260d55e21688b20d18808f84d17",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-en-rXC/strings.xml",
+      "kind": "blob",
+      "oid": "4fc18b621fc8e161ec80dcecfa75beb22d4c39f7",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-es-rUS/strings.xml",
+      "kind": "blob",
+      "oid": "f91b10e0f7a60aa0ee76a866031f14851212c602",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-es/strings.xml",
+      "kind": "blob",
+      "oid": "ecbaefcb9b158ae305ae643100274cc818c321cc",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-et/strings.xml",
+      "kind": "blob",
+      "oid": "803d6f31d85f131518fee8573ee88295e00aaf69",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-eu/strings.xml",
+      "kind": "blob",
+      "oid": "766d8ae596f8307f22ade1ee698adc970e15441c",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-fa/strings.xml",
+      "kind": "blob",
+      "oid": "1a083a90bf7ee7804403a2aedc8b3fbf5365971c",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-fi/strings.xml",
+      "kind": "blob",
+      "oid": "9ada0dbd4e7f7b664221117dd2f4832d1bac0bc9",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-fr-rCA/strings.xml",
+      "kind": "blob",
+      "oid": "0b71645b51624c697e7c3eabe1641c1dbb58a246",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-fr/strings.xml",
+      "kind": "blob",
+      "oid": "5304957a367bcd1ad6d0597e96b35ecd2239a946",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-gl/strings.xml",
+      "kind": "blob",
+      "oid": "61397f35cefb2e3cc7bd0f49be0c506e2418f14e",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-gu/strings.xml",
+      "kind": "blob",
+      "oid": "d062dfdeb83d20d171b7161ea9f038b5b3fe81c2",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-h480dp/dimens.xml",
+      "kind": "blob",
+      "oid": "74fab4ea6f7d2e928855391eb0573b6a88d3f635",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-h480dp/integers.xml",
+      "kind": "blob",
+      "oid": "1195d6b75ea64fe72991c0a8c55e9b3f7ec5388f",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-h600dp/dimens.xml",
+      "kind": "blob",
+      "oid": "8ec0dc1d8bb8f413da08591484cce4e59d992450",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-hi/strings.xml",
+      "kind": "blob",
+      "oid": "d585beeebbc033d66d0e409e570934f9a107412a",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-hr/strings.xml",
+      "kind": "blob",
+      "oid": "4288324e621848ba07a93799e7f776a71b42f965",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-hu/strings.xml",
+      "kind": "blob",
+      "oid": "311741be4707ced9ec2b6e6596dc7e01cec157f8",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-hy/strings.xml",
+      "kind": "blob",
+      "oid": "a0de81488eb3dfb6ada566d54b7155213a73c8a6",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-in/strings.xml",
+      "kind": "blob",
+      "oid": "7aab84fa6f523efd85052a4274627216c87c8c2d",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-is/strings.xml",
+      "kind": "blob",
+      "oid": "5a929e7f6339ffefd19cee75ee481b68ea7908f8",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-it/strings.xml",
+      "kind": "blob",
+      "oid": "a6baca09850f7d6ec7727bc0386bd57fc8b8e10f",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-iw/strings.xml",
+      "kind": "blob",
+      "oid": "06d5f5b082fafb35b44e107410c815fb4d8d76e6",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-ja/strings.xml",
+      "kind": "blob",
+      "oid": "d2f5369d19332be850425fa4c31471e0831e824f",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-ka/strings.xml",
+      "kind": "blob",
+      "oid": "2e05c7127aa28cff4aaa746dc58c29ba51e424cc",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-kk/strings.xml",
+      "kind": "blob",
+      "oid": "c29fc3b35d6f5a1ff8602adc199dd5ee0ffa4499",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-km/strings.xml",
+      "kind": "blob",
+      "oid": "69ca640c845f1e82c0b39bb907588a2a037f2cab",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-kn/strings.xml",
+      "kind": "blob",
+      "oid": "b9591ced19d1ed78d1b5dfb1eea6a611e59d3edd",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-ko/strings.xml",
+      "kind": "blob",
+      "oid": "11a9e15a8402e502f02fcdd974285a2c164a022f",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-ky/strings.xml",
+      "kind": "blob",
+      "oid": "926fc9976cf402129e6d0e629982cc80d71e29c1",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-lo/strings.xml",
+      "kind": "blob",
+      "oid": "3abd4d1161ba769a5b174e4c5176a3cf738ff8cb",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-lt/strings.xml",
+      "kind": "blob",
+      "oid": "607cb34c7a3b39143f69dbe8bd4efdecfad59ce7",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-lv/strings.xml",
+      "kind": "blob",
+      "oid": "f454e07f2b82b916a6377bd479ff7be9f0536f82",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-mk/strings.xml",
+      "kind": "blob",
+      "oid": "4136c06d78906464e4327acc6bdfee71e7de016e",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-ml/strings.xml",
+      "kind": "blob",
+      "oid": "9437476af764f9656ac33c698c9e6884ac87ad07",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-mn/strings.xml",
+      "kind": "blob",
+      "oid": "fda15cb8d23650d4d245c6c8f428e3a51aa2587d",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-mr/strings.xml",
+      "kind": "blob",
+      "oid": "b4525167ee6b1e3c3d5bf06b9981df1cbd76a461",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-ms/strings.xml",
+      "kind": "blob",
+      "oid": "9737ca07b310a46005d72fe91cf61fc45ab5c052",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-my/strings.xml",
+      "kind": "blob",
+      "oid": "695cffcf8a3546fc09bfba6d65f46fae8ef68e4a",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-nb/strings.xml",
+      "kind": "blob",
+      "oid": "86c5baf5390628b88d0f34ab70b113b067314c93",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-ne/strings.xml",
+      "kind": "blob",
+      "oid": "286bbe60dd3b08957fbafc96fb0a904b6a093b40",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-night/colors.xml",
+      "kind": "blob",
+      "oid": "9a4738bda23e8e2879800d45a5d0e6aa7b702240",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-night/styles.xml",
+      "kind": "blob",
+      "oid": "95071bac2d9f1166a991b8717db266c95c1de53a",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-nl/strings.xml",
+      "kind": "blob",
+      "oid": "d47e4a8ca3ad868669423b20840ae699f05d5f34",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-or/strings.xml",
+      "kind": "blob",
+      "oid": "51fb6c9920013928814f42ccb8a68ae3725ee105",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-pa/strings.xml",
+      "kind": "blob",
+      "oid": "23785ccfef0947cacef5d00287b62a2786f28637",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-pl/strings.xml",
+      "kind": "blob",
+      "oid": "27e6eb3993e579fca8e79392dac4330f5837ae57",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-pt-rBR/strings.xml",
+      "kind": "blob",
+      "oid": "b7b70cd1b8c93f51d6266d77914e9daaaae49cdd",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-pt-rPT/strings.xml",
+      "kind": "blob",
+      "oid": "2f259fd9758683dbfdbbc4874a54aebdb6441488",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-pt/strings.xml",
+      "kind": "blob",
+      "oid": "b7b70cd1b8c93f51d6266d77914e9daaaae49cdd",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-ro/strings.xml",
+      "kind": "blob",
+      "oid": "3cd543784fdf9bfb92f1c3e143e17ac35503771a",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-ru/strings.xml",
+      "kind": "blob",
+      "oid": "e70f0f0256a6a9165f7f02fd627302012349d8e3",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-si/strings.xml",
+      "kind": "blob",
+      "oid": "ac2c8bda595dc0eada5e203d2a06e5d09f7ad1c5",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-sk/strings.xml",
+      "kind": "blob",
+      "oid": "04805fa0d644f3695437ec05a2f38b99779ff60c",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-sl/strings.xml",
+      "kind": "blob",
+      "oid": "f6b0449200db497d75ff7c4dc182297fcb0c9cee",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-sq/strings.xml",
+      "kind": "blob",
+      "oid": "1db1bc1254c26390e4c892ead01c5c1b03351b7d",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-sr/strings.xml",
+      "kind": "blob",
+      "oid": "55dc41462e1b697bcbd0ce96da6d4dea4fb1d143",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-sv/strings.xml",
+      "kind": "blob",
+      "oid": "7f795028a9f5906704532a45d60a68cf38662d36",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-sw/strings.xml",
+      "kind": "blob",
+      "oid": "cd1423d2da98be3eb48613276afc0de4f6e1e000",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-sw600dp/dimens.xml",
+      "kind": "blob",
+      "oid": "4fc63fc3da19bb1c5f09f52dccf8151a47394883",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-ta/strings.xml",
+      "kind": "blob",
+      "oid": "d04d2dcbb96ad20fbaaf3a4a59f9effd19fb3a95",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-te/strings.xml",
+      "kind": "blob",
+      "oid": "6120aea954e773a65d34fdb2d290d700c1040304",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-th/strings.xml",
+      "kind": "blob",
+      "oid": "b86e8a5d15383e136582e74cd682dd9c7331a729",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-tl/strings.xml",
+      "kind": "blob",
+      "oid": "d82712eae2ae19c0ae79203e6899e877599f503c",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-tr/strings.xml",
+      "kind": "blob",
+      "oid": "b5c5ac2619049c9ac10be9c72d9df69973a32d5f",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-uk/strings.xml",
+      "kind": "blob",
+      "oid": "57e11d95eef0d8ea3db92f52d796ffcb8ee6b756",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-ur/strings.xml",
+      "kind": "blob",
+      "oid": "a895a5994867029b0e00bf17794d43acec7e2de2",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-uz/strings.xml",
+      "kind": "blob",
+      "oid": "3eb60fa6f09b0dd8ec3b7a97508fb18fb62d3a70",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-vi/strings.xml",
+      "kind": "blob",
+      "oid": "6404c537930b087e93b08743adab576760f51f13",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-zh-rCN/strings.xml",
+      "kind": "blob",
+      "oid": "0528d80e7ab929d4a6c92a652e053152f23c1f04",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-zh-rHK/strings.xml",
+      "kind": "blob",
+      "oid": "83d6428ef3e6900291a6285d1c1f38e12de29b25",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-zh-rTW/strings.xml",
+      "kind": "blob",
+      "oid": "1e7e31afd9f51d4391a59f2e56cb87df111ce737",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values-zu/strings.xml",
+      "kind": "blob",
+      "oid": "47490af2dea4534bcd2eb7b4928ec70ffced10fd",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values/attrs.xml",
+      "kind": "blob",
+      "oid": "942cc58149fde6d20a5fef6c4d74d13c872f40cd",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values/bools.xml",
+      "kind": "blob",
+      "oid": "71027ae685d7b330b73c71b04084105e2007b397",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values/colors.xml",
+      "kind": "blob",
+      "oid": "1c3eea18d551d8928830130a7daaafff7cb023bf",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values/config.xml",
+      "kind": "blob",
+      "oid": "925f1f52d5f0a9f1faf78d057406aaf0fdb457a2",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values/dimens.xml",
+      "kind": "blob",
+      "oid": "17acddae8fe6e46e076180c08850266ce690a1ee",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values/ids.xml",
+      "kind": "blob",
+      "oid": "d7166245f23caa4c68b0bd3cd27d0c794bfbb14e",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values/integers.xml",
+      "kind": "blob",
+      "oid": "719a3d2a3ff655044b13763aeac70c3b0596aa9f",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values/overlayable.xml",
+      "kind": "blob",
+      "oid": "5a5e1160ddc89a64062917e4d49868d156340205",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values/strings.xml",
+      "kind": "blob",
+      "oid": "dc96520b01e6847169cc8127626617dd4fb125d1",
+      "mode": "100644"
+    },
+    {
+      "path": "java/res/values/styles.xml",
+      "kind": "blob",
+      "oid": "383e88dc98fbe0b82405aae91395704e36efcc8a",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ChooserActionFactory.java",
+      "kind": "blob",
+      "oid": "ff822a67293dfe9d6ab1bcfa8b512b2a886e571d",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ChooserActivity.java",
+      "kind": "blob",
+      "oid": "2cc82d0842a7256c35ca786a8ed06a357e1434ba",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ChooserGridLayoutManager.java",
+      "kind": "blob",
+      "oid": "133d09b4495237e274dd107e82e36e26228c8717",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ChooserHelper.kt",
+      "kind": "blob",
+      "oid": "ad39fcba5442ac22dc3e98b44fc895d91e299446",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ChooserListAdapter.java",
+      "kind": "blob",
+      "oid": "47ea16f44fe534e1ae29ea8cd4ff6cac3e0b61a7",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ChooserListController.java",
+      "kind": "blob",
+      "oid": "2e89840abdf1b96160260ef758eb8e062fb3efc8",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ChooserRecyclerViewAccessibilityDelegate.java",
+      "kind": "blob",
+      "oid": "ff723719ab0945d737246691968ca09d8f391e8f",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ChooserRefinementManager.java",
+      "kind": "blob",
+      "oid": "e777b1e92600fb519a560912f1bbcf272f59f750",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ChooserStackedAppDialogFragment.java",
+      "kind": "blob",
+      "oid": "30e69c18d4296f8185b5919fa90bd9a7d48b97dd",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ChooserTargetActionsDialogFragment.java",
+      "kind": "blob",
+      "oid": "8070fc84e144e86975bbe85a81ef3a1becf284ea",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ContentTypeHint.kt",
+      "kind": "blob",
+      "oid": "f607e4ae52565915845c7d39ae15c68dbce53993",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/DrawerCollapseReservedHeightDelegate.kt",
+      "kind": "blob",
+      "oid": "5e7f074843e396163480fd8a42850fb51b96b3f5",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/EnterTransitionAnimationDelegate.kt",
+      "kind": "blob",
+      "oid": "6a4fe65a35298d62870e2b5a84f63bdb68b981cc",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/IntentForwarderActivity.java",
+      "kind": "blob",
+      "oid": "753d6eee54fc87e63292c027e18586a1db554f99",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/IntentForwarding.kt",
+      "kind": "blob",
+      "oid": "c8f6cf413949efec793e70e75b1018d4f9c04851",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ItemRevealAnimationTracker.kt",
+      "kind": "blob",
+      "oid": "7deb0d10cb9e066b2302dfc27274eacf29ca71e0",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/JavaFlowHelper.kt",
+      "kind": "blob",
+      "oid": "231cb80909cb88808f8a67d63f1ffa34ede26c39",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/MainApplication.kt",
+      "kind": "blob",
+      "oid": "0a82662920d1b7cff5dde12261c1bdb4f9c8f9f6",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/PackagesChangedListener.kt",
+      "kind": "blob",
+      "oid": "10f0bf517eaf57754dc24e7621260ef294ec9e30",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ProfileAvailability.kt",
+      "kind": "blob",
+      "oid": "fed5395394bb87d7a57b549873dc2160173be31d",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ProfileHelper.kt",
+      "kind": "blob",
+      "oid": "fcad5f19da3af9f41ba5cebbfe69fc93acc2c883",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ResolvedComponentInfo.java",
+      "kind": "blob",
+      "oid": "aaa97c42f7883afaa7ea87fab0c27de07b7b90bb",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ResolverActivity.java",
+      "kind": "blob",
+      "oid": "1515e9c6eba37da9792da2524c06ebd86ca194f3",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ResolverHelper.kt",
+      "kind": "blob",
+      "oid": "d12ba7d59fea770012e14690a1e049586bdcef5e",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ResolverInfoHelpers.kt",
+      "kind": "blob",
+      "oid": "8d1d865895c167ca2e67b639561fed77c7d6d133",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ResolverListAdapter.java",
+      "kind": "blob",
+      "oid": "5ac39888307232751494fd76f75ec2990aea60e0",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ResolverListController.java",
+      "kind": "blob",
+      "oid": "bb653855819b9fab4f0255f8f0e548572ea0acd4",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ResolverViewPager.java",
+      "kind": "blob",
+      "oid": "891ace876666c770732bcb8c668f7e2f9e9ed418",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ShortcutSelectionLogic.java",
+      "kind": "blob",
+      "oid": "4ceafdbcbd18ca62cb6f4fce52a2c29d72c2919a",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/SimpleIconFactory.java",
+      "kind": "blob",
+      "oid": "db5910bfb36ad70c215583c249aa6c2e86828e81",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/StartsSelectedItem.kt",
+      "kind": "blob",
+      "oid": "01cdf124b69657768bb2a199bf4faab7052efafe",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/TargetPresentationGetter.java",
+      "kind": "blob",
+      "oid": "3a7f807d0b8a16e091bc093c9bd8e7863b7270ca",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/WorkProfileAvailabilityManager.java",
+      "kind": "blob",
+      "oid": "6e51520b46b72825533837f46fd704297fce9728",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/actions/ImageEditorActionFactory.kt",
+      "kind": "blob",
+      "oid": "d9365b0e1b6d21267d674619b7a78e41f1f62230",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/annotation/JavaInterop.kt",
+      "kind": "blob",
+      "oid": "e268af980f67292b19ddb9c749dd70c15381c3b5",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/chooser/ChooserTargetInfo.java",
+      "kind": "blob",
+      "oid": "074537ef68d2c199baaa576d039deb125a6e21a8",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/chooser/DisplayResolveInfo.java",
+      "kind": "blob",
+      "oid": "e641944ef4c717c6326069cfedb92603cb1827cc",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/chooser/DisplayResolveInfoAzInfoComparator.java",
+      "kind": "blob",
+      "oid": "3462b726bd0724a6fba757a8a68a58f95d6e4f1e",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/chooser/ImmutableTargetInfo.java",
+      "kind": "blob",
+      "oid": "50aaec0b789d246d2a7fd74ad20320ae4b195a74",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/chooser/MultiDisplayResolveInfo.java",
+      "kind": "blob",
+      "oid": "95cb443ef5eb883a71bca0b15b7bce0be279b650",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/chooser/NotSelectableTargetInfo.java",
+      "kind": "blob",
+      "oid": "46803a04d8bde4ed67d040c01e46b378a96b76ab",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/chooser/SelectableTargetInfo.java",
+      "kind": "blob",
+      "oid": "2658f3e5e7d634d571533f7cfa32f36e9c7440f8",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/chooser/TargetInfo.java",
+      "kind": "blob",
+      "oid": "0935c6e80931eeaa6ca77a3b1bd8dddcd40a0e7a",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/ChooserContentPreviewUi.java",
+      "kind": "blob",
+      "oid": "a4496db6a7e4cc229236d1df1d2fd76ff9ce13b9",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/ContentPreviewType.java",
+      "kind": "blob",
+      "oid": "79bb9d3cde84df54d94bd17e32b229c9259572eb",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/ContentPreviewUi.java",
+      "kind": "blob",
+      "oid": "b2e16b9605f90f89c504a2a59909efeb05407f72",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/DefaultMimeTypeClassifier.kt",
+      "kind": "blob",
+      "oid": "b92157096e1b4cfd372547f26d8f6c8caf6c52df",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/FileContentPreviewUi.java",
+      "kind": "blob",
+      "oid": "1749c6f79fdc63522c9df0dd442854da5bd4ac90",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/FileInfo.kt",
+      "kind": "blob",
+      "oid": "16a948df27a75d0e8428fbfdaff6a09026b85e86",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/FilesPlusTextContentPreviewUi.java",
+      "kind": "blob",
+      "oid": "9105679bdc729a1f839f8ee16d967a8c0218edc8",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/HeadlineGenerator.kt",
+      "kind": "blob",
+      "oid": "9c4122bb905ba5a22c52e4a4210470b42fc2f814",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/HeadlineGeneratorImpl.kt",
+      "kind": "blob",
+      "oid": "ca01875bbb9f3d62683b5e40c1c982a1c0cff55d",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/ImageLoader.kt",
+      "kind": "blob",
+      "oid": "ac34f552531cc962d742c3a4d1a82507a065048b",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/ImageLoaderModule.kt",
+      "kind": "blob",
+      "oid": "7cc4458fc4e7b3d8a13d0e97de742693dd2864c8",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/IsHttpUri.kt",
+      "kind": "blob",
+      "oid": "ac002ab6dfcae71ac7e95d5487e104ab01c0dbea",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/JavaFlowHelper.kt",
+      "kind": "blob",
+      "oid": "b29c5774ecb27dbce6a8b79a7903916160f096cd",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/MimeTypeClassifier.java",
+      "kind": "blob",
+      "oid": "0c333b6835f8f72d5bf8f20f6f339a5445fad827",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/NoContextPreviewUi.kt",
+      "kind": "blob",
+      "oid": "924e64990d40390b3a681233fe7c3d78c46ac1e6",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/PreviewDataProvider.kt",
+      "kind": "blob",
+      "oid": "cd1edec09009cd0e756fb04df6b6d73f1aa62ef9",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/PreviewImageLoader.kt",
+      "kind": "blob",
+      "oid": "44d88c4117f93f4b089a443d82841d47cc8d1aa8",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/ShareouselContentPreviewUi.kt",
+      "kind": "blob",
+      "oid": "ff52556a96866d9e08dba47fac768df9537e0d66",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/TextContentPreviewUi.java",
+      "kind": "blob",
+      "oid": "f82b0a3b31e9241ee6ef104e46614b53cd42e19d",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/ThumbnailLoader.kt",
+      "kind": "blob",
+      "oid": "f121badac9171a2767e9040ab8b98af89ec916c1",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/UnifiedContentPreviewUi.java",
+      "kind": "blob",
+      "oid": "b7c5226c00eb7f4ff2c6226f5f4f94f9ad8af506",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/UriMetadataHelpers.kt",
+      "kind": "blob",
+      "oid": "80d0e0584598f832d3c444fd003ed7d76f1359cd",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/UriMetadataReader.kt",
+      "kind": "blob",
+      "oid": "4e403c22f7630696831a7fc83526db01c205b4c3",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/data/model/CustomActionModel.kt",
+      "kind": "blob",
+      "oid": "b7945005a8b0222bfb8b2929479032b81f27f043",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/data/repository/ActivityResultRepository.kt",
+      "kind": "blob",
+      "oid": "c3bb88c873b12e804020a59ae8f819edea0e3308",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/data/repository/CursorPreviewsRepository.kt",
+      "kind": "blob",
+      "oid": "b104d4bf2d08f919c08186c54e34bf7fa9e381f0",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/data/repository/PendingSelectionCallbackRepository.kt",
+      "kind": "blob",
+      "oid": "1745cd9cf9ab5af57653c2c03cbc6c800abd982e",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/data/repository/PreviewSelectionsRepository.kt",
+      "kind": "blob",
+      "oid": "0688ce022bfb55e6b78d1a7891479a4485725d0a",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/cursor/CursorResolver.kt",
+      "kind": "blob",
+      "oid": "3aa0d56744eb1d5150010949238506957184731b",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/cursor/PayloadToggleCursorResolver.kt",
+      "kind": "blob",
+      "oid": "353e7e53b07124a68602290b3966dd54beff02fc",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/intent/CustomActionPendingIntentSender.kt",
+      "kind": "blob",
+      "oid": "26e7074d77ba1632daf81785484f8d198edcbcd3",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/intent/InitialCustomActionsModule.kt",
+      "kind": "blob",
+      "oid": "d75884d5965078d7d5810e6bf41505a4f90fab9b",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/intent/PendingIntentSender.kt",
+      "kind": "blob",
+      "oid": "23ba31baccdcc9840846f349c0b3cc6349db1314",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/intent/TargetIntentModifier.kt",
+      "kind": "blob",
+      "oid": "4a2a6932bd3b73778383f0468ef9a3a9c293958d",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/interactor/ChooserRequestInteractor.kt",
+      "kind": "blob",
+      "oid": "953e91b37ee821021ae0954d7cca7a30ab3bcc4e",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/interactor/CursorPreviewsInteractor.kt",
+      "kind": "blob",
+      "oid": "59e7e15e9132d1f29a52a9af22b0418802bfa5ea",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/interactor/CustomActionsInteractor.kt",
+      "kind": "blob",
+      "oid": "e973e844bdfd11e4fe7743a9f9e8f167b1e63876",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/interactor/FetchPreviewsInteractor.kt",
+      "kind": "blob",
+      "oid": "1fd693510f98972dfb01d86fa0b3b597c6f7ef0c",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/interactor/ProcessTargetIntentUpdatesInteractor.kt",
+      "kind": "blob",
+      "oid": "c202eabf31e16a0d2f6c87ff5b79fd940e89351f",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/interactor/SelectablePreviewInteractor.kt",
+      "kind": "blob",
+      "oid": "8f18ebe011eb6bc3286369cb6997058e9f0fa396",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/interactor/SelectablePreviewsInteractor.kt",
+      "kind": "blob",
+      "oid": "d0ac8d4aa77107c90f551ec76f94b2c8f3484c5d",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/interactor/SelectionInteractor.kt",
+      "kind": "blob",
+      "oid": "6796db3a11c59632163533ee578e1463a28c900a",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/interactor/SetCursorPreviewsInteractor.kt",
+      "kind": "blob",
+      "oid": "124e2a3dbdc6a814049de22b415e23ed8d2af90e",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/interactor/SizeExtensions.kt",
+      "kind": "blob",
+      "oid": "4cf10414e85be10b6f2038395765b08535ca2cb2",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/interactor/UpdateChooserRequestInteractor.kt",
+      "kind": "blob",
+      "oid": "fc193ecaf469df1d10ca3c5a701afd12d158bff2",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/interactor/UpdateTargetIntentInteractor.kt",
+      "kind": "blob",
+      "oid": "d99d69abaf9fe6ead2ffab4b5bb4bc8d0dd1cb5c",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/model/ActionModel.kt",
+      "kind": "blob",
+      "oid": "f69365d72b5848647905916862eec7bf5e60bd8a",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/model/CursorRow.kt",
+      "kind": "blob",
+      "oid": "aae29102ec3df82f961f3459fcea065e9394f2ee",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/model/LoadDirection.kt",
+      "kind": "blob",
+      "oid": "23510f154fd8f2cc09488a49deff90f03926355f",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/model/LoadedWindow.kt",
+      "kind": "blob",
+      "oid": "5e34b178a0e22e2e699a18a7cbc36d9091907b67",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/model/ShareouselUpdate.kt",
+      "kind": "blob",
+      "oid": "77f196e640af90bc9c572b86b092181928255632",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/model/ValueUpdate.kt",
+      "kind": "blob",
+      "oid": "bad4eebe262268a8a91171b461c1bb85ea38ae6e",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/update/SelectionChangeCallback.kt",
+      "kind": "blob",
+      "oid": "0bfa96e4bdb716ed098cbf3f814b3baecc89f7fb",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/shared/ContentType.kt",
+      "kind": "blob",
+      "oid": "3ef6d98ff66866e282aed7297292dfe4c5b0a92d",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/shared/model/PreviewKey.kt",
+      "kind": "blob",
+      "oid": "6b42133e0e9f893045e0142c3df389429137911f",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/shared/model/PreviewModel.kt",
+      "kind": "blob",
+      "oid": "d4df8a3aee4452b2abbbf004f21f52df5838298d",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/shared/model/PreviewsModel.kt",
+      "kind": "blob",
+      "oid": "ae8bd1ebf63187e784ac4eadf9b1bcf269e895ab",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/ui/composable/ComposeIconComposable.kt",
+      "kind": "blob",
+      "oid": "8cf237da8a31d7f22a383f2617727604d964818e",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/ui/composable/ModifierExt.kt",
+      "kind": "blob",
+      "oid": "a9d8b9dcc8cd5d5c048b04c46b0d4e5b0268ef20",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/ui/composable/ShareouselCardComposable.kt",
+      "kind": "blob",
+      "oid": "197d6858f8a6a262df96477286ebbcdff8257f98",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/ui/composable/ShareouselComposable.kt",
+      "kind": "blob",
+      "oid": "b8c7d8e2b46a1158ee1dfbe9af32f4b45799dd01",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/ui/composable/ShareouselLazyListPrefetchStrategy.kt",
+      "kind": "blob",
+      "oid": "e47700f1eea4877dc7b7f6a83121434def648d7c",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/ui/viewmodel/ActionChipViewModel.kt",
+      "kind": "blob",
+      "oid": "728c573b2924eedd2fa741c60104b65ff9f70675",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/ui/viewmodel/ShareouselPreviewViewModel.kt",
+      "kind": "blob",
+      "oid": "85f278a6c6963908c654ef39580bc0666e07e554",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/contentpreview/payloadtoggle/ui/viewmodel/ShareouselViewModel.kt",
+      "kind": "blob",
+      "oid": "36062d89dcdcafb7c87493089c15363b15b99996",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/data/BroadcastSubscriber.kt",
+      "kind": "blob",
+      "oid": "cf31ea10a2e3bb9f9a564d573193a5082d2e7ae1",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/data/model/ChooserRequest.kt",
+      "kind": "blob",
+      "oid": "253afaa9726bf75d80eb2e5b97e4ac650ff34752",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/data/repository/ActivityModelRepository.kt",
+      "kind": "blob",
+      "oid": "7c3188d2c255d66052f142b359d8953d6e531a26",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/data/repository/ChooserRequestRepository.kt",
+      "kind": "blob",
+      "oid": "8b7885c9e8c8339e1da9c832a161c50893f0812d",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/data/repository/ChooserSelectionRepository.kt",
+      "kind": "blob",
+      "oid": "d0954bf5648800f4c323172c760d4a76c77b646e",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/data/repository/DevicePolicyResources.kt",
+      "kind": "blob",
+      "oid": "7fb3c4cda2677d0b41cb4416ab7fa1f0f278702c",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/data/repository/UserInfoExt.kt",
+      "kind": "blob",
+      "oid": "753df93eff33af16c9595aa23304f9f3d6e29a54",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/data/repository/UserRepository.kt",
+      "kind": "blob",
+      "oid": "6b5ff4ba76b4b1652bcb793d2e62031e71686f8e",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/data/repository/UserRepositoryModule.kt",
+      "kind": "blob",
+      "oid": "7109d6d4dcf13e7384d564cb64764f9833495b31",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/data/repository/UserScopedService.kt",
+      "kind": "blob",
+      "oid": "10a33eb1a0227b92c5fa837fc890272fb6156c56",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/domain/ChooserRequestExt.kt",
+      "kind": "blob",
+      "oid": "fbab403ce64cc2b8866367f682d73786d1f8c855",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/domain/UriCallerReadAccessValidator.kt",
+      "kind": "blob",
+      "oid": "28a50f68f47bb12fe1ea00803b0fa820a376d928",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/domain/interactor/UserInteractor.kt",
+      "kind": "blob",
+      "oid": "2392a48def32ca5ac1015d121c4df8ba77f5ddcf",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/emptystate/AlwaysTrueCrossProfileIntentsChecker.kt",
+      "kind": "blob",
+      "oid": "bd1203a3f89e2bdbc6db99b6a252ed90486af47d",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/emptystate/CompositeEmptyStateProvider.kt",
+      "kind": "blob",
+      "oid": "05062a4bbfb3289fd893d2a794e1ef44515711c5",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/emptystate/CrossProfileIntentsChecker.java",
+      "kind": "blob",
+      "oid": "04ac164060eeac6bee85f1fc8fbc4d87a2baf420",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/emptystate/DefaultEmptyState.kt",
+      "kind": "blob",
+      "oid": "ea1a03cc29320c963f2a66608373a8a2bb3d9ff6",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/emptystate/DevicePolicyBlockerEmptyState.java",
+      "kind": "blob",
+      "oid": "1cbc6175313b8e083ffba078202010c9737b5c73",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/emptystate/EmptyState.java",
+      "kind": "blob",
+      "oid": "cde99fe158a6c84e320004e7b3ddd3e9369ee8c0",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/emptystate/EmptyStateProvider.java",
+      "kind": "blob",
+      "oid": "c326128721a9e3cdbd65df9e91754d55a9abd7a6",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/emptystate/EmptyStateUiHelper.java",
+      "kind": "blob",
+      "oid": "7524f3432fe74348803e3dc2d041ea46a61b3662",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/emptystate/NoAppsAvailableEmptyState.java",
+      "kind": "blob",
+      "oid": "b03c730a6f54ba4a22a74da821df1291e71fd32d",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/emptystate/NoAppsAvailableEmptyStateProvider.java",
+      "kind": "blob",
+      "oid": "b3d3e3430cc35f7ff1d936d813f6d065a1d7275f",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/emptystate/NoCrossProfileEmptyStateProvider.java",
+      "kind": "blob",
+      "oid": "0cf2ea4507ddfee548b4124b14c427533c98d44b",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/emptystate/WorkProfileOffEmptyState.java",
+      "kind": "blob",
+      "oid": "e9de3221f1cf554885af85c4be9560935d87a532",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/emptystate/WorkProfilePausedEmptyStateProvider.java",
+      "kind": "blob",
+      "oid": "f78d1ca2408236ee2ffcc578b218cfe052b8893d",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ext/CreationExtrasExt.kt",
+      "kind": "blob",
+      "oid": "5063f6bd17428fd903cda52e2b94d397dd918bf7",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ext/IntentExt.kt",
+      "kind": "blob",
+      "oid": "127dbf86d8d614d629abcc51c5daa555abd4eb62",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ext/ParcelExt.kt",
+      "kind": "blob",
+      "oid": "68ea600f5512f9b122578f889509d464f4cb5f9b",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/grid/AllAppDividerDecoration.kt",
+      "kind": "blob",
+      "oid": "e05e2dfc68cd7a7feb3b49e062310608512b5a5a",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/grid/ChooserGridAdapter.java",
+      "kind": "blob",
+      "oid": "f192d4463fbf196e756aca488ddaf73f32d91d7c",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/grid/DirectShareViewHolder.java",
+      "kind": "blob",
+      "oid": "ad78c7193e4e921d98f685459d1520fa1aa61094",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/grid/DividerGridAdapter.kt",
+      "kind": "blob",
+      "oid": "be3d319e6746cd92ccb83c2b75b587feb761bcfb",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/grid/ItemGroupViewHolder.java",
+      "kind": "blob",
+      "oid": "5470506b231e6f029f59cd379c9ac5f919b0ac6c",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/grid/ItemViewHolder.java",
+      "kind": "blob",
+      "oid": "2ec56b1b94a8936bbd2a17a61d3f03733ad75abc",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/grid/SingleRowViewHolder.java",
+      "kind": "blob",
+      "oid": "a72da7aa0384be0482660d30fb6810e33129547d",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/grid/ViewHolderBase.java",
+      "kind": "blob",
+      "oid": "7ffc0eb4e3b7036f63e772c159d565839ad7b79e",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/icon/ComposeIcon.kt",
+      "kind": "blob",
+      "oid": "dbea1e5506de2eaedcbbc9699948afeb6adf1428",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/icons/BaseLoadIconTask.java",
+      "kind": "blob",
+      "oid": "f09fcfc5027b01d794fef560c7e9ec722bd5209a",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/icons/CachingTargetDataLoader.kt",
+      "kind": "blob",
+      "oid": "c20a59f3b64351fb3ea0500e7b5dc6ae1c7e2fe6",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/icons/DefaultTargetDataLoader.kt",
+      "kind": "blob",
+      "oid": "a28f011ea957b5aedc7b0303fcf7ca3be9e42981",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/icons/LabelInfo.kt",
+      "kind": "blob",
+      "oid": "4b60d6074200f4c1fad614e36264eb465517b1e0",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/icons/LoadIconTask.java",
+      "kind": "blob",
+      "oid": "4573fadf773c681c5a2b4326c5a89c3ddd408aa9",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/icons/LoadLabelTask.java",
+      "kind": "blob",
+      "oid": "6d443f78e0218789136a4defc22478d9aa679116",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/icons/TargetDataLoader.kt",
+      "kind": "blob",
+      "oid": "4fc02a5cd7040cc38c397d6e1688c5e3f137f121",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/icons/TargetDataLoaderModule.kt",
+      "kind": "blob",
+      "oid": "cee5a9fa4ccfa6be3a18ee3ab4dabadc919640f5",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/inject/ActivityModelModule.kt",
+      "kind": "blob",
+      "oid": "9323f9f77ff0c40285179540df2ee64e114ce090",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/inject/ActivityModule.kt",
+      "kind": "blob",
+      "oid": "21bfe4c638a94b10508a035277770a647d5dd790",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/inject/ConcurrencyModule.kt",
+      "kind": "blob",
+      "oid": "7cfe5309c83e839100bb6b320f23670d3fc4fc9e",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/inject/Qualifiers.kt",
+      "kind": "blob",
+      "oid": "2f1a616f10b9ac22b773664d617d36c519efbda9",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/inject/SingletonModule.kt",
+      "kind": "blob",
+      "oid": "af0546256e977a36163cf7a0b750c3ce0a524fb4",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/inject/SystemServices.kt",
+      "kind": "blob",
+      "oid": "51ddb953e5e3b6926a2ac1bac49a150cf2c13b6c",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/inject/ViewModelCoroutineScopeModule.kt",
+      "kind": "blob",
+      "oid": "4dda26539dadbd1648482279c919de85b6247c38",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/interactive/data/repository/InteractiveSessionCallbackRepository.kt",
+      "kind": "blob",
+      "oid": "6a792dcd98c893da3fbafb87d3c2494a15c5b019",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/interactive/domain/interactor/InteractiveSessionInteractor.kt",
+      "kind": "blob",
+      "oid": "9a8a57d414afe577bb726fc7db6017541bb4b2e8",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/interactive/domain/interactor/SafeChooserControllerCallback.kt",
+      "kind": "blob",
+      "oid": "da5900d7db1214df1e5cfa73f3dffaaea9099540",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/interactive/domain/model/ChooserController.kt",
+      "kind": "blob",
+      "oid": "0587dc89692dac01ecfd62d30792c17d9dc826ef",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/logging/EventLog.kt",
+      "kind": "blob",
+      "oid": "d8b4b680a88b880962b1b027a4175e227bb83aa2",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/logging/EventLogImpl.java",
+      "kind": "blob",
+      "oid": "88b60d9ac4f8cc164fb6eca630d6f398be94e210",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/logging/EventLogModule.kt",
+      "kind": "blob",
+      "oid": "73af7d377d2334051494955b66efca15d4fe9892",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/logging/FrameworkStatsLogger.kt",
+      "kind": "blob",
+      "oid": "a2b822c8131330a25cee500b58af94bc0768fff5",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/measurements/Tracer.kt",
+      "kind": "blob",
+      "oid": "5f69932a9763797dbf953b2da9b60ebb8cce0a70",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/model/AbstractResolverComparator.java",
+      "kind": "blob",
+      "oid": "4871ef4d0d92f3d0846c56eb1809340372a8559f",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/model/AppPredictionServiceResolverComparator.java",
+      "kind": "blob",
+      "oid": "c6de32605b0e24c5feaafcb315e76a00145d251c",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/model/CompareSelectProbabilityThenAzLabel.kt",
+      "kind": "blob",
+      "oid": "ff638828b5ca6b8d69d1e877a1a483ea6c581d11",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/model/ResolveInfoAzInfoComparator.java",
+      "kind": "blob",
+      "oid": "411d0c6e7344aea360694ec8004fc00b6b68122f",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/model/ResolverComparatorModel.java",
+      "kind": "blob",
+      "oid": "4835ea17719f8ca05bf21ec3ccb1bddca2481b61",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/model/ResolverRankerServiceResolverComparator.java",
+      "kind": "blob",
+      "oid": "45907d02ff2c65fd1b539091c37aec73155049d2",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/platform/AppPredictionModule.kt",
+      "kind": "blob",
+      "oid": "415d5f7de166d331016501b85d76dc154342abc0",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/platform/ImageEditorModule.kt",
+      "kind": "blob",
+      "oid": "01dd58d6da416713d4149dc1c6e1ad918d8f2734",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/platform/NearbyShareModule.kt",
+      "kind": "blob",
+      "oid": "1e4b5241927996449f416dc45346038a40f57c37",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/platform/SettingsImpl.kt",
+      "kind": "blob",
+      "oid": "c7ff352192227b5ebe3b178b81b5da2bedd2fb03",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/platform/SettingsModule.kt",
+      "kind": "blob",
+      "oid": "3d5c50da228880f0591d7d1d64b4a5583a46be6a",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/platform/SettingsProxy.kt",
+      "kind": "blob",
+      "oid": "d97a04144a473d179cb8625878498ca29f04d865",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/profiles/AdapterBinder.java",
+      "kind": "blob",
+      "oid": "f92a140ff0dcaba8940cfc20d8924ee3bd16348b",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/profiles/ChooserMultiProfilePagerAdapter.java",
+      "kind": "blob",
+      "oid": "149fa485d0c7fb30b5e86db445586c13fbefd095",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/profiles/MultiProfilePagerAdapter.java",
+      "kind": "blob",
+      "oid": "a830cf9008dd068461db7b0af265fa093b1e88b5",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/profiles/OnProfileSelectedListener.java",
+      "kind": "blob",
+      "oid": "e62999544396f6c4ac500a1c8de8b46314e00be7",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/profiles/OnSwitchOnWorkSelectedListener.java",
+      "kind": "blob",
+      "oid": "7989551af9999af1d7b8ecb4c343011154403446",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/profiles/ProfileDescriptor.java",
+      "kind": "blob",
+      "oid": "61c7c67041343687ea87d00bbedba89f00920311",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/profiles/ResolverMultiProfilePagerAdapter.java",
+      "kind": "blob",
+      "oid": "91526ebd91884f20315d59a278abef364e55dbfb",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/profiles/TabConfig.java",
+      "kind": "blob",
+      "oid": "320f069ab1467ff73c18c65cdf72b0a5e4a35d31",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/shared/model/ActivityModel.kt",
+      "kind": "blob",
+      "oid": "1a57759d6595afc1958a43af82197034e10202fb",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/shared/model/Profile.kt",
+      "kind": "blob",
+      "oid": "ce7052596aa89d69cfea9bcab8e431a0a69cab70",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/shared/model/User.kt",
+      "kind": "blob",
+      "oid": "b544a3904f60f26dcc14d0ad5d2580486d149833",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/shortcuts/AppPredictorFactory.kt",
+      "kind": "blob",
+      "oid": "c7bd03363a888a6bec7a2bbb31424e2ed1ced10c",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/shortcuts/ScopedAppTargetListCallback.kt",
+      "kind": "blob",
+      "oid": "9606a6a19bfd80c1fd42aacd160ca37348b8823f",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/shortcuts/ShortcutLoader.kt",
+      "kind": "blob",
+      "oid": "689f91dbe666e0a7f32dd5b94c509cd7adeac3bc",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/shortcuts/ShortcutToChooserTargetConverter.java",
+      "kind": "blob",
+      "oid": "31929948fb36ec036f97b65d68bad0119a49a96d",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/tapsharing/TapEventServiceConnector.kt",
+      "kind": "blob",
+      "oid": "683614bd58ea4588303b89ddf53f6e89322be3ab",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/tapsharing/TapShareController.kt",
+      "kind": "blob",
+      "oid": "003f2e8067ecd0b229a49e93c710a87e128f0ed1",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/tapsharing/TapShareModule.kt",
+      "kind": "blob",
+      "oid": "6fb3a3d8bb826613842ddffc7e97f52e995c06d1",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ui/ActionTitle.java",
+      "kind": "blob",
+      "oid": "1cc96fa9875c1854585e9e4e4e04502e860d01ce",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ui/DrawerUiModeController.kt",
+      "kind": "blob",
+      "oid": "aad786853eb618f5fa49e61f706d0724be8b56b5",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ui/FontStyles.kt",
+      "kind": "blob",
+      "oid": "45b31cf951d2243daac3c6715b4b92afded4f651",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ui/ProfilePagerResources.kt",
+      "kind": "blob",
+      "oid": "0d07af8f845d2c86abcc3b46976f188d21b6ccf6",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ui/ShareResultSender.kt",
+      "kind": "blob",
+      "oid": "e348aa630f886bbde66430c23ce2c0b972cb522a",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ui/ShortcutPolicyModule.kt",
+      "kind": "blob",
+      "oid": "7239198ef0de34f02081c8a6b6a1de5106b63bbb",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ui/model/ResolverRequest.kt",
+      "kind": "blob",
+      "oid": "363c413ddd92bd13f0549def0f5ec317e3b1b3e3",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ui/model/ShareAction.kt",
+      "kind": "blob",
+      "oid": "4d727b9a507b7349a47b553c7ebe46dd179cb9b6",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ui/viewmodel/ChooserRequestReader.kt",
+      "kind": "blob",
+      "oid": "bab5c762436b881015fadaa94d3b0de07db404cd",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ui/viewmodel/ChooserViewModel.kt",
+      "kind": "blob",
+      "oid": "8db7b8311e7706163dd50a9ad0ed75967b16924a",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ui/viewmodel/IntentExt.kt",
+      "kind": "blob",
+      "oid": "30f16d208ca8f230e4fc4887e54c4dd01a3243a6",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ui/viewmodel/ResolverRequestReader.kt",
+      "kind": "blob",
+      "oid": "884be6355042c5cccb1e8a4c9306a437eabe23a3",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/ui/viewmodel/ResolverViewModel.kt",
+      "kind": "blob",
+      "oid": "3511637b7eaf3b33544674e89c36925f2d018b37",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/util/CancellationSignalUtils.kt",
+      "kind": "blob",
+      "oid": "e89cb5cae3c72f9f5041e9d00343322e72a92bc7",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/util/Flow.kt",
+      "kind": "blob",
+      "oid": "598379f35c8ffd8cd129569dee9f80c5a8d29749",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/util/IntentUtils.kt",
+      "kind": "blob",
+      "oid": "dccacf8d744a141f7dbcc69e31dc73905aa712dc",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/util/ParallelIteration.kt",
+      "kind": "blob",
+      "oid": "745bcdbf74ec6cf63de4fd77eb517be1f2a472e3",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/util/SyncUtils.kt",
+      "kind": "blob",
+      "oid": "eaebc6ea7525f59ad02955de342eda5097b0f4f1",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/util/UriFilters.kt",
+      "kind": "blob",
+      "oid": "a4c6e574800b8bc5cc0100b518dab38e19d1a231",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/util/cursor/CursorView.kt",
+      "kind": "blob",
+      "oid": "eca7d335c6cc36e07d2cbf429597fa6226c50816",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/util/cursor/Cursors.kt",
+      "kind": "blob",
+      "oid": "ce768f3b5cb7a9d9a6e728eb5120abd9148352b7",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/util/cursor/PagedCursor.kt",
+      "kind": "blob",
+      "oid": "6e4318dc0016f9f31540af6c4f37f2e01d9e8549",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/util/graphics/SuspendedMatrixColorFilter.kt",
+      "kind": "blob",
+      "oid": "3e2d8e2a82a7ba73ba39c9a1bc1b980c92c82166",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/validation/Findings.kt",
+      "kind": "blob",
+      "oid": "0d62017f66822f33e42410c22837ef532382bc02",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/validation/Validation.kt",
+      "kind": "blob",
+      "oid": "6ba62e57f5c9af27e03d981235537c5f0ad8f443",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/validation/ValidationResult.kt",
+      "kind": "blob",
+      "oid": "9685c70da0806b46e23693ac8694923ec164d07f",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/validation/types/IntentOrUri.kt",
+      "kind": "blob",
+      "oid": "74c48a2397075e3d5a97853209a41a9e57989586",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/validation/types/ParceledArray.kt",
+      "kind": "blob",
+      "oid": "5150ec5e7b395ac1e316a97532896a80f78b7be2",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/validation/types/SimpleValue.kt",
+      "kind": "blob",
+      "oid": "64299e118596e17aad4f5da539014361c3b75b32",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/validation/types/Validators.kt",
+      "kind": "blob",
+      "oid": "1049f04527e1b5e07f2a3db482e3c947afeb7f14",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/widget/ActionRow.kt",
+      "kind": "blob",
+      "oid": "c1f03751e5f05e5c770bcb09a5e72e7de2256c9c",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/widget/BadgeTextView.kt",
+      "kind": "blob",
+      "oid": "6674d92dacb400f1421311b3f65cebc7f5d7c5e6",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/widget/ChooserNestedScrollView.kt",
+      "kind": "blob",
+      "oid": "1d0f96ee16c3c3fd5db2b41ceb0f33f01708632b",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/widget/ChooserTargetItemView.kt",
+      "kind": "blob",
+      "oid": "816a2b1d36bb2d300eb66cc4e9ff23a79c89ae12",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/widget/ChooserTargetView.kt",
+      "kind": "blob",
+      "oid": "b841108869b783d4c1ac961217a1aa05e5ab14b5",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/widget/ImagePreviewView.kt",
+      "kind": "blob",
+      "oid": "55418c493a6840ac575e77f3909bf3321e465cde",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/widget/NestedScrollView.java",
+      "kind": "blob",
+      "oid": "36fc7da63673c4f44284b2b5c734a42f9de6136c",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/widget/NestedScrollView.java.patch",
+      "kind": "blob",
+      "oid": "913d3b1a8125e2de379d21a72095a07b5382df40",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/widget/RecyclerViewExtensions.kt",
+      "kind": "blob",
+      "oid": "a8aa633bf281a3e1d01ea15cbc7ea93f1933853d",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/widget/ResolverDrawerLayout.java",
+      "kind": "blob",
+      "oid": "68abd59896345a3f392e291123fdc9d8537f2456",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/widget/ResolverDrawerLayoutExt.kt",
+      "kind": "blob",
+      "oid": "e388158fae76bfed5846628b5014e60127086e55",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/widget/RoundedRectImageView.java",
+      "kind": "blob",
+      "oid": "8ca6ed14b2e01972f4a82abf18b8e81b180d782b",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/widget/ScrollableActionRow.kt",
+      "kind": "blob",
+      "oid": "2b64ca30acc121d01b46646bb1264fbae1227325",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/widget/ScrollableImagePreviewView.kt",
+      "kind": "blob",
+      "oid": "e4ee6505a41f688954203a85d54542a1c9581f54",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/widget/TargetListScrollStateQuery.kt",
+      "kind": "blob",
+      "oid": "d77d79a181a904f0cbaa8541f6aefba00e754dd5",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/widget/ViewExtensions.kt",
+      "kind": "blob",
+      "oid": "64aa935239ff0a9245cb738217f641d0fa143eca",
+      "mode": "100644"
+    },
+    {
+      "path": "java/src/com/android/intentresolver/widget/ViewRoleDescriptionAccessibilityDelegate.kt",
+      "kind": "blob",
+      "oid": "8fe7144ae78afd94d3a309a1dd7b5ad7fb945baa",
+      "mode": "100644"
+    },
+    {
+      "path": "lint-baseline.xml",
+      "kind": "blob",
+      "oid": "4af21c51b75f51285d922ebe030ca262d5c2e0ba",
+      "mode": "100644"
+    },
+    {
+      "path": "proguard.flags",
+      "kind": "blob",
+      "oid": "c0b7f21e28f212cbdfc9e7086bdd4906b30bd4e5",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/README.md",
+      "kind": "blob",
+      "oid": "a3f905548c65c0e500505df49615097f841d6029",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/activity/Android.bp",
+      "kind": "blob",
+      "oid": "ef54d825abf64cb355c320a40cbccc02c23d5fa3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/activity/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "90cb3d92ee2f8d9e47da7092a5d6738de8e6fb3f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/activity/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "04e4e69fce1de3d9239c50d911ff0d89ce3f4940",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/activity/res/drawable/test320x240.png",
+      "kind": "blob",
+      "oid": "9b5800da243df5027743d5a2076bdd8c3b8a244f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/activity/src/com/android/intentresolver/ChooserActivityOverrideData.java",
+      "kind": "blob",
+      "oid": "5d164417d172cd0cfc4e4e45d96e49649ffefec1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/activity/src/com/android/intentresolver/ChooserActivityShareouselTest.kt",
+      "kind": "blob",
+      "oid": "daa1f7abfb3f8cf3bc119d53746291b8da30a55e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/activity/src/com/android/intentresolver/ChooserActivityTest.java",
+      "kind": "blob",
+      "oid": "6c5347ffbbdcfb7be6df4d6b793676760fb48120",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/activity/src/com/android/intentresolver/ChooserActivityWorkProfileTest.java",
+      "kind": "blob",
+      "oid": "307f41c7c4591e807cac5fad87154baf20183cd9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/activity/src/com/android/intentresolver/ChooserWrapperActivity.java",
+      "kind": "blob",
+      "oid": "c396f6b80d961abb1a81645a1e33d1febb9ce0b3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/activity/src/com/android/intentresolver/IChooserWrapper.java",
+      "kind": "blob",
+      "oid": "481cf3b27675f0983c665c41e7852be9138bf5f1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/activity/src/com/android/intentresolver/ResolverActivityTest.java",
+      "kind": "blob",
+      "oid": "731d5aa3961e6822d4ef2ac77d4368ea70492ff5",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/activity/src/com/android/intentresolver/ResolverWrapperActivity.java",
+      "kind": "blob",
+      "oid": "dfdce47884ed06d6c60b3b8836d2bd5162399ae1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/activity/src/com/android/intentresolver/TestContentProvider.kt",
+      "kind": "blob",
+      "oid": "dcd5888c134f56c7072841b3404fe5f188faad45",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/activity/src/com/android/intentresolver/TestUtils.kt",
+      "kind": "blob",
+      "oid": "18dee64486a8da2887b8874e134eee79986c3a6e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/activity/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/cursor/FakePayloadToggleCursorResolver.kt",
+      "kind": "blob",
+      "oid": "ded9dce0e1c2a6463fe20b3539f40d64dd2fcdf0",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/activity/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/update/FakeSelectionChangeCallback.kt",
+      "kind": "blob",
+      "oid": "ad095677dc0675ce52253db09585121fd80eb0ee",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/activity/src/com/android/intentresolver/ext/RecyclerViewExt.kt",
+      "kind": "blob",
+      "oid": "90acaa60d2ea523f9e54e0ef05b13ea1b88722fe",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/activity/src/com/android/intentresolver/logging/TestEventLogModule.kt",
+      "kind": "blob",
+      "oid": "d1dea7c37a70fd744e22d25413819aa327cda172",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/activity/src/com/android/intentresolver/platform/FakeSettingsModule.kt",
+      "kind": "blob",
+      "oid": "9295f054d23e28ba68c197d9d99af32a72b97448",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/integration/Android.bp",
+      "kind": "blob",
+      "oid": "9109507aa340e07e7ca0e3d463a2da8bbd35f8f5",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/integration/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "1a7b035d5c9a7a4662bc1ddf2aa77f13e3cfc686",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/integration/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "4a2eee98df0072c6f0dc0c64ab65f4bc528c0d08",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/integration/res/values/strings.xml",
+      "kind": "blob",
+      "oid": "3115a7aef27a58d918cda6e83407df454cea432d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/integration/src/com/android/intentresolver/v2/data/repository/PlaceholderTest.kt",
+      "kind": "blob",
+      "oid": "af2836aaa935d0dfe8df5c71a3a3c43b69d3ec00",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/shared/Android.bp",
+      "kind": "blob",
+      "oid": "0f501c4f723ea9d1b9cd1d2ae8ae6c333ffe4179",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/shared/src/com/android/intentresolver/CoroutinesKosmos.kt",
+      "kind": "blob",
+      "oid": "eacefdc0ba3256282e6139e00bb8661377c3ceaf",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/shared/src/com/android/intentresolver/FakeImageLoader.kt",
+      "kind": "blob",
+      "oid": "76eb5e0d44ae1e5a6efc414602aceee18153b084",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/shared/src/com/android/intentresolver/FrameworkMocksKosmos.kt",
+      "kind": "blob",
+      "oid": "df3931c67cb62433abb320764f0ed081b9b929e9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/shared/src/com/android/intentresolver/MatcherUtils.java",
+      "kind": "blob",
+      "oid": "97cc69843ecbb84f81422634634237406e4506a5",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/shared/src/com/android/intentresolver/MockitoKotlinHelpers.kt",
+      "kind": "blob",
+      "oid": "d26dd340f93644b227c54840ebcd023549495861",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/shared/src/com/android/intentresolver/ResolverDataProvider.java",
+      "kind": "blob",
+      "oid": "3953d89c540d33cb466d71ff5f24ec1382c7dcbe",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/shared/src/com/android/intentresolver/contentpreview/FakeThumbnailLoader.kt",
+      "kind": "blob",
+      "oid": "33969eb7e754c7c6366386eaf07ddd3279dc3565",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/shared/src/com/android/intentresolver/contentpreview/MimetypeClassifierKosmos.kt",
+      "kind": "blob",
+      "oid": "4f979f545c93e34dac18f42d1a7d4862550ead0e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/shared/src/com/android/intentresolver/contentpreview/UriMetadataReaderKosmos.kt",
+      "kind": "blob",
+      "oid": "bdee477d5ec3a5b0d8cef6988d72018fbcf86523",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/shared/src/com/android/intentresolver/contentpreview/payloadtoggle/data/repository/PayloadToggleRepoKosmos.kt",
+      "kind": "blob",
+      "oid": "894ef1634b3c46b33746f0e3767768bd4c988a86",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/shared/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/cursor/CursorResolverKosmos.kt",
+      "kind": "blob",
+      "oid": "63456d41fd261d619aa37989a3c798ff2259fc4e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/shared/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/intent/PendingIntentSenderKosmos.kt",
+      "kind": "blob",
+      "oid": "1b4c0c8f507995e0e9960a5538a2e4cc958edb88",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/shared/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/intent/TargetIntentModifierKosmos.kt",
+      "kind": "blob",
+      "oid": "29e11a15d419c9747560d8462bcda51db5ad75ca",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/shared/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/interactor/PayloadToggleInteractorKosmos.kt",
+      "kind": "blob",
+      "oid": "7cca414f8e148a1ecb248af9051a2b182021b60d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/shared/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/update/SelectionChangeCallbackKosmos.kt",
+      "kind": "blob",
+      "oid": "f81682b7e88f7b8971cc8346d4a537f011ced901",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/shared/src/com/android/intentresolver/data/repository/FakeUserRepository.kt",
+      "kind": "blob",
+      "oid": "fb8fbd3f899c0432b0fc71c46c3b4656f54e157b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/shared/src/com/android/intentresolver/data/repository/V2RepositoryKosmos.kt",
+      "kind": "blob",
+      "oid": "0b2d3eb4e3eb2aa687287e0c2ddf275c491262bd",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/shared/src/com/android/intentresolver/domain/FakeUriGrantsManager.kt",
+      "kind": "blob",
+      "oid": "c649fd42bf4e6f7ef288988d97290565277a2680",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/shared/src/com/android/intentresolver/domain/UriCallerRreadAccessValidatorKosmos.kt",
+      "kind": "blob",
+      "oid": "0829c54becb8b23bdc7935668f7be4f44b215963",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/shared/src/com/android/intentresolver/ext/ParcelableExt.kt",
+      "kind": "blob",
+      "oid": "0b9caa3252a4bd6c110cd321dab1b73dc8b3b0ef",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/shared/src/com/android/intentresolver/inject/ActivityModelKosmos.kt",
+      "kind": "blob",
+      "oid": "9944163bafbc3457226af7681acf616764e7dd95",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/shared/src/com/android/intentresolver/logging/EventLogKosmos.kt",
+      "kind": "blob",
+      "oid": "5bf3ddee514debb59f99b05dd49cec19f779f6d4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/shared/src/com/android/intentresolver/logging/FakeEventLog.kt",
+      "kind": "blob",
+      "oid": "cb141b5eaafa7ea3fc7995c4fe097b71b914cb5e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/shared/src/com/android/intentresolver/logging/FakeFrameworkStatsLogger.kt",
+      "kind": "blob",
+      "oid": "b2fb2cfc150a414913f6a824183dcd81d864823d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/shared/src/com/android/intentresolver/platform/FakeSettings.kt",
+      "kind": "blob",
+      "oid": "55cd71273731768067408ae47f5cafc966266d5c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/shared/src/com/android/intentresolver/platform/FakeUserManager.kt",
+      "kind": "blob",
+      "oid": "32cb9062a6beb64c8a6cb25eb096441f84530da2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/Android.bp",
+      "kind": "blob",
+      "oid": "a3b30a3a1306f7fda95169ad9b051923f1d01552",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "80bc784a3aa2d5c161af43073d674b3f4cf7b39b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "2815c9352a78740900c34581b1d4b78356e34b47",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/res/values/strings.xml",
+      "kind": "blob",
+      "oid": "3115a7aef27a58d918cda6e83407df454cea432d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/ChooserActionFactoryTest.kt",
+      "kind": "blob",
+      "oid": "8dfbdbdde7332207565571099e7e0313e726fb63",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/ChooserListAdapterDataTest.kt",
+      "kind": "blob",
+      "oid": "bf5d5f6bd432433ff599fe49ab7dcadd6f5016e3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/ChooserListAdapterTest.kt",
+      "kind": "blob",
+      "oid": "f2323417ce8873d94a26ccf643744801e80c89a3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/ChooserListControllerTest.kt",
+      "kind": "blob",
+      "oid": "3e3c7967badeed11089fd82644505a8822660b43",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/ChooserRefinementManagerTest.kt",
+      "kind": "blob",
+      "oid": "0c74cbbbd331414b66a558d3ed0a69d1268f7b14",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/DrawerCollapseReservedHeightDelegateTest.kt",
+      "kind": "blob",
+      "oid": "2a730d5b7eed4fa9fb4a5630e6d18987c9c9fa84",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/EnterTransitionAnimationDelegateTest.kt",
+      "kind": "blob",
+      "oid": "2b7d6ff99aac30eebaff8f600c9463f3a9bf5838",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/FakeResolverListCommunicator.kt",
+      "kind": "blob",
+      "oid": "629f825cf05384ef9de8499824e9c6a5ca052109",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/ProfileAvailabilityTest.kt",
+      "kind": "blob",
+      "oid": "47db0cf5787cb853edfbe1fae27a5174553f2f23",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/ProfileHelperTest.kt",
+      "kind": "blob",
+      "oid": "956c39e95171f78b67464a091b6b3bd2f26d2747",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/ResolverListAdapterTest.kt",
+      "kind": "blob",
+      "oid": "4667f5130a4464f8eefb86db3140aefc1a7c1ff7",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/ShortcutSelectionLogicTest.kt",
+      "kind": "blob",
+      "oid": "42098729e107369241ab2695e996e82a290daaac",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/TargetPresentationGetterTest.kt",
+      "kind": "blob",
+      "oid": "b5b05eb9e835b55874206e8d20b1997777f37fd5",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/TestHelpers.kt",
+      "kind": "blob",
+      "oid": "812ecd1bc8597f5fc3d11a8772bbf18938e8f7e2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/actions/ImageEditorActionFactoryTest.kt",
+      "kind": "blob",
+      "oid": "66aa6d342d5e56974c44ac1c211fdec764359000",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/chooser/ImmutableTargetInfoTest.kt",
+      "kind": "blob",
+      "oid": "4d9d488052e45e22c80d19e9b8a036d6b99e5fb2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/chooser/TargetInfoTest.kt",
+      "kind": "blob",
+      "oid": "a2f6e7a4224c766bfa43e04151f6fd88b3ca36a3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/contentpreview/ChooserContentPreviewUiTest.kt",
+      "kind": "blob",
+      "oid": "401a284336c364509f35ca6dd958a1b57a882761",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/contentpreview/ContentPreviewUiTest.kt",
+      "kind": "blob",
+      "oid": "6db53a9e28110aa9326c21f656d8cd3d7a43fc5d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/contentpreview/CursorReadSizeTest.kt",
+      "kind": "blob",
+      "oid": "0c346095ba38c27a1b6a9878fa32f3fb5b650e1c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/contentpreview/FileContentPreviewUiTest.kt",
+      "kind": "blob",
+      "oid": "b34c1be2aba64d388d28f491088fb237d03c6d59",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/contentpreview/FilesPlusTextContentPreviewUiTest.kt",
+      "kind": "blob",
+      "oid": "aea5eb47e2ee68914cb01ce648d4c1d8a4a40a12",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/contentpreview/HeadlineGeneratorImplTest.kt",
+      "kind": "blob",
+      "oid": "6d07d1955e870e157256eb0ae43d021a81d73d80",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/contentpreview/PreviewDataProviderTest.kt",
+      "kind": "blob",
+      "oid": "f5c8fb3dda2a94636da3687351f899ecb1725126",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/contentpreview/PreviewImageLoaderTest.kt",
+      "kind": "blob",
+      "oid": "8c810058c522520b3787e3e8e8ea96a28b5510a4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/contentpreview/TextContentPreviewUiTest.kt",
+      "kind": "blob",
+      "oid": "eff7a7426e700b50e225fb29a44c752b78e9c58e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/contentpreview/ThumbnailLoaderImplTest.kt",
+      "kind": "blob",
+      "oid": "35c926019ca04d00ca4cbab9d0cf0f7df20d286a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/contentpreview/UnifiedContentPreviewUiTest.kt",
+      "kind": "blob",
+      "oid": "a7fa68855d1811aa1e4bec541d10337e075a98ec",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/contentpreview/UriMetadataReaderTest.kt",
+      "kind": "blob",
+      "oid": "74f1e59d97abf397683525b1b97cd5197c3996b8",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/cursor/PayloadToggleCursorResolverTest.kt",
+      "kind": "blob",
+      "oid": "87c3e4ee2289787c8f560da12790fa47456157b3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/intent/TargetIntentModifierImplTest.kt",
+      "kind": "blob",
+      "oid": "7c36ef55c8fd289aba9f892800f5388f60f4f5cd",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/interactor/CursorPreviewsInteractorTest.kt",
+      "kind": "blob",
+      "oid": "d1340ec404563f5d68f8a9c29d661ae28526ebb9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/interactor/CustomActionsInteractorTest.kt",
+      "kind": "blob",
+      "oid": "2bbda0cc9d7e1c4d96e9131047ead8dbb92c63fb",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/interactor/FetchPreviewsInteractorTest.kt",
+      "kind": "blob",
+      "oid": "9dcd1e79430299c3f81bd7f148279ddc222c4084",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/interactor/SelectablePreviewInteractorTest.kt",
+      "kind": "blob",
+      "oid": "0268a4d55c62717b0af7067334be153ca7efc84c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/interactor/SelectablePreviewsInteractorTest.kt",
+      "kind": "blob",
+      "oid": "c90a30919ff0c20b9659b9aa12d34e139e77e16a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/interactor/SelectionInteractorTest.kt",
+      "kind": "blob",
+      "oid": "5e33f5efb2539fa75881ff01dd33eb4889394c34",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/interactor/SetCursorPreviewsInteractorTest.kt",
+      "kind": "blob",
+      "oid": "42f1a1b2d10a3dcaed5cb65dc8ac6cefa7471007",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/interactor/UpdateChooserRequestInteractorTest.kt",
+      "kind": "blob",
+      "oid": "e734aec73b135ee688df1dbb0ce7474431304c1c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/contentpreview/payloadtoggle/domain/update/SelectionChangeCallbackImplTest.kt",
+      "kind": "blob",
+      "oid": "766403d49300e3a5b154bf849a38bc3d8e2ee0ed",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/contentpreview/payloadtoggle/ui/viewmodel/ShareouselViewModelTest.kt",
+      "kind": "blob",
+      "oid": "c1be516275ba0c4da67afd5699623e535a399594",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/coroutines/Flow.kt",
+      "kind": "blob",
+      "oid": "ca60824daab3f1594fcd8f13bcdf8fe1b6e16049",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/data/repository/FakeUserRepositoryTest.kt",
+      "kind": "blob",
+      "oid": "2fad37f2054df43e05493ad5d597da3f5c451bfb",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/data/repository/UserRepositoryImplTest.kt",
+      "kind": "blob",
+      "oid": "8db0bb567433fbbf849631c3748c8dd853d294ea",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/domain/UriCallerReadAccessValidatorTest.kt",
+      "kind": "blob",
+      "oid": "d3c524adbfa230494fa69c7e260f5da103e84740",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/domain/interactor/UserInteractorTest.kt",
+      "kind": "blob",
+      "oid": "4d6f2e5bfbca7815ae97d66e52bd10ca046ae4ff",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/emptystate/CompositeEmptyStateProviderTest.kt",
+      "kind": "blob",
+      "oid": "084d12e614c0551296cabec1f038490cb5f19f65",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/emptystate/CrossProfileIntentsCheckerTest.kt",
+      "kind": "blob",
+      "oid": "8cf87ebe63e2f760e72a6c8ec4b4c43b465bfe5d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/emptystate/EmptyStateUiHelperTest.kt",
+      "kind": "blob",
+      "oid": "174b8d59aecd567b0bcea4bb0ffaf3defc903dd4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/emptystate/NoCrossProfileEmptyStateProviderTest.kt",
+      "kind": "blob",
+      "oid": "bee13a21b155911cf9736c2b36196863146554f8",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/ext/CreationExtrasExtTest.kt",
+      "kind": "blob",
+      "oid": "241b92c90462ce70c11bb41c2b74228412eac7c5",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/ext/IntentExtTest.kt",
+      "kind": "blob",
+      "oid": "bf1e159cad9d847f497564fe3e69fb244fe92d17",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/grid/AllAppDividerDecorationTest.kt",
+      "kind": "blob",
+      "oid": "777f3afa8bb7105c4eac5bbec0fc00ee89b56df9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/icons/CachingTargetDataLoaderTest.kt",
+      "kind": "blob",
+      "oid": "11c143e6d26262ccc8bfd539bd2705d3ac7e9672",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/icons/DefaultTargetDataLoaderTest.kt",
+      "kind": "blob",
+      "oid": "81864e3ef996d9d85057413e8dea696bbe06d5af",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/interactive/domain/interactor/InteractiveSessionInteractorTest.kt",
+      "kind": "blob",
+      "oid": "2c3d70e968e571b54631e5f5cf085821b2a52877",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/interactive/domain/interactor/SafeChooserControllerCallbackTest.kt",
+      "kind": "blob",
+      "oid": "073266bd43a561c878d67a481c6db9716fa59861",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/interactive/domain/model/ChooserControllerTest.kt",
+      "kind": "blob",
+      "oid": "89e94185d13912e0024c162e8be58a0dda3a6aee",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/logging/EventLogImplTest.java",
+      "kind": "blob",
+      "oid": "0c3e6a41d95d548c007faa040b8396f8228ba354",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/model/AbstractResolverComparatorTest.java",
+      "kind": "blob",
+      "oid": "5cec973428dc881f8140528c028f6c041ed0c803",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/model/CompareSelectProbabilityThenAzLabelTest.kt",
+      "kind": "blob",
+      "oid": "a3375c2d4d05c5608735b4ad49f1738a251aa23c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/platform/FakeSettingsTest.kt",
+      "kind": "blob",
+      "oid": "82daca5573557f44c4eb9885c76a5dcdeaf786da",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/platform/FakeUserManagerTest.kt",
+      "kind": "blob",
+      "oid": "fdc32207a106507b26756c8188bea411a5b2e56c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/platform/NearbyShareModuleTest.kt",
+      "kind": "blob",
+      "oid": "a4bcad380a54292f9332074728db1644fd5425ad",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/profiles/MultiProfilePagerAdapterTest.kt",
+      "kind": "blob",
+      "oid": "8eafa0b5133adbf1ca215dfcef8988c34169ebd6",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/shortcuts/ScopedAppTargetListCallbackTest.kt",
+      "kind": "blob",
+      "oid": "c81e88ab659befc75a23c87a38046ff126a4a417",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/shortcuts/ShortcutLoaderTest.kt",
+      "kind": "blob",
+      "oid": "8b87e63bb2cc07058edc3f546e3ab695835199c0",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/shortcuts/ShortcutToChooserTargetConverterTest.kt",
+      "kind": "blob",
+      "oid": "ce6ef4775ba103b79fb8314055cd57e93282238b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/tapsharing/TapEventServiceConnectorTest.kt",
+      "kind": "blob",
+      "oid": "2eed6f0cc84cf8e964d1e532f092ad32ca3eb702",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/tapsharing/TapShareControllerTest.kt",
+      "kind": "blob",
+      "oid": "d5790c6f7b9aaa736a9f8b9c61dbb41f9ade4e8b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/tapsharing/TapShareModuleTest.kt",
+      "kind": "blob",
+      "oid": "59285b1b18dc88629edcaca4872d29595a61b3c6",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/ui/ShareResultSenderImplTest.kt",
+      "kind": "blob",
+      "oid": "d8b1b175090509965a1390fe27e8b0d5b685f86e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/ui/model/ActivityModelTest.kt",
+      "kind": "blob",
+      "oid": "b48a6422a450380fe32c63afeaddacbaf5695dfb",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/ui/viewmodel/ChooserRequestTest.kt",
+      "kind": "blob",
+      "oid": "dedf9f250cd93fd66085671d728c8c65700166b3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/ui/viewmodel/IntentExtTest.kt",
+      "kind": "blob",
+      "oid": "8fc162caa7bf2de49a1023a25b0814190599610f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/ui/viewmodel/ResolverRequestTest.kt",
+      "kind": "blob",
+      "oid": "2618d72f87715108d7b40ade25968a815d14866c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/util/IntentUtilsTest.kt",
+      "kind": "blob",
+      "oid": "b775700210e4f521a81a7b27186f713648a87e8f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/util/TestExecutor.kt",
+      "kind": "blob",
+      "oid": "214b97078361bd2718571d981232bf01e564e1b4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/util/TestKosmos.kt",
+      "kind": "blob",
+      "oid": "473d9b72d9d5bc26aac49a9d8027c652d7e2b3f1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/util/TruthUtils.kt",
+      "kind": "blob",
+      "oid": "b96b6f05d3dc8744741780251046e16555ffc9c9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/util/UriFiltersTest.kt",
+      "kind": "blob",
+      "oid": "32c19f136a21edab5ee98a0756f97a2f6ac96dec",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/validation/ValidationTest.kt",
+      "kind": "blob",
+      "oid": "93a5ec0c73f96e4f53a0eb4ef6850df979a30dbe",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/validation/types/IntentOrUriTest.kt",
+      "kind": "blob",
+      "oid": "f8622ce080fe7af2690ee1d2ec74aac3925863ff",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/validation/types/ParceledArrayTest.kt",
+      "kind": "blob",
+      "oid": "5284cbecc36651ca5eefe795ae1cf6b4a24ad522",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/validation/types/SimpleValueTest.kt",
+      "kind": "blob",
+      "oid": "1b6bace1e1bae6887163f76c5bdc9d2654d6c98b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/widget/BatchPreviewLoaderTest.kt",
+      "kind": "blob",
+      "oid": "640c6c1464f57cfae4256e08161670392feeb320",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/widget/ResolverDrawerLayoutExtTest.kt",
+      "kind": "blob",
+      "oid": "c2bcd7cc04df0a00e7705bca2dc4c06e94ac177e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/intentresolver/widget/ResolverDrawerLayoutTest.kt",
+      "kind": "blob",
+      "oid": "77679d0b7bb95cd184ef47ebe3178cf9635874fc",
+      "mode": "100644"
+    }
+  ]
+}

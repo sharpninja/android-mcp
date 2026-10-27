@@ -1,0 +1,73 @@
+types scanned 59254 candidates 6582
+callback methods scanned 20000
+callback methods scanned 40000
+callback methods scanned 60000
+callback methods scanned 80000
+callback methods scanned 100000
+callback methods scanned 120000
+callback methods scanned 140000
+callback methods scanned 160000
+callback methods scanned 180000
+callback methods scanned 200000
+callback methods scanned 220000
+callback methods scanned 240000
+callback methods scanned 260000
+callback methods scanned 280000
+callback methods scanned 300000
+callback methods scanned 320000
+callback methods scanned 340000
+callback methods scanned 360000
+callback methods scanned 380000
+{
+  "at": "2026-10-27T05:57:20.141863+00:00",
+  "release": "010",
+  "database": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/catalog/output/release-010/catalog.sqlite",
+  "registry_id": "9c3a75568d10a33cedcbe826137d9a799f4db55c5b4b9e88fe93a968cbd0601e",
+  "counts": {
+    "declared_types_scanned": 59254,
+    "type_candidates": 6582,
+    "methods_scanned": 392593,
+    "parameters_scanned": 441514,
+    "nonprimitive_parameters": 240556,
+    "parameter_candidates": 16405,
+    "candidate_endpoint_methods": 32231,
+    "unregistration-candidate": 2142,
+    "registration-candidate": 5755,
+    "callback-parameter-candidate": 8508,
+    "lifecycle_pair_candidates": 3079,
+    "nonprimitive_parameters_without_callback_classification": 224151
+  },
+  "producer_sha256": "1ed4e0dfca74b9e501527f059034c51a74e966d12bb7ca67fb85169030f082df",
+  "tests": 13,
+  "scope": "All normalized catalog type/method/parameter rows scanned; candidate roles do not prove all callbacks or lifecycle",
+  "complete": false,
+  "limitations": [
+    "Source catalog predates new callback producer and may contain unresolved types, hidden/native/generated sources and older oneway metadata",
+    "Absent inherited AIDL oneway flag never proves synchronous; both flags false required; HIDL method flag handled separately",
+    "No automatic global short-name resolution or callback lifecycle inferred",
+    "Registration/removal pairs are candidates; no runtime invocation, stream or device actions performed",
+    "SDK delegates/functional callback roles without names or resolved interface metadata remain explicit unclassified reference parameters"
+  ],
+  "files": [
+    {
+      "path": "endpoint-methods.jsonl",
+      "bytes": 90561068,
+      "sha256": "43804328672c05767159cd57b8d9b27098dfc9e6e55360797d53c57063b60524"
+    },
+    {
+      "path": "lifecycle-pair-candidates.jsonl",
+      "bytes": 976043,
+      "sha256": "f141b3aca60361aa190c0d61b453cdc292475e8c27460e8fc63d228a99499998"
+    },
+    {
+      "path": "parameter-candidates.jsonl",
+      "bytes": 41383288,
+      "sha256": "946f6f4502258c1e22b3a75ad9465a0cdede3f0295041ae233cb94435944eb7d"
+    },
+    {
+      "path": "type-candidates.jsonl",
+      "bytes": 9512584,
+      "sha256": "1bbb5cc21320dd3a3cd31cf6e74d57410c0272f534c843d5e1e1838a48f37d7d"
+    }
+  ]
+}

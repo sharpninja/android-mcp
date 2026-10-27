@@ -1,0 +1,1789 @@
+{
+  "repo": "platform/packages/modules/NpuManager",
+  "requested_revision": "refs/tags/android-17.0.0_r1",
+  "revision": "d194f8ada2cab31b8487fb3aaac6fd383fc7e07f",
+  "entries": [
+    {
+      "path": ".clang-format",
+      "kind": "blob",
+      "oid": "973b2fabde4eb62d0dc75e424a262e37c9103161",
+      "mode": "120000"
+    },
+    {
+      "path": "OWNERS",
+      "kind": "blob",
+      "oid": "097bd9bb9eb4a550ddb25b946bff2247171ea33a",
+      "mode": "100644"
+    },
+    {
+      "path": "PREUPLOAD.cfg",
+      "kind": "blob",
+      "oid": "4a4e17c2a7d547655580c36ddb28f8af01e42931",
+      "mode": "100644"
+    },
+    {
+      "path": "TEST_MAPPING",
+      "kind": "blob",
+      "oid": "32d9d1bc3b1f83f20f9a3ce54abf73544ddab225",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/Android.bp",
+      "kind": "blob",
+      "oid": "b5f6ce7b18e69793fd0f473653472fdeabe04a79",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/com.android.npumanager.avbpubkey",
+      "kind": "blob",
+      "oid": "d0453e9097985ba58f2001fc9558864e8de8ea16",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/com.android.npumanager.pem",
+      "kind": "blob",
+      "oid": "cb8ea71511e647a8d9db08677ffea50bea7661f7",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/com.android.npumanager.pk8",
+      "kind": "blob",
+      "oid": "d1b2b5c1e57706801d39f33a3271924bc55c2122",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/com.android.npumanager.x509.pem",
+      "kind": "blob",
+      "oid": "45de40b40826dd898ccf28410c492097e9c43220",
+      "mode": "100644"
+    },
+    {
+      "path": "apex/manifest.json",
+      "kind": "blob",
+      "oid": "44ccbb07786a99306dfadc7f80976dd2da9e3c66",
+      "mode": "100644"
+    },
+    {
+      "path": "flags/Android.bp",
+      "kind": "blob",
+      "oid": "e010abe55b645b3fbf7f336bead183e1b069461c",
+      "mode": "100644"
+    },
+    {
+      "path": "flags/npumanager_flags.aconfig",
+      "kind": "blob",
+      "oid": "ba2bc8a632ae55201f1f9a8c6c5f3246e88a2dc6",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/Android.bp",
+      "kind": "blob",
+      "oid": "e4b6ebb6c4c7271474d2a784bf01a1dc8e689c83",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/current.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/module-lib-current.txt",
+      "kind": "blob",
+      "oid": "d2092dddcd7ee49a6ec19e7449f71d6f617f5b61",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/module-lib-removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/system-current.txt",
+      "kind": "blob",
+      "oid": "8794ce49836e31997c97ba83c9c38f2b6733ff75",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/api/system-removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/jarjar-rules.txt",
+      "kind": "blob",
+      "oid": "79a59e5cd58c244a79d474661b66b6c35b509346",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/npumanager/BufferType.aidl",
+      "kind": "blob",
+      "oid": "01684259923715bf0b2a11144843f88aa50feb2c",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/npumanager/FileSegment.aidl",
+      "kind": "blob",
+      "oid": "999f7d1b0cc46bb0faaebae7c3220f082698316b",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/npumanager/IModelLoadCallback.aidl",
+      "kind": "blob",
+      "oid": "459ef4b8735b922cf91cc7a047116245923c1a30",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/npumanager/INpuAllocator.aidl",
+      "kind": "blob",
+      "oid": "7415d1f81d984d07d8aa0f96b9b6b395bee2d821",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/npumanager/INpuAllocatorCallback.aidl",
+      "kind": "blob",
+      "oid": "a5e06ca48abaf4bcbf03d6dfb04a602daf599178",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/npumanager/INpuManagerService.aidl",
+      "kind": "blob",
+      "oid": "bf36620dbf01dbffb6c7d6752daeaae700c87142",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/npumanager/ModelLoadRequest.java",
+      "kind": "blob",
+      "oid": "0ce22f922c0dd6644ec452594f8108c6bcc0c006",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/npumanager/ModelLoadRequestCallback.java",
+      "kind": "blob",
+      "oid": "c8390a301b537e4cf86a55f2e81e73df603a4fdc",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/npumanager/ModelLoadRequestParcelable.aidl",
+      "kind": "blob",
+      "oid": "5d4ed0fbbaf06d0038aabf13138a024c9575785e",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/npumanager/ModelLoadRequestUtils.java",
+      "kind": "blob",
+      "oid": "56499bee9503a4b4af222954a3fe74cc8df2b27c",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/npumanager/NpuBufferGetRequest.aidl",
+      "kind": "blob",
+      "oid": "1043186cb8b01a79a9bfe5b6cd8b555492e70a9d",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/npumanager/NpuManager.java",
+      "kind": "blob",
+      "oid": "d1e3520ee4f17540a89a79bb9475e95937fa52ae",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/npumanager/NpuManagerFrameworkInitializer.java",
+      "kind": "blob",
+      "oid": "dc0708ee5dbeee9a9f5d0829a0c494b0de53b6c3",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/java/android/npumanager/NpuModelSize.aidl",
+      "kind": "blob",
+      "oid": "2e26d93f51f6b616c057be93cbbf9bf245cc6abe",
+      "mode": "100644"
+    },
+    {
+      "path": "ndk/Android.bp",
+      "kind": "blob",
+      "oid": "b8af5827649d2b89aa416ffc7982d005f96f3ae6",
+      "mode": "100644"
+    },
+    {
+      "path": "ndk/NOTICE",
+      "kind": "blob",
+      "oid": "f68b15b8360009bc2f61f0106240fc3e0495e48a",
+      "mode": "100644"
+    },
+    {
+      "path": "ndk/alloc_request.rs",
+      "kind": "blob",
+      "oid": "3b7a34cd1e3d86361b10b9358bacca930c220903",
+      "mode": "100644"
+    },
+    {
+      "path": "ndk/buffer_impl.rs",
+      "kind": "blob",
+      "oid": "f6b0281b05bb9455af87c65df27caa970cce8061",
+      "mode": "100644"
+    },
+    {
+      "path": "ndk/cookie.rs",
+      "kind": "blob",
+      "oid": "c94b6f5ac03d38f55acc7451c467dc0ea2a6de92",
+      "mode": "100644"
+    },
+    {
+      "path": "ndk/deferred_alloc_error.rs",
+      "kind": "blob",
+      "oid": "a1d2ed3c5ce7cf045a890b5bbcdf4d7edd40b399",
+      "mode": "100644"
+    },
+    {
+      "path": "ndk/include/android/npumanager/buffer.h",
+      "kind": "blob",
+      "oid": "f167aa3a94eb915e7ac307ff3b79cd27a847e4a8",
+      "mode": "100644"
+    },
+    {
+      "path": "ndk/include/android/npumanager/buffer_fd.h",
+      "kind": "blob",
+      "oid": "15ffae7fe7ea7d926c8843ab4eadf6429b45d6d7",
+      "mode": "100644"
+    },
+    {
+      "path": "ndk/include_libandroid/android/npumanager/buffer_impl.h",
+      "kind": "blob",
+      "oid": "88918905a01d6589120646f156491c358aea6ccb",
+      "mode": "100644"
+    },
+    {
+      "path": "ndk/libandroid_shim.cpp",
+      "kind": "blob",
+      "oid": "4cfc9269c0a1947eee266c3e1482b3b722a789c6",
+      "mode": "100644"
+    },
+    {
+      "path": "ndk/libandroid_shim_platform.cpp",
+      "kind": "blob",
+      "oid": "a84b08a94e02fb5ec8df0332cd4651a9bf6cc0f7",
+      "mode": "100644"
+    },
+    {
+      "path": "ndk/libcom.android.npumanager.map.txt",
+      "kind": "blob",
+      "oid": "4b3ec5998980623d8d89e7400c3e539be1ec9baa",
+      "mode": "100644"
+    },
+    {
+      "path": "ndk/libnpumanager.map.txt",
+      "kind": "blob",
+      "oid": "2f73a2f2bb8a6d8b07e05ce00fb7aa994381f2bf",
+      "mode": "100644"
+    },
+    {
+      "path": "ndk/npu_allocator_callback.rs",
+      "kind": "blob",
+      "oid": "79bb68295f416feb464e7d9ae5248113e74e0511",
+      "mode": "100644"
+    },
+    {
+      "path": "ndk/npu_allocator_client.rs",
+      "kind": "blob",
+      "oid": "fbcb70a5fe3d28c951c50f91ffc00f57356550fc",
+      "mode": "100644"
+    },
+    {
+      "path": "ndk/npu_buffer_impl.rs",
+      "kind": "blob",
+      "oid": "be267698080c2a6dd3bf03cac92d04a608c107bc",
+      "mode": "100644"
+    },
+    {
+      "path": "ndk/npu_buffer_state.rs",
+      "kind": "blob",
+      "oid": "03ce0aeab9db27fc4886b3fd93e0c90c84c2722b",
+      "mode": "100644"
+    },
+    {
+      "path": "ndk/npu_manager_delegate.rs",
+      "kind": "blob",
+      "oid": "67ce1b4d6a409016cb61121431ae569ea7970617",
+      "mode": "100644"
+    },
+    {
+      "path": "ndk/npumanager_dlopen.cpp",
+      "kind": "blob",
+      "oid": "2f8aca0fd48731185a9e722e9471b16c6afc9588",
+      "mode": "100644"
+    },
+    {
+      "path": "ndk/npumanager_dlopen.h",
+      "kind": "blob",
+      "oid": "ca8d8a88c6f9a06761e1e7cf6f972631a2a48878",
+      "mode": "100644"
+    },
+    {
+      "path": "ndk/translations.rs",
+      "kind": "blob",
+      "oid": "7062e8e3c6b05edeb4caca6d0e753072666927c7",
+      "mode": "100644"
+    },
+    {
+      "path": "ndk/try_clone.rs",
+      "kind": "blob",
+      "oid": "20920c787af65dbe4094a6029650857bd988d4d6",
+      "mode": "100644"
+    },
+    {
+      "path": "ndk/unpack_option.rs",
+      "kind": "blob",
+      "oid": "801143eac7d2685c9b63607687baaf96b62c9366",
+      "mode": "100644"
+    },
+    {
+      "path": "service/Android.bp",
+      "kind": "blob",
+      "oid": "ed1dbff48a25a91c1a5d6dfd5d322a80445e9e23",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/npumanager/BudgetModelLoadingPolicy.java",
+      "kind": "blob",
+      "oid": "fe520a7978b3a9608db98c9e232c14da94a1836c",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/npumanager/BufferEntry.java",
+      "kind": "blob",
+      "oid": "5ffc66146b5e2c3624d9c0c6c924a06e784145b7",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/npumanager/BufferRegistry.java",
+      "kind": "blob",
+      "oid": "5c0010485873647e8617ca2a1796954730fa8df8",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/npumanager/DumpUtils.java",
+      "kind": "blob",
+      "oid": "ea1e3681333ed158e785be8f431edc26c3013f23",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/npumanager/MetricsLogger.java",
+      "kind": "blob",
+      "oid": "4f72df9b2266509953311759fd362cd907c16991",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/npumanager/ModelLoadRequestInfo.java",
+      "kind": "blob",
+      "oid": "c78c4efa628cd13fbd5dd5da38a52b2f45f46bbc",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/npumanager/NpuAllocator.java",
+      "kind": "blob",
+      "oid": "0c9bc2807d222f7d9be77b3ff143a10fa1b7be26",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/npumanager/NpuManagerService.java",
+      "kind": "blob",
+      "oid": "0a3498c93a7d1de84eb1b0da7fd899a87c0b1d46",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/npumanager/NpuManagerServiceImpl.java",
+      "kind": "blob",
+      "oid": "ddf553d150205424aaa4341784fdbeab4e0e08b4",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/npumanager/NpuModelLoadingPolicy.java",
+      "kind": "blob",
+      "oid": "f720d609594f02d766a32df3c9445f6921dad326",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/npumanager/PriorityManager.java",
+      "kind": "blob",
+      "oid": "f6ee16f4f735d345d384ffa141ea9162b4efead6",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/npumanager/StatusQuoModelLoadingPolicy.java",
+      "kind": "blob",
+      "oid": "6e80f3031976d98dc88c1e19c74d287efc03aa64",
+      "mode": "100644"
+    },
+    {
+      "path": "service/java/com/android/server/npumanager/TurnTakingModelLoadingPolicy.java",
+      "kind": "blob",
+      "oid": "a517f0cd37eb02190451c0e3477c3c344b36160c",
+      "mode": "100644"
+    },
+    {
+      "path": "service/jni/Android.bp",
+      "kind": "blob",
+      "oid": "f47bdf48d6d66e8aef48cc92e7213de41c2d2ed4",
+      "mode": "100644"
+    },
+    {
+      "path": "service/jni/com_android_server_npumanager_NpuAllocator.rs",
+      "kind": "blob",
+      "oid": "071ee84fe553c548b114885582def6b9723f26b6",
+      "mode": "100644"
+    },
+    {
+      "path": "service/jni/lib.rs",
+      "kind": "blob",
+      "oid": "e0a1ac351a3e186c2dd696edcbbae287d2f98aeb",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/aicore/Android.bp",
+      "kind": "blob",
+      "oid": "1e941864e9c8e979ce06f738e418ec5929385690",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/aicore/AndroidMoblyTest.xml",
+      "kind": "blob",
+      "oid": "ff492259591c9e14be4ea8b3450dfab0a6a183ee",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/aicore/SapiApp/Android.bp",
+      "kind": "blob",
+      "oid": "c2414e67d2f709fe8c304eb9ca6fbf8249ece082",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/aicore/SapiApp/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "34bc8b2b7798091699a636bbc5df73fd72a31906",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/aicore/SapiApp/libs/common-18.11.0.aar",
+      "kind": "blob",
+      "oid": "ec04486c8ba8c1ce1e631f4ca6a9ba3cf0edd78f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/aicore/SapiApp/libs/firebase-components-19.0.0.aar",
+      "kind": "blob",
+      "oid": "29ad65980e0c9ac184e3a803a3b1843571a86ed1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/aicore/SapiApp/libs/firebase-encoders-17.0.0.jar",
+      "kind": "blob",
+      "oid": "1849ad8e156562361c718568aed3d9407284e353",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/aicore/SapiApp/libs/firebase-encoders-json-18.0.1.aar",
+      "kind": "blob",
+      "oid": "ff97e2c8cac3377c1adf5028a1cb46f1c816560b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/aicore/SapiApp/libs/genai-common-1.0.0-beta2.aar",
+      "kind": "blob",
+      "oid": "2eb3337d049ae52d23bc36201e46955b5c991b2d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/aicore/SapiApp/libs/genai-rewriting-1.0.0-beta1.aar",
+      "kind": "blob",
+      "oid": "a1a54817c23ceb1b9b9d249efd567de969916d4b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/aicore/SapiApp/libs/genai-summarization-1.0.0-beta1.aar",
+      "kind": "blob",
+      "oid": "b55c445b5e5e56151e587ffd419cfe12cd7c6a63",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/aicore/SapiApp/libs/javax.inject-1.jar",
+      "kind": "blob",
+      "oid": "b2a9d0bf7bd463a6361898b36f010edd05c0cf6e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/aicore/SapiApp/libs/play-services-basement-18.9.0.aar",
+      "kind": "blob",
+      "oid": "01781b0db43fb5ee1701670d7a8dbdfe7d676249",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/aicore/SapiApp/libs/play-services-tasks-18.4.0.aar",
+      "kind": "blob",
+      "oid": "ebe600a26d1b786fc773a12b065114572848d587",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/aicore/SapiApp/libs/transport-api-4.0.0.aar",
+      "kind": "blob",
+      "oid": "2d471d2fb27cf70f5ebb52f6316037f09c06e24c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/aicore/SapiApp/libs/transport-backend-cct-4.0.0.aar",
+      "kind": "blob",
+      "oid": "d147cb9bd7db35bfb1d890fcf26656ad36d803f8",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/aicore/SapiApp/libs/transport-runtime-4.0.0.aar",
+      "kind": "blob",
+      "oid": "84a152ab9d79f8814d77a8175bbe7898d90896ed",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/aicore/SapiApp/res/layout/activity_main.xml",
+      "kind": "blob",
+      "oid": "2c1398d88b8079ba211343334f1f68037ef7cbf8",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/aicore/SapiApp/src/com/android/npumanager/sapiapp/MainActivity.java",
+      "kind": "blob",
+      "oid": "830f986b4865b43ab846b10b92ef29a9c3e1bebd",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/aicore/SapiApp/src/com/android/npumanager/sapiapp/SapiSnippet.java",
+      "kind": "blob",
+      "oid": "3ee67595bd559dfbfa7206d0e7155a978bf8b5f4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/aicore/aicore_npu_manager_test.py",
+      "kind": "blob",
+      "oid": "c5be1c4f1a5229d6d5101b1d25aa6c5a5b441c84",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/aicore/mobly_config.yaml",
+      "kind": "blob",
+      "oid": "cd55ed1303a5678f7ae2f49542f73b4072e3281a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/Android.bp",
+      "kind": "blob",
+      "oid": "ba5317de0788f197ed7732a5b18fc01564003812",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "b2ebfa16729204b3ffb7740bd8e9930f3d2c198a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/AndroidManifest_platform.xml",
+      "kind": "blob",
+      "oid": "4f26768f1751f61396b0d667e6a432f885964ca0",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/AndroidMoblyTest.xml",
+      "kind": "blob",
+      "oid": "ccb9d1cb6685fc76196369582f5522206ee92798",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "de24a3f60329299c2e205e6efc0bc33bf85f45a4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/AndroidTest_platform.xml",
+      "kind": "blob",
+      "oid": "eba121d085f4950e301595c8f7bed8e1d5da5dd9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/Android.bp",
+      "kind": "blob",
+      "oid": "50ff7dbabc16c41083bebaed98422f6cb73d84a2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "ac318032994b7ac38337d9de210f8e3c95cd24e5",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/AndroidManifest_nofeature.xml",
+      "kind": "blob",
+      "oid": "fbdf9627c94b6940f673c4aba7b229afb5f389b1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/AndroidManifest_variant.xml",
+      "kind": "blob",
+      "oid": "c4e42f2f3503693300a6486642435677949b13af",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/libLiteRtDispatch_Qualcomm.so",
+      "kind": "blob",
+      "oid": "c62bd10b73c74e80b0a68c0a72d65fcf8b29779b",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/mobilenet_v2_224_100.tflite",
+      "kind": "blob",
+      "oid": "ba5ea6e12f1510dbccf6595e06d2d8bf4516b201",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/mtk/libLiteRtDispatch_MediaTek.so",
+      "kind": "blob",
+      "oid": "ce59731da08947f1c72b1cafc98dfbcc8594a3b1",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/panda.ndarray",
+      "kind": "blob",
+      "oid": "3a1e28ce47a5c28186ac4b937fd38441aad276da",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/qnn_v73/libLiteRtCompilerPlugin_Qualcomm.so",
+      "kind": "blob",
+      "oid": "d6d39f488576fd3d19e647f66030ebbdf86ba857",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/qnn_v73/libLiteRtDispatch_Qualcomm.so",
+      "kind": "blob",
+      "oid": "0fde9ce5de1dfb0617155245b3fe10105584adc3",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/qnn_v73/libQnnHtp.so",
+      "kind": "blob",
+      "oid": "372ef35166acf45407725e2edee3c2fa8aa7bf01",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/qnn_v73/libQnnHtpPrepare.so",
+      "kind": "blob",
+      "oid": "b56f70968e1bfe62d74cdd20e609419711ba3c5a",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/qnn_v73/libQnnHtpV73Skel.so",
+      "kind": "blob",
+      "oid": "eb939d54325291b6ee772a34136192fd726c0a2a",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/qnn_v73/libQnnHtpV73Stub.so",
+      "kind": "blob",
+      "oid": "988ede9cd193f95963fbc3c5fd8a302e8d2d946d",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/qnn_v73/libQnnSystem.so",
+      "kind": "blob",
+      "oid": "31ef693e644413278f809334d83d6ae9471739e5",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/qnn_v75/libLiteRtCompilerPlugin_Qualcomm.so",
+      "kind": "blob",
+      "oid": "d6d39f488576fd3d19e647f66030ebbdf86ba857",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/qnn_v75/libLiteRtDispatch_Qualcomm.so",
+      "kind": "blob",
+      "oid": "0fde9ce5de1dfb0617155245b3fe10105584adc3",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/qnn_v75/libQnnHtp.so",
+      "kind": "blob",
+      "oid": "372ef35166acf45407725e2edee3c2fa8aa7bf01",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/qnn_v75/libQnnHtpPrepare.so",
+      "kind": "blob",
+      "oid": "b56f70968e1bfe62d74cdd20e609419711ba3c5a",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/qnn_v75/libQnnHtpV75Skel.so",
+      "kind": "blob",
+      "oid": "25c6c7fc0d6e2cb05b81559e25a7895a24a7124c",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/qnn_v75/libQnnHtpV75Stub.so",
+      "kind": "blob",
+      "oid": "4c4eb5d3ffc905d641dfd544f64b69d26d0d81c4",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/qnn_v75/libQnnSystem.so",
+      "kind": "blob",
+      "oid": "31ef693e644413278f809334d83d6ae9471739e5",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/qnn_v79/libLiteRtCompilerPlugin_Qualcomm.so",
+      "kind": "blob",
+      "oid": "d6d39f488576fd3d19e647f66030ebbdf86ba857",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/qnn_v79/libLiteRtDispatch_Qualcomm.so",
+      "kind": "blob",
+      "oid": "0fde9ce5de1dfb0617155245b3fe10105584adc3",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/qnn_v79/libQnnHtp.so",
+      "kind": "blob",
+      "oid": "372ef35166acf45407725e2edee3c2fa8aa7bf01",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/qnn_v79/libQnnHtpPrepare.so",
+      "kind": "blob",
+      "oid": "b56f70968e1bfe62d74cdd20e609419711ba3c5a",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/qnn_v79/libQnnHtpV79Skel.so",
+      "kind": "blob",
+      "oid": "881413ec3cf377c82949f30beb343303f1faa041",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/qnn_v79/libQnnHtpV79Stub.so",
+      "kind": "blob",
+      "oid": "bea086c4e7078c2aad980f8a2462c4f6f87db197",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/qnn_v79/libQnnSystem.so",
+      "kind": "blob",
+      "oid": "31ef693e644413278f809334d83d6ae9471739e5",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/qnn_v81/libLiteRtCompilerPlugin_Qualcomm.so",
+      "kind": "blob",
+      "oid": "d6d39f488576fd3d19e647f66030ebbdf86ba857",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/qnn_v81/libLiteRtDispatch_Qualcomm.so",
+      "kind": "blob",
+      "oid": "0fde9ce5de1dfb0617155245b3fe10105584adc3",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/qnn_v81/libQnnHtp.so",
+      "kind": "blob",
+      "oid": "372ef35166acf45407725e2edee3c2fa8aa7bf01",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/qnn_v81/libQnnHtpPrepare.so",
+      "kind": "blob",
+      "oid": "b56f70968e1bfe62d74cdd20e609419711ba3c5a",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/qnn_v81/libQnnHtpV81Skel.so",
+      "kind": "blob",
+      "oid": "ca0ad15868ea70ad8fe6a047ec02c1c99cbcba50",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/qnn_v81/libQnnHtpV81Stub.so",
+      "kind": "blob",
+      "oid": "cd7164c1a71eb78e7d89729e96774d102ea0c208",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/qnn_v81/libQnnSystem.so",
+      "kind": "blob",
+      "oid": "31ef693e644413278f809334d83d6ae9471739e5",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/selfie_multiclass.g6.tflite",
+      "kind": "blob",
+      "oid": "9db0e2a3e85ce2c9538befa3aeddb26d72299f86",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/selfie_multiclass.mediatek.mt6991.tflite",
+      "kind": "blob",
+      "oid": "e3b2b36c26fa38bff81d28b1d51deb2a77451633",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/selfie_multiclass.mediatek.mt6993.tflite",
+      "kind": "blob",
+      "oid": "e0afae83916a61f25306807c3e55b499616367cc",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/selfie_multiclass.mediatek.mt6995.tflite",
+      "kind": "blob",
+      "oid": "d36bd9c5e04e874c824adc49c428918676bb37b3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/selfie_multiclass.qualcomm.sm8550.tflite",
+      "kind": "blob",
+      "oid": "2e7a2b129d1cc268f8795441cac6513cdbc7554c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/selfie_multiclass.qualcomm.sm8650.tflite",
+      "kind": "blob",
+      "oid": "6d971e506beff4616d53d6cb1270905eb3a89bc3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/selfie_multiclass.qualcomm.sm8750.tflite",
+      "kind": "blob",
+      "oid": "7ac0888ae1d9b2295377c683f2e4e7317ed5720e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/selfie_multiclass.tensor.g4.tflite",
+      "kind": "blob",
+      "oid": "4394fb60cf8e5d2d934425ce3b021cadd1b8d06d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/selfie_multiclass.tensor.g5.tflite",
+      "kind": "blob",
+      "oid": "cf129d62b83b718bb75f470116e2f187925e0e7b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/assets/tensor/libLiteRtDispatch_GoogleTensor.so",
+      "kind": "blob",
+      "oid": "9d0ac2f7964cfad1e51000b31feb5ab96c50fe4e",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/Android.bp",
+      "kind": "blob",
+      "oid": "115f1c21ec52adb2e966e476ec6039adda737f26",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/CMakeLists.txt",
+      "kind": "blob",
+      "oid": "7e70d08ba3ab215c2c89d4e32b2026a190a182f6",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/CMakePresets.json",
+      "kind": "blob",
+      "oid": "3feeb7e4fbc90687fbfa8e081297eab37fb17937",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/FindFlatBuffers.cmake",
+      "kind": "blob",
+      "oid": "12c752ca152445aaddb475c6c5eb861b347d4191",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/Findabsl.cmake",
+      "kind": "blob",
+      "oid": "75041749bd1bcc90f758bcebc31d73a09f7326bb",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/Findopencl_headers.cmake",
+      "kind": "blob",
+      "oid": "6384aa0d1da2d389f109037d45adf4d0ac6fe7fe",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/OverridableFetchContent.cmake",
+      "kind": "blob",
+      "oid": "5e26cb0319c105b7d38b5255deb1bd7d79ceb08a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/abseil-cpp.cmake",
+      "kind": "blob",
+      "oid": "304b5b315b9fc89538ee56fd8295677f050cd4cb",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/flatbuffers.cmake",
+      "kind": "blob",
+      "oid": "ec0950f5e4dc5ce319252706b212547f5784924f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/build_common/build_config.h",
+      "kind": "blob",
+      "oid": "1fd4c72a09faff833fe66bf32ae2add2e1b7d446",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/internal/litert_logging.cc",
+      "kind": "blob",
+      "oid": "c4431c1af3b49c758bb84bebe9a0ca6b7cc58771",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/internal/litert_logging.h",
+      "kind": "blob",
+      "oid": "e8f1d759c94aa1fb278b34d287b95357e2c5dc95",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/internal/litert_options_helper.h",
+      "kind": "blob",
+      "oid": "5ec9ec8a285b1c41743830af3b784813ed53d2c0",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/internal/litert_runtime_c_api.h",
+      "kind": "blob",
+      "oid": "07a99463f122fc2bee84282d9626d5ec82760869",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/internal/litert_scheduling_info.h",
+      "kind": "blob",
+      "oid": "a2db3b3a28770b12d5d332e793eeea24a32e9a90",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/litert_any.h",
+      "kind": "blob",
+      "oid": "00eea470da67e05697c43aa61077a951d172dbbb",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/litert_common.h",
+      "kind": "blob",
+      "oid": "712a333ff848e79aa831039f03fe529a3f961b18",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/litert_compiled_model.h",
+      "kind": "blob",
+      "oid": "e8d92003effb204abc94bb45084f74a55f8cae86",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/litert_custom_op_kernel.h",
+      "kind": "blob",
+      "oid": "999c030baa768edb248e2fadc157ed34d4a875ec",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/litert_custom_tensor_buffer.h",
+      "kind": "blob",
+      "oid": "b8a6c046ea3016b9edf0d98026c2fb86a91804e9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/litert_environment.h",
+      "kind": "blob",
+      "oid": "f44a3a7e14d0382cd590758c8740e6eab539d834",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/litert_environment_options.h",
+      "kind": "blob",
+      "oid": "0f06ebb805bfa45b0334baea9acf2518f05ff0e3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/litert_event.h",
+      "kind": "blob",
+      "oid": "2adbfef822cd0d48c8f5fe048731288f88fc7068",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/litert_event_type.h",
+      "kind": "blob",
+      "oid": "cde0b9ba169030f515e3040804e89d4fc830f6cf",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/litert_gl_types.h",
+      "kind": "blob",
+      "oid": "b09076805d143fac89e3786d7c885a477fd4d74d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/litert_layout.cc",
+      "kind": "blob",
+      "oid": "b0def0aa88e9d05da732569d328cf42f35d7ab69",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/litert_layout.h",
+      "kind": "blob",
+      "oid": "b147192313c0f3517098c1f6376697e57e3eb025",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/litert_metrics.h",
+      "kind": "blob",
+      "oid": "afced20ee10b28c0326f481e59c2ef28a1c8edd6",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/litert_model.h",
+      "kind": "blob",
+      "oid": "07de3b4f35b2d5755610159dfe33a2c7d3152eaf",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/litert_model_types.h",
+      "kind": "blob",
+      "oid": "044a09760b35a66aada30f967beb7a7f458f1c37",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/litert_op_code.h",
+      "kind": "blob",
+      "oid": "3743c0998e9236524c1ecbfcbb6802b17bc7dffd",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/litert_op_options.h",
+      "kind": "blob",
+      "oid": "842e687356127ea3575a7134f2f6bc210764402e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/litert_opaque_options.h",
+      "kind": "blob",
+      "oid": "0ee77730e8942e2db52badf850f3c34c7074b046",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/litert_opencl_types.h",
+      "kind": "blob",
+      "oid": "8bf0a20ffa02d6b248a0afd90804113ad1f14176",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/litert_options.h",
+      "kind": "blob",
+      "oid": "0ab4551ff176a0870e51229b13f501f5665c27cf",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/litert_platform_support.h",
+      "kind": "blob",
+      "oid": "98a3ae325df565a1af149b2b0bdc617b776c8f2d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/litert_profiler.h",
+      "kind": "blob",
+      "oid": "54091eb710cd177aabe17cb65aa67716db3e055c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/litert_profiler_event.h",
+      "kind": "blob",
+      "oid": "ac69602166a2e737e85b2b16af1a4fa617c32436",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/litert_tensor_buffer.h",
+      "kind": "blob",
+      "oid": "2ae1d4ead2c7c9853fbacec3f63a5e091a6d6d47",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/litert_tensor_buffer_requirements.h",
+      "kind": "blob",
+      "oid": "14913070b8216e0bff5a5ee4292eb87df0f565f9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/litert_tensor_buffer_types.h",
+      "kind": "blob",
+      "oid": "6fbe0c32c18c3edf287d4653d1bc8bab1b53fe42",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/litert_webgpu_types.h",
+      "kind": "blob",
+      "oid": "5e57ee046aa02660e172fd48126e016ec4228e1d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/options/litert_compiler_options.cc",
+      "kind": "blob",
+      "oid": "39aa21d921804bf844a8eb9f7e7ebf68c07f9b4a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/options/litert_compiler_options.h",
+      "kind": "blob",
+      "oid": "fa99ba99c206ad61d051defcaa2fd16a4b665149",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/options/litert_cpu_options.cc",
+      "kind": "blob",
+      "oid": "573e9261da5c5c0d8ad163321b839e84b39dc6b0",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/options/litert_cpu_options.h",
+      "kind": "blob",
+      "oid": "a35480040fd6e12e96aedd9ce33e476770c8904a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/options/litert_google_tensor_options.cc",
+      "kind": "blob",
+      "oid": "247824f434a37174cc0ebccf34388d1818760d88",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/options/litert_google_tensor_options.h",
+      "kind": "blob",
+      "oid": "d42ddc54e97af55ec0e4e0d987510e2909b1ff3b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/options/litert_google_tensor_options_type.h",
+      "kind": "blob",
+      "oid": "f95e5998cbf2ef90f716a977619411949a274c78",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/options/litert_gpu_options.cc",
+      "kind": "blob",
+      "oid": "c91bacf544865bbc924c737af725f333f2856c1e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/options/litert_gpu_options.h",
+      "kind": "blob",
+      "oid": "9e74098e7b98277eb957546a694e13a79368afca",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/options/litert_intel_openvino_options.cc",
+      "kind": "blob",
+      "oid": "4d44b035f8d9c185513dfbc66289ae5a41f669b6",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/options/litert_intel_openvino_options.h",
+      "kind": "blob",
+      "oid": "82497f1361bac827cca91ede001ff1ac11c43889",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/options/litert_mediatek_options.cc",
+      "kind": "blob",
+      "oid": "e2d594fe3258306a47ee23031cdde5fa7f94cb69",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/options/litert_mediatek_options.h",
+      "kind": "blob",
+      "oid": "ae0bd9520fe638a3efb1189cba646a4f417b3ef5",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/options/litert_qualcomm_options.cc",
+      "kind": "blob",
+      "oid": "8c3cd96a6b52881f54e75cb62fcb14d170df0c10",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/options/litert_qualcomm_options.h",
+      "kind": "blob",
+      "oid": "3765202fc622b53bddc77256a551466336d61369",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/options/litert_runtime_options.cc",
+      "kind": "blob",
+      "oid": "b772701184dab19c1e95ed79d22ee3c51bb7a0ee",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/options/litert_runtime_options.h",
+      "kind": "blob",
+      "oid": "b826361f6385afd9bba3758009219d31c43c1a9d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/options/litert_samsung_options.cc",
+      "kind": "blob",
+      "oid": "d7550266289227ce041516f850697d13fac0e764",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/c/options/litert_samsung_options.h",
+      "kind": "blob",
+      "oid": "47e826ecb0d15cd5d712018aa5594c81c9c9bbc6",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/internal/litert_c_types_printing.h",
+      "kind": "blob",
+      "oid": "c6272e0f17302f80ae2717ce77925071f37ac894",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/internal/litert_consts.h",
+      "kind": "blob",
+      "oid": "b6fdd2a1c6b6e439f66dc2c88ac4e5e51c61241b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/internal/litert_detail.h",
+      "kind": "blob",
+      "oid": "bd0ee6fd1feb6ca122f8cb2d1baded9bc5e7812d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/internal/litert_handle.h",
+      "kind": "blob",
+      "oid": "ae3089d2eaf2e4271652b14b874589886d6d54c7",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/internal/litert_logging.h",
+      "kind": "blob",
+      "oid": "edbe3dc368032d93b7163d87c5cedbe874f33131",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/internal/litert_numerics.h",
+      "kind": "blob",
+      "oid": "ebbd89bcd83fae464a25cfe982ef3f01e1b447c1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/internal/litert_op_options.h",
+      "kind": "blob",
+      "oid": "de809c2e07b5d3faf2a0044981f2d7d23c185dd9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/internal/litert_platform_support.h",
+      "kind": "blob",
+      "oid": "1fc422f3354821445110b01dfebac23e693a34ca",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/internal/litert_runtime_builtin.h",
+      "kind": "blob",
+      "oid": "b40255e5573d0426480e0665c1edd1b6214a1513",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/internal/litert_runtime_proxy.h",
+      "kind": "blob",
+      "oid": "852241a505a79f5395a3f9f40171f4ef60325317",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/internal/litert_shared_library.h",
+      "kind": "blob",
+      "oid": "eefa29d1ef2096670258708ea1ba1834b5c12e1f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/internal/litert_source_location.h",
+      "kind": "blob",
+      "oid": "7260602ebf99ca477543030d325f730b1cbe993c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/internal/litert_tensor_buffer_utils.h",
+      "kind": "blob",
+      "oid": "01f378eff71ee04a65aaa3e7aecee0c7d72bfd9b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/internal/litert_tflite_error_status_builder.h",
+      "kind": "blob",
+      "oid": "17cfe3f995d98715f409eb6eddcde9c07ac4906e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/internal/scoped_file.h",
+      "kind": "blob",
+      "oid": "df405ee01db21f53eb74c76f7587ecda805e3afc",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/internal/scoped_file_posix.h",
+      "kind": "blob",
+      "oid": "4b0cd89a427bf2303607af797d7952408d8f26f2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/internal/scoped_file_win.h",
+      "kind": "blob",
+      "oid": "c848cf9e06d89d162c76a93c0754b311ed33583a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/internal/scoped_weight_source.h",
+      "kind": "blob",
+      "oid": "1133e0840c182038be020b762b6f09945af0a8ce",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/litert_any.h",
+      "kind": "blob",
+      "oid": "d07c6c8b8fc47b8613db856d13f9ad9557db8fce",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/litert_buffer_ref.h",
+      "kind": "blob",
+      "oid": "11b5fdd634b3e025c93802aab01b60d7fda51f28",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/litert_common.h",
+      "kind": "blob",
+      "oid": "eb882bbf8cfb6816463d398c5265659930ccb14f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/litert_compiled_model.h",
+      "kind": "blob",
+      "oid": "889eee9c5c5f2bbd67338f8303fe97722ebd6722",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/litert_custom_op_kernel.h",
+      "kind": "blob",
+      "oid": "8b6747690b17c022ea6818a2ee4de79c636aa40e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/litert_element_type.h",
+      "kind": "blob",
+      "oid": "cf7d043cdd4f8202fbdb87c9452eaa74cc044131",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/litert_environment.h",
+      "kind": "blob",
+      "oid": "cf48e2645235c1fa585e5dc7c5c638d241c8f1b0",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/litert_environment_options.h",
+      "kind": "blob",
+      "oid": "d41344e88cc7dcd78702adb6bc7900795a2e070d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/litert_event.h",
+      "kind": "blob",
+      "oid": "e1a56a6305bfabcb25ddc4d45c641556d441c59a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/litert_expected.h",
+      "kind": "blob",
+      "oid": "e25229aaa3048067f4cdebd579cf5e856d9f701b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/litert_layout.h",
+      "kind": "blob",
+      "oid": "05c13de33a24bc3d5a55f16d469cac2e4cf49c51",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/litert_macros.h",
+      "kind": "blob",
+      "oid": "34b51721a0e57f6c9fc575922bdbb1f81b42dff1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/litert_model.h",
+      "kind": "blob",
+      "oid": "953ef6a0b2ac6c01a3bc9d02873f863b0bc2995a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/litert_model_types.h",
+      "kind": "blob",
+      "oid": "cadc0b0e3050466972e433414d0ac8b8c9bf79be",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/litert_opaque_options.h",
+      "kind": "blob",
+      "oid": "0215375f4cf2a43417b64b4cfacadce835fe2703",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/litert_options.h",
+      "kind": "blob",
+      "oid": "ee6d904b08da8aad57a21ae67062aee2ceb9fd00",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/litert_profiler.h",
+      "kind": "blob",
+      "oid": "bc62bc4abf24a0a7711ea0f3f1c78ef42bd1e10c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/litert_ranked_tensor_type.h",
+      "kind": "blob",
+      "oid": "3204be3336b198fb93f2e26b0d2f399625af7744",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/litert_tensor_buffer.h",
+      "kind": "blob",
+      "oid": "941ad5f65915a00c306b40e84f4f411b46bda83c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/litert_tensor_buffer_requirements.h",
+      "kind": "blob",
+      "oid": "73c2a8d917003db4ff71fa591b001f9306a3fd37",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/litert_tensor_buffer_types.h",
+      "kind": "blob",
+      "oid": "954ba36e7113a71075a428c36424275ab73626a2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/options/litert_compiler_options.h",
+      "kind": "blob",
+      "oid": "b1b219b8526821b6ea8cb4d382e8b3074a61497f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/options/litert_cpu_options.h",
+      "kind": "blob",
+      "oid": "d8fa6e835d5879782de0912d61cdaefe676c5e57",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/options/litert_google_tensor_options.h",
+      "kind": "blob",
+      "oid": "991f922c3b31f45705df3a0fad0d4c0b7fbfa9ea",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/options/litert_gpu_options.h",
+      "kind": "blob",
+      "oid": "3569202ad6e698e3ac5dcf012b46117773dd5b4d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/options/litert_intel_openvino_options.h",
+      "kind": "blob",
+      "oid": "051b3f6e9088f0e54c325c99ff5f562a656bfe9d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/options/litert_magic_number_options.h",
+      "kind": "blob",
+      "oid": "90395c59ba479cdebfb6a5ac1dc2a947a6c33df9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/options/litert_mediatek_options.h",
+      "kind": "blob",
+      "oid": "72c561603cf9e29f90b8d8b9b9b5ab687c78cfa9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/options/litert_qualcomm_options.h",
+      "kind": "blob",
+      "oid": "ee5eb07dd300a707296ca63a9357b859ef902d71",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/options/litert_runtime_options.h",
+      "kind": "blob",
+      "oid": "33f6807668e8425fff78b464444f0fcdc666891f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/cc/options/litert_samsung_options.h",
+      "kind": "blob",
+      "oid": "396a161fe1c8712bb06d39b0ea41c4679577bdf8",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/core/litert_toml_parser.cc",
+      "kind": "blob",
+      "oid": "bac7d67337de67f4175c0c9f5ef83d531f56c91f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/core/litert_toml_parser.h",
+      "kind": "blob",
+      "oid": "19a95e3b498ceb674c2293a27e9100bf98558dd2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert/core/options.h",
+      "kind": "blob",
+      "oid": "8b0e0fe6a0c43667e35898d89dc6102b66b9567f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert_cc_sdk_hdrs.txt",
+      "kind": "blob",
+      "oid": "727701465c8e30ade85658d307c7b976e81aca0d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/litert_cc_sdk_srcs.txt",
+      "kind": "blob",
+      "oid": "9a6248afaa9782f97ab980ead517f0ec5e351327",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/include/litert_cc_sdk/opencl_headers.cmake",
+      "kind": "blob",
+      "oid": "5015eaf07d147a3f7ab3ed2f937a494484a56280",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/libLiteRt.so",
+      "kind": "blob",
+      "oid": "d100e4d5cf94bf04bfbba5d236f08df0a7d8f72a",
+      "mode": "100755"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/nnapi_inference.cpp",
+      "kind": "blob",
+      "oid": "fda37a827caeb724e7cf44605c14a4566a683056",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/nnapi_inference.h",
+      "kind": "blob",
+      "oid": "372ec808d335826f855d692300fe5436fe1eafe3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/nnapi_inference_jni.cpp",
+      "kind": "blob",
+      "oid": "c70e6b3e3f85be96a9d80f165fe796a47d970382",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/run_model_with_litert.cpp",
+      "kind": "blob",
+      "oid": "e84ff2383e3fa801e4180d950cd0a3705edd4065",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/run_model_with_litert.h",
+      "kind": "blob",
+      "oid": "3fd526b6bc6ef4370ecf9465cc3644e970c3acb3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/jni/run_model_with_litert_jni.cpp",
+      "kind": "blob",
+      "oid": "be051c5836366b522f2782bf7df3be1595db529f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/res/layout/activity_main.xml",
+      "kind": "blob",
+      "oid": "e54cfcc15f473af057826f98e6e1068875b135b1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/src/com/android/npumanager/delegateapp/DelegateSnippet.java",
+      "kind": "blob",
+      "oid": "402f8046932b74bff3dfe87403085a9445d276ea",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/src/com/android/npumanager/delegateapp/DeviceUtil.java",
+      "kind": "blob",
+      "oid": "31874a627305dfc3c5c8600f8a99dd64904366fd",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/DelegateApp/src/com/android/npumanager/delegateapp/MainActivity.java",
+      "kind": "blob",
+      "oid": "ce4f24ba3bb4456189a7f8c65c386bbbdf8e48a0",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/cts_npu_manager_test.py",
+      "kind": "blob",
+      "oid": "2a648f4559047c461f451896134655a539cae3d3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/jni/Android.bp",
+      "kind": "blob",
+      "oid": "971bb2efb2e8c096e1a0aee1a2a2aafe66c53f77",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/jni/android_npumanager_cts_CtsNpuManagerBufferTest.cpp",
+      "kind": "blob",
+      "oid": "10c60345d6475ea7385f1d26b0e612388783f416",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/mobly_config.yaml",
+      "kind": "blob",
+      "oid": "200997dbd519538def8a85db313cee7c8d8cc274",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/src/android/npumanager/cts/CtsModelLoadRequestTest.java",
+      "kind": "blob",
+      "oid": "e839ffa7e3069aac4a375d82138673504049be22",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/src/android/npumanager/cts/CtsNpuManagerBufferTest.java",
+      "kind": "blob",
+      "oid": "bb427be80c37165e5407fc7d7ceca1399b226509",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/src/android/npumanager/cts/CtsNpuManagerServiceTest.java",
+      "kind": "blob",
+      "oid": "0513480983c48b87f6645db59cf2c5081938a37d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/src/android/npumanager/cts/CtsNpuModelManagerTest.java",
+      "kind": "blob",
+      "oid": "ac5c4772c8a99438816b2db27395ebed4fababd5",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cts/src/android/npumanager/platform/test/NpuManagerPlatformBufferTest.java",
+      "kind": "blob",
+      "oid": "9b97d5e630f02a316c11147828d94361baace82a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/testapps/Android.bp",
+      "kind": "blob",
+      "oid": "dc28ccfe3cee051f37271fdefdddc6309d8211be",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/testapps/AndroidManifest_A.xml",
+      "kind": "blob",
+      "oid": "5c03e71564c9fbd92f27b404ded308cfbfc7b52d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/testapps/AndroidManifest_B.xml",
+      "kind": "blob",
+      "oid": "9ef9e9a611c77c6a848d42636ca0b3c909110929",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/testapps/AndroidManifest_testapp.xml",
+      "kind": "blob",
+      "oid": "8aefd95610cba7b50ec0fe93b7f56c1edcacb85f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/testapps/src/android/npumanager/testapp/MainActivity.java",
+      "kind": "blob",
+      "oid": "a8245f919480fc15fe6329fb87049182cb2ead47",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/testapps/src/android/npumanager/testapp/NpuManagerTestService.java",
+      "kind": "blob",
+      "oid": "b0e16bd7d216be4fd2b1ba0d97a30ad4e00ed267",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/utils/Android.bp",
+      "kind": "blob",
+      "oid": "273fd567aec23ccb5dc23afa425472430470842a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/utils/src/android/npumanager/testing/ITestModelLoadRequestCallback.aidl",
+      "kind": "blob",
+      "oid": "f7c9d13c8e1b9ce4f2b5e60ba6c7a8591e8b4e60",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/utils/src/android/npumanager/testing/ITestModelLoadStatusListener.aidl",
+      "kind": "blob",
+      "oid": "a6018662987159594a189a3b81ad7c93518ad002",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/utils/src/android/npumanager/testing/ITestNpuManagerService.aidl",
+      "kind": "blob",
+      "oid": "8b7f04098398af690d769acc8ba660289a54a666",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/utils/src/android/npumanager/testing/TestModelLoadRequest.aidl",
+      "kind": "blob",
+      "oid": "470515787c6101371045ad5c44a241ba5ef5424b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/utils/src/android/npumanager/testing/TestModelLoadRequest.java",
+      "kind": "blob",
+      "oid": "a79bb3a5906c1ee2c8f4e76077884272aa6e2666",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/utils/src/android/npumanager/testing/TestNpuManagerClient.java",
+      "kind": "blob",
+      "oid": "fe4cd20aca2269023faca21513da1e8c99165dd2",
+      "mode": "100644"
+    }
+  ]
+}

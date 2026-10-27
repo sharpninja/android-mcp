@@ -1,0 +1,212 @@
+STEP ["production_reconciliation.py", "010"]
+{
+  "created_at": "2026-10-27T03:58:15.932726+00:00",
+  "release": "010",
+  "database_open_mode": "read-only",
+  "complete": false,
+  "inventory_sha256": "fcfb6e51eef44e472fb92e34b57b4cf2b059de2bb2e19f3d6c0c3bb290fc0a20",
+  "source_reconciliation": {
+    "expected": 44397,
+    "imported": 44397,
+    "missing": [],
+    "extra": [],
+    "by_kind": {
+      "sdk-api-index": 1,
+      "evidence": 1498,
+      "aidl": 20210,
+      "source-signature": 317,
+      "manifest": 5328,
+      "sdk-history": 75,
+      "sdk-signature": 73,
+      "sdk-annotations": 2,
+      "java-source": 16893
+    }
+  },
+  "core_manifest": {
+    "sha256": "26d188bfdc84ab67d3e999227d07fa273fb28c8581225cb74ea956ab93e084ec",
+    "elements": 1160,
+    "unique_names": 1138,
+    "imported_unique_names": 1138,
+    "duplicate_elements_retained": 22,
+    "duplicates": {
+      "android.permission.SET_DEFAULT_ACCOUNT_FOR_CONTACTS": 2,
+      "android.permission.NETWORK_FACTORY": 2,
+      "android.permission.BLUETOOTH_MAP": 2,
+      "android.permission.BLUETOOTH_STACK": 2,
+      "android.permission.NET_ADMIN": 2,
+      "android.permission.LISTEN_ALWAYS_REPORTED_SIGNAL_STRENGTH": 2,
+      "android.permission.GET_INTENT_SENDER_INTENT": 2,
+      "android.permission.SYSTEM_APPLICATION_OVERLAY": 2,
+      "android.permission.MANAGE_APP_OPS_MODES": 2,
+      "android.permission.SUBSCRIBE_TO_KEYGUARD_LOCKED_STATE": 2,
+      "android.permission.OBSERVE_ROLE_HOLDERS": 2,
+      "android.permission.READ_FRAME_BUFFER": 2,
+      "android.permission.QUERY_AUDIO_STATE": 2,
+      "android.permission.DEVICE_POWER": 2,
+      "android.permission.NET_TUNNELING": 2,
+      "android.permission.MANAGE_NOTIFICATIONS": 2,
+      "android.permission.READ_BLOCKED_NUMBERS": 2,
+      "android.permission.EXECUTE_APP_FUNCTIONS": 2,
+      "android.permission.SEND_SAFETY_CENTER_UPDATE": 2,
+      "android.permission.MANAGE_SAFETY_CENTER": 2,
+      "android.permission.MANAGE_KEY_GESTURES": 2,
+      "android.permission.RECEIVE_SENSITIVE_NOTIFICATIONS": 2
+    }
+  },
+  "annotation_target_resolution": {
+    "matched:same-snapshot-sdk-signature:None": 5365,
+    "unmatched:unresolved-or-ambiguous:Target absent or ambiguous in the acquired declaration inventory": 846,
+    "matched:same-snapshot-sdk-signature-java-lang-spelling-equivalence:None": 776,
+    "matched:current-sdk-index-exact:None": 6347
+  },
+  "limitations": [
+    "This sidecar supplements exhaustive validation; it does not claim all-current coverage",
+    "Legacy comparison checks retained shape alternatives, not API applicability or current public membership",
+    "AIDL enrichment and expanded outside-corpus sources belong to the next immutable candidate"
+  ]
+}
+legacy dispositions {'shape-variants-retained': 552}
+STEP ["production_reconciliation.py", "010", "--exports"]
+reconciled export sources 44397
+reconciled export source_details 44397
+reconciled export bindings 802936
+reconciled export occurrences 1125985
+reconciled export binding_declarations 1125985
+reconciled export permission_definitions 1500
+reconciled export permission_symbols 3310
+reconciled export permission_relations 1128252
+reconciled export aidl_schemas 20210
+reconciled export annotation_evidence 13334
+reconciled export issues 3177
+reconciled export parse_reports 44397
+{
+  "created_at": "2026-10-27T03:59:41.627117+00:00",
+  "release": "010",
+  "database_open_mode": "read-only",
+  "table_rows": {
+    "sources": 44397,
+    "source_details": 44397,
+    "bindings": 802936,
+    "occurrences": 1125985,
+    "binding_declarations": 1125985,
+    "permission_definitions": 1500,
+    "permission_symbols": 3310,
+    "permission_relations": 1128252,
+    "aidl_schemas": 20210,
+    "annotation_evidence": 13334,
+    "issues": 3177,
+    "parse_reports": 44397
+  },
+  "entries": 802936,
+  "json_and_jsonl_byte_equivalent": true,
+  "complete": false
+}
+STEP ["compare_annotation_archives.py", "006", "010"]
+{
+  "path": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/annotation-archive-comparison-006-to-010.json",
+  "unresolved": 846,
+  "archives": [
+    {
+      "path": "android-37.2/data/annotations.zip",
+      "counts": {
+        "total": 6825,
+        "matched": 6347,
+        "permission-family:total": 1081,
+        "permission-family:matched": 934,
+        "unmatched": 478,
+        "permission-family:unmatched": 147
+      }
+    },
+    {
+      "path": "37.0/public/data/annotations.zip",
+      "counts": {
+        "total": 6509,
+        "matched": 6141,
+        "unmatched": 368,
+        "permission-family:total": 1027,
+        "permission-family:matched": 952,
+        "permission-family:unmatched": 75
+      }
+    }
+  ],
+  "aidl": {
+    "declaration_count_distribution": {
+      "2": 527,
+      "1": 19134,
+      "3": 233,
+      "4": 108,
+      "5": 81,
+      "10": 11,
+      "11": 1,
+      "7": 31,
+      "17": 2,
+      "18": 6,
+      "19": 3,
+      "6": 50,
+      "24": 2,
+      "28": 3,
+      "14": 8,
+      "16": 1,
+      "9": 2,
+      "8": 7
+    },
+    "status_distribution": {
+      "field-metadata-parsed": 13391,
+      "declaration-only": 1753,
+      "methods-parsed": 5022,
+      "declarations-inventoried": 44
+    },
+    "top_level_declaration_roots": 22895,
+    "multi_declaration_files": 1076
+  }
+}
+STEP ["device_inventory_reconciliation.py", "010"]
+reconciled startup inventory 100000
+reconciled startup inventory 200000
+reconciled startup inventory 300000
+reconciled startup inventory 400000
+reconciled startup inventory 500000
+reconciled startup inventory 600000
+reconciled startup inventory 700000
+reconciled startup inventory 800000
+{
+  "entries": 802936,
+  "registry_id": "9c3a75568d10a33cedcbe826137d9a799f4db55c5b4b9e88fe93a968cbd0601e",
+  "inventory_sha256": "c4b190d2b09c8c08c2ae32b8c3c4189e3a57465b0bb565a2d56e405ffd07386b",
+  "all_record_hashes_verified": true,
+  "sqlite_jsonl_byte_equivalent": true,
+  "device_operations": false,
+  "completed_at": "2026-10-27T04:00:24.959666+00:00",
+  "release": "010",
+  "database_open_mode": "read-only",
+  "complete": false
+}
+STEP ["finish_catalog_release_v2.py", "010"]
+{
+  "evidence": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/release010-evidence",
+  "counts": {
+    "sources": 44397,
+    "bindings": 802936,
+    "occurrences": 1125985,
+    "binding_declarations": 1125985,
+    "permission_definitions": 1500,
+    "permission_symbols": 3310,
+    "permission_relations": 1128252,
+    "aidl_schemas": 20210,
+    "annotation_evidence": 13334,
+    "registry_entries": 802936,
+    "registry_inventory": 802936
+  },
+  "permissions": 1721,
+  "sqlite": {
+    "path": "catalog/output/release-010/catalog.sqlite",
+    "bytes": 10276548608,
+    "sha256": "3eb7a2d1ae0fdeeb2743aa1814fe3bf9d2ac5f167d3dec1bde3ac900c0497eb7"
+  }
+}
+STEP ["package_release_evidence_v3.py", "010"]
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/package_release_evidence_v3.py", line 85, in <module>
+    if p.stat().st_size>16_000_000:raise ValueError('Bundle exceeds safe attachment cap; preserve it and make logical variants')
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Bundle exceeds safe attachment cap; preserve it and make logical variants

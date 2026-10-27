@@ -1,0 +1,113 @@
+package {
+    // See: http://go/android-license-faq
+    // A large-scale-change added 'default_applicable_licenses' to import
+    // all of the 'license_kinds' from "hardware_st_nfc_license"
+    // to get the below license kinds:
+    //   SPDX-license-identifier-Apache-2.0
+    default_applicable_licenses: ["hardware_st_nfc_license"],
+}
+
+cc_defaults {
+    name: "android.hardware.nfc-service.st_default",
+    cflags: [
+        "-Wall",
+        "-Wextra",
+    ],
+    shared_libs: [
+        "libbase",
+        "liblog",
+        "libutils",
+        "libbinder_ndk",
+        "android.hardware.nfc-V1-ndk",
+        "nfc_nci.st21nfc.default",
+    ],
+    srcs: [
+        "Nfc.cpp",
+        "hal_st21nfc.cc",
+    ],
+    arch: {
+        arm: {
+            cflags: ["-DST_LIB_32"],
+        },
+    },
+}
+
+cc_binary {
+    name: "android.hardware.nfc-service.st",
+    defaults: ["android.hardware.nfc-service.st_default"],
+    relative_install_path: "hw",
+    init_rc: ["nfc-service-default.rc"],
+    vintf_fragment_modules: ["nfc-service-default.xml"],
+    vendor: true,
+    cflags: [
+        "-Wall",
+        "-Wextra",
+    ],
+    shared_libs: [
+        "libbase",
+        "liblog",
+        "libutils",
+        "libbinder_ndk",
+        "android.hardware.nfc-V1-ndk",
+        "nfc_nci.st21nfc.default",
+    ],
+    srcs: [
+        "main.cpp",
+    ],
+    arch: {
+        arm: {
+            cflags: ["-DST_LIB_32"],
+        },
+    },
+}
+
+vintf_fragment {
+    name: "nfc-service-default.xml",
+    src: "nfc-service-default.xml",
+    vendor: true,
+}
+
+cc_fuzz {
+    name: "nfc_service_fuzzer",
+    defaults: [
+        "android.hardware.nfc-service.st_default",
+        "service_fuzzer_defaults",
+    ],
+    srcs: [
+        "fuzzer/NfcServiceFuzzer.cpp",
+    ],
+    vendor: true,
+}
+
+genrule {
+    name: "com.google.android.hardware.nfc.st.rc-gen",
+    srcs: ["nfc-service-default.rc"],
+    out: ["com.google.android.hardware.nfc.st.rc"],
+    cmd: "sed -E 's@/vendor/bin@/apex/com.google.android.hardware.nfc.st/bin@' $(in) > $(out)",
+}
+
+prebuilt_etc {
+    name: "com.google.android.hardware.nfc.st.rc",
+    src: ":com.google.android.hardware.nfc.st.rc-gen",
+    installable: false,
+}
+
+apex {
+    name: "com.google.android.hardware.nfc.st",
+    manifest: "apex_manifest.json",
+    file_contexts: "file_contexts",
+    key: "com.android.hardware.key",
+    certificate: ":com.android.hardware.certificate",
+    updatable: false,
+    vendor: true,
+
+    binaries: ["android.hardware.nfc-service.st"],
+    prebuilts: [
+        "com.google.android.hardware.nfc.st.rc",
+        "android.hardware.nfc.prebuilt.xml",
+        "android.hardware.nfc.hce.prebuilt.xml",
+        "android.hardware.nfc.hcef.prebuilt.xml",
+        "com.nxp.mifare.prebuilt.xml",
+        "android.hardware.nfc.ese.prebuilt.xml",
+    ],
+}

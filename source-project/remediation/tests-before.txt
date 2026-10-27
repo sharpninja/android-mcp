@@ -1,0 +1,88 @@
+test_null_primary_and_registry_source_keys_rejected (test_contract_remediation.HardeningTests.test_null_primary_and_registry_source_keys_rejected) ... FAIL
+test_registry_api_enum_matches_sql (test_contract_remediation.HardeningTests.test_registry_api_enum_matches_sql) ... /usr/lib/python3.14/json/decoder.py:361: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x752ae6743c40>
+  obj, end = self.scan_once(s, idx)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ERROR
+test_view_generation_exists (test_contract_remediation.HardeningTests.test_view_generation_exists) ... ERROR
+test_canonical_policy_alias_equivalence_and_precedence (test_contract_remediation.OracleTests.test_canonical_policy_alias_equivalence_and_precedence) ... FAIL
+test_collision_orders_and_cursor_generation (test_contract_remediation.OracleTests.test_collision_orders_and_cursor_generation) ... FAIL
+test_conflict_tombstone_transitions (test_contract_remediation.OracleTests.test_conflict_tombstone_transitions) ... FAIL
+test_etag_changes_after_delete_publish_and_other_overlay_write (test_contract_remediation.OracleTests.test_etag_changes_after_delete_publish_and_other_overlay_write) ... FAIL
+test_missing_and_stale_preconditions (test_contract_remediation.OracleTests.test_missing_and_stale_preconditions) ... FAIL
+
+======================================================================
+ERROR: test_registry_api_enum_matches_sql (test_contract_remediation.HardeningTests.test_registry_api_enum_matches_sql)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/remediation/tests/test_contract_remediation.py", line 20, in test_registry_api_enum_matches_sql
+    db.execute('INSERT INTO registries VALUES(?,?,?,?,?,?,?,?,?)',(f'r{i}',i+1,'1.2.0','fixture',37,'h','now',state,'{}'))
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.IntegrityError: CHECK constraint failed: status IN ('staged','published','retired')
+
+======================================================================
+ERROR: test_view_generation_exists (test_contract_remediation.HardeningTests.test_view_generation_exists)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/remediation/tests/test_contract_remediation.py", line 23, in test_view_generation_exists
+    db=self.db();self.assertEqual(db.execute('SELECT overlay_generation FROM catalog_view_generation WHERE singleton=1').fetchone()[0],0);db.close()
+                                  ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: catalog_view_generation
+
+======================================================================
+FAIL: test_null_primary_and_registry_source_keys_rejected (test_contract_remediation.HardeningTests.test_null_primary_and_registry_source_keys_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/remediation/tests/test_contract_remediation.py", line 14, in test_null_primary_and_registry_source_keys_rejected
+    with self.assertRaises(sqlite3.IntegrityError):db.execute('INSERT INTO catalog_meta VALUES(NULL,"x")')
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: IntegrityError not raised
+
+======================================================================
+FAIL: test_canonical_policy_alias_equivalence_and_precedence (test_contract_remediation.OracleTests.test_canonical_policy_alias_equivalence_and_precedence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/remediation/tests/test_contract_remediation.py", line 25, in setUp
+    def setUp(self):self.assertIsNotNone(c,'contract_oracle must be implemented after these fixtures')
+                    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: unexpectedly None : contract_oracle must be implemented after these fixtures
+
+======================================================================
+FAIL: test_collision_orders_and_cursor_generation (test_contract_remediation.OracleTests.test_collision_orders_and_cursor_generation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/remediation/tests/test_contract_remediation.py", line 25, in setUp
+    def setUp(self):self.assertIsNotNone(c,'contract_oracle must be implemented after these fixtures')
+                    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: unexpectedly None : contract_oracle must be implemented after these fixtures
+
+======================================================================
+FAIL: test_conflict_tombstone_transitions (test_contract_remediation.OracleTests.test_conflict_tombstone_transitions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/remediation/tests/test_contract_remediation.py", line 25, in setUp
+    def setUp(self):self.assertIsNotNone(c,'contract_oracle must be implemented after these fixtures')
+                    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: unexpectedly None : contract_oracle must be implemented after these fixtures
+
+======================================================================
+FAIL: test_etag_changes_after_delete_publish_and_other_overlay_write (test_contract_remediation.OracleTests.test_etag_changes_after_delete_publish_and_other_overlay_write)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/remediation/tests/test_contract_remediation.py", line 25, in setUp
+    def setUp(self):self.assertIsNotNone(c,'contract_oracle must be implemented after these fixtures')
+                    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: unexpectedly None : contract_oracle must be implemented after these fixtures
+
+======================================================================
+FAIL: test_missing_and_stale_preconditions (test_contract_remediation.OracleTests.test_missing_and_stale_preconditions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/remediation/tests/test_contract_remediation.py", line 25, in setUp
+    def setUp(self):self.assertIsNotNone(c,'contract_oracle must be implemented after these fixtures')
+                    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: unexpectedly None : contract_oracle must be implemented after these fixtures
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.023s
+
+FAILED (failures=6, errors=2)

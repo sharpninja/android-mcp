@@ -1,0 +1,607 @@
+{
+  "repo": "platform/packages/modules/SdkExtensions",
+  "requested_revision": "refs/tags/android-17.0.0_r1",
+  "revision": "3d78a2fea79f2a17831e6fad8c257deaeb8dee85",
+  "entries": [
+    {
+      "path": "Android.bp",
+      "kind": "blob",
+      "oid": "9081bb77dd3ee4cc92f8d2184e1ba97012e7e725",
+      "mode": "100644"
+    },
+    {
+      "path": "OWNERS",
+      "kind": "blob",
+      "oid": "36a50889f3997c0f028d0e78cf846411d38208c5",
+      "mode": "100644"
+    },
+    {
+      "path": "PREUPLOAD.cfg",
+      "kind": "blob",
+      "oid": "700df2b6122e40f91128389cd9acf3c6c3e599ec",
+      "mode": "100644"
+    },
+    {
+      "path": "README.md",
+      "kind": "blob",
+      "oid": "d699eb4cdcb4d1aa59098469f1a05e6591d1c248",
+      "mode": "100644"
+    },
+    {
+      "path": "TEST_MAPPING",
+      "kind": "blob",
+      "oid": "2f4e7b7748545110ba6813063ab098cb3df434b6",
+      "mode": "100644"
+    },
+    {
+      "path": "api-to-sdk-ext-info.py",
+      "kind": "blob",
+      "oid": "341e27669e53e4fb6b6c077e861736ffb502dc45",
+      "mode": "100755"
+    },
+    {
+      "path": "com.android.sdkext.avbpubkey",
+      "kind": "blob",
+      "oid": "8f47741ed3b8f92506b1bde0a33c3c9c98b38b41",
+      "mode": "100644"
+    },
+    {
+      "path": "com.android.sdkext.pem",
+      "kind": "blob",
+      "oid": "816460183aa31e4d646ed5ba0b581471ac566859",
+      "mode": "100644"
+    },
+    {
+      "path": "com.android.sdkext.pk8",
+      "kind": "blob",
+      "oid": "ccc0bf438cd183ff453e75d48813f7e4769b2a7f",
+      "mode": "100644"
+    },
+    {
+      "path": "com.android.sdkext.x509.pem",
+      "kind": "blob",
+      "oid": "45d2ade354d4c70892fd04ea0ef2f3e8f2a203ad",
+      "mode": "100644"
+    },
+    {
+      "path": "derive_classpath/.clang-format",
+      "kind": "blob",
+      "oid": "86b159339fe85bf1628b95416e43cea7a0e2cc47",
+      "mode": "120000"
+    },
+    {
+      "path": "derive_classpath/Android.bp",
+      "kind": "blob",
+      "oid": "9fb245e5cdaf061d5a86b0979ab52e6d5fd9ef03",
+      "mode": "100644"
+    },
+    {
+      "path": "derive_classpath/OWNERS",
+      "kind": "blob",
+      "oid": "a01db40d7bbe212c9d7258a36015da0a4e05402f",
+      "mode": "100644"
+    },
+    {
+      "path": "derive_classpath/TEST_MAPPING",
+      "kind": "blob",
+      "oid": "d6c0a7affdc32ea42e8fc58f5ed7b47fae8272f9",
+      "mode": "100644"
+    },
+    {
+      "path": "derive_classpath/derive_classpath.cpp",
+      "kind": "blob",
+      "oid": "c1faec2e28c69bb464dab961b0fb6daa890618aa",
+      "mode": "100644"
+    },
+    {
+      "path": "derive_classpath/derive_classpath.h",
+      "kind": "blob",
+      "oid": "88d7f2174c51d2ab08eed68719c94fe14db9ab47",
+      "mode": "100644"
+    },
+    {
+      "path": "derive_classpath/derive_classpath.rc",
+      "kind": "blob",
+      "oid": "95ae09db9da4a982672e1be394bfb5af96af65be",
+      "mode": "100644"
+    },
+    {
+      "path": "derive_classpath/derive_classpath_test.cpp",
+      "kind": "blob",
+      "oid": "4b22e57408a75d224fddc43bfbac4eb4f79bad87",
+      "mode": "100644"
+    },
+    {
+      "path": "derive_classpath/main.cpp",
+      "kind": "blob",
+      "oid": "d8319d382cdcb3f8d636679e5829d1931929d7c2",
+      "mode": "100644"
+    },
+    {
+      "path": "derive_sdk/.clang-format",
+      "kind": "blob",
+      "oid": "86b159339fe85bf1628b95416e43cea7a0e2cc47",
+      "mode": "120000"
+    },
+    {
+      "path": "derive_sdk/Android.bp",
+      "kind": "blob",
+      "oid": "e381ef9257d9eada0f858ea916e4d6fc8c79dc5b",
+      "mode": "100644"
+    },
+    {
+      "path": "derive_sdk/derive_sdk.cpp",
+      "kind": "blob",
+      "oid": "a38abc32f67ea93a3d01edb00a58e87a24cf773e",
+      "mode": "100644"
+    },
+    {
+      "path": "derive_sdk/derive_sdk.h",
+      "kind": "blob",
+      "oid": "30c1b5bb6448deb8119e85214d96a166c3d4a3cf",
+      "mode": "100644"
+    },
+    {
+      "path": "derive_sdk/derive_sdk.rc",
+      "kind": "blob",
+      "oid": "18f021ccadff16cee714e5d2f7b0056de4335b14",
+      "mode": "100644"
+    },
+    {
+      "path": "derive_sdk/derive_sdk_jni.cpp",
+      "kind": "blob",
+      "oid": "5ccc4655bf5f211ca544f6f23e5096704dda3c28",
+      "mode": "100644"
+    },
+    {
+      "path": "derive_sdk/derive_sdk_test.cpp",
+      "kind": "blob",
+      "oid": "03a86add3bafebc0b70afd6ec15de6025804ad8f",
+      "mode": "100644"
+    },
+    {
+      "path": "derive_sdk/main.cpp",
+      "kind": "blob",
+      "oid": "ffd829170ace1d3269057c021c45b6c99cfab449",
+      "mode": "100644"
+    },
+    {
+      "path": "gen_sdk/Android.bp",
+      "kind": "blob",
+      "oid": "cde5935564f8519ca74839ec1141e34956a78000",
+      "mode": "100644"
+    },
+    {
+      "path": "gen_sdk/bump_sdk.sh",
+      "kind": "blob",
+      "oid": "c039ac59857d767ecf72f43a316257800c297ceb",
+      "mode": "100755"
+    },
+    {
+      "path": "gen_sdk/extensions_db.textpb",
+      "kind": "blob",
+      "oid": "e0a48cd79cfda658204bd60c66f301d5ca138002",
+      "mode": "100644"
+    },
+    {
+      "path": "gen_sdk/gen_sdk.py",
+      "kind": "blob",
+      "oid": "b6ade091bb3e4cec7361f441a207fe58932004c2",
+      "mode": "100644"
+    },
+    {
+      "path": "gen_sdk/gen_sdk_test.sh",
+      "kind": "blob",
+      "oid": "fe11eefb4e772a711c59bf9be25cf2e4f57c412f",
+      "mode": "100755"
+    },
+    {
+      "path": "gen_sdk/testdata/backward_req.textpb",
+      "kind": "blob",
+      "oid": "f77604a2381a01f8ae2a311750cb61eb6c370dcc",
+      "mode": "100644"
+    },
+    {
+      "path": "gen_sdk/testdata/dupe_req.textpb",
+      "kind": "blob",
+      "oid": "12803794911964227b6f62e70aa05c9329679385",
+      "mode": "100644"
+    },
+    {
+      "path": "gen_sdk/testdata/test_extensions_db.textpb",
+      "kind": "blob",
+      "oid": "63163b08c3370d21051534fc1445b762bb1fba64",
+      "mode": "100644"
+    },
+    {
+      "path": "gen_sdk/testdata/undefined_module.textpb",
+      "kind": "blob",
+      "oid": "f350119c03ab0dc63e8a12bfe0845290b1549b3e",
+      "mode": "100644"
+    },
+    {
+      "path": "gen_sdk/testdata/unknown_module.textpb",
+      "kind": "blob",
+      "oid": "b30c79ac6813d10b238348afabaeec793517b514",
+      "mode": "100644"
+    },
+    {
+      "path": "java/android/os/ext/Android.bp",
+      "kind": "blob",
+      "oid": "a20544c719ee5157e4608219b9532aa1ab12f23a",
+      "mode": "100644"
+    },
+    {
+      "path": "java/android/os/ext/SdkExtensions.java",
+      "kind": "blob",
+      "oid": "bef6b6e9eb63cd45b324da19fb22b35f0e199277",
+      "mode": "100644"
+    },
+    {
+      "path": "java/android/os/ext/api/current.txt",
+      "kind": "blob",
+      "oid": "f25b510559bd9c84495d1d158a7d571747f77a8b",
+      "mode": "100644"
+    },
+    {
+      "path": "java/android/os/ext/api/module-lib-current.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "java/android/os/ext/api/module-lib-removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "java/android/os/ext/api/removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "java/android/os/ext/api/system-current.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "java/android/os/ext/api/system-removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "java/android/os/ext/jarjar_rules.txt",
+      "kind": "blob",
+      "oid": "eef29db4868e59a86ad04fb90e5e2be0f49d4c55",
+      "mode": "100644"
+    },
+    {
+      "path": "java/android/os/ext/package.html",
+      "kind": "blob",
+      "oid": "34c1697c01fda34f2bdb186cd560fc643d92e8e0",
+      "mode": "100644"
+    },
+    {
+      "path": "java/android/os/ext/testing/Android.bp",
+      "kind": "blob",
+      "oid": "97263a76fbd7c21325dd89baf3998645fbf8b842",
+      "mode": "100644"
+    },
+    {
+      "path": "java/android/os/ext/testing/Test.java",
+      "kind": "blob",
+      "oid": "1b050fc0b9e670963e41a6f90e3de1e2dc0e107a",
+      "mode": "100644"
+    },
+    {
+      "path": "java/android/os/ext/testing/apis_for_tests/current.txt",
+      "kind": "blob",
+      "oid": "12a08b90d3d958751088c147ee840c9a98f486db",
+      "mode": "100644"
+    },
+    {
+      "path": "java/android/os/ext/testing/apis_for_tests/module-lib-current.txt",
+      "kind": "blob",
+      "oid": "d1fa0ad9e95fe37841e0396c8c39d0e3f2418294",
+      "mode": "100644"
+    },
+    {
+      "path": "java/android/os/ext/testing/apis_for_tests/module-lib-removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "java/android/os/ext/testing/apis_for_tests/removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "java/android/os/ext/testing/apis_for_tests/system-current.txt",
+      "kind": "blob",
+      "oid": "8eb94428c15aef0bee47ea6776f7ed8678083f37",
+      "mode": "100644"
+    },
+    {
+      "path": "java/android/os/ext/testing/apis_for_tests/system-removed.txt",
+      "kind": "blob",
+      "oid": "c079792dcf45a6d8d16f54fe723dd3cc0dbde572",
+      "mode": "100644"
+    },
+    {
+      "path": "java/com/android/os/ext/testing/Android.bp",
+      "kind": "blob",
+      "oid": "9ce7774b47a0886667cd48ba9eea592ddea90845",
+      "mode": "100644"
+    },
+    {
+      "path": "java/com/android/os/ext/testing/CurrentVersionTemplate.java",
+      "kind": "blob",
+      "oid": "f95341d2b1ae2f604ef82c679cda2ce62b09e5e1",
+      "mode": "100644"
+    },
+    {
+      "path": "java/com/android/os/ext/testing/DeriveSdk.java",
+      "kind": "blob",
+      "oid": "1e073fd872fee769bac84132cc133fc2a62e6619",
+      "mode": "100644"
+    },
+    {
+      "path": "javatests/Android.bp",
+      "kind": "blob",
+      "oid": "67f0cab643d23f22d929bc3aacf17df3f6a82545",
+      "mode": "100644"
+    },
+    {
+      "path": "javatests/com/android/os/classpath/Android.bp",
+      "kind": "blob",
+      "oid": "0a8b75a0ab4dccab1f931afb3e4f608a2ac94409",
+      "mode": "100644"
+    },
+    {
+      "path": "javatests/com/android/os/classpath/AndroidTest.xml",
+      "kind": "blob",
+      "oid": "af8992b826bdb347491299753b8157fda887a363",
+      "mode": "100644"
+    },
+    {
+      "path": "javatests/com/android/os/classpath/ClasspathsTest.java",
+      "kind": "blob",
+      "oid": "d4fc05ca58382c5dcac09de7c5628214881caac7",
+      "mode": "100644"
+    },
+    {
+      "path": "javatests/com/android/os/classpath/OWNERS",
+      "kind": "blob",
+      "oid": "039ef5ea5a499215fcc640767cbc4cfdcd68f060",
+      "mode": "100644"
+    },
+    {
+      "path": "javatests/com/android/os/ext/Android.bp",
+      "kind": "blob",
+      "oid": "bf91d6c2767f82d7408641534567173fcd3e9a2a",
+      "mode": "100644"
+    },
+    {
+      "path": "javatests/com/android/os/ext/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "255a1c3c20dec1b599312e7b15ac6b46937eb0aa",
+      "mode": "100644"
+    },
+    {
+      "path": "javatests/com/android/os/ext/CtsSdkExtensionsTestCases.xml",
+      "kind": "blob",
+      "oid": "aeb4643d6497c26c575511ca12a0f0f2beed8677",
+      "mode": "100644"
+    },
+    {
+      "path": "javatests/com/android/os/ext/SdkExtensionsTest.java",
+      "kind": "blob",
+      "oid": "a8e6f124fedd6ab90f3c9ce04fcfc1a6959eb46d",
+      "mode": "100644"
+    },
+    {
+      "path": "javatests/com/android/os/ext/jarjar-rules.txt",
+      "kind": "blob",
+      "oid": "28abd2a912c74b23307a6fc3b7252845ff3a84bf",
+      "mode": "100644"
+    },
+    {
+      "path": "javatests/com/android/sdkext/extensions/Android.bp",
+      "kind": "blob",
+      "oid": "448e9fa05a4fe9d9a4925ee848e9630068f28991",
+      "mode": "100644"
+    },
+    {
+      "path": "javatests/com/android/sdkext/extensions/SdkExtensionsHostTest.java",
+      "kind": "blob",
+      "oid": "0d9d648a47816587401dc51c76c23dd3b44bae24",
+      "mode": "100644"
+    },
+    {
+      "path": "javatests/com/android/sdkext/extensions/apexes/Android.bp",
+      "kind": "blob",
+      "oid": "a9f890b0742843ebd5e05ada6baa5a825c0fb96e",
+      "mode": "100644"
+    },
+    {
+      "path": "javatests/com/android/sdkext/extensions/apexes/test_extensions_db.textpb",
+      "kind": "blob",
+      "oid": "e02680c6f21d4a4147235430cc8317fd2e31c388",
+      "mode": "100644"
+    },
+    {
+      "path": "javatests/com/android/sdkext/extensions/apexes/test_manifest.json",
+      "kind": "blob",
+      "oid": "1b4a2b0c6e60169733059e148f427c543a5b4847",
+      "mode": "100644"
+    },
+    {
+      "path": "javatests/com/android/sdkext/extensions/apps/Android.bp",
+      "kind": "blob",
+      "oid": "da05413a2e6504a4199d6db7900c491fdf273173",
+      "mode": "100644"
+    },
+    {
+      "path": "javatests/com/android/sdkext/extensions/apps/AndroidManifest-r12.xml",
+      "kind": "blob",
+      "oid": "f7fbbade0351c97db45553757333c00ef1cf5278",
+      "mode": "100644"
+    },
+    {
+      "path": "javatests/com/android/sdkext/extensions/apps/AndroidManifest-r45.xml",
+      "kind": "blob",
+      "oid": "7530c3edf3dfc0ca4f203ca5e5003c05e091feec",
+      "mode": "100644"
+    },
+    {
+      "path": "javatests/com/android/sdkext/extensions/apps/AndroidManifest-s12.xml",
+      "kind": "blob",
+      "oid": "7ca8ba28f9c3229f9d30b6f0c81ba001b63e9352",
+      "mode": "100644"
+    },
+    {
+      "path": "javatests/com/android/sdkext/extensions/apps/AndroidManifest-s45.xml",
+      "kind": "blob",
+      "oid": "b0c5d72455b2a739d55c12964673957b7168523d",
+      "mode": "100644"
+    },
+    {
+      "path": "javatests/com/android/sdkext/extensions/apps/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "c73db8aee1361c6609c7197ec69cf50495dee2e6",
+      "mode": "100644"
+    },
+    {
+      "path": "javatests/com/android/sdkext/extensions/apps/Receiver.java",
+      "kind": "blob",
+      "oid": "c662b0c152688737c6d67aafe9b8b3817b627d40",
+      "mode": "100644"
+    },
+    {
+      "path": "javatests/com/android/sdkext/extensions/sdkextensions-e2e-tests.xml",
+      "kind": "blob",
+      "oid": "50be2c8087ecc5e9ef76c14505e82d99c6daf76d",
+      "mode": "100644"
+    },
+    {
+      "path": "manifest.json",
+      "kind": "blob",
+      "oid": "53bcecd001fd6f08b8531b7806843afda219d7e7",
+      "mode": "100644"
+    },
+    {
+      "path": "released-flagged-apis.txt",
+      "kind": "blob",
+      "oid": "4ec104ff249bdb7431c8f1661f42d7bf76467cc2",
+      "mode": "100644"
+    },
+    {
+      "path": "rustfmt.toml",
+      "kind": "blob",
+      "oid": "cefaa42a3f64a49cc5586c611f65d8996657fc72",
+      "mode": "100644"
+    },
+    {
+      "path": "sdk-extensions-info-test/Android.bp",
+      "kind": "blob",
+      "oid": "80de51e5b019cb9271fab73f4c62d47dc364b461",
+      "mode": "100644"
+    },
+    {
+      "path": "sdk-extensions-info-test/test.rs",
+      "kind": "blob",
+      "oid": "6fc10b4c56a0033f9635920aec1687746f33b0d6",
+      "mode": "100644"
+    },
+    {
+      "path": "sdk-extensions-info-test/testdata/adservices-sdk-mixed-with-other-sdk.xml",
+      "kind": "blob",
+      "oid": "cf03eaf1b127c05787889b17eb3856d352383290",
+      "mode": "100644"
+    },
+    {
+      "path": "sdk-extensions-info-test/testdata/correct.xml",
+      "kind": "blob",
+      "oid": "b24e8aa82f5117a9c5a0b9b6bc3287f941f71aa2",
+      "mode": "100644"
+    },
+    {
+      "path": "sdk-extensions-info-test/testdata/corrupt-xml.xml",
+      "kind": "blob",
+      "oid": "26aa4494d293b537240f8922e733b0a2d1283ce8",
+      "mode": "100644"
+    },
+    {
+      "path": "sdk-extensions-info-test/testdata/duplicate-sdk-id.xml",
+      "kind": "blob",
+      "oid": "e92a7ddcdda38a54a74eb726f9d2052c4b04119e",
+      "mode": "100644"
+    },
+    {
+      "path": "sdk-extensions-info-test/testdata/duplicate-sdk-name.xml",
+      "kind": "blob",
+      "oid": "d083c1f2a2ca77c88bdc259a66c66844ad33b673",
+      "mode": "100644"
+    },
+    {
+      "path": "sdk-extensions-info-test/testdata/duplicate-sdk-reference.xml",
+      "kind": "blob",
+      "oid": "ef5fbdd82b9716d854919e1e2b7f3a50c067cb26",
+      "mode": "100644"
+    },
+    {
+      "path": "sdk-extensions-info-test/testdata/duplicate-sdk-shortname.xml",
+      "kind": "blob",
+      "oid": "27380aa6aea3e6ee58a3938cd8594c0097953aa0",
+      "mode": "100644"
+    },
+    {
+      "path": "sdk-extensions-info-test/testdata/duplicate-symbol-sdks.xml",
+      "kind": "blob",
+      "oid": "47ddb305ce390ba4c0f17306c435295c6c437bc9",
+      "mode": "100644"
+    },
+    {
+      "path": "sdk-extensions-info-test/testdata/incorrect-sdk-id-format.xml",
+      "kind": "blob",
+      "oid": "ddaa95883dc9e5430c00777e6cfe98965e4916b7",
+      "mode": "100644"
+    },
+    {
+      "path": "sdk-extensions-info-test/testdata/symbol-refers-to-non-existent-sdk.xml",
+      "kind": "blob",
+      "oid": "96fb15fecb11c8d75442aa6af4fcb30be8c07b98",
+      "mode": "100644"
+    },
+    {
+      "path": "sdk-extensions-info-test/testdata/whitespace-in-jar.xml",
+      "kind": "blob",
+      "oid": "e479ca478f5906b63c88ee20d96b41968b5acc77",
+      "mode": "100644"
+    },
+    {
+      "path": "sdk-extensions-info-test/testdata/whitespace-in-pattern.xml",
+      "kind": "blob",
+      "oid": "bf8c53ab9baf03c1ccef848981031078de544018",
+      "mode": "100644"
+    },
+    {
+      "path": "sdk-extensions-info.xml",
+      "kind": "blob",
+      "oid": "d05d0a656930b62f203c27c66c3054dc04ee927f",
+      "mode": "100644"
+    },
+    {
+      "path": "sdkext-conformance-framework.xml",
+      "kind": "blob",
+      "oid": "ca595efa765c1a51983fe1599b515aa94e280ff8",
+      "mode": "100644"
+    }
+  ]
+}

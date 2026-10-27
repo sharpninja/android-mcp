@@ -1,0 +1,3079 @@
+{
+  "repo": "platform/packages/modules/ImsMedia",
+  "requested_revision": "refs/tags/android-17.0.0_r1",
+  "revision": "0101cb4caf48dbcc3b8fbc6ab3e41137b90b8e67",
+  "entries": [
+    {
+      "path": ".clang-format",
+      "kind": "blob",
+      "oid": "6af0e0d912aed59b63d15fc03dcd4dc8d09d974d",
+      "mode": "100644"
+    },
+    {
+      "path": "OWNERS",
+      "kind": "blob",
+      "oid": "0ba79c4be7216ba80066007072f6594b0e941c5c",
+      "mode": "100644"
+    },
+    {
+      "path": "PREUPLOAD.cfg",
+      "kind": "blob",
+      "oid": "74e6a6d56745df5fd0b4188df2fd38194bada6bf",
+      "mode": "100644"
+    },
+    {
+      "path": "TEST_MAPPING",
+      "kind": "blob",
+      "oid": "9204f34d82e77a7bec9c887c84f261139221b988",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/Android.bp",
+      "kind": "blob",
+      "oid": "28688aee26879e9e6d1e2a789566cb59b3c72dbd",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "898a00ee6e76328d75bc0486992621924281edfe",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/AmrParams.aidl",
+      "kind": "blob",
+      "oid": "6bd2fb11e4c442fa0561c3c6b186355fa27936aa",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/AmrParams.java",
+      "kind": "blob",
+      "oid": "d735a04fb584c58445071635ca39606332107641",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/AnbrMode.aidl",
+      "kind": "blob",
+      "oid": "07c0ee954ef551d88e29010bdcbe48b215f5f082",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/AnbrMode.java",
+      "kind": "blob",
+      "oid": "73c2819434c6d1129b003ac9d41ef419fc9fe163",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/AudioConfig.aidl",
+      "kind": "blob",
+      "oid": "70cc25c920baf7890c1b503cce6d38fd577eb18b",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/AudioConfig.java",
+      "kind": "blob",
+      "oid": "223577ec51ab486babce10bb7b2854a4381b9b51",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/AudioSessionCallback.java",
+      "kind": "blob",
+      "oid": "1c5ef27fce9b903c0de2f873a2e406536a387d86",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/EvsParams.aidl",
+      "kind": "blob",
+      "oid": "1298ddc4fc3c2ef70f5d8588a6c2cc487cbc673a",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/EvsParams.java",
+      "kind": "blob",
+      "oid": "f8725820fdc79b49dadb7005d51333c3c17c51f9",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/IImsAudioSession.aidl",
+      "kind": "blob",
+      "oid": "574ce724332b9dd90b8b30a410e60f5b463b8ccd",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/IImsAudioSessionCallback.aidl",
+      "kind": "blob",
+      "oid": "03987607d9e1cf4f769a34d831d378191f26298a",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/IImsMedia.aidl",
+      "kind": "blob",
+      "oid": "af8fb51fd17ebc23c46fe69ce79b6c1c17e0e96e",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/IImsMediaCallback.aidl",
+      "kind": "blob",
+      "oid": "3c4dd6ded5297c38bc6e24195a0474b8cd5c8251",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/IImsTextSession.aidl",
+      "kind": "blob",
+      "oid": "8a2ae2df24fe73af2d15a097b3aeea21f7fd2db8",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/IImsTextSessionCallback.aidl",
+      "kind": "blob",
+      "oid": "937dc4f4a0b9722e35041ed7810749b4aebcbf3b",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/IImsVideoSession.aidl",
+      "kind": "blob",
+      "oid": "4c1a40553b62aa880fef88d90c2a662b6224ae14",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/IImsVideoSessionCallback.aidl",
+      "kind": "blob",
+      "oid": "f861af7a29ae83ba9af3ad3ffceb3e993438631e",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/ImsAudioSession.java",
+      "kind": "blob",
+      "oid": "86d1373f30bdc2f7342cc26864e3cd4b88e5d6e3",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/ImsMediaManager.java",
+      "kind": "blob",
+      "oid": "2f905e2066ca06a87fa18406a07a0f57025ddf1c",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/ImsMediaSession.java",
+      "kind": "blob",
+      "oid": "59e6c312411ca12d1c6e24d2a6e2d8c92090015a",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/ImsTextSession.java",
+      "kind": "blob",
+      "oid": "b9058063167766ca7c0dee077545431868e3ee83",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/ImsVideoSession.java",
+      "kind": "blob",
+      "oid": "a15e3ff732ea1fc5367db345b2607cdfdeb03bf6",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/MediaQualityStatus.aidl",
+      "kind": "blob",
+      "oid": "df3ee33ec1983e784cd3f926267e5b28268b62d1",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/MediaQualityStatus.java",
+      "kind": "blob",
+      "oid": "c7063817a2f2b6d92ce8d263b71faf0e95e18947",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/MediaQualityThreshold.aidl",
+      "kind": "blob",
+      "oid": "0a262962b0d81e99def84f49b564f37891bfec0e",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/MediaQualityThreshold.java",
+      "kind": "blob",
+      "oid": "42024a87a599d4850bb339e841b254b2f792d62e",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/RtcpConfig.aidl",
+      "kind": "blob",
+      "oid": "732b331adf3306301414393869351d21a8e355e8",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/RtcpConfig.java",
+      "kind": "blob",
+      "oid": "4b6d00fcb9cb8870409a7cc34bcd651c5469c37f",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/RtpConfig.aidl",
+      "kind": "blob",
+      "oid": "c0a9fa880780042a33f3923ec8f6afe62bc555df",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/RtpConfig.java",
+      "kind": "blob",
+      "oid": "8e7365ed999e101144b53c9492077265f26c4221",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/RtpContextParams.aidl",
+      "kind": "blob",
+      "oid": "6ea5616eeb31743607151d1b07fd7230cd4ecc5c",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/RtpContextParams.java",
+      "kind": "blob",
+      "oid": "031b0a3ff5eb2611c11d1d22a5cdd32babae45b5",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/RtpReceptionStats.aidl",
+      "kind": "blob",
+      "oid": "9c9dc499c88e1040882c88b5c366208f7f097133",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/RtpReceptionStats.java",
+      "kind": "blob",
+      "oid": "fead5364dd14e61767c5c23844c950b5be4a7633",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/TextConfig.aidl",
+      "kind": "blob",
+      "oid": "76c1f800c49a6e34401a4ed9cf9bc6c011d8a435",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/TextConfig.java",
+      "kind": "blob",
+      "oid": "11f3ede25b015d16dbe02eb954f1ea933b726322",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/TextSessionCallback.java",
+      "kind": "blob",
+      "oid": "328d430b0b41957b42ed88a54401dc565a88811d",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/VideoConfig.aidl",
+      "kind": "blob",
+      "oid": "113fb18a94cc36554ef97fc159d5106ac5d5d50c",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/VideoConfig.java",
+      "kind": "blob",
+      "oid": "dadfe3e2e4ca1b733b5b6e2c060b53bf12f188a8",
+      "mode": "100644"
+    },
+    {
+      "path": "framework/src/android/telephony/imsmedia/VideoSessionCallback.java",
+      "kind": "blob",
+      "oid": "e8c0b06e6f0b261c72dc0123e1a3db9a21d07a01",
+      "mode": "100644"
+    },
+    {
+      "path": "imsmedia.mk",
+      "kind": "blob",
+      "oid": "fd9a5d6da6f9846da17a542f5cfda465d75d291f",
+      "mode": "100644"
+    },
+    {
+      "path": "service/Android.bp",
+      "kind": "blob",
+      "oid": "416cae37f57195e5f37043f568165bc7ea218bbf",
+      "mode": "100644"
+    },
+    {
+      "path": "service/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "05f0406892105593384ab91499950bcdda11fa61",
+      "mode": "100644"
+    },
+    {
+      "path": "service/assets/pause_images/pause_img_cif_l.jpg",
+      "kind": "blob",
+      "oid": "1f52732ae358abf0030065272f621740ec955472",
+      "mode": "100644"
+    },
+    {
+      "path": "service/assets/pause_images/pause_img_cif_p.jpg",
+      "kind": "blob",
+      "oid": "9fdf23381ae5b7220884aaa978c7311724ee412c",
+      "mode": "100644"
+    },
+    {
+      "path": "service/assets/pause_images/pause_img_fhd_l.jpg",
+      "kind": "blob",
+      "oid": "17ac1bbcd526a36a0b7ecab9ed004edf5103911d",
+      "mode": "100644"
+    },
+    {
+      "path": "service/assets/pause_images/pause_img_fhd_p.jpg",
+      "kind": "blob",
+      "oid": "d08a4ac9a9669628b6e35b9634a8317c52cef849",
+      "mode": "100644"
+    },
+    {
+      "path": "service/assets/pause_images/pause_img_hd_l.jpg",
+      "kind": "blob",
+      "oid": "5d38aefd5cfed3cd21dca2b958f693a697a32146",
+      "mode": "100644"
+    },
+    {
+      "path": "service/assets/pause_images/pause_img_hd_p.jpg",
+      "kind": "blob",
+      "oid": "054e597802e303b200cf16201cbaa5e64d456af8",
+      "mode": "100644"
+    },
+    {
+      "path": "service/assets/pause_images/pause_img_qcif_l.jpg",
+      "kind": "blob",
+      "oid": "5298e0e7a80fb5104c16b087bfabdcb958115091",
+      "mode": "100644"
+    },
+    {
+      "path": "service/assets/pause_images/pause_img_qcif_p.jpg",
+      "kind": "blob",
+      "oid": "4ba68451738ce8fa4d1be633b5b1421ef5aaf783",
+      "mode": "100644"
+    },
+    {
+      "path": "service/assets/pause_images/pause_img_qvga_l.jpg",
+      "kind": "blob",
+      "oid": "96155d6b521663b49e2752f697afed6b90eb7490",
+      "mode": "100644"
+    },
+    {
+      "path": "service/assets/pause_images/pause_img_qvga_p.jpg",
+      "kind": "blob",
+      "oid": "fb11351c0694b8548551022e6421be864d82ae35",
+      "mode": "100644"
+    },
+    {
+      "path": "service/assets/pause_images/pause_img_sif_l.jpg",
+      "kind": "blob",
+      "oid": "77021e71c780fc243b58b8f4f9ce7f8f6bd8edaf",
+      "mode": "100644"
+    },
+    {
+      "path": "service/assets/pause_images/pause_img_sif_p.jpg",
+      "kind": "blob",
+      "oid": "b951a385b4a894dbc9592216db8ccb704b7c0394",
+      "mode": "100644"
+    },
+    {
+      "path": "service/assets/pause_images/pause_img_sqcif_l.jpg",
+      "kind": "blob",
+      "oid": "b19538b54c58abf34afb041d7524a536d7e6840a",
+      "mode": "100644"
+    },
+    {
+      "path": "service/assets/pause_images/pause_img_sqcif_p.jpg",
+      "kind": "blob",
+      "oid": "e56d6f0646b9274ebb0710e91bbc44b729163ca6",
+      "mode": "100644"
+    },
+    {
+      "path": "service/assets/pause_images/pause_img_vga_l.jpg",
+      "kind": "blob",
+      "oid": "d8536689fa21f3d8107ad45ab23da741e8bd7f1f",
+      "mode": "100644"
+    },
+    {
+      "path": "service/assets/pause_images/pause_img_vga_p.jpg",
+      "kind": "blob",
+      "oid": "b3176b1e8841a82065d264812f53fc3a8c03d7f3",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values/arrays.xml",
+      "kind": "blob",
+      "oid": "7c40f5c7c106dadcaace999ff266f15fd74b89cd",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/values/strings.xml",
+      "kind": "blob",
+      "oid": "6ee0b1e174fad1bf3e01101c92794c4e828bc059",
+      "mode": "100644"
+    },
+    {
+      "path": "service/res/xml/config_preference.xml",
+      "kind": "blob",
+      "oid": "c553decf40b39607fa82b0fae73e9920bb8cbf97",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/AudioListener.java",
+      "kind": "blob",
+      "oid": "5fc9f39babcaaaa90fb60ec1d15b6be8ccafd7cd",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/AudioLocalSession.java",
+      "kind": "blob",
+      "oid": "c36cda168604c0f7204acbda8f0f93aae1389b5c",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/AudioOffloadListener.java",
+      "kind": "blob",
+      "oid": "c031fd350bccdbf3bd72b9e44d47ef635ece18da",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/AudioOffloadService.java",
+      "kind": "blob",
+      "oid": "f7ba4fb95ec18e1f8fa1ddbdef0258611464d7c0",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/AudioService.java",
+      "kind": "blob",
+      "oid": "e84509e8f4aca2c23aaaab8aff25933b3b406055",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/AudioSession.java",
+      "kind": "blob",
+      "oid": "d53565b2c537504162f71e15c7afce42e73df257",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/IMediaSession.java",
+      "kind": "blob",
+      "oid": "ee2e05b3707ea553962f2bade0c867de688579ce",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/ImsMediaApplication.java",
+      "kind": "blob",
+      "oid": "f662d2f137eb078c23ffb457588e14dd31bd8396",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/ImsMediaController.java",
+      "kind": "blob",
+      "oid": "b99a18c84659b524ca64bee4b2035dcbd53e386a",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/JNIImsMediaListener.java",
+      "kind": "blob",
+      "oid": "9542369c60e71fa17fa652e3a09da4c72b00ae50",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/JNIImsMediaService.java",
+      "kind": "blob",
+      "oid": "ee6eb9d489344813167c9a55e22952e9a6ae4fbc",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/TextListener.java",
+      "kind": "blob",
+      "oid": "dcb9c69d5fa3bf5be2d518f11fea099fe15f405b",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/TextLocalSession.java",
+      "kind": "blob",
+      "oid": "8c398939e1e7299afac55afea734c9d777daf993",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/TextService.java",
+      "kind": "blob",
+      "oid": "f01f265a7d4284bdc0763767c6b4b8efd0b59851",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/TextSession.java",
+      "kind": "blob",
+      "oid": "653e0f1f75f9c84eabbe622838c2fae779b12af6",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/Utils.java",
+      "kind": "blob",
+      "oid": "39ea80ec87eee187904f8175457cc17c5c27510b",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/VideoListener.java",
+      "kind": "blob",
+      "oid": "6ec2ca7549d710a69317a2b423bbdc3c1a796b88",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/VideoLocalSession.java",
+      "kind": "blob",
+      "oid": "32e392a63db0e8f6fd7e6497c79b0e0473e7f646",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/VideoService.java",
+      "kind": "blob",
+      "oid": "6de3a2a72e8fe79632bf3857b113ebeb21e2c9c9",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/VideoSession.java",
+      "kind": "blob",
+      "oid": "7b8c1ea6607064d23932cf72a1d95e7218ba7361",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/WakeLockManager.java",
+      "kind": "blob",
+      "oid": "5138033ee368a5d428453959f0054ed387ff644c",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/config/ConfigPreference.java",
+      "kind": "blob",
+      "oid": "ac644179fc826290a8e80c664996f6588d57f27c",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/Android.bp",
+      "kind": "blob",
+      "oid": "80eed2f5f3e23ee6eae94a1ec99aae1eac07b965",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/Android.bp",
+      "kind": "blob",
+      "oid": "74e85e28cf03200ddb86d811758a9cecfdb6655e",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/include/AmrParams.h",
+      "kind": "blob",
+      "oid": "7a81f4d521aeaf5928bceb6e99ae16c0c7f0aebe",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/include/AnbrMode.h",
+      "kind": "blob",
+      "oid": "f0355a3c9c35250cbdb667a3b9616ffc6b43e8a5",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/include/AudioConfig.h",
+      "kind": "blob",
+      "oid": "4bdc5f01d96f5354a294f0aa133e0103e1a04e9e",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/include/CallQuality.h",
+      "kind": "blob",
+      "oid": "67fb1f6d6c52a18dcf230523802e54724f73e8e0",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/include/EvsParams.h",
+      "kind": "blob",
+      "oid": "5ffbda9b5d06f2c8c2a5e76f2b9e7f344ce2b90a",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/include/MediaQualityStatus.h",
+      "kind": "blob",
+      "oid": "c7dcaebdf0b5b6e1f4f39f538c6a4881da71a0f7",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/include/MediaQualityThreshold.h",
+      "kind": "blob",
+      "oid": "b5e3c0eac260c984476dd560cc2b47a45d63b694",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/include/RtcpConfig.h",
+      "kind": "blob",
+      "oid": "2542c37a6fed01ae3d55eae131d3e5aba79bc57a",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/include/RtpConfig.h",
+      "kind": "blob",
+      "oid": "3c47189047427ef3a73c24f57f58d81db60c0793",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/include/RtpContextParams.h",
+      "kind": "blob",
+      "oid": "3cdc7e3cf3230736cc0e5e4f7fa6df45f2e1a36f",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/include/RtpHeaderExtension.h",
+      "kind": "blob",
+      "oid": "f3c52272f309788a4868f5f53d793080ed4d43e4",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/include/RtpReceptionStats.h",
+      "kind": "blob",
+      "oid": "41476bcf3cb61d2de02e523b478b69b6a7e5807a",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/include/TextConfig.h",
+      "kind": "blob",
+      "oid": "493a5d06b7f6ada00c542b1d038e588e0e3962ff",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/include/VideoConfig.h",
+      "kind": "blob",
+      "oid": "0cf5c558489e5e5b6e9f8dab257d9d2b820bf7d2",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/src/AmrParams.cpp",
+      "kind": "blob",
+      "oid": "71dffe78b4778ef1458538e24c01200757f57337",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/src/AnbrMode.cpp",
+      "kind": "blob",
+      "oid": "7c7e4d1ecae4bafa4a586f08a4c02fae26b4c03d",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/src/AudioConfig.cpp",
+      "kind": "blob",
+      "oid": "6d7b5e8e381703c5a925b43bbded20b37bea4a76",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/src/CallQuality.cpp",
+      "kind": "blob",
+      "oid": "a0bf76f6be19964125720306a3a9019f4629ca37",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/src/EvsParams.cpp",
+      "kind": "blob",
+      "oid": "d58cdb7e3e924555173a6c18e2976957a2dce789",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/src/MediaQualityStatus.cpp",
+      "kind": "blob",
+      "oid": "566cf771425864ad92ac19701a11531cce43932c",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/src/MediaQualityThreshold.cpp",
+      "kind": "blob",
+      "oid": "52b71848629fec909867cd9b1a4b9d18e37e65fb",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/src/RtcpConfig.cpp",
+      "kind": "blob",
+      "oid": "2c1c44e234a5293124b157a1b9c06276b7bf0b0d",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/src/RtpConfig.cpp",
+      "kind": "blob",
+      "oid": "04fdcdf78b53506db28d9d6130f7266b2a85e567",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/src/RtpContextParams.cpp",
+      "kind": "blob",
+      "oid": "d061fd25d5c20d833f047fb3b734c820c5106b90",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/src/RtpHeaderExtension.cpp",
+      "kind": "blob",
+      "oid": "e65bd75288e184198579c5d02dbb0f2a1bfff23d",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/src/RtpReceptionStats.cpp",
+      "kind": "blob",
+      "oid": "a6e586d70a7866715670bb0b180e0dd255832841",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/src/TextConfig.cpp",
+      "kind": "blob",
+      "oid": "27529f92324d56104d8510038bf6ba9a11759442",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/src/VideoConfig.cpp",
+      "kind": "blob",
+      "oid": "56cb0d48cb5c02a35f56e53eb995223df91bd049",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/Android.bp",
+      "kind": "blob",
+      "oid": "f173bd1067d4d05e5a9a9955cade679e1aea5e84",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/BaseJitterBuffer.cpp",
+      "kind": "blob",
+      "oid": "d5d9e48610e159641c56ee98b400dc04113c0b9c",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/BaseManager.cpp",
+      "kind": "blob",
+      "oid": "f3e7e8110460dc7420e78b082f39dffaf0d03ccd",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/BaseSession.cpp",
+      "kind": "blob",
+      "oid": "4219c9c555e5ef216015ae3b4c850f79e2caeb96",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/BaseStreamGraph.cpp",
+      "kind": "blob",
+      "oid": "8347eb3e6bd745e035833ec13cf73394025bbb94",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/IRtpSession.cpp",
+      "kind": "blob",
+      "oid": "28d87fb9eed64c380e1b8259a2a24829e67e90f8",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/JitterNetworkAnalyser.cpp",
+      "kind": "blob",
+      "oid": "ade5b6cc7d660246ba461f3f83408c23e3bbd5a6",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/StreamScheduler.cpp",
+      "kind": "blob",
+      "oid": "7ad6fe0045f51e9135c4ccdf01936427b108cab8",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/audio/AudioJitterBuffer.cpp",
+      "kind": "blob",
+      "oid": "5d6136d02160c4e2304b03329e099dd85845df8b",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/audio/AudioManager.cpp",
+      "kind": "blob",
+      "oid": "2f80d9418b44793e5113140453a9345450473674",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/audio/AudioSession.cpp",
+      "kind": "blob",
+      "oid": "b704e0efb5fffa4d4e837358c117243898c0aea7",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/audio/AudioStreamGraphRtcp.cpp",
+      "kind": "blob",
+      "oid": "fa42bffd39a4012a942f5d1a8d892cefe6819b45",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/audio/AudioStreamGraphRtpRx.cpp",
+      "kind": "blob",
+      "oid": "2693748de22fb6ca13e3caa2ff021c8cad86d406",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/audio/AudioStreamGraphRtpTx.cpp",
+      "kind": "blob",
+      "oid": "a70b4b201595d14afb25d798928187c65f1e2243",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/audio/MediaQualityAnalyzer.cpp",
+      "kind": "blob",
+      "oid": "789f4fdd129e5437d2cd9cceddab27b752c3a5bb",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/audio/RtcpXrEncoder.cpp",
+      "kind": "blob",
+      "oid": "dda436ea32f51f42b9958181a6b00f1b7f3fc680",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/audio/android/Android.bp",
+      "kind": "blob",
+      "oid": "252ca0e4dff04801877d3184bb30c25930eba750",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/audio/android/ImsMediaAudioPlayer.cpp",
+      "kind": "blob",
+      "oid": "a9539d5d40bc74b548248013427d55379874c838",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/audio/android/ImsMediaAudioSource.cpp",
+      "kind": "blob",
+      "oid": "ca8fb446619048aef9fe98462cf01740a210d0f5",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/audio/android/include/IFrameCallback.h",
+      "kind": "blob",
+      "oid": "a24cde6e83245a5998366e987ac408fb475ba561",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/audio/android/include/ImsMediaAudioDefine.h",
+      "kind": "blob",
+      "oid": "d7a1c596e865a0c17e66096b0960cbe2f69247b3",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/audio/android/include/ImsMediaAudioPlayer.h",
+      "kind": "blob",
+      "oid": "cfdf2d3cdd759de1a9732ad6c9cc7285a3b42a82",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/audio/android/include/ImsMediaAudioSource.h",
+      "kind": "blob",
+      "oid": "944f3aa6d56dfee5a7d748602871861552c5e8cf",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/audio/nodes/AudioRtpPayloadDecoderNode.cpp",
+      "kind": "blob",
+      "oid": "feb9d96faf8d5c9bbca88286da8da2b23b6ecbec",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/audio/nodes/AudioRtpPayloadEncoderNode.cpp",
+      "kind": "blob",
+      "oid": "687b6fc3dfe3a4ebd4b500ea3000f912d916acfc",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/audio/nodes/DtmfEncoderNode.cpp",
+      "kind": "blob",
+      "oid": "70cfe4efec3ff22fee3ca8357a5a1314a8526ea5",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/audio/nodes/DtmfSenderNode.cpp",
+      "kind": "blob",
+      "oid": "53cd70f5b302a31db954d4f1f8686ab6cdd5e2bd",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/audio/nodes/IAudioPlayerNode.cpp",
+      "kind": "blob",
+      "oid": "84b62014700c594afaa4830ee84dca358c83cd3d",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/audio/nodes/IAudioSourceNode.cpp",
+      "kind": "blob",
+      "oid": "53bc664f3c99f7c5a7e7b43871a4e7a258456437",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/audio/nodes/ImsMediaAudioUtil.cpp",
+      "kind": "blob",
+      "oid": "fcaf82e41890f4f0bb854d36ad4766173e61bf2b",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/BaseJitterBuffer.h",
+      "kind": "blob",
+      "oid": "3a5409497076213eb1854951ab26a9f77a08dfc5",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/BaseManager.h",
+      "kind": "blob",
+      "oid": "7ddb0a06ce12ab15dbdb74af446bf0e59f543dca",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/BaseSession.h",
+      "kind": "blob",
+      "oid": "4c27539a54a879eb340241b33033f47cba6e6c76",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/BaseSessionCallback.h",
+      "kind": "blob",
+      "oid": "606173617a5bb98cd6e1a25fd51555ac7b31696b",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/BaseStreamGraph.h",
+      "kind": "blob",
+      "oid": "bee38ddc09bcd97920f682b3ba9e158b39dfd89a",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/IRtpSession.h",
+      "kind": "blob",
+      "oid": "263deeb5750688729ba90824a74d0bc5d3566c3b",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/ImsMediaDefine.h",
+      "kind": "blob",
+      "oid": "9daabd86901b269ad7f33da8bdfcc40ead7042e9",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/JitterNetworkAnalyser.h",
+      "kind": "blob",
+      "oid": "2a7513a0f87be23de8d54a18ba1cb7d0f6915fd5",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/StreamScheduler.h",
+      "kind": "blob",
+      "oid": "0afac26ca06d8ab2390b9ebb2f3806e0269eab2a",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/StreamSchedulerCallback.h",
+      "kind": "blob",
+      "oid": "d9a475ea607ec057e9326166f2270bd62ec2bdf6",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/audio/AudioJitterBuffer.h",
+      "kind": "blob",
+      "oid": "d355a37b10e9dd7d2633e08e55c55c70f63f7e78",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/audio/AudioManager.h",
+      "kind": "blob",
+      "oid": "d721f98382439f13b1ad7bf0dd8f2dc6e3529cb8",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/audio/AudioSession.h",
+      "kind": "blob",
+      "oid": "add73570086af074ebe300408573484cfb1e22e4",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/audio/AudioStreamGraph.h",
+      "kind": "blob",
+      "oid": "211b981def36df0144ea2b0d0fc273a0ef48d2b4",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/audio/AudioStreamGraphRtcp.h",
+      "kind": "blob",
+      "oid": "7253b035e323f688800385bb1c3d248bd4747f89",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/audio/AudioStreamGraphRtpRx.h",
+      "kind": "blob",
+      "oid": "13dfb85261cf0e1b6cb20fe52944402974a198c9",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/audio/AudioStreamGraphRtpTx.h",
+      "kind": "blob",
+      "oid": "1b7d2c16b56eaef1123eb74d2751da39dbb977ad",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/audio/ImsMediaAudioUtil.h",
+      "kind": "blob",
+      "oid": "582f94629d746de41ca9d38c9df0436763a9cd7e",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/audio/MediaQualityAnalyzer.h",
+      "kind": "blob",
+      "oid": "965316761e4159d34da39045a5532ec042d8ad44",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/audio/RtcpXrEncoder.h",
+      "kind": "blob",
+      "oid": "0ce68425a590a3c90d98141ae618623077dec7f1",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/audio/nodes/AudioRtpPayloadDecoderNode.h",
+      "kind": "blob",
+      "oid": "3b66575165baa2e3b5575f93f3166451b0fad94a",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/audio/nodes/AudioRtpPayloadEncoderNode.h",
+      "kind": "blob",
+      "oid": "e37ea061a61dbed5966ca118e747263a81618779",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/audio/nodes/DtmfEncoderNode.h",
+      "kind": "blob",
+      "oid": "fa4179fea279fb51b5b9b93888958121a67c8b54",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/audio/nodes/DtmfSenderNode.h",
+      "kind": "blob",
+      "oid": "705767610bab2bc15be369d834e3a9171b35539b",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/audio/nodes/IAudioPlayerNode.h",
+      "kind": "blob",
+      "oid": "f85db16f15260bbf12fdafb2cf8d8a57a77f728d",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/audio/nodes/IAudioSourceNode.h",
+      "kind": "blob",
+      "oid": "c19a0b406e865032f327b69d080e491a9457ef35",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/nodes/BaseNode.h",
+      "kind": "blob",
+      "oid": "ae059bbfce3a60226b604cb62b9579f158b321bd",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/nodes/JitterBufferControlNode.h",
+      "kind": "blob",
+      "oid": "52b5e544887ae4bb6d321417dd8340d9659c0112",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/nodes/RtcpDecoderNode.h",
+      "kind": "blob",
+      "oid": "77c60906664c3bd25f752c8fd03c3698a3999515",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/nodes/RtcpEncoderNode.h",
+      "kind": "blob",
+      "oid": "8de3e1c3aa3c3e6901ac6cb7003058466343a398",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/nodes/RtpDecoderNode.h",
+      "kind": "blob",
+      "oid": "aee71d4029fb33e9a0cc26a1d3cfc7afa66c11ae",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/nodes/RtpEncoderNode.h",
+      "kind": "blob",
+      "oid": "81b1bf6fee3c3f6fb795b17815fc6d5d4e6a8991",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/nodes/SocketReaderNode.h",
+      "kind": "blob",
+      "oid": "95900e927780669f4a88ab3b2e0525f8fbbb8ae9",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/nodes/SocketWriterNode.h",
+      "kind": "blob",
+      "oid": "3ef549e454c77058bbb2b8baf6905fe2049099d0",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/text/TextJitterBuffer.h",
+      "kind": "blob",
+      "oid": "dcb05aef8ced95535e649361019598522fc5f7a8",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/text/TextManager.h",
+      "kind": "blob",
+      "oid": "f23ac8f638e15c1347c3348914f63a077423d1cb",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/text/TextSession.h",
+      "kind": "blob",
+      "oid": "ea1c636c1f5642788f67e4d7376389edada90b1c",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/text/TextStreamGraph.h",
+      "kind": "blob",
+      "oid": "87453b0a730d5ff04fd974c00c2d240b16ac9a89",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/text/TextStreamGraphRtcp.h",
+      "kind": "blob",
+      "oid": "2e5155a104032f7992c5567defb48b9e4b7b7818",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/text/TextStreamGraphRtpRx.h",
+      "kind": "blob",
+      "oid": "0d6e6c60f753e593b0ff805ff52db9090ee2964e",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/text/TextStreamGraphRtpTx.h",
+      "kind": "blob",
+      "oid": "0d00be203fdce3f3e5be16325efc35aefe428b0c",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/text/nodes/TextRendererNode.h",
+      "kind": "blob",
+      "oid": "3e1f41f4e4e1775cdd039936e6fcb4159ccebac1",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/text/nodes/TextRtpPayloadDecoderNode.h",
+      "kind": "blob",
+      "oid": "c8b0292dc00c2c0ea3fe65bbd6692b533bf1d904",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/text/nodes/TextRtpPayloadEncoderNode.h",
+      "kind": "blob",
+      "oid": "c18a620bbbf1b08b970309526a7e73cd12adf823",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/text/nodes/TextSourceNode.h",
+      "kind": "blob",
+      "oid": "a52764b93965aeb64e2adc99b059af2681beef0f",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/utils/IImsMediaThread.h",
+      "kind": "blob",
+      "oid": "082a49ae761b82e1f23e637aa93dc16583c000e0",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/utils/ISocket.h",
+      "kind": "blob",
+      "oid": "7105415899209b29b17e029f5aba12cbacae2fd0",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/utils/ImsMediaBinaryFormat.h",
+      "kind": "blob",
+      "oid": "a59066d2c6c544568a5ade2253ec95e3a2033b11",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/utils/ImsMediaBitReader.h",
+      "kind": "blob",
+      "oid": "93352d70aa7dd7945adf5fd914efea6b91233647",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/utils/ImsMediaBitWriter.h",
+      "kind": "blob",
+      "oid": "693b2f5cda61936f1864fb597ba0a49127494e4d",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/utils/ImsMediaCondition.h",
+      "kind": "blob",
+      "oid": "738d51be141440b0fbbe8cccab33f62aa0ed3941",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/utils/ImsMediaDataQueue.h",
+      "kind": "blob",
+      "oid": "a5b06f99acba14f559f1eda289cacbf516a2783a",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/utils/ImsMediaEventHandler.h",
+      "kind": "blob",
+      "oid": "d4b72d79db452f6a95d7a56f5344b13974d6d775",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/utils/ImsMediaImageRotate.h",
+      "kind": "blob",
+      "oid": "a0d46ddfcbcdd3a080f2ca707a3ec4fe7dd6c9e5",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/utils/ImsMediaNetworkUtil.h",
+      "kind": "blob",
+      "oid": "8cb5913229d8e2b9891184f8c0b4b7961f40d743",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/utils/ImsMediaSocket.h",
+      "kind": "blob",
+      "oid": "32935c880534c64fdb754c7181d2226289efaf6e",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/video/ImsMediaVideoUtil.h",
+      "kind": "blob",
+      "oid": "a2e7897b298557efcf6183100d813a69826c1cd4",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/video/VideoJitterBuffer.h",
+      "kind": "blob",
+      "oid": "2809cefc3bcef46764a3270770773faf880b5f44",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/video/VideoManager.h",
+      "kind": "blob",
+      "oid": "efab6a3cd4024ee5abcba92f9ca4ac717d660154",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/video/VideoSession.h",
+      "kind": "blob",
+      "oid": "66de0fcacbda88840c6798f14766a36c093f8357",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/video/VideoStreamGraph.h",
+      "kind": "blob",
+      "oid": "3e1455957d055599968a45b1f8ffa479761736d8",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/video/VideoStreamGraphRtcp.h",
+      "kind": "blob",
+      "oid": "f1c6d0135647bcd8747f362f5771aa6a5d7abdce",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/video/VideoStreamGraphRtpRx.h",
+      "kind": "blob",
+      "oid": "ed3656d2fa78e9b6684c91f6ea098be22a336b10",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/video/VideoStreamGraphRtpTx.h",
+      "kind": "blob",
+      "oid": "0fd1104aea304b03f5f9419b7ca6f5cbbfc9affb",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/video/android/ImsMediaCamera.h",
+      "kind": "blob",
+      "oid": "0a7728a1e45caba86d7608095e9be3e5c4d07057",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/video/android/ImsMediaPauseImageSource.h",
+      "kind": "blob",
+      "oid": "66022fc2bc629389e03ad3ef6fb221a3c1624575",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/video/android/ImsMediaVideoRenderer.h",
+      "kind": "blob",
+      "oid": "ad657e7701a6eaf4e7d13e2ee97cb26e9a4c8746",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/video/android/ImsMediaVideoSource.h",
+      "kind": "blob",
+      "oid": "64ce9df8084c2670960e920e8df49cbd5d94c398",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/video/nodes/IVideoRendererNode.h",
+      "kind": "blob",
+      "oid": "7af5c15ac3412e5f6c035caef269760bdf373a7c",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/video/nodes/IVideoSourceNode.h",
+      "kind": "blob",
+      "oid": "a8486169be4dc00ebac8987fdef6f5f4fdb96047",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/video/nodes/VideoRtpPayloadDecoderNode.h",
+      "kind": "blob",
+      "oid": "dc3882b75f77ae471efe13be81579a8e3e2035cf",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/include/video/nodes/VideoRtpPayloadEncoderNode.h",
+      "kind": "blob",
+      "oid": "eeab0cc74e6b648b23f029c9653d2f98a5270414",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/interface/utils/ImsMediaMutex.h",
+      "kind": "blob",
+      "oid": "c1bbb8e337b3cba2a6885fd7f9b05714fd5abe30",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/interface/utils/ImsMediaTimer.h",
+      "kind": "blob",
+      "oid": "ebcff380f07c46a96700e9cd32154816277a4fa9",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/interface/utils/ImsMediaTrace.h",
+      "kind": "blob",
+      "oid": "c1edbdf13830df48cdeba20fde33a7972aea0bf6",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/nodes/BaseNode.cpp",
+      "kind": "blob",
+      "oid": "39b787aa1adad977c575c5e7bb123544e0ff7b42",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/nodes/JitterBufferControlNode.cpp",
+      "kind": "blob",
+      "oid": "f4d304a2b12c0c1670b3d9dc46d07e4e8ccbcedb",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/nodes/RtcpDecoderNode.cpp",
+      "kind": "blob",
+      "oid": "b2c9fb2a06e67a580dd157a364148bda4e10de2d",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/nodes/RtcpEncoderNode.cpp",
+      "kind": "blob",
+      "oid": "0e5766f869758c75af8bc8d25a6764249f3a43df",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/nodes/RtpDecoderNode.cpp",
+      "kind": "blob",
+      "oid": "88c305e91ca15c33fac730f82edc6d09305833c6",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/nodes/RtpEncoderNode.cpp",
+      "kind": "blob",
+      "oid": "4b398f4347493159c9123e55b557dbb3e1409fbb",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/nodes/SocketReaderNode.cpp",
+      "kind": "blob",
+      "oid": "d798a725618c4952d3ef80b0220f832b5d559a02",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/nodes/SocketWriterNode.cpp",
+      "kind": "blob",
+      "oid": "194786902f0d71f76c4d5c8a719a9df34cf742c3",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/text/TextJitterBuffer.cpp",
+      "kind": "blob",
+      "oid": "1deab63c1f453bfb11a9990b35f63b1b8a24f2d3",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/text/TextManager.cpp",
+      "kind": "blob",
+      "oid": "54ca008734b2b5ebf9b7125001208b183918726e",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/text/TextSession.cpp",
+      "kind": "blob",
+      "oid": "da7664bb6db9874a3c730af787543f23ae948b56",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/text/TextStreamGraphRtcp.cpp",
+      "kind": "blob",
+      "oid": "db36bedabf14bad5922912f8df05a97a2673c8e2",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/text/TextStreamGraphRtpRx.cpp",
+      "kind": "blob",
+      "oid": "a278e8c0009df4ab48d24379657ce95042fa01c3",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/text/TextStreamGraphRtpTx.cpp",
+      "kind": "blob",
+      "oid": "622860306acf3bb64e1934ca66d05683e0b7da31",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/text/nodes/TextRendererNode.cpp",
+      "kind": "blob",
+      "oid": "891f9a3d6bc04bbe379f84cb2c2bf2fcb86c9105",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/text/nodes/TextRtpPayloadDecoderNode.cpp",
+      "kind": "blob",
+      "oid": "fb7e45d79d436cf375ebfeae4797eb8845c7194f",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/text/nodes/TextRtpPayloadEncoderNode.cpp",
+      "kind": "blob",
+      "oid": "854b099937bc0248341671b90ac9052ef37d602f",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/text/nodes/TextSourceNode.cpp",
+      "kind": "blob",
+      "oid": "4640da1c483c19482f11996bcc4c221e666b9b9b",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/utils/IImsMediaThread.cpp",
+      "kind": "blob",
+      "oid": "39ea284d7492f4c153df7ccb675f75da43b7a8b1",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/utils/ISocket.cpp",
+      "kind": "blob",
+      "oid": "52f8168a7b17c3437fab0bd0e1f82eb0b1a33adc",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/utils/ImsMediaBinaryFormat.cpp",
+      "kind": "blob",
+      "oid": "26a02a1cafc7d602d5c06dca8470fc239659ff1b",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/utils/ImsMediaBitReader.cpp",
+      "kind": "blob",
+      "oid": "35c7148d86f4697cbb4d1af145f9a816b28cc615",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/utils/ImsMediaBitWriter.cpp",
+      "kind": "blob",
+      "oid": "91d69581381de923d1a13b8798f3bf5e26816cbb",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/utils/ImsMediaCondition.cpp",
+      "kind": "blob",
+      "oid": "f4661ef96b3425272b76838390c69fa82c06e8ed",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/utils/ImsMediaDataQueue.cpp",
+      "kind": "blob",
+      "oid": "fe8321b6baba649a8d0db90177b354d3df1d3626",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/utils/ImsMediaEventHandler.cpp",
+      "kind": "blob",
+      "oid": "d29bb2094706f1bcae8f7ad2b940010fcf7a7f0a",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/utils/ImsMediaImageRotate.cpp",
+      "kind": "blob",
+      "oid": "46d01ceb4abc243223e14e5f454ccafc30dfbd28",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/utils/ImsMediaNetworkUtil.cpp",
+      "kind": "blob",
+      "oid": "9394fff34154224eed06f68da4983737f12f832a",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/utils/ImsMediaSocket.cpp",
+      "kind": "blob",
+      "oid": "1a7d73cb5d089ee0cdcfa7f5f07b51d82d77540e",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/utils/ImsMediaTimer.cpp",
+      "kind": "blob",
+      "oid": "e08f6936229fb54524b4153fa0525ee6a2b40a7d",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/utils/ImsMediaTrace.cpp",
+      "kind": "blob",
+      "oid": "ff0f8c646cef64b58f5cc65935c755a4ce4b770c",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/video/ImsMediaVideoUtil.cpp",
+      "kind": "blob",
+      "oid": "4dea47832974ef6d8673926982fd79376a59a111",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/video/VideoJitterBuffer.cpp",
+      "kind": "blob",
+      "oid": "ab70ac170fa24b6666f378efe5cbb85d80902d61",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/video/VideoManager.cpp",
+      "kind": "blob",
+      "oid": "7d1176ab58abcc97354e0b575cbd3bdb60eb06cd",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/video/VideoSession.cpp",
+      "kind": "blob",
+      "oid": "83135273d5aae52fba9e0ffdc929acd19ceae8da",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/video/VideoStreamGraphRtcp.cpp",
+      "kind": "blob",
+      "oid": "03a6f72804cfe41c8f0741613a24f1ca4e481bdf",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/video/VideoStreamGraphRtpRx.cpp",
+      "kind": "blob",
+      "oid": "ed463f3d678522c616ff9b91e583279a15a783b5",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/video/VideoStreamGraphRtpTx.cpp",
+      "kind": "blob",
+      "oid": "bc7c7dd0e81cca65a57a6a78833a967f9defa4b1",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/video/android/ImsMediaCamera.cpp",
+      "kind": "blob",
+      "oid": "982ac37d97505a3c62dc70068f22c072c46aa14f",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/video/android/ImsMediaPauseImageSource.cpp",
+      "kind": "blob",
+      "oid": "58c2f9fa176397ca5de2dd01cddc6a75c76d2e4f",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/video/android/ImsMediaVideoRenderer.cpp",
+      "kind": "blob",
+      "oid": "a4b1dc8ec3ac9b90e91e32309e61bdd5a9613b86",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/video/android/ImsMediaVideoSource.cpp",
+      "kind": "blob",
+      "oid": "dbb1af6d9b98b4c3ea083fd0298d9e6deca2c7b9",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/video/nodes/IVideoRendererNode.cpp",
+      "kind": "blob",
+      "oid": "bc3468d3f7a6669d51776ab5de5c38e190d2e111",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/video/nodes/IVideoSourceNode.cpp",
+      "kind": "blob",
+      "oid": "c95f62401a5eb045e98b2893fab33b6e5c6b6ebc",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/video/nodes/VideoRtpPayloadDecoderNode.cpp",
+      "kind": "blob",
+      "oid": "664a30f6050f09785d26c582230e197c5c253133",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/video/nodes/VideoRtpPayloadEncoderNode.cpp",
+      "kind": "blob",
+      "oid": "d814c98f9e0e2f9fc5a5118915ad5a4727826e52",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/jni/Android.bp",
+      "kind": "blob",
+      "oid": "a28b76f23a43666a5a9ff59a5dac753f01dce861",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/jni/MediaManagerFactory.cpp",
+      "kind": "blob",
+      "oid": "89b1b9413c673d6523c9b8aab344c114a02555de",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/jni/include/MediaManagerFactory.h",
+      "kind": "blob",
+      "oid": "fdcb33b0803547cca1057ad487b1a47e806cb990",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/jni/libimsmediajni.cpp",
+      "kind": "blob",
+      "oid": "bd0bd2a27a4d941f5857dbcbf6a423346b94bb8c",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/libimsmedia.cpp",
+      "kind": "blob",
+      "oid": "c8ed9bd87553dfc5fbb8f45191d74b58870bd4ba",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/Android.bp",
+      "kind": "blob",
+      "oid": "ae635ff8ef4a25bdda2d216c5159d67d818cc4d3",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/include/rtp/core/RtcpAppPacket.h",
+      "kind": "blob",
+      "oid": "1201113413c2d1836a25c26e3f17bcd33a359572",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/include/rtp/core/RtcpByePacket.h",
+      "kind": "blob",
+      "oid": "00f6cabd19479601fc0fea826128dd0c97b066db",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/include/rtp/core/RtcpChunk.h",
+      "kind": "blob",
+      "oid": "7af1c1fa22e4a187b2ba2faa52d51b8d1154ed6a",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/include/rtp/core/RtcpConfigInfo.h",
+      "kind": "blob",
+      "oid": "1411551a1aab95af8bcdd72d1b1b419d36215c93",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/include/rtp/core/RtcpFbPacket.h",
+      "kind": "blob",
+      "oid": "53e27a4fb2cf5dd73fd9345603653188b218eaab",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/include/rtp/core/RtcpHeader.h",
+      "kind": "blob",
+      "oid": "19fb95c492b8eb19e68b0ed45784a7070b34d63b",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/include/rtp/core/RtcpPacket.h",
+      "kind": "blob",
+      "oid": "9875b8f37a8c220c790b05f865cde2f8ab301abf",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/include/rtp/core/RtcpReportBlock.h",
+      "kind": "blob",
+      "oid": "086459e4504c963bf3a890d7ae38638de0a17029",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/include/rtp/core/RtcpRrPacket.h",
+      "kind": "blob",
+      "oid": "11e94e03446557e569e2f58254b979ec1fad426e",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/include/rtp/core/RtcpSdesPacket.h",
+      "kind": "blob",
+      "oid": "575d40bf176f3c3798bb9a800e00cf3747f26533",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/include/rtp/core/RtcpSrPacket.h",
+      "kind": "blob",
+      "oid": "f082c06bd44ac87574cd0a403867f655d7669ea3",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/include/rtp/core/RtcpXrPacket.h",
+      "kind": "blob",
+      "oid": "848ee35187f34ff0c8943eff70c2dd87c0e824ed",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/include/rtp/core/RtpHeader.h",
+      "kind": "blob",
+      "oid": "a980ab5b05444480925fbe13b313a5b0c1475a0f",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/include/rtp/core/RtpPacket.h",
+      "kind": "blob",
+      "oid": "869d16c9aa1fcae846e016044abf1f2951a10beb",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/include/rtp/core/RtpPayloadInfo.h",
+      "kind": "blob",
+      "oid": "f49d49993b211c62939351c881e888d5e89794ba",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/include/rtp/core/RtpReceiverInfo.h",
+      "kind": "blob",
+      "oid": "7af88e1a2dd56d18cb092d1e95864890c2529339",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/include/rtp/core/RtpSession.h",
+      "kind": "blob",
+      "oid": "770cad39fc94dcb3adde597577418c19d4aeac55",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/include/rtp/core/RtpSessionManager.h",
+      "kind": "blob",
+      "oid": "f60b2793e36f2e0697eda19d29a6ec0769be1926",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/include/rtp/core/RtpStack.h",
+      "kind": "blob",
+      "oid": "84cd88b10d17b89a48cd3a5937b99ce2dd1e9caa",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/include/rtp/core/RtpStackProfile.h",
+      "kind": "blob",
+      "oid": "ab23cb66037afdd259077640faa65019d40a9555",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/include/rtp/core/RtpStackUtil.h",
+      "kind": "blob",
+      "oid": "a3e74de2396f2c34c101e3da0e8ce5508b99c813",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/include/rtp/core/RtpTimerInfo.h",
+      "kind": "blob",
+      "oid": "83dee6f430ca292013eabf68a09964e7a561e7f8",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/include/rtp/utils/RtpBuffer.h",
+      "kind": "blob",
+      "oid": "bf615533c9555d37b6f7b46bb3d80111983a6741",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/include/rtp/utils/RtpError.h",
+      "kind": "blob",
+      "oid": "458217c78cfd2cc672e20a06d55df193f077e3e4",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/include/rtp/utils/RtpGlobal.h",
+      "kind": "blob",
+      "oid": "5757cc48b75df5a83f3275eee98ab3530dc01396",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/include/rtp/utils/RtpOsUtil.h",
+      "kind": "blob",
+      "oid": "26d6ff43cbe646c5dcc18e4f1fb7c39e3cb54fbb",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/include/rtp/utils/RtpPfDatatypes.h",
+      "kind": "blob",
+      "oid": "6b738da052231bcb41b5f3fd55fd6af4ad7355e1",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/include/rtp/utils/RtpTrace.h",
+      "kind": "blob",
+      "oid": "8d88ac11d00dd3fa0fe40c9aa2c6cdef96a49db7",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/interface/rtp/IRtpAppInterface.h",
+      "kind": "blob",
+      "oid": "2f70529a49bae59d9fa44d3a85c3af848959b82d",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/interface/rtp/RtpImpl.h",
+      "kind": "blob",
+      "oid": "33c6d871b647e51f43cd2c542eba9ec8138097bd",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/interface/rtp/RtpService.h",
+      "kind": "blob",
+      "oid": "8579f5f7712d0f755f4ad93cc85dae5cc3c16c8a",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/interface/rtp/RtpServiceTypes.h",
+      "kind": "blob",
+      "oid": "8ec4fb3129529688a010f0e66ae63e7d3d0bcafc",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/RtpImpl.cpp",
+      "kind": "blob",
+      "oid": "07e8a45dbca8214b4706d80645a08e5ad968beac",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/RtpService.cpp",
+      "kind": "blob",
+      "oid": "d76fb78958e829ca383b4e0cfced7eea4fdab157",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtcpAppPacket.cpp",
+      "kind": "blob",
+      "oid": "e3ee5e42214f274ac82797ddbebcd205e4531053",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtcpByePacket.cpp",
+      "kind": "blob",
+      "oid": "0920f81cc58300d2669b11e84cf1e74d2008ff80",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtcpChunk.cpp",
+      "kind": "blob",
+      "oid": "12f5e9e45704214436b7c42352ae88dd2c0e2daa",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtcpConfigInfo.cpp",
+      "kind": "blob",
+      "oid": "acb443665ac494e4f2a0e7c3d341d5083a6cf482",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtcpFbPacket.cpp",
+      "kind": "blob",
+      "oid": "a115b678206e88974e675b0d2b402b967708537f",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtcpHeader.cpp",
+      "kind": "blob",
+      "oid": "495681fa876fcf85ce3a0cac06d22ae71900d675",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtcpPacket.cpp",
+      "kind": "blob",
+      "oid": "2f11d8f1e4b3efae777525183c5156695aad2f07",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtcpReportBlock.cpp",
+      "kind": "blob",
+      "oid": "ed2241756e497bb4fc04c8edb8e6492288a12bde",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtcpRrPacket.cpp",
+      "kind": "blob",
+      "oid": "d41c584c5214926c4d6ed24eadc5ecd83e069674",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtcpSdesPacket.cpp",
+      "kind": "blob",
+      "oid": "736247b4dd9148a933d5fec3ff2b86710c4ca919",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtcpSrPacket.cpp",
+      "kind": "blob",
+      "oid": "3dd1c99c7e755867aa09e5855c4d846a1da489bf",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtcpXrPacket.cpp",
+      "kind": "blob",
+      "oid": "406f04f010045fd3ac7daf886b394943a2af07cf",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtpHeader.cpp",
+      "kind": "blob",
+      "oid": "4c5f02e01499736976129d99626760915a460aef",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtpPacket.cpp",
+      "kind": "blob",
+      "oid": "23fa937882544053a90189e0ef950e1802e9da8a",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtpPayloadInfo.cpp",
+      "kind": "blob",
+      "oid": "f381678466fc05d47be55abc22d3af83794db2f5",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtpReceiverInfo.cpp",
+      "kind": "blob",
+      "oid": "55f7af050109a9f0ba613e647bb94071d4dd6bc6",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtpSession.cpp",
+      "kind": "blob",
+      "oid": "22b0e841d4fd6b073a3b6ef421a5402cf1d9b547",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtpSessionManager.cpp",
+      "kind": "blob",
+      "oid": "920c5daa02f226407425751e26e1e2295fc40543",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtpStack.cpp",
+      "kind": "blob",
+      "oid": "62564b6e2251ce01b7d2bca1c4288da07f07e866",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtpStackProfile.cpp",
+      "kind": "blob",
+      "oid": "25ae243906bf4f012fb239c20cfb0432ec479487",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtpStackUtil.cpp",
+      "kind": "blob",
+      "oid": "aaf09015f515f4daa9992a8cc09801faebfba9ca",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtpTimerInfo.cpp",
+      "kind": "blob",
+      "oid": "6327d8f7ad9b482ef660e9fdf1f36ea3d092c373",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/utils/RtpBuffer.cpp",
+      "kind": "blob",
+      "oid": "bcb36528161f424e10e836f53e02aceb796d5ff0",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/utils/RtpOsUtil.cpp",
+      "kind": "blob",
+      "oid": "f8d707f839b0d0714f6585278b895171eb0f8879",
+      "mode": "100644"
+    },
+    {
+      "path": "service/src/com/android/telephony/imsmedia/util/Log.java",
+      "kind": "blob",
+      "oid": "6e317f7d139c6fd59cb364f66220f2204d613b51",
+      "mode": "100644"
+    },
+    {
+      "path": "service/sysconfig/Android.bp",
+      "kind": "blob",
+      "oid": "afbab54358fcfe7a98023150b830c3d74ce0e433",
+      "mode": "100644"
+    },
+    {
+      "path": "service/sysconfig/preinstalled-packages-imsmedia.xml",
+      "kind": "blob",
+      "oid": "fd5555e4de0cbf0fadc835ef83dd1d47510095b3",
+      "mode": "100644"
+    },
+    {
+      "path": "test/README.md",
+      "kind": "blob",
+      "oid": "f6efa125086f73767d455cb77ecbb62f6e91d219",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/.gitignore",
+      "kind": "blob",
+      "oid": "95f398f4035c3639cdfd96dd8ce6514b3613b583",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/Android.bp",
+      "kind": "blob",
+      "oid": "d5380f4a7350f4a7d94cb7c74b847fc462214118",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "674b7326e4f7f7648a4ee0ec4fc7c8920382c114",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/androidTest/java/com/example/imsmediatestingapp/ExampleInstrumentedTest.java",
+      "kind": "blob",
+      "oid": "9dcfa933e21c94b62e4c2b7765230f0d031b3bed",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/java/com/example/imsmediatestingapp/BottomSheetAudioCodecSettings.java",
+      "kind": "blob",
+      "oid": "7bed7790a28b1ea34da7c7f697b2782ce81228e4",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/java/com/example/imsmediatestingapp/BottomSheetDialer.java",
+      "kind": "blob",
+      "oid": "da04c369ca94fe3b9dd7bdb6008d0fd30a3f8737",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/java/com/example/imsmediatestingapp/DeviceInfo.java",
+      "kind": "blob",
+      "oid": "f5ddb903a9598ad1993265e265d6a1e2af7ddb98",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/java/com/example/imsmediatestingapp/HandshakeReceiver.java",
+      "kind": "blob",
+      "oid": "b627dfb1ebd6d6819e0db8a493e1355f846e4937",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/java/com/example/imsmediatestingapp/HandshakeSender.java",
+      "kind": "blob",
+      "oid": "115330767a32f5b937c638f8112a8a001a6cd291",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/java/com/example/imsmediatestingapp/MainActivity.java",
+      "kind": "blob",
+      "oid": "32501b9f789c430eb1fbab0c5ec5ca77e83e0e60",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/java/com/example/imsmediatestingapp/SharedPrefsHandler.java",
+      "kind": "blob",
+      "oid": "48a2ecfc2c8f8c8972ff41d86edf5c387e360c6b",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml",
+      "kind": "blob",
+      "oid": "966abaff20743f40a8e6c71a8c0f6362e75ad433",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/drawable/ic_baseline_dialpad_24.xml",
+      "kind": "blob",
+      "oid": "b77d94e497b36e6c518f1875e304eb0cc96598d8",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/drawable/ic_baseline_home_24.xml",
+      "kind": "blob",
+      "oid": "4c5e8541048095a651e9ad54e4e43366894c4789",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/drawable/ic_baseline_network_check_24.xml",
+      "kind": "blob",
+      "oid": "ec39c9de400c3577ac97a4dcd99e6e6bcf9f702a",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/drawable/ic_baseline_phone_24.xml",
+      "kind": "blob",
+      "oid": "67d862a50abfcf4bae58bfcc292e2f361696c800",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/drawable/ic_baseline_phone_in_talk_24.xml",
+      "kind": "blob",
+      "oid": "5f4638673037fb5e41d01676758e62c9c7c0ea92",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/drawable/ic_baseline_phone_paused_24.xml",
+      "kind": "blob",
+      "oid": "ee94929332ada7298cb0db74d1a3c2b047a073d7",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/drawable/ic_baseline_settings_24.xml",
+      "kind": "blob",
+      "oid": "b240b83007995d9b07881f4466f9bed8ffd7c9d8",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/drawable/ic_launcher_background.xml",
+      "kind": "blob",
+      "oid": "61bb79edb7090a23c46a44565c42432be7b54b3e",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/drawable/ripple_effect.xml",
+      "kind": "blob",
+      "oid": "307c0c0ae476d635cd6e37b63c997314112626c4",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/layout/activity_main.xml",
+      "kind": "blob",
+      "oid": "868168bbab3726036aad27d684ec1a1e7c49b6a9",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/layout/audio_codec_change.xml",
+      "kind": "blob",
+      "oid": "7bbb80bbd42c8a27f2827b5577b172cdb3e44fd9",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/layout/dialer.xml",
+      "kind": "blob",
+      "oid": "50fb8c95bb4da42fc79ab659cc64eaae5d1070b4",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/layout/settings.xml",
+      "kind": "blob",
+      "oid": "d02f9c80319d7aba2f35520235415d29288f975c",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/layout/settings_video.xml",
+      "kind": "blob",
+      "oid": "ec502bec7a2069c33a7a42a35a71aa32c18c1174",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/menu/amr_modes_menu.xml",
+      "kind": "blob",
+      "oid": "f663b7606aeca40b2066d27d419f32b8e62cc5b7",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/menu/audio_codecs_menu.xml",
+      "kind": "blob",
+      "oid": "dc3d854af6a022911734c421720a1818f9c84a86",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/menu/evs_band_menu.xml",
+      "kind": "blob",
+      "oid": "8bf5dddd9a2c7a618c9c2a51517b0ea66fb8ce43",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/menu/evs_modes_menu.xml",
+      "kind": "blob",
+      "oid": "45935c0350c19e27fb20e7d299e36ae966455e79",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/menu/main.xml",
+      "kind": "blob",
+      "oid": "51be103d5e368b73b23b8e1960b67a3604770e74",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/menu/media_direction_menu.xml",
+      "kind": "blob",
+      "oid": "edb9d756da5278d633f24d8f5e771d5765ac14e4",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml",
+      "kind": "blob",
+      "oid": "03eed2533da28fbfd79e1106c6194ebabbec140c",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml",
+      "kind": "blob",
+      "oid": "03eed2533da28fbfd79e1106c6194ebabbec140c",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/mipmap-hdpi/ic_launcher.webp",
+      "kind": "blob",
+      "oid": "c209e78ecd372343283f4157dcfd918ec5165bb3",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/mipmap-hdpi/ic_launcher_round.webp",
+      "kind": "blob",
+      "oid": "b2dfe3d1ba5cf3ee31b3ecc1ced89044a1f3b7a9",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/mipmap-mdpi/ic_launcher.webp",
+      "kind": "blob",
+      "oid": "4f0f1d64e58ba64d180ce43ee13bf9a17835fbca",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/mipmap-mdpi/ic_launcher_round.webp",
+      "kind": "blob",
+      "oid": "62b611da081676d42f6c3f78a2c91e7bcedddedb",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/mipmap-xhdpi/ic_launcher.webp",
+      "kind": "blob",
+      "oid": "948a3070fe34c611c42c0d3ad3013a0dce358be0",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp",
+      "kind": "blob",
+      "oid": "1b9a6956b3acdc11f40ce2bb3f6efbd845cc243f",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/mipmap-xxhdpi/ic_launcher.webp",
+      "kind": "blob",
+      "oid": "28d4b77f9f036a47549d47db79c16788749dca10",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp",
+      "kind": "blob",
+      "oid": "9287f5083623b375139afb391af71cc533a7dd37",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp",
+      "kind": "blob",
+      "oid": "aa7d6427e6fa1074b79ccd52ef67ac15c5637e85",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp",
+      "kind": "blob",
+      "oid": "9126ae37cbc3587421d6889eadd1d91fbf1994d4",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/values-night/themes.xml",
+      "kind": "blob",
+      "oid": "16684255908909322310908f50924b8f42bfc71e",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/values/colors.xml",
+      "kind": "blob",
+      "oid": "5d0f9938be838d4b38ac97027bf044b0ea1d9b4c",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/values/strings.xml",
+      "kind": "blob",
+      "oid": "3aa5d3e9a848950b2fb7490653373f8fbde502ea",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/values/themes.xml",
+      "kind": "blob",
+      "oid": "00704e81ab9daba379441765234dcae7ed89ccc5",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/main/res/xml/backup_descriptor.xml",
+      "kind": "blob",
+      "oid": "703f59d79e87f66a0169d04b9e464489a473c1b4",
+      "mode": "100644"
+    },
+    {
+      "path": "test/app/ImsMediaTestingApp/app/src/test/java/com/example/imsmediatestingapp/ExampleUnitTest.java",
+      "kind": "blob",
+      "oid": "f2c9362102a6861f723b89b76e163e85936cbdd5",
+      "mode": "100644"
+    },
+    {
+      "path": "test/imsmediahal/Android.bp",
+      "kind": "blob",
+      "oid": "d4a2fb775cce5895cf3260fce4d5ce91abe42509",
+      "mode": "100644"
+    },
+    {
+      "path": "test/imsmediahal/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "8f7af3193370232808e6a118e2d6236028cc59f8",
+      "mode": "100644"
+    },
+    {
+      "path": "test/imsmediahal/src/com/android/telephony/testimsmediahal/AudioListenerProxy.java",
+      "kind": "blob",
+      "oid": "2832c4d2cf6881113e1ee0118103110f2eabcdfa",
+      "mode": "100644"
+    },
+    {
+      "path": "test/imsmediahal/src/com/android/telephony/testimsmediahal/IImsMediaImpl.java",
+      "kind": "blob",
+      "oid": "84526f66b5f722e5f06ce577b9ec04a3a8717282",
+      "mode": "100644"
+    },
+    {
+      "path": "test/imsmediahal/src/com/android/telephony/testimsmediahal/IImsMediaSessionImpl.java",
+      "kind": "blob",
+      "oid": "bec9f3ea1e9225c67cef5410c22f47b95a71ce40",
+      "mode": "100644"
+    },
+    {
+      "path": "test/imsmediahal/src/com/android/telephony/testimsmediahal/ImsMediaHALtestService.java",
+      "kind": "blob",
+      "oid": "50e00dbaf9bdbe81885c31079cb2f08ef5b214d7",
+      "mode": "100644"
+    },
+    {
+      "path": "test/imsmediahal/src/com/android/telephony/testimsmediahal/JNIConnector.java",
+      "kind": "blob",
+      "oid": "64e2a3a46b54b50b71bc835e5716e5ca1aca165d",
+      "mode": "100644"
+    },
+    {
+      "path": "test/imsmediahal/src/com/android/telephony/testimsmediahal/MediaBroadcastReceiver.java",
+      "kind": "blob",
+      "oid": "6b0e0ebefb4061d62c91f761c8bcebeda2cf40c9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/README.md",
+      "kind": "blob",
+      "oid": "56f4d8211cdc94127182dfec1668dd5676f386b2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/Android.bp",
+      "kind": "blob",
+      "oid": "cf72ff11c0dbf0a55d71e3fd02b5abd362a0cb3f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/imsmedia_tests.xml",
+      "kind": "blob",
+      "oid": "12ae38d372ad83a79271f20c83956d2692ad8503",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/audio_codec/Android.bp",
+      "kind": "blob",
+      "oid": "626473efb5ba5ff700cce40366c18accf43163a4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/audio_codec/include/ImsMediaAudioPlayer.h",
+      "kind": "blob",
+      "oid": "a786d7260e8928164c70fd4099dd6d23cc6c8e1f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/audio_codec/include/ImsMediaAudioSource.h",
+      "kind": "blob",
+      "oid": "e4bd1731a2f2e465344e296856b3cc7b4970e0d3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/audio_codec/src/ImsMediaAudioPlayer.cpp",
+      "kind": "blob",
+      "oid": "c6a21d2e7de84ea4de40f2864232708ebc3243d7",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/audio_codec/src/ImsMediaAudioSource.cpp",
+      "kind": "blob",
+      "oid": "857dbb245d4398cad6226694428602dcb39b5c2e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/AmrParamsTest.cpp",
+      "kind": "blob",
+      "oid": "487cd59845955df9d44c388edc2442c248fa5a2c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/AnbrModeTest.cpp",
+      "kind": "blob",
+      "oid": "0bc92d7ed3d4dc3a7a69eeb392cfa09c469edf4f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/Android.bp",
+      "kind": "blob",
+      "oid": "82b684ad5a5b37be047326ea274f02b474977ab2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/AudioConfigTest.cpp",
+      "kind": "blob",
+      "oid": "95ac71990eb3657c3e8f0aeecaa00afc0c5b8398",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/CallQualityTest.cpp",
+      "kind": "blob",
+      "oid": "abad26d078e2186cbdaf3f7137036631357eacc8",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/EvsParamsTest.cpp",
+      "kind": "blob",
+      "oid": "4a1449a85f198dedbfb79977ca53bb06ca4eb5b0",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/MediaQualityStatusTest.cpp",
+      "kind": "blob",
+      "oid": "e440d255e288892df177332fba7e063b950e57b2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/MediaQualityThresholdTest.cpp",
+      "kind": "blob",
+      "oid": "abea1e12fefe96f0c77ec21f3b43e361bef6d3a7",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/RtcpConfigTest.cpp",
+      "kind": "blob",
+      "oid": "f32565fead09e8d7dad9a18535a544851f4d4021",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/RtpContextParamsTest.cpp",
+      "kind": "blob",
+      "oid": "269013f9f4c9a83c652d834fa3f43bf2cfdd4ad9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/RtpHeaderExtensionTest.cpp",
+      "kind": "blob",
+      "oid": "93faaf94e5a7bef8cb7d6b370a9cc6c7b62d4dd9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/RtpReceptionStatsTest.cpp",
+      "kind": "blob",
+      "oid": "4a25cab7544905d848240feceaa57544b3d9e6ed",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/TextConfigTest.cpp",
+      "kind": "blob",
+      "oid": "c09e19abd5f795fbab158afce41c288dc6481e71",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/VideoConfigTest.cpp",
+      "kind": "blob",
+      "oid": "213bb84283563f090b192b856a31a63164d43bf2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/config/imsmediaconfig_tests.xml",
+      "kind": "blob",
+      "oid": "5ad9c6794b6fdb7970ab0544aab8c5de78385f85",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/Android.bp",
+      "kind": "blob",
+      "oid": "b6a6765eec82051695489873634e776fc308da67",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/audio/AudioJitterBufferTest.cpp",
+      "kind": "blob",
+      "oid": "53ef61d9d9357fbe1c02a0d5fa70215d7a4bfa2a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/audio/AudioManagerTest.cpp",
+      "kind": "blob",
+      "oid": "322cd3beab392c1f2d0a17b830f3487550795635",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/audio/AudioSessionTest.cpp",
+      "kind": "blob",
+      "oid": "cd55673ede033c947d04548a04ea0a7dcbc18dc1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/audio/AudioStreamGraphRtcpTest.cpp",
+      "kind": "blob",
+      "oid": "180b1cef7601f8b94bff0b16640e5184043b59a2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/audio/AudioStreamGraphRtpRxTest.cpp",
+      "kind": "blob",
+      "oid": "750f5720d883c9ba14752cc492f873fc26dc56da",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/audio/AudioStreamGraphRtpTxTest.cpp",
+      "kind": "blob",
+      "oid": "ba81cadc4a980873123ad117d823073072ab603c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/audio/JitterNetworkAnalyserTest.cpp",
+      "kind": "blob",
+      "oid": "e37aaa6dc1ba8ddd4e0d46928cbb52b74c2cb002",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/audio/MediaQualityAnalyzerTest.cpp",
+      "kind": "blob",
+      "oid": "ee6da30ad1f04932ab6cd484293b6e58c9bf0d44",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/audio/nodes/AudioRtpPayloadNodeTest.cpp",
+      "kind": "blob",
+      "oid": "e42cfc74bc884f75f19a7a8229447dc8be55226b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/audio/nodes/ImsMediaAudioUtilTest.cpp",
+      "kind": "blob",
+      "oid": "b60e76897e9a8a332002a2fc21aecd00e3f920e4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/imsmediacore_tests.xml",
+      "kind": "blob",
+      "oid": "28b5bb826ec0582bd7616ad0f2ea839e3545118f",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/nodes/RtcpDecoderNodeTests.cpp",
+      "kind": "blob",
+      "oid": "f68ae53b1a6f8757938a37ae89971aaff8a283ef",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/nodes/RtcpEncoderNodeTests.cpp",
+      "kind": "blob",
+      "oid": "e258b5c89cbc90ccf0fa03f412ff036405af42e7",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/nodes/RtpDecoderNodeTests.cpp",
+      "kind": "blob",
+      "oid": "33c62fe37abd672c979ace47bc5dc010b18eed16",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/nodes/RtpEncoderNodeTest.cpp",
+      "kind": "blob",
+      "oid": "279d6e9814b34c09ba9ad42fe3d898d90c448fe0",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/nodes/SocketNodeTest.cpp",
+      "kind": "blob",
+      "oid": "571986877a8d219ce77ef4ec1011848ea838023a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/text/TextManagerTest.cpp",
+      "kind": "blob",
+      "oid": "ff2054c8b14920b16bc2c0a9dbec5de1ae3a8250",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/text/TextSessionTest.cpp",
+      "kind": "blob",
+      "oid": "2d10234f4831ccd94d5d09034eb39a249eaf47fd",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/text/TextStreamGraphRtcpTest.cpp",
+      "kind": "blob",
+      "oid": "ec201fa7d26e5c2cdb1386333a16ccb184814ca1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/text/TextStreamGraphRtpRxTest.cpp",
+      "kind": "blob",
+      "oid": "d1ecd4f60c3e7f52223e2fdd3377d296859247c4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/text/TextStreamGraphRtpTxTest.cpp",
+      "kind": "blob",
+      "oid": "29c86352c9c46179be61eeed13c489a48ba8e99e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/text/nodes/TextRendererNodeTest.cpp",
+      "kind": "blob",
+      "oid": "af406b04ba3cff5396519a42dcdf8d6cebe7cf54",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/text/nodes/TextSourceNodeTest.cpp",
+      "kind": "blob",
+      "oid": "3825baa894ceb0768f32afaeabeb4be83a8aab21",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/utils/ImsMediaBitReaderTest.cpp",
+      "kind": "blob",
+      "oid": "da66bcf8dd8f350202719286d26a3f93cd648c33",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/utils/ImsMediaBitWriterTest.cpp",
+      "kind": "blob",
+      "oid": "af10eaa2878ce5edd5f0c41d52aaaacd416932ae",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/utils/ImsMediaImageRotateTest.cpp",
+      "kind": "blob",
+      "oid": "a5cbd1573196197ea08c7c68c2efcec43409f8dc",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/utils/ImsMediaMutexTest.cpp",
+      "kind": "blob",
+      "oid": "addd24b4de48b79003cb662d32ae70cf22ed8036",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/utils/ImsMediaNetworkUtilTest.cpp",
+      "kind": "blob",
+      "oid": "f40f27e8f56083f8d6339fc7c13d32719e750398",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/utils/ImsMediaSocketTest.cpp",
+      "kind": "blob",
+      "oid": "a43a638710364c4cc03e985a4858fc5c7f12d8ed",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/utils/ImsMediaTimerTest.cpp",
+      "kind": "blob",
+      "oid": "e036215ec2c3b997d7a747ebd56c34c448053930",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/utils/StreamSchedulerTest.cpp",
+      "kind": "blob",
+      "oid": "1538538f850134fcbb1b6a60080a11edd314de4c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/video/VideoManagerTest.cpp",
+      "kind": "blob",
+      "oid": "205cdd8edfc14833fe7f6caaaddad2fd74a85bea",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/video/VideoStreamGraphRtcpTest.cpp",
+      "kind": "blob",
+      "oid": "e9e9ce37b655cd3d54da0d2319941858acebd0f2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/video/VideoStreamGraphRtpRxTest.cpp",
+      "kind": "blob",
+      "oid": "9fbc54526816addc73a70ad875ed1086b28eda9a",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/core/video/VideoStreamGraphRtpTxTest.cpp",
+      "kind": "blob",
+      "oid": "d8c5a2d21f468018c57b09e6f4c4dc8d46a3c201",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/include/MockBaseNode.h",
+      "kind": "blob",
+      "oid": "42169f061df2a410288a4aadea53e57d8e5b3122",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/include/MockBaseSessionCallback.h",
+      "kind": "blob",
+      "oid": "7629b24945ee5631f74cba29c4fea0d1e7219da2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/include/core/audio/MockAudioManager.h",
+      "kind": "blob",
+      "oid": "4a46634bca7b4ccb96a62a1a244c7cee80b0353e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/include/core/text/MockTextManager.h",
+      "kind": "blob",
+      "oid": "c7bbe92534f0aea686d8bc14f692dc24302e7228",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/include/core/video/MockVideoManager.h",
+      "kind": "blob",
+      "oid": "ff31cbd872b280787156137b9283551457ebd60c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/Android.bp",
+      "kind": "blob",
+      "oid": "a4d0c1eafb97e432d6701247b662fdf3dc452823",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/imsmediaprotocol_tests.xml",
+      "kind": "blob",
+      "oid": "81b0f3eba4d90aa6ce03eedd5f194043c776b6fb",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtcpAppPacketTest.cpp",
+      "kind": "blob",
+      "oid": "264effc82ae84b03329a383841eea2e9f8d96a14",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtcpByePacketTest.cpp",
+      "kind": "blob",
+      "oid": "0a3f6f988433c8640f15a4b3431734b13cb45e53",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtcpChunkTest.cpp",
+      "kind": "blob",
+      "oid": "acfb15797c30e435307bffad05eb17e2efb0a9a0",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtcpFbPacketTest.cpp",
+      "kind": "blob",
+      "oid": "42025ea4b6310d951711606cac92cdcc3dec4487",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtcpHeaderTest.cpp",
+      "kind": "blob",
+      "oid": "fb5c6e357f0824d21bdf608406f2f1fcda855012",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtcpPacketTest.cpp",
+      "kind": "blob",
+      "oid": "1c95e03b88dcfa49625a7343494047e945a5b032",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtcpReportBlockTest.cpp",
+      "kind": "blob",
+      "oid": "9e5df9b3ad79550d0c0f1f5316d0ae26d528d344",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtcpRrPacketTest.cpp",
+      "kind": "blob",
+      "oid": "504311ceb680b8f838baabc02fddb31f85781e47",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtcpSdesPacketTest.cpp",
+      "kind": "blob",
+      "oid": "306d043061721984d2dd4283030efc95919f19a3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtcpSrPacketTest.cpp",
+      "kind": "blob",
+      "oid": "2434c57fb2fa228321679c7fe596e1fb5c047dc4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtcpXrPacketTest.cpp",
+      "kind": "blob",
+      "oid": "45624c7177978d3a8a778030df7e2414503cc5e9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtpHeaderTest.cpp",
+      "kind": "blob",
+      "oid": "10a0a350b8cb6a71e4e0d5266a98986995537965",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtpOsUtilTest.cpp",
+      "kind": "blob",
+      "oid": "846df317f69e6b4f38843e47dbc934e603fdad00",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtpPacketTest.cpp",
+      "kind": "blob",
+      "oid": "319a2fe0212e2cab04681b6cf6c187df64729968",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtpPayloadInfoTest.cpp",
+      "kind": "blob",
+      "oid": "4b0707014dfff7114095a10fbc1e4f2961f1553b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtpSessionManagerTest.cpp",
+      "kind": "blob",
+      "oid": "c93455f3161f92cca550a8418af75278059194c2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtpStackProfileTest.cpp",
+      "kind": "blob",
+      "oid": "c5cdbfff2b52f2985f0b6ff6e33854cd69807a74",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtpStackTest.cpp",
+      "kind": "blob",
+      "oid": "c2484244e8d333db9b3ca72509c8d10a9dc46fc0",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/core/RtpStackUtilTest.cpp",
+      "kind": "blob",
+      "oid": "275cdfdc47fb4d38bfd6cf2f8a80b04be1b20884",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/native/service/src/com/android/telephony/imsmedia/lib/libimsmedia/protocol/rtp/utils/RtpBufferTest.cpp",
+      "kind": "blob",
+      "oid": "9a4c80e7b534ee24a0b097ff6b716df35e3ef947",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/Android.bp",
+      "kind": "blob",
+      "oid": "498f5e1e03bc267613aa3fe789d842478cf5f7b1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/AndroidManifest.xml",
+      "kind": "blob",
+      "oid": "cd61e78efaa0b50a73a3266ea2009b4eaa0add50",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/android/telephony/imsmedia/AmrParamsTest.java",
+      "kind": "blob",
+      "oid": "e5f0094458b6ab27da69c0cb1e6f23744997ff39",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/android/telephony/imsmedia/AnbrModeTest.java",
+      "kind": "blob",
+      "oid": "bd47bf8da1f3838df96a041eb36a3602a84906c4",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/android/telephony/imsmedia/AudioConfigTest.java",
+      "kind": "blob",
+      "oid": "3873ea8c297a12bf5cf3c86232466a566f3889fb",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/android/telephony/imsmedia/CallQualityTest.java",
+      "kind": "blob",
+      "oid": "968a2bcd479a12298ff69cfdb72d10087b7fc965",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/android/telephony/imsmedia/EvsParamsTest.java",
+      "kind": "blob",
+      "oid": "271b6040413ffb0e9334423753f1833f57e9dcd2",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/android/telephony/imsmedia/ImsAudioSessionTest.java",
+      "kind": "blob",
+      "oid": "5c62cf4d716e50e4315d4c27efd450c86bc0280b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/android/telephony/imsmedia/ImsMediaManagerTest.java",
+      "kind": "blob",
+      "oid": "ce70e167945ed42897e8ddf6ea4593c5939d0b4c",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/android/telephony/imsmedia/ImsTextSessionTest.java",
+      "kind": "blob",
+      "oid": "1cb030824034286b41714cdabe1317191b19e6fa",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/android/telephony/imsmedia/ImsVideoSessionTest.java",
+      "kind": "blob",
+      "oid": "edc4d5feb794ee3ab5b554a33dafb10be057edc1",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/android/telephony/imsmedia/MediaQualityStatusTest.java",
+      "kind": "blob",
+      "oid": "69d62c1cfbc32d3a98e45caf58e0aeba9916afc6",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/android/telephony/imsmedia/MediaQualityThresholdTest.java",
+      "kind": "blob",
+      "oid": "c078b36c5e3115d00acb8abe34de59bb8c76e900",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/android/telephony/imsmedia/RtcpConfigTest.java",
+      "kind": "blob",
+      "oid": "9853e509fbd5c11df2d72fd74ac3ee37077e49c9",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/android/telephony/imsmedia/RtpContextParamsTest.java",
+      "kind": "blob",
+      "oid": "7eebfd7c97998d5f3871bfccb7376d5b9c84c52e",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/android/telephony/imsmedia/RtpReceptionStatsTest.java",
+      "kind": "blob",
+      "oid": "f494e128cebe6b43aad2fa2392a3ce2b4c98ca27",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/android/telephony/imsmedia/TextConfigTest.java",
+      "kind": "blob",
+      "oid": "cf1215e3b65e2e68bb7e8ed9c36fb0d6674e50a7",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/android/telephony/imsmedia/VideoConfigTest.java",
+      "kind": "blob",
+      "oid": "28372fd48c292f24e0b81800f3001aafed81272d",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/telephony/imsmedia/AudioListenerTest.java",
+      "kind": "blob",
+      "oid": "0ad942dd925251834690363f4408c0c036126413",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/telephony/imsmedia/AudioOffloadTest.java",
+      "kind": "blob",
+      "oid": "cbce412d46b6bc3757ba14770dbc077fabd75233",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/telephony/imsmedia/AudioSessionTest.java",
+      "kind": "blob",
+      "oid": "4bf8a245d1ef2b78fd98d850e06d75f883606939",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/telephony/imsmedia/ImsMediaTest.java",
+      "kind": "blob",
+      "oid": "c9ad9f179f3a02bc1ccba202e5f24641e452edf0",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/telephony/imsmedia/JNIImsMediaServiceTest.java",
+      "kind": "blob",
+      "oid": "958200e12bf2147f3d00095f704b70baf67456c7",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/telephony/imsmedia/TextListenerTest.java",
+      "kind": "blob",
+      "oid": "6ccd5944dcc40076f9138031c9466ec7ffa501de",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/telephony/imsmedia/TextSessionTest.java",
+      "kind": "blob",
+      "oid": "f48ade8cde96be4c7f8b795d1592d368818bd7f5",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/telephony/imsmedia/VideoListenerTest.java",
+      "kind": "blob",
+      "oid": "037d5bf0e48e2404fb9e897b11785289f5211a18",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/telephony/imsmedia/VideoSessionTest.java",
+      "kind": "blob",
+      "oid": "fd6758786542727e42d406aa7fd2bc809947aab3",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/telephony/imsmedia/WakeLockManagerTest.java",
+      "kind": "blob",
+      "oid": "740d452302303ca00389fcea08d45827d2eecf3b",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/src/com/android/telephony/imsmedia/util/LogTest.java",
+      "kind": "blob",
+      "oid": "cd48550f112723c6e8c8bdf4422a6b849c7c65eb",
+      "mode": "100644"
+    }
+  ]
+}

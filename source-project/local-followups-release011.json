@@ -1,0 +1,70 @@
+{
+  "release": "011",
+  "pid": 23,
+  "pid_scope": "followup runner namespace",
+  "started_at": "2026-10-27T04:45:32.224011+00:00",
+  "status": "blocked: local follow-up failed; evidence retained",
+  "steps": [
+    {
+      "command": [
+        "production_reconciliation.py",
+        "011"
+      ],
+      "returncode": 0,
+      "completed_at": "2026-10-27T06:18:12.616417+00:00"
+    },
+    {
+      "command": [
+        "production_reconciliation.py",
+        "011",
+        "--exports"
+      ],
+      "returncode": 0,
+      "completed_at": "2026-10-27T06:19:14.639616+00:00"
+    },
+    {
+      "command": [
+        "compare_annotation_archives.py",
+        "006",
+        "011"
+      ],
+      "status": "pre-existing evidence retained",
+      "path": "annotation-archive-comparison-006-to-011.json"
+    },
+    {
+      "command": [
+        "device_inventory_reconciliation_v2.py",
+        "011"
+      ],
+      "returncode": 0,
+      "completed_at": "2026-10-27T06:19:30.193379+00:00"
+    },
+    {
+      "command": [
+        "finish_catalog_release_v3.py",
+        "011"
+      ],
+      "returncode": 0,
+      "completed_at": "2026-10-27T06:20:00.179574+00:00"
+    },
+    {
+      "command": [
+        "package_release_evidence_v4.py",
+        "011"
+      ],
+      "returncode": 1,
+      "completed_at": "2026-10-27T06:20:04.849178+00:00"
+    }
+  ],
+  "network": false,
+  "upload": false,
+  "updated_at": "2026-10-27T06:20:04.849842+00:00",
+  "current_command": [
+    "package_release_evidence_v4.py",
+    "011"
+  ],
+  "failed_command": [
+    "package_release_evidence_v4.py",
+    "011"
+  ]
+}

@@ -1,0 +1,22 @@
+6. DELETE followed by a PUT carrying the pre-delete ETag must return 412.
+7. A local POST followed by an import of the same signature is undefined, see C-05.
+8. A cursor used after a publish must return 410, and reconstructing an older view requires reading entry_history because overlays are mutated in place.
+9. DELETE on an entry already in conflict state is unspecified.
+10. A missing If-Match cannot produce 428 while the parameter is marked required.
+
+**Cannot be verified without implementation, runtime or device tests.**
+- An Android-compatible HTTP engine, SQLite native loading and Keystore HMAC behavior on each shipped ABI and AOT mode.
+- Foreground service type eligibility, boot start, notification visibility and recovery after process kill or force stop.
+- The loopback address family that device-side adb forwarding connects to, and the display-ID semantics of screencap and input on target API levels.
+- Same-device wireless debugging pairing and whether the pairing survives reboot and network changes.
+- Upstream RemoteControl API names, transport details and the release label the design cites.
+- Compatibility of any MCP SDK with the 2025-11-25 baseline the design pins.
+- Non-SDK restriction behavior for reflection or JNI against cataloged members.
+- Transaction codes and parcel layouts for any interface.
+- The format version and content of the acquired signature files, and every hash in input-manifest.json.
+- Existence and results of the unit tests, and the content of the coverage manifest.
+- The Google release facts and the archived mirror status asserted in the readme.
+
+**Limitations of this review.** Every finding comes from reading frozen text. Extractor behavior was traced by hand, not executed, so line-level claims such as the assertion failure should be confirmed with a fixture that contains one annotation type. The progress counts were accepted as given and not audited against the manifest.
+
+**Recap.** The design needs one identity model, one policy evaluator and one admin API before implementation starts, and it has no bridge DDL or dispatch generator. The contracts need the registry enum unified, NOT NULL on every key, one ETag composition and serialized compare-and-swap on all mutations. The extractor must not run for publication until the annotation-type, reconciliation and symbolic-constant defects are fixed and representative fixtures exist. No production data exists, and the 37.0 baseline must be labeled as a declared gap against 37.2 in any future catalog.
