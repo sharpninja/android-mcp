@@ -1,0 +1,17 @@
+name: Lean publication boundary
+on: [push, pull_request]
+jobs:
+  deliverables:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - run: python tools/check_deliverables.py
+      - run: python tools/check_documentation.py
+      - run: python -m pip install -r rehydration/producers/release-011/requirements-extraction.txt
+      - run: python -m unittest discover -s tools/tests
+      - run: python -m unittest discover -s remediation/catalog/tests
+      - run: python -m unittest discover -s rehydration/producers/release-011/tests
+      - run: python -m unittest discover -s tools/source_facts

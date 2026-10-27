@@ -1,7 +1,0 @@
-{
-  "action": "Read-only current-schema validation of migrated release002",
-  "error": "sqlite3.OperationalError: disk I/O error while selecting sorted effective_entries",
-  "outcome": "failed, no validation report produced",
-  "diagnosis": "DB header/tail readable and registry_entries count135508 succeeded; query planner used TEMP B-TREE FOR ORDER BY; /tmp16GiB with3.4GiB available. Temp sort is a suspected contributor, not confirmed root cause.",
-  "mitigation": "Remove unnecessary ORDER BY from validation scan; identity/hash/AST checks do not require row ordering; keep indexed order for declaration grouping"
-}

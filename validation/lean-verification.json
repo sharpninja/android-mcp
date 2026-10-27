@@ -1,0 +1,69 @@
+{
+  "verified_at": "2026-10-27T21:35:44.143524+00:00",
+  "base_commit": "5eae7e9d67ce4d31392845eae0cb788f1e2bba4c",
+  "suites": [
+    {
+      "name": "portable",
+      "exit": 0,
+      "summary": "..........\n----------------------------------------------------------------------\nRan 10 tests in 3.569s\n\nOK"
+    },
+    {
+      "name": "catalog",
+      "exit": 0,
+      "summary": "...................................................................................................................................................................................................................................................................................................................\n----------------------------------------------------------------------\nRan 307 tests in 14.916s\n\nOK"
+    },
+    {
+      "name": "producer",
+      "exit": 0,
+      "summary": "..................................................................................................................................................................................................................................................................\n----------------------------------------------------------------------\nRan 258 tests in 8.185s\n\nOK"
+    },
+    {
+      "name": "source-facts",
+      "exit": 0,
+      "summary": "......................................................................................................................\n----------------------------------------------------------------------\nRan 118 tests in 0.051s\n\nOK"
+    }
+  ],
+  "tests_passed": 693,
+  "documentation": {
+    "checksums_checked": 80,
+    "markdown_links_checked": 149,
+    "rendered_svg_count": 38,
+    "editable_ui_copies": 17,
+    "errors": []
+  },
+  "tracked_allowlist_violations": 0,
+  "clean_staged_copy": {
+    "portable_tests": 10,
+    "documentation_checks": true,
+    "producer_doctor": true,
+    "java_and_sdk_cache_fingerprints_match": true
+  },
+  "default_recipe_plan_and_doctor": "passed offline",
+  "production_rebuild_executed": false,
+  "upstream_availability_verified": false,
+  "historical_snapshot_prerequisite": {
+    "bytes": 2777598,
+    "sha256": "03c7d0944215660abcfe6ec2a254b1efa282d75dfffe880c3490fde4b3672ad1",
+    "action": "If live content differs, use verified seed from the owner snapshot bundle"
+  },
+  "archive_inspection": {
+    "retained_gradle_wrapper_jar_members": 33,
+    "removed_design_archive_members": 229,
+    "removed_historical_runtime_copies": 2,
+    "runtime_zip_bytes_each": 158530998,
+    "runtime_members": [
+      "catalog.sqlite",
+      "validation-report.json"
+    ]
+  },
+  "original_workspaces_modified": false,
+  "hv_inputs_or_processes_modified": false,
+  "history_rewritten": false,
+  "large_data_uploaded": false,
+  "limitations": [
+    "This forward cleanup leaves previous broad Git objects in history",
+    "Full production regeneration and upstream download availability were not tested",
+    "Historical model transcripts and migration outputs are not all reconstructable from the current recipe",
+    "Existing design/checksum assets were verified; no new Gradle render or visual QA is claimed"
+  ]
+}

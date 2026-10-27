@@ -1,7 +1,0 @@
-import pathlib,difflib,json,hashlib
-R=pathlib.Path(__file__).resolve().parent;source=pathlib.Path('/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/catalog-integrated/tooling/build_catalog.py')
-original=source.read_text();modified=original.replace('from parsers import signature,aidl,permission,unknown,sha,split_top,typ','from parsers import signature,aidl,permission,unknown,sha,split_top,typ\nfrom aidl_members import enrich as enrich_aidl').replace("'tooling/parsers.py','tooling/foundation_extract.py'","'tooling/parsers.py','tooling/aidl_members.py','tooling/foundation_extract.py'").replace('try:d=aidl(text)','try:d=enrich_aidl(text,aidl(text))')
-assert modified!=original
-target=R/'integration/build_catalog.aidl-members-only.py';target.write_text(modified)
-(R/'integration/aidl-members.patch').write_text(''.join(difflib.unified_diff(original.splitlines(True),modified.splitlines(True),fromfile='catalog/tooling/build_catalog.py',tofile='catalog/tooling/build_catalog.py')))
-p=R/'integration/aidl-members-integration.json';d=json.loads(p.read_text());d.update(patch=str(R/'integration/aidl-members.patch'),patch_base=str(source),patch_base_sha256=hashlib.sha256(source.read_bytes()).hexdigest(),patched_builder_sha256=hashlib.sha256(target.read_bytes()).hexdigest(),matches_tested_main_builder=target.read_bytes()==(R/'catalog/tooling/build_catalog.py').read_bytes(),new_immutable_publication_required=True);p.write_text(json.dumps(d,indent=2));print(json.dumps(d))

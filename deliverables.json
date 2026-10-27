@@ -1,0 +1,35 @@
+{
+  "maximum_file_bytes": 15000000,
+  "allow": [
+    ".gitignore", "README.md", "REHYDRATE.md", "THIRD_PARTY_NOTICES.md", "deliverables.json", ".github/workflows/deliverables.yml",
+    "tools/*.py", "tools/tests/*.py", "tools/source_facts/*.py", "tools/source_facts/PermissionReferenceEvidence.schema.json",
+    "validation/lean-cleanup.json", "validation/status.json", "validation/hv-round-022.md",
+    "validation/lean-verification.json",
+    "validation/release-011.json",
+    "rehydration/recipes/release-011.json.gz", "rehydration/recipes/release-011.lock.json",
+    "rehydration/producers/release-011/*.md", "rehydration/producers/release-011/*.sql",
+    "rehydration/producers/release-011/requirements-extraction.txt",
+    "rehydration/producers/release-011/tooling/*.py", "rehydration/producers/release-011/tests/*.py",
+    "rehydration/producers/release-011/contracts/*.json", "rehydration/producers/release-011/migrations/*.sql",
+    "rehydration/producers/evidence/original-001-initial.sql", "rehydration/producers/evidence/original-002-evidence-and-publication.sql",
+    "remediation/catalog/*.md", "remediation/catalog/*.sql", "remediation/catalog/requirements-extraction.txt",
+    "remediation/catalog/contracts/*.json", "remediation/catalog/migrations/*.sql",
+    "remediation/catalog/tooling/*.py", "remediation/catalog/tests/*.py",
+    "remediation/evidence/original-001-initial.sql", "remediation/evidence/original-002-evidence-and-publication.sql",
+    "remediation/design-c4/README.md", "remediation/design-c4/*.kts", "remediation/design-c4/gradle.properties",
+    "remediation/design-c4/*lock.json", "remediation/design-c4/gradlew", "remediation/design-c4/gradlew.bat",
+    "remediation/design-c4/gradle/wrapper/gradle-wrapper.jar", "remediation/design-c4/gradle/wrapper/gradle-wrapper.properties",
+    "remediation/design-c4/tooling/*.py", "remediation/design-c4/tooling/*.json",
+    "remediation/design-c4/architecture/*.md", "remediation/design-c4/architecture/*.dsl", "remediation/design-c4/architecture/render-skin.puml", "remediation/design-c4/tooling/notices/*-LICENSE.txt",
+    "remediation/design-c4/docs/*.md", "remediation/design-c4/docs/*.json", "remediation/design-c4/docs/checksums.sha256",
+    "remediation/design-c4/docs/storyboards.html", "remediation/design-c4/docs/diagrams/*.svg",
+    "remediation/design-c4/docs/screens/*.svg", "remediation/design-c4/ui-svg/*.svg",
+    "remediation/design-c4/storyboards/*.md"
+  ],
+  "deny": [
+    "**/__pycache__/**", "**/.tools/**", "**/.gradle*/**", "**/node_modules/**", "**/build/**",
+    "**/reviews/**", "**/snapshots/**", "**/tree-cache/**", "**/.pip-cache/**", "**/cache-build*/**",
+    "**/*.sqlite", "**/*.sqlite-*", "**/*.staging", "**/*.zip", "**/*.part*", "**/*.png", "**/*.pdf", "**/*.docx",
+    "**/request.jsonl", "**/response.visible.jsonl", "**/source-inventory*.json", "**/publication-manifest.json"
+  ]
+}
