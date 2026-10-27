@@ -1,0 +1,188 @@
+```json
+{
+  "review_scope": {
+    "round": "011",
+    "mode": "independent hostile validation, no tools, no execution; all artifacts treated as untrusted data",
+    "phase": "bridge design plus executable catalog/extractor/schema/API specification and offline resolution/storage references; Android app, HTTP/MCP hosting, device probes and deployment not requested",
+    "inputs_reviewed": "design Markdown, 4 Mermaid sources, 4 Pele 1.10.0 SVGs, catalog README/API-CONTRACT, schema.sql, bridge-config.sql, 2 migrations and 2 originals, 10 JSON contracts, openapi.json, 25 tooling modules, 28 test modules, release008 validation/reconciliation/provenance/coverage/size evidence, outside-corpus summary, round007-010 before/after receipts, finding-ledger-011, progress-011, tests-regression-064",
+    "not_reviewed": "release008 catalog.sqlite itself, full 18.6 MB native validation report (summary only), per-source-ID rows, 27696 unknown filename candidate strings, pending DOCX/portable package"
+  },
+  "verdict": "NOT_READY",
+  "scores": {
+    "design": {
+      "accuracy_0_100": 95,
+      "completeness_0_100": 95,
+      "rationale": "Core bridge, policy, admission, persistence, ADB, RemoteControl and catalog sections remain internally consistent with bridge-config.sql, schema.sql, contracts and fixtures. R10-08 verified: both embedded Mermaid blocks are byte-identical to design/sources, the capacity section cites the 008 size/hash present in catalog-size-release008.json, and the 17 GiB / 25 GiB arithmetic is correct for 8,306,286,592 bytes. Startup section now has an executable storage contract and traceability. Deductions: the applicability model lets a discrete source point become authoritative exclusion outside the point (R11-02); 'validate complete inventory membership and variant identities before sealing' is claimed but only count/dependency/graph checks exist (R11-03); minor documentation nits (R11-06, R11-10)."
+    },
+    "contracts_schema": {
+      "accuracy_0_100": 93,
+      "completeness_0_100": 93,
+      "rationale": "R10-03/04/05 verified executable: device_view_scopes/invalidations/capability_facts/views/entries/active/pins/gc and binding_wire_contracts exist with staging, sealing, CAS, epoch, JSON-column consistency and type-closure triggers; refresh scope is catalog:admin, device paths carry 400/401, refresh 412 carries ETag, dv1/cat1 compositions match code, Facts require capability_epoch/observed_at, ResolvedEntry has graph_digest, DeviceResolution 2.0.0 and OpenAPI 1.3.0 consistent across README/API-CONTRACT/builder/trigger. Deductions: point-interval contract (R11-02); no membership/inventory digest pin at activation (R11-03); contract digest embeds raw header text including lifecycle attributes (R11-05); wire-contract proof_state unconstrained and binding_mappings.transaction_code unbounded (R11-08); fields/enumerants classified as 'binding' (R11-09); OpenAPI disclosure/description inconsistencies and unreferenced internal components (R11-11)."
+    },
+    "extractor": {
+      "accuracy_0_100": 94,
+      "completeness_0_100": 92,
+      "rationale": "R10-02 verified in code: sdk_api_index emits every lifecycle record with lifecycle_status, parses sdks pairs with container inheritance, build_catalog filters only current-at-target for JVM/annotation lookup; catalog_projection resolves same-snapshot TypeReferences, emits variants with contract_digest format 2, lifecycle/extension alternatives and container/argument/return/field dependencies; registry_inventory is validated, counted, exported and reconciled; R10-09 precheck present. Deductions: AIDL member documents never receive imports so imported types cannot resolve (R11-04); java.lang abbreviation in signature files is not resolved by type_ref although the same repository proves the abbreviation elsewhere, and snapshot keys depend on repository/revision presence (R11-07); since/sdks inconsistency not quarantined (R11-13); reference resolver reloads the schema per entity and has never run at production scale (R11-12)."
+    },
+    "production_catalog_data": {
+      "accuracy_0_100": 89,
+      "completeness_0_100": 74,
+      "rationale": "Release008 is internally consistent: entry kinds sum to 799,527; per-kind declarations sum to 1,122,576 occurrences; source kinds sum to 43,128; AIDL statuses sum to 20,210; annotations 13,334 = 6,509 + 6,825, mapped 12,488, unmatched 846 = 368 + 478, target-resolution buckets sum to 13,334; permission reference names 699 + 15 + 5 = 719; API index 90,272 + 3,409 = 93,681 matches the round011 producer audit; exports byte-equivalent; integrity/FK/schema checks pass. All 43,128 selected paths including 5,255 supplemental paths are imported, resolving the R10 selected-path blocker. Accuracy deductions: built with pre-R9/R10 code (parsers 84f7872e, index producer current-only, DDL 955549f8/e03226b7), leaving 2 unsupported AIDL statements, no registry_inventory/device projection and no catalog_meta contract version; README/progress misstate undefined permission names as 6 (R11-06). Completeness: 732 of 985 outside projects semantically unknown, 962 declared HIDL paths not imported, native/generated/protocol coverage unknown, 3,409 lifecycle records absent from the published registry, 846 unmatched annotations, 5 permission names without definition or constant, and no production-derived device inventory beyond a 4-entry sample. Acknowledgment earns no credit."
+    }
+  },
+  "overall": {
+    "accuracy_0_100": 93,
+    "completeness_0_100": 84,
+    "verdict": "NOT_READY",
+    "rationale": "All eight artifact-level R10 findings are verifiably fixed in the current files and the selected-path acquisition blocker is closed by 008. The deliverable is below 98/98 because (a) no production release embodies the candidate extractor, DDL or inventory projection, (b) required all-public binding/permission coverage remains materially incomplete and partly unscoped, and (c) two new medium defects in the startup resolution contract convert absence of evidence into 'unavailable' and leave membership/variant identity unverified at activation."
+  },
+  "findings": [
+    {
+      "id": "R11-01",
+      "severity": "high",
+      "artifact": "evidence/production008-full-code-provenance.json; build-release008-inputs.json; built-in-validation-summary-release008.json; coverage-manifest-release008.compact.json; outside-corpus-classification-latest-summary.json; validation-report-release008.json",
+      "evidence": "production_equals_latest_candidate=false, ddl_matches_candidate=false; 008 parsers.py 84f7872e vs candidate d45a952b, sdk_api_index.py cb349724 vs b28fb6a1, build_catalog.py dedb3894 vs 2d7bd4e7, migrations 955549f8/e03226b7 vs d7c9796c/fc58a9b6; catalog_projection.py, device_resolution.py, device_view_storage.py and DeviceResolution.schema.json absent from production; 008 sdk-api-index semantic_scope 'Current platform lifecycle index' with 90,272 declarations, so 3,409 lifecycle records are not in the registry; aidl unsupported total 2; projects.excluded 985 with counts unknown 732 / relevant 247 / irrelevant 6 and 27,696 unknown filename candidate paths; HIDL gap lists 962 declared paths across 10 repositories with 'no HIDL semantic parser'; external_annotations_unmatched 846; without_definition_or_constant 5.",
+      "issue": "Missing source input: no completed release matches the candidate code, DDL or inventory projection; the registry cannot supply a startup inventory (validate_inventory would report absent-legacy); global public binding/permission coverage remains incomplete and 732 projects plus native/generated/protocol/HIDL sources are unscoped.",
+      "exact_minimal_correction": "Source owner: regenerate Java and index caches under cache_fingerprint contract 2 with the candidate producers; build/validate/export/reconcile release009 from the candidate snapshot so provenance reports both equality flags true and device_inventory_manifest.json validates; import the 962 declared HIDL paths or record an explicit owner exclusion; classify the 732 unknown projects by content inspection or record an owner scope decision; retarget the 846 unmatched annotations and acquire definitions for the 5 permission names or record them as unresolvable.",
+      "verification_needed": "New provenance/validation/export/reconciliation receipts for release009 including device_inventory status 'validated' with entries equal to bindings; classification summary without unknown projects or an owner scope decision; annotation and permission-name distributions."
+    },
+    {
+      "id": "R11-02",
+      "severity": "medium",
+      "artifact": "catalog/tooling/catalog_projection.py lifecycle_rule; catalog/tooling/device_resolution.py platform_range; catalog/API-CONTRACT.md; design startup section; catalog/tests/test_device_catalog_pipeline.py",
+      "evidence": "lifecycle_rule: 'return dict(alternatives=[dict(platform=dict(introduced=point,removed=[point[0],point[1]+1]))],evidence_ids=evidence)'; platform_range: 'if lo is False or hi is True:return unavailable,[PLATFORM_VERSION_EXCLUDED]'; API-CONTRACT: 'authoritative absence produces unavailable' and 'A source occurrence without an index proves only its explicit major.minor point, represented by the discrete interval [major,minor]..[major,minor+1]'; design: 'Unknown conditions cannot become true by default'; test_real_build_exports_inventory_and_resolves_before_atomic_storage sets platform 36.0 and asserts java:a.A#go(int) from a 37.0 api.txt is 'unavailable'; 008 has 191,533 sdk-signature, 146,699 source-signature and 530,212 java-source occurrences that would carry only point rules.",
+      "issue": "A fabricated removed bound turns absence of evidence into authoritative exclusion: every signature/source-derived variant resolves 'unavailable' with PLATFORM_VERSION_EXCLUDED on any device not at the exact minor point, including newer devices, contradicting the unavailable/unknown distinction the contract defines and the design's own evidence rule. Non-callable either way, so no authority leak, but inventory states and UI filters are wrong at scale.",
+      "exact_minimal_correction": "Add an explicit point form to Clause (platform_point: [major,minor]) or mark the point clause with x-point; in platform_range return ('available',[PLATFORM_POINT_MATCH]) inside the point and ('unknown',[PLATFORM_APPLICABILITY_UNPROVEN]) outside it, never unavailable; keep index ranges unchanged; update API-CONTRACT/design wording and change the pipeline fixture to expect 'unknown' at 36.0 and at 38.0 for a 37.0 point occurrence.",
+      "verification_needed": "Fixtures for older and newer devices against a point occurrence; schema change note (additive 2.1 or documented 2.0.x if the key is optional)."
+    },
+    {
+      "id": "R11-03",
+      "severity": "medium",
+      "artifact": "catalog/tooling/device_resolution.py ViewStore.publish; catalog/tooling/device_view_storage.py publish; catalog/bridge-config.sql device_view_active/device_view_stage; design 'Atomic activation, invalidation and refresh'",
+      "evidence": "ViewStore.publish checks only 'len(entries)!=len(snapshot[entries]) or len(entries)!=snapshot[inventory_count]'; DeviceViewStore.publish adds 'snapshot[inventory_count]!=c[expected_inventory_count]'; device_view_stage pins registry_id, generations, epoch and inventory_count only; design: 'Validate complete inventory membership, variant identities and type dependencies before sealing'; dispatch_manifest.generate performs the membership set check ('Device view and supplied inventory differ') but only at alias generation.",
+      "issue": "Activation verifies cardinality, dependency coherence and graph digest but not that the snapshot's entry set and selected schema hashes belong to the pinned registry inventory; a same-count snapshot built from a different inventory (or with substituted schema hashes) activates. The design claims membership and variant-identity validation at sealing.",
+      "exact_minimal_correction": "Add inventory_sha256 (the device_inventory_manifest stream digest) to Snapshot/Header/DeviceResolution.schema.json, to device_views and device_view_active, and to the dv1 pin set; compute it in resolve() from the consumed inventory; require equality in ViewStore.publish, DeviceViewStore.publish and the device_view_stage/device_active_update triggers; validate in publish that each available row's schema_hash is in that entry's inventory variants (pass the inventory or its variant digest map).",
+      "verification_needed": "Fixture publishing a same-count snapshot from a different inventory expecting rejection; SQL fixture for the pinned digest."
+    },
+    {
+      "id": "R11-04",
+      "severity": "low",
+      "artifact": "catalog/tooling/build_catalog.py aidl branch; catalog/tooling/catalog_projection.py type_ref",
+      "evidence": "Root AIDL record extras include imports=d['imports'] but the member loop sets only interface_annotations/interface_permission; type_ref reads doc['extensions'].get('imports',[]) for unqualified names; the only cross-type AIDL fixture (interface I { parcelable P {...} void take(in P p); }) resolves through owner nesting, not imports.",
+      "issue": "Imported parcelable/enum types referenced by AIDL methods and fields can never resolve, so their bindings carry 'No proven declared type in the same snapshot' even when the imported type is declared in the same repository snapshot.",
+      "exact_minimal_correction": "In the AIDL member loop set r['extras']['imports']=d['imports'] before add(); add a fixture with 'import a.P; interface I { void take(in P p); }' plus a separate P.aidl source in the same repository/revision expecting status resolved.",
+      "verification_needed": "Fixture receipt."
+    },
+    {
+      "id": "R11-05",
+      "severity": "low",
+      "artifact": "catalog/tooling/dispatch_manifest.py contract_digest; catalog/tooling/catalog_projection.py project; catalog/tooling/sdk_api_index.py; catalog/API-CONTRACT.md",
+      "evidence": "contract_digest adds extensions.declared_type_shape when present; project() sets declared_type_shape.header=doc['provenance'][0]['raw_signature']; for index types raw is ET.tostring(ET.Element(node.tag,node.attrib)) which embeds since/removed/deprecated/sdks; for Java types the header includes annotations; API-CONTRACT: 'Provenance-only additions leave schema_hash stable'.",
+      "issue": "Type schema identity changes when lifecycle or annotation text changes although the type shape is unchanged, so dependent bindings get new schema hashes across index revisions, invalidating grants and approvals without a semantic change.",
+      "exact_minimal_correction": "Replace header in declared_type_shape with a normalized shape (kind, qualified name, type parameters, supertypes) or drop header from the digest; keep raw header in extensions outside the digest; add a fixture showing a since/removed attribute change leaves schema_hash stable.",
+      "verification_needed": "Fixture receipt."
+    },
+    {
+      "id": "R11-06",
+      "severity": "low",
+      "artifact": "catalog/README.md; evidence/progress-011.json; evidence/finding-ledger-011.json",
+      "evidence": "README: 'Six referenced permission names still lack acquired definitions/constants'; progress-011 known_gaps: '6referencedpermissionnames unproven'; validation-report-release008: without_definition_or_constant 5 with five listed names.",
+      "issue": "Documentation carries the 007 count into the 008 description.",
+      "exact_minimal_correction": "Change both statements to five and list the five names or cite the validation report.",
+      "verification_needed": "Text review."
+    },
+    {
+      "id": "R11-07",
+      "severity": "low",
+      "artifact": "catalog/tooling/catalog_projection.py Projection.__init__/type_ref; evidence/production008-derived-projection-sample.json; evidence/progress-011.json",
+      "evidence": "Snapshot key is (repository,revision,platform_api_version,api_level,channel) only when source has repository and revision, else (sid,); type_ref maps an unqualified 'String' to nested/import/package candidates only; production-reconciliation-release008 shows 776 'java-lang-spelling-equivalence' matches proving signature files abbreviate java.lang; the only production-derived projection run covers 4 entries, all unknown.",
+      "issue": "There is no evidence of the projection's yield at production scale: if java-source and signature sources lack repository/revision each file is its own snapshot, and java.lang abbreviations never resolve, so most SDK members would be unknown on any device. Conservative, not unsafe, but FR-DEV-01 usefulness is unmeasured.",
+      "exact_minimal_correction": "Run the candidate projection over the 008 inventory (or release009) with a fixture facts set at 37.2 and report entity states by source kind; resolve bare java.lang names for sdk-signature/source-signature sources using the existing formal-type-variable guard from annotation_link; ensure java-source and signature source records carry repository and revision.",
+      "verification_needed": "State-distribution report per source kind and per entity_kind."
+    },
+    {
+      "id": "R11-08",
+      "severity": "low",
+      "artifact": "catalog/bridge-config.sql binding_wire_contracts, binding_mappings",
+      "evidence": "binding_wire_contracts CHECKs only json_valid on argument_codec_json/response_codec_json and json_type(proof_source_json)='object'; proof_state 'verified' permits '{}' codecs and an empty proof object; no UNIQUE on (binding_id,schema_hash,descriptor,transaction_code,interface_version); binding_mappings.transaction_code INTEGER has no range CHECK while binding_wire_contracts bounds 0..4294967295.",
+      "issue": "The DDL does not make 'verified' mean a complete proven contract, and the same wire tuple can be recorded twice with conflicting proof states.",
+      "exact_minimal_correction": "Add CHECK(proof_state<>'verified' OR (json_type(argument_codec_json)='object' AND json_type(response_codec_json)='object' AND json_array_length(json_extract(proof_source_json,'$.evidence'))>0)); add UNIQUE(binding_id,schema_hash,descriptor,transaction_code,coalesce(interface_version,-1)); bound binding_mappings.transaction_code.",
+      "verification_needed": "DDL fixture."
+    },
+    {
+      "id": "R11-09",
+      "severity": "low",
+      "artifact": "catalog/tooling/catalog_projection.py entity; catalog/bridge-config.sql binding_availability",
+      "evidence": "entity(): kind='type' if TYPE_KINDS else 'other' for package/unsupported else 'binding'; AIDL parcelable/union/enum members and Java fields are kind 'field' (303,629 field entries in 008); binding_availability selects entity_kind='binding'.",
+      "issue": "Structured-type components and constants are presented as invocable bindings in the availability projection and alias manifest.",
+      "exact_minimal_correction": "Classify field entries whose extensions carry aidl_declaration_kind or enum_constant as 'other' (or introduce an additive 'member' kind in a 2.1 schema) and exclude them from binding_availability.",
+      "verification_needed": "Fixture asserting an AIDL parcelable field is not a binding row."
+    },
+    {
+      "id": "R11-10",
+      "severity": "low",
+      "artifact": "design/Android MCP Bridge Design.md",
+      "evidence": "Architecture and request-sequence diagrams carry 'Editable source follows' blocks identical to design/sources; startup-resolution.svg and device-binding-sequence.svg are embedded without inline sources although their .mmd files exist and hash-match portable-assets-check.json.",
+      "issue": "Inconsistent convention; portable editability is satisfied only through the separate files.",
+      "exact_minimal_correction": "Add the two .mmd texts under the images or state once that design/sources is authoritative.",
+      "verification_needed": "Text review."
+    },
+    {
+      "id": "R11-11",
+      "severity": "low",
+      "artifact": "catalog/contracts/openapi.json; catalog/API-CONTRACT.md",
+      "evidence": "components DeviceSnapshot, DeviceFacts, DeviceInventoryEntity, DeviceVariant, DeviceRule, DeviceClause, DevicePlatformRange, DeviceModuleRange, DeviceInterfaceConstraint, DeviceModuleFact, DeviceInterfaceFact are referenced by no path; GET /device-views/{view_id} returns 404 'Unknown or inaccessible snapshot' with no 403 while GET /device-views/{view_id}/entries returns 403 'Profile/target access denied'; getCurrentDeviceView 200 description says 'Current snapshot' but returns DeviceStatusResponse header.",
+      "issue": "Disclosure semantics differ between sibling paths and internal collector contracts are published in the administration API document.",
+      "exact_minimal_correction": "Return 404 for inaccessible views on both paths (or 403 on both with a no-disclosure note); fix the 200 description; move internal-only schemas to DeviceResolution.schema.json references or mark them x-internal.",
+      "verification_needed": "OpenAPI lint; extend test_device_paths_use_declared_scopes_and_response_sets."
+    },
+    {
+      "id": "R11-12",
+      "severity": "low",
+      "artifact": "catalog/tooling/device_resolution.py validate/resolve; catalog/tests/test_device_catalog_pipeline.py",
+      "evidence": "validate() reads and parses contracts/DeviceResolution.schema.json and builds a Draft202012Validator on every call; resolve() calls validate(entity,'InventoryEntity') for each entity; largest exercised inventory is 10 fixture entries plus a 4-entry production sample; the pipeline test asserts assertGreaterEqual(len(raw),count) where equality is the builder invariant.",
+      "issue": "The reference oracle has not been shown to handle the 799,527-entry inventory it is specified for, and one fixture assertion is weaker than the invariant it guards.",
+      "exact_minimal_correction": "Cache compiled validators at module level; add a bounded scale check (load_inventory + resolve over the full 008-shaped inventory) with timing in evidence; change the assertion to assertEqual.",
+      "verification_needed": "Timing receipt."
+    },
+    {
+      "id": "R11-13",
+      "severity": "low",
+      "artifact": "catalog/tooling/catalog_projection.py lifecycle_rule",
+      "evidence": "When sdk_extensions is non-empty the parsed 'since' is unused: platform alternatives come only from sdk_id '0' pairs; a record with since=35 and inherited sdks '30:4,0:34' would yield a platform alternative introduced at 34.",
+      "issue": "Inconsistent since/sdks evidence is silently resolved in favor of the sdks pair instead of being quarantined.",
+      "exact_minimal_correction": "If a '0:X' pair exists and X differs from since, or if no '0:' pair exists while since is explicitly present on the member, return an unknown_reason rule with x-raw evidence.",
+      "verification_needed": "Fixture."
+    }
+  ],
+  "verified_resolutions": [
+    {"id": "R10-01", "status": "partially resolved, missing input remains", "basis": "All 43,128 selected paths including 5,255 supplemental paths imported and reconciled (source_reconciliation missing [] extra []); production still predates candidate code/DDL/projection; global scope unresolved (R11-01)."},
+    {"id": "R10-02", "status": "resolved in candidate, production pending", "basis": "sdk_api_index retains all records with lifecycle_status and sdks parsing (round011 audit 93,681 = 90,272 + 3,409); build_catalog filters current-at-target only for lookups; catalog_projection emits variants, lifecycle/extension alternatives and dependencies; registry_inventory validated against InventoryEntity, counted, streamed with manifest and reconciled; test_full_index_build_applies_history_extensions_and_container_constraints and test_aidl_type_reference_proof_and_contract_digest_are_shared exercise the path."},
+    {"id": "R10-03", "status": "resolved", "basis": "bridge-config.sql device_view_scopes/invalidations/capability_facts/views/entries/active/pins/gc, binding_wire_contracts, resolved_device_catalog and binding_availability with reason_codes_json/schema_hash/graph_digest; 8 SQLite fixtures including partial inventory and JSON disagreement rejection; round010-storage-before shows prior absence."},
+    {"id": "R10-04", "status": "resolved with residual R11-11", "basis": "refresh security catalog:admin; 400/401 on all device-view operations; refresh 412 ETag header; DeviceSnapshotResponse removed; API-CONTRACT title 1.3 matches info.version 1.3.0."},
+    {"id": "R10-05", "status": "resolved", "basis": "Facts require capability_epoch and observed_at; resolve() raises 'Captured facts capability epoch mismatch'; publish compares facts epoch, facts_id and view_id; graph_digest computed in resolve and rechecked in publish; round010-low-before and round010-graph-before show prior failures."},
+    {"id": "R10-06", "status": "resolved", "basis": "MODULE_PRESENCE_UNPROVEN / INTERFACE_REACHABILITY_UNPROVEN for non-authoritative positives; malformed intervals mapped to APPLICABILITY_MALFORMED per variant; invalidation history in ViewStore and append-only device_view_invalidations."},
+    {"id": "R10-07", "status": "resolved", "basis": "Cross-target snapshot is recomputed from other-target facts and publish raises 'Cross-target/profile snapshot'; permission fixture asserts matching Allow with stale schema denies; alias fixture pins selected schema and graph digest and rejects stale views."},
+    {"id": "R10-08", "status": "resolved for Markdown, portable package pending", "basis": "Embedded Mermaid equals design/sources byte-for-byte; capacity section cites catalog-size-release008.json; README reports 008 figures; new DOCX/portable synchronization not claimed delivered and not reviewed."},
+    {"id": "R10-09", "status": "resolved", "basis": "build_catalog precheck raises 'Explicit platform_api_version required for sdk-annotations'; permissive no-version branch removed; test_annotations_require_an_explicit_platform_version present."},
+    {"id": "P10-01", "status": "resolved", "basis": "overlays.entry_id CHECK length 64 lowercase hex; test_postfreeze10 covers 'local:fixture', 'short', uppercase and non-hex; legacy 135,508-entry copy validates with 552 retained variant omissions and no semantic rebuild claim."}
+  ],
+  "blockers_to_98_98": [
+    "Production release built from the candidate snapshot with a validated complete device inventory (R11-01).",
+    "Global coverage decision or completion: 732 unknown projects, 962 declared HIDL paths, native/generated/protocol sources (R11-01).",
+    "Point-occurrence applicability must yield unknown, not unavailable, outside the proven point (R11-02).",
+    "Inventory membership/variant identity pinned and checked at activation (R11-03).",
+    "846 unmatched annotations and 5 undefined permission names resolved or explicitly scoped (R11-01).",
+    "Production-scale projection/resolution evidence with state distribution and timing (R11-07, R11-12).",
+    "Remaining low findings R11-04 through R11-13 and the pending portable DOCX/package synchronization."
+  ],
+  "limitations": [
+    "No tools: nothing was executed, hashed or opened; code behavior was verified by reading the supplied sources.",
+    "Test counts, ResourceWarning-as-error configuration, hash equalities and read-only capture claims are taken from supplied receipts; tests-regression-064.txt shows 190 tests OK but no warning flags.",
+    "release008 catalog.sqlite, the 18.6 MB native validation report, per-source-ID mismatch rows and the 27,696 unknown filename candidates were not reviewed; only their summaries were cross-checked arithmetically.",
+    "External platform claims (SDK_INT_FULL accessors, Android 15 BOOT_COMPLETED limits, Metalava sdks inheritance, MCP 2025-11-25, Avalonia 12 on .NET 10) were checked for plausibility against cited references, not independently retrieved.",
+    "Scores are independent judgments; prior round scores were treated as historical only."
+  ],
+  "report_complete": true
+}
+```

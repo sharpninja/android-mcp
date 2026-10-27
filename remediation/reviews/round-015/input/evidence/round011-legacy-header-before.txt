@@ -1,0 +1,76 @@
+parsed sources 0 / 3
+{
+  "counts": {
+    "sources": 3,
+    "bindings": 7,
+    "occurrences": 7,
+    "binding_declarations": 7,
+    "permission_definitions": 1,
+    "permission_symbols": 0,
+    "permission_relations": 7,
+    "aidl_schemas": 1,
+    "annotation_evidence": 0,
+    "issues": 0,
+    "effective_entries": 7
+  },
+  "integrity_check": "ok",
+  "unavailable_paths": 0
+}
+parsed sources 0 / 3
+{
+  "counts": {
+    "sources": 3,
+    "bindings": 6,
+    "occurrences": 6,
+    "binding_declarations": 6,
+    "permission_definitions": 1,
+    "permission_symbols": 0,
+    "permission_relations": 6,
+    "aidl_schemas": 1,
+    "annotation_evidence": 0,
+    "issues": 0,
+    "effective_entries": 6
+  },
+  "integrity_check": "ok",
+  "unavailable_paths": 0
+}
+parsed sources 0 / 4
+{
+  "counts": {
+    "sources": 4,
+    "bindings": 12,
+    "occurrences": 12,
+    "binding_declarations": 12,
+    "permission_definitions": 1,
+    "permission_symbols": 1,
+    "permission_relations": 12,
+    "aidl_schemas": 2,
+    "annotation_evidence": 0,
+    "issues": 0,
+    "effective_entries": 12
+  },
+  "integrity_check": "ok",
+  "unavailable_paths": 0
+}
+.....E.....
+======================================================================
+ERROR: test_malformed_legacy_header_quarantines_without_aborting_projection (test_round11.Round11.test_malformed_legacy_header_quarantines_without_aborting_projection)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_round11.py", line 67, in test_malformed_legacy_header_quarantines_without_aborting_projection
+    projection=cp.Projection(db,{sid:source});entity=projection.entity(key,[(sid,1,json.dumps(projection.project(doc,sid)))]);facts=f.facts();facts['platform']={'major':37,'minor':2};self.assertEqual(dr.resolve([entity],facts,registry_id=f.h('f'),catalog_generation=1,overlay_generation=0,capability_epoch=0,view_generation=1)['entries'][0]['state'],'unknown')
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tooling/catalog_projection.py", line 61, in __init__
+    self.formals[(sid,doc.get('owner',''))].update(formal_names(doc['provenance'][0]['raw_signature']))
+                                                   ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tooling/annotation_link.py", line 5, in formal_names
+    clean=annotations(raw)[0];starts=[]
+          ~~~~~~~~~~~^^^^^
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tooling/parsers.py", line 37, in annotations
+    if end is None:raise ValueError('Unclosed annotation')
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Unclosed annotation
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.133s
+
+FAILED (errors=1)

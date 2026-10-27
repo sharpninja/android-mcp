@@ -1,0 +1,821 @@
+--- a/catalog/API-CONTRACT.md
++++ b/catalog/API-CONTRACT.md
+@@ -1,4 +1,4 @@
+-# Catalog administration contract 1.3
++# Catalog administration contract 1.4
+ 
+ This specification and `contracts/openapi.json` describe an administration API; no listener, Android bridge or HTTP handler is implemented. The offline reference models and fixture databases test contract rules. The corrected storage baseline is 1.2.0 (`user_version=3`). Prior release migrations are evidence under `../evidence/`; do not run the corrected baseline on an existing database. `tooling/migrate_v3.py` performs a checked offline copy migration to a new file. Original files remain intact.
+ 
+@@ -88,7 +88,7 @@
+ 
+ ## Producer-to-inventory projection and executable device storage
+ 
+-`catalog_projection.py` enriches only derived registry entries; immutable binding_declarations and source bytes remain unchanged. `registry_inventory` contains one validated InventoryEntity per registry entry, sealed with the registry. Its variants use `dispatch_manifest.contract_digest`, contract format2, shared by generated aliases and generic dispatch schema pins. Source locators and permission metadata never establish a codec. Semantic type references and declared structured-type shapes contribute to the contract; changing this digest version requires explicit schema/grant reconciliation and does not silently retarget existing grants.
++`catalog_projection.py` enriches only derived registry entries; immutable binding_declarations and source bytes remain unchanged. `registry_inventory` contains one validated InventoryEntity per registry entry, sealed with the registry. Its variants use `dispatch_manifest.contract_digest`, contract format3, shared by generated aliases and generic dispatch schema pins. Source locators and permission metadata never establish a codec. Semantic type references and declared structured-type shapes contribute to the contract; changing this digest version requires explicit schema/grant reconciliation and does not silently retarget existing grants.
+ 
+ The SDK index producer now emits every historical, current, future and unknown-lifecycle record. `excluded_history_or_future` is retained only as a compatibility diagnostic for the native current-target projection; it no longer means records were omitted. Only `lifecycle_status=current-at-target` enters current exact-index annotation/JVM-equivalence lookup. This flag describes the frozen native SDK target, never a device extension observation or runtime authority. Raw member and container lifecycle attributes remain separate. Parsed `sdks` pairs use SDK ID0 for platform versions and declared nonzero SDK IDs for extension minima. Omitted member `sdks` inherits the container value because the public Metalava writer suppresses identical attributes; explicit member pairs replace that set. The containing type dependency enforces its independent lifetime. Unknown SDK IDs/syntax remain unknown with raw evidence. [Metalava source](https://android.googlesource.com/platform/tools/metalava/+/a9d285ca63f95134ff1eb2c02eff5638109a5ad3%5E2..a9d285ca63f95134ff1eb2c02eff5638109a5ad3/) documents the pair format and inheritance.
+ 
+@@ -101,3 +101,7 @@
+ Resolved3 schema identity is SHA256(canonical `{schema_format:"closure3",contract_hash:C,graph_digest:G}`); G hashes the sorted transitive entry/base-contract pairs, including the root. This makes a dependent type change invalidate previous binding schema grants without cyclic hash recursion. Raw lifecycle/annotation headers stay in provenance and are excluded from semantic type shape hashes. Formal type variables never resolve to similarly named package/java.lang classes.
+ 
+ Strong status ETag syntax is `"dv2:<scope_sha256>:<generation>:<capability_epoch>:<catalog_generation>:<overlay_generation>:<inventory_sha256>"`; an uninitialized fixture store uses SHA256(canonical null) as the inventory token and cannot publish until it has a trusted inventory. All counters are canonical decimal. Inaccessible historical view/header and entry-list requests both return404 after authentication. Internal Device schemas are marked x-internal and are not request payloads.
++
++A verified wire row must provide object codecs with nonempty codec_id and matching final schema_hash, plus nonempty evidence. The tuple (binding,schema,descriptor,transaction_code,nullable-interface-version) is unique; transaction codes/flags are uint32. These structural checks do not verify codec implementation or confer invocation authority: only a trusted adapter with complete proven ABI/layout may admit the row. Unknown/unsupported proof states remain visible.
++
++Semantic contract format3 normalizes structured field/supertype references without their proof prose/source revision metadata, retains type parameters and declared supertypes, and includes parameter directions, known wire type annotations, oneway metadata and HIDL result types. Permission/lifecycle provenance remains separate. All hashes are versioned inputs to closure3; format2 grants/codecs are never silently migrated to new schema hashes. Unknown type/import/compiler/ABI semantics still prevent typed invocation.
+--- a/catalog/bridge-config.sql
++++ b/catalog/bridge-config.sql
+@@ -82,7 +82,7 @@
+ CREATE TRIGGER capability_facts_delete_guard BEFORE DELETE ON device_capability_facts WHEN (SELECT authorized FROM device_view_gc WHERE singleton=1) IS NOT 1 BEGIN SELECT RAISE(ABORT,'Fact retention requires explicit maintenance transaction'); END;
+ CREATE VIEW resolved_device_catalog AS SELECT s.scope_id,s.profile_id,s.target_key,a.view_id,a.capability_epoch,a.generation,e.entry_id,e.entity_kind,e.state,e.reason_codes_json,e.schema_hash,e.contract_hash,e.dependencies_json,e.graph_digest FROM device_view_active a JOIN device_view_scopes s USING(scope_id) JOIN device_view_entries e USING(view_id) WHERE a.stale=0;
+ CREATE VIEW binding_availability AS SELECT entry_id AS binding_id,target_key,state,json_extract(reason_codes_json,'$[0]') AS reason_code,scope_id,profile_id,view_id,capability_epoch,generation,schema_hash,contract_hash,graph_digest,reason_codes_json FROM resolved_device_catalog WHERE entity_kind='binding';
+-CREATE TABLE binding_wire_contracts(contract_id TEXT NOT NULL PRIMARY KEY CHECK(length(contract_id)=64 AND contract_id NOT GLOB '*[^0-9a-f]*'),binding_id TEXT NOT NULL,schema_hash TEXT NOT NULL,descriptor TEXT NOT NULL,interface_version INTEGER CHECK(interface_version IS NULL OR interface_version>=0),interface_hash TEXT,transaction_code INTEGER NOT NULL CHECK(transaction_code BETWEEN 0 AND 4294967295),flags INTEGER NOT NULL CHECK(flags BETWEEN 0 AND 4294967295),oneway INTEGER NOT NULL CHECK(oneway IN (0,1)),argument_codec_json TEXT NOT NULL CHECK(json_valid(argument_codec_json)),response_codec_json TEXT NOT NULL CHECK(json_valid(response_codec_json)),proof_source_json TEXT NOT NULL CHECK(json_valid(proof_source_json) AND json_type(proof_source_json)='object'),proof_state TEXT NOT NULL CHECK(proof_state IN ('verified','unknown','unsupported')),CHECK(proof_state<>'verified' OR (json_type(argument_codec_json)='object' AND json_type(response_codec_json)='object' AND coalesce(json_type(proof_source_json,'$.evidence')='array' AND json_array_length(proof_source_json,'$.evidence')>0,0))),FOREIGN KEY(binding_id,schema_hash) REFERENCES binding_mappings);
++CREATE TABLE binding_wire_contracts(contract_id TEXT NOT NULL PRIMARY KEY CHECK(length(contract_id)=64 AND contract_id NOT GLOB '*[^0-9a-f]*'),binding_id TEXT NOT NULL,schema_hash TEXT NOT NULL,descriptor TEXT NOT NULL,interface_version INTEGER CHECK(interface_version IS NULL OR interface_version>=0),interface_hash TEXT,transaction_code INTEGER NOT NULL CHECK(transaction_code BETWEEN 0 AND 4294967295),flags INTEGER NOT NULL CHECK(flags BETWEEN 0 AND 4294967295),oneway INTEGER NOT NULL CHECK(oneway IN (0,1)),argument_codec_json TEXT NOT NULL CHECK(json_valid(argument_codec_json)),response_codec_json TEXT NOT NULL CHECK(json_valid(response_codec_json)),proof_source_json TEXT NOT NULL CHECK(json_valid(proof_source_json) AND json_type(proof_source_json)='object'),proof_state TEXT NOT NULL CHECK(proof_state IN ('verified','unknown','unsupported')),CHECK(proof_state<>'verified' OR (json_type(argument_codec_json)='object' AND json_type(response_codec_json)='object' AND coalesce(json_type(argument_codec_json,'$.codec_id')='text' AND length(json_extract(argument_codec_json,'$.codec_id'))>0 AND json_extract(argument_codec_json,'$.schema_hash')=schema_hash,0) AND coalesce(json_type(response_codec_json,'$.codec_id')='text' AND length(json_extract(response_codec_json,'$.codec_id'))>0 AND json_extract(response_codec_json,'$.schema_hash')=schema_hash,0) AND coalesce(json_type(proof_source_json,'$.evidence')='array' AND json_array_length(proof_source_json,'$.evidence')>0,0))),FOREIGN KEY(binding_id,schema_hash) REFERENCES binding_mappings);
+ CREATE UNIQUE INDEX wire_tuple_identity ON binding_wire_contracts(binding_id,schema_hash,descriptor,transaction_code,coalesce(interface_version,-1));
+ CREATE TRIGGER wire_proof_no_update BEFORE UPDATE ON binding_wire_contracts BEGIN SELECT RAISE(ABORT,'Version wire evidence rather than rewriting it'); END;
+ CREATE TRIGGER wire_proof_no_delete BEFORE DELETE ON binding_wire_contracts BEGIN SELECT RAISE(ABORT,'Retain wire evidence while versioned'); END;
+@@ -93,6 +93,16 @@
+ 
+ CREATE TRIGGER device_active_inventory_pin BEFORE INSERT ON device_view_active WHEN NOT EXISTS(SELECT 1 FROM device_inventory_sets i WHERE i.inventory_sha256=new.inventory_sha256 AND i.state='sealed' AND i.entry_count=new.expected_inventory_count) BEGIN SELECT RAISE(ABORT,'Active scope requires verified sealed inventory'); END;
+ CREATE TRIGGER device_active_inventory_repin BEFORE UPDATE ON device_view_active WHEN NOT EXISTS(SELECT 1 FROM device_inventory_sets i WHERE i.inventory_sha256=new.inventory_sha256 AND i.state='sealed' AND i.entry_count=new.expected_inventory_count) BEGIN SELECT RAISE(ABORT,'Active scope requires verified sealed inventory'); END;
+-CREATE TRIGGER device_entry_inventory_member BEFORE INSERT ON device_view_entries WHEN NOT EXISTS(SELECT 1 FROM device_views v JOIN device_inventory_members m ON m.inventory_sha256=v.inventory_sha256 WHERE v.view_id=new.view_id AND m.entry_id=new.entry_id AND m.entity_kind=new.entity_kind AND (new.state<>'available' OR EXISTS(SELECT 1 FROM json_each(m.document_json,'$.variants') variant WHERE json_extract(variant.value,'$.schema_hash')=new.contract_hash AND json_array_length(json_extract(variant.value,'$.dependencies'))=json_array_length(new.dependencies_json) AND NOT EXISTS(SELECT 1 FROM json_each(new.dependencies_json) d WHERE NOT EXISTS(SELECT 1 FROM json_each(variant.value,'$.dependencies') expected WHERE json_extract(expected.value,'$.entry_id')=json_extract(d.value,'$.entry_id') AND json_extract(expected.value,'$.schema_hash')=json_extract(d.value,'$.contract_hash')))))) BEGIN SELECT RAISE(ABORT,'Entry or selected variant differs from pinned inventory'); END;
++CREATE TRIGGER device_entry_inventory_member BEFORE INSERT ON device_view_entries WHEN NOT EXISTS(SELECT 1 FROM device_views v JOIN device_inventory_members m ON m.inventory_sha256=v.inventory_sha256 WHERE v.view_id=new.view_id AND m.entry_id=new.entry_id AND m.entity_kind=new.entity_kind AND coalesce(json_extract(m.document_json,'$.catalog_state'),'active')=json_extract(new.document_json,'$.catalog_state') AND coalesce(json_extract(m.document_json,'$.catalog_revision'),0)=json_extract(new.document_json,'$.catalog_revision') AND (json_extract(m.document_json,'$.catalog_document_sha256') IS json_extract(new.document_json,'$.catalog_document_sha256')) AND json_type(new.document_json,'$.catalog_document_sha256') IS NOT NULL AND (new.state<>'available' OR EXISTS(SELECT 1 FROM json_each(m.document_json,'$.variants') variant WHERE json_extract(variant.value,'$.schema_hash')=new.contract_hash AND json_array_length(json_extract(variant.value,'$.dependencies'))=json_array_length(new.dependencies_json) AND NOT EXISTS(SELECT 1 FROM json_each(new.dependencies_json) d WHERE NOT EXISTS(SELECT 1 FROM json_each(variant.value,'$.dependencies') expected WHERE json_extract(expected.value,'$.entry_id')=json_extract(d.value,'$.entry_id') AND json_extract(expected.value,'$.schema_hash')=json_extract(d.value,'$.contract_hash')))))) BEGIN SELECT RAISE(ABORT,'Entry or selected variant differs from pinned inventory'); END;
++
++
++-- Available graph adjacency supports bounded indexed traversal; unknown edges remain lossless in JSON.
++CREATE TABLE device_type_edges(view_id TEXT NOT NULL,entry_id TEXT NOT NULL,type_entry_id TEXT NOT NULL,type_contract_hash TEXT NOT NULL,PRIMARY KEY(view_id,entry_id,type_entry_id),FOREIGN KEY(view_id,entry_id) REFERENCES device_view_entries ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED,FOREIGN KEY(view_id,type_entry_id) REFERENCES device_view_entries DEFERRABLE INITIALLY DEFERRED);
++CREATE INDEX device_type_reverse ON device_type_edges(view_id,type_entry_id);
++CREATE TRIGGER device_edge_source BEFORE INSERT ON device_type_edges WHEN NOT EXISTS(SELECT 1 FROM device_view_entries e JOIN device_views v USING(view_id),json_each(e.dependencies_json) d WHERE e.view_id=new.view_id AND e.entry_id=new.entry_id AND e.state='available' AND v.state='staged' AND json_extract(d.value,'$.entry_id')=new.type_entry_id AND json_extract(d.value,'$.contract_hash')=new.type_contract_hash) BEGIN SELECT RAISE(ABORT,'Graph edge must match staged available membership'); END;
++CREATE TRIGGER device_edge_project AFTER INSERT ON device_view_entries WHEN new.state='available' BEGIN INSERT INTO device_type_edges SELECT new.view_id,new.entry_id,json_extract(d.value,'$.entry_id'),json_extract(d.value,'$.contract_hash') FROM json_each(new.dependencies_json) d; END;
++CREATE TRIGGER device_edge_update BEFORE UPDATE ON device_type_edges BEGIN SELECT RAISE(ABORT,'Graph edges are immutable'); END;
++CREATE TRIGGER device_edge_delete BEFORE DELETE ON device_type_edges WHEN EXISTS(SELECT 1 FROM device_view_active WHERE view_id=old.view_id) OR EXISTS(SELECT 1 FROM device_view_pins WHERE view_id=old.view_id) OR ((SELECT state FROM device_views WHERE view_id=old.view_id)='sealed' AND (SELECT authorized FROM device_view_gc WHERE singleton=1) IS NOT 1) BEGIN SELECT RAISE(ABORT,'Sealed active or pinned graph edges cannot be deleted'); END;
+ 
+ COMMIT;
++
+--- a/catalog/contracts/DeviceView.schema.json
++++ b/catalog/contracts/DeviceView.schema.json
+@@ -504,6 +504,30 @@
+             "$ref": "#/$defs/Variant"
+           },
+           "minItems": 0
++        },
++        "catalog_state": {
++          "enum": [
++            "active",
++            "suppressed",
++            "conflict",
++            "deleted"
++          ]
++        },
++        "catalog_revision": {
++          "type": "integer",
++          "minimum": 0,
++          "maximum": 9007199254740991
++        },
++        "catalog_document_sha256": {
++          "anyOf": [
++            {
++              "type": "string",
++              "pattern": "^[a-f0-9]{64}$"
++            },
++            {
++              "type": "null"
++            }
++          ]
+         }
+       },
+       "required": [
+@@ -572,6 +596,30 @@
+           ]
+         },
+         "contract_hash": {
++          "anyOf": [
++            {
++              "type": "string",
++              "pattern": "^[a-f0-9]{64}$"
++            },
++            {
++              "type": "null"
++            }
++          ]
++        },
++        "catalog_state": {
++          "enum": [
++            "active",
++            "suppressed",
++            "conflict",
++            "deleted"
++          ]
++        },
++        "catalog_revision": {
++          "type": "integer",
++          "minimum": 0,
++          "maximum": 9007199254740991
++        },
++        "catalog_document_sha256": {
+           "anyOf": [
+             {
+               "type": "string",
+@@ -591,7 +639,10 @@
+         "schema_hash",
+         "dependencies",
+         "graph_digest",
+-        "contract_hash"
++        "contract_hash",
++        "catalog_state",
++        "catalog_revision",
++        "catalog_document_sha256"
+       ],
+       "additionalProperties": false,
+       "allOf": [
+--- a/catalog/contracts/openapi.json
++++ b/catalog/contracts/openapi.json
+@@ -2744,6 +2744,30 @@
+               "$ref": "#/components/schemas/DeviceVariant"
+             },
+             "minItems": 0
++          },
++          "catalog_state": {
++            "enum": [
++              "active",
++              "suppressed",
++              "conflict",
++              "deleted"
++            ]
++          },
++          "catalog_revision": {
++            "type": "integer",
++            "minimum": 0,
++            "maximum": 9007199254740991
++          },
++          "catalog_document_sha256": {
++            "anyOf": [
++              {
++                "type": "string",
++                "pattern": "^[a-f0-9]{64}$"
++              },
++              {
++                "type": "null"
++              }
++            ]
+           }
+         },
+         "required": [
+@@ -2823,6 +2847,30 @@
+                 "type": "null"
+               }
+             ]
++          },
++          "catalog_state": {
++            "enum": [
++              "active",
++              "suppressed",
++              "conflict",
++              "deleted"
++            ]
++          },
++          "catalog_revision": {
++            "type": "integer",
++            "minimum": 0,
++            "maximum": 9007199254740991
++          },
++          "catalog_document_sha256": {
++            "anyOf": [
++              {
++                "type": "string",
++                "pattern": "^[a-f0-9]{64}$"
++              },
++              {
++                "type": "null"
++              }
++            ]
+           }
+         },
+         "required": [
+@@ -2833,7 +2881,10 @@
+           "schema_hash",
+           "dependencies",
+           "graph_digest",
+-          "contract_hash"
++          "contract_hash",
++          "catalog_state",
++          "catalog_revision",
++          "catalog_document_sha256"
+         ],
+         "additionalProperties": false,
+         "allOf": [
+--- a/catalog/tests/test_annotation_jvm_erasure.py
++++ b/catalog/tests/test_annotation_jvm_erasure.py
+@@ -0,0 +1,20 @@
++import pathlib,sys,unittest
++sys.path.insert(0,str(pathlib.Path(__file__).resolve().parents[1]/'tooling'))
++from annotation_link import xml_jvm_key
++class XmlJvmErasure(unittest.TestCase):
++ owners={'a.A':'a/A','a.Callback':'a/Callback','java.lang.String':'java/lang/String','a.Result':'a/Result','a.A.Inner':'a/A$Inner'}
++ def test_qualified_generic_outer_erasure_has_exact_descriptor(self):
++  key=xml_jvm_key('a.A a.Result<java.lang.String> call(a.Callback<a.Result>, java.lang.String)',self.owners)
++  self.assertEqual(key,'a/A#call(La/Callback;Ljava/lang/String;)La/Result;')
++ def test_type_variable_is_not_erased_to_object_by_guess(self):
++  self.assertIsNone(xml_jvm_key('a.A void call(T)',self.owners));self.assertIsNone(xml_jvm_key('a.A T call()',self.owners))
++ def test_unqualified_java_lang_alias_not_guessed(self):
++  self.assertIsNone(xml_jvm_key('a.A void call(String)',self.owners))
++ def test_parameterized_array_and_parameter_annotation_ordinal(self):
++  self.assertEqual(xml_jvm_key('a.A void call(a.Callback<T>[]) 0',self.owners),'a/A#call([La/Callback;)V')
++ def test_malformed_generics_and_void_parameters_rejected(self):
++  self.assertIsNone(xml_jvm_key('a.A void call(a.Callback<T)',self.owners));self.assertIsNone(xml_jvm_key('a.A void call(void)',self.owners))
++ def test_constructor_and_same_name_regular_method_differ(self):
++  self.assertEqual(xml_jvm_key('a.A A()',self.owners),'a/A#<init>()V');self.assertEqual(xml_jvm_key('a.A int A()',self.owners),'a/A#A()I')
++ def test_nested_binary_owner_is_known_not_inferred(self):
++  self.assertEqual(xml_jvm_key('a.A a.A.Inner call()',self.owners),'a/A#call()La/A$Inner;')
+--- a/catalog/tests/test_annotation_jvm_erasure_import.py
++++ b/catalog/tests/test_annotation_jvm_erasure_import.py
+@@ -0,0 +1,30 @@
++import unittest,pathlib,tempfile,sys,json,gzip,sqlite3,contextlib,zipfile,hashlib
++from xml.sax.saxutils import escape
++sys.path.insert(0,str(pathlib.Path(__file__).resolve().parents[1]/'tooling'))
++import build_catalog,sdk_api_index,test_build,copy,cache_fingerprint
++class XmlJvmImport(unittest.TestCase):
++ def source(self,root,spec,kind,name,data,**extras):
++  (root/name).write_bytes(data);s=copy.deepcopy(spec['sources'][0]);s.update(kind=kind,path=name,local_path=name,sha256=hashlib.sha256(data).hexdigest(),git_blob=hashlib.sha1(b'blob '+str(len(data)).encode()+b'\0'+data).hexdigest(),size_bytes=len(data));s.update(extras);spec['sources'].append(s)
++ def check(self,item,expected,platform='37.2',methods=None):
++  with tempfile.TemporaryDirectory() as directory:
++   root=pathlib.Path(directory);inv=test_build.BuildTests().fixture(root);spec=json.loads(inv.read_text());methods=methods or '<method name="call(La/Callback;)La/Result;"/>';data=('<api version="4"><class name="a/A">'+methods+'</class><class name="a/Callback"/><class name="a/Result"/><class name="java/lang/String"/></api>').encode();records=sdk_api_index.parse(data,target='37.2')['records'];cache=root/'index.gz'
++   with gzip.open(cache,'wt') as stream:
++    for row in records:stream.write(json.dumps(row)+'\n')
++   self.source(root,spec,'sdk-api-index','index.xml',data,platform_api_version='37.2',metadata_cache=dict(path=cache.name,sha256=hashlib.sha256(cache.read_bytes()).hexdigest(),records=len(records),parser_sha256=cache_fingerprint.current('sdk-api-index')))
++   archive=root/'annotations.zip'
++   with zipfile.ZipFile(archive,'w') as z:z.writestr('a.xml','<root><item name="'+escape(item,{'"':'&quot;'})+'"><annotation name="androidx.annotation.RequiresPermission"><val name="value" val="&quot;android.permission.CAMERA&quot;"/></annotation></item></root>')
++   self.source(root,spec,'sdk-annotations','annotations.zip',archive.read_bytes(),platform_api_version=platform);inv.write_text(json.dumps(spec));build_catalog.build(inv,root/'out')
++   with contextlib.closing(sqlite3.connect(root/'out/catalog.sqlite')) as db:
++    bid,raw=db.execute('SELECT binding_id,document_json FROM annotation_evidence').fetchone();evidence=json.loads(raw)
++    self.assertEqual(bid,hashlib.sha256(expected.encode()).hexdigest() if expected else None)
++    if expected:
++     self.assertEqual(db.execute("SELECT count(*) FROM permission_relations WHERE binding_id=? AND annotation='external'",(bid,)).fetchone()[0],1)
++    return evidence
++ def test_generic_outer_erasure_matches_exact_current_descriptor(self):
++  evidence=self.check('a.A a.Result<java.lang.String> call(a.Callback<T>)','jvm:a/A#call(La/Callback;)La/Result;');self.assertEqual(evidence['target_match_kind'],'current-sdk-index-jvm-erasure-exact')
++ def test_top_level_type_variable_not_guessed(self):
++  self.check('a.A a.Result call(T)',None)
++ def test_current_index_is_not_borrowed_for_other_platform(self):
++  self.check('a.A a.Result<java.lang.String> call(a.Callback<T>)',None,platform='37.0')
++ def test_regular_method_with_class_name_is_not_constructor(self):
++  self.check('a.A int A()','jvm:a/A#A()I',methods='<method name="&lt;init>()V"/><method name="A()I"/>')
+--- a/catalog/tests/test_contract_models.py
++++ b/catalog/tests/test_contract_models.py
+@@ -49,7 +49,7 @@
+             with self.assertRaises(ValueError):resolve_fixture_route('raw',raw,aliases,schemas,wire)
+     def test_generated_alias_identity_and_default_deny(self):
+         sig='java:a.A#x()';e=dict(entry_id=identity(sig),canonical_signature=sig)
+-        r=generate([e])['aliases'][0];self.assertEqual(r['binding_id'],r['generic_binding_id']);self.assertEqual(r['default_grant'],'deny')
++        e['kind']='method';r=generate([e])['aliases'][0];self.assertEqual(r['binding_id'],r['generic_binding_id']);self.assertEqual(r['default_grant'],'deny')
+         with self.assertRaises(ValueError):generate([e,e])
+     def test_bridge_ddl_integrity_and_closed_enums(self):
+         db=sqlite3.connect(':memory:');self.addCleanup(db.close);db.executescript((P/'bridge-config.sql').read_text())
+--- a/catalog/tests/test_device_catalog_pipeline.py
++++ b/catalog/tests/test_device_catalog_pipeline.py
+@@ -4,7 +4,7 @@
+ import sdk_api_index,test_source_integration,build_catalog,device_resolution as dr,test_device_resolution as f
+ import device_view_storage
+ import cache_fingerprint
+-import catalog_projection,validate_catalog
++import catalog_projection,validate_catalog,effective_device_inventory
+ class DeviceCatalogPipeline(unittest.TestCase):
+     def test_index_retains_past_and_future_and_container_lifecycle(self):
+         parsed=sdk_api_index.parse(b'<api version="4"><sdk id="30"/><class name="a/Old" since="1" removed="36"/><class name="a/Future" since="38"><method name="f()V" since="1"/></class><class name="a/Backport" since="34" sdks="30:4,0:34"/></api>',target='37.2')
+@@ -33,7 +33,8 @@
+         import dispatch_manifest,policy_reference
+         with tempfile.TemporaryDirectory() as td:
+             root=pathlib.Path(td);inv=test_source_integration.SourceIntegrationTests().fixture(root);build_catalog.build(inv,root/'out');docs=[json.loads(s) for s in (root/'out/entries.jsonl').read_text().splitlines()];inventory=[json.loads(s) for s in (root/'out/device_inventory.jsonl').read_text().splitlines()]
+-            facts=f.facts();facts['platform']={'major':37,'minor':0};view=dr.resolve(inventory,facts,registry_id=f.h('f'),catalog_generation=1,overlay_generation=0,capability_epoch=0,view_generation=1);status=dict(snapshot=view,stale=False,capability_epoch=0,generation=1)
++            with contextlib.closing(sqlite3.connect(root/'out/catalog.sqlite')) as db:captured=effective_device_inventory.capture(db)
++            facts=f.facts();facts['platform']={'major':37,'minor':0};view=dr.resolve(captured['inventory'],facts,registry_id=captured['registry_id'],catalog_generation=captured['catalog_generation'],overlay_generation=captured['overlay_generation'],capability_epoch=0,view_generation=1);status=dict(snapshot=view,stale=False,capability_epoch=0,generation=1)
+             aliases=dispatch_manifest.generate(docs,status)['aliases'];key=hashlib.sha256(b'java:a.A#go(int)').hexdigest();row=next(v for v in view['entries'] if v['entry_id']==key);alias=next(a for a in aliases if a['binding_id']==key)
+             self.assertEqual(row['state'],'available');self.assertEqual(alias['schema_hash'],row['schema_hash']);self.assertEqual(alias['type_graph_digest'],row['graph_digest'])
+             req=dict(tool_name=alias['tool_name'],binding_id=key,schema_hash=row['schema_hash'],target='fixture',items=1);schemas={key:row['schema_hash']};mapping={alias['tool_name']:(key,alias['schema_hash'])}
+--- a/catalog/tests/test_device_view_storage.py
++++ b/catalog/tests/test_device_view_storage.py
+@@ -17,6 +17,7 @@
+         self.store.publish(self.snapshot(),facts=f.facts(),expected_generation=0)
+         self.assertFalse(self.store.read()['stale']);self.assertEqual(self.db.execute('SELECT count(*) FROM resolved_device_catalog').fetchone()[0],2);self.assertEqual(self.db.execute('SELECT count(*) FROM binding_availability').fetchone()[0],1)
+         self.assertEqual(self.db.execute('PRAGMA foreign_key_check').fetchall(),[])
++        self.assertEqual(self.db.execute('SELECT count(*) FROM device_type_edges').fetchone()[0],1)
+     def test_invalidation_preserves_old_snapshot_and_records_reason(self):
+         self.store.publish(self.snapshot(),facts=f.facts(),expected_generation=0);before=self.store.read()['snapshot'];self.store.invalidate('module-replaced')
+         self.assertTrue(self.store.read()['stale']);self.assertEqual(self.store.read()['snapshot'],before);self.assertEqual(self.db.execute('SELECT count(*) FROM resolved_device_catalog').fetchone()[0],0)
+--- a/catalog/tests/test_effective_device_inventory.py
++++ b/catalog/tests/test_effective_device_inventory.py
+@@ -0,0 +1,31 @@
++"""CRUD overlays must participate in startup/view identity and admission."""
++import copy,hashlib,json,pathlib,sqlite3,sys,tempfile,unittest
++P=pathlib.Path(__file__).resolve().parents[1];sys.path.insert(0,str(P/'tooling'))
++import build_catalog,test_round8,test_device_resolution as f,device_resolution as dr,effective_device_inventory as effective,policy_reference
++class EffectiveInventory(unittest.TestCase):
++ def fixture(self,root):
++  inv=test_round8.Review8().fixture(root,'package a; interface I { parcelable P { int x; } void take(in P p); }');build_catalog.build(inv,root/'out');db=sqlite3.connect(root/'out/catalog.sqlite');db.execute('PRAGMA foreign_keys=ON');self.addCleanup(db.close);return db
++ def doc(self,db,signature):return json.loads(db.execute('SELECT document_json FROM effective_entries WHERE json_extract(document_json,\'$.canonical_signature\')=?',(signature,)).fetchone()[0])
++ def overlay(self,db,doc,state='active',local=False):
++  registry=db.execute('SELECT registry_id FROM active_registry').fetchone()[0];key=doc['entry_id'];base=None if local else db.execute('SELECT record_sha256 FROM effective_entries WHERE entry_id=?',(key,)).fetchone()[0];now='2026-10-27T03:00:00Z';db.execute('INSERT INTO overlays VALUES(?,?,?,?,?,?,?,?,?,?)',(key,None if local else key,doc['canonical_signature'],1,None if local else registry,base,state,json.dumps(doc),now,now));db.execute('INSERT INTO entry_history VALUES(?,?,?,?,?,?)',(key,1,'create' if local else 'suppress' if state=='suppressed' else 'update',json.dumps(doc),'fixture',now));db.commit()
++ def resolve(self,capture):
++  facts=f.facts();facts['platform']={'major':37,'minor':0};return dr.resolve(capture['inventory'],facts,registry_id=capture['registry_id'],catalog_generation=capture['catalog_generation'],overlay_generation=capture['overlay_generation'],capability_epoch=0,view_generation=1)
++ def test_suppression_retains_existence_but_denies_known_dispatch(self):
++  with tempfile.TemporaryDirectory() as td:
++   db=self.fixture(pathlib.Path(td));doc=self.doc(db,'aidl:a.I#take(P)');self.overlay(db,doc,'suppressed');capture=effective.capture(db);snapshot=self.resolve(capture);row=next(r for r in snapshot['entries'] if r['entry_id']==doc['entry_id']);self.assertEqual(row['state'],'available');self.assertEqual(row['catalog_state'],'suppressed');self.assertEqual(capture['base_inventory_count'],len(capture['inventory']));status=dict(snapshot=snapshot,stale=False,generation=1,capability_epoch=0);rule=policy_reference.Rule('allow',row['schema_hash'],frozenset({'platform:local'}),1);entry=policy_reference.Rule('allow','tool',frozenset({'platform:local'}),1)
++   self.assertEqual(policy_reference.evaluate_view_fixture([(doc['entry_id'],row['schema_hash'],'platform:local',1)],status,{doc['entry_id']:rule},entry,entry_schema='tool',authority=True),'deny')
++ def test_local_addition_is_visible_and_version_unknown(self):
++  with tempfile.TemporaryDirectory() as td:
++   db=self.fixture(pathlib.Path(td));doc=self.doc(db,'aidl:a.I#take(P)');doc.update(canonical_signature='aidl:a.I#added(int)',name='added',origin='local',overlay_revision=1);doc['entry_id']=hashlib.sha256(doc['canonical_signature'].encode()).hexdigest();doc['arguments']=[{'text':'int','status':'primitive','codec_status':'unknown'}];self.overlay(db,doc,local=True);capture=effective.capture(db);self.assertEqual(len(capture['inventory']),capture['base_inventory_count']+1);row=next(r for r in self.resolve(capture)['entries'] if r['entry_id']==doc['entry_id']);self.assertEqual(row['state'],'unknown');self.assertEqual(row['catalog_state'],'active')
++ def test_structured_field_override_changes_transitive_binding_hash(self):
++  with tempfile.TemporaryDirectory() as td:
++   db=self.fixture(pathlib.Path(td));before=effective.capture(db);binding=self.doc(db,'aidl:a.I#take(P)')['entry_id'];old=next(r for r in self.resolve(before)['entries'] if r['entry_id']==binding);doc=self.doc(db,'aidl:a.I.P#x');doc['return_type']['text']='long';self.overlay(db,doc);after=effective.capture(db);new=next(r for r in self.resolve(after)['entries'] if r['entry_id']==binding);self.assertEqual(new['state'],'available');self.assertNotEqual(old['schema_hash'],new['schema_hash']);self.assertNotEqual(before['inventory_sha256'],after['inventory_sha256']);self.assertEqual(after['overlay_generation'],before['overlay_generation']+1)
++ def test_matching_allow_succeeds_but_changed_document_pin_denies(self):
++  with tempfile.TemporaryDirectory() as td:
++   db=self.fixture(pathlib.Path(td));captured=effective.capture(db);snapshot=self.resolve(captured);doc=self.doc(db,'aidl:a.I#take(P)');key=doc['entry_id'];row=next(r for r in snapshot['entries'] if r['entry_id']==key);status=dict(snapshot=snapshot,stale=False,generation=1,capability_epoch=0);plan=[(key,row['schema_hash'],'platform:local',1)];rule=policy_reference.Rule('allow',row['schema_hash'],frozenset({'platform:local'}),1);entry=policy_reference.Rule('allow','tool',frozenset({'platform:local'}),1)
++   self.assertEqual(policy_reference.evaluate_view_fixture(plan,status,{key:rule},entry,entry_schema='tool',authority=True,current_document_hashes=captured['document_hashes']),'admit-candidate');self.assertEqual(policy_reference.evaluate_view_fixture(plan,status,{key:rule},entry,entry_schema='tool',authority=False,current_document_hashes=captured['document_hashes']),'os-unavailable')
++   doc['unresolved'].append('New metadata evidence');self.overlay(db,doc);after=effective.capture(db);newrow=next(r for r in self.resolve(after)['entries'] if r['entry_id']==key);self.assertEqual(row['schema_hash'],newrow['schema_hash']);self.assertNotEqual(row['catalog_document_sha256'],newrow['catalog_document_sha256']);self.assertEqual(policy_reference.evaluate_view_fixture(plan,status,{key:rule},entry,entry_schema='tool',authority=True,current_document_hashes=after['document_hashes']),'deny')
++ def test_suppressed_type_denies_an_otherwise_allowed_binding(self):
++  with tempfile.TemporaryDirectory() as td:
++   db=self.fixture(pathlib.Path(td));self.overlay(db,self.doc(db,'aidl:a.I.P'),'suppressed');captured=effective.capture(db);snapshot=self.resolve(captured);key=self.doc(db,'aidl:a.I#take(P)')['entry_id'];row=next(r for r in snapshot['entries'] if r['entry_id']==key);self.assertEqual(row['state'],'available');status=dict(snapshot=snapshot,stale=False,generation=1,capability_epoch=0);rule=policy_reference.Rule('allow',row['schema_hash'],frozenset({'platform:local'}),1);entry=policy_reference.Rule('allow','tool',frozenset({'platform:local'}),1);self.assertEqual(policy_reference.evaluate_view_fixture([(key,row['schema_hash'],'platform:local',1)],status,{key:rule},entry,entry_schema='tool',authority=True,current_document_hashes=captured['document_hashes']),'deny')
++if __name__=='__main__':unittest.main()
+--- a/catalog/tests/test_permission_reference.py
++++ b/catalog/tests/test_permission_reference.py
+@@ -0,0 +1,18 @@
++import unittest,pathlib,sys
++sys.path.insert(0,str(pathlib.Path(__file__).resolve().parents[1]/'tooling'))
++from permission_reference import parse
++def field(name,value='',attrs='data-version-added="37.2"'):
++ return f'<div {attrs}><h3 class="api-name" id="{name}">{name}</h3><div>Added in 37.2</div><pre class="api-signature">public static final <a>String</a> {name}</pre><p>Protection level: internal|role</p>{value}</div>'
++class PermissionReferenceFacts(unittest.TestCase):
++ def test_literals_and_major_minor_facts_not_guessed(self):
++  rows=parse(field('X','<p>Constant Value: &quot;other.permission.X&quot;</p>'))['fields']
++  self.assertEqual(rows[0]['value'],'other.permission.X');self.assertEqual(rows[0]['introduced_raw'],'37.2');self.assertEqual(rows[0]['protection_level_raw'],'internal|role')
++ def test_missing_value_and_deprecated_are_not_permission_absence_or_removal(self):
++  row=parse(field('X',attrs='data-version-added="1" data-version-deprecated="16"'))['fields'][0]
++  self.assertIsNone(row['value']);self.assertEqual(row['deprecated_raw'],'16');self.assertIsNone(row['removed_raw'])
++ def test_duplicate_names_remain_evidence_and_are_flagged(self):
++  result=parse(field('X','Constant Value: "a.permission.X"')+field('X','Constant Value: "b.permission.X"'))
++  self.assertEqual(len(result['fields']),2);self.assertEqual(result['duplicate_field_names'],['X'])
++ def test_script_text_cannot_create_a_documented_field(self):
++  result=parse('<script>'+field('FAKE','Constant Value: "a.permission.FAKE"')+'</script>'+field('REAL','Constant Value: "a.permission.REAL"'))
++  self.assertEqual([f['name'] for f in result['fields']],['REAL'])
+--- a/catalog/tests/test_permission_reference_import.py
++++ b/catalog/tests/test_permission_reference_import.py
+@@ -0,0 +1,15 @@
++import unittest,pathlib,sys,tempfile,json,sqlite3,contextlib
++sys.path.insert(0,str(pathlib.Path(__file__).resolve().parents[1]/'tooling'))
++import build_catalog,test_build,copy,hashlib
++class PermissionReferenceImport(unittest.TestCase):
++ def test_documented_constants_are_symbols_not_manifest_definitions(self):
++  with tempfile.TemporaryDirectory() as directory:
++   root=pathlib.Path(directory);inv=test_build.BuildTests().fixture(root);spec=json.loads(inv.read_text())
++   raw=b'<div data-version-added="37.2"><h3 class="api-name" id="DOC_ONLY">DOC_ONLY</h3><pre class="api-signature">public static final String DOC_ONLY</pre><p>Protection level: internal|role</p><p>Constant Value: "android.permission.DOC_ONLY"</p></div>'
++   (root/'reference.html').write_bytes(raw);source=copy.deepcopy(spec['sources'][0]);source.update(kind='evidence',path='reference.html',local_path='reference.html',sha256=hashlib.sha256(raw).hexdigest(),git_blob=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest(),size_bytes=len(raw),scope='official-sdk-permission-reference',api_level=None,platform_api_version=None,channel='unknown');spec['sources'].append(source);inv.write_text(json.dumps(spec));build_catalog.build(inv,root/'out')
++   with contextlib.closing(sqlite3.connect(root/'out/catalog.sqlite')) as db:
++    self.assertEqual(db.execute("SELECT value FROM permission_symbols WHERE symbol='android.Manifest.permission.DOC_ONLY'").fetchone(),('android.permission.DOC_ONLY',))
++    self.assertEqual(db.execute("SELECT count(*) FROM permission_definitions WHERE name='android.permission.DOC_ONLY'").fetchone()[0],0)
++    report=json.loads(db.execute("SELECT p.document_json FROM parse_reports p JOIN sources s USING(source_id) WHERE s.path='reference.html'").fetchone()[0])
++    self.assertEqual(report['documented_fields'][0]['protection_level_raw'],'internal|role')
++    self.assertEqual(report['declarations'],0)
+--- a/catalog/tests/test_round11.py
++++ b/catalog/tests/test_round11.py
+@@ -16,6 +16,27 @@
+   doc={'canonical_signature':'jvm:a/A','kind':'type','arguments':[],'codec_status':'unknown','extensions':{'declared_type_shape':{'header':'<class name="a/A" since="34"/>','fields':[]}}}
+   other=copy.deepcopy(doc);other['extensions']['declared_type_shape']['header']='<class name="a/A" since="35" removed="39" sdks="30:4,0:35"/>'
+   self.assertEqual(dispatch_manifest.contract_digest(doc),dispatch_manifest.contract_digest(other))
++ def test_type_reference_proof_text_is_not_semantic_shape(self):
++  doc={'canonical_signature':'aidl:a.P','kind':'aidl-parcelable','arguments':[],'codec_status':'unknown','extensions':{'declared_type_shape':{'fields':[{'name':'x','type':{'text':'a.Q','status':'resolved','resolved_binding_id':f.h('a'),'codec_status':'unknown','reason':'first proof','x-resolution-source-snapshot':['r','commit1']},'constant':None}]}}};other=copy.deepcopy(doc);other['extensions']['declared_type_shape']['fields'][0]['type'].update(reason='new evidence',**{'x-resolution-source-snapshot':['r','commit2']});self.assertEqual(dispatch_manifest.contract_digest(doc),dispatch_manifest.contract_digest(other))
++ def test_direction_nullable_and_hidl_outputs_affect_contract(self):
++  doc={'canonical_signature':'aidl:a.I#f(int)','kind':'method','arguments':[{'text':'int','status':'primitive','codec_status':'unknown'}],'codec_status':'unknown','extensions':{'parameters':[{'type':'int','direction':'in','annotations':[]}]}}
++  changed=copy.deepcopy(doc);changed['extensions']['parameters'][0]['direction']='out';self.assertNotEqual(dispatch_manifest.contract_digest(doc),dispatch_manifest.contract_digest(changed))
++  changed=copy.deepcopy(doc);changed['extensions']['parameters'][0]['annotations']=[{'name':'nullable','arguments':'','raw':'@nullable'}];self.assertNotEqual(dispatch_manifest.contract_digest(doc),dispatch_manifest.contract_digest(changed))
++  doc['extensions']['results']=[{'name':'value','type':'int32_t'}];changed=copy.deepcopy(doc);changed['extensions']['results'][0]['type']='int64_t';self.assertNotEqual(dispatch_manifest.contract_digest(doc),dispatch_manifest.contract_digest(changed))
++ def test_missing_or_unknown_kind_rejects_without_fabricating_a_binding(self):
++  doc={'canonical_signature':'aidl:a.I#f()','entry_id':hashlib.sha256(b'aidl:a.I#f()').hexdigest()}
++  for kind in (None,'future-kind'):
++   item=dict(doc)
++   if kind is not None:item['kind']=kind
++   with self.assertRaisesRegex(ValueError,'Entry.kind'):dispatch_manifest.generate([item])
++ def test_interface_oneway_semantics_apply_to_all_methods(self):
++  doc={'canonical_signature':'aidl:a.I#f()','kind':'method','extensions':{'oneway':False,'interface_oneway':False}};changed=copy.deepcopy(doc);changed['extensions']['interface_oneway']=True;self.assertNotEqual(dispatch_manifest.contract_digest(doc),dispatch_manifest.contract_digest(changed))
++ def test_proven_supertype_change_affects_type_contract_and_graph(self):
++  hashes=[]
++  for parent in ('P','Q'):
++   with tempfile.TemporaryDirectory() as td:
++    root=pathlib.Path(td);inv=test_build.BuildTests().fixture(root);spec=json.loads(inv.read_text());raw=('package a {\n public class P {\n }\n public class Q {\n }\n public class A extends '+parent+' {\n }\n}').encode();(root/'api.txt').write_bytes(raw);spec['sources'][0].update(sha256=hashlib.sha256(raw).hexdigest(),git_blob=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest(),size_bytes=len(raw));inv.write_text(json.dumps(spec));build_catalog.build(inv,root/'out');doc=next(d for d in map(json.loads,(root/'out/entries.jsonl').read_text().splitlines()) if d['canonical_signature']=='java:a.A');hashes.append(dispatch_manifest.contract_digest(doc));self.assertIn('supertypes',doc['extensions']['declared_type_shape'])
++  self.assertNotEqual(*hashes)
+  def test_imported_aidl_type_and_noninvocable_fields(self):
+   with tempfile.TemporaryDirectory() as td:
+    root=pathlib.Path(td);inv=test_build.BuildTests().fixture(root);spec=json.loads(inv.read_text())
+@@ -57,6 +78,7 @@
+   with self.assertRaises(sqlite3.IntegrityError):db.execute('INSERT INTO binding_mappings VALUES(?,?,?,?,?,?,?,?,?,?)',(key,f.h('c'),1,'unknown','fixture','binder','a.I',4294967296,'{}','{}'))
+   row=(f.h('c'),key,schema,'a.I',None,None,0,0,0,'{}','{}','{}','verified')
+   with self.assertRaises(sqlite3.IntegrityError):db.execute('INSERT INTO binding_wire_contracts VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)',row)
++  with self.assertRaises(sqlite3.IntegrityError):db.execute('INSERT INTO binding_wire_contracts VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)',(*row[:11],'{"evidence":["fixture"]}','verified'))
+   row=(*row[:11],'{"evidence":["fixture"]}','unknown');db.execute('INSERT INTO binding_wire_contracts VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)',row)
+   with self.assertRaises(sqlite3.IntegrityError):db.execute('INSERT INTO binding_wire_contracts VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)',(f.h('d'),*row[1:]))
+  def test_abbreviated_java_lang_needs_declared_same_snapshot_type(self):
+--- a/catalog/tests/test_round2.py
++++ b/catalog/tests/test_round2.py
+@@ -40,7 +40,7 @@
+  def test_legacy_extractor_has_no_executable_run(self):self.assertFalse(hasattr(foundation_extract,'run'))
+  def test_dispatch_schema_is_independent_of_provenance(self):
+   sig='java:a.A#x()';doc=dict(entry_id=hashlib.sha256(sig.encode()).hexdigest(),canonical_signature=sig,arguments=[],codec_status='unknown')
+-  before=dispatch_manifest.generate([doc])['aliases'][0];after=dispatch_manifest.generate([dict(doc,provenance=[dict(source_id='new')])])['aliases'][0]
++  doc['kind']='method';before=dispatch_manifest.generate([doc])['aliases'][0];after=dispatch_manifest.generate([dict(doc,provenance=[dict(source_id='new')])])['aliases'][0]
+   self.assertEqual(before['schema_hash'],after['schema_hash']);self.assertNotEqual(before['document_hash'],after['document_hash'])
+  def test_bridge_config_matches_named_design_records(self):
+   db=sqlite3.connect(':memory:');self.addCleanup(db.close);db.executescript((P/'bridge-config.sql').read_text())
+--- a/catalog/tooling/annotation_link.py
++++ b/catalog/tooling/annotation_link.py
+@@ -1,6 +1,24 @@
+ """Conservative annotation spelling fallback: a type variable is not java.lang."""
+ import re
+ from parsers import annotations,split_top,typ
++def xml_jvm_key(item_name,owners):
++ """Exact descriptor spelling from explicit XML types and known SDK owners.
++ Generic outer-type erasure is allowed only through encode's known-class proof.
++ Unknown type variables, malformed generics and guessed java.lang names fail.
++ """
++ from jvm_source_link import encode
++ target=re.sub(r'\s+\d+$','',item_name);owner,separator,tail=target.partition(' ')
++ if not separator or owner not in owners or '(' not in tail:return None
++ start=tail.find('(');end=tail.rfind(')')
++ if end<start or tail[end+1:].strip():return None
++ match=re.search(r'([\w$]+)$',tail[:start])
++ if not match:return None
++ name=match.group(1);result=tail[:match.start()].strip();constructor=not result and name==owner.rsplit('.',1)[-1]
++ if not result and not constructor:return None
++ parameters=[encode(typ(value),owner,owners) for value in split_top(tail[start+1:end]) if value.strip()]
++ returned='V' if constructor else encode(typ(result),owner,owners)
++ if returned is None or any(value is None or value=='V' for value in parameters):return None
++ return owners[owner]+'#'+('<init>' if constructor else name)+'('+''.join(parameters)+')'+returned
+ def formal_names(raw):
+  clean=annotations(raw)[0];starts=[]
+  type_match=re.search(r'\b(?:class|interface|enum)\s+[\w.$]+\s*(<)',clean)
+--- a/catalog/tooling/build_catalog.py
++++ b/catalog/tooling/build_catalog.py
+@@ -9,7 +9,7 @@
+ def js(x):return json.dumps(x,sort_keys=True,separators=(',',':'),ensure_ascii=False)
+ def hb(b):return hashlib.sha256(b).hexdigest()
+ def processing_fingerprint():
+- return sha(js({name:hb((P/name).read_bytes()) for name in ('tooling/build_catalog.py','tooling/cache_fingerprint.py','tooling/parsers.py','tooling/aidl_members.py','tooling/aidl_lex.py','tooling/hidl_source.py','tooling/foundation_extract.py','tooling/java_source.py','tooling/sdk_api_index.py','tooling/jvm_source_link.py','tooling/java_context.py','tooling/annotation_link.py','tooling/catalog_projection.py','tooling/dispatch_manifest.py','contracts/DeviceResolution.schema.json','contracts/Entry.schema.json','contracts/PermissionExpression.schema.json')}))
++ return sha(js({name:hb((P/name).read_bytes()) for name in ('tooling/build_catalog.py','tooling/cache_fingerprint.py','tooling/parsers.py','tooling/aidl_members.py','tooling/aidl_lex.py','tooling/hidl_source.py','tooling/foundation_extract.py','tooling/java_source.py','tooling/sdk_api_index.py','tooling/jvm_source_link.py','tooling/java_context.py','tooling/annotation_link.py','tooling/catalog_projection.py','tooling/dispatch_manifest.py','tooling/permission_reference.py','contracts/DeviceResolution.schema.json','contracts/Entry.schema.json','contracts/PermissionExpression.schema.json')}))
+ def ref(text):return dict(text=text,status='unknown',codec_status='unknown',reason='Source type retained; runtime resolver/codec not verified')
+ def cached_records(s,root):
+  cache=s.get('metadata_cache')
+@@ -62,6 +62,12 @@
+  source_by_id={s['source_id']:s for s in sources};symbols_by_value=collections.defaultdict(set);symbol_rows=[]
+  # Separate constant pass avoids source order changing symbolic permission resolution.
+  for s in sources:
++  if s.get('scope')=='official-sdk-permission-reference':
++   from permission_reference import parse as reference_facts
++   for fact in reference_facts((root/s['local_path']).read_bytes())['fields']:
++    if isinstance(fact['value'],str) and fact['value']:
++     symbols_by_value[fact['symbol']].add(fact['value']);symbol_rows.append((fact['symbol'],fact['value'],s['source_id'],fact['line']))
++   continue
+   if s['kind'] not in ('sdk-signature','source-signature','java-source'):continue
+   records=cached_records(s,root) if s['kind']=='java-source' else signature((root/s['local_path']).read_text())
+   for r in records:
+@@ -185,6 +191,10 @@
+    report.update(status=status,member_chunks=member_count,declaration_count=len(declarations),aidl_lexical_inventory=lexical,aidl_reconciliation='matched' if reconciled else 'unreconciled')
+    if reconciled:report['expected_declarations']=lexical['expected_records']
+   elif kind=='sdk-annotations':report['status']='deferred-external-annotation-pass'
++  elif kind=='evidence' and s.get('scope')=='official-sdk-permission-reference':
++   from permission_reference import parse as reference_facts
++   facts=reference_facts(path.read_bytes())
++   report.update(status='partial' if facts['unknown_values'] or facts['duplicate_field_names'] or facts['unclosed_version_sections'] else 'documented-permission-symbols-parsed',documented_fields=facts['fields'],duplicate_field_names=facts['duplicate_field_names'],unknown_documented_values=facts['unknown_values'],documentation_is_manifest_definition=False,source_semantics=facts['source_semantics'])
+   elif kind=='evidence' and s.get('scope')=='aosp-pinned-hidl-source-evidence':
+    from hidl_source import parse as parse_hidl
+    payload=path.read_bytes()
+@@ -222,7 +232,7 @@
+      if not sep:canonical=owner
+      elif '(' in tail:
+       a=tail.find('(');b=tail.rfind(')');m=re.search(r'([\w$]+)$',tail[:a]);method=m.group(1) if m else None
+-      if method:canonical=owner+'#'+('<init>' if method==owner.split('.')[-1] else method)+'('+','.join(typ(x) for x in split_top(tail[a+1:b]) if x.strip())+')'
++      if method:canonical=owner+'#'+('<init>' if method==owner.split('.')[-1] and not tail[:a][:m.start()].strip() else method)+'('+','.join(typ(x) for x in split_top(tail[a+1:b]) if x.strip())+')'
+      else:canonical=owner+'#'+tail.split()[-1]
+      target_match_kind='exact';matched_canonical=canonical
+      candidates=[canonical] if canonical else []
+@@ -238,6 +248,10 @@
+        package_candidate='java-source:package:'+owner;package_bid=sha(package_candidate)
+        if any(item['kind']=='java-source' and str(item.get('platform_api_version',''))==platform for item in sources) and db.execute('SELECT 1 FROM bindings WHERE binding_id=?',(package_bid,)).fetchone():matches.append((package_candidate,package_bid))
+       target_match_kind='current-sdk-index-exact'
++      if not matches:
++       from annotation_link import xml_jvm_key
++       proven_key=xml_jvm_key(name,jvm_owners.get(platform,{}));proven_bid=jvm_keys.get(platform,{}).get(proven_key)
++       if proven_bid:matches=[('jvm:'+proven_key,proven_bid)];target_match_kind='current-sdk-index-jvm-erasure-exact'
+       if not matches and platform not in index_versions.values():
+        from annotation_link import fallback_supported,same_snapshot_source_ids,snapshot_declared_type_matches
+        for candidate in dict.fromkeys(candidates):
+@@ -249,7 +263,7 @@
+      bid=None
+      if len(matches)==1:
+       matched_canonical,bid=matches[0]
+-      if matched_canonical!=canonical:target_match_kind=('same-snapshot-sdk-signature-' if target_match_kind=='same-snapshot-sdk-signature' else '')+('java-lang-spelling-equivalence' if sep else 'package-namespace')
++      if matched_canonical!=canonical and target_match_kind!='current-sdk-index-jvm-erasure-exact':target_match_kind=('same-snapshot-sdk-signature-' if target_match_kind=='same-snapshot-sdk-signature' else '')+('java-lang-spelling-equivalence' if sep else 'package-namespace')
+      else:target_match_kind='unresolved-or-ambiguous'
+      anns=[]
+      for ai,node in enumerate(item.findall('annotation')):
+--- a/catalog/tooling/catalog_projection.py
++++ b/catalog/tooling/catalog_projection.py
+@@ -2,9 +2,13 @@
+ Immutable source declarations remain unchanged; proofs enrich derived registry docs.
+ """
+ import copy,collections,hashlib,json,re
+-from dispatch_manifest import contract_digest
++from dispatch_manifest import contract_digest,wire_annotations
+ TYPE_KINDS={'class','interface','enum','annotation','type','aidl-interface','aidl-parcelable','aidl-union','aidl-enum'}
+ PRIMITIVES={'boolean','byte','char','short','int','long','float','double','void'}
++def entity_kind(doc):
++ e=doc.get('extensions',{})
++ if doc.get('kind') not in TYPE_KINDS|{'package','unsupported','enum-constant','constructor','method','field','property','aidl-member'}:raise ValueError('Missing or unknown Entry.kind; no invocation kind is inferred')
++ return 'type' if doc['kind'] in TYPE_KINDS else 'other' if doc['kind'] in ('package','unsupported','enum-constant') or (doc['kind']=='field' and (e.get('aidl_declaration_kind') or e.get('enum_constant') or e.get('language')=='hidl')) else 'binding'
+ def js(value):return json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=False)
+ def version(value):
+  if not isinstance(value,str) or not re.fullmatch(r'[0-9]+(?:\.[0-9]+)?',value):raise ValueError('Unknown platform version syntax')
+@@ -44,6 +48,33 @@
+   for clause in rule['alternatives']:clause['unknown_reason']=reason
+  else:rule['unknown_reason']+='; '+reason
+  return rule
++
++def structural_header(doc):
++ e=doc['extensions'];supers=[];parameters=e.get('type_parameters');header=e.get('type_header','')
++ if header:
++  match=re.search(r'(?:\b(?:class|interface|enum)|@interface)\s+[\w.$]+(.*)',header)
++  tail=match.group(1).strip().rstrip('{').strip() if match else ''
++  if tail.startswith('<'):
++   depth=0
++   for i,c in enumerate(tail):
++    if c=='<':depth+=1
++    elif c=='>':
++     depth-=1
++     if depth==0:parameters=tail[:i+1];tail=tail[i+1:];break
++  for match in re.finditer(r'\b(extends|implements)\s+(.+?)(?=\b(?:extends|implements)\b|$)',tail):
++   from parsers import split_top
++   supers.extend(dict(relation=match[1],text=value.strip()) for value in split_top(match[2]) if value.strip())
++ for name,relation in (('superclass','extends'),('interfaces','implements')):
++  text=e.get(name)
++  if text:
++   from parsers import split_top
++   text=re.sub(r'^\s*(?:extends|implements)\s+','',text)
++   supers.extend(dict(relation=relation,text=value.strip()) for value in split_top(text) if value.strip())
++ for value in e.get('supertypes',[]):
++  if value.get('name'):supers.append(dict(relation=value.get('relation','unknown'),text=value['name'].replace('/','.').replace('$','.')))
++ if e.get('declared_extends'):supers.append(dict(relation='hidl-declared-extends',text=e['declared_extends']))
++ normalized={js(v):v for v in supers}
++ return parameters,[normalized[k] for k in sorted(normalized)]
+ 
+ class Projection:
+  def __init__(self,db,sources):
+@@ -105,18 +136,20 @@
+   if doc['kind'] in TYPE_KINDS:
+    shape=[]
+    for field_sid,field in self.fields.get((self.snapshots[sid],doc.get('owner')),[]):
+-    shape.append(dict(name=field['name'],type=self.type_ref(field['return_type'],field,field_sid) if field.get('return_type') else None,constant=field['extensions'].get('constant_raw')))
+-   doc['extensions']['declared_type_shape']=dict(kind=doc['kind'],qualified_name=doc.get('owner') or doc['canonical_signature'].split(':',1)[1],fields=sorted(shape,key=js))
++    shape.append(dict(name=field['name'],type=self.type_ref(field['return_type'],field,field_sid) if field.get('return_type') else None,constant=field['extensions'].get('constant_raw'),wire_annotations=wire_annotations(field['extensions'].get('annotations',[]))))
++   parameters,supers=structural_header(doc)
++   super_refs=[dict(relation=v['relation'],type=self.type_ref(dict(text=v['text'],status='unknown',codec_status='unknown'),doc,sid)) for v in supers]
++   doc['extensions']['declared_type_shape']=dict(kind=doc['kind'],qualified_name=doc.get('owner') or doc['canonical_signature'].split(':',1)[1],type_parameters=parameters,supertypes=super_refs,wire_annotations=wire_annotations(doc['extensions'].get('annotations',[])),fields=sorted(shape,key=js))
+   return doc
+  def entity(self,entry_id,rows):
+   variants={};kind=None
+   for sid,line,raw in rows:
+-   doc=json.loads(raw);kind='type' if doc['kind'] in TYPE_KINDS else 'other' if doc['kind'] in ('package','unsupported','enum-constant') or (doc['kind']=='field' and (doc['extensions'].get('aidl_declaration_kind') or doc['extensions'].get('enum_constant') or doc['extensions']['language']=='hidl')) else 'binding';rule=lifecycle_rule(doc,self.sources[sid]);dependencies={};unresolved=[]
++   doc=json.loads(raw);kind=entity_kind(doc);rule=lifecycle_rule(doc,self.sources[sid]);dependencies={};unresolved=[]
+    if (sid,doc.get('owner','')) in self.formal_unknown:unresolved.append('Malformed formal/header evidence retained')
+    if doc['extensions'].get('field_type_status')=='unknown':unresolved.append('API index omits the required field type schema')
+    refs=list(doc.get('arguments',[]))+([doc['return_type']] if doc.get('return_type') else [])
+    if doc['kind'] in TYPE_KINDS:
+-    refs.extend(v['type'] for v in doc['extensions'].get('declared_type_shape',{}).get('fields',[]) if v['type'])
++    refs.extend(v['type'] for field in ('fields','supertypes') for v in doc['extensions'].get('declared_type_shape',{}).get(field,[]) if v['type'])
+    elif doc.get('owner'):
+     owner_ids=self.index.get((self.snapshots[sid],doc['extensions']['language'],doc['owner']),set())
+     if len(owner_ids)==1:refs.append(dict(text=doc['owner'],status='resolved',resolved_binding_id=next(iter(owner_ids)),codec_status='unknown'))
+--- a/catalog/tooling/device_resolution.py
++++ b/catalog/tooling/device_resolution.py
+@@ -105,7 +105,7 @@
+   elif evaluated:state,reasons='unavailable',sorted({r for _,(_,rs) in evaluated for r in rs})
+   else:state,reasons='unknown',['APPLICABILITY_MISSING']
+   base[key]=(state,reasons);selected[key]=choice
+-  output[key]=dict(entry_id=key,entity_kind=entity['entity_kind'],state=state,reason_codes=reasons,schema_hash=None,contract_hash=choice['schema_hash'] if choice else None,dependencies=[dict(entry_id=d['entry_id'],contract_hash=d['schema_hash']) for d in choice['dependencies']] if choice else [],graph_digest=None)
++  output[key]=dict(entry_id=key,entity_kind=entity['entity_kind'],catalog_state=entity.get('catalog_state','active'),catalog_revision=entity.get('catalog_revision',0),catalog_document_sha256=entity.get('catalog_document_sha256'),state=state,reason_codes=reasons,schema_hash=None,contract_hash=choice['schema_hash'] if choice else None,dependencies=[dict(entry_id=d['entry_id'],contract_hash=d['schema_hash']) for d in choice['dependencies']] if choice else [],graph_digest=None)
+  # Monotone fixed point propagates missing/excluded schemas through recursive SCCs.
+  for _ in range(len(output)+1):
+   changed=False
+--- a/catalog/tooling/dispatch_manifest.py
++++ b/catalog/tooling/dispatch_manifest.py
+@@ -1,14 +1,28 @@
+ """Offline generated alias manifest; never executes imported data or enables tools."""
+ import hashlib,json,sys
+ 
++def wire_annotations(values):
++    # Known type/wire semantics only; permission/lifecycle/proof metadata is separate.
++    names={'nullable','Nullable','NonNull','NotNull','utf8InCpp','FixedSize','Backing','VintfStability','JavaOnlyStableParcelable'}
++    return sorted([dict(name=v['name'],arguments=v.get('arguments','')) for v in values if v.get('name','').rsplit('.',1)[-1] in names],key=lambda v:(v['name'],v['arguments']))
++
+ def contract_digest(entry):
+-    """Version2 semantic contract; source locators/permissions do not select codecs."""
++    """Version3 semantic contract; source locators/permissions do not select codecs."""
+     def type_ref(value):
+         if not isinstance(value,dict):return value
+         return {k:value[k] for k in ('text','status','resolved_binding_id','codec_status','codec_id') if k in value}
+-    contract=dict(contract_format_version=2,canonical_signature=entry.get('canonical_signature'),kind=entry.get('kind'),arguments=[type_ref(v) for v in entry.get('arguments',[])],return_type=type_ref(entry.get('return_type')),codec_status=entry.get('codec_status'),codec_identity=entry.get('extensions',{}).get('codec_identity'))
+-    shape=entry.get('extensions',{}).get('declared_type_shape')
+-    if shape is not None:contract['declared_type_shape']={k:v for k,v in shape.items() if k!='header'}
++    contract=dict(contract_format_version=3,canonical_signature=entry.get('canonical_signature'),kind=entry.get('kind'),arguments=[type_ref(v) for v in entry.get('arguments',[])],return_type=type_ref(entry.get('return_type')),codec_status=entry.get('codec_status'),codec_identity=entry.get('extensions',{}).get('codec_identity'))
++    e=entry.get('extensions',{})
++    contract['parameter_semantics']=[dict(direction=p.get('direction'),wire_annotations=wire_annotations(p.get('all_annotations',p.get('annotations',[])))) for p in e.get('parameters',[])]
++    contract['wire_annotations']=wire_annotations(e.get('annotations',[]))
++    contract['oneway']=True if e.get('oneway') is True or e.get('interface_oneway') is True else False if 'oneway' in e or 'interface_oneway' in e else None
++    contract['hidl_results']=[dict(name=p.get('name'),type=p.get('type'),wire_annotations=wire_annotations(p.get('all_annotations',p.get('annotations',[])))) for p in e.get('results',[])]
++    shape=e.get('declared_type_shape')
++    if shape is not None:
++        normalized={k:v for k,v in shape.items() if k not in ('header','fields','supertypes')}
++        normalized['fields']=[dict(v,type=type_ref(v.get('type'))) for v in shape.get('fields',[])]
++        normalized['supertypes']=[dict(v,type=type_ref(v.get('type'))) for v in shape.get('supertypes',[])]
++        contract['declared_type_shape']=normalized
+     return hashlib.sha256(json.dumps(contract,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()
+ 
+ def generate(entries,resolved_status=None):
+@@ -34,6 +48,9 @@
+         if view is not None:
+             if resolved is None:raise ValueError('Device view omits inventory entry')
+             digest=resolved['schema_hash']
++        if view is not None and (resolved['catalog_document_sha256'] is None or resolved['catalog_document_sha256']!=document_hash):raise ValueError('Generated alias document differs from pinned effective catalog')
++        from catalog_projection import entity_kind
++        if entity_kind(entry)!='binding' or (resolved and resolved.get('catalog_state','active')!='active'):continue
+         permission_hash=hashlib.sha256(json.dumps(entry.get('permission'),sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()
+         # Names use the full hash, avoiding collision through human-friendly truncation.
+         result.append(dict(tool_name='binding_'+bid,policy_tool_id='binding.invoke',binding_id=bid,schema_hash=digest,document_hash=document_hash,permission_hash=permission_hash,
+@@ -42,7 +59,7 @@
+                            dispatch_state='unavailable',
+                            reason='Offline catalog only; runtime authority, target resolver and validated codec required'))
+     if view is not None and set(selected)!=set(seen):raise ValueError('Device view and supplied inventory differ')
+-    return dict(format_version='1.1.0',contract_format_version=2,aliases=result)
++    return dict(format_version='1.1.0',contract_format_version=3,aliases=result)
+ 
+ if __name__=='__main__':
+     with open(sys.argv[1]) as f: entries=[json.loads(x) for x in f if x.strip()]
+--- a/catalog/tooling/effective_device_inventory.py
++++ b/catalog/tooling/effective_device_inventory.py
+@@ -0,0 +1,75 @@
++"""Offline atomic registry+local-overlay inventory composition; no device work.
++Catalog exposure state stays separate from version existence and client grants.
++The immutable producer inventory is never rewritten by local CRUD.
++"""
++import copy,hashlib,json,pathlib
++import jsonschema
++import catalog_projection as cp
++from dispatch_manifest import contract_digest
++import device_resolution as dr
++P=pathlib.Path(__file__).resolve().parents[1]
++entity_kind=cp.entity_kind
++def capture(db):
++ """Owns a read transaction, returns all base/local/tombstone nodes with pins.
++ A runtime uses the same DB/coordinator for configuration CAS and catalog epochs.
++ """
++ if db.in_transaction:raise ValueError('Reference inventory capture owns its read transaction')
++ try:
++  db.execute('BEGIN');registry=db.execute('SELECT registry_id FROM active_registry WHERE singleton=1').fetchone()[0];generation,overlay=db.execute('SELECT registry_generation,overlay_generation FROM catalog_view').fetchone();items={v['entry_id']:v for v in cp.load_inventory(db,registry)};base_count=len(items);changed={};states={};revisions={};entry_validator=jsonschema.Draft202012Validator(json.loads((P/'contracts/Entry.schema.json').read_text()))
++  def imported(key):
++   row=db.execute('SELECT document_json FROM registry_entries WHERE registry_id=? AND entry_id=?',(registry,key)).fetchone();return json.loads(row[0]) if row else None
++  for key,state,revision,raw in db.execute('SELECT entry_id,state,revision,document_json FROM overlays ORDER BY entry_id'):
++   states[key]=state;revisions[key]=revision
++   if state=='active':
++    doc=json.loads(raw);entry_validator.validate(doc)
++    if doc['entry_id']!=key or hashlib.sha256(doc['canonical_signature'].encode()).hexdigest()!=key:raise ValueError('Local overlay canonical identity mismatch')
++    changed[key]=doc
++   if key not in items:
++    doc=changed.get(key)
++    # A deleted/conflicting local tombstone stays visible, without inventing shape.
++    items[key]=dict(entry_id=key,entity_kind=entity_kind(doc) if doc else 'other',variants=[])
++  document_hashes={key:hash_value for key,hash_value in db.execute('SELECT entry_id,record_sha256 FROM registry_entries WHERE registry_id=?',(registry,))}
++  for key in states:
++   raw=db.execute('SELECT document_json FROM overlays WHERE entry_id=?',(key,)).fetchone()[0];document_hashes[key]=hashlib.sha256(dr.canonical(json.loads(raw)).encode()).hexdigest()
++  # Component field overrides affect the enclosing structured-type contract too.
++  for key,doc in list(changed.items()):
++   if doc['kind']!='field' or not doc['extensions'].get('aidl_declaration_kind'):continue
++   candidates=db.execute("SELECT binding_id FROM bindings WHERE owner=? AND kind IN ('aidl-parcelable','aidl-union','aidl-enum')",(doc.get('owner'),)).fetchall()
++   for target, in candidates:
++    parent=changed.get(target) or imported(target)
++    if not parent:continue
++    shape=parent['extensions'].get('declared_type_shape')
++    if not shape:raise ValueError('Structured type override needs a producer shape')
++    for field in shape['fields']:
++     if field['name']==doc['name']:field['type']=copy.deepcopy(doc.get('return_type'));field['constant']=doc['extensions'].get('constant_raw')
++    changed[target]=parent
++  contracts={key:{v['schema_hash'] for v in item['variants']} for key,item in items.items()}
++  for key,doc in changed.items():contracts[key]={contract_digest(doc)};items[key]['entity_kind']=entity_kind(doc)
++  for key,item in items.items():
++   if key in changed:
++    doc=changed[key];refs=list(doc.get('arguments',[]))+([doc['return_type']] if doc.get('return_type') else [])
++    refs.extend(field['type'] for name in ('fields','supertypes') for field in doc['extensions'].get('declared_type_shape',{}).get(name,[]) if field.get('type'));dependencies={};unknown=[]
++    if item['entity_kind']!='type' and doc.get('owner'):
++     owners=[row[0] for row in db.execute('SELECT binding_id FROM bindings WHERE owner=?',(doc['owner'],)) if row[0] in items and items[row[0]]['entity_kind']=='type']
++     if len(set(owners))==1:refs.append(dict(status='resolved',resolved_binding_id=owners[0]))
++     else:unknown.append('Containing local type is absent or ambiguous')
++    for ref in refs:
++     if ref.get('status')=='primitive':continue
++     target=ref.get('resolved_binding_id');hashes=contracts.get(target,set())
++     if ref.get('status')!='resolved' or target not in items or items[target]['entity_kind']!='type' or len(hashes)!=1:unknown.append('Local override requires an unambiguous declared type schema');continue
++     dependencies[target]=next(iter(hashes))
++    variants=item['variants'] or [dict(availability={'unknown_reason':'Local addition has no imported version applicability evidence'},dependencies=[],schema_hash=next(iter(contracts[key])))]
++    for variant in variants:
++     variant['schema_hash']=next(iter(contracts[key]));variant['dependencies']=[dict(entry_id=k,schema_hash=v) for k,v in sorted(dependencies.items())]
++     if unknown:variant['availability']=cp.incomplete(variant['availability'],'; '.join(sorted(set(unknown))))
++    item['variants']=variants
++   else:
++    for variant in item['variants']:
++     for dep in variant['dependencies']:
++      if dep['entry_id'] in changed:
++       hashes=contracts[dep['entry_id']]
++       if len(hashes)==1:dep['schema_hash']=next(iter(hashes))
++       else:variant['availability']=cp.incomplete(variant['availability'],'Local type variants ambiguous')
++   item['catalog_state']=states.get(key,'active');item['catalog_revision']=revisions.get(key,0);item['catalog_document_sha256']=document_hashes.get(key);dr.validate(item,'InventoryEntity')
++  result=dict(registry_id=registry,catalog_generation=generation,overlay_generation=overlay,base_inventory_count=base_count,document_hashes=document_hashes,inventory=[items[k] for k in sorted(items)]);result['inventory_sha256']=dr.inventory_digest(result['inventory']);db.commit();return result
++ except Exception:db.rollback();raise
+--- a/catalog/tooling/permission_reference.py
++++ b/catalog/tooling/permission_reference.py
+@@ -0,0 +1,52 @@
++"""Functional facts from the complete official Manifest.permission reference.
++Documentation is not a compiled manifest definition and grants no OS authority.
++All named constant sections are retained, including missing/ambiguous values.
++"""
++from html.parser import HTMLParser
++import re,json,collections
++class Fields(HTMLParser):
++ def __init__(self):
++  super().__init__(convert_charrefs=True);self.depth=0;self.active=[];self.rows=[];self.other=[];self.signature=False;self.script=0
++ def append(self,text,signature=False):
++  for item in self.active:
++   item['text'].append(text)
++   if signature:item['signature'].append(text)
++ def handle_starttag(self,tag,attributes):
++  attrs=dict(attributes)
++  if tag in ('script','style'):self.script+=1
++  if self.script:return
++  if tag=='div':
++   self.depth+=1
++   if 'data-version-added' in attrs:self.active.append(dict(depth=self.depth,attrs=attrs,line=self.getpos()[0],names=[],text=[],signature=[]))
++  if tag in ('p','div','br','h3','pre','li'):self.append('\n')
++  if tag=='h3' and 'api-name' in attrs.get('class','').split():
++   for item in self.active:item['names'].append(attrs.get('id'))
++  if tag=='pre' and 'api-signature' in attrs.get('class','').split():self.signature=True
++ def handle_data(self,text):
++  if not self.script:self.append(text,self.signature)
++ def handle_endtag(self,tag):
++  if tag in ('script','style'):
++   self.script=max(0,self.script-1);return
++  if self.script:return
++  if tag=='pre':self.signature=False
++  if tag in ('p','div','br','h3','pre','li'):self.append('\n')
++  if tag=='div':
++   completed=[item for item in self.active if item['depth']==self.depth]
++   self.active=[item for item in self.active if item['depth']!=self.depth]
++   for item in completed:self.finish(item)
++   self.depth=max(0,self.depth-1)
++ def finish(self,item):
++  if len(item['names'])!=1:return
++  name=item['names'][0];signature=' '.join(''.join(item['signature']).split())
++  if not name or not re.search(r'\bpublic\s+static\s+final\s+(?:java\.lang\.)?String\s+'+re.escape(name)+r'\b',signature):
++   self.other.append(dict(name=name,line=item['line'],signature=signature,reason='Not a recognized documented String constant section'));return
++  text=''.join(item['text']);values=re.findall(r'Constant\s+Value\s*:\s*("(?:[^"\\]|\\.)*")',text);value=None;unknown=None
++  if len(values)==1:
++   try:value=json.loads(values[0])
++   except ValueError:unknown='Documented literal is not a recognized string encoding'
++  else:unknown='Missing or ambiguous documented constant literal'
++  match=re.search(r'Protection\s+level\s*:\s*([^\r\n]+)',text,re.I)
++  self.rows.append(dict(name=name,symbol='android.Manifest.permission.'+name,value=value,line=item['line'],introduced_raw=item['attrs'].get('data-version-added'),deprecated_raw=item['attrs'].get('data-version-deprecated'),removed_raw=item['attrs'].get('data-version-removed'),protection_level_raw=match.group(1).strip() if match else None,signature=signature,value_status='documented-constant' if value is not None else 'unknown',unknown_reason=unknown,authority='Documentation fact only; not a compiled definition, OS grant or MCP client permission'))
++def parse(data):
++ text=data.decode('utf-8') if isinstance(data,bytes) else data;parser=Fields();parser.feed(text);parser.close();counts=collections.Counter(row['name'] for row in parser.rows)
++ return dict(fields=parser.rows,duplicate_field_names=sorted(name for name,count in counts.items() if count>1),nonconstant_or_unsupported_sections=parser.other,unclosed_version_sections=len(parser.active),known_values=sum(row['value'] is not None for row in parser.rows),unknown_values=sum(row['value'] is None for row in parser.rows),source_semantics='Unversioned official API reference snapshot; raw introduced/deprecated/removed and protection metadata preserved separately')
+--- a/catalog/tooling/policy_reference.py
++++ b/catalog/tooling/policy_reference.py
+@@ -81,3 +81,27 @@
+     if route in ('generated','generic'):return ('binding.invoke',)
+     if route=='raw':return ('binding.invoke','binder.transact') if known_raw else ('binder.transact',)
+     raise ValueError('Convenience wrappers use their own registered policy tool_id')
++
++def evaluate_view_fixture(binding_plan,trusted_status,binding_rules,entry_rule,*,entry_schema,authority,emergency=False,current_document_hashes=None):
++    """Known routes compose catalog exposure, existence and canonical grants.
++    trusted_status must come from the configured sealed store, never caller JSON.
++    Unknown raw service grants remain their separately bounded policy path.
++    """
++    import device_resolution as dr
++    view=trusted_status.get('snapshot')
++    if not view or trusted_status.get('stale') or trusted_status.get('generation')!=view['view_generation'] or trusted_status.get('capability_epoch')!=view['capability_epoch']:return 'deny'
++    dr.validate(view,'Snapshot')
++    if dr.digest({k:v for k,v in view.items() if k!='view_id'})!=view['view_id']:return 'deny'
++    entries={row['entry_id']:row for row in view['entries']};pending=[]
++    for key,schema,target,items in binding_plan:
++        row=entries.get(key)
++        if not row or row['entity_kind']!='binding' or row['schema_hash']!=schema or target!=view['target_key'] or row['catalog_document_sha256'] is None or not current_document_hashes or current_document_hashes.get(key)!=row['catalog_document_sha256']:return 'deny'
++        pending.append(key)
++    seen=set()
++    while pending:
++        key=pending.pop()
++        if key in seen:continue
++        seen.add(key);row=entries.get(key)
++        if not row or row['state']!='available' or row['catalog_state']!='active':return 'deny'
++        pending.extend(dep['entry_id'] for dep in row['dependencies'])
++    return evaluate(binding_plan,binding_rules,entry_rule,entry_schema=entry_schema,authority=authority,emergency=emergency)

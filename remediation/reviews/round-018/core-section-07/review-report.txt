@@ -1,0 +1,276 @@
+Workpaper for the assigned slice follows. The slice is the entire file, so no definition crosses the byte boundary.
+
+```json
+{
+  "stage": "round-018 core-section evidence check 7/7: design-c4/architecture/workspace.dsl, current design-only scope",
+  "coverage": {
+    "file": "design-c4/architecture/workspace.dsl",
+    "bytes_assigned": "0-14230 of 14230 (entire file)",
+    "boundary_crossing_definitions": "none; the slice is the whole file, so no unresolved dependency on bytes outside it",
+    "integrity": "sha256 3302f2e6fd9755c770b155af5c6486877626a68cf5d1034376bfe8f1db9b45ff and byte count were supplied by the harness and not independently recomputed (no tools)",
+    "method": "line-by-line inspection of DSL grammar, element and relationship consistency, mapping of every dynamic-view step to a model relationship, and mapping of requirements R1-R12 where the DSL is the applicable artifact"
+  },
+  "findings": [
+    {
+      "id": "WS-01",
+      "severity": "high",
+      "area": "MCP resources and callback journal (R7, R9)",
+      "artifact": "workspace.dsl model relationships and dynamic view CallbackFlow",
+      "evidence": [
+        "transport = component \"McpServer\" \"Pinned MCP2025-11-25 transport, sessions and bounded resource reads\" \"Kotlin\"",
+        "agent -> bridge.app.transport \"Discovers jobs, invokes bindings and reads callback journal\" \"Authenticated MCP\"",
+        "bridge.app.callbacks -> bridge.app.transport \"Signals URI-only resource update and bounded reads\"",
+        "CallbackFlow step: bridge.app.callbacks -> bridge.app.transport \"URI update hint; resource reads supply finite pages\"",
+        "Model relationships with source bridge.app.transport: only -> bridge.app.auth, -> bridge.app.policy, -> bridge.app.groups. None to bridge.app.callbacks, bridge.db or bridge.app.catalog."
+      ],
+      "issue": "resources/subscribe (exact URI), resources/read (finite journal pages/status) and unregister/cancel on client disconnect have no modeled dependency from McpServer to CallbackBroker or storage. The only edge runs broker -> transport yet is labeled as supplying reads, so the model contradicts its own claim that McpServer performs bounded resource reads.",
+      "exact_minimal_correction": "Add model relationship: bridge.app.transport -> bridge.app.callbacks \"Subscribes exact URI, reads finite bounded journal pages/status, unregisters on cancel or disconnect\". Reword the existing edge to \"Signals URI-only resources/updated\". In dynamic CallbackFlow append: bridge.app.transport -> bridge.app.callbacks \"Read finite journal page on resources/read\".",
+      "verification_needed": "Pass covering docs/diagrams/server-execution-classes.svg: confirm which class serves resources/read and that McpServer holds a reference to it."
+    },
+    {
+      "id": "WS-02",
+      "severity": "medium",
+      "area": "ADB backend ownership and canonical dispatch (R3, R4, R5)",
+      "artifact": "workspace.dsl components invoke, policy, arc and their android edges",
+      "evidence": [
+        "invoke = component \"InvocationPlanner\" \"Typed generic/raw dispatch, codecs, Binder and ADB adapters\" \"Kotlin\"",
+        "policy = component \"AdmissionGate\" \"Canonical policy, approvals, epochs and dispatch boundary\" \"Kotlin\"",
+        "bridge.app.policy -> bridge.app.invoke \"Admits verified canonical dispatch\"",
+        "bridge.app.invoke -> android \"Performs authorized SDK/Binder/paired ADB operation\"",
+        "bridge.app.arc -> android \"Uses separate authorized ADB backend for generic phone control\""
+      ],
+      "issue": "The ADB adapter is declared as InvocationPlanner's responsibility, but ArcEngine reaches Android directly with its own ADB backend outside the AdmissionGate -> InvocationPlanner dispatch boundary. No component owns the paired-ADB session, two independent ADB clients against one adbd pairing is unspecified, and R5 convergence of generic/raw paths on canonical policy is asserted only for admission (arc -> policy), not for dispatch.",
+      "exact_minimal_correction": "Either replace the direct edge with bridge.app.arc -> bridge.app.invoke \"Submits admitted generic phone-control operations (screen.state, input.tap) to canonical paired-ADB dispatch\", or add adb = component \"AdbBackend\" \"Single paired-ADB session and loopback forward owner\" \"Kotlin\" with bridge.app.invoke -> bridge.app.adb, bridge.app.arc -> bridge.app.adb, bridge.app.adb -> android, and remove both direct ADB mentions.",
+      "verification_needed": "arc-ui-classes.svg and server-execution-classes.svg: which class owns the ADB session and whether the ARC ADB path consumes an admission ticket."
+    },
+    {
+      "id": "WS-03",
+      "severity": "medium",
+      "area": "UI boundary and bounded facade (R2)",
+      "artifact": "workspace.dsl ui -> arcController relationship",
+      "evidence": [
+        "ownerCommands = component \"OwnerCommandFacade\" \"Bounded unexported local Binder commands and owner authentication\" \"Kotlin\"",
+        "bridge.app.ui -> bridge.app.ownerCommands \"Submits typed CAS commands and observes immutable state\"",
+        "bridge.app.ui -> bridge.app.arcController \"Controls explicitly selected remote session through local service\""
+      ],
+      "issue": "The label says the UI controls the controller session \"through local service\", but the modeled edge runs directly from the Compose UI to ArcClientAdapter, bypassing the only declared bounded facade. This contradicts the facade's \"bounded\" claim and R2 (UI cannot bypass service-owned authorization).",
+      "exact_minimal_correction": "Replace with bridge.app.ownerCommands -> bridge.app.arcController \"Opens, drives and closes an explicitly selected controller session for the authenticated owner\"; keep bridge.app.ui -> bridge.app.ownerCommands as the sole UI entry.",
+      "verification_needed": "arc-controller-classes.svg: confirm the controller session object is service-owned and not instantiated by the UI."
+    },
+    {
+      "id": "WS-04",
+      "severity": "medium",
+      "area": "Facade reach versus UI responsibilities; status and health (R2, R7)",
+      "artifact": "workspace.dsl components lifecycle, ui, audit and ownerCommands edges",
+      "evidence": [
+        "lifecycle = component \"BridgeService\" \"Foreground lifecycle, boot eligibility and truthful status\" \"Kotlin Android Service\"",
+        "ui = component \"Compose management UI\" \"Screen definitions, grants, group/catalog/log/subscription management\" \"Kotlin / Compose\"",
+        "audit = component \"AuditLogger\" \"Mandatory audit and configurable per-client payload logging\" \"Kotlin\"",
+        "Relationships with source bridge.app.ownerCommands: only -> bridge.app.policy and -> bridge.app.catalog. No relationship connects ui or ownerCommands to lifecycle, callbacks, audit, device or transport; no relationship reads configuration into audit."
+      ],
+      "issue": "The UI must show running status and separate MCP/ADB/device-view health and manage logs and callback subscriptions, but the facade reaches only policy and catalog. The source of status/health, the path to list or revoke registrations, and the path by which AuditLogger obtains per-client logging configuration are unspecified.",
+      "exact_minimal_correction": "Add: bridge.app.ownerCommands -> bridge.app.lifecycle \"Reads separate MCP, ADB and device-view health and boot eligibility\"; bridge.app.ownerCommands -> bridge.app.callbacks \"Lists and revokes registrations and subscriptions\"; bridge.app.audit -> bridge.app.catalog \"Reads per-client logging configuration\" (plus ownerCommands -> audit if log review is served live rather than from db).",
+      "verification_needed": "server-core-classes.svg and the dashboard, logs and callback screen specifications: confirm the status snapshot and subscription-management paths."
+    },
+    {
+      "id": "WS-05",
+      "severity": "medium",
+      "area": "Authentication ownership and client-mapping persistence (R2, R5, R7)",
+      "artifact": "workspace.dsl components auth, ownerCommands, policy",
+      "evidence": [
+        "auth = component \"ClientAuthenticator\" \"Credential, principal and session ownership\" \"Kotlin / Keystore\"",
+        "ownerCommands = component \"OwnerCommandFacade\" \"Bounded unexported local Binder commands and owner authentication\" \"Kotlin\"",
+        "bridge.app.ownerCommands -> bridge.app.policy \"Requires exact fresh owner capability for protected transitions\"",
+        "bridge.app.policy -> bridge.app.auth \"Pins current principal and credential epoch\"",
+        "No relationship has source bridge.app.auth; no relationship ownerCommands -> auth exists."
+      ],
+      "issue": "Two components claim authentication. The issuer of the \"fresh owner capability\" is never connected to ClientAuthenticator, so AdmissionGate pins an owner principal and credential epoch with a component that never authenticated the owner. ClientAuthenticator also has no persistence dependency, while R2 requires client mapping and permissions in SQLite.",
+      "exact_minimal_correction": "Add bridge.app.ownerCommands -> bridge.app.auth \"Authenticates local owner and obtains fresh owner capability\"; change the facade description to \"Bounded unexported local Binder commands; owner authentication delegated to ClientAuthenticator\"; add bridge.app.auth -> bridge.app.catalog \"Reads client mapping, credential metadata and credential epochs\" (or -> bridge.db).",
+      "verification_needed": "server-core-classes.svg: identify the OwnerCapability issuer and the client-mapping table owner."
+    },
+    {
+      "id": "WS-06",
+      "severity": "medium",
+      "area": "SQLite write ownership and concurrency (R2, R7)",
+      "artifact": "workspace.dsl edges into bridge.db",
+      "evidence": [
+        "bridge.app.catalog -> bridge.db \"Owns transactional writes and read-only snapshots\"",
+        "bridge.app.callbacks -> bridge.db \"Appends ordered bounded events and cleanup state\"",
+        "bridge.app.audit -> bridge.db \"Persists mandatory audit and configured call records\""
+      ],
+      "issue": "The catalog edge claims ownership of transactional writes, yet two other components write to the same SQLite container directly. Single-writer serialization, connection ownership and the ordering guarantee for the event journal across three writers are unspecified. This is a contradiction, not a summary.",
+      "exact_minimal_correction": "Reword to bridge.app.catalog -> bridge.db \"Owns catalog, overlay, policy, group and view tables through the single serialized writer connection\" and state the connection owner and journal mode in the db container description, or route the other two writers through a named storage component.",
+      "verification_needed": "Storage and journal class ownership in server-execution-classes.svg."
+    },
+    {
+      "id": "WS-07",
+      "severity": "medium",
+      "area": "Callback lifecycle triggers (R7)",
+      "artifact": "workspace.dsl edges into bridge.app.callbacks",
+      "evidence": [
+        "callbacks = component \"CallbackBroker\" \"Registration, bounded journal, local reply and cleanup obligations\" \"Kotlin\"",
+        "bridge.app.callbacks -> bridge.app.policy \"Rechecks event/reply/cleanup authority and epochs\"",
+        "Relationships with destination bridge.app.callbacks: only from bridge.app.invoke and android. Source bridge.app.lifecycle edges: transport, catalog, device, arc only."
+      ],
+      "issue": "Cleanup on service restart (replay of persisted cleanup obligations), Binder death handling and credential revocation are required by R7, but no component triggers them. Revocation is discoverable only on pull recheck and restart replay has no initiator.",
+      "exact_minimal_correction": "Add bridge.app.lifecycle -> bridge.app.callbacks \"Replays persisted cleanup obligations and expires dead registrations on restart\"; rely on the WS-01 transport -> callbacks edge for disconnect/cancel; add death-notification wording to android -> bridge.app.callbacks.",
+      "verification_needed": "Confirm the restart-cleanup owner in the docs."
+    },
+    {
+      "id": "WS-08",
+      "severity": "medium",
+      "area": "Device view refresh triggers (R6)",
+      "artifact": "workspace.dsl lifecycle -> device edge",
+      "evidence": [
+        "bridge.app.lifecycle -> bridge.app.device \"Requests startup capability resolution\"",
+        "device = component \"DeviceViewResolver\" \"Observed version applicability and coherent binding/type activation\" \"Kotlin\"",
+        "bridge.app.ownerCommands -> bridge.app.catalog \"Commits validated owner catalog/configuration changes\"; no relationship from catalog, ownerCommands or invoke to bridge.app.device."
+      ],
+      "issue": "R6 requires invalidation and refresh on device, backend or catalog changes. The only modeled trigger is startup, so a committed catalog import or an ADB backend change leaves the sealed view stale with no re-resolution path.",
+      "exact_minimal_correction": "Reword to \"Requests startup and change-triggered atomic capability re-resolution\" and add bridge.app.catalog -> bridge.app.device \"Signals committed catalog/overlay change for atomic re-resolution\" (or ownerCommands -> device).",
+      "verification_needed": "Docs for the view epoch and invalidation contract."
+    },
+    {
+      "id": "WS-09",
+      "severity": "low",
+      "area": "Protocol and technology labels (R3, R4, R9)",
+      "artifact": "workspace.dsl external edges",
+      "evidence": [
+        "arcClient = softwareSystem \"Compatible ARC client\" \"Existing arc-protobuf-v1 remote-control client\"",
+        "arcClient -> bridge.app.arc \"Inspects approved target tree/frames and requests guarded input\" \"arc-protobuf-v1 loopback TCP\"",
+        "bridge.app.arcController -> arcTarget \"Connects and validates exact retained ARC profile\" (no technology)",
+        "agent -> bridge.app.transport \"Discovers jobs, invokes bindings and reads callback journal\" \"Authenticated MCP\" (no transport binding)"
+      ],
+      "issue": "The identifier arc-protobuf-v1 is not among the stated ARC facts (envelope 1.0 versus package 0.8.0, raw TCP with signed 4-byte BE length, max 8388608). If it is not a literal from the pinned commit it is an invented protocol claim. The controller edge omits the same technology, and the MCP edge omits its binding (Streamable HTTP over loopback or adb forward versus stdio).",
+      "exact_minimal_correction": "Use on both ARC edges \"ARC raw TCP, signed 4-byte BE length, envelope 1.0 / package 0.8.0, loopback\" (replace arc-protobuf-v1 unless confirmed) and on the agent edge \"MCP 2025-11-25 Streamable HTTP over loopback TCP (adb forward)\".",
+      "verification_needed": "Search pinned ARC commit 19792a52a13a3df342f90bab6b246b547e673919 for the literal arc-protobuf-v1."
+    },
+    {
+      "id": "WS-10",
+      "severity": "low",
+      "area": "ComposeTargetAdapter ownership (R4, R10)",
+      "artifact": "workspace.dsl arc -> ui edge and image view ArcTargetClasses",
+      "evidence": [
+        "bridge.app.arc -> bridge.app.ui \"Operates only selected unprotected ComposeTargetAdapter root\"",
+        "image bridge.app.arc ArcTargetClasses { ... title \"C4 code-level detail: Compose tree, frame, input and property adapters (UML class notation)\" }",
+        "ui description: \"Screen definitions, grants, group/catalog/log/subscription management\" (no adapter mention)"
+      ],
+      "issue": "The target adapter classes are attached to ArcEngine by the image view, but the relationship places the adapter root inside the UI. The owning component is ambiguous, so ownership and multiplicity required by R10 cannot be read from the model.",
+      "exact_minimal_correction": "Append \"; hosts the ComposeTargetAdapter root exposed to ArcEngine\" to the ui description, or attach ArcTargetClasses to bridge.app.ui.",
+      "verification_needed": "arc-target-classes.svg package and ownership annotations."
+    },
+    {
+      "id": "WS-11",
+      "severity": "low",
+      "area": "Deployment platform label (R6)",
+      "artifact": "workspace.dsl deploymentEnvironment ReferenceAndroid",
+      "evidence": [
+        "deploymentNode \"Android phone\" \"Reference deployment, not a deployed app\" \"Android35+\""
+      ],
+      "issue": "\"Android35+\" conflates an API level (35 is Android 15) with a version number. The design elsewhere forbids API-level-only reasoning, so the reference minimum is ambiguous.",
+      "exact_minimal_correction": "Technology \"Android 15 (API level 35) or newer; observed major/minor resolved at startup\" or the actual intended minimum.",
+      "verification_needed": "Consistency with the minSdk and the wireless-pairing minimum stated in the docs."
+    },
+    {
+      "id": "WS-12",
+      "severity": "low",
+      "area": "Dynamic view coverage (R4, R5, R7, R9, R10)",
+      "artifact": "workspace.dsl views block",
+      "evidence": [
+        "Dynamic views present: Startup, CallbackFlow, InvocationFlow, GroupFlow. None includes arcClient, owner or bridge.app.ownerCommands; no step has agent as destination."
+      ],
+      "issue": "The ARC session lifecycle (one request per socket, repeated stream responses, terminal end flag, cancellation by socket close) and the protected owner CAS transition have no architecture message sequence. The finite registration handle (R7) and the single final JSON-RPC response (R9) are never shown as responses.",
+      "exact_minimal_correction": "Add dynamic bridge.app ArcSession and dynamic bridge.app OwnerTransition using existing relationships, and add response steps such as bridge.app.transport -> agent \"Final JSON-RPC result carrying finite registration handle\". Structurizr renders reverse-direction steps as responses when only the forward relationship exists; confirm with the pinned CLI.",
+      "verification_needed": "Whether the Markdown docs already carry these sequences, and CLI behaviour for reverse response steps."
+    },
+    {
+      "id": "WS-13",
+      "severity": "low",
+      "area": "Rendering determinism property (R11, R12), unverified",
+      "artifact": "workspace.dsl views properties",
+      "evidence": [
+        "properties { \"plantuml.skinparams\" \"backgroundColor=white,defaultFontName=DejaVu Sans\" }"
+      ],
+      "issue": "plantuml.skinparams could not be confirmed as a property recognized by the Structurizr PlantUML exporter (known keys include plantuml.title, plantuml.includes, plantuml.sequenceDiagrams). An unrecognized key is silently ignored, so the DSL does not establish the font and background determinism it implies.",
+      "exact_minimal_correction": "If unrecognized by the pinned structurizr-cli, replace with \"plantuml.includes\" \"skin.puml\" where the local file carries skinparam defaultFontName DejaVu Sans and skinparam backgroundColor white.",
+      "verification_needed": "Pinned structurizr-cli exporter documentation, or an exported .puml showing the skinparam lines."
+    },
+    {
+      "id": "WS-14",
+      "severity": "low",
+      "area": "Authentication-event audit path (R7)",
+      "artifact": "workspace.dsl edges into bridge.app.audit",
+      "evidence": [
+        "bridge.app.policy -> bridge.app.audit \"Records admission and bounded outcome\"",
+        "No relationship from bridge.app.transport or bridge.app.auth to bridge.app.audit."
+      ],
+      "issue": "Authentication failures, session creation, reconnect and revocation never reach AdmissionGate, so per-client auth logging has no modeled path.",
+      "exact_minimal_correction": "Add bridge.app.auth -> bridge.app.audit \"Records authentication failures, session creation, reconnect and revocation\".",
+      "verification_needed": "Class diagram: whether AuditLogger exposes an auth-event API."
+    },
+    {
+      "id": "WS-15",
+      "severity": "low",
+      "area": "Boot and foreground-service constraints (R2)",
+      "artifact": "workspace.dsl lifecycle component",
+      "evidence": [
+        "lifecycle description \"Foreground lifecycle, boot eligibility and truthful status\"",
+        "No relationship between android and bridge.app.lifecycle in either direction."
+      ],
+      "issue": "Optional boot start and the honest Android limits (boot-completed delivery, foreground-service start restrictions) require OS interaction that the model omits.",
+      "exact_minimal_correction": "Add android -> bridge.app.lifecycle \"Delivers boot-completed and foreground-service start/stop constraints; may refuse background start\".",
+      "verification_needed": "Settings and boot screen specification wording for the stated limits."
+    },
+    {
+      "id": "WS-16",
+      "severity": "info",
+      "area": "Honesty labels (R4)",
+      "artifact": "workspace.dsl components arc and arcController",
+      "evidence": [
+        "arc = component \"ArcEngine\" \"Internal Kotlin port preserving pinned ARC wire/profile; not implemented\" \"Kotlin / protobuf\"",
+        "arcController = component \"ArcClientAdapter\" \"Controller-side session/profile and compatible external-target connection\" \"Kotlin / protobuf\""
+      ],
+      "issue": "The controller half of the ARC port lacks the explicit \"not implemented\" marker carried by ArcEngine. Mitigated by the workspace description \"design only\", so this is a consistency note, not a contradiction.",
+      "exact_minimal_correction": "Append \"; not implemented\" to the ArcClientAdapter description.",
+      "verification_needed": "none"
+    }
+  ],
+  "verified_resolutions": [
+    "No DSL grammar defect found by inspection: hierarchical identifiers are used consistently, all view keys are unique, and the styles, deployment, image and dynamic view syntax matches Structurizr DSL as understood. Running structurizr validate was not possible.",
+    "All 27 dynamic-view steps (Startup 5, CallbackFlow 8, InvocationFlow 8, GroupFlow 6) map to existing model relationships, as the DSL requires.",
+    "R10: no Mermaid or Pele keywords; code-level detail is delivered through image views explicitly titled \"C4 code-level detail ... (UML class notation)\" and attached to C4 components; relative paths ../docs/diagrams/*.svg are portable (existence is checked by other passes).",
+    "R9: transport is pinned to MCP 2025-11-25; callback updates are labeled URI-only; resource reads are described as finite and bounded.",
+    "R7: callback replies are described as bounded local reply only (dynamic step \"Deliver callback; bounded local reply only\").",
+    "R2: Running status is exposed only after a ready listener (Startup step); the service is a Kotlin Android foreground Service; the deployment honestly states \"No privilege boundary between UI and service\" and \"Reference deployment, not a deployed app\".",
+    "R4/R5: ArcEngine is labeled \"not implemented\"; ArcEngine and ArcClientAdapter are both bound to AdmissionGate (\"Uses same admission and protected-owner boundary\", \"Checks client target grants before forwarding\"); no TLS, IsAdbTunnel or handshake claims appear in the DSL.",
+    "R8: discovery edges state \"Report permission status; no grant change\" and \"without granting authority\"; CAS activation with conflict return is modeled.",
+    "R12: no absolute paths and no hosting URLs appear in the DSL."
+  ],
+  "cross_artifact_questions": [
+    "Do docs/diagrams/server-core-classes.svg, server-execution-classes.svg, arc-ui-classes.svg, arc-controller-classes.svg and arc-target-classes.svg exist, and do their classes map to the components they are attached to (transport, invoke, arc, arcController, arc)?",
+    "Does the Gradle SVG task handle image views? The PlantUML exporter does not emit image views, so the Markdown must link the five SVGs directly; confirm the links/outputs task does this.",
+    "Is arc-protobuf-v1 a literal profile identifier in ARC commit 19792a52a13a3df342f90bab6b246b547e673919?",
+    "Which class owns the paired-ADB session, and is it shared between InvocationPlanner and ArcEngine (WS-02)?",
+    "Who mints the owner capability, and where is client mapping persisted (WS-05)?",
+    "What is the single-writer and journal-mode model for the SQLite container (WS-06)?",
+    "Where is the optional negotiated direct event stream (R7, R9) declared or marked unsupported? It is absent from the DSL.",
+    "How does the validated catalog release reach the APK (bundled asset at build time versus owner-triggered import), and how is \"trusted\" established at load (hash or signature)?",
+    "Does tools/list_changed emission after group activation sit in McpServer? No groups -> transport edge exists.",
+    "Is the reference minimum \"Android35+\" consistent with the minSdk and wireless-pairing minimum in the docs?",
+    "Does the pinned structurizr-cli recognize plantuml.skinparams (WS-13)?"
+  ],
+  "limitations": [
+    "No tools: sha256 and byte count were not recomputed; structurizr validate was not run; referenced SVGs and docs were not opened; exporter property support and the ARC identifier were not checked against sources.",
+    "Statements about Structurizr DSL grammar and exporter behaviour rely on reviewer knowledge of the DSL and structurizr-export; uncertainty is stated where it exists (WS-12, WS-13).",
+    "Severities reflect impact on design correctness within this slice only. No scores are assigned, and the whole design is not reconstructed here.",
+    "Findings are limited to concrete contradictions or unspecified mechanisms with quoted evidence; speculative improvements were excluded."
+  ],
+  "report_complete": true
+}
+```
+
+`★ Insight ─────────────────────────────────────`
+- In Structurizr DSL, every step in a `dynamic` view must reuse a relationship that already exists in the model, so a dynamic view can never introduce a dependency the component model lacks. That is why the missing `transport -> callbacks` edge (WS-01) surfaces as a mislabeled reverse edge: the author had no forward relationship to draw the read step on.
+- Relationship descriptions in C4 are contracts, not decoration. Phrases like "Owns transactional writes" (WS-06) or "through local service" (WS-03) assert ownership and routing, and a hostile reader checks them against the actual edges. Keeping descriptions to what the edge truly carries avoids these contradictions.
+- Image views are the only Structurizr mechanism for class-level detail, but the PlantUML exporter ignores them. If the Gradle pipeline exports through PlantUML, those five SVGs reach the Markdown only via explicit links, which is worth confirming in the build pass.
+`─────────────────────────────────────────────────`

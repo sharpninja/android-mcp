@@ -1,0 +1,731 @@
+--- catalog/tooling/parsers.py
++++ catalog/tooling/parsers.py
+@@ -176,7 +176,9 @@
+   if end is None:return dict(package=pkg,descriptor=descriptor,declaration_kind=kind,imports=imports,annotations=topanns,members=[],parse_status='unsupported',reason='Unbalanced declaration body')
+   body=code[start+1:end]
+   if kind=='interface':
+-   chunks=[c.strip() for c in split_top(body,';') if c.strip()];status='methods-parsed'
++   # Angle brackets in constant expressions are shifts/comparisons, not nesting.
++   from aidl_lex import chunks as aidl_chunks
++   chunks=[raw for raw,offset in aidl_chunks(body,';')];status='methods-parsed'
+    offset=0
+    for ordinal,raw in enumerate(chunks):
+     locator=body.find(raw,offset);offset=locator+len(raw)
+--- /dev/null
++++ catalog/tooling/aidl_lex.py
+@@ -0,0 +1,18 @@
++"""AIDL statement delimiters: angle shifts/comparisons do not open nesting."""
++def chunks(text,separator):
++    start=0;stack=[];quote=None;escape=False
++    for i,c in enumerate(text):
++        if quote:
++            if escape:escape=False
++            elif c=='\\':escape=True
++            elif c==quote:quote=None
++        elif c in ('"',"'"):quote=c
++        elif c in '([{':stack.append(c)
++        elif c in ')]}':
++            if stack:stack.pop()
++        elif c==separator and not stack:
++            raw=text[start:i].strip()
++            if raw:yield raw,start
++            start=i+1
++    raw=text[start:].strip()
++    if raw:yield raw,start
+--- /dev/null
++++ catalog/tooling/aidl_members.py
+@@ -0,0 +1,69 @@
++"""AIDL declaration inventory only. Never infer wire tags/layouts or execute values."""
++import re
++from parsers import annotations,typ,without_comments,sha
++from aidl_lex import chunks
++
++def field(raw,descriptor,package,kind,ordinal,line):
++    clean,anns=annotations(raw);clean=clean.strip().rstrip(';').strip()
++    constant=bool(re.match(r'^const\b',clean));clean=re.sub(r'^const\s+','',clean)
++    if kind=='enum':
++        m=re.fullmatch(r'([A-Za-z_]\w*)\s*(?:=\s*(.*))?',clean,re.S)
++        if not m:raise ValueError('Unresolved AIDL enumerant')
++        name,value=m.groups();type_name=descriptor
++    else:
++        m=re.fullmatch(r'(.+?)\s+([A-Za-z_]\w*)\s*(?:=\s*(.*))?',clean,re.S)
++        if not m:raise ValueError('Unresolved AIDL field declaration')
++        type_name,name,value=m.groups()
++        if any(c in type_name for c in ';={}()'):raise ValueError('Unsupported nested AIDL field syntax')
++        type_name=typ(type_name)
++    return dict(kind='field',canonical=descriptor+'#'+name,owner=descriptor,package=package,name=name,return_type=type_name,parameters=[],annotations=anns,all_annotations=anns,raw=raw,line=line,extras=dict(aidl_declaration_kind=kind,enum_constant=kind=='enum',is_constant=constant,constant_raw=value,declared_ordinal=ordinal,wire_tag=None,wire_layout_status='unknown; declaration order/value is not verified wire metadata'))
++
++def enrich(text,declaration):
++    """Preserve parser result; enrich structured metadata and interface constants."""
++    result=dict(declaration);result['members']=list(declaration['members'])
++    kind=result['declaration_kind'];descriptor=result.get('descriptor')
++    if not descriptor:return result
++    if kind=='interface':
++        for i,member in enumerate(result['members']):
++            if member['kind']=='unsupported' and re.match(r'^\s*const\b',annotations(member['raw'])[0]):
++                try:result['members'][i]=field(member['raw'],descriptor,result['package'],'interface',i,member['line'])
++                except ValueError:pass
++        result['parse_status']='partial' if any(m['kind']=='unsupported' for m in result['members']) else 'methods-parsed'
++        return result
++    if kind not in ('parcelable','union','enum'):return result
++    code=without_comments(text);clean,_=annotations(code)
++    header=re.search(r'\b'+kind+r'\s+'+re.escape(descriptor.rsplit('.',1)[-1])+r'\b',clean)
++    if not header:return result
++    pos=header.end()
++    while pos<len(clean) and clean[pos].isspace():pos+=1
++    if pos<len(clean) and clean[pos]=='<':
++        depth=0
++        for i in range(pos,len(clean)):
++            if clean[i]=='<':depth+=1
++            elif clean[i]=='>':
++                depth-=1
++                if depth==0:pos=i+1;break
++        else:return result
++        while pos<len(clean) and clean[pos].isspace():pos+=1
++    if pos>=len(clean) or clean[pos]!='{':return result # external declaration has no body
++    start=pos;depth=0;quote=None;escape=False;end=None
++    for i,c in enumerate(code[start:],start):
++        if quote:
++            if escape:escape=False
++            elif c=='\\':escape=True
++            elif c==quote:quote=None
++        elif c in ('"',"'"):quote=c
++        elif c=='{':depth+=1
++        elif c=='}':
++            depth-=1
++            if depth==0:end=i;break
++    if end is None:return result
++    body=code[start+1:end];members=[];unsupported=0
++    for ordinal,(raw,offset) in enumerate(chunks(body,',' if kind=='enum' else ';')):
++        locator=body.find(raw,offset);line=code[:start+1+locator].count('\n')+1
++        try:member=field(raw,descriptor,result['package'],kind,ordinal,line)
++        except ValueError as error:
++            unsupported+=1;member=dict(kind='unsupported',canonical=descriptor+'#unparsed:'+sha(raw),owner=descriptor,package=result['package'],name='unparsed',return_type=None,parameters=[],annotations=annotations(raw)[1],all_annotations=annotations(raw)[1],raw=raw,line=line,extras=dict(parse_error=str(error),declared_ordinal=ordinal))
++        members.append(member)
++    result.update(members=members,parse_status='field-metadata-partial' if unsupported else 'field-metadata-parsed',reason='Source fields/enumerants inventoried; imports, runtime type resolution, wire tags/layouts and codecs remain unverified')
++    return result
+--- catalog/tooling/sdk_api_index.py
++++ catalog/tooling/sdk_api_index.py
+@@ -41,7 +41,7 @@
+   if tag in ('class','method','field'):positions.append((tag,locator.CurrentLineNumber))
+  locator.StartElementHandler=locate;locator.Parse(data,True)
+  nodes=[n for n in root.iter() if n.tag in ('class','method','field')]
+- assert [n.tag for n in nodes]==[tag for tag,line in positions]
++ if [n.tag for n in nodes]!=[tag for tag,line in positions]:raise ValueError('API index locator alignment failed')
+  lines={id(n):line for n,(tag,line) in zip(nodes,positions)}
+  def active(node,inherited):
+   since=node.get('since',inherited.get('since','1'));removed=node.get('removed',inherited.get('removed'));v=version(since);rv=version(removed) if removed else None
+--- catalog/tooling/build_catalog.py
++++ catalog/tooling/build_catalog.py
+@@ -4,11 +4,12 @@
+ """
+ import pathlib,json,sqlite3,hashlib,datetime,sys,xml.etree.ElementTree as ET,zipfile,collections,os,re,gzip
+ from parsers import signature,aidl,permission,unknown,sha,split_top,typ
++from aidl_members import enrich as enrich_aidl
+ P=pathlib.Path(__file__).resolve().parents[1]
+ def js(x):return json.dumps(x,sort_keys=True,separators=(',',':'),ensure_ascii=False)
+ def hb(b):return hashlib.sha256(b).hexdigest()
+ def processing_fingerprint():
+- return sha(js({name:hb((P/name).read_bytes()) for name in ('tooling/build_catalog.py','tooling/parsers.py','tooling/foundation_extract.py','tooling/java_source.py','tooling/sdk_api_index.py','tooling/jvm_source_link.py','tooling/java_context.py','tooling/annotation_link.py','contracts/Entry.schema.json','contracts/PermissionExpression.schema.json')}))
++ return sha(js({name:hb((P/name).read_bytes()) for name in ('tooling/build_catalog.py','tooling/parsers.py','tooling/aidl_members.py','tooling/aidl_lex.py','tooling/foundation_extract.py','tooling/java_source.py','tooling/sdk_api_index.py','tooling/jvm_source_link.py','tooling/java_context.py','tooling/annotation_link.py','contracts/Entry.schema.json','contracts/PermissionExpression.schema.json')}))
+ def ref(text):return dict(text=text,status='unknown',codec_status='unknown',reason='Source type retained; runtime resolver/codec not verified')
+ def cached_records(s,root):
+  cache=s.get('metadata_cache')
+@@ -87,6 +88,7 @@
+    extensions['identity_scope']='Source-spelled type identity; wildcard/type-variable resolution unknown; no JVM equivalence inferred without proof'
+   elif lang=='jvm':extensions['identity_scope']='Published JVM owner/member key; methods include descriptors; field descriptor/type and Java type kind may be unknown'
+   doc=dict(schema_version='1.0.0',entry_id=bid,canonical_signature=canonical,kind=r['kind'],name=r['name'],package=r['package'],permission=ast,provenance=[dict(source_id=s['source_id'],line=line,raw_signature=r['raw'],source_revision=s['revision'])],origin='imported',state='active',registry_version=meta['registry_version'],overlay_revision=0,codec_status='unknown',unresolved=['OS authority, MCP client grants and wire codecs are not established by catalog metadata'],required_semantics=[],extensions=extensions)
++  if r['kind'] in ('aidl-parcelable','aidl-union','aidl-enum'):doc['schema_version']='1.1.0'
+   if r['owner'] is not None:doc['owner']=r['owner']
+   for parameter in doc['extensions']['parameters']:parameter['permission']=permission(parameter['annotations'],symbols,lang=='aidl')
+   doc['arguments']=[ref(x['type']) for x in r['parameters']]
+@@ -130,19 +132,21 @@
+    except ET.ParseError as e:issue(s,None,'Manifest XML unresolved: '+str(e),path.read_text(errors='replace'));report['status']='unsupported'
+   elif kind=='aidl':
+    text=path.read_text()
+-   try:d=aidl(text)
++   try:d=enrich_aidl(text,aidl(text))
+    except ValueError as e:
+     d=dict(package='',descriptor=None,declaration_kind=None,imports=[],annotations=[],members=[],parse_status='unsupported',reason='AIDL annotation/syntax unresolved: '+str(e))
+     add(dict(kind='unsupported',canonical='unparsed-source:'+s['repository']+':'+s['path']+':'+s['sha256'],owner=None,package='',name=s['path'].rsplit('/',1)[-1],return_type=None,parameters=[],annotations=[],all_annotations=[],raw=text,line=1,extras=dict(parse_error=d['reason'],source_bytes_retained=True)),s,'aidl');report['declarations']+=1;report['unsupported']+=1
+    db.execute('INSERT INTO aidl_schemas VALUES (?,?,?,?,?,?,?,?)',(sid,d['package'],d['descriptor'] if d['declaration_kind']=='interface' else None,d['declaration_kind'],text,d['parse_status'],js(dict(imports=d['imports'],declaration_annotations=d['annotations'],descriptor_candidate=d['descriptor'],oneway=d.get('oneway'),wire_status='unknown')), 'unknown'))
+    if d['descriptor']:
+-    r=dict(kind='aidl-interface' if d['declaration_kind']=='interface' else 'unsupported',canonical=d['descriptor'],package=d['package'],owner=d['descriptor'],name=d['descriptor'].split('.')[-1],return_type=None,parameters=[],annotations=d['annotations'],all_annotations=d['annotations'],raw=text.split('{',1)[0].strip(),line=1,extras=dict(aidl_kind=d['declaration_kind'],imports=d['imports'],parse_status=d['parse_status'],oneway=d.get('oneway')))
++    root_kind='unsupported' if d['parse_status']=='unsupported' else 'aidl-'+d['declaration_kind']
++    r=dict(kind=root_kind,canonical=d['descriptor'],package=d['package'],owner=d['descriptor'],name=d['descriptor'].split('.')[-1],return_type=None,parameters=[],annotations=d['annotations'],all_annotations=d['annotations'],raw=text.split('{',1)[0].strip(),line=1,extras=dict(aidl_kind=d['declaration_kind'],imports=d['imports'],parse_status=d['parse_status'],oneway=d.get('oneway'),schema_resolution_reason=d['reason']))
++    if root_kind=='unsupported':r['extras']['parse_error']=d['reason']
+     add(r,s,'aidl');report['declarations']+=1;report['unsupported']+=r['kind']=='unsupported'
+    for r in d['members']:
+     r['extras']['interface_annotations']=d['annotations'];r['extras']['interface_permission']=permission(d['annotations'],symbols,True)
+     add(r,s,'aidl');report['declarations']+=1;report['unsupported']+=r['kind']=='unsupported'
+    report.update(status=d['parse_status'],member_chunks=len(d['members']))
+-   if d['parse_status']!='methods-parsed':issue(s,None,d['reason'],text,'aidl-semantic-gap')
++   if d['parse_status'] not in ('methods-parsed','field-metadata-parsed'):issue(s,None,d['reason'],text,'aidl-semantic-gap')
+   elif kind=='sdk-annotations':report['status']='deferred-external-annotation-pass'
+   elif kind in ('evidence','sdk-history'):report['status']='retained-evidence-not-current-declarations'
+   else:issue(s,None,'Unrecognized source kind',kind);report['status']='unsupported'
+@@ -253,7 +257,7 @@
+  db.execute("UPDATE registries SET state='published' WHERE registry_id=?",(registry_id,))
+  db.execute('INSERT INTO active_registry(singleton,registry_id) VALUES (1,?)',(registry_id,))
+  db.executemany('INSERT INTO registry_sources VALUES (?,?)',[(registry_id,s['source_id']) for s in sources])
+- db.executemany('INSERT INTO catalog_meta VALUES (?,?)',[('schema_version','1.2.0'),('entry_contract_version','1.0.0'),('rebuilt_with_corrected_extractor','true'),('source_set_hash',set_hash),('coverage',meta['coverage']),('source_inventory_sha256',hb(invpath.read_bytes())),('authority','Metadata only; no OS capability or MCP client grant'),('sdk_api_level',str(meta.get('sdk_api_level','unknown'))),('current_sdk_metadata_api_level',str(meta.get('current_sdk_metadata_api_level','unknown')))])
++ db.executemany('INSERT INTO catalog_meta VALUES (?,?)',[('schema_version','1.2.0'),('entry_contract_version','1.1.0'),('rebuilt_with_corrected_extractor','true'),('source_set_hash',set_hash),('coverage',meta['coverage']),('source_inventory_sha256',hb(invpath.read_bytes())),('authority','Metadata only; no OS capability or MCP client grant'),('sdk_api_level',str(meta.get('sdk_api_level','unknown'))),('current_sdk_metadata_api_level',str(meta.get('current_sdk_metadata_api_level','unknown')))])
+  db.commit();db.execute('PRAGMA optimize');db.close()
+  db=sqlite3.connect(out/'catalog.staging.sqlite');db.row_factory=sqlite3.Row
+  connections.append(db)
+--- /dev/null
++++ catalog/tooling/permission_reader.py
+@@ -0,0 +1,22 @@
++"""Offline future-node reader; generated AST validation remains strict.
++Original input bytes remain in immutable import evidence. x-raw-node retains the
++exact parsed JSON value, not a claim of preserving lexical whitespace/order.
++"""
++import pathlib,json,copy,re
++import jsonschema
++P=pathlib.Path(__file__).resolve().parents[1]
++SCHEMA=json.loads((P/'contracts/PermissionExpression.schema.json').read_text())
++OPS={node['properties']['op']['const'] for node in SCHEMA['$defs']['PermissionExpression']['oneOf']}
++def read(node,schema_version='1.0.0'):
++ if not re.fullmatch(r'1\.[0-9]+\.[0-9]+',schema_version):raise ValueError('Unsupported permission major/version')
++ def visit(value):
++  if not isinstance(value,dict) or value.get('op') not in OPS:
++   return {'op':'unknown','reason':'Unrecognized permission semantic node; invocation unsupported','x-raw-node':copy.deepcopy(value)}
++  result=copy.deepcopy(value)
++  # Only schema-defined semantic edges are visited; x-* raw metadata is data.
++  for key in ('children',):
++   if key in result and isinstance(result[key],list):result[key]=[visit(child) for child in result[key]]
++  for key in ('condition','requirement','read','write'):
++   if key in result:result[key]=visit(result[key])
++  return result
++ result=visit(node);jsonschema.Draft202012Validator(SCHEMA).validate(result);return result
+--- catalog/tooling/contract_reference.py
++++ catalog/tooling/contract_reference.py
+@@ -12,32 +12,33 @@
+     def tag(self,key):
+         r=self.entries[key]
+         return f'"cat1:{self.registry_generation}:{r["base_hash"] or "local"}:{key}:{r["revision"]}:{r["state"]}"'
+-    def create(self,signature,document):
++    def create(self,signature,document,reason=None):
+         key=identity(signature)
+         if key in self.entries:raise Error(409)
+         self.entries[key]=dict(signature=signature,document=document,state='active',revision=1,base_hash=None,imported=False)
+-        self.record(key,'create');return key
+-    def record(self,key,operation):
++        self.record(key,'create',reason);return key
++    def record(self,key,operation,reason=None):
+         self.overlay_generation+=1
+         self.history.setdefault(key,[]).append(dict(operation=operation,revision=self.entries[key]['revision'],state=self.entries[key]['state']))
++        if reason is not None:self.history[key][-1]['reason']=reason
+     def precondition(self,key,tag):
+         if tag is None:raise Error(428)
+         if not isinstance(tag,str) or not tag.startswith('"cat1:') or not tag.endswith('"') or ',' in tag:raise Error(400)
+         if key not in self.entries:raise Error(404)
+         if tag!=self.tag(key):raise Error(412)
+-    def put(self,key,tag,document,resolution=None):
++    def put(self,key,tag,document,resolution=None,reason=None):
+         self.precondition(key,tag);r=self.entries[key]
+         if r['state']=='conflict':
+             expected=dict(action='rebase' if r['base_hash'] else 'retain-local',expected_imported_record_sha256=r['base_hash'])
+             if resolution!=expected:raise Error(409)
+         r.update(document=document,state='active',revision=r['revision']+1)
+-        self.record(key,'update');return self.tag(key)
+-    def delete(self,key,tag):
++        self.record(key,'update',reason);return self.tag(key)
++    def delete(self,key,tag,reason=None):
+         self.precondition(key,tag);r=self.entries[key]
+         if r['state']=='conflict':raise Error(409)
+         if r['state'] in ('deleted','suppressed'):return self.tag(key)
+         r.update(state='suppressed' if r['imported'] else 'deleted',revision=r['revision']+1)
+-        self.record(key,'delete');return self.tag(key)
++        self.record(key,'delete',reason);return self.tag(key)
+     def publish_fixture(self,records):
+         """records = complete next selected base. Fixture bypasses staging validation."""
+         # Validate all incoming identities/documents before changing selected state.
+--- catalog/schema.sql
++++ catalog/schema.sql
+@@ -75,8 +75,8 @@
+ CREATE TRIGGER active_must_be_published_insert BEFORE INSERT ON active_registry WHEN (SELECT state FROM registries WHERE registry_id=new.registry_id) IS NOT 'published' BEGIN SELECT RAISE(ABORT,'Active registry must be published'); END;
+ CREATE TRIGGER active_must_be_published_update BEFORE UPDATE OF registry_id ON active_registry WHEN (SELECT state FROM registries WHERE registry_id=new.registry_id) IS NOT 'published' OR (new.registry_id<>old.registry_id AND (SELECT registry_version FROM registries WHERE registry_id=new.registry_id)<=(SELECT registry_version FROM registries WHERE registry_id=old.registry_id)) BEGIN SELECT RAISE(ABORT,'Publication requires a newer published registry'); END;
+ 
+--- Additive migration from version 1. Entry/API JSON contracts retain version 1.0.0;
+--- additions live under their explicitly reserved extensions/x-* namespaces.
++-- Storage baseline v3: Entry1.0 base plus documented1.1 AIDL type kinds;
++-- unknown semantic vocabulary is rejected/quarantined, never granted authority.
+ PRAGMA foreign_keys=ON;
+ BEGIN IMMEDIATE;
+ CREATE TABLE source_details(source_id TEXT NOT NULL PRIMARY KEY REFERENCES sources, document_json TEXT NOT NULL CHECK(json_valid(document_json)));
+@@ -120,5 +120,10 @@
+ CREATE TRIGGER active_local_collision_update BEFORE UPDATE OF registry_id ON active_registry WHEN EXISTS(SELECT 1 FROM overlays o JOIN registry_entries e ON e.entry_id=o.entry_id AND e.registry_id=new.registry_id WHERE o.imported_binding_id IS NULL AND o.state='active') BEGIN SELECT RAISE(ABORT,'Resolve local/import collision before publication'); END;
+ CREATE TRIGGER local_collision_insert BEFORE INSERT ON overlays WHEN new.imported_binding_id IS NULL AND new.state='active' AND EXISTS(SELECT 1 FROM effective_entries e WHERE e.entry_id=new.entry_id) BEGIN SELECT RAISE(ABORT,'Use an imported overlay for an active imported identity'); END;
+ CREATE TRIGGER local_collision_update BEFORE UPDATE ON overlays WHEN new.imported_binding_id IS NULL AND new.state='active' AND EXISTS(SELECT 1 FROM effective_entries e WHERE e.entry_id=new.entry_id) BEGIN SELECT RAISE(ABORT,'Use an imported overlay for an active imported identity'); END;
++CREATE TRIGGER active_imported_base_insert BEFORE INSERT ON active_registry WHEN EXISTS(SELECT 1 FROM overlays o WHERE o.imported_binding_id IS NOT NULL AND o.state IN ('active','suppressed') AND NOT EXISTS(SELECT 1 FROM registry_entries e WHERE e.registry_id=new.registry_id AND e.entry_id=o.imported_binding_id AND e.record_sha256=o.base_record_hash)) BEGIN SELECT RAISE(ABORT,'Resolve changed or missing imported overlay base before publication'); END;
++CREATE TRIGGER active_imported_base_update BEFORE UPDATE OF registry_id ON active_registry WHEN EXISTS(SELECT 1 FROM overlays o WHERE o.imported_binding_id IS NOT NULL AND o.state IN ('active','suppressed') AND NOT EXISTS(SELECT 1 FROM registry_entries e WHERE e.registry_id=new.registry_id AND e.entry_id=o.imported_binding_id AND e.record_sha256=o.base_record_hash)) BEGIN SELECT RAISE(ABORT,'Resolve changed or missing imported overlay base before publication'); END;
++CREATE TABLE entry_history_reasons(entry_id TEXT NOT NULL,revision INTEGER NOT NULL,reason TEXT NOT NULL,PRIMARY KEY(entry_id,revision),FOREIGN KEY(entry_id,revision) REFERENCES entry_history(entry_id,revision));
++CREATE TRIGGER history_reason_no_update BEFORE UPDATE ON entry_history_reasons BEGIN SELECT RAISE(ABORT,'History justification is append-only'); END;
++CREATE TRIGGER history_reason_no_delete BEFORE DELETE ON entry_history_reasons BEGIN SELECT RAISE(ABORT,'History justification is append-only'); END;
+ PRAGMA user_version=3;
+ COMMIT;
+--- catalog/migrations/002-evidence-and-publication.sql
++++ catalog/migrations/002-evidence-and-publication.sql
+@@ -1,5 +1,5 @@
+--- Additive migration from version 1. Entry/API JSON contracts retain version 1.0.0;
+--- additions live under their explicitly reserved extensions/x-* namespaces.
++-- Storage baseline v3: Entry1.0 base plus documented1.1 AIDL type kinds;
++-- unknown semantic vocabulary is rejected/quarantined, never granted authority.
+ PRAGMA foreign_keys=ON;
+ BEGIN IMMEDIATE;
+ CREATE TABLE source_details(source_id TEXT NOT NULL PRIMARY KEY REFERENCES sources, document_json TEXT NOT NULL CHECK(json_valid(document_json)));
+@@ -43,5 +43,10 @@
+ CREATE TRIGGER active_local_collision_update BEFORE UPDATE OF registry_id ON active_registry WHEN EXISTS(SELECT 1 FROM overlays o JOIN registry_entries e ON e.entry_id=o.entry_id AND e.registry_id=new.registry_id WHERE o.imported_binding_id IS NULL AND o.state='active') BEGIN SELECT RAISE(ABORT,'Resolve local/import collision before publication'); END;
+ CREATE TRIGGER local_collision_insert BEFORE INSERT ON overlays WHEN new.imported_binding_id IS NULL AND new.state='active' AND EXISTS(SELECT 1 FROM effective_entries e WHERE e.entry_id=new.entry_id) BEGIN SELECT RAISE(ABORT,'Use an imported overlay for an active imported identity'); END;
+ CREATE TRIGGER local_collision_update BEFORE UPDATE ON overlays WHEN new.imported_binding_id IS NULL AND new.state='active' AND EXISTS(SELECT 1 FROM effective_entries e WHERE e.entry_id=new.entry_id) BEGIN SELECT RAISE(ABORT,'Use an imported overlay for an active imported identity'); END;
++CREATE TRIGGER active_imported_base_insert BEFORE INSERT ON active_registry WHEN EXISTS(SELECT 1 FROM overlays o WHERE o.imported_binding_id IS NOT NULL AND o.state IN ('active','suppressed') AND NOT EXISTS(SELECT 1 FROM registry_entries e WHERE e.registry_id=new.registry_id AND e.entry_id=o.imported_binding_id AND e.record_sha256=o.base_record_hash)) BEGIN SELECT RAISE(ABORT,'Resolve changed or missing imported overlay base before publication'); END;
++CREATE TRIGGER active_imported_base_update BEFORE UPDATE OF registry_id ON active_registry WHEN EXISTS(SELECT 1 FROM overlays o WHERE o.imported_binding_id IS NOT NULL AND o.state IN ('active','suppressed') AND NOT EXISTS(SELECT 1 FROM registry_entries e WHERE e.registry_id=new.registry_id AND e.entry_id=o.imported_binding_id AND e.record_sha256=o.base_record_hash)) BEGIN SELECT RAISE(ABORT,'Resolve changed or missing imported overlay base before publication'); END;
++CREATE TABLE entry_history_reasons(entry_id TEXT NOT NULL,revision INTEGER NOT NULL,reason TEXT NOT NULL,PRIMARY KEY(entry_id,revision),FOREIGN KEY(entry_id,revision) REFERENCES entry_history(entry_id,revision));
++CREATE TRIGGER history_reason_no_update BEFORE UPDATE ON entry_history_reasons BEGIN SELECT RAISE(ABORT,'History justification is append-only'); END;
++CREATE TRIGGER history_reason_no_delete BEFORE DELETE ON entry_history_reasons BEGIN SELECT RAISE(ABORT,'History justification is append-only'); END;
+ PRAGMA user_version=3;
+ COMMIT;
+--- catalog/contracts/Entry.schema.json
++++ catalog/contracts/Entry.schema.json
+@@ -337,7 +337,10 @@
+             "property",
+             "aidl-interface",
+             "aidl-member",
+-            "unsupported"
++            "unsupported",
++            "aidl-parcelable",
++            "aidl-union",
++            "aidl-enum"
+           ]
+         },
+         "package": {
+@@ -458,7 +461,10 @@
+             "property",
+             "aidl-interface",
+             "aidl-member",
+-            "unsupported"
++            "unsupported",
++            "aidl-parcelable",
++            "aidl-union",
++            "aidl-enum"
+           ]
+         },
+         "package": {
+@@ -686,6 +692,10 @@
+         },
+         "document": {
+           "$ref": "#/$defs/Entry"
++        },
++        "reason": {
++          "type": "string",
++          "description": "Persisted immutable owner mutation justification; absent only for legacy/system history without one."
+         }
+       },
+       "required": [
+@@ -801,7 +811,10 @@
+           "type": "string"
+         },
+         "api_level": {
+-          "type": "integer"
++          "type": [
++            "integer",
++            "null"
++          ]
+         },
+         "source_set_hash": {
+           "type": "string",
+--- catalog/contracts/Error.schema.json
++++ catalog/contracts/Error.schema.json
+@@ -337,7 +337,10 @@
+             "property",
+             "aidl-interface",
+             "aidl-member",
+-            "unsupported"
++            "unsupported",
++            "aidl-parcelable",
++            "aidl-union",
++            "aidl-enum"
+           ]
+         },
+         "package": {
+@@ -458,7 +461,10 @@
+             "property",
+             "aidl-interface",
+             "aidl-member",
+-            "unsupported"
++            "unsupported",
++            "aidl-parcelable",
++            "aidl-union",
++            "aidl-enum"
+           ]
+         },
+         "package": {
+@@ -686,6 +692,10 @@
+         },
+         "document": {
+           "$ref": "#/$defs/Entry"
++        },
++        "reason": {
++          "type": "string",
++          "description": "Persisted immutable owner mutation justification; absent only for legacy/system history without one."
+         }
+       },
+       "required": [
+@@ -801,7 +811,10 @@
+           "type": "string"
+         },
+         "api_level": {
+-          "type": "integer"
++          "type": [
++            "integer",
++            "null"
++          ]
+         },
+         "source_set_hash": {
+           "type": "string",
+--- catalog/contracts/ImportRequest.schema.json
++++ catalog/contracts/ImportRequest.schema.json
+@@ -337,7 +337,10 @@
+             "property",
+             "aidl-interface",
+             "aidl-member",
+-            "unsupported"
++            "unsupported",
++            "aidl-parcelable",
++            "aidl-union",
++            "aidl-enum"
+           ]
+         },
+         "package": {
+@@ -458,7 +461,10 @@
+             "property",
+             "aidl-interface",
+             "aidl-member",
+-            "unsupported"
++            "unsupported",
++            "aidl-parcelable",
++            "aidl-union",
++            "aidl-enum"
+           ]
+         },
+         "package": {
+@@ -686,6 +692,10 @@
+         },
+         "document": {
+           "$ref": "#/$defs/Entry"
++        },
++        "reason": {
++          "type": "string",
++          "description": "Persisted immutable owner mutation justification; absent only for legacy/system history without one."
+         }
+       },
+       "required": [
+@@ -801,7 +811,10 @@
+           "type": "string"
+         },
+         "api_level": {
+-          "type": "integer"
++          "type": [
++            "integer",
++            "null"
++          ]
+         },
+         "source_set_hash": {
+           "type": "string",
+--- catalog/contracts/Mutation.schema.json
++++ catalog/contracts/Mutation.schema.json
+@@ -337,7 +337,10 @@
+             "property",
+             "aidl-interface",
+             "aidl-member",
+-            "unsupported"
++            "unsupported",
++            "aidl-parcelable",
++            "aidl-union",
++            "aidl-enum"
+           ]
+         },
+         "package": {
+@@ -458,7 +461,10 @@
+             "property",
+             "aidl-interface",
+             "aidl-member",
+-            "unsupported"
++            "unsupported",
++            "aidl-parcelable",
++            "aidl-union",
++            "aidl-enum"
+           ]
+         },
+         "package": {
+@@ -686,6 +692,10 @@
+         },
+         "document": {
+           "$ref": "#/$defs/Entry"
++        },
++        "reason": {
++          "type": "string",
++          "description": "Persisted immutable owner mutation justification; absent only for legacy/system history without one."
+         }
+       },
+       "required": [
+@@ -801,7 +811,10 @@
+           "type": "string"
+         },
+         "api_level": {
+-          "type": "integer"
++          "type": [
++            "integer",
++            "null"
++          ]
+         },
+         "source_set_hash": {
+           "type": "string",
+--- catalog/contracts/openapi.json
++++ catalog/contracts/openapi.json
+@@ -1367,7 +1367,10 @@
+               "property",
+               "aidl-interface",
+               "aidl-member",
+-              "unsupported"
++              "unsupported",
++              "aidl-parcelable",
++              "aidl-union",
++              "aidl-enum"
+             ]
+           },
+           "package": {
+@@ -1488,7 +1491,10 @@
+               "property",
+               "aidl-interface",
+               "aidl-member",
+-              "unsupported"
++              "unsupported",
++              "aidl-parcelable",
++              "aidl-union",
++              "aidl-enum"
+             ]
+           },
+           "package": {
+@@ -1716,6 +1722,10 @@
+           },
+           "document": {
+             "$ref": "#/components/schemas/Entry"
++          },
++          "reason": {
++            "type": "string",
++            "description": "Persisted immutable owner mutation justification; absent only for legacy/system history without one."
+           }
+         },
+         "required": [
+@@ -1831,7 +1841,10 @@
+             "type": "string"
+           },
+           "api_level": {
+-            "type": "integer"
++            "type": [
++              "integer",
++              "null"
++            ]
+           },
+           "source_set_hash": {
+             "type": "string",
+--- catalog/contracts/PermissionExpression.schema.json
++++ catalog/contracts/PermissionExpression.schema.json
+@@ -337,7 +337,10 @@
+             "property",
+             "aidl-interface",
+             "aidl-member",
+-            "unsupported"
++            "unsupported",
++            "aidl-parcelable",
++            "aidl-union",
++            "aidl-enum"
+           ]
+         },
+         "package": {
+@@ -458,7 +461,10 @@
+             "property",
+             "aidl-interface",
+             "aidl-member",
+-            "unsupported"
++            "unsupported",
++            "aidl-parcelable",
++            "aidl-union",
++            "aidl-enum"
+           ]
+         },
+         "package": {
+@@ -686,6 +692,10 @@
+         },
+         "document": {
+           "$ref": "#/$defs/Entry"
++        },
++        "reason": {
++          "type": "string",
++          "description": "Persisted immutable owner mutation justification; absent only for legacy/system history without one."
+         }
+       },
+       "required": [
+@@ -801,7 +811,10 @@
+           "type": "string"
+         },
+         "api_level": {
+-          "type": "integer"
++          "type": [
++            "integer",
++            "null"
++          ]
+         },
+         "source_set_hash": {
+           "type": "string",
+--- catalog/contracts/Source.schema.json
++++ catalog/contracts/Source.schema.json
+@@ -337,7 +337,10 @@
+             "property",
+             "aidl-interface",
+             "aidl-member",
+-            "unsupported"
++            "unsupported",
++            "aidl-parcelable",
++            "aidl-union",
++            "aidl-enum"
+           ]
+         },
+         "package": {
+@@ -458,7 +461,10 @@
+             "property",
+             "aidl-interface",
+             "aidl-member",
+-            "unsupported"
++            "unsupported",
++            "aidl-parcelable",
++            "aidl-union",
++            "aidl-enum"
+           ]
+         },
+         "package": {
+@@ -686,6 +692,10 @@
+         },
+         "document": {
+           "$ref": "#/$defs/Entry"
++        },
++        "reason": {
++          "type": "string",
++          "description": "Persisted immutable owner mutation justification; absent only for legacy/system history without one."
+         }
+       },
+       "required": [
+@@ -801,7 +811,10 @@
+           "type": "string"
+         },
+         "api_level": {
+-          "type": "integer"
++          "type": [
++            "integer",
++            "null"
++          ]
+         },
+         "source_set_hash": {
+           "type": "string",
+--- /dev/null
++++ catalog/tests/test_round4.py
+@@ -0,0 +1,49 @@
++import unittest,pathlib,sys,sqlite3,json,types,importlib,subprocess
++from unittest import mock
++P=pathlib.Path(__file__).resolve().parents[1];sys.path.insert(0,str(P/'tooling'))
++import aidl_members,parsers,sdk_api_index,jsonschema
++class Round4(unittest.TestCase):
++ def test_silent_signature_record_loss_blocks_publication(self):
++  import tempfile,build_catalog,test_build
++  with tempfile.TemporaryDirectory() as td:
++   root=pathlib.Path(td);inventory=test_build.BuildTests().fixture(root);original=build_catalog.signature
++   def dropped(text):
++    return (record for record in original(text) if record['name']!='go')
++   with mock.patch.object(build_catalog,'signature',side_effect=dropped):
++    with self.assertRaisesRegex(ValueError,'Signature reconciliation'):build_catalog.build(inventory,root/'out')
++   self.assertFalse((root/'out/catalog.sqlite').exists())
++ def test_oracle_retains_mutation_justification(self):
++  from contract_reference import Catalog
++  catalog=Catalog();key=catalog.create('java:a.A',{},reason='owner create');catalog.put(key,catalog.tag(key),{},reason='owner update');self.assertEqual([event['reason'] for event in catalog.history[key]],['owner create','owner update'])
++ def test_interface_shift_constant_does_not_consume_methods(self):
++  result=aidl_members.enrich('package a; interface I { const int F=1 << 2; void first(); void second(); }',parsers.aidl('package a; interface I { const int F=1 << 2; void first(); void second(); }'))
++  self.assertEqual([r['name'] for r in result['members']],['F','first','second']);self.assertEqual(result['parse_status'],'methods-parsed')
++ def test_generic_parcelable_retains_field(self):
++  text='package a; parcelable P<T> { T value; }';result=aidl_members.enrich(text,parsers.aidl(text));self.assertEqual([r['name'] for r in result['members']],['value'])
++ def test_changed_missing_and_suppressed_import_bases_block_pointer(self):
++  for state in ('active','suppressed'):
++   for new_hash in (None,'changed'):
++    with self.subTest(state=state,new_hash=new_hash):
++     db=sqlite3.connect(':memory:');self.addCleanup(db.close);db.executescript((P/'schema.sql').read_text())
++     db.execute("INSERT INTO bindings(binding_id,signature,package,kind,name,raw_signature) VALUES('b','java:a.A','a','class','A','fixture')")
++     for key,version in (('old',1),('new',2)):db.execute('INSERT INTO registries VALUES(?,?,?,?,?,?,?,?,?)',(key,version,'1.2.0','fixture',37,'h','now','published' if key=='old' else 'validated','{}'))
++     db.execute("INSERT INTO registry_entries VALUES('old','b','{}','original')");db.execute("INSERT INTO active_registry VALUES(1,'old')")
++     db.execute("INSERT INTO overlays VALUES('b','b','java:a.A',1,'old','original',?,'{}','now','now')",(state,));db.execute("INSERT INTO entry_history VALUES('b',1,'update','{}','fixture','now')");db.commit()
++     if new_hash:db.execute("INSERT INTO registry_entries VALUES('new','b','{}',?)",(new_hash,))
++     db.execute("UPDATE registries SET state='retired' WHERE registry_id='old'");db.execute("UPDATE registries SET state='published' WHERE registry_id='new'")
++     with self.assertRaises(sqlite3.IntegrityError):db.execute("UPDATE active_registry SET registry_id='new'")
++     db.execute("UPDATE overlays SET state='conflict',revision=2 WHERE entry_id='b'");db.execute("INSERT INTO entry_history VALUES('b',2,'conflict','{}','fixture','now')");db.execute("UPDATE active_registry SET registry_id='new'");db.commit();self.assertEqual(db.execute('SELECT count(*) FROM runtime_catalog').fetchone()[0],0)
++ def test_history_reason_has_append_only_storage_and_contract(self):
++  schema=json.loads((P/'contracts/Entry.schema.json').read_text());self.assertIn('reason',schema['$defs']['HistoryEvent']['properties']);self.assertIn('null',schema['$defs']['Registry']['properties']['api_level']['type'])
++  db=sqlite3.connect(':memory:');self.addCleanup(db.close);db.executescript((P/'schema.sql').read_text());db.execute("INSERT INTO overlays VALUES('l',NULL,'java:a.A',1,NULL,NULL,'active','{}','now','now')");db.execute("INSERT INTO entry_history VALUES('l',1,'create','{}','fixture','now')");db.execute("INSERT INTO entry_history_reasons VALUES('l',1,'owner supplied reason')");db.commit()
++  with self.assertRaises(sqlite3.IntegrityError):db.execute("UPDATE entry_history_reasons SET reason='changed'")
++ def test_locator_alignment_guard_survives_optimization(self):
++  fake=types.SimpleNamespace(Parse=lambda *args:None)
++  with mock.patch.object(sdk_api_index.xml.parsers.expat,'ParserCreate',return_value=fake):
++   with self.assertRaisesRegex(ValueError,'locator alignment'):sdk_api_index.parse(b'<api version="4"><class name="a/C"/></api>')
++ def test_unknown_semantics_reader_quarantines_and_retains_raw(self):
++  reader=importlib.import_module('permission_reader');raw={'op':'future-operator','nodes':[{'strange':1}]};node=reader.read(raw,'1.9.0');self.assertEqual(node['op'],'unknown');self.assertEqual(node['x-raw-node'],raw);self.assertIsNot(node['x-raw-node'],raw)
++  jsonschema.Draft202012Validator(json.loads((P/'contracts/PermissionExpression.schema.json').read_text())).validate(node)
++  with self.assertRaises(ValueError):reader.read(raw,'2.0.0')
++  with self.assertRaises(jsonschema.ValidationError):reader.read({'op':'all','children':[]},'1.0.0')
++if __name__=='__main__':unittest.main()
+--- /dev/null
++++ catalog/tests/test_aidl_members.py
+@@ -0,0 +1,19 @@
++import pathlib,sys,unittest
++P=pathlib.Path(__file__).resolve().parents[1];sys.path.insert(0,str(P/'tooling'))
++from parsers import aidl
++from aidl_members import enrich
++class AidlMembers(unittest.TestCase):
++ def parse(self,text):return enrich(text,aidl(text))
++ def test_parcelable_fields_annotations_and_values(self):
++  result=self.parse('package a; parcelable P {\n @nullable String name;\n int[] values={1,2};\n const String S="a;b";\n}')
++  self.assertEqual([m['name'] for m in result['members']],['name','values','S']);self.assertTrue(result['members'][0]['annotations']);self.assertEqual(result['members'][1]['return_type'],'int[]');self.assertEqual(result['members'][2]['extras']['constant_raw'],'"a;b"');self.assertTrue(all(m['extras']['wire_tag'] is None for m in result['members']))
++ def test_enum_shifts_and_union_declaration_ordinals_not_tags(self):
++  result=self.parse('package a; enum E { A=1<<0, B=1<<1, C, }');self.assertEqual([m['name'] for m in result['members']],['A','B','C']);self.assertEqual(result['members'][1]['extras']['constant_raw'],'1<<1')
++  union=self.parse('package a; union U { int x; String y; }');self.assertEqual([m['extras']['declared_ordinal'] for m in union['members']],[0,1]);self.assertTrue(all(m['extras']['wire_tag'] is None for m in union['members']))
++ def test_external_parcelable_and_unknown_nested_schema_stay_visible(self):
++  self.assertEqual(self.parse('package a; parcelable P cpp_header "P.h";')['members'],[])
++  result=self.parse('package a; parcelable P { new_syntax; int good; }');self.assertEqual(result['members'][0]['kind'],'unsupported');self.assertEqual(result['members'][1]['name'],'good');self.assertIn('partial',result['parse_status'])
++ def test_interface_constant_is_metadata_and_repeated_lines_are_distinct(self):
++  result=self.parse('package a; interface I { const int C=3; void x(); }');self.assertEqual(result['members'][0]['kind'],'field');self.assertEqual(result['members'][0]['name'],'C')
++  fields=self.parse('package a; parcelable P {\n int x;\n int y;\n}')['members'];self.assertEqual([m['line'] for m in fields],[2,3])
++if __name__=='__main__':unittest.main()
+--- catalog/tests/test_source_integration.py
++++ catalog/tests/test_source_integration.py
+@@ -4,6 +4,23 @@
+ import test_build as base_module
+ class SourceIntegrationTests(unittest.TestCase):
+     fixture=base_module.BuildTests.fixture
++
++    def test_structured_aidl_members_survive_publication(self):
++        with tempfile.TemporaryDirectory() as td:
++            r=pathlib.Path(td);inv=self.fixture(r);spec=json.loads(inv.read_text())
++            source=spec['sources'][2];data=b'package a; parcelable P { @nullable String name; int[] values={1,2}; }'
++            (r/'IFoo.aidl').write_bytes(data)
++            source.update(sha256=hashlib.sha256(data).hexdigest(),git_blob=hashlib.sha1(b'blob '+str(len(data)).encode()+b'\x00'+data).hexdigest(),size_bytes=len(data))
++            inv.write_text(json.dumps(spec));b.build(inv,r/'out')
++            docs=[json.loads(line) for line in (r/'out/entries.jsonl').read_text().splitlines()]
++            fields=[doc for doc in docs if doc['canonical_signature'] in ('aidl:a.P#name','aidl:a.P#values')]
++            self.assertEqual(len(fields),2)
++            self.assertTrue(all(doc['extensions']['wire_tag'] is None for doc in fields))
++            root=next(doc for doc in docs if doc['canonical_signature']=='aidl:a.P')
++            self.assertEqual(root['kind'],'aidl-parcelable');self.assertEqual(root['schema_version'],'1.1.0')
++            self.assertFalse(any('Structured AIDL' in reason for reason in root['unresolved']))
++            db=sqlite3.connect(r/'out/catalog.sqlite');self.addCleanup(db.close)
++            self.assertEqual(db.execute("SELECT count(*) FROM issues WHERE category='aidl-semantic-gap'").fetchone()[0],0)
+ 
+     def test_cached_java_and_current_index_import_with_distinct_evidence(self):
+         import java_source, sdk_api_index

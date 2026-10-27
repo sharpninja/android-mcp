@@ -1,0 +1,108 @@
+test_reader_quarantines_only_typed_future_operator_and_preserves_metadata (test_round8.Round8.test_reader_quarantines_only_typed_future_operator_and_preserves_metadata) ... ok
+test_reader_rejects_corrupt_known_semantic_child (test_round8.Round8.test_reader_rejects_corrupt_known_semantic_child) ... 
+  test_reader_rejects_corrupt_known_semantic_child (test_round8.Round8.test_reader_rejects_corrupt_known_semantic_child) (raw={'op': 'all', 'children': [None]}) ... FAIL
+  test_reader_rejects_corrupt_known_semantic_child (test_round8.Round8.test_reader_rejects_corrupt_known_semantic_child) (raw={'op': 'any', 'children': [{'op': False}]}) ... FAIL
+  test_reader_rejects_corrupt_known_semantic_child (test_round8.Round8.test_reader_rejects_corrupt_known_semantic_child) (raw={'op': 'conditional', 'condition': False, 'requirement': {'op': 'permission', 'name': 'android.permission.CAMERA'}}) ... FAIL
+test_reader_rejects_nonobject_or_missing_typed_operator (test_round8.Round8.test_reader_rejects_nonobject_or_missing_typed_operator) ... 
+  test_reader_rejects_nonobject_or_missing_typed_operator (test_round8.Round8.test_reader_rejects_nonobject_or_missing_typed_operator) (raw=None) ... FAIL
+  test_reader_rejects_nonobject_or_missing_typed_operator (test_round8.Round8.test_reader_rejects_nonobject_or_missing_typed_operator) (raw=False) ... FAIL
+  test_reader_rejects_nonobject_or_missing_typed_operator (test_round8.Round8.test_reader_rejects_nonobject_or_missing_typed_operator) (raw=42) ... FAIL
+  test_reader_rejects_nonobject_or_missing_typed_operator (test_round8.Round8.test_reader_rejects_nonobject_or_missing_typed_operator) (raw=[]) ... FAIL
+  test_reader_rejects_nonobject_or_missing_typed_operator (test_round8.Round8.test_reader_rejects_nonobject_or_missing_typed_operator) (raw={}) ... FAIL
+  test_reader_rejects_nonobject_or_missing_typed_operator (test_round8.Round8.test_reader_rejects_nonobject_or_missing_typed_operator) (raw={'op': None}) ... FAIL
+  test_reader_rejects_nonobject_or_missing_typed_operator (test_round8.Round8.test_reader_rejects_nonobject_or_missing_typed_operator) (raw={'op': 17}) ... FAIL
+
+======================================================================
+FAIL: test_reader_rejects_corrupt_known_semantic_child (test_round8.Round8.test_reader_rejects_corrupt_known_semantic_child) (raw={'op': 'all', 'children': [None]})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_round8.py", line 17, in test_reader_rejects_corrupt_known_semantic_child
+    with self.subTest(raw=raw),self.assertRaises(jsonschema.ValidationError):
+                               ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValidationError not raised
+
+======================================================================
+FAIL: test_reader_rejects_corrupt_known_semantic_child (test_round8.Round8.test_reader_rejects_corrupt_known_semantic_child) (raw={'op': 'any', 'children': [{'op': False}]})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_round8.py", line 17, in test_reader_rejects_corrupt_known_semantic_child
+    with self.subTest(raw=raw),self.assertRaises(jsonschema.ValidationError):
+                               ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValidationError not raised
+
+======================================================================
+FAIL: test_reader_rejects_corrupt_known_semantic_child (test_round8.Round8.test_reader_rejects_corrupt_known_semantic_child) (raw={'op': 'conditional', 'condition': False, 'requirement': {'op': 'permission', 'name': 'android.permission.CAMERA'}})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_round8.py", line 17, in test_reader_rejects_corrupt_known_semantic_child
+    with self.subTest(raw=raw),self.assertRaises(jsonschema.ValidationError):
+                               ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValidationError not raised
+
+======================================================================
+FAIL: test_reader_rejects_nonobject_or_missing_typed_operator (test_round8.Round8.test_reader_rejects_nonobject_or_missing_typed_operator) (raw=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_round8.py", line 10, in test_reader_rejects_nonobject_or_missing_typed_operator
+    with self.subTest(raw=raw),self.assertRaises(jsonschema.ValidationError):
+                               ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValidationError not raised
+
+======================================================================
+FAIL: test_reader_rejects_nonobject_or_missing_typed_operator (test_round8.Round8.test_reader_rejects_nonobject_or_missing_typed_operator) (raw=False)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_round8.py", line 10, in test_reader_rejects_nonobject_or_missing_typed_operator
+    with self.subTest(raw=raw),self.assertRaises(jsonschema.ValidationError):
+                               ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValidationError not raised
+
+======================================================================
+FAIL: test_reader_rejects_nonobject_or_missing_typed_operator (test_round8.Round8.test_reader_rejects_nonobject_or_missing_typed_operator) (raw=42)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_round8.py", line 10, in test_reader_rejects_nonobject_or_missing_typed_operator
+    with self.subTest(raw=raw),self.assertRaises(jsonschema.ValidationError):
+                               ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValidationError not raised
+
+======================================================================
+FAIL: test_reader_rejects_nonobject_or_missing_typed_operator (test_round8.Round8.test_reader_rejects_nonobject_or_missing_typed_operator) (raw=[])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_round8.py", line 10, in test_reader_rejects_nonobject_or_missing_typed_operator
+    with self.subTest(raw=raw),self.assertRaises(jsonschema.ValidationError):
+                               ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValidationError not raised
+
+======================================================================
+FAIL: test_reader_rejects_nonobject_or_missing_typed_operator (test_round8.Round8.test_reader_rejects_nonobject_or_missing_typed_operator) (raw={})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_round8.py", line 10, in test_reader_rejects_nonobject_or_missing_typed_operator
+    with self.subTest(raw=raw),self.assertRaises(jsonschema.ValidationError):
+                               ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValidationError not raised
+
+======================================================================
+FAIL: test_reader_rejects_nonobject_or_missing_typed_operator (test_round8.Round8.test_reader_rejects_nonobject_or_missing_typed_operator) (raw={'op': None})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_round8.py", line 10, in test_reader_rejects_nonobject_or_missing_typed_operator
+    with self.subTest(raw=raw),self.assertRaises(jsonschema.ValidationError):
+                               ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValidationError not raised
+
+======================================================================
+FAIL: test_reader_rejects_nonobject_or_missing_typed_operator (test_round8.Round8.test_reader_rejects_nonobject_or_missing_typed_operator) (raw={'op': 17})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_round8.py", line 10, in test_reader_rejects_nonobject_or_missing_typed_operator
+    with self.subTest(raw=raw),self.assertRaises(jsonschema.ValidationError):
+                               ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValidationError not raised
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.011s
+
+FAILED (failures=10)

@@ -1,0 +1,824 @@
+[
+  {
+    "id": "F-01",
+    "resolution": "Finite registration -> separate subscribe/read/cancel; recorded cleanup OS edge",
+    "evidence": [
+      {
+        "anchor": "Unified diagram call paths",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1512
+          }
+        ]
+      },
+      {
+        "anchor": "CallbackFlow",
+        "locations": [
+          {
+            "file": "design-c4/build.gradle.kts",
+            "line": 11
+          }
+        ]
+      },
+      {
+        "anchor": "McpCallbackResourceAdapter",
+        "locations": [
+          {
+            "file": "design-c4/architecture/code-diagrams.md",
+            "line": 94
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F-02",
+    "resolution": "Forward is ingress only; exact forwarding authority, no arbitrary loopback Host",
+    "evidence": [
+      {
+        "anchor": "External ADB host ingress",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 630
+          }
+        ]
+      },
+      {
+        "anchor": "host.forwarder",
+        "locations": [
+          {
+            "file": "design-c4/architecture/workspace.dsl",
+            "line": 132
+          }
+        ]
+      },
+      {
+        "anchor": "AdbPhoneBackend",
+        "locations": [
+          {
+            "file": "design-c4/architecture/workspace.dsl",
+            "line": 27
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F-03",
+    "resolution": "Role-aware none/unknown and concrete/abstract unsupported subclass taxonomy",
+    "evidence": [
+      {
+        "anchor": "CallbackDescriptor.materialization_strategy",
+        "locations": [
+          {
+            "file": "design-c4/architecture/round013-design-corrections.md",
+            "line": 9
+          }
+        ]
+      },
+      {
+        "anchor": "callback_descriptors",
+        "locations": [
+          {
+            "file": "design-c4/architecture/round013-design-corrections.md",
+            "line": 33
+          }
+        ]
+      },
+      {
+        "anchor": "unknown roles use unknown",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1307
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F-04",
+    "resolution": "Replaced optional-only ARC decisions; current Kotlin ownership and migration vocabulary",
+    "evidence": [
+      {
+        "anchor": "Internal Kotlin",
+        "locations": [
+          {
+            "file": "design-c4/architecture/workspace.dsl",
+            "line": 22
+          }
+        ]
+      },
+      {
+        "anchor": "bridge.arc",
+        "locations": []
+      },
+      {
+        "anchor": "Historical round013",
+        "locations": [
+          {
+            "file": "design-c4/architecture/round013-design-corrections.md",
+            "line": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F-05",
+    "resolution": "Mandatory fresh auth, exact command/revision consume, foreign privileged controller boundary",
+    "evidence": [
+      {
+        "anchor": "OwnerAuthenticationService is also",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1612
+          }
+        ]
+      },
+      {
+        "anchor": "FLAG_SECURE",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 742
+          }
+        ]
+      },
+      {
+        "anchor": "Every Ask decision",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 374
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F-06",
+    "resolution": "Exact owner/nonce/proof ordering and named SSLServerSocket candidate; runtime spike explicitly gated",
+    "evidence": [
+      {
+        "anchor": "LP(x)",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1351
+          }
+        ]
+      },
+      {
+        "anchor": "manual_bearer",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 128
+          }
+        ]
+      },
+      {
+        "anchor": "LoopbackTlsHost",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1363
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F-07",
+    "resolution": "Closed transition/cleanup table; required renew arguments and bounded list cursor/limit",
+    "evidence": [
+      {
+        "anchor": "cleanup_disposition",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1581
+          }
+        ]
+      },
+      {
+        "anchor": "registration_timeout",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1587
+          }
+        ]
+      },
+      {
+        "anchor": "onCalleeDied",
+        "locations": [
+          {
+            "file": "design-c4/architecture/code-diagrams.md",
+            "line": 264
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F-08",
+    "resolution": "Distinct pre-dispatch/pinned-result/live-handle semantics; publication authority checked",
+    "evidence": [
+      {
+        "anchor": "admitted but not dispatched",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1119
+          }
+        ]
+      },
+      {
+        "anchor": "dispatched unary",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1119
+          }
+        ]
+      },
+      {
+        "anchor": "Live handles never retarget",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1119
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F-09",
+    "resolution": "One closed health/status tuple and read-only chip on every SVG screen",
+    "evidence": [
+      {
+        "anchor": "HealthSnapshot",
+        "locations": [
+          {
+            "file": "design-c4/architecture/code-diagrams.md",
+            "line": 36
+          }
+        ]
+      },
+      {
+        "anchor": "STATUS",
+        "locations": [
+          {
+            "file": "design-c4/docs/ui-screens-and-storyboards.md",
+            "line": 103
+          }
+        ]
+      },
+      {
+        "anchor": "catalog_readiness",
+        "locations": [
+          {
+            "file": "design-c4/docs/ui-asset-manifest.json",
+            "line": 413
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F-10",
+    "resolution": "Kotlin coordinator/native AOSP adapter choice, Locked transitions, paired-peer domains and topology",
+    "evidence": [
+      {
+        "anchor": "AdbConnectionManager",
+        "locations": [
+          {
+            "file": "design-c4/architecture/code-diagrams.md",
+            "line": 227
+          }
+        ]
+      },
+      {
+        "anchor": "Paired adbd",
+        "locations": [
+          {
+            "file": "design-c4/architecture/workspace.dsl",
+            "line": 120
+          }
+        ]
+      },
+      {
+        "anchor": "identity_verification_method",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 659
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F-11",
+    "resolution": "Authoritative class views, service/connection lifetimes, policy convergence and vocabulary crosswalk",
+    "evidence": [
+      {
+        "anchor": "Design vocabulary crosswalk",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1659
+          }
+        ]
+      },
+      {
+        "anchor": "reference:",
+        "locations": [
+          {
+            "file": "design-c4/architecture/code-diagrams.md",
+            "line": 93
+          }
+        ]
+      },
+      {
+        "anchor": "ArcConnectionSession",
+        "locations": [
+          {
+            "file": "design-c4/architecture/code-diagrams.md",
+            "line": 390
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F-12",
+    "resolution": "Explicit container summaries, owner/auth/catalog/lifecycle/invalidation relationships",
+    "evidence": [
+      {
+        "anchor": "single serialized writer",
+        "locations": [
+          {
+            "file": "design-c4/architecture/workspace.dsl",
+            "line": 88
+          }
+        ]
+      },
+      {
+        "anchor": "OwnerTransition",
+        "locations": [
+          {
+            "file": "design-c4/build.gradle.kts",
+            "line": 11
+          }
+        ]
+      },
+      {
+        "anchor": "Reads credential/client",
+        "locations": [
+          {
+            "file": "design-c4/architecture/workspace.dsl",
+            "line": 103
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F-13",
+    "resolution": "Ordered finite results, separate resource lifecycle, group CAS, startup and new failure paths",
+    "evidence": [
+      {
+        "anchor": "dynamic bridge.app ArcSession",
+        "locations": [
+          {
+            "file": "design-c4/architecture/workspace.dsl",
+            "line": 226
+          }
+        ]
+      },
+      {
+        "anchor": "dynamic bridge.app OwnerTransition",
+        "locations": [
+          {
+            "file": "design-c4/architecture/workspace.dsl",
+            "line": 236
+          }
+        ]
+      },
+      {
+        "anchor": "Final tool result",
+        "locations": [
+          {
+            "file": "design-c4/architecture/workspace.dsl",
+            "line": 186
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F-14",
+    "resolution": "Layer plus stable code grammar; package visibility/permission/classpath/Wi-Fi reasons",
+    "evidence": [
+      {
+        "anchor": "Reason envelopes separate",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1618
+          }
+        ]
+      },
+      {
+        "anchor": "PACKAGE_NOT_VISIBLE",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1618
+          }
+        ]
+      },
+      {
+        "anchor": "NOT_ON_BRIDGE_CLASSPATH",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1618
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F-15",
+    "resolution": "Exact tombstone/route/staging/import trust and SQLite allowlist; metadata item PUT and retry semantics",
+    "evidence": [
+      {
+        "anchor": "An owner delete always",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1123
+          }
+        ]
+      },
+      {
+        "anchor": "administrative entry ETag",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1622
+          }
+        ]
+      },
+      {
+        "anchor": "import-stages",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1624
+          }
+        ]
+      }
+    ],
+    "disputed_subclaims": "meta1 global-generation ETags are conservative false conflicts by design, not an HTTP prohibition; public representation includes the ETag. DELETE412 after prior successful effect is idempotent by intended effect, not identical response. Cursor replay is allowed. Item creation changed to PUT If-None-Match:* (genuine defect)."
+  },
+  {
+    "id": "F-16",
+    "resolution": "Explicit canonical bytes and stable language namespace/JVM equivalence separation",
+    "evidence": [
+      {
+        "anchor": "meta-json-v1",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1622
+          }
+        ]
+      },
+      {
+        "anchor": "source-signature IDs retain",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1622
+          }
+        ]
+      },
+      {
+        "anchor": "golden",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1230
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F-17",
+    "resolution": "Negotiation, authenticated route, journal cursor/retention/bounds and fallback designed",
+    "evidence": [
+      {
+        "anchor": "android.bridge.directEvents.v1",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1600
+          }
+        ]
+      },
+      {
+        "anchor": "DirectStreamNegotiator",
+        "locations": [
+          {
+            "file": "design-c4/architecture/code-diagrams.md",
+            "line": 26
+          }
+        ]
+      },
+      {
+        "anchor": "DIRECT_STREAM_UNAVAILABLE",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1606
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F-18",
+    "resolution": "Pinned constant evidence; exact envelope/default/cancel/frame/DIP/input/marker/version semantics",
+    "evidence": [
+      {
+        "anchor": "RemoteControlProtocol.cs:31",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1651
+          }
+        ]
+      },
+      {
+        "anchor": "Length zero is permitted",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1653
+          }
+        ]
+      },
+      {
+        "anchor": "package0.8.0",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1651
+          }
+        ]
+      }
+    ],
+    "disputed_subclaims": "arc-protobuf-v1 is defined by the actual upstream constant, not an invented profile. Reviewer suggested length<=0 reject would break upstream zero-frame semantics; preserve codec zero and reject default envelope at validation. Exact pinned source evidence supplied."
+  },
+  {
+    "id": "F-19",
+    "resolution": "11 screens,5 ordered storyboards,21 slides; concrete actors/control/state IDs and branches",
+    "evidence": [
+      {
+        "anchor": "STB04",
+        "locations": [
+          {
+            "file": "design-c4/docs/ui-screens-and-storyboards.md",
+            "line": 89
+          }
+        ]
+      },
+      {
+        "anchor": "STB05",
+        "locations": [
+          {
+            "file": "design-c4/docs/ui-screens-and-storyboards.md",
+            "line": 95
+          }
+        ]
+      },
+      {
+        "anchor": "control_id",
+        "locations": [
+          {
+            "file": "design-c4/docs/ui-asset-manifest.json",
+            "line": 194
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F-20",
+    "resolution": "Exact existing renderer/JDK/Node/Marp hashes, manifest asset set, strict offline failure and Gradle inputs",
+    "evidence": [
+      {
+        "anchor": "renderer-lock.json",
+        "locations": [
+          {
+            "file": "design-c4/build.gradle.kts",
+            "line": 32
+          }
+        ]
+      },
+      {
+        "anchor": "verifyToolchain",
+        "locations": [
+          {
+            "file": "design-c4/build.gradle.kts",
+            "line": 31
+          }
+        ]
+      },
+      {
+        "anchor": "expectedSvgPaths",
+        "locations": [
+          {
+            "file": "design-c4/build.gradle.kts",
+            "line": 164
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F-21",
+    "resolution": "Session/header/error/GET/hint queue/disconnect/deadline/URI/idempotency rules",
+    "evidence": [
+      {
+        "anchor": "unknown/expired Mcp-Session-Id",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1628
+          }
+        ]
+      },
+      {
+        "anchor": "MCP-Protocol-Version",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 497
+          }
+        ]
+      },
+      {
+        "anchor": "isError=true",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1630
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F-22",
+    "resolution": "Semantic generations, inert stale rules, no auto-rebind, audit/log ordering and stable fingerprint",
+    "evidence": [
+      {
+        "anchor": "re-grant-required",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1634
+          }
+        ]
+      },
+      {
+        "anchor": "Reserved",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1206
+          }
+        ]
+      },
+      {
+        "anchor": "Mandatory admission audit failure",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1634
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F-23",
+    "resolution": "Logical/physical proof, explicit transforms/bounds/capture cap and typed brightness anomalies",
+    "evidence": [
+      {
+        "anchor": "coordinateSpaceVersion",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 713
+          }
+        ]
+      },
+      {
+        "anchor": "DISPLAY_MAPPING_UNPROVEN",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1636
+          }
+        ]
+      },
+      {
+        "anchor": "unparseable",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1636
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F-24",
+    "resolution": "Correct links/API-version language/units/budget/phase labels; no raster replacement",
+    "evidence": [
+      {
+        "anchor": "structurizr-InvocationFlow.svg",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 950
+          }
+        ]
+      },
+      {
+        "anchor": "Editable sources:",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 998
+          }
+        ]
+      },
+      {
+        "anchor": "are acceptance plans",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1642
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F-25",
+    "resolution": "Added missing table/ownership/index constraints, memory budgets, boot path and local/meta callbacks",
+    "evidence": [
+      {
+        "anchor": "group_dependencies",
+        "locations": [
+          {
+            "file": "design-c4/architecture/round013-design-corrections.md",
+            "line": 37
+          }
+        ]
+      },
+      {
+        "anchor": "Cache seal is HMAC-SHA256",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1640
+          }
+        ]
+      },
+      {
+        "anchor": "runtime-registered",
+        "locations": [
+          {
+            "file": "design-c4/docs/Android MCP Bridge Design.md",
+            "line": 1355
+          }
+        ]
+      }
+    ]
+  }
+]

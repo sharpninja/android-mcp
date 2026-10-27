@@ -1,0 +1,349 @@
+I'll assess the assigned byte slice (the tail of the design document: ARC fixtures/contract table, C4 build, screens/storyboards, the post-round-013 normative mechanisms, sections 19 and 20) against requirements 2 and 4 through 12, and return the JSON workpaper.
+
+```json
+{
+  "stage": "core-section-evidence-check 4/7, design-c4/docs/Android MCP Bridge Design.md bytes 165000-206076 (document tail), design-only scope, no tools",
+  "coverage": {
+    "inspected": [
+      "truncated opening sentence ending ' grants additional rights.' (crosses start boundary, see limitations)",
+      "ARC golden fixture paragraph and FR/TR/AC-ARC-01..05 table",
+      "five class-diagram image references and ARC controller/target class prose",
+      "C4 architecture source and documentation build section, Gradle task list, toolchain pins",
+      "Compose screen definitions and storyboards section, FR-DOC-01..03 and FR-UI-01..02 table, current validation status",
+      "Verified design mechanisms after round013: callback object construction, startup reuse and bounded admission, catalog delivery and admin API, callback/group tables, callback.status/callback.cancel contracts, broker/journal durability, StreamableHTTP session rules, pairing, owner authentication, boot receiver, specialUse FGS, wireless debugging discovery, screen.state/input.tap caps, Kotlin HTTP evaluation target, brightness, toolGroups capability",
+      "section 19 acceptance tests and delivery sequence",
+      "section 20 decisions, primary and integration references, closing current-decisions paragraph"
+    ],
+    "requirements_applicable": ["2", "3 (screen.state/input.tap caps, ADB discovery only)", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+    "not_inspectable": "SVG images, linked workspace.dsl, code-diagrams.md, README, storyboard.md, storyboards.html, ledger and receipts are outside the byte range; only the Markdown text was assessed"
+  },
+  "findings": [
+    {
+      "id": "F-04-01",
+      "severity": "medium",
+      "area": "callback schema / materialization",
+      "artifact": "Design.md, 'Callback/group table and operation contracts' row callback_descriptors and 'Callback object construction and reachability'",
+      "evidence": "'role CHECK proven_callback/candidate/proven_non_callback/unknown; materialization_strategy CHECK the four closed values above' and 'closed values interface_dynamic_proxy, binder_generic_stub, prebuilt_adapter and unsupported_abstract_class'",
+      "issue": "Every descriptor row, including proven_non_callback, candidate and unknown roles, must carry one of four registrable or abstract-class strategies; there is no none/unknown value and no CHECK tying strategy to role, so non-callbacks and unknown candidates store a false materialization claim. The closed set also has no value for concrete non-final classes that require subclassing, so their classification is undefined and the only available label is factually wrong for them.",
+      "exact_minimal_correction": "Add strategy values none and unknown; add CHECK that registrable strategies are allowed only when role=proven_callback; rename unsupported_abstract_class to unsupported_requires_subclass or add unsupported_concrete_class with its own explicit reason code.",
+      "verification_needed": "Confirm no earlier byte range already defines a wider strategy set or a role/strategy CHECK."
+    },
+    {
+      "id": "F-04-02",
+      "severity": "medium",
+      "area": "credential scoping / admin route",
+      "artifact": "Design.md, 'Catalog delivery and management API ownership'",
+      "evidence": "'admin credentials are rejected by tools/call and ordinary MCP credentials are rejected by admin routes'",
+      "issue": "Rejection of admin credentials is specified only for tools/call. As written an admin credential may initialize an MCP session, call tools/list, resources/read and resources/subscribe on callback journals and open the GET stream, which contradicts the stated kind separation and per-client journal authorization.",
+      "exact_minimal_correction": "Replace with: kind=admin is rejected by every /mcp request including initialize and the GET stream; kind=mcp is rejected by every /v1/catalog route; /pair accepts neither credential kind.",
+      "verification_needed": "Check whether LoopbackHost credential text elsewhere already enforces kind per route."
+    },
+    {
+      "id": "F-04-03",
+      "severity": "medium",
+      "area": "delivery sequence / internal consistency",
+      "artifact": "Design.md, section 19 'Acceptance tests and delivery sequence' and 'Current validation status'",
+      "evidence": "Delivery steps 1..4 name only 'Compatibility spike', 'Security core', 'Vertical slice', 'Complete generic capabilities ... any enabled Avalonia runtime adapter'; the test-area table has rows Policy, Approval binding, Authorization races, Identity and transport, Endpoint identity, SQLite durability, Android integration, Lifecycle, UI accessibility, Privacy and performance; status text says round013 reviewed the design 'frozen before the internal ARC port'",
+      "issue": "The delivery sequence and test-area table omit the mechanisms this revision adds and declares normative: ARC golden fixtures and bidirectional interoperability (AC-ARC-01..05), callback broker/journal/lease/cancel and group activation CAS, SAF catalog import and the admin route window, pairing protocol and BiometricPrompt binding, and the license-notice distribution gate. Step 4 still frames ARC as an 'Avalonia runtime adapter', so exit criteria are inconsistent with the internal Kotlin port sections.",
+      "exact_minimal_correction": "Add delivery steps and exit criteria for ARC fixtures/interop plus license gate, callback broker/journal/status/cancel plus group activation, catalog import plus admin route, and pairing plus owner authentication; add matching test-area rows; reword step 4 to the internal Kotlin ARC port.",
+      "verification_needed": "None; the omission is visible within the slice."
+    },
+    {
+      "id": "F-04-04",
+      "severity": "medium",
+      "area": "documentation toolchain / determinism",
+      "artifact": "Design.md, 'C4 architecture source and documentation build' and 'Compose screen definitions and user storyboards'",
+      "evidence": "'Gradle8.14.3, existing Structurizr CLI2025.11.09 image digest, Java21 and PlantUML1.2025.10 are pinned. The local image is reused; no host software/settings are changed.' and 'Marp CLI4.2.3 and its integrity-locked package graph are task-local tooling.' and 'Cached offline builds fail explicitly if dependencies are missing'",
+      "issue": "Three required host runtimes are neither named, pinned nor given a failure mode: a container runtime to run the Structurizr CLI image digest, a Node.js runtime to run Marp CLI, and a PlantUML layout engine (Graphviz dot or the bundled smetana option) that class and component diagrams need. Without them the no-host-change, deterministic-output and fail-explicitly claims cannot be evaluated, and dot versus smetana produce different layouts.",
+      "exact_minimal_correction": "List each host prerequisite with a pinned version or digest and the Gradle precondition check that fails explicitly when it is absent; state the PlantUML layout engine used so output is host independent.",
+      "verification_needed": "Build pass to inspect README and build.gradle.kts; the Graphviz and Marp runtime statements are reviewer recollection, not verified platform facts."
+    },
+    {
+      "id": "F-04-05",
+      "severity": "medium",
+      "area": "document coherence",
+      "artifact": "Design.md, 'Verified design mechanisms after round013'",
+      "evidence": "'These mechanisms are normative for this revision and replace conflicting earlier wording.'",
+      "issue": "The canonical Markdown is declared to contain conflicting earlier wording overridden by a later appendix, but the superseded statements are neither enumerated nor edited. A reader of an earlier section cannot know it is void, so the document is internally inconsistent by its own admission. The heading word 'Verified' also implies verification the body disclaims as design contracts.",
+      "exact_minimal_correction": "Edit each superseded statement in place or add an enumerated supersession list (section, original sentence, replacement), delete the blanket clause, and rename the heading to 'Normative design mechanisms'.",
+      "verification_needed": "Other passes must list the actual earlier conflicts (brightness range, catalog delivery via request body, PATCH alias are implied by this slice)."
+    },
+    {
+      "id": "F-04-06",
+      "severity": "medium",
+      "area": "pairing protocol completeness",
+      "artifact": "Design.md, 'Pairing, owner authentication and boot lifecycle'",
+      "evidence": "'A one-use server nonce plus agent nonce, fingerprint and exact proposed label hash are length-prefixed into HMAC-SHA256 under the random bootstrap secret with domain pair-v1 ... Nonces expire after60seconds ... the response returns the new bearer once ... Approval binds the proposed principal and fingerprint' and 'require a successful prompt within30seconds'",
+      "issue": "The protocol does not state how the agent obtains the one-use server nonce (separate step, first POST, or QR payload), how and when the bootstrap secret is generated and expires relative to the pairing window, which fingerprint the approval binds (only a server TLS fingerprint exists because the agent has no certificate), or whether the owner prompt occurs before the proof or after it. If after, the POST response must wait or the agent must poll, and a 60 second nonce with a 30 second prompt yields different failure behavior per ordering.",
+      "exact_minimal_correction": "Define the message sequence: nonce issuance step, HMAC input order and encoding, secret lifetime bound to the window, the approval point, and response-wait or poll behavior; state that approval binds the label hash and the displayed server fingerprint.",
+      "verification_needed": "Check the owner storyboard and any dynamic view for a pairing sequence in other passes."
+    },
+    {
+      "id": "F-04-07",
+      "severity": "low",
+      "area": "callback.status tool contract",
+      "artifact": "Design.md, 'Callback/group table and operation contracts'",
+      "evidence": "'callback.status input is {subscription_id?:string, renew?:boolean=false, expected_revision?:positive_integer, requested_lease_seconds?:integer}. Without an ID it lists only the authenticated client's subscriptions with bounded cursor/limit and renew=false.'",
+      "issue": "List mode requires cursor and limit parameters that the declared input lacks, and requested_lease_seconds is optional although renew=true requires a 1..300 second duration.",
+      "exact_minimal_correction": "Add cursor?:string and bounded limit?:integer to the input; state that renew=true requires subscription_id, expected_revision and requested_lease_seconds and that renew without subscription_id is rejected.",
+      "verification_needed": "Confirm the tool manifest schema in an earlier range matches."
+    },
+    {
+      "id": "F-04-08",
+      "severity": "low",
+      "area": "admin API wording",
+      "artifact": "Design.md, 'Catalog delivery and management API ownership'",
+      "evidence": "'POST /v1/catalog/imports carries that handle plus expected pins/idempotency key.' and 'PUT/DELETE are the mutation family; no PATCH alias is defined.'",
+      "issue": "POST imports is a mutation, so the statement that PUT/DELETE are the mutation family is inconsistent.",
+      "exact_minimal_correction": "State: POST is used only for imports; PUT/DELETE mutate overrides and permissions; no PATCH.",
+      "verification_needed": "None."
+    },
+    {
+      "id": "F-04-09",
+      "severity": "low",
+      "area": "StreamableHTTP session precision",
+      "artifact": "Design.md, 'Callback/group table and operation contracts' final paragraph",
+      "evidence": "'post-initialize requests without it receive400 ... Session expiry requires reinitialization'",
+      "issue": "Only the missing-header case (400) is specified. The pinned transport text distinguishes an unknown or terminated session id (404 then reinitialize); the reconnect result for a GET with a stale id is therefore unspecified in this slice.",
+      "exact_minimal_correction": "Add: requests carrying an unknown or expired Mcp-Session-Id receive 404 and the client must send a new InitializeRequest; state DELETE termination handling.",
+      "verification_needed": "Confirm the earlier transport section and the pinned spec text [S4]."
+    },
+    {
+      "id": "F-04-10",
+      "severity": "low",
+      "area": "reason-code taxonomy",
+      "artifact": "Design.md, 'Callback object construction and reachability' and 'Startup reuse and bounded admission'",
+      "evidence": "'NON_SDK_BLOCKED/OS_UNAVAILABLE', 'ABSTRACT_CLASS_NO_RUNTIME_SUBCLASS', 'VIEW_RESOLVING' versus 'backend_unreachable:non_sdk' and 'backend_unreachable:hidl'",
+      "issue": "Two reason-code formats coexist and NON_SDK_BLOCKED overlaps backend_unreachable:non_sdk with no stated distinction between member access and handle acquisition.",
+      "exact_minimal_correction": "Declare one canonical reason-code grammar and closed list, mapping each code to its condition and emitting layer.",
+      "verification_needed": "Check the earlier error taxonomy section."
+    },
+    {
+      "id": "F-04-11",
+      "severity": "low",
+      "area": "schema completeness",
+      "artifact": "Design.md, table rows group_memberships, 'Raw connection_id' paragraph, admin credentials paragraph",
+      "evidence": "'full type/dependency closure through versioned group_dependencies and type pins'; 'a real connection_profiles.profile_id'; 'Owner-issued credentials.kind=admin'",
+      "issue": "group_dependencies, type-pin storage, connection_profiles and credentials are constraint targets but are not defined in this slice's table contract.",
+      "exact_minimal_correction": "If undefined elsewhere, add rows with keys, FK RESTRICT rules and uniqueness; otherwise add a cross-reference to the defining section.",
+      "verification_needed": "Unresolved dependency on earlier byte ranges."
+    },
+    {
+      "id": "F-04-12",
+      "severity": "low",
+      "area": "subscription state naming",
+      "artifact": "Design.md, subscriptions row and callback.status/callback.cancel paragraphs",
+      "evidence": "'state CHECK registering/active/cancelling/closed/orphaned/outcome_unknown' versus 'It cannot revive closed/orphaned/unknown registrations' and 'returns delivery_closed, cleanup_confirmed/cleanup_unknown and new revision'",
+      "issue": "Prose uses 'unknown' for the CHECK value 'outcome_unknown', and the state reached after cancel with cleanup_unknown is not stated.",
+      "exact_minimal_correction": "Use the CHECK value name in prose and state: cleanup_unknown sets outcome_unknown, cleanup_confirmed sets closed.",
+      "verification_needed": "None."
+    },
+    {
+      "id": "F-04-13",
+      "severity": "low",
+      "area": "catalog import lifecycle",
+      "artifact": "Design.md, 'Catalog delivery and management API ownership'",
+      "evidence": "'BridgeService obtains the owner-granted read capability, preflights capacity, streams bounded copy chunks into a new app-private staging file' and 'A bounded expiring staged-local-handle identifies this verified copy; POST /v1/catalog/imports carries that handle'",
+      "issue": "A Storage Access Framework grant originates from an Activity picker, yet the design does not state whether the grant is taken persistably for the background copy, when it is released, how an external admin client learns the staged handle, or whether handle expiry is tied to the 10 minute management window.",
+      "exact_minimal_correction": "State: picker launched by the management Activity; persistable grant held only for the copy and released after hash verification; staged handles exposed by an admin GET route or the owner UI and expiring with the window.",
+      "verification_needed": "Check the owner settings storyboard for the import flow."
+    },
+    {
+      "id": "F-04-14",
+      "severity": "low",
+      "area": "untrusted SQLite catalog hardening",
+      "artifact": "Design.md, 'Catalog delivery and management API ownership'",
+      "evidence": "'Only then open the SQLite input read-only for schema/integrity/FK/content validation and atomic activation. Untrusted filenames, archive paths or SQL are never commands.'",
+      "issue": "An imported SQLite file can carry schema SQL (views, triggers, generated columns) that executes on query; read-only opening does not neutralize it and no schema allowlist or defensive-pragma step is specified.",
+      "exact_minimal_correction": "Require validation to reject any schema object outside the expected allowlist (no views or triggers) and to set available defensive pragmas before the first content query.",
+      "verification_needed": "Confirm which pragmas the Android 15 bundled SQLite exposes during the implementation spike."
+    },
+    {
+      "id": "F-04-15",
+      "severity": "low",
+      "area": "boot lifecycle",
+      "artifact": "Design.md, 'Pairing, owner authentication and boot lifecycle'",
+      "evidence": "'BOOT_COMPLETED/ACTION_USER_UNLOCKED reconciles the mirror against credential-encrypted desired state'",
+      "issue": "Reviewer recollection, stated as uncertainty, is that ACTION_USER_UNLOCKED reaches only runtime-registered receivers; the design does not say how the unexported manifest receiver receives it, and the process may not survive from LOCKED_BOOT_COMPLETED to unlock.",
+      "exact_minimal_correction": "State the receipt mechanism: rely on BOOT_COMPLETED for manifest delivery and register ACTION_USER_UNLOCKED at runtime only while the process is alive, or remove the ACTION_USER_UNLOCKED claim.",
+      "verification_needed": "Verify against the official Intent.ACTION_USER_UNLOCKED reference."
+    },
+    {
+      "id": "F-04-16",
+      "severity": "low",
+      "area": "cache semantic key",
+      "artifact": "Design.md, 'Startup reuse and bounded admission'",
+      "evidence": "'canonical semantic facts (platform/minor/extensions/build/OEM/module/interface identity and relevant availability), scope, inventory root, catalog/overlay generations, resolver/schema version and type-graph digest'",
+      "issue": "Requirement 6 demands invalidation on backend changes; the key lists device and catalog facts but no explicit backend or connection-profile identity, and 'scope' and 'relevant availability' are undefined terms.",
+      "exact_minimal_correction": "Add backend set and connection-profile identities to the semantic key and define 'scope' and 'relevant availability'.",
+      "verification_needed": "Check whether 'capability observation' is defined earlier to include backend facts."
+    },
+    {
+      "id": "F-04-17",
+      "severity": "low",
+      "area": "slideshow self-containment",
+      "artifact": "Design.md, 'Compose screen definitions and user storyboards' and FR-UI-02",
+      "evidence": "'The self-contained HTML slideshow embeds the SVG assets' and 'AC-UI-02 ... the HTML has no external image/style dependencies'",
+      "issue": "The step that inlines SVGs into the Marp HTML output is unspecified; reviewer recollection, stated as uncertainty, is that Marp CLI HTML output keeps local image paths unless post-processed.",
+      "exact_minimal_correction": "Name the inlining step inside renderStoryboards and the check that asserts zero external references.",
+      "verification_needed": "Build pass to inspect the renderStoryboards task."
+    },
+    {
+      "id": "F-04-18",
+      "severity": "low",
+      "area": "dynamic proxy semantics",
+      "artifact": "Design.md, 'Callback object construction and reachability'",
+      "evidence": "'A public Java interface can use java.lang.reflect.Proxy with the exact source-proven interface list, declared methods and supported classloader.'",
+      "issue": "Handler behavior for java.lang.Object methods (equals/hashCode/toString, which platform listener registries and unregister matching rely on) and for interface default methods is unspecified; publishing them as events or breaking identity defeats cleanup pairing.",
+      "exact_minimal_correction": "State that the handler answers Object methods locally with proxy identity, never publishes them, and treats default methods per the pinned descriptor.",
+      "verification_needed": "None."
+    },
+    {
+      "id": "F-04-19",
+      "severity": "low",
+      "area": "generic Binder stub wire contract",
+      "artifact": "Design.md, 'Callback object construction and reachability'",
+      "evidence": "'implement onTransact using the exact verified transaction IDs, flags and codecs, enforce interface tokens'",
+      "issue": "For versioned stable AIDL callback interfaces the remote may invoke interface version and hash meta transactions; stub handling is unspecified although the design pins interface versions and hashes.",
+      "exact_minimal_correction": "State how the stub answers meta transactions for versioned interfaces from the pinned descriptor, or mark such interfaces unsupported with an explicit reason.",
+      "verification_needed": "Exact meta transaction codes to be confirmed from pinned AIDL source [S30]; reviewer recollection only."
+    },
+    {
+      "id": "F-04-20",
+      "severity": "low",
+      "area": "schema nits",
+      "artifact": "Design.md, rows subscription_events and group_activations",
+      "evidence": "'PK(subscription_id, stream_epoch, sequence) ... Index(subscription_id,stream_epoch,sequence)' and 'PK(client_id, credential_epoch, mcp_session_id, activation_revision) ... revision>=1'",
+      "issue": "The explicit index duplicates the primary key; the activation row names the key column activation_revision but constrains 'revision'.",
+      "exact_minimal_correction": "Drop the duplicate index or declare WITHOUT ROWID; use a single column name.",
+      "verification_needed": "None."
+    },
+    {
+      "id": "F-04-21",
+      "severity": "low",
+      "area": "onboarding terminology and TLS dependency",
+      "artifact": "Design.md, pairing paragraph, 'Named Kotlin HTTP evaluation target', section 20 decisions table",
+      "evidence": "'reduced_http rejects pairing'; 'Manual paired bearer profile for compatible on device agents; preferred pinned loopback TLS'; 'Paired HTTPS needs a verified TLS-capable Android engine/tunnel adapter; CIO support alone is not evidence'",
+      "issue": "'paired' names both the manual bearer profile and the POST /pair protocol, and the only automated onboarding path depends on an unselected TLS server component; the design does not state the onboarding path available until that gate passes.",
+      "exact_minimal_correction": "Rename the manual profile (for example manual_bearer) and add one sentence stating that owner-authenticated credential reveal is the onboarding path until a TLS engine passes the gate.",
+      "verification_needed": "Check the profile list in the earlier transport section."
+    },
+    {
+      "id": "F-04-22",
+      "severity": "low",
+      "area": "document structure",
+      "artifact": "Design.md, after 'Current validation status'",
+      "evidence": "'![C4 server core detail](diagrams/structurizr-ServerCoreComponents.svg)' and '![C4 execution and callbacks detail](diagrams/structurizr-ExecutionComponents.svg)' follow the validation-status paragraph with no heading or caption text",
+      "issue": "Two component views are orphaned under the validation-status paragraph instead of the C4 build section, so the figure set is split without explanation.",
+      "exact_minimal_correction": "Move both figures into the C4 section after the ServerComponents figure.",
+      "verification_needed": "None."
+
+   }
+  ],
+  "verified_resolutions": [
+    {
+      "requirement": "4",
+      "evidence": "'Capabilities-first is a client convention, not an ARC handshake.'; 'A transport-level OK response can contain CommandResult.succeeded=false'; 'The retained input schema has no pointer IDs or multitouch; Avalonia key-name strings require explicit mapping rather than interpretation as Android keycodes.'",
+      "status": "Matches the no-handshake, OK-with-command-failure, no-multitouch and key-name requirements."
+    },
+    {
+      "requirement": "4",
+      "evidence": "Golden fixture paragraph and AC-ARC-05 'no Kotlin implementation or interoperability result is claimed by this document'; 'Independently constructed design examples are reference vectors, not official cross-language pass evidence.'",
+      "status": "Fixture and interop plan is honestly separated from implementation; license-notice distribution gate is stated."
+    },
+    {
+      "requirement": "10",
+      "evidence": "'editable inline PlantUML definitions in architecture/code-diagrams.md are rendered locally, then image views scope them to the corresponding C4 components'; 'these are proposed classes, not native Structurizr class objects'; 'A C4 container here represents the one Android APK/process'",
+      "status": "Image-view code workflow matches [S25]; no Mermaid appears in this slice; container semantics match requirement 2's single packaging."
+    },
+    {
+      "requirement": "11",
+      "evidence": "'Real Gradle targets are validateArchitecture, generateArchitectureDiagrams, generateUiAssets, renderStoryboards, verifyDesignDocs and packageDesignDocs'; 'Gradle wrapper distribution verification is mandatory'",
+      "status": "Required task families are named; wrapper verification stated (subject to F-04-04)."
+    },
+    {
+      "requirement": "12",
+      "evidence": "Ten screens and three storyboards enumerated; 'They are not UML message sequences.'; HTML 'is an optional local presentation of the canonical Markdown/SVG definitions'",
+      "status": "Screen and storyboard coverage names every surface in requirement 12 and separates them from architecture dynamics."
+    },
+    {
+      "requirement": "7",
+      "evidence": "'Binder callback threads copy bounded typed data into a bounded broker accept queue and return promptly; synchronous local reply selection never waits for SQLite.'; 'An event becomes replayable only after commit; precommit crash loss is disclosed'; 'Async queue order is acceptance order across threads, not physical source causality.'",
+      "status": "Bounded buffers, local synchronous reply, commit-gated replay and honest ordering semantics are specified."
+    },
+    {
+      "requirement": "7 and 9",
+      "evidence": "'The base no-query events_uri returns a bounded status document ... Expanded cursor URIs page history.'; 'Transport SSE replay defaults to nondurable; this does not remove the separately retained application journal.'",
+      "status": "resources/read status plus bounded pages and the Last-Event-ID versus application cursor distinction are correct."
+    },
+    {
+      "requirement": "6",
+      "evidence": "'Platform ServiceManager lookup and manager-private proxy fields are non-SDK; the ordinary app backend reports backend_unreachable:non_sdk'; 'No ordinary app backend is assumed to access hwbinder'; 'Every runtime permission/reachability/wire/handle check is fresh at dispatch regardless of cache reuse.'",
+      "status": "No magical universal access; unsupported reasons are explicit; cache reuse does not skip runtime checks."
+    },
+    {
+      "requirement": "2 and 5",
+      "evidence": "'It is disabled by default and enabled only by fresh local owner action for a bounded maximum10-minute window.'; 'The local Compose facade invokes the same application service without opening HTTP or minting an admin credential.'; 'No admin route is active merely because this design contains its specification.'",
+      "status": "Admin route gating and UI-facade ownership are consistent with service-owned authorization."
+    },
+    {
+      "requirement": "2",
+      "evidence": "'The selected candidate foreground-service type is specialUse ... eligibility, platform prerequisites and distribution review are release gates, not presumed approval.'; 'An inconsistent mirror defaults off.'",
+      "status": "Boot and foreground-service claims are stated with honest Android limits."
+    },
+    {
+      "requirement": "8 and 9",
+      "evidence": "'initialization experimental capability android.bridge.toolGroups.v1 with requested mode dynamic_aliases and a server-confirmed matching capability; absent/mismatched agreement stays portable'; 'advertises standard tools.listChanged only when it will emit notifications/tools/list_changed'; 'does not promise host context eviction'",
+      "status": "Dynamic aliases are opt-in via a negotiated extension, portable fallback retained, no eviction promise."
+    },
+    {
+      "requirement": "primary fact (brightness)",
+      "evidence": "'between 1 (minimum) and 255 (maximum)' with [S15]; 'Brightness source range remains1..255'",
+      "status": "Consistent with the supplied official source wording; raw-read and write-policy distinction is explicit."
+    },
+    {
+      "requirement": "3",
+      "evidence": "'screen.state caps inline PNG bytes at2MiB before base64 and total JSON result at3MiB ... never silently cropped'; 'input.tap validates display ID, rotation, capture/transform freshness and bounds'",
+      "status": "Caps are arithmetically consistent and on-demand semantics preserved."
+    },
+    {
+      "requirement": "honesty of claims",
+      "evidence": "'proposed unmeasured p95 acceptance targets'; 'the historical Python4.30GiB/565.6second probe does not satisfy them'; 'This is an explicit protocol design, not an implemented cryptographic handshake claim.'; 'Existing full-project98/98 acceptance remains unmet'",
+      "status": "Plans and benchmarks are distinguished from proven implementation throughout the slice."
+    }
+  ],
+  "cross_artifact_questions": [
+    "Do earlier byte ranges embed the C4 container view and at least one dynamic view SVG? This slice references Context, four component views and Deployment only.",
+    "Do earlier ranges define group_dependencies, type-pin storage, connection_profiles and credentials tables with FK RESTRICT rules (F-04-11)?",
+    "What are the nine bootstrap tools? This slice names callback.status, callback.cancel, bindings.search/list/get, screen.state, input.tap and an unnamed 'policy/status' call; confirm the list and the exact name of the status tool.",
+    "Does the earlier ARC framing section define Cancel8 unsupported, Bearer field 4, FPS parsed-not-enforced and whether a zero-length frame is an invalid envelope, matching AC-ARC-02?",
+    "Do the class diagrams name the ARC TCP listener/framing class and the separate ADB backend class required by requirement 4? Prose here names only ArcRequestHandler, ArcRuntime, ArcAuthorizationGate, TargetAdapter and the Compose adapters.",
+    "Where is stream_epoch incremented and does sequence restart per epoch? Event identity is PK(subscription_id, stream_epoch, sequence) but the increment rule is not in this slice.",
+    "Which subscription state results from remote target Binder death, and is a terminal journal event written? Only restart (orphaned) is specified here.",
+    "Is the negotiated optional direct stream (requirement 7), the POST SSE single-final-response rule, progress termination and the exact Origin policy for loopback non-browser clients defined in an earlier range?",
+    "Does storyboard.md contain exactly 13 slides with one screen/action step each, including the denied/error/cancel branches, consistent with 'one ordered screen/action step per slide'?",
+    "Does the ledger contain 28 findings with F-13 marked refuted, as this slice asserts?",
+    "Is the BiometricPrompt result bound to the command cryptographically (CryptoObject with an auth-bound key) or only in-process? 'bound to a single nonce, exact command' does not say.",
+    "What do 'on-read page/document hashes' refer to (result pages or SQLite pages) and where are the hashes stored?",
+    "Are generateUiAssets inputs hand-authored SVGs or generated from a text source? 'native SVG design assets' versus a generate task is ambiguous.",
+    "Which earlier section defines the pairing window duration, nonce rate limit and bootstrap secret lifetime (F-04-06)?"
+  ],
+  "limitations": [
+    "No tools: the sha256 and byte offsets of the supplied slice could not be verified; the pasted text is assumed to equal bytes 165000-206076.",
+    "The opening fragment ' grants additional rights.' crosses the start boundary; its subject sentence was not assessed and is marked as an unresolved dependency on check 3/7.",
+    "SVG diagrams, linked DSL, code-diagrams.md, README, storyboard.md, HTML, ledger and build receipts were not inspectable; class ownership and multiplicity claims in images are unverified.",
+    "Platform statements about ACTION_USER_UNLOCKED delivery, Marp HTML inlining, PlantUML layout-engine needs, Ktor CIO server TLS and stable AIDL meta transactions are reviewer recollection flagged as uncertainty, not asserted facts.",
+    "Kotlin SDK 0.15.0 commit, Gradle, Structurizr CLI, PlantUML and Marp version pins were taken as supplied and not verified.",
+    "No scores were produced per the assignment; severities reflect design correctness only, not catalog completeness or implementation status."
+  ],
+  "report_complete": true
+}
+```
+
+`★ Insight ─────────────────────────────────────`
+- **Closed enums need a role gate.** F-04-01 is the pattern to watch for in schema contracts: a CHECK constraint on one column is only truthful when another CHECK ties it to the row's role, otherwise every row is forced to assert something false.
+- **Route-scoped credentials must be stated per endpoint, not per method.** F-04-02 shows how a single sentence naming only tools/call silently leaves initialize, resources and the GET stream open to the wrong credential kind.
+- **"Replaces earlier wording" is a documentation smell.** Appending normative overrides without editing the superseded text (F-04-05) is how canonical documents drift into self-contradiction.
+`─────────────────────────────────────────────────`
+
+The workpaper covers the full assigned slice with 22 findings: six medium (schema role/strategy mismatch, admin credential scope, stale delivery sequence, unpinned host runtimes, un-enumerated supersession, incomplete pairing sequence) and sixteen low. Verified resolutions, cross-artifact questions for the other passes, and limitations are recorded. No scores were assigned, per the assignment.

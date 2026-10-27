@@ -1,0 +1,498 @@
+--- a/catalog/tooling/aidl_lex.py
++++ b/catalog/tooling/aidl_lex.py
+@@ -66,6 +66,16 @@
+             if depth==0:return start,i
+     raise ValueError('Unbalanced AIDL declaration body')
+ 
++def declaration_header(text):
++    """Exact raw header ends at the real body delimiter, outside quoted data."""
++    declaration=re.search(r'\b(?:interface|parcelable|union|enum)\s+[\w.]+',code_mask(text))
++    if declaration is None:return text.strip()
++    # An unterminated body still has a provable header delimiter. Preserve the
++    # declaration identity and unsupported status from the parser; do not turn
++    # a missing closing brace into a different whole-source identity.
++    start=code_mask(text).find('{',declaration.end())
++    return text[:start if start>=0 else len(text)].strip()
++
+ def inventory_counts(text):
+     """Independent lexical no-drop counts; no type or wire interpretation."""
+     counts=dict(declarations=0,statements=0,reconciled=True,issues=[])
+--- a/catalog/tooling/parsers.py
++++ b/catalog/tooling/parsers.py
+@@ -152,7 +152,7 @@
+  return re.sub(r'"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'|/\*.*?\*/|//[^\n]*',lambda m:m.group(0) if m.group(0).startswith(('"',"'")) else ''.join('\n' if c=='\n' else ' ' for c in m.group(0)),text,flags=re.S)
+ 
+ def aidl(text,parent_descriptor=None):
+- from aidl_lex import code_mask,declaration_spans,mask_spans
++ from aidl_lex import code_mask,declaration_spans,mask_spans,declaration_header
+  code=without_comments(text);p=re.search(r'\bpackage\s+([\w.]+)\s*;',code);pkg=p.group(1) if p else ''
+  imports=re.findall(r'\bimport\s+([\w.]+)\s*;',code)
+  clean,anns=annotations(code)
+@@ -185,7 +185,7 @@
+    for x,y in contexts:chars[x:y]=code[x:y]
+    chars[ca:cb]=code[ca:cb];child=aidl(''.join(chars),descriptor)
+    header=re.search(r'\b(?:interface|parcelable|union|enum)\s+',code_mask(code[ca:cb]));at=ca+(header.start() if header else 0)
+-   child.update(declaration_span=[ca,cb],declaration_line=code[:at].count('\n')+1,declaration_raw=code[ca:cb].strip(),declaration_ordinal=ordinal,parent_descriptor=descriptor)
++   child.update(declaration_span=[ca,cb],declaration_line=code[:at].count('\n')+1,declaration_raw=code[ca:cb].strip(),declaration_header=declaration_header(code[ca:cb]),declaration_ordinal=ordinal,parent_descriptor=descriptor)
+    nested_declarations.append(child)
+   body=mask_spans(body,nested_spans)
+   if kind=='interface':
+@@ -204,7 +204,7 @@
+ 
+ def aidl_all(text):
+  """Every top-level declaration, with package/import and physical lines retained."""
+- from aidl_lex import declaration_spans,code_mask
++ from aidl_lex import declaration_spans,code_mask,declaration_header
+  spans=declaration_spans(text)
+  if not spans:return [aidl(text)]
+  masked=code_mask(text);context=[]
+@@ -215,7 +215,7 @@
+   for a,b in context:chars[a:b]=text[a:b]
+   chars[start:end]=text[start:end];one=aidl(''.join(chars));raw=text[start:end]
+   header=re.search(r'\b(?:interface|parcelable|union|enum)\s+',code_mask(raw));offset=start+(header.start() if header else 0)
+-  one.update(declaration_ordinal=ordinal,declaration_line=text[:offset].count('\n')+1,declaration_raw=raw.strip(),declaration_span=[start,end]);result.append(one)
++  one.update(declaration_ordinal=ordinal,declaration_line=text[:offset].count('\n')+1,declaration_raw=raw.strip(),declaration_header=declaration_header(raw),declaration_span=[start,end]);result.append(one)
+  flat=[]
+  def flatten(declaration,depth=0):
+   children=declaration.pop('nested_declarations',[]);declaration['declaration_depth']=depth;flat.append(declaration)
+--- a/catalog/tooling/build_catalog.py
++++ b/catalog/tooling/build_catalog.py
+@@ -154,15 +154,16 @@
+    except ValueError as error:
+     declarations=[dict(package='',descriptor=None,declaration_kind=None,imports=[],annotations=[],members=[],parse_status='unsupported',reason='AIDL annotation/syntax unresolved: '+str(error))]
+    states=[d['parse_status'] for d in declarations]
+-   status=states[0] if len(states)==1 else 'partial' if any(v in ('unsupported','partial','field-metadata-partial') for v in states) else 'declarations-inventoried'
+-   first=declarations[0]
++   roots=[d for d in declarations if d.get('declaration_depth',0)==0]
++   status='partial' if len(declarations)>1 and any(v in ('unsupported','partial','field-metadata-partial') for v in states) else roots[0]['parse_status'] if len(roots)==1 else 'declarations-inventoried'
++   first=roots[0] if roots else declarations[0]
+    metadata=dict(imports=first['imports'],wire_status='unknown',declarations=[{k:d.get(k) for k in ('descriptor','declaration_kind','parse_status','reason','declaration_line','declaration_ordinal','declaration_span','parent_descriptor','declaration_depth')} for d in declarations])
+-   db.execute('INSERT INTO aidl_schemas VALUES (?,?,?,?,?,?,?,?)',(sid,first['package'],first['descriptor'] if len(declarations)==1 and first['declaration_kind']=='interface' else None,first['declaration_kind'] if len(declarations)==1 else 'multiple',text,status,js(metadata),'unknown'))
++   db.execute('INSERT INTO aidl_schemas VALUES (?,?,?,?,?,?,?,?)',(sid,first['package'],first['descriptor'] if len(roots)==1 and first['declaration_kind']=='interface' else None,first['declaration_kind'] if len(roots)==1 else 'multiple',text,status,js(metadata),'unknown'))
+    member_count=0
+    for d in declarations:
+     if d['descriptor']:
+      root_kind='unsupported' if d['parse_status']=='unsupported' else 'aidl-'+d['declaration_kind']
+-     r=dict(kind=root_kind,canonical=d['descriptor'],package=d['package'],owner=d['descriptor'],name=d['descriptor'].split('.')[-1],return_type=None,parameters=[],annotations=d['annotations'],all_annotations=d['annotations'],raw=d.get('declaration_raw',text).split('{',1)[0].strip(),line=d.get('declaration_line',1),extras=dict(aidl_kind=d['declaration_kind'],imports=d['imports'],parse_status=d['parse_status'],oneway=d.get('oneway'),schema_resolution_reason=d['reason'],declaration_ordinal=d.get('declaration_ordinal',0)))
++     r=dict(kind=root_kind,canonical=d['descriptor'],package=d['package'],owner=d['descriptor'],name=d['descriptor'].split('.')[-1],return_type=None,parameters=[],annotations=d['annotations'],all_annotations=d['annotations'],raw=d.get('declaration_header',d.get('declaration_raw',text)),line=d.get('declaration_line',1),extras=dict(aidl_kind=d['declaration_kind'],imports=d['imports'],parse_status=d['parse_status'],oneway=d.get('oneway'),schema_resolution_reason=d['reason'],declaration_ordinal=d.get('declaration_ordinal',0)))
+      r['extras']['parent_descriptor']=d.get('parent_descriptor');r['extras']['declaration_depth']=d.get('declaration_depth',0)
+      if root_kind=='unsupported':r['extras']['parse_error']=d['reason']
+     else:r=dict(kind='unsupported',canonical='unparsed-source:'+s['repository']+':'+s['path']+':'+s['sha256'],owner=None,package=d['package'],name=s['path'].rsplit('/',1)[-1],return_type=None,parameters=[],annotations=[],all_annotations=[],raw=text,line=1,extras=dict(parse_error=d['reason'],source_bytes_retained=True))
+--- a/catalog/migrations/001-initial.sql
++++ b/catalog/migrations/001-initial.sql
+@@ -1,8 +1,8 @@
+ PRAGMA foreign_keys=ON;
+ PRAGMA user_version=1;
+ CREATE TABLE catalog_meta(key TEXT NOT NULL PRIMARY KEY,value TEXT NOT NULL);
+-CREATE TABLE sources(source_id TEXT NOT NULL PRIMARY KEY, path TEXT NOT NULL, url TEXT NOT NULL, revision TEXT NOT NULL, retrieved_at TEXT NOT NULL, sha256 TEXT NOT NULL, api_level INTEGER, channel TEXT NOT NULL, kind TEXT NOT NULL, license TEXT NOT NULL);
+-CREATE TABLE bindings(binding_id TEXT NOT NULL PRIMARY KEY, signature TEXT NOT NULL UNIQUE, package TEXT NOT NULL, owner TEXT, kind TEXT NOT NULL, name TEXT NOT NULL, return_type TEXT, arguments_json TEXT, raw_signature TEXT NOT NULL, codec_status TEXT NOT NULL DEFAULT 'unknown');
++CREATE TABLE sources(source_id TEXT NOT NULL PRIMARY KEY, path TEXT NOT NULL, url TEXT NOT NULL, revision TEXT NOT NULL, retrieved_at TEXT NOT NULL, sha256 TEXT NOT NULL CHECK((length(sha256)=64 AND sha256 NOT GLOB '*[^0-9a-f]*')), api_level INTEGER, channel TEXT NOT NULL, kind TEXT NOT NULL, license TEXT NOT NULL);
++CREATE TABLE bindings(binding_id TEXT NOT NULL PRIMARY KEY CHECK((length(binding_id)=64 AND binding_id NOT GLOB '*[^0-9a-f]*')), signature TEXT NOT NULL UNIQUE, package TEXT NOT NULL, owner TEXT, kind TEXT NOT NULL, name TEXT NOT NULL, return_type TEXT, arguments_json TEXT, raw_signature TEXT NOT NULL, codec_status TEXT NOT NULL DEFAULT 'unknown');
+ CREATE INDEX binding_lookup ON bindings(package,owner,name,binding_id);
+ CREATE TABLE occurrences(binding_id TEXT NOT NULL REFERENCES bindings, source_id TEXT NOT NULL REFERENCES sources, line INTEGER NOT NULL, PRIMARY KEY(binding_id,source_id,line));
+ CREATE TABLE binding_declarations(binding_id TEXT NOT NULL,source_id TEXT NOT NULL,line INTEGER NOT NULL,document_json TEXT NOT NULL,PRIMARY KEY(binding_id,source_id,line),FOREIGN KEY(binding_id,source_id,line) REFERENCES occurrences);
+@@ -19,7 +19,7 @@
+ CREATE TABLE registries(registry_id TEXT NOT NULL PRIMARY KEY, registry_version INTEGER NOT NULL UNIQUE CHECK(registry_version>=1), schema_version TEXT NOT NULL, android_version TEXT NOT NULL, api_level INTEGER, source_set_hash TEXT NOT NULL, created_at TEXT NOT NULL, state TEXT NOT NULL CHECK(state IN ('staged','validated','rejected','published','retired')), validation_json TEXT NOT NULL,UNIQUE(registry_id,state));
+ CREATE TABLE registry_sources(registry_id TEXT NOT NULL REFERENCES registries,source_id TEXT NOT NULL REFERENCES sources,PRIMARY KEY(registry_id,source_id));
+ CREATE TABLE active_registry(singleton INTEGER PRIMARY KEY CHECK(singleton=1),registry_id TEXT NOT NULL REFERENCES registries,published_state TEXT GENERATED ALWAYS AS ('published') VIRTUAL,FOREIGN KEY(registry_id,published_state) REFERENCES registries(registry_id,state) DEFERRABLE INITIALLY DEFERRED);
+-CREATE TABLE overlays(entry_id TEXT NOT NULL PRIMARY KEY, imported_binding_id TEXT REFERENCES bindings, canonical_signature TEXT NOT NULL, revision INTEGER NOT NULL CHECK(revision>0), base_registry_id TEXT REFERENCES registries, base_record_hash TEXT, state TEXT NOT NULL CHECK(state IN ('active','suppressed','conflict','deleted')), document_json TEXT NOT NULL CHECK(json_valid(document_json)), created_at TEXT NOT NULL, updated_at TEXT NOT NULL,FOREIGN KEY(entry_id,revision) REFERENCES entry_history(entry_id,revision) DEFERRABLE INITIALLY DEFERRED,CHECK(imported_binding_id IS NULL OR entry_id=imported_binding_id),CHECK(state<>'suppressed' OR imported_binding_id IS NOT NULL),CHECK(state<>'deleted' OR imported_binding_id IS NULL));
++CREATE TABLE overlays(entry_id TEXT NOT NULL PRIMARY KEY, imported_binding_id TEXT REFERENCES bindings, canonical_signature TEXT NOT NULL, revision INTEGER NOT NULL CHECK(revision>0), base_registry_id TEXT REFERENCES registries, base_record_hash TEXT CHECK(base_record_hash IS NULL OR (length(base_record_hash)=64 AND base_record_hash NOT GLOB '*[^0-9a-f]*')), state TEXT NOT NULL CHECK(state IN ('active','suppressed','conflict','deleted')), document_json TEXT NOT NULL CHECK(json_valid(document_json)), created_at TEXT NOT NULL, updated_at TEXT NOT NULL,FOREIGN KEY(entry_id,revision) REFERENCES entry_history(entry_id,revision) DEFERRABLE INITIALLY DEFERRED,CHECK(imported_binding_id IS NULL OR entry_id=imported_binding_id),CHECK(state<>'suppressed' OR imported_binding_id IS NOT NULL),CHECK(state<>'deleted' OR imported_binding_id IS NULL));
+ CREATE INDEX overlay_lookup ON overlays(imported_binding_id,state);
+ CREATE UNIQUE INDEX overlay_one_import ON overlays(imported_binding_id) WHERE imported_binding_id IS NOT NULL;
+ CREATE TABLE entry_history(entry_id TEXT NOT NULL REFERENCES overlays, revision INTEGER NOT NULL, operation TEXT NOT NULL CHECK(operation IN ('create','update','suppress','delete','restore','rebase','conflict')), document_json TEXT NOT NULL CHECK(json_valid(document_json)), actor TEXT NOT NULL, occurred_at TEXT NOT NULL, PRIMARY KEY(entry_id,revision));
+--- a/catalog/migrations/002-evidence-and-publication.sql
++++ b/catalog/migrations/002-evidence-and-publication.sql
+@@ -8,7 +8,7 @@
+ CREATE TABLE annotation_evidence(source_id TEXT NOT NULL REFERENCES sources, locator TEXT NOT NULL, binding_id TEXT REFERENCES bindings, scope TEXT NOT NULL, document_json TEXT NOT NULL CHECK(json_valid(document_json)), PRIMARY KEY(source_id,locator));
+ CREATE INDEX annotation_target ON annotation_evidence(binding_id);
+ CREATE TABLE permission_symbols(symbol TEXT NOT NULL, value TEXT NOT NULL, source_id TEXT NOT NULL REFERENCES sources, line INTEGER NOT NULL, PRIMARY KEY(symbol,source_id,line));
+-CREATE TABLE registry_entries(registry_id TEXT NOT NULL REFERENCES registries,entry_id TEXT NOT NULL REFERENCES bindings(binding_id),document_json TEXT NOT NULL CHECK(json_valid(document_json)),record_sha256 TEXT NOT NULL,PRIMARY KEY(registry_id,entry_id));
++CREATE TABLE registry_entries(registry_id TEXT NOT NULL REFERENCES registries,entry_id TEXT NOT NULL REFERENCES bindings(binding_id),document_json TEXT NOT NULL CHECK(json_valid(document_json)),record_sha256 TEXT NOT NULL CHECK(length(record_sha256)=64 AND record_sha256 NOT GLOB '*[^0-9a-f]*'),PRIMARY KEY(registry_id,entry_id));
+ CREATE TRIGGER source_details_no_update BEFORE UPDATE ON source_details BEGIN SELECT RAISE(ABORT,'Imported evidence is immutable'); END;
+ CREATE TRIGGER source_details_no_delete BEFORE DELETE ON source_details BEGIN SELECT RAISE(ABORT,'Imported evidence is immutable'); END;
+ CREATE TRIGGER annotation_evidence_no_update BEFORE UPDATE ON annotation_evidence BEGIN SELECT RAISE(ABORT,'Imported evidence is immutable'); END;
+@@ -52,5 +52,11 @@
+ CREATE TRIGGER history_reason_no_delete BEFORE DELETE ON entry_history_reasons BEGIN SELECT RAISE(ABORT,'History justification is append-only'); END;
+ CREATE TRIGGER registry_entries_insert_staged BEFORE INSERT ON registry_entries WHEN (SELECT state FROM registries WHERE registry_id=new.registry_id) IS NOT 'staged' BEGIN SELECT RAISE(ABORT,'Registry membership is sealed outside staging'); END;
+ CREATE TRIGGER registry_sources_insert_staged BEFORE INSERT ON registry_sources WHEN (SELECT state FROM registries WHERE registry_id=new.registry_id) IS NOT 'staged' BEGIN SELECT RAISE(ABORT,'Registry source set is sealed outside staging'); END;
++CREATE TRIGGER active_registry_no_delete BEFORE DELETE ON active_registry BEGIN SELECT RAISE(ABORT,'Active pointer must be switched, not deleted'); END;
++CREATE TRIGGER catalog_view_no_delete BEFORE DELETE ON catalog_view BEGIN SELECT RAISE(ABORT,'Catalog generation singleton cannot be deleted'); END;
++CREATE VIEW overlay_etags AS
++ SELECT o.entry_id,o.state,o.revision,
++ '"cat1:'||v.registry_generation||':'||coalesce(e.record_sha256,'local')||':'||o.entry_id||':'||o.revision||':'||o.state||'"' AS etag
++ FROM overlays o CROSS JOIN catalog_view v LEFT JOIN effective_entries e ON e.entry_id=o.entry_id;
+ PRAGMA user_version=3;
+ COMMIT;
+--- a/catalog/schema.sql
++++ b/catalog/schema.sql
+@@ -1,8 +1,8 @@
+ PRAGMA foreign_keys=ON;
+ PRAGMA user_version=1;
+ CREATE TABLE catalog_meta(key TEXT NOT NULL PRIMARY KEY,value TEXT NOT NULL);
+-CREATE TABLE sources(source_id TEXT NOT NULL PRIMARY KEY, path TEXT NOT NULL, url TEXT NOT NULL, revision TEXT NOT NULL, retrieved_at TEXT NOT NULL, sha256 TEXT NOT NULL, api_level INTEGER, channel TEXT NOT NULL, kind TEXT NOT NULL, license TEXT NOT NULL);
+-CREATE TABLE bindings(binding_id TEXT NOT NULL PRIMARY KEY, signature TEXT NOT NULL UNIQUE, package TEXT NOT NULL, owner TEXT, kind TEXT NOT NULL, name TEXT NOT NULL, return_type TEXT, arguments_json TEXT, raw_signature TEXT NOT NULL, codec_status TEXT NOT NULL DEFAULT 'unknown');
++CREATE TABLE sources(source_id TEXT NOT NULL PRIMARY KEY, path TEXT NOT NULL, url TEXT NOT NULL, revision TEXT NOT NULL, retrieved_at TEXT NOT NULL, sha256 TEXT NOT NULL CHECK((length(sha256)=64 AND sha256 NOT GLOB '*[^0-9a-f]*')), api_level INTEGER, channel TEXT NOT NULL, kind TEXT NOT NULL, license TEXT NOT NULL);
++CREATE TABLE bindings(binding_id TEXT NOT NULL PRIMARY KEY CHECK((length(binding_id)=64 AND binding_id NOT GLOB '*[^0-9a-f]*')), signature TEXT NOT NULL UNIQUE, package TEXT NOT NULL, owner TEXT, kind TEXT NOT NULL, name TEXT NOT NULL, return_type TEXT, arguments_json TEXT, raw_signature TEXT NOT NULL, codec_status TEXT NOT NULL DEFAULT 'unknown');
+ CREATE INDEX binding_lookup ON bindings(package,owner,name,binding_id);
+ CREATE TABLE occurrences(binding_id TEXT NOT NULL REFERENCES bindings, source_id TEXT NOT NULL REFERENCES sources, line INTEGER NOT NULL, PRIMARY KEY(binding_id,source_id,line));
+ CREATE TABLE binding_declarations(binding_id TEXT NOT NULL,source_id TEXT NOT NULL,line INTEGER NOT NULL,document_json TEXT NOT NULL,PRIMARY KEY(binding_id,source_id,line),FOREIGN KEY(binding_id,source_id,line) REFERENCES occurrences);
+@@ -19,7 +19,7 @@
+ CREATE TABLE registries(registry_id TEXT NOT NULL PRIMARY KEY, registry_version INTEGER NOT NULL UNIQUE CHECK(registry_version>=1), schema_version TEXT NOT NULL, android_version TEXT NOT NULL, api_level INTEGER, source_set_hash TEXT NOT NULL, created_at TEXT NOT NULL, state TEXT NOT NULL CHECK(state IN ('staged','validated','rejected','published','retired')), validation_json TEXT NOT NULL,UNIQUE(registry_id,state));
+ CREATE TABLE registry_sources(registry_id TEXT NOT NULL REFERENCES registries,source_id TEXT NOT NULL REFERENCES sources,PRIMARY KEY(registry_id,source_id));
+ CREATE TABLE active_registry(singleton INTEGER PRIMARY KEY CHECK(singleton=1),registry_id TEXT NOT NULL REFERENCES registries,published_state TEXT GENERATED ALWAYS AS ('published') VIRTUAL,FOREIGN KEY(registry_id,published_state) REFERENCES registries(registry_id,state) DEFERRABLE INITIALLY DEFERRED);
+-CREATE TABLE overlays(entry_id TEXT NOT NULL PRIMARY KEY, imported_binding_id TEXT REFERENCES bindings, canonical_signature TEXT NOT NULL, revision INTEGER NOT NULL CHECK(revision>0), base_registry_id TEXT REFERENCES registries, base_record_hash TEXT, state TEXT NOT NULL CHECK(state IN ('active','suppressed','conflict','deleted')), document_json TEXT NOT NULL CHECK(json_valid(document_json)), created_at TEXT NOT NULL, updated_at TEXT NOT NULL,FOREIGN KEY(entry_id,revision) REFERENCES entry_history(entry_id,revision) DEFERRABLE INITIALLY DEFERRED,CHECK(imported_binding_id IS NULL OR entry_id=imported_binding_id),CHECK(state<>'suppressed' OR imported_binding_id IS NOT NULL),CHECK(state<>'deleted' OR imported_binding_id IS NULL));
++CREATE TABLE overlays(entry_id TEXT NOT NULL PRIMARY KEY, imported_binding_id TEXT REFERENCES bindings, canonical_signature TEXT NOT NULL, revision INTEGER NOT NULL CHECK(revision>0), base_registry_id TEXT REFERENCES registries, base_record_hash TEXT CHECK(base_record_hash IS NULL OR (length(base_record_hash)=64 AND base_record_hash NOT GLOB '*[^0-9a-f]*')), state TEXT NOT NULL CHECK(state IN ('active','suppressed','conflict','deleted')), document_json TEXT NOT NULL CHECK(json_valid(document_json)), created_at TEXT NOT NULL, updated_at TEXT NOT NULL,FOREIGN KEY(entry_id,revision) REFERENCES entry_history(entry_id,revision) DEFERRABLE INITIALLY DEFERRED,CHECK(imported_binding_id IS NULL OR entry_id=imported_binding_id),CHECK(state<>'suppressed' OR imported_binding_id IS NOT NULL),CHECK(state<>'deleted' OR imported_binding_id IS NULL));
+ CREATE INDEX overlay_lookup ON overlays(imported_binding_id,state);
+ CREATE UNIQUE INDEX overlay_one_import ON overlays(imported_binding_id) WHERE imported_binding_id IS NOT NULL;
+ CREATE TABLE entry_history(entry_id TEXT NOT NULL REFERENCES overlays, revision INTEGER NOT NULL, operation TEXT NOT NULL CHECK(operation IN ('create','update','suppress','delete','restore','rebase','conflict')), document_json TEXT NOT NULL CHECK(json_valid(document_json)), actor TEXT NOT NULL, occurred_at TEXT NOT NULL, PRIMARY KEY(entry_id,revision));
+@@ -84,7 +84,7 @@
+ CREATE TABLE annotation_evidence(source_id TEXT NOT NULL REFERENCES sources, locator TEXT NOT NULL, binding_id TEXT REFERENCES bindings, scope TEXT NOT NULL, document_json TEXT NOT NULL CHECK(json_valid(document_json)), PRIMARY KEY(source_id,locator));
+ CREATE INDEX annotation_target ON annotation_evidence(binding_id);
+ CREATE TABLE permission_symbols(symbol TEXT NOT NULL, value TEXT NOT NULL, source_id TEXT NOT NULL REFERENCES sources, line INTEGER NOT NULL, PRIMARY KEY(symbol,source_id,line));
+-CREATE TABLE registry_entries(registry_id TEXT NOT NULL REFERENCES registries,entry_id TEXT NOT NULL REFERENCES bindings(binding_id),document_json TEXT NOT NULL CHECK(json_valid(document_json)),record_sha256 TEXT NOT NULL,PRIMARY KEY(registry_id,entry_id));
++CREATE TABLE registry_entries(registry_id TEXT NOT NULL REFERENCES registries,entry_id TEXT NOT NULL REFERENCES bindings(binding_id),document_json TEXT NOT NULL CHECK(json_valid(document_json)),record_sha256 TEXT NOT NULL CHECK(length(record_sha256)=64 AND record_sha256 NOT GLOB '*[^0-9a-f]*'),PRIMARY KEY(registry_id,entry_id));
+ CREATE TRIGGER source_details_no_update BEFORE UPDATE ON source_details BEGIN SELECT RAISE(ABORT,'Imported evidence is immutable'); END;
+ CREATE TRIGGER source_details_no_delete BEFORE DELETE ON source_details BEGIN SELECT RAISE(ABORT,'Imported evidence is immutable'); END;
+ CREATE TRIGGER annotation_evidence_no_update BEFORE UPDATE ON annotation_evidence BEGIN SELECT RAISE(ABORT,'Imported evidence is immutable'); END;
+@@ -128,5 +128,11 @@
+ CREATE TRIGGER history_reason_no_delete BEFORE DELETE ON entry_history_reasons BEGIN SELECT RAISE(ABORT,'History justification is append-only'); END;
+ CREATE TRIGGER registry_entries_insert_staged BEFORE INSERT ON registry_entries WHEN (SELECT state FROM registries WHERE registry_id=new.registry_id) IS NOT 'staged' BEGIN SELECT RAISE(ABORT,'Registry membership is sealed outside staging'); END;
+ CREATE TRIGGER registry_sources_insert_staged BEFORE INSERT ON registry_sources WHEN (SELECT state FROM registries WHERE registry_id=new.registry_id) IS NOT 'staged' BEGIN SELECT RAISE(ABORT,'Registry source set is sealed outside staging'); END;
++CREATE TRIGGER active_registry_no_delete BEFORE DELETE ON active_registry BEGIN SELECT RAISE(ABORT,'Active pointer must be switched, not deleted'); END;
++CREATE TRIGGER catalog_view_no_delete BEFORE DELETE ON catalog_view BEGIN SELECT RAISE(ABORT,'Catalog generation singleton cannot be deleted'); END;
++CREATE VIEW overlay_etags AS
++ SELECT o.entry_id,o.state,o.revision,
++ '"cat1:'||v.registry_generation||':'||coalesce(e.record_sha256,'local')||':'||o.entry_id||':'||o.revision||':'||o.state||'"' AS etag
++ FROM overlays o CROSS JOIN catalog_view v LEFT JOIN effective_entries e ON e.entry_id=o.entry_id;
+ PRAGMA user_version=3;
+ COMMIT;
+--- a/catalog/tests/test_round9_review.py
++++ b/catalog/tests/test_round9_review.py
+@@ -0,0 +1,66 @@
++"""Independent round009 findings: root identity/header and executable SQL guards."""
++import contextlib,hashlib,json,pathlib,sqlite3,sys,tempfile,unittest
++P=pathlib.Path(__file__).resolve().parents[1];sys.path.insert(0,str(P/'tooling'))
++import build_catalog,test_round8
++H=hashlib.sha256(b'fixture').hexdigest();B=hashlib.sha256(b'java:a.A').hexdigest()
++
++class Review9(unittest.TestCase):
++    def build(self,text):
++        td=tempfile.TemporaryDirectory();self.addCleanup(td.cleanup);root=pathlib.Path(td.name)
++        inv=test_round8.Review8().fixture(root,text);build_catalog.build(inv,root/'out')
++        db=sqlite3.connect(root/'out/catalog.sqlite');self.addCleanup(db.close)
++        return db,list(map(json.loads,(root/'out/entries.jsonl').read_text().splitlines()))
++    def test_nested_types_do_not_replace_single_outer_interface_file_metadata(self):
++        db,docs=self.build('package a; interface I { parcelable P { int x; } void f(); }')
++        self.assertEqual(db.execute('SELECT descriptor,declaration_kind,parse_status FROM aidl_schemas').fetchone(),('a.I','interface','methods-parsed'))
++        self.assertEqual({d['canonical_signature'] for d in docs if d['kind']=='aidl-parcelable'},{'aidl:a.I.P'})
++    def test_multiple_outer_types_still_have_explicit_multiple_metadata(self):
++        db,_=self.build('package a; interface I {} interface J {}')
++        self.assertEqual(db.execute('SELECT descriptor,declaration_kind FROM aidl_schemas').fetchone(),(None,'multiple'))
++    def test_raw_header_preserves_annotation_braces_and_cpp_header_literal(self):
++        text='package a;\n @Note(value={"a", "b"}) interface I { void f(); }\n parcelable P cpp_header "x{y}.h";'
++        _,docs=self.build(text);docs={d['canonical_signature']:d for d in docs}
++        self.assertEqual(docs['aidl:a.I']['provenance'][0]['raw_signature'],'@Note(value={"a", "b"}) interface I')
++        self.assertEqual(docs['aidl:a.P']['provenance'][0]['raw_signature'],'parcelable P cpp_header "x{y}.h";')
++    def database(self):
++        db=sqlite3.connect(':memory:');self.addCleanup(db.close);db.executescript((P/'schema.sql').read_text());return db
++    def publish(self,db):
++        db.execute('INSERT INTO bindings(binding_id,signature,package,kind,name,raw_signature) VALUES(?,?,?,?,?,?)',(B,'java:a.A','a','class','A','fixture'))
++        db.execute("INSERT INTO registries VALUES('r',1,'1.2.0','fixture',37,?,'now','staged','{}')",(H,))
++        db.execute("INSERT INTO registry_entries VALUES('r',?,'{}',?)",(B,H))
++        db.execute("UPDATE registries SET state='validated'");db.execute("UPDATE registries SET state='published'");db.execute("INSERT INTO active_registry VALUES(1,'r')")
++    def test_singleton_deletions_are_rejected(self):
++        db=self.database();self.publish(db)
++        for table in ('active_registry','catalog_view'):
++            with self.subTest(table=table),self.assertRaises(sqlite3.IntegrityError):db.execute('DELETE FROM '+table)
++    def test_hash_shapes_are_checked_at_storage_boundary(self):
++        for value in ('short','z'*64,'A'*64,'0'*63):
++            with self.subTest(value=value):
++                db=self.database()
++                with self.assertRaises(sqlite3.IntegrityError):db.execute('INSERT INTO bindings(binding_id,signature,package,kind,name,raw_signature) VALUES(?,?,?,?,?,?)',(value,'java:a.A','a','class','A','fixture'))
++                with self.assertRaises(sqlite3.IntegrityError):db.execute("INSERT INTO sources VALUES('s','p','u','r','now',?,37,'stable','aidl','license')",(value,))
++                self.publish(db)
++                db.execute("INSERT INTO registries VALUES('next',2,'1.2.0','fixture',37,?,'now','staged','{}')",(H,))
++                with self.assertRaises(sqlite3.IntegrityError):db.execute("INSERT INTO registry_entries VALUES('next',?,'{}',?)",(B,value))
++                with self.assertRaises(sqlite3.IntegrityError):db.execute("INSERT INTO overlays VALUES(?,?,'java:a.A',1,'r',?,'conflict','{}','now','now')",(B,B,value))
++    def test_all_overlay_states_have_cat1_projection(self):
++        for state in ('active','suppressed','conflict','deleted'):
++            with self.subTest(state=state):
++                db=self.database();self.publish(db)
++                imported=state!='deleted';entry=B if imported else 'local:fixture'
++                db.execute('INSERT INTO overlays VALUES(?,?,?,?,?,?,?,?,?,?)',(entry,B if imported else None,'java:a.A' if imported else 'local:fixture',1,'r' if imported else None,H if imported else None,state,'{}','now','now'))
++                row=db.execute('SELECT etag FROM overlay_etags WHERE entry_id=?',(entry,)).fetchone()
++                self.assertEqual(row,(f'"cat1:1:{H if imported else "local"}:{entry}:1:{state}"',))
++    def test_conflict_etag_uses_new_selected_base_and_missing_base_local_marker(self):
++        for has_base in (False,True):
++            with self.subTest(has_base=has_base):
++                db=self.database();self.publish(db)
++                changed=hashlib.sha256(b'changed').hexdigest()
++                db.execute('INSERT INTO overlays VALUES(?,?,?,?,?,?,?,?,?,?)',(B,B,'java:a.A',1,'r',H,'conflict','{}','now','now'))
++                db.execute("INSERT INTO entry_history VALUES(?,1,'conflict','{}','fixture','now')",(B,))
++                db.execute("INSERT INTO registries VALUES('next',2,'1.2.0','fixture',37,?,'now','staged','{}')",(H,))
++                if has_base:db.execute("INSERT INTO registry_entries VALUES('next',?,'{}',?)",(B,changed))
++                db.execute("UPDATE registries SET state='validated' WHERE registry_id='next'");db.execute("UPDATE registries SET state='retired' WHERE registry_id='r'");db.execute("UPDATE registries SET state='published' WHERE registry_id='next'");db.execute("UPDATE active_registry SET registry_id='next'")
++                self.assertEqual(db.execute('SELECT etag FROM overlay_etags WHERE entry_id=?',(B,)).fetchone()[0],f'"cat1:2:{changed if has_base else "local"}:{B}:1:conflict"')
++
++if __name__=='__main__':unittest.main()
+--- a/catalog/tests/test_remediation.py
++++ b/catalog/tests/test_remediation.py
+@@ -40,10 +40,10 @@
+ 
+     def test_registry_switch_selects_immutable_entry_variant(self):
+         db=database();self.addCleanup(db.close)
+-        db.execute("INSERT INTO bindings(binding_id,signature,package,kind,name,raw_signature) VALUES('b','java:a.A','a','class','A','fixture')")
++        db.execute("INSERT INTO bindings(binding_id,signature,package,kind,name,raw_signature) VALUES('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','java:a.A','a','class','A','fixture')")
+         for n in (1,2):
+-            db.execute('INSERT INTO registries VALUES(?,?,?,?,?,?,?,?,?)',(str(n),n+1,'1.2.0','fixture',37,'hash','now','staged','{}'))
+-            db.execute('INSERT INTO registry_entries VALUES(?,?,?,?)',(str(n),'b',json.dumps({'version':n}),str(n)*64))
++            db.execute('INSERT INTO registries VALUES(?,?,?,?,?,?,?,?,?)',(str(n),n+1,'1.2.0','fixture',37,'d04b98f48e8f8bcc15c6ae5ac050801cd6dcfd428fb5f9e65c4e16e7807340fa','now','staged','{}'))
++            db.execute('INSERT INTO registry_entries VALUES(?,?,?,?)',(str(n),'5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0',json.dumps({'version':n}),str(n)*64))
+             db.execute("UPDATE registries SET state='validated' WHERE registry_id=?",(str(n),))
+             if n==1:db.execute("UPDATE registries SET state='published' WHERE registry_id=?",(str(n),))
+         db.execute("INSERT INTO active_registry VALUES(1,'1')")
+@@ -76,7 +76,7 @@
+             r=pathlib.Path(td);old=sqlite3.connect(r/'old.sqlite')
+             for name in ('001-initial.sql','002-evidence-and-publication.sql'):
+                 old.executescript((P.parent/'evidence'/('original-'+name)).read_text())
+-            old.execute("INSERT INTO registries VALUES('fixture',1,'1.1.0','fixture',37,'hash','now','published','{}')");old.execute('ANALYZE');old.commit();old.close()
++            old.execute("INSERT INTO registries VALUES('fixture',1,'1.1.0','fixture',37,'d04b98f48e8f8bcc15c6ae5ac050801cd6dcfd428fb5f9e65c4e16e7807340fa','now','published','{}')");old.execute('ANALYZE');old.commit();old.close()
+             before=(r/'old.sqlite').read_bytes();migrate(r/'old.sqlite',r/'new.sqlite')
+             self.assertEqual(before,(r/'old.sqlite').read_bytes())
+             new=sqlite3.connect(r/'new.sqlite');self.addCleanup(new.close);self.assertEqual(new.execute('SELECT state FROM registries').fetchone()[0],'published')
+--- a/catalog/tests/test_round2.py
++++ b/catalog/tests/test_round2.py
+@@ -80,10 +80,10 @@
+ 
+  def test_positive_raw_grant_never_overrides_known_binding(self):
+   rule=policy_reference.Rule('ask','s',frozenset({'t'}),2);entry=policy_reference.Rule('allow','tool',frozenset({'t'}),2)
+-  grant=policy_reference.RawGrant('c','fixture.I',1,99,1,'h',rule,frozenset({'h1'}),frozenset({0}));req=dict(connection_id='c',descriptor='fixture.I',transaction_code=50,contract_hash='h',flags=1,target='t',items=1,handle='h1',display_id=0)
++  grant=policy_reference.RawGrant('c','fixture.I',1,99,1,'aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123',rule,frozenset({'h1'}),frozenset({0}));req=dict(connection_id='c',descriptor='fixture.I',transaction_code=50,contract_hash='aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123',flags=1,target='t',items=1,handle='h1',display_id=0)
+   args=dict(entry_schema='tool',authority=True,wire_mappings={},schemas={},binding_rules={})
+   self.assertEqual(policy_reference.evaluate_raw_fixture(req,{('c','fixture.I'):grant},entry,**args),'ask')
+-  allow=policy_reference.RawGrant('c','fixture.I',1,99,1,'h',policy_reference.Rule('allow','s',frozenset({'t'}),2),frozenset({'h1'}),frozenset({0}))
++  allow=policy_reference.RawGrant('c','fixture.I',1,99,1,'aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123',policy_reference.Rule('allow','s',frozenset({'t'}),2),frozenset({'h1'}),frozenset({0}))
+   self.assertEqual(policy_reference.evaluate_raw_fixture(req,{('c','fixture.I'):allow},entry,**args),'admit-candidate')
+   self.assertEqual(policy_reference.evaluate_raw_fixture(dict(req,flags=2),{('c','fixture.I'):allow},entry,**args),'deny')
+   self.assertEqual(policy_reference.evaluate_raw_fixture(dict(req,handle='foreign'),{('c','fixture.I'):allow},entry,**args),'deny')
+@@ -93,12 +93,12 @@
+ 
+  def test_overlay_revision_identity_and_registry_state_constraints(self):
+   db=sqlite3.connect(':memory:');self.addCleanup(db.close);db.executescript((P/'schema.sql').read_text())
+-  db.execute("INSERT INTO bindings(binding_id,signature,package,kind,name,raw_signature) VALUES('b','java:a.A','a','class','A','fixture')")
+-  with self.assertRaises(sqlite3.IntegrityError):db.execute("INSERT INTO overlays VALUES('wrong','b','java:a.A',1,NULL,NULL,'conflict','{}','now','now')")
+-  with self.assertRaises(sqlite3.IntegrityError):db.execute("INSERT INTO overlays VALUES('b','b','wrong',1,NULL,NULL,'conflict','{}','now','now')")
+-  db.execute("INSERT INTO overlays VALUES('b','b','java:a.A',1,NULL,NULL,'conflict','{}','now','now')")
++  db.execute("INSERT INTO bindings(binding_id,signature,package,kind,name,raw_signature) VALUES('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','java:a.A','a','class','A','fixture')")
++  with self.assertRaises(sqlite3.IntegrityError):db.execute("INSERT INTO overlays VALUES('wrong','5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','java:a.A',1,NULL,NULL,'conflict','{}','now','now')")
++  with self.assertRaises(sqlite3.IntegrityError):db.execute("INSERT INTO overlays VALUES('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','wrong',1,NULL,NULL,'conflict','{}','now','now')")
++  db.execute("INSERT INTO overlays VALUES('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','java:a.A',1,NULL,NULL,'conflict','{}','now','now')")
+   with self.assertRaises(sqlite3.IntegrityError):db.execute("UPDATE overlays SET document_json='{\"changed\":true}'")
+-  db.execute("INSERT INTO registries VALUES('r',1,'1.2.0','fixture',37,'h','now','retired','{}')")
++  db.execute("INSERT INTO registries VALUES('r',1,'1.2.0','fixture',37,'aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123','now','retired','{}')")
+   with self.assertRaises(sqlite3.IntegrityError):db.execute("UPDATE registries SET state='published'")
+ 
+  def test_minor_schema_and_declaration_variants(self):
+--- a/catalog/tests/test_round3.py
++++ b/catalog/tests/test_round3.py
+@@ -7,7 +7,7 @@
+ class Round3(unittest.TestCase):
+  def db(self):
+   db=sqlite3.connect(':memory:');db.executescript((P/'schema.sql').read_text());self.addCleanup(db.close);return db
+- def registry(self,db,key,version,state):db.execute('INSERT INTO registries VALUES(?,?,?,?,?,?,?,?,?)',(key,version,'1.2.0','fixture',37,'h','now',state,'{}'))
++ def registry(self,db,key,version,state):db.execute('INSERT INTO registries VALUES(?,?,?,?,?,?,?,?,?)',(key,version,'1.2.0','fixture',37,'aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123','now',state,'{}'))
+  def fixture(self,r):return test_build.BuildTests().fixture(r)
+  def test_java_lang_annotation_target(self):
+   with tempfile.TemporaryDirectory() as td:
+@@ -35,13 +35,13 @@
+   self.assertEqual(policy_reference.policy_entrypoints('raw',True),('binding.invoke','binder.transact'))
+   allow=policy_reference.Rule('allow','s',frozenset({'t'}),2);raw=policy_reference.Rule('allow','raw',frozenset({'t'}),2);deny=policy_reference.Rule('deny','binding.invoke-v1',frozenset({'t'}),2)
+   request=dict(descriptor='fixture.I',transaction_code=1,decoded_and_validated=True,target='t',items=1)
+-  result=policy_reference.evaluate_raw_fixture(request,{},raw,entry_schema='raw',authority=True,wire_mappings={('fixture.I',1):('b','s')},schemas={'b':'s'},binding_rules={'b':allow},binding_entry_rule=deny)
++  result=policy_reference.evaluate_raw_fixture(request,{},raw,entry_schema='raw',authority=True,wire_mappings={('fixture.I',1):('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','s')},schemas={'5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0':'s'},binding_rules={'5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0':allow},binding_entry_rule=deny)
+   self.assertEqual(result,'deny')
+  def test_database_validation_without_exports(self):
+   with tempfile.TemporaryDirectory() as td:
+    r=pathlib.Path(td);inv=self.fixture(r);build_catalog.build(inv,r/'out');shutil.copy2(r/'out/catalog.sqlite',r/'db.sqlite');before=(r/'db.sqlite').read_bytes();result=validate_catalog.run_database(r/'db.sqlite',r/'report.json');self.assertEqual(result['json_schema_failures'],[]);self.assertEqual(before,(r/'db.sqlite').read_bytes())
+  def test_raw_constraints_have_one_authority(self):
+-  schema=json.loads((P/'contracts/RawGrant.schema.json').read_text());scope=dict(allowed_targets=['t'],allowed_handles=['h'],allowed_displays=[0],max_items=2);jsonschema.Draft202012Validator(schema).validate(scope)
++  schema=json.loads((P/'contracts/RawGrant.schema.json').read_text());scope=dict(allowed_targets=['t'],allowed_handles=['aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123'],allowed_displays=[0],max_items=2);jsonschema.Draft202012Validator(schema).validate(scope)
+   db=sqlite3.connect(':memory:');self.addCleanup(db.close);db.executescript((P/'bridge-config.sql').read_text());db.execute("INSERT INTO clients VALUES('c','fixture','active',0,1,0,0,NULL)");db.execute("INSERT INTO connection_profiles(profile_id,backend_kind,display_name,enabled,row_version,android_user_id,endpoint_metadata_json,verification_strength) VALUES('p','self_adb','fixture',0,1,0,'{}','fixture')")
+   with self.assertRaises(sqlite3.IntegrityError):db.execute('INSERT INTO client_raw_grants VALUES(?,?,?,?,?,?,?,?,?,?)',('c','p','fixture.I',1,9,0,'a'*64,'ask',json.dumps(dict(scope,code_min=99)),1))
+  def test_published_pointer_and_single_published_registry(self):
+@@ -58,9 +58,9 @@
+   db.rollback()
+   with self.assertRaises(sqlite3.IntegrityError):db.execute("INSERT INTO overlays VALUES('local',NULL,'java:a.A',1,NULL,NULL,'active','not-json','now','now')")
+  def test_local_collision_cannot_publish_or_leak_discovery(self):
+-  db=self.db();db.execute("INSERT INTO bindings(binding_id,signature,package,kind,name,raw_signature) VALUES('b','java:a.A','a','class','A','fixture')");self.registry(db,'r',1,'staged');db.execute("INSERT INTO registry_entries VALUES('r','b','{}','hash')");db.execute("UPDATE registries SET state='validated' WHERE registry_id='r'");db.execute("UPDATE registries SET state='published' WHERE registry_id='r'");db.execute("INSERT INTO overlays VALUES('b',NULL,'java:a.A',1,NULL,NULL,'active','{}','now','now')");db.execute("INSERT INTO entry_history VALUES('b',1,'create','{}','fixture','now')")
++  db=self.db();db.execute("INSERT INTO bindings(binding_id,signature,package,kind,name,raw_signature) VALUES('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','java:a.A','a','class','A','fixture')");self.registry(db,'r',1,'staged');db.execute("INSERT INTO registry_entries VALUES('r','5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','{}','d04b98f48e8f8bcc15c6ae5ac050801cd6dcfd428fb5f9e65c4e16e7807340fa')");db.execute("UPDATE registries SET state='validated' WHERE registry_id='r'");db.execute("UPDATE registries SET state='published' WHERE registry_id='r'");db.execute("INSERT INTO overlays VALUES('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0',NULL,'java:a.A',1,NULL,NULL,'active','{}','now','now')");db.execute("INSERT INTO entry_history VALUES('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0',1,'create','{}','fixture','now')")
+   with self.assertRaises(sqlite3.IntegrityError):db.execute("INSERT INTO active_registry VALUES(1,'r')")
+-  db.execute("UPDATE overlays SET state='conflict',revision=2 WHERE entry_id='b'");db.execute("INSERT INTO entry_history VALUES('b',2,'conflict','{}','fixture','now')");db.execute("INSERT INTO active_registry VALUES(1,'r')");db.commit();self.assertEqual(db.execute('SELECT count(*) FROM runtime_catalog').fetchone()[0],0)
++  db.execute("UPDATE overlays SET state='conflict',revision=2 WHERE entry_id='5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0'");db.execute("INSERT INTO entry_history VALUES('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0',2,'conflict','{}','fixture','now')");db.execute("INSERT INTO active_registry VALUES(1,'r')");db.commit();self.assertEqual(db.execute('SELECT count(*) FROM runtime_catalog').fetchone()[0],0)
+  def test_native_availability_and_bounded_audit_retention(self):
+   db=sqlite3.connect(':memory:');self.addCleanup(db.close);db.executescript((P/'bridge-config.sql').read_text());db.execute("INSERT INTO binding_definitions VALUES(?,?,'1.0.0')",('a'*64,'java:a.A'));db.execute("INSERT INTO binding_availability VALUES(?,'platform:local','unknown','fixture','fixture',0)",('a'*64,))
+   db.execute("INSERT INTO bridge_config(singleton_id,row_version,desired_state,start_on_boot,fgs_type,transport_profile,loopback_address,port_preference,server_identity_key_alias,retention_days,audit_size_cap) VALUES(1,1,'stopped',0,'fixture','paired_tls','127.0.0.1',0,'fixture',7,1024)");db.execute("INSERT INTO audit_events(event_id,occurred_at,operation,decision,reason_code,policy_revision) VALUES('a',0,'fixture','deny','fixture',1)")
+@@ -73,7 +73,7 @@
+   with tempfile.TemporaryDirectory() as td:
+    r=pathlib.Path(td);db=sqlite3.connect(r/'old.sqlite')
+    for name in ('001-initial.sql','002-evidence-and-publication.sql'):db.executescript((P.parent/'evidence'/('original-'+name)).read_text())
+-   self.registry(db,'r',5,'published') if 'state' in {x[1] for x in db.execute('PRAGMA table_info(registries)')} else db.execute("INSERT INTO registries VALUES('r',5,'1.1.0','fixture',37,'h','now','published','{}')")
++   self.registry(db,'r',5,'published') if 'state' in {x[1] for x in db.execute('PRAGMA table_info(registries)')} else db.execute("INSERT INTO registries VALUES('r',5,'1.1.0','fixture',37,'aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123','now','published','{}')")
+    db.execute("INSERT INTO active_registry VALUES(1,'r')");db.commit();db.close();migrate_v3.migrate(r/'old.sqlite',r/'new.sqlite');new=sqlite3.connect(r/'new.sqlite');self.addCleanup(new.close);self.assertEqual(new.execute('SELECT registry_generation FROM catalog_view').fetchone()[0],5);self.assertEqual(new.execute("SELECT value FROM catalog_meta WHERE key='rebuilt_with_corrected_extractor'").fetchone()[0],'false')
+ 
+ if __name__=='__main__':unittest.main()
+--- a/catalog/tests/test_round4.py
++++ b/catalog/tests/test_round4.py
+@@ -22,22 +22,22 @@
+   text='package a; parcelable P<T> { T value; }';result=aidl_members.enrich(text,parsers.aidl(text));self.assertEqual([r['name'] for r in result['members']],['value'])
+  def test_changed_missing_and_suppressed_import_bases_block_pointer(self):
+   for state in ('active','suppressed'):
+-   for new_hash in (None,'changed'):
++   for new_hash in (None,'d67e2e944994496c8d8ec76eed0cf9f09679448d584b532bebf941852a37f5ed'):
+     with self.subTest(state=state,new_hash=new_hash):
+      db=sqlite3.connect(':memory:');self.addCleanup(db.close);db.executescript((P/'schema.sql').read_text())
+-     db.execute("INSERT INTO bindings(binding_id,signature,package,kind,name,raw_signature) VALUES('b','java:a.A','a','class','A','fixture')")
+-     for key,version in (('old',1),('new',2)):db.execute('INSERT INTO registries VALUES(?,?,?,?,?,?,?,?,?)',(key,version,'1.2.0','fixture',37,'h','now','staged','{}'))
+-     db.execute("INSERT INTO registry_entries VALUES('old','b','{}','original')");db.execute("UPDATE registries SET state='validated' WHERE registry_id='old'");db.execute("UPDATE registries SET state='published' WHERE registry_id='old'");db.execute("INSERT INTO active_registry VALUES(1,'old')")
+-     db.execute("INSERT INTO overlays VALUES('b','b','java:a.A',1,'old','original',?,'{}','now','now')",(state,));db.execute("INSERT INTO entry_history VALUES('b',1,'update','{}','fixture','now')");db.commit()
+-     if new_hash:db.execute("INSERT INTO registry_entries VALUES('new','b','{}',?)",(new_hash,))
++     db.execute("INSERT INTO bindings(binding_id,signature,package,kind,name,raw_signature) VALUES('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','java:a.A','a','class','A','fixture')")
++     for key,version in (('old',1),('new',2)):db.execute('INSERT INTO registries VALUES(?,?,?,?,?,?,?,?,?)',(key,version,'1.2.0','fixture',37,'aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123','now','staged','{}'))
++     db.execute("INSERT INTO registry_entries VALUES('old','5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','{}','0682c5f2076f099c34cfdd15a9e063849ed437a49677e6fcc5b4198c76575be5')");db.execute("UPDATE registries SET state='validated' WHERE registry_id='old'");db.execute("UPDATE registries SET state='published' WHERE registry_id='old'");db.execute("INSERT INTO active_registry VALUES(1,'old')")
++     db.execute("INSERT INTO overlays VALUES('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','java:a.A',1,'old','0682c5f2076f099c34cfdd15a9e063849ed437a49677e6fcc5b4198c76575be5',?,'{}','now','now')",(state,));db.execute("INSERT INTO entry_history VALUES('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0',1,'update','{}','fixture','now')");db.commit()
++     if new_hash:db.execute("INSERT INTO registry_entries VALUES('new','5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','{}',?)",(new_hash,))
+      db.execute("UPDATE registries SET state='validated' WHERE registry_id='new'")
+      db.execute("UPDATE registries SET state='retired' WHERE registry_id='old'");db.execute("UPDATE registries SET state='published' WHERE registry_id='new'")
+      with self.assertRaises(sqlite3.IntegrityError):db.execute("UPDATE active_registry SET registry_id='new'")
+-     db.execute("UPDATE overlays SET state='conflict',revision=2 WHERE entry_id='b'");db.execute("INSERT INTO entry_history VALUES('b',2,'conflict','{}','fixture','now')");db.execute("UPDATE active_registry SET registry_id='new'");db.commit();self.assertEqual(db.execute('SELECT count(*) FROM runtime_catalog').fetchone()[0],0)
++     db.execute("UPDATE overlays SET state='conflict',revision=2 WHERE entry_id='5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0'");db.execute("INSERT INTO entry_history VALUES('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0',2,'conflict','{}','fixture','now')");db.execute("UPDATE active_registry SET registry_id='new'");db.commit();self.assertEqual(db.execute('SELECT count(*) FROM runtime_catalog').fetchone()[0],0)
+  def test_history_reason_has_append_only_storage_and_contract(self):
+   schema=json.loads((P/'contracts/Entry.schema.json').read_text());self.assertIn('reason',schema['$defs']['HistoryEvent']['properties']);self.assertIn('null',schema['$defs']['Registry']['properties']['api_level']['type'])
+   db=sqlite3.connect(':memory:');self.addCleanup(db.close);db.executescript((P/'schema.sql').read_text());db.execute("INSERT INTO overlays VALUES('l',NULL,'java:a.A',1,NULL,NULL,'active','{}','now','now')");db.execute("INSERT INTO entry_history VALUES('l',1,'create','{}','fixture','now')");db.execute("INSERT INTO entry_history_reasons VALUES('l',1,'owner supplied reason')");db.commit()
+-  with self.assertRaises(sqlite3.IntegrityError):db.execute("UPDATE entry_history_reasons SET reason='changed'")
++  with self.assertRaises(sqlite3.IntegrityError):db.execute("UPDATE entry_history_reasons SET reason='d67e2e944994496c8d8ec76eed0cf9f09679448d584b532bebf941852a37f5ed'")
+  def test_locator_alignment_guard_survives_optimization(self):
+   fake=types.SimpleNamespace(Parse=lambda *args:None)
+   with mock.patch.object(sdk_api_index.xml.parsers.expat,'ParserCreate',return_value=fake):
+--- a/catalog/tests/test_round5.py
++++ b/catalog/tests/test_round5.py
+@@ -22,14 +22,14 @@
+   with tempfile.TemporaryDirectory() as td:
+    root=pathlib.Path(td);db=sqlite3.connect(root/'old.sqlite')
+    for name in ('001-initial.sql','002-evidence-and-publication.sql'):db.executescript((C.parent/'evidence'/('original-'+name)).read_text())
+-   db.execute("INSERT INTO bindings(binding_id,signature,package,kind,name,raw_signature) VALUES('b','java:a.A','a','class','A','fixture')");db.execute("INSERT INTO registries VALUES('r',1,'1.1.0','fixture',37,'h','now','published','{}')");db.execute("INSERT INTO active_registry VALUES(1,'r')");db.execute("INSERT INTO effective_entries VALUES('b','{}','h','fixture')");db.execute("INSERT INTO overlays VALUES('b',NULL,'java:a.A',1,NULL,NULL,'deleted','{}','now','now')");db.execute("INSERT INTO entry_history VALUES('b',1,'delete','{}','fixture','now')");db.commit();db.close()
++   db.execute("INSERT INTO bindings(binding_id,signature,package,kind,name,raw_signature) VALUES('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','java:a.A','a','class','A','fixture')");db.execute("INSERT INTO registries VALUES('r',1,'1.1.0','fixture',37,'aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123','now','published','{}')");db.execute("INSERT INTO active_registry VALUES(1,'r')");db.execute("INSERT INTO effective_entries VALUES('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','{}','aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123','fixture')");db.execute("INSERT INTO overlays VALUES('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0',NULL,'java:a.A',1,NULL,NULL,'deleted','{}','now','now')");db.execute("INSERT INTO entry_history VALUES('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0',1,'delete','{}','fixture','now')");db.commit();db.close()
+    with self.assertRaisesRegex(sqlite3.IntegrityError,'collision|imported overlay'):migrate_v3.migrate(root/'old.sqlite',root/'new.sqlite')
+    self.assertFalse((root/'new.sqlite').exists())
+  def test_interface_failure_status_is_not_promoted(self):
+   for text,status in [('package a; interface I { void x();','unsupported'),('package a; interface I;','declaration-only')]:
+    self.assertEqual(aidl_members.enrich(text,parsers.aidl(text))['parse_status'],status)
+  def test_deleted_local_import_collision_blocks_pointer(self):
+-  db=sqlite3.connect(':memory:');self.addCleanup(db.close);db.executescript((C/'schema.sql').read_text());db.execute("INSERT INTO bindings(binding_id,signature,package,kind,name,raw_signature) VALUES('b','java:a.A','a','class','A','fixture')");db.execute("INSERT INTO registries VALUES('r',1,'1.2.0','fixture',37,'h','now','staged','{}')");db.execute("INSERT INTO registry_entries VALUES('r','b','{}','h')");db.execute("INSERT INTO overlays VALUES('b',NULL,'java:a.A',1,NULL,NULL,'deleted','{}','now','now')");db.execute("INSERT INTO entry_history VALUES('b',1,'delete','{}','fixture','now')");db.execute("UPDATE registries SET state='validated'");db.execute("UPDATE registries SET state='published'")
++  db=sqlite3.connect(':memory:');self.addCleanup(db.close);db.executescript((C/'schema.sql').read_text());db.execute("INSERT INTO bindings(binding_id,signature,package,kind,name,raw_signature) VALUES('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','java:a.A','a','class','A','fixture')");db.execute("INSERT INTO registries VALUES('r',1,'1.2.0','fixture',37,'aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123','now','staged','{}')");db.execute("INSERT INTO registry_entries VALUES('r','5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','{}','aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123')");db.execute("INSERT INTO overlays VALUES('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0',NULL,'java:a.A',1,NULL,NULL,'deleted','{}','now','now')");db.execute("INSERT INTO entry_history VALUES('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0',1,'delete','{}','fixture','now')");db.execute("UPDATE registries SET state='validated'");db.execute("UPDATE registries SET state='published'")
+   with self.assertRaises(sqlite3.IntegrityError):db.execute("INSERT INTO active_registry VALUES(1,'r')")
+  def test_future_platform_annotations_use_matching_index(self):
+   helper=test_source_annotation_targets.SourceTargets()
+--- a/catalog/tests/test_round7.py
++++ b/catalog/tests/test_round7.py
+@@ -7,16 +7,16 @@
+  def test_local_tombstone_is_not_discovered(self):
+   db=self.db();db.execute("INSERT INTO overlays VALUES('local',NULL,'java:a.A',1,NULL,NULL,'deleted','{}','now','now')");db.execute("INSERT INTO entry_history VALUES('local',1,'delete','{}','fixture','now')");db.commit();self.assertEqual(db.execute('SELECT count(*) FROM runtime_catalog').fetchone()[0],0)
+  def test_deleted_local_cannot_hide_existing_import(self):
+-  db=self.db();db.execute("INSERT INTO bindings(binding_id,signature,package,kind,name,raw_signature) VALUES('b','java:a.A','a','class','A','fixture')");db.execute("INSERT INTO registries VALUES('r',1,'1.2.0','fixture',37,'h','now','staged','{}')");db.execute("INSERT INTO registry_entries VALUES('r','b','{}','h')");db.execute("UPDATE registries SET state='validated'");db.execute("UPDATE registries SET state='published'");db.execute("INSERT INTO active_registry VALUES(1,'r')")
+-  with self.assertRaises(sqlite3.IntegrityError):db.execute("INSERT INTO overlays VALUES('b',NULL,'java:a.A',1,NULL,NULL,'deleted','{}','now','now')")
++  db=self.db();db.execute("INSERT INTO bindings(binding_id,signature,package,kind,name,raw_signature) VALUES('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','java:a.A','a','class','A','fixture')");db.execute("INSERT INTO registries VALUES('r',1,'1.2.0','fixture',37,'aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123','now','staged','{}')");db.execute("INSERT INTO registry_entries VALUES('r','5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','{}','aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123')");db.execute("UPDATE registries SET state='validated'");db.execute("UPDATE registries SET state='published'");db.execute("INSERT INTO active_registry VALUES(1,'r')")
++  with self.assertRaises(sqlite3.IntegrityError):db.execute("INSERT INTO overlays VALUES('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0',NULL,'java:a.A',1,NULL,NULL,'deleted','{}','now','now')")
+  def test_overlay_origin_and_tombstone_state_are_consistent(self):
+-  db=self.db();db.execute("INSERT INTO bindings(binding_id,signature,package,kind,name,raw_signature) VALUES('b','java:a.A','a','class','A','fixture')")
+-  for key,imported,state in [('local',None,'suppressed'),('b','b','deleted')]:
++  db=self.db();db.execute("INSERT INTO bindings(binding_id,signature,package,kind,name,raw_signature) VALUES('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','java:a.A','a','class','A','fixture')")
++  for key,imported,state in [('local',None,'suppressed'),('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','deleted')]:
+    with self.subTest(state=state):
+     with self.assertRaises(sqlite3.IntegrityError):db.execute('INSERT INTO overlays VALUES(?,?,?,?,?,?,?,?,?,?)',(key,imported,'java:a.A',1,None,None,state,'{}','now','now'))
+  def test_history_operations_match_transitions(self):
+   cat=contract_reference.Catalog();key=cat.create('java:a.A',{});cat.delete(key,cat.tag(key));cat.put(key,cat.tag(key),{});self.assertEqual([r['operation'] for r in cat.history[key]],['create','delete','restore'])
+-  other=contract_reference.Catalog();key=contract_reference.identity('java:a.A');other.publish_fixture({key:('java:a.A',{})});other.delete(key,other.tag(key));self.assertEqual(other.history[key][-1]['operation'],'suppress');other.publish_fixture({key:('java:a.A',{'changed':True})});row=other.entries[key];other.put(key,other.tag(key),{},resolution=dict(action='rebase',expected_imported_record_sha256=row['base_hash']));self.assertEqual(other.history[key][-1]['operation'],'rebase')
++  other=contract_reference.Catalog();key=contract_reference.identity('java:a.A');other.publish_fixture({key:('java:a.A',{})});other.delete(key,other.tag(key));self.assertEqual(other.history[key][-1]['operation'],'suppress');other.publish_fixture({key:('java:a.A',{'d67e2e944994496c8d8ec76eed0cf9f09679448d584b532bebf941852a37f5ed':True})});row=other.entries[key];other.put(key,other.tag(key),{},resolution=dict(action='rebase',expected_imported_record_sha256=row['base_hash']));self.assertEqual(other.history[key][-1]['operation'],'rebase')
+  def test_all_forward_declarations_keep_dotted_identity(self):
+   document=parsers.aidl_all('package a; parcelable Outer.Inner; parcelable Other cpp_header "o.h";')
+   self.assertEqual([d['descriptor'] for d in document],['a.Outer.Inner','a.Other'])
+--- a/catalog/tests/test_round8.py
++++ b/catalog/tests/test_round8.py
+@@ -1,5 +1,5 @@
+ """Known structural corruption must not masquerade as future semantics."""
+-import pathlib,sys,unittest,tempfile,json,hashlib,sqlite3
++import pathlib,sys,unittest,tempfile,json,hashlib,sqlite3,contextlib
+ P=pathlib.Path(__file__).resolve().parents[1]
+ sys.path.insert(0,str(P/'tooling'))
+ import jsonschema,permission_reader
+@@ -72,7 +72,7 @@
+     def test_malformed_nested_aidl_keeps_full_source_and_reason(self):
+         with tempfile.TemporaryDirectory() as td:
+             root=pathlib.Path(td);text='package a; interface I { parcelable P { int x;';inv=self.fixture(root,text);build_catalog.build(inv,root/'out')
+-            with sqlite3.connect(root/'out/catalog.sqlite') as db:
++            with contextlib.closing(sqlite3.connect(root/'out/catalog.sqlite')) as db:
+                 self.assertEqual(db.execute('SELECT raw_schema,parse_status FROM aidl_schemas').fetchone(),(text,'unsupported'))
+                 report=json.loads(db.execute("SELECT p.document_json FROM parse_reports p JOIN sources s USING(source_id) WHERE s.kind='aidl'").fetchone()[0])
+                 self.assertEqual(report['aidl_reconciliation'],'unreconciled')
+@@ -97,21 +97,21 @@
+         self.assertEqual(next(r for r in rows if r['canonical']=='a.PrivateOuter.PackageNested')['extras']['effective_visibility'],'package')
+     def test_imported_overlay_current_base_required_on_write(self):
+         db=sqlite3.connect(':memory:');self.addCleanup(db.close);db.executescript((P/'schema.sql').read_text())
+-        db.execute("INSERT INTO bindings(binding_id,signature,package,kind,name,raw_signature) VALUES('b','java:a.A','a','class','A','fixture')");db.execute("INSERT INTO registries VALUES('r',1,'1.2.0','fixture',37,'h','now','staged','{}')");db.execute("INSERT INTO registry_entries VALUES('r','b','{}','h')");db.execute("UPDATE registries SET state='validated'");db.execute("UPDATE registries SET state='published'");db.execute("INSERT INTO active_registry VALUES(1,'r')")
++        db.execute("INSERT INTO bindings(binding_id,signature,package,kind,name,raw_signature) VALUES('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','java:a.A','a','class','A','fixture')");db.execute("INSERT INTO registries VALUES('r',1,'1.2.0','fixture',37,'aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123','now','staged','{}')");db.execute("INSERT INTO registry_entries VALUES('r','5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','{}','aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123')");db.execute("UPDATE registries SET state='validated'");db.execute("UPDATE registries SET state='published'");db.execute("INSERT INTO active_registry VALUES(1,'r')")
+         for value in (None,'stale'):
+-            with self.subTest(value=value),self.assertRaises(sqlite3.IntegrityError):db.execute("INSERT INTO overlays VALUES('b','b','java:a.A',1,'r',?,'suppressed','{}','now','now')",(value,))
+-        db.execute("INSERT INTO overlays VALUES('b','b','java:a.A',1,'r','h','suppressed','{}','now','now')")
+-        with self.assertRaises(sqlite3.IntegrityError):db.execute("UPDATE overlays SET base_record_hash='stale' WHERE entry_id='b'")
++            with self.subTest(value=value),self.assertRaises(sqlite3.IntegrityError):db.execute("INSERT INTO overlays VALUES('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','java:a.A',1,'r',?,'suppressed','{}','now','now')",(value,))
++        db.execute("INSERT INTO overlays VALUES('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','java:a.A',1,'r','aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123','suppressed','{}','now','now')")
++        with self.assertRaises(sqlite3.IntegrityError):db.execute("UPDATE overlays SET base_record_hash='stale' WHERE entry_id='5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0'")
+     def test_copy_migration_admits_only_matching_imported_overlay_base(self):
+-        for base in ('h',None,'stale'):
++        for base in ('aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123',None,'stale'):
+             with self.subTest(base=base),tempfile.TemporaryDirectory() as td:
+                 root=pathlib.Path(td);db=sqlite3.connect(root/'old.sqlite')
+                 for name in ('001-initial.sql','002-evidence-and-publication.sql'):db.executescript((P.parent/'evidence'/('original-'+name)).read_text())
+-                db.execute("INSERT INTO bindings(binding_id,signature,package,kind,name,raw_signature) VALUES('b','java:a.A','a','class','A','fixture')");db.execute("INSERT INTO registries VALUES('r',1,'1.1.0','fixture',37,'h','now','published','{}')");db.execute("INSERT INTO active_registry VALUES(1,'r')");db.execute("INSERT INTO effective_entries VALUES('b','{}','h','fixture')")
+-                db.execute("INSERT INTO overlays VALUES('b','b','java:a.A',1,'r',?,'suppressed','{}','now','now')",(base,));db.execute("INSERT INTO entry_history VALUES('b',1,'suppress','{}','fixture','now')");db.commit();db.close()
+-                if base=='h':
++                db.execute("INSERT INTO bindings(binding_id,signature,package,kind,name,raw_signature) VALUES('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','java:a.A','a','class','A','fixture')");db.execute("INSERT INTO registries VALUES('r',1,'1.1.0','fixture',37,'aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123','now','published','{}')");db.execute("INSERT INTO active_registry VALUES(1,'r')");db.execute("INSERT INTO effective_entries VALUES('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','{}','aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123','fixture')")
++                db.execute("INSERT INTO overlays VALUES('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','java:a.A',1,'r',?,'suppressed','{}','now','now')",(base,));db.execute("INSERT INTO entry_history VALUES('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0',1,'suppress','{}','fixture','now')");db.commit();db.close()
++                if base=='aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123':
+                     migrate_v3.migrate(root/'old.sqlite',root/'new.sqlite')
+-                    with sqlite3.connect(root/'new.sqlite') as new:self.assertEqual(new.execute('SELECT state,base_record_hash FROM overlays').fetchone(),('suppressed','h'))
++                    with contextlib.closing(sqlite3.connect(root/'new.sqlite')) as new:self.assertEqual(new.execute('SELECT state,base_record_hash FROM overlays').fetchone(),('suppressed','aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123'))
+                 else:
+                     with self.assertRaisesRegex(sqlite3.IntegrityError,'base must match'):migrate_v3.migrate(root/'old.sqlite',root/'new.sqlite')
+                     self.assertFalse((root/'new.sqlite').exists())
+--- a/catalog/tests/test_sealed_registry.py
++++ b/catalog/tests/test_sealed_registry.py
+@@ -6,8 +6,8 @@
+  def test_memberships_are_staged_only_and_staged_inserts_succeed(self):
+   for state in ('staged','validated','published','retired','rejected'):
+    with self.subTest(state=state):
+-    db=sqlite3.connect(':memory:');self.addCleanup(db.close);db.executescript((C/'schema.sql').read_text());db.execute("INSERT INTO registries VALUES('r',1,'1.2.0','fixture',NULL,'h','now',?,'{}')",(state,));db.execute("INSERT INTO sources VALUES('s','p','https://example.invalid/p','rev','now','hash',NULL,'unknown','evidence','fixture')");db.execute("INSERT INTO bindings(binding_id,signature,package,kind,name,raw_signature) VALUES('b','java:a.A','a','class','A','fixture')")
+-    for sql in ("INSERT INTO registry_entries VALUES('r','b','{}','h')","INSERT INTO registry_sources VALUES('r','s')"):
++    db=sqlite3.connect(':memory:');self.addCleanup(db.close);db.executescript((C/'schema.sql').read_text());db.execute("INSERT INTO registries VALUES('r',1,'1.2.0','fixture',NULL,'aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123','now',?,'{}')",(state,));db.execute("INSERT INTO sources VALUES('s','p','https://example.invalid/p','rev','now','d04b98f48e8f8bcc15c6ae5ac050801cd6dcfd428fb5f9e65c4e16e7807340fa',NULL,'unknown','evidence','fixture')");db.execute("INSERT INTO bindings(binding_id,signature,package,kind,name,raw_signature) VALUES('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','java:a.A','a','class','A','fixture')")
++    for sql in ("INSERT INTO registry_entries VALUES('r','5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','{}','aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123')","INSERT INTO registry_sources VALUES('r','s')"):
+      if state=='staged':db.execute(sql)
+      else:
+       with self.assertRaises(sqlite3.IntegrityError):db.execute(sql)
+@@ -16,12 +16,12 @@
+   with tempfile.TemporaryDirectory() as td:
+    root=pathlib.Path(td);db=sqlite3.connect(root/'old.sqlite')
+    for name in ('001-initial.sql','002-evidence-and-publication.sql'):db.executescript((C.parent/'evidence'/('original-'+name)).read_text())
+-   db.execute("INSERT INTO registries VALUES('old',1,'1.1.0','fixture',37,'h','now','retired','{}')");db.execute("INSERT INTO registries VALUES('selected',5,'1.1.0','fixture',37,'h','now','published','{}')");db.execute("INSERT INTO active_registry VALUES(1,'selected')");db.commit();db.close()
++   db.execute("INSERT INTO registries VALUES('old',1,'1.1.0','fixture',37,'aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123','now','retired','{}')");db.execute("INSERT INTO registries VALUES('selected',5,'1.1.0','fixture',37,'aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123','now','published','{}')");db.execute("INSERT INTO active_registry VALUES(1,'selected')");db.commit();db.close()
+    migrate_v3.migrate(root/'old.sqlite',root/'new.sqlite');new=sqlite3.connect(root/'new.sqlite');self.addCleanup(new.close)
+    self.assertEqual(dict(new.execute('SELECT registry_id,state FROM registries')),{'old':'retired','selected':'published'});self.assertEqual(new.execute('SELECT registry_id FROM active_registry').fetchone()[0],'selected');self.assertEqual(new.execute('SELECT registry_generation FROM catalog_view').fetchone()[0],5)
+  def test_no_appending_members_after_publication(self):
+   db=sqlite3.connect(':memory:');self.addCleanup(db.close);db.executescript((C/'schema.sql').read_text())
+-  db.execute("INSERT INTO bindings(binding_id,signature,package,kind,name,raw_signature) VALUES('b','java:a.A','a','class','A','fixture')")
+-  db.execute("INSERT INTO registries VALUES('r',1,'1.2.0','fixture',37,'h','now','published','{}')");db.execute("INSERT INTO active_registry VALUES(1,'r')");db.commit()
+-  with self.assertRaises(sqlite3.IntegrityError):db.execute("INSERT INTO registry_entries VALUES('r','b','{}','hash')")
++  db.execute("INSERT INTO bindings(binding_id,signature,package,kind,name,raw_signature) VALUES('5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','java:a.A','a','class','A','fixture')")
++  db.execute("INSERT INTO registries VALUES('r',1,'1.2.0','fixture',37,'aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123','now','published','{}')");db.execute("INSERT INTO active_registry VALUES(1,'r')");db.commit()
++  with self.assertRaises(sqlite3.IntegrityError):db.execute("INSERT INTO registry_entries VALUES('r','5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0','{}','d04b98f48e8f8bcc15c6ae5ac050801cd6dcfd428fb5f9e65c4e16e7807340fa')")
+ if __name__=='__main__':unittest.main()

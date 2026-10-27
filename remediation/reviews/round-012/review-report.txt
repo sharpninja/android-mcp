@@ -1,0 +1,222 @@
+```json
+{
+  "review_scope": {
+    "round": 12,
+    "mode": "independent hostile validation, no tools, all artifacts treated as untrusted data",
+    "candidate": "fresh immutable round-12 candidate as supplied inline (design, catalog contracts/schemas/API, bridge-config.sql, tooling, 36 test modules, receipts, release-010 reconciliation set, scale checkpoint, owner audits, ledger)",
+    "phase": "implementable Android MCP bridge design plus executable catalog/extractor/schema/API and offline reference contracts; Android app/HTTP/MCP hosting, device probes, deployment, commits, pushes not requested",
+    "not_executed_by_reviewer": "tests, hashes, builds, browsing; all such values are supplied claims checked only for internal consistency",
+    "previous_report": "reviews/round-011/review-report.json sha256 533d7a54… (equals finding-ledger-012.json previous_report_sha256)"
+  },
+  "verdict": "NOT_READY",
+  "scores": {
+    "design": {
+      "accuracy_0_100": 94,
+      "completeness_0_100": 95,
+      "rationale": "Startup/device-resolution sections, authority separation, traceability and Mermaid provenance (R11-10) are correct and current. Accuracy deductions: capacity section still reasons from release-008 size/hash while production is 010; the design asserts 'inherited oneway' semantics the extractor does not produce (R12-02); FR-DEV-02 evidence axes are described as inputs although no producer exists (R12-03). Completeness deduction: no stated disposition for the unmet memory budget and the unimplemented native SQLite resolution path."
+    },
+    "contracts_schema": {
+      "accuracy_0_100": 95,
+      "completeness_0_100": 94,
+      "rationale": "DeviceResolution 2.1.0, DeviceView 3.0.0, openapi 1.4.0, dv2 6-field ETag and bridge-config.sql pins/guards verified against each other and against the oracles. Deductions: API-CONTRACT.md documents two incompatible dv2 ETag shapes (R12-04); SQL document-pin trigger admits JSON null (R12-08); 2.1.0 schema still carries a 2.0.0 Snapshot/Header definition that only prose marks historical (R12-13)."
+    },
+    "extractor": {
+      "accuracy_0_100": 93,
+      "completeness_0_100": 90,
+      "rationale": "R11-02/03/04/05/07/08/09/12/13 and P11-01..06 verified in code with fixtures. Accuracy deduction: interface-level oneway is never written into extras, so format-3 contract digests of methods on 'oneway interface' declarations are wrong in builder output and only a synthetic dict is tested (R12-02); null schema_hash aliases are emitted (R12-11). Completeness deductions: no extractor produces interface/modules/oem/build_fingerprints clauses, leaving all AIDL/HIDL variants unknown by construction (R12-03); 010 build shows 1268 retained-unsupported sources and 8 unsupported manifests (R12-07); two test modules present in the 010 snapshot are absent from the candidate without a recorded reason (R12-09); performance evidence exists only for superseded code (R12-10)."
+    },
+    "production_catalog_data": {
+      "accuracy_0_100": 90,
+      "completeness_0_100": 78,
+      "rationale": "Release 010 counts reconcile internally (entry kinds sum 802936, source kinds 44397, declarations 1125985, annotation buckets 13334, permission names 719, AIDL statuses 20210) and inventory/registry digests are reported byte-equivalent. Accuracy is capped because 010 was built by pre-candidate code and embodies semantics the candidate has since corrected: fabricated platform point intervals (R11-02), format-2 digests over raw headers (R11-05), AIDL/HIDL fields classified as bindings (R11-09), no interface oneway (R12-02); provenance states production_equals_latest_candidate:false and the candidate loader rejects a non-2.1.0 inventory (R12-01). Completeness: 846 unmatched annotations and 2 undefined permission names persist; HIDL (962 files) and the annotation owner fallback are not in production; 732 of 985 outside projects remain unknown with 27696 uninspected filename candidates; 1268 retained-unsupported sources; no interface/module evidence for any AIDL binding. Acknowledgement does not substitute for coverage."
+    }
+  },
+  "overall": {
+    "accuracy_0_100": 93,
+    "completeness_0_100": 80,
+    "method": "Not an average. Overall completeness is bounded by the required all-public binding/permission coverage, which the production catalog does not yet reach; overall accuracy reflects that every verified category defect is either disclosed or small except R12-01/R12-02.",
+    "ready": false,
+    "distance_to_98_98": "Requires an immutable production rebuild from the frozen candidate (R12-01), the oneway builder fix (R12-02), a real producer for interface/module evidence (R12-03), disclosure and reduction of retained-unsupported sources (R12-07), and measurable closure of the outside-corpus and annotation residuals (R12-15, R12-16)."
+  },
+  "findings": [
+    {
+      "id": "R12-01",
+      "severity": "high",
+      "artifact": "evidence/production010-full-code-provenance.json; catalog/tooling/catalog_projection.py (load_inventory); catalog/tooling/build_catalog.py",
+      "evidence": "provenance: \"production_equals_latest_candidate\": false, \"ddl_matches_candidate\": false; 17 differing files incl. DeviceView.schema.json, effective_device_inventory.py, hidl_source.py listed absent in production; candidate build_catalog writes manifest urn:android-binding-catalog:2.1.0:DeviceResolution while production DeviceResolution.schema sha256 is baa447f5… (2.0); candidate load_inventory requires catalog_meta device_resolution_contract_version=='2.1.0'.",
+      "issue": "The only production catalog (010) is not an output of the validated candidate tooling. All semantic corrections verified in this round (point semantics, format-3 digests, entity kinds, java.lang fallback, overlays, DeviceView 3 pins) are absent from the data that is scored as production, and the candidate oracle cannot load the production inventory without a rebuild.",
+      "exact_minimal_correction": "Freeze the candidate hashes, rebuild an immutable release 011 from them, publish provenance with production_equals_latest_candidate:true and ddl_matches_candidate:true, and regenerate device-inventory/export/production reconciliation receipts against 011.",
+      "verification_needed": "Rebuild receipts and reconciliation artifacts for 011; not executable in this no-tools review."
+    },
+    {
+      "id": "R12-02",
+      "severity": "medium",
+      "artifact": "catalog/tooling/build_catalog.py (AIDL member loop); catalog/tooling/parsers.py (member, aidl); catalog/tooling/dispatch_manifest.py (contract_digest); catalog/tests/test_round11.py",
+      "evidence": "build_catalog member loop assigns r['extras']['imports']=d['imports'], r['extras']['interface_annotations'], r['extras']['interface_permission'] and never assigns interface_oneway; parsers.member sets oneway=bool(re.search(r'\\boneway\\b',body[:a])) over the method text only; parsers.aidl sets declaration-level oneway=kind=='interface' and …; contract_digest reads extras interface_oneway; the only interface-oneway test passes the synthetic dict {'oneway':False,'interface_oneway':False}.",
+      "issue": "For 'oneway interface IFoo { void bar(); }' every method is digested with oneway=false in builder output. contract_hash, schema_hash and policy identity are therefore wrong for inherited-oneway methods, and the design/README statement 'inherited oneway' is not implemented. The fixture never exercises the builder, so the regression suite cannot detect it.",
+      "exact_minimal_correction": "In the build_catalog member loop add r['extras']['interface_oneway']=bool(d.get('oneway')); add a builder-level fixture that parses an 'oneway interface' source and asserts contract_digest(…)['oneway'] is true and differs from the non-oneway digest.",
+      "verification_needed": "New fixture run plus a rebuilt contract-hash sample for one oneway interface."
+    },
+    {
+      "id": "R12-03",
+      "severity": "medium",
+      "artifact": "catalog/tooling/catalog_projection.py (lifecycle_rule); catalog/tooling/build_catalog.py; evidence/round012-scale-attempt2/result.json",
+      "evidence": "lifecycle_rule emits only index ranges/extension alternatives, dict(alternatives=[dict(platform_point=point)],evidence_ids=evidence), or unknown_reason 'Source API major alone does not prove minor applicability'; no code path constructs clauses keyed interface, modules, oem or build_fingerprints; scale states_by_source_kind: aidl 0 available/52427 unknown, sdk-signature 0/97830, source-signature 0/141515.",
+      "issue": "The startup requirement (FR-DEV-02/TR-DEV-02) demands resolution from SDK extensions, OEM/build/module versions and interface version/hash/reachability. Those evidence axes exist only in the 2.1.0 schema and hand-written fixtures. Stable-AIDL aidl_api/<iface>/<N>/.hash files and Mainline module metadata are never imported, so no AIDL or HIDL binding can ever resolve to available.",
+      "exact_minimal_correction": "Add an extractor that reads stable-AIDL aidl_api/*/{N,current}/.hash into interface clauses (version, hash) and APEX/module manifests into modules clauses; until then emit unknown_reason naming the missing evidence class and state in the design that AIDL/HIDL availability is unknown by construction.",
+      "verification_needed": "Builder fixture with an aidl_api hash file and a non-zero aidl available count in a scale receipt."
+    },
+    {
+      "id": "R12-04",
+      "severity": "low",
+      "artifact": "catalog/API-CONTRACT.md (1.4)",
+      "evidence": "Contains \"dv2:<scope_sha256>:<view_generation>:<capability_epoch>:<catalog_generation>:<overlay_generation>\" in the 'additive contract 1.3' section and later \"dv2:…:<overlay_generation>:<inventory_sha256>\"; device_resolution.etag() and openapi.json pattern use six fields.",
+      "issue": "Two incompatible ETag definitions in one contract version; a client implementing the first form will fail If-Match preconditions.",
+      "exact_minimal_correction": "Mark the five-field form as '1.3, superseded' or delete it, and add a test asserting the documented regex matches device_resolution.etag() output.",
+      "verification_needed": "Doc diff and one regex test."
+    },
+    {
+      "id": "R12-05",
+      "severity": "low",
+      "artifact": "design/Android MCP Bridge Design.md (capacity section); evidence/catalog-size-release010.json",
+      "evidence": "Design cites release-008 size 8,306,286,592 bytes sha 8cd8db1d… with 17 GiB / 25 GiB derived figures; catalog-size-release010.json reports 10,276,548,608 bytes.",
+      "issue": "Capacity arithmetic is stale by one release (about 9.57 GiB, roughly 20 GiB additional and 30 GiB peak under the same multipliers).",
+      "exact_minimal_correction": "Recompute the capacity paragraph from the 010 size artifact and cite it by filename.",
+      "verification_needed": "Doc diff only."
+    },
+    {
+      "id": "R12-06",
+      "severity": "low",
+      "artifact": "requirements-traceability.json",
+      "evidence": "\"Completed007…796212entries…\", \"Outside985 audit is in progress\", \"design Library versions4/2/1\", updated_at 01:09 (before the 010 build).",
+      "issue": "Traceability artifact contradicts the 010 reconciliation set, the 985-project summary (732 unknown) and the byte-verified Library versions 5/3/2.",
+      "exact_minimal_correction": "Regenerate with the 010 baseline, Library 5/3/2, and outside-corpus status '247 relevant / 732 unknown / 6 irrelevant'.",
+      "verification_needed": "Regenerated file."
+    },
+    {
+      "id": "R12-07",
+      "severity": "medium",
+      "artifact": "evidence/built-in-validation-summary-release010.json; catalog/README.md; progress-012.json",
+      "evidence": "Summary reports 1268 evidence sources with status raw-binding-source-retained-unsupported and 8 manifests with status unsupported (XML unresolved); README known gaps list only '846unmatched annotations and2permission names'.",
+      "issue": "Undisclosed production coverage gap: 1268 binding sources and 8 manifests contributed no declarations, and their classes are not enumerated anywhere the reader is pointed to.",
+      "exact_minimal_correction": "Add both counts, the unsupported construct classes and the 8 manifest paths to README known gaps and the ledger; schedule parser support or classify as out of scope with reason.",
+      "verification_needed": "Updated README and a per-class breakdown from the full validation report."
+    },
+    {
+      "id": "R12-08",
+      "severity": "low",
+      "artifact": "catalog/bridge-config.sql (device_entry_inventory_member trigger); catalog/tooling/device_view_storage.py; catalog/tests/test_device_catalog_pipeline.py",
+      "evidence": "Trigger condition json_type(new.document_json,'$.catalog_document_sha256') IS NOT NULL accepts a JSON null value (json_type returns 'null'); pipeline test publishes rows from raw load_inventory into DeviceViewStore and seals successfully without effective pins.",
+      "issue": "A sealed, active view can hold available entries with no catalog document pin; only alias generation and the policy gate later deny them, so the storage invariant 'every available member pins its document' is not enforced where it is declared.",
+      "exact_minimal_correction": "Change the predicate to json_type(...)='text' and require a 64-char hex value; in publish, reject available entries lacking catalog_document_sha256 when the inventory is effective; make the pipeline test assert rejection or a non-dispatchable seal.",
+      "verification_needed": "Trigger test with a null pin."
+    },
+    {
+      "id": "R12-09",
+      "severity": "low",
+      "artifact": "evidence/build-release010-inputs.json; candidate catalog/tests",
+      "evidence": "010 snapshot lists test_bundled_http_snapshot.py, test_unnormalized_source_retention.py and sdk_availability_evidence.py; none appear in the 36 candidate test modules or the 245-test receipts.",
+      "issue": "Regression surface shrank between production build and candidate without a ledger entry; the 245-test figure is not comparable to the set that validated 010.",
+      "exact_minimal_correction": "Restore the two test modules or record their retirement and replacement coverage in the ledger and README.",
+      "verification_needed": "Ledger entry or restored modules in the next receipt."
+    },
+    {
+      "id": "R12-10",
+      "severity": "medium",
+      "artifact": "evidence/round012-scale-attempt2/result.json; code-checkpoint-manifest.json; design budget section",
+      "evidence": "Checkpoint hashes catalog_projection ca2a01d0…, device_resolution d3bd71ec…, dispatch_manifest fc7a0453…, DeviceView schema 586973a8… differ from candidate 250dac8b…/f075be79…/84963aed…/706d3487…; \"current_candidate_supersedes_this_checkpoint\": true; measured 565.6 s and 4.30 GiB on 799527 entries against a design budget of at most 384 MiB; native SQLite resolution is specified, not implemented.",
+      "issue": "No runtime or memory evidence exists for the current candidate, and the only measurement exceeds the design budget by more than an order of magnitude.",
+      "exact_minimal_correction": "Re-run the scale harness on the frozen candidate hashes and attach the receipt; either implement the SQL-side resolution path or revise the budget with a stated justification.",
+      "verification_needed": "Fresh scale receipt whose code hashes equal the candidate."
+    },
+    {
+      "id": "R12-11",
+      "severity": "low",
+      "artifact": "catalog/tooling/dispatch_manifest.py (generate)",
+      "evidence": "generate emits schema_hash=resolved['schema_hash'] which is None for non-available rows; SQL binding_wire_contracts NOT NULL and the policy gate are the only guards.",
+      "issue": "Alias documents with a null schema hash can be serialized and shipped even though they can never be admitted.",
+      "exact_minimal_correction": "Skip non-available rows or emit dispatchable:false with no schema_hash, and add a test that generated output contains no null schema_hash.",
+      "verification_needed": "One test."
+    },
+    {
+      "id": "R12-12",
+      "severity": "low",
+      "artifact": "evidence/production-reconciliation-release010.json (limitations text)",
+      "evidence": "\"AIDL enrichment … belong to the next immutable candidate\" while built-in-validation-summary-release010.json reports 13391 field-metadata-parsed.",
+      "issue": "Stale limitation statement contradicts the same release's summary.",
+      "exact_minimal_correction": "Correct the limitation text to describe what 010 actually contains and what is deferred.",
+      "verification_needed": "Doc diff."
+    },
+    {
+      "id": "R12-13",
+      "severity": "low",
+      "artifact": "catalog/contracts/DeviceResolution.schema.json ($id 2.1.0)",
+      "evidence": "Snapshot and Header definitions retain const \"2.0.0\" with a description that resolved2 cannot activate as DeviceView3.",
+      "issue": "A 2.1.0 schema document publishes a 2.0.0 snapshot shape; consumers validating against $id 2.1.0 can emit legacy snapshots that the storage layer then rejects.",
+      "exact_minimal_correction": "Move the 2.0.0 Snapshot/Header to a historical schema file or add deprecated:true and reference DeviceView 3.0.0 as the only publishable snapshot.",
+      "verification_needed": "Schema diff."
+    },
+    {
+      "id": "R12-14",
+      "severity": "low",
+      "artifact": "evidence/legacy-populated-round012-validation.json",
+      "evidence": "135508 entries validated with validator d70110d5…; 552 variant omissions reported.",
+      "issue": "The 552 omissions have no disposition in finding-ledger-012.json or progress-012.json.",
+      "exact_minimal_correction": "Add a ledger entry classifying the 552 omissions (expected legacy loss vs defect) with the rule that produced them.",
+      "verification_needed": "Ledger entry."
+    },
+    {
+      "id": "R12-15",
+      "severity": "high",
+      "artifact": "evidence/outside-corpus-classification-latest-summary.json; hidl-owner-audit-round012.json; carried from R11-01",
+      "evidence": "985 projects: relevant 247, irrelevant 6, unknown 732 (source-content-uninspected 630, binder-filename-candidates 65, hidl-filename-candidates 2, prebuilt-or-other 35); 27696 unknown filename candidates; HIDL owner audit 962 files / 22757 records marked not production.",
+      "issue": "All-public binding/permission source coverage is a stated requirement for overall completeness. Three quarters of the outside corpus is unclassified and the HIDL extraction has not been applied to production.",
+      "exact_minimal_correction": "Inspect the 630 uninspected projects by content, classify the 65+2 filename candidates, fold the HIDL extractor output into the 011 rebuild, and publish a coverage receipt with zero unknown projects or a named out-of-scope list.",
+      "verification_needed": "Updated classification summary and 011 counts."
+    },
+    {
+      "id": "R12-16",
+      "severity": "medium",
+      "artifact": "catalog/README.md; evidence/built-in-validation-summary-release010.json; owner annotation fallback results",
+      "evidence": "846 unmatched annotations and 2 undefined permission names in 010; owner fallback over 11 fixtures predicts 268 additional matches (119 permission) and 578 remaining; marked not production.",
+      "issue": "Annotation-to-declaration linkage and permission definition completeness remain open in production; the proposed fallback is unmeasured at production scale.",
+      "exact_minimal_correction": "Run the fallback in the 011 build, report actual matched/remaining counts, and resolve or document the 2 undefined permission names.",
+      "verification_needed": "011 summary counts."
+    }
+  ],
+  "verified_resolutions": {
+    "R11-01": "OPEN. 010 publishes the full lifecycle index (93681 = 90272 + 3409) and the base inventory, but global coverage residuals remain; see R12-15/R12-16.",
+    "R11-02": "VERIFIED in code: lifecycle_rule emits platform_point for non-index sources; clause() yields PLATFORM_POINT_MATCH or PLATFORM_APPLICABILITY_UNPROVEN; schema Clause.platform_point prefixItems; test_round11 point-semantics fixtures.",
+    "R11-03": "VERIFIED: inventory_sha256 in resolve/Snapshot/Header/dv2; ViewStore.publish re-resolves and raises 'Snapshot inventory membership, selected variants or states differ from trusted resolution'; sealed device_inventory_sets/members with SQL variant/dependency pins; foreign same-count and substituted-contract fixtures reject.",
+    "R11-04": "VERIFIED: build_catalog member loop sets r['extras']['imports']=d['imports']; imported-type fixture present.",
+    "R11-05": "VERIFIED: contract_digest format 3 covers canonical signature, kind, normalized TypeReference, directions, wire annotations, oneway flags, HIDL results, declared_type_shape; raw header excluded by test. Caveat R12-02 for interface oneway.",
+    "R11-06": "VERIFIED: README now states 'Five referenced permission names' for 008.",
+    "R11-07": "VERIFIED: java.lang fallback for sdk-signature/source-signature, formal-type-variable guard, malformed-header quarantine via formal_unknown; fixtures present.",
+    "R11-08": "VERIFIED: binding_wire_contracts CHECK on verified codec_id/schema_hash/evidence, wire_tuple_identity UNIQUE, transaction_code BETWEEN 0 AND 4294967295.",
+    "R11-09": "VERIFIED: entity_kind raises on missing kind and classifies AIDL/HIDL fields and enum constants as other; Java fields remain binding as the design states.",
+    "R11-10": "VERIFIED: design states authoritative Mermaid sources for all four diagrams live in design/sources; render-manifest.json Pele 1.10.0 hashes equal the INPUT MANIFEST entries.",
+    "R11-11": "VERIFIED: openapi 1.4.0 returns 404 'Unknown or inaccessible snapshot' on both view paths, current-view description excludes entry collections, internal schemas x-internal:true.",
+    "R11-12": "PARTIAL: lru_cache validator and assertEqual verified; scale receipt exists but measures superseded code (R12-10).",
+    "R11-13": "VERIFIED: lifecycle_rule raises 'Inconsistent explicit since/sdk platform evidence'; fixture present.",
+    "P11-01..P11-06": "VERIFIED via test_postfreeze11.py, type_ref guards, effective_device_inventory overlay composition (suppression denies, local addition unknown, field override changes transitive hash, stale document pin denies), format-3 digests and document pins in evaluate_view_fixture."
+  },
+  "blockers_to_98_98": [
+    "R12-01 production catalog not built from the validated candidate; candidate loader rejects its inventory.",
+    "R12-15 outside-corpus coverage: 732 unknown projects and 27696 uninspected filename candidates; HIDL not in production.",
+    "R12-16 846 unmatched annotations and 2 undefined permission names; fallback unmeasured at scale.",
+    "R12-03 no interface/module/OEM evidence producer, so AIDL/HIDL bindings cannot become available.",
+    "R12-02 inherited oneway not digested in builder output.",
+    "R12-07 1268 retained-unsupported sources and 8 unsupported manifests undisclosed.",
+    "R12-10 no scale or memory evidence for the current candidate; measured footprint exceeds design budget."
+  ],
+  "limitations": [
+    "No tools: no test execution, hash recomputation, SQL execution or file retrieval; every receipt value is a submitter claim checked only for internal arithmetic consistency.",
+    "Not reviewed: the 010 catalog.sqlite itself, the full 19.3 MB native validation report, per-source rows, the 27696 filename candidate list, full HIDL record set, and the 43 MB api-lifecycle-facts.jsonl.",
+    "Public Android platform claims (SDK extension semantics, stable-AIDL hash layout, Binder flags) rely on cited references and prior knowledge, not fresh browsing.",
+    "Owner HIDL and annotation-fallback results are owner audits on fixtures, not production outputs, and were scored as such.",
+    "Scale checkpoint code hashes differ from the candidate; its numbers describe superseded code.",
+    "Evidence quotations are reproduced from the supplied inline artifacts as read; line numbers are not asserted."
+  ],
+  "report_complete": true
+}
+```

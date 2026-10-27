@@ -1,0 +1,122 @@
+{
+  "captured_at": "2026-10-27T01:09:24.369143+00:00",
+  "previous_report": "reviews/round-009/review-report.repaired.json",
+  "previous_report_sha256": "9c836fb87d90a764a3920759e134e51971f2cda2de89f3cbc1ac53ac71196a92",
+  "previous_scores_historical": {
+    "design": {
+      "accuracy_0_100": 95,
+      "completeness_0_100": 96,
+      "rationale": "Identity (entry_id=binding_id=SHA-256 canonical signature), single evaluator over canonical binding plus schema hash across generated/generic/known-raw routes, separate client_raw_grants with SQL-authoritative bounds, admission linearization, persistent service/boot/status truthfulness, separate MCP and ADB health, three authorities, cat1 ETag/CAS/cursor rules, audit-retention flag, platform:local availability, and capacity budgets all match bridge-config.sql, schema.sql, contracts and fixtures. Release006 size (8264855552 bytes) and the 17 GiB/25 GiB arithmetic are consistent with catalog-size-release006.json. Deductions: 'entire selected corpus' wording conflicts with the manifest's own 3285 not-retrieved selected paths; UI page maximum 1000 versus API/Page maximum 500 without saying the UI bypasses the API; overlapping 'scheme 2/3' terminology (R9-04)."
+    },
+    "contracts_schema": {
+      "accuracy_0_100": 96,
+      "completeness_0_100": 95,
+      "rationale": "R8-03 is closed: overlay_base_current_insert/update enforce the base hash at write time and the copy migration admits overlays only after pointer restoration (fixtures for matching, NULL and stale bases). Sealed membership, single published registry, deferred pointer FK, base-hash and local-collision pointer guards, revision/history/reason sidecars, 428/400/412 ordering, 1.1 kind gating, scoped idempotency, and the oracle's conflict/tombstone/reverse-collision/cursor behaviour are consistent with API-CONTRACT.md. Deductions (R9-05): no guard on DELETE of active_registry/catalog_view, hash-shaped columns in the catalog schema lack length checks while bridge-config and idempotency_records enforce them, and the cat1 ETag for suppressed/deleted/conflict rows exists only in the Python oracle, not as an executable projection."
+    },
+    "extractor": {
+      "accuracy_0_100": 94,
+      "completeness_0_100": 94,
+      "rationale": "R8-01 is closed in the candidate: nested AIDL declarations are recursed with parent descriptor and depth, member() rejects merged heads, aidl_lex.inventory_counts is comment-masked, build and validator both enforce AIDL no-drop reconciliation, and the full 19781-file rerun reports 0 mismatches, 22447 declarations, 161693 records and 2 explicit unsupported statements. R8-02/R8-05 fixed with fixtures; reader hardening (P8-01) fixed. New lows: aidl_schemas.descriptor/declaration_kind degrade to NULL/'multiple' for any file with nested types (R9-02); root raw_signature is truncated at the first '{' including annotation arguments and string literals (R9-03). Wildcard imports, type variables, wire codes and codecs remain declared unknowns, as scoped."
+    },
+    "production_catalog_data": {
+      "accuracy_0_100": 85,
+      "completeness_0_100": 66,
+      "rationale": "Release006 is internally consistent: source reconciliation 39194/39194, entry_kinds sum exactly to 794195, declarations by kind sum to 1098639 occurrences, JSON/JSONL byte-equivalent, permission counts reconcile (1423 elements, 1399 records, 22 core duplicates). Accuracy deductions: it carries superseded extraction, now quantified: 115 malformed member return types, 1024 nested-type files, and the current parser yields 161693 AIDL records from the same 19781 files versus 149655 declarations in 006 (12038 records absent); 6987 of 13334 external annotations unmatched, 6509 of them a 37.0 routing regression; undefined names MANAGE_MEDIA_PROJECTION and QUERY_ALL_PACKAGES; old DDL. Completeness: 3285 discovered paths not retrieved, 247 relevant outside projects with enumerated declared-kind paths not imported, 732 projects unknown, native/generated Binder unknown; source007 is pre-R8 and not completed. Acknowledgment earns no credit."
+    }
+  },
+  "previous_overall_historical": {
+    "accuracy_0_100": 92,
+    "completeness_0_100": 80,
+    "verdict": "NOT_READY",
+    "rationale": "All R8 artifact findings are verifiably fixed in the candidate with before/after receipts and a full-corpus parser audit. Remaining artifact defects are low severity and fixable. Overall completeness stays bounded by missing source input: the released catalog must be regenerated from the corrected snapshot with regenerated caches, and required public binding/permission coverage remains materially incomplete and partly unscoped."
+  },
+  "findings": [
+    {
+      "id": "R9-01",
+      "severity": "high",
+      "artifact": "evidence/production006-full-code-provenance.json; evidence/round008-release006-defect-summary.json; evidence/round008-current-parser-corpus-audit-v2.json; evidence/built-in-validation-summary-release006.json; evidence/coverage-manifest-release006.compact.json; evidence/outside-corpus-classification-latest-summary.json; evidence/annotation-routing-postfreeze008.json; evidence/progress-009.json",
+      "evidence": "production_equals_latest_candidate=false; ddl_matches_candidate=false; 006 aidl declarations total 149655 versus current-parser records 161693 on the same 19781 files; malformed_unique_aidl_member_return_types 115; nested_type_files 1024; 006 annotation source 37.0: matched 0, unmatched 6509, status parsed; source_paths not-retrieved 3285; outside counts unknown 732, relevant 247; source007_status 'Running ... predatesR8candidate'; source007-cache-recomputation old fingerprint c654afbe... new c5ab437b..., both pre-R8 java_source.py.",
+      "issue": "Missing input, not an artifact defect: no completed production release embodies the corrected extractor, DDL and annotation routing, and required public binding/permission source coverage is incomplete and partly unscoped.",
+      "exact_minimal_correction": "Source task: regenerate Java and index caches under the current cache_fingerprint; build the next release from the candidate snapshot; extend the inventory with the 3285 not-retrieved paths and the enumerated declared-kind paths of the 247 relevant projects; record an owner scope decision or complete enumeration for the 732 unknown projects and for native/generated Binder sources; run validate_catalog, export_permissions and reconciliation; supply provenance with both equality flags true, annotation mapping distributions per platform, and aidl_schemas status distribution.",
+      "verification_needed": "New release validation, export, reconciliation and provenance reports; classification summary with no unenumerated projects.",
+      "working_status": "missing-source-input-remains",
+      "remediation": "Completed007 evidence replaces006 as current; producer/candidate differences explicit. Corrected matching build plus global coverage and normalized historical/future binding/type lifecycle imports still required.",
+      "independently_reassessed": false
+    },
+    {
+      "id": "R9-02",
+      "severity": "low",
+      "artifact": "catalog/tooling/build_catalog.py (AIDL branch); catalog/tooling/parsers.py aidl_all()",
+      "evidence": "'first[\"descriptor\"] if len(declarations)==1 and first[\"declaration_kind\"]==\"interface\" else None' and 'first[\"declaration_kind\"] if len(declarations)==1 else \"multiple\"' are evaluated over the flattened list returned by aidl_all(), which now includes nested declarations with declaration_depth>0.",
+      "issue": "Newly introduced by the R8-01 fix: any file whose single top-level interface contains a nested parcelable/enum/union gets aidl_schemas.descriptor NULL and declaration_kind 'multiple', and parse_status 'declarations-inventoried' instead of the interface status; 1024 such files exist in the selected corpus.",
+      "exact_minimal_correction": "Compute descriptor/kind/status from top-level declarations only: 'top=[d for d in declarations if d.get(\"declaration_depth\",0)==0]' and use len(top)==1. Fixture: 'package a; interface I { parcelable P { int x; } void f(); }' expecting aidl_schemas.descriptor='a.I', declaration_kind='interface'.",
+      "verification_needed": "Fixture in a fresh regression receipt.",
+      "working_status": "candidate-fixed",
+      "remediation": "Depth-zero declarations determine single outer interface file metadata; nested inventory retained; partial child status propagated.",
+      "independently_reassessed": false
+    },
+    {
+      "id": "R9-03",
+      "severity": "low",
+      "artifact": "catalog/tooling/build_catalog.py (AIDL root record)",
+      "evidence": "'raw=d.get(\"declaration_raw\",text).split(\"{\",1)[0].strip()' splits at the first brace anywhere in the declaration text; declaration_raw includes leading annotations and header text, so '@SuppressWarnings(value={\"out-array\"}) interface I {' yields raw_signature '@SuppressWarnings(value=' and 'parcelable P cpp_header \"x{y}.h\";' yields 'parcelable P cpp_header \"x'. test_cpp_header_braces_are_not_a_declaration_body checks parse_status and members only.",
+      "issue": "Root AIDL raw_signature provenance is truncated when annotation arguments or string literals contain '{'; identity is unaffected but record_sha256 and displayed provenance are wrong.",
+      "exact_minimal_correction": "In parsers.aidl() return header_end (the body '{' index found via code_mask(code).find('{',dm.end()), or len(code) when absent) and in build_catalog use declaration_raw[:header_end-span_start] instead of split('{'). Fixture asserting the full header text for both cases above.",
+      "verification_needed": "Fixture; read-only count over the next release of root AIDL raw_signature values ending inside an annotation or string.",
+      "working_status": "candidate-fixed",
+      "remediation": "Raw header uses actual code-masked body delimiter, retaining annotation array/quoted cpp_header braces; malformed body retains unsupported declaration identity.",
+      "independently_reassessed": false
+    },
+    {
+      "id": "R9-04",
+      "severity": "low",
+      "artifact": "design/Android MCP Bridge Design.md (capacity section, UI paging); catalog/README.md; catalog/API-CONTRACT.md; evidence/coverage-manifest-release006.compact.json",
+      "evidence": "Design: 'This is the entire selected corpus, not global coverage'; README: 'A complete selected corpus is not global coverage'; manifest: aosp_paths selected 25563, downloaded 22278, not-retrieved 3285. Design UI: 'default100 entries per page, hard maximum1000'; openapi limit maximum 500 and Page.items maxItems 500. README 'Canonicalizationv2' and 'Source identity scheme3' versus API-CONTRACT 'Identity scheme 2 reserves java:package'. Manifest current_official_sdk.extension_level 24 presented beside platform_api 37.2 without labelling it package metadata.",
+      "issue": "Documentation imprecision: 'selected' names both the 102-project set and a 25563-path set that is only 87 percent retrieved; two different numbering schemes share the word 'scheme'; UI and API maxima differ without stating the UI pages SQLite directly; 37.2 could be misread as extension 24.",
+      "exact_minimal_correction": "Replace 'entire selected corpus' with 'all 39194 downloaded sources of the frozen inventory; 3285 selected paths remain not retrieved'; rename to 'canonicalization scheme 2' and 'source identity scheme 3' consistently; state that the UI pages the local SQLite registry and the admin API maximum is 500; label extension_level as the package's base extension metadata.",
+      "verification_needed": "Text review.",
+      "working_status": "candidate-fixed",
+      "remediation": "Design separates006 historical capacity reference from current data; selected source counts and global gaps explicit; UI localSQLite paging versus API limit specified; identity scheme distinctions and extension metadata clarified.",
+      "independently_reassessed": false
+    },
+    {
+      "id": "R9-05",
+      "severity": "low",
+      "artifact": "catalog/schema.sql; catalog/migrations/002-evidence-and-publication.sql; catalog/tests/test_round3.py, test_round4.py",
+      "evidence": "active_registry has insert/update triggers only (active_must_be_published_*, active_local_collision_*, active_imported_base_*, registry_generation_switch/initial) and no DELETE guard; catalog_view likewise. registry_entries.record_sha256, overlays.base_record_hash, bindings.binding_id and sources.sha256 carry no length check while idempotency_records.request_sha256 and bridge-config binding_definitions.binding_id use CHECK(length=64); fixtures insert 'hash', 'original', 'h'. Only effective_entries and runtime_catalog compute cat1 ETags; suppressed/deleted/conflict tags exist only in contract_reference.Catalog.tag().",
+      "issue": "Deleting the pointer empties the effective view without a generation change or audit row; identity and hash format are enforced only by Python validation; CAS tokens for tombstones and conflicts are not executable in SQL.",
+      "exact_minimal_correction": "Add 'CREATE TRIGGER active_registry_no_delete BEFORE DELETE ON active_registry BEGIN SELECT RAISE(ABORT,\"Publication switches the pointer; it is never removed\"); END;' and the same for catalog_view; add CHECK(length(x)=64) to the four columns and update fixtures to 64-hex values; add a view overlay_etags producing the cat1 tag for every overlay state using the same composition.",
+      "verification_needed": "DDL fixtures; existing suites still pass.",
+      "working_status": "candidate-fixed",
+      "remediation": "Singleton DELETE guards, lowercase64hex hash constraints, executable all-state overlay_etags including changed/missing selected base fixtures; full fresh copy migration and schema validation.",
+      "independently_reassessed": false
+    },
+    {
+      "id": "R9-06",
+      "severity": "low",
+      "artifact": "catalog/tests/test_round8.py; evidence/tests-regression-044.txt",
+      "evidence": "Receipt lines 'ResourceWarning: unclosed database in <sqlite3.Connection ...>' during test_malformed_nested_aidl_keeps_full_source_and_reason and the following versioned-annotation test; test_round8 uses 'with sqlite3.connect(root/\"out/catalog.sqlite\") as db:' which commits but does not close.",
+      "issue": "Fixture hygiene only: leaked connections produce warnings and would hold file locks on platforms with mandatory locking; no catalog defect.",
+      "exact_minimal_correction": "Use 'db=sqlite3.connect(...); self.addCleanup(db.close)' as other suites do.",
+      "verification_needed": "Warning-free receipt.",
+      "working_status": "candidate-fixed",
+      "remediation": "Explicit connection closing;167tests pass with ResourceWarnings treated as errors.",
+      "independently_reassessed": false
+    }
+  ],
+  "new_requirement": {
+    "status": "implemented-design-schema-api-offline-reference; freshHVpending",
+    "specification": "Startup device-resolved bindings AND types, observed version evidence, coherent type graph, separate permissions, atomic activation and refresh. Generic Binder/codecs spec; no Android deployment/device actions.",
+    "files": [
+      "design/Android MCP Bridge Design.md",
+      "catalog/contracts/DeviceResolution.schema.json",
+      "catalog/tooling/device_resolution.py",
+      "catalog/tests/test_device_resolution.py",
+      "catalog/contracts/openapi.json",
+      "catalog/API-CONTRACT.md"
+    ],
+    "production_gap": "Current-target SDK-index records alone are insufficient for older/newer-device inventory resolution; full lifecycle metadata/provenance integration remains required."
+  },
+  "source_handoff": "integration/round009-review-actions.json; on top ofR8v2+arrayboundary patch; no source files written",
+  "score_claim": "No self-score and no98acceptance claim"
+}

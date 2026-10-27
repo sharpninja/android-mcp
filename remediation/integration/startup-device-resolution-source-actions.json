@@ -1,0 +1,31 @@
+{
+  "scope": "Source-owner integration requirements for the explicitly requested startup bindings/types view; current round010 already frozen and discloses this production gap.",
+  "source_files_modified": false,
+  "reference_files": [
+    "catalog/tooling/device_resolution.py",
+    "catalog/contracts/DeviceResolution.schema.json",
+    "catalog/tests/test_device_resolution.py",
+    "catalog/API-CONTRACT.md: Startup device-resolved bindings and types",
+    "design/Android MCP Bridge Design.md: Startup device-resolved bindings, types and generic Binder execution"
+  ],
+  "tests": "167 full suite, including16 offline resolver fixtures; no actual collector/Binder runtime or device actions",
+  "current_production_limitation": "sdk_api_index.parse currently retains non-current declarations only in excluded metadata, while build_catalog consumes records as current exact-index annotation targets. Do not simply insert every historical/future record into the current exact_index_targets lookup.",
+  "required_integration": [
+    "Retain every source-supported historical, current, future and unknown-lifecycle binding AND type as immutable inventory evidence. Separate full inventory from a current-target projection; preserve existing exact current annotation routing.",
+    "Normalize applicability into source-backed rules with evidence IDs. Preserve each class and member lifecycle separately; availability of a member must respect containing type constraints rather than losing a class constraint through merged attribute overwrite.",
+    "Keep platform SDK major/minor separate from extension/module versions. Unsupported lifecycle/extension attributes must remain raw evidence with unknown reason; do not infer a version or broaden an interval.",
+    "Create selected schema/type dependency identities only from proven source relationships. API index lacks field types and class/interface distinctions; retain unknown when no exact same-snapshot source link proves them. Never invent transaction codes, layout or codecs.",
+    "Freeze the producer and regenerate parser caches with exact contract2 fingerprints after changes; do not relabel older cache metadata. Produce matching integrity/schema/FK/export/source-reconciliation receipts and full source-coverage gaps.",
+    "Reference runtime collectors remain fixture inputs in this phase. No device setting, authority change, pairing, Binder transaction or Android deployment is requested."
+  ],
+  "acceptance_fixtures_for_source_owner": [
+    "An API entry removed before37.2 remains inventory-visible and is available on a matching older fixture device, while unavailable at37.2.",
+    "An introduced37.2 type and binding remain unknown when device minor is unobserved and unavailable at37.1.",
+    "An apparently older member inside a newly introduced class cannot become available before its containing type.",
+    "Historical/future records do not enter exact current-version annotation lookup or receive current public-membership claims.",
+    "Unknown extension/module/interface facts preserve unknown rather than disappearing or granting invocation.",
+    "Binding availability propagates unavailable/unknown type dependencies and rejects ambiguous schema variants; atomic epoch/CAS fixture continues passing."
+  ],
+  "independent_review_status": "Round010 is running and includes the requirement, design/API/schema/reference fixtures and production limitation; no98claim.",
+  "recorded_at": "2026-10-27T01:13:51.798032+00:00"
+}

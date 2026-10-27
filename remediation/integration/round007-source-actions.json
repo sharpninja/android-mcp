@@ -1,0 +1,108 @@
+{
+  "created_at": "2026-10-26T22:35:36.645694+00:00",
+  "base_root": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/build-snapshots/release006/catalog",
+  "candidate_root": "/home/sharpninja/github/2026-10-26/task-3/remediation/integration/round007",
+  "patch": "/home/sharpninja/github/2026-10-26/task-3/remediation/integration/round007-source-contract.patch",
+  "patch_sha256": "761d5d42556a67456435c82a5da4ef6ff32cf664bea1cc1d585c5b510073ff6f",
+  "tests": "tests-regression-036.txt:119passed",
+  "status": "candidate fixed, independent next review pending;005 candidate validation still running",
+  "findings": {
+    "R7-01": "Targeted runtime_catalog active-only local branch; negative local-tombstone discovery fixture",
+    "R7-02": "aidl_all inventories every top-level declaration and preserves dotted source names, annotation context and physical lines; one raw-schema row holds per-declaration metadata;18801real files:41multi-declaration and71dotted,18883top-level roots",
+    "R7-03": "Local collision inserts/updates guard active/deleted; CHECKs forbid local-suppressed and imported-deleted states",
+    "R7-04": "History restore/rebase/suppress operation labels match transitions",
+    "R7-06": "cache_fingerprint.current(kind) contract2 binds producer files, helper, Python and parser-library versions; old/missing FP rejects",
+    "R7-07": "Missing version-matching index marks annotation import partial plus issue, never silently parsed",
+    "R7-08": "Unqualified literals unknown for Java andAIDL; no fabricated namespace"
+  },
+  "mandatory_producer_changes": [
+    "Merge only into a new isolated candidate; preserve existing006 run/snapshot/data",
+    "Java cache producer must set parser_sha256=cache_fingerprint.current(\"java-source\"); SDK index cache producer uses current(\"sdk-api-index\")",
+    "Generate cache records again with these exact producers and real dependency versions; never relabel old cache/stats. Identical byte objects may be reused only after recomputation and equality verification with a new immutable producer receipt",
+    "SDK index parse requires an explicit platform target; preserve current version-aware annotation/index/Java linkage",
+    "Record full code/contracts/DDL/cache/input hashes and include new AIDL declaration_count/status distributions in next validation/reconciliation"
+  ],
+  "source_active_files_modified": false,
+  "files": [
+    {
+      "file": "README.md",
+      "base_sha256": "9d8f7f74e570caca6bded6732a5c82770f2821293f30eaa3d9684e1c6ac7e428",
+      "candidate_sha256": "5ac9665fc1e7703e6c121cb63384e405458501502d6437c0e4d7ea34f14d7a37"
+    },
+    {
+      "file": "migrations/001-initial.sql",
+      "base_sha256": "c5d1fe985afda22a7459bd8b444f7877637ee69162047741fe0e18711100df38",
+      "candidate_sha256": "955549f85ffda8b8b2a9e79afd3d2d95a13494c1bb55aa5cd81e87b0d04d38a8"
+    },
+    {
+      "file": "migrations/002-evidence-and-publication.sql",
+      "base_sha256": "b8558f3be40974762cdc5eb4148e5bfc70068d9656701452e8344753e666c501",
+      "candidate_sha256": "3c20c5035dff7453fd6b83f5c414af4a99e1247f28912b21856cfd0c7d136505"
+    },
+    {
+      "file": "schema.sql",
+      "base_sha256": "98294b6b21dde7920f6fae5733dbf91a252ccda9dba99ee6836a274deb8c9d37",
+      "candidate_sha256": "b38c027d9069853a98744e544de180828b99527ef3c5b9d19ced1cd5605f45d2"
+    },
+    {
+      "file": "tests/test_parsers.py",
+      "base_sha256": "e8f39e8325c48733c45e7a981136d7137064f9104f7a1d78461d3137d0210ecb",
+      "candidate_sha256": "d27384a2c3dd8d6eced29756e234a04040a658c1f0ee5257c6b1232431d2747d"
+    },
+    {
+      "file": "tests/test_round5.py",
+      "base_sha256": "4b3a94e333dc62b2e6d186c1ea143bbcbfe3183c6dd9c3ed222aaee158cff648",
+      "candidate_sha256": "1eff078e2e61c0b3ca11b18590da17824ad4ab18df5cb72f633de459e07ca09c"
+    },
+    {
+      "file": "tests/test_round7.py",
+      "base_sha256": null,
+      "candidate_sha256": "bfabf0e6e5d36b325f4b706dba3488fda3e2fc80d7e1858cc999895e723bcac2"
+    },
+    {
+      "file": "tests/test_source_annotation_targets.py",
+      "base_sha256": "b86a2364025ea63495435e10ec976642e89432e6215868b9f72dd3a082a01df5",
+      "candidate_sha256": "3f7618620e38b72f0937b9b48d1224ba5c96247c6b94a57c0bb8c0890ecf8245"
+    },
+    {
+      "file": "tests/test_source_integration.py",
+      "base_sha256": "d40ba30bbefde7e645394ad8706e54d897efc0bc8138e3624dd0aeda6cf91e2f",
+      "candidate_sha256": "2ba39bbd83c4ae3b647b97d064f7b1b4eb3725d4ab0460bec98969302eeca055"
+    },
+    {
+      "file": "tooling/aidl_lex.py",
+      "base_sha256": "3bbf74c8e8356bd53d4f4616f725b2cd410dc20109fdb486ca10a81e53475a44",
+      "candidate_sha256": "e37e0bc9834fe49db7cf7aa0b9975092de326ff3ceb9f679527a602611c78165"
+    },
+    {
+      "file": "tooling/aidl_members.py",
+      "base_sha256": "092bc4ab977e8f421ab05263194cafdecca852bd4d5100adc4fde689ec427345",
+      "candidate_sha256": "eeaff82e11dc09442595c79b4b7746f1c8778d88af641a078f84ce6cf48de918"
+    },
+    {
+      "file": "tooling/build_catalog.py",
+      "base_sha256": "3c53cc263967e99a8a1128682f5b352668be193f12608568d7e280f0c8a1092f",
+      "candidate_sha256": "5e76ff6abfe61cecc8333eee80727612c0224d1f0d42e0e6c8ccb186a8f5ff96"
+    },
+    {
+      "file": "tooling/cache_fingerprint.py",
+      "base_sha256": null,
+      "candidate_sha256": "fceef48aa6acbad07d5ab75e9aefa4e270c33f7ccca8bc1fb8a065144794f98d"
+    },
+    {
+      "file": "tooling/contract_reference.py",
+      "base_sha256": "a2e3e5305c63aac0d7f10e6797ec7a6e63e337db63ed3091c624611b4b9bb405",
+      "candidate_sha256": "3c85a83c1db6fb3a213416ee2776c2996a6f96db10f678d8233ac1fd56ec33d7"
+    },
+    {
+      "file": "tooling/parsers.py",
+      "base_sha256": "22e392dea5babb9aecde09d85f130ed2cfc4d36c49ccdf04822e753220a98975",
+      "candidate_sha256": "4051f4e85b06b0bcce785371898922684a7f441a32138fade769478ee911fccb"
+    },
+    {
+      "file": "tooling/validate_catalog.py",
+      "base_sha256": "fcbe3d899ef9ab475f7204f6449ae78baa4607516ffbfad33ae994618b5b0b68",
+      "candidate_sha256": "59633f3c8db89d68acb637f5c79b6dce694f7606fe67ad8180d57f0b3f8c43da"
+    }
+  ]
+}

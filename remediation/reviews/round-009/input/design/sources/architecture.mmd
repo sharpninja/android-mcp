@@ -1,0 +1,11 @@
+flowchart TD
+    Client[Agent or ADB-forwarded host] --> Server[Persistent MCP service]
+    Server --> Gate[Shared client policy gate]
+    Sources[SDK AIDL and protocol metadata] --> Registry[Full binding registry]
+    Registry --> Gate
+    Owner[Local owner UI] --> Gate
+    Gate --> Binding[Generated or generic binding]
+    Gate --> ADB[Paired ADB screen and tap]
+    Gate --> Runtime[Optional Avalonia runtime]
+    Gate --> Data[SQLite audit and configuration]
+    Data --> Logs[Per-client optional logs]

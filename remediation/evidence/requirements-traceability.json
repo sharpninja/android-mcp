@@ -1,0 +1,141 @@
+{
+  "purpose": "Human requirement-to-evidence map; no acceptance score or claim of deployed runtime behavior.",
+  "runtime_implementation_requested": false,
+  "requirements": [
+    {
+      "requirement": "Reusable app-agnostic Android MCP bridge; consuming agents own business workflows",
+      "specification": "design/Android MCP Bridge Design.md",
+      "production_runtime_evidence": "Not implemented in this deliverable phase"
+    },
+    {
+      "requirement": "ALL available versioned SDK/Binder/AIDL/protocol bindings, generic and low-level invocation; visible unknowns and permission boundaries",
+      "specification": "design/Android MCP Bridge Design.md",
+      "catalog_artifacts": [
+        "catalog/tooling/build_catalog.py",
+        "catalog/tooling/java_source.py",
+        "catalog/tooling/sdk_api_index.py",
+        "catalog/tooling/aidl_members.py"
+      ],
+      "remaining_blockers": [
+        "010predatescurrentcandidate2.1/semantic3/HIDL/oneway/source-scoped layouts; matchednewproductionrequired",
+        "Outside985projects:247relevant732unknown6irrelevant; globalnative/generated/protocolcontentcoverageunresolved",
+        "1268unsupportedrawartifactsand8XMLfailuresdisclosedinrelease010-retained-unsupported-summary.json; bytesretainednotsemanticcoverage",
+        "846unmatchedannotationsand2undefinedpermissionnames persistin010; ownerfallbackpendingproduction"
+      ]
+    },
+    {
+      "requirement": "Avalonia12 management UI; SQLite client configuration; per-client permissions and configurable logging",
+      "specification": [
+        "design/Android MCP Bridge Design.md",
+        "design/Android MCP Bridge Design.md",
+        "design/Android MCP Bridge Design.md"
+      ],
+      "executable_storage": "catalog/bridge-config.sql",
+      "production_runtime_evidence": "Specification/DDL only"
+    },
+    {
+      "requirement": "Persistent MCP independent of UI; optional boot start; truthful running indicator and separate MCP/ADB health under Android limits",
+      "specification": "design/Android MCP Bridge Design.md",
+      "production_runtime_evidence": "Specification only; runtime integration gates retained"
+    },
+    {
+      "requirement": "Same-device paired ADB and remote-host loopback forwarding; on-demand screen.state/input.tap; no scheduler/business choices or phone operations",
+      "specification": [
+        "design/Android MCP Bridge Design.md",
+        "design/Android MCP Bridge Design.md",
+        "design/Android MCP Bridge Design.md"
+      ],
+      "device_operations_performed": false
+    },
+    {
+      "requirement": "Optional SharpNinja.Avalonia.RemoteControl Android Runtime/Protocol; generic ADB does not require target instrumentation",
+      "specification": "design/Android MCP Bridge Design.md",
+      "production_runtime_evidence": "Specification only; target trust and compatibility gates retained"
+    },
+    {
+      "requirement": "Comprehensive Google public binding/permission metadata; schema versions/future compatibility; provenance, immutable imports and local overrides with CRUD CAS",
+      "specification": [
+        "design/Android MCP Bridge Design.md",
+        "design/Android MCP Bridge Design.md",
+        "catalog/API-CONTRACT.md"
+      ],
+      "executable_artifacts": [
+        "catalog/contracts",
+        "catalog/schema.sql",
+        "catalog/tooling/contract_reference.py",
+        "catalog/tooling/migrate_v3.py",
+        "catalog/tooling/validate_catalog.py"
+      ],
+      "remaining_blockers": [
+        "010predatescurrentcandidate2.1/semantic3/HIDL/oneway/source-scoped layouts; matchednewproductionrequired",
+        "Outside985projects:247relevant732unknown6irrelevant; globalnative/generated/protocolcontentcoverageunresolved",
+        "1268unsupportedrawartifactsand8XMLfailuresdisclosedinrelease010-retained-unsupported-summary.json; bytesretainednotsemanticcoverage",
+        "846unmatchedannotationsand2undefinedpermissionnames persistin010; ownerfallbackpendingproduction"
+      ],
+      "historical_validation": "Legacy002copy passes structural validation but has552variant omissions; current candidate read-only005crosscheck passes772733entries with0variant omissions. Historical copy limitations are not counted as omissions in newer releases."
+    },
+    {
+      "requirement": "Declared permissions distinct from OS runtime authority and MCP client grants; canonical binding permission rules across generated/generic/raw paths",
+      "specification": [
+        "design/Android MCP Bridge Design.md",
+        "design/Android MCP Bridge Design.md"
+      ],
+      "executable_reference": "catalog/tooling/policy_reference.py",
+      "production_runtime_evidence": "Reference policy and storage tests, not actual OS authority"
+    },
+    {
+      "requirement": "Pele1.10.0 Mermaid SVGs with retained editable sources and portable assets",
+      "specification": [
+        "design/sources/architecture.mmd",
+        "design/sources/request-sequence.mmd",
+        "design/sources/startup-resolution.mmd",
+        "design/sources/device-binding-sequence.mmd"
+      ],
+      "evidence": "design/validation-summary.json and render-manifest.json; delivered design Library versions6/4/3",
+      "status": "36pages4diagrams29tables XML/relationships/bounds/visualQApass;Pele1.10.0"
+    },
+    {
+      "requirement": "Namespace/package semantic re-sharding remains a proposal",
+      "semantic_resharding_implemented": false,
+      "minimal_identity_fix": "Package/type identity collision corrected with explicit canonicalization version; no automatic grant retargeting"
+    },
+    {
+      "requirement": "Startup version-compatible bindings AND types view; full inventory with reasons; coherent dependency graph; separate permission/policy; atomic activation and capability refresh; generic Binder/codecs architecture",
+      "requirement_ids": [
+        "FR-DEV-01",
+        "FR-DEV-02",
+        "TR-DEV-01",
+        "TR-DEV-02",
+        "TR-DEV-03",
+        "FR-BIND-01"
+      ],
+      "specification": "design/Android MCP Bridge Design.md: Startup device-resolved bindings, types and generic Binder execution",
+      "executable_reference": [
+        "catalog/tooling/device_resolution.py",
+        "catalog/tooling/effective_device_inventory.py",
+        "catalog/tooling/device_view_storage.py",
+        "catalog/contracts/DeviceResolution.schema.json",
+        "catalog/contracts/DeviceView.schema.json"
+      ],
+      "api_contract": [
+        "catalog/contracts/openapi.json",
+        "catalog/API-CONTRACT.md"
+      ],
+      "runtime_implemented": false,
+      "production_gap": "010contains full93681lifecycle rows and802936inventoryrows but predatescandidate2.1/semantic3/HIDL/module-interfaceproducers; actualdeviceimplementation/performanceunclaimed"
+    }
+  ],
+  "updated_at": "2026-10-27T05:13:37.360938+00:00",
+  "production_baseline": "Completed010:802936entries44397sources1500definitionrecords1721permissionnames;846unmatchedannotations,2undefinedpermissionnames;1268unsupportedrawartifacts,8XMLfailures;partialglobalcoverage",
+  "legacy_disposition": {
+    "report": "legacy-populated-round012-validation.json",
+    "entries": 135508,
+    "structural_checks_pass": true,
+    "variant_omissions": 552,
+    "classification": "Known inherited semantic loss in unrebuilt release002, not accepted as current-candidate completion",
+    "rule": "Count binding IDs with >1 distinct immutable declaration shape over(kind,arguments,return_type) whose active legacy registry Entry lacks extensions.declaration_variants",
+    "raw_declarations_preserved": true,
+    "corrected_rebuild_gate": "run_database raises if rebuilt_with_corrected_extractor=true and omissions>0",
+    "semantic_rebuild_claim": false
+  }
+}

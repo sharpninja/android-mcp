@@ -1,0 +1,25 @@
+--- catalog/tooling/build_catalog.py
++++ catalog/tooling/build_catalog.py
+@@ -4,11 +4,12 @@
+ """
+ import pathlib,json,sqlite3,hashlib,datetime,sys,xml.etree.ElementTree as ET,zipfile,collections,os,re,gzip
+ from parsers import signature,aidl,permission,unknown,sha,split_top,typ
++from aidl_members import enrich as enrich_aidl
+ P=pathlib.Path(__file__).resolve().parents[1]
+ def js(x):return json.dumps(x,sort_keys=True,separators=(',',':'),ensure_ascii=False)
+ def hb(b):return hashlib.sha256(b).hexdigest()
+ def processing_fingerprint():
+- return sha(js({name:hb((P/name).read_bytes()) for name in ('tooling/build_catalog.py','tooling/parsers.py','tooling/foundation_extract.py','tooling/java_source.py','tooling/sdk_api_index.py','tooling/jvm_source_link.py','tooling/java_context.py','tooling/annotation_link.py','contracts/Entry.schema.json','contracts/PermissionExpression.schema.json')}))
++ return sha(js({name:hb((P/name).read_bytes()) for name in ('tooling/build_catalog.py','tooling/parsers.py','tooling/aidl_members.py','tooling/foundation_extract.py','tooling/java_source.py','tooling/sdk_api_index.py','tooling/jvm_source_link.py','tooling/java_context.py','tooling/annotation_link.py','contracts/Entry.schema.json','contracts/PermissionExpression.schema.json')}))
+ def ref(text):return dict(text=text,status='unknown',codec_status='unknown',reason='Source type retained; runtime resolver/codec not verified')
+ def cached_records(s,root):
+  cache=s.get('metadata_cache')
+@@ -130,7 +131,7 @@
+    except ET.ParseError as e:issue(s,None,'Manifest XML unresolved: '+str(e),path.read_text(errors='replace'));report['status']='unsupported'
+   elif kind=='aidl':
+    text=path.read_text()
+-   try:d=aidl(text)
++   try:d=enrich_aidl(text,aidl(text))
+    except ValueError as e:
+     d=dict(package='',descriptor=None,declaration_kind=None,imports=[],annotations=[],members=[],parse_status='unsupported',reason='AIDL annotation/syntax unresolved: '+str(e))
+     add(dict(kind='unsupported',canonical='unparsed-source:'+s['repository']+':'+s['path']+':'+s['sha256'],owner=None,package='',name=s['path'].rsplit('/',1)[-1],return_type=None,parameters=[],annotations=[],all_annotations=[],raw=text,line=1,extras=dict(parse_error=d['reason'],source_bytes_retained=True)),s,'aidl');report['declarations']+=1;report['unsupported']+=1

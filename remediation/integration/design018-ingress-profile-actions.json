@@ -1,0 +1,10 @@
+{
+  "at": "2026-10-27T08:37:11.361079+00:00",
+  "finding": "CS2-01",
+  "design_correction": "Host ADB forwarding is ingress-only; phone has no route to host5037 and does not select external_adb for execution",
+  "required_contract_gate": "INGRESS_PROFILE_NOT_EXECUTABLE for any execution/raw grant using legacy external_adb profile",
+  "logical_new_collection": "host_forward_profiles: exact advertised authority, listener identity, serial, operator-owned mapping, revision and endpoint epoch",
+  "legacy_arc_labels": "avalonia_runtime/avalonia mean retained ARC protocol, including Kotlin targets; rename only by versioned migration",
+  "scope": "Design/reference contract follow-up, not implementation/deployment or source-generation change",
+  "source_files_modified": false
+}

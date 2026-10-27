@@ -1,0 +1,348 @@
+I'll audit the full `code-diagrams.md` slice (bytes 0–11076, the whole file) against requirements 2–10 and return the JSON workpaper.
+
+```json
+{
+  "stage": "core-section-evidence-check-05-of-07 (design-only hostile validation)",
+  "coverage": {
+    "file": "design-c4/architecture/code-diagrams.md",
+    "start_byte": 0,
+    "end_byte": 11076,
+    "total_bytes": 11076,
+    "whole_file": true,
+    "sha256_verified": false,
+    "blocks_inspected": [
+      "server-core-classes",
+      "arc-controller-classes",
+      "server-execution-classes",
+      "arc-ui-classes",
+      "arc-target-classes"
+    ],
+    "boundary_crossing_definitions": "none; the range covers the entire file, so no definition is cut",
+    "requirements_applied": "2, 3, 4, 5, 6, 7, 8, 9, 10 as they bear on class ownership, multiplicity, responsibility, protocol literals, failure/lifecycle/concurrency mechanisms; 1, 11, 12 only where the slice makes claims about them"
+  },
+  "findings": [
+    {
+      "id": "CS05-01",
+      "severity": "high",
+      "area": "owner authorization boundary (req 2, 5)",
+      "artifact": "code-diagrams.md blocks server-core-classes and arc-ui-classes",
+      "evidence": "`+submit(command, ownerCapability, etag)` (OwnerCommandFacade, block 1); `+requireFreshOwnerCapability(command)` (OwnerCommandFacade, block 4); `+submitOwnerCommand(expectedRevision)` (ComposeManagementViewModel); notes `UI reference is not owner authorization.` and `ARC principal cannot mint local owner approval.`",
+      "issue": "The facade consumes an owner capability, but no class, interface, note or dependency in the file issues, verifies, scopes or expires one. The ViewModel's submit call carries no capability, so the only modeled producer path is unspecified. Both non-bypass notes assert a property whose mechanism is absent from the class model that is supposed to detail it.",
+      "exact_minimal_correction": "Add `OwnerCapabilityIssuer` composed by BridgeService with `+issueAfterProtectedPrompt(command): OwnerCapability` (single-use, deadline-bound, command-bound) and `+verifyAndConsume(capability, command)`; add `OwnerCommandFacade ..> OwnerCapabilityIssuer`; state that ComposeManagementViewModel has no dependency on the issuer and that `submitOwnerCommand` passes a draft plus expectedRevision while the facade triggers the protected prompt.",
+      "verification_needed": "Check whether a component view, dynamic view or protected-owner storyboard defines the issuer and the protected prompt. If one does, downgrade to low as a code-view omission; if none does, this is a design gap."
+    },
+    {
+      "id": "CS05-02",
+      "severity": "medium",
+      "area": "ownership and lifecycle (req 2, 10)",
+      "artifact": "code-diagrams.md all blocks",
+      "evidence": "`BridgeService \"1\" *-- \"1\" McpServer`, `BridgeService \"1\" *-- \"1\" DeviceViewResolver`, `BridgeService \"1\" *-- \"1\" SqliteCatalogRepository`; legend `Composition diamonds denote owned lifetime`; no composition edge targets AdmissionGate, FunctionalGroupIndex, AuditLogger, OwnerCommandFacade, InvocationPlanner, CallbackBroker, SqliteEventJournal, BinderBackend, AdbPhoneBackend, ArcTcpTransport, ArcRuntime or ArcSessionManager in any block.",
+      "issue": "By the file's own legend these classes have no owned lifetime, so `+stopWithinDeadline()` has no modeled scope over the ARC listener, callback broker, journal or backends. Requirement 2 says the service owns transport, policy, SQLite, resolver, invocation, callbacks, groups and lifecycle.",
+      "exact_minimal_correction": "Add `BridgeService \"1\" *-- \"1\"` composition edges (or one composed `ServiceGraph` root) for each listed class, plus a note giving start and stop order relative to `startDesiredState()` and `stopWithinDeadline()`.",
+      "verification_needed": "Check whether the container or component model names a composition root the code view should mirror."
+    },
+    {
+      "id": "CS05-03",
+      "severity": "medium",
+      "area": "MCP request routing (req 9, 10)",
+      "artifact": "code-diagrams.md blocks server-core-classes and server-execution-classes",
+      "evidence": "McpServer dependencies are only `McpServer ..> ClientAuthenticator`, `McpServer ..> AdmissionGate`, `McpServer ..> FunctionalGroupIndex`; block 3 has no inbound edge to InvocationPlanner or McpCallbackResourceAdapter; `+readResource(uri, cursor, limits)` on McpServer versus `+readBoundedPage(principal, cursor)` on McpCallbackResourceAdapter.",
+      "issue": "tools/call and resources/read and resources/subscribe have no class-level path from the transport to the invoke and callbacks components, and the two read signatures differ (limits versus principal) with no stated mapping.",
+      "exact_minimal_correction": "Add `McpServer ..> InvocationPlanner : tools/call` and `McpServer ..> McpCallbackResourceAdapter : resources/read, resources/subscribe` as cross-block references; align both read signatures to `(principal, uri, cursor, limits)` or state the derivation.",
+      "verification_needed": "Confirm the component and dynamic views show the same two paths."
+    },
+    {
+      "id": "CS05-04",
+      "severity": "medium",
+      "area": "internal consistency and component mapping (req 10)",
+      "artifact": "code-diagrams.md blocks 1, 2, 4, 5",
+      "evidence": "AdmissionGate block 1 `{ +admit(plan, pins): Admission +recheck(admission): Decision }` vs block 2 `{ +admitClientTargetOperation(plan) }`; OwnerCommandFacade block 1 `{ +submit(command, ownerCapability, etag) +observeImmutableStatus() }` vs block 4 `{ +requireFreshOwnerCapability(command) }`; ComposeTargetAdapter block 4 `{ +captureUnprotectedSelectedRoot() +mapDipAndFrameScale() +releasePressedInputOnClose() }` vs block 5 `{ +snapshotSelectedRoot() +invokeApprovedAction() +observeRootGeneration() }`; TargetAdapter block 4 declares `snapshot(rootGeneration)`, `watchFramesWithinQuota()`, `invokeApprovedAction()`, `sendInput(rootGeneration, events)` while block 5 shows `interface TargetAdapter` with no members; ArcFrameCodec and ArcProtocolModel are memberless in block 2 and have members in block 4; `+releasePressedInputOnClose()` (ComposeTargetAdapter) and `+releasePressedStateOnClose()` (ArcInputDispatcher) both exist; header `Each block identifies its scoped C4 component.`",
+      "issue": "The same class name carries different public surfaces in different blocks, one responsibility is assigned to two classes, and a class appearing in two blocks has no single owning component for the image-view mapping required by requirement 10.",
+      "exact_minimal_correction": "For each shared class pick one defining block holding the complete surface; in other blocks render it as `class X <<from bridge.app.Y>>` with no members; delete `releasePressedInputOnClose()` from ComposeTargetAdapter and keep it on ArcInputDispatcher.",
+      "verification_needed": "None within the slice."
+    },
+    {
+      "id": "CS05-05",
+      "severity": "medium",
+      "area": "ARC target wiring (req 4, 10)",
+      "artifact": "code-diagrams.md blocks arc-ui-classes and arc-target-classes",
+      "evidence": "Block 5 has no edge into ArcFrameStreamService or ArcLogStreamService; their only edges are `ArcFrameStreamService ..> ArcFrameCapture`, `ArcFrameStreamService ..> ArcAuthorizationGate`, `ArcLogStreamService ..> ArcAuthorizationGate`. ArcRuntime is absent from block 5 although its heading reads `target/runtime adapter detail`. Block 4: `ArcRuntime ..> TargetAdapter`, `+watchBoundedEvents(plan)`, `+watchFramesWithinQuota()`.",
+      "issue": "`watchFramesWithinQuota()` and log watching have no realization path: nothing calls either stream service and ComposeTargetAdapter depends on neither.",
+      "exact_minimal_correction": "Add `ComposeTargetAdapter ..> ArcFrameStreamService : watchFramesWithinQuota` and `ArcRuntime ..> ArcLogStreamService : watchBoundedEvents(logs)` (or add `+watchLogs(plan)` to TargetAdapter), and include `class ArcRuntime` in block 5.",
+      "verification_needed": "None within the slice."
+    },
+    {
+      "id": "CS05-06",
+      "severity": "medium",
+      "area": "ARC authorization coverage (req 4, 5)",
+      "artifact": "code-diagrams.md block arc-target-classes",
+      "evidence": "`ArcInputDispatcher ..> ArcAuthorizationGate`, `ArcFrameStreamService ..> ArcAuthorizationGate`, `ArcLogStreamService ..> ArcAuthorizationGate`; `class ArcPropertyMutationService { +applyAllowlistedTypedProperty() }` has only `ComposeTargetAdapter ..> ArcPropertyMutationService` and `ArcPropertyMutationService ..> UiDispatcher`.",
+      "issue": "Property mutation is the only target write path not gated by ArcAuthorizationGate, and the source of its allowlist is unnamed.",
+      "exact_minimal_correction": "Add `ArcPropertyMutationService ..> ArcAuthorizationGate` and a note `allowlist is policy data from the catalog, not a code constant`.",
+      "verification_needed": "None within the slice."
+    },
+    {
+      "id": "CS05-07",
+      "severity": "medium",
+      "area": "canonical policy convergence (req 5, 7)",
+      "artifact": "code-diagrams.md blocks arc-ui-classes and arc-target-classes",
+      "evidence": "Block 4 `class ArcAuthorizationGate { +admitTargetOperation(principal, pins) }` and block 5 `class ArcAuthorizationGate` have no outgoing dependency; by contrast `AdmissionGate ..> CatalogRepository`, `AdmissionGate ..> DeviceViewResolver`, `AdmissionGate ..> AuditLogger` and, on the controller side, `ArcSessionManager ..> AdmissionGate`.",
+      "issue": "The ARC target path decides authorization from an unspecified source and is not shown converging on the canonical policy, nor logging admissions.",
+      "exact_minimal_correction": "Add `ArcAuthorizationGate ..> AdmissionGate : canonical policy` and `ArcAuthorizationGate ..> AuditLogger`, or have both gates realize one `PolicyDecisionPoint` interface.",
+      "verification_needed": "Check the component view for a single policy element both gates map to."
+    },
+    {
+      "id": "CS05-08",
+      "severity": "medium",
+      "area": "epoch, invalidation and revocation propagation (req 6, 7, 8)",
+      "artifact": "code-diagrams.md blocks 1, 3, 4",
+      "evidence": "`+invalidateEpoch(epoch)` (McpSessionRegistry); `+pinConnectionPrincipalAndEpoch()` and `+revokeAndCloseStreams()` (ArcSessionRegistry); `+observeCapabilityEpoch()` (BackendAdapter); `+streamEpoch: String` (Subscription); `+activateCAS(expectedView, stagedView)` (DeviceViewResolver). No edge from OwnerCommandFacade, AdmissionGate, DeviceViewResolver or CatalogRepository to McpSessionRegistry, ArcSessionRegistry, CallbackBroker or FunctionalGroupIndex; nothing in block 1 depends on BackendAdapter, so `observeCapabilityEpoch()` is unconsumed.",
+      "issue": "Cache invalidation on device, backend or catalog change and revocation propagation have no modeled trigger path. Every epoch consumer exists but nothing produces or fans out epochs.",
+      "exact_minimal_correction": "Add `EpochSource` composed by BridgeService with `+publish(epochKind, value)`; add `DeviceViewResolver ..> BackendAdapter : observeCapabilityEpoch` and dependencies from McpSessionRegistry, ArcSessionRegistry, CallbackBroker and FunctionalGroupIndex on EpochSource; name the caller of `invalidateEpoch` and `revokeAndCloseStreams` in a note.",
+      "verification_needed": "Check dynamic views for an invalidation sequence the code view should mirror."
+    },
+    {
+      "id": "CS05-09",
+      "severity": "medium",
+      "area": "client grants, credentials and logging persistence (req 2, 5, 7)",
+      "artifact": "code-diagrams.md blocks 1, 3, 4",
+      "evidence": "`interface ClientAuthenticator { +authenticate(credential): Principal }` and `interface ArcAuthenticator { +authenticateEnvelopeBearer(): Principal }` have no realizing class and no dependency; `AdmissionGate.admit(plan, pins)` depends only on CatalogRepository, DeviceViewResolver and AuditLogger; `class AuditLogger { +recordAdmission(principal, pins) +recordBoundedOutcome(result, logPolicy) }` has no outgoing dependency and only `AdmissionGate ..> AuditLogger` points at it; InvocationPlanner, CallbackBroker and ArcRequestHandler do not depend on AuditLogger.",
+      "issue": "Requirement 2 places client mapping, permissions and logging configuration in SQLite and requirement 5 distinguishes the MCP per-client grant from declared metadata. No class stores grants or credentials, and invocation, callback and ARC outcomes have no logging path.",
+      "exact_minimal_correction": "Add `interface ClientGrantRepository` with `SqliteClientGrantRepository ..|> ClientGrantRepository`; add `ClientAuthenticator ..> ClientGrantRepository`, `ArcAuthenticator ..> ClientGrantRepository`, `AdmissionGate ..> ClientGrantRepository : per-client grant`; add `AuditLogger ..> SqliteAuditStore` and `InvocationPlanner ..> AuditLogger`, `CallbackBroker ..> AuditLogger`, `ArcRequestHandler ..> AuditLogger`.",
+      "verification_needed": "Check whether the component model shows a grants or logging store the code view omitted."
+    },
+    {
+      "id": "CS05-10",
+      "severity": "medium",
+      "area": "invocation backends (req 1 mechanism, 6)",
+      "artifact": "code-diagrams.md block server-execution-classes",
+      "evidence": "Only `BinderBackend ..|> BackendAdapter` and `AdbPhoneBackend ..|> BackendAdapter`; `+transact(verifiedWirePlan)`; `+screenState(scope)`, `+tap(scope, coordinates)`.",
+      "issue": "The inventory mechanism covers SDK, Binder, AIDL and protocol surfaces with generic invocation, and startup activates compatible bindings. No backend invokes SDK in-process bindings or AIDL generated stubs, so those inventory kinds have no execution path in the invoke component.",
+      "exact_minimal_correction": "Add `SdkBindingBackend ..|> BackendAdapter` with `+invokeBinding(verifiedPlan)` and a note stating that AIDL stubs route through BinderBackend plus CodecRegistry.",
+      "verification_needed": "Check whether the component view assigns SDK invocation to another element."
+    },
+    {
+      "id": "CS05-11",
+      "severity": "medium",
+      "area": "negotiated direct stream (req 7, 9)",
+      "artifact": "code-diagrams.md block server-execution-classes",
+      "evidence": "The delivery surface is only `McpCallbackResourceAdapter { +subscribeOwnedUri(session, uri) +notifyUriOnly(uri) +readBoundedPage(principal, cursor) }`; no class mentions negotiation or a direct payload transport.",
+      "issue": "An explicitly negotiated, authenticated optional direct stream with fallback is required; the callbacks code view has no class for negotiation, emission, auth or fallback.",
+      "exact_minimal_correction": "Add `DirectStreamNegotiator { +negotiate(session, capabilities): DirectStreamGrant | Fallback }` and `DirectEventEmitter { +emitBounded(event) }` with `CallbackBroker ..> DirectEventEmitter` and `DirectStreamNegotiator ..> ClientAuthenticator`; or add a note stating the direct stream is deferred and the journal baseline is the only path.",
+      "verification_needed": "Check whether the callbacks design doc defines the direct stream; absence there is a design gap, presence makes this a code-view omission."
+    },
+    {
+      "id": "CS05-12",
+      "severity": "medium",
+      "area": "ARC cancel semantics preservation (req 4)",
+      "artifact": "code-diagrams.md blocks arc-ui-classes and arc-controller-classes",
+      "evidence": "`+closeSocketOnCancel()` (ArcTcpTransport); note `Cancel enum8 is unsupported; the compatible client closes its socket.`; block 2 `+cancelByClosingSocket()`.",
+      "issue": "On the target side the method name says the target closes the socket on cancel, yet Cancel(8) arrives as an unsupported command. Whether the target answers with an error envelope, ignores it or closes is unstated, and peer-close detection that cancels an in-flight watch is not a separate responsibility. Preservation of pinned upstream behavior cannot be judged from the slice.",
+      "exact_minimal_correction": "Replace with `+cancelInFlightOnPeerClose()` and `+respondUnsupportedCommand(request): BridgeResponse`, with a note citing the pinned upstream handling of command 8.",
+      "verification_needed": "Verify upstream behavior for a Cancel request at commit 19792a52a13a3df342f90bab6b246b547e673919."
+    },
+    {
+      "id": "CS05-13",
+      "severity": "medium",
+      "area": "ARC session multiplicity (req 4, 10)",
+      "artifact": "code-diagrams.md block arc-ui-classes",
+      "evidence": "`ArcTcpTransport \"1\" *-- \"0..*\" ArcSessionRegistry`; `class ArcSessionRegistry { +pinConnectionPrincipalAndEpoch() +revokeAndCloseStreams() }`; no edge from ArcRequestHandler or ArcAuthenticator to ArcSessionRegistry.",
+      "issue": "A transport owning zero-to-many registries contradicts registry semantics; per-connection pins are methods on the registry rather than on a session object; nothing calls `pinConnectionPrincipalAndEpoch()`.",
+      "exact_minimal_correction": "Change to `ArcTcpTransport \"1\" *-- \"1\" ArcSessionRegistry` and `ArcSessionRegistry \"1\" *-- \"0..*\" ArcConnectionSession { principal, policyEpoch, socket }`; add `ArcRequestHandler ..> ArcSessionRegistry : pin after authenticate`.",
+      "verification_needed": "None within the slice."
+    },
+    {
+      "id": "CS05-14",
+      "severity": "medium",
+      "area": "controller UI to service boundary (req 2, 4)",
+      "artifact": "code-diagrams.md block arc-controller-classes",
+      "evidence": "`ComposeRemoteControlViewModel ..> ArcSessionManager : local service facade`; the only facade defined is `OwnerCommandFacade { +submit(command, ownerCapability, etag) +observeImmutableStatus() }` (block 1), which does not appear in block 2 and exposes no session open, probe, input or disconnect operation; `+openOwnedSession(principal, targetPins)`.",
+      "issue": "The controller UI reaches a service-owned session manager either through a facade that has no such surface or directly despite the label. The boundary mechanism and the principal supplied for the local operator are unspecified.",
+      "exact_minimal_correction": "Either add `+arcController(): ArcControllerPort` to OwnerCommandFacade exposing the four operations and change the edge to `ComposeRemoteControlViewModel ..> OwnerCommandFacade : local only`, or relabel the edge `in-process direct` and state which principal `openOwnedSession` receives for the local operator.",
+      "verification_needed": "None within the slice."
+    },
+    {
+      "id": "CS05-15",
+      "severity": "medium",
+      "area": "callback death handling and correlation (req 7)",
+      "artifact": "code-diagrams.md block server-execution-classes",
+      "evidence": "`+receive(sender, method, payload)` and `+recoverOrphanedRegistrations()` (CallbackBroker); `+registrationAndCleanupPins` (Subscription); note `Durable handle/journal is not a durable OS registration.`; no class represents the OS-facing listener or Binder stub object passed at registration, no death-recipient member, and no stated sender-to-Subscription correlation.",
+      "issue": "Death and revocation are named lifecycle cases and exact pairing and token positions are required. The class model has no mechanism for Binder death of the callee holding the callback, nor for correlating an inbound callback to its Subscription.",
+      "exact_minimal_correction": "Add `CallbackStub { +token: String } ..> CallbackBroker : receive(token, method, payload)` and `+linkToDeath(stub)` plus `+onCalleeDied(token)` on CallbackBroker, with Subscription.state gaining a `CalleeDead` value.",
+      "verification_needed": "Check the callbacks design doc for the stub and death mechanism."
+    },
+    {
+      "id": "CS05-16",
+      "severity": "medium",
+      "area": "UI, boot and status classes (req 2, 10)",
+      "artifact": "code-diagrams.md blocks arc-controller-classes and arc-ui-classes",
+      "evidence": "UI classes in the file are only `ComposeManagementViewModel { +observeStatusAndDrafts() +submitOwnerCommand(expectedRevision) }` and `ComposeRemoteControlViewModel`; no class for foreground notification, boot receiver, health model or screen and navigation state.",
+      "issue": "Requirement 10 asks for detailed ARC/UI classes and requirement 2 for a running-status AppBar and notification, optional boot with Android limits, and separate MCP, ADB and device-view health. The ui component has no code view beyond two view models.",
+      "exact_minimal_correction": "Add a `ui-classes` block with `BootCompletedReceiver`, `ForegroundStatusNotifier` composed by BridgeService, `HealthSnapshot { mcp, adb, deviceView }` returned by `observeImmutableStatus()`, and one state holder per screen family named in requirement 12.",
+      "verification_needed": "Check whether another code-diagram artifact covers bridge.app.ui; if so this file should reference it."
+    },
+    {
+      "id": "CS05-17",
+      "severity": "low",
+      "area": "ARC frame bound literal (req 4)",
+      "artifact": "code-diagrams.md block arc-ui-classes",
+      "evidence": "`+readExactSignedBigEndianLength()`, `+decodeBoundedFrame(): BridgeRequest`; the literal 8388608 does not occur in the file although block 4 pins other literals: `+protocolVersion = \"1.0\"`, `+transport = \"arc-protobuf-v1\"`.",
+      "issue": "The exact frame bound and the behavior for a length of zero, negative or above the bound are not stated where the codec is defined.",
+      "exact_minimal_correction": "Add `+maxFrameBytes = 8388608` to ArcFrameCodec and a note `length <= 0 or > maxFrameBytes: close socket, no response` adjusted to verified upstream behavior.",
+      "verification_needed": "Confirm upstream handling of invalid length at the pinned commit."
+    },
+    {
+      "id": "CS05-18",
+      "severity": "low",
+      "area": "ARC terminal flag and rejection responses (req 4)",
+      "artifact": "code-diagrams.md blocks arc-ui-classes, arc-target-classes, arc-controller-classes",
+      "evidence": "`+handleWatch(request): ResponseFlow`, `+closeSlowConsumerWithTerminal()`, `+validateVersionAndMethod(request)`, `+watchTypedResponses(method)`; no member emits the terminal end flag on normal completion or error and no member produces the rejection response for version, method or auth failure.",
+      "issue": "The terminal end flag and failure responses are unassigned responsibilities on both target and controller.",
+      "exact_minimal_correction": "Add `+emitTerminal(reason)` to ArcRequestHandler, `+rejectWithStatus(reason): BridgeResponse` to ArcCompatibilityProfile, and `+completeOnTerminalFlag()` to ArcClientAdapter.",
+      "verification_needed": "None within the slice."
+    },
+    {
+      "id": "CS05-19",
+      "severity": "low",
+      "area": "notation legend (req 10)",
+      "artifact": "code-diagrams.md header",
+      "evidence": "Legend: `Composition diamonds denote owned lifetime; dashed arrows denote dependency, and quoted labels denote multiplicity.`; solid edges `ArcClientAdapter --> CompatibleExternalRuntime : unchanged ARC TCP bytes`, `ArcClientAdapter --> RemoteFrameState : generation-pinned observation`, `CompatibleArcClient --> ArcTcpTransport : retained ARC wire`; realization edges `..|>` in blocks 1, 3, 4 and 5.",
+      "issue": "Two edge kinds used in the diagrams are undefined by the legend.",
+      "exact_minimal_correction": "Extend the legend: `solid arrows denote runtime communication or association; dashed hollow-triangle arrows denote interface realization.`",
+      "verification_needed": "None."
+    },
+    {
+      "id": "CS05-20",
+      "severity": "low",
+      "area": "component identifiers for image views (req 10)",
+      "artifact": "code-diagrams.md block headings",
+      "evidence": "Head
+
+ings `bridge.app.transport and server ownership`, `bridge.app.invoke and bridge.app.callbacks`, `bridge.app.arc, bridge.app.ui and ownerCommands`; `ownerCommands` lacks the `bridge.app.` prefix and `server ownership` is not an identifier.",
+      "issue": "Image views must match C4 components; three blocks span two or three components and one name is inconsistent, so the attachment element per image view is ambiguous.",
+      "exact_minimal_correction": "Rename to `bridge.app.ownerCommands`, drop `and server ownership`, and add one line per block: `image view attached to: <single element identifier>`.",
+      "verification_needed": "Confirm the identifiers exist in workspace.dsl."
+    },
+    {
+      "id": "CS05-21",
+      "severity": "low",
+      "area": "activation and CAS precondition consistency (req 5, 6)",
+      "artifact": "code-diagrams.md block server-core-classes",
+      "evidence": "`+activateSealedView(pins)` (CatalogRepository) and `+activateCAS(expectedView, stagedView)` (DeviceViewResolver); CAS preconditions named `expectedRevision` (commitOverride, submitOwnerCommand), `etag` (setActiveCAS, submit) and `expectedView` (activateCAS).",
+      "issue": "Two activation entry points with no stated relation; three names for the CAS precondition with no stated derivation.",
+      "exact_minimal_correction": "Add note `activateCAS is the only public activation; it calls activateSealedView inside the same transaction`; define `etag = strong hash of revision` once in block 1.",
+      "verification_needed": "None."
+    },
+    {
+      "id": "CS05-22",
+      "severity": "low",
+      "area": "event and registration types (req 7)",
+      "artifact": "code-diagrams.md block server-execution-classes",
+      "evidence": "`+appendOrderedWithinQuota(event)`, `+readOwnedPage(cursor, limits)`, `+state: RegistrationState`; no class or enum defines the event or the registration states.",
+      "issue": "Event identity, correlation, sequence, time, payload and errors are enumerated requirements; the journal's element type and the subscription state machine are absent from the code view.",
+      "exact_minimal_correction": "Add `class JournalEvent { +subscriptionId +sequence: Long +correlationId +time +payload +error }` and `enum RegistrationState { Pending, Registered, Cancelling, Cleaned, Orphaned, CalleeDead }`.",
+      "verification_needed": "Align state names with the callbacks design doc."
+    },
+    {
+      "id": "CS05-23",
+      "severity": "low",
+      "area": "controller bearer and profile secrets (req 4)",
+      "artifact": "code-diagrams.md block arc-controller-classes",
+      "evidence": "`+selectTarget(profileId)`, `+openOwnedSession(principal, targetPins)`; no class owns target profiles or the bearer secret the controller must place in the envelope.",
+      "issue": "The controller's bearer source and its protection are unspecified although protected secret surfaces are required.",
+      "exact_minimal_correction": "Add `ArcTargetProfileStore { +resolveBearer(profileId): Secret }` composed by BridgeService with `ArcSessionManager ..> ArcTargetProfileStore`.",
+      "verification_needed": "Check the settings or ARC storyboard for profile storage."
+    },
+    {
+      "id": "CS05-24",
+      "severity": "low",
+      "area": "frame state publication across threads (req 4 concurrency)",
+      "artifact": "code-diagrams.md block arc-controller-classes",
+      "evidence": "`ArcClientAdapter --> RemoteFrameState : generation-pinned observation`, `ComposeRemoteControlViewModel ..> RemoteFrameState`, `ArcSessionManager \"1\" *-- \"0..*\" ArcClientAdapter`; fields `+targetGeneration +sequence: ULong +pixelAndLogicalBounds +renderScale`; no publication mechanism stated, unlike `+observeReadiness(): StateFlow`.",
+      "issue": "An object shared between socket readers and the UI has no stated thread-safe publication, and the number of RemoteFrameState instances per session with many adapters is unstated.",
+      "exact_minimal_correction": "Declare RemoteFrameState immutable, add `+frames: StateFlow<RemoteFrameState>` to ArcClientAdapter, and add `ArcSessionManager \"1\" *-- \"1\" RemoteFrameState`.",
+      "verification_needed": "None."
+    },
+    {
+      "id": "CS05-25",
+      "severity": "low",
+      "area": "ADB pairing and health (req 2, 3)",
+      "artifact": "code-diagrams.md block server-execution-classes",
+      "evidence": "`class AdbPhoneBackend { +screenState(scope) +tap(scope, coordinates) }`; no pairing, connection or health member; `+observeImmutableStatus()` has no ADB health type.",
+      "issue": "Same-device paired ADB and separate ADB health have no class responsibility.",
+      "exact_minimal_correction": "Add `AdbConnectionManager { +pairingState() +connectLoopback() +health(): AdbHealth }` composed by BridgeService with `AdbPhoneBackend ..> AdbConnectionManager`.",
+      "verification_needed": "Check settings and backends artifacts."
+    },
+    {
+      "id": "CS05-26",
+      "severity": "low",
+      "area": "codec unsupported reasons (req 6)",
+      "artifact": "code-diagrams.md block server-execution-classes",
+      "evidence": "`+selectExact(schemaHash, wireProof)` has no return type; the only modeled unsupported outcome is the LocalReplyPolicy note `Unknown valid deadline/default means unsupported.`",
+      "issue": "Explicit unsupported reasons are required for Binder codec acquisition and are not surfaced.",
+      "exact_minimal_correction": "Change to `+selectExact(schemaHash, wireProof): CodecSelection` with note `CodecSelection = Exact(codec) | Unsupported(reason)`.",
+      "verification_needed": "None."
+    },
+    {
+      "id": "CS05-27",
+      "severity": "low",
+      "area": "response validation responsibility (req 4)",
+      "artifact": "code-diagrams.md blocks arc-ui-classes and arc-controller-classes",
+      "evidence": "`+validateResponseIdVersionStatus()` on ArcCompatibilityProfile reached only via `ArcRequestHandler ..> ArcCompatibilityProfile` (target side); `+validateIdVersionStatusAndCommandResult()` on ArcClientAdapter (controller side).",
+      "issue": "Response validation is a controller concern but is also assigned to the target's request path with no stated purpose.",
+      "exact_minimal_correction": "Either move `validateResponseIdVersionStatus()` to ArcProtocolModel and add `ArcClientAdapter ..> ArcCompatibilityProfile`, or rename it `selfCheckOutboundResponse()`.",
+      "verification_needed": "None."
+    }
+  ],
+  "verified_resolutions": [
+    "Honest labeling (req 10): header states `They are proposed Kotlin classes/interfaces, not implemented Android code.` and every block title ends `— proposed`.",
+    "Image-view workflow (req 10): header states `Structurizr has no native class view. These editable inline PlantUML definitions are rendered locally and referenced by image views in workspace.dsl.`; consistent with the Structurizr code-diagram primary fact.",
+    "Real class notation, not component boxes (req 10): `class`/`interface` with members, `..|>` realization, `*--` composition with quoted multiplicities in all five blocks.",
+    "No separate handshake (req 4): block 2 note `No separate handshake. Capabilities-first is a convention.`",
+    "Cancel8 unsupported and socket-close cancellation (req 4): `+cancelByClosingSocket()`, notes `Cancel enum8 is not a supported v1 command.` and `the compatible client closes its socket.` (mechanism ambiguity on the target side is CS05-12).",
+    "OK envelope can carry command failure (req 4): `+validateIdVersionStatusAndCommandResult()` and note `Validate OK envelope AND CommandResult.succeeded.`",
+    "Signed big-endian length, one request per socket, plaintext loopback without fake TLS (req 4): `+readExactSignedBigEndianLength()`, `+readOneRequestAndStreamResponses()`, note `Authenticated plaintext loopback TCP, no fake TLS. One request/socket.`",
+    "Unknown protobuf field handling (req 4): `+preserveUnknownProtobufFields()`.",
+    "Input model (req 4): block 5 note `Mouse/wheel/key/text only; no wire pointer ID or multitouch. Key strings are not Android keycodes.`; `+dispatchOrderedApprovedBatch()`; `+mapRootDipAndAvaloniaKeyNames(events)`.",
+    "Protected surfaces excluded (req 4, 5): `+captureUnprotectedSelectedRoot()`, `+excludeProtectedSurfaces()`, note `Protected approval/grant screens excluded.`",
+    "Stable/stale node generation and density semantics (req 4): `+resolveNode(id, generation)`, `+invalidateOnRootReplacement()`, `+mapDipAndFrameScale()`, `RemoteFrameState { +targetGeneration ... +renderScale }`, edge label `generation-pinned observation`.",
+    "Separate ADB backend for uninstrumented targets (req 3, 4): note `Generic phone input uses separate AdbPhoneBackend.`; `+screenState(scope)`, `+tap(scope, coordinates)`.",
+    "Finite subscription handle and paired cleanup (req 7, 8): `+register(admission): SubscriptionHandle`, `+cancel(handle): CleanupOutcome`, `+registrationAndCleanupPins`.",
+    "Journal bounds, gaps, disconnect and restart semantics (req 7): `+appendOrderedWithinQuota(event)`, `+recordGapOrTerminal(reason)`, `+recoverOrphanedRegistrations()`, notes `Durable handle/journal is not a durable OS registration.` and `Transport disconnect does not imply unregister.`",
+    "Synchronous return callbacks stay local and bounded (req 7): `+replyWithinDeadline(input)`, `+validateTypedFallback(evidence)`, note `No network or agent roundtrip for sync return. Unknown valid deadline/default means unsupported.`",
+    "MCP resource semantics (req 9): `+subscribeOwnedUri(session, uri)`, `+notifyUriOnly(uri)`, `+readBoundedPage(principal, cursor)`.",
+    "CAS, epochs and in-flight recheck (req 5, 6, 8): `+commitOverride(command, expectedRevision)`, `+activateCAS(expectedView, stagedView)`, `+setActiveCAS(session, desiredSet, etag)`, `+recheck(admission): Decision`, `+invalidateEpoch(epoch)` (naming inconsistency is CS05-21).",
+    "Non-bypass claims stated (req 2, 5): notes `Unexported bounded local Binder facade. UI reference is not owner authorization.` and `ARC principal cannot mint local owner approval. The ViewModel is not the external ARC client.` (mechanism gap is CS05-01).",
+    "Verified exact Binder wire contract gating (req 6): `+selectExact(schemaHash, wireProof)`, `+transact(verifiedWirePlan)`, `+invoke(verifiedPlan): Outcome`.",
+    "Backpressure and overflow (req 7): `+closeSlowConsumerWithTerminal()`, `+streamWithinLocalRateAndByteQuota()`, `+filterRedactAndReportDroppedCount()`.",
+    "Offline-renderable diagrams (req 11): every block uses `!pragma layout smetana`, which removes the Graphviz dependency; the PlantUML text reads as syntactically valid by inspection (no rendering was performed)."
+  ],
+  "cross_artifact_questions": [
+    "workspace.dsl: do image views exist for all five block keys, attached to which single element each, and do they use a local rendered file rather than the `plantuml` server form (requirement 11 forbids hosted rendering)?",
+    "Gradle: is there a task that extracts each `@startuml` block by heading key, renders SVG with smetana offline, and fails deterministically on a missing cache or missing DejaVu Sans rather than substituting silently?",
+    "Pinned ARC proto at commit 19792a52a13a3df342f90bab6b246b547e673919: are `transport = \"arc-protobuf-v1\"`, `CommandResult.succeeded`, PNG frame encoding in `captureBoundedPng`, and `sequence: ULong` exact upstream field names, values and scalar types? Any invented wire literal would violate protocol preservation.",
+    "Upstream behavior on receiving Cancel(8), on invalid or oversize length, on unsupported version or method, and on auth failure: error envelope or socket close? CS05-12, CS05-17 and CS05-18 depend on this.",
+    "Bearer field 4, IsAdbTunnel non-faking and FPS parsed-not-enforced versus the local rate quota in `streamWithinLocalRateAndByteQuota()`: does the protocol artifact document the local quota as a bridge bound and not a protocol semantic?",
+    "Do the identifiers `bridge.app.transport`, `bridge.app.arcController`, `bridge.app.invoke`, `bridge.app.callbacks`, `bridge.app.arc`, `bridge.app.ui` and an owner-commands component exist in workspace.dsl with those exact names?",
+    "Does any other artifact define the owner capability issuer and protected prompt, the client grant store, an SDK invocation backend, direct stream negotiation, Binder death handling, an epoch source, and UI/boot/status classes? These decide whether CS05-01, 08, 09, 10, 11, 15 and 16 are code-view omissions or design gaps.",
+    "MCP transport details absent from `McpServer` (Last-Event-ID versus application cursor, tools/list pagination and list_changed, progress ending with the request, POST SSE single final response): are they specified in dynamic views?",
+    "Principal typing: do MCP and ARC principals share one `Principal` type, and if so how is the realm distinguished so an ARC bearer principal cannot satisfy an MCP admission?",
+    "Controller reach: is `ArcClientAdapter --> CompatibleExternalRuntime` restricted to loopback or forwarded endpoints, or may the controller open plaintext sessions to arbitrary hosts?"
+  ],
+  "limitations": [
+    "No tools: the sha256 and byte offsets could not be verified; the pasted text was treated as the exact bytes of the stated range.",
+    "No rendering: PlantUML validity was judged by reading; layout, font fallback and SVG text editability were not observed.",
+    "Other design artifacts were not visible; every finding marked with verification_needed may be resolved elsewhere, and this workpaper does not score or reconstruct the whole design.",
+    "Upstream ARC source and proto were not consulted; protocol literal checks are posed as questions, not asserted facts."
+  ],
+  "report_complete": true
+}
+```
+
+`★ Insight ─────────────────────────────────────`
+- Each `@startuml` block is an independent PlantUML namespace, so a class named `AdmissionGate` in two blocks is two unrelated definitions to the renderer. Consistency across blocks exists only by convention, which is why CS05-04 asks for one defining block per class and explicit `<<from component>>` stubs elsewhere.
+- Declaring "composition diamonds denote owned lifetime" turns every missing diamond into a statement that nothing owns that object. The legend is what makes CS05-02 a defect rather than a stylistic gap.
+- Structurizr image views attach to exactly one element, so a code block that spans three components cannot be mapped without choosing one. Splitting blocks per component is cheaper than inventing an umbrella element.
+`─────────────────────────────────────────────────`
+
+The workpaper covers the full file with 27 findings: one high (no class issues or verifies the owner capability that the non-bypass claims rest on), fifteen medium (unowned lifetimes, unwired MCP request paths, same-named classes with divergent surfaces, orphaned ARC stream services, ungated property mutation, ARC gate not converging on canonical policy, no epoch propagation, no grant or audit store, no SDK backend, no direct stream, ambiguous cancel handling, registry multiplicity, controller facade path, callback death handling, thin UI classes), and eleven low. Twenty-one requirement points are verified as resolved in the text with exact evidence. Ten questions need other artifacts or the pinned ARC source to settle.

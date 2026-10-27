@@ -1,0 +1,13 @@
+flowchart TD
+    Start[Headless service startup or capability change] --> Capture[Capability snapshot with profile target and epoch]
+    Catalog[Full immutable bindings and types inventory] --> Resolve[Evidence based version applicability]
+    Capture --> Resolve
+    Resolve --> Types[Coherent versioned type graph]
+    Types --> Stage[Stage complete available unavailable unknown view]
+    Stage --> CAS[Recheck catalog identity and capability epoch]
+    CAS --> Active[Atomically activate sealed view]
+    Change[Backend device module or interface change] --> Stale[Invalidate view and approvals]
+    Stale --> Capture
+    Active --> UI[Avalonia full inventory and reason filters]
+    Active --> Plan[Canonical dispatch planner]
+    Plan --> Policy[Separate client policy and live OS authority]

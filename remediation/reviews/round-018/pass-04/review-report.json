@@ -1,0 +1,562 @@
+{
+  "stage": "design-evidence-pass-4-of-5: Structurizr ServerComponents/ServerCoreComponents/Startup views, SCR01-SCR10 screen SVGs, STB01-STB03 storyboard SVGs, Gradle build assets, Marp storyboard deck, UI docs and UI asset manifest",
+  "coverage": [
+    {
+      "file": "design-c4/docs/diagrams/structurizr-ServerComponents.svg",
+      "complete": true,
+      "limits": "Full SVG source read; 10 components, 3 external elements and 24 relationship labels enumerated from text; not rendered visually."
+    },
+    {
+      "file": "design-c4/docs/diagrams/structurizr-ServerCoreComponents.svg",
+      "complete": true,
+      "limits": "Full SVG source read; 8 components, 2 external elements and 15 relationship labels enumerated; not rendered."
+    },
+    {
+      "file": "design-c4/docs/diagrams/structurizr-Startup.svg",
+      "complete": true,
+      "limits": "Full SVG source read; 5 elements and 5 numbered steps enumerated; not rendered."
+    },
+    {
+      "file": "design-c4/docs/screens/SCR01.svg",
+      "complete": true,
+      "limits": "All text nodes, control rectangles, state panels and rail font weights inspected; not rendered."
+    },
+    {
+      "file": "design-c4/docs/screens/SCR02.svg",
+      "complete": true,
+      "limits": "Same as SCR01."
+    },
+    {
+      "file": "design-c4/docs/screens/SCR03.svg",
+      "complete": true,
+      "limits": "Same as SCR01."
+    },
+    {
+      "file": "design-c4/docs/screens/SCR04.svg",
+      "complete": true,
+      "limits": "Same as SCR01."
+    },
+    {
+      "file": "design-c4/docs/screens/SCR05.svg",
+      "complete": true,
+      "limits": "Same as SCR01."
+    },
+    {
+      "file": "design-c4/docs/screens/SCR06.svg",
+      "complete": true,
+      "limits": "Same as SCR01."
+    },
+    {
+      "file": "design-c4/docs/screens/SCR07.svg",
+      "complete": true,
+      "limits": "Same as SCR01."
+    },
+    {
+      "file": "design-c4/docs/screens/SCR08.svg",
+      "complete": true,
+      "limits": "Same as SCR01."
+    },
+    {
+      "file": "design-c4/docs/screens/SCR09.svg",
+      "complete": true,
+      "limits": "Same as SCR01."
+    },
+    {
+      "file": "design-c4/docs/screens/SCR10.svg",
+      "complete": true,
+      "limits": "Same as SCR01."
+    },
+    {
+      "file": "design-c4/docs/screens/STB01.svg",
+      "complete": true,
+      "limits": "4 panels, arrows and boundary footer inspected; panel contents are placeholders (see P4-17)."
+    },
+    {
+      "file": "design-c4/docs/screens/STB02.svg",
+      "complete": true,
+      "limits": "Same as STB01."
+    },
+    {
+      "file": "design-c4/docs/screens/STB03.svg",
+      "complete": true,
+      "limits": "Same as STB01."
+    },
+    {
+      "file": "design-c4/build.gradle.kts",
+      "complete": true,
+      "limits": "All 11 task registrations and 3 helpers read; not executed; referenced files toolchain-lock.json, README.md, gradlew, ui-svg/, tooling/, .tools/ are not in the evidence manifest."
+    },
+    {
+      "file": "design-c4/settings.gradle.kts",
+      "complete": true,
+      "limits": "Single statement."
+    },
+    {
+      "file": "design-c4/gradle.properties",
+      "complete": true,
+      "limits": "5 properties."
+    },
+    {
+      "file": "design-c4/gradle/wrapper/gradle-wrapper.properties",
+      "complete": true,
+      "limits": "Pinned 8.14.3 distribution with sha256; the checksum cannot be independently confirmed without network; gradle-wrapper.jar absent from evidence."
+    },
+    {
+      "file": "design-c4/storyboards/storyboard.md",
+      "complete": true,
+      "limits": "13 slides; image paths checked against manifest paths; Marp rendering not executed."
+    },
+    {
+      "file": "design-c4/docs/ui-screens-and-storyboards.md",
+      "complete": true,
+      "limits": "All relative links checked against manifest; storyboards.html target absent from evidence."
+    },
+    {
+      "file": "design-c4/docs/ui-asset-manifest.json",
+      "complete": true,
+      "limits": "Cross-checked against SVG title/desc text and STB panel sequences."
+    }
+  ],
+  "findings": [
+    {
+      "id": "P4-01",
+      "severity": "medium",
+      "area": "c4-component-model/internal-consistency",
+      "artifact": "design-c4/docs/diagrams/structurizr-ServerComponents.svg vs structurizr-ServerCoreComponents.svg",
+      "evidence": "ServerComponents (subtitle 'C4 Kotlin server components') contains exactly 10 components: McpServer, ClientAuthenticator, AdmissionGate, CatalogRepository, DeviceViewResolver, FunctionalGroupIndex, InvocationPlanner, CallbackBroker, AuditLogger, BridgeService. ServerCoreComponents adds 'OwnerCommandFacade [Component: Kotlin] Bounded unexported local Binder commands and owner authentication' for the same container 'Android bridge APK'.",
+      "issue": "The full server component view omits a component that the detail view declares in the same container. A reader of the overview cannot see the owner facade that requirement 2 makes central (bounded unexported local service facade). Either the overview is incomplete or the two views disagree about the container's membership.",
+      "exact_minimal_correction": "Add OwnerCommandFacade and its two relationships to the ServerComponents view (include it in the view's element list), or change the ServerComponents subtitle to state explicitly that the owner facade is shown only in the core detail view.",
+      "verification_needed": "workspace.dsl: whether the ServerComponents view uses an explicit include list that deliberately drops the facade."
+    },
+    {
+      "id": "P4-02",
+      "severity": "medium",
+      "area": "c4-component-model/ownership-boundary",
+      "artifact": "structurizr-ServerComponents.svg, structurizr-ServerCoreComponents.svg",
+      "evidence": "Container label '[Container: Kotlin / Jetpack Compose]' but no Compose UI component exists in either view. In ServerCoreComponents, OwnerCommandFacade has only outbound edges ('Requires exact fresh owner capability for protected transitions' to AdmissionGate; 'Commits validated owner catalog/configuration changes' to CatalogRepository) and no inbound edge.",
+      "issue": "Requirement 2 states the UI cannot bypass protected owner authorization and must go through the bounded facade. Without a modeled UI element and a single UI-to-facade relationship, the diagrams cannot demonstrate that boundary; the facade appears to have no caller.",
+      "exact_minimal_correction": "Model the Compose management UI as a component (or sibling container) with exactly one relationship 'binds to OwnerCommandFacade (unexported, same process)' and no relationships to any other server component.",
+      "verification_needed": "structurizr-ArcComponents.svg, structurizr-Containers.svg and workspace.dsl for a UI element and its relationships."
+    },
+    {
+      "id": "P4-03",
+      "severity": "medium",
+      "area": "class-responsibilities/concurrency",
+      "artifact": "structurizr-ServerComponents.svg",
+      "evidence": "'CatalogRepository -> App-private catalog/configuration: Owns transactional writes and read-only snapshots'; 'CallbackBroker -> App-private catalog/configuration: Appends ordered bounded events and cleanup state'; 'AuditLogger -> App-private catalog/configuration: Persists mandatory audit and configured call records'.",
+      "issue": "Three components write to the one SQLite container while one of them claims to own transactional writes. The model does not say who owns the connection, WAL/transaction boundaries, or ordering between a catalog CAS commit, a journal append and an audit append that belong to the same admitted operation. This is a concrete unspecified concurrency mechanism and a contradicted ownership claim.",
+      "exact_minimal_correction": "Either (a) relabel the CatalogRepository edge to 'Owns catalog, policy, group and view tables' and add one explicit database owner (e.g. BridgeDatabase: single writer connection, serialized transactions) that CatalogRepository, CallbackBroker and AuditLogger use, or (b) route journal and audit writes through CatalogRepository and rename it as the store owner. State the transaction boundary for admission+audit (same transaction or ordered separate transactions).",
+      "verification_needed": "Main design doc and server-core-classes.svg for a database-owner class and transaction policy."
+    },
+    {
+      "id": "P4-04",
+      "severity": "medium",
+      "area": "c4-component-model/callback-lifecycle",
+      "artifact": "structurizr-ServerComponents.svg",
+      "evidence": "Inbound edges to CallbackBroker are only 'InvocationPlanner -> CallbackBroker: Registers typed callback proxy and cleanup plan' and 'Android OS and target apps -> CallbackBroker: Calls verified callback endpoint; authority remains separate'. The only broker/server edge is 'CallbackBroker -> McpServer: Signals URI-only resource update and bounded reads'. There is no McpServer or AdmissionGate edge into CallbackBroker, and no CallbackBroker edge to Android OS or InvocationPlanner.",
+      "issue": "The model has no forward path for resources/read of the journal, resources/subscribe or unsubscribe, subscription cancellation, or execution of the cleanup/unregister plan against the OS. 'bounded reads' is written on an edge pointing the wrong way (the broker does not read from the server). Requirements 7 and 9 core flows are therefore not expressible from this view.",
+      "exact_minimal_correction": "Add 'McpServer -> CallbackBroker: After admission, reads bounded journal pages, subscribes/unsubscribes exact URI, cancels subscription' and 'CallbackBroker -> Android OS and target apps: Executes verified unregister/cleanup plan' (or 'CallbackBroker -> InvocationPlanner: Executes cleanup plan'); change the existing broker->server label to 'Signals URI-only resources/updated'.",
+      "verification_needed": "structurizr-CallbackFlow.svg and workspace.dsl: if such relationships exist in the model, explain why the component view filters them."
+    },
+    {
+      "id": "P4-05",
+      "severity": "medium",
+      "area": "security-boundary/protected-owner-flow",
+      "artifact": "structurizr-ServerCoreComponents.svg",
+      "evidence": "'OwnerCommandFacade -> AdmissionGate: Requires exact fresh owner capability for protected transitions' and 'OwnerCommandFacade -> CatalogRepository: Commits validated owner catalog/configuration changes'. CatalogRepository description 'Immutable imports, local overlays, CAS, full inventory' contains no capability check. No edge from OwnerCommandFacade to AuditLogger.",
+      "issue": "The commit path bypasses the gate: the facade obtains a capability from the gate and then writes to the repository itself. Nothing in the model verifies at commit time that the committed change equals the approved plan (hash/revision/expiry shown on SCR09). Owner commands that do not pass through the gate also have no modeled audit path.",
+      "exact_minimal_correction": "Either route protected commits through AdmissionGate (AdmissionGate -> CatalogRepository: commits approved plan) or state that CatalogRepository.commit requires a capability bound to the plan hash and policy revision and rejects mismatches; add an audit edge for owner commands (OwnerCommandFacade -> AuditLogger or gate-recorded).",
+      "verification_needed": "Main design doc and server-core-classes.svg for capability verification at commit."
+    },
+    {
+      "id": "P4-06",
+      "severity": "low",
+      "area": "c4-component-model/policy-convergence",
+      "artifact": "structurizr-ServerComponents.svg, structurizr-ServerCoreComponents.svg",
+      "evidence": "'McpServer -> FunctionalGroupIndex: Requests bounded discovery or activation' is a direct path; AdmissionGate is described as 'Canonical policy, approvals, epochs and dispatch boundary'; 'FunctionalGroupIndex -> AdmissionGate: Reports grants and rechecks activation epochs without granting authority'.",
+      "issue": "Activation changes per-session state and budgets but does not pass through the gate; the index consults the gate instead. The design must say which checks (principal, budget, epoch, type closure) the index performs on activation so that requirement 5 convergence on canonical policy holds for the activation path too.",
+      "exact_minimal_correction": "Add a sentence to the view or doc: 'Activation is not a dispatch; FunctionalGroupIndex performs principal pin, byte budget and epoch checks via AdmissionGate before any atomic registration', or route activation requests through AdmissionGate.",
+      "verification_needed": "structurizr-GroupFlow.svg and the main doc activation section."
+    },
+    {
+      "id": "P4-07",
+      "severity": "low",
+      "area": "c4-component-model/edge-semantics",
+      "artifact": "structurizr-ServerComponents.svg",
+      "evidence": "'McpServer -> AdmissionGate: Submits exact admitted operation plan'; 'DeviceViewResolver -> CatalogRepository: Streams full inventory and persists atomic resolved view'; 'CallbackBroker -> McpServer: Signals URI-only resource update and bounded reads'.",
+      "issue": "Labels describe the plan as already admitted before the gate admits it, and mix opposite-direction operations (streaming inventory comes from the repository; reads are performed by the server) on one directed edge.",
+      "exact_minimal_correction": "Relabel to 'Submits exact candidate operation plan'; split into 'reads full inventory' and 'persists sealed resolved view'; move 'bounded reads' to a server->broker edge (see P4-04).",
+      "verification_needed": "none"
+    },
+    {
+      "id": "P4-08",
+      "severity": "medium",
+      "area": "lifecycle/cache-invalidation",
+      "artifact": "structurizr-ServerComponents.svg, structurizr-Startup.svg, SCR03.svg",
+      "evidence": "Inbound edges to DeviceViewResolver are only 'BridgeService -> DeviceViewResolver: Requests startup capability resolution' and 'AdmissionGate -> DeviceViewResolver: Checks selected availability and type closure'. SCR03.S3 states 'Stale device view: refresh required'. No edge or step models a change signal (package install/OTA/catalog import/backend change) or an owner-triggered refresh.",
+      "issue": "Requirement 6 demands cache invalidation and refresh on device, backend and catalog changes with atomic activation. The views show resolution only at startup; the trigger, the epoch bump and the in-flight behavior during re-resolution are unspecified mechanisms.",
+      "exact_minimal_correction": "Add 'BridgeService -> DeviceViewResolver: Re-resolves on package/OTA/catalog-import/backend-change signals; bumps capability epoch; old view stays active until the new one is sealed' and 'OwnerCommandFacade -> DeviceViewResolver: Owner-requested refresh'.",
+      "verification_needed": "Main design doc invalidation section; workspace.dsl."
+    },
+    {
+      "id": "P4-09",
+      "severity": "medium",
+      "area": "lifecycle/restart",
+      "artifact": "structurizr-Startup.svg, SCR05.svg",
+      "evidence": "Startup steps: '1: Load validated immutable catalog and config', '2: Resolve observed compatible binding and type graph', '3: Read supported capability facts, retaining unknowns', '4: Seal and atomically activate complete view', '5: Expose Running only after ready listener'. CallbackBroker is absent from the view. SCR05 states 'Transport disconnect does not unregister' and CallbackBroker 'Appends ordered bounded events and cleanup state'.",
+      "issue": "After process death the in-process OS listeners are gone while the persisted subscriptions and journal survive. The startup flow has no reconciliation step (mark registrations lost, decide re-register vs. terminate, journal a restart event with sequence continuity). Requirement 7 explicitly lists restart.",
+      "exact_minimal_correction": "Add a startup step between 4 and 5: 'CallbackBroker reconciles persisted subscriptions: OS registrations marked lost, re-registered only where policy and grant epoch still permit, otherwise terminated with a journaled reason'.",
+      "verification_needed": "Main design doc restart semantics; structurizr-CallbackFlow.svg."
+    },
+    {
+      "id": "P4-10",
+      "severity": "medium",
+      "area": "lifecycle/android-platform",
+      "artifact": "structurizr-Startup.svg, SCR01.svg",
+      "evidence": "Startup performs catalog load and device probes (steps 1-4) before step '5: Expose Running only after ready listener'; no step promotes the service to foreground. SCR01.S1 'Starting: admission closed' implies a Starting state with a notification.",
+      "issue": "Android requires a service started with startForegroundService to call startForeground promptly or the platform raises an ANR. The dynamic view does not show when foreground promotion with the Starting notification happens relative to potentially slow probing, so the lifecycle ordering is unspecified.",
+      "exact_minimal_correction": "Add step 0: 'BridgeService promotes to foreground with Starting notification (declared foregroundServiceType) before any catalog or probe work', and state that steps 1-4 run on a background dispatcher with a bounded probe timeout.",
+      "verification_needed": "Main design doc BridgeService lifecycle section."
+    },
+    {
+      "id": "P4-11",
+      "severity": "medium",
+      "area": "exact-platform-claim/boot",
+      "artifact": "SCR08.svg, SCR10.svg, structurizr-ServerComponents.svg",
+      "evidence": "SCR08 'Start on boot: Off; Does not override Android start restrictions'; SCR10 'Android reason: Foreground-service start not eligible'; BridgeService 'Foreground lifecycle, boot eligibility and truthful status'. No pass-4 artifact names the foregroundServiceType or the Android version matrix.",
+      "issue": "Boot eligibility on Android 14+ depends on the declared foreground service type (several types cannot be started from BOOT_COMPLETED). The claim 'honest Android limits' is unverifiable without the type and matrix.",
+      "exact_minimal_correction": "State the declared foregroundServiceType and a per-Android-version eligibility table (boot receiver start allowed/denied, background start denied, notification permission effects) in the settings/boot documentation and reference it from SCR08/SCR10.",
+      "verification_needed": "Main design doc."
+    },
+    {
+      "id": "P4-12",
+      "severity": "medium",
+      "area": "exact-platform-claim/protected-approval",
+      "artifact": "SCR09.svg",
+      "evidence": "'Input boundary: ARC + ADB input quiesced'; 'No remote root, pixels or approval capability'; 'Authentication: Fresh local owner authentication'.",
+      "issue": "The bridge can quiesce its own ARC input router and the ADB operations it dispatches itself, but it cannot quiesce input injected through adbd by any other authorized ADB client, which can inject key and touch events into any window including a device-credential prompt. As written the screen over-claims a platform guarantee. Pixel protection also depends on a mechanism (FLAG_SECURE) that is not stated.",
+      "exact_minimal_correction": "Change to 'Bridge-dispatched ARC and ADB input quiesced' and add a trust-boundary line: 'Hosts already authorized by adbd are outside this protection'; state that the approval window sets FLAG_SECURE.",
+      "verification_needed": "Main design doc threat model for the ADB trust boundary."
+    },
+    {
+      "id": "P4-13",
+      "severity": "medium",
+      "area": "ui-spec/requirements-completeness",
+      "artifact": "SCR01-SCR10.svg, docs/ui-screens-and-storyboards.md, STB03.svg",
+      "evidence": "Every screen consists of a navigation rail (x=24..189), a content column and a right annotation panel; no AppBar or persistent status strip element exists. STB03 footer asserts 'AppBar and notification share actual service readiness'. Requirement 2 requires a running-status AppBar/notification.",
+      "issue": "A UI element that a storyboard relies on and that the requirement names is never specified in any screen.",
+      "exact_minimal_correction": "Add a status control to the screen template (e.g. C04 'Service status chip' in the rail header or an AppBar) with states Running/Starting/Stopped/Error mirrored from BridgeService, and reference it in ui-screens-and-storyboards.md.",
+      "verification_needed": "none"
+    },
+    {
+      "id": "P4-14",
+      "severity": "medium",
+      "area": "ui-spec/requirements-completeness",
+      "artifact": "SCR08.svg",
+      "evidence": "Settings cards are only 'Start on boot', 'Service notification', 'ADB profile: Owner-paired / target scope', 'ARC profile'. No MCP listener bind address/port, loopback-only policy, Origin/allowed-host setting or remote-host forwarding instruction appears.",
+      "issue": "Requirement 3 (remote-host loopback forwarding) and requirement 9 (Origin/auth precise) imply owner-visible configuration of the listener binding. The settings screen omits it, so the security-relevantposture of the listener is unspecified in the UI.",
+      "exact_minimal_correction": "Add a card 'MCP listener: 127.0.0.1:<port>, loopback only; remote hosts use adb forward tcp:<port> tcp:<port>' plus an Origin/allowed-host field, each with the revision-protected save path.",
+      "verification_needed": "Main design doc transport binding policy."
+    },
+    {
+      "id": "P4-15",
+      "severity": "low",
+      "area": "ui-spec/health-separation",
+      "artifact": "SCR01.svg",
+      "evidence": "Cards: 'MCP service: Running - listener ready / Ready view 27 / capability epoch 8', 'ADB backend: Disconnected / MCP health stays Running', 'Catalog: Full inventory retained', 'Active work'. Device-view readiness appears only as a sub-line under MCP service.",
+      "issue": "Requirement 2 asks for separate MCP, ADB and device-view health. The dashboard has no device-view health state (Ready/Stale/Refreshing/Failed) even though SCR03.S3 defines a stale view.",
+      "exact_minimal_correction": "Replace the 'Catalog' card with a 'Device view' health card showing Ready/Stale/Refreshing/Failed and the epoch, keeping catalog inventory status as its sub-line.",
+      "verification_needed": "none"
+    },
+    {
+      "id": "P4-16",
+      "severity": "medium",
+      "area": "storyboard/coverage",
+      "artifact": "STB01-STB03.svg, storyboard.md, ui-asset-manifest.json",
+      "evidence": "Storyboards: STB01 [SCR04, SCR04, SCR05, SCR05], STB02 [SCR07 x4], STB03 [SCR08, SCR09, SCR08, SCR10]. No storyboard visits SCR01, SCR02, SCR03 or SCR06. SCR02 defines 'Edit exact grants', 'Revoke credential', S1 'No clients: pair locally', S3 'Conflict: reload changed revision'; SCR03 defines 'Edit local override'; SCR06 defines 'Export selected scope', S2 'Denied: export needs owner auth'.",
+      "issue": "Requirement 12 lists clients/grants, catalog, logs and protected owner flows. The grant-editing, pairing, credential-revocation, local-override and export flows have defined controls and error states but no ordered storyboard with success/error/cancel branches.",
+      "exact_minimal_correction": "Add STB04 'Pair client and edit exact grants' [SCR02, SCR09, SCR02 (S3 conflict), SCR02], STB05 'Create local override with CAS preview' [SCR03, SCR09, SCR03], STB06 'Export logs scope' [SCR06, SCR09, SCR06 (S2 denied)], and the matching Marp slides and manifest entries.",
+      "verification_needed": "none"
+    },
+    {
+      "id": "P4-17",
+      "severity": "medium",
+      "area": "storyboard/traceability",
+      "artifact": "STB01.svg, STB02.svg, STB03.svg",
+      "evidence": "Each panel contains a chip 'SCRxx / selected screen state', an empty rectangle and a button labelled only 'User action'. No step references a control ID (C01/C02/C03) or a state ID (S1-S3). Example: STB01 step 2 'CAS activate within byte budget' does not name SCR04.C02 'Activate selected set' or SCR04.S2/S3.",
+      "issue": "Requirement 12 asks for screen panels and user actions; the panels are placeholders and the actions are not bound to the screen specifications, so a storyboard step cannot be traced to a control or resulting state.",
+      "exact_minimal_correction": "In each panel replace 'User action' with the control ID and label (e.g. 'SCR04.C02 Activate selected set') and add 'Result: SCR04 default / Alternate: SCR04.S3' lines; mirror in storyboard.md.",
+      "verification_needed": "none"
+    },
+    {
+      "id": "P4-18",
+      "severity": "medium",
+      "area": "storyboard/actor-consistency",
+      "artifact": "STB01.svg, SCR04.svg, SCR05.svg",
+      "evidence": "STB01 'User action' texts: 'Read bounded group summaries', 'CAS activate within byte budget', 'One final response, then journal pages', 'Stop delivery; verify unregister'. SCR04.C02 'Activate selected set'; SCR04 card 'Session view: Portable generic-invoke mode'; SCR01 'Active work: 2 subscriptions / 1 session'.",
+      "issue": "'One final response, then journal pages' is MCP POST SSE semantics experienced by the consuming agent, not an action a Compose UI user performs. Activation and journal reads are per MCP session, but the storyboard presents them as owner-UI actions without saying which session the owner acts on or whether the client receives tools/list_changed.",
+      "exact_minimal_correction": "Either re-frame STB01 as owner observation ('inspect ranked groups', 'view session activation', 'read journal page', 'cancel subscription on behalf of client; audited') or add a one-line owner-driven session model to SCR04 ('Activate selected set applies to the selected session; client receives tools/list_changed').",
+      "verification_needed": "Main design doc: whether the owner UI may act on a client session."
+    },
+    {
+      "id": "P4-19",
+      "severity": "low",
+      "area": "storyboard/screen-mismatch",
+      "artifact": "STB03.svg, storyboard.md",
+      "evidence": "STB03 step 4 '4. Observe actual status' is on SCR10 with action 'Running only when listener is ready' and alternate 'Start denied: action required, no bypass'. SCR10 is titled 'Action required / Service could not start'.",
+      "issue": "The success statement is placed on the failure screen; a successful start would be observed on SCR01.",
+      "exact_minimal_correction": "Step 4 screen = SCR01 (Running badge); alternate path = SCR10.",
+      "verification_needed": "none"
+    },
+    {
+      "id": "P4-20",
+      "severity": "low",
+      "area": "ui-spec/navigation-state",
+      "artifact": "SCR05.svg, SCR07.svg, SCR09.svg, SCR10.svg",
+      "evidence": "SCR01-SCR04, SCR06 and SCR08 set font-weight 600 on their rail item; in SCR05 'Callbacks' and in SCR07 'ARC control' are font-weight 400 like every other rail item. SCR09 and SCR10 have no rail counterpart and no statement of modality or parent screen.",
+      "issue": "Active navigation state is inconsistently specified; SCR09 ('Dismissal, timeout or missing UI denies execution') needs an explicit modal/rail-locked statement.",
+      "exact_minimal_correction": "Set weight 600 on 'Callbacks' in SCR05 and 'ARC control' in SCR07; add to SCR09 'Modal; rail disabled while pending' and to SCR10 'Shown under Dashboard'.",
+      "verification_needed": "none"
+    },
+    {
+      "id": "P4-21",
+      "severity": "low",
+      "area": "ui-spec/control-inventory",
+      "artifact": "SCR01-SCR10.svg",
+      "evidence": "Legend on every screen: 'C01 primary action    C02 secondary action    C03 navigation rail'; right panel on every screen: 'Control IDs: SCRxx.C01/C02'.",
+      "issue": "C03 is defined in the legend but excluded from the control ID list.",
+      "exact_minimal_correction": "Change the panel line to 'Control IDs: SCRxx.C01/C02/C03'.",
+      "verification_needed": "none"
+    },
+    {
+      "id": "P4-22",
+      "severity": "low",
+      "area": "ui-spec/fidelity",
+      "artifact": "SCR08.svg",
+      "evidence": "ADB profile card sub-line: 'No action performed by these design artifacts'.",
+      "issue": "A reviewer disclaimer is placed where the UI state description belongs; it is not UI copy.",
+      "exact_minimal_correction": "Replace with the state line, e.g. 'Pairing code + host:port; ADB key pair in app-private storage'.",
+      "verification_needed": "none"
+    },
+    {
+      "id": "P4-23",
+      "severity": "low",
+      "area": "ui-spec/accessibility-consistency",
+      "artifact": "docs/ui-screens-and-storyboards.md, SCR01-SCR10.svg",
+      "evidence": "Markdown: 'Minimum48dp touch targets'. Every primary/secondary button rect is height 38 on a 1280x840 canvas presented as the large-window layout.",
+      "issue": "The stated acceptance gate contradicts the depicted control size unless a canvas scale is declared.",
+      "exact_minimal_correction": "Draw 48-unit buttons or add 'canvas units are not dp' to the markdown; fix the missing space in 'Minimum48dp'.",
+      "verification_needed": "none"
+    },
+    {
+      "id": "P4-24",
+      "severity": "medium",
+      "area": "failure-mechanism/audit",
+      "artifact": "SCR06.svg, structurizr-ServerComponents.svg",
+      "evidence": "AuditLogger 'Mandatory audit and configurable per-client payload logging'; SCR06 'Minimal mandatory audit is separate from optional logs'; SCR06.S3 'Disk quota: visible retention error'.",
+      "issue": "Whether admission fails closed when the mandatory audit record cannot be persisted, and whether mandatory audit is ever pruned under quota, are not specified in the pass-4 artifacts.",
+      "exact_minimal_correction": "Add to SCR06 and the AuditLogger description: 'Admission is denied if the mandatory audit append fails; optional logs are pruned first; mandatory audit retention N days'.",
+      "verification_needed": "Main design doc audit section."
+    },
+    {
+      "id": "P4-25",
+      "severity": "low",
+      "area": "callback-lifecycle/overflow-and-orphans",
+      "artifact": "SCR05.svg",
+      "evidence": "'Retention: 256 events or 1 MiB maximum / Overflow default closes delivery with reason'; 'Transport disconnect does not unregister'; S3 'Orphaned / revoked: payload suppressed'.",
+      "issue": "'default' implies alternative overflow policies that are not enumerated here, and no orphan deadline bounds how long an OS registration (e.g. a location listener) stays alive after the client disconnects.",
+      "exact_minimal_correction": "Enumerate overflow policies (close-with-reason, drop-oldest, drop-newest) and add 'Orphan deadline: OS registration released and journaled after T without a reconnect'.",
+      "verification_needed": "Main design doc callback section."
+    },
+    {
+      "id": "P4-26",
+      "severity": "low",
+      "area": "ui-spec/state-coverage",
+      "artifact": "SCR05.svg",
+      "evidence": "States: S1 'Empty: no registrations', S2 'Cursor expired: retention boundary', S3 'Orphaned / revoked: payload suppressed'.",
+      "issue": "Requirement 7 lists death; no state covers a target or backend death that invalidates a registration with unknown cleanup.",
+      "exact_minimal_correction": "Add S4 'Target died: registration lost, cleanup unknown'.",
+      "verification_needed": "none"
+    },
+    {
+      "id": "P4-27",
+      "severity": "needs-verification",
+      "area": "requirements-traceability",
+      "artifact": "SCR01-SCR10.svg, ui-asset-manifest.json",
+      "evidence": "Requirement mappings used: FR-KT-01/02/03, FR-DEV-01, FR-GRP-01/02/03, FR-CB-01..04, FR-ARC-01..04. SCR09 maps the approval flow to 'FR-ARC-04 / canonical Ask approval'.",
+      "issue": "No FR family for policy/catalog CRUD (requirement 5), MCP transport (requirement 9) or ADB backend (requirement 3) is referenced, and the approval flow is filed under an ARC requirement although it is policy.",
+      "exact_minimal_correction": "Map SCR09 to the policy requirement ID and add transport/ADB/catalog IDs where the screens cover them.",
+      "verification_needed": "Main design doc: existence and meaning of each FR ID."
+    },
+    {
+      "id": "P4-28",
+      "severity": "needs-verification",
+      "area": "exact-protocol-claim/ARC",
+      "artifact": "SCR07.svg, STB02.svg, storyboard.md",
+      "evidence": "'arc-protobuf-v1 / wire 1.0; no handshake claim'; 'Read tree/frame/control after probe'; STB02 'Version 1.0 and matching request ID'; footer 'Denied control can be OK envelope + CommandResult.succeeded=false'.",
+      "issue": "The identifier 'arc-protobuf-v1', a request-ID field, a probe operation and the field name CommandResult.succeeded are concrete wire claims that must exist in the pinned proto; if absent they are invented mechanisms.",
+      "exact_minimal_correction": "Replace any identifier not present in remote_control.proto with the exact proto name, or label it as a bridge-local profile name distinct from the wire.",
+      "verification_needed": "arc-upstream remote_control.proto at commit 19792a52."
+    },
+    {
+      "id": "P4-29",
+      "severity": "low",
+      "area": "ui-spec/role-confusion",
+      "artifact": "SCR07.svg",
+      "evidence": "Header 'Controller: selected compatible target'; S2 'Unknown protocol: reject before forwarding'.",
+      "issue": "'Forwarding' is a target-side router behavior shown on the controller screen.",
+      "exact_minimal_correction": "S2 'Unknown protocol: controller refuses to connect', or move the forwarding rejection to the target listener status on SCR08.",
+      "verification_needed": "none"
+    },
+    {
+      "id": "P4-30",
+      "severity": "medium",
+      "area": "build/determinism",
+      "artifact": "design-c4/build.gradle.kts",
+      "evidence": "verifyToolchain checks PlantUML jar checksum against toolchain-lock.json and exactly 5 pinned file hashes, then only check(file(cli.get()).isFile) with message 'Use the documented digest-pinned local Structurizr container'. The CLI path defaults to /usr/local/structurizr-cli/structurizr.sh.",
+      "issue": "No version or digest of the Structurizr CLI (or its container) is verified by the build, so validation and export are not deterministic across hosts despite the message wording.",
+      "exact_minimal_correction": "Record the CLI jar or container digest in toolchain-lock.json and verify it in verifyToolchain (hash the CLI lib jar, or run the CLI version command and compare to the lock).",
+      "verification_needed": "toolchain-lock.json content and README bootstrap instructions (not in evidence)."
+    },
+    {
+      "id": "P4-31",
+      "severity": "low",
+      "area": "build/explicit-failures",
+      "artifact": "design-c4/build.gradle.kts",
+      "evidence": "renderStoryboards runs node on .tools/marp/node_modules/@marp-team/marp-cli/marp-cli.js with NODE_BIN defaulting to 'node'; package-lock.json is only an input, never verified; no existence check precedes the ProcessBuilder call.",
+      "issue": "A missing or mismatched Marp install fails with a generic Node error, not the explicit offline/cache failure requirement 11 asks for; Node is unpinned.",
+      "exact_minimal_correction": "Add check(file(marpCli).isFile) with a 'bootstrap pinned Marp' message and include the package-lock hash among the lock pins; pin a Node version in toolchain-lock.json.",
+      "verification_needed": "toolchain-lock.json."
+    },
+    {
+      "id": "P4-32",
+      "severity": "low",
+      "area": "build/check-strength",
+      "artifact": "design-c4/build.gradle.kts, docs/ui-asset-manifest.json",
+      "evidence": "generateUiAssets asserts docs/screens size >= 10; verifyDesignDocs asserts SVG count >= 21; generateArchitectureDiagrams asserts exported sources >= 11. Declared sets are exactly 10 screens + 3 storyboards and 16 diagrams.",
+      "issue": "Threshold checks let a missing storyboard or screen pass; the diagrams use exact-name checks but the UI assets do not.",
+      "exact_minimal_correction": "Read ui-asset-manifest.json in generateUiAssets and assert each SCR/STB id exists; assert exact total 29 SVGs in verifyDesignDocs.",
+      "verification_needed": "none"
+    },
+    {
+      "id": "P4-33",
+      "severity": "low",
+      "area": "build/ui-generation",
+      "artifact": "design-c4/build.gradle.kts, docs/ui-asset-manifest.json",
+      "evidence": "generateUiAssets is a Copy from 'ui-svg' into 'docs/screens'; no task consumes ui-asset-manifest.json; 'tooling' is packaged with __pycache__ exclusions but never invoked; ui-svg/ and tooling/ are absent from the evidence manifest; ui-screens-and-storyboards.md calls docs/screens 'editable'.",
+      "issue": "Screen SVG generation is not a Gradle task, so determinism between the manifest and the SVGs is unenforced, and the editable source location (ui-svg vs docs/screens, which the build overwrites) is ambiguous.",
+      "exact_minimal_correction": "Add generateUiSvg invoking the pinned generator from ui-asset-manifest.json into ui-svg/, or state in the markdown that ui-svg/ is the hand-edited source and docs/screens is derived.",
+      "verification_needed": "tooling/ and ui-svg/ contents (not in evidence)."
+    },
+    {
+      "id": "P4-34",
+      "severity": "low",
+      "area": "build/reproducibility-boundary",
+      "artifact": "design-c4/build.gradle.kts, structurizr-*.svg",
+      "evidence": "PlantUML is run with the host JDK (java.home) and font-family 'sans-serif'; generated SVGs carry textLength values (e.g. 809.0977) derived from host font metrics; generateArtifactManifest hashes these SVGs into docs/checksums.sha256.",
+      "issue": "Byte-level reproducibility of diagrams depends on unpinned JDK and system fonts, so the checksum manifest is host-specific.",
+      "exact_minimal_correction": "Document the reproducibility boundary (same pinned container/JDK/fonts) or render inside the pinned container.",
+      "verification_needed": "README (not in evidence)."
+    },
+    {
+      "id": "P4-35",
+      "severity": "medium",
+      "area": "evidence-completeness",
+      "artifact": "shared manifest vs build.gradle.kts and docs/ui-screens-and-storyboards.md",
+      "evidence": "Build references and packages README.md, toolchain-lock.json, gradlew, gradlew.bat, gradle/wrapper/gradle-wrapper.jar, ui-svg/, tooling/, docs/checksums.sha256 and produces docs/storyboards.html; none of these appear in the shared manifest. ui-screens-and-storyboards.md links '[Self-contained HTML slideshow](storyboards.html)'.",
+      "issue": "The required self-contained HTML slideshow and the lock/wrapper files that make the pinning claims checkable are not in the evidence set; only receipts (not in this pass) claim they were produced.",
+      "exact_minimal_correction": "Add docs/storyboards.html, docs/checksums.sha256, toolchain-lock.json, the wrapper jar and the ui-svg/tooling sources to the evidence manifest with hashes.",
+      "verification_needed": "Receipt pass: whether receipts enumerate these outputs with hashes."
+    },
+    {
+      "id": "P4-36",
+      "severity": "low",
+      "area": "cosmetic",
+      "artifact": "structurizr-*.svg, build.gradle.kts",
+      "evidence": "SVG <title> elements contain literal creole, e.g. '&lt;size:24&gt;Component View: ...'; validateArchitecture writes 'Structurizr validation exited0'.",
+      "issue": "Accessibility title text carries markup; receipt string lacks a space.",
+      "exact_minimal_correction": "Strip creole from the exported title or accept as tool artifact; change to 'exited 0'.",
+      "verification_needed": "none"
+    },
+    {
+      "id": "P4-37",
+      "severity": "low",
+      "area": "dynamic-view/completeness",
+      "artifact": "structurizr-Startup.svg, SCR10.svg",
+      "evidence": "No step shows DeviceViewResolver reading the inventory from CatalogRepository although the component view says 'Streams full inventory'; no failure branch for invalid catalog, probe timeout or ineligible start, while SCR10.S1 'No catalog: import validated release' and S2 'Offline: explicit unknown capability facts' define those outcomes.",
+      "issue": "The startup flow is success-only and skips a read the component model declares.",
+      "exact_minimal_correction": "Add step 'DeviceViewResolver reads full inventory from CatalogRepository' before probing and a failure table beside the view mapping each failure to SCR10 states.",
+      "verification_needed": "Main design doc."
+    },
+    {
+      "id": "P4-38",
+      "severity": "low",
+      "area": "ui-spec/wording",
+      "artifact": "SCR01.svg, SCR10.svg",
+      "evidence": "SCR01.S2 'Start denied: owner action required'; SCR10 'Foreground-service start not eligible ... Start only after a permitted owner action'; SCR10.S2 'Offline: explicit unknown capability facts'.",
+      "issue": "'Owner action' is ambiguous between an Android settings action and owner authentication; 'Offline' is undefined for local probes.",
+      "exact_minimal_correction": "SCR01.S2 'Start denied by Android: open prerequisites (SCR10)'; SCR10.S2 'Backend unreachable: probes recorded unknown'.",
+      "verification_needed": "none"
+    },
+    {
+      "id": "P4-39",
+      "severity": "low",
+      "area": "exact-platform-claim/direct-boot",
+      "artifact": "SCR08.svg",
+      "evidence": "S1 'Locked: wait for unlock'.",
+      "issue": "Implies the service may run before first unlock while credential-encrypted SQLite is inaccessible; direct-boot awareness and listener behavior before unlock are unstated.",
+      "exact_minimal_correction": "State 'Service is not direct-boot aware; boot start is deferred until after first unlock' or define the pre-unlock closed-listener behavior.",
+      "verification_needed": "Main design doc."
+    },
+    {
+      "id": "P4-40",
+      "severity": "needs-verification",
+      "area": "ui-spec/constants",
+      "artifact": "SCR04.svg, SCR05.svg",
+      "evidence": "'8 KiB descriptors / estimate 1800 tokens / Strict bytes enforced; token estimate labeled'; '256 events or 1 MiB maximum'.",
+      "issue": "These read as design defaults rather than sample data; they must match the document's stated defaults.",
+      "exact_minimal_correction": "Mark as 'example' on screen or align with the doc's defaults.",
+      "verification_needed": "Main design doc budgets and retention defaults."
+    }
+  ],
+  "verified_resolutions": [
+    "V1: All three C4 views are native Structurizr PlantUML exports (data-source-line, data-uid, Structurizr style attributes), with no Mermaid content in any pass-4 artifact; requirement 10 native views hold for these files.",
+    "V2: The injected canvas rect in each diagram byte-matches build.gradle.kts copyVectorWithCanvas, confirming the diagrams passed through the described pipeline.",
+    "V3: expectedNativeViews (11) and expectedCodeViews (5) in build.gradle.kts match exactly the 16 diagram files in the shared manifest.",
+    "V4: Startup ordering exposes the listener only after the sealed atomic view (step 5 after step 4), consistent with SCR01.S1, SCR10 and the STB03 footer on truthful readiness.",
+    "V5: Screens, deck and manifest are honestly labeled as design only ('not a running application', 'Design only', implemented_android_ui=false), with no implementation claimed.",
+    "V6: ui-asset-manifest.json storyboard screen sequences equal the STB SVG panel sequences and the Marp slide order; screen titles and requirement strings match SVG title/desc text.",
+    "V7: Relative links in ui-screens-and-storyboards.md and storyboard.md resolve within the manifest, except the generated storyboards.html (P4-35).",
+    "V8: The build resolves no dependencies (plugins { base }), pins the Gradle wrapper with sha256 and validateDistributionUrl, verifies the PlantUML checksum with an explicit failure, produces a reproducible zip, rejects external assets in the HTML, guards inlined image paths against traversal, rejects Mermaid, and enforces vector text with no raster or script in SVGs.",
+    "V9: Screen states cover empty, denied, disconnected and error cases and a protected owner flow (SCR09); SCR07/STB02 claims match requirement 4 (no handshake, OK envelope with succeeded=false, plaintext loopback without TLS, no multitouch, protected root excluded, socket-close cancellation, release of pressed keys).",
+    "V10: Component descriptions encode requirement 5/6/7/8 principles: immutable imports with overlays and CAS, unknown versus unavailable distinction, bounded journal with local reply and cleanup obligations, discovery that does not grant authority, credential and capability epochs.",
+    "V11: SQLite is the declared home of policy, groups, views, journal and audit, matching requirement 2."
+  ],
+  "cross_artifact_questions": [
+    "Q1 (workspace.dsl, ArcComponents, Containers): Is a Compose management UI element modeled, with a single relationship to OwnerCommandFacade? Is OwnerCommandFacade excluded from the ServerComponents view by an explicit include list?",
+    "Q2 (CallbackFlow.svg, workspace.dsl): Do McpServer->CallbackBroker and CallbackBroker->Android OS (cleanup) relationships exist in the model? If yes, why are they absent from ServerComponents?",
+    "Q3 (main doc, server-core-classes.svg): Is there one SQLite connection/transaction owner shared by CatalogRepository, CallbackBroker and AuditLogger, and is admission+audit one transaction?",
+    "Q4 (main doc): Declared foregroundServiceType, startForeground timing, per-version boot eligibility matrix, direct-boot awareness.",
+    "Q5 (main doc): Device-view refresh triggers, epoch bump and in-flight behavior during re-resolution.",
+    "Q6 (main doc, CallbackFlow): Subscription reconciliation after process restart, orphan deadline after client disconnect, enumerated overflow policies.",
+    "Q7 (main doc): Fail-closed semantics when the mandatory audit append fails, and audit retention versus optional-log pruning.",
+    "Q8 (remote_control.proto): Existence of 'arc-protobuf-v1', a request-ID field, a probe/capabilities command and CommandResult.succeeded.",
+    "Q9 (main doc): Existence and meaning of FR-KT-01..03, FR-DEV-01, FR-GRP-01..03, FR-CB-01..04, FR-ARC-01..04; which IDs cover policy CRUD, MCP transport and ADB backend.",
+    "Q10 (toolchain-lock.json, README): Which 5 files are pinned; whether the Structurizr CLI digest, Marp lock hash and Node version are recorded; how tools are bootstrapped offline.",
+    "Q11 (receipts): Do gradle-validate-001..005 and gradle-package-001 enumerate docs/storyboards.html and docs/checksums.sha256 with hashes, and are they self-reported by the same build?",
+    "Q12 (server-core-classes.svg, server-execution-classes.svg, code-diagrams.md): Do the class views include OwnerCommandFacade, a database owner and the UI classes, matching the component views?",
+    "Q13 (main doc): MCP listener bind address/port policy, Origin validation, and the remote-host adb forward instruction.",
+    "Q14 (main doc): SCR09 modality and FLAG_SECURE on the approval window; the owner-driven session model behind SCR04.C02.",
+    "Q15 (main doc): Whether 256 events / 1 MiB retention and the 8 KiB descriptor budget are the stated defaults.",
+    "Q16 (verifyDesignDocs vs docs): Does any markdown link to 'Android MCP Bridge Design.md' with %20 encoding? The link checker resolves the raw target text and would fail on encoded names."
+  ],
+  "limitations": [
+    "No tools were used: SVGs were inspected as source text, not rendered; layout overlaps or clipping cannot be judged.",
+    "Gradle, Structurizr, PlantUML and Marp were not executed; build receipts belong to another pass and are treated as claims.",
+    "The Gradle 8.14.3 checksum and the existence of PlantUML 1.2025.10 could not be confirmed offline.",
+    "The main design doc, workspace.dsl, code-diagrams.md, round013 corrections, finding ledger, proto file and the other diagrams were not in this pass; findings that depend on them carry verification_needed.",
+    "No design013 ledger was available here, so verified_resolutions lists properties verified in the current artifacts rather than closed regressions.",
+    "The brightness primary fact is not referenced by any pass-4 artifact and was not applied."
+  ],
+  "report_complete": true
+}

@@ -1,0 +1,170 @@
+{
+  "review_scope": {
+    "round": "005 fresh immutable candidate, static review only, no execution",
+    "artifacts_reviewed": "design/Android MCP Bridge Design.md; catalog/README.md; catalog/API-CONTRACT.md; schema.sql; bridge-config.sql; migrations 001/002 and evidence originals; all 8 contracts incl. openapi.json; all 20 tooling modules; all 16 test modules; 4 diagram assets; 22 evidence files",
+    "checks_performed": "prior F-01..F-09 re-verified against current files; generated/generic/known-raw/unknown-raw policy equivalence (policy_reference + bridge-config DDL); cat1 ETag/CAS, publication, conflict/tombstone/reverse-collision/cursor (schema triggers, views, contract_reference, API-CONTRACT); copy migration ordering; parser AST/annotation scope/owner reset/locators; provenance identity scheme 3; test receipt internal consistency (93 tests enumerated = 93 run); coverage arithmetic (37,873 by kind; 530,028 by kind; 90,272 index; 102 selected projects hand-counted)"
+  },
+  "verdict": "NOT_READY",
+  "scores": {
+    "design": {
+      "accuracy_0_100": 96,
+      "completeness_0_100": 96,
+      "rationale": "F-03/F-09 text now matches RawGrant.schema and permission_reader. Identity, single evaluator with binding.invoke shared tool_id, admission linearization, service/boot/status truthfulness, separate MCP/ADB health, three authorities, CRUD/ETag/cursor rules and runtime gates are consistent with DDL and fixtures. Losses: multi-binding convenience wrappers unrepresentable in tool_binding_aliases (F-14); brightness range unverifiable by me (F-19, no deduction)."
+    },
+    "contracts_schema": {
+      "accuracy_0_100": 95,
+      "completeness_0_100": 95,
+      "rationale": "F-05/F-06/F-08 enforced and fixture-tested (base-hash pointer triggers, entry_history_reasons, nullable Registry.api_level, four identity namespaces). Remaining: deleted-local tombstone hides a new import without conflict (F-11); alias UNIQUE (F-14); Entry $id/version gating and DELETE 422 residue, stale README evidence paragraph (F-15)."
+    },
+    "extractor": {
+      "accuracy_0_100": 92,
+      "completeness_0_100": 92,
+      "rationale": "F-02 (aidl_lex), F-04 (aidl-* kinds), F-07 (ValueError guard) resolved with fixtures. New medium defect: enrich() overwrites an interface's 'unsupported'/'declaration-only' parse_status with 'methods-parsed' (F-10). Lows: hardcoded '37.2' (F-12), SDK class nodes published as 'unsupported' making the index source always 'partial' (F-13), record compact constructors (F-17), resource leaks (F-18)."
+    },
+    "production_catalog_data": {
+      "accuracy_0_100": 64,
+      "completeness_0_100": 30,
+      "rationale": "Only release-002 exists (legacy builder, rebuilt_with_corrected_extractor=false, 552 variant omissions, 4,133 of 37,873 sources, 10 of 1,160 definitions, 875 unmatched annotations); AIDL smoke shows legacy data lacks 925 member/417 method occurrences now parsed. release005: no database, no validation, production_success_claimed=false; 985 repositories unenumerated; SDK 37.2 archive/index retrieved, not imported."
+    }
+  },
+  "overall": {
+    "accuracy_0_100": 87,
+    "completeness_0_100": 66,
+    "verdict": "NOT_READY",
+    "rationale": "Design/contracts/extractor are near target with one new medium and several low fixable defects. Overall completeness is bounded by the required public binding/permission coverage, which remains a missing production input (F-01); acknowledged gaps earn no completeness."
+  },
+  "findings": [
+    {
+      "id": "F-01",
+      "severity": "high",
+      "classification": "missing_input",
+      "artifact": "evidence/production-release005-status.json; progress-005.json; source-coverage-release005.json; legacy-populated-round4-schema-validation.json",
+      "evidence": "'final_database_present': false, 'final_validation_present': false, 'production_success_claimed': false; 'released_snapshot': 'release-002', 'released_source_count': 4133, 'released_permission_definitions': 10; 'complete': false, 'excluded': 985; 'rebuilt_with_corrected_extractor': 'false', 'declaration_variant_omissions': 552",
+      "issue": "No validated catalog built with the corrected tooling from the retrieved sources, SDK 37.2 archive/index or 1,160-definition manifest; 985 repositories have unknown binding/permission file counts.",
+      "exact_minimal_correction": "Source task: build_catalog.py on the release005 inventory into an empty directory, validate_catalog.py to an external report; supply report with sources==37873, permission_definitions>=1160, catalog_meta rebuilt_with_corrected_extractor=true, aidl parse-status distribution; add relevance classification or file enumeration for the 985 excluded projects (or a recorded owner scoping decision).",
+      "verification_needed": "release005 validation-report.json, coverage manifest with excluded-project classification, tooling hash list of the build snapshot."
+    },
+    {
+      "id": "F-10",
+      "severity": "medium",
+      "classification": "artifact_defect_new",
+      "artifact": "catalog/tooling/aidl_members.py enrich(); parsers.py aidl(); build_catalog.py aidl branch",
+      "evidence": "parsers.aidl(): return dict(...,members=[],parse_status='unsupported',reason='Unbalanced declaration body') and parse_status='declaration-only' when no '{'; enrich(): \"if kind=='interface': ... result['parse_status']='partial' if any(m['kind']=='unsupported' ...) else 'methods-parsed'; return result\" with no prior status check; build: \"root_kind='unsupported' if d['parse_status']=='unsupported' else 'aidl-'+d['declaration_kind']\" and issue() only when status not in ('methods-parsed','field-metadata-parsed'). test_malformed_aidl fails earlier inside annotations(), so this path is untested.",
+      "issue": "An interface with an unbalanced or absent body is published as kind aidl-interface, parse_status 'methods-parsed', zero members and no issue row; the failure survives only in extensions.schema_resolution_reason. Silent mislabel of a parse failure as success, introduced by the F-02 enrich change.",
+      "exact_minimal_correction": "In enrich() interface branch: if declaration['parse_status'] not in ('methods-parsed','partial'): return result. Fixture: 'package a; interface I { void x();' asserting parse_status 'unsupported', root kind 'unsupported', one aidl-semantic-gap issue, raw schema retained.",
+      "verification_needed": "New fixture passing; release005 aidl status counts."
+    },
+    {
+      "id": "F-11",
+      "severity": "low",
+      "classification": "artifact_defect",
+      "artifact": "catalog/migrations/002-evidence-and-publication.sql; schema.sql; tooling/migrate_v3.py",
+      "evidence": "active_local_collision_insert/update WHEN '... o.imported_binding_id IS NULL AND o.state='active''; runtime_catalog 'LEFT JOIN overlays o ON o.entry_id=e.entry_id WHERE o.entry_id IS NULL OR o.state='active''; API-CONTRACT: 'A local addition followed by import of the same signature is always marked conflict during publication'; contract_reference.publish_fixture conflicts any entry where not r['imported'] (including deleted). migrate_v3 copies active_registry before overlays and registry_entries.",
+      "issue": "A deleted local tombstone with the same entry_id as a newly imported entry does not block pointer admission but hides that import from runtime_catalog with no conflict row. Copy migration never evaluates either collision or base-hash invariant.",
+      "exact_minimal_correction": "Change both active_local_collision triggers to o.state IN ('active','deleted'); add test_round4 subtest (deleted local + registry entry => IntegrityError; after conflict+history => runtime_catalog count 0). In migrate_v3 after copy, execute the same EXISTS predicates and raise on any hit.",
+      "verification_needed": "Schema fixture; migration fixture with seeded collision."
+    },
+    {
+      "id": "F-12",
+      "severity": "low",
+      "classification": "artifact_defect",
+      "artifact": "catalog/tooling/build_catalog.py annotation pass; sdk_api_index.py; restore_snapshot.py",
+      "evidence": "\"if s.get('platform_api_version')=='37.2': current=exact_index_targets.get(canonical)\" else fallback_supported path; sdk_api_index.parse(data,target='37.2'); restore_snapshot: \"p.attrib['path']=='platforms;android-37.2'\"",
+      "issue": "Platform version is a hardcoded literal in a pipeline that claims schema/source versioning; a 37.3 annotations zip with a 37.3 index would silently take the java: fallback namespace.",
+      "exact_minimal_correction": "Map annotations to the index when s['platform_api_version'] equals an imported sdk-api-index source's platform_api_version/extras target_platform_api; pass target from inventory; reject mismatches. Fixture with version '37.3' on both sources.",
+      "verification_needed": "Fixture passing with non-37.2 version."
+    },
+    {
+      "id": "F-13",
+      "severity": "low",
+      "classification": "artifact_defect",
+      "artifact": "catalog/tooling/sdk_api_index.py; build_catalog.py",
+      "evidence": "\"kind='unsupported' if node is c else 'field'\", \"parse_error='API index omits interface/class/annotation distinction'\"; build: \"report['unsupported']+=r['kind']=='unsupported'\", \"status='partial' if report['unsupported'] else 'parsed'\", issue() per unsupported; source-coverage-release005 counts_by_kind 'unsupported': 6681",
+      "issue": "Every SDK class node becomes kind 'unsupported' with an issue row, so the official index source is always 'partial' and reconciliation cannot separate parse failures from unknown type kind (same class as resolved F-04).",
+      "exact_minimal_correction": "Add 1.1.0 kind 'type' (type_kind_status unknown) for index class nodes; emit issues only for descriptor failures; update test_field_type_and_type_kind_are_not_invented.",
+      "verification_needed": "Fixture; release005 index source status 'parsed'."
+    },
+    {
+      "id": "F-14",
+      "severity": "low",
+      "classification": "artifact_defect",
+      "artifact": "catalog/bridge-config.sql tool_binding_aliases; design 'Canonical permission entry points'",
+      "evidence": "'alias_name TEXT NOT NULL UNIQUE, ... PRIMARY KEY(tool_id,binding_id)'; design: 'Convenience wrappers have their own restrictive entry-point rules in addition to every required binding grant'",
+      "issue": "A wrapper requiring two bindings needs two rows with the same alias_name, violating UNIQUE; multi-binding plans are unrepresentable.",
+      "exact_minimal_correction": "UNIQUE(alias_name,binding_id) and a design sentence stating one alias may map several canonical bindings; fixture inserting two bindings under one alias.",
+      "verification_needed": "DDL fixture."
+    },
+    {
+      "id": "F-15",
+      "severity": "low",
+      "classification": "artifact_defect",
+      "artifact": "catalog/contracts/*.schema.json; openapi.json; catalog/README.md",
+      "evidence": "'$id': 'urn:android-binding-catalog:1.0.0:Entry' while kind enum carries aidl-parcelable/aidl-union/aidl-enum with no if/then on schema_version; DELETE /entries/{entry_id} lists 422 'Schema, source or semantic validation failed' for a bodiless request; README: 'Current reproduction evidence is evidence/tests-regression-024.txt (85 tests)... release004 remains staging' versus supplied tests-regression-027.txt (93) and release005.",
+      "issue": "Minor-version vocabulary is not gated by schema_version; contract residue; stale README evidence paragraph.",
+      "exact_minimal_correction": "Set $id to 1.1.0 with if kind in aidl-* then schema_version pattern ^1\\.[1-9]; remove DELETE 422; update README paragraph to 027/93/release005.",
+      "verification_needed": "Text/schema review."
+    },
+    {
+      "id": "F-16",
+      "severity": "low",
+      "classification": "missing_evidence",
+      "artifact": "evidence/source-pipeline-copy-manifest.json; production-release005-status.json; progress-005.json",
+      "evidence": "copy-manifest target sha256 build_catalog.py 68d945e2..., sdk_api_index.py 3a7767ce..., test_source_integration.py 17080621... differ from INPUT MANIFEST ded0b0e2..., b859746e..., 4405359c...; status 'code_snapshot': 'build-snapshots/release005' without hashes; progress 'source_inventory_sha256': '31c52204...' versus coverage inventory sha256 'f534ccdd...'",
+      "issue": "Cannot establish that the release005 production run uses the F-02/F-04/F-07-fixed tooling or which inventory it consumes.",
+      "exact_minimal_correction": "Add per-file sha256 of catalog/tooling and contracts plus the inventory sha256 to production-release005-status; reconcile the progress inventory hash.",
+      "verification_needed": "Hash list matching INPUT MANIFEST."
+    },
+    {
+      "id": "F-17",
+      "severity": "low",
+      "classification": "artifact_defect",
+      "artifact": "catalog/tooling/java_source.py",
+      "evidence": "'compact_constructor_declaration' handled via ps=c.child_by_field_name('parameters') (None) => canonical owner+'#<init>()'; record_declaration mapped to 'class', components excluded",
+      "issue": "Record compact canonical constructors get a wrong (possibly colliding) signature; record components are dropped silently.",
+      "exact_minimal_correction": "Derive compact constructor parameters from the record's 'parameters' field; emit components as fields; add a record fixture.",
+      "verification_needed": "Fixture."
+    },
+    {
+      "id": "F-18",
+      "severity": "low",
+      "classification": "artifact_defect",
+      "artifact": "catalog/tooling/validate_catalog.py run()",
+      "evidence": "\"for line in (out / 'entries.jsonl').open():\" (ResourceWarning at line 54 in tests-regression-027.txt); db.close() only on success path",
+      "issue": "File handle and database connection leak on failure.",
+      "exact_minimal_correction": "Use with-blocks and try/finally as run_database does.",
+      "verification_needed": "Receipt without ResourceWarning."
+    },
+    {
+      "id": "F-19",
+      "severity": "low",
+      "classification": "unverified",
+      "artifact": "evidence/brightness-primary-source.json; design settings.brightness.get/set",
+      "evidence": "exact_short_quote 'between 1 (minimum) and 255 (maximum).' verified_at 2026-10-26; design documentedRange 1..255, 0 returned with anomaly flag, write default 16..240",
+      "issue": "Static review cannot confirm the quote; the AOSP SCREEN_BRIGHTNESS Javadoc historically read 'between 0 and 255'. If 0 is documented, the set schema (rawValue 1..255) rejects a legal value. No score deduction: the design reports out-of-range reads honestly either way.",
+      "exact_minimal_correction": "None if the quote is confirmed; otherwise change documentedRange to 0..255, keep anomaly flag and 16..240 default.",
+      "verification_needed": "Fetch the cited URL and retain a page snapshot hash."
+    }
+  ],
+  "verified_resolutions": [
+    "F-02: parsers.aidl() splits with aidl_lex.chunks (only ([{ and quotes nest); enrich() skips <...> before '{'; test_interface_shift_constant_does_not_consume_methods and test_generic_parcelable_retains_field pass (027, round004-optimized-final).",
+    "F-03: design now states constraints_json is scope-only with the four RawGrant fields and SQL-column authority.",
+    "F-04: root_kind 'aidl-'+declaration_kind with schema_version 1.1.0; issues only for unresolved statuses; test_structured_aidl_members_survive_publication asserts no 'Structured AIDL' unresolved and zero aidl-semantic-gap issues.",
+    "F-05: active_imported_base_insert/update triggers; 4 subtests of test_changed_missing_and_suppressed_import_bases_block_pointer pass.",
+    "F-06: HistoryEvent.reason optional in all duplicated contracts; entry_history_reasons append-only with FK; Registry.api_level ['integer','null']; test_history_reason_has_append_only_storage_and_contract and test_oracle_retains_mutation_justification pass.",
+    "F-07: explicit ValueError('API index locator alignment failed'); mocked alignment failure passes under -O.",
+    "F-08: README enumerates java:, java-source:, aidl:, jvm: forms, package: infix and proven_current_sdk_jvm_identity.",
+    "F-09: permission_reader.read wraps unknown nodes with x-raw-node deep copy, rejects malformed known nodes and non-1.x versions; fixture passes."
+  ],
+  "blockers_to_98_98": [
+    "Missing input F-01: validated corrected production release with full retrieved-source import, SDK 37.2 index/source import, 1,160 manifest definitions, and excluded-repository classification.",
+    "Fix F-10 (medium) and F-11..F-18 (low) with the listed fixtures; confirm F-19 quote.",
+    "Supply F-16 provenance hashes so production evidence can be tied to the reviewed tooling."
+  ],
+  "limitations": [
+    "No tools: no test execution, hash verification, URL fetch or database inspection; test receipts and validation reports are supplied evidence.",
+    "Project coverage table: 102 selected rows hand-verified; total 1,087 accepted as supplied.",
+    "Pele 1.10.0 rendering cannot be verified from SVG content; asset hashes match the manifest and portable-assets-check.",
+    "requirements-extraction.txt and build-snapshots/release005 not supplied."
+  ],
+  "report_complete": true
+}

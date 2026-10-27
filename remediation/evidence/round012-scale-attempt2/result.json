@@ -1,0 +1,99 @@
+{
+  "completed_at": "2026-10-27T04:02:47.571890+00:00",
+  "scope": "Entire historical008-shaped registry projected/resolved by current code with offline37.2 fixture facts; no production publication, devices, OS authority or coverage completion",
+  "source_path": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/catalog/output/release-008/catalog.sqlite",
+  "source_size": 8306286592,
+  "source_mtime_ns": 1793062152452677678,
+  "source_bytes_metadata_unchanged": true,
+  "entries": 799527,
+  "source_count": 43128,
+  "inventory_sha256": "56db7e2366bef4aeb940aec329047c657e0da328db9ed5075f8e856c5fc73ccb",
+  "snapshot_inventory_sha256": "56db7e2366bef4aeb940aec329047c657e0da328db9ed5075f8e856c5fc73ccb",
+  "entity_kinds": {
+    "binding": 709293,
+    "other": 31434,
+    "type": 58800
+  },
+  "states_by_entity_kind": {
+    "binding": {
+      "available": 392959,
+      "unknown": 316334
+    },
+    "other": {
+      "unknown": 31434
+    },
+    "type": {
+      "available": 39631,
+      "unknown": 19169
+    }
+  },
+  "states_by_source_kind": {
+    "java-source": {
+      "available": 375533,
+      "unknown": 139033
+    },
+    "sdk-api-index": {
+      "available": 57057,
+      "unknown": 33215
+    },
+    "source-signature": {
+      "unknown": 141515
+    },
+    "aidl": {
+      "unknown": 52427
+    },
+    "sdk-signature": {
+      "unknown": 97830
+    }
+  },
+  "source_kind_counts_can_overlap": true,
+  "reasons": {
+    "APPLICABLE_EVIDENCE": 432590,
+    "APPLICABILITY_INCOMPLETE": 173636,
+    "NON_EXECUTABLE_INVENTORY_NODE": 31434,
+    "APPLICABILITY_UNKNOWN": 167607,
+    "PLATFORM_APPLICABILITY_UNPROVEN": 96275
+  },
+  "phases": {
+    "projection_index_seconds": 68.06682038516738,
+    "project_and_validate_seconds": 872.7045169021003,
+    "full_resolve_validate_seconds": 565.5841785878874
+  },
+  "total_seconds": 1520.9393310020678,
+  "max_rss_kib": 4505948,
+  "facts": {
+    "profile_id": "fixture",
+    "target_key": "platform:local",
+    "android_user_id": 0,
+    "backend_instance_id": "backend-fixture",
+    "device_instance_id": "boot-fixture",
+    "identity_verified": true,
+    "capability_epoch": 0,
+    "observed_at": "2026-10-27T01:00:00Z",
+    "platform": {
+      "major": 37,
+      "minor": 2
+    },
+    "extensions": {},
+    "modules": {},
+    "interfaces": {},
+    "oem": null,
+    "build_fingerprint": null,
+    "evidence_ids": [
+      "offline-scale-fixture-no-device-probe"
+    ]
+  },
+  "producer_files": {
+    "catalog/tooling/catalog_projection.py": "ca2a01d085f3937bd32ff8762cf877eb59bf3206a6070540d0abe03aa1ce6d57",
+    "catalog/tooling/device_resolution.py": "d3bd71ec87cf049d034708163f170e7bd22fda321ac1fe645cc5c96a82b30d08",
+    "catalog/tooling/dispatch_manifest.py": "fc7a0453d57bd1d2182282bdc3ee130f4f33c17653b9a03ef346472909e59667",
+    "catalog/contracts/DeviceResolution.schema.json": "da4fc856fd36aef5cf81522bf2b024dec60d48759a3539d74ac98ccf3f91d804",
+    "catalog/contracts/DeviceView.schema.json": "586973a8e92b76fd76379c3cdb77a6e5c0f1ed76cc2f27927f93cabae538a3f5"
+  },
+  "limitations": [
+    "Old immutable declarations retain pre-R9/R10 extractor defects; current AIDL import fix cannot retrospectively invent missing imports",
+    "Historical008 lacks3409lifecycle rows; source snapshot identities are original008 and not relabeled",
+    "Fixture availability does not prove actual device presence, codecs, grants or global source completeness",
+    "This checks full in-memory resolution scale, not full SQLite activation of799527rows"
+  ]
+}

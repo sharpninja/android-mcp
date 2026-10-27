@@ -1,0 +1,65 @@
+{
+  "captured_at": "2026-10-27T01:09:24.373025+00:00",
+  "tests_passed": 167,
+  "test_receipt": "tests-regression-050.txt",
+  "test_mode": "ResourceWarnings treated as errors",
+  "latest_review_historical_snapshot": {
+    "accuracy_0_100": 92,
+    "completeness_0_100": 80,
+    "verdict": "NOT_READY",
+    "rationale": "All R8 artifact findings are verifiably fixed in the candidate with before/after receipts and a full-corpus parser audit. Remaining artifact defects are low severity and fixable. Overall completeness stays bounded by missing source input: the released catalog must be regenerated from the corrected snapshot with regenerated caches, and required public binding/permission coverage remains materially incomplete and partly unscoped."
+  },
+  "current_production": {
+    "release": "007",
+    "entries": 796212,
+    "sources": 42620,
+    "permission_definitions": 1467,
+    "permission_names": 1700,
+    "independent_validation": "passed",
+    "unmatched_annotations": 846,
+    "undefined_permission_names": [
+      "android.contacts.permission.MANAGE_SIM_ACCOUNTS",
+      "android.permission.MANAGE_DEVICE_POLICY_DEVICE_SECURITY_LOGGING",
+      "android.permission.MANAGE_DEVICE_POLICY_USER_SECURITY_LOGGING",
+      "android.permission.MANAGE_PERIPHERAL_CUSTOMIZATION",
+      "android.permission.QUERY_APP_USAGE",
+      "android.permission.READ_HOME_TIME_ZONE"
+    ],
+    "complete": false,
+    "source_reconciliation": "42620of42620inventorysources; this is not all43128selected acquisition paths or global coverage",
+    "selected_not_retrieved": 508
+  },
+  "production_equals_latest_candidate": false,
+  "ddl_matches_candidate": false,
+  "producer_provenance": "production007-full-code-provenance.json",
+  "legacy_copy_validation": "legacy-populated-round010-validation.json:135508passed;552historicalvariantomissions;semanticrebuildfalse",
+  "current_parser_audit": {
+    "corpus": "frozen006AIDLsource text, notall007AIDLsources",
+    "files": 19781,
+    "type_declarations": 22447,
+    "records": 161693,
+    "unsupported_statements": 0,
+    "count_mismatches": 0,
+    "quarantines": 0
+  },
+  "outside_classification": {
+    "unknown": 732,
+    "relevant": 247,
+    "irrelevant": 6
+  },
+  "outside_updated_at": "2026-10-26T21:44:16.052518+00:00",
+  "startup_requirement": "Addedafter009freeze; new independent assessment required.16offlinefixturetests pass; no real device probes, Binder runtime or HTTPservice",
+  "design_library_versions": {
+    "libfile_6b805280260081918bc0189c22e12c28": 4,
+    "libfile_0badd2151b588191ace425d019dd1273": 2,
+    "libfile_b09763c5ad1c81918c28b43e12671137": 1
+  },
+  "known_gaps": [
+    "Production007predatesR8nestedtype/Java/R9parser and latestDDL fixes; matching regenerated caches/new build+validation required",
+    "508selected paths not retrieved; outside985audit247relevant732unknown6irrelevant; relevant paths partly imported, native/generated/protocol coverage unknown",
+    "846unmatched external annotations across all kinds,6permission names undefined by current definitions/constants",
+    "Full historical/future bindingANDtype availability metadata not yet integrated in production; unresolved schema/wire contracts cannot be invoked"
+  ],
+  "complete": false,
+  "acceptance_claimed": false
+}

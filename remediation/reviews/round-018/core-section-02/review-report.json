@@ -1,0 +1,284 @@
+{
+  "stage": "core-section-evidence-check-2/7",
+  "coverage": {
+    "artifact": "design-c4/docs/Android MCP Bridge Design.md",
+    "byte_range": "55000-110000 of 206076",
+    "sha256_claimed": "55ede96e5042e7dfb23f930a49c9a6d126d6b7525a8ee32558fb343615892237",
+    "sha256_verified": false,
+    "sections_inspected": [
+      "Logging tail (Security and data handling, Failure and deletion behavior, Logging acceptance checks)",
+      "15 Authorized ADB execution architecture (modes, pairing/lifecycle, SQLite connection/target profiles, external host forwarding)",
+      "16 On demand screen state and coordinate taps",
+      "17 Internal Kotlin ARC engine (summary only; port contract is outside slice)",
+      "18 Protected consent and integration acceptance",
+      "Full binding coverage and generic invocation; registry storage; permissions metadata; catalog compatibility and CRUD API",
+      "Startup device-resolved bindings/types; applicability; classes table; generic Binder codecs; atomic activation; source projection/storage; overlays; traceability; diagram sections; remediation precedence; start of client_raw_grants DDL"
+    ],
+    "boundary_cuts": {
+      "start": "Slice opens mid-sentence ('puts or expands that call's captured fields'); the logging capture rule it belongs to is before byte 55000 and is not assessed.",
+      "end": "Slice ends mid-sentence in client_raw_grants constraints_json ('allowed_displays, max_'); remaining raw-grant constraint keys are unresolved, not assumed missing."
+    },
+    "method": "Text-only reading of the supplied bytes. No files, diagrams, DSL, DDL, OpenAPI, fixtures or receipts were opened; platform claims from reviewer recollection are flagged verification_needed."
+  },
+  "findings": [
+    {
+      "id": "CS2-01",
+      "severity": "high",
+      "area": "ADB backend architecture / requirement 3 remote-host loopback forwarding",
+      "artifact": "Section 15 'Three distinct backend modes', 'External host forwarding', 'SQLite connection and target profiles'; Section 16 tool table",
+      "evidence": "'External ADB host | An already-authorized USB or securely paired wireless host forwards its localhost socket to a phone loopback endpoint.' ; 'For host-to-phone connections use adb forward, not adb reverse.' ; 'Do not use adb -a, expose port 5037, enable tcpip 5555, bind 0.0.0.0 or create an Internet tunnel.' ; 'backend_kind CHECK self_adb/external_adb/avalonia_runtime' ; 'input.tap | Input: x, y, displayId and optional referenceCaptureId, with an approved connection profile.' ; 'record ownership of the mapping and remove only that mapping on stop.'",
+      "issue": "external_adb is modeled as an execution backend (a connection_profiles backend_kind selectable by screen.state/input.tap), but the design gives the phone-resident bridge no path to shell authority through a host: adb forward only lets the host reach the phone, and the two mechanisms that could let the phone reach the host adb server (adb reverse, exposing 5037) are explicitly prohibited. The mode as written is MCP/runtime ingress only. The forwarding commands and 'record ownership of the mapping' also imply an unnamed host-side component that is not part of 'one coherent Android packaging/process'.",
+      "exact_minimal_correction": "State that external_adb profiles are ingress transports (MCP HTTPS, optional target-runtime endpoint) and are not eligible executor backends; add a constraint that tools.executor_kind='adb' requires connection_profiles.backend_kind='self_adb'; add a trigger/CHECK to that effect. If host-side execution is intended instead, add the host-resident component, its authenticated channel and its principal to the design and C4 container model.",
+      "verification_needed": true
+    },
+    {
+      "id": "CS2-02",
+      "severity": "medium",
+      "area": "Self ADB pairing lifecycle / implementability",
+      "artifact": "Section 15 'Pairing and lifecycle' steps 2 and 4; connection_profiles fields",
+      "evidence": "'Use the pairing endpoint only for pairing, then discover the authenticated connect endpoint. Ports may differ and change after reboot, debugging toggle or network changes.' ; 'Reconnect with the same trusted profile only after endpoint rediscovery and peer verification' ; 'peer_fingerprint nullable; verification_strength'",
+      "issue": "No discovery mechanism is specified for the pairing or connect endpoint (mDNS/NsdManager service lookup versus owner manual entry), no bounded discovery timeout or multi-result disambiguation, and no statement of which address is dialed (127.0.0.1 versus the Wi-Fi interface IP, which 'network changes' can alter). 'Peer verification' does not say what is compared, and verification_strength and identity_verification_method have no declared value domains although sibling columns carry CHECK constraints.",
+      "exact_minimal_correction": "Specify NsdManager discovery of the adb TLS pairing and connect service types with owner manual entry fallback, a bounded timeout, exact-instance matching, the dialed address, peer verification as comparison of adbd's TLS certificate fingerprint captured at pairing against peer_fingerprint, and CHECK domains for verification_strength and identity_verification_method.",
+      "verification_needed": true
+    },
+    {
+      "id": "CS2-03",
+      "severity": "medium",
+      "area": "Exact platform claims / screen.state and input.tap dispatch",
+      "artifact": "Section 16 tool table and 'Dispatch and outcome'",
+      "evidence": "'screen.state | Input: connectionProfileId, displayId.' ; 'input.tap | Input: x, y, displayId' ; 'Translate into a fixed reviewed ADB operation with validated numeric arguments, bounded duration and no caller-supplied shell text.' ; 'identify the coordinate-space version.'",
+      "issue": "The fixed ADB operations are not pinned. Reviewer recollection is that screencap -d expects a physical (SurfaceFlinger) display ID while input -d expects a logical display ID, so one displayId cannot drive both without an explicit mapping; the minimum Android version for per-display capture/injection is not stated; coordinateSpaceVersion is referenced but never defined.",
+      "exact_minimal_correction": "Pin the shell operations and argument forms, define displayId as the logical DisplayManager display ID, define the logical-to-physical mapping source for capture, state the minimum supported Android version, and define coordinateSpaceVersion as a documented enumeration with its semantics.",
+      "verification_needed": true
+    },
+    {
+      "id": "CS2-04",
+      "severity": "medium",
+      "area": "Startup lifecycle / performance mechanism",
+      "artifact": "'Atomic activation, invalidation and refresh'; 'Effective overlays, semantic identity and bounded execution'",
+      "evidence": "'Startup, reconnect/device replacement, boot/session or Android-user change, OS/build/OEM update, SDK extension/Mainline/module change, supported interface version/hash or reachability change, backend capability change and catalog/type/overlay publication invalidate affected active views and pending approvals. Mark the view stale immediately; no new device call may use it.' ; 'Resolution/validation took565.6seconds and the whole desktop probe peaked at4.30GiB' ; 'no call is admitted through a partial/stale view.'",
+      "issue": "Listing startup itself as an invalidation trigger, combined with no-partial-view admission, means every service process start (frequent on Android; the design elsewhere concedes recovery is best effort) blocks all device calls until a complete multi-hundred-thousand-entry rebuild finishes. The facts hash, epoch and generation pins needed for safe reuse exist but reuse-on-match is never specified.",
+      "exact_minimal_correction": "Change startup from 'invalidate' to 'revalidate': recompute the facts hash and compare it with the sealed view's pinned facts hash, scope and catalog/overlay generations; reuse the sealed snapshot when all match, otherwise mark stale and rebuild. Define the Resolving status shown during revalidation.",
+      "verification_needed": true
+    },
+    {
+      "id": "CS2-05",
+      "severity": "medium",
+      "area": "Binder endpoint acquisition / requirement 6",
+      "artifact": "'Full binding coverage and generic invocation' table; 'Classes and responsibilities'; 'Existing table extensions'",
+      "evidence": "'Bind only reachable endpoints with verified identity. IBinder does not enumerate every remote method or its parameter schema.' ; 'IGenericBinderTransactionEngine / IBinderTransport | Execute a verified typed transaction through the selected backend' ; 'tools.executor_kind CHECK native/adb/avalonia'",
+      "issue": "The slice never states how an IBinder reference is acquired per backend: bindService for exported app services, ServiceManager lookup (non-SDK for ordinary apps), or ADB shell 'service call' (shell authority, limited primitive argument encoding, hex reply). It also does not say which executor_kind a Binder transaction uses, so the 'live backend/OS authority' intersected by the admission gate is undefined for Binder calls.",
+      "exact_minimal_correction": "Add an endpoint-acquisition contract listing each route, its executor_kind, authority principal (bridge UID vs shell), codec limitations and the reason codes emitted when a route is non-SDK-blocked, unreachable or unsupported.",
+      "verification_needed": true
+    },
+    {
+      "id": "CS2-06",
+      "severity": "medium",
+      "area": "C4 dynamic views / requirement 10 and 12 links",
+      "artifact": "Image references in 'Classes and responsibilities' and 'Generic Binder invocation and codecs'",
+      "evidence": "'![Startup capability capture and atomic device view](diagrams/structurizr-Startup.svg)' and later '![Resolved view and policy-bound generic Binder dispatch](diagrams/structurizr-Startup.svg)'",
+      "issue": "Two different captions describing two different flows link the same SVG file. Either the generic Binder dispatch dynamic view does not exist or the link is wrong.",
+      "exact_minimal_correction": "Define and export a distinct dynamic view for policy-bound generic Binder dispatch and link it, or remove the second image if the startup view is intended to cover both.",
+      "verification_needed": true
+    },
+    {
+      "id": "CS2-07",
+      "severity": "low",
+      "area": "Documentation completeness / requirement 12 portable DSL assets",
+      "artifact": "'Architecture diagram' and 'Request and approval sequence' subsections",
+      "evidence": "'Editable source follows.' appears after both diagram paragraphs; the next content in each case is a blank line followed by the next heading.",
+      "issue": "The promised editable source is absent in the canonical Markdown at both locations.",
+      "exact_minimal_correction": "Replace each 'Editable source follows.' with a relative link to the view definition in architecture/workspace.dsl, or inline the DSL fragment.",
+      "verification_needed": false
+    },
+    {
+      "id": "CS2-08",
+      "severity": "low",
+      "area": "Schema consistency / ARC target naming",
+      "artifact": "'SQLite connection and target profiles'; Section 17",
+      "evidence": "'backend_kind CHECK self_adb/external_adb/avalonia_runtime' ; 'tools.executor_kind CHECK native/adb/avalonia; executions.connection_profile_id and target_id nullable, backend_kind and dispatch_time nullable.' ; 'compatible external ARC targets remain supported by the planned Kotlin client adapter.'",
+      "issue": "executions.backend_kind has no declared domain; no rule ties executor_kind to compatible profile backend_kind; the only ARC-protocol backend_kind is avalonia_runtime, which does not name a Compose/Kotlin ARC target even though section 17 and requirement 4 define such targets.",
+      "exact_minimal_correction": "Give executions.backend_kind the connection_profiles domain (or derive it by FK), add an executor-to-backend compatibility rule, and define a protocol-neutral ARC target backend_kind (e.g. arc_target) covering Avalonia and Compose targets.",
+      "verification_needed": true
+    },
+    {
+      "id": "CS2-09",
+      "severity": "low",
+      "area": "Policy mechanism / schema-bound grants",
+      "artifact": "binding registry table; 'Source projection, capture epoch and storage contract'; 'Atomic activation, invalidation and refresh'; CRUD test paragraph",
+      "evidence": "'client_binding_rules PK client_id plus binding_id | ... schema_hash; effect CHECK deny/ask/allow ... Exact schema-bound grants' ; 'The final schema_hash is SHA256 of canonical {schema_format:closure3, contract_hash:C, graph_digest:G}. A dependent type change therefore invalidates prior binding/schema grants' ; 'invalidate affected active views and pending approvals' ; 'Publishing altered schemas invalidates affected approvals and schema-bound grants until reevaluated.'",
+      "issue": "schema_hash is view-dependent, yet only catalog publication is said to invalidate grants; a view re-resolution after an OS or module update changes graph_digest and leaves rule rows with a mismatched schema_hash whose evaluation outcome and re-grant path are unspecified, and 'reevaluated' names no actor.",
+      "exact_minimal_correction": "State that a rule whose schema_hash differs from the active view's selected schema_hash is inert and treated as missing (deny), is surfaced in the UI as re-grant required, and whether owner-configured automatic rebinding is allowed when contract_hash is unchanged and only graph_digest changed.",
+      "verification_needed": true
+    },
+    {
+      "id": "CS2-10",
+      "severity": "low",
+      "area": "Protected consent / capture exclusion mechanism",
+      "artifact": "Section 18 'Protect management and approval from remote input'; integration evidence row 'Protected consent'",
+      "evidence": "'A protected Compose management surface must be outside the remote root and excluded from tree, properties and pixel frames; sensitive-name redaction does not redact pixels.' ; 'Captures show no protected data.'",
+      "issue": "For ADB shell capture the bridge does not control the capture path, so exclusion from pixels needs a platform mechanism; the design names none. Reviewer recollection is that FLAG_SECURE windows are blanked by shell screencap.",
+      "exact_minimal_correction": "Require FLAG_SECURE on every protected owner window and dialog, add a gate verifying blanking under shell screencap on reference builds, and record OEM variance as a known uncertainty.",
+      "verification_needed": true
+    },
+    {
+      "id": "CS2-11",
+      "severity": "low",
+      "area": "screen.state contract bounds",
+      "artifact": "Section 16 tool table and 'Coordinate and freshness contract'",
+      "evidence": "'Return a bounded PNG image plus width, height, displayId, rotation, captureId and capturedAt' ; 'if an implementation scales or crops it, it must expose an explicit image-to-display transform and coordinateSpaceVersion' ; 'Set a configurable short maximum age.'",
+      "issue": "The bound (bytes or pixels) and the over-bound behavior (fail versus scale with transform) are undefined; no per-client cap on retained capture references exists, so repeated captures within the maximum age grow unbounded; packaging of the PNG plus metadata in the MCP tools/call result is not stated in this slice.",
+      "exact_minimal_correction": "Define the maximum image size, the behavior when exceeded, a per-client retained-capture cap with eviction, and the result packaging (image content item plus structured metadata).",
+      "verification_needed": true
+    },
+    {
+      "id": "CS2-12",
+      "severity": "low",
+      "area": "Connection state model",
+      "artifact": "Section 15 'Pairing and lifecycle' step 2",
+      "evidence": "'Track Unpaired, Paired offline, Connecting, Connected, Locked and Revoked separately.'",
+      "issue": "'Locked' has no defined entry or exit condition and no mapping to the integration gate's 'device lock' case.",
+      "exact_minimal_correction": "Define Locked (for example keyguard-locked device where injection and capture target the lockscreen, or an owner/policy lock) with its transitions, or remove it.",
+      "verification_needed": false
+    },
+    {
+      "id": "CS2-13",
+      "severity": "low",
+      "area": "Logging concurrency (crosses start boundary)",
+      "artifact": "Logging tail, first paragraph",
+      "evidence": "'Serialize queued writes against logging reductions so a stale snapshot cannot commit afterward.'",
+      "issue": "The serialization mechanism is not stated in the slice; it may be defined before byte 55000.",
+      "exact_minimal_correction": "Stamp each queued projection with the client logging-settings revision captured at admission and recheck the current revision and level inside the same SQLite write transaction, discarding records whose captured level exceeds the current level.",
+      "verification_needed": true
+    },
+    {
+      "id": "CS2-14",
+      "severity": "low",
+      "area": "Dangling reference",
+      "artifact": "'Effective overlays, semantic identity and bounded execution'",
+      "evidence": "'it does not meet the headless runtime memory targets below.'",
+      "issue": "No numeric memory or latency targets appear within the slice after this sentence.",
+      "exact_minimal_correction": "State the targets at the referenced location or link to where they are defined.",
+      "verification_needed": true
+    },
+    {
+      "id": "CS2-15",
+      "severity": "low",
+      "area": "Canonical identity mechanism",
+      "artifact": "'Full binding coverage and generic invocation'; registry storage table; 'Catalog compatibility and administration API'",
+      "evidence": "'Build the registry from Android SDK/.NET binding metadata such as api.xml' ; 'Record classes, constructors, fields/properties, methods, overloads' ; 'Resolve public members through java.lang.reflect or supported MethodHandles from pinned JVM signatures' ; 'canonical source signature UNIQUE' ; 'Stable entry IDs identify namespace plus logical qualified signature'",
+      "issue": "The language and normalization of the canonical signature are undefined while inputs are described in .NET-shaped terms (properties, api.xml) and dispatch needs JVM signatures; the same member from two source shapes could receive different IDs or distinct members could collide. This is the identity mechanism, not source acquisition.",
+      "exact_minimal_correction": "Define the canonical signature as the JVM descriptor form (binary class name, member name, erased parameter and return descriptors) and document the mapping applied to .NET-shaped metadata before ID assignment.",
+      "verification_needed": true
+    },
+    {
+      "id": "CS2-16",
+      "severity": "low",
+      "area": "CRUD API ETag ambiguity",
+      "artifact": "'Separate catalog CRUD API' table",
+      "evidence": "'GET /v1/catalog/entries/{entry_id} | Effective entry and current cat1 ETag' ; 'GET /v1/catalog/entries/{entry_id}/history | Immutable history and current administrative ETag for CAS.'",
+      "issue": "Two ETag names are used for one entry; which one PUT/DELETE If-Match must carry, and whether they are identical, is not stated here.",
+      "exact_minimal_correction": "State that the administrative ETag is the same cat1 ETag, or define when each is required.",
+      "verification_needed": true
+    },
+    {
+      "id": "CS2-17",
+      "severity": "low",
+      "area": "In-flight behavior on view invalidation",
+      "artifact": "'Atomic activation, invalidation and refresh'; 'Generic Binder invocation and codecs'",
+      "evidence": "'Mark the view stale immediately; no new device call may use it.' ; 'Marshal only the admitted plan'",
+      "issue": "Behavior of already-admitted calls when the view goes stale is not stated here, whereas the ADB disconnect section does define in-flight handling for its case.",
+      "exact_minimal_correction": "State that admitted plans complete under their pinned plan unless the invalidation reason also removes backend authority, in which case they are canceled and reported outcome unknown.",
+      "verification_needed": true
+    },
+    {
+      "id": "CS2-18",
+      "severity": "low",
+      "area": "Class responsibilities / requirement 10 ownership and multiplicity",
+      "artifact": "'Classes and responsibilities' table",
+      "evidence": "Table columns are '| Component | Responsibility | Boundary |'",
+      "issue": "Owning container/process and multiplicity (per profile/target/user versus singleton) are not given in the table.",
+      "exact_minimal_correction": "Add owner and multiplicity columns, or state that architecture/code-diagrams.md supplies them for every row.",
+      "verification_needed": true
+    },
+    {
+      "id": "CS2-19",
+      "severity": "low",
+      "area": "Honest Android limits for Self ADB",
+      "artifact": "Section 15 'Self ADB primary' row and 'Pairing and lifecycle'",
+      "evidence": "'Android 11+ is the starting compatibility target, subject to device support.' ; 'Ports may differ and change after reboot, debugging toggle or network changes.'",
+      "issue": "Reviewer recollection is that Wireless Debugging is only available while the device is connected to Wi-Fi; the design lists network changes but not this prerequisite, so the self_adb mode's unavailability offline or on cellular-only is not surfaced as a reason code.",
+      "exact_minimal_correction": "State the Wi-Fi connection prerequisite as a documented limit with its own connection-health reason code, after verifying it against the pinned Android documentation.",
+      "verification_needed": true
+    }
+  ],
+  "verified_resolutions": [
+    {
+      "id": "VR-01",
+      "claim": "Host forwarding uses adb forward, loopback only, explicit serial, --no-rebind and owned-mapping removal.",
+      "evidence": "Command block and 'Both phone listeners and host forwards remain loopback-only.'",
+      "status": "Text-consistent and matches adb semantics as recalled; execution not verified."
+    },
+    {
+      "id": "VR-02",
+      "claim": "Generated, generic and known-raw paths converge on one canonical binding policy key.",
+      "evidence": "'evaluate a canonical binding permission key regardless of entry point' ; 'Known raw transactions must decode to the same binding/schema' ; 'ICanonicalDispatchPlanner ... No alternate policy identity for an alias'",
+      "status": "Stated consistently in three sections; implementation unverified."
+    },
+    {
+      "id": "VR-03",
+      "claim": "Unknown is distinct from unavailable and never defaults to true or false.",
+      "evidence": "'It retains unknown values instead of converting them to zero or false.' ; 'Unknown conditions cannot become true by default.'",
+      "status": "Consistent with requirement 6; fixtures not inspected."
+    },
+    {
+      "id": "VR-04",
+      "claim": "Point applicability evidence and digest-pinned membership address the prior design013 defects.",
+      "evidence": "'platform_point:[37,2]' ; 'PLATFORM_APPLICABILITY_UNPROVEN' ; 'inventory_sha256 and expected_inventory_count reject substituted and partial views'",
+      "status": "Mechanisms are described and labeled as reference/offline; not proven implemented."
+    },
+    {
+      "id": "VR-05",
+      "claim": "Offline checkpoint counts are internally consistent.",
+      "evidence": "432,590 + 366,937 = 799,527 and 392,959 + 39,631 = 432,590.",
+      "status": "Arithmetic checks; honestly labeled as not a device observation."
+    },
+    {
+      "id": "VR-06",
+      "claim": "Screenshots, UI text and secrets are excluded from diagnostic logs; no persisted screenshot logs.",
+      "evidence": "Security and data handling bullet 2; 'No persisted screenshot logs.' ; logging gate row.",
+      "status": "Consistent across sections."
+    },
+    {
+      "id": "VR-07",
+      "claim": "MCP listener health, ADB connection health and view resolving state are separate.",
+      "evidence": "'distinguish Resolving/Stale from MCP listener health and ADB connection health.'",
+      "status": "Consistent with requirement 2."
+    },
+    {
+      "id": "VR-08",
+      "claim": "Secure erasure is not promised; audit key and optional-log key are separate.",
+      "evidence": "'do not promise secure erasure without evidence' ; 'Never reuse the mandatory-audit key for optional-log deletion.'",
+      "status": "Honest; consistent."
+    }
+  ],
+  "cross_artifact_questions": [
+    "Does any other slice or the C4 container model define a host-side component that executes adb forward and records mapping ownership (CS2-01)?",
+    "Does the ARC port contract after byte 110000 state envelope 1.0 versus package 0.8.0, and does 'arc-protobuf-v1' match the pinned commit's framing name?",
+    "Are screen.state and input.tap registered as tools on group activation, or invoked only through the manifest/generic-invoke fallback? Where is their MCP result packaging defined?",
+    "Does architecture/workspace.dsl define a separate dynamic view for generic Binder dispatch, and does the SVG export directory contain it (CS2-06)?",
+    "Does catalog/API-CONTRACT.md define the missing If-Match (428) behavior, Idempotency-Key handling for imports/publish, and the cat1 versus administrative ETag relationship (CS2-16)?",
+    "Does the client_binding_rules constraints_json schema allow scoping to a connection profile with no target_app_profile (self_adb without a target app)?",
+    "Are the Python tooling files (policy_reference.py, dispatch_manifest.py) pinned under the requirement 11 Gradle offline/deterministic build, given the all-Kotlin server scope?",
+    "Where are the headless runtime memory and latency targets stated (CS2-14)?",
+    "Are the S17-S34 citations resolvable to pinned sources in the references section outside this slice?"
+  ],
+  "limitations": [
+    "No tools: the file, its sha256, the SVGs, workspace.dsl, code-diagrams.md, DDL, OpenAPI contract, fixtures and build receipts were not opened; findings rest only on the supplied bytes.",
+    "Platform behaviors cited for screencap/input display IDs, FLAG_SECURE capture blanking, mDNS service types and the Wireless Debugging Wi-Fi prerequisite come from reviewer recollection and are marked verification_needed rather than asserted as fact.",
+    "Platform 37.2 and extension level 24 appear only as fixture or example values in the slice and were not treated as platform facts.",
+    "The design document embeds prior review scores (012: 93/80, 013: 91/88); these were not used as acceptance context.",
+    "Callback, MCP transport, group discovery and ARC port contract requirements are largely outside this slice and are not assessed here."
+  ],
+  "report_complete": true
+}

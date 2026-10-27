@@ -1,0 +1,32 @@
+{
+  "origin": "R12-09 verified against actual010snapshot",
+  "files": [
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/build-snapshots/release010/catalog/tests/test_bundled_http_snapshot.py",
+      "candidate": "tests/test_bundled_http_snapshot.py",
+      "sha256": "4b008c2d46b2f5d26e95812cac5a0bd6f5ea56260388e3cd5276d813098e1e81",
+      "byte_identical": true
+    },
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/build-snapshots/release010/sdk_availability_evidence.py",
+      "candidate": "tooling/sdk_availability_evidence.py",
+      "sha256": "10961df02f1737e28b717c90a4d9ec152308ea9f3b14f1ce55659be12e6499d1",
+      "byte_identical": true
+    },
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/build-snapshots/release010/test_sdk_availability_evidence.py",
+      "candidate": "tests/test_sdk_availability_evidence.py",
+      "sha256": "13e99e792ef4b982b10ff43c166e9a23ccc68e980a8d17488d7c03fd3068dea0",
+      "byte_identical": true
+    },
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/build-snapshots/release010/catalog/tests/test_unnormalized_source_retention.py",
+      "candidate": "tests/test_unnormalized_source_retention.py",
+      "adapted": true,
+      "reason": "HIDL now imports declared-source structure; retain exact rawbytes/nonUTF8/unknownwire/unknownAndroid/compiler-not-validated coverage, replace superseded assertion thatHIDLhaszero declarations. Fixture uses own base and explicitly unknown HIDL Android version."
+    }
+  ],
+  "raw_sdk_helper_original_location": "build-snapshots/release010/sdk_availability_evidence.py (outsidecatalog/tooling originally)",
+  "retired_modules": [],
+  "source_files_modified": false
+}

@@ -1,0 +1,12 @@
+{
+  "at": "2026-10-27T04:38:26.663114+00:00",
+  "frozen_input": "reviews/round-012/input/catalog/bridge-config.sql",
+  "scope": "In-memory reproduction only, no real configuration changed",
+  "blocked_paths": {
+    "immutable-update": "Version wire evidence rather than rewriting it",
+    "duplicate-tuple": "UNIQUE constraint failed: index 'wire_tuple_identity'"
+  },
+  "initial_unknown_retained": true,
+  "working_correction": "wire_proof_revisions + wire_proof_active CAS; existing unique immutable tuple unchanged",
+  "in_frozen_review012": false
+}

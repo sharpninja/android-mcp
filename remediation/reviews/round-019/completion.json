@@ -1,0 +1,132 @@
+{
+  "event": "completed",
+  "completed_at": "2026-10-27T10:14:25.605705+00:00",
+  "exit_code": 0,
+  "actual_models": [
+    "claude-fable-5-1"
+  ],
+  "requested_effort": "max",
+  "invocation": [
+    "/home/sharpninja/.local/share/mise/installs/claude/2.1.300/claude",
+    "--safe-mode",
+    "--strict-mcp-config",
+    "--mcp-config",
+    "{\"mcpServers\":{}}",
+    "--tools",
+    "",
+    "--permission-mode",
+    "dontAsk",
+    "--no-session-persistence",
+    "--print",
+    "--output-format",
+    "stream-json",
+    "--verbose",
+    "--model",
+    "claude-fable-5-1",
+    "--effort",
+    "max",
+    "--max-turns",
+    "1"
+  ],
+  "cli_version": "2.1.300 (Claude Code)",
+  "visible_response_sha256": "9cd51e2ff2d6d0c01c0c30c59af57a33354665f41ab18c85c1952090691c9d87",
+  "report_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "report_complete": false,
+  "hidden_blocks_excluded": 2,
+  "result_metadata": {
+    "duration_api_ms": 1527218,
+    "stop_reason": "max_tokens",
+    "session_id": "41afdcfe-1564-4470-b801-a076e5671321",
+    "total_cost_usd": 14.926158000000001,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 426220,
+      "cache_read_input_tokens": 6872,
+      "output_tokens": 128000,
+      "output_tokens_details": {
+        "thinking_tokens": 128000
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 426220,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 64000,
+          "cache_read_input_tokens": 3436,
+          "cache_creation_input_tokens": 213141,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 213141
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    },
+    "modelUsage": {
+      "claude-fable-5-1": {
+        "inputTokens": 4,
+        "outputTokens": 128000,
+        "cacheReadInputTokens": 6872,
+        "cacheCreationInputTokens": 426220,
+        "webSearchRequests": 0,
+        "costUSD": 14.926158000000001,
+        "contextWindow": 1000000,
+        "maxOutputTokens": 64000,
+        "thinkingTokens": 128000,
+        "canonicalModel": "claude-fable-5-1",
+        "provider": "firstParty",
+        "costBasis": "list"
+      }
+    },
+    "permission_denials": [],
+    "terminal_reason": "aborted_streaming",
+    "fast_mode_state": "off",
+    "fast_mode_disabled_reason": "sdk_opt_in_required",
+    "subagent_stats": {
+      "spawned": 0,
+      "requested": {
+        "background": 0,
+        "foreground": 0,
+        "unset": 0
+      },
+      "started_in_background": 0,
+      "max_depth": 0,
+      "spawned_by_subagents": 0,
+      "completed": 0,
+      "failed": 0,
+      "killed": {
+        "parent": 0,
+        "user": 0,
+        "system": 0
+      },
+      "refused": {
+        "depth_limit": 0,
+        "concurrency_limit": 0,
+        "budget": 0
+      },
+      "by_type": {}
+    },
+    "safety_stops": 0,
+    "is_error": true,
+    "num_turns": 4,
+    "subtype": "error_during_execution",
+    "errors": [
+      "[ede_diagnostic] result_type=user last_content_type=n/a stop_reason=max_tokens"
+    ],
+    "type": "result",
+    "duration_ms": 1657749,
+    "uuid": "dc25fed4-3ce3-48ca-9290-9a6cd9401f6c",
+    "queued_turn_count": 0,
+    "result_index": 0
+  }
+}

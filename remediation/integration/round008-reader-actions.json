@@ -1,0 +1,27 @@
+{
+  "created_at": "2026-10-26T23:13:54.795889+00:00",
+  "id": "P8-01",
+  "found_by": "Codex static inspection and failing regression, not a Claude verdict",
+  "issue": "Malformed nonobject/missing/nonstrings semantic ops were quarantined as future operators, contradicting malformed-known-node rejection. Invocation remained fail-closed, but invalid source structures were mislabeled.",
+  "fix": "Require object/string op on schema-defined semantic edges; preserve genuinely future string operators as raw unknown nodes; leave x-* metadata untouched.",
+  "evidence_before": "evidence/round008-reader-before.txt:3tests10failing subcases",
+  "evidence_after": "evidence/tests-regression-038.txt:128tests; evidence/round008-reader-optimized.txt:3tests",
+  "patch": "/home/sharpninja/github/2026-10-26/task-3/remediation/integration/round008-reader.patch",
+  "patch_sha256": "573837e93f8f08736d341260e5f489cf021143b26ea531467cfe49dba46cf435",
+  "candidate_root": "/home/sharpninja/github/2026-10-26/task-3/remediation/integration/round008-reader",
+  "files": [
+    {
+      "file": "tooling/permission_reader.py",
+      "base_sha256": "c1f1eb69ac859a0eb8339d7b0d29b8ef000a37d26a82b45cb4d79025253dec6c",
+      "candidate_sha256": "ec9b368f68d3fb94f2c71fd9b84b26fa3c6e48c7b05c6c6fd3136f666048e5ce"
+    },
+    {
+      "file": "tests/test_round8.py",
+      "base_sha256": null,
+      "candidate_sha256": "f0535ca84bb815e466a14c04818bd7224938df9b19cff298961d59188f4ad343"
+    }
+  ],
+  "source_files_modified": false,
+  "production_impact": "Offline reader fixture only; builder-generated AST validation is unchanged, as are DDL/contracts/Java/AIDL/cache producers. No request to interrupt an active production build. Independent next review remains required.",
+  "frozen_round008_modified": false
+}

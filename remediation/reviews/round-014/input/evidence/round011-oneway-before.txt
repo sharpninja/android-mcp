@@ -1,0 +1,104 @@
+parsed sources 0 / 3
+{
+  "counts": {
+    "sources": 3,
+    "bindings": 7,
+    "occurrences": 7,
+    "binding_declarations": 7,
+    "permission_definitions": 1,
+    "permission_symbols": 0,
+    "permission_relations": 7,
+    "aidl_schemas": 1,
+    "annotation_evidence": 0,
+    "issues": 0,
+    "effective_entries": 7
+  },
+  "integrity_check": "ok",
+  "unavailable_paths": 0
+}
+parsed sources 0 / 3
+{
+  "counts": {
+    "sources": 3,
+    "bindings": 6,
+    "occurrences": 6,
+    "binding_declarations": 6,
+    "permission_definitions": 1,
+    "permission_symbols": 0,
+    "permission_relations": 6,
+    "aidl_schemas": 1,
+    "annotation_evidence": 0,
+    "issues": 0,
+    "effective_entries": 6
+  },
+  "integrity_check": "ok",
+  "unavailable_paths": 0
+}
+parsed sources 0 / 4
+{
+  "counts": {
+    "sources": 4,
+    "bindings": 12,
+    "occurrences": 12,
+    "binding_declarations": 12,
+    "permission_definitions": 1,
+    "permission_symbols": 1,
+    "permission_relations": 12,
+    "aidl_schemas": 2,
+    "annotation_evidence": 0,
+    "issues": 0,
+    "effective_entries": 12
+  },
+  "integrity_check": "ok",
+  "unavailable_paths": 0
+}
+parsed sources 0 / 3
+{
+  "counts": {
+    "sources": 3,
+    "bindings": 6,
+    "occurrences": 6,
+    "binding_declarations": 6,
+    "permission_definitions": 1,
+    "permission_symbols": 0,
+    "permission_relations": 6,
+    "aidl_schemas": 1,
+    "annotation_evidence": 0,
+    "issues": 0,
+    "effective_entries": 6
+  },
+  "integrity_check": "ok",
+  "unavailable_paths": 0
+}
+parsed sources 0 / 3
+{
+  "counts": {
+    "sources": 3,
+    "bindings": 6,
+    "occurrences": 6,
+    "binding_declarations": 6,
+    "permission_definitions": 1,
+    "permission_symbols": 0,
+    "permission_relations": 6,
+    "aidl_schemas": 1,
+    "annotation_evidence": 0,
+    "issues": 0,
+    "effective_entries": 6
+  },
+  "integrity_check": "ok",
+  "unavailable_paths": 0
+}
+.....F..........
+======================================================================
+FAIL: test_interface_oneway_semantics_apply_to_all_methods (test_round11.Round11.test_interface_oneway_semantics_apply_to_all_methods)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_round11.py", line 33, in test_interface_oneway_semantics_apply_to_all_methods
+    doc={'canonical_signature':'aidl:a.I#f()','kind':'method','extensions':{'oneway':False,'interface_oneway':False}};changed=copy.deepcopy(doc);changed['extensions']['interface_oneway']=True;self.assertNotEqual(dispatch_manifest.contract_digest(doc),dispatch_manifest.contract_digest(changed))
+                                                                                                                                                                                                ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'fabd2720bbc9a0bc71fe23cf600154b8048f399778e226eee36e52163cd59518' == 'fabd2720bbc9a0bc71fe23cf600154b8048f399778e226eee36e52163cd59518'
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.183s
+
+FAILED (failures=1)

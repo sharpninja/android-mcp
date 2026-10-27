@@ -1,0 +1,141 @@
+{
+  "pid": 2836257,
+  "status": "finished",
+  "event": "completed",
+  "completed_at": "2026-10-27T07:07:57.893961+00:00",
+  "exit_code": 1,
+  "actual_models": [
+    "<synthetic>",
+    "claude-fable-5-1"
+  ],
+  "requested_effort": "max",
+  "invocation": [
+    "/home/sharpninja/.local/share/mise/installs/claude/2.1.300/claude",
+    "--safe-mode",
+    "--strict-mcp-config",
+    "--mcp-config",
+    "{\"mcpServers\":{}}",
+    "--restricted",
+    "--tools",
+    "Read",
+    "--allowedTools",
+    "Read(//home/sharpninja/github/2026-10-26/task-3/remediation/reviews/round-015/input/**)",
+    "--settings",
+    "/home/sharpninja/github/2026-10-26/task-3/remediation/reviews/round-015/read-only-settings.json",
+    "--permission-mode",
+    "dontAsk",
+    "--no-session-persistence",
+    "--print",
+    "--output-format",
+    "stream-json",
+    "--verbose",
+    "--model",
+    "claude-fable-5-1",
+    "--effort",
+    "max",
+    "--max-turns",
+    "120",
+    "--autocompact",
+    "160k"
+  ],
+  "cli_version": "2.1.300 (Claude Code)",
+  "visible_response_sha256": "be1b0eb3949a1885ef2be0c247a01360c9e1184eea4402cd52c6092a9408bb20",
+  "report_sha256": "52b25fe5b212b16baa4ea1983800e5f9d386cb68537222327470da3fbeb338c0",
+  "report_complete": false,
+  "hidden_blocks_excluded": 9,
+  "result_metadata": {
+    "duration_api_ms": 1005529,
+    "stop_reason": "stop_sequence",
+    "session_id": "bfc7ef5e-87c2-47bd-9d64-343d5197a79f",
+    "total_cost_usd": 14.658476499999999,
+    "usage": {
+      "input_tokens": 194,
+      "cache_creation_input_tokens": 381214,
+      "cache_read_input_tokens": 125790,
+      "output_tokens": 18738,
+      "output_tokens_details": {
+        "thinking_tokens": 9976
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 381214,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 32,
+          "output_tokens": 4490,
+          "cache_read_input_tokens": 4448,
+          "cache_creation_input_tokens": 76356,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 76356
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    },
+    "modelUsage": {
+      "claude-fable-5-1": {
+        "inputTokens": 193396,
+        "outputTokens": 95037,
+        "cacheReadInputTokens": 230746,
+        "cacheCreationInputTokens": 404470,
+        "webSearchRequests": 0,
+        "costUSD": 14.658476499999999,
+        "contextWindow": 1000000,
+        "maxOutputTokens": 64000,
+        "thinkingTokens": 19775,
+        "canonicalModel": "claude-fable-5-1",
+        "provider": "firstParty",
+        "costBasis": "list"
+      }
+    },
+    "permission_denials": [],
+    "terminal_reason": "rapid_refill_breaker",
+    "fast_mode_state": "off",
+    "fast_mode_disabled_reason": "sdk_opt_in_required",
+    "subagent_stats": {
+      "spawned": 0,
+      "requested": {
+        "background": 0,
+        "foreground": 0,
+        "unset": 0
+      },
+      "started_in_background": 0,
+      "max_depth": 0,
+      "spawned_by_subagents": 0,
+      "completed": 0,
+      "failed": 0,
+      "killed": {
+        "parent": 0,
+        "user": 0,
+        "system": 0
+      },
+      "refused": {
+        "depth_limit": 0,
+        "concurrency_limit": 0,
+        "budget": 0
+      },
+      "by_type": {}
+    },
+    "safety_stops": 0,
+    "is_error": true,
+    "num_turns": 76,
+    "subtype": "success",
+    "api_error_status": null,
+    "api_error": "autocompact_thrashing",
+    "type": "result",
+    "duration_ms": 1006867,
+    "uuid": "96b927ac-d84f-4bc2-ae7d-05d79753e66d",
+    "queued_turn_count": 0,
+    "result_index": 0
+  }
+}

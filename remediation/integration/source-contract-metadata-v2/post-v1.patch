@@ -1,0 +1,886 @@
+--- a/SOURCE-METADATA-CONTRACT.md
++++ b/SOURCE-METADATA-CONTRACT.md
+@@ -72,6 +72,11 @@
+ hashed prebuilt adapter or explicit unsupported status. No runtime subclassing
+ or registration follows from saving a descriptor.
+ 
++Materialization is none for a proven non-callback, unknown with a reason for an
++unknown role, and explicitly unsupported when a class needs an absent reviewed
++adapter. Concrete non-final class subclassing is distinct from abstract classes.
++A candidate's known shape is not proof of callback role or registration.
++
+ Groups contain at most 128 explicit members, required types, pinned dependencies
+ and atomic registration/cleanup units. Unassigned catalog entries remain available
+ to discovery. All referenced catalog IDs and hashes must be checked against a
+@@ -86,20 +91,47 @@
+ JSON request fields. A future host must enforce protected owner authorization
+ and read visibility before invoking it; it is not an authentication provider.
+ 
+-POST requires `If-None-Match: *`; existing identities return 409. PUT and DELETE
+-require one exact strong ETag. Missing precondition is 428, malformed is 400,
++Create uses PUT at the ITEM URI with `If-None-Match: *`: success201, existing
++identity412. No conditional POST targets an already-existing collection.
++Replace PUT uses `If-Match`; exactly one create/replace precondition is allowed.
++DELETE requires an exact strong ETag. Missing precondition is 428, malformed is 400,
+ stale is 412, unauthorized owner is 403, missing identity is 404, invalid document
+ or reference is 422. PUT replaces the whole declarative document, never PATCH.
+ DELETE preserves history and returns the suppressed/deleted representation. A
+ repeat DELETE with the current ETag is idempotent. PUT of a tombstone restores
+ it. A conflicting newer import requires explicit resolution against its current
+ base hash; merely sending a fresh ETag does not resolve an overlay conflict.
++Retrying a stale conditional DELETE can return412 without further effect; HTTP
++idempotence concerns intended effects, not identical responses. GET current state
++before a fresh intent. Conflict resolution is mutation-body
++`resolution:{action:"rebase"|"retain-local",expected_base_hash:hash|null}`;
++the action must match imported-base versus local-only conflict semantics.
+ 
+ `"meta1:<generation>:<kind>:<sha256(resource_id UTF8)>:<base_hash|local>:<revision>:<state>:<content_hash>"`
+ is the strong metadata ETag. A successful head change increments the global
+ metadata generation atomically, invalidating all old metadata cursors and ETags.
+-The content hash is SHA-256 of sorted-key compact UTF-8 JSON, with non-finite
+-numbers forbidden. Base/import hashes and local history cannot be edited or
++This is conservative metadata-view CAS: unrelated writes can cause a false
++conflict. The public representation contains its current ETag and therefore also
++changes. No per-resource edit independence or high-write-rate pagination is
++claimed. Clients reload/rebase exact intent; bounded listing retries eventually
++report busy/restart instead of retrying indefinitely. The closed ETag state set
++is active/suppressed/deleted/conflict.
++
++Content encoding is `meta-json-v1`, mapped to document schema_version1.0.0:
++CPython3.14 JSON encoder semantics with `sort_keys=True`, `separators=(',',':')`,
++`ensure_ascii=False`, `allow_nan=False`, then strict UTF-8. Keys sort by Unicode
++scalar/code-point order, not UTF-16 code units; strings keep their code points
++without normalization. Quote/backslash and control characters use the encoder's
++standard JSON escapes; slash and valid non-ASCII are unescaped. Integers render
++exact decimal; finite binary64 floats use its shortest-roundtrip repr, including
++integral-float decimal points, negative zero and exponent spelling: `1` differs
++from `1.0`; examples are `-0.0`, `1e-07`, `1e+20`. Non-finite numbers, lone
++surrogates and non-JSON keys are rejected. The offline digest and literal-byte
++golden vectors are normative; a Kotlin encoder must pass integer/float/Unicode/
++escaping fixtures before interoperability. This is not a JCS claim. Original
++source/declaration hashes verify original bytes without re-serialization. A
++canonicalization change requires a versioned migration.
++Base/import hashes and local history cannot be edited or
+ deleted. SQL null cannot satisfy schema-version or identity checks. SQLite FK,
+ JSON checks and immutability triggers supplement full JSON Schema/semantic
+ validation; SQL alone does not prove every descriptor field or reference.
+@@ -107,11 +139,21 @@
+ Read/list/history HTTP routes are specifications in OpenAPI, not a deployed API.
+ Metadata list cursors must pin authenticated reader, collection, registry and
+ metadata generation; bounded keyset pagination, maximum 100 resources, rejects
+-replayed/cross-reader/stale cursors with 410. Non-active/history visibility is
++cross-reader/stale cursors with 410. Retrying the same cursor under unchanged pins
++is allowed for a lost response; it is not consume-once. Non-active/history visibility is
+ owner-only. Source metadata reads follow Entry read visibility; absence is an
+ explicit `not-produced` result with reason, never an empty proof of no callbacks.
+ This offline oracle currently exercises generation/reader cursor invalidation;
+ HTTP serialization, opaque authenticated cursors and middleware remain host work.
++The trusted index is the currently published sealed catalog, never a staged
++import. Later suppression or contract/type changes leave historical resources
++inspectable but make activation fail stale/unavailable until an explicit coherent
++revision is validated. A stored descriptor or group never grants authority.
++
++HTTP semantics follow [RFC9110](https://www.rfc-editor.org/rfc/rfc9110.html): opaque
++strong ETags, item-target creation preconditions and idempotent intended effects.
++The unshipped OpenAPI1.5 collection-create draft is superseded by1.6; source DTO
++schema1.0 stays separate. No HTTP host is implemented by the reference.
+ 
+ ## Integration and validation
+ 
+--- a/contracts/CallbackDescriptor.schema.json
++++ b/contracts/CallbackDescriptor.schema.json
+@@ -1562,10 +1562,13 @@
+           "properties": {
+             "strategy": {
+               "enum": [
++                "none",
++                "unknown",
+                 "interface_dynamic_proxy",
+                 "binder_generic_stub",
+                 "prebuilt_adapter",
+-                "unsupported_abstract_class"
++                "unsupported_abstract_class",
++                "unsupported_class_subclass"
+               ]
+             },
+             "adapter": {
+@@ -1592,7 +1595,8 @@
+               "additionalProperties": false
+             },
+             "unknown_reason": {
+-              "type": "string"
++              "type": "string",
++              "minLength": 1
+             }
+           },
+           "required": [
+@@ -1621,7 +1625,11 @@
+               "if": {
+                 "properties": {
+                   "strategy": {
+-                    "const": "unsupported_abstract_class"
++                    "enum": [
++                      "unknown",
++                      "unsupported_abstract_class",
++                      "unsupported_class_subclass"
++                    ]
+                   }
+                 },
+                 "required": [
+@@ -1760,7 +1768,81 @@
+         "evidence",
+         "source_applicability"
+       ],
+-      "additionalProperties": false
++      "additionalProperties": false,
++      "allOf": [
++        {
++          "if": {
++            "properties": {
++              "classification": {
++                "const": "unknown"
++              }
++            },
++            "required": [
++              "classification"
++            ]
++          },
++          "then": {
++            "properties": {
++              "materialization": {
++                "properties": {
++                  "strategy": {
++                    "const": "unknown"
++                  }
++                }
++              }
++            }
++          }
++        },
++        {
++          "if": {
++            "properties": {
++              "classification": {
++                "const": "proven_non_callback"
++              }
++            },
++            "required": [
++              "classification"
++            ]
++          },
++          "then": {
++            "properties": {
++              "materialization": {
++                "properties": {
++                  "strategy": {
++                    "const": "none"
++                  }
++                }
++              }
++            }
++          }
++        },
++        {
++          "if": {
++            "properties": {
++              "materialization": {
++                "properties": {
++                  "strategy": {
++                    "const": "none"
++                  }
++                },
++                "required": [
++                  "strategy"
++                ]
++              }
++            },
++            "required": [
++              "materialization"
++            ]
++          },
++          "then": {
++            "properties": {
++              "classification": {
++                "const": "proven_non_callback"
++              }
++            }
++          }
++        }
++      ]
+     },
+     "MetaFunctionalGroup": {
+       "type": "object",
+--- a/contracts/FunctionalGroup.schema.json
++++ b/contracts/FunctionalGroup.schema.json
+@@ -1562,10 +1562,13 @@
+           "properties": {
+             "strategy": {
+               "enum": [
++                "none",
++                "unknown",
+                 "interface_dynamic_proxy",
+                 "binder_generic_stub",
+                 "prebuilt_adapter",
+-                "unsupported_abstract_class"
++                "unsupported_abstract_class",
++                "unsupported_class_subclass"
+               ]
+             },
+             "adapter": {
+@@ -1592,7 +1595,8 @@
+               "additionalProperties": false
+             },
+             "unknown_reason": {
+-              "type": "string"
++              "type": "string",
++              "minLength": 1
+             }
+           },
+           "required": [
+@@ -1621,7 +1625,11 @@
+               "if": {
+                 "properties": {
+                   "strategy": {
+-                    "const": "unsupported_abstract_class"
++                    "enum": [
++                      "unknown",
++                      "unsupported_abstract_class",
++                      "unsupported_class_subclass"
++                    ]
+                   }
+                 },
+                 "required": [
+@@ -1760,7 +1768,81 @@
+         "evidence",
+         "source_applicability"
+       ],
+-      "additionalProperties": false
++      "additionalProperties": false,
++      "allOf": [
++        {
++          "if": {
++            "properties": {
++              "classification": {
++                "const": "unknown"
++              }
++            },
++            "required": [
++              "classification"
++            ]
++          },
++          "then": {
++            "properties": {
++              "materialization": {
++                "properties": {
++                  "strategy": {
++                    "const": "unknown"
++                  }
++                }
++              }
++            }
++          }
++        },
++        {
++          "if": {
++            "properties": {
++              "classification": {
++                "const": "proven_non_callback"
++              }
++            },
++            "required": [
++              "classification"
++            ]
++          },
++          "then": {
++            "properties": {
++              "materialization": {
++                "properties": {
++                  "strategy": {
++                    "const": "none"
++                  }
++                }
++              }
++            }
++          }
++        },
++        {
++          "if": {
++            "properties": {
++              "materialization": {
++                "properties": {
++                  "strategy": {
++                    "const": "none"
++                  }
++                },
++                "required": [
++                  "strategy"
++                ]
++              }
++            },
++            "required": [
++              "materialization"
++            ]
++          },
++          "then": {
++            "properties": {
++              "classification": {
++                "const": "proven_non_callback"
++              }
++            }
++          }
++        }
++      ]
+     },
+     "MetaFunctionalGroup": {
+       "type": "object",
+--- a/contracts/NativeAbiEvidence.schema.json
++++ b/contracts/NativeAbiEvidence.schema.json
+@@ -1562,10 +1562,13 @@
+           "properties": {
+             "strategy": {
+               "enum": [
++                "none",
++                "unknown",
+                 "interface_dynamic_proxy",
+                 "binder_generic_stub",
+                 "prebuilt_adapter",
+-                "unsupported_abstract_class"
++                "unsupported_abstract_class",
++                "unsupported_class_subclass"
+               ]
+             },
+             "adapter": {
+@@ -1592,7 +1595,8 @@
+               "additionalProperties": false
+             },
+             "unknown_reason": {
+-              "type": "string"
++              "type": "string",
++              "minLength": 1
+             }
+           },
+           "required": [
+@@ -1621,7 +1625,11 @@
+               "if": {
+                 "properties": {
+                   "strategy": {
+-                    "const": "unsupported_abstract_class"
++                    "enum": [
++                      "unknown",
++                      "unsupported_abstract_class",
++                      "unsupported_class_subclass"
++                    ]
+                   }
+                 },
+                 "required": [
+@@ -1760,7 +1768,81 @@
+         "evidence",
+         "source_applicability"
+       ],
+-      "additionalProperties": false
++      "additionalProperties": false,
++      "allOf": [
++        {
++          "if": {
++            "properties": {
++              "classification": {
++                "const": "unknown"
++              }
++            },
++            "required": [
++              "classification"
++            ]
++          },
++          "then": {
++            "properties": {
++              "materialization": {
++                "properties": {
++                  "strategy": {
++                    "const": "unknown"
++                  }
++                }
++              }
++            }
++          }
++        },
++        {
++          "if": {
++            "properties": {
++              "classification": {
++                "const": "proven_non_callback"
++              }
++            },
++            "required": [
++              "classification"
++            ]
++          },
++          "then": {
++            "properties": {
++              "materialization": {
++                "properties": {
++                  "strategy": {
++                    "const": "none"
++                  }
++                }
++              }
++            }
++          }
++        },
++        {
++          "if": {
++            "properties": {
++              "materialization": {
++                "properties": {
++                  "strategy": {
++                    "const": "none"
++                  }
++                },
++                "required": [
++                  "strategy"
++                ]
++              }
++            },
++            "required": [
++              "materialization"
++            ]
++          },
++          "then": {
++            "properties": {
++              "classification": {
++                "const": "proven_non_callback"
++              }
++            }
++          }
++        }
++      ]
+     },
+     "MetaFunctionalGroup": {
+       "type": "object",
+--- a/contracts/SourceContractMetadata.schema.json
++++ b/contracts/SourceContractMetadata.schema.json
+@@ -1562,10 +1562,13 @@
+           "properties": {
+             "strategy": {
+               "enum": [
++                "none",
++                "unknown",
+                 "interface_dynamic_proxy",
+                 "binder_generic_stub",
+                 "prebuilt_adapter",
+-                "unsupported_abstract_class"
++                "unsupported_abstract_class",
++                "unsupported_class_subclass"
+               ]
+             },
+             "adapter": {
+@@ -1592,7 +1595,8 @@
+               "additionalProperties": false
+             },
+             "unknown_reason": {
+-              "type": "string"
++              "type": "string",
++              "minLength": 1
+             }
+           },
+           "required": [
+@@ -1621,7 +1625,11 @@
+               "if": {
+                 "properties": {
+                   "strategy": {
+-                    "const": "unsupported_abstract_class"
++                    "enum": [
++                      "unknown",
++                      "unsupported_abstract_class",
++                      "unsupported_class_subclass"
++                    ]
+                   }
+                 },
+                 "required": [
+@@ -1760,7 +1768,81 @@
+         "evidence",
+         "source_applicability"
+       ],
+-      "additionalProperties": false
++      "additionalProperties": false,
++      "allOf": [
++        {
++          "if": {
++            "properties": {
++              "classification": {
++                "const": "unknown"
++              }
++            },
++            "required": [
++              "classification"
++            ]
++          },
++          "then": {
++            "properties": {
++              "materialization": {
++                "properties": {
++                  "strategy": {
++                    "const": "unknown"
++                  }
++                }
++              }
++            }
++          }
++        },
++        {
++          "if": {
++            "properties": {
++              "classification": {
++                "const": "proven_non_callback"
++              }
++            },
++            "required": [
++              "classification"
++            ]
++          },
++          "then": {
++            "properties": {
++              "materialization": {
++                "properties": {
++                  "strategy": {
++                    "const": "none"
++                  }
++                }
++              }
++            }
++          }
++        },
++        {
++          "if": {
++            "properties": {
++              "materialization": {
++                "properties": {
++                  "strategy": {
++                    "const": "none"
++                  }
++                },
++                "required": [
++                  "strategy"
++                ]
++              }
++            },
++            "required": [
++              "materialization"
++            ]
++          },
++          "then": {
++            "properties": {
++              "classification": {
++                "const": "proven_non_callback"
++              }
++            }
++          }
++        }
++      ]
+     },
+     "MetaFunctionalGroup": {
+       "type": "object",
+--- a/contracts/SourceContractMetadataSet.schema.json
++++ b/contracts/SourceContractMetadataSet.schema.json
+@@ -1562,10 +1562,13 @@
+           "properties": {
+             "strategy": {
+               "enum": [
++                "none",
++                "unknown",
+                 "interface_dynamic_proxy",
+                 "binder_generic_stub",
+                 "prebuilt_adapter",
+-                "unsupported_abstract_class"
++                "unsupported_abstract_class",
++                "unsupported_class_subclass"
+               ]
+             },
+             "adapter": {
+@@ -1592,7 +1595,8 @@
+               "additionalProperties": false
+             },
+             "unknown_reason": {
+-              "type": "string"
++              "type": "string",
++              "minLength": 1
+             }
+           },
+           "required": [
+@@ -1621,7 +1625,11 @@
+               "if": {
+                 "properties": {
+                   "strategy": {
+-                    "const": "unsupported_abstract_class"
++                    "enum": [
++                      "unknown",
++                      "unsupported_abstract_class",
++                      "unsupported_class_subclass"
++                    ]
+                   }
+                 },
+                 "required": [
+@@ -1760,7 +1768,81 @@
+         "evidence",
+         "source_applicability"
+       ],
+-      "additionalProperties": false
++      "additionalProperties": false,
++      "allOf": [
++        {
++          "if": {
++            "properties": {
++              "classification": {
++                "const": "unknown"
++              }
++            },
++            "required": [
++              "classification"
++            ]
++          },
++          "then": {
++            "properties": {
++              "materialization": {
++                "properties": {
++                  "strategy": {
++                    "const": "unknown"
++                  }
++                }
++              }
++            }
++          }
++        },
++        {
++          "if": {
++            "properties": {
++              "classification": {
++                "const": "proven_non_callback"
++              }
++            },
++            "required": [
++              "classification"
++            ]
++          },
++          "then": {
++            "properties": {
++              "materialization": {
++                "properties": {
++                  "strategy": {
++                    "const": "none"
++                  }
++                }
++              }
++            }
++          }
++        },
++        {
++          "if": {
++            "properties": {
++              "materialization": {
++                "properties": {
++                  "strategy": {
++                    "const": "none"
++                  }
++                },
++                "required": [
++                  "strategy"
++                ]
++              }
++            },
++            "required": [
++              "materialization"
++            ]
++          },
++          "then": {
++            "properties": {
++              "classification": {
++                "const": "proven_non_callback"
++              }
++            }
++          }
++        }
++      ]
+     },
+     "MetaFunctionalGroup": {
+       "type": "object",
+--- a/contracts/SourceInterfaceEvidence.schema.json
++++ b/contracts/SourceInterfaceEvidence.schema.json
+@@ -1562,10 +1562,13 @@
+           "properties": {
+             "strategy": {
+               "enum": [
++                "none",
++                "unknown",
+                 "interface_dynamic_proxy",
+                 "binder_generic_stub",
+                 "prebuilt_adapter",
+-                "unsupported_abstract_class"
++                "unsupported_abstract_class",
++                "unsupported_class_subclass"
+               ]
+             },
+             "adapter": {
+@@ -1592,7 +1595,8 @@
+               "additionalProperties": false
+             },
+             "unknown_reason": {
+-              "type": "string"
++              "type": "string",
++              "minLength": 1
+             }
+           },
+           "required": [
+@@ -1621,7 +1625,11 @@
+               "if": {
+                 "properties": {
+                   "strategy": {
+-                    "const": "unsupported_abstract_class"
++                    "enum": [
++                      "unknown",
++                      "unsupported_abstract_class",
++                      "unsupported_class_subclass"
++                    ]
+                   }
+                 },
+                 "required": [
+@@ -1760,7 +1768,81 @@
+         "evidence",
+         "source_applicability"
+       ],
+-      "additionalProperties": false
++      "additionalProperties": false,
++      "allOf": [
++        {
++          "if": {
++            "properties": {
++              "classification": {
++                "const": "unknown"
++              }
++            },
++            "required": [
++              "classification"
++            ]
++          },
++          "then": {
++            "properties": {
++              "materialization": {
++                "properties": {
++                  "strategy": {
++                    "const": "unknown"
++                  }
++                }
++              }
++            }
++          }
++        },
++        {
++          "if": {
++            "properties": {
++              "classification": {
++                "const": "proven_non_callback"
++              }
++            },
++            "required": [
++              "classification"
++            ]
++          },
++          "then": {
++            "properties": {
++              "materialization": {
++                "properties": {
++                  "strategy": {
++                    "const": "none"
++                  }
++                }
++              }
++            }
++          }
++        },
++        {
++          "if": {
++            "properties": {
++              "materialization": {
++                "properties": {
++                  "strategy": {
++                    "const": "none"
++                  }
++                },
++                "required": [
++                  "strategy"
++                ]
++              }
++            },
++            "required": [
++              "materialization"
++            ]
++          },
++          "then": {
++            "properties": {
++              "classification": {
++                "const": "proven_non_callback"
++              }
++            }
++          }
++        }
++      ]
+     },
+     "MetaFunctionalGroup": {
+       "type": "object",
+--- a/tests/test_source_metadata_crud.py
++++ b/tests/test_source_metadata_crud.py
+@@ -16,13 +16,21 @@
+  def test_owner_and_creation_preconditions(self):
+   g=self.group();self.error(403,lambda:self.store.create('functional-group',g['group_id'],g,'fixture',if_none_match='*'))
+   self.error(428,lambda:self.store.create('functional-group',g['group_id'],g,'fixture',owner=True))
+-  self.create();self.error(409,lambda:self.create())
++  self.create();self.error(412,lambda:self.create())
+  def test_put_cas_and_reader_cursor_invalidation(self):
+   old=self.create();cursor=self.store.cursor('reader-A');doc=self.group();doc['description']='new local mapping'
+   new=self.store.put('functional-group',doc['group_id'],doc,old['etag'],'fixture update',owner=True)
+   self.assertEqual(new['revision'],2);self.assertNotEqual(new['etag'],old['etag']);self.error(412,lambda:self.store.put('functional-group',doc['group_id'],doc,old['etag'],'stale',owner=True));self.error(410,lambda:self.store.continue_page(cursor,'reader-A'))
+  def test_cursor_cannot_transfer_to_another_reader(self):
+   self.create();cursor=self.store.cursor('reader-A');self.error(410,lambda:self.store.continue_page(cursor,'reader-B'))
++ def test_same_reader_can_retry_current_cursor_without_consuming_it(self):
++  self.create();cursor=self.store.cursor('reader-A');self.store.continue_page(cursor,'reader-A');self.store.continue_page(cursor,'reader-A')
++ def test_meta_json_literal_unicode_and_numeric_vectors(self):
++  import hashlib
++  from source_metadata_reference import digest
++  value={'😀':'é','\ue000':'e\u0301','z':[-0.0,1.0,1,1e-7,1e20,9223372036854775807]}
++  expected='{"z":[-0.0,1.0,1,1e-07,1e+20,9223372036854775807],"\ue000":"e\u0301","😀":"é"}'
++  self.assertEqual(digest(value),hashlib.sha256(expected.encode('utf-8')).hexdigest())
+  def test_delete_is_tombstone_and_idempotent_with_fresh_cas(self):
+   old=self.create();new=self.store.delete('functional-group',old['resource_id'],old['etag'],'fixture delete',owner=True);self.assertEqual(new['state'],'deleted')
+   same=self.store.delete('functional-group',new['resource_id'],new['etag'],'fixture retry',owner=True);self.assertEqual(new['etag'],same['etag']);self.assertEqual(len(self.store.history('functional-group',new['resource_id'])),2)
+@@ -65,6 +73,11 @@
+   doc=dict(schema_version='1.0.0',callback_id='c'*64,type_id='a'*64,type_contract_hash='b'*64,classification='candidate',unknown_reason='Role not proven',methods=[],registration_binding_ids=[],materialization={'strategy':'unsupported_abstract_class','unknown_reason':'ABSTRACT_CLASS_NO_RUNTIME_SUBCLASS'},cleanup={'binding_id':None,'contract_hash':None,'status':'unknown','argument_mapping':[],'evidence':[],'unknown_reason':'Cleanup unknown'},evidence=[],source_applicability={'unknown_reason':'No observed device'})
+   row=self.store.create('callback-descriptor',doc['callback_id'],doc,'fixture candidate; no runtime registration',owner=True,if_none_match='*')
+   self.assertEqual(row['document']['materialization']['strategy'],'unsupported_abstract_class')
++  bad=copy.deepcopy(doc);bad['classification']='unknown';bad['materialization']={'strategy':'interface_dynamic_proxy'}
++  self.error(422,lambda:self.store.put('callback-descriptor',doc['callback_id'],bad,row['etag'],'unproven role cannot assert positive materializer',owner=True))
++ def test_unknown_descriptor_can_preserve_unknown_materialization(self):
++  value=dict(schema_version='1.0.0',callback_id='c'*64,type_id='a'*64,type_contract_hash='b'*64,classification='unknown',unknown_reason='Role unproven',methods=[],registration_binding_ids=[],materialization={'strategy':'unknown','unknown_reason':'Shape not resolved'},cleanup={'binding_id':None,'contract_hash':None,'status':'unknown','argument_mapping':[],'evidence':[],'unknown_reason':'No cleanup proof'},evidence=[],source_applicability={'unknown_reason':'No device evidence'})
++  validate_descriptor(value)
+  def test_public_representation_matches_local_openapi_component(self):
+   import json,jsonschema
+   row=self.create();doc=self.store.representation('functional-group',row['resource_id']);api=json.loads((P/'contracts/openapi.json').read_text())
+--- a/tooling/source_metadata_reference.py
++++ b/tooling/source_metadata_reference.py
+@@ -95,6 +95,8 @@
+   if set(adapter)!=required or not all(isinstance(adapter[k],str) and adapter[k] for k in required) or len(adapter['adapter_sha256'])!=64:raise ValueError('Reviewed adapter must have exact id/version/hash pin')
+   return dict(strategy='prebuilt_adapter',adapter=copy.deepcopy(adapter))
+  if shape=='abstract-class':return dict(strategy='unsupported_abstract_class',unknown_reason='ABSTRACT_CLASS_NO_RUNTIME_SUBCLASS')
++ if shape in ('class','nonfinal-class'):return dict(strategy='unsupported_class_subclass',unknown_reason='CLASS_CALLBACK_REQUIRES_REVIEWED_ADAPTER')
++ if shape=='unknown':return dict(strategy='unknown',unknown_reason='Callback materialization shape is unresolved')
+  if shape=='java-interface':return dict(strategy='interface_dynamic_proxy')
+  if shape=='aidl-interface':return dict(strategy='binder_generic_stub')
+  raise ValueError('Unknown callback materialization shape; no runtime subclassing inferred')
+--- a/tooling/source_metadata_store.py
++++ b/tooling/source_metadata_store.py
+@@ -70,7 +70,7 @@
+   if if_none_match is None:raise Error(428,'If-None-Match:* required')
+   if if_none_match!='*':raise Error(400,'Creation requires If-None-Match:*')
+   with self.db:
+-   if self.row(kind,key):raise Error(409,'Identity exists; use CAS restore/update')
++   if self.row(kind,key):raise Error(412,'If-None-Match:* failed: target identity exists; use current-CAS update')
+    self.validate_document(kind,key,document);self._append(kind,key,document,'local','active',None,reason)
+   return self.get(kind,key)
+  def put(self,kind,key,document,etag,reason,*,owner=False,resolution=None):

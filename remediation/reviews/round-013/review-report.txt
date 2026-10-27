@@ -1,0 +1,332 @@
+Reviewing the eleven requirements and the pinned MCP rules against the design snapshot, then returning the JSON report.
+
+`★ Insight ─────────────────────────────────────`
+- A language-stack switch (Avalonia/.NET to Kotlin/Compose) leaves fingerprints in three places: prose idioms ("compiled bindings", "trimming/AOT"), diagram labels, and mechanism assumptions (runtime code generation exists on .NET but not on ART). Hostile review hunts all three, not just the headline statement.
+- For a protocol-composition design like this one, the sharpest test is whether every tool the agent is told to call actually appears in the one authoritative default `tools/list` set. Here it does not.
+`─────────────────────────────────────────────────`
+
+```json
+{
+  "review_scope": "Independent hostile validation of the immutable snapshot listed in the input manifest: design/Android MCP Bridge Design.md (sha256 0952cd79...), render-manifest.json, design-review-state.json, eight Mermaid sources and eight Pele 1.10.0 SVG assets. Reviewed for accuracy, completeness, internal consistency, MCP 2025-11-25 protocol correctness (using the supplied rule paraphrases as evidence), Android platform correctness and implementability against the eleven preserved user requirements: (1) app-agnostic reusable bridge with no app-specific workflow or scheduler; (2) all-source SDK/Binder/AIDL/protocol inventory with generic and raw invocation, visible unknown/unreachable/private/OEM evidence, no universal introspection claim; (3) Kotlin MCP server and Kotlin Jetpack Compose UI in one APK with foreground service, bounded unexported local Binder facade, service-owned runtime/policy/SQLite, no managed runtime or Kestrel, Python extractor as tooling only, generic ADB control preserved, optional Avalonia Runtime adapter as protocol only, SQLite client config, per-client permission mapping and configurable call logging; (4) persistent UI-independent MCP service, optional boot, truthful running status and AppBar indicator, MCP health separate from ADB health; (5) same-device paired ADB and remote-host ADB loopback forwarding with on-demand screen.state and input.tap, no phone operations in this task; (6) optional SharpNinja.Avalonia.RemoteControl Android Runtime/Protocol without desktop Server/Kestrel or target embedding for generic ADB; (7) comprehensive Google public binding/permission catalog with immutable imports, local overrides, provenance, CRUD transitions, schema versioning, forward compatibility and ETag CAS, with declared permission metadata, runtime Android authority and MCP grants kept distinct and canonical; (8) startup observed device version/platform major+minor/SDK extensions/OEM/build/module/interface versions+hash/reachability resolved into an atomic compatible binding and type view with full unavailable/unknown inventory, coherent dependencies and invalidation, dynamic Binder engine only with verified wire contracts and policy; (9) Pele 1.10.0 Mermaid SVG with editable sources, portable assets, DOCX content preservation, consistent diagrams, re-sharding kept as proposal; (10) callbacks: exhaustive role identification, inherited methods, registration/unregister pairing, token mapping, evidence, HIDL completion distinct, finite registration outcome, durable scoped journal, exact MCP 2025-11-25 transport pattern, envelope semantics, ordering/replay/dedup, bounds and lifecycle, per-client auth/logging, bounded local policy for synchronous return-valued callbacks; (11) small cohesive functional groups, full searchable inventory including unassigned, bootstrap job discovery within byte/token/pagination bounds, deterministic index, ranking not authority, session activation with CAS/epochs, activation not permission, portable manifest fallback, in-flight/handle semantics, SQLite CRUD and Compose UI. Design acceptance is judged separately from catalog production (release 010) and from any Android runtime implementation. No tools were used; no device, code or external file was touched.",
+  "verdict": "NOT_READY",
+  "scores": {
+    "design": {
+      "accuracy_0_100": 91,
+      "completeness_0_100": 88,
+      "rationale": "Accuracy: the protocol composition (POST SSE terminating at the single final response, GET SSE for server notifications, Last-Event-ID distinct from the application journal cursor, resources/subscribe on the exact URI, resources/updated carrying the URI, progress ending with the request, no custom standard methods, honest pagination and list_changed caveats) matches the supplied MCP rules, and the Android facts checked (foreground service types, Android 15 BOOT_COMPLETED limits, notification permission behavior, SDK_INT_FULL and SDK extensions, stable AIDL version/hash, adb forward --no-rebind tcp:0, Android 11 wireless debugging) are correct. Deductions are for verifiable internal contradictions and stale content: the startup-resolution diagram still labels the UI as Avalonia, Section 8 still describes an Avalonia single-view app with compiled bindings, Section 3 and the groups section give incompatible accounts of the default tools/list surface, the catalog API says no PATCH while the groups section mandates PATCH, the tool_binding_aliases primary key contradicts its stated row semantics, .NET trimming/AOT language survives in the Kotlin runtime description, and the brightness documented-range claim is doubtful. Completeness: all eleven requirements are addressed at contract level, but several load-bearing mechanisms are unspecified rather than merely deferred: how callback implementations are materialized at runtime (abstract classes especially), how IBinder handles for platform AIDL services are acquired without non-SDK APIs, how a roughly 10 GiB catalog reaches app-private storage, how startup resolution is budgeted and reused across boots, who hosts and authenticates the catalog administration HTTP API in the one-APK design, lease renewal and callback.status contracts, table-level storage definitions for callbacks/groups, HIDL reachability, pairing proof-of-possession protocol, and direct-boot receiver behavior. These are concrete design omissions, not implementation gates. Neither score is averaged from prior rounds or from any self-score."
+    }
+  },
+  "findings": [
+    {
+      "id": "F-01",
+      "severity": "high",
+      "artifact": "design/Android MCP Bridge Design.md (Section 3 Discovery and streams; Section 12; Section 16; Small functional tool groups, Activation subsection)",
+      "evidence": "Section 3: 'bindings.search/list/get expose every entry in the declared source coverage ... Generated per-binding MCP tools are paginated; binding.invoke provides a generic route to the same registry'. Groups section: 'an agent starts with a small stable bootstrap tool set: android.groups.discover, android.groups.describe, android.groups.set_active, binding.invoke, callback.status and callback.cancel' and 'The default portable mode exposes only the stable bootstrap tools through tools/list'. Section 16: 'The arbitrary-app convenience surface has two primary tools: screen.state and input.tap, alongside the complete generated binding inventory'.",
+      "issue": "Three incompatible specifications of what tools/list returns by default. The six-tool bootstrap set contains no inventory search tool, so requirement 11 ('full searchable inventory including unassigned') and requirement 2 have no defined MCP entry point in portable mode; bindings.search/list/get are never reconciled with the bootstrap set. It is also undefined whether convenience tools (screen.state, input.tap, settings.*, contacts.list, document.read, sensors.*) are listed by default or delivered only through group activation. Section 3's paginated generated tools describe the pre-groups model and are not marked as superseded.",
+      "exact_minimal_correction": "In the groups section add one authoritative sentence: 'Default tools/list = bootstrap tools (android.groups.discover/describe/set_active, binding.invoke, callback.status, callback.cancel) plus the inventory tools bindings.search, bindings.list and bindings.get; convenience tools are exposed through functional groups (portable manifest or opt-in alias)'. In Section 3 change 'Generated per-binding MCP tools are paginated' to 'Generated per-binding aliases appear in tools/list only in the opt-in dynamic alias mode defined in the functional-group section'. Make Section 16 state that screen.state and input.tap are group-delivered convenience tools, or list them as bootstrap.",
+      "verification_needed": false
+    },
+    {
+      "id": "F-02",
+      "severity": "high",
+      "artifact": "design/Android MCP Bridge Design.md (Catalog-driven callbacks: Callback inventory and evidence; Invocation and subscription lifecycle; component table)",
+      "evidence": "'Extract all source-declared callback interfaces, listener/delegate types and abstract callback classes, their inherited methods, and methods accepting or returning them.' 'Supplying arbitrary executable code, an external callback URL or an untyped Binder object is not supported.' 'ICallbackProxyAdapter | Verify supported sender boundary, decode typed callbacks and provide bounded local synchronous replies.' Section 2: 'bridge.bindings (Kotlin runtime) | SDK/AIDL metadata ingestion, versioned schemas, code generation and generic marshalling'.",
+      "issue": "The design never states how the Kotlin process materializes a callback object from catalog metadata. Three cases differ fundamentally: Java interfaces can use java.lang.reflect.Proxy; AIDL callbacks need a generic android.os.Binder subclass whose onTransact decodes by the pinned descriptor and transaction codes; abstract classes (BroadcastReceiver, TelephonyCallback, CameraDevice.StateCallback, ConnectivityManager.NetworkCallback, BluetoothGattCallback) cannot be subclassed at runtime on ART without dex generation, which the design neither selects nor rules out. Because 'code generation' appears as a Kotlin runtime responsibility, the registrable subset of 'all callback roles' is undefined and the catalog-driven registration contract is not implementable as written.",
+      "exact_minimal_correction": "Add a materialization_strategy field to CallbackDescriptor with closed values interface_dynamic_proxy, binder_generic_stub, prebuilt_adapter, unsupported_abstract_class, and the rule: 'Abstract callback classes are registration-unsupported (reason ABSTRACT_CLASS_NO_RUNTIME_SUBCLASS) unless a reviewed prebuilt adapter is shipped; no runtime bytecode generation is used.' Change Section 2 bridge.bindings to 'offline-generated metadata ingestion and generic marshalling; no runtime code generation'.",
+      "verification_needed": false
+    },
+    {
+      "id": "F-03",
+      "severity": "medium",
+      "artifact": "design/Android MCP Bridge Design.md (Full binding coverage table; Generic Binder invocation and codecs; Remediation contract precedence raw grant DDL)",
+      "evidence": "'Expose binder.transact under an explicit per-client low-level grant, scoped to connection/handle, transaction-code range and flags.' 'Bind only reachable endpoints with verified identity. IBinder does not enumerate every remote method or its parameter schema.' 'Root and hidden-API bypass are not assumed.' 'client_raw_grants(client_id, connection_id, descriptor, code_min, code_max, flags_mask, contract_hash, effect, constraints_json, row_version)'.",
+      "issue": "No acquisition path for IBinder handles to platform AIDL services is specified. From an ordinary app UID the public routes are bindService to an explicit exported component and the public manager wrappers; android.os.ServiceManager.getService and the manager objects' internal proxy fields are non-SDK interfaces. Whether raw transactions may instead execute through the ADB backend with shell authority (service call) is not stated. connection_id in client_raw_grants is not tied to connection_profiles.profile_id or to the reserved target_key platform:local, so the 'connection' scope of a raw grant is undefined.",
+      "exact_minimal_correction": "Add a 'Binder handle acquisition' paragraph: permitted paths are (a) bindService to an explicit component with signing identity verification, (b) handles returned by public SDK methods recorded in the catalog as handle sources, (c) ADB-backed raw transactions under a self/external ADB profile using shell authority; ServiceManager lookup is classified non-SDK and reported backend_unreachable:non_sdk unless an owner enables an explicitly labeled reflection profile. Define connection_id as connection_profiles.profile_id or the literal platform:local.",
+      "verification_needed": false
+    },
+    {
+      "id": "F-04",
+      "severity": "medium",
+      "artifact": "design/sources/startup-resolution.mmd; design/assets/startup-resolution.svg; design/Android MCP Bridge Design.md (Classes and responsibilities; sentence after the startup-resolution image)",
+      "evidence": "startup-resolution.mmd: 'Active --> UI[Avalonia full inventory and reason filters]'. startup-resolution.svg contains the rendered text 'Avalonia full inventory'. Design table: 'Kotlin Compose ViewModels | Full inventory plus availability/reason filters, resolving/stale indicators and owner remediation'. Design text: 'The authoritative editable Mermaid sources for all four diagrams are in design/sources and the portable bundle.' render-manifest.json and design-review-state.json both list eight diagrams.",
+      "issue": "One of the eight diagrams contradicts the user's latest Kotlin/Compose decision and the surrounding prose, violating requirement 9 (consistent design diagrams). The 'all four diagrams' sentence is stale against eight rendered diagrams.",
+      "exact_minimal_correction": "Change the node label to 'Compose full inventory and reason filters', re-render with Pele 1.10.0, update sourceSha256/svgSha256 and lengths in render-manifest.json and the portable bundle, and change 'all four diagrams' to 'all eight diagrams'.",
+      "verification_needed": false
+    },
+    {
+      "id": "F-05",
+      "severity": "medium",
+      "artifact": "design/Android MCP Bridge Design.md (Section 8 Kotlin Compose management interface, first paragraph)",
+      "evidence": "'Use an Android single view application with MVVM and compiled bindings. Keep navigation state in view models and platform activity concerns behind services.'",
+      "issue": "'Single view application' and 'compiled bindings' are Avalonia constructs (ISingleViewApplicationLifetime, CompiledBindings). Jetpack Compose has neither; the section title says Compose but its architecture sentence still describes the superseded stack, contradicting requirement 3 and the later Kotlin section.",
+      "exact_minimal_correction": "Replace with: 'Use one ComponentActivity hosting Compose with ViewModel-held UI state and state hoisting; navigation state lives in ViewModels and saved state; platform concerns stay behind service-owned interfaces reached through the local facade.'",
+      "verification_needed": false
+    },
+    {
+      "id": "F-06",
+      "severity": "high",
+      "artifact": "design/Android MCP Bridge Design.md (Atomic activation, invalidation and refresh; Source projection, capture epoch and storage contract; Effective overlays ... bounded execution; Device capacity and latency acceptance budgets; Kotlin server section startup paragraph)",
+      "evidence": "'The full offline Python checkpoint projected/resolved 799,527 historical008 entries ... Resolution/validation took565.6seconds and the whole desktop probe peaked at4.30GiB; it does not meet the headless runtime memory targets below.' 'Startup, reconnect/device replacement, boot/session or Android-user change ... invalidate affected active views and pending approvals.' 'Facts are captured with capability_epoch and observed_at. The resolver rejects epoch relabeling'. 'Startup validates ... loads trusted catalog/capability snapshots and admits only a ready device view.' Budgets list p95 targets for metadata query, policy lookup, permission commit and first management view only; 'traverse coherent type closures with bounded scratch storage' gives no bound.",
+      "issue": "Every boot invalidates the active view and epoch relabeling is forbidden, so the design forces a complete re-resolution of roughly 800k entries on every boot and on every capability change, with no device-side time budget and no validated-reuse rule. The only evidence is 565.6 s on a desktop at 4.30 GiB, which the design admits does not meet the 384 MiB peak target. Which calls are admitted while the view is Resolving is unspecified. The bounded-batch strategy is a sketch with no numeric scratch bound, so the 'implementable acceptance strategy' required after round 012 is still not stated in checkable terms.",
+      "exact_minimal_correction": "Add three sentences: (1) 'Reuse: a sealed view whose inventory_sha256, exact facts hash, catalog and overlay generations and scope equal the freshly observed facts is re-verified and re-bound to the new boot/epoch; this is re-verification, not relabeling.' (2) Add to the budgets table a cold full-resolution p95 target and a warm reuse target, measured on the reference device profile. (3) 'While Resolving, the listener admits policy, status, callback.cancel and bindings.search/list/get; device-call admission returns VIEW_RESOLVING.' Add a numeric scratch bound (for example <= 64 MiB) to the bounded-batch resolver.",
+      "verification_needed": false
+    },
+    {
+      "id": "F-07",
+      "severity": "medium",
+      "artifact": "design/Android MCP Bridge Design.md (Catalog artifact import contract; Separate catalog CRUD API; Section 3 limits; Device capacity budgets)",
+      "evidence": "'Accept a versioned SQLite catalog with equivalent JSON/JSONL export and a machine-readable source/coverage manifest.' 'POST /v1/catalog/imports | Idempotent immutable staging and validation, no active view change.' 'Suggested initial limits: 256 KiB request body'. 'The measured release010 reference SQLite catalog is10,276,548,608 bytes'. 'Trusted source installation is a local-owner operation'.",
+      "issue": "No channel is specified for placing a roughly 10 GiB catalog file into the service's app-private storage: Storage Access Framework pick and copy, adb push plus owner import, or in-app download. The HTTP import endpoint cannot carry it under the stated body limit, and the point at which the manifest SHA-256 is verified relative to the copy is unspecified.",
+      "exact_minimal_correction": "Add a 'Catalog delivery' paragraph: 'The owner selects the catalog through the Storage Access Framework or names an adb-pushed path under an authorized ADB profile; BridgeService copies it into staging, verifies the manifest SHA-256 before validation, and POST /v1/catalog/imports references the staged local handle rather than carrying a body upload.'",
+      "verification_needed": false
+    },
+    {
+      "id": "F-08",
+      "severity": "medium",
+      "artifact": "design/Android MCP Bridge Design.md (Separate catalog CRUD API; Management, CRUD and component responsibilities; Kotlin server and Jetpack Compose management UI)",
+      "evidence": "'Catalog administration uses a distinct authenticated admin scope and explicit owner authorization ... Reuse authenticated loopback transport protections or a separately approved management transport; localhost alone is not trusted.' 'No administration endpoint is enabled by this design document.' Kotlin section: 'The activity binds to the already-started service through an unexported local Binder facade, never through an unauthenticated loopback admin endpoint.' 'UI edits use the same CAS APIs.'",
+      "issue": "In the one-APK Kotlin design it is unspecified whether BridgeService hosts the /v1/catalog HTTP API at all, on which listener or port, who its intended clients are (desktop tooling through adb forward?), and how admin-scope credentials are issued, since pairing only issues ordinary client bearer credentials. The Compose UI uses the facade, leaving the HTTP admin API's role and enablement ambiguous.",
+      "exact_minimal_correction": "State: 'BridgeService serves the catalog CRUD API on the same loopback listener under /v1/catalog, disabled by default, enabled by local owner action for a bounded window, authenticated with an owner-issued admin credential (separate credentials.kind=admin, never usable for tools/call); the Compose UI reaches the same application service through the local facade.'",
+      "verification_needed": false
+    },
+    {
+      "id": "F-09",
+      "severity": "medium",
+      "artifact": "design/Android MCP Bridge Design.md (Separate catalog CRUD API vs Management, CRUD and component responsibilities)",
+      "evidence": "'There is one route family; no PATCH alias.' versus 'Owner-authenticated PUT/PATCH/DELETE affects local mappings or tombstones; imported evidence is never rewritten.'",
+      "issue": "Direct contradiction about the authoritative catalog API surface; the OpenAPI contract is declared authoritative, so the groups section is wrong on its face.",
+      "exact_minimal_correction": "Change 'PUT/PATCH/DELETE' to 'PUT/DELETE'.",
+      "verification_needed": false
+    },
+    {
+      "id": "F-10",
+      "severity": "medium",
+      "artifact": "design/Android MCP Bridge Design.md (Event envelope, bounds and synchronous replies; Invocation and subscription lifecycle; FunctionalGroup paragraph; bootstrap tool list)",
+      "evidence": "'SQLite stores subscription metadata/revisions, exact contract pins, lease state, journal records keyed by subscription/epoch/sequence, per-client quotas, cleanup obligations and bounded replay cursors.' 'A configured lease/grace bounds disconnected retention; a client must explicitly renew within its authorized maximum.' Bootstrap set lists callback.status but no renewal operation and no callback.status contract; FunctionalGroup and CallbackDescriptor fields are prose only, while Sections 10, 11, 14 and 15 define tables with PK/FK/CHECK/index.",
+      "issue": "The callback and group features lack the table-level storage contract used everywhere else (no callback_descriptors, functional_groups, group_memberships, group_activations, subscriptions, subscription_events definitions), the lease renewal operation the client 'must' perform is undefined, and callback.status has no input/output contract. These are design omissions distinct from the pending executable DDL.",
+      "exact_minimal_correction": "Add a table block mirroring Section 10 style for callback_descriptors, functional_groups, group_memberships, group_activations, subscriptions(PK subscription_id; client_id FK; stream_epoch; state CHECK registering/active/cancelling/closed/orphaned/outcome_unknown; lease_expires_at; quota columns) and subscription_events(PK subscription_id, stream_epoch, sequence). Define callback.status(subscription_id optional, renew boolean) returning state, revision, lease_expires_at, quota usage, oldest/newest cursors; state that renew is bounded by the client's max_lease constraint.",
+      "verification_needed": false
+    },
+    {
+      "id": "F-11",
+      "severity": "medium",
+      "artifact": "design/Android MCP Bridge Design.md (Full binding coverage table, SDK and Java bindings row; Section 2 project table)",
+      "evidence": "'Generate invocation wrappers where required by trimming/AOT; reflection or JNI may be used where supported, not as a hidden-API bypass.' Section 2: 'bridge.bindings (Kotlin runtime) | ... code generation and generic marshalling'.",
+      "issue": "'Trimming/AOT' is .NET terminology carried over from the superseded stack. On ART there is no runtime code generation, and shipping generated wrappers for roughly 800k entries is infeasible, so the only Kotlin execution path for SDK/Java members is reflection or MethodHandles resolved from the pinned JVM signature, with non-SDK restriction failures surfaced as a reason code. That path is not stated.",
+      "exact_minimal_correction": "Replace the row text with: 'SDK/Java members dispatch through java.lang.reflect or MethodHandles resolved at admission from the pinned JVM signature; no per-member generated code is shipped; code generation exists only in offline tooling; a non-SDK restriction failure yields OS_UNAVAILABLE with reason NON_SDK_BLOCKED.'",
+      "verification_needed": false
+    },
+    {
+      "id": "F-12",
+      "severity": "medium",
+      "artifact": "design/Android MCP Bridge Design.md (Callback inventory and evidence; Event envelope, bounds and synchronous replies; Effective overlays semantic contract)",
+      "evidence": "'HIDL generates clauses describe RPC completion results and must not automatically become durable subscriptions.' 'HIDL RPC completion adapters retain their finite call correlation and are not mislabeled as subscriptions.' Semantic contract format3 includes 'HIDL result types'.",
+      "issue": "The text implies executable HIDL completion adapters, but an ordinary app UID cannot reach hwbinder HAL services (SELinux restricts untrusted apps to a short allowlist of hwservices). The design never states that HIDL entries are inventory and classification only, nor names any backend that could reach them.",
+      "exact_minimal_correction": "Add: 'HIDL interfaces are inventory and semantic-classification entries; no bridge backend reaches hwbinder from the app UID, so they report backend_unreachable:hidl unless a reviewed privileged backend is configured. HIDL completion semantics are retained for classification correctness only.'",
+      "verification_needed": true
+    },
+    {
+      "id": "F-13",
+      "severity": "low",
+      "artifact": "design/Android MCP Bridge Design.md (Section 12 settings.brightness.get row; Canonical permission entry points paragraph on brightness)",
+      "evidence": "'documented range1..255' and 'the cited documentedRange1..255. An out-of-range observation (including0 on a differing device) is returned with an anomaly flag', citing [S15] Settings.System.",
+      "issue": "To the reviewer's knowledge the Settings.System.SCREEN_BRIGHTNESS reference text documents the backlight brightness as between 0 and 255, not 1 and 255; if so, the 'documented range' label and the treatment of 0 as an out-of-range anomaly are inaccurate attributions to the cited source.",
+      "exact_minimal_correction": "Quote the exact documented sentence from the cited reference; if it reads 0 to 255, change documentedRange to 0..255, keep the write policy floor at 16 as a design choice, and drop the 0-as-anomaly example.",
+      "verification_needed": true
+    },
+    {
+      "id": "F-14",
+      "severity": "low",
+      "artifact": "design/Android MCP Bridge Design.md (Activation, concurrency and host compatibility; Section 10 identity definition)",
+      "evidence": "'Stable tool names include canonical binding identity; names cannot be reused for different contracts after refresh.' Section 10: 'binding_id and entry_id are the same SHA-256 canonical source-signature identity'.",
+      "issue": "Embedding a 64-hex SHA-256 identity in an MCP tool name risks exceeding host-side name length and charset constraints (recent MCP guidance bounds tool names and some hosts cap them around 64 characters). The alias name format is undefined.",
+      "exact_minimal_correction": "Define the dynamic alias name format as a bounded ASCII identifier (for example a short qualified symbol plus the first 16 hex characters of binding_id, maximum 64 characters, charset [A-Za-z0-9_.-]) and carry the full binding_id and schema_hash inside the tool description and input schema.",
+      "verification_needed": true
+    },
+    {
+      "id": "F-15",
+      "severity": "low",
+      "artifact": "design/Android MCP Bridge Design.md (MCP2025-11-25 transport contract)",
+      "evidence": "'The no-query URI reads the earliest retained page.'",
+      "issue": "Clients subscribe to the no-query URI and hosts that react to notifications/resources/updated by re-reading the subscribed URI will receive the same earliest retained page repeatedly and never the new events, placing stale content in agent context. The design acknowledges hosts choose context behavior but the chosen semantics defeat the most common host behavior.",
+      "exact_minimal_correction": "Make the no-query read return a bounded status document (state, oldest_retained_cursor, newest_cursor, next read URI) or the latest page, and state that cursor-expanded URIs are the only way to page history.",
+      "verification_needed": false
+    },
+    {
+      "id": "F-16",
+      "severity": "low",
+      "artifact": "design/Android MCP Bridge Design.md (Binding registry storage table; Canonical permission entry points; alias paragraph)",
+      "evidence": "'tool_binding_aliases PK tool_id plus binding_id' versus 'tool_binding_aliases stores one row per (alias_name,binding_id), while all rows sharing an alias_name must use one policy tool_id' and 'Generated per-binding MCP tool names and binding.invoke share the single policy tool_id binding.invoke'.",
+      "issue": "With every generated alias sharing tool_id binding.invoke, a primary key of (tool_id, binding_id) permits only one alias row per binding, which contradicts the stated row-per-(alias_name, binding_id) semantics as soon as a static generated alias and a session dynamic alias (or two overload-group aliases) reference the same binding.",
+      "exact_minimal_correction": "Change the key to PK(alias_name, binding_id) with a CHECK-enforced invariant (trigger) that all rows for one alias_name share one tool_id, and index (tool_id, binding_id).",
+      "verification_needed": false
+    },
+    {
+      "id": "F-17",
+      "severity": "low",
+      "artifact": "design/Android MCP Bridge Design.md (Section 7 table, Connection reconnects row; Invocation and subscription lifecycle)",
+      "evidence": "'Default v1 has no durable event replay; client retries cannot recreate an approval.' versus 'Subscription records and retained events may survive transport reconnect and bridge restart.'",
+      "issue": "Read together these conflict; the first refers to transport SSE replay and the second to the application journal, but the text never says so.",
+      "exact_minimal_correction": "Amend the Section 7 cell to 'no durable transport (SSE) replay; application journals defined in the callback section are retained and read through resources/read'.",
+      "verification_needed": false
+    },
+    {
+      "id": "F-18",
+      "severity": "low",
+      "artifact": "design/Android MCP Bridge Design.md (Example MCP exchange header; Activation, concurrency and host compatibility)",
+      "evidence": "'Mcp-Session-Id: <bound-session-if-negotiated>' and 'Interest/activation is scoped to authenticated client, credential epoch and MCP session.'",
+      "issue": "Session assignment is optional for a Streamable HTTP server, yet activation, view cursors and callback scoping depend on an MCP session. Behavior when no session is negotiated is undefined.",
+      "exact_minimal_correction": "State: 'The bridge always assigns Mcp-Session-Id at initialize and rejects post-initialize requests without it (400), so session scope is always defined.'",
+      "verification_needed": false
+    },
+    {
+      "id": "F-19",
+      "severity": "low",
+      "artifact": "design/Android MCP Bridge Design.md (Service boot recovery and status indicators, Optional boot start)",
+      "evidence": "'A manifest boot receiver reads only a minimal nonsecret boot preference, then requests eligible service startup' and 'A blocked or pre-unlock start is reported as Waiting for unlock or Start requires owner action.'",
+      "issue": "On file-based-encryption devices BOOT_COMPLETED is delivered only after user unlock; a 'Waiting for unlock' state before unlock requires a directBootAware receiver for LOCKED_BOOT_COMPLETED and a mirror in device-protected storage, neither of which is specified.",
+      "exact_minimal_correction": "Specify: receiver android:directBootAware=true handling LOCKED_BOOT_COMPLETED (sets Waiting for unlock from the device-protected mirror) and BOOT_COMPLETED or ACTION_USER_UNLOCKED (requests eligible start after reconciling with credential-encrypted configuration).",
+      "verification_needed": false
+    },
+    {
+      "id": "F-20",
+      "severity": "low",
+      "artifact": "design/Android MCP Bridge Design.md (Section 4 Manual pairing flow)",
+      "evidence": "'The agent proves possession of the bootstrap secret and presents a proposed label.' 'Use an explicit pairing surface outside the MCP method catalog and enabled only during a local pairing window.'",
+      "issue": "The pairing endpoint, message format and proof mechanism are unspecified. If the agent simply submits the bootstrap secret over the reduced_http profile, a port impersonator captures it; whether proof is HMAC challenge-response, a PAKE, or plain submission over pinned TLS is undefined.",
+      "exact_minimal_correction": "Define the pairing route (for example POST /pair on the same listener) and require either the paired_tls profile or an HMAC-over-server-nonce proof so the bootstrap secret never transits in reduced_http; state the response carries the credential once.",
+      "verification_needed": false
+    },
+    {
+      "id": "F-21",
+      "severity": "low",
+      "artifact": "design/Android MCP Bridge Design.md (Section 9 Approval detail; Section 18; Kotlin server section)",
+      "evidence": "'Ask the owner to unlock or authenticate locally for sensitive approvals if the chosen security profile requires it.' 'require fresh owner authentication where supported'. 'owner-sensitive commands require the existing fresh authenticated owner approval bound to nonce, exact operation, expected revisions and expiry.'",
+      "issue": "The owner authentication mechanism is never named, so the 'security profile' and the facade's owner-approval capability have no concrete platform binding.",
+      "exact_minimal_correction": "Name BiometricPrompt with allowed authenticators BIOMETRIC_STRONG or DEVICE_CREDENTIAL (device-credential fallback), state the freshness window, and map profile levels to whether it is required for pairing, credential reveal, grants, export and Ask approvals.",
+      "verification_needed": false
+    },
+    {
+      "id": "F-22",
+      "severity": "low",
+      "artifact": "design/Android MCP Bridge Design.md (document structure; Requirement and acceptance traceability paragraph; Validation status; references; budgets)",
+      "evidence": "Callback, group, Kotlin and remediation sections are placed after '# 20 Decisions and source references' and '# Integration source references'. 'Round011 independently assessed design95/95, contracts93/93, extractor94/92 and overall93/84 (NOT_READY)' coexists with 'Latest completed independent overall agreement remains93% accuracy/80% completeness'. [S13] and [S25] are listed but never cited in the body. 'The reference deployment profile is64-bit Android35+'. Decisions table omits foreground-service type, callback and group decisions.",
+      "issue": "Two different 'latest review' statements, design content after the references chapter, uncited references and the ambiguous 'Android35+' (API level 35 or Android version) reduce accuracy and readability of a document meant to be DOCX-preserved.",
+      "exact_minimal_correction": "Move the four appended sections before Section 19; replace the round011 sentence with a pointer to the round012 result; write 'API level 35 (Android 15) or later'; cite or remove S13 and S25; add foreground-service type, callback materialization and group alias naming to the Decisions table.",
+      "verification_needed": false
+    },
+    {
+      "id": "F-23",
+      "severity": "low",
+      "artifact": "design/Android MCP Bridge Design.md (Section 16 table; Section 3 limits)",
+      "evidence": "'Return a bounded PNG image plus width, height, displayId, rotation, captureId and capturedAt' with no numeric bound; Section 3 bounds only the request body at 256 KiB.",
+      "issue": "Response size for screen.state is unbounded in numbers (full-resolution PNG screenshots are commonly several MiB before base64), and display routing for capture and tap (screencap -d, input -d) is not stated.",
+      "exact_minimal_correction": "Add a default maximum image payload (for example 2 MiB with optional downscale exposing the image-to-display transform already permitted) and state that multi-display routing uses the display-selecting forms of the fixed reviewed ADB operations.",
+      "verification_needed": false
+    },
+    {
+      "id": "F-24",
+      "severity": "low
+
+",
+      "artifact": "design/Android MCP Bridge Design.md (Section 15 Pairing and lifecycle)",
+      "evidence": "'Use the pairing endpoint only for pairing, then discover the authenticated connect endpoint. Ports may differ and change after reboot, debugging toggle or network changes.'",
+      "issue": "The discovery mechanism for the wireless-debugging connect endpoint is unspecified (NsdManager discovery of _adb-tls-connect._tcp and _adb-tls-pairing._tcp, or an owner-entered port), so the Self ADB profile's reconnect path has no defined source for the changing port.",
+      "exact_minimal_correction": "State: 'Endpoint discovery uses NsdManager service discovery of _adb-tls-pairing._tcp (pairing) and _adb-tls-connect._tcp (connect) on the local interface, with owner-entered host:port as the fallback; the discovered port is never trusted without TLS peer verification against the paired identity.'",
+      "verification_needed": false
+    },
+    {
+      "id": "F-25",
+      "severity": "low",
+      "artifact": "design/Android MCP Bridge Design.md (Section 2 Baseline and release gates; Section 3 first paragraph)",
+      "evidence": "'Kotlin release build runs an Android-compatible HTTP engine behind the Kotlin LoopbackHost interface' and 'Prefer the official protocol implementation behind an Android proven host adapter. [S4]'.",
+      "issue": "The MCP Kotlin SDK candidate and the HTTP engine are unnamed, [S4] is the transport specification rather than an implementation, and LoopbackHost is referenced once and never defined, so the compatibility spike has no concrete evaluation target.",
+      "exact_minimal_correction": "Name the evaluation target (official MCP Kotlin SDK pinned to a 2025-11-25-compatible release plus a pure-JVM Android-compatible HTTP engine), and define LoopbackHost as the interface owning bind, Host/Origin validation, credential extraction, request body/nesting limits and SSE queue bounds.",
+      "verification_needed": false
+    },
+    {
+      "id": "F-26",
+      "severity": "low",
+      "artifact": "design/Android MCP Bridge Design.md (Invocation and subscription lifecycle; Section 6 definition of Ask)",
+      "evidence": "'Authorization is rechecked on reads and before event publication; revocation immediately suppresses payload access.' Section 6: 'Ask means approval of one prepared execution, not consent to an unbounded future conversation.'",
+      "issue": "For a callback binding whose rule is Ask, it is unspecified whether approval is consumed once at registration or required again for each resources/read or each published event; the two sections can be read to require per-read approvals, which would make journals unusable.",
+      "exact_minimal_correction": "State: 'Ask is consumed once at registration; subsequent reads and event publication require only that the rule remain Ask or Allow and that the registration's approval record and contract pins remain valid; a change to Deny suppresses reads and queues cleanup.'",
+      "verification_needed": false
+    },
+    {
+      "id": "F-27",
+      "severity": "low",
+      "artifact": "design/Android MCP Bridge Design.md (Event envelope, bounds and synchronous replies; Section 11 Indexes and connection policy)",
+      "evidence": "'Sequence order is assigned atomically when appending within one subscription across concurrent Binder threads' and 'Disk-full marks durability_failed and closes the stream; it does not acknowledge a durable append.' Section 11: 'Start with synchronous=FULL for security relevant mutations' and 'a single application writer queue'.",
+      "issue": "Whether a Binder thread blocks on a synchronous SQLite commit per event, or hands the event to the single writer queue with batched commits, is unspecified; the choice determines Binder-thread latency, what 'accepted' means for at-least-once replay, and how 'release native resources promptly' is honored.",
+      "exact_minimal_correction": "State: 'Binder threads enqueue to the broker's bounded in-memory accept buffer and return; the single writer commits batches with synchronous=NORMAL for journal rows; an event is replayable only after commit, and the accept buffer counts against the subscription quota.'",
+      "verification_needed": false
+    },
+    {
+      "id": "F-28",
+      "severity": "low",
+      "artifact": "design/Android MCP Bridge Design.md (Section 10 executions row; Section 14 Security and data handling)",
+      "evidence": "Section 10: 'state CHECK admitted/dispatched/completed/failed/canceled/unknown'. Section 14: 'Extend executions.state with dispatched and record dispatch time when observable'.",
+      "issue": "Section 14 proposes extending a state set that Section 10 already contains; editorial inconsistency that suggests two different schema baselines.",
+      "exact_minimal_correction": "Change the Section 14 sentence to 'executions.state already includes dispatched; record dispatch_time when observable'.",
+      "verification_needed": false
+    }
+  ],
+  "verified_strengths": [
+    "render-manifest.json sourceSha256, svgSha256, sourceLength and svgLength values match the input manifest sha256 and size_bytes for all eight diagrams (string comparison only; hashes were not recomputed).",
+    "The two inline Mermaid blocks (architecture, request-sequence) match design/sources byte-for-byte as far as text comparison shows; seven of eight diagrams carry Kotlin-consistent labels and render as standalone SVG with inline colors, no links and no external images.",
+    "Arithmetic checks pass: 432,590 + 366,937 = 799,527; 392,959 + 39,631 = 432,590; 10,276,548,608 bytes = 9.57 GiB; the 21 GiB and 30 GiB capacity figures follow from the stated formula.",
+    "MCP 2025-11-25 composition matches the supplied rules: single final tools/call response with SSE allowed during registration and then termination; server notifications on the GET SSE stream; Last-Event-ID kept distinct from the application journal cursor; resources/subscribe on the exact URI; notifications/resources/updated carrying the URI; resources/read returning bounded application/json pages via a URI template; progress tokens ending with the request; no custom standard notifications; honest statements that pagination does not stop eager hosts and list_changed does not guarantee host refresh.",
+    "Android facts checked against reviewer knowledge are correct: foreground service type truthfulness and dataSync misuse warning, Android 15 BOOT_COMPLETED restrictions for the listed types, Android 13 notification permission effects, START_STICKY null Intent, SDK_INT_FULL with major/minor accessors, separate SDK extension query, stable AIDL version and hash queries, Android 11 wireless debugging pairing, adb forward --no-rebind tcp:0 and --remove, loopback-only forwards, Keystore HMAC verifier, SQLite partial unique index and core lack of SHA-256.",
+    "Authority model is consistently layered: inventory existence, device applicability, verified wire contract, OS authority, backend authority and per-client grant are separate axes; deny by default; admission as the linearization point; approvals bound to a canonical digest with revision pins; revocation honestly not rollback.",
+    "Requirement 3 ownership is correctly expressed: single APK, started foreground BridgeService owning transport, policy, SQLite and backends; Compose activity through an unexported same-process facade that is explicitly not a privilege boundary; no .NET runtime or Kestrel; Python extractor labeled tooling.",
+    "Synchronous return-valued callbacks are restricted to bounded local typed policy with explicit unsupported_synchronous_reply; HIDL completion is distinguished from subscriptions; name heuristics are treated as candidate evidence only; unknown dispositions are retained.",
+    "Scale evidence is disclosed truthfully as historical desktop measurement that misses the memory target, with no claim of Android measurement, catalog publication or coverage completeness.",
+    "Logging, journal persistence and mandatory audit are kept distinct with separate revisions, quotas, keys and failure semantics."
+  ],
+  "blockers_to_design_98_98": [
+    "F-01 define one authoritative default tools/list set including inventory search tools and the delivery route for convenience tools.",
+    "F-02 specify callback materialization strategy per descriptor and declare abstract classes unsupported without prebuilt adapters.",
+    "F-06 add resolution reuse rule, cold/warm resolution budgets, Resolving-state admission rule and a numeric scratch bound.",
+    "F-03 specify Binder handle acquisition paths and define raw-grant connection_id.",
+    "F-04 and F-05 remove remaining Avalonia content from the startup-resolution diagram and Section 8 and fix the diagram count.",
+    "F-07 and F-08 specify catalog delivery channel and the hosting, enablement and credential model of the catalog administration API.",
+    "F-09, F-16, F-17, F-28 resolve the PATCH, alias key, replay-layer and executions.state contradictions.",
+    "F-10 add table-level storage contracts for callbacks and groups plus lease renewal and callback.status contracts.",
+    "F-11 and F-12 replace .NET execution language with the Kotlin reflection path and state HIDL reachability.",
+    "Low findings F-13 through F-15 and F-18 through F-27 should be closed or explicitly accepted with rationale before a 98/98 claim."
+  ],
+  "implementation_validation_gates": [
+    "Callback and group executable schema, producers and reference fixtures are pending; the 271 normal and 271 optimized reference tests cover existing catalog and reference contracts only and verify no callback or group lifecycle behavior (design-review-state.json: new_callback_group_reference_coverage false).",
+    "Full callback classification is not proven; the source owner's candidate counts in design-review-state.json are qualified candidates and are not treated as coverage evidence by this review.",
+    "Kotlin BridgeService, Compose UI, local facade, HTTP engine and pinned MCP Kotlin SDK: build, real client exchange, Streamable HTTP conformance and Origin/Host/session tests.",
+    "Foreground service type selection (specialUse subtype declaration or alternative), boot and background-start eligibility, notification denial behavior, restart recovery and force-stop semantics on supported devices.",
+    "On-device resolution benchmarks for the complete inventory within the stated RSS, page cache and latency budgets, cold and warm, plus catalog capacity preflight.",
+    "Generic Binder engine with verified wire contracts, parcel codecs, handle lifetimes and non-SDK denial handling on real Android; sender-UID verification for callback proxies.",
+    "Self ADB native client packaging, pairing and endpoint rediscovery, external-host forwards, screen.state and input.tap coordinate and freshness tests, protected-consent isolation.",
+    "Optional Avalonia RemoteControl Android protocol adapter in Kotlin with target authentication, if ever enabled.",
+    "DOCX regeneration and visual QA for the Kotlin revision and library save (design-review-state.json marks both pending); Pele 1.10.0 re-render after the F-04 label fix.",
+    "SQLite migration, WAL, backup, Keystore and secret-canary tests; logging isolation and quota races; journal durability and overflow behavior."
+  ],
+  "project_status_separate": {
+    "overall": "NOT_READY per round 012 (overall accuracy 93, completeness 80); this design review neither replaces the full-project rubric nor confers any overall score.",
+    "catalog_production": "Release 010 as stated by the user: 802,936 entries, 846 unmatched annotations, 2 undefined permissions, open global and native coverage gaps; source owner controls 011; the design cites a 799,527-entry historical 008 checkpoint and the 010 file size only, and makes no 010 entry-count or coverage claim.",
+    "effect_of_this_review": "Design-only scores of 91 accuracy and 88 completeness; design is NOT_READY for the 98/98 target; no change to catalog, extractor or overall status."
+  },
+  "limitations": [
+    "No tools were used: SHA-256 values were cross-checked between the two manifests as strings but not recomputed over artifact bytes.",
+    "External files referenced by the design (catalog/README.md, catalog/API-CONTRACT.md, catalog/contracts/openapi.json, catalog/bridge-config.sql, policy_reference.py, dispatch_manifest.py, evidence/catalog-size-release010.json, the DOCX and the portable bundle) were not in the snapshot and were not assessed.",
+    "MCP rules were judged from the supplied paraphrases; Android, SQLite, ADB and Avalonia facts were judged from reviewer knowledge and are marked verification_needed where confidence is limited (F-12, F-13, F-14).",
+    "Pele 1.10.0 behavior and the upstream Avalonia.RemoteControl README were taken as cited, not inspected.",
+    "No counts, coverage or runtime behavior were inferred beyond what the artifacts state."
+  ],
+  "report_complete": true
+}
+```
+
+`★ Insight ─────────────────────────────────────`
+- The highest-value findings are the ones where the document is internally consistent but silent: callback materialization on ART, IBinder handle acquisition, and per-boot re-resolution. Silence on a mechanism is a design gap even when every stated sentence is true.
+- Splitting "accuracy" (is what is written correct) from "completeness" (is what is needed written) keeps stale-stack residue from masking the larger mechanism omissions, and vice versa.
+`─────────────────────────────────────────────────`
+
+Verdict: NOT_READY for the 98/98 design target, scored 91 accuracy and 88 completeness. Three high findings (default tool surface inconsistency, undefined callback materialization, unbudgeted per-boot full re-resolution) and nine medium findings block acceptance. The overall project status stays as round 012 left it.

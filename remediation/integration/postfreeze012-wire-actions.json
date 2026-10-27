@@ -1,0 +1,69 @@
+{
+  "created_at": "2026-10-27T04:44:34.294223+00:00",
+  "base": "Immutable frozen012; consumer/configuration delta only, not in running review",
+  "patch": "/home/sharpninja/github/2026-10-26/task-3/remediation/integration/postfreeze012-wire.patch",
+  "patch_sha256": "80bdfa9c88759d1102cef0db92ba36b0e6906bb94d9957349be5e5601179672f",
+  "candidate_files": "/home/sharpninja/github/2026-10-26/task-3/remediation/integration/postfreeze012-wire",
+  "files": [
+    {
+      "file": "bridge-config.sql",
+      "base_sha256": "b98dcbf8e768a0484d3960408a3295c708349aa3794834f5fa787492ad646a38",
+      "candidate_sha256": "0aef40b1a277ed87862c932a9925dd8721836fac5ed7ef135f13fac0bf1c89f6"
+    },
+    {
+      "file": "API-CONTRACT.md",
+      "base_sha256": "2fafb99b4d259b949eed46e28a9873db6925a80511d5846e0da77576a7855835",
+      "candidate_sha256": "f678eaba976fc8e711f379b0eaaa4526f91dbe91e8a2498b3229b1b5c0525859"
+    },
+    {
+      "file": "tooling/wire_proof_reference.py",
+      "base_sha256": null,
+      "candidate_sha256": "a347aa198cc3204f4d6c2c75f396a185f431290bcbe433cd908a06fe41ad0103"
+    },
+    {
+      "file": "tests/test_postfreeze12_wire_evidence.py",
+      "base_sha256": null,
+      "candidate_sha256": "67de30565b887bfdbf40ab25a1b9e2118524c5508a99fbdc5b26728ddb6a9373"
+    }
+  ],
+  "tests": {
+    "normal": 247,
+    "optimized": 247,
+    "receipts": [
+      "evidence/tests-regression-077.receipt.json",
+      "evidence/tests-regression-078.receipt.json"
+    ]
+  },
+  "original_sql_failure": "evidence/postfreeze12-wire-original-sql.json",
+  "changes": [
+    "Retain unique immutable wire tuple while allowing append-only proof acquisition/revocation",
+    "Current proof selection uses revision CAS; stale/invalid attempts rollback entirely",
+    "Proof-record hash and revision are distinct admission pins from semantic client schema grants"
+  ],
+  "producer_inputs_unchanged": {
+    "tooling/build_catalog.py": true,
+    "tooling/cache_fingerprint.py": true,
+    "tooling/parsers.py": true,
+    "tooling/aidl_members.py": true,
+    "tooling/aidl_lex.py": true,
+    "tooling/hidl_source.py": true,
+    "tooling/foundation_extract.py": true,
+    "tooling/java_source.py": true,
+    "tooling/sdk_api_index.py": true,
+    "tooling/jvm_source_link.py": true,
+    "tooling/java_context.py": true,
+    "tooling/annotation_link.py": true,
+    "tooling/catalog_projection.py": true,
+    "tooling/dispatch_manifest.py": true,
+    "tooling/permission_reference.py": true,
+    "contracts/DeviceResolution.schema.json": true,
+    "contracts/Entry.schema.json": true,
+    "contracts/PermissionExpression.schema.json": true
+  },
+  "producer_processing_fingerprint_unchanged": true,
+  "parser_cache_fingerprints_unchanged": true,
+  "no_production_regeneration_needed_for_this_delta": true,
+  "source_files_modified": false,
+  "independent_acceptance": false,
+  "mandatory": "Integrate into a new source candidate/code snapshot preserving immutable existing builds; do not relabel old production. No need interrupt/rebuild normalized catalog data solely for this consumer delta. Keep runtime ABI/profile/authority and no-device-action gates."
+}

@@ -1,0 +1,112 @@
+{
+  "created_at": "2026-10-26T20:50:19.565326+00:00",
+  "base_root": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/catalog-integrated",
+  "candidate_root": "/home/sharpninja/github/2026-10-26/task-3/remediation/integration/round004",
+  "patch": "/home/sharpninja/github/2026-10-26/task-3/remediation/integration/round004-source-contract.patch",
+  "source_active_files_modified": false,
+  "findings": {
+    "F-02": "Interface shift constants swallowed later methods; shared aidl_lex splitter plus generic type-header skip",
+    "F-04": "Mapped structured AIDL type roots now additive1.1.0 kinds with explicit wire/type-resolution unknowns, no stale unsupported issues",
+    "F-07": "SDK index locator guard is explicit ValueError under python-O",
+    "F-05/F-06": "Pointer switch base conflicts enforced, append-only mutation justification sidecar and Registry nullable applicability"
+  },
+  "regressions": "evidence/tests-regression-027.txt:93passed; evidence/round004-optimized.txt:7passed",
+  "important": "Adopt atomically into a new immutable build only. Parser/Entry contract bytes change processing fingerprints and may invalidate source cache keys; source owner must handle regeneration/verified cache provenance with its staging driver. Do not overwrite an active generation or merely relabel old cache hashes.",
+  "files": [
+    {
+      "file": "tooling/parsers.py",
+      "base_sha256": "7f86ad1b15571f31f9ce208845546d9609d419eaa6b9e508f2c958ab3ab795ae",
+      "candidate_sha256": "22e392dea5babb9aecde09d85f130ed2cfc4d36c49ccdf04822e753220a98975"
+    },
+    {
+      "file": "tooling/aidl_lex.py",
+      "base_sha256": null,
+      "candidate_sha256": "3bbf74c8e8356bd53d4f4616f725b2cd410dc20109fdb486ca10a81e53475a44"
+    },
+    {
+      "file": "tooling/aidl_members.py",
+      "base_sha256": null,
+      "candidate_sha256": "3c18f4bedd561009d693fc9cf62e9e367130b04e106f4a2a278e3b8ea29e4da5"
+    },
+    {
+      "file": "tooling/sdk_api_index.py",
+      "base_sha256": "3a7767ce0d96b8e0e1eb493159a71695eef4e8568fec81119123198c1e06742a",
+      "candidate_sha256": "b859746e92964b1cbac40663330afd4c0afa95d97aba9ced530f7538ccb31e73"
+    },
+    {
+      "file": "tooling/build_catalog.py",
+      "base_sha256": "68d945e23c5d339dfd252dee114e6f3cf4cc9f3c972a4c2eddd63e028cdbca8c",
+      "candidate_sha256": "ded0b0e2fe613932da8730605c5da39104359b12107f03b6741e569b8271bde7"
+    },
+    {
+      "file": "tooling/permission_reader.py",
+      "base_sha256": null,
+      "candidate_sha256": "c1f1eb69ac859a0eb8339d7b0d29b8ef000a37d26a82b45cb4d79025253dec6c"
+    },
+    {
+      "file": "tooling/contract_reference.py",
+      "base_sha256": "7abf16d7aa8dd4577c22464ca3db20135cf695454286991bda38123fa713ab4b",
+      "candidate_sha256": "a2e3e5305c63aac0d7f10e6797ec7a6e63e337db63ed3091c624611b4b9bb405"
+    },
+    {
+      "file": "schema.sql",
+      "base_sha256": "05beb69191814657892fc7fb0c227e73e8ffa91afe17b61d61e6999eee7f5bad",
+      "candidate_sha256": "3a622f9d996bfa4ed38138789949caed11b007bfc7b4cd61df3439a7be837010"
+    },
+    {
+      "file": "migrations/002-evidence-and-publication.sql",
+      "base_sha256": "1e330c70b2d23e96cf4fc66bb7bad47111d3aa74e57e39415f626bb3ddff7702",
+      "candidate_sha256": "53cd71eaa51264077a4cda796bf9c2002b4010367651d374f620f85711cd88ec"
+    },
+    {
+      "file": "contracts/Entry.schema.json",
+      "base_sha256": "faba03d743f646877ec9c847e9604fd652c767d6d2ba450d77011c887b74fefa",
+      "candidate_sha256": "be2595da412bfb05757f579eea02a521e6fc860853a8048a4c3e05f26c84adfa"
+    },
+    {
+      "file": "contracts/Error.schema.json",
+      "base_sha256": "fd2e1389e7d37bdc4e1a16587870584effbb5af7f3eb59ae231d7c034e89af23",
+      "candidate_sha256": "010121aa4b104d79daa26b914ff69bc46cecf8a6b61df383ea68a0b43a676897"
+    },
+    {
+      "file": "contracts/ImportRequest.schema.json",
+      "base_sha256": "d5810416ebef9275c0fd74f364b7f97394ea2fb763d9ea437eaa7e99a83ce0ae",
+      "candidate_sha256": "2cbf1e2dd191fbebe9bc6786e7d3497eccc93abd62ba0e6aa830a5996d5f604f"
+    },
+    {
+      "file": "contracts/Mutation.schema.json",
+      "base_sha256": "4dc91be9525557e18619db8b1a3d4323bf629377ffef304d0f9f437542908e36",
+      "candidate_sha256": "ebf39852d34f4515e5652b41aa54dc97bd2b2866ae70084d74679a67a3a3c918"
+    },
+    {
+      "file": "contracts/openapi.json",
+      "base_sha256": "42ed4290600f06f14e50fa760e96b20b8e72b9447a4563bc2d61fe7baf733551",
+      "candidate_sha256": "d924c09875c7e2803fe7f7202290533e9de97b838a3336f4ed133c44ec94ffbe"
+    },
+    {
+      "file": "contracts/PermissionExpression.schema.json",
+      "base_sha256": "85268fb29f282bdea613078da3ec28dc85d97a7fe91a2fab2f956bfd5f858010",
+      "candidate_sha256": "f34ff2d34ab12c4cd78b995c3d53193999f1050e62a8a009084d363b847fc1bb"
+    },
+    {
+      "file": "contracts/Source.schema.json",
+      "base_sha256": "35bc5a9ebde228ba1796f7d1c5ea3f993511cf07d88b632bb7e3054f15a90d26",
+      "candidate_sha256": "a1930843041b3f94788fe971810c699d366413a23b76028ac0c944a958765115"
+    },
+    {
+      "file": "tests/test_round4.py",
+      "base_sha256": null,
+      "candidate_sha256": "883fe9cc2065ac639dafa94683f5a337554b32df268652341bed56a126ff3c89"
+    },
+    {
+      "file": "tests/test_aidl_members.py",
+      "base_sha256": null,
+      "candidate_sha256": "31139a1bcb61b3f0818e7123b7e713c38930946c6e2bfb79e079b363546d3b4c"
+    },
+    {
+      "file": "tests/test_source_integration.py",
+      "base_sha256": "17080621c659df6e122d4913930550ba0496f6dc0b38275590d45c4d93f81fe8",
+      "candidate_sha256": "4405359ccba720c58da242cb324b9596751f6f4e712f16d942b91a5b699392bd"
+    }
+  ]
+}

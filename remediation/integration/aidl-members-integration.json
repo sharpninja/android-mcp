@@ -1,0 +1,21 @@
+{
+  "created_at": "2026-10-26T20:14:49.427386+00:00",
+  "helper": "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tooling/aidl_members.py",
+  "sha256": "05efc6e179aecaed72fc2ee2b10f0303799d840ad2997e2c130d34dec73142a3",
+  "tests": "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_aidl_members.py",
+  "builder_regression": "test_structured_aidl_members_survive_publication",
+  "integration": [
+    "Import enrich from aidl_members",
+    "Replace d=aidl(text) by d=enrich(text,aidl(text))",
+    "Include aidl_members.py in processing_fingerprint"
+  ],
+  "source_parser_unchanged": true,
+  "java_cache_regeneration_required": false,
+  "limitations": "Declaration metadata only, no inferred wire tags/layout/codecs; unsupported raw syntax retained; do not hotpatch a running build.",
+  "patch": "/home/sharpninja/github/2026-10-26/task-3/remediation/integration/aidl-members.patch",
+  "patch_base": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/catalog-integrated/tooling/build_catalog.py",
+  "patch_base_sha256": "68d945e23c5d339dfd252dee114e6f3cf4cc9f3c972a4c2eddd63e028cdbca8c",
+  "patched_builder_sha256": "4f2c79888d6fdfbf684aaa8e48dbb4da8817c6e76815cc6bc06c19a3f4023e9d",
+  "matches_tested_main_builder": true,
+  "new_immutable_publication_required": true
+}

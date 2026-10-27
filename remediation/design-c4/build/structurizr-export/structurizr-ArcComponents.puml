@@ -1,0 +1,139 @@
+@startuml
+!include ../../architecture/render-skin.puml
+title <size:24>Component View: Android MCP bridge - Android bridge APK</size>\n<size:24>C4 internal ARC and local UI boundary</size>
+
+set separator none
+top to bottom direction
+skinparam ranksep 60
+skinparam nodesep 30
+hide stereotype
+
+<style>
+  root {
+    BackgroundColor: #ffffff;
+    FontColor: #444444;
+  }
+  // Element
+  .Element-RWxlbWVudA== {
+    BackgroundColor: #edf3f8;
+    LineColor: #34526b;
+    LineStyle: 0;
+    LineThickness: 2;
+    FontColor: #17212b;
+    FontSize: 24;
+    HorizontalAlignment: center;
+    Shadowing: 0;
+    MaximumWidth: 450;
+  }
+  // Element,Database
+  .Element-RWxlbWVudCxEYXRhYmFzZQ== {
+    BackgroundColor: #edf3f8;
+    LineColor: #34526b;
+    LineStyle: 0;
+    LineThickness: 2;
+    FontColor: #17212b;
+    FontSize: 24;
+    HorizontalAlignment: center;
+    Shadowing: 0;
+    MaximumWidth: 450;
+  }
+  // Element,Person
+  .Element-RWxlbWVudCxQZXJzb24= {
+    BackgroundColor: #edf3f8;
+    LineColor: #34526b;
+    LineStyle: 0;
+    LineThickness: 2;
+    FontColor: #17212b;
+    FontSize: 24;
+    HorizontalAlignment: center;
+    Shadowing: 0;
+    MaximumWidth: 450;
+  }
+  // Relationship
+  .Relationship-UmVsYXRpb25zaGlw {
+    LineThickness: 2;
+    LineStyle: 10-10;
+    LineColor: #34526b;
+    FontColor: #34526b;
+    FontSize: 20;
+  }
+  // Android MCP bridge
+  .Boundary-QW5kcm9pZCBNQ1AgYnJpZGdl {
+    BackgroundColor: #ffffff;
+    LineColor: #34526b;
+    LineStyle: 0;
+    LineThickness: 2;
+    FontColor: #17212b;
+    FontSize: 24;
+    HorizontalAlignment: center;
+    Shadowing: 0;
+  }
+  // Android bridge APK
+  .Boundary-QW5kcm9pZCBicmlkZ2UgQVBL {
+    BackgroundColor: #ffffff;
+    LineColor: #34526b;
+    LineStyle: 0;
+    LineThickness: 2;
+    FontColor: #17212b;
+    FontSize: 24;
+    HorizontalAlignment: center;
+    Shadowing: 0;
+  }
+</style>
+
+person "==Local owner\n<size:16>[Person]</size>\n\nAuthenticates protected management commands" <<Element-RWxlbWVudCxQZXJzb24=>> as Localowner
+
+rectangle "==Compatible ARC client\n<size:16>[Software System]</size>\n\nExisting arc-protobuf-v1 remote-control client" <<Element-RWxlbWVudA==>> as CompatibleARCclient
+rectangle "==Compatible external ARC target\n<size:16>[Software System]</size>\n\nOpted-in Avalonia or Kotlin target retaining ARC wire" <<Element-RWxlbWVudA==>> as CompatibleexternalARCtarget
+rectangle "==Android OS and target apps\n<size:16>[Software System]</size>\n\nFinal OS authority, Binder services, adbd and uninstrumented targets" <<Element-RWxlbWVudA==>> as AndroidOSandtargetapps
+
+rectangle "Android MCP bridge\n<size:16>[Software System]</size>" <<Boundary-QW5kcm9pZCBNQ1AgYnJpZGdl>> {
+  rectangle "Android bridge APK\n<size:16>[Container: Kotlin / Jetpack Compose]</size>" <<Boundary-QW5kcm9pZCBicmlkZ2UgQVBL>> {
+    rectangle "==ClientAuthenticator\n<size:16>[Component: Kotlin / Keystore]</size>\n\nCredential, principal and session ownership" <<Element-RWxlbWVudA==>> as AndroidMCPbridge.AndroidbridgeAPK.ClientAuthenticator
+    rectangle "==AdmissionGate\n<size:16>[Component: Kotlin]</size>\n\nCanonical policy, approvals, epochs and dispatch boundary" <<Element-RWxlbWVudA==>> as AndroidMCPbridge.AndroidbridgeAPK.AdmissionGate
+    rectangle "==ArcEngine\n<size:16>[Component: Kotlin / protobuf]</size>\n\nProposed Kotlin port preserving pinned ARC wire/profile; no app implementation claimed" <<Element-RWxlbWVudA==>> as AndroidMCPbridge.AndroidbridgeAPK.ArcEngine
+    rectangle "==ArcClientAdapter\n<size:16>[Component: Kotlin / protobuf]</size>\n\nController-side session/profile and compatible external-target connection" <<Element-RWxlbWVudA==>> as AndroidMCPbridge.AndroidbridgeAPK.ArcClientAdapter
+    rectangle "==Compose management UI\n<size:16>[Component: Kotlin / Compose]</size>\n\nScreen definitions and selected unprotected ComposeTargetAdapter root; management/protected roots excluded" <<Element-RWxlbWVudA==>> as AndroidMCPbridge.AndroidbridgeAPK.ComposemanagementUI
+    rectangle "==OwnerCommandFacade\n<size:16>[Component: Kotlin]</size>\n\nProtected owner commands; nonce/revision-bound fresh authentication" <<Element-RWxlbWVudA==>> as AndroidMCPbridge.AndroidbridgeAPK.OwnerCommandFacade
+    rectangle "==SessionCommandFacade\n<size:16>[Component: Kotlin]</size>\n\nBounded unexported session commands; server-derived principal and canonical policy" <<Element-RWxlbWVudA==>> as AndroidMCPbridge.AndroidbridgeAPK.SessionCommandFacade
+    rectangle "==SqliteStoreCoordinator\n<size:16>[Component: Kotlin / SQLite]</size>\n\nOne serialized writer connection and bounded read-only snapshots" <<Element-RWxlbWVudA==>> as AndroidMCPbridge.AndroidbridgeAPK.SqliteStoreCoordinator
+    rectangle "==AuditLogger\n<size:16>[Component: Kotlin]</size>\n\nMandatory audit and configurable per-client payload logging" <<Element-RWxlbWVudA==>> as AndroidMCPbridge.AndroidbridgeAPK.AuditLogger
+    rectangle "==BridgeService\n<size:16>[Component: Kotlin Android Service]</size>\n\nForeground lifecycle, boot eligibility and truthful status" <<Element-RWxlbWVudA==>> as AndroidMCPbridge.AndroidbridgeAPK.BridgeService
+  }
+
+  database "==App-private catalog/configuration\n<size:16>[Container: SQLite]</size>\n\nCatalog snapshots, client/principal mappings, grants/logging configuration, groups/views, journal and audit; secret keys remain in Keystore" <<Element-RWxlbWVudCxEYXRhYmFzZQ==>> as AndroidMCPbridge.Appprivatecatalogconfiguration
+}
+
+AndroidMCPbridge.AndroidbridgeAPK.ClientAuthenticator --> AndroidMCPbridge.AndroidbridgeAPK.AuditLogger <<Relationship-UmVsYXRpb25zaGlw>> : "Records bounded authentication/session/revocation events"
+AndroidMCPbridge.AndroidbridgeAPK.OwnerCommandFacade --> AndroidMCPbridge.AndroidbridgeAPK.BridgeService <<Relationship-UmVsYXRpb25zaGlw>> : "Reads health/boot eligibility; protected configuration uses repository"
+AndroidOSandtargetapps --> AndroidMCPbridge.AndroidbridgeAPK.BridgeService <<Relationship-UmVsYXRpb25zaGlw>> : "Delivers eligible boot/unlock/lifecycle events"
+AndroidMCPbridge.AndroidbridgeAPK.ArcEngine --> CompatibleARCclient <<Relationship-UmVsYXRpb25zaGlw>> : "Sends one result or bounded watch responses with matching ID/version"
+AndroidMCPbridge.AndroidbridgeAPK.OwnerCommandFacade --> AndroidMCPbridge.AndroidbridgeAPK.ComposemanagementUI <<Relationship-UmVsYXRpb25zaGlw>> : "Returns protected command result or explicit failure"
+AndroidMCPbridge.AndroidbridgeAPK.SqliteStoreCoordinator --> AndroidMCPbridge.Appprivatecatalogconfiguration <<Relationship-UmVsYXRpb25zaGlw>> : "Owns the single writer connection and bounded snapshot readers"
+AndroidMCPbridge.AndroidbridgeAPK.BridgeService --> AndroidMCPbridge.AndroidbridgeAPK.SqliteStoreCoordinator <<Relationship-UmVsYXRpb25zaGlw>> : "Owns and closes coordinator before service shutdown"
+AndroidMCPbridge.AndroidbridgeAPK.OwnerCommandFacade --> AndroidMCPbridge.AndroidbridgeAPK.AuditLogger <<Relationship-UmVsYXRpb25zaGlw>> : "Exports exact redacted snapshot after fresh owner authorization"
+AndroidMCPbridge.AndroidbridgeAPK.SessionCommandFacade --> AndroidMCPbridge.AndroidbridgeAPK.AuditLogger <<Relationship-UmVsYXRpb25zaGlw>> : "Queries bounded local-owner log snapshots; no direct SQL"
+AndroidMCPbridge.AndroidbridgeAPK.SessionCommandFacade --> AndroidMCPbridge.AndroidbridgeAPK.BridgeService <<Relationship-UmVsYXRpb25zaGlw>> : "Ordinary local stop/status; stopped-service start uses an Activity foreground-service start intent"
+AndroidMCPbridge.AndroidbridgeAPK.ArcEngine --> AndroidMCPbridge.AndroidbridgeAPK.ClientAuthenticator <<Relationship-UmVsYXRpb25zaGlw>> : "ArcAuthenticator delegates expected_kind=arc to shared credential/client registry"
+Localowner --> AndroidMCPbridge.AndroidbridgeAPK.ComposemanagementUI <<Relationship-UmVsYXRpb25zaGlw>> : "Manages local settings and reviews protected approvals"
+CompatibleARCclient --> AndroidMCPbridge.AndroidbridgeAPK.ArcEngine <<Relationship-UmVsYXRpb25zaGlw>> : "Inspects approved target tree/frames and requests guarded input\n<size:14>[arc-protobuf-v1 loopback TCP]</size>"
+AndroidMCPbridge.AndroidbridgeAPK.BridgeService --> AndroidMCPbridge.AndroidbridgeAPK.ArcEngine <<Relationship-UmVsYXRpb25zaGlw>> : "Owns enabled ARC listener lifecycle"
+AndroidMCPbridge.AndroidbridgeAPK.BridgeService --> AndroidOSandtargetapps <<Relationship-UmVsYXRpb25zaGlw>> : "Requests eligible foreground promotion and truthful notification"
+AndroidMCPbridge.AndroidbridgeAPK.AdmissionGate --> AndroidMCPbridge.AndroidbridgeAPK.ComposemanagementUI <<Relationship-UmVsYXRpb25zaGlw>> : "Requests exact bounded Ask challenge after input quiescence; no automatic approval"
+AndroidMCPbridge.AndroidbridgeAPK.ComposemanagementUI --> AndroidMCPbridge.AndroidbridgeAPK.AdmissionGate <<Relationship-UmVsYXRpb25zaGlw>> : "Returns exact challenge result or denial; same-process trust is disclosed"
+AndroidMCPbridge.AndroidbridgeAPK.ClientAuthenticator --> AndroidMCPbridge.AndroidbridgeAPK.ArcEngine <<Relationship-UmVsYXRpb25zaGlw>> : "Revokes inbound streams and input leases"
+AndroidMCPbridge.AndroidbridgeAPK.AdmissionGate --> AndroidMCPbridge.AndroidbridgeAPK.ClientAuthenticator <<Relationship-UmVsYXRpb25zaGlw>> : "Pins current principal and credential epoch"
+AndroidMCPbridge.AndroidbridgeAPK.AdmissionGate --> AndroidMCPbridge.AndroidbridgeAPK.AuditLogger <<Relationship-UmVsYXRpb25zaGlw>> : "Records canonical admission decision"
+AndroidMCPbridge.AndroidbridgeAPK.AuditLogger --> AndroidMCPbridge.AndroidbridgeAPK.SqliteStoreCoordinator <<Relationship-UmVsYXRpb25zaGlw>> : "Appends audit/logs and reads redacted snapshots through store coordinator"
+AndroidMCPbridge.AndroidbridgeAPK.ComposemanagementUI --> AndroidMCPbridge.AndroidbridgeAPK.OwnerCommandFacade <<Relationship-UmVsYXRpb25zaGlw>> : "Submits typed CAS commands and observes immutable state"
+AndroidMCPbridge.AndroidbridgeAPK.OwnerCommandFacade --> AndroidMCPbridge.AndroidbridgeAPK.AdmissionGate <<Relationship-UmVsYXRpb25zaGlw>> : "Requires exact fresh owner capability for protected transitions"
+AndroidMCPbridge.AndroidbridgeAPK.ArcEngine --> AndroidMCPbridge.AndroidbridgeAPK.AdmissionGate <<Relationship-UmVsYXRpb25zaGlw>> : "Uses same admission and protected-owner boundary"
+AndroidMCPbridge.AndroidbridgeAPK.ArcEngine --> AndroidMCPbridge.AndroidbridgeAPK.ComposemanagementUI <<Relationship-UmVsYXRpb25zaGlw>> : "Operates only selected unprotected ComposeTargetAdapter root"
+AndroidMCPbridge.AndroidbridgeAPK.ArcEngine --> AndroidMCPbridge.AndroidbridgeAPK.AuditLogger <<Relationship-UmVsYXRpb25zaGlw>> : "Records principal-scoped protocol outcomes"
+AndroidMCPbridge.AndroidbridgeAPK.ComposemanagementUI --> AndroidMCPbridge.AndroidbridgeAPK.SessionCommandFacade <<Relationship-UmVsYXRpb25zaGlw>> : "Submits bounded session command; cannot assert owner identity"
+AndroidMCPbridge.AndroidbridgeAPK.SessionCommandFacade --> AndroidMCPbridge.AndroidbridgeAPK.AdmissionGate <<Relationship-UmVsYXRpb25zaGlw>> : "Derives trusted context and admits exact target operation"
+AndroidMCPbridge.AndroidbridgeAPK.SessionCommandFacade --> AndroidMCPbridge.AndroidbridgeAPK.ArcClientAdapter <<Relationship-UmVsYXRpb25zaGlw>> : "Forwards admitted explicit target/session command"
+AndroidMCPbridge.AndroidbridgeAPK.ArcClientAdapter --> CompatibleexternalARCtarget <<Relationship-UmVsYXRpb25zaGlw>> : "Validates pinned version/id/status on first request/response; no handshake\n<size:14>[arc-protobuf-v1 raw loopback TCP; envelope1.0]</size>"
+AndroidMCPbridge.AndroidbridgeAPK.ArcClientAdapter --> AndroidMCPbridge.AndroidbridgeAPK.AdmissionGate <<Relationship-UmVsYXRpb25zaGlw>> : "Checks client target grants before forwarding"
+
+@enduml

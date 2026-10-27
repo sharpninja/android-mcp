@@ -1,0 +1,176 @@
+{
+  "captured_at": "2026-10-26T22:59:25.334976+00:00",
+  "previous_report_sha256": "cadfb990774fbee0c827dcfe2804277522e3826ab2f0fdc85df0a0a12f652641",
+  "previous_scores_historical": {
+    "design": {
+      "accuracy_0_100": 95,
+      "completeness_0_100": 95,
+      "rationale": "Identity (entry_id=binding_id=SHA-256 canonical signature), single evaluator keyed by canonical binding plus schema hash, binding.invoke shared tool_id, client_raw_grants bounds, admission linearization, persistent service/boot/status truthfulness, separate MCP and ADB health, three authorities, ETag/CAS/cursor rules and explicit runtime gates match DDL, contracts and fixtures line by line. Deductions: text residue (R7-09): stale '135,000' row figure, over-claim that F-01 is resolved, missing S22 reference; no quantified on-device storage/latency budget for a 772k-entry registry beyond 'measure before targets'."
+    },
+    "contracts_schema": {
+      "accuracy_0_100": 92,
+      "completeness_0_100": 94,
+      "rationale": "Sealed membership (IMM-01), single published registry, deferred pointer FK, base-hash and local/deleted collision pointer guards, revision/history/reason sidecars, 428/400/412 ordering, 1.1 kind gating (1.10 accepted), RawGrant closed scope and scoped idempotency are enforced and fixture-backed. Deductions: runtime_catalog now returns deleted local tombstones, contradicting README, API-CONTRACT and the schema comment (R7-01, new, untested); local_collision triggers guard only state 'active' (R7-03); oracle history labels diverge from the HistoryEvent enum (R7-04)."
+    },
+    "extractor": {
+      "accuracy_0_100": 91,
+      "completeness_0_100": 92,
+      "rationale": "Signature, Java AST, SDK index, AIDL member, symbol, permission-AST, annotation-link, aggregation/variant and reconciliation logic is sound; F-10, F-12, F-13, F-17, F-18 fixes are present in code and receipts. Deductions: AIDL files with several top-level declarations or dotted nested forward declarations are mis-identified and silently truncated (R7-02); stale parser caches are not rejected (R7-06); annotation sources whose platform has no imported index map nothing silently (R7-07); unqualified permission literals accepted as proven names (R7-08)."
+    },
+    "production_catalog_data": {
+      "accuracy_0_100": 84,
+      "completeness_0_100": 62,
+      "rationale": "Release005: 37,873/37,873 sources, 772,733 entries, integrity ok, zero schema/FK failures, exact signature reconciliation, entry_kinds sum to bindings, identical counts across native/independent/export reports, 1,384 definitions (core 1,138 unique names), inventory and code hashes pinned. Accuracy deductions: built from a pre-fix snapshot (14 of 26 listed files differ; aidl_members/aidl_lex absent; older 002 DDL), so 12,685 structured AIDL types and 6,681 SDK class nodes are kind 'unsupported' (honest but imprecise), nested AIDL forward declarations mis-identified (R7-02), older AIDL chunker (smoke: +925 member/+417 method occurrences), record constructors mis-signed. Completeness: about 89k AIDL fields/enumerants absent; 235 relevant outside projects with enumerated declared-kind paths (cts 1,813, hardware/sdv/interfaces 403, hardware/google/interfaces 381, development 320) not imported; 744 projects unknown; native/generated Binder unknown. Acknowledgment earns no credit."
+    }
+  },
+  "previous_overall_historical": {
+    "accuracy_0_100": 90,
+    "completeness_0_100": 78,
+    "verdict": "NOT_READY",
+    "rationale": "Design, contracts and extractor are near target with two new medium defects (R7-01, R7-02) plus lows, all fixable with fixtures. Overall completeness is bounded by required catalog coverage: release005 is a complete selected corpus built by a superseded extractor and DDL, and the outside corpus remains materially unimported and partly unclassified. Runtime bridge gates are out of scope for this phase and were not scored."
+  },
+  "findings": [
+    {
+      "id": "R7-01",
+      "severity": "medium",
+      "classification": "artifact_defect_new",
+      "artifact": "catalog/migrations/002-evidence-and-publication.sql; catalog/schema.sql (runtime_catalog); catalog/README.md; catalog/API-CONTRACT.md",
+      "evidence": "Second UNION branch: \"FROM overlays o CROSS JOIN catalog_view v WHERE o.imported_binding_id IS NULL AND o.state IN ('active','deleted') AND NOT EXISTS(...)\"; evidence/original-002 read \"o.state='active'\". README: \"runtime_catalog excludes suppressed/deleted/conflict overlays.\" schema comment: \"They MUST exclude suppressed/deleted/conflict rows for invocation discovery\". API-CONTRACT: \"Invocation discovery always omits them.\" test_round5.test_deleted_local_import_collision_blocks_pointer asserts only the pointer IntegrityError; no fixture queries runtime_catalog after a local DELETE.",
+      "issue": "The F-11 remediation widened the discovery view together with the pointer triggers; a locally deleted entry stays in the invocation-discovery view (ETag state 'deleted'). Discovery grants nothing, but the view violates its own documented contract and is untested.",
+      "exact_minimal_correction": "Change the second branch to o.state='active' in both files(schema.sql and migrations/002) and add a fixture: insert local active overlay plus history, update to state 'deleted' revision 2 plus history, assert SELECT count(*) FROM runtime_catalog = 0 while the tombstone ETag remains readable from overlays for GET 410.",
+      "verification_needed": "New fixture in test_round5 or test_sealed_registry passing in a fresh regression receipt.",
+      "candidate_status": "candidate-fixed",
+      "candidate_change": "Targeted active-only local branch restored. Local deleted rows not discovered; invalid local-suppressed/imported-deleted states rejected.",
+      "test_evidence": "tests-regression-037.txt:125passed; round007-before.txt; round007-tombstone-states-before.txt; aidl-multideclaration-audit.json; current optimized receipts",
+      "independent_revalidation_pending": true
+    },
+    {
+      "id": "R7-02",
+      "severity": "medium",
+      "classification": "artifact_defect",
+      "artifact": "catalog/tooling/parsers.py aidl(); catalog/tooling/build_catalog.py aidl branch",
+      "evidence": "\"d=re.search(r'\\b(interface|parcelable|union|enum)\\s+([\\w]+)',clean)\" takes only the first match and \\w excludes '.'; \"descriptor=(pkg+'.' if pkg else '')+name\"; build root record \"canonical=d['descriptor'] ... name=d['descriptor'].split('.')[-1]\". AOSP frameworks/base (selected corpus) contains forward-declaration files such as android/app/ActivityManager.aidl (\"parcelable ActivityManager.RunningTaskInfo; parcelable ActivityManager.RunningServiceInfo; ...\") and android/content/pm/PackageInstaller.aidl.",
+      "issue": "Dotted nested forward declarations are published under the outer type identity (e.g. aidl:android.app.ActivityManager, kind aidl-parcelable) and every declaration after the first in a file is omitted from the inventory; only the generic 'aidl-semantic-gap' issue row (1,721 declaration-only files) exists. This fabricates identity and silently drops declarations, contradicting the no-drop principle; it also affects release005.",
+      "exact_minimal_correction": "In aidl(), iterate all top-level matches of (interface|parcelable|union|enum)\\s+([\\w.]+) outside brace bodies, emit one declaration record per match with the dotted descriptor retained, record declaration_count in the parse report; fixture: 'package a; parcelable Outer.Inner; parcelable Other cpp_header \"o.h\";' expecting roots aidl:a.Outer.Inner and aidl:a.Other.",
+      "verification_needed": "Fixture passing; count of release005 aidl_schemas.raw_schema rows with more than one declaration or a dotted declaration name.",
+      "candidate_status": "candidate-fixed",
+      "candidate_change": "aidl_all lexes every top-level declaration, preserves dotted names/package/import context and physical lines; one source schema stores per-declaration metadata. Real005 audit18801files:18883roots,41multi and71dotted.",
+      "test_evidence": "tests-regression-037.txt:125passed; round007-before.txt; round007-tombstone-states-before.txt; aidl-multideclaration-audit.json; current optimized receipts",
+      "independent_revalidation_pending": true
+    },
+    {
+      "id": "R7-03",
+      "severity": "low",
+      "classification": "artifact_defect",
+      "artifact": "catalog/schema.sql local_collision_insert/local_collision_update",
+      "evidence": "\"WHEN new.imported_binding_id IS NULL AND new.state='active' AND EXISTS(SELECT 1 FROM effective_entries e ...)\"; runtime_catalog first branch \"WHERE o.entry_id IS NULL OR o.state='active'\".",
+      "issue": "A local overlay inserted directly in state 'deleted' for an active imported identity hides that imported entry from discovery without a conflict row (insert-time mirror of F-11).",
+      "exact_minimal_correction": "Extend both triggers to new.state IN ('active','deleted'); optionally add CHECK((imported_binding_id IS NULL) = (state<>'suppressed')); fixture inserting a local deleted overlay for an effective entry expecting IntegrityError.",
+      "verification_needed": "DDL fixture.",
+      "candidate_status": "candidate-fixed",
+      "candidate_change": "Insert/update local collision checks active/deleted and origin/state CHECKs block alternative suppressed/deleted disguises.",
+      "test_evidence": "tests-regression-037.txt:125passed; round007-before.txt; round007-tombstone-states-before.txt; aidl-multideclaration-audit.json; current optimized receipts",
+      "independent_revalidation_pending": true
+    },
+    {
+      "id": "R7-04",
+      "severity": "low",
+      "classification": "artifact_defect",
+      "artifact": "catalog/tooling/contract_reference.py put()/delete()",
+      "evidence": "put(): \"self.record(key,'update',reason)\" for restore and conflict resolution; delete(): \"self.record(key,'delete',reason)\" for imported suppression; Entry.schema HistoryEvent.operation enum includes 'suppress','restore','rebase'.",
+      "issue": "Oracle history operations diverge from the contract vocabulary; fixtures assert only history length.",
+      "exact_minimal_correction": "Record 'restore' when prior state was deleted/suppressed, 'rebase' for resolution, 'suppress' for imported delete; assert operation sequence in test_cas_tombstones_history_and_cursor.",
+      "verification_needed": "Fixture.",
+      "candidate_status": "candidate-fixed",
+      "candidate_change": "Oracle emits restore/rebase/suppress according to actual transitions; operation-sequence regression passes.",
+      "test_evidence": "tests-regression-037.txt:125passed; round007-before.txt; round007-tombstone-states-before.txt; aidl-multideclaration-audit.json; current optimized receipts",
+      "independent_revalidation_pending": true
+    },
+    {
+      "id": "R7-05",
+      "severity": "low",
+      "classification": "missing_evidence",
+      "artifact": "evidence/production005-code-provenance.json; evidence/build-release005-inputs.json",
+      "evidence": "Provenance compares 26 files only. build inputs show migrations/002 1e330c70... (candidate b8558f3b...), schema.sql 05beb691... (candidate 98294b6b...), bridge-config.sql 159d9a24... (candidate 5b72ed9e...), and no aidl_members.py, aidl_lex.py or permission_reader.py in the release005 snapshot. validation-report-release005 was produced by the snapshot validator 21dab0d5..., not candidate 59633f3c....",
+      "issue": "Release005's catalog.sqlite carries the pre-IMM-01/pre-F-11 DDL and never ran AIDL enrichment; the provenance file understates divergence and no candidate-validator cross-check of release005 is supplied.",
+      "exact_minimal_correction": "Add the omitted files with matches_candidate=false and an explicit note that release005 DDL predates IMM-01/F-11; run the candidate validate_catalog.py --database read-only over release005 with a report outside the release directory.",
+      "verification_needed": "Updated provenance JSON; candidate run_database report.",
+      "candidate_status": "validation-complete-ddl-difference-explicit",
+      "candidate_change": "Full producer/candidate provenance union includes missing modules and DDL. Candidate read-only005 validation completed22:52:50:772733entries,0schema/FK errors,integrityok,0variant omissions. This does not update005DDL or prove later extraction semantics.",
+      "test_evidence": "tests-regression-037.txt:125passed; round007-before.txt; round007-tombstone-states-before.txt; aidl-multideclaration-audit.json; current optimized receipts",
+      "independent_revalidation_pending": true
+    },
+    {
+      "id": "R7-06",
+      "severity": "low",
+      "classification": "artifact_defect",
+      "artifact": "catalog/tooling/build_catalog.py cached_records/_build",
+      "evidence": "cached_records verifies cache sha256 and record count; \"cache_parser_sha256=s['metadata_cache'].get('parser_sha256')\" is only folded into the source identity; README: \"Source owners must regenerate changed parser caches, never relabel old records.\"",
+      "issue": "A rebuild with candidate tooling but stale Java/index caches publishes old-parser records (e.g. without record components) under a new processing fingerprint.",
+      "exact_minimal_correction": "Require metadata_cache.parser_sha256 to equal a declared current parser fingerprint (hash of java_source.py or sdk_api_index.py plus pinned tree-sitter versions) or raise ValueError('Stale parser cache'); fixture with a mismatched hash.",
+      "verification_needed": "Fixture.",
+      "candidate_status": "candidate-fixed",
+      "candidate_change": "cache_fingerprint.current contract2 binds exact producer/helper files, Python and parser library versions; missing or stale fingerprint rejects even when cache bytes/count match. Producers must regenerate, not relabel.",
+      "test_evidence": "tests-regression-037.txt:125passed; round007-before.txt; round007-tombstone-states-before.txt; aidl-multideclaration-audit.json; current optimized receipts",
+      "independent_revalidation_pending": true
+    },
+    {
+      "id": "R7-07",
+      "severity": "low",
+      "classification": "artifact_defect",
+      "artifact": "catalog/tooling/build_catalog.py annotation pass",
+      "evidence": "\"if s.get('platform_api_version') is not None: platform=...; current=exact_index_targets.get(platform,{}).get(canonical)\"; exact_index_targets is populated only from imported sdk-api-index sources; no issue() emitted and report status stays 'parsed'.",
+      "issue": "An annotations zip declaring a platform with no imported index yields mapped_annotations=0 silently.",
+      "exact_minimal_correction": "Raise ValueError('No imported SDK API index for annotation platform') or record an issue and status 'partial'; fixture with platform '37.3' and only a '37.2' index.",
+      "verification_needed": "Fixture.",
+      "candidate_status": "candidate-fixed-with-proven-source-followup",
+      "candidate_change": "Missing-index unresolved annotation targets mark partial plus diagnostic. Same repository/commit/platform legacy signatures can map only when all eligible types agree and formal-variable guards pass; no fallback when matching-platform index exists.",
+      "test_evidence": "tests-regression-037.txt:125passed; round007-before.txt; round007-tombstone-states-before.txt; aidl-multideclaration-audit.json; current optimized receipts",
+      "independent_revalidation_pending": true
+    },
+    {
+      "id": "R7-08",
+      "severity": "low",
+      "classification": "artifact_defect",
+      "artifact": "catalog/tooling/parsers.py permission()/resolve()",
+      "evidence": "\"if aidl and '.' not in name:return unknown(...)\" applies only to AIDL; validation-report undefined_permission_names includes \"MANAGE_MEDIA_PROJECTION\" and \"QUERY_ALL_PACKAGES\".",
+      "issue": "Unqualified literals (typical of @EnforcePermission in Java sources) become op 'permission' with a name that can never match a manifest definition.",
+      "exact_minimal_correction": "Return unknown('Unqualified permission literal', name) for names without '.' regardless of language, or add 'x-unqualified': true; fixture.",
+      "verification_needed": "Fixture; undefined_permission_names shrink in the next validation report.",
+      "candidate_status": "candidate-fixed",
+      "candidate_change": "Java andAIDL unqualified permission literals become unknown with raw name; no invented namespace.",
+      "test_evidence": "tests-regression-037.txt:125passed; round007-before.txt; round007-tombstone-states-before.txt; aidl-multideclaration-audit.json; current optimized receipts",
+      "independent_revalidation_pending": true
+    },
+    {
+      "id": "R7-09",
+      "severity": "low",
+      "classification": "artifact_defect",
+      "artifact": "design/Android MCP Bridge Design.md",
+      "evidence": "\"not135,000 independent shadow permission rows\" (release005 has 772,733 entries); \"This revision resolves recovered findings F-01\u2013F-08\" while finding-ledger-006 marks F-01 'partly-resolved-source-gaps-remain'; reference list jumps from [S21] to [S23].",
+      "issue": "Stale count, over-claimed resolution and a dangling reference number.",
+      "exact_minimal_correction": "Replace the count with 'hundreds of thousands', reword to 'F-02\u2013F-08 resolved; F-01 remains a source-task input', add or renumber S22.",
+      "verification_needed": "Text review.",
+      "candidate_status": "candidate-fixed",
+      "candidate_change": "Removed stale row count/resolution overclaim, repaired reference numbering. Quantified storage/memory/latency budgets and capacity failure behavior are specification targets, explicitly not device measurements.",
+      "test_evidence": "tests-regression-037.txt:125passed; round007-before.txt; round007-tombstone-states-before.txt; aidl-multideclaration-audit.json; current optimized receipts",
+      "independent_revalidation_pending": true
+    },
+    {
+      "id": "R7-10",
+      "severity": "high",
+      "classification": "missing_input",
+      "artifact": "evidence/outside-corpus-classification-summary.json; evidence/built-in-validation-summary-release005.json; evidence/validation-report-release005.json; evidence/aidl-smoke-round4-summary.json; evidence/progress-006.json",
+      "evidence": "Outside corpus counts {\"unknown\":744,\"relevant\":235,\"irrelevant\":6}, status \"running\", about 50 projects with reason 'not been enumerated'; release005 aidl statuses contain 'structured-body-retained; fields/enumerants/union tags unresolved': 12685 and no 'field-metadata-*' status; entry_kinds lack aidl-parcelable/aidl-union/aidl-enum/type; sdk-api-index status 'partial' with 6681 unsupported; smoke counts field 89,152 and members 125,265 versus release005 aidl declarations 57,374; progress-006 known_gaps list the same.",
+      "issue": "Required public binding/permission coverage is incomplete and the released data predates the candidate extractor and DDL.",
+      "exact_minimal_correction": "Source task: regenerate Java/index caches with the candidate parsers; build release006 from the candidate snapshot (with aidl_members/aidl_lex) on the release005 inventory extended by the enumerated declared-kind paths of the 235 relevant projects; finish tree enumeration for the unclassified projects or record an owner scoping decision for the 744 unknowns; supply validation/reconciliation/export reports for release006 including aidl parse-status distribution and entry_kinds.",
+      "verification_needed": "Release006 validation-report, coverage manifest with classification totals, code provenance equal to the reviewed candidate.",
+      "candidate_status": "missing-production-input-remains",
+      "candidate_change": "006nowfullyvalidated794195entries/39194sources/1399definitions with1639permission names;006stillpredatesR7/cache-contract2 fixes and corpus remains partial. Current outside classification supplied; no owner scoping reduction and no overall acceptance.",
+      "test_evidence": "tests-regression-037.txt:125passed; round007-before.txt; round007-tombstone-states-before.txt; aidl-multideclaration-audit.json; current optimized receipts",
+      "independent_revalidation_pending": true
+    }
+  ],
+  "source_followup": "source-same-snapshot-annotations-v2.json; six guards tested in own copy",
+  "regression_explanation": "R7lowercontract score was caused by a broad SQL replacement widening the local discovery branch. The branch is now targeted and tombstone/origin fixtures prevent recurrence; no rubric was changed."
+}

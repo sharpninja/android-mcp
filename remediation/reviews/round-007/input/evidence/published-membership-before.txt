@@ -1,0 +1,14 @@
+F
+======================================================================
+FAIL: test_no_appending_members_after_publication (__main__.SealedRegistry.test_no_appending_members_after_publication)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/investigations/test_sealed_registry.py", line 9, in test_no_appending_members_after_publication
+    with self.assertRaises(sqlite3.IntegrityError):db.execute("INSERT INTO registry_entries VALUES('r','b','{}','hash')")
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: IntegrityError not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 0.008s
+
+FAILED (failures=1)

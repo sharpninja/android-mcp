@@ -1,0 +1,184 @@
+parsed sources 0 / 4
+{
+  "counts": {
+    "sources": 4,
+    "bindings": 10,
+    "occurrences": 10,
+    "binding_declarations": 10,
+    "permission_definitions": 1,
+    "permission_symbols": 1,
+    "permission_relations": 10,
+    "aidl_schemas": 1,
+    "annotation_evidence": 0,
+    "issues": 0,
+    "effective_entries": 10
+  },
+  "integrity_check": "ok",
+  "unavailable_paths": 0
+}
+FFEEEF
+======================================================================
+ERROR: test_facts_cannot_be_relabelled_with_a_new_epoch (test_round10.Review10.test_facts_cannot_be_relabelled_with_a_new_epoch)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_round10.py", line 23, in test_facts_cannot_be_relabelled_with_a_new_epoch
+    with self.assertRaisesRegex(ValueError,'epoch'):dr.resolve([fixtures.entity('a')],facts,registry_id=fixtures.h('f'),catalog_generation=1,overlay_generation=0,capability_epoch=1,view_generation=1)
+                                                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tooling/device_resolution.py", line 65, in resolve
+    validate(facts,'Facts')
+    ~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tooling/device_resolution.py", line 14, in validate
+    schema=json.loads((P/'contracts/DeviceResolution.schema.json').read_text());schema['$ref']='#/$defs/'+name;jsonschema.Draft202012Validator(schema).validate(value)
+                                                                                                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/.venv/lib/python3.14/site-packages/jsonschema/validators.py", line 450, in validate
+    raise error
+jsonschema.exceptions.ValidationError: Additional properties are not allowed ('capability_epoch', 'observed_at' were unexpected)
+
+Failed validating 'additionalProperties' in schema:
+    {'type': 'object',
+     'properties': {'profile_id': {'type': 'string', 'minLength': 1},
+                    'target_key': {'type': 'string', 'minLength': 1},
+                    'android_user_id': {'type': 'integer',
+                                        'minimum': 0,
+                                        'maximum': 2147483647},
+                    'backend_instance_id': {'type': 'string',
+                                            'minLength': 1},
+                    'device_instance_id': {'type': 'string',
+                                           'minLength': 1},
+                    'identity_verified': {'type': 'boolean'},
+                    'platform': {'type': 'object',
+                                 'properties': {'major': {'anyOf': [{'type': 'integer',
+                                                                     'minimum': 0,
+                                                                     'maximum': 2147483647},
+                                                                    {'type': 'null'}]},
+                                                'minor': {'anyOf': [{'type': 'integer',
+                                                                     'minimum': 0,
+                                                                     'maximum': 2147483647},
+                                                                    {'type': 'null'}]}},
+                                 'required': ['major', 'minor'],
+                                 'additionalProperties': False},
+                    'extensions': {'type': 'object',
+                                   'additionalProperties': {'anyOf': [{'type': 'integer',
+                                                                       'minimum': 0,
+                                                                       'maximum': 2147483647},
+                                                                      {'type': 'null'}]}},
+                    'modules': {'type': 'object',
+                                'additionalProperties': {'$ref': '#/$defs/ModuleFact'}},
+                    'interfaces': {'type': 'object',
+                                   'additionalProperties': {'$ref': '#/$defs/InterfaceFact'}},
+                    'oem': {'anyOf': [{'type': 'string', 'minLength': 1},
+                                      {'type': 'null'}]},
+                    'build_fingerprint': {'anyOf': [{'type': 'string',
+                                                     'minLength': 1},
+                                                    {'type': 'null'}]},
+                    'evidence_ids': {'type': 'array',
+                                     'items': {'type': 'string',
+                                               'minLength': 1},
+                                     'minItems': 1}},
+     'required': ['profile_id',
+                  'target_key',
+                  'android_user_id',
+                  'backend_instance_id',
+                  'device_instance_id',
+                  'identity_verified',
+                  'platform',
+                  'extensions',
+                  'modules',
+                  'interfaces',
+                  'oem',
+                  'build_fingerprint',
+                  'evidence_ids'],
+     'additionalProperties': False}
+
+On instance:
+    {'profile_id': 'fixture',
+     'target_key': 'platform:local',
+     'android_user_id': 0,
+     'backend_instance_id': 'backend-fixture',
+     'device_instance_id': 'boot-fixture',
+     'identity_verified': True,
+     'platform': {'major': 37, 'minor': 1},
+     'extensions': {'30': 4},
+     'modules': {'m': {'state': 'present',
+                       'version': '12',
+                       'authoritative': True}},
+     'interfaces': {'a.I': {'state': 'reachable',
+                            'version': 2,
+                            'hash': 'interface-hash-v2',
+                            'authoritative': True}},
+     'oem': 'fixture-oem',
+     'build_fingerprint': 'fixture-build',
+     'evidence_ids': ['fixture-observation'],
+     'capability_epoch': 0,
+     'observed_at': '2026-10-27T01:00:00Z'}
+
+======================================================================
+ERROR: test_invalidation_reason_is_retained (test_round10.Review10.test_invalidation_reason_is_retained)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_round10.py", line 20, in test_invalidation_reason_is_retained
+    store=dr.ViewStore(fixtures.h('f'),1,0,'fixture','platform:local',0,'backend-fixture','boot-fixture');store.invalidate('module-replaced');self.assertEqual(store.history[-1],{'epoch':1,'reason':'module-replaced'})
+                                                                                                                                                               ^^^^^^^^^^^^^
+AttributeError: 'ViewStore' object has no attribute 'history'
+
+======================================================================
+ERROR: test_malformed_interval_is_quarantined_without_hiding_other_rows (test_round10.Review10.test_malformed_interval_is_quarantined_without_hiding_other_rows)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_round10.py", line 18, in test_malformed_interval_is_quarantined_without_hiding_other_rows
+    a=fixtures.entity('a',availability=fixtures.rule(platform=dict(introduced=[38,0],removed=[37,0])));b=fixtures.entity('b');rows=fixtures.resolved([a,b]);self.assertEqual(rows[fixtures.h('a')]['state'],'unknown');self.assertIn('APPLICABILITY_MALFORMED',rows[fixtures.h('a')]['reason_codes']);self.assertEqual(rows[fixtures.h('b')]['state'],'available')
+                                                                                                                                   ~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_device_resolution.py", line 14, in resolved
+    result=resolver.resolve(items,observations or facts(),registry_id=h('f'),catalog_generation=1,overlay_generation=0,capability_epoch=0,view_generation=1)
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tooling/device_resolution.py", line 72, in resolve
+    key=entity['entry_id'];evaluated=[(v,applicability(v['availability'],facts)) for v in entity['variants']];yes=[v for v,(s,_) in evaluated if s=='available'];maybe=[v for v,(s,_) in evaluated if s=='unknown'];choice=None
+                                         ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tooling/device_resolution.py", line 62, in applicability
+    return merge([clause(c,facts) for c in rule['alternatives']],alternative=True)
+                  ~~~~~~^^^^^^^^^
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tooling/device_resolution.py", line 44, in clause
+    if 'platform' in rule:results.append(platform_range(facts['platform'],rule['platform']))
+                                         ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tooling/device_resolution.py", line 22, in platform_range
+    if upper is not None and upper<=lower:raise ValueError('Invalid platform applicability interval')
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Invalid platform applicability interval
+
+======================================================================
+FAIL: test_annotations_require_an_explicit_platform_version (test_round10.Review10.test_annotations_require_an_explicit_platform_version)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_round10.py", line 11, in test_annotations_require_an_explicit_platform_version
+    with self.assertRaisesRegex(ValueError,'Explicit platform_api_version required'):build_catalog.build(inv,root/'out')
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_device_paths_use_declared_scopes_and_response_sets (test_round10.Review10.test_device_paths_use_declared_scopes_and_response_sets)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_round10.py", line 32, in test_device_paths_use_declared_scopes_and_response_sets
+    self.assertIn('400',operation['responses']);self.assertIn('401',operation['responses'])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '400' not found in {'200': {'description': 'Current snapshot plus stale/capability epoch; no remote facts accepted', 'content': {'application/json': {'schema': {'$ref': '#/components/schemas/DeviceStatusResponse'}}}, 'headers': {'ETag': {'required': True, 'description': 'Strong scope/generation/epoch/catalog/overlay token, including null-header bootstrap. Exact composition and canonical scope hashing in API-CONTRACT.md.', 'schema': {'type': 'string', 'pattern': '^"dv1:[0-9a-f]{64}:(0|[1-9][0-9]*):(0|[1-9][0-9]*):(0|[1-9][0-9]*):(0|[1-9][0-9]*)"$'}}}}, '403': {'description': 'Profile/target access denied without existence disclosure'}}
+
+======================================================================
+FAIL: test_non_authoritative_positive_observations_are_unknown (test_round10.Review10.test_non_authoritative_positive_observations_are_unknown)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_round10.py", line 16, in test_non_authoritative_positive_observations_are_unknown
+    rows=fixtures.resolved([a,b],facts);self.assertEqual([rows[fixtures.h(k)]['state'] for k in ('a','b')],['unknown','unknown'])
+                                        ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['available', 'available'] != ['unknown', 'unknown']
+
+First differing element 0:
+'available'
+'unknown'
+
+- ['available', 'available']
++ ['unknown', 'unknown']
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.044s
+
+FAILED (failures=3, errors=3)

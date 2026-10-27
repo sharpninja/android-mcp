@@ -1,0 +1,77 @@
+{
+  "pid": 3492505,
+  "started_at": "2026-10-27T11:30:09.391883+00:00",
+  "status": "complete",
+  "round": "/home/sharpninja/github/2026-10-26/task-3/remediation/reviews/round-022",
+  "assistant_caps": null,
+  "stages": {
+    "pass-01": {
+      "at": "2026-10-27T11:30:09.601171+00:00",
+      "stage": "pass-01",
+      "report": "/home/sharpninja/github/2026-10-26/task-3/remediation/reviews/round-022/pass-01/supervisor-report.txt",
+      "report_sha256": "8a203f55c34bc64645be2d32963e2731e1b95f5a132246f6090701a4de758702",
+      "provenance": "existing original valid call, no restart",
+      "complete": true,
+      "originals_modified": false
+    },
+    "pass-02": {
+      "at": "2026-10-27T11:30:09.604998+00:00",
+      "stage": "pass-02",
+      "report": "/home/sharpninja/github/2026-10-26/task-3/remediation/reviews/round-022/pass-02/supervisor-report.txt",
+      "report_sha256": "e74184d9eaa49cf9c63f465c41e3e01206fb05449ac081874ff223449aa2310b",
+      "provenance": "existing original valid call, no restart",
+      "complete": true,
+      "originals_modified": false
+    },
+    "pass-03": {
+      "at": "2026-10-27T11:41:26.826556+00:00",
+      "stage": "pass-03",
+      "report": "/home/sharpninja/github/2026-10-26/task-3/remediation/reviews/round-022/pass-03/supervisor-report.txt",
+      "report_sha256": "7b60406ae4d39818a830e88c08735415a62ed8649d60d44f1aeb9509095d5f84",
+      "provenance": "reserved known-unstarted slot, preflight-checked supervisor launch",
+      "complete": true,
+      "originals_modified": false
+    }
+  },
+  "calls": [
+    {
+      "stage": "pass-03",
+      "directory": "/home/sharpninja/github/2026-10-26/task-3/remediation/reviews/round-022/pass-03/continuation-0001",
+      "at": "2026-10-27T11:30:09.607323+00:00",
+      "context_partition": false,
+      "preflight_required": true
+    },
+    {
+      "stage": "synthesis",
+      "directory": "/home/sharpninja/github/2026-10-26/task-3/remediation/reviews/round-022/synthesis/continuation-0001",
+      "at": "2026-10-27T11:41:26.832162+00:00",
+      "context_partition": false,
+      "preflight_required": true
+    }
+  ],
+  "audit": "/home/sharpninja/github/2026-10-26/task-3/remediation/reviews/round-022/supervisor/active-orchestration-audit.json",
+  "regression_tests": "normal+optimized passed",
+  "recovery_owned": true,
+  "reserved_handoff": {
+    "at": "2026-10-27T11:19:25.942237+00:00",
+    "reserved_unstarted_slots": [
+      "pass-03",
+      "synthesis"
+    ],
+    "existing_slots_not_touched": [],
+    "active_pass01_pass02_preserved": true,
+    "original_coordinator_behavior": "Its mkdir(exist_ok=False) guard prevents a duplicate request in a reserved slot; all current CLI capture processes remain running. Supervisor will own these slots after regression preflight.",
+    "new_inference_launched": false
+  },
+  "heartbeat_at": "2026-10-27T11:59:20.874822+00:00",
+  "final": {
+    "at": "2026-10-27T11:59:20.874434+00:00",
+    "report_complete": true,
+    "scope": "Full current DESIGN ONLY; Google API surface/acquisition/extraction/catalog population/deployment excluded by user",
+    "source_report": "/home/sharpninja/github/2026-10-26/task-3/remediation/reviews/round-022/supervisor/unified-review-report.txt",
+    "report_sha256": "4594d1c851b09a7b9eaeb792f40f6b4ef661b0ae55846bb3367aa72a381fc1c0",
+    "all_three_evidence_stages_complete": true,
+    "assistant_caps": null,
+    "original_root_completion_preserved": true
+  }
+}

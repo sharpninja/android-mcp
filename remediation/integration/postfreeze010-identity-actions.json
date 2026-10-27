@@ -1,0 +1,56 @@
+{
+  "created_at": "2026-10-27T01:17:45.945237+00:00",
+  "id": "P10-01",
+  "issue": "Adjacent identity audit: local overlays accepted non-SHA256 IDs despite Entry schema and canonical identity model",
+  "fix": "Same lowercase64hex shape check on overlays.entry_id; imported identities still constrained by FK/equality. Fixtures use valid IDs so existing history/collision tests exercise intended branches.",
+  "regression_before": "evidence/postfreeze10-local-id-before.txt:4failures",
+  "regression_after": "evidence/tests-regression-051.txt:168passed with ResourceWarnings as errors",
+  "patch": "/home/sharpninja/github/2026-10-26/task-3/remediation/integration/postfreeze010-identity.patch",
+  "patch_sha256": "a887ef952b435e6e31cbc86a23806e09606253fcce7a6c16012faee2e110a5ce",
+  "files": [
+    {
+      "file": "migrations/001-initial.sql",
+      "base_sha256": "8d7db12ea33d093f1b6763ccccc46c7629650dacea660403c929a1de30e176e3",
+      "candidate_sha256": "d7c9796cb53a455a569fbfc214c5efa74129627ee944c17a5ab3c3aed9b739ee"
+    },
+    {
+      "file": "schema.sql",
+      "base_sha256": "3ee60d5940e5cc90ed1b38abc662d212a7a7dba35e5cb1ce47eb4e96fdde9a15",
+      "candidate_sha256": "32c9a3701b7f7c760ac378ca6a4d6bf63b03b28efed7b9b436f500aab78cecb6"
+    },
+    {
+      "file": "tests/test_round2.py",
+      "base_sha256": "915a5ad6fb6beef15409ac50bda31c519fa48d70a711794bf8f676b1cc70d9ec",
+      "candidate_sha256": "e63360d46091e535f628ef42f9592df5657bd3726c208180430d2ffd568e53bc"
+    },
+    {
+      "file": "tests/test_round3.py",
+      "base_sha256": "76ec383b0a48fc9ce796bd93781c281707ef3078c6efc132c89a2a880d2b0a1e",
+      "candidate_sha256": "59389f956035f9e61fd75b343985fbb580688928497818912b1e86660e632e1a"
+    },
+    {
+      "file": "tests/test_round4.py",
+      "base_sha256": "6db3395ce04c3f3c8422f76178119c404b93e387327554f46e4c3208329740f7",
+      "candidate_sha256": "e2869d4b2e4c1175eeb490c8792f5656346d0c765b4150660574b940e76ace5c"
+    },
+    {
+      "file": "tests/test_round7.py",
+      "base_sha256": "3fdc393d7ce67b87e9038f17f429cf25d2de11de77cdd9f5e428abbeb881f78f",
+      "candidate_sha256": "78793812aac2c602f56f46d6596af0a3b91be1746d584b3a45b9b8b37fd4c397"
+    },
+    {
+      "file": "tests/test_round9_review.py",
+      "base_sha256": "1fbd60700d677530153238b6bca608f949d7d7e5c775ae428e301d6cc18873cd",
+      "candidate_sha256": "1bcf158c3fa0956e3a9eb08aa219033d4115ae734daf92910f3196d7f76ccc35"
+    },
+    {
+      "file": "tests/test_postfreeze10.py",
+      "base_sha256": null,
+      "candidate_sha256": "2e1c5f56d6d03011c89b074d7fda663babd410fcb1b0bf4e7b039939a7e428be"
+    }
+  ],
+  "source_active_files_modified": false,
+  "review_scope": "Post-freeze010 working candidate; running010still167tests and does not include this fix",
+  "integration_base": "Apply after integration/round009-review.patch; exact base is frozen010catalog",
+  "full_copy_validation": "round011running; do not claim complete yet"
+}

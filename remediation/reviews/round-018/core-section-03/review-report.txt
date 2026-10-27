@@ -1,0 +1,322 @@
+Evidence check of bytes 110000–165000 against requirements 1–10 and 12 follows as a JSON workpaper; no scores, no tools used.
+
+```json
+{
+  "stage": "core-section-evidence-check-3/7",
+  "coverage": {
+    "artifact": "design-c4/docs/Android MCP Bridge Design.md",
+    "byte_range": "110000-165000 of 206076 (sha256 92a7e3e8… as supplied; not independently hashed)",
+    "sections_inspected": [
+      "tail of raw-grant bounds paragraph (first sentence truncated at start boundary)",
+      "Canonical permission entry points and retained unknown metadata",
+      "Device capacity and latency acceptance budgets",
+      "Catalog-driven callbacks and bounded event delivery (inventory, lifecycle, MCP 2025-11-25 transport contract, event envelope/bounds/synchronous replies)",
+      "Small functional tool groups and job-based discovery (activation/concurrency/host compatibility, management/CRUD/components, traceability, validation status)",
+      "Kotlin server and Jetpack Compose management UI (incl. FR-KT table)",
+      "Internal Kotlin ARC compatibility port (pinned upstream, framing/dispatch, transport/authorization, modules, license paragraph truncated at end boundary)"
+    ],
+    "requirements_exercised": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "12"],
+    "requirements_not_in_slice": ["11 (Gradle tasks)", "12 storyboard/SVG/Marp specifics", "9 Origin/session-ID handling", "4 golden fixtures/test plan (after 165000)"]
+  },
+  "findings": [
+    {
+      "id": "CS3-F01",
+      "severity": "medium",
+      "area": "Internal consistency / Req 4 ARC port",
+      "artifact": "Design.md 110000-165000, 'Kotlin server and Jetpack Compose management UI' vs 'Internal Kotlin ARC compatibility port'",
+      "evidence": "Kotlin section: \"SharpNinja.Avalonia.RemoteControl remains only an optional protocol-compatible external-target adapter for apps that deliberately embed its Android Runtime/Protocol.\" and row \"FR-KT-04 preserve remote control | TR-KT-04 ADB generic control plus optional external protocol target. AC-KT-04 ... missing external adapter remains explicitly unsupported.\" Next section: \"This supersedes the earlier external-adapter-only proposal. The Kotlin bridge includes a designed ArcEngine module and ComposeTargetAdapter\".",
+      "issue": "Two contradictory normative positions remain in the same document. The Kotlin section and its FR-KT-04 traceability row still state the superseded external-adapter-only design and do not trace the internal port, ComposeTargetAdapter or ArcClientAdapter.",
+      "exact_minimal_correction": "Replace the Kotlin paragraph with: 'ARC is provided by the internal Kotlin ArcEngine (ArcTcpTransport, ArcRequestHandler, ComposeTargetAdapter) plus ArcClientAdapter for external compatible targets; adapter_unsupported is reported only where no verified implementation exists.' Update TR-KT-04/AC-KT-04 to cite ArcEngine, ComposeTargetAdapter, ArcClientAdapter and the golden-fixture gate.",
+      "verification_needed": "Other passes: confirm no third ARC position exists before byte 110000; confirm FR-ARC rows after 165000 match the port section."
+    },
+    {
+      "id": "CS3-F02",
+      "severity": "medium",
+      "area": "Callback lifecycle / Req 7",
+      "artifact": "Design.md, 'Invocation and subscription lifecycle', 'Event envelope, bounds and synchronous replies', bootstrap tool list",
+      "evidence": "\"A configured lease/grace bounds disconnected retention; a client must explicitly renew within its authorized maximum.\" and \"5-minute renewable lease\"; bootstrap set is \"android.groups.discover, android.groups.describe, android.groups.set_active, binding.invoke, callback.status, callback.cancel, bindings.search, bindings.list and bindings.get\"; \"lease expiry invalidate delivery\".",
+      "issue": "Renewal is mandatory for every subscription living longer than the default lease, but no renewal operation is defined: no renew tool exists in the nine-tool surface, callback.status has no stated contract, and it is unstated whether a successful resources/read or callback.status renews. As written every subscription dies at 5 minutes with no defined client action.",
+      "exact_minimal_correction": "Define renewal explicitly: callback.status accepts renew=true (or add callback.renew to bootstrap), returns new lease expiry and remaining authorized maximum; state that resources/read does not renew; add the renewal/expiry case to AC-CB-04.",
+      "verification_needed": "Check whether callback.status is specified in bytes before 110000; check the SVG storyboards for a renewal interaction."
+    },
+    {
+      "id": "CS3-F03",
+      "severity": "medium",
+      "area": "Concurrency/in-flight behavior / Req 8",
+      "artifact": "Design.md, 'Activation, concurrency and host compatibility'",
+      "evidence": "\"In-flight calls pin their admitted complete contract/type/policy plan.\" then \"A harmless activation view change alone does not invalidate an already admitted call or live callback handle; a contract, capability or authority change revalidates or rejects it with stale_contract/revoked/epoch_changed.\"",
+      "issue": "A pinned plan cannot also be rejected with stale_contract after admission; a dispatched Binder/ADB operation cannot be revalidated. The text does not distinguish admitted-not-dispatched, dispatched, and live-handle phases.",
+      "exact_minimal_correction": "State: (a) admitted but not yet dispatched calls revalidate against the new epoch and may fail stale_contract/epoch_changed; (b) dispatched unary calls complete under the pinned plan and annotate the result with epoch_changed; (c) live handles recheck authority only at publication/read, and contract changes never retarget them (explicit re-registration required).",
+      "verification_needed": "Compare with the dynamic view structurizr-GroupFlow and CallbackFlow for the depicted phase at which rejection occurs."
+    },
+    {
+      "id": "CS3-F04",
+      "severity": "medium",
+      "area": "Host presentation modes / Req 8",
+      "artifact": "Design.md, 'Activation, concurrency and host compatibility', 'Small functional tool groups'",
+      "evidence": "\"A host that supports an explicitly negotiated group-view feature may opt into dynamic aliases for its active groups.\"; \"active groups supply bounded schema manifests for generic binding.invoke\"; \"explicitly fetches only the required manifest pages\"; discover accepts \"maximum groups, maximum response bytes and optional estimated-token budget\".",
+      "issue": "The opt-in vehicle for dynamic alias mode is unspecified (initialize-time experimental capability, owner-configured per-client SQLite setting, or set_active argument). The operation and page bounds that deliver portable-mode manifests are unnamed, and server-side hard maxima for discover results/bytes are not stated although read maxima are.",
+      "exact_minimal_correction": "Specify: presentation_mode is an owner-configured per-client column defaulting to portable, overridable per session only by a set_active argument the owner has allowed; manifests are paged by android.groups.describe with cursor/max_bytes under the same fixed maxima as resources/read; discover enforces server maxima (state values) over client-supplied maximum groups/bytes.",
+      "verification_needed": "Check bridge-config.sql for a per-client presentation/mode column and the describe tool contract elsewhere."
+    },
+    {
+      "id": "CS3-F05",
+      "severity": "medium",
+      "area": "Producer backpressure / Req 7 bounded buffers",
+      "artifact": "Design.md, 'Event envelope, bounds and synchronous replies'",
+      "evidence": "\"Sequence order is assigned atomically when appending within one subscription across concurrent Binder threads\"; \"Binder threads release native resources promptly; no producer waits for a remote consumer to drain the buffer.\"; \"Disk-full marks durability_failed and closes the stream; it does not acknowledge a durable append.\"; \"SQLite stores ... journal records keyed by subscription/epoch/sequence\".",
+      "issue": "Overflow policy is defined only for the retained journal quota. The handoff between Binder callback threads and the single-writer SQLite journal is unspecified: whether appends are synchronous durable writes on Binder threads (blocking the process Binder thread pool under bursts) or go through a bounded pre-durable queue, where 'accepted' and sequence assignment occur, and what happens when that queue is full.",
+      "exact_minimal_correction": "Specify a bounded per-subscription in-memory admission queue (events and bytes), a single journal-writer coroutine in BridgeService, sequence assignment at durable append, admission-queue-full handling via the subscription's overflow policy with a recorded loss range, and WAL/group-commit for journal writes.",
+      "verification_needed": "Check structurizr-ServerComponents and CallbackFlow for a queue/writer element; check reference fixtures for a queue-full case."
+    },
+    {
+      "id": "CS3-F06",
+      "severity": "medium",
+      "area": "Health model / Req 2 separate MCP/ADB/device-view health",
+      "artifact": "Design.md, 'Device capacity and latency acceptance budgets', 'Management, CRUD and component responsibilities', Kotlin section",
+      "evidence": "\"Bridge health reports catalog readiness separately from listener and ADB health.\" vs \"retains its running indicator and separate MCP/ADB health\" and \"the Compose AppBar renders the same state stream with separate MCP and ADB health\".",
+      "issue": "Health dimensions are inconsistent (three in the capacity section, two in the UI statements) and the derived device-view state (ready/stale/staging-failed, which the capacity section introduces) is not a surfaced health dimension as Requirement 2 demands.",
+      "exact_minimal_correction": "Define one health tuple {mcp_listener, adb_backend, catalog_readiness, device_view ∈ ready|stale|staging_failed|absent} rendered identically in notification and AppBar; replace both 'MCP/ADB' phrases with the tuple.",
+      "verification_needed": "Check dashboard SVG screen specification for the rendered health fields."
+    },
+    {
+      "id": "CS3-F07",
+      "severity": "medium",
+      "area": "Catalog CRUD mechanism / Req 5",
+      "artifact": "Design.md, 'Management, CRUD and component responsibilities'",
+      "evidence": "\"Deleting a referenced group mapping is rejected while an active view pins it or creates a new revision used only after explicit activation; existing evidence remains retrievable by revision.\"",
+      "issue": "Two mutually exclusive behaviors are joined by 'or' with no selection rule. The first alternative lets any remote session with an active view block an owner mutation.",
+      "exact_minimal_correction": "Adopt the second alternative only: owner delete always creates a tombstone revision; active views keep their pinned activation revision until the next set_active, which then returns unknown-dependency for the tombstoned group; remove the 'rejected while an active view pins it' clause.",
+      "verification_needed": "Check the CRUD API section (other bytes) for a conflicting rule."
+    },
+    {
+      "id": "CS3-F08",
+      "severity": "medium",
+      "area": "Device view lifecycle / Req 6 atomic activation and refresh",
+      "artifact": "Design.md, 'Device capacity and latency acceptance budgets'",
+      "evidence": "\"If a complete view cannot be staged within quota, retain the old snapshot as stale and report capacity failure; no partial activation.\"",
+      "issue": "After a device/backend/catalog change whose refresh fails, it is unspecified whether new admissions continue against the stale snapshot (risking availability claims from superseded observations) or admission closes until a view is staged.",
+      "exact_minimal_correction": "State: while device_view is stale, new admissions are refused with stale_view for bindings whose applicability depends on the changed observation set, and other calls carry a stale_view flag; readiness is reported through the device_view health dimension.",
+      "verification_needed": "Cross-check the startup/resolution section before byte 110000 for an existing stale-view rule."
+    },
+    {
+      "id": "CS3-F09",
+      "severity": "medium",
+      "area": "Subscription state machine completeness / Req 7",
+      "artifact": "Design.md, 'Invocation and subscription lifecycle', 'Event envelope, bounds and synchronous replies'",
+      "evidence": "\"registration outcome (active, failed or outcome_unknown)\"; \"Lifecycle states are registering, active, cancelling, closed, orphaned and outcome_unknown.\"; \"Terminal states cannot be silently reactivated\"; \"Its result distinguishes locally closed delivery from confirmed remote cleanup and cleanup_unknown.\"; \"The default overflow policy closes delivery and reports buffer_overflow\"; \"Disk-full marks durability_failed and closes the stream\".",
+      "issue": "The 'failed' registration outcome has no lifecycle state; the terminal set is not enumerated; cleanup_unknown is neither a state nor a declared attribute; buffer_overflow, durability_failed and lease expiry close delivery without stating whether the recorded remote cleanup obligation is queued (only revocation says so).",
+      "exact_minimal_correction": "Enumerate terminal states {closed, orphaned}; map failed → closed(reason=registration_failed, via cancelling when a cleanup obligation exists); add closed-state attribute cleanup_disposition ∈ {not_required, confirmed, pending, cleanup_unknown}; state that buffer_overflow, durability_failed and lease_expired all enqueue the recorded cleanup obligation.",
+      "verification_needed": "Check CallbackFlow dynamic view and reference fixtures for the depicted transitions."
+    },
+    {
+      "id": "CS3-F10",
+      "severity": "low",
+      "area": "Exact numeric claim / capacity budget",
+      "artifact": "Design.md, 'Device capacity and latency acceptance budgets'",
+      "evidence": "\"10,276,548,608 bytes (about9.57GiB)\"; \"at least21GiB additional free space plus the configured quota; the total peak catalog footprint, including that already allocated active copy, rounds up to30GiB plus the quota\".",
+      "issue": "Three catalog-sized files total 28.71 GiB, which rounds up to 29 GiB; 30 GiB is reproducible only if the 1 GiB free-space reserve is counted as footprint. The 21 GiB figure is reproducible (20.14 GiB ceil).",
+      "exact_minimal_correction": "Write 'peak footprint 29 GiB (3 × 9.57 GiB) plus 1 GiB reserve = 30 GiB plus the configured quota'.",
+      "verification_needed": "None beyond arithmetic."
+    },
+    {
+      "id": "CS3-F11",
+      "severity": "low",
+      "area": "Permission expression semantics / Req 5 canonical policy",
+      "artifact": "Design.md, 'Canonical permission entry points and retained unknown metadata'",
+      "evidence": "\"PermissionExpression accepts only known op values. Future x- properties on known nodes are retained; an unrecognized semantic node is quarantined as a known unknown wrapper with reason plus exact parsed JSON value in x-raw-node (and required_semantics as appropriate), never interpreted as permission-free.\"",
+      "issue": "The wrapper node's op value is unnamed, 'required_semantics' is undefined in this slice, and only the negative constraint is given; the admission outcome for an entry whose effective expression contains an unknown wrapper (deny, unsupported, or ask) is not stated.",
+      "exact_minimal_correction": "Name the wrapper op (e.g. op:\"unknown\") and state: any unknown wrapper in the effective expression makes the entry unsupported for invocation with reason permission_semantics_unknown; ask/allow are never offered for it.",
+      "verification_needed": "Check the permission schema section before byte 110000 for required_semantics and the admission rule."
+    },
+    {
+      "id": "CS3-F12",
+      "severity": "low",
+      "area": "Exact platform claim / brightness tool",
+      "artifact": "Design.md, 'Canonical permission entry points and retained unknown metadata'",
+      "evidence": "\"settings.brightness.get reports the actual observed signed32-bit rawValue without clamping, plus withinDocumentedRange and the cited documentedRange1..255.\"",
+      "issue": "The contract presumes an integer value exists. Disposition for an absent or non-integer stored value is unspecified (per my recollection the Settings.System integer accessor throws SettingNotFoundException in both cases; treat as uncertain).",
+      "exact_minimal_correction": "Add observation ∈ {integer rawValue, absent, unparseable(raw string)} with a typed error/anomaly for the last two; never synthesize rawValue.",
+      "verification_needed": "Confirm against the official Settings.System documentation (not browsable here)."
+    },
+    {
+      "id": "CS3-F13",
+      "severity": "low",
+      "area": "Maintenance lifecycle / Req 2 headless persistence",
+      "artifact": "Design.md, 'Canonical permission entry points and retained unknown metadata', capacity section",
+      "evidence": "\"Audit retention is a separate authenticated local-owner maintenance transaction: set bridge_config.audit_retention_authorized=1, perform bounded retention deletes, append maintenance audit evidence, reset the flag to0 before commit.\"; \"Optional client-log purge remains separate from mandatory audit retention.\"; derived views: \"collect only unreferenced expired derived snapshots through trusted maintenance\".",
+      "issue": "Who triggers mandatory audit retention and when is unstated. If 'authenticated local-owner' means the interactive fresh owner approval, mandatory retention cannot run while the headless service operates unattended; the derived-view path uses a different term ('trusted maintenance'), leaving two unreconciled maintenance authorities.",
+      "exact_minimal_correction": "State that mandatory audit retention is a service-internal trusted maintenance transaction (same flag protocol) executed at startup and on a bounded interval, and that owner authentication is required only to change the retention policy.",
+      "verification_needed": "Check bridge-config.sql triggers for the flag guard and for any schedule table."
+    },
+    {
+      "id": "CS3-F14",
+      "severity": "low",
+      "area": "Exact protocol claim / tool naming portability (Req 8, Req 9)",
+      "artifact": "Design.md, 'Activation, concurrency and host compatibility'",
+      "evidence": "\"Dynamic alias names use b.<first32hex(binding_id)>.<first24hex(schema_hash)> (59 ASCII characters, [A-Za-z0-9_.-])\"; bootstrap names such as \"android.groups.discover\".",
+      "issue": "The length/charset constraint is asserted without citing its authority. The 59-character count is correct, but whether dots and this length satisfy the pinned spec's tool-name guidance and common host model-API name patterns is not established in the slice; portable-mode claims depend on bootstrap names surviving host sanitization. I cannot verify the spec text here and record this as uncertainty.",
+      "exact_minimal_correction": "Cite the pinned server/tools tool-name rule next to the alias format and add: 'hosts that further restrict names receive a documented deterministic sanitized mapping (e.g. dots → underscores) recorded in the session view'.",
+      "verification_needed": "Verify against https://modelcontextprotocol.io/specification/2025-11-25/server/tools 'Tool names' section."
+    },
+    {
+      "id": "CS3-F15",
+      "severity": "low",
+      "area": "Exact URI semantics / Req 9 resources/subscribe exact URI",
+      "artifact": "Design.md, 'MCP2025-11-25 transport contract'",
+      "evidence": "\"events_uri such as android-callback://subscription-id/events\"; \"The client may subscribe to that exact URI\"; \"The implementation validates and canonicalizes the URI\".",
+      "issue": "subscription_id occupies the URI authority (host) position, where generic URI canonicalization is case-insensitive. Its charset/case rules are unspecified, so exact-URI matching between subscribe, updated notification and read could diverge after canonicalization.",
+      "exact_minimal_correction": "Constrain subscription_id to lowerc
+
+ase [a-z0-9-] (host-safe), declare the advertised string as canonical form, and require the updated notification to repeat exactly that string.",
+      "verification_needed": "None; definitional."
+    },
+    {
+      "id": "CS3-F16",
+      "severity": "low",
+      "area": "Error surfacing / Req 9 resources/read",
+      "artifact": "Design.md, 'MCP2025-11-25 transport contract'",
+      "evidence": "\"checks ownership, enforces fixed maxima\"; \"An expired cursor returns cursor_expired with the available retention boundary, never a fabricated contiguous replay.\"",
+      "issue": "Whether ownership failures, unknown URIs and cursor_expired are returned as JSON-RPC errors (and which code) or as application/json status bodies is unspecified; existence disclosure to foreign principals is therefore undefined.",
+      "exact_minimal_correction": "State: foreign/unknown URI → the spec's resource-not-found JSON-RPC error (recalled as -32002; verify) with no existence distinction; cursor_expired → application/json body with status, oldest_retained_cursor and next-read URI.",
+      "verification_needed": "Confirm error code against the pinned resources page."
+    },
+    {
+      "id": "CS3-F17",
+      "severity": "low",
+      "area": "Optional direct stream negotiation / Req 7, Req 9",
+      "artifact": "Design.md, 'MCP2025-11-25 transport contract'",
+      "evidence": "\"Direct payload SSE is optional and disabled by default. A future implementation may expose a separately authenticated subscription stream, or a fully documented mutually negotiated experimental extension. It must advertise its exact transport, authorization, schema, limits and cancellation rules and retain the standard resource-read fallback.\"",
+      "issue": "The negotiation vehicle (where it is advertised and how a client opts in) is deferred rather than specified; the requirement asks for an explicitly negotiated optional stream. Honest labeling as future/disabled limits severity.",
+      "exact_minimal_correction": "Name the advertisement point (server capabilities.experimental key with a versioned name) and the opt-in request, or label the paragraph 'placeholder, not part of the current contract'.",
+      "verification_needed": "Check whether an earlier section defines the experimental capability key."
+    },
+    {
+      "id": "CS3-F18",
+      "severity": "low",
+      "area": "ARC class ownership/multiplicity / Req 4, Req 10",
+      "artifact": "Design.md, 'Port modules and class responsibilities'",
+      "evidence": "Module list from \"ArcProtocolModel preserves the pinned descriptor\" to \"ArcClientAdapter communicates with external compatible runtimes.\"; \"ComposeManagementViewModel ... It is not the remote client\".",
+      "issue": "No controller-side UI component is named (Requirement 4 asks for distinct controller UI/ARC client), the container owning ArcClientAdapter and what drives it (MCP tools or UI) is unstated, and multiplicity is absent for all ARC classes and for the eight callback/group interfaces in the component table.",
+      "exact_minimal_correction": "Add an ArcController Compose screen/ViewModel that drives ArcClientAdapter against external targets, and annotate each class/interface with owner container and multiplicity (ArcRuntime 1 per BridgeService; ArcSessionRegistry 1 per transport; session state 1 per accepted socket; ComposeTargetAdapter 1 per selected root generation; ICallbackBroker 1 per service).",
+      "verification_needed": "The PlantUML class/code diagrams may carry multiplicity; another pass should check."
+    },
+    {
+      "id": "CS3-F19",
+      "severity": "low",
+      "area": "Coordinate/density semantics / Req 4",
+      "artifact": "Design.md, 'Exact framing and dispatch profile'",
+      "evidence": "\"root-relative DIP coordinates\"; \"The Compose adapter converts DIP/root bounds and frame render_scale using the same captured root generation\".",
+      "issue": "The meaning of an ARC DIP on a Compose target is not pinned (Compose dp versus scaled pixels) nor is render_scale defined relative to Android density, so client pixel/DIP conversions are underdetermined.",
+      "exact_minimal_correction": "Define DIP := Compose dp, render_scale := Density.density of the captured root, absolute bounds relative to the selected root's window origin, frame pixel size = round(root dp × render_scale).",
+      "verification_needed": "Check bytes before 110000 for an existing coordinate definition."
+    },
+    {
+      "id": "CS3-F20",
+      "severity": "low",
+      "area": "Input adapter mechanism / Req 4 (mouse/wheel/key/text, Avalonia key names, no multitouch)",
+      "artifact": "Design.md, 'Exact framing and dispatch profile'",
+      "evidence": "\"Input retains enum values (pointer move1, press2, release3, wheel4, keydown5, keyup6, text7; mouse buttons unspecified0/left1/right2/middle3)\"; \"rejects nonfinite/out-of-root values, stale node/frame targets and unsupported key/property actions\".",
+      "issue": "Delivery path per event kind on Compose is unspecified (synthesized MotionEvent/KeyEvent into the selected window versus semantics actions, especially for text7), the Avalonia-key-name mapping is not mentioned in this slice, and the single-pointer limitation is not stated here.",
+      "exact_minimal_correction": "Add per kind: pointer/wheel → synthesized mouse-source MotionEvents dispatched to the selected root window on UiDispatcher; keys → documented Avalonia Key-name map with explicit unsupported list; text → semantics insert/set-text action on the focused editable node; declare single pointer only.",
+      "verification_needed": "Check earlier ARC adapter bytes for the key map and multitouch statement."
+    },
+    {
+      "id": "CS3-F21",
+      "severity": "low",
+      "area": "ARC marker/token lifecycle / Req 4 protected secret surfaces",
+      "artifact": "Design.md, 'Transport, authorization and owner-control isolation'",
+      "evidence": "\"A marker is app-private, created only after successful bind and removed on stop. No secret token is placed in logs, public catalog or design examples.\"",
+      "issue": "Behavior after abnormal termination (stale marker survives) and token rotation per bind are unspecified. A client following a stale marker sends the plaintext bearer token as its first frame to whatever now listens on that loopback port.",
+      "exact_minimal_correction": "Regenerate the token on every successful bind, delete stale markers at startup before binding, and state the marker's maximum validity.",
+      "verification_needed": "Confirm whether the pinned upstream regenerates the token per run (acquisition manifest sources)."
+    },
+    {
+      "id": "CS3-F22",
+      "severity": "low",
+      "area": "Protobuf defaults / Req 4 exact tags/enums/defaults",
+      "artifact": "Design.md, 'Exact framing and dispatch profile'",
+      "evidence": "\"Descriptors must not reinterpret unknown values as method0 or OK.\"; \"A unary success/failure is end_of_stream=true; stream items usefalse\".",
+      "issue": "Unknown-value handling is stated but proto3 zero-value defaults are not: absent protocol_version/request_id decode to empty strings and absent method/status to 0, and end_of_stream=false is never serialized, so the validation and encoding consequences are unstated.",
+      "exact_minimal_correction": "Add: absent scalars decode to proto3 zero values; empty protocol_version/request_id or method 0 fail validation before dispatch; terminal responses must serialize end_of_stream=true explicitly.",
+      "verification_needed": "None; definitional against proto3 semantics."
+    },
+    {
+      "id": "CS3-F23",
+      "severity": "low",
+      "area": "Exact protocol claim / Req 4 envelope 1.0 vs package 0.8.0",
+      "artifact": "Design.md, 'Pinned upstream and compatibility boundary'",
+      "evidence": "\"protocol_version=\\\"1.0\\\"\" appears; no mention of the 0.8.0 package version in the slice.",
+      "issue": "The required distinction between the envelope version 1.0 and the package version 0.8.0 is absent from the ARC port section.",
+      "exact_minimal_correction": "Add one sentence: 'protocol_version 1.0 is the wire envelope version; 0.8.0 is the upstream package version and never appears on the wire'.",
+      "verification_needed": "May be stated before byte 110000; other passes confirm."
+    },
+    {
+      "id": "CS3-F24",
+      "severity": "low",
+      "area": "Wording consistency / Req 4 Compose adapter",
+      "artifact": "Design.md, Kotlin section vs ARC port section",
+      "evidence": "\"a Compose semantics/test API is not exposed as a production remote-control bypass\" vs \"ComposeTargetAdapter implements tree/frame/action/input contracts using a protected, explicitly selected root\".",
+      "issue": "Readable as 'no Compose semantics exposure', which conflicts with the required Compose tree adapter.",
+      "exact_minimal_correction": "Reword to: 'Compose semantics are reachable only through the policy-gated ComposeTargetAdapter; no ungated test hook is shipped'.",
+      "verification_needed": "None."
+    },
+    {
+      "id": "CS3-F25",
+      "severity": "low",
+      "area": "Honest Android limits / Req 2 persistent service",
+      "artifact": "Design.md, Kotlin section",
+      "evidence": "\"obtains an eligible foreground-service start, begins its foreground notification within platform deadlines\"; \"applies existing Android foreground-service and boot limits\"; reference profile \"API level35 (Android15)\".",
+      "issue": "The foreground service type is not named in this slice. On the stated reference profile the chosen type determines whether the service can be persistent at all (my recollection: type declaration is mandatory from API 34 and some types carry daily runtime timeouts on Android 15; treat as uncertain). 'Platform deadlines' is left unquantified.",
+      "exact_minimal_correction": "Name the foreground service type and its documented restriction, and cite the start-timeout the design relies on.",
+      "verification_needed": "Confirm the 'previously documented Android restrictions' before byte 110000 cover the type and timeout; verify against official docs."
+    },
+    {
+      "id": "CS3-F26",
+      "severity": "low",
+      "area": "Plan vs proof labeling and traceability gaps",
+      "artifact": "Design.md, traceability tables",
+      "evidence": "\"AC-KT-03 ... are verified in Kotlin/instrumentation acceptance tests.\"; \"AC-CB-03 ... are tested\"; surrounding text: \"These are new design decisions and acceptance plans, not a Kotlin application implemented by this task.\"",
+      "issue": "Row wording uses present tense that reads as completed verification; the surrounding paragraphs correct it, but the rows stand alone when extracted. No acceptance row covers lease renewal/expiry or durability_failed.",
+      "exact_minimal_correction": "Change 'are verified/are tested' to 'are to be verified/tested'; add lease renewal/expiry and durability_failed to AC-CB-03/04.",
+      "verification_needed": "None."
+    }
+  ],
+  "verified_resolutions": [
+    "Req 9 transport claims match the stated requirement: POST SSE yields one final JSON-RPC response then terminates; standard notifications on GET SSE/stdio; resources/subscribe exact URI; updated notification carries URI only; resources/read finite pages with status; Last-Event-ID distinct from journal cursor; progress ends with the request; no custom method presented as standard; the four cited URLs equal the supplied primary facts.",
+    "Req 4 framing/dispatch claims match the stated requirement: signed 32-bit big-endian length, 8 MiB default max, Bearer in envelope field 4, one request per TCP connection with repeated responses and end_of_stream terminal flag, Cancel 8 unsupported with socket-close cancellation, no fake TLS/IsAdbTunnel, OK envelope carrying command failure, FPS parsed not enforced, stale node generation, pressed-state release, loopback-only plaintext, pinned commit 19792a52a13a3df342f90bab6b246b547e673919.",
+    "Req 7 synchronous replies are local, typed, deadline-bounded or unsupported_synchronous_reply; registration returns a finite descriptor; the event envelope carries identity/correlation/sequence/time/payload/error; at-least-once and cross-thread ordering limits are stated honestly; sender validation is backend-verified, not client-asserted.",
+    "Req 8 nine-tool bootstrap enumerated correctly; set_active is whole-set CAS without partial activation; alias format yields 59 characters and refuses prefix collisions; unassigned inventory remains searchable; ranking deterministic with optional non-authoritative semantic ranking; discovery and activation cannot grant; host cache/eviction limits stated honestly.",
+    "Req 2 BridgeService owns transport, policy, SQLite, resolution, backends and callbacks; unexported local facade with no SQL/reflection; activity destruction does not stop service work; stop ordering is bounded; notification and AppBar share one state stream.",
+    "Req 5 immutable imports, local overlays, CAS history, append-only entry_history_reasons in the same transaction; per-binding grants and OS authority never replaced by alias rules.",
+    "Req 1/6 full inventory retained under capacity budgets; extension_level labeled as package metadata, not device observation; unknown ABI/cleanup/sender cases yield explicit unsupported reasons while remaining in inventory.",
+    "Brightness semantics agree with the supplied primary fact (documented range 1..255; out-of-range reported with anomaly flag, not fabricated or rejected).",
+    "Capacity arithmetic for 21 GiB additional free space is reproducible from the stated bytes.",
+    "Plans are labeled as not implemented at section level (callback extension, Kotlin stack, ARC port, license gate); diagram links are relative paths under diagrams/."
+  ],
+  "cross_artifact_questions": [
+    "Do the Structurizr component DSL and PlantUML class diagrams define ownership and multiplicity for the eight callback/group interfaces and the ARC classes (CS3-F18)?",
+    "Where is the fresh authenticated owner approval mechanism defined (keystore/biometric), and does it withstand external ADB input injection that the bridge cannot quiesce?",
+    "Do earlier bytes define: Origin/session-ID handling (Req 9), the 0.8.0 package version, the Avalonia key-name map and no-multitouch statement, the 'documented legacy gRPC selection policy', required_semantics, the binder.transact exposure path (not in the bootstrap set), and contracts for callback.status, bindings.search/list/get, android.groups.describe?",
+    "Does arc-protocol-contract.json agree with the field numbers, method enum 0..10, status enum 0..6 and input enums quoted here, and does the acquisition manifest hold the per-file SHA-256s referenced?",
+    "Does bridge-config.sql define tool_binding_aliases, client_binding_rules, entry_history_reasons, binding_occurrences and bridge_config.audit_retention_authorized with the trigger guard implied by the flag protocol?",
+    "Are per-client 'private overrides' a defined concept, given overrides are elsewhere owner-local?",
+    "Do the SVG storyboards include stale/disconnected health states, lease renewal, and device_view readiness?"
+  ],
+  "limitations": [
+    "Only bytes 110000-165000 were inspected; the opening sentence ('items); connection, descriptor, ...') and the closing sentence ('not a claim that an absent license file') are truncated and their dependencies are unresolved rather than assumed missing.",
+    "The golden fixture/test plan and remaining ARC acceptance text lie after byte 165000.",
+    "No tools were used: the SHA-256, diagram files, SQL, JSON contract and upstream sources were not opened; MCP and Android documentation were not browsed. Platform statements in CS3-F12, F14, F16 and F25 are recollections flagged as uncertain.",
+    "Severity reflects design-contract weight only; implementation and dataset status were out of scope and not assessed.",
+    "No scores were produced, per instruction."
+  ],
+  "report_complete": true
+}
+```
+
+`★ Insight ─────────────────────────────────────`
+- The strongest defects in this slice are omissions inside otherwise sound mechanisms: the lease is mandatory but no renewal path exists, and the journal is bounded but the Binder-thread-to-SQLite handoff is not.
+- Internal consistency failed mainly where a superseding decision was appended without editing the earlier text, so both positions still read as normative.
+`─────────────────────────────────────────────────`
+
+The workpaper covers the whole assigned byte range. It records 26 findings (9 medium, 17 low, none high), 10 verified resolutions, 7 cross-artifact questions and the boundary limitations. Other passes should resolve the flagged cross-boundary dependencies before any whole-design verdict.

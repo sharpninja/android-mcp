@@ -1,0 +1,50 @@
+{
+  "captured_at": "2026-10-26T23:52:44.797283+00:00",
+  "released_snapshot": "release-006",
+  "released_entries": 794195,
+  "released_source_count": 39194,
+  "released_permission_definitions": 1399,
+  "released_declarations": 1098639,
+  "released_validation_time": "2026-10-26T22:50:48.308081+00:00",
+  "released_integrity": "ok",
+  "released_schema_failures": [],
+  "released_fk_failures": [],
+  "released_duplicate_occurrences": 0,
+  "permission_export": {
+    "permission_names": 1639,
+    "manifest_definition_records": 1399,
+    "source_catalog": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/catalog/output/release-006",
+    "complete": false
+  },
+  "source_inventory_sha256": "8eaaa60b13dc7bd486d42fadd9d0b3f62eacb0481dbb33788fe60a5f2e3be0d7",
+  "production_provenance": "production006-full-code-provenance.json",
+  "candidate_release005_crosscheck": "candidate-release005-validation.json",
+  "candidate_legacy_copy_check": "legacy-populated-round009-validation.json",
+  "tests_passed": 141,
+  "latest_review_historical_snapshot": {
+    "accuracy_0_100": 91,
+    "completeness_0_100": 80,
+    "verdict": "NOT_READY",
+    "rationale": "All nine R7 findings are verifiably fixed in the candidate with fixtures, and the released catalog is now a fully validated complete selected corpus. One new medium extractor defect (R8-01) exists in both candidate and production, three lows are fixable, and overall completeness remains bounded by required source coverage owned by the source task plus the need to regenerate production with the corrected extractor and DDL."
+  },
+  "outside_classification": {
+    "unknown": 732,
+    "relevant": 247,
+    "irrelevant": 6
+  },
+  "outside_snapshot_at": "2026-10-26T21:44:16.052518+00:00",
+  "source_task_owns_data_generation": true,
+  "complete": false,
+  "acceptance_claimed": false,
+  "known_gaps": [
+    "006andactive007producer/DDL predateR8candidate; exact matching later build and validation required",
+    "Relevant outside paths not fully imported; unclassified/native/generated sources unresolved",
+    "Two unsupported AIDL statements retain source/reasons; wire layouts, OS authority and MCP grants remain unproven"
+  ],
+  "current_corpus_parser_audit": "round008-current-parser-corpus-audit-v2.json",
+  "old_counter_failure": "round008-current-parser-corpus-audit.json:929mismatches duecommentpunctuation; preserved, fixed guard notdisabled",
+  "current_size_receipt": "catalog-size-release006.json",
+  "annotation_version_regression": "annotation-routing-postfreeze008.json:6410newunmatchedentirelySDK37.0routing, notnewambiguity;6141recoveryprospectiveonly",
+  "source007_status": "Running separateproductioncheckpoint, not yet completed/validated; predatesR8candidate",
+  "source007_cache_receipt": "HistoricalpreR8producerproof only; not valid for newJava parser fingerprint"
+}

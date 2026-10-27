@@ -1,0 +1,25 @@
+sequenceDiagram
+    participant C as Client
+    participant P as Policy
+    participant V as Device view
+    participant U as Owner
+    participant G as Gate
+    participant A as Adapter
+    C->>P: Authenticated call
+    P->>V: Pin binding types and capability epoch
+    P->>P: Validate plan
+    opt Ask configured
+        P->>U: Bound request
+        U->>P: Decision
+        break Denied or expired
+            P-->>C: No dispatch
+        end
+    end
+    P->>G: Plan and revisions
+    G->>G: Recheck and audit
+    G->>V: Reject stale or changed device view
+    G->>A: Typed operation
+    A-->>P: Result or unknown
+    P->>P: Filter and bounded log
+    P-->>C: Response
+    Note over G,A: No replay of uncertain taps

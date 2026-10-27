@@ -1,0 +1,117 @@
+{
+  "captured_at": "2026-10-26T23:52:44.796754+00:00",
+  "previous_report_sha256": "9517d050974ef6a7b9768bc0e4079f022468e359a2918bcf06890a778025bf89",
+  "previous_scores_historical": {
+    "design": {
+      "accuracy_0_100": 96,
+      "completeness_0_100": 96,
+      "rationale": "Identity (entry_id=binding_id=SHA-256 canonical signature), one evaluator over canonical binding plus schema hash, binding.invoke shared tool_id with alias_name separated, client_raw_grants bounds, admission linearization, persistent service/boot/status truthfulness, separate MCP and ADB health, three authorities, ETag/CAS/cursor rules, capacity/latency budgets stated as targets, and runtime release gates all match the DDL, contracts and fixtures line by line. R7-09 residue is gone (no 135,000 claim, no F-01 over-claim, S22 present). Deductions: capacity section still cites a release005 byte size with no supplied receipt while 006 is current (R8-04)."
+    },
+    "contracts_schema": {
+      "accuracy_0_100": 95,
+      "completeness_0_100": 95,
+      "rationale": "runtime_catalog local branch restored to active-only (R7-01), local-collision triggers cover deleted plus origin/state CHECKs (R7-03), oracle history vocabulary matches HistoryEvent (R7-04); sealed membership, single published registry, deferred pointer FK, base-hash pointer guards, revision/history/reason sidecars, 428/400/412 ordering, 1.1 kind gating and scoped idempotency are enforced and fixture-backed. Deductions: imported overlay rows accept NULL or stale base_record_hash at write time, CAS is enforced only at pointer publication (R8-03); README still describes release005 as the completed import (R8-04)."
+    },
+    "extractor": {
+      "accuracy_0_100": 91,
+      "completeness_0_100": 92,
+      "rationale": "aidl_all/declaration_spans fix R7-02 with dotted identities and physical lines; cache contract 2 rejects stale caches (R7-06); missing-index annotations report partial with same-snapshot guards (R7-07, six fixtures); unqualified permission literals are unknown in Java and AIDL (R7-08). Deductions: nested type declarations inside AIDL interface bodies are merged into the next member, fabricating return types and dropping types with no issue row and no AIDL reconciliation guard (R8-01, affects selected hardware/interfaces HAL files); java.lang subpackage imports left unqualified in java-source identities (R8-02); nested member-type visibility misreported (R8-05)."
+    },
+    "production_catalog_data": {
+      "accuracy_0_100": 86,
+      "completeness_0_100": 66,
+      "rationale": "Release006: 39,194 of 39,194 inventory sources imported, 794,195 entries, integrity ok, 0 schema/FK failures, 0 duplicate occurrences, entry_kinds sum exactly to bindings, native/independent/export counts identical, JSON and JSONL byte-equivalent, 1,399 definitions covering all 1,138 unique core names, structured AIDL kinds present. Accuracy deductions: built from a pre-R7 snapshot (parsers, aidl_lex, aidl_members, annotation_link, build_catalog, DDL 002 differ; cache_fingerprint absent), so it carries R7-02 fabricated outer identities for 71 dotted and 41 multi-declaration files, R7-07 (one annotations source mapped 0 yet status parsed), R7-08 (undefined names MANAGE_MEDIA_PROJECTION, QUERY_ALL_PACKAGES) and R8-01. Completeness: 3,285 discovered paths not retrieved, 247 relevant outside projects with enumerated declared-kind paths not imported, 732 projects unknown, 6,987 of 13,334 external annotations unmatched (same-snapshot probe is prospective only), native/generated Binder unknown. Acknowledgment earns no credit."
+    }
+  },
+  "previous_overall_historical": {
+    "accuracy_0_100": 91,
+    "completeness_0_100": 80,
+    "verdict": "NOT_READY",
+    "rationale": "All nine R7 findings are verifiably fixed in the candidate with fixtures, and the released catalog is now a fully validated complete selected corpus. One new medium extractor defect (R8-01) exists in both candidate and production, three lows are fixable, and overall completeness remains bounded by required source coverage owned by the source task plus the need to regenerate production with the corrected extractor and DDL."
+  },
+  "findings": [
+    {
+      "id": "R8-01",
+      "severity": "medium",
+      "artifact": "catalog/tooling/parsers.py aidl(), member(); catalog/tooling/aidl_lex.py chunks(); catalog/tooling/build_catalog.py; catalog/tooling/validate_catalog.py",
+      "evidence": "aidl(): `chunks=[raw for raw,offset in aidl_chunks(body,';')]` then `member(raw,descriptor,pkg,True)`. aidl_lex.chunks splits only on ';' at bracket depth 0, so `parcelable P { int x; }` without trailing ';' merges with the following statement. member(): `a=body.index('(')...h=body[:a].strip()...ret=head_return(h[:m.start()].strip())` accepts a head containing '{' and '}' with no error, unlike aidl_members.field(): `if any(c in type_name for c in ';={}()'):raise ValueError`. No AIDL counterpart of the signature reconciliation guard exists in build_catalog or validate_catalog. hardware/interfaces is a selected project (project-coverage row [1293,1294], selected=true) and its stable HAL AIDL (for example android.hardware.audio.core.IModule) declares parcelables inside interface bodies before the methods using them. R7-02 only fixed top-level declarations.",
+      "issue": "A nested type followed by a method yields a single aidl-member whose return_type text is the whole nested body, reported as methods-parsed with no issue row, and the nested type receives no inventory entry. This fabricates metadata and silently drops declarations, contradicting the no-drop/visible-unknown principle, in both the candidate and release006.",
+      "exact_minimal_correction": "In parsers.aidl() interface path, pre-scan the body with a declaration-aware lexer (reuse aidl_lex.declaration_spans on the body) and emit each nested interface/parcelable/union/enum as its own declaration with descriptor '<outer>.<Name>' through enrich, removing its span before ';' chunking; as a guard, make member() raise ValueError when the head before '(' contains any of '{};' so any remaining merge becomes a visible unsupported record; add an AIDL reconciliation check (lexed declarations plus statements equal emitted records). Fixture: 'package a; interface I { parcelable P { int x; } void f(); }' expecting aidl:a.I, aidl:a.I.P (kind aidl-parcelable) and aidl:a.I#f() with return_type 'void'.",
+      "verification_needed": "New fixtures in a fresh regression receipt; read-only query over release006 counting aidl-member rows whose return_type contains '{' or 'parcelable '.",
+      "candidate_status": "candidate-fixed",
+      "candidate_change": "Recursive nested declarations and containing-type metadata preserved before method/field parsing; own-header one-way; malformed merged heads reject. No-drop counter excludes comments, preserves literals. Initial929counter mismatches retained, fixed, full19781-file rerun zero mismatches;161693records22447types2unsupported statements explicit.",
+      "independent_next_review_pending": true
+    },
+    {
+      "id": "R8-02",
+      "severity": "low",
+      "artifact": "catalog/tooling/java_source.py type_text()",
+      "evidence": "`for simple,full in imports.items(): if full.startswith('java.lang.'):continue` skips every java.lang.* import including subpackages; qualify_anns() qualifies the same imports; jvm_source_link.encode() returns None for unqualified names.",
+      "issue": "Types imported from java.lang.reflect, java.lang.annotation or java.lang.ref stay unqualified in java-source canonical signatures, inconsistent with other explicit imports and blocking provable JVM links.",
+      "exact_minimal_correction": "Change the skip to `if full=='java.lang.'+simple:continue`. Fixture: 'import java.lang.reflect.Method;' with 'void f(Method m)' expecting canonical a.C#f(java.lang.reflect.Method). Caches must be regenerated, not relabeled.",
+      "verification_needed": "Fixture; cache_fingerprint change forces regeneration.",
+      "candidate_status": "candidate-fixed-new-cache-required",
+      "candidate_change": "java.lang subpackage explicit imports resolve; direct java.lang.Simple abbreviations retained. NewJava producer fingerprinta75ac91a... requires regeneration; older007proof is historical.",
+      "independent_next_review_pending": true
+    },
+    {
+      "id": "R8-03",
+      "severity": "low",
+      "artifact": "catalog/schema.sql; catalog/migrations/002-evidence-and-publication.sql overlays; catalog/tests/test_build.py",
+      "evidence": "Only active_imported_base_insert/update (on active_registry) compare base_record_hash. test_build inserts `(bid,bid,signature,1,None,None,'suppressed','{}',now,now)` with NULL base on a published database and succeeds. API-CONTRACT: 'Hash is the canonical effective imported document hash before local changes'; README: 'CAS constraints are executable'.",
+      "issue": "An imported overlay can be written with a NULL or stale base hash against the current active registry; the CAS invariant is enforced only at the next publication.",
+      "exact_minimal_correction": "Add `CREATE TRIGGER overlay_base_current_insert BEFORE INSERT ON overlays WHEN new.imported_binding_id IS NOT NULL AND new.state IN ('active','suppressed') AND NOT EXISTS(SELECT 1 FROM effective_entries e WHERE e.entry_id=new.imported_binding_id AND e.record_sha256=new.base_record_hash) BEGIN SELECT RAISE(ABORT,'Imported overlay base must match active entry'); END;` plus the UPDATE twin in schema.sql and migrations/002; update the test_build fixture to supply the current record_sha256 and registry id.",
+      "verification_needed": "DDL fixture rejecting NULL and stale bases; existing suites still pass.",
+      "candidate_status": "candidate-fixed",
+      "candidate_change": "Overlay insert/update match active base. Copy migration restores pointer before guarded overlay admission; matching/null/stale fixture verifies preservation/rejection. New135508entry migration integrity/schema/FKpassed.",
+      "independent_next_review_pending": true
+    },
+    {
+      "id": "R8-04",
+      "severity": "low",
+      "artifact": "catalog/README.md; design/Android MCP Bridge Design.md capacity section",
+      "evidence": "README: 'Release005 completed its import with 37,873 sources, 772,733 binding entries and 1,384 permission definitions'. Design: 'Release005's complete SQLite catalog is 7,841,099,776 bytes (about 7.30GiB)'. progress-008: released_snapshot release-006, 794,195 entries, 39,194 sources, 1,399 definitions. No size receipt is supplied for either release.",
+      "issue": "Current documentation presents superseded production figures and an unverifiable byte count.",
+      "exact_minimal_correction": "Replace with release006 figures labelled as current, mark 005 as historical, add a hashed size receipt for the 006 catalog.sqlite and recompute the replacement free-space estimate from it.",
+      "verification_needed": "Text review plus size receipt.",
+      "candidate_status": "candidate-fixed",
+      "candidate_change": "Current006README and design figures corrected. Hashed stable size8264855552bytes;17GiBadditionalfree and25GiBtotalpeak plusquota, avoids double-counting allocated active file.",
+      "independent_next_review_pending": true
+    },
+    {
+      "id": "R8-05",
+      "severity": "low",
+      "artifact": "catalog/tooling/java_source.py row()/type_decl()",
+      "evidence": "`visibility='public' if defaults.get('owner_kind') in ('interface','annotation') and kind in ('method','field') else 'package'`; type_decl passes `extra=dict(declaration_kind=...)` without owner_kind.",
+      "issue": "Member types declared inside an interface or annotation without modifiers are recorded effective_visibility 'package' although they are implicitly public static.",
+      "exact_minimal_correction": "Pass owner_kind for nested type_decl calls and include class/interface/enum/annotation kinds in the implicit-public rule. Fixture: 'interface I { class C {} }' expecting 'public'.",
+      "verification_needed": "Fixture.",
+      "candidate_status": "candidate-fixed",
+      "candidate_change": "Nested type owner kind informs implicit-public visibility; class-contained and top-level default package visibility retained.",
+      "independent_next_review_pending": true
+    },
+    {
+      "id": "R8-06",
+      "severity": "high",
+      "artifact": "evidence/coverage-manifest-release006.json; evidence/outside-corpus-classification-latest-summary.json; evidence/production006-full-code-provenance.json; evidence/validation-report-release006.json; evidence/built-in-validation-summary-release006.json; evidence/aidl-multideclaration-audit.json",
+      "evidence": "source_paths by_status not-retrieved 3285 (platform/cts hostsidetests manifests and .aidl, platform/development, device/*, external/*). Outside counts unknown 732, relevant 247, irrelevant 6; matching_paths cts 1813, hardware/sdv/interfaces 403, hardware/google/interfaces 381, development 320, developers/samples/android 241, developers/build 227, exoplayer 135, Dialer 104, platform_testing 95. Provenance: production_equals_latest_candidate=false, ddl_matches_candidate=false, parsers 22e392..., aidl_lex 3bbf74..., aidl_members 092bc4..., annotation_link 77ccb0..., migrations/002 b8558f..., cache_fingerprint absent. undefined_permission_names contains MANAGE_MEDIA_PROJECTION and QUERY_ALL_PACKAGES; external_annotations_unmatched 6987 of 13334; sdk-annotations mapped_annotations min 0 with both statuses parsed; 005/006 shared inventory has 41 multi-declaration and 71 dotted AIDL files.",
+      "issue": "Missing input, not an artifact defect: required public binding/permission coverage remains incomplete, and the released data embodies superseded extraction (R7-02, R7-07, R7-08, R8-01) and pre-R7 DDL.",
+      "exact_minimal_correction": "Source task: regenerate Java/index caches under cache contract 2; build release007 from the post-R8-01 candidate snapshot; extend the inventory with the 3,285 not-retrieved paths and the enumerated declared-kind paths of the 247 relevant projects; record an owner scoping decision or complete enumeration for the 732 unknown projects; run the candidate validator and exporter; supply provenance with production_equals_latest_candidate=true and ddl_matches_candidate=true, plus annotation mapping and AIDL status distributions.",
+      "verification_needed": "Release007 validation, reconciliation, export and provenance reports; classification summary with no unenumerated projects.",
+      "candidate_status": "missing-source-input-remains",
+      "candidate_change": "Current fully validated006predatescandidate.007buildcontinues separately and predatesR8fixes. Global relevant/unclassified/native/generated/source paths remain unresolved. Latest audit classification supplied; no owner scope reduction or98acceptance claimed.",
+      "independent_next_review_pending": true
+    },
+    {
+      "id": "P8-01",
+      "found_by": "Codex regression, not Claude",
+      "candidate_status": "candidate-fixed",
+      "issue": "Malformed structural AST values were relabeled as future operators.",
+      "candidate_change": "Object/string-op shape required; typed future operators retain parsed JSON and x-metadata untouched.",
+      "evidence": "round008-reader-before.txt; tests-regression-044.txt",
+      "independent_next_review_pending": true
+    }
+  ],
+  "tests": "tests-regression-044.txt:141passed;round008-optimized-v2.txt:15passed",
+  "source_handoff": "integration/round008-v2-source-actions.json"
+}

@@ -1,0 +1,18 @@
+import pathlib,json,hashlib,shutil,datetime
+R=pathlib.Path(__file__).resolve().parent;P=R/'design-c4'
+source=(R/'bootstrap_architecture_tools.py').read_text().replace("R=pathlib.Path(__file__).resolve().parent/'design-c4'","R=pathlib.Path(__file__).resolve().parents[1]")
+# Keep portable dependency setup narrow; source package lock pins Marp transitive integrity.
+source+='''\nimport subprocess,os\nmarp=R/'.tools/marp';marp.mkdir(parents=True,exist_ok=True)\nfor original,target in [('marp-package.json','package.json'),('marp-package-lock.json','package-lock.json')]:\n import shutil\n shutil.copyfile(R/'tooling'/original,marp/target)\nsubprocess.run(['npm','--userconfig',os.devnull,'--cache',str(R/'.tools/npm-cache'),'ci','--prefix',str(marp),'--ignore-scripts','--no-audit','--no-fund'],check=True)\n'''
+(P/'tooling/bootstrap.py').write_text(source)
+lock=json.loads((P/'toolchain-lock.json').read_text());lock.update(node_used='26.8.2 existing host binary mounted read-only',marp='4.2.3',marp_lock_sha256=hashlib.sha256((P/'tooling/marp-package-lock.json').read_bytes()).hexdigest(),node_libatomic_sha256='977b443ea807835dca23aa5f27b6245799c5f452d972d033b88ca768e0b216d1');(P/'toolchain-lock.json').write_text(json.dumps(lock,indent=2)+'\n')
+licenses=P/'tooling/notices';licenses.mkdir(exist_ok=True)
+for source,name in [(P/'.tools/gradle-8.14.3/LICENSE','Gradle-LICENSE.txt'),(P/'.tools/marp/node_modules/@marp-team/marp-cli/LICENSE','Marp-LICENSE.txt')]:
+ if source.exists():shutil.copyfile(source,licenses/name)
+# Seed the official wrapper's URL-specific cache from the already checksum-verified task-local distribution.
+url='https://services.gradle.org/distributions/gradle-8.14.3-bin.zip';n=int.from_bytes(hashlib.md5(url.encode()).digest(),'big');alphabet='0123456789abcdefghijklmnopqrstuvwxyz';encoded=''
+while n:n,r=divmod(n,36);encoded=alphabet[r]+encoded
+cache=P/'.gradle-home/wrapper/dists/gradle-8.14.3-bin'/encoded;cache.mkdir(parents=True,exist_ok=True)
+shutil.copyfile(P/'.tools/gradle-8.14.3-bin.zip',cache/'gradle-8.14.3-bin.zip')
+readme=P/'README.md';s=readme.read_text().replace('docs/Android%20MCP%20Bridge%20Design.md','<docs/Android MCP Bridge Design.md>')
+s+='''\n## Bootstrap and actual isolated build\n\nOn a machine with Python3/npm and the pinned existing renderer image available, run python3 tooling/bootstrap.py. It downloads only checksum-recorded Gradle/PlantUML task dependencies and performs npm ci with the included Marp integrity lock, without lifecycle scripts or global installation. Java21/Graphviz come from the documented image; this is separate from any Android app installation. Offline use requires a populated wrapper distribution and Marp cache.\n\nThe validated environment uses the official Gradle wrapper in the existing digest-pinned Structurizr container, user1000, network none, no exposed ports, task directory mounted at /workspace and an existing compatible Node binary at /tool-node/node. Node26.8.2 requires libatomic.so.1; an existing host copy is mounted read-only in that ephemeral container, its hash retained in toolchain-lock.json. This is an environment dependency, not a hidden package installation. Other existing Java21/Node environments can use the same tasks with STRUCTURIZR_CLI and NODE_BIN set to verified local tooling. No task starts a public diagram server.\n\nExecution and model/docs validation receipts are in validation/ in the archive. The portable ZIP omits .tools, .gradle-home, all source catalog data, reviewer receipts, old diagram outputs, Word/PDF and raster mockups.\n''';readme.write_text(s)
+print(json.dumps(dict(wrapper_cache=str(cache),toolchain_pins_updated=True,bootstrap='tooling/bootstrap.py')))

@@ -1,0 +1,15 @@
+loading historical008 source metadata {}
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/scale_projection_round12.py", line 12, in <module>
+    progress('loading historical008 source metadata');sources={sid:json.loads(raw) for sid,raw in db.execute('SELECT source_id,document_json FROM source_details')};t=time.monotonic();projection=cp.Projection(db,sources);phases['projection_index_seconds']=time.monotonic()-t
+                                                                                                                                                                                                  ~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tooling/catalog_projection.py", line 61, in __init__
+    self.formals[(sid,doc.get('owner',''))].update(formal_names(doc['provenance'][0]['raw_signature']))
+                                                   ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tooling/annotation_link.py", line 5, in formal_names
+    clean=annotations(raw)[0];starts=[]
+          ~~~~~~~~~~~^^^^^
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tooling/parsers.py", line 37, in annotations
+    if end is None:raise ValueError('Unclosed annotation')
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Unclosed annotation

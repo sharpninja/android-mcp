@@ -1,0 +1,170 @@
+test_deleted_local_import_collision_blocks_pointer (test_round5.Round5.test_deleted_local_import_collision_blocks_pointer) ... FAIL
+parsed sources 0 / 5
+{
+  "counts": {
+    "sources": 5,
+    "bindings": 12,
+    "occurrences": 12,
+    "binding_declarations": 12,
+    "permission_definitions": 1,
+    "permission_symbols": 1,
+    "permission_relations": 13,
+    "aidl_schemas": 1,
+    "annotation_evidence": 1,
+    "issues": 1,
+    "effective_entries": 12
+  },
+  "integrity_check": "ok",
+  "unavailable_paths": 0
+}
+test_future_platform_annotations_use_matching_index (test_round5.Round5.test_future_platform_annotations_use_matching_index) ... FAIL
+test_interface_failure_status_is_not_promoted (test_round5.Round5.test_interface_failure_status_is_not_promoted) ... FAIL
+parsed sources 0 / 3
+{
+  "counts": {
+    "sources": 3,
+    "bindings": 10,
+    "occurrences": 10,
+    "binding_declarations": 10,
+    "permission_definitions": 1,
+    "permission_symbols": 1,
+    "permission_relations": 10,
+    "aidl_schemas": 1,
+    "annotation_evidence": 0,
+    "issues": 0,
+    "effective_entries": 10
+  },
+  "integrity_check": "ok",
+  "unavailable_paths": 0
+}
+test_minor_kind_vocabulary_is_version_gated (test_round5.Round5.test_minor_kind_vocabulary_is_version_gated) ... ERROR
+test_record_components_and_compact_constructor_parameters (test_round5.Round5.test_record_components_and_compact_constructor_parameters) ... FAIL
+test_restore_metadata_uses_explicit_platform (test_round5.Round5.test_restore_metadata_uses_explicit_platform) ... ERROR
+test_sdk_type_presence_is_known_without_invented_type_kind (test_round5.Round5.test_sdk_type_presence_is_known_without_invented_type_kind) ... FAIL
+test_validator_closes_database_on_failure (test_round5.Round5.test_validator_closes_database_on_failure) ... FAIL
+test_wrapper_alias_can_require_two_bindings (test_round5.Round5.test_wrapper_alias_can_require_two_bindings) ... ERROR
+
+======================================================================
+ERROR: test_minor_kind_vocabulary_is_version_gated (test_round5.Round5.test_minor_kind_vocabulary_is_version_gated)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_round5.py", line 31, in test_minor_kind_vocabulary_is_version_gated
+    for version in ('1.1.0','1.10.0'):doc['schema_version']=version;validator.validate(doc)
+                                                                    ~~~~~~~~~~~~~~~~~~^^^^^
+  File "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/.venv/lib/python3.14/site-packages/jsonschema/validators.py", line 450, in validate
+    raise error
+jsonschema.exceptions.ValidationError: 'type' is not one of ['package', 'class', 'interface', 'enum', 'annotation', 'constructor', 'method', 'field', 'property', 'aidl-interface', 'aidl-member', 'unsupported', 'aidl-parcelable', 'aidl-union', 'aidl-enum']
+
+Failed validating 'enum' in schema['properties']['kind']:
+    {'enum': ['package',
+              'class',
+              'interface',
+              'enum',
+              'annotation',
+              'constructor',
+              'method',
+              'field',
+              'property',
+              'aidl-interface',
+              'aidl-member',
+              'unsupported',
+              'aidl-parcelable',
+              'aidl-union',
+              'aidl-enum']}
+
+On instance['kind']:
+    'type'
+
+======================================================================
+ERROR: test_restore_metadata_uses_explicit_platform (test_round5.Round5.test_restore_metadata_uses_explicit_platform)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_round5.py", line 44, in test_restore_metadata_uses_explicit_platform
+    with mock.patch.object(restore_snapshot,'extract_metadata',return_value=({'api.xml':b'fixture'},{})) as extract:self.assertEqual(restore_snapshot.restore_metadata(source,root),{'api.xml':b'fixture'});self.assertEqual(extract.call_args.args[0],100)
+                                                                                                                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tooling/restore_snapshot.py", line 40, in restore_metadata
+    metadata=ET.parse(root/'repository2-3.xml').getroot();package=next(p for p in metadata.findall('remotePackage') if p.attrib['path']=='platforms;android-37.2');size=int(package.findtext('archives/archive/complete/size'))
+                                                                  ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+StopIteration
+
+======================================================================
+ERROR: test_wrapper_alias_can_require_two_bindings (test_round5.Round5.test_wrapper_alias_can_require_two_bindings)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_round5.py", line 25, in test_wrapper_alias_can_require_two_bindings
+    db.execute('INSERT INTO binding_definitions VALUES(?,?,?)',(bid,'java:'+bid,'1.1.0'));db.execute("INSERT INTO binding_mappings(binding_id,schema_hash,registry_revision,mapping_state,dispatch_kind,argument_schema_json,permission_ast_json) VALUES(?,?,1,'unknown','fixture','{}','{}')",(bid,'c'*64));db.execute("INSERT INTO tool_binding_aliases VALUES('wrapper','wrapper',?,?,1,?)",(bid,'c'*64,'d'*64))
+                                                                                                                                                                                                                                                                                                             ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.IntegrityError: UNIQUE constraint failed: tool_binding_aliases.alias_name
+
+======================================================================
+FAIL: test_deleted_local_import_collision_blocks_pointer (test_round5.Round5.test_deleted_local_import_collision_blocks_pointer)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_round5.py", line 11, in test_deleted_local_import_collision_blocks_pointer
+    with self.assertRaises(sqlite3.IntegrityError):db.execute("INSERT INTO active_registry VALUES(1,'r')")
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: IntegrityError not raised
+
+======================================================================
+FAIL: test_future_platform_annotations_use_matching_index (test_round5.Round5.test_future_platform_annotations_use_matching_index)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_round5.py", line 19, in test_future_platform_annotations_use_matching_index
+    helper.annotation(r,spec,platform_api_version='37.3');inv.write_text(json.dumps(spec));build_catalog.build(inv,r/'out');db=sqlite3.connect(r/'out/catalog.sqlite');self.addCleanup(db.close);self.assertEqual(db.execute('SELECT binding_id FROM annotation_evidence').fetchone()[0],hashlib.sha256(b'jvm:a/A#go(Ljava/lang/String;)V').hexdigest())
+                                                                                                                                                                                                 ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '64a1702820f1d56dc48fe90d91c59969a2e99706258a5364d1b397c8bd2a57d1' != '920f7a917bf8772b31fe2359589a5dda6f28811c8493a405a859dde43979958b'
+- 64a1702820f1d56dc48fe90d91c59969a2e99706258a5364d1b397c8bd2a57d1
++ 920f7a917bf8772b31fe2359589a5dda6f28811c8493a405a859dde43979958b
+
+
+======================================================================
+FAIL: test_interface_failure_status_is_not_promoted (test_round5.Round5.test_interface_failure_status_is_not_promoted)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_round5.py", line 8, in test_interface_failure_status_is_not_promoted
+    self.assertEqual(aidl_members.enrich(text,parsers.aidl(text))['parse_status'],status)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'methods-parsed' != 'unsupported'
+- methods-parsed
++ unsupported
+
+
+======================================================================
+FAIL: test_record_components_and_compact_constructor_parameters (test_round5.Round5.test_record_components_and_compact_constructor_parameters)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_round5.py", line 33, in test_record_components_and_compact_constructor_parameters
+    records=java_source.parse('package a; public record R(int x, String name) { public R { if(x<0) throw new Error(); } }')['records'];ctor=next(row for row in records if row['kind']=='constructor');self.assertEqual(ctor['canonical'],'a.R#<init>(int,String)');self.assertEqual({row['name'] for row in records if row['extras'].get('record_component')},{'x','name'})
+                                                                                                                                                                                                       ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'a.R#<init>()' != 'a.R#<init>(int,String)'
+- a.R#<init>()
++ a.R#<init>(int,String)
+
+
+======================================================================
+FAIL: test_sdk_type_presence_is_known_without_invented_type_kind (test_round5.Round5.test_sdk_type_presence_is_known_without_invented_type_kind)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_round5.py", line 21, in test_sdk_type_presence_is_known_without_invented_type_kind
+    result=sdk_api_index.parse(b'<api version="4"><class name="a/C"/></api>');self.assertEqual(result['records'][0]['kind'],'type');self.assertEqual(result['records'][0]['extras']['type_kind_status'],'unknown');self.assertNotIn('parse_error',result['records'][0]['extras'])
+                                                                              ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'unsupported' != 'type'
+- unsupported
++ type
+
+
+======================================================================
+FAIL: test_validator_closes_database_on_failure (test_round5.Round5.test_validator_closes_database_on_failure)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_round5.py", line 39, in test_validator_closes_database_on_failure
+    db.close.assert_called()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.14/unittest/mock.py", line 955, in assert_called
+    raise AssertionError(msg)
+AssertionError: Expected 'close' to have been called.
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.765s
+
+FAILED (failures=6, errors=3)

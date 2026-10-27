@@ -1,0 +1,31 @@
+{
+  "at": "2026-10-27T11:30:09.590797+00:00",
+  "round": "/home/sharpninja/github/2026-10-26/task-3/remediation/reviews/round-022",
+  "active_processes": [
+    {
+      "stage": "pass-01",
+      "pid": 3422963,
+      "status": "finished"
+    },
+    {
+      "stage": "pass-02",
+      "pid": 3422962,
+      "status": "finished"
+    }
+  ],
+  "assigned_distinct_files": 77,
+  "expected_distinct_files": 77,
+  "complete_input_assignment": true,
+  "source_sha256": {
+    "review_design_unbounded.py": "150498f1c807be5af2df7812d190a0a727baecf6fedf841179fb0f1229d31c46",
+    "recover_design022.py": "2bb150773f214808b78bb20b9bcecb35c539d8fc47daa0f4d48ec09bae61b1d4",
+    "hv_invariants.py": "52b16d334399f550119f10c12bbce9c465fe5dd2b14686cadfc880a05998a9c8",
+    "hv_runtime.py": "3955502459e834e12b542deb77907125e6dda13e709308dc6b07acd4cabacbcd",
+    "hv_supervisor.py": "c08ab73b80a2e7f9d18c40f81bcfeac4879c26f995efe25fe65d49ced4da0a2b"
+  },
+  "assistant_caps": null,
+  "continuation_supervisor_required": true,
+  "historical_violation": "The original022 coordinator raised on an incomplete stage and exited; reserved unstarted slots transfer future scheduling to the attached supervisor while active01/02 are preserved.",
+  "violations": [],
+  "environment_audit": "Whitelisted CLAUDE_CODE_MAX_OUTPUT_TOKENS only; no credential/auth environment values recorded"
+}

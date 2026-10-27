@@ -1,0 +1,45 @@
+{
+  "at": "2026-10-26T22:43:20.905384+00:00",
+  "metadata_version": 2,
+  "supersedes": "same-snapshot-annotations-integration.json",
+  "base_root": "android-catalog-20261026/catalog-round005",
+  "candidate_root": "android-catalog-20261026/catalog-source-followup",
+  "patch": "android-catalog-20261026/integration/same-snapshot-annotations-v2.patch",
+  "patch_sha256": "0e045bcad43dbace6d2ab008b49274dfc26e8e894ef6e4f3aba6bd1434b965d1",
+  "files": [
+    {
+      "path": "tooling/annotation_link.py",
+      "base_sha256": "77ccb024d2f69b5e12007daaded8e8636b8b2278955e0f288df8f051e2b95b25",
+      "candidate_sha256": "8a1c34c532c91175dc3be51a255cb28a9bf9098e6614d71b7f6c8daabb2897b4"
+    },
+    {
+      "path": "tooling/build_catalog.py",
+      "base_sha256": "2d6bf101da2964169783f29d1c0d170b3655030ca23d88e9139704f0fe2c72b0",
+      "candidate_sha256": "e826fafb495aac695b86d43ca129f4b4368e8ac5a120480370e22eaf7231a01c"
+    },
+    {
+      "path": "tests/test_versioned_signature_annotations.py",
+      "base_sha256": null,
+      "candidate_sha256": "38cbf61dd5f30326beb810eee519fce6eca83ac493acf692726bfe7c941909da"
+    }
+  ],
+  "tests": {
+    "count": 116,
+    "result": "passed",
+    "log": "same-snapshot-type-guard-regression.txt"
+  },
+  "prospective_production_probe": {
+    "uniquely-proven-same-snapshot": 6141,
+    "still-unmatched-or-ambiguous": 368
+  },
+  "frozen006_modified": false,
+  "scope": "Extractor annotation linkage only; no schema/API/design changes",
+  "constraints": [
+    "Explicit platform version and identical repository/commit required",
+    "No fallback when a matching-platform index exists",
+    "All eligible signature return/field types must agree; unresolved erasures remain unknown",
+    "Formal type-variable ambiguity remains guarded",
+    "No OS/client authority inferred"
+  ],
+  "cache_serialization_proof": "sdk-index-cache-deterministic/attempt002/reproducibility-proof.json"
+}

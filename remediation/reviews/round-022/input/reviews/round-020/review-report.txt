@@ -1,0 +1,89 @@
+**DESIGN ACCURACY: 95/100**
+**DESIGN COMPLETENESS: 94/100**
+**Verdict: NOT_ACCEPTED at the 98/98 bar.**
+
+All three high findings and sixteen of seventeen medium findings from round 018 are resolved by the supplied replacement text, the rewritten Structurizr model, the reference-stub class views and the eleven-screen manifest. Both disputed 018 corrections verify against the pinned primary sources. The constant AndroidBridgeTransportProtocol equals "arc-protobuf-v1" at RemoteControlProtocol.cs line 31, and MajorVersion 1 with MinorVersion 0 yields display version 1.0. ValidateLength in BridgeFrameCodec.cs rejects only negative and oversize lengths, so a zero-length frame is legal at the framing layer and only the decoded default envelope fails validation. The global-generation metadata ETag is an explicit conservative choice, and item creation now uses PUT with If-None-Match, so that 018 defect is closed. The deductions are one medium internal contradiction, two smaller contradictions, three unspecified mechanisms, one unchanged stale table and a bundle of low residuals. No deduction depends on dataset, app or deployment status. No NEEDS_CONTEXT request is required.
+
+## Disposition of F01..F25
+
+Line numbers are current lines in design-c4/docs/Android MCP Bridge Design.md unless a file is named.
+
+| ID | 018 | Status | Verified at | Residual |
+|---|---|---|---|---|
+| F-01 | high | Resolved | CallbackFlow in workspace.dsl; edges transport→callbacks and callbacks→android; line 1512 | callback.cancel dispatch owner not labeled; low |
+| F-02 | high | Resolved, new contradiction | lines 82, 630, 658, 662; host.forwarder node | N-01 |
+| F-03 | high | Resolved | lines 1307, 1331; contract doc materialization paragraph | one reason code for abstract, concrete and final classes; low |
+| F-04 | medium | Partial | lines 10, 53, 948, 1157, 1174, 1303, 1423 | S9 screen table unchanged; N-01 label sentence |
+| F-05 | medium | Resolved | lines 374, 738, 741-753, 1612; OwnerTransition view; SCR09.S3 | FLAG_SECURE under screencap is a gate |
+| F-06 | medium | Resolved | lines 128, 130, 1351, 1363 | paired_tls names both the transport profile and the helper flow; low |
+| F-07 | medium | Resolved | lines 1341, 1581-1587; onCalleeDied in code-diagrams.md | N-02 |
+| F-08 | medium | Resolved | line 1119 | none |
+| F-09 | medium | Resolved | lines 295, 1610; manifest shared_status; HealthSnapshot class | chip presence in SVG not inspectable |
+| F-10 | medium | Resolved | line 1616; adbd and forwarder nodes; AdbConnectionManager | deployment omits the optional external ARC target; low |
+| F-11 | medium | Resolved | reference stubs in code-diagrams.md; crosswalk at line 1659 | unowned DirectStreamNegotiator, DirectEventEmitter, ArcRuntime, ArcSessionManager, SdkBindingBackend; N-07 |
+| F-12 | medium | Partial | container edges; auth→catalog; catalog→device; lifecycle→callbacks | N-03; three component writers under a single-writer label; low |
+| F-13 | medium | Resolved | InvocationFlow, GroupFlow, ArcSession, OwnerTransition views | GroupFlow step 8 acts before the step 9 call; low |
+| F-14 | medium | Resolved | line 1618 | lowercase tool codes versus uppercase reason codes with no stated rule; low |
+| F-15 | medium | Resolved | lines 1123, 1323, 1622, 1624, 814-840; contract PUT create | N-04; POST entry creation versus PUT item creation unexplained; low |
+| F-16 | medium | Resolved | line 1622; contract meta-json-v1 | Entry profile not explicitly identified with meta-json-v1; low |
+| F-17 | medium | Resolved | lines 1600-1606; negotiator and emitter classes | C4 edge labels omit the direct route; low |
+| F-18 | medium | Resolved | lines 1651-1657; RemoteControlProtocol.cs line 31; ValidateLength | status for method 0 or unknown method unstated; low |
+| F-19 | medium | Resolved | manifest 11 screens, 5 storyboards; 21-slide receipt | ADB backend pairing has no storyboard; low |
+| F-20 | medium | Resolved | renderer-lock.json; verifyToolchain; exact expectedSvgPaths | skinparams honoring unverified; external-asset regex misses url() forms; low |
+| F-21 | low | Resolved | lines 497, 1628-1630 | isError for schema-invalid arguments needs confirmation against the pinned tools page |
+| F-22 | low | Resolved | lines 230-238, 1634 | none |
+| F-23 | low | Resolved | line 1636 | display mapping is a gate |
+| F-24 | low | Resolved | lines 950, 998, 1008, 1045, 1642 | "about 29 GiB" is 29.7 GiB; trivial |
+| F-25 | low | Resolved | lines 1355, 1640 | N-01 label sentence |
+
+## Remaining and new root causes
+
+**N-01, medium, contradiction: legacy backend labels.** Line 658 sets the connection profile CHECK domain to native, self_adb and arc_target, and line 660 sets the executor domain to native, adb and arc_target. Lines 662-663 then say a stored external_adb row is rejected at admission, and lines 670-674 say stored avalonia_runtime and avalonia names remain compatibility labels pending a future versioned rename. Line 1640 says those rows are migrated explicitly to arc_target. A CHECK that excludes a value cannot store it for admission-time rejection, and a value cannot be both retained and migrated. Two implementers would ship different schemas. Minimal fix: delete the compatibility-label sentence at lines 670-674 and state that migration rewrites external_adb into host_forward_profiles and avalonia_runtime into arc_target before the live CHECK applies.
+
+**N-02, low-medium, unspecified: outcome_unknown has no exits.** The table at lines 1581-1587 enters outcome_unknown on registration timeout but has no row for a late confirmed result, a delivered event, or callback.cancel from that state. The cancel contract at line 1341 forbids blind replay but does not say whether the retained provisional cleanup pins may be executed. Minimal fix: add three rows. A late result moves to active or closed. A delivered event is suppressed and journaled as a gap. Cancel moves to cancelling using the provisional pins.
+
+**N-03, low-medium, unspecified: log inspection and export have no owner.** AuditLogger in workspace.dsl has only inbound edges, and its class exposes only record methods. Neither facade has an edge to AuditLogger or the database. Manifest controls SCR06.C01 and SCR06.C02 and STB05 steps 3 and 4 inspect and export logs, and line 1353 names sensitive export as a protected transition. Minimal fix: add a read and export operation on AuditLogger, an ownerCommands→audit relationship, and a redaction statement for export.
+
+**N-04, low-medium, contradiction: resumable import stage.** Lines 836-837 say expiry or a closed admin window retains only an explicitly resumable stage. Line 1624 says expiry at the window end deletes unactivated staging. Nothing defines how a stage becomes resumable, its lifetime, or the proof needed to resume. Minimal fix: remove the resumable clause, or define a resumable flag with a bounded lifetime and fresh owner proof on resume.
+
+**N-06, low, inconsistency: start and stop protection level.** The ownerCommands→lifecycle edge in workspace.dsl reads "requests protected desired state". Line 1353 does not list desired-state changes among protected transitions, and line 295 lets the unprotected notification Stop action change desired state. Minimal fix: route start and stop through SessionCommandFacade as an ordinary command and relabel the edge.
+
+**N-07, low-medium, unspecified: ARC authentication source.** The code view defines ArcAuthenticator separately from ClientAuthenticator. The ArcComponents view excludes the auth component, and no arc→auth or arc→db relationship exists. Requirement 2 places client mapping in SQLite and requirement 5 forbids a second authority. Minimal fix: declare ArcAuthenticator as an adapter over ClientAuthenticator and add the relationship.
+
+**F-04 residual, low: stale screen table.** No delta operation touches the S9 screen table; the nearest operations are at lines 288, 295 and 374. That table therefore cannot list SCR11, STB04 or STB05 added this round, which contradicts line 1273. Minimal fix: regenerate the table from the manifest.
+
+**Low residual bundle.** The ui-screens-and-storyboards.md sections repeat SCR02 and SCR07 boilerplate under every screen. The crosswalk names a "router" class that does not exist in the arc-ui view. The spike sentence at line 1363 says "client certificate pinning" where it means the client pins the server certificate. The isError choice at line 1630 is defensible only under the tools page's "invalid input data" wording; the same page lists "invalid arguments" as a protocol error, so the split must be confirmed against the pinned text rather than asserted.
+
+`★ Insight ─────────────────────────────────────`
+A CHECK constraint is a statement about what rows can exist, so prose that describes admission-time handling of excluded values is unimplementable rather than merely redundant. Schema domains, migrations and reason codes have to be stated as one ordered story.
+A state machine is only closed when every non-terminal state has an exit for every event that can still arrive; late Binder results after a timeout are the classic missed row.
+`─────────────────────────────────────────────────`
+
+## Requirements coverage and implementation gates
+
+- **R1 mechanism.** Full inventory with unknown and unreachable reasons, versioned reason registry and permission boundaries are specified at line 1618. Covered.
+- **R2.** Kotlin service and Compose UI, two unexported facades, persistent service, boot path, HealthSnapshot and SQLite configuration are specified at lines 44, 295, 1157, 1355 and 1610. Covered except N-03 and N-06.
+- **R3.** Paired same-device ADB and host ingress forwarding are specified at lines 82, 630 and 1616. Covered except N-01 schema text.
+- **R4.** ARC port with exact framing, envelope, defaults, cancel, DIP and key mapping is specified at lines 1651-1657 and verified against the three pinned sources. Covered except N-07.
+- **R5.** Immutable imports, CAS history, ETag families and no self-approval are specified at lines 1123, 1323 and 1622. Covered except N-04.
+- **R6.** Observed-version bindings, sealed activation and invalidation are specified at lines 966, 1119 and 1317. Covered.
+- **R7.** Callback roles, transition table, bounded journal and negotiated direct stream are specified at lines 1307, 1341, 1581 and 1600. Covered except N-02.
+- **R8.** Functional groups, CAS activation and in-flight semantics are specified at line 1119 and in GroupFlow. Covered.
+- **R9.** Pinned transport edge cases are specified at lines 1628-1630 and match the pinned specification pages as recalled. Covered, one confirmation pending.
+- **R10.** Thirteen native views, five labeled image views and a crosswalk exist. Covered except ownership gaps and N-03.
+- **R11.** Gradle 8.14.3, renderer and toolchain locks, explicit offline failures and exact asset sets exist in build.gradle.kts. Covered.
+- **R12.** Eleven screens, five ordered storyboards, Marp deck and self-contained HTML are declared and receipted. Covered except the ADB pairing storyboard.
+
+Design-versus-implementation gates, unchanged in kind from 018 and extended by this round:
+
+- Android instrumentation for FLAG_SECURE under shell screencap, BiometricPrompt binding, direct-boot receivers, specialUse eligibility, package visibility and display-ID mapping.
+- The LoopbackTlsHost spike with an AndroidKeyStore-held key before paired_tls or /pair is enabled.
+- The bundled native AOSP ADB client behind JNI: ABI, version, license and packaging compatibility.
+- ARC golden fixtures against commit 19792a52, including the zero-length frame, Cancel 8, empty request ID and the Avalonia key-name table.
+- MCP conformance of SDK 0.15.0 against the pinned pages, including the isError decision and the 405 and 404 paths.
+- AC-CB-05 direct stream fixtures for negotiation, bearer and session confusion, cursor expiry, overflow and revoke races.
+- Kotlin reproduction of meta-json-v1 golden byte vectors and import manifest verification.
+- Build determinism: confirmation that plantuml.skinparams is honored, forced offline cold-cache failure, and checksum reproducibility inside the pinned image.
+- Visual inspection of the STATUS chip and storyboard panel bindings in the SVG sources; only the manifest and receipts were available here.
+
+END_DESIGN_REVIEW_020

@@ -1,0 +1,179 @@
+parsed sources 0 / 3
+{
+  "counts": {
+    "sources": 3,
+    "bindings": 12,
+    "occurrences": 12,
+    "binding_declarations": 12,
+    "permission_definitions": 1,
+    "permission_symbols": 1,
+    "permission_relations": 12,
+    "aidl_schemas": 1,
+    "annotation_evidence": 0,
+    "issues": 0,
+    "effective_entries": 12
+  },
+  "integrity_check": "ok",
+  "unavailable_paths": 0
+}
+parsed sources 0 / 3
+{
+  "counts": {
+    "sources": 3,
+    "bindings": 12,
+    "occurrences": 12,
+    "binding_declarations": 12,
+    "permission_definitions": 1,
+    "permission_symbols": 1,
+    "permission_relations": 12,
+    "aidl_schemas": 1,
+    "annotation_evidence": 0,
+    "issues": 0,
+    "effective_entries": 12
+  },
+  "integrity_check": "ok",
+  "unavailable_paths": 0
+}
+parsed sources 0 / 3
+{
+  "counts": {
+    "sources": 3,
+    "bindings": 12,
+    "occurrences": 12,
+    "binding_declarations": 12,
+    "permission_definitions": 1,
+    "permission_symbols": 1,
+    "permission_relations": 12,
+    "aidl_schemas": 1,
+    "annotation_evidence": 0,
+    "issues": 0,
+    "effective_entries": 12
+  },
+  "integrity_check": "ok",
+  "unavailable_paths": 0
+}
+EEE
+======================================================================
+ERROR: test_local_addition_is_visible_and_version_unknown (test_effective_device_inventory.EffectiveInventory.test_local_addition_is_visible_and_version_unknown)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_effective_device_inventory.py", line 19, in test_local_addition_is_visible_and_version_unknown
+    db=self.fixture(pathlib.Path(td));doc=self.doc(db,'aidl:a.I#take(P)');doc.update(canonical_signature='aidl:a.I#added(int)',name='added',origin='local',overlay_revision=1);doc['entry_id']=hashlib.sha256(doc['canonical_signature'].encode()).hexdigest();doc['arguments']=[{'text':'int','status':'primitive','codec_status':'unknown'}];self.overlay(db,doc,local=True);capture=effective.capture(db);self.assertEqual(len(capture['inventory']),capture['base_inventory_count']+1);row=next(r for r in self.resolve(capture)['entries'] if r['entry_id']==doc['entry_id']);self.assertEqual(row['state'],'unknown');self.assertEqual(row['catalog_state'],'active')
+                                                                                                                                                                                                                                                                                                                                                                                       ~~~~~~~~~~~~~~~~~^^^^
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tooling/effective_device_inventory.py", line 71, in capture
+    item['catalog_state']=states.get(key,'active');item['catalog_revision']=revisions.get(key,0);dr.validate(item,'InventoryEntity')
+                                                                                                 ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tooling/device_resolution.py", line 23, in validate
+    validator(name).validate(value)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/.venv/lib/python3.14/site-packages/jsonschema/validators.py", line 450, in validate
+    raise error
+jsonschema.exceptions.ValidationError: Additional properties are not allowed ('catalog_revision', 'catalog_state' were unexpected)
+
+Failed validating 'additionalProperties' in schema:
+    {'type': 'object',
+     'properties': {'entry_id': {'type': 'string',
+                                 'pattern': '^[a-f0-9]{64}$'},
+                    'entity_kind': {'enum': ['binding', 'type', 'other']},
+                    'variants': {'type': 'array',
+                                 'items': {'$ref': '#/$defs/Variant'},
+                                 'minItems': 0}},
+     'required': ['entry_id', 'entity_kind', 'variants'],
+     'additionalProperties': False}
+
+On instance:
+    {'entity_kind': 'binding',
+     'entry_id': '43ff89335246cb5d8475c72d4a532bae797f85a32d6572bd7eb51549eabd441c',
+     'variants': [{'availability': {'alternatives': [{'platform_point': [37,
+                                                                         0]}],
+                                    'evidence_ids': ['c55f31002c2a80ba67ec3ee6dc8ede65d899d5184eeb086b357db40e7e1fb3d1']},
+                   'dependencies': [{'entry_id': '5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0',
+                                     'schema_hash': '346a7a15169f1ade5f044810c95b15200a4500fe087de678150ee9ea8485690f'}],
+                   'schema_hash': 'a848819ffe5119eced6ddb742580c777e8c23e5857f465a36eaff2bc15bce2a9'}],
+     'catalog_state': 'active',
+     'catalog_revision': 0}
+
+======================================================================
+ERROR: test_structured_field_override_changes_transitive_binding_hash (test_effective_device_inventory.EffectiveInventory.test_structured_field_override_changes_transitive_binding_hash)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_effective_device_inventory.py", line 22, in test_structured_field_override_changes_transitive_binding_hash
+    db=self.fixture(pathlib.Path(td));before=effective.capture(db);binding=self.doc(db,'aidl:a.I#take(P)')['entry_id'];old=next(r for r in self.resolve(before)['entries'] if r['entry_id']==binding);doc=self.doc(db,'aidl:a.I.P#x');doc['return_type']['text']='long';self.overlay(db,doc);after=effective.capture(db);new=next(r for r in self.resolve(after)['entries'] if r['entry_id']==binding);self.assertEqual(new['state'],'available');self.assertNotEqual(old['schema_hash'],new['schema_hash']);self.assertNotEqual(before['inventory_sha256'],after['inventory_sha256']);self.assertEqual(after['overlay_generation'],before['overlay_generation']+1)
+                                             ~~~~~~~~~~~~~~~~~^^^^
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tooling/effective_device_inventory.py", line 71, in capture
+    item['catalog_state']=states.get(key,'active');item['catalog_revision']=revisions.get(key,0);dr.validate(item,'InventoryEntity')
+                                                                                                 ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tooling/device_resolution.py", line 23, in validate
+    validator(name).validate(value)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/.venv/lib/python3.14/site-packages/jsonschema/validators.py", line 450, in validate
+    raise error
+jsonschema.exceptions.ValidationError: Additional properties are not allowed ('catalog_revision', 'catalog_state' were unexpected)
+
+Failed validating 'additionalProperties' in schema:
+    {'type': 'object',
+     'properties': {'entry_id': {'type': 'string',
+                                 'pattern': '^[a-f0-9]{64}$'},
+                    'entity_kind': {'enum': ['binding', 'type', 'other']},
+                    'variants': {'type': 'array',
+                                 'items': {'$ref': '#/$defs/Variant'},
+                                 'minItems': 0}},
+     'required': ['entry_id', 'entity_kind', 'variants'],
+     'additionalProperties': False}
+
+On instance:
+    {'entity_kind': 'binding',
+     'entry_id': '43ff89335246cb5d8475c72d4a532bae797f85a32d6572bd7eb51549eabd441c',
+     'variants': [{'availability': {'alternatives': [{'platform_point': [37,
+                                                                         0]}],
+                                    'evidence_ids': ['c55f31002c2a80ba67ec3ee6dc8ede65d899d5184eeb086b357db40e7e1fb3d1']},
+                   'dependencies': [{'entry_id': '5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0',
+                                     'schema_hash': '346a7a15169f1ade5f044810c95b15200a4500fe087de678150ee9ea8485690f'}],
+                   'schema_hash': 'a848819ffe5119eced6ddb742580c777e8c23e5857f465a36eaff2bc15bce2a9'}],
+     'catalog_state': 'active',
+     'catalog_revision': 0}
+
+======================================================================
+ERROR: test_suppression_retains_existence_but_denies_known_dispatch (test_effective_device_inventory.EffectiveInventory.test_suppression_retains_existence_but_denies_known_dispatch)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_effective_device_inventory.py", line 15, in test_suppression_retains_existence_but_denies_known_dispatch
+    db=self.fixture(pathlib.Path(td));doc=self.doc(db,'aidl:a.I#take(P)');self.overlay(db,doc,'suppressed');capture=effective.capture(db);snapshot=self.resolve(capture);row=next(r for r in snapshot['entries'] if r['entry_id']==doc['entry_id']);self.assertEqual(row['state'],'available');self.assertEqual(row['catalog_state'],'suppressed');self.assertEqual(capture['base_inventory_count'],len(capture['inventory']));status=dict(snapshot=snapshot,stale=False,generation=1,capability_epoch=0);rule=policy_reference.Rule('allow',row['schema_hash'],frozenset({'platform:local'}),1);entry=policy_reference.Rule('allow','tool',frozenset({'platform:local'}),1)
+                                                                                                                    ~~~~~~~~~~~~~~~~~^^^^
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tooling/effective_device_inventory.py", line 71, in capture
+    item['catalog_state']=states.get(key,'active');item['catalog_revision']=revisions.get(key,0);dr.validate(item,'InventoryEntity')
+                                                                                                 ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tooling/device_resolution.py", line 23, in validate
+    validator(name).validate(value)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/.venv/lib/python3.14/site-packages/jsonschema/validators.py", line 450, in validate
+    raise error
+jsonschema.exceptions.ValidationError: Additional properties are not allowed ('catalog_revision', 'catalog_state' were unexpected)
+
+Failed validating 'additionalProperties' in schema:
+    {'type': 'object',
+     'properties': {'entry_id': {'type': 'string',
+                                 'pattern': '^[a-f0-9]{64}$'},
+                    'entity_kind': {'enum': ['binding', 'type', 'other']},
+                    'variants': {'type': 'array',
+                                 'items': {'$ref': '#/$defs/Variant'},
+                                 'minItems': 0}},
+     'required': ['entry_id', 'entity_kind', 'variants'],
+     'additionalProperties': False}
+
+On instance:
+    {'entity_kind': 'binding',
+     'entry_id': '43ff89335246cb5d8475c72d4a532bae797f85a32d6572bd7eb51549eabd441c',
+     'variants': [{'availability': {'alternatives': [{'platform_point': [37,
+                                                                         0]}],
+                                    'evidence_ids': ['c55f31002c2a80ba67ec3ee6dc8ede65d899d5184eeb086b357db40e7e1fb3d1']},
+                   'dependencies': [{'entry_id': '5f87cd3688062954f3186c8fa5fd9eb0da6e9150837d816e29bf94d9889e82d0',
+                                     'schema_hash': '346a7a15169f1ade5f044810c95b15200a4500fe087de678150ee9ea8485690f'}],
+                   'schema_hash': 'a848819ffe5119eced6ddb742580c777e8c23e5857f465a36eaff2bc15bce2a9'}],
+     'catalog_state': 'active',
+     'catalog_revision': 0}
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.167s
+
+FAILED (errors=3)

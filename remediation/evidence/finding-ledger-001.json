@@ -1,0 +1,111 @@
+{
+  "prior_review_sha256": "07b7f0b14f58ac65dde7416a4aad4ffd34ec37396af11da3a3f594cc4b7097e4",
+  "prior_input_manifest_sha256": "9ae1de0be405eb943ea08048ac6b527ecb76f1d2d6f59f314e7c0076cce9824d",
+  "findings": [
+    {
+      "id": "F-01",
+      "severity": "high",
+      "artifact": "design.md Section 10, binding registry storage, catalog compatibility; foundation-readme.md",
+      "exact_short_evidence": "'IDs are opaque random TEXT values'; binding_definitions 'UNIQUE(source_id, qualified_name, signature)'; 'Stable entry IDs identify namespace plus logical qualified signature'; readme ID v1 is SHA-256 of the canonical signature.",
+      "issue": "Design contradiction. Three identity models: a random per-source binding_id cannot be the stable cross-snapshot entry_id that overlays and grants key on.",
+      "proposed_correction": "Adopt ID v1 content hash as the single binding and entry identity; model per-source presence as occurrences; drop random binding IDs.",
+      "verification_needed": "Fixture import of one signature from two sources yields one ID and two occurrences.",
+      "current_verification": "Current design still contradicted generated SHA-256 identity. Fixed design to catalog source-signature identity and occurrence model.",
+      "status": "corrected-or-verified-in-candidate; awaiting-independent-review",
+      "test_evidence": "test_one_identity_two_immutable_occurrences"
+    },
+    {
+      "id": "F-02",
+      "severity": "high",
+      "artifact": "design.md Section 5 and binding permissions section",
+      "exact_short_evidence": "'one rule per client and exact tool version'; evaluate() reads only client tool rules; later 'client_binding_rules is authoritative for method access... Ask dominates Allow and all constraints intersect'.",
+      "issue": "Design contradiction. Two evaluators with different algebras; the pseudocode never consults binding rules, so binding.invoke and a generated tool could decide differently.",
+      "proposed_correction": "One evaluator over canonical binding keys; tool rules only restrict; replace the Section 5 pseudocode with the combined algorithm.",
+      "verification_needed": "Property tests proving generated, generic and raw paths return identical decisions.",
+      "current_verification": "Current design evaluator omitted binding rules. Replaced with canonical plan evaluator plus restrictive entry-point rules. Offline decision algebra added.",
+      "status": "corrected-or-verified-in-candidate; awaiting-independent-review",
+      "test_evidence": "test_binding_rules_dominate_all_aliases"
+    },
+    {
+      "id": "F-03",
+      "severity": "medium",
+      "artifact": "design.md catalog CRUD table versus openapi.json",
+      "exact_short_evidence": "design: 'GET /catalog-admin/v1/entries', 'PATCH or PUT /entries/{id}', 'POST /catalog-admin/v1/publish'; openapi: '/v1/catalog/entries', PUT only, '/v1/catalog/registries/{registry_id}/publish' with Idempotency-Key.",
+      "issue": "Two admin API shapes. No DDL exists for clients, credentials, tools, rules, executions or audit, and no dispatch generator artifact exists in the evidence.",
+      "proposed_correction": "Declare openapi.json authoritative and rewrite the design table; add bridge DDL and a generator before implementation.",
+      "verification_needed": "Text fix needs none; DDL and generator must be produced and tested.",
+      "current_verification": "Current design API family diverged. Unified routes to OpenAPI; executable config DDL and offline alias generator added. Runtime implementation remains required in a later phase.",
+      "status": "corrected-or-verified-in-candidate; awaiting-independent-review",
+      "test_evidence": "test_bridge_ddl_integrity_and_closed_enums; test_generated_alias_identity_and_default_deny"
+    },
+    {
+      "id": "F-04",
+      "severity": "medium",
+      "artifact": "schema-v1.sql versus Entry.schema.json",
+      "exact_short_evidence": "registries.status CHECK IN ('staged','published','retired'); Registry.state enum staged, validated, rejected, published, retired; import_jobs.status CHECK IN ('staged','validated','rejected','published'); permission_relations.logic allows 'value' while the AST op is 'permission' and 'access' is absent.",
+      "issue": "Three registry enums and two column names cannot round-trip; validated or rejected registries are unrepresentable in SQL.",
+      "proposed_correction": "One registry state enum and name shared by SQL, JSON and import_jobs; derive logic from the AST root or drop the column.",
+      "verification_needed": "Cross-check test loading each enum value through SQLite and JSON Schema.",
+      "current_verification": "Current SQL state/logic vocabulary diverged. Corrected baseline and checked copy migration preserve state and AST root.",
+      "status": "corrected-or-verified-in-candidate; awaiting-independent-review",
+      "test_evidence": "test_registry_state_round_trip; test_permission_root_vocabulary; test_offline_copy_migration"
+    },
+    {
+      "id": "F-05",
+      "severity": "medium",
+      "artifact": "schema-v1.sql registry_sources",
+      "exact_short_evidence": "registry_sources(registry_id TEXT REFERENCES registries, source_id TEXT REFERENCES sources, PRIMARY KEY(registry_id,source_id))",
+      "issue": "SQLite permits NULL in non-INTEGER PRIMARY KEY columns of rowid tables and does not check NULL foreign keys, so a row with NULL registry_id passes every constraint and escapes count reconciliation.",
+      "proposed_correction": "Add NOT NULL to both columns; consider WITHOUT ROWID.",
+      "verification_needed": "Insert a NULL registry_id against the live DDL.",
+      "current_verification": "Current SQL exposed twelve nullable natural PK fields including registry_sources. All corrected to explicit NOT NULL.",
+      "status": "corrected-or-verified-in-candidate; awaiting-independent-review",
+      "test_evidence": "test_all_natural_primary_keys_are_not_null"
+    },
+    {
+      "id": "F-06",
+      "severity": "medium",
+      "artifact": "foundation-readme.md and openapi.json preconditions",
+      "exact_short_evidence": "ETags 'cover registry generation, imported declaration hash, overlay revision and effective document hash'; history 'Response ETag is current overlay revision'; PUT restores 'against their current admin history ETag'; If-Match 'required: true' beside 428 'If-Match required'; GET searchEntries lists 412, 428 and 410 with an ETag on every error.",
+      "issue": "Plural ETag compositions make PUT preconditions state-dependent. Typical OpenAPI validators reject a missing required header with 400, so 428 is unreachable without custom handling. Responses are copied boilerplate.",
+      "proposed_correction": "One ETag composition; state the tombstone and history precondition explicitly; make If-Match optional with mandatory 428 handling or document the validator behavior; prune responses per operation.",
+      "verification_needed": "Contract tests for absent, stale and history ETags.",
+      "current_verification": "Current projection used plural hash/overlay tags. Defined and applied cat1 entry ETags and missing/stale/history behavior; pruned operation responses.",
+      "status": "corrected-or-verified-in-candidate; awaiting-independent-review",
+      "test_evidence": "test_cas_tombstones_history_and_cursor; full validate_catalog fixture"
+    },
+    {
+      "id": "F-07",
+      "severity": "medium",
+      "artifact": "foundation-readme.md CRUD section, openapi.json, schema-v1.sql overlays",
+      "exact_short_evidence": "DELETE: 'suppression tombstone for imported entry or deleted tombstone for local entry'; readme: normal search excludes conflicted records; overlays has one mutable row per entry_id and no overlay generation column; POST: 'Imported ID collision returns 409'.",
+      "issue": "Unspecified: DELETE or GET on an entry already in conflict state; a local POST followed by an import of the same signature, the reverse of the documented collision; cursor pinning while overlays mutate in place, so either every overlay write must expire all cursors with 410 or readers must rebuild views from entry_history. DELETE then PUT with the pre-delete ETag is the one well-defined case and yields 412.",
+      "proposed_correction": "Add a state transition table covering conflict, tombstone and collision cases; store an overlay view generation and define the 410 rule.",
+      "verification_needed": "Fixture tests per transition and a paginated read across a concurrent PUT.",
+      "current_verification": "Current CRUD conflict/collision/cursor transitions incomplete. Added explicit transition table, global overlay-generation invalidation and offline state oracle.",
+      "status": "corrected-or-verified-in-candidate; awaiting-independent-review",
+      "test_evidence": "test_import_both_collision_orders_and_rebase; test_cas_tombstones_history_and_cursor"
+    },
+    {
+      "id": "F-08",
+      "severity": "high",
+      "artifact": "incomplete-extractor.py run(), parse_signature(), permission_ast()",
+      "exact_short_evidence": "elif re.search(r'\\b(class|interface|enum|@interface)\\s',clean) runs on clean, from which annotations() has already removed '@interface'; owner is never reset; final assert excludes issues where i.raw LIKE '%interface %'; leaf() accepts only quoted literals.",
+      "issue": "Unimplemented runtime guarantee. A metalava '@interface Foo' header misses the class branch, parse_signature raises on kind 'public', signature_declarations is incremented, the issue is excluded by the LIKE filter, so the assert fails after db.commit() and validation.json is never written. Following members are attributed to the previous owner with wrong IDs that INSERT OR IGNORE merges silently. Every android.Manifest.permission constant becomes unknown, permission_definitions is never cross-referenced, and AIDL EnforcePermission is never parsed.",
+      "proposed_correction": "Detect headers on the pre-strip line, map @interface to kind annotation, reset owner on scope exit, replace the LIKE heuristic with per-line category counters, resolve symbolic constants against manifest definitions, write validation before asserting.",
+      "verification_needed": "Fixture with one @interface type and one symbolic RequiresPermission; execute the tests.",
+      "current_verification": "Latest parser already corrected old annotation header/owner/symbolic/AIDL issues; regression tests verify. Newly found duplicate AIDL locator corrected; failed import emits validation-failure receipt before raising.",
+      "status": "corrected-or-verified-in-candidate; awaiting-independent-review",
+      "test_evidence": "test_symbolic_read_and_header_do_not_leak_owner; test_repeated_aidl_statement_locators_are_distinct; test_hash_failure_does_not_publish"
+    }
+  ],
+  "additional_findings": [
+    {
+      "id": "N-01",
+      "issue": "Repeated AIDL statements shared body.find locator",
+      "status": "corrected",
+      "test": "test_repeated_aidl_statement_locators_are_distinct"
+    }
+  ],
+  "overall_acceptance": "NOT MET: no current Claude agreement, source coverage incomplete"
+}

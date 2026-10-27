@@ -1,0 +1,22 @@
+sequenceDiagram
+  participant A as Agent client
+  participant M as MCP adapter
+  participant B as Broker and journal
+  participant D as Android backend
+  A->>M: tools/call binding.invoke with callback bindings
+  M->>B: Pin contracts and authorize registration
+  B->>D: Register typed proxy with verified wire contract
+  D-->>B: Registration outcome
+  B-->>M: Active handle or explicit uncertain outcome
+  M-->>A: Single final response with URI and cursor
+  A->>M: resources/subscribe to events URI
+  D->>B: Callback, bounded local reply if required
+  B->>B: Ordered append within quota
+  B-->>M: Resource changed
+  M-->>A: notifications/resources/updated URI only
+  A->>M: resources/read bounded page after cursor
+  M-->>A: Typed events, next cursor and loss status
+  A->>M: tools/call callback.cancel
+  M->>B: Suppress delivery and request cleanup
+  B->>D: Verified unregister with recorded token
+  M-->>A: Closed and confirmed or unknown cleanup

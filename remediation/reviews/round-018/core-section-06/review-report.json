@@ -1,0 +1,10 @@
+{
+  "id": "F06-14",
+  "severity": "low",
+  "area": "Cycle rejection scope",
+  "artifact": "round013-design-corrections.md § Callback/group table (group_memberships row)",
+  "evidence": "'Reject unresolved/cyclic/oversize activation instead of selecting part of a lifecycle unit.'",
+  "issue": "Type closures over real SDK types are routinely cyclic (mutually referencing classes); rejecting cycles there would reject most activations. The sentence does not restrict the cycle rule to group dependencies.",
+  "exact_minimal_correction": "'Reject unresolved, cyclic-group-dependency or oversize activation ...; type closure is computed over strongly connected components and may contain cycles.'",
+  "verification_needed": "None."
+}

@@ -1,0 +1,874 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:android-binding-catalog:1.0.0:ImportRequest",
+  "$ref": "#/$defs/ImportRequest",
+  "$defs": {
+    "PermissionExpression": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "permission"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "op",
+            "name"
+          ],
+          "additionalProperties": false,
+          "patternProperties": {
+            "^x-": {}
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "all"
+            },
+            "children": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/PermissionExpression"
+              }
+            }
+          },
+          "required": [
+            "op",
+            "children"
+          ],
+          "additionalProperties": false,
+          "patternProperties": {
+            "^x-": {}
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "any"
+            },
+            "children": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/PermissionExpression"
+              }
+            }
+          },
+          "required": [
+            "op",
+            "children"
+          ],
+          "additionalProperties": false,
+          "patternProperties": {
+            "^x-": {}
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "conditional"
+            },
+            "condition": {
+              "$ref": "#/$defs/PermissionExpression"
+            },
+            "requirement": {
+              "$ref": "#/$defs/PermissionExpression"
+            }
+          },
+          "required": [
+            "op",
+            "condition",
+            "requirement"
+          ],
+          "additionalProperties": false,
+          "patternProperties": {
+            "^x-": {}
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "access"
+            },
+            "access": {
+              "enum": [
+                "read",
+                "write"
+              ]
+            },
+            "requirement": {
+              "$ref": "#/$defs/PermissionExpression"
+            }
+          },
+          "required": [
+            "op",
+            "access",
+            "requirement"
+          ],
+          "additionalProperties": false,
+          "patternProperties": {
+            "^x-": {}
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "manual"
+            },
+            "reason": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "op",
+            "reason"
+          ],
+          "additionalProperties": false,
+          "patternProperties": {
+            "^x-": {}
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "explicit-none"
+            }
+          },
+          "required": [
+            "op"
+          ],
+          "additionalProperties": false,
+          "patternProperties": {
+            "^x-": {}
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "unknown"
+            },
+            "reason": {
+              "type": "string"
+            },
+            "raw": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "op",
+            "reason"
+          ],
+          "additionalProperties": false,
+          "patternProperties": {
+            "^x-": {}
+          }
+        }
+      ]
+    },
+    "TypeReference": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "resolved_binding_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "status": {
+          "enum": [
+            "resolved",
+            "primitive",
+            "unknown",
+            "unsupported"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        },
+        "codec_status": {
+          "enum": [
+            "known",
+            "unknown",
+            "unsupported"
+          ]
+        },
+        "codec_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "text",
+        "status",
+        "codec_status"
+      ],
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {}
+      }
+    },
+    "Source": {
+      "type": "object",
+      "properties": {
+        "source_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "path": {
+          "type": "string"
+        },
+        "revision": {
+          "type": "string"
+        },
+        "retrieved_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "api_level": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "channel": {
+          "enum": [
+            "stable",
+            "preview",
+            "development"
+          ]
+        },
+        "kind": {
+          "type": "string"
+        },
+        "license": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "url",
+        "path",
+        "revision",
+        "retrieved_at",
+        "sha256",
+        "api_level",
+        "channel",
+        "kind",
+        "license"
+      ],
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {}
+      }
+    },
+    "Provenance": {
+      "type": "object",
+      "properties": {
+        "source_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "raw_signature": {
+          "type": "string"
+        },
+        "source_revision": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "raw_signature",
+        "source_revision"
+      ],
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {}
+      }
+    },
+    "Entry": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "type": "string",
+          "pattern": "^1\\.[0-9]+\\.[0-9]+$"
+        },
+        "entry_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "canonical_signature": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "package",
+            "class",
+            "interface",
+            "enum",
+            "annotation",
+            "constructor",
+            "method",
+            "field",
+            "property",
+            "aidl-interface",
+            "aidl-member",
+            "unsupported",
+            "aidl-parcelable",
+            "aidl-union",
+            "aidl-enum"
+          ]
+        },
+        "package": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "arguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/TypeReference"
+          }
+        },
+        "return_type": {
+          "$ref": "#/$defs/TypeReference"
+        },
+        "permission": {
+          "$ref": "#/$defs/PermissionExpression"
+        },
+        "provenance": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Provenance"
+          }
+        },
+        "origin": {
+          "enum": [
+            "imported",
+            "local",
+            "overlay"
+          ]
+        },
+        "state": {
+          "enum": [
+            "active",
+            "suppressed",
+            "deleted",
+            "conflict"
+          ]
+        },
+        "registry_version": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "overlay_revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "codec_status": {
+          "enum": [
+            "known",
+            "unknown",
+            "unsupported"
+          ]
+        },
+        "unresolved": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "extensions": {
+          "type": "object"
+        },
+        "required_semantics": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "schema_version",
+        "entry_id",
+        "canonical_signature",
+        "kind",
+        "name",
+        "permission",
+        "provenance",
+        "origin",
+        "state",
+        "registry_version",
+        "overlay_revision",
+        "codec_status",
+        "unresolved",
+        "required_semantics"
+      ],
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {}
+      }
+    },
+    "Mutation": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "type": "string",
+          "pattern": "^1\\.[0-9]+\\.[0-9]+$"
+        },
+        "canonical_signature": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "package",
+            "class",
+            "interface",
+            "enum",
+            "annotation",
+            "constructor",
+            "method",
+            "field",
+            "property",
+            "aidl-interface",
+            "aidl-member",
+            "unsupported",
+            "aidl-parcelable",
+            "aidl-union",
+            "aidl-enum"
+          ]
+        },
+        "package": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "arguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/TypeReference"
+          }
+        },
+        "return_type": {
+          "$ref": "#/$defs/TypeReference"
+        },
+        "permission": {
+          "$ref": "#/$defs/PermissionExpression"
+        },
+        "codec_status": {
+          "enum": [
+            "known",
+            "unknown",
+            "unsupported"
+          ]
+        },
+        "unresolved": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "extensions": {
+          "type": "object"
+        },
+        "required_semantics": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "reason": {
+          "type": "string"
+        },
+        "x-resolution": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "action": {
+                  "const": "rebase"
+                },
+                "expected_imported_record_sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              },
+              "required": [
+                "action",
+                "expected_imported_record_sha256"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "action": {
+                  "const": "retain-local"
+                },
+                "expected_imported_record_sha256": {
+                  "type": "null"
+                }
+              },
+              "required": [
+                "action",
+                "expected_imported_record_sha256"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": [
+        "schema_version",
+        "canonical_signature",
+        "kind",
+        "name",
+        "permission",
+        "codec_status",
+        "unresolved",
+        "required_semantics",
+        "reason"
+      ],
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {}
+      }
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "enum": [
+            "invalid_request",
+            "unauthorized",
+            "forbidden",
+            "not_found",
+            "gone",
+            "conflict",
+            "precondition_failed",
+            "precondition_required",
+            "unsupported_schema",
+            "unknown_semantics",
+            "validation_failed",
+            "idempotency_conflict",
+            "cursor_expired"
+          ]
+        },
+        "message": {
+          "type": "string"
+        },
+        "request_id": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string"
+              },
+              "reason": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "path",
+              "reason"
+            ],
+            "additionalProperties": false,
+            "patternProperties": {
+              "^x-": {}
+            }
+          }
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "request_id"
+      ],
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {}
+      }
+    },
+    "Page": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "maxItems": 500,
+          "items": {
+            "$ref": "#/$defs/Entry"
+          }
+        },
+        "next_cursor": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "registry_version": {
+          "type": "integer"
+        },
+        "view_version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "items",
+        "next_cursor",
+        "registry_version",
+        "view_version"
+      ],
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {}
+      }
+    },
+    "HistoryEvent": {
+      "type": "object",
+      "properties": {
+        "entry_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "operation": {
+          "enum": [
+            "create",
+            "update",
+            "suppress",
+            "delete",
+            "restore",
+            "rebase",
+            "conflict"
+          ]
+        },
+        "actor": {
+          "type": "string"
+        },
+        "occurred_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "document": {
+          "$ref": "#/$defs/Entry"
+        },
+        "reason": {
+          "type": "string",
+          "description": "Persisted immutable owner mutation justification; absent only for legacy/system history without one."
+        }
+      },
+      "required": [
+        "entry_id",
+        "revision",
+        "operation",
+        "actor",
+        "occurred_at",
+        "document"
+      ],
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {}
+      }
+    },
+    "HistoryPage": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "maxItems": 500,
+          "items": {
+            "$ref": "#/$defs/HistoryEvent"
+          }
+        },
+        "next_cursor": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "items",
+        "next_cursor"
+      ],
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {}
+      }
+    },
+    "ImportRequest": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "type": "string",
+          "pattern": "^1\\.[0-9]+\\.[0-9]+$"
+        },
+        "android_version": {
+          "type": "string"
+        },
+        "api_level": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "source_set_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/Source"
+          }
+        },
+        "records_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "local_artifact_id": {
+          "type": "string"
+        },
+        "registry_version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "coverage": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "schema_version",
+        "android_version",
+        "api_level",
+        "source_set_hash",
+        "sources",
+        "records_sha256",
+        "local_artifact_id",
+        "registry_version",
+        "coverage"
+      ],
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {}
+      }
+    },
+    "Registry": {
+      "type": "object",
+      "properties": {
+        "registry_id": {
+          "type": "string"
+        },
+        "registry_version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "schema_version": {
+          "type": "string"
+        },
+        "android_version": {
+          "type": "string"
+        },
+        "api_level": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "source_set_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "state": {
+          "enum": [
+            "staged",
+            "validated",
+            "rejected",
+            "published",
+            "retired"
+          ]
+        },
+        "validation": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "registry_id",
+        "registry_version",
+        "schema_version",
+        "android_version",
+        "api_level",
+        "source_set_hash",
+        "state",
+        "validation"
+      ],
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {}
+      }
+    },
+    "PublishRequest": {
+      "type": "object",
+      "properties": {
+        "expected_active_registry_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "conflict_policy": {
+          "const": "mark-conflict"
+        }
+      },
+      "required": [
+        "expected_active_registry_id",
+        "conflict_policy"
+      ],
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {}
+      }
+    }
+  }
+}

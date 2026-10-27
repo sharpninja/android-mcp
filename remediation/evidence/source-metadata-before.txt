@@ -1,0 +1,104 @@
+EEEFEEEEEE
+======================================================================
+ERROR: test_all_unclassified_entries_remain_unknown_and_searchable (test_source_metadata_contract.SourceMetadataContracts.test_all_unclassified_entries_remain_unknown_and_searchable)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_source_metadata_contract.py", line 15, in test_all_unclassified_entries_remain_unknown_and_searchable
+    m=self.module();doc=self.doc();doc['name']='Ordinary';v=m.produce_entry_metadata(doc)
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_source_metadata_contract.py", line 8, in module
+    import source_metadata_reference
+ModuleNotFoundError: No module named 'source_metadata_reference'
+
+======================================================================
+ERROR: test_attach_preserves_inputs_and_uses_one_canonical_extension (test_source_metadata_contract.SourceMetadataContracts.test_attach_preserves_inputs_and_uses_one_canonical_extension)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_source_metadata_contract.py", line 30, in test_attach_preserves_inputs_and_uses_one_canonical_extension
+    m=self.module();doc=self.doc();old=copy.deepcopy(doc);v=m.produce_entry_metadata(doc);out=m.attach(doc,v)
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_source_metadata_contract.py", line 8, in module
+    import source_metadata_reference
+ModuleNotFoundError: No module named 'source_metadata_reference'
+
+======================================================================
+ERROR: test_entry_identity_mismatch_rejected_before_attach (test_source_metadata_contract.SourceMetadataContracts.test_entry_identity_mismatch_rejected_before_attach)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_source_metadata_contract.py", line 27, in test_entry_identity_mismatch_rejected_before_attach
+    m=self.module();doc=self.doc();v=m.produce_entry_metadata(doc);v['entry_id']='f'*64
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_source_metadata_contract.py", line 8, in module
+    import source_metadata_reference
+ModuleNotFoundError: No module named 'source_metadata_reference'
+
+======================================================================
+ERROR: test_materialization_does_not_auto_subclass_abstract_types (test_source_metadata_contract.SourceMetadataContracts.test_materialization_does_not_auto_subclass_abstract_types)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_source_metadata_contract.py", line 41, in test_materialization_does_not_auto_subclass_abstract_types
+    m=self.module();self.assertEqual(m.materialization('abstract-class'),{'strategy':'unsupported_abstract_class','unknown_reason':'ABSTRACT_CLASS_NO_RUNTIME_SUBCLASS'})
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_source_metadata_contract.py", line 8, in module
+    import source_metadata_reference
+ModuleNotFoundError: No module named 'source_metadata_reference'
+
+======================================================================
+ERROR: test_named_listener_is_candidate_never_registrable (test_source_metadata_contract.SourceMetadataContracts.test_named_listener_is_candidate_never_registrable)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_source_metadata_contract.py", line 18, in test_named_listener_is_candidate_never_registrable
+    m=self.module();v=m.produce_entry_metadata(self.doc());self.assertEqual(v['callback_facts']['type_disposition']['role'],'candidate');self.assertFalse(m.callback_registration_allowed(v))
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_source_metadata_contract.py", line 8, in module
+    import source_metadata_reference
+ModuleNotFoundError: No module named 'source_metadata_reference'
+
+======================================================================
+ERROR: test_native_evidence_identity_is_not_a_binding_id (test_source_metadata_contract.SourceMetadataContracts.test_native_evidence_identity_is_not_a_binding_id)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_source_metadata_contract.py", line 36, in test_native_evidence_identity_is_not_a_binding_id
+    m=self.module();record=dict(evidence_record_id='c'*64,identity_scope='source-file-local ABI evidence, not a stable MCP binding ID',permission_authority='unknown',record={'collection':'pointer_types','local_key':'p','ordinal':0,'metadata':{}},runtime_applicability='unknown',source=dict(self.source(),source_id='d'*64),source_registry_id='e'*64,wire_codec_proven=False)
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_source_metadata_contract.py", line 8, in module
+    import source_metadata_reference
+ModuleNotFoundError: No module named 'source_metadata_reference'
+
+======================================================================
+ERROR: test_producer_dto_retains_selector_and_ordered_hash_candidates (test_source_metadata_contract.SourceMetadataContracts.test_producer_dto_retains_selector_and_ordered_hash_candidates)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_source_metadata_contract.py", line 20, in test_producer_dto_retains_selector_and_ordered_hash_candidates
+    m=self.module();from interface_applicability_evidence import produce
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_source_metadata_contract.py", line 8, in module
+    import source_metadata_reference
+ModuleNotFoundError: No module named 'source_metadata_reference'
+
+======================================================================
+ERROR: test_source_metadata_cannot_claim_runtime_or_client_authority (test_source_metadata_contract.SourceMetadataContracts.test_source_metadata_cannot_claim_runtime_or_client_authority)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_source_metadata_contract.py", line 24, in test_source_metadata_cannot_claim_runtime_or_client_authority
+    m=self.module();v=m.produce_entry_metadata(self.doc());v['runtime_observation']=True
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_source_metadata_contract.py", line 8, in module
+    import source_metadata_reference
+ModuleNotFoundError: No module named 'source_metadata_reference'
+
+======================================================================
+ERROR: test_unknown_fields_are_rejected_in_known_contract (test_source_metadata_contract.SourceMetadataContracts.test_unknown_fields_are_rejected_in_known_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_source_metadata_contract.py", line 33, in test_unknown_fields_are_rejected_in_known_contract
+    m=self.module();v=m.produce_entry_metadata(self.doc());v['grant_all']=True
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_source_metadata_contract.py", line 8, in module
+    import source_metadata_reference
+ModuleNotFoundError: No module named 'source_metadata_reference'
+
+======================================================================
+FAIL: test_generated_schema_is_available (test_source_metadata_contract.SourceMetadataContracts.test_generated_schema_is_available)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_source_metadata_contract.py", line 13, in test_generated_schema_is_available
+    def test_generated_schema_is_available(self):self.assertTrue((P/'contracts/SourceContractMetadata.schema.json').exists())
+                                                 ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.004s
+
+FAILED (failures=1, errors=9)

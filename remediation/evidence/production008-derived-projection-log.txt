@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/production_projection_sample.py", line 15, in <module>
+    build_catalog.build(D/'source-inventory.json',D/'catalog');validation=validate_catalog.run(D/'catalog',D/'source-inventory.json',D/'validation.json')
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tooling/build_catalog.py", line 346, in build
+    try:return _build(inventory,output,connections)
+               ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tooling/build_catalog.py", line 32, in _build
+    if not isinstance(meta['api_level'],int) or isinstance(meta['api_level'],bool) or meta['api_level']<1:raise ValueError('Target catalog api_level must be a positive integer')
+                                                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Target catalog api_level must be a positive integer

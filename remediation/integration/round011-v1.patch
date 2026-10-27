@@ -1,0 +1,2229 @@
+--- a/catalog/API-CONTRACT.md
++++ b/catalog/API-CONTRACT.md
+@@ -79,7 +79,7 @@
+ 
+ `GET /v1/catalog/device-views/current?profile_id=...&target_key=...` returns a bounded status/header and an ETag. Before first activation the header is null and view generation is zero; this bootstrap state still has a valid ETag. `GET /v1/catalog/device-views/{view_id}` returns the immutable small header, not the entire inventory. `GET /v1/catalog/device-views/{view_id}/entries` returns at most 500 rows with all/available/unavailable/unknown filtering. A cursor binds the immutable view, authorized reader, profile/target, filter and page boundary; invalidation or expiry returns410. Historical headers remain evidence and cannot authorize dispatch. Authorization is checked before disclosing existence or scope.
+ 
+-The current-view strong ETag is `"dv1:<scope_sha256>:<view_generation>:<capability_epoch>:<catalog_generation>:<overlay_generation>"`. `scope_sha256` hashes the canonical JSON array `[profile_id,target_key,android_user_id,backend_instance_id,device_instance_id]`; it is an opaque scope identity, not credentials. Counters are decimal nonnegative integers bounded by the schema. A stale view has the new epoch and therefore a different token even before the replacement activates. `POST /v1/catalog/device-views/refresh` is restricted to the authenticated local owner and a configured profile/target. It accepts only that profile/target and one exact strong If-Match from the current-status read, never asserted facts or arbitrary probe instructions. After authorization, missing/malformed/mismatching preconditions return428/400/412 respectively, including the generation-zero bootstrap. A matched request atomically invalidates admission and queues the bounded internal refresh, returning202 with current status. Repeated or concurrent requests must re-read the new token; none can activate a snapshot built for an old epoch.
++The current-view strong ETag is `"dv2:<scope_sha256>:<view_generation>:<capability_epoch>:<catalog_generation>:<overlay_generation>"`. `scope_sha256` hashes the canonical JSON array `[profile_id,target_key,android_user_id,backend_instance_id,device_instance_id]`; it is an opaque scope identity, not credentials. Counters are decimal nonnegative integers bounded by the schema. A stale view has the new epoch and therefore a different token even before the replacement activates. `POST /v1/catalog/device-views/refresh` is restricted to the authenticated local owner and a configured profile/target. It accepts only that profile/target and one exact strong If-Match from the current-status read, never asserted facts or arbitrary probe instructions. After authorization, missing/malformed/mismatching preconditions return428/400/412 respectively, including the generation-zero bootstrap. A matched request atomically invalidates admission and queues the bounded internal refresh, returning202 with current status. Repeated or concurrent requests must re-read the new token; none can activate a snapshot built for an old epoch.
+ 
+ Startup, reconnect and relevant device/build/module/extension/interface/backend/catalog changes invalidate the selected view. Capture, resolution, dependency validation and hash sealing happen against one fact epoch and pinned catalog/overlay generation. Publication is a single SQLite transaction comparing the scope, current generation, epoch and catalog pins before switching the active pointer; failure preserves the old immutable snapshot as stale evidence. Dispatch pins the selected schema/type-graph/view and checks freshness again at admission. The reference `ViewStore` is a single-thread state-machine oracle for this contract; a runtime requires a real transaction/lock and integration tests. View retention, quota and garbage collection follow the bounded derived-view policy in the design. No app monitoring scheduler is added.
+ 
+@@ -92,8 +92,12 @@
+ 
+ The SDK index producer now emits every historical, current, future and unknown-lifecycle record. `excluded_history_or_future` is retained only as a compatibility diagnostic for the native current-target projection; it no longer means records were omitted. Only `lifecycle_status=current-at-target` enters current exact-index annotation/JVM-equivalence lookup. This flag describes the frozen native SDK target, never a device extension observation or runtime authority. Raw member and container lifecycle attributes remain separate. Parsed `sdks` pairs use SDK ID0 for platform versions and declared nonzero SDK IDs for extension minima. Omitted member `sdks` inherits the container value because the public Metalava writer suppresses identical attributes; explicit member pairs replace that set. The containing type dependency enforces its independent lifetime. Unknown SDK IDs/syntax remain unknown with raw evidence. [Metalava source](https://android.googlesource.com/platform/tools/metalava/+/a9d285ca63f95134ff1eb2c02eff5638109a5ad3%5E2..a9d285ca63f95134ff1eb2c02eff5638109a5ad3/) documents the pair format and inheritance.
+ 
+-An index supplies introduced-inclusive/removed-exclusive ranges and separately evidenced extension alternatives. A source occurrence without an index proves only its explicit major.minor point, represented by the discrete interval `[major,minor]..[major,minor+1]`. An API major alone never proves a minor or a whole-major range. Metadata remains unknown when no source-supported rule exists. Reference fields resolve only a unique declared type in the same repository/revision/platform snapshot with package/nesting/import evidence. Intrinsic primitive/array leaves are explicit TypeReference.status=primitive and remain codec-unknown. Generic, wildcard, absent or ambiguous schemas remain unknown. Required unresolved type evidence is an AND-unknown predicate, so a proven version exclusion still yields unavailable. Containing types, argument/return types and structured-field schemas are dependencies; each pins the exact type contract hash. Full source/shape/evidence variants remain visible.
++An index supplies introduced-inclusive/removed-exclusive ranges and separately evidenced extension alternatives. A source occurrence without an index proves only its explicit major.minor point, represented by `platform_point:[major,minor]`. A point match is available evidence; every other major/minor (including an unknown minor) is unknown with PLATFORM_APPLICABILITY_UNPROVEN. A point never fabricates a removal bound. An API major alone never proves a minor or a whole-major range. Metadata remains unknown when no source-supported rule exists. Reference fields resolve only a unique declared type in the same repository/revision/platform snapshot with package/nesting/import evidence. Intrinsic primitive/array leaves are explicit TypeReference.status=primitive and remain codec-unknown. Generic, wildcard, absent or ambiguous schemas remain unknown. Required unresolved type evidence is an AND-unknown predicate, so a proven version exclusion still yields unavailable. Containing types, argument/return types and structured-field schemas are dependencies; each pins the exact type contract hash. Full source/shape/evidence variants remain visible.
+ 
+-The builder streams `device_inventory.jsonl` and its versioned manifest, validates each InventoryEntity, enforces one-to-one entry counts, and includes the inventory metadata in the derived entry document hash. Older releases/copy migrations without this projection cannot supply a complete startup inventory; startup must reject an absent/incomplete inventory rather than inventing it. The new snapshot/Facts contract is DeviceResolution2.0.0, replacing the unimplemented round0101.2draft because epoch-bound facts and graph digests are required. Previous draft snapshots remain historical evidence and are rejected for activation; no silent migration is defined. Existing Entry1.1 and catalog storage1.2 envelopes are unchanged. OpenAPI specification version is1.3.0.
++The builder streams `device_inventory.jsonl` and its versioned manifest, validates each InventoryEntity, enforces one-to-one entry counts, and includes the inventory metadata in the derived entry document hash. Older releases/copy migrations without this projection cannot supply a complete startup inventory; startup must reject an absent/incomplete inventory rather than inventing it. The inventory contract is DeviceResolution2.1.0: the additive platform_point key changes applicability semantics and requires explicit version handling. Resolved snapshots/Facts use DeviceView3.0.0: base contract_hash and transitive graph_digest produce the final schema_hash used by client grants. Earlier resolved drafts cannot activate silently. Previous draft snapshots remain historical evidence and are rejected for activation; no silent migration is defined. Existing Entry1.1 and catalog storage1.2 envelopes are unchanged. OpenAPI specification version is1.4.0.
+ 
+-`bridge-config.sql` now stores scoped epoch-bound capability facts, immutable staged/sealed device_views and device_view_entries, an active pointer with exact generation/epoch/catalog/overlay CAS, and append-only invalidation reasons. A catalog-pinned expected_inventory_count prevents a partial snapshot from activating. `device_view_storage.py` is the offline SQLite transaction reference: validate the snapshot/facts/hash/type closure, write all rows, seal membership, then compare-and-switch inside BEGIN IMMEDIATE. Facts carry capability_epoch and observed_at; the resolver and publisher both reject old-epoch facts. Per-row graph_digest hashes the sorted transitive root/type `(entry_id,schema_hash)` closure and is rechecked at publication. `binding_availability` is a read-only fresh-active-view projection; `resolved_device_catalog` includes bindings and types. Neither grants permission. Wire mapping proof is versioned in binding_wire_contracts, separately from existence; unknown codecs/contracts cannot be invoked. Retention requires explicit maintenance and rejects active/pinned view deletion. No Android collector, Binder service, MCP service or HTTP deployment is implemented.
++`bridge-config.sql` now stores scoped epoch-bound capability facts, immutable staged/sealed device_views and device_view_entries, an active pointer with exact generation/epoch/catalog/overlay CAS, and append-only invalidation reasons. A catalog-pinned inventory_sha256 (canonical sorted InventoryEntity JSONL digest) and expected_inventory_count prevent partial or substituted inventories from activating. The trusted loader validates the complete inventory before sealing device_inventory_sets/members. Activation recomputes resolution from that pinned inventory/facts and rejects substituted members, contract hashes, dependencies or states. SQLite independently checks sealed inventory membership, selected base contracts and dependency pins; core SQLite has no built-in SHA256, so the offline loader verifies content hashes before sealing. `device_view_storage.py` is the offline SQLite transaction reference: validate the snapshot/facts/hash/type closure, write all rows, seal membership, then compare-and-switch inside BEGIN IMMEDIATE. Facts carry capability_epoch and observed_at; the resolver and publisher both reject old-epoch facts. Per-row graph_digest hashes the sorted transitive root/type `(entry_id,contract_hash)` closure and is rechecked at publication. `binding_availability` is a read-only fresh-active-view projection; `resolved_device_catalog` includes bindings and types. Neither grants permission. Wire mapping proof is versioned in binding_wire_contracts, separately from existence; unknown codecs/contracts cannot be invoked. Retention requires explicit maintenance and rejects active/pinned view deletion. No Android collector, Binder service, MCP service or HTTP deployment is implemented.
++
++Resolved3 schema identity is SHA256(canonical `{schema_format:"closure3",contract_hash:C,graph_digest:G}`); G hashes the sorted transitive entry/base-contract pairs, including the root. This makes a dependent type change invalidate previous binding schema grants without cyclic hash recursion. Raw lifecycle/annotation headers stay in provenance and are excluded from semantic type shape hashes. Formal type variables never resolve to similarly named package/java.lang classes.
++
++Strong status ETag syntax is `"dv2:<scope_sha256>:<generation>:<capability_epoch>:<catalog_generation>:<overlay_generation>:<inventory_sha256>"`; an uninitialized fixture store uses SHA256(canonical null) as the inventory token and cannot publish until it has a trusted inventory. All counters are canonical decimal. Inaccessible historical view/header and entry-list requests both return404 after authentication. Internal Device schemas are marked x-internal and are not request payloads.
+--- a/catalog/README.md
++++ b/catalog/README.md
+@@ -4,7 +4,7 @@
+ 
+ Production acquisition/import belongs to the source task. Completed release008 independently validates799,527 entries from43,128 sources,1,500 permission definition records and1,715 exported names, with integrity/schema/FK/duplicate checks and exports passed. All43,128 selected paths, including all5,255 declared supplemental paths from247 relevant projects, were acquired/imported at that checkpoint. Global coverage remains incomplete:732 projects are still unclassified for content/Binder/generated/protocol semantics, and6 are classified irrelevant. Release008 predates the current R9/R10 candidate parser, DDL and inventory projection; exact hashes, not its internal consistency, determine whether a later build matches. No98/98 acceptance is claimed.
+ 
+-Release008 has846 unmatched external annotations across all annotation kinds. The older006 count6,987 included a37.0 routing regression; the guarded same-snapshot correction is now published, leaving368 unmatched37.0 and478 unmatched37.2 records. Six referenced permission names still lack acquired definitions/constants. Cache fingerprints and source coverage remain separate gates.
++Release008 has846 unmatched external annotations across all annotation kinds. The older006 count6,987 included a37.0 routing regression; the guarded same-snapshot correction is now published, leaving368 unmatched37.0 and478 unmatched37.2 records. Five referenced permission names still lack acquired definitions/constants. Cache fingerprints and source coverage remain separate gates.
+ 
+ ## Identity and contracts
+ 
+--- a/catalog/bridge-config.sql
++++ b/catalog/bridge-config.sql
+@@ -6,7 +6,7 @@
+ CREATE TABLE credentials(credential_id TEXT NOT NULL PRIMARY KEY,client_id TEXT NOT NULL REFERENCES clients ON DELETE RESTRICT,verifier BLOB NOT NULL UNIQUE CHECK(length(verifier)=32),key_alias TEXT NOT NULL,state TEXT NOT NULL CHECK(state IN ('active','revoked')),created_at INTEGER NOT NULL,expires_at INTEGER,revoked_at INTEGER,epoch INTEGER NOT NULL CHECK(epoch>=0));
+ CREATE TABLE binding_definitions(binding_id TEXT NOT NULL PRIMARY KEY CHECK(length(binding_id)=64),canonical_signature TEXT NOT NULL UNIQUE,entry_schema_version TEXT NOT NULL);
+ CREATE TABLE binding_type_schemas(type_schema_id TEXT NOT NULL PRIMARY KEY,schema_hash TEXT NOT NULL UNIQUE CHECK(length(schema_hash)=64 AND schema_hash NOT GLOB '*[^0-9a-f]*'),format_version TEXT NOT NULL,canonical_schema_json TEXT NOT NULL CHECK(json_valid(canonical_schema_json)),validation_state TEXT NOT NULL CHECK(validation_state IN ('known','unknown','unsupported')),reason_code TEXT);
+-CREATE TABLE binding_mappings(binding_id TEXT NOT NULL REFERENCES binding_definitions,schema_hash TEXT NOT NULL CHECK(length(schema_hash)=64 AND schema_hash NOT GLOB '*[^0-9a-f]*'),registry_revision INTEGER NOT NULL CHECK(registry_revision>=1),mapping_state TEXT NOT NULL CHECK(mapping_state IN ('known','unknown','unsupported','unreachable')),reason_code TEXT,dispatch_kind TEXT NOT NULL,descriptor TEXT,transaction_code INTEGER,argument_schema_json TEXT NOT NULL CHECK(json_valid(argument_schema_json)),permission_ast_json TEXT NOT NULL CHECK(json_valid(permission_ast_json)),PRIMARY KEY(binding_id,schema_hash));
++CREATE TABLE binding_mappings(binding_id TEXT NOT NULL REFERENCES binding_definitions,schema_hash TEXT NOT NULL CHECK(length(schema_hash)=64 AND schema_hash NOT GLOB '*[^0-9a-f]*'),registry_revision INTEGER NOT NULL CHECK(registry_revision>=1),mapping_state TEXT NOT NULL CHECK(mapping_state IN ('known','unknown','unsupported','unreachable')),reason_code TEXT,dispatch_kind TEXT NOT NULL,descriptor TEXT,transaction_code INTEGER CHECK(transaction_code IS NULL OR transaction_code BETWEEN 0 AND 4294967295),argument_schema_json TEXT NOT NULL CHECK(json_valid(argument_schema_json)),permission_ast_json TEXT NOT NULL CHECK(json_valid(permission_ast_json)),PRIMARY KEY(binding_id,schema_hash));
+ CREATE TABLE binding_occurrences(binding_id TEXT NOT NULL REFERENCES binding_definitions,source_id TEXT NOT NULL,locator TEXT NOT NULL,record_hash TEXT NOT NULL CHECK(length(record_hash)=64),provenance_json TEXT NOT NULL CHECK(json_valid(provenance_json)),PRIMARY KEY(binding_id,source_id,locator));
+ CREATE TABLE tools(tool_id TEXT NOT NULL PRIMARY KEY,schema_version TEXT NOT NULL,adapter_version TEXT NOT NULL,capability_key TEXT NOT NULL,scope_schema_version TEXT NOT NULL,risk_class TEXT NOT NULL,registry_revision INTEGER NOT NULL CHECK(registry_revision>=1),executor_kind TEXT NOT NULL DEFAULT 'native' CHECK(executor_kind IN ('native','adb','avalonia')));
+ CREATE TABLE tool_binding_aliases(alias_name TEXT NOT NULL,tool_id TEXT NOT NULL REFERENCES tools,binding_id TEXT NOT NULL,schema_hash TEXT NOT NULL,canonicalization_version INTEGER NOT NULL CHECK(canonicalization_version>=1),argument_mapping_hash TEXT NOT NULL CHECK(length(argument_mapping_hash)=64),PRIMARY KEY(tool_id,binding_id),UNIQUE(alias_name,binding_id),FOREIGN KEY(binding_id,schema_hash) REFERENCES binding_mappings);
+@@ -43,6 +43,16 @@
+ CREATE UNIQUE INDEX execution_idempotency ON executions(client_id,tool_id,idempotency_key) WHERE idempotency_key IS NOT NULL;
+ CREATE TRIGGER audit_no_update BEFORE UPDATE ON audit_events BEGIN SELECT RAISE(ABORT,'Audit is append-only'); END;
+ CREATE TRIGGER audit_no_delete BEFORE DELETE ON audit_events WHEN coalesce((SELECT audit_retention_authorized FROM bridge_config WHERE singleton_id=1),0)<>1 BEGIN SELECT RAISE(ABORT,'Audit retention uses a separately authorized maintenance transaction'); END;
++-- The offline loader verifies canonical SHA256 before sealing a pinned inventory.
++-- SQLite guards membership/selected contract identities; SHA256 is checked by the reference loader.
++CREATE TABLE device_inventory_sets(inventory_sha256 TEXT NOT NULL PRIMARY KEY CHECK(length(inventory_sha256)=64 AND inventory_sha256 NOT GLOB '*[^0-9a-f]*'),entry_count INTEGER NOT NULL CHECK(entry_count>=0),state TEXT NOT NULL CHECK(state IN ('staged','sealed')));
++CREATE TABLE device_inventory_members(inventory_sha256 TEXT NOT NULL REFERENCES device_inventory_sets,entry_id TEXT NOT NULL,entity_kind TEXT NOT NULL CHECK(entity_kind IN ('binding','type','other')),document_json TEXT NOT NULL CHECK(json_valid(document_json) AND json_extract(document_json,'$.entry_id')=entry_id AND json_extract(document_json,'$.entity_kind')=entity_kind AND json_type(document_json,'$.variants')='array'),PRIMARY KEY(inventory_sha256,entry_id));
++CREATE TRIGGER inventory_member_insert BEFORE INSERT ON device_inventory_members WHEN (SELECT state FROM device_inventory_sets WHERE inventory_sha256=new.inventory_sha256) IS NOT 'staged' BEGIN SELECT RAISE(ABORT,'Pinned inventory is sealed'); END;
++CREATE TRIGGER inventory_member_update BEFORE UPDATE ON device_inventory_members BEGIN SELECT RAISE(ABORT,'Pinned inventory is immutable'); END;
++CREATE TRIGGER inventory_member_delete BEFORE DELETE ON device_inventory_members BEGIN SELECT RAISE(ABORT,'Pinned inventory is immutable'); END;
++CREATE TRIGGER inventory_set_insert BEFORE INSERT ON device_inventory_sets WHEN new.state<>'staged' BEGIN SELECT RAISE(ABORT,'Inventory must stage before sealing'); END;
++CREATE TRIGGER inventory_set_update BEFORE UPDATE ON device_inventory_sets WHEN old.state<>'staged' OR new.state<>'sealed' OR new.inventory_sha256<>old.inventory_sha256 OR new.entry_count<>old.entry_count OR new.entry_count<>(SELECT count(*) FROM device_inventory_members WHERE inventory_sha256=new.inventory_sha256) BEGIN SELECT RAISE(ABORT,'Pinned inventory requires complete immutable membership'); END;
++CREATE TRIGGER inventory_set_delete BEFORE DELETE ON device_inventory_sets BEGIN SELECT RAISE(ABORT,'Pinned inventory is retained'); END;
+ -- Additive executable design/reference storage. No real clients or devices.
+ CREATE TABLE device_view_scopes(scope_id TEXT NOT NULL PRIMARY KEY CHECK(length(scope_id)=64 AND scope_id NOT GLOB '*[^0-9a-f]*'),profile_id TEXT NOT NULL REFERENCES connection_profiles,target_key TEXT NOT NULL,android_user_id INTEGER NOT NULL CHECK(android_user_id>=0),backend_instance_id TEXT NOT NULL,device_instance_id TEXT NOT NULL,UNIQUE(profile_id,target_key,android_user_id,backend_instance_id,device_instance_id));
+ CREATE TRIGGER device_scope_target BEFORE INSERT ON device_view_scopes WHEN NOT EXISTS(SELECT 1 FROM connection_profiles p WHERE p.profile_id=new.profile_id AND p.android_user_id=new.android_user_id) OR (new.target_key<>'platform:local' AND NOT EXISTS(SELECT 1 FROM target_app_profiles t WHERE t.target_id=new.target_key AND t.connection_profile_id=new.profile_id)) BEGIN SELECT RAISE(ABORT,'Unknown device scope or Android user'); END;
+@@ -52,32 +62,37 @@
+ CREATE TRIGGER invalidation_no_delete BEFORE DELETE ON device_view_invalidations BEGIN SELECT RAISE(ABORT,'Invalidation evidence is append-only'); END;
+ CREATE TABLE device_capability_facts(facts_id TEXT NOT NULL PRIMARY KEY CHECK(length(facts_id)=64 AND facts_id NOT GLOB '*[^0-9a-f]*'),scope_id TEXT NOT NULL REFERENCES device_view_scopes,capability_epoch INTEGER NOT NULL,observed_at TEXT NOT NULL,document_json TEXT NOT NULL CHECK(json_valid(document_json) AND json_type(document_json)='object'),UNIQUE(facts_id,scope_id,capability_epoch),FOREIGN KEY(scope_id,capability_epoch) REFERENCES device_view_invalidations);
+ CREATE TRIGGER capability_facts_no_update BEFORE UPDATE ON device_capability_facts BEGIN SELECT RAISE(ABORT,'Captured facts are immutable'); END;
+-CREATE TABLE device_views(view_id TEXT NOT NULL PRIMARY KEY CHECK(length(view_id)=64 AND view_id NOT GLOB '*[^0-9a-f]*'),scope_id TEXT NOT NULL REFERENCES device_view_scopes,registry_id TEXT NOT NULL,catalog_generation INTEGER NOT NULL CHECK(catalog_generation>=1),overlay_generation INTEGER NOT NULL CHECK(overlay_generation>=0),capability_epoch INTEGER NOT NULL CHECK(capability_epoch>=0),view_generation INTEGER NOT NULL CHECK(view_generation>=1),inventory_count INTEGER NOT NULL CHECK(inventory_count>=0),facts_id TEXT NOT NULL,document_json TEXT NOT NULL CHECK(json_valid(document_json)),state TEXT NOT NULL CHECK(state IN ('staged','sealed')),UNIQUE(view_id,scope_id),FOREIGN KEY(facts_id,scope_id,capability_epoch) REFERENCES device_capability_facts(facts_id,scope_id,capability_epoch));
+-CREATE TABLE device_view_entries(view_id TEXT NOT NULL REFERENCES device_views ON DELETE CASCADE,entry_id TEXT NOT NULL CHECK(length(entry_id)=64 AND entry_id NOT GLOB '*[^0-9a-f]*'),entity_kind TEXT NOT NULL CHECK(entity_kind IN ('binding','type','other')),state TEXT NOT NULL CHECK(state IN ('available','unavailable','unknown')),reason_codes_json TEXT NOT NULL CHECK(json_valid(reason_codes_json) AND json_type(reason_codes_json)='array' AND json_array_length(reason_codes_json)>0),schema_hash TEXT CHECK(schema_hash IS NULL OR length(schema_hash)=64 AND schema_hash NOT GLOB '*[^0-9a-f]*'),dependencies_json TEXT NOT NULL CHECK(json_valid(dependencies_json) AND json_type(dependencies_json)='array'),graph_digest TEXT CHECK(graph_digest IS NULL OR length(graph_digest)=64 AND graph_digest NOT GLOB '*[^0-9a-f]*'),document_json TEXT NOT NULL CHECK(json_valid(document_json)),PRIMARY KEY(view_id,entry_id),CHECK(state<>'available' OR (schema_hash IS NOT NULL AND graph_digest IS NOT NULL)));
+-CREATE TABLE device_view_active(scope_id TEXT NOT NULL PRIMARY KEY REFERENCES device_view_scopes,view_id TEXT,registry_id TEXT NOT NULL,catalog_generation INTEGER NOT NULL CHECK(catalog_generation>=1),overlay_generation INTEGER NOT NULL CHECK(overlay_generation>=0),capability_epoch INTEGER NOT NULL CHECK(capability_epoch BETWEEN 0 AND 9007199254740991),generation INTEGER NOT NULL CHECK(generation BETWEEN 0 AND 9007199254740991),stale INTEGER NOT NULL CHECK(stale IN (0,1)),expected_inventory_count INTEGER NOT NULL CHECK(expected_inventory_count>=0),FOREIGN KEY(view_id,scope_id) REFERENCES device_views(view_id,scope_id),FOREIGN KEY(scope_id,capability_epoch) REFERENCES device_view_invalidations DEFERRABLE INITIALLY DEFERRED);
++CREATE TABLE device_views(view_id TEXT NOT NULL PRIMARY KEY CHECK(length(view_id)=64 AND view_id NOT GLOB '*[^0-9a-f]*'),scope_id TEXT NOT NULL REFERENCES device_view_scopes,registry_id TEXT NOT NULL,catalog_generation INTEGER NOT NULL CHECK(catalog_generation>=1),overlay_generation INTEGER NOT NULL CHECK(overlay_generation>=0),capability_epoch INTEGER NOT NULL CHECK(capability_epoch>=0),view_generation INTEGER NOT NULL CHECK(view_generation>=1),inventory_count INTEGER NOT NULL CHECK(inventory_count>=0),inventory_sha256 TEXT NOT NULL REFERENCES device_inventory_sets,facts_id TEXT NOT NULL,document_json TEXT NOT NULL CHECK(json_valid(document_json)),state TEXT NOT NULL CHECK(state IN ('staged','sealed')),UNIQUE(view_id,scope_id),FOREIGN KEY(facts_id,scope_id,capability_epoch) REFERENCES device_capability_facts(facts_id,scope_id,capability_epoch));
++CREATE TABLE device_view_entries(view_id TEXT NOT NULL REFERENCES device_views ON DELETE CASCADE,entry_id TEXT NOT NULL CHECK(length(entry_id)=64 AND entry_id NOT GLOB '*[^0-9a-f]*'),entity_kind TEXT NOT NULL CHECK(entity_kind IN ('binding','type','other')),state TEXT NOT NULL CHECK(state IN ('available','unavailable','unknown')),reason_codes_json TEXT NOT NULL CHECK(json_valid(reason_codes_json) AND json_type(reason_codes_json)='array' AND json_array_length(reason_codes_json)>0),schema_hash TEXT CHECK(schema_hash IS NULL OR length(schema_hash)=64 AND schema_hash NOT GLOB '*[^0-9a-f]*'),contract_hash TEXT CHECK(contract_hash IS NULL OR length(contract_hash)=64 AND contract_hash NOT GLOB '*[^0-9a-f]*'),dependencies_json TEXT NOT NULL CHECK(json_valid(dependencies_json) AND json_type(dependencies_json)='array'),graph_digest TEXT CHECK(graph_digest IS NULL OR length(graph_digest)=64 AND graph_digest NOT GLOB '*[^0-9a-f]*'),document_json TEXT NOT NULL CHECK(json_valid(document_json)),PRIMARY KEY(view_id,entry_id),CHECK(state<>'available' OR (schema_hash IS NOT NULL AND contract_hash IS NOT NULL AND graph_digest IS NOT NULL)));
++CREATE TABLE device_view_active(scope_id TEXT NOT NULL PRIMARY KEY REFERENCES device_view_scopes,view_id TEXT,registry_id TEXT NOT NULL,catalog_generation INTEGER NOT NULL CHECK(catalog_generation>=1),overlay_generation INTEGER NOT NULL CHECK(overlay_generation>=0),capability_epoch INTEGER NOT NULL CHECK(capability_epoch BETWEEN 0 AND 9007199254740991),generation INTEGER NOT NULL CHECK(generation BETWEEN 0 AND 9007199254740991),stale INTEGER NOT NULL CHECK(stale IN (0,1)),expected_inventory_count INTEGER NOT NULL CHECK(expected_inventory_count>=0),inventory_sha256 TEXT NOT NULL REFERENCES device_inventory_sets,FOREIGN KEY(view_id,scope_id) REFERENCES device_views(view_id,scope_id),FOREIGN KEY(scope_id,capability_epoch) REFERENCES device_view_invalidations DEFERRABLE INITIALLY DEFERRED);
+ CREATE TRIGGER device_active_bootstrap BEFORE INSERT ON device_view_active WHEN new.view_id IS NOT NULL OR new.generation<>0 OR new.capability_epoch<>0 OR new.stale<>1 BEGIN SELECT RAISE(ABORT,'Device scope begins with stale generation zero'); END;
+ CREATE TRIGGER device_active_no_delete BEFORE DELETE ON device_view_active BEGIN SELECT RAISE(ABORT,'Invalidate device scope rather than deleting pointer'); END;
+ CREATE TRIGGER device_active_update BEFORE UPDATE ON device_view_active WHEN new.scope_id<>old.scope_id OR new.catalog_generation<old.catalog_generation OR new.overlay_generation<old.overlay_generation OR
+- (new.stale=1 AND (new.capability_epoch<>old.capability_epoch+1 OR new.generation<>old.generation OR new.view_id IS NOT old.view_id OR (new.expected_inventory_count<>old.expected_inventory_count AND new.registry_id=old.registry_id AND new.catalog_generation=old.catalog_generation AND new.overlay_generation=old.overlay_generation))) OR
+- (new.stale=0 AND (new.capability_epoch<>old.capability_epoch OR new.generation<>old.generation+1 OR new.registry_id<>old.registry_id OR new.catalog_generation<>old.catalog_generation OR new.overlay_generation<>old.overlay_generation OR NOT EXISTS(SELECT 1 FROM device_views v WHERE v.view_id=new.view_id AND v.scope_id=new.scope_id AND v.state='sealed' AND v.capability_epoch=new.capability_epoch AND v.view_generation=new.generation AND v.registry_id=new.registry_id AND v.catalog_generation=new.catalog_generation AND v.overlay_generation=new.overlay_generation AND v.inventory_count=new.expected_inventory_count) OR new.expected_inventory_count<>old.expected_inventory_count))
++ (new.stale=1 AND (new.capability_epoch<>old.capability_epoch+1 OR new.generation<>old.generation OR new.view_id IS NOT old.view_id OR ((new.expected_inventory_count<>old.expected_inventory_count OR new.inventory_sha256<>old.inventory_sha256) AND new.registry_id=old.registry_id AND new.catalog_generation=old.catalog_generation AND new.overlay_generation=old.overlay_generation))) OR
++ (new.stale=0 AND (new.capability_epoch<>old.capability_epoch OR new.generation<>old.generation+1 OR new.registry_id<>old.registry_id OR new.catalog_generation<>old.catalog_generation OR new.overlay_generation<>old.overlay_generation OR NOT EXISTS(SELECT 1 FROM device_views v WHERE v.view_id=new.view_id AND v.scope_id=new.scope_id AND v.state='sealed' AND v.capability_epoch=new.capability_epoch AND v.view_generation=new.generation AND v.registry_id=new.registry_id AND v.catalog_generation=new.catalog_generation AND v.overlay_generation=new.overlay_generation AND v.inventory_count=new.expected_inventory_count AND v.inventory_sha256=new.inventory_sha256) OR new.expected_inventory_count<>old.expected_inventory_count OR new.inventory_sha256<>old.inventory_sha256))
+  BEGIN SELECT RAISE(ABORT,'Device view CAS, scope, epoch or catalog pin mismatch'); END;
+ CREATE TRIGGER device_entries_staged BEFORE INSERT ON device_view_entries WHEN (SELECT state FROM device_views WHERE view_id=new.view_id) IS NOT 'staged' BEGIN SELECT RAISE(ABORT,'Device membership is sealed'); END;
+ CREATE TRIGGER device_entries_no_update BEFORE UPDATE ON device_view_entries BEGIN SELECT RAISE(ABORT,'Device view entries are immutable'); END;
+-CREATE TRIGGER device_view_seal BEFORE UPDATE ON device_views WHEN old.state<>'staged' OR new.state<>'sealed' OR new.view_id<>old.view_id OR new.scope_id<>old.scope_id OR new.registry_id<>old.registry_id OR new.catalog_generation<>old.catalog_generation OR new.overlay_generation<>old.overlay_generation OR new.capability_epoch<>old.capability_epoch OR new.view_generation<>old.view_generation OR new.facts_id<>old.facts_id OR new.inventory_count<>old.inventory_count OR new.document_json<>old.document_json OR new.inventory_count<>(SELECT count(*) FROM device_view_entries WHERE view_id=new.view_id) OR EXISTS(SELECT 1 FROM device_view_entries e,json_each(e.dependencies_json) d WHERE e.view_id=new.view_id AND e.state='available' AND NOT EXISTS(SELECT 1 FROM device_view_entries t WHERE t.view_id=e.view_id AND t.entry_id=json_extract(d.value,'$.entry_id') AND t.entity_kind='type' AND t.state='available' AND t.schema_hash=json_extract(d.value,'$.schema_hash'))) BEGIN SELECT RAISE(ABORT,'Immutable device view or incoherent complete type graph'); END;
++CREATE TRIGGER device_view_seal BEFORE UPDATE ON device_views WHEN old.state<>'staged' OR new.state<>'sealed' OR new.view_id<>old.view_id OR new.scope_id<>old.scope_id OR new.registry_id<>old.registry_id OR new.catalog_generation<>old.catalog_generation OR new.overlay_generation<>old.overlay_generation OR new.capability_epoch<>old.capability_epoch OR new.view_generation<>old.view_generation OR new.facts_id<>old.facts_id OR new.inventory_count<>old.inventory_count OR new.inventory_sha256<>old.inventory_sha256 OR new.document_json<>old.document_json OR new.inventory_count<>(SELECT count(*) FROM device_view_entries WHERE view_id=new.view_id) OR EXISTS(SELECT 1 FROM device_view_entries e,json_each(e.dependencies_json) d WHERE e.view_id=new.view_id AND e.state='available' AND NOT EXISTS(SELECT 1 FROM device_view_entries t WHERE t.view_id=e.view_id AND t.entry_id=json_extract(d.value,'$.entry_id') AND t.entity_kind='type' AND t.state='available' AND t.contract_hash=json_extract(d.value,'$.contract_hash'))) BEGIN SELECT RAISE(ABORT,'Immutable device view or incoherent complete type graph'); END;
+ CREATE TABLE device_view_pins(pin_id TEXT PRIMARY KEY,view_id TEXT NOT NULL REFERENCES device_views,purpose TEXT NOT NULL CHECK(purpose IN ('execution','cursor')),expires_at TEXT NOT NULL);
+ CREATE TABLE device_view_gc(singleton INTEGER PRIMARY KEY CHECK(singleton=1),authorized INTEGER NOT NULL DEFAULT 0 CHECK(authorized IN (0,1)));
+ INSERT INTO device_view_gc VALUES(1,0);
+ CREATE TRIGGER device_view_delete_guard BEFORE DELETE ON device_views WHEN EXISTS(SELECT 1 FROM device_view_active WHERE view_id=old.view_id) OR EXISTS(SELECT 1 FROM device_view_pins WHERE view_id=old.view_id) OR (old.state='sealed' AND (SELECT authorized FROM device_view_gc WHERE singleton=1) IS NOT 1) BEGIN SELECT RAISE(ABORT,'Active or pinned device view cannot be collected'); END;
+ CREATE TRIGGER device_entries_delete_guard BEFORE DELETE ON device_view_entries WHEN EXISTS(SELECT 1 FROM device_view_active WHERE view_id=old.view_id) OR EXISTS(SELECT 1 FROM device_view_pins WHERE view_id=old.view_id) OR ((SELECT state FROM device_views WHERE view_id=old.view_id)='sealed' AND (SELECT authorized FROM device_view_gc WHERE singleton=1) IS NOT 1) BEGIN SELECT RAISE(ABORT,'Sealed active or pinned membership cannot be deleted'); END;
+ CREATE TRIGGER capability_facts_delete_guard BEFORE DELETE ON device_capability_facts WHEN (SELECT authorized FROM device_view_gc WHERE singleton=1) IS NOT 1 BEGIN SELECT RAISE(ABORT,'Fact retention requires explicit maintenance transaction'); END;
+-CREATE VIEW resolved_device_catalog AS SELECT s.scope_id,s.profile_id,s.target_key,a.view_id,a.capability_epoch,a.generation,e.entry_id,e.entity_kind,e.state,e.reason_codes_json,e.schema_hash,e.dependencies_json,e.graph_digest FROM device_view_active a JOIN device_view_scopes s USING(scope_id) JOIN device_view_entries e USING(view_id) WHERE a.stale=0;
+-CREATE VIEW binding_availability AS SELECT entry_id AS binding_id,target_key,state,json_extract(reason_codes_json,'$[0]') AS reason_code,scope_id,profile_id,view_id,capability_epoch,generation,schema_hash,graph_digest,reason_codes_json FROM resolved_device_catalog WHERE entity_kind='binding';
+-CREATE TABLE binding_wire_contracts(contract_id TEXT NOT NULL PRIMARY KEY CHECK(length(contract_id)=64 AND contract_id NOT GLOB '*[^0-9a-f]*'),binding_id TEXT NOT NULL,schema_hash TEXT NOT NULL,descriptor TEXT NOT NULL,interface_version INTEGER CHECK(interface_version IS NULL OR interface_version>=0),interface_hash TEXT,transaction_code INTEGER NOT NULL CHECK(transaction_code BETWEEN 0 AND 4294967295),flags INTEGER NOT NULL CHECK(flags BETWEEN 0 AND 4294967295),oneway INTEGER NOT NULL CHECK(oneway IN (0,1)),argument_codec_json TEXT NOT NULL CHECK(json_valid(argument_codec_json)),response_codec_json TEXT NOT NULL CHECK(json_valid(response_codec_json)),proof_source_json TEXT NOT NULL CHECK(json_valid(proof_source_json) AND json_type(proof_source_json)='object'),proof_state TEXT NOT NULL CHECK(proof_state IN ('verified','unknown','unsupported')),FOREIGN KEY(binding_id,schema_hash) REFERENCES binding_mappings);
++CREATE VIEW resolved_device_catalog AS SELECT s.scope_id,s.profile_id,s.target_key,a.view_id,a.capability_epoch,a.generation,e.entry_id,e.entity_kind,e.state,e.reason_codes_json,e.schema_hash,e.contract_hash,e.dependencies_json,e.graph_digest FROM device_view_active a JOIN device_view_scopes s USING(scope_id) JOIN device_view_entries e USING(view_id) WHERE a.stale=0;
++CREATE VIEW binding_availability AS SELECT entry_id AS binding_id,target_key,state,json_extract(reason_codes_json,'$[0]') AS reason_code,scope_id,profile_id,view_id,capability_epoch,generation,schema_hash,contract_hash,graph_digest,reason_codes_json FROM resolved_device_catalog WHERE entity_kind='binding';
++CREATE TABLE binding_wire_contracts(contract_id TEXT NOT NULL PRIMARY KEY CHECK(length(contract_id)=64 AND contract_id NOT GLOB '*[^0-9a-f]*'),binding_id TEXT NOT NULL,schema_hash TEXT NOT NULL,descriptor TEXT NOT NULL,interface_version INTEGER CHECK(interface_version IS NULL OR interface_version>=0),interface_hash TEXT,transaction_code INTEGER NOT NULL CHECK(transaction_code BETWEEN 0 AND 4294967295),flags INTEGER NOT NULL CHECK(flags BETWEEN 0 AND 4294967295),oneway INTEGER NOT NULL CHECK(oneway IN (0,1)),argument_codec_json TEXT NOT NULL CHECK(json_valid(argument_codec_json)),response_codec_json TEXT NOT NULL CHECK(json_valid(response_codec_json)),proof_source_json TEXT NOT NULL CHECK(json_valid(proof_source_json) AND json_type(proof_source_json)='object'),proof_state TEXT NOT NULL CHECK(proof_state IN ('verified','unknown','unsupported')),CHECK(proof_state<>'verified' OR (json_type(argument_codec_json)='object' AND json_type(response_codec_json)='object' AND coalesce(json_type(proof_source_json,'$.evidence')='array' AND json_array_length(proof_source_json,'$.evidence')>0,0))),FOREIGN KEY(binding_id,schema_hash) REFERENCES binding_mappings);
++CREATE UNIQUE INDEX wire_tuple_identity ON binding_wire_contracts(binding_id,schema_hash,descriptor,transaction_code,coalesce(interface_version,-1));
+ CREATE TRIGGER wire_proof_no_update BEFORE UPDATE ON binding_wire_contracts BEGIN SELECT RAISE(ABORT,'Version wire evidence rather than rewriting it'); END;
+ CREATE TRIGGER wire_proof_no_delete BEFORE DELETE ON binding_wire_contracts BEGIN SELECT RAISE(ABORT,'Retain wire evidence while versioned'); END;
++CREATE TRIGGER device_facts_current BEFORE INSERT ON device_capability_facts WHEN NOT EXISTS(SELECT 1 FROM device_view_active a JOIN device_view_scopes s USING(scope_id) WHERE a.scope_id=new.scope_id AND a.capability_epoch=new.capability_epoch AND json_extract(new.document_json,'$.capability_epoch')=new.capability_epoch AND json_extract(new.document_json,'$.observed_at')=new.observed_at AND json_extract(new.document_json,'$.profile_id')=s.profile_id AND json_extract(new.document_json,'$.target_key')=s.target_key AND json_extract(new.document_json,'$.android_user_id')=s.android_user_id AND json_extract(new.document_json,'$.backend_instance_id')=s.backend_instance_id AND json_extract(new.document_json,'$.device_instance_id')=s.device_instance_id) BEGIN SELECT RAISE(ABORT,'Captured facts scope or epoch mismatch'); END;
++CREATE TRIGGER device_view_stage BEFORE INSERT ON device_views WHEN new.state<>'staged' OR NOT EXISTS(SELECT 1 FROM device_view_active a WHERE a.scope_id=new.scope_id AND new.capability_epoch=a.capability_epoch AND new.view_generation=a.generation+1 AND new.registry_id=a.registry_id AND new.catalog_generation=a.catalog_generation AND new.overlay_generation=a.overlay_generation AND new.inventory_count=a.expected_inventory_count AND new.inventory_sha256=a.inventory_sha256) BEGIN SELECT RAISE(ABORT,'Stage must pin the complete current inventory and epoch'); END;
++CREATE TRIGGER device_entry_document_consistent BEFORE INSERT ON device_view_entries WHEN json_extract(new.document_json,'$.entry_id') IS NOT new.entry_id OR json_extract(new.document_json,'$.entity_kind') IS NOT new.entity_kind OR json_extract(new.document_json,'$.state') IS NOT new.state OR json_type(new.document_json,'$.schema_hash') IS NULL OR json_extract(new.document_json,'$.schema_hash') IS NOT new.schema_hash OR json_type(new.document_json,'$.contract_hash') IS NULL OR json_extract(new.document_json,'$.contract_hash') IS NOT new.contract_hash OR json_type(new.document_json,'$.graph_digest') IS NULL OR json_extract(new.document_json,'$.graph_digest') IS NOT new.graph_digest OR json(json_extract(new.document_json,'$.reason_codes')) IS NOT json(new.reason_codes_json) OR json(json_extract(new.document_json,'$.dependencies')) IS NOT json(new.dependencies_json) OR EXISTS(SELECT 1 FROM json_each(new.reason_codes_json) WHERE type<>'text' OR length(value)=0) BEGIN SELECT RAISE(ABORT,'Device entry JSON disagrees with authoritative columns'); END;
++CREATE TRIGGER device_header_document_consistent BEFORE INSERT ON device_views WHEN json_extract(new.document_json,'$.schema_version') IS NOT '3.0.0' OR json_extract(new.document_json,'$.view_id') IS NOT new.view_id OR json_extract(new.document_json,'$.facts_id') IS NOT new.facts_id OR json_extract(new.document_json,'$.registry_id') IS NOT new.registry_id OR json_extract(new.document_json,'$.catalog_generation') IS NOT new.catalog_generation OR json_extract(new.document_json,'$.overlay_generation') IS NOT new.overlay_generation OR json_extract(new.document_json,'$.capability_epoch') IS NOT new.capability_epoch OR json_extract(new.document_json,'$.view_generation') IS NOT new.view_generation OR json_extract(new.document_json,'$.inventory_count') IS NOT new.inventory_count OR json_extract(new.document_json,'$.inventory_sha256') IS NOT new.inventory_sha256 OR json_type(new.document_json,'$.entries') IS NOT NULL BEGIN SELECT RAISE(ABORT,'Device header JSON disagrees with immutable metadata'); END;
+ 
+-CREATE TRIGGER device_facts_current BEFORE INSERT ON device_capability_facts WHEN NOT EXISTS(SELECT 1 FROM device_view_active a JOIN device_view_scopes s USING(scope_id) WHERE a.scope_id=new.scope_id AND a.capability_epoch=new.capability_epoch AND json_extract(new.document_json,'$.capability_epoch')=new.capability_epoch AND json_extract(new.document_json,'$.observed_at')=new.observed_at AND json_extract(new.document_json,'$.profile_id')=s.profile_id AND json_extract(new.document_json,'$.target_key')=s.target_key AND json_extract(new.document_json,'$.android_user_id')=s.android_user_id AND json_extract(new.document_json,'$.backend_instance_id')=s.backend_instance_id AND json_extract(new.document_json,'$.device_instance_id')=s.device_instance_id) BEGIN SELECT RAISE(ABORT,'Captured facts scope or epoch mismatch'); END;
+-CREATE TRIGGER device_view_stage BEFORE INSERT ON device_views WHEN new.state<>'staged' OR NOT EXISTS(SELECT 1 FROM device_view_active a WHERE a.scope_id=new.scope_id AND new.capability_epoch=a.capability_epoch AND new.view_generation=a.generation+1 AND new.registry_id=a.registry_id AND new.catalog_generation=a.catalog_generation AND new.overlay_generation=a.overlay_generation AND new.inventory_count=a.expected_inventory_count) BEGIN SELECT RAISE(ABORT,'Stage must pin the complete current inventory and epoch'); END;
+-CREATE TRIGGER device_entry_document_consistent BEFORE INSERT ON device_view_entries WHEN json_extract(new.document_json,'$.entry_id') IS NOT new.entry_id OR json_extract(new.document_json,'$.entity_kind') IS NOT new.entity_kind OR json_extract(new.document_json,'$.state') IS NOT new.state OR json_type(new.document_json,'$.schema_hash') IS NULL OR json_extract(new.document_json,'$.schema_hash') IS NOT new.schema_hash OR json_type(new.document_json,'$.graph_digest') IS NULL OR json_extract(new.document_json,'$.graph_digest') IS NOT new.graph_digest OR json(json_extract(new.document_json,'$.reason_codes')) IS NOT json(new.reason_codes_json) OR json(json_extract(new.document_json,'$.dependencies')) IS NOT json(new.dependencies_json) OR EXISTS(SELECT 1 FROM json_each(new.reason_codes_json) WHERE type<>'text' OR length(value)=0) BEGIN SELECT RAISE(ABORT,'Device entry JSON disagrees with authoritative columns'); END;
+-CREATE TRIGGER device_header_document_consistent BEFORE INSERT ON device_views WHEN json_extract(new.document_json,'$.schema_version') IS NOT '2.0.0' OR json_extract(new.document_json,'$.view_id') IS NOT new.view_id OR json_extract(new.document_json,'$.facts_id') IS NOT new.facts_id OR json_extract(new.document_json,'$.registry_id') IS NOT new.registry_id OR json_extract(new.document_json,'$.catalog_generation') IS NOT new.catalog_generation OR json_extract(new.document_json,'$.overlay_generation') IS NOT new.overlay_generation OR json_extract(new.document_json,'$.capability_epoch') IS NOT new.capability_epoch OR json_extract(new.document_json,'$.view_generation') IS NOT new.view_generation OR json_extract(new.document_json,'$.inventory_count') IS NOT new.inventory_count OR json_type(new.document_json,'$.entries') IS NOT NULL BEGIN SELECT RAISE(ABORT,'Device header JSON disagrees with immutable metadata'); END;
++CREATE TRIGGER device_active_inventory_pin BEFORE INSERT ON device_view_active WHEN NOT EXISTS(SELECT 1 FROM device_inventory_sets i WHERE i.inventory_sha256=new.inventory_sha256 AND i.state='sealed' AND i.entry_count=new.expected_inventory_count) BEGIN SELECT RAISE(ABORT,'Active scope requires verified sealed inventory'); END;
++CREATE TRIGGER device_active_inventory_repin BEFORE UPDATE ON device_view_active WHEN NOT EXISTS(SELECT 1 FROM device_inventory_sets i WHERE i.inventory_sha256=new.inventory_sha256 AND i.state='sealed' AND i.entry_count=new.expected_inventory_count) BEGIN SELECT RAISE(ABORT,'Active scope requires verified sealed inventory'); END;
++CREATE TRIGGER device_entry_inventory_member BEFORE INSERT ON device_view_entries WHEN NOT EXISTS(SELECT 1 FROM device_views v JOIN device_inventory_members m ON m.inventory_sha256=v.inventory_sha256 WHERE v.view_id=new.view_id AND m.entry_id=new.entry_id AND m.entity_kind=new.entity_kind AND (new.state<>'available' OR EXISTS(SELECT 1 FROM json_each(m.document_json,'$.variants') variant WHERE json_extract(variant.value,'$.schema_hash')=new.contract_hash AND json_array_length(json_extract(variant.value,'$.dependencies'))=json_array_length(new.dependencies_json) AND NOT EXISTS(SELECT 1 FROM json_each(new.dependencies_json) d WHERE NOT EXISTS(SELECT 1 FROM json_each(variant.value,'$.dependencies') expected WHERE json_extract(expected.value,'$.entry_id')=json_extract(d.value,'$.entry_id') AND json_extract(expected.value,'$.schema_hash')=json_extract(d.value,'$.contract_hash')))))) BEGIN SELECT RAISE(ABORT,'Entry or selected variant differs from pinned inventory'); END;
++
+ COMMIT;
+--- a/catalog/contracts/DeviceResolution.schema.json
++++ b/catalog/contracts/DeviceResolution.schema.json
+@@ -1,6 +1,6 @@
+ {
+   "$schema": "https://json-schema.org/draft/2020-12/schema",
+-  "$id": "urn:android-binding-catalog:2.0.0:DeviceResolution",
++  "$id": "urn:android-binding-catalog:2.1.0:DeviceResolution",
+   "$ref": "#/$defs/Snapshot",
+   "$defs": {
+     "PlatformRange": {
+@@ -144,6 +144,24 @@
+         "unknown_reason": {
+           "type": "string",
+           "minLength": 1
++        },
++        "platform_point": {
++          "type": "array",
++          "prefixItems": [
++            {
++              "type": "integer",
++              "minimum": 0,
++              "maximum": 2147483647
++            },
++            {
++              "type": "integer",
++              "minimum": 0,
++              "maximum": 2147483647
++            }
++          ],
++          "items": false,
++          "minItems": 2,
++          "maxItems": 2
+         }
+       },
+       "required": [],
+@@ -890,5 +908,5 @@
+       "additionalProperties": false
+     }
+   },
+-  "description": "Offline reference/collector contract. Facts are internally collected evidence, never remote assertions or permission grants. Missing metadata yields unknown. No probes or server are implemented."
++  "description": "Catalog inventory2.1 adds explicit point evidence: other versions are unknown, never inferred absent. Historical resolved2 definitions cannot activate as DeviceView3."
+ }
+--- a/catalog/contracts/DeviceView.schema.json
++++ b/catalog/contracts/DeviceView.schema.json
+@@ -0,0 +1,956 @@
++{
++  "$schema": "https://json-schema.org/draft/2020-12/schema",
++  "$id": "urn:android-binding-catalog:3.0.0:DeviceView",
++  "$ref": "#/$defs/Snapshot",
++  "$defs": {
++    "PlatformRange": {
++      "type": "object",
++      "properties": {
++        "introduced": {
++          "type": "array",
++          "items": {
++            "type": "integer",
++            "minimum": 0,
++            "maximum": 2147483647
++          },
++          "minItems": 2,
++          "maxItems": 2
++        },
++        "removed": {
++          "anyOf": [
++            {
++              "type": "array",
++              "items": {
++                "type": "integer",
++                "minimum": 0,
++                "maximum": 2147483647
++              },
++              "minItems": 2,
++              "maxItems": 2
++            },
++            {
++              "type": "null"
++            }
++          ]
++        }
++      },
++      "required": [
++        "introduced",
++        "removed"
++      ],
++      "additionalProperties": false
++    },
++    "ModuleRange": {
++      "type": "object",
++      "properties": {
++        "introduced": {
++          "type": "string",
++          "pattern": "^(0|[1-9][0-9]*)$",
++          "maxLength": 19
++        },
++        "removed": {
++          "anyOf": [
++            {
++              "type": "string",
++              "pattern": "^(0|[1-9][0-9]*)$",
++              "maxLength": 19
++            },
++            {
++              "type": "null"
++            }
++          ]
++        }
++      },
++      "required": [
++        "introduced",
++        "removed"
++      ],
++      "additionalProperties": false
++    },
++    "InterfaceConstraint": {
++      "type": "object",
++      "properties": {
++        "descriptor": {
++          "type": "string",
++          "minLength": 1
++        },
++        "minimum_version": {
++          "anyOf": [
++            {
++              "type": "integer",
++              "minimum": 0,
++              "maximum": 2147483647
++            },
++            {
++              "type": "null"
++            }
++          ]
++        },
++        "accepted_hashes": {
++          "type": "array",
++          "items": {
++            "type": "string",
++            "minLength": 1
++          },
++          "minItems": 0
++        }
++      },
++      "required": [
++        "descriptor",
++        "minimum_version",
++        "accepted_hashes"
++      ],
++      "additionalProperties": false
++    },
++    "Clause": {
++      "type": "object",
++      "properties": {
++        "platform": {
++          "$ref": "#/$defs/PlatformRange"
++        },
++        "extensions": {
++          "type": "object",
++          "additionalProperties": {
++            "type": "integer",
++            "minimum": 0,
++            "maximum": 2147483647
++          }
++        },
++        "modules": {
++          "type": "object",
++          "additionalProperties": {
++            "$ref": "#/$defs/ModuleRange"
++          }
++        },
++        "oem": {
++          "type": "array",
++          "items": {
++            "type": "string",
++            "minLength": 1
++          },
++          "minItems": 1
++        },
++        "build_fingerprints": {
++          "type": "array",
++          "items": {
++            "type": "string",
++            "minLength": 1
++          },
++          "minItems": 1
++        },
++        "interface": {
++          "$ref": "#/$defs/InterfaceConstraint"
++        },
++        "unknown_reason": {
++          "type": "string",
++          "minLength": 1
++        },
++        "platform_point": {
++          "type": "array",
++          "prefixItems": [
++            {
++              "type": "integer",
++              "minimum": 0,
++              "maximum": 2147483647
++            },
++            {
++              "type": "integer",
++              "minimum": 0,
++              "maximum": 2147483647
++            }
++          ],
++          "items": false,
++          "minItems": 2,
++          "maxItems": 2
++        }
++      },
++      "required": [],
++      "additionalProperties": false,
++      "minProperties": 1
++    },
++    "Rule": {
++      "oneOf": [
++        {
++          "type": "object",
++          "properties": {
++            "alternatives": {
++              "type": "array",
++              "items": {
++                "$ref": "#/$defs/Clause"
++              },
++              "minItems": 1
++            },
++            "evidence_ids": {
++              "type": "array",
++              "items": {
++                "type": "string",
++                "minLength": 1
++              },
++              "minItems": 1
++            }
++          },
++          "required": [
++            "alternatives",
++            "evidence_ids"
++          ],
++          "additionalProperties": false
++        },
++        {
++          "type": "object",
++          "properties": {
++            "unknown_reason": {
++              "type": "string",
++              "minLength": 1
++            },
++            "x-raw": {}
++          },
++          "required": [
++            "unknown_reason"
++          ],
++          "additionalProperties": false
++        }
++      ]
++    },
++    "ModuleFact": {
++      "type": "object",
++      "properties": {
++        "state": {
++          "enum": [
++            "present",
++            "absent",
++            "unknown"
++          ]
++        },
++        "version": {
++          "anyOf": [
++            {
++              "type": "string",
++              "pattern": "^(0|[1-9][0-9]*)$",
++              "maxLength": 19
++            },
++            {
++              "type": "null"
++            }
++          ]
++        },
++        "authoritative": {
++          "type": "boolean"
++        }
++      },
++      "required": [
++        "state",
++        "version",
++        "authoritative"
++      ],
++      "additionalProperties": false
++    },
++    "InterfaceFact": {
++      "type": "object",
++      "properties": {
++        "state": {
++          "enum": [
++            "reachable",
++            "absent",
++            "denied",
++            "unreachable",
++            "unsupported",
++            "unknown"
++          ]
++        },
++        "version": {
++          "anyOf": [
++            {
++              "type": "integer",
++              "minimum": 0,
++              "maximum": 2147483647
++            },
++            {
++              "type": "null"
++            }
++          ]
++        },
++        "hash": {
++          "anyOf": [
++            {
++              "type": "string",
++              "minLength": 1
++            },
++            {
++              "type": "null"
++            }
++          ]
++        },
++        "authoritative": {
++          "type": "boolean"
++        }
++      },
++      "required": [
++        "state",
++        "version",
++        "hash",
++        "authoritative"
++      ],
++      "additionalProperties": false
++    },
++    "Facts": {
++      "type": "object",
++      "properties": {
++        "profile_id": {
++          "type": "string",
++          "minLength": 1
++        },
++        "target_key": {
++          "type": "string",
++          "minLength": 1
++        },
++        "android_user_id": {
++          "type": "integer",
++          "minimum": 0,
++          "maximum": 2147483647
++        },
++        "backend_instance_id": {
++          "type": "string",
++          "minLength": 1
++        },
++        "device_instance_id": {
++          "type": "string",
++          "minLength": 1
++        },
++        "identity_verified": {
++          "type": "boolean"
++        },
++        "capability_epoch": {
++          "type": "integer",
++          "minimum": 0,
++          "maximum": 9007199254740991
++        },
++        "observed_at": {
++          "type": "string",
++          "minLength": 1,
++          "maxLength": 64,
++          "format": "date-time"
++        },
++        "platform": {
++          "type": "object",
++          "properties": {
++            "major": {
++              "anyOf": [
++                {
++                  "type": "integer",
++                  "minimum": 0,
++                  "maximum": 2147483647
++                },
++                {
++                  "type": "null"
++                }
++              ]
++            },
++            "minor": {
++              "anyOf": [
++                {
++                  "type": "integer",
++                  "minimum": 0,
++                  "maximum": 2147483647
++                },
++                {
++                  "type": "null"
++                }
++              ]
++            }
++          },
++          "required": [
++            "major",
++            "minor"
++          ],
++          "additionalProperties": false
++        },
++        "extensions": {
++          "type": "object",
++          "additionalProperties": {
++            "anyOf": [
++              {
++                "type": "integer",
++                "minimum": 0,
++                "maximum": 2147483647
++              },
++              {
++                "type": "null"
++              }
++            ]
++          }
++        },
++        "modules": {
++          "type": "object",
++          "additionalProperties": {
++            "$ref": "#/$defs/ModuleFact"
++          }
++        },
++        "interfaces": {
++          "type": "object",
++          "additionalProperties": {
++            "$ref": "#/$defs/InterfaceFact"
++          }
++        },
++        "oem": {
++          "anyOf": [
++            {
++              "type": "string",
++              "minLength": 1
++            },
++            {
++              "type": "null"
++            }
++          ]
++        },
++        "build_fingerprint": {
++          "anyOf": [
++            {
++              "type": "string",
++              "minLength": 1
++            },
++            {
++              "type": "null"
++            }
++          ]
++        },
++        "evidence_ids": {
++          "type": "array",
++          "items": {
++            "type": "string",
++            "minLength": 1
++          },
++          "minItems": 1
++        }
++      },
++      "required": [
++        "profile_id",
++        "target_key",
++        "android_user_id",
++        "backend_instance_id",
++        "device_instance_id",
++        "identity_verified",
++        "capability_epoch",
++        "observed_at",
++        "platform",
++        "extensions",
++        "modules",
++        "interfaces",
++        "oem",
++        "build_fingerprint",
++        "evidence_ids"
++      ],
++      "additionalProperties": false
++    },
++    "Dependency": {
++      "type": "object",
++      "properties": {
++        "entry_id": {
++          "type": "string",
++          "pattern": "^[a-f0-9]{64}$"
++        },
++        "schema_hash": {
++          "type": "string",
++          "pattern": "^[a-f0-9]{64}$"
++        }
++      },
++      "required": [
++        "entry_id",
++        "schema_hash"
++      ],
++      "additionalProperties": false
++    },
++    "Variant": {
++      "type": "object",
++      "properties": {
++        "schema_hash": {
++          "type": "string",
++          "pattern": "^[a-f0-9]{64}$"
++        },
++        "availability": {
++          "$ref": "#/$defs/Rule"
++        },
++        "dependencies": {
++          "type": "array",
++          "items": {
++            "$ref": "#/$defs/Dependency"
++          },
++          "minItems": 0
++        }
++      },
++      "required": [
++        "schema_hash",
++        "availability",
++        "dependencies"
++      ],
++      "additionalProperties": false
++    },
++    "InventoryEntity": {
++      "type": "object",
++      "properties": {
++        "entry_id": {
++          "type": "string",
++          "pattern": "^[a-f0-9]{64}$"
++        },
++        "entity_kind": {
++          "enum": [
++            "binding",
++            "type",
++            "other"
++          ]
++        },
++        "variants": {
++          "type": "array",
++          "items": {
++            "$ref": "#/$defs/Variant"
++          },
++          "minItems": 0
++        }
++      },
++      "required": [
++        "entry_id",
++        "entity_kind",
++        "variants"
++      ],
++      "additionalProperties": false
++    },
++    "ResolvedEntry": {
++      "type": "object",
++      "properties": {
++        "entry_id": {
++          "type": "string",
++          "pattern": "^[a-f0-9]{64}$"
++        },
++        "entity_kind": {
++          "enum": [
++            "binding",
++            "type",
++            "other"
++          ]
++        },
++        "state": {
++          "enum": [
++            "available",
++            "unavailable",
++            "unknown"
++          ]
++        },
++        "reason_codes": {
++          "type": "array",
++          "items": {
++            "type": "string",
++            "minLength": 1
++          },
++          "minItems": 1
++        },
++        "schema_hash": {
++          "anyOf": [
++            {
++              "type": "string",
++              "pattern": "^[a-f0-9]{64}$"
++            },
++            {
++              "type": "null"
++            }
++          ]
++        },
++        "dependencies": {
++          "type": "array",
++          "items": {
++            "$ref": "#/$defs/ResolvedDependency"
++          },
++          "minItems": 0
++        },
++        "graph_digest": {
++          "anyOf": [
++            {
++              "type": "string",
++              "pattern": "^[a-f0-9]{64}$"
++            },
++            {
++              "type": "null"
++            }
++          ]
++        },
++        "contract_hash": {
++          "anyOf": [
++            {
++              "type": "string",
++              "pattern": "^[a-f0-9]{64}$"
++            },
++            {
++              "type": "null"
++            }
++          ]
++        }
++      },
++      "required": [
++        "entry_id",
++        "entity_kind",
++        "state",
++        "reason_codes",
++        "schema_hash",
++        "dependencies",
++        "graph_digest",
++        "contract_hash"
++      ],
++      "additionalProperties": false,
++      "allOf": [
++        {
++          "if": {
++            "properties": {
++              "state": {
++                "const": "available"
++              }
++            }
++          },
++          "then": {
++            "properties": {
++              "schema_hash": {
++                "type": "string",
++                "pattern": "^[a-f0-9]{64}$"
++              },
++              "graph_digest": {
++                "type": "string",
++                "pattern": "^[a-f0-9]{64}$"
++              },
++              "contract_hash": {
++                "type": "string",
++                "pattern": "^[a-f0-9]{64}$"
++              }
++            }
++          }
++        }
++      ]
++    },
++    "Snapshot": {
++      "type": "object",
++      "properties": {
++        "schema_version": {
++          "const": "3.0.0"
++        },
++        "view_id": {
++          "type": "string",
++          "pattern": "^[a-f0-9]{64}$"
++        },
++        "facts_id": {
++          "type": "string",
++          "pattern": "^[a-f0-9]{64}$"
++        },
++        "registry_id": {
++          "type": "string",
++          "pattern": "^[a-f0-9]{64}$"
++        },
++        "catalog_generation": {
++          "type": "integer",
++          "minimum": 0,
++          "maximum": 9007199254740991
++        },
++        "overlay_generation": {
++          "type": "integer",
++          "minimum": 0,
++          "maximum": 9007199254740991
++        },
++        "capability_epoch": {
++          "type": "integer",
++          "minimum": 0,
++          "maximum": 9007199254740991
++        },
++        "view_generation": {
++          "type": "integer",
++          "minimum": 0,
++          "maximum": 9007199254740991
++        },
++        "inventory_count": {
++          "type": "integer",
++          "minimum": 0,
++          "maximum": 9007199254740991
++        },
++        "entries": {
++          "type": "array",
++          "items": {
++            "$ref": "#/$defs/ResolvedEntry"
++          },
++          "minItems": 0
++        },
++        "profile_id": {
++          "type": "string",
++          "minLength": 1
++        },
++        "target_key": {
++          "type": "string",
++          "minLength": 1
++        },
++        "android_user_id": {
++          "type": "integer",
++          "minimum": 0,
++          "maximum": 2147483647
++        },
++        "backend_instance_id": {
++          "type": "string",
++          "minLength": 1
++        },
++        "device_instance_id": {
++          "type": "string",
++          "minLength": 1
++        },
++        "inventory_sha256": {
++          "type": "string",
++          "pattern": "^[a-f0-9]{64}$"
++        }
++      },
++      "required": [
++        "schema_version",
++        "view_id",
++        "facts_id",
++        "registry_id",
++        "catalog_generation",
++        "overlay_generation",
++        "capability_epoch",
++        "view_generation",
++        "inventory_count",
++        "entries",
++        "profile_id",
++        "target_key",
++        "android_user_id",
++        "backend_instance_id",
++        "device_instance_id",
++        "inventory_sha256"
++      ],
++      "additionalProperties": false
++    },
++    "SnapshotResponse": {
++      "type": "object",
++      "properties": {
++        "snapshot": {
++          "anyOf": [
++            {
++              "$ref": "#/$defs/Snapshot"
++            },
++            {
++              "type": "null"
++            }
++          ]
++        },
++        "stale": {
++          "type": "boolean"
++        },
++        "capability_epoch": {
++          "type": "integer",
++          "minimum": 0,
++          "maximum": 9007199254740991
++        },
++        "generation": {
++          "type": "integer",
++          "minimum": 0,
++          "maximum": 9007199254740991
++        }
++      },
++      "required": [
++        "snapshot",
++        "stale",
++        "capability_epoch",
++        "generation"
++      ],
++      "additionalProperties": false
++    },
++    "Header": {
++      "type": "object",
++      "properties": {
++        "schema_version": {
++          "const": "3.0.0"
++        },
++        "view_id": {
++          "type": "string",
++          "pattern": "^[a-f0-9]{64}$"
++        },
++        "facts_id": {
++          "type": "string",
++          "pattern": "^[a-f0-9]{64}$"
++        },
++        "registry_id": {
++          "type": "string",
++          "pattern": "^[a-f0-9]{64}$"
++        },
++        "catalog_generation": {
++          "type": "integer",
++          "minimum": 0,
++          "maximum": 9007199254740991
++        },
++        "overlay_generation": {
++          "type": "integer",
++          "minimum": 0,
++          "maximum": 9007199254740991
++        },
++        "capability_epoch": {
++          "type": "integer",
++          "minimum": 0,
++          "maximum": 9007199254740991
++        },
++        "view_generation": {
++          "type": "integer",
++          "minimum": 0,
++          "maximum": 9007199254740991
++        },
++        "inventory_count": {
++          "type": "integer",
++          "minimum": 0,
++          "maximum": 9007199254740991
++        },
++        "profile_id": {
++          "type": "string",
++          "minLength": 1
++        },
++        "target_key": {
++          "type": "string",
++          "minLength": 1
++        },
++        "android_user_id": {
++          "type": "integer",
++          "minimum": 0,
++          "maximum": 2147483647
++        },
++        "backend_instance_id": {
++          "type": "string",
++          "minLength": 1
++        },
++        "device_instance_id": {
++          "type": "string",
++          "minLength": 1
++        },
++        "inventory_sha256": {
++          "type": "string",
++          "pattern": "^[a-f0-9]{64}$"
++        }
++      },
++      "required": [
++        "schema_version",
++        "view_id",
++        "facts_id",
++        "registry_id",
++        "catalog_generation",
++        "overlay_generation",
++        "capability_epoch",
++        "view_generation",
++        "inventory_count",
++        "profile_id",
++        "target_key",
++        "android_user_id",
++        "backend_instance_id",
++        "device_instance_id",
++        "inventory_sha256"
++      ],
++      "additionalProperties": false
++    },
++    "StatusResponse": {
++      "type": "object",
++      "properties": {
++        "header": {
++          "anyOf": [
++            {
++              "$ref": "#/$defs/Header"
++            },
++            {
++              "type": "null"
++            }
++          ]
++        },
++        "stale": {
++          "type": "boolean"
++        },
++        "capability_epoch": {
++          "type": "integer",
++          "minimum": 0,
++          "maximum": 9007199254740991
++        },
++        "generation": {
++          "type": "integer",
++          "minimum": 0,
++          "maximum": 9007199254740991
++        }
++      },
++      "required": [
++        "header",
++        "stale",
++        "capability_epoch",
++        "generation"
++      ],
++      "additionalProperties": false
++    },
++    "EntryPage": {
++      "type": "object",
++      "properties": {
++        "view_id": {
++          "type": "string",
++          "pattern": "^[a-f0-9]{64}$"
++        },
++        "view_generation": {
++          "type": "integer",
++          "minimum": 0,
++          "maximum": 9007199254740991
++        },
++        "items": {
++          "type": "array",
++          "items": {
++            "$ref": "#/$defs/ResolvedEntry"
++          },
++          "maxItems": 500
++        },
++        "next_cursor": {
++          "anyOf": [
++            {
++              "type": "string",
++              "minLength": 1
++            },
++            {
++              "type": "null"
++            }
++          ]
++        }
++      },
++      "required": [
++        "view_id",
++        "view_generation",
++        "items",
++        "next_cursor"
++      ],
++      "additionalProperties": false
++    },
++    "RefreshRequest": {
++      "type": "object",
++      "properties": {
++        "profile_id": {
++          "type": "string",
++          "minLength": 1
++        },
++        "target_key": {
++          "type": "string",
++          "minLength": 1
++        }
++      },
++      "required": [
++        "profile_id",
++        "target_key"
++      ],
++      "additionalProperties": false
++    },
++    "ResolvedDependency": {
++      "type": "object",
++      "properties": {
++        "entry_id": {
++          "type": "string",
++          "pattern": "^[a-f0-9]{64}$"
++        },
++        "contract_hash": {
++          "type": "string",
++          "pattern": "^[a-f0-9]{64}$"
++        }
++      },
++      "required": [
++        "entry_id",
++        "contract_hash"
++      ],
++      "additionalProperties": false
++    }
++  },
++  "description": "Resolved view3: base contract_hash and transitive graph_digest bind final schema_hash for grants/codecs. Catalog inventory2.1 explicitly represents point applicability; resolved3 binds complete membership and transitive type identity. Older resolved2 snapshots cannot activate silently."
++}
+--- a/catalog/contracts/openapi.json
++++ b/catalog/contracts/openapi.json
+@@ -2,7 +2,7 @@
+   "openapi": "3.1.0",
+   "info": {
+     "title": "Android Binding Catalog Administration Contract",
+-    "version": "1.3.0",
++    "version": "1.4.0",
+     "description": "Specification only. No HTTP server, authentication provider or remote listener enabled. Catalog administration never grants Android invocation permission. Normative state, ETag and publication semantics: ../API-CONTRACT.md."
+   },
+   "paths": {
+@@ -1008,7 +1008,7 @@
+     "/v1/catalog/device-views/current": {
+       "get": {
+         "operationId": "getCurrentDeviceView",
+-        "description": "Read bounded current status/header and strong dv1 ETag, including generation-zero bootstrap with null header. Authorized exact profile/target only. stale forbids admission; availability is separate from permission.",
++        "description": "Read bounded current status/header and strong dv2 ETag, including generation-zero bootstrap with null header. Authorized exact profile/target only. stale forbids admission; availability is separate from permission.",
+         "security": [
+           {
+             "catalogAuth": [
+@@ -1038,7 +1038,7 @@
+         ],
+         "responses": {
+           "200": {
+-            "description": "Current snapshot plus stale/capability epoch; no remote facts accepted",
++            "description": "Current status and bounded snapshot header; no entry collection",
+             "content": {
+               "application/json": {
+                 "schema": {
+@@ -1052,7 +1052,7 @@
+                 "description": "Strong scope/generation/epoch/catalog/overlay token, including null-header bootstrap. Exact composition and canonical scope hashing in API-CONTRACT.md.",
+                 "schema": {
+                   "type": "string",
+-                  "pattern": "^\"dv1:[0-9a-f]{64}:(0|[1-9][0-9]*):(0|[1-9][0-9]*):(0|[1-9][0-9]*):(0|[1-9][0-9]*)\"$"
++                  "pattern": "^\"dv2:[0-9a-f]{64}:(0|[1-9][0-9]*):(0|[1-9][0-9]*):(0|[1-9][0-9]*):(0|[1-9][0-9]*):[0-9a-f]{64}\"$"
+                 }
+               }
+             }
+@@ -1120,7 +1120,7 @@
+     "/v1/catalog/device-views/refresh": {
+       "post": {
+         "operationId": "requestDeviceViewRefresh",
+-        "description": "Authenticated local owner only, within configured backend authority. Request bounded supported metadata refresh; never accept asserted facts, available flags, arbitrary probes or permission changes. Startup/event refresh uses the same internal coordinator. No HTTP service is implemented. After scope authorization, missing/malformed/mismatching strong current-status ETag returns428/400/412. Matched refresh atomically increments epoch and marks stale, including bootstrap; no duplicate stale token can be admitted. Exact dv1 syntax in API-CONTRACT.md.",
++        "description": "Authenticated local owner only, within configured backend authority. Request bounded supported metadata refresh; never accept asserted facts, available flags, arbitrary probes or permission changes. Startup/event refresh uses the same internal coordinator. No HTTP service is implemented. After scope authorization, missing/malformed/mismatching strong current-status ETag returns428/400/412. Matched refresh atomically increments epoch and marks stale, including bootstrap; no duplicate stale token can be admitted. Exact dv2 syntax in API-CONTRACT.md.",
+         "security": [
+           {
+             "catalogAuth": [
+@@ -1135,7 +1135,7 @@
+             "required": true,
+             "schema": {
+               "type": "string",
+-              "pattern": "^\"dv1:[0-9a-f]{64}:(0|[1-9][0-9]*):(0|[1-9][0-9]*):(0|[1-9][0-9]*):(0|[1-9][0-9]*)\"$"
++              "pattern": "^\"dv2:[0-9a-f]{64}:(0|[1-9][0-9]*):(0|[1-9][0-9]*):(0|[1-9][0-9]*):(0|[1-9][0-9]*):[0-9a-f]{64}\"$"
+             }
+           }
+         ],
+@@ -1158,7 +1158,7 @@
+                 "description": "New current-view token",
+                 "schema": {
+                   "type": "string",
+-                  "pattern": "^\"dv1:[0-9a-f]{64}:(0|[1-9][0-9]*):(0|[1-9][0-9]*):(0|[1-9][0-9]*):(0|[1-9][0-9]*)\"$"
++                  "pattern": "^\"dv2:[0-9a-f]{64}:(0|[1-9][0-9]*):(0|[1-9][0-9]*):(0|[1-9][0-9]*):(0|[1-9][0-9]*):[0-9a-f]{64}\"$"
+                 }
+               }
+             },
+@@ -1181,7 +1181,7 @@
+                 "description": "Current authorized-scope view token",
+                 "schema": {
+                   "type": "string",
+-                  "pattern": "^\"dv1:[0-9a-f]{64}:(0|[1-9][0-9]*):(0|[1-9][0-9]*):(0|[1-9][0-9]*):(0|[1-9][0-9]*)\"$"
++                  "pattern": "^\"dv2:[0-9a-f]{64}:(0|[1-9][0-9]*):(0|[1-9][0-9]*):(0|[1-9][0-9]*):(0|[1-9][0-9]*):[0-9a-f]{64}\"$"
+                 }
+               }
+             }
+@@ -1265,14 +1265,21 @@
+           "410": {
+             "description": "Expired/stale snapshot or cursor"
+           },
+-          "403": {
+-            "description": "Profile/target access denied"
+-          },
+           "400": {
+             "description": "Malformed bounded request or cursor"
+           },
+           "401": {
+             "description": "Authentication required"
++          },
++          "404": {
++            "description": "Unknown or inaccessible snapshot; same disclosure rule as sibling snapshot endpoint",
++            "content": {
++              "application/json": {
++                "schema": {
++                  "$ref": "#/components/schemas/Error"
++                }
++              }
++            }
+           }
+         }
+       }
+@@ -2251,7 +2258,9 @@
+           "introduced",
+           "removed"
+         ],
+-        "additionalProperties": false
++        "additionalProperties": false,
++        "x-internal": true,
++        "description": " Internal collector/catalog reference contract, not an administration request DTO."
+       },
+       "DeviceModuleRange": {
+         "type": "object",
+@@ -2278,7 +2287,9 @@
+           "introduced",
+           "removed"
+         ],
+-        "additionalProperties": false
++        "additionalProperties": false,
++        "x-internal": true,
++        "description": " Internal collector/catalog reference contract, not an administration request DTO."
+       },
+       "DeviceInterfaceConstraint": {
+         "type": "object",
+@@ -2313,7 +2324,9 @@
+           "minimum_version",
+           "accepted_hashes"
+         ],
+-        "additionalProperties": false
++        "additionalProperties": false,
++        "x-internal": true,
++        "description": " Internal collector/catalog reference contract, not an administration request DTO."
+       },
+       "DeviceClause": {
+         "type": "object",
+@@ -2357,11 +2370,31 @@
+           "unknown_reason": {
+             "type": "string",
+             "minLength": 1
++          },
++          "platform_point": {
++            "type": "array",
++            "prefixItems": [
++              {
++                "type": "integer",
++                "minimum": 0,
++                "maximum": 2147483647
++              },
++              {
++                "type": "integer",
++                "minimum": 0,
++                "maximum": 2147483647
++              }
++            ],
++            "items": false,
++            "minItems": 2,
++            "maxItems": 2
+           }
+         },
+         "required": [],
+         "additionalProperties": false,
+-        "minProperties": 1
++        "minProperties": 1,
++        "x-internal": true,
++        "description": " Internal collector/catalog reference contract, not an administration request DTO."
+       },
+       "DeviceRule": {
+         "oneOf": [
+@@ -2404,7 +2437,9 @@
+             ],
+             "additionalProperties": false
+           }
+-        ]
++        ],
++        "x-internal": true,
++        "description": " Internal collector/catalog reference contract, not an administration request DTO."
+       },
+       "DeviceModuleFact": {
+         "type": "object",
+@@ -2437,7 +2472,9 @@
+           "version",
+           "authoritative"
+         ],
+-        "additionalProperties": false
++        "additionalProperties": false,
++        "x-internal": true,
++        "description": " Internal collector/catalog reference contract, not an administration request DTO."
+       },
+       "DeviceInterfaceFact": {
+         "type": "object",
+@@ -2485,7 +2522,9 @@
+           "hash",
+           "authoritative"
+         ],
+-        "additionalProperties": false
++        "additionalProperties": false,
++        "x-internal": true,
++        "description": " Internal collector/catalog reference contract, not an administration request DTO."
+       },
+       "DeviceFacts": {
+         "type": "object",
+@@ -2634,7 +2673,9 @@
+           "build_fingerprint",
+           "evidence_ids"
+         ],
+-        "additionalProperties": false
++        "additionalProperties": false,
++        "x-internal": true,
++        "description": " Internal collector/catalog reference contract, not an administration request DTO."
+       },
+       "DeviceDependency": {
+         "type": "object",
+@@ -2652,7 +2693,9 @@
+           "entry_id",
+           "schema_hash"
+         ],
+-        "additionalProperties": false
++        "additionalProperties": false,
++        "x-internal": true,
++        "description": " Internal collector/catalog reference contract, not an administration request DTO."
+       },
+       "DeviceVariant": {
+         "type": "object",
+@@ -2677,7 +2720,9 @@
+           "availability",
+           "dependencies"
+         ],
+-        "additionalProperties": false
++        "additionalProperties": false,
++        "x-internal": true,
++        "description": " Internal collector/catalog reference contract, not an administration request DTO."
+       },
+       "DeviceInventoryEntity": {
+         "type": "object",
+@@ -2706,7 +2751,9 @@
+           "entity_kind",
+           "variants"
+         ],
+-        "additionalProperties": false
++        "additionalProperties": false,
++        "x-internal": true,
++        "description": " Internal collector/catalog reference contract, not an administration request DTO."
+       },
+       "DeviceResolvedEntry": {
+         "type": "object",
+@@ -2751,7 +2798,7 @@
+           "dependencies": {
+             "type": "array",
+             "items": {
+-              "$ref": "#/components/schemas/DeviceDependency"
++              "$ref": "#/components/schemas/DeviceResolvedDependency"
+             },
+             "minItems": 0
+           },
+@@ -2765,6 +2812,17 @@
+                 "type": "null"
+               }
+             ]
++          },
++          "contract_hash": {
++            "anyOf": [
++              {
++                "type": "string",
++                "pattern": "^[a-f0-9]{64}$"
++              },
++              {
++                "type": "null"
++              }
++            ]
+           }
+         },
+         "required": [
+@@ -2774,7 +2832,8 @@
+           "reason_codes",
+           "schema_hash",
+           "dependencies",
+-          "graph_digest"
++          "graph_digest",
++          "contract_hash"
+         ],
+         "additionalProperties": false,
+         "allOf": [
+@@ -2795,6 +2854,10 @@
+                 "graph_digest": {
+                   "type": "string",
+                   "pattern": "^[a-f0-9]{64}$"
++                },
++                "contract_hash": {
++                  "type": "string",
++                  "pattern": "^[a-f0-9]{64}$"
+                 }
+               }
+             }
+@@ -2805,7 +2868,7 @@
+         "type": "object",
+         "properties": {
+           "schema_version": {
+-            "const": "2.0.0"
++            "const": "3.0.0"
+           },
+           "view_id": {
+             "type": "string",
+@@ -2871,6 +2934,10 @@
+           "device_instance_id": {
+             "type": "string",
+             "minLength": 1
++          },
++          "inventory_sha256": {
++            "type": "string",
++            "pattern": "^[a-f0-9]{64}$"
+           }
+         },
+         "required": [
+@@ -2888,9 +2955,12 @@
+           "target_key",
+           "android_user_id",
+           "backend_instance_id",
+-          "device_instance_id"
+-        ],
+-        "additionalProperties": false
++          "device_instance_id",
++          "inventory_sha256"
++        ],
++        "additionalProperties": false,
++        "x-internal": true,
++        "description": " Internal collector/catalog reference contract, not an administration request DTO."
+       },
+       "DeviceRefreshRequest": {
+         "type": "object",
+@@ -2914,7 +2984,7 @@
+         "type": "object",
+         "properties": {
+           "schema_version": {
+-            "const": "2.0.0"
++            "const": "3.0.0"
+           },
+           "view_id": {
+             "type": "string",
+@@ -2973,6 +3043,10 @@
+           "device_instance_id": {
+             "type": "string",
+             "minLength": 1
++          },
++          "inventory_sha256": {
++            "type": "string",
++            "pattern": "^[a-f0-9]{64}$"
+           }
+         },
+         "required": [
+@@ -2989,7 +3063,8 @@
+           "target_key",
+           "android_user_id",
+           "backend_instance_id",
+-          "device_instance_id"
++          "device_instance_id",
++          "inventory_sha256"
+         ],
+         "additionalProperties": false
+       },
+@@ -3066,6 +3141,24 @@
+           "next_cursor"
+         ],
+         "additionalProperties": false
++      },
++      "DeviceResolvedDependency": {
++        "type": "object",
++        "properties": {
++          "entry_id": {
++            "type": "string",
++            "pattern": "^[a-f0-9]{64}$"
++          },
++          "contract_hash": {
++            "type": "string",
++            "pattern": "^[a-f0-9]{64}$"
++          }
++        },
++        "required": [
++          "entry_id",
++          "contract_hash"
++        ],
++        "additionalProperties": false
+       }
+     }
+   }
+--- a/catalog/tests/test_device_catalog_pipeline.py
++++ b/catalog/tests/test_device_catalog_pipeline.py
+@@ -20,14 +20,14 @@
+                 registry=catalog.execute('SELECT registry_id FROM active_registry').fetchone()[0]
+                 raw=list(catalog_projection.load_inventory(catalog,registry))
+                 count=catalog.execute('SELECT count(*) FROM effective_entries').fetchone()[0]
+-            self.assertGreaterEqual(len(raw),count)
++            self.assertEqual(len(raw),count)
+             for item in raw:dr.validate(item,'InventoryEntity')
+             facts=f.facts();facts['platform']={'major':36,'minor':0}
+             snapshot=dr.resolve(raw,facts,registry_id=registry,catalog_generation=1,overlay_generation=0,capability_epoch=0,view_generation=1)
+             self.assertEqual(snapshot['inventory_count'],len(raw))
+-            member=hashlib.sha256(b'java:a.A#go(int)').hexdigest();self.assertEqual(next(r for r in snapshot['entries'] if r['entry_id']==member)['state'],'unavailable')
++            member=hashlib.sha256(b'java:a.A#go(int)').hexdigest();self.assertEqual(next(r for r in snapshot['entries'] if r['entry_id']==member)['state'],'unknown')
+             db=sqlite3.connect(':memory:');self.addCleanup(db.close);db.executescript((P/'bridge-config.sql').read_text());db.execute("INSERT INTO connection_profiles(profile_id,backend_kind,display_name,enabled,row_version,android_user_id,endpoint_metadata_json,verification_strength) VALUES('fixture','self_adb','fixture',0,1,0,'{}','fixture')");db.commit()
+-            store=device_view_storage.DeviceViewStore(db,facts,registry_id=registry,catalog_generation=1,overlay_generation=0,inventory_count=len(raw));store.publish(snapshot,facts=facts,expected_generation=0)
++            store=device_view_storage.DeviceViewStore(db,facts,registry_id=registry,catalog_generation=1,overlay_generation=0,inventory=raw,inventory_count=len(raw));store.publish(snapshot,facts=facts,expected_generation=0)
+             self.assertEqual(store.read()['snapshot'],snapshot);store.invalidate('device-build-change');self.assertTrue(store.read()['stale'])
+     def test_generated_aliases_pin_the_selected_device_schema_and_shared_policy(self):
+         import dispatch_manifest,policy_reference
+--- a/catalog/tests/test_device_resolution.py
++++ b/catalog/tests/test_device_resolution.py
+@@ -53,7 +53,7 @@
+     def test_unknown_lifecycle_is_retained_with_reason(self):
+         item=entity('a');item['variants'][0]['availability']={'unknown_reason':'OEM lifecycle not acquired','x-raw':{'vendor':1}};rows=resolved([item]);self.assertEqual(rows[h('a')]['state'],'unknown');self.assertTrue(rows[h('a')]['reason_codes'])
+     def test_atomic_publication_epoch_invalidation_and_cross_target(self):
+-        store=resolver.ViewStore(h('f'),1,0,'fixture','platform:local',0,'backend-fixture','boot-fixture');candidate=resolver.resolve([entity('a')],facts(),registry_id=h('f'),catalog_generation=1,overlay_generation=0,capability_epoch=0,view_generation=1)
++        store=resolver.ViewStore(h('f'),1,0,'fixture','platform:local',0,'backend-fixture','boot-fixture',inventory=[entity('a')]);candidate=resolver.resolve([entity('a')],facts(),registry_id=h('f'),catalog_generation=1,overlay_generation=0,capability_epoch=0,view_generation=1)
+         store.publish(candidate,expected_generation=0,facts=facts());original=copy.deepcopy(store.read()['snapshot']);store.invalidate('backend-disconnect')
+         self.assertTrue(store.read()['stale']);self.assertEqual(store.read()['snapshot'],original)
+         with self.assertRaises(resolver.StaleView):store.publish(candidate,expected_generation=1,facts=facts())
+@@ -79,7 +79,7 @@
+     def test_status_is_bounded_header_and_etag_scope_is_distinct(self):
+         store=resolver.ViewStore(h('f'),1,0,'fixture','platform:local',0,'backend-fixture','boot-fixture')
+         other=resolver.ViewStore(h('f'),1,0,'other','platform:local',0,'backend-fixture','boot-fixture');self.assertNotEqual(store.etag(),other.etag())
+-        snapshot=resolver.resolve([entity('a')],facts(),registry_id=h('f'),catalog_generation=1,overlay_generation=0,capability_epoch=0,view_generation=1);store.publish(snapshot,expected_generation=0,facts=facts())
++        snapshot=resolver.resolve([entity('a')],facts(),registry_id=h('f'),catalog_generation=1,overlay_generation=0,capability_epoch=0,view_generation=1);store.inventory=[entity('a')];store.inventory_sha256=resolver.inventory_digest(store.inventory);store.publish(snapshot,expected_generation=0,facts=facts())
+         self.assertNotIn('entries',store.status()['header']);resolver.validate(store.status(),'StatusResponse')
+     def test_epoch_exhaustion_does_not_mutate_catalog_pins(self):
+         store=resolver.ViewStore(h('f'),1,0,'fixture','platform:local',0,'backend-fixture','boot-fixture');store.epoch=resolver.LIMIT;before=store.catalog
+--- a/catalog/tests/test_device_view_storage.py
++++ b/catalog/tests/test_device_view_storage.py
+@@ -9,7 +9,8 @@
+         self.assertIsNotNone(storage,'Device-view SQLite reference storage missing')
+         self.db=sqlite3.connect(':memory:');self.addCleanup(self.db.close);self.db.executescript((P/'bridge-config.sql').read_text())
+         self.db.execute("INSERT INTO connection_profiles(profile_id,backend_kind,display_name,enabled,row_version,android_user_id,endpoint_metadata_json,verification_strength) VALUES('fixture','self_adb','fixture',0,1,0,'{}','fixture')");self.db.commit()
+-        self.store=storage.DeviceViewStore(self.db,f.facts(),registry_id=f.h('f'),catalog_generation=1,overlay_generation=0,inventory_count=2)
++        self.inventory=[f.entity('a',dependencies=[dict(entry_id=f.h('b'),schema_hash=f.h('b'))]),f.entity('b','type',schema='b')]
++        self.store=storage.DeviceViewStore(self.db,f.facts(),registry_id=f.h('f'),catalog_generation=1,overlay_generation=0,inventory=self.inventory,inventory_count=2)
+     def snapshot(self,facts=None,view_generation=1):
+         facts=facts or f.facts();return dr.resolve([f.entity('a',dependencies=[dict(entry_id=f.h('b'),schema_hash=f.h('b'))]),f.entity('b','type',schema='b')],facts,registry_id=f.h('f'),catalog_generation=1,overlay_generation=0,capability_epoch=facts['capability_epoch'],view_generation=view_generation)
+     def test_complete_atomic_activation_and_type_projection(self):
+@@ -44,8 +45,8 @@
+         self.assertEqual(self.db.execute('SELECT count(*) FROM device_views').fetchone()[0],0)
+     def test_entry_json_cannot_override_normalized_availability(self):
+         self.store.publish(self.snapshot(),facts=f.facts(),expected_generation=0);snapshot=self.snapshot(view_generation=2);header={k:v for k,v in snapshot.items() if k!='entries'}
+-        self.db.execute('INSERT INTO device_views VALUES(?,?,?,?,?,?,?,?,?,?,?)',(snapshot['view_id'],self.store.scope_id,snapshot['registry_id'],1,0,0,2,2,snapshot['facts_id'],dr.canonical(header),'staged'))
++        self.db.execute('INSERT INTO device_views VALUES(?,?,?,?,?,?,?,?,?,?,?,?)',(snapshot['view_id'],self.store.scope_id,snapshot['registry_id'],1,0,0,2,2,snapshot['inventory_sha256'],snapshot['facts_id'],dr.canonical(header),'staged'))
+         row=snapshot['entries'][0]
+-        with self.assertRaisesRegex(sqlite3.IntegrityError,'JSON disagrees'):self.db.execute('INSERT INTO device_view_entries VALUES(?,?,?,?,?,?,?,?,?)',(snapshot['view_id'],row['entry_id'],row['entity_kind'],'unknown',dr.canonical(row['reason_codes']),row['schema_hash'],dr.canonical(row['dependencies']),row['graph_digest'],dr.canonical(row)))
++        with self.assertRaisesRegex(sqlite3.IntegrityError,'JSON disagrees'):self.db.execute('INSERT INTO device_view_entries VALUES(?,?,?,?,?,?,?,?,?,?)',(snapshot['view_id'],row['entry_id'],row['entity_kind'],'unknown',dr.canonical(row['reason_codes']),row['schema_hash'],row['contract_hash'],dr.canonical(row['dependencies']),row['graph_digest'],dr.canonical(row)))
+         self.db.rollback();self.assertEqual(self.store.read()['generation'],1)
+ if __name__=='__main__':unittest.main()
+--- a/catalog/tests/test_hidl_import.py
++++ b/catalog/tests/test_hidl_import.py
+@@ -0,0 +1,23 @@
++import unittest,pathlib,tempfile,sys,json,sqlite3,contextlib,base64
++sys.path.insert(0,str(pathlib.Path(__file__).resolve().parents[1]/'tooling'))
++import build_catalog,test_build,hashlib,copy
++class HidlImport(unittest.TestCase):
++ def fixture(self,root,raw,**extras):
++  inv=test_build.BuildTests().fixture(root);spec=json.loads(inv.read_text());(root/'IFoo.hal').write_bytes(raw);s=copy.deepcopy(spec['sources'][2]);s.update(kind='evidence',path='IFoo.hal',local_path='IFoo.hal',scope='aosp-pinned-hidl-source-evidence',api_level=None,channel='unknown',platform_api_version=None,sha256=hashlib.sha256(raw).hexdigest(),git_blob=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest(),size_bytes=len(raw));s.update(extras);spec['sources'].append(s);inv.write_text(json.dumps(spec));return inv
++ def test_structural_records_and_multi_results_survive_schema_gate(self):
++  with tempfile.TemporaryDirectory() as directory:
++   root=pathlib.Path(directory);inv=self.fixture(root,b'package hardware.test@2.7; interface IFoo { struct Point { int32_t x; }; get(Point[3]points) generates (bool ok, Point result); };');build_catalog.build(inv,root/'out')
++   with contextlib.closing(sqlite3.connect(root/'out/catalog.sqlite')) as db:
++    docs=[json.loads(r[0]) for r in db.execute("SELECT document_json FROM registry_entries WHERE json_extract(document_json,'$.extensions.language')='hidl'")]
++    self.assertEqual(len(docs),5);method=next(d for d in docs if d['kind']=='method');self.assertEqual(len(method['extensions']['results']),2);self.assertEqual(method['permission']['op'],'unknown');self.assertEqual(method['codec_status'],'unknown')
++    self.assertIn('hardware.test@2.7::IFoo.Point',[d['canonical_signature'].removeprefix('hidl:') for d in docs]);self.assertTrue(all('unknown_reason' in v['availability'] for d in docs for v in d['extensions']['device_resolution_variants']))
++ def test_package_version_cannot_become_android_api_applicability(self):
++  with tempfile.TemporaryDirectory() as directory:
++   root=pathlib.Path(directory);inv=self.fixture(root,b'package hardware.test@2.7; interface IFoo {};',platform_api_version='37.0')
++   with self.assertRaisesRegex(ValueError,'does not establish Android applicability'):build_catalog.build(inv,root/'out')
++   self.assertFalse((root/'out/catalog.sqlite').exists())
++ def test_invalid_utf8_retains_source_without_binding_inference(self):
++  with tempfile.TemporaryDirectory() as directory:
++   root=pathlib.Path(directory);raw=b'invalid\xffHIDL';inv=self.fixture(root,raw);build_catalog.build(inv,root/'out')
++   with contextlib.closing(sqlite3.connect(root/'out/catalog.sqlite')) as db:
++    value=db.execute("SELECT raw FROM issues WHERE category='hidl-source'").fetchone()[0];self.assertEqual(base64.b64decode(value),raw);self.assertEqual(db.execute("SELECT count(*) FROM registry_entries WHERE json_extract(document_json,'$.extensions.language')='hidl'").fetchone()[0],0)
+--- a/catalog/tests/test_hidl_source.py
++++ b/catalog/tests/test_hidl_source.py
+@@ -0,0 +1,46 @@
++import unittest,pathlib,sys
++sys.path.insert(0,str(pathlib.Path(__file__).resolve().parents[1]/'tooling'))
++from hidl_source import parse
++class Hidl(unittest.TestCase):
++ def test_interface_nested_type_and_following_method(self):
++  result=parse('package android.hardware.test@1.0; interface IFoo { struct Point { int32_t x; }; get(vec<Point> points) generates (bool ok, Point[3] triangle); };')
++  self.assertEqual([r['name'] for r in result['records']],['android.hardware.test@1.0','IFoo','Point','x','get']);self.assertEqual(result['unsupported'],[])
++  method=result['records'][-1];self.assertEqual(method['extras']['results'][1]['type'],'Point[3]');self.assertIsNone(method['extras']['wire_transaction_id'])
++ def test_shifts_dont_consume_enum_values_or_following_method(self):
++  result=parse('package p@1.0; interface I { enum Flags : uint32_t { A=1<<2, B=A|2, C }; ping(); };')
++  self.assertEqual([r['name'] for r in result['records']][-4:],['A','B','C','ping'])
++ def test_nested_template_comma_separation(self):
++  result=parse('package p@1.0; interface I { m(vec<vec<int32_t>> a, bitfield<Flags> b); };');method=result['records'][-1]
++  self.assertEqual([p['type'] for p in method['parameters']],['vec<vec<int32_t>>','bitfield<Flags>'])
++ def test_annotations_with_braces_and_semicolon_string_are_not_bodies(self):
++  result=parse('package p@1.0; @Callflow(next={"a;","b"}) interface I { @entry m(); };')
++  self.assertEqual([r['name'] for r in result['records']],['p@1.0','I','m']);self.assertEqual(len(result['records'][1]['all_annotations']),1)
++ def test_comments_and_line_offsets(self):
++  result=parse('\n'*300+'// interface IFake {};\npackage p@1.0; interface I {};')
++  self.assertEqual(len(result['records']),2);self.assertEqual(result['records'][1]['line'],302)
++ def test_unknown_statement_and_missing_package_retained(self):
++  result=parse('package p@1.0; mystery ?;');self.assertEqual(result['records'][-1]['kind'],'unsupported');self.assertEqual(len(result['unsupported']),1)
++  self.assertEqual(parse('interface I {};')['records'][0]['kind'],'unsupported')
++ def test_oneway_with_results_not_silently_accepted(self):
++  result=parse('package p@1.0; interface I { oneway m() generates (bool ok); };');self.assertEqual(result['records'][-1]['kind'],'unsupported')
++ def test_source_hidl_version_is_not_android_availability(self):
++  result=parse('package p@2.7; interface I {};');r=result['records'][1]
++  self.assertEqual(r['extras']['hidl_package_version'],'2.7');self.assertEqual(r['extras']['android_availability'],'unknown')
++ def test_typedef_and_safe_union(self):
++  result=parse('package p@1.0; typedef vec<int32_t> Values; safe_union Value { int32_t number; string text; };')
++  self.assertEqual([r['name'] for r in result['records']],['p@1.0','Values','Value','number','text'])
++ def test_type_canonical_does_not_repeat_own_name(self):
++  result=parse('package p@1.0; interface I { struct Point { int32_t x; }; };')
++  self.assertEqual(result['records'][1]['canonical'],'p@1.0::I');self.assertEqual(result['records'][2]['canonical'],'p@1.0::I.Point')
++ def test_line_of_method_after_leading_blank_lines(self):
++  result=parse('package p@1.0;\ninterface I {\n\n m();\n};')
++  self.assertEqual(result['records'][-1]['line'],4)
++ def test_missing_semicolon_and_nested_interface_retained_unknown(self):
++  self.assertTrue(parse('package p@1.0; interface I {}')['unsupported'])
++  self.assertTrue(parse('package p@1.0; interface I { interface INested {}; };')['unsupported'])
++ def test_interface_special_type_is_a_field_not_nested_declaration(self):
++  result=parse('package p@1.0; struct Holder { interface instance; };')
++  self.assertEqual(result['records'][-1]['kind'],'field');self.assertEqual(result['records'][-1]['return_type'],'interface');self.assertEqual(result['unsupported'],[])
++ def test_type_delimiter_can_touch_variable_name(self):
++  result=parse('package p@1.0; interface I { m(vec<uint8_t>input) generates (uint32_t[3]output); };')
++  self.assertEqual(result['records'][-1]['parameters'][0]['name'],'input');self.assertEqual(result['records'][-1]['extras']['results'][0]['name'],'output');self.assertEqual(result['unsupported'],[])
+--- a/catalog/tests/test_postfreeze11.py
++++ b/catalog/tests/test_postfreeze11.py
+@@ -0,0 +1,16 @@
++"""Post-freeze011 audit: downstream type changes must invalidate schema grants."""
++import json,pathlib,sys,tempfile,unittest
++P=pathlib.Path(__file__).resolve().parents[1];sys.path.insert(0,str(P/'tooling'))
++import build_catalog,test_round8,device_resolution as dr,test_device_resolution as f,policy_reference
++class TransitiveSchemaPolicy(unittest.TestCase):
++    def test_downstream_type_shape_changes_selected_binding_schema_hash(self):
++        hashes=[];graphs=[]
++        for field_type in ('int','long'):
++            with tempfile.TemporaryDirectory() as td:
++                root=pathlib.Path(td);inv=test_round8.Review8().fixture(root,'package a; interface I { parcelable P { '+field_type+' x; } void take(in P p); }');build_catalog.build(inv,root/'out')
++                docs=[json.loads(s) for s in (root/'out/entries.jsonl').read_text().splitlines()];key=next(d['entry_id'] for d in docs if d['canonical_signature']=='aidl:a.I#take(P)');inventory=[json.loads(s) for s in (root/'out/device_inventory.jsonl').read_text().splitlines()]
++                facts=f.facts();facts['platform']={'major':37,'minor':0};snapshot=dr.resolve(inventory,facts,registry_id=f.h('f'),catalog_generation=1,overlay_generation=0,capability_epoch=0,view_generation=1);row=next(r for r in snapshot['entries'] if r['entry_id']==key);self.assertEqual(row['state'],'available');hashes.append(row['schema_hash']);graphs.append(row['graph_digest'])
++        self.assertNotEqual(graphs[0],graphs[1]);self.assertNotEqual(hashes[0],hashes[1],'A widened dependent type must not reuse an existing binding schema grant')
++        old=policy_reference.Rule('allow',hashes[0],frozenset({'fixture'}),1);entry=policy_reference.Rule('allow','tool',frozenset({'fixture'}),1)
++        self.assertEqual(policy_reference.evaluate([(key,hashes[1],'fixture',1)],{key:old},entry,entry_schema='tool',authority=True),'deny')
++if __name__=='__main__':unittest.main()
+--- a/catalog/tests/test_round10.py
++++ b/catalog/tests/test_round10.py
+@@ -34,7 +34,7 @@
+     def test_graph_digest_is_recomputed_at_publication(self):
+         facts=fixtures.facts();snapshot=dr.resolve([fixtures.entity('a')],facts,registry_id=fixtures.h('f'),catalog_generation=1,overlay_generation=0,capability_epoch=0,view_generation=1)
+         snapshot['entries'][0]['graph_digest']=fixtures.h('b');snapshot['view_id']=dr.digest({k:v for k,v in snapshot.items() if k!='view_id'})
+-        store=dr.ViewStore(fixtures.h('f'),1,0,'fixture','platform:local',0,'backend-fixture','boot-fixture')
++        store=dr.ViewStore(fixtures.h('f'),1,0,'fixture','platform:local',0,'backend-fixture','boot-fixture',inventory=[fixtures.entity('a')])
+         with self.assertRaisesRegex(ValueError,'graph digest'):store.publish(snapshot,expected_generation=0,facts=facts)
+         self.assertIsNone(store.active)
+ 
+--- a/catalog/tests/test_round11.py
++++ b/catalog/tests/test_round11.py
+@@ -0,0 +1,39 @@
++"""Regression evidence for independent round011; no device or network work."""
++import copy,hashlib,json,pathlib,sqlite3,sys,tempfile,unittest
++P=pathlib.Path(__file__).resolve().parents[1];sys.path.insert(0,str(P/'tooling'))
++import catalog_projection as cp,device_resolution as dr,dispatch_manifest,build_catalog,test_build,test_device_resolution as f
++class Round11(unittest.TestCase):
++ def test_source_point_is_unknown_outside_proven_minor(self):
++  rule=cp.lifecycle_rule({'extensions':{}},{'source_id':f.h('a'),'platform_api_version':'37.2'})
++  for major,minor,state in [(36,0,'unknown'),(37,1,'unknown'),(37,2,'available'),(38,0,'unknown'),(37,None,'unknown')]:
++   facts=f.facts();facts['platform']={'major':major,'minor':minor}
++   with self.subTest(major=major,minor=minor):self.assertEqual(dr.applicability(rule,facts)[0],state)
++ def test_inconsistent_since_sdks_is_unknown(self):
++  for sdks in [[{'sdk_id':'0','minimum_version':'34'},{'sdk_id':'30','minimum_version':'4'}],[{'sdk_id':'30','minimum_version':'4'}]]:
++   doc={'extensions':{'source_kind':'sdk-api-index','api_lifecycle':{'since':'35'},'sdk_extensions':sdks}}
++   self.assertIn('unknown_reason',cp.lifecycle_rule(doc,{'source_id':f.h('a')}))
++ def test_lifecycle_text_does_not_change_declared_type_contract(self):
++  doc={'canonical_signature':'jvm:a/A','kind':'type','arguments':[],'codec_status':'unknown','extensions':{'declared_type_shape':{'header':'<class name="a/A" since="34"/>','fields':[]}}}
++  other=copy.deepcopy(doc);other['extensions']['declared_type_shape']['header']='<class name="a/A" since="35" removed="39" sdks="30:4,0:35"/>'
++  self.assertEqual(dispatch_manifest.contract_digest(doc),dispatch_manifest.contract_digest(other))
++ def test_imported_aidl_type_and_noninvocable_fields(self):
++  with tempfile.TemporaryDirectory() as td:
++   root=pathlib.Path(td);inv=test_build.BuildTests().fixture(root);spec=json.loads(inv.read_text())
++   for name,text in [('IFoo.aidl','package b; import a.P; interface I { void take(in P p); }'),('P.aidl','package a; parcelable P { int x; }')]:
++    raw=text.encode();(root/name).write_bytes(raw);s=copy.deepcopy(spec['sources'][2]);s.update(path=name,local_path=name,sha256=hashlib.sha256(raw).hexdigest(),git_blob=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest(),size_bytes=len(raw));
++    if name=='IFoo.aidl':spec['sources'][2]=s
++    else:spec['sources'].append(s)
++   inv.write_text(json.dumps(spec));build_catalog.build(inv,root/'out');docs={d['canonical_signature']:d for d in map(json.loads,(root/'out/entries.jsonl').read_text().splitlines())};inventory={d['entry_id']:d for d in map(json.loads,(root/'out/device_inventory.jsonl').read_text().splitlines())}
++   self.assertEqual(docs['aidl:b.I#take(P)']['arguments'][0]['status'],'resolved')
++   self.assertEqual(inventory[docs['aidl:a.P#x']['entry_id']]['entity_kind'],'other')
++ def test_same_count_foreign_inventory_cannot_activate(self):
++  inventory=[f.entity('a')];other=[f.entity('b')];facts=f.facts()
++  store=dr.ViewStore(f.h('f'),1,0,*[facts[k] for k in dr.SCOPE],inventory=inventory)
++  snapshot=dr.resolve(other,facts,registry_id=f.h('f'),catalog_generation=1,overlay_generation=0,capability_epoch=0,view_generation=1)
++  with self.assertRaisesRegex(ValueError,'inventory|Inventory'):store.publish(snapshot,expected_generation=0,facts=facts)
++ def test_formal_name_cannot_resolve_to_package_class(self):
++  with tempfile.TemporaryDirectory() as td:
++   root=pathlib.Path(td);inv=test_build.BuildTests().fixture(root);spec=json.loads(inv.read_text());raw=b'package a {\n public class P {\n }\n public class A<P> {\n method public P take(P);\n }\n}'
++   (root/'api.txt').write_bytes(raw);spec['sources'][0].update(sha256=hashlib.sha256(raw).hexdigest(),git_blob=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest(),size_bytes=len(raw));inv.write_text(json.dumps(spec));build_catalog.build(inv,root/'out')
++   doc=next(d for d in map(json.loads,(root/'out/entries.jsonl').read_text().splitlines()) if d['kind']=='method');self.assertEqual(doc['arguments'][0]['status'],'unknown');self.assertIn('formal',doc['arguments'][0]['reason'].lower())
++if __name__=='__main__':unittest.main()
+--- a/catalog/tooling/build_catalog.py
++++ b/catalog/tooling/build_catalog.py
+@@ -9,7 +9,7 @@
+ def js(x):return json.dumps(x,sort_keys=True,separators=(',',':'),ensure_ascii=False)
+ def hb(b):return hashlib.sha256(b).hexdigest()
+ def processing_fingerprint():
+- return sha(js({name:hb((P/name).read_bytes()) for name in ('tooling/build_catalog.py','tooling/cache_fingerprint.py','tooling/parsers.py','tooling/aidl_members.py','tooling/aidl_lex.py','tooling/foundation_extract.py','tooling/java_source.py','tooling/sdk_api_index.py','tooling/jvm_source_link.py','tooling/java_context.py','tooling/annotation_link.py','tooling/catalog_projection.py','tooling/dispatch_manifest.py','contracts/DeviceResolution.schema.json','contracts/Entry.schema.json','contracts/PermissionExpression.schema.json')}))
++ return sha(js({name:hb((P/name).read_bytes()) for name in ('tooling/build_catalog.py','tooling/cache_fingerprint.py','tooling/parsers.py','tooling/aidl_members.py','tooling/aidl_lex.py','tooling/hidl_source.py','tooling/foundation_extract.py','tooling/java_source.py','tooling/sdk_api_index.py','tooling/jvm_source_link.py','tooling/java_context.py','tooling/annotation_link.py','tooling/catalog_projection.py','tooling/dispatch_manifest.py','contracts/DeviceResolution.schema.json','contracts/Entry.schema.json','contracts/PermissionExpression.schema.json')}))
+ def ref(text):return dict(text=text,status='unknown',codec_status='unknown',reason='Source type retained; runtime resolver/codec not verified')
+ def cached_records(s,root):
+  cache=s.get('metadata_cache')
+@@ -38,6 +38,7 @@
+   if 'api_level' not in source or not isinstance(source.get('channel'),str) or not source['channel']:raise ValueError('Explicit source api_level/channel metadata required')
+   level=source['api_level']
+   if level is not None and (not isinstance(level,int) or isinstance(level,bool) or level<1):raise ValueError('Source api_level must be positive or null (unknown)')
++  if source.get('scope')=='aosp-pinned-hidl-source-evidence' and (level is not None or source.get('platform_api_version') is not None):raise ValueError('HIDL package/source-release version does not establish Android applicability; move release context to source_release_context and retain unknown applicability')
+ 
+  db=sqlite3.connect(out/'catalog.staging.sqlite');db.execute('PRAGMA foreign_keys=ON');db.execute('PRAGMA cache_size=-524288');db.execute('PRAGMA temp_store=MEMORY')
+  connections.append(db)
+@@ -171,6 +172,7 @@
+     else:r=dict(kind='unsupported',canonical='unparsed-source:'+s['repository']+':'+s['path']+':'+s['sha256'],owner=None,package=d['package'],name=s['path'].rsplit('/',1)[-1],return_type=None,parameters=[],annotations=[],all_annotations=[],raw=text,line=1,extras=dict(parse_error=d['reason'],source_bytes_retained=True))
+     add(r,s,'aidl');report['declarations']+=1;report['unsupported']+=r['kind']=='unsupported'
+     for r in d['members']:
++     r['extras']['imports']=d['imports']
+      r['extras']['interface_annotations']=d['annotations'];r['extras']['interface_permission']=permission(d['annotations'],symbols,True)
+      add(r,s,'aidl');report['declarations']+=1;report['unsupported']+=r['kind']=='unsupported';member_count+=1
+     if d['parse_status'] not in ('methods-parsed','field-metadata-parsed'):issue(s,d.get('declaration_line'),d['reason'],d.get('declaration_raw',text),'aidl-semantic-gap')
+@@ -183,6 +185,19 @@
+    report.update(status=status,member_chunks=member_count,declaration_count=len(declarations),aidl_lexical_inventory=lexical,aidl_reconciliation='matched' if reconciled else 'unreconciled')
+    if reconciled:report['expected_declarations']=lexical['expected_records']
+   elif kind=='sdk-annotations':report['status']='deferred-external-annotation-pass'
++  elif kind=='evidence' and s.get('scope')=='aosp-pinned-hidl-source-evidence':
++   from hidl_source import parse as parse_hidl
++   payload=path.read_bytes()
++   try:
++    text=payload.decode('utf-8');facts=parse_hidl(text)
++    for r in facts['records']:
++     add(r,s,'hidl');report['declarations']+=1;report['unsupported']+=r['kind']=='unsupported'
++    issue(s,None,'Full HIDL declared source retained; compiler/type/import/wire/runtime validity not established',text,'hidl-source')
++    report.update(status='hidl-structural-source-partial' if facts['unsupported'] else 'hidl-declared-structure-parsed',imports=facts['imports'],compiler_validation=False,wire_resolution='unknown',android_availability='unknown',normalizer_complete=False,raw_source_encoding='utf-8',raw_source_retained_in_issues=True)
++   except UnicodeDecodeError:
++    import base64
++    issue(s,None,'Non-UTF8 HIDL source retained losslessly; no declarations inferred',base64.b64encode(payload).decode('ascii'),'hidl-source')
++    report.update(status='hidl-source-encoding-unknown',raw_source_encoding='base64',raw_source_retained_in_issues=True,compiler_validation=False,normalizer_complete=False)
+   elif kind in ('evidence','sdk-history'):report['status']='retained-evidence-not-current-declarations'
+   else:issue(s,None,'Unrecognized source kind',kind);report['status']='unsupported'
+   per_source.append(report);totals[kind]+=1
+@@ -284,7 +299,7 @@
+     if node['op']=='unknown' and node.get('reason','').startswith('No declared recognized'):variant['x-absence-of-annotation']=True
+    doc['extensions']['permission_variants']=list(evidence_variants.values())
+   entity=projection.entity(bid,rows)
+-  doc['extensions']['device_resolution_variants']=entity['variants'];doc['extensions']['device_resolution_contract_version']='2.0.0'
++  doc['extensions']['device_resolution_variants']=entity['variants'];doc['extensions']['device_resolution_contract_version']='2.1.0'
+   doc['extensions']['occurrence_count']=len(rows);content=js(doc);digest=sha(content)
+   db.execute('INSERT INTO registry_entries VALUES (?,?,?,?)',(registry_id,bid,content,digest))
+   inventory_content=js(entity);db.execute('INSERT INTO registry_inventory VALUES(?,?,?,?)',(registry_id,bid,inventory_content,sha(inventory_content)))
+@@ -313,7 +328,7 @@
+  db.execute("UPDATE registries SET state='validated',validation_json=? WHERE registry_id=?",(js(validation),registry_id))
+  db.execute("UPDATE registries SET state='published' WHERE registry_id=?",(registry_id,))
+  db.execute('INSERT INTO active_registry(singleton,registry_id) VALUES (1,?)',(registry_id,))
+- db.executemany('INSERT INTO catalog_meta VALUES (?,?)',[('schema_version','1.2.0'),('entry_contract_version','1.1.0'),('device_resolution_contract_version','2.0.0'),('rebuilt_with_corrected_extractor','true'),('source_set_hash',set_hash),('coverage',meta['coverage']),('source_inventory_sha256',hb(invpath.read_bytes())),('authority','Metadata only; no OS capability or MCP client grant'),('sdk_api_level',str(meta.get('sdk_api_level','unknown'))),('current_sdk_metadata_api_level',str(meta.get('current_sdk_metadata_api_level','unknown')))])
++ db.executemany('INSERT INTO catalog_meta VALUES (?,?)',[('schema_version','1.2.0'),('entry_contract_version','1.1.0'),('device_resolution_contract_version','2.1.0'),('rebuilt_with_corrected_extractor','true'),('source_set_hash',set_hash),('coverage',meta['coverage']),('source_inventory_sha256',hb(invpath.read_bytes())),('authority','Metadata only; no OS capability or MCP client grant'),('sdk_api_level',str(meta.get('sdk_api_level','unknown'))),('current_sdk_metadata_api_level',str(meta.get('current_sdk_metadata_api_level','unknown')))])
+  db.commit();db.execute('PRAGMA optimize');db.close()
+  db=sqlite3.connect(out/'catalog.staging.sqlite');db.row_factory=sqlite3.Row
+  connections.append(db)
+@@ -326,7 +341,7 @@
+  with (out/'device_inventory.jsonl').open('w',encoding='utf-8',newline='\n') as f:
+   for row in db.execute('SELECT document_json FROM registry_inventory ORDER BY entry_id'):
+    line=row[0]+'\n';f.write(line);inventory_hash.update(line.encode('utf-8'))
+- (out/'device_inventory_manifest.json').write_text(js(dict(contract='urn:android-binding-catalog:2.0.0:DeviceResolution',registry_id=registry_id,entries=counts['bindings'],inventory_sha256=inventory_hash.hexdigest(),semantic_scope='Full versioned metadata inventory; no device observation or permission grant')))
++ (out/'device_inventory_manifest.json').write_text(js(dict(contract='urn:android-binding-catalog:2.1.0:DeviceResolution',registry_id=registry_id,entries=counts['bindings'],inventory_sha256=inventory_hash.hexdigest(),semantic_scope='Full versioned metadata inventory; no device observation or permission grant')))
+  # JSON export is streamed to avoid loading the catalog into memory.
+  with (out/'catalog.json').open('w') as f:
+   f.write('{"schema_version":"1.2.0","complete":false,"entries":[');first=True
+--- a/catalog/tooling/catalog_projection.py
++++ b/catalog/tooling/catalog_projection.py
+@@ -21,6 +21,8 @@
+    if removed is not None and removed<=introduced:raise ValueError('Malformed source lifecycle interval')
+    sdks=e.get('sdk_extensions',[]);alternatives=[]
+    if sdks:
++    platform_pairs=[item for item in sdks if item['sdk_id']=='0']
++    if len(platform_pairs)>1 or (platform_pairs and version(platform_pairs[0]['minimum_version'])!=introduced) or (not platform_pairs and 'since' in own):raise ValueError('Inconsistent explicit since/sdk platform evidence')
+     for item in sdks:
+      if item['sdk_id']=='0':alternatives.append(dict(platform=dict(introduced=version(item['minimum_version']),removed=removed)))
+      else:
+@@ -34,8 +36,7 @@
+   platform=source.get('platform_api_version')
+   if not isinstance(platform,str) or '.' not in platform:raise ValueError('Source API major alone does not prove minor applicability')
+   point=version(platform)
+-  if point[1]==2147483647:raise ValueError('Source minor cannot form an exact discrete interval')
+-  return dict(alternatives=[dict(platform=dict(introduced=point,removed=[point[0],point[1]+1]))],evidence_ids=evidence)
++  return dict(alternatives=[dict(platform_point=point)],evidence_ids=evidence)
+  except (ValueError,TypeError,KeyError) as error:return dict(unknown_reason=str(error),**{'x-raw':dict(source_id=source['source_id'],api_lifecycle=e.get('api_lifecycle'),platform_api_version=source.get('platform_api_version'))})
+ def incomplete(rule,reason):
+  rule=copy.deepcopy(rule)
+@@ -46,7 +47,7 @@
+ 
+ class Projection:
+  def __init__(self,db,sources):
+-  self.db=db;self.sources=sources;self.index=collections.defaultdict(set);self.type_hashes=collections.defaultdict(set);self.fields=collections.defaultdict(list)
++  self.db=db;self.sources=sources;self.index=collections.defaultdict(set);self.type_hashes=collections.defaultdict(set);self.fields=collections.defaultdict(list);self.formals=collections.defaultdict(set)
+   snapshots={}
+   for sid,source in sources.items():
+    key=(source.get('repository'),source.get('revision'),source.get('platform_api_version'),source.get('api_level'),source.get('channel')) if source.get('repository') and source.get('revision') else (sid,)
+@@ -55,7 +56,10 @@
+   placeholders=','.join('?' for _ in TYPE_KINDS)
+   query="SELECT d.source_id,d.document_json FROM binding_declarations d WHERE json_extract(d.document_json,'$.kind') IN ("+placeholders+')'
+   for sid,raw in db.execute(query,tuple(TYPE_KINDS)):
+-   doc=json.loads(raw);self.index[(snapshots[sid],doc['extensions']['language'],doc.get('owner') or doc['canonical_signature'].split(':',1)[1].replace('/','.').replace('$','.'))].add(doc['entry_id'])
++   doc=json.loads(raw)
++   from annotation_link import formal_names
++   self.formals[(sid,doc.get('owner',''))].update(formal_names(doc['provenance'][0]['raw_signature']))
++   self.index[(snapshots[sid],doc['extensions']['language'],doc.get('owner') or doc['canonical_signature'].split(':',1)[1].replace('/','.').replace('$','.'))].add(doc['entry_id'])
+   for sid,raw in db.execute("SELECT d.source_id,d.document_json FROM binding_declarations d WHERE json_extract(d.document_json,'$.kind') IN ('field','enum-constant')"):
+    doc=json.loads(raw)
+    if doc['extensions']['language']=='aidl':self.fields[(snapshots[sid],doc.get('owner'))].append((sid,doc))
+@@ -67,6 +71,12 @@
+    result.update(status='primitive',reason='Intrinsic language type; this does not prove a wire codec');return result
+   if not re.fullmatch(r'[A-Za-z_$][\w.$]*',base):result.update(status='unknown',reason='Generic/wildcard or unrecognized type schema requires source proof');return result
+   lang=doc['extensions']['language'];owner=doc.get('owner','');package=doc.get('package','');groups=[]
++  from annotation_link import formal_names
++  formals=formal_names(doc['provenance'][0]['raw_signature']);parent=owner
++  while parent and parent!=package:
++   formals.update(self.formals.get((sid,parent),set()));parent=parent.rsplit('.',1)[0] if '.' in parent else ''
++  if base.split('.',1)[0] in formals:
++   result.update(status='unknown',reason='Formal type variable requires instantiation proof');return result
+   if '.' in base:groups.append([base.replace('$','.')])
+   else:
+    parent=owner
+@@ -75,6 +85,8 @@
+    imported=[v for v in doc['extensions'].get('imports',[]) if v.rsplit('.',1)[-1]==base]
+    if imported:groups.append(imported)
+    groups.append([(package+'.' if package else '')+base])
++   if self.sources[sid]['kind'] in ('sdk-signature','source-signature'):
++    groups.append(['java.lang.'+base])
+   for group in groups:
+    matches=set().union(*(self.index.get((self.snapshots[sid],lang,candidate),set()) for candidate in group))
+    if len(matches)>1:result.update(status='unknown',reason='Ambiguous same-snapshot declared type');return result
+@@ -88,12 +100,12 @@
+    shape=[]
+    for field_sid,field in self.fields.get((self.snapshots[sid],doc.get('owner')),[]):
+     shape.append(dict(name=field['name'],type=self.type_ref(field['return_type'],field,field_sid) if field.get('return_type') else None,constant=field['extensions'].get('constant_raw')))
+-   doc['extensions']['declared_type_shape']=dict(header=doc['provenance'][0]['raw_signature'],fields=sorted(shape,key=js))
++   doc['extensions']['declared_type_shape']=dict(kind=doc['kind'],qualified_name=doc.get('owner') or doc['canonical_signature'].split(':',1)[1],fields=sorted(shape,key=js))
+   return doc
+  def entity(self,entry_id,rows):
+   variants={};kind=None
+   for sid,line,raw in rows:
+-   doc=json.loads(raw);kind='type' if doc['kind'] in TYPE_KINDS else 'other' if doc['kind'] in ('package','unsupported') else 'binding';rule=lifecycle_rule(doc,self.sources[sid]);dependencies={};unresolved=[]
++   doc=json.loads(raw);kind='type' if doc['kind'] in TYPE_KINDS else 'other' if doc['kind'] in ('package','unsupported','enum-constant') or (doc['kind']=='field' and (doc['extensions'].get('aidl_declaration_kind') or doc['extensions'].get('enum_constant') or doc['extensions']['language']=='hidl')) else 'binding';rule=lifecycle_rule(doc,self.sources[sid]);dependencies={};unresolved=[]
+    if doc['extensions'].get('field_type_status')=='unknown':unresolved.append('API index omits the required field type schema')
+    refs=list(doc.get('arguments',[]))+([doc['return_type']] if doc.get('return_type') else [])
+    if doc['kind'] in TYPE_KINDS:
+@@ -115,7 +127,7 @@
+  """Checked full projection from an immutable catalog; never invent legacy rows."""
+  import jsonschema,pathlib
+  version_row=db.execute("SELECT value FROM catalog_meta WHERE key='device_resolution_contract_version'").fetchone()
+- if not version_row or version_row[0]!='2.0.0':raise ValueError('No supported complete device inventory contract')
++ if not version_row or version_row[0]!='2.1.0':raise ValueError('No supported complete device inventory contract')
+  expected=db.execute('SELECT count(*) FROM registry_entries WHERE registry_id=?',(registry_id,)).fetchone()[0]
+  actual=db.execute('SELECT count(*) FROM registry_inventory WHERE registry_id=?',(registry_id,)).fetchone()[0]
+  if actual!=expected:raise ValueError('Incomplete registry inventory')
+@@ -137,7 +149,7 @@
+  sources={r[0] for r in db.execute('SELECT source_id FROM sources')};count=0;digest=hashlib.sha256()
+  for item in load_inventory(db,registry):
+   entry=json.loads(db.execute('SELECT document_json FROM registry_entries WHERE registry_id=? AND entry_id=?',(registry,item['entry_id'])).fetchone()[0])
+-  if entry['extensions'].get('device_resolution_contract_version')!='2.0.0' or entry['extensions'].get('device_resolution_variants')!=item['variants']:raise ValueError('Inventory differs from hashed Entry projection')
++  if entry['extensions'].get('device_resolution_contract_version')!='2.1.0' or entry['extensions'].get('device_resolution_variants')!=item['variants']:raise ValueError('Inventory differs from hashed Entry projection')
+   for variant in item['variants']:
+    rule=variant['availability'];ids=rule.get('evidence_ids',[rule.get('x-raw',{}).get('source_id')])
+    if not ids or any(sid not in sources for sid in ids):raise ValueError('Inventory source evidence missing')
+@@ -149,5 +161,5 @@
+  manifest=json.loads(manifest_path.read_text());file_digest=hashlib.sha256()
+  with path.open('rb') as stream:
+   for block in iter(lambda:stream.read(1024*1024),b''):file_digest.update(block)
+- if manifest.get('contract')!='urn:android-binding-catalog:2.0.0:DeviceResolution' or manifest.get('registry_id')!=registry or type(manifest.get('entries')) is not int or manifest['entries']!=count or manifest.get('inventory_sha256')!=digest.hexdigest() or file_digest.hexdigest()!=digest.hexdigest():raise ValueError('Inventory stream/manifest reconciliation failed')
+- return dict(status='validated',entries=count,contract='2.0.0',inventory_sha256=digest.hexdigest(),complete=True,scope='Complete selected registry projection, not global source coverage or runtime authority')
++ if manifest.get('contract')!='urn:android-binding-catalog:2.1.0:DeviceResolution' or manifest.get('registry_id')!=registry or type(manifest.get('entries')) is not int or manifest['entries']!=count or manifest.get('inventory_sha256')!=digest.hexdigest() or file_digest.hexdigest()!=digest.hexdigest():raise ValueError('Inventory stream/manifest reconciliation failed')
++ return dict(status='validated',entries=count,contract='2.1.0',inventory_sha256=digest.hexdigest(),complete=True,scope='Complete selected registry projection, not global source coverage or runtime authority')
+--- a/catalog/tooling/device_resolution.py
++++ b/catalog/tooling/device_resolution.py
+@@ -2,7 +2,7 @@
+ Inputs represent trusted collector evidence fixtures, never remote assertions.
+ Availability is existence/applicability evidence, never a permission decision.
+ """
+-import copy,hashlib,json,pathlib
++import copy,hashlib,json,pathlib,functools
+ import jsonschema
+ P=pathlib.Path(__file__).resolve().parents[1]
+ STATES=('available','unavailable','unknown')
+@@ -10,8 +10,17 @@
+ LIMIT=2**53-1
+ def canonical(value):return json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False)
+ def digest(value):return hashlib.sha256(canonical(value).encode()).hexdigest()
++def inventory_digest(inventory):
++ h=hashlib.sha256()
++ for item in sorted(inventory,key=lambda e:e['entry_id']):h.update((canonical(item)+'\n').encode())
++ return h.hexdigest()
++def resolved_schema_hash(contract_hash,graph_digest):
++ return digest(dict(schema_format='closure3',contract_hash=contract_hash,graph_digest=graph_digest))
++@functools.lru_cache(maxsize=None)
++def validator(name):
++ schema=json.loads((P/'contracts/DeviceView.schema.json').read_text());schema['$ref']='#/$defs/'+name;return jsonschema.Draft202012Validator(schema)
+ def validate(value,name):
+- schema=json.loads((P/'contracts/DeviceResolution.schema.json').read_text());schema['$ref']='#/$defs/'+name;jsonschema.Draft202012Validator(schema).validate(value)
++ validator(name).validate(value)
+  if name=='Facts':
+   import datetime
+   try:observed=datetime.datetime.fromisoformat(value['observed_at'].replace('Z','+00:00'))
+@@ -48,6 +57,8 @@
+ def clause(rule,facts):
+  results=[]
+  if 'unknown_reason' in rule:results.append(('unknown',['APPLICABILITY_INCOMPLETE']))
++ if 'platform_point' in rule:
++  point=rule['platform_point'];observed=facts['platform'];results.append(('available',['PLATFORM_POINT_MATCH']) if [observed['major'],observed['minor']]==point else ('unknown',['PLATFORM_APPLICABILITY_UNPROVEN']))
+  if 'platform' in rule:results.append(platform_range(facts['platform'],rule['platform']))
+  for name,minimum in rule.get('extensions',{}).items():
+   observed=facts['extensions'].get(name);results.append(('unknown',['SDK_EXTENSION_UNKNOWN']) if observed is None else ('available',['SDK_EXTENSION_MATCH']) if observed>=minimum else ('unavailable',['SDK_EXTENSION_TOO_OLD']))
+@@ -94,7 +105,7 @@
+   elif evaluated:state,reasons='unavailable',sorted({r for _,(_,rs) in evaluated for r in rs})
+   else:state,reasons='unknown',['APPLICABILITY_MISSING']
+   base[key]=(state,reasons);selected[key]=choice
+-  output[key]=dict(entry_id=key,entity_kind=entity['entity_kind'],state=state,reason_codes=reasons,schema_hash=choice['schema_hash'] if choice else None,dependencies=copy.deepcopy(choice['dependencies']) if choice else [],graph_digest=None)
++  output[key]=dict(entry_id=key,entity_kind=entity['entity_kind'],state=state,reason_codes=reasons,schema_hash=None,contract_hash=choice['schema_hash'] if choice else None,dependencies=[dict(entry_id=d['entry_id'],contract_hash=d['schema_hash']) for d in choice['dependencies']] if choice else [],graph_digest=None)
+  # Monotone fixed point propagates missing/excluded schemas through recursive SCCs.
+  for _ in range(len(output)+1):
+   changed=False
+@@ -107,7 +118,7 @@
+     elif dep['entity_kind']!='type':checks.append(('unknown',['TYPE_DEPENDENCY_NOT_TYPE']))
+     elif dep['state']=='unavailable':checks.append(('unavailable',['TYPE_DEPENDENCY_UNAVAILABLE']))
+     elif dep['state']=='unknown':checks.append(('unknown',['TYPE_DEPENDENCY_UNKNOWN']))
+-    elif dep['schema_hash']!=required['schema_hash']:checks.append(('unknown',['TYPE_DEPENDENCY_SCHEMA_MISMATCH']))
++    elif dep['contract_hash']!=required['contract_hash']:checks.append(('unknown',['TYPE_DEPENDENCY_SCHEMA_MISMATCH']))
+    state,reasons=merge(checks) if checks else base[key]
+    if state!=row['state'] or reasons!=row['reason_codes']:row.update(state=state,reason_codes=reasons);changed=True
+   if not changed:break
+@@ -118,9 +129,10 @@
+   while pending:
+    target=pending.pop()
+    if target in closure:continue
+-   item=output[target];closure[target]=item['schema_hash'];pending.extend(d['entry_id'] for d in item['dependencies'])
++   item=output[target];closure[target]=item['contract_hash'];pending.extend(d['entry_id'] for d in item['dependencies'])
+   row['graph_digest']=digest(sorted(closure.items()))
+- snapshot=dict(schema_version='2.0.0',registry_id=registry_id,catalog_generation=catalog_generation,overlay_generation=overlay_generation,capability_epoch=capability_epoch,view_generation=view_generation,facts_id=digest(facts),inventory_count=len(inventory),entries=[output[k] for k in sorted(output)],**{k:facts[k] for k in SCOPE})
++  row['schema_hash']=resolved_schema_hash(row['contract_hash'],row['graph_digest'])
++ snapshot=dict(schema_version='3.0.0',registry_id=registry_id,catalog_generation=catalog_generation,overlay_generation=overlay_generation,capability_epoch=capability_epoch,view_generation=view_generation,facts_id=digest(facts),inventory_count=len(inventory),inventory_sha256=inventory_digest(inventory),entries=[output[k] for k in sorted(output)],**{k:facts[k] for k in SCOPE})
+  snapshot['view_id']=digest(snapshot);validate(snapshot,'Snapshot');return snapshot
+ 
+ class StaleView(Exception):pass
+@@ -128,17 +140,17 @@
+  def __init__(self,status):self.status=status
+ class ViewStore:
+  """Single-thread fixture oracle; a runtime uses an actual DB transaction/lock."""
+- def __init__(self,registry_id,catalog_generation,overlay_generation,profile_id,target_key,android_user_id,backend_instance_id,device_instance_id):
+-  self.catalog=(registry_id,catalog_generation,overlay_generation);self.scope=(profile_id,target_key,android_user_id,backend_instance_id,device_instance_id);self.epoch=0;self.generation=0;self.active=None;self.stale=True;self.history=[]
++ def __init__(self,registry_id,catalog_generation,overlay_generation,profile_id,target_key,android_user_id,backend_instance_id,device_instance_id,*,inventory=None):
++  self.catalog=(registry_id,catalog_generation,overlay_generation);self.scope=(profile_id,target_key,android_user_id,backend_instance_id,device_instance_id);self.epoch=0;self.generation=0;self.active=None;self.stale=True;self.history=[];self.inventory=copy.deepcopy(inventory) if inventory is not None else None;self.inventory_sha256=inventory_digest(inventory) if inventory is not None else None
+  def invalidate(self,reason):
+   if not isinstance(reason,str) or not reason:raise ValueError('Invalidation reason required')
+   if self.epoch==LIMIT:raise OverflowError('Capability epoch exhausted')
+   self.epoch+=1;self.stale=True;self.history.append(dict(epoch=self.epoch,reason=reason))
+- def change_catalog(self,registry_id,catalog_generation,overlay_generation):
++ def change_catalog(self,registry_id,catalog_generation,overlay_generation,*,inventory=None):
+   # Overflow must fail before mutating a catalog pin or the prior active state.
+-  self.invalidate('catalog-change');self.catalog=(registry_id,catalog_generation,overlay_generation)
++  self.invalidate('catalog-change');self.catalog=(registry_id,catalog_generation,overlay_generation);self.inventory=copy.deepcopy(inventory) if inventory is not None else None;self.inventory_sha256=inventory_digest(inventory) if inventory is not None else None
+  def etag(self):
+-  return f'"dv1:{digest(list(self.scope))}:{self.generation}:{self.epoch}:{self.catalog[1]}:{self.catalog[2]}"'
++  return f'"dv2:{digest(list(self.scope))}:{self.generation}:{self.epoch}:{self.catalog[1]}:{self.catalog[2]}:{self.inventory_sha256 or digest(None)}"'
+  def status(self):
+   header={k:copy.deepcopy(v) for k,v in self.active.items() if k!='entries'} if self.active else None
+   return dict(header=header,stale=self.stale,capability_epoch=self.epoch,generation=self.generation)
+@@ -146,7 +158,7 @@
+   """Fixture for an already authorized scope. No HTTP request or device work."""
+   import re
+   if tag is None:raise PreconditionFailed(428)
+-  if not isinstance(tag,str) or not re.fullmatch(r'"dv1:[0-9a-f]{64}:(?:0|[1-9][0-9]*):(?:0|[1-9][0-9]*):(?:0|[1-9][0-9]*):(?:0|[1-9][0-9]*)"',tag):raise PreconditionFailed(400)
++  if not isinstance(tag,str) or not re.fullmatch(r'"dv2:[0-9a-f]{64}:(?:0|[1-9][0-9]*):(?:0|[1-9][0-9]*):(?:0|[1-9][0-9]*):(?:0|[1-9][0-9]*):[0-9a-f]{64}"',tag):raise PreconditionFailed(400)
+   if tag!=self.etag():raise PreconditionFailed(412)
+   self.invalidate('owner-refresh');return self.status()
+  def publish(self,snapshot,*,expected_generation,facts):
+@@ -159,19 +171,23 @@
+   if tuple(snapshot[k] for k in SCOPE)!=self.scope or tuple(facts[k] for k in SCOPE)!=self.scope:raise ValueError('Cross-target/profile snapshot')
+   if (snapshot['registry_id'],snapshot['catalog_generation'],snapshot['overlay_generation'])!=self.catalog:raise StaleView('Catalog changed')
+   if expected_generation!=self.generation or snapshot['view_generation']!=self.generation+1 or snapshot['capability_epoch']!=self.epoch:raise StaleView('Snapshot generation/capability epoch changed')
++  if self.inventory is None or snapshot['inventory_sha256']!=self.inventory_sha256:raise ValueError('Snapshot inventory digest differs from trusted pin')
+   entries={e['entry_id']:e for e in snapshot['entries']}
+   if len(entries)!=len(snapshot['entries']) or len(entries)!=snapshot['inventory_count']:raise ValueError('Snapshot membership mismatch')
+   for row in entries.values():
+    if row['state']!='available':continue
+    for dep in row['dependencies']:
+     target=entries.get(dep['entry_id'])
+-    if not target or target['entity_kind']!='type' or target['state']!='available' or target['schema_hash']!=dep['schema_hash']:raise ValueError('Incoherent available type dependency')
++    if not target or target['entity_kind']!='type' or target['state']!='available' or target['contract_hash']!=dep['contract_hash']:raise ValueError('Incoherent available type dependency')
+    closure={};pending=[row['entry_id']]
+    while pending:
+     key=pending.pop()
+     if key in closure:continue
+-    target=entries[key];closure[key]=target['schema_hash'];pending.extend(d['entry_id'] for d in target['dependencies'])
++    target=entries[key];closure[key]=target['contract_hash'];pending.extend(d['entry_id'] for d in target['dependencies'])
+    if row['graph_digest']!=digest(sorted(closure.items())):raise ValueError('Type graph digest mismatch')
++   if row['schema_hash']!=resolved_schema_hash(row['contract_hash'],row['graph_digest']):raise ValueError('Schema hash does not bind the transitive type graph')
++  expected=resolve(self.inventory,facts,registry_id=self.catalog[0],catalog_generation=self.catalog[1],overlay_generation=self.catalog[2],capability_epoch=self.epoch,view_generation=snapshot['view_generation'])
++  if snapshot!=expected:raise ValueError('Snapshot inventory membership, selected variants or states differ from trusted resolution')
+   # Assignment happens only after every validation; caller inputs are not retained.
+   self.active=copy.deepcopy(snapshot);self.generation=snapshot['view_generation'];self.stale=False
+  def read(self):return dict(snapshot=copy.deepcopy(self.active),stale=self.stale,capability_epoch=self.epoch,generation=self.generation)
+--- a/catalog/tooling/device_view_storage.py
++++ b/catalog/tooling/device_view_storage.py
+@@ -1,49 +1,69 @@
+ """Offline SQLite reference for captured facts and atomic resolved-view activation.
+ No Android probes, connections, policy changes, Binder execution or HTTP server.
+ """
+-import datetime,json,sqlite3
++import copy,datetime,json,sqlite3
+ import device_resolution as dr
+ now=lambda:datetime.datetime.now(datetime.timezone.utc).isoformat()
+ class DeviceViewStore:
+- def __init__(self,db,scope_facts,*,registry_id,catalog_generation,overlay_generation,inventory_count):
++ def __init__(self,db,scope_facts,*,registry_id,catalog_generation,overlay_generation,inventory,inventory_count=None):
++  inventory_count=len(inventory) if inventory_count is None else inventory_count
++  if inventory_count!=len(inventory):raise ValueError('Expected inventory count disagrees with supplied complete inventory')
+   if not isinstance(inventory_count,int) or isinstance(inventory_count,bool) or not 0<=inventory_count<=dr.LIMIT:raise ValueError('Invalid expected inventory count')
+-  self.expected_inventory_count=inventory_count
++  if 'contract_hash' not in {r[1] for r in db.execute('PRAGMA table_info(device_view_entries)')}:raise ValueError('Legacy device-view storage requires checked migration; model3 cannot activate silently')
++  self.expected_inventory_count=inventory_count;self.inventory=copy.deepcopy(inventory);self.inventory_sha256=dr.inventory_digest(inventory)
+   self.db=db;self.scope=tuple(scope_facts[k] for k in dr.SCOPE);self.scope_id=dr.digest(list(self.scope))
+   with db:
++   self.pin_inventory(inventory)
+    db.execute('INSERT OR IGNORE INTO device_view_scopes VALUES(?,?,?,?,?,?)',(self.scope_id,*self.scope))
+    if not db.execute('SELECT 1 FROM device_view_active WHERE scope_id=?',(self.scope_id,)).fetchone():
+     db.execute('INSERT INTO device_view_invalidations VALUES(?,?,?,?)',(self.scope_id,0,'startup',now()))
+-    db.execute('INSERT INTO device_view_active VALUES(?,NULL,?,?,?,0,0,1,?)',(self.scope_id,registry_id,catalog_generation,overlay_generation,inventory_count))
++    db.execute('INSERT INTO device_view_active VALUES(?,NULL,?,?,?,0,0,1,?,?)',(self.scope_id,registry_id,catalog_generation,overlay_generation,inventory_count,self.inventory_sha256))
++   c=self.control()
++   if c['inventory_sha256']!=self.inventory_sha256:raise ValueError('Reopened scope inventory differs from pinned catalog')
++ def pin_inventory(self,inventory):
++  digest=dr.inventory_digest(inventory)
++  for item in inventory:dr.validate(item,'InventoryEntity')
++  if len({v['entry_id'] for v in inventory})!=len(inventory):raise ValueError('Duplicate inventory membership')
++  existing=self.db.execute('SELECT entry_count,state FROM device_inventory_sets WHERE inventory_sha256=?',(digest,)).fetchone()
++  if existing:
++   raw=[json.loads(r[0]) for r in self.db.execute('SELECT document_json FROM device_inventory_members WHERE inventory_sha256=? ORDER BY entry_id',(digest,))]
++   if existing!=(len(inventory),'sealed') or dr.inventory_digest(raw)!=digest:raise ValueError('Pinned inventory digest/content mismatch')
++   return digest
++  self.db.execute("INSERT INTO device_inventory_sets VALUES(?,?,'staged')",(digest,len(inventory)))
++  self.db.executemany('INSERT INTO device_inventory_members VALUES(?,?,?,?)',[(digest,item['entry_id'],item['entity_kind'],dr.canonical(item)) for item in inventory])
++  self.db.execute("UPDATE device_inventory_sets SET state='sealed' WHERE inventory_sha256=?",(digest,));return digest
+  def control(self):
+-  row=self.db.execute('SELECT view_id,registry_id,catalog_generation,overlay_generation,capability_epoch,generation,stale,expected_inventory_count FROM device_view_active WHERE scope_id=?',(self.scope_id,)).fetchone()
++  row=self.db.execute('SELECT view_id,registry_id,catalog_generation,overlay_generation,capability_epoch,generation,stale,expected_inventory_count,inventory_sha256 FROM device_view_active WHERE scope_id=?',(self.scope_id,)).fetchone()
+   if row is None:raise ValueError('Device scope not initialized')
+-  return dict(zip(('view_id','registry_id','catalog_generation','overlay_generation','capability_epoch','generation','stale','expected_inventory_count'),row))
++  return dict(zip(('view_id','registry_id','catalog_generation','overlay_generation','capability_epoch','generation','stale','expected_inventory_count','inventory_sha256'),row))
+  def read(self):
+   c=self.control();snapshot=None
+   if c['view_id']:
+    snapshot=json.loads(self.db.execute('SELECT document_json FROM device_views WHERE view_id=?',(c['view_id'],)).fetchone()[0]);snapshot['entries']=[json.loads(r[0]) for r in self.db.execute('SELECT document_json FROM device_view_entries WHERE view_id=? ORDER BY entry_id',(c['view_id'],))]
+   return dict(snapshot=snapshot,stale=bool(c['stale']),capability_epoch=c['capability_epoch'],generation=c['generation'])
+- def invalidate(self,reason,*,registry_id=None,catalog_generation=None,overlay_generation=None,inventory_count=None):
++ def invalidate(self,reason,*,registry_id=None,catalog_generation=None,overlay_generation=None,inventory=None):
+   if not isinstance(reason,str) or not reason:raise ValueError('Invalidation reason required')
+   if self.db.in_transaction:raise ValueError('Reference storage owns its transaction')
+   try:
+    self.db.execute('BEGIN IMMEDIATE');c=self.control();epoch=c['capability_epoch']+1
+    if epoch>dr.LIMIT:raise OverflowError('Capability epoch exhausted')
+    self.db.execute('INSERT INTO device_view_invalidations VALUES(?,?,?,?)',(self.scope_id,epoch,reason,now()))
+-   self.db.execute('UPDATE device_view_active SET capability_epoch=?,stale=1,registry_id=?,catalog_generation=?,overlay_generation=?,expected_inventory_count=? WHERE scope_id=?',(epoch,registry_id if registry_id is not None else c['registry_id'],catalog_generation if catalog_generation is not None else c['catalog_generation'],overlay_generation if overlay_generation is not None else c['overlay_generation'],inventory_count if inventory_count is not None else c['expected_inventory_count'],self.scope_id));self.db.commit()
++   pinned=self.pin_inventory(inventory) if inventory is not None else c['inventory_sha256']
++   self.db.execute('UPDATE device_view_active SET capability_epoch=?,stale=1,registry_id=?,catalog_generation=?,overlay_generation=?,expected_inventory_count=?,inventory_sha256=? WHERE scope_id=?',(epoch,registry_id if registry_id is not None else c['registry_id'],catalog_generation if catalog_generation is not None else c['catalog_generation'],overlay_generation if overlay_generation is not None else c['overlay_generation'],len(inventory) if inventory is not None else c['expected_inventory_count'],pinned,self.scope_id));self.db.commit()
++   if inventory is not None:self.inventory=copy.deepcopy(inventory);self.inventory_sha256=pinned
+   except Exception:self.db.rollback();raise
+  def publish(self,snapshot,*,facts,expected_generation):
+   if self.db.in_transaction:raise ValueError('Reference storage owns its transaction')
+   try:
+    self.db.execute('BEGIN IMMEDIATE');c=self.control()
+-   oracle=dr.ViewStore(c['registry_id'],c['catalog_generation'],c['overlay_generation'],*self.scope);oracle.epoch=c['capability_epoch'];oracle.generation=c['generation']
++   oracle=dr.ViewStore(c['registry_id'],c['catalog_generation'],c['overlay_generation'],*self.scope,inventory=self.inventory);oracle.epoch=c['capability_epoch'];oracle.generation=c['generation']
+    oracle.publish(snapshot,facts=facts,expected_generation=expected_generation)
+    if snapshot['inventory_count']!=c['expected_inventory_count']:raise ValueError('Incomplete inventory for pinned catalog')
+    facts_id=dr.digest(facts);self.db.execute('INSERT OR IGNORE INTO device_capability_facts VALUES(?,?,?,?,?)',(facts_id,self.scope_id,facts['capability_epoch'],facts['observed_at'],dr.canonical(facts)))
+    header={k:v for k,v in snapshot.items() if k!='entries'}
+-   self.db.execute('INSERT INTO device_views VALUES(?,?,?,?,?,?,?,?,?,?,?)',(snapshot['view_id'],self.scope_id,snapshot['registry_id'],snapshot['catalog_generation'],snapshot['overlay_generation'],snapshot['capability_epoch'],snapshot['view_generation'],snapshot['inventory_count'],facts_id,dr.canonical(header),'staged'))
++   self.db.execute('INSERT INTO device_views VALUES(?,?,?,?,?,?,?,?,?,?,?,?)',(snapshot['view_id'],self.scope_id,snapshot['registry_id'],snapshot['catalog_generation'],snapshot['overlay_generation'],snapshot['capability_epoch'],snapshot['view_generation'],snapshot['inventory_count'],snapshot['inventory_sha256'],facts_id,dr.canonical(header),'staged'))
+    for e in snapshot['entries']:
+-    self.db.execute('INSERT INTO device_view_entries VALUES(?,?,?,?,?,?,?,?,?)',(snapshot['view_id'],e['entry_id'],e['entity_kind'],e['state'],dr.canonical(e['reason_codes']),e['schema_hash'],dr.canonical(e['dependencies']),e['graph_digest'],dr.canonical(e)))
++    self.db.execute('INSERT INTO device_view_entries VALUES(?,?,?,?,?,?,?,?,?,?)',(snapshot['view_id'],e['entry_id'],e['entity_kind'],e['state'],dr.canonical(e['reason_codes']),e['schema_hash'],e['contract_hash'],dr.canonical(e['dependencies']),e['graph_digest'],dr.canonical(e)))
+    self.db.execute("UPDATE device_views SET state='sealed' WHERE view_id=?",(snapshot['view_id'],))
+    changed=self.db.execute('UPDATE device_view_active SET view_id=?,generation=?,stale=0 WHERE scope_id=? AND generation=? AND capability_epoch=?',(snapshot['view_id'],snapshot['view_generation'],self.scope_id,expected_generation,facts['capability_epoch'])).rowcount
+    if changed!=1:raise dr.StaleView('Concurrent device view CAS')
+--- a/catalog/tooling/dispatch_manifest.py
++++ b/catalog/tooling/dispatch_manifest.py
+@@ -8,7 +8,7 @@
+         return {k:value[k] for k in ('text','status','resolved_binding_id','codec_status','codec_id') if k in value}
+     contract=dict(contract_format_version=2,canonical_signature=entry.get('canonical_signature'),kind=entry.get('kind'),arguments=[type_ref(v) for v in entry.get('arguments',[])],return_type=type_ref(entry.get('return_type')),codec_status=entry.get('codec_status'),codec_identity=entry.get('extensions',{}).get('codec_identity'))
+     shape=entry.get('extensions',{}).get('declared_type_shape')
+-    if shape is not None:contract['declared_type_shape']=shape
++    if shape is not None:contract['declared_type_shape']={k:v for k,v in shape.items() if k!='header'}
+     return hashlib.sha256(json.dumps(contract,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()
+ 
+ def generate(entries,resolved_status=None):
+--- a/catalog/tooling/hidl_source.py
++++ b/catalog/tooling/hidl_source.py
+@@ -0,0 +1,116 @@
++"""Conservative HIDL declared-source structure, not compiler/ABI/wire validation.
++Every unrecognized statement remains an unsupported record with exact source text.
++Package @major.minor denotes HIDL package version, never Android applicability.
++"""
++import re
++from aidl_lex import code_mask,comment_mask
++IDENT=r'[A-Za-z_]\w*'
++def spans(text,start,end,separator=';',angles=False,masked=None):
++ masked=code_mask(text) if masked is None else masked;stack=[];begin=start;angle=0
++ for i in range(start,end):
++  c=masked[i]
++  if c in '([{':stack.append(c)
++  elif c in ')]}':
++   if stack:stack.pop()
++  elif angles and not stack and c=='<':angle+=1
++  elif angles and not stack and c=='>':angle=max(0,angle-1)
++  elif c==separator and not stack and angle==0:
++   if comment_mask(text[begin:i]).strip():yield begin,i
++   begin=i+1
++ if comment_mask(text[begin:end]).strip():yield begin,end
++def annotations(text,start,end,masked=None):
++ masked=code_mask(text) if masked is None else masked;result=[];position=start
++ while True:
++  while position<end and masked[position].isspace():position+=1
++  match=re.match(r'@('+IDENT+r'(?:\.'+IDENT+r')*)',masked[position:end])
++  if not match:return position,result
++  initial=position;position+=match.end();arguments=''
++  while position<end and masked[position].isspace():position+=1
++  if position<end and masked[position]=='(':
++   begin=position+1;depth=1;position+=1
++   while position<end and depth:
++    if masked[position]=='(':depth+=1
++    elif masked[position]==')':depth-=1
++    position+=1
++   if depth:return initial,result
++   arguments=text[begin:position-1]
++  result.append(dict(name=match.group(1),arguments=arguments,raw=text[initial:position],semantics='unknown HIDL source annotation'))
++def typed(text,start,end):
++ result=[]
++ for a,b in spans(text,start,end,',',True):
++  initial,anns=annotations(text,a,b);clean=comment_mask(text[initial:b]).strip();match=re.fullmatch(r'(.+?)(?:\s+|(?<=[>\]]))('+IDENT+r')',clean,re.S)
++  if not match:raise ValueError('Unrecognized typed variable '+clean)
++  result.append(dict(name=match.group(2),type=re.sub(r'\s+',' ',match.group(1)).strip(),annotations=[],all_annotations=anns,raw=text[a:b]))
++ if len({p['name'] for p in result})!=len(result):raise ValueError('Duplicate typed variable names')
++ return result
++def parse(text):
++ mask=comment_mask(text);code=code_mask(text);package_match=re.match(r'\s*package\s+([A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*)@(\d+\.\d+)\s*;',mask);records=[];unsupported=[];imports=[];seen=set()
++ package=package_match.group(1)+'@'+package_match.group(2) if package_match else None
++ version=package_match.group(2) if package_match else None
++ def add(kind,name,owner,start,end,params=None,return_type=None,anns=None,extras=None):
++  canonical=package if kind=='package' else (owner if kind in ('type','interface','enum') and owner else (owner+'::'+name if owner else (package or 'unresolved-package')+'::'+name))
++  if kind=='method':canonical+='('+','.join(p['type'] for p in (params or []))+')'
++  visible=comment_mask(text[start:end]);leading=len(visible)-len(visible.lstrip());line=text.count('\n',0,start+leading)+1;key=(canonical,line)
++  if key in seen:
++   kind='unsupported';canonical+='::duplicate-locator:'+str(start);extras=dict(extras or {},parse_error='Duplicate declaration at one physical locator; raw syntax retained')
++  seen.add(key);extra=dict(hidl_package_version=version,android_availability='unknown',wire_transaction_id=None,wire_codec_status='unknown',source_character_span=[start,end],semantic_status='Declared-source structure only; compiler validity, imports and runtime registration unverified');extra.update(extras or {})
++  record=dict(kind=kind,name=name,owner=owner,package=package or '',canonical=canonical or 'unresolved-package:'+str(start),line=line,raw=text[start:end],parameters=params or [],return_type=return_type,annotations=[],all_annotations=anns or [],extras=extra)
++  records.append(record)
++  if kind=='unsupported':unsupported.append(dict(line=line,raw=record['raw'],reason=extra.get('parse_error','Unknown HIDL structure')))
++  return record
++ if not package_match:
++  add('unsupported','unresolved-hidl-source',None,0,len(text),extras=dict(parse_error='Required HIDL package/version declaration absent or malformed'));return dict(records=records,unsupported=unsupported,imports=[],source_complete=False)
++ add('package',package,None,package_match.start(),package_match.end())
++ def scope(start,end,owner,context):
++  for a,b in spans(text,start,end,masked=code):
++   initial,anns=annotations(text,a,b,code)
++   while initial<b and mask[initial].isspace():initial+=1
++   raw=mask[initial:b].strip()
++   if not raw:continue
++   if b>=end or code[b]!=';':
++    add('unsupported','unterminated-hidl-statement',owner,a,b,anns=anns,extras=dict(parse_error='Required statement semicolon absent; raw syntax retained'));continue
++   imp=re.fullmatch(r'import\s+([^;{}]+)',raw)
++   if imp and context=='package':imports.append(dict(raw=text[a:b],target=imp.group(1).strip(),line=text.count('\n',0,initial)+1));continue
++   declaration=re.match(r'(interface|struct|union|safe_union|enum)\s+('+IDENT+r')\b',raw)
++   if declaration and declaration.group(1)=='interface' and context=='compound' and code.find('{',initial,b)<0:declaration=None
++   if declaration:
++    local_start=initial;head=declaration.group(1);name=declaration.group(2);masked=code;brace=masked.find('{',local_start,b);close=masked.rfind('}',local_start,b)
++    if head=='interface' and (context!='package' or not name.startswith('I')):
++     add('unsupported',name,owner,a,b,anns=anns,extras=dict(parse_error='HIDL interfaces require global scope and I-prefixed name'));continue
++    if brace<0 or close<brace:
++     add('unsupported',name,owner,a,b,anns=anns,extras=dict(parse_error='Missing HIDL declaration body'));continue
++    suffix=mask[close+1:b].strip();full=(owner+'.'+name) if owner else package+'::'+name;header=mask[initial:brace];extra=dict(hidl_declaration_kind=head,enclosing_type=owner,keyword_character_offset=initial,hidl_qualified_name=full)
++    if head=='interface':
++     extra['declared_extends']=header[declaration.end():].strip();extra['descriptor_source_name']=full
++    if head=='enum':extra['storage_type_raw']=header[declaration.end():].strip()
++    add('interface' if head=='interface' else 'enum' if head=='enum' else 'type',name,full,a,b,anns=anns,extras=extra)
++    if head=='enum':
++     for x,y in spans(text,brace+1,close,',',masked=code):
++      value_start,value_anns=annotations(text,x,y,code);value=comment_mask(text[value_start:y]).strip();m=re.fullmatch(r'('+IDENT+r')(?:\s*=\s*(.+))?',value,re.S)
++      if m:add('field',m.group(1),full,x,y,return_type=full,anns=value_anns,extras=dict(hidl_declaration_kind='enum-value',constant_expression_raw=m.group(2)))
++      else:add('unsupported','unresolved-enum-value',full,x,y,extras=dict(parse_error='Unknown HIDL enum value'))
++    else:scope(brace+1,close,full,'interface' if head=='interface' else 'compound')
++    if suffix:
++     if context=='compound' and re.fullmatch(IDENT,suffix):add('field',suffix,owner,close+1,b,return_type=full,extras=dict(hidl_declaration_kind='inline-compound-field'))
++     else:add('unsupported','trailing-declaration-syntax',owner,close+1,b,extras=dict(parse_error='Unrecognized suffix after HIDL type body'))
++    continue
++   alias=re.fullmatch(r'typedef\s+(.+?)\s+('+IDENT+r')',raw,re.S)
++   if alias:add('type',alias.group(2),(owner+'.'+alias.group(2)) if owner else package+'::'+alias.group(2),a,b,anns=anns,extras=dict(hidl_declaration_kind='typedef',target_type_raw=alias.group(1)));continue
++   method=re.fullmatch(r'(oneway\s+)?('+IDENT+r')\s*\((.*?)\)\s*(?:generates\s*\((.*?)\))?',raw,re.S)
++   if method and context=='interface':
++    try:
++     if method.group(1) and method.group(4) is not None:raise ValueError('HIDL oneway method cannot declare generated results')
++     parameters=typed(raw,method.start(3),method.end(3));results=typed(raw,method.start(4),method.end(4)) if method.group(4) is not None else []
++     if method.group(4) is not None and not results:raise ValueError('Empty HIDL generates clause')
++     add('method',method.group(2),owner,a,b,params=parameters,return_type=None,anns=anns,extras=dict(hidl_declaration_kind='method',results=results,oneway=bool(method.group(1))))
++    except ValueError as error:add('unsupported',method.group(2),owner,a,b,anns=anns,extras=dict(parse_error=str(error)))
++    continue
++   if context=='compound':
++    try:
++     fields=typed(raw,0,len(raw))
++     if len(fields)!=1:raise ValueError('Expected exactly one HIDL field')
++     field=fields[0];add('field',field['name'],owner,a,b,return_type=field['type'],anns=anns,extras=dict(hidl_declaration_kind='field'));continue
++    except ValueError:pass
++   add('unsupported','unresolved-hidl-statement',owner,a,b,anns=anns,extras=dict(parse_error='Unsupported HIDL declaration retained verbatim'))
++ scope(package_match.end(),len(text),None,'package')
++ return dict(records=records,unsupported=unsupported,imports=imports,source_complete=False,structural_statement_parse_complete=not unsupported,limitation='No compiler validation, complete type resolution, implicit inherited method expansion, Android/module availability or wire transaction inference')

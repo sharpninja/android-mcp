@@ -1,0 +1,560 @@
+--- catalog/README.md
++++ catalog/README.md
+@@ -2,7 +2,9 @@
+ 
+ This deliverable contains the bridge design, catalog extractors, SQLite schemas, JSON contracts and offline policy/CRUD fixtures. It contains no Android application, HTTP administration service or deployed MCP bridge. Catalog metadata never grants OS authority or MCP client permission. No device operations or software installation were performed.
+ 
+-Production acquisition/import belongs to the source task. Release005 completed its import with37,873 sources,772,733 binding entries and1,384 permission definitions; independent validation and exports are recorded only when completed. Its build snapshot predates later remediation fixes. A complete selected corpus is not global coverage:985 excluded repositories and unresolved SDK/type/wire semantics remain explicit. Historical release002 validation and old review scores remain historical. No overall98/98 acceptance is claimed here.
++Production acquisition/import belongs to the source task. Release006 completed independent validation and exports with39,194 sources,794,195 binding entries,1,399 permission definition records and1,639 exported permission names. Its producer and DDL predate the post007 candidate fixes; full file-hash differences are recorded. A complete selected corpus is not global coverage: the985-project audit cohort still contains relevant unimported paths and unknown/native/generated Binder coverage. Historical release002/005 evidence and old review scores remain historical. No overall98/98 acceptance is claimed here.
++
++Release006 has6,987 unmatched external annotations, including annotation types other than permissions. The increase from577 in005 is entirely SDK37.0 version routing:6,509 unmatched versus99, while SDK37.2 remains478. The same-snapshot fallback probe recovers6,141 and leaves368 of the37.0 annotations unresolved; this prospective probe is not a published correction. Cache-contract2 recomputation also has its own proof, separate from completed production validation.
+ 
+ ## Identity and contracts
+ 
+@@ -33,7 +35,7 @@
+ 
+ Java AST metadata retains imports, type variables, record components and compact-constructor parameters. Wildcard/inheritance/type-variable resolution stays conservative; record-component annotation propagation is not invented. Point positions use tuple indexing. The confirmed binding getter defect is distinct from the inferred connection to the earlier exact crash. No source is executed or compiled.
+ 
+-AIDL inventory retains methods/constants, structured fields and enumerants, raw initializers and unsupported syntax. Declaration order is not a verified wire tag. Imports/runtime types, generated Binder transactions and codecs remain separate unknowns. SDK index type presence is known even when class/interface/annotation kind or field types are unknown. Source visibility alone is not public SDK membership.
++AIDL inventory retains top-level and nested interfaces/parcelables/unions/enums, methods/constants, structured fields and enumerants, raw initializers and unsupported syntax. Parent descriptor, declaration depth and physical locators remain explicit. Nested spans are separated before parsing following members. An independent lexical no-drop count checks declarations plus statements; comment punctuation is excluded and quoted data preserved. Malformed source remains unsupported/unreconciled with raw bytes and reasons. Declaration order is not a verified wire tag. Imports/runtime types, generated Binder transactions and codecs remain separate unknowns. SDK index type presence is known even when class/interface/annotation kind or field types are unknown. Source visibility alone is not public SDK membership.
+ 
+ Signature reconciliation is a no-drop source-line guard, not independent grammar correctness proof. A mutant extractor dropping a fixture method fails publication. Targeted golden fixtures cover grammar behavior; the official current SDK index is separate evidence. Unknowns and acquisition exclusions remain visible with reasons.
+ 
+--- catalog/migrations/002-evidence-and-publication.sql
++++ catalog/migrations/002-evidence-and-publication.sql
+@@ -45,6 +45,8 @@
+ CREATE TRIGGER local_collision_update BEFORE UPDATE ON overlays WHEN new.imported_binding_id IS NULL AND new.state IN ('active','deleted') AND EXISTS(SELECT 1 FROM effective_entries e WHERE e.entry_id=new.entry_id) BEGIN SELECT RAISE(ABORT,'Use an imported overlay for an active imported identity'); END;
+ CREATE TRIGGER active_imported_base_insert BEFORE INSERT ON active_registry WHEN EXISTS(SELECT 1 FROM overlays o WHERE o.imported_binding_id IS NOT NULL AND o.state IN ('active','suppressed') AND NOT EXISTS(SELECT 1 FROM registry_entries e WHERE e.registry_id=new.registry_id AND e.entry_id=o.imported_binding_id AND e.record_sha256=o.base_record_hash)) BEGIN SELECT RAISE(ABORT,'Resolve changed or missing imported overlay base before publication'); END;
+ CREATE TRIGGER active_imported_base_update BEFORE UPDATE OF registry_id ON active_registry WHEN EXISTS(SELECT 1 FROM overlays o WHERE o.imported_binding_id IS NOT NULL AND o.state IN ('active','suppressed') AND NOT EXISTS(SELECT 1 FROM registry_entries e WHERE e.registry_id=new.registry_id AND e.entry_id=o.imported_binding_id AND e.record_sha256=o.base_record_hash)) BEGIN SELECT RAISE(ABORT,'Resolve changed or missing imported overlay base before publication'); END;
++CREATE TRIGGER overlay_base_current_insert BEFORE INSERT ON overlays WHEN new.imported_binding_id IS NOT NULL AND new.state IN ('active','suppressed') AND NOT EXISTS(SELECT 1 FROM effective_entries e WHERE e.entry_id=new.imported_binding_id AND e.record_sha256=new.base_record_hash) BEGIN SELECT RAISE(ABORT,'Imported overlay base must match active entry'); END;
++CREATE TRIGGER overlay_base_current_update BEFORE UPDATE ON overlays WHEN new.imported_binding_id IS NOT NULL AND new.state IN ('active','suppressed') AND NOT EXISTS(SELECT 1 FROM effective_entries e WHERE e.entry_id=new.imported_binding_id AND e.record_sha256=new.base_record_hash) BEGIN SELECT RAISE(ABORT,'Imported overlay base must match active entry'); END;
+ CREATE TABLE entry_history_reasons(entry_id TEXT NOT NULL,revision INTEGER NOT NULL,reason TEXT NOT NULL,PRIMARY KEY(entry_id,revision),FOREIGN KEY(entry_id,revision) REFERENCES entry_history(entry_id,revision));
+ CREATE TRIGGER history_reason_no_update BEFORE UPDATE ON entry_history_reasons BEGIN SELECT RAISE(ABORT,'History justification is append-only'); END;
+ CREATE TRIGGER history_reason_no_delete BEFORE DELETE ON entry_history_reasons BEGIN SELECT RAISE(ABORT,'History justification is append-only'); END;
+--- catalog/schema.sql
++++ catalog/schema.sql
+@@ -74,7 +74,6 @@
+ CREATE UNIQUE INDEX registries_one_published ON registries(state) WHERE state='published';
+ CREATE TRIGGER active_must_be_published_insert BEFORE INSERT ON active_registry WHEN (SELECT state FROM registries WHERE registry_id=new.registry_id) IS NOT 'published' BEGIN SELECT RAISE(ABORT,'Active registry must be published'); END;
+ CREATE TRIGGER active_must_be_published_update BEFORE UPDATE OF registry_id ON active_registry WHEN (SELECT state FROM registries WHERE registry_id=new.registry_id) IS NOT 'published' OR (new.registry_id<>old.registry_id AND (SELECT registry_version FROM registries WHERE registry_id=new.registry_id)<=(SELECT registry_version FROM registries WHERE registry_id=old.registry_id)) BEGIN SELECT RAISE(ABORT,'Publication requires a newer published registry'); END;
+-
+ -- Storage baseline v3: Entry1.0 base plus documented1.1 AIDL type kinds;
+ -- unknown semantic vocabulary is rejected/quarantined, never granted authority.
+ PRAGMA foreign_keys=ON;
+@@ -122,6 +121,8 @@
+ CREATE TRIGGER local_collision_update BEFORE UPDATE ON overlays WHEN new.imported_binding_id IS NULL AND new.state IN ('active','deleted') AND EXISTS(SELECT 1 FROM effective_entries e WHERE e.entry_id=new.entry_id) BEGIN SELECT RAISE(ABORT,'Use an imported overlay for an active imported identity'); END;
+ CREATE TRIGGER active_imported_base_insert BEFORE INSERT ON active_registry WHEN EXISTS(SELECT 1 FROM overlays o WHERE o.imported_binding_id IS NOT NULL AND o.state IN ('active','suppressed') AND NOT EXISTS(SELECT 1 FROM registry_entries e WHERE e.registry_id=new.registry_id AND e.entry_id=o.imported_binding_id AND e.record_sha256=o.base_record_hash)) BEGIN SELECT RAISE(ABORT,'Resolve changed or missing imported overlay base before publication'); END;
+ CREATE TRIGGER active_imported_base_update BEFORE UPDATE OF registry_id ON active_registry WHEN EXISTS(SELECT 1 FROM overlays o WHERE o.imported_binding_id IS NOT NULL AND o.state IN ('active','suppressed') AND NOT EXISTS(SELECT 1 FROM registry_entries e WHERE e.registry_id=new.registry_id AND e.entry_id=o.imported_binding_id AND e.record_sha256=o.base_record_hash)) BEGIN SELECT RAISE(ABORT,'Resolve changed or missing imported overlay base before publication'); END;
++CREATE TRIGGER overlay_base_current_insert BEFORE INSERT ON overlays WHEN new.imported_binding_id IS NOT NULL AND new.state IN ('active','suppressed') AND NOT EXISTS(SELECT 1 FROM effective_entries e WHERE e.entry_id=new.imported_binding_id AND e.record_sha256=new.base_record_hash) BEGIN SELECT RAISE(ABORT,'Imported overlay base must match active entry'); END;
++CREATE TRIGGER overlay_base_current_update BEFORE UPDATE ON overlays WHEN new.imported_binding_id IS NOT NULL AND new.state IN ('active','suppressed') AND NOT EXISTS(SELECT 1 FROM effective_entries e WHERE e.entry_id=new.imported_binding_id AND e.record_sha256=new.base_record_hash) BEGIN SELECT RAISE(ABORT,'Imported overlay base must match active entry'); END;
+ CREATE TABLE entry_history_reasons(entry_id TEXT NOT NULL,revision INTEGER NOT NULL,reason TEXT NOT NULL,PRIMARY KEY(entry_id,revision),FOREIGN KEY(entry_id,revision) REFERENCES entry_history(entry_id,revision));
+ CREATE TRIGGER history_reason_no_update BEFORE UPDATE ON entry_history_reasons BEGIN SELECT RAISE(ABORT,'History justification is append-only'); END;
+ CREATE TRIGGER history_reason_no_delete BEFORE DELETE ON entry_history_reasons BEGIN SELECT RAISE(ABORT,'History justification is append-only'); END;
+--- catalog/tests/test_build.py
++++ catalog/tests/test_build.py
+@@ -33,7 +33,8 @@
+    db=sqlite3.connect(r/'out/catalog.sqlite');db.execute('PRAGMA foreign_keys=ON');bid=db.execute('SELECT entry_id FROM effective_entries LIMIT 1').fetchone()[0]
+    with self.assertRaises(sqlite3.IntegrityError):db.execute('UPDATE bindings SET name="changed" WHERE binding_id=?',(bid,))
+    count=db.execute('SELECT count(*) FROM runtime_catalog').fetchone()[0];now='2026-10-26T00:00:00Z'
+-   db.execute('INSERT INTO overlays VALUES (?,?,?,?,?,?,?,?,?,?)',(bid,bid,db.execute('SELECT signature FROM bindings WHERE binding_id=?',(bid,)).fetchone()[0],1,None,None,'suppressed','{}',now,now))
++   base_hash=db.execute('SELECT record_sha256 FROM effective_entries WHERE entry_id=?',(bid,)).fetchone()[0];registry=db.execute('SELECT registry_id FROM active_registry').fetchone()[0]
++   db.execute('INSERT INTO overlays VALUES (?,?,?,?,?,?,?,?,?,?)',(bid,bid,db.execute('SELECT signature FROM bindings WHERE binding_id=?',(bid,)).fetchone()[0],1,registry,base_hash,'suppressed','{}',now,now))
+    db.execute('INSERT INTO entry_history VALUES (?,?,?,?,?,?)',(bid,1,'suppress','{}','fixture',now))
+    self.assertEqual(db.execute('SELECT count(*) FROM runtime_catalog').fetchone()[0],count-1)
+    db.execute('UPDATE overlays SET state="active",revision=2,document_json=? WHERE entry_id=?',(json.dumps({'fixture':'override'}),bid));self.assertEqual(json.loads(db.execute('SELECT document_json FROM runtime_catalog WHERE entry_id=?',(bid,)).fetchone()[0]),{'fixture':'override'})
+--- catalog/tests/test_round2.py
++++ catalog/tests/test_round2.py
+@@ -94,9 +94,9 @@
+  def test_overlay_revision_identity_and_registry_state_constraints(self):
+   db=sqlite3.connect(':memory:');self.addCleanup(db.close);db.executescript((P/'schema.sql').read_text())
+   db.execute("INSERT INTO bindings(binding_id,signature,package,kind,name,raw_signature) VALUES('b','java:a.A','a','class','A','fixture')")
+-  with self.assertRaises(sqlite3.IntegrityError):db.execute("INSERT INTO overlays VALUES('wrong','b','java:a.A',1,NULL,NULL,'active','{}','now','now')")
+-  with self.assertRaises(sqlite3.IntegrityError):db.execute("INSERT INTO overlays VALUES('b','b','wrong',1,NULL,NULL,'active','{}','now','now')")
+-  db.execute("INSERT INTO overlays VALUES('b','b','java:a.A',1,NULL,NULL,'active','{}','now','now')")
++  with self.assertRaises(sqlite3.IntegrityError):db.execute("INSERT INTO overlays VALUES('wrong','b','java:a.A',1,NULL,NULL,'conflict','{}','now','now')")
++  with self.assertRaises(sqlite3.IntegrityError):db.execute("INSERT INTO overlays VALUES('b','b','wrong',1,NULL,NULL,'conflict','{}','now','now')")
++  db.execute("INSERT INTO overlays VALUES('b','b','java:a.A',1,NULL,NULL,'conflict','{}','now','now')")
+   with self.assertRaises(sqlite3.IntegrityError):db.execute("UPDATE overlays SET document_json='{\"changed\":true}'")
+   db.execute("INSERT INTO registries VALUES('r',1,'1.2.0','fixture',37,'h','now','retired','{}')")
+   with self.assertRaises(sqlite3.IntegrityError):db.execute("UPDATE registries SET state='published'")
+--- catalog/tests/test_round5.py
++++ catalog/tests/test_round5.py
+@@ -23,7 +23,7 @@
+    root=pathlib.Path(td);db=sqlite3.connect(root/'old.sqlite')
+    for name in ('001-initial.sql','002-evidence-and-publication.sql'):db.executescript((C.parent/'evidence'/('original-'+name)).read_text())
+    db.execute("INSERT INTO bindings(binding_id,signature,package,kind,name,raw_signature) VALUES('b','java:a.A','a','class','A','fixture')");db.execute("INSERT INTO registries VALUES('r',1,'1.1.0','fixture',37,'h','now','published','{}')");db.execute("INSERT INTO active_registry VALUES(1,'r')");db.execute("INSERT INTO effective_entries VALUES('b','{}','h','fixture')");db.execute("INSERT INTO overlays VALUES('b',NULL,'java:a.A',1,NULL,NULL,'deleted','{}','now','now')");db.execute("INSERT INTO entry_history VALUES('b',1,'delete','{}','fixture','now')");db.commit();db.close()
+-   with self.assertRaisesRegex(sqlite3.IntegrityError,'collision'):migrate_v3.migrate(root/'old.sqlite',root/'new.sqlite')
++   with self.assertRaisesRegex(sqlite3.IntegrityError,'collision|imported overlay'):migrate_v3.migrate(root/'old.sqlite',root/'new.sqlite')
+    self.assertFalse((root/'new.sqlite').exists())
+  def test_interface_failure_status_is_not_promoted(self):
+   for text,status in [('package a; interface I { void x();','unsupported'),('package a; interface I;','declaration-only')]:
+--- /dev/null
++++ catalog/tests/test_round8.py
+@@ -0,0 +1,119 @@
++"""Known structural corruption must not masquerade as future semantics."""
++import pathlib,sys,unittest,tempfile,json,hashlib,sqlite3
++P=pathlib.Path(__file__).resolve().parents[1]
++sys.path.insert(0,str(P/'tooling'))
++import jsonschema,permission_reader
++import parsers,java_source,build_catalog,test_build,migrate_v3,aidl_lex
++from unittest import mock
++
++class Round8(unittest.TestCase):
++    def test_reader_rejects_nonobject_or_missing_typed_operator(self):
++        for raw in (None,False,42,[],{}, {'op':None},{'op':17}):
++            with self.subTest(raw=raw),self.assertRaises(jsonschema.ValidationError):
++                permission_reader.read(raw,'1.9.0')
++
++    def test_reader_rejects_corrupt_known_semantic_child(self):
++        for raw in ({'op':'all','children':[None]},
++                    {'op':'any','children':[{'op':False}]},
++                    {'op':'conditional','condition':False,'requirement':{'op':'permission','name':'android.permission.CAMERA'}}):
++            with self.subTest(raw=raw),self.assertRaises(jsonschema.ValidationError):
++                permission_reader.read(raw,'1.9.0')
++
++    def test_reader_quarantines_only_typed_future_operator_and_preserves_metadata(self):
++        child={'op':'future-operator','children':[None],'vendor':17}
++        raw={'op':'all','children':[child],'x-evidence':{'children':[None],'op':False}}
++        result=permission_reader.read(raw,'1.9.0')
++        self.assertEqual(result['children'][0]['op'],'unknown')
++        self.assertEqual(result['children'][0]['x-raw-node'],child)
++        self.assertEqual(result['x-evidence'],raw['x-evidence'])
++        self.assertEqual(raw['children'][0],child)
++
++class Review8(unittest.TestCase):
++    def fixture(self,root,text):
++        inv=test_build.BuildTests().fixture(root);spec=json.loads(inv.read_text());raw=text.encode();(root/'IFoo.aidl').write_bytes(raw)
++        spec['sources'][2].update(sha256=hashlib.sha256(raw).hexdigest(),git_blob=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest(),size_bytes=len(raw));inv.write_text(json.dumps(spec));return inv
++    def test_nested_aidl_types_and_following_methods_published(self):
++        with tempfile.TemporaryDirectory() as td:
++            root=pathlib.Path(td);inv=self.fixture(root,'package a;\ninterface I {\n parcelable P { int x; }\n void f();\n enum E { A=1, B=2 }\n union U { P p; int n; }\n interface J { parcelable Q { int y; } void g(); }\n}')
++            build_catalog.build(inv,root/'out');docs={d['canonical_signature']:d for d in map(json.loads,(root/'out/entries.jsonl').read_text().splitlines())}
++            for key in ('aidl:a.I','aidl:a.I.P','aidl:a.I.P#x','aidl:a.I#f()','aidl:a.I.E','aidl:a.I.E#A','aidl:a.I.E#B','aidl:a.I.U','aidl:a.I.U#p','aidl:a.I.U#n','aidl:a.I.J','aidl:a.I.J.Q','aidl:a.I.J.Q#y','aidl:a.I.J#g()'):
++                self.assertIn(key,docs)
++            self.assertEqual(docs['aidl:a.I#f()']['return_type']['text'],'void')
++            self.assertEqual(docs['aidl:a.I.P']['kind'],'aidl-parcelable')
++            self.assertEqual(docs['aidl:a.I.P']['provenance'][0]['line'],3)
++            self.assertEqual(docs['aidl:a.I.P']['extensions']['parent_descriptor'],'a.I')
++            self.assertEqual(docs['aidl:a.I.J.Q']['extensions']['declaration_depth'],2)
++    def test_nested_structured_types_do_not_swallow_fields(self):
++        with tempfile.TemporaryDirectory() as td:
++            root=pathlib.Path(td);inv=self.fixture(root,'package a; /* prior comment */\nparcelable Outer { parcelable Inner { int x; } int after; }')
++            build_catalog.build(inv,root/'out');docs={d['canonical_signature']:d for d in map(json.loads,(root/'out/entries.jsonl').read_text().splitlines())}
++            self.assertIn('aidl:a.Outer.Inner#x',docs);self.assertEqual(docs['aidl:a.Outer#after']['return_type']['text'],'int')
++    def test_aidl_merged_head_rejected_instead_of_fabricated_type(self):
++        with self.assertRaises(ValueError):parsers.member('parcelable P { int x; } void f()','a.I','a',True)
++    def test_nested_oneway_does_not_mark_the_outer_interface(self):
++        declarations={d['descriptor']:d for d in parsers.aidl_all('package a; interface I { oneway interface Inner { void f(); } void g(); }')}
++        self.assertFalse(declarations['a.I']['oneway']);self.assertTrue(declarations['a.I.Inner']['oneway'])
++    def test_aidl_reconciliation_comments_are_not_statements(self):
++        text='''package a; interface I { /* we're ignoring commas, and semicolons; */
++ enum E { A, // ignored, comment;
++ B, /* another, comment */ }
++ const String X="semi;comma,"; void f(); // trailing comment;
++ } interface Empty { // comment-only body;
++ }'''
++        counts=aidl_lex.inventory_counts(text);self.assertEqual(counts['declarations'],3);self.assertEqual(counts['statements'],4)
++        with tempfile.TemporaryDirectory() as td:
++            root=pathlib.Path(td);inv=self.fixture(root,text);build_catalog.build(inv,root/'out')
++    def test_nested_aidl_unknown_statement_remains_visible(self):
++        with tempfile.TemporaryDirectory() as td:
++            root=pathlib.Path(td);inv=self.fixture(root,'package a; interface I { parcelable P { int x; } broken thing; void f(); }')
++            build_catalog.build(inv,root/'out');docs=list(map(json.loads,(root/'out/entries.jsonl').read_text().splitlines()))
++            self.assertTrue(any(d['kind']=='unsupported' and d.get('owner')=='a.I' for d in docs))
++            self.assertEqual(next(d for d in docs if d['canonical_signature']=='aidl:a.I#f()')['return_type']['text'],'void')
++    def test_malformed_nested_aidl_keeps_full_source_and_reason(self):
++        with tempfile.TemporaryDirectory() as td:
++            root=pathlib.Path(td);text='package a; interface I { parcelable P { int x;';inv=self.fixture(root,text);build_catalog.build(inv,root/'out')
++            with sqlite3.connect(root/'out/catalog.sqlite') as db:
++                self.assertEqual(db.execute('SELECT raw_schema,parse_status FROM aidl_schemas').fetchone(),(text,'unsupported'))
++                report=json.loads(db.execute("SELECT p.document_json FROM parse_reports p JOIN sources s USING(source_id) WHERE s.kind='aidl'").fetchone()[0])
++                self.assertEqual(report['aidl_reconciliation'],'unreconciled')
++                self.assertGreater(db.execute("SELECT count(*) FROM issues WHERE category='aidl-reconciliation'").fetchone()[0],0)
++    def test_aidl_drop_mutant_cannot_publish(self):
++        original=build_catalog.aidl_all
++        def drop(text):
++            result=original(text)
++            for d in result:d['members']=[m for m in d['members'] if m['name']!='f']
++            return result
++        with tempfile.TemporaryDirectory() as td:
++            root=pathlib.Path(td);inv=self.fixture(root,'package a; interface I { void f(); void g(); }')
++            with mock.patch.object(build_catalog,'aidl_all',drop),self.assertRaisesRegex(ValueError,'AIDL reconciliation'):build_catalog.build(inv,root/'out')
++            self.assertFalse((root/'out/catalog.sqlite').exists())
++    def test_java_lang_subpackages_are_explicit_imports(self):
++        rows=java_source.parse('package a; import java.lang.reflect.Method; import java.lang.ref.WeakReference; import java.lang.String; class C { void f(Method m, WeakReference<String> r) {} }')['records']
++        method=next(r for r in rows if r['name']=='f');self.assertEqual(method['canonical'],'a.C#f(java.lang.reflect.Method,java.lang.ref.WeakReference<String>)')
++    def test_java_nested_type_implicit_visibility(self):
++        rows=java_source.parse('package a; interface I { class C {} interface J {} enum E { X } @interface A {} } @interface Ann { class C {} } class PrivateOuter { class PackageNested {} }')['records']
++        for r in rows:
++            if r['canonical'] in ('a.I.C','a.I.J','a.I.E','a.I.A','a.Ann.C'):self.assertEqual(r['extras']['effective_visibility'],'public')
++        self.assertEqual(next(r for r in rows if r['canonical']=='a.PrivateOuter.PackageNested')['extras']['effective_visibility'],'package')
++    def test_imported_overlay_current_base_required_on_write(self):
++        db=sqlite3.connect(':memory:');self.addCleanup(db.close);db.executescript((P/'schema.sql').read_text())
++        db.execute("INSERT INTO bindings(binding_id,signature,package,kind,name,raw_signature) VALUES('b','java:a.A','a','class','A','fixture')");db.execute("INSERT INTO registries VALUES('r',1,'1.2.0','fixture',37,'h','now','staged','{}')");db.execute("INSERT INTO registry_entries VALUES('r','b','{}','h')");db.execute("UPDATE registries SET state='validated'");db.execute("UPDATE registries SET state='published'");db.execute("INSERT INTO active_registry VALUES(1,'r')")
++        for value in (None,'stale'):
++            with self.subTest(value=value),self.assertRaises(sqlite3.IntegrityError):db.execute("INSERT INTO overlays VALUES('b','b','java:a.A',1,'r',?,'suppressed','{}','now','now')",(value,))
++        db.execute("INSERT INTO overlays VALUES('b','b','java:a.A',1,'r','h','suppressed','{}','now','now')")
++        with self.assertRaises(sqlite3.IntegrityError):db.execute("UPDATE overlays SET base_record_hash='stale' WHERE entry_id='b'")
++    def test_copy_migration_admits_only_matching_imported_overlay_base(self):
++        for base in ('h',None,'stale'):
++            with self.subTest(base=base),tempfile.TemporaryDirectory() as td:
++                root=pathlib.Path(td);db=sqlite3.connect(root/'old.sqlite')
++                for name in ('001-initial.sql','002-evidence-and-publication.sql'):db.executescript((P.parent/'evidence'/('original-'+name)).read_text())
++                db.execute("INSERT INTO bindings(binding_id,signature,package,kind,name,raw_signature) VALUES('b','java:a.A','a','class','A','fixture')");db.execute("INSERT INTO registries VALUES('r',1,'1.1.0','fixture',37,'h','now','published','{}')");db.execute("INSERT INTO active_registry VALUES(1,'r')");db.execute("INSERT INTO effective_entries VALUES('b','{}','h','fixture')")
++                db.execute("INSERT INTO overlays VALUES('b','b','java:a.A',1,'r',?,'suppressed','{}','now','now')",(base,));db.execute("INSERT INTO entry_history VALUES('b',1,'suppress','{}','fixture','now')");db.commit();db.close()
++                if base=='h':
++                    migrate_v3.migrate(root/'old.sqlite',root/'new.sqlite')
++                    with sqlite3.connect(root/'new.sqlite') as new:self.assertEqual(new.execute('SELECT state,base_record_hash FROM overlays').fetchone(),('suppressed','h'))
++                else:
++                    with self.assertRaisesRegex(sqlite3.IntegrityError,'base must match'):migrate_v3.migrate(root/'old.sqlite',root/'new.sqlite')
++                    self.assertFalse((root/'new.sqlite').exists())
++
++if __name__=='__main__':unittest.main()
+--- catalog/tests/test_versioned_signature_annotations.py
++++ catalog/tests/test_versioned_signature_annotations.py
+@@ -3,7 +3,7 @@
+ import build_catalog,sdk_api_index,test_source_annotation_targets
+ 
+ class VersionedSignatureAnnotations(unittest.TestCase):
+-    def fixture(self,root,signature_version='37.0',annotation_version='37.0',different_revision=False,index_present=False,shadow=False,wrong_return=False):
++    def fixture(self,root,signature_version='37.0',annotation_version='37.0',different_revision=False,index_present=False,shadow=False,wrong_return=False,want_report=False):
+         helper=test_source_annotation_targets.SourceTargets();inv=helper.fixture(root);spec=json.loads(inv.read_text());spec['sources'][0]['platform_api_version']=signature_version
+         if shadow:
+             source=spec['sources'][0];data=(root/source['local_path']).read_bytes().replace(b'public class A {',b'public class A<String> {');(root/source['local_path']).write_bytes(data);source.update(sha256=hashlib.sha256(data).hexdigest(),git_blob=hashlib.sha1(b'blob '+str(len(data)).encode()+b'\0'+data).hexdigest(),size_bytes=len(data))
+@@ -19,7 +19,12 @@
+         inv.write_text(json.dumps(spec));build_catalog.build(inv,root/'out')
+         with sqlite3.connect((root/'out/catalog.sqlite').as_uri()+'?mode=ro',uri=True) as db:
+             result=db.execute('SELECT binding_id FROM annotation_evidence').fetchone()[0]
+-        db.close();return result
++            report=json.loads(db.execute("SELECT p.document_json FROM parse_reports p JOIN sources s USING(source_id) WHERE s.kind='sdk-annotations'").fetchone()[0]) if want_report else None
++        db.close();return (result,report) if want_report else result
++    def test_archive_resolution_counts_are_distinct_from_parse_status(self):
++        with tempfile.TemporaryDirectory() as td:
++            binding,report=self.fixture(pathlib.Path(td),want_report=True)
++            self.assertIsNotNone(binding);self.assertEqual(report['mapped_annotations'],report['annotations']);self.assertEqual(report['unmatched_annotations'],0);self.assertEqual(report['mapping_status'],'complete');self.assertEqual(report['platform_api_version'],'37.0')
+     def test_matching_snapshot_and_version_resolves_legacy_signature(self):
+         with tempfile.TemporaryDirectory() as td:self.assertEqual(self.fixture(pathlib.Path(td)),hashlib.sha256(b'java:a.A#go(String)').hexdigest())
+     def test_different_snapshot_is_not_used_as_fallback(self):
+--- catalog/tooling/aidl_lex.py
++++ catalog/tooling/aidl_lex.py
+@@ -4,6 +4,11 @@
+     """Mask comments/strings with equal-length blanks, preserving line offsets."""
+     pattern=r'"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'|/\*.*?\*/|//[^\n]*'
+     return re.sub(pattern,lambda m:''.join('\n' if c=='\n' else ' ' for c in m.group()),text,flags=re.S)
++
++def comment_mask(text):
++    """Remove comments as equal-length spaces; quoted data stays literal data."""
++    pattern=r'"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'|/\*.*?\*/|//[^\n]*'
++    return re.sub(pattern,lambda m:m.group() if m.group().startswith(('"',"'")) else ''.join('\n' if c=='\n' else ' ' for c in m.group()),text,flags=re.S)
+ 
+ def declaration_spans(text):
+     masked=code_mask(text);matches={m.start():m for m in re.finditer(r'\b(interface|parcelable|union|enum)\s+([\w]+(?:\.[\w]+)*)',masked)}
+@@ -43,3 +48,40 @@
+             start=i+1
+     raw=text[start:].strip()
+     if raw:yield raw,start
++
++def mask_spans(text,spans):
++    chars=list(text)
++    for start,end in spans:
++        chars[start:end]=['\n' if c=='\n' else ' ' for c in text[start:end]]
++    return ''.join(chars)
++
++def body_range(text,after=0):
++    masked=code_mask(text);start=masked.find('{',after)
++    if start<0:return None
++    depth=0
++    for i,c in enumerate(masked[start:],start):
++        if c=='{':depth+=1
++        elif c=='}':
++            depth-=1
++            if depth==0:return start,i
++    raise ValueError('Unbalanced AIDL declaration body')
++
++def inventory_counts(text):
++    """Independent lexical no-drop counts; no type or wire interpretation."""
++    counts=dict(declarations=0,statements=0,reconciled=True,issues=[])
++    def visit(fragment):
++        for start,end in declaration_spans(fragment):
++            raw=fragment[start:end];header=re.search(r'\b(interface|parcelable|union|enum)\s+[\w.]+',code_mask(raw))
++            if not header:continue
++            counts['declarations']+=1
++            try:bounds=body_range(raw,header.end())
++            except ValueError as error:
++                counts['reconciled']=False;counts['issues'].append(str(error));continue
++            if bounds is None:continue
++            a,b=bounds;body=comment_mask(raw[a+1:b]);nested=declaration_spans(body)
++            remaining=mask_spans(body,nested)
++            counts['statements']+=sum(1 for _ in chunks(remaining,',' if header.group(1)=='enum' else ';'))
++            visit(body)
++    visit(text)
++    counts['expected_records']=counts['declarations']+counts['statements'] if counts['declarations'] else 1
++    return counts
+--- catalog/tooling/aidl_members.py
++++ catalog/tooling/aidl_members.py
+@@ -1,7 +1,7 @@
+ """AIDL declaration inventory only. Never infer wire tags/layouts or execute values."""
+ import re
+ from parsers import annotations,typ,without_comments,sha
+-from aidl_lex import chunks
++from aidl_lex import chunks,declaration_spans,mask_spans
+ 
+ def field(raw,descriptor,package,kind,ordinal,line):
+     clean,anns=annotations(raw);clean=clean.strip().rstrip(';').strip()
+@@ -59,7 +59,7 @@
+             depth-=1
+             if depth==0:end=i;break
+     if end is None:return result
+-    body=code[start+1:end];members=[];unsupported=0
++    body=code[start+1:end];body=mask_spans(body,declaration_spans(body));members=[];unsupported=0
+     for ordinal,(raw,offset) in enumerate(chunks(body,',' if kind=='enum' else ';')):
+         locator=body.find(raw,offset);line=code[:start+1+locator].count('\n')+1
+         try:member=field(raw,descriptor,result['package'],kind,ordinal,line)
+--- catalog/tooling/build_catalog.py
++++ catalog/tooling/build_catalog.py
+@@ -156,13 +156,14 @@
+    states=[d['parse_status'] for d in declarations]
+    status=states[0] if len(states)==1 else 'partial' if any(v in ('unsupported','partial','field-metadata-partial') for v in states) else 'declarations-inventoried'
+    first=declarations[0]
+-   metadata=dict(imports=first['imports'],wire_status='unknown',declarations=[{k:d.get(k) for k in ('descriptor','declaration_kind','parse_status','reason','declaration_line','declaration_ordinal','declaration_span')} for d in declarations])
++   metadata=dict(imports=first['imports'],wire_status='unknown',declarations=[{k:d.get(k) for k in ('descriptor','declaration_kind','parse_status','reason','declaration_line','declaration_ordinal','declaration_span','parent_descriptor','declaration_depth')} for d in declarations])
+    db.execute('INSERT INTO aidl_schemas VALUES (?,?,?,?,?,?,?,?)',(sid,first['package'],first['descriptor'] if len(declarations)==1 and first['declaration_kind']=='interface' else None,first['declaration_kind'] if len(declarations)==1 else 'multiple',text,status,js(metadata),'unknown'))
+    member_count=0
+    for d in declarations:
+     if d['descriptor']:
+      root_kind='unsupported' if d['parse_status']=='unsupported' else 'aidl-'+d['declaration_kind']
+      r=dict(kind=root_kind,canonical=d['descriptor'],package=d['package'],owner=d['descriptor'],name=d['descriptor'].split('.')[-1],return_type=None,parameters=[],annotations=d['annotations'],all_annotations=d['annotations'],raw=d.get('declaration_raw',text).split('{',1)[0].strip(),line=d.get('declaration_line',1),extras=dict(aidl_kind=d['declaration_kind'],imports=d['imports'],parse_status=d['parse_status'],oneway=d.get('oneway'),schema_resolution_reason=d['reason'],declaration_ordinal=d.get('declaration_ordinal',0)))
++     r['extras']['parent_descriptor']=d.get('parent_descriptor');r['extras']['declaration_depth']=d.get('declaration_depth',0)
+      if root_kind=='unsupported':r['extras']['parse_error']=d['reason']
+     else:r=dict(kind='unsupported',canonical='unparsed-source:'+s['repository']+':'+s['path']+':'+s['sha256'],owner=None,package=d['package'],name=s['path'].rsplit('/',1)[-1],return_type=None,parameters=[],annotations=[],all_annotations=[],raw=text,line=1,extras=dict(parse_error=d['reason'],source_bytes_retained=True))
+     add(r,s,'aidl');report['declarations']+=1;report['unsupported']+=r['kind']=='unsupported'
+@@ -170,7 +171,14 @@
+      r['extras']['interface_annotations']=d['annotations'];r['extras']['interface_permission']=permission(d['annotations'],symbols,True)
+      add(r,s,'aidl');report['declarations']+=1;report['unsupported']+=r['kind']=='unsupported';member_count+=1
+     if d['parse_status'] not in ('methods-parsed','field-metadata-parsed'):issue(s,d.get('declaration_line'),d['reason'],d.get('declaration_raw',text),'aidl-semantic-gap')
+-   report.update(status=status,member_chunks=member_count,declaration_count=len(declarations))
++   from aidl_lex import inventory_counts
++   lexical=inventory_counts(text)
++   whole_file_unknown=len(declarations)==1 and declarations[0]['descriptor'] is None
++   reconciled=lexical['reconciled'] and not (whole_file_unknown and lexical['declarations'])
++   if reconciled and (lexical['declarations'] and lexical['declarations']!=len(declarations) or lexical['expected_records']!=report['declarations']):raise ValueError('AIDL reconciliation failed '+s['path'])
++   if not reconciled:issue(s,None,'AIDL lexical reconciliation unresolved; full source retained',text,'aidl-reconciliation')
++   report.update(status=status,member_chunks=member_count,declaration_count=len(declarations),aidl_lexical_inventory=lexical,aidl_reconciliation='matched' if reconciled else 'unreconciled')
++   if reconciled:report['expected_declarations']=lexical['expected_records']
+   elif kind=='sdk-annotations':report['status']='deferred-external-annotation-pass'
+   elif kind in ('evidence','sdk-history'):report['status']='retained-evidence-not-current-declarations'
+   else:issue(s,None,'Unrecognized source kind',kind);report['status']='unsupported'
+@@ -180,8 +188,6 @@
+  for s in sources:
+   if s['kind']!='sdk-annotations':continue
+   report=next(x for x in per_source if x['source_id']==s['source_id']);report.update(xml_documents=0,items=0,annotations=0,mapped_annotations=0,status='parsed')
+-  if s.get('platform_api_version') is not None and str(s['platform_api_version']) not in exact_index_targets:
+-   report['status']='partial';issue(s,None,'No imported SDK API index for annotation platform '+str(s['platform_api_version']),s['path'],'annotation-platform')
+   with zipfile.ZipFile(root/s['local_path']) as archive:
+    for filename in sorted(archive.namelist()):
+     if not filename.endswith('.xml'):issue(s,None,'Unrecognized annotation archive member',filename);continue
+@@ -237,12 +243,11 @@
+      if bid and scope=='declaration':
+       ast=permission(anns,symbols)
+       if ast['op']!='unknown':db.execute('INSERT INTO permission_relations(binding_id,source_id,line,annotation,logic,expression_json,raw_annotation) VALUES (?,?,?,?,?,?,?)',(bid,s['source_id'],ordinal+1,'external',ast['op'],js(ast),js(anns)))
+- for source in sources:
+-  if source['kind']=='sdk-annotations':
+-   archive_report=next(item for item in per_source if item['source_id']==source['source_id'])
+-   archive_report['unmatched_annotations']=archive_report['annotations']-archive_report['mapped_annotations']
+-   archive_report['mapping_status']='complete' if archive_report['unmatched_annotations']==0 else 'partial'
+-   archive_report['platform_api_version']=source.get('platform_api_version')
++  if s.get('platform_api_version') is not None and str(s['platform_api_version']) not in exact_index_targets and report['mapped_annotations']<report['annotations']:
++   report['status']='partial';issue(s,None,'No imported SDK API index for annotation platform '+str(s['platform_api_version'])+' and unresolved same-snapshot signature targets remain',s['path'],'annotation-platform')
++  report['unmatched_annotations']=report['annotations']-report['mapped_annotations']
++  report['mapping_status']='complete' if report['unmatched_annotations']==0 else 'partial'
++  report['platform_api_version']=s.get('platform_api_version')
+  for report in per_source:db.execute('INSERT INTO parse_reports VALUES (?,?)',(report['source_id'],js(report)))
+  # One conservative discovery entry; all occurrence documents remain authoritative evidence.
+  for (bid,) in db.execute('SELECT binding_id FROM bindings ORDER BY binding_id').fetchall():
+--- catalog/tooling/java_source.py
++++ catalog/tooling/java_source.py
+@@ -47,7 +47,7 @@
+   raw=txt(n)+extra;clean=typ(raw)
+   # Resolve explicit imports without guessing wildcard imports/type variables.
+   for simple,full in imports.items():
+-   if full.startswith('java.lang.'):continue
++   if full=='java.lang.'+simple:continue
+    clean=re.sub(r'(?<![\w.$])'+re.escape(simple)+r'(?![\w$])',full,clean)
+   return clean
+  def parameter(n):
+@@ -63,15 +63,15 @@
+   if raw is not None:header=raw
+   visibility=next((x for x in mods if x in ('public','protected','private')),None)
+   defaults=extra or {}
+-  if visibility is None:visibility='public' if defaults.get('owner_kind') in ('interface','annotation') and kind in ('method','field') else 'package'
++  if visibility is None:visibility='public' if defaults.get('owner_kind') in ('interface','annotation') and kind in ('method','field','class','interface','enum','annotation') else 'package'
+   e=dict(source_path=source_path,source_byte_range=[n.start_byte,n.end_byte],modifiers=mods,effective_visibility=visibility,owner_binary_name=binary_by_owner.get(owner),public_sdk_membership='unknown until checked against published SDK metadata');e.update(defaults)
+   return dict(kind=kind,canonical=canonical or owner+'#'+name,owner=owner,package=package,name=name,return_type=return_type,parameters=parameters,annotations=ma if anns is None else anns,all_annotations=qualify_anns(header),raw=header,line=n.start_point[0]+1,extras=e)
+  def excluded_node(kind):excluded[kind]=excluded.get(kind,0)+1
+- def type_decl(n,outer=None,depth=0):
++ def type_decl(n,outer=None,depth=0,owner_kind=None):
+   if depth>128:issues.append(dict(reason='Nested type depth exceeds128',line=n.start_point[0]+1,byte_range=[n.start_byte,n.end_byte]));return
+   name=txt(n.child_by_field_name('name'));owner=outer+'.'+name if outer else (package+'.' if package else '')+name;kind=TYPE_KINDS[n.type]
+   binary_by_owner[owner]=binary_by_owner[outer]+'$'+name if outer else (package.replace('.','/')+'/' if package else '')+name
+-  r=row(n,kind,owner,name,canonical=owner,extra=dict(declaration_kind=n.type,type_parameters=txt(n.child_by_field_name('type_parameters')),superclass=txt(n.child_by_field_name('superclass')),interfaces=txt(n.child_by_field_name('interfaces'))));records.append(r)
++  r=row(n,kind,owner,name,canonical=owner,extra=dict(owner_kind=owner_kind,declaration_kind=n.type,type_parameters=txt(n.child_by_field_name('type_parameters')),superclass=txt(n.child_by_field_name('superclass')),interfaces=txt(n.child_by_field_name('interfaces'))));records.append(r)
+   record_parameters=n.child_by_field_name('parameters') if n.type=='record_declaration' else None
+   if record_parameters:
+    for component in record_parameters.named_children:
+@@ -81,7 +81,7 @@
+   body=n.child_by_field_name('body')
+   if body is None:return
+   def child(c):
+-   if c.type in TYPE_KINDS:type_decl(c,owner,depth+1)
++   if c.type in TYPE_KINDS:type_decl(c,owner,depth+1,kind)
+    elif c.type=='enum_body_declarations':
+     for x in c.named_children:child(x)
+    elif c.type in ('method_declaration','constructor_declaration','compact_constructor_declaration','annotation_type_element_declaration'):
+--- catalog/tooling/migrate_v3.py
++++ catalog/tooling/migrate_v3.py
+@@ -15,11 +15,14 @@
+         # SQLite optimizer statistics are internal and are regenerated, not imported.
+         tables=[r[0] for r in old.execute("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'")]
+         new.execute('PRAGMA defer_foreign_keys=ON');new.execute('BEGIN IMMEDIATE')
+-        registry_states={};active_rows=[]
++        registry_states={};active_rows=[];overlay_rows=[]
+         for table in tables:
+             if table=='catalog_view':continue
+             if table=='active_registry':
+                 active_rows=[dict(row) for row in old.execute('SELECT * FROM active_registry')]
++                continue
++            if table=='overlays':
++                overlay_rows=[dict(row) for row in old.execute('SELECT * FROM overlays')]
+                 continue
+             if table=='effective_entries':
+                 active=old.execute('SELECT registry_id FROM active_registry WHERE singleton=1').fetchone()
+@@ -49,6 +52,12 @@
+         for row in active_rows:
+             new.execute('INSERT INTO active_registry(singleton,registry_id) VALUES(?,?)',(row['singleton'],row['registry_id']))
+         if new.execute('SELECT count(*) FROM active_registry').fetchone()[0]!=len(active_rows):raise ValueError('Active pointer count mismatch')
++        # Admit copied overlays only against the restored active base. Both local
++        # collision and imported-base guards run; invalid historical bases reject.
++        for row in overlay_rows:
++            cols=','.join('"'+k+'"' for k in row)
++            new.execute('INSERT INTO overlays('+cols+') VALUES('+','.join('?' for _ in row)+')',list(row.values()))
++        if new.execute('SELECT count(*) FROM overlays').fetchone()[0]!=len(overlay_rows):raise ValueError('Overlay count mismatch')
+         new.execute("INSERT OR REPLACE INTO catalog_meta VALUES('rebuilt_with_corrected_extractor','false')")
+         new.execute('UPDATE catalog_view SET registry_generation=(SELECT registry_version FROM registries WHERE registry_id=(SELECT registry_id FROM active_registry WHERE singleton=1)) WHERE EXISTS(SELECT 1 FROM active_registry)')
+         if new.execute('PRAGMA integrity_check').fetchone()[0]!='ok' or new.execute('PRAGMA foreign_key_check').fetchall():raise ValueError('Migrated integrity/FK failure')
+--- catalog/tooling/parsers.py
++++ catalog/tooling/parsers.py
+@@ -99,6 +99,7 @@
+   a=body.index('(');b=body.rfind(')')
+   if b<a:raise ValueError('Unclosed parameter list')
+   h=body[:a].strip();m=re.search(r'([\w$]+)$',h)
++  if aidl and any(c in h for c in '{};'):raise ValueError('Unsupported merged/nested AIDL callable head')
+   if not m:raise ValueError('Unresolved callable name')
+   name=m.group(1);ret=None if kind=='ctor' else head_return(h[:m.start()].strip())
+   original_a=clean_full.index('(');original_b=clean_full.rfind(')')
+@@ -148,20 +149,21 @@
+ 
+ def without_comments(text):
+  # Keep string/char literals intact, including // and /* inside quoted strings.
+- return re.sub(r'"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'|/\*.*?\*/|//[^\n]*',lambda m:m.group(0) if m.group(0).startswith(('"',"'")) else '\n'*m.group(0).count('\n')+' ',text,flags=re.S)
+-
+-def aidl(text):
+- from aidl_lex import code_mask
++ return re.sub(r'"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'|/\*.*?\*/|//[^\n]*',lambda m:m.group(0) if m.group(0).startswith(('"',"'")) else ''.join('\n' if c=='\n' else ' ' for c in m.group(0)),text,flags=re.S)
++
++def aidl(text,parent_descriptor=None):
++ from aidl_lex import code_mask,declaration_spans,mask_spans
+  code=without_comments(text);p=re.search(r'\bpackage\s+([\w.]+)\s*;',code);pkg=p.group(1) if p else ''
+  imports=re.findall(r'\bimport\s+([\w.]+)\s*;',code)
+  clean,anns=annotations(code)
+  d=re.search(r'\b(interface|parcelable|union|enum)\s+([\w]+(?:\.[\w]+)*)',code_mask(clean))
+  if not d:return dict(package=pkg,descriptor=None,declaration_kind=None,imports=imports,annotations=anns,members=[],parse_status='unsupported',reason='No supported top-level AIDL declaration')
+  kind,name=d.groups();descriptor=name if pkg and name.startswith(pkg+'.') else (pkg+'.' if pkg else '')+name
++ if parent_descriptor and not descriptor.startswith(parent_descriptor+'.'):descriptor=parent_descriptor+'.'+name
+  # Locate the actual declaration before stripping annotations, preserving raw member annotation arguments.
+  dm=d
+  prefix=code[:dm.start()];_,topanns=annotations(prefix[prefix.rfind(';')+1:])
+- start=code_mask(code).find('{',dm.end());members=[];status='declaration-only'
++ start=code_mask(code).find('{',dm.end());members=[];nested_declarations=[];status='declaration-only'
+  if start>=0:
+   depth=0;quote=None;esc=False;end=None
+   for i,c in enumerate(code[start:],start):
+@@ -176,6 +178,16 @@
+     if depth==0:end=i;break
+   if end is None:return dict(package=pkg,descriptor=descriptor,declaration_kind=kind,imports=imports,annotations=topanns,members=[],parse_status='unsupported',reason='Unbalanced declaration body')
+   body=code[start+1:end]
++  nested_spans=declaration_spans(body)
++  contexts=[(m.start(),m.end()) for m in re.finditer(r'\b(?:package|import)\s+[\w.]+\s*;',code_mask(code))]
++  for ordinal,(a,b) in enumerate(nested_spans):
++   ca,cb=start+1+a,start+1+b;chars=['\n' if c=='\n' else ' ' for c in code]
++   for x,y in contexts:chars[x:y]=code[x:y]
++   chars[ca:cb]=code[ca:cb];child=aidl(''.join(chars),descriptor)
++   header=re.search(r'\b(?:interface|parcelable|union|enum)\s+',code_mask(code[ca:cb]));at=ca+(header.start() if header else 0)
++   child.update(declaration_span=[ca,cb],declaration_line=code[:at].count('\n')+1,declaration_raw=code[ca:cb].strip(),declaration_ordinal=ordinal,parent_descriptor=descriptor)
++   nested_declarations.append(child)
++  body=mask_spans(body,nested_spans)
+   if kind=='interface':
+    # Angle brackets in constant expressions are shifts/comparisons, not nesting.
+    from aidl_lex import chunks as aidl_chunks
+@@ -187,7 +199,8 @@
+     except Exception as e:r=dict(kind='unsupported',canonical=descriptor+'#unparsed:'+sha(raw),owner=descriptor,package=pkg,name='unparsed',return_type=None,parameters=[],annotations=annotations(raw)[1],all_annotations=annotations(raw)[1],raw=raw,extras=dict(parse_error=str(e)));status='partial'
+     r['line']=code[:start+1].count('\n')+1+body[:locator].count('\n');members.append(r)
+   else:status='structured-body-retained; fields/enumerants/union tags unresolved'
+- return dict(package=pkg,descriptor=descriptor,declaration_name=name,declaration_kind=kind,imports=imports,annotations=topanns,members=members,parse_status=status,reason='All source bytes retained; generated transaction IDs, resolved imports and wire codecs unknown',oneway=bool(re.search(r'\boneway\s+interface\s+'+re.escape(name),code)))
++ own_header=annotations(prefix[prefix.rfind(';')+1:])[0]
++ return dict(package=pkg,descriptor=descriptor,declaration_name=name,declaration_kind=kind,imports=imports,annotations=topanns,members=members,nested_declarations=nested_declarations,parse_status=status,reason='All source bytes retained; generated transaction IDs, resolved imports and wire codecs unknown',oneway=kind=='interface' and bool(re.search(r'\boneway\b',own_header)))
+ 
+ def aidl_all(text):
+  """Every top-level declaration, with package/import and physical lines retained."""
+@@ -203,4 +216,10 @@
+   chars[start:end]=text[start:end];one=aidl(''.join(chars));raw=text[start:end]
+   header=re.search(r'\b(?:interface|parcelable|union|enum)\s+',code_mask(raw));offset=start+(header.start() if header else 0)
+   one.update(declaration_ordinal=ordinal,declaration_line=text[:offset].count('\n')+1,declaration_raw=raw.strip(),declaration_span=[start,end]);result.append(one)
+- return result
++ flat=[]
++ def flatten(declaration,depth=0):
++  children=declaration.pop('nested_declarations',[]);declaration['declaration_depth']=depth;flat.append(declaration)
++  for child in children:flatten(child,depth+1)
++ for declaration in result:flatten(declaration)
++ for ordinal,declaration in enumerate(flat):declaration['declaration_ordinal']=ordinal
++ return flat
+--- catalog/tooling/permission_reader.py
++++ catalog/tooling/permission_reader.py
+@@ -10,7 +10,9 @@
+ def read(node,schema_version='1.0.0'):
+  if not re.fullmatch(r'1\.[0-9]+\.[0-9]+',schema_version):raise ValueError('Unsupported permission major/version')
+  def visit(value):
+-  if not isinstance(value,dict) or value.get('op') not in OPS:
++  if not isinstance(value,dict) or not isinstance(value.get('op'),str):
++   raise jsonschema.ValidationError('Permission semantic node must be an object with a string op')
++  if value['op'] not in OPS:
+    return {'op':'unknown','reason':'Unrecognized permission semantic node; invocation unsupported','x-raw-node':copy.deepcopy(value)}
+   result=copy.deepcopy(value)
+   # Only schema-defined semantic edges are visited; x-* raw metadata is data.
+--- catalog/tooling/validate_catalog.py
++++ catalog/tooling/validate_catalog.py
+@@ -76,6 +76,17 @@
+         if 'expected_declarations' in r:
+             if not r['expected_declarations'] == r['declarations']:
+                 raise ValueError("Validation failed: r['expected_declarations'] == r['declarations']")
++    from aidl_lex import inventory_counts
++    report_by_id={r['source_id']:r for r in reports}
++    actual_by_id=dict(db.execute('SELECT source_id,count(*) FROM binding_declarations GROUP BY source_id'))
++    aidl_reconciliation=collections.Counter()
++    for sid,raw_schema in db.execute('SELECT source_id,raw_schema FROM aidl_schemas'):
++        report=report_by_id[sid];lexical=inventory_counts(raw_schema)
++        if report.get('aidl_reconciliation')=='matched':
++            if not lexical['reconciled'] or lexical['expected_records']!=actual_by_id.get(sid,0):raise ValueError('AIDL reconciliation failed in validator '+sid)
++            aidl_reconciliation['matched']+=1
++        else:
++            aidl_reconciliation['unreconciled']+=1
+     signature_stats = {}
+     for k in ('sdk-signature', 'source-signature'):
+         rs = [r for r in reports if r['kind'] == k]
+@@ -111,6 +122,7 @@
+                             refs(x)
+         refs(json.loads(row[0]))
+     result = dict(validated_at=datetime.datetime.now(datetime.timezone.utc).isoformat(), schema_version='1.2.0', entries_validated=n, json_schema_failures=failures, integrity_check=integrity, foreign_key_check=fk, duplicate_occurrences=duplicates, counts={t: db.execute('SELECT count(*) FROM ' + t).fetchone()[0] for t in ('sources', 'bindings', 'occurrences', 'binding_declarations', 'permission_definitions', 'permission_symbols', 'permission_relations', 'aidl_schemas', 'annotation_evidence', 'issues')}, entry_kinds=dict(kinds), effective_permission_nodes=dict(ops), scoped_annotation_permission_nodes=dict(scoped_annotation_ops), source_dependent_permission_entries=variants, signature_reconciliation=signature_stats, external_annotations_unmatched=unmatched, permission_reference_names=dict(total=len(leaves), with_definition=len(set(leaves) & known_defs), constant_only=len((set(leaves) & known_symbols) - known_defs), without_definition_or_constant=len(set(leaves) - known_defs - known_symbols)), undefined_permission_names=sorted(set(leaves) - known_defs - known_symbols), complete=False)
++    result['aidl_reconciliation']=dict(aidl_reconciliation)
+     db.close()
+     report_path=pathlib.Path(report_path).resolve()
+     if report_path==out or out in report_path.parents:raise ValueError('Validation report must be outside immutable release directory')

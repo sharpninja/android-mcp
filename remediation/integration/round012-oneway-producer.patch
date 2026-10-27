@@ -1,0 +1,6 @@
+--- a/catalog/tooling/build_catalog.py
++++ b/catalog/tooling/build_catalog.py
+@@ -173,2 +173,3 @@
+     for r in d['members']:
+      r['extras']['imports']=d['imports']
++     r['extras']['interface_oneway']=bool(d.get('oneway'))

@@ -1,0 +1,88 @@
+FFFFFFFF
+======================================================================
+FAIL: test_arc_authentication_is_explicitly_an_adapter_to_shared_registry (__main__.Design020.test_arc_authentication_is_explicitly_an_adapter_to_shared_registry)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/tests_design020_contract.py", line 9, in test_arc_authentication_is_explicitly_an_adapter_to_shared_registry
+    self.assertTrue('ArcAuthenticator ..> ClientAuthenticator' in self.code)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_component_writes_converge_on_single_sqlite_coordinator (__main__.Design020.test_component_writes_converge_on_single_sqlite_coordinator)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/tests_design020_contract.py", line 13, in test_component_writes_converge_on_single_sqlite_coordinator
+    self.assertEqual(['storage'],writers)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['storage'] != ['callbacks', 'catalog', 'audit', 'callbacks']
+
+First differing element 0:
+'storage'
+'callbacks'
+
+Second list contains 3 additional elements.
+First extra element 1:
+'catalog'
+
+- ['storage']
++ ['callbacks', 'catalog', 'audit', 'callbacks']
+
+======================================================================
+FAIL: test_migration_precedes_live_schema (__main__.Design020.test_migration_precedes_live_schema)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/tests_design020_contract.py", line 24, in test_migration_precedes_live_schema
+    self.assertTrue('Migration precedes the live CHECK' in self.main)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_nonresumable_stage_expiry_has_one_policy (__main__.Design020.test_nonresumable_stage_expiry_has_one_policy)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/tests_design020_contract.py", line 21, in test_nonresumable_stage_expiry_has_one_policy
+    self.assertFalse('retaining only an explicitly resumable stage' in self.main)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_owner_log_read_and_export_have_both_model_and_code_path (__main__.Design020.test_owner_log_read_and_export_have_both_model_and_code_path)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/tests_design020_contract.py", line 15, in test_owner_log_read_and_export_have_both_model_and_code_path
+    self.assertTrue('bridge.app.ownerCommands -> bridge.app.audit' in self.model)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_screen_tables_and_story_actions_resolve_to_declared_ids (__main__.Design020.test_screen_tables_and_story_actions_resolve_to_declared_ids)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/tests_design020_contract.py", line 29, in test_screen_tables_and_story_actions_resolve_to_declared_ids
+    self.assertTrue('['+x['id']+'](screens/'+x['id']+'.svg)' in self.main,x['id'])
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : SCR01
+
+======================================================================
+FAIL: test_self_adb_pairing_is_an_explicit_story_not_a_grant (__main__.Design020.test_self_adb_pairing_is_an_explicit_story_not_a_grant)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/tests_design020_contract.py", line 37, in test_self_adb_pairing_is_an_explicit_story_not_a_grant
+    self.assertIsNotNone(story)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^
+AssertionError: unexpectedly None
+
+======================================================================
+FAIL: test_unknown_callback_late_result_and_cancel_are_closed_in_contract (__main__.Design020.test_unknown_callback_late_result_and_cancel_are_closed_in_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/tests_design020_contract.py", line 19, in test_unknown_callback_late_result_and_cancel_are_closed_in_contract
+    self.assertTrue(event in self.main,event)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : late confirmed registration result
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.013s
+
+FAILED (failures=8)

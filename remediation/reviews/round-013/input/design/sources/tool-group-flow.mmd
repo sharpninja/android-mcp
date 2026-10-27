@@ -1,0 +1,13 @@
+flowchart TD
+  Full[Complete catalog and unassigned queue] --> Index[Functional group index with provenance]
+  Job[Job description and constraints] --> Search[Deterministic bounded discovery]
+  Index --> Search
+  Search --> Summary[Ranked summaries and scoped cursor]
+  Summary --> Describe[Fetch selected coherent group manifest]
+  Describe --> Plan[Dependency closure and byte budget]
+  Plan --> CAS[Atomic session view CAS and epoch checks]
+  CAS --> Portable[Default bootstrap and generic invoke]
+  CAS --> Dynamic[Opt in dynamic aliases]
+  Dynamic --> Notify[Standard tools list changed hint]
+  Portable --> Gate[Current policy and Android authority]
+  Dynamic --> Gate

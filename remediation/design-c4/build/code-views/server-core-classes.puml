@@ -1,0 +1,176 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName DejaVu Sans
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam backgroundColor white
+title Kotlin server core — proposed ownership and contracts
+left to right direction
+class BridgeService {
+  +startDesiredState()
+  +stopWithinDeadline()
+  +observeReadiness(): StateFlow
+}
+class McpServer {
+  +handlePost(request): Response
+  +openNotificationStream(session, lastEventId)
+  +validateOrigin(request)
+  +readResource(principal, uri, cursor, limits)
+}
+class DirectStreamNegotiator {
+  +negotiate(clientCaps, serverCaps): AgreedProfile
+  +requireOwnedSession(principal, session)
+}
+class DirectEventEmitter {
+  +openOwnedCommittedCursor(request)
+  +closeOnOverflowRevocationOrLease()
+}
+note bottom of DirectEventEmitter
+Explicit android.bridge.directEvents.v1 negotiation only.
+Authenticated loopback GET /v1/subscriptions/{id}/events SSE.
+Application cursor differs from MCP SSE Last-Event-ID.
+No negotiation means standard resource journal only.
+end note
+McpServer ..> DirectStreamNegotiator
+DirectStreamNegotiator ..> DirectEventEmitter
+class HealthSnapshot {
+  +serviceState
+  +desiredState
+  +mcpListener
+  +adbBackend
+  +deviceView
+  +catalogReadiness
+  +arcListener
+}
+class ForegroundStatusNotifier {
+  +renderSameSnapshot(health)
+}
+class BootCompletedReceiver {
+  +recordWaitingForUnlock()
+  +requestEligibleStart()
+}
+BridgeService ..> HealthSnapshot
+BridgeService "1" *-- "1" ForegroundStatusNotifier
+BootCompletedReceiver ..> BridgeService
+class McpSessionRegistry {
+  +resolveOwnedSession(principal, id)
+  +invalidateEpoch(epoch)
+}
+interface ClientAuthenticator {
+  +authenticate(credential, expectedKind): Principal
+}
+class AdmissionGate {
+  +admit(plan, pins): Admission
+  +recheck(admission): Decision
+}
+interface CatalogRepository {
+  +streamEffectiveInventory(snapshot)
+  +commitOverride(command, expectedRevision, ownerCapability)
+  +activateSealedView(pins)
+  +commitSessionView(session, desiredSet, expectedEtag)
+  +observePublications(): Flow
+}
+class SqliteStoreCoordinator {
+  +writeSerialized(transaction)
+  +readBoundedSnapshot(query, pins)
+}
+class SqliteCatalogRepository
+class DeviceViewResolver {
+  +resolve(facts, inventory): StagedView
+  +activateCAS(expectedView, stagedView)
+  +onPublication(epoch)
+}
+class FunctionalGroupIndex {
+  +discover(job, constraints, budget)
+  +setActiveCAS(session, desiredSet, etag)
+}
+class AuditLogger {
+  +recordAdmission(principal, pins)
+  +recordBoundedOutcome(result, logPolicy)
+  +queryRedactedSnapshot(ownerContext, filters, cursor, limits)
+  +exportApprovedSnapshot(command, ownerCapability)
+}
+class OwnerCommandFacade {
+  +submit(command, ownerCapability, etag)
+  +observeImmutableStatus()
+}
+BridgeService "1" *-- "1" McpServer
+BridgeService "1" *-- "1" DeviceViewResolver
+BridgeService "1" *-- "1" SqliteCatalogRepository
+McpServer "1" *-- "1" McpSessionRegistry
+McpServer ..> ClientAuthenticator
+McpServer ..> AdmissionGate
+note bottom of AdmissionGate
+Owner challenge pending: input admission closed, prior input drained.
+ARC input/actions and every ADB/raw input path recheck the same gate.
+Quiescence failure means no protected prompt.
+end note
+McpServer ..> FunctionalGroupIndex
+class InvocationPlanner <<reference: server-execution-classes>>
+class McpCallbackResourceAdapter <<reference: server-execution-classes>>
+McpServer ..> InvocationPlanner : plan then dispatch admitted plan
+McpServer ..> McpCallbackResourceAdapter : subscribe / bounded read / URI hint
+class OwnerAuthenticationService {
+  +issueChallenge(exactCommand, revisions, nonce)
+  +consumeFreshBiometricResult(challenge): OwnerCapability
+  +verifyAndConsume(capability, command, revisions)
+  +quiesceRemoteInputWhilePending(challenge)
+}
+class RemoteInputQuiescer {
+  +closeInputAdmissionAndDrain(deadline)
+  +reopenAfterLastChallenge()
+}
+OwnerAuthenticationService "1" *-- "1" RemoteInputQuiescer
+RemoteInputQuiescer ..> AdmissionGate : denies every bridge-controlled input path
+class SessionCommandFacade {
+  +submitSessionCommand(command, etag)
+  +observeOwnedSessionStatus()
+}
+OwnerCommandFacade ..> OwnerAuthenticationService : verify and consume exact command capability
+SqliteCatalogRepository ..> OwnerAuthenticationService : same serialized CAS boundary
+SessionCommandFacade ..> AdmissionGate
+note bottom of SessionCommandFacade
+Service derives owned principal/session context.
+No UI or JSON-supplied principal or owner assertion.
+Protected transitions use OwnerCommandFacade.
+end note
+note bottom of OwnerAuthenticationService
+Service-owned nonce, exact command/revisions and foreground Activity.
+BiometricPrompt strong/device credential, max30s, single use.
+UI object or JSON principal is never owner authorization.
+end note
+BridgeService "1" *-- "1" AdmissionGate
+BridgeService "1" *-- "1" ClientAuthenticator
+BridgeService "1" *-- "1" FunctionalGroupIndex
+BridgeService "1" *-- "1" AuditLogger
+BridgeService "1" *-- "1" OwnerCommandFacade
+BridgeService "1" *-- "1" OwnerAuthenticationService
+BridgeService "1" *-- "1" SessionCommandFacade
+BridgeService "1" *-- "1" SqliteStoreCoordinator
+BridgeService "1" *-- "1" DirectStreamNegotiator
+BridgeService "1" *-- "1" DirectEventEmitter
+SqliteCatalogRepository ..> SqliteStoreCoordinator
+AuditLogger ..> SqliteStoreCoordinator
+SessionCommandFacade ..> AuditLogger : bounded redacted local-owner query
+OwnerCommandFacade ..> AuditLogger : protected exact-snapshot export
+BridgeService "1" *-- "1" InvocationPlanner
+BridgeService "1" *-- "1" McpCallbackResourceAdapter
+AdmissionGate ..> ClientAuthenticator
+ClientAuthenticator ..> CatalogRepository
+ClientAuthenticator ..> AuditLogger
+AdmissionGate ..> CatalogRepository
+AdmissionGate ..> DeviceViewResolver
+AdmissionGate ..> AuditLogger
+SqliteCatalogRepository ..|> CatalogRepository
+CatalogRepository ..> DeviceViewResolver : committed publication epoch flow
+DeviceViewResolver ..> CatalogRepository
+FunctionalGroupIndex ..> CatalogRepository
+FunctionalGroupIndex ..> DeviceViewResolver
+FunctionalGroupIndex ..> AdmissionGate
+OwnerCommandFacade ..> AdmissionGate
+OwnerCommandFacade ..> CatalogRepository
+note bottom of OwnerCommandFacade
+Unexported bounded local Binder facade.
+UI reference is not owner authorization.
+end note
+@enduml

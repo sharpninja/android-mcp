@@ -1,0 +1,123 @@
+{
+  "captured_at": "2026-10-26T23:42:51.286753+00:00",
+  "database": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/catalog/output/release-006/catalog.sqlite",
+  "mode": "read-only",
+  "source_files_modified": false,
+  "malformed_unique_aidl_member_return_types": 115,
+  "examples": [
+    {
+      "binding_id": "6a7b1ddd6ab1ed1c8a62ee8478231bbe869a7dc222b332668e55c34f6525bdbd",
+      "signature": "aidl:android.hardware.camera2.ICameraDeviceUser#setCameraAudioRestriction(AudioRestriction)",
+      "return_type": "enum AudioRestriction { NONE = 0,VIBRATION = 1,VIBRATION_SOUND = 3 } void"
+    },
+    {
+      "binding_id": "4d04171050fac731a1e0f0655775d618682dbe0fed492f83c664d367d7f50d04",
+      "signature": "aidl:android.media.IAudioManagerNative#playbackHardeningEvent(int,HardeningType,boolean,HardeningExemptionReason,int)",
+      "return_type": "enum HardeningType { PARTIAL,FULL,} enum HardeningExemptionReason { NONE,SYSTEM_USAGE,PRIVILEGED_APP,FLAG_DISABLED,ALARM,OVERRIDE,TARGET_SDK,} oneway void"
+    },
+    {
+      "binding_id": "ba0e4cd7e3b6e213514ce4fed03745d83c8199504303027e92d7712583863a13",
+      "signature": "aidl:android.media.audio.IHalAdapterVendorExtension#parseVendorParameterIds(ParameterScope,String)",
+      "return_type": "enum ScopeType { MODULE = 0,STREAM = 1,} parcelable ParameterScope { ScopeType scope; String instanceName; } String[]"
+    },
+    {
+      "binding_id": "9fcec7f6548a1f340e3901b0f1cbb07a89729e4143eedbcbf92f13df6304d352",
+      "signature": "aidl:android.media.IAudioPolicyService#setHardeningOverride(HardeningOverride)",
+      "return_type": "enum HardeningOverride { DEFAULT = 0,DISABLE = 1,ENABLE = 2,THROW = 3,} void"
+    },
+    {
+      "binding_id": "d1c22879338f5f46d8b0b24b343a1c2b3066cba0b27e75d3377ba56ca8ef7895",
+      "signature": "aidl:android.media.IMmapStream#getMmapPosition()",
+      "return_type": "parcelable MmapStreamPosition { long timeNanos; int positionFrames; } MmapStreamPosition"
+    },
+    {
+      "binding_id": "df203b98612bae51dc17972dfc2ea6492c45597615079992afcd8dd516a17fe3",
+      "signature": "aidl:android.media.IMmapStream#getObservablePosition()",
+      "return_type": "parcelable MmapObservablePosition { long timeNanos; long positionFrames; } MmapObservablePosition"
+    },
+    {
+      "binding_id": "6bfb31f2217f2c80573d06ff4b619043ab35a4ec1bfc6e618595adc23c64c067",
+      "signature": "aidl:android.media.IMmapStream#createTrack(AudioClient,AudioAttributes)",
+      "return_type": "parcelable MmapCreateTrackResponse { int portId; int ioHandle; } MmapCreateTrackResponse"
+    },
+    {
+      "binding_id": "a8e741138024f3e78f7ed345ebd9fa8dded603c7c64c342cde54ccc1112c19c4",
+      "signature": "aidl:android.media.ISoundDose#initCachedAudioDeviceCategories(AudioDeviceCategory[])",
+      "return_type": "parcelable AudioDeviceCategory { String address; int internalAudioType; boolean csdCompatible; } oneway void"
+    },
+    {
+      "binding_id": "33973fffa11881dfe24027c5147941e4ed1ae37cbb2beb6ee7468b71aad2e67c",
+      "signature": "aidl:android.media.IAidlNode#freeNode()",
+      "return_type": "parcelable InputBufferParams { int bufferCountActual; int frameWidth; int frameHeight; } void"
+    },
+    {
+      "binding_id": "dbe16429ccfd984af6504363130de95434df8310bcae39b6d71b44a475b1bfbc",
+      "signature": "aidl:android.hardware.biometrics.IBiometricContextListener#onFoldChanged(FoldState)",
+      "return_type": "enum FoldState { UNKNOWN = 0,HALF_OPENED = 1,FULLY_OPENED = 2,FULLY_CLOSED = 3,} void"
+    },
+    {
+      "binding_id": "d4c8b23cff42a1c522d1374e3d562fa90acdadbcf804da715bd71f9fcd3e74f1",
+      "signature": "aidl:android.hardware.biometrics.IIdentityCheckStateListener#onWatchRangingStateChanged(WatchRangingState,int)",
+      "return_type": "enum WatchRangingState { WATCH_RANGING_IDLE = 0,WATCH_RANGING_SUCCESSFUL = 1,WATCH_RANGING_STARTED = 2,WATCH_RANGING_STOPPED = 3,} void"
+    },
+    {
+      "binding_id": "49596754714b4df8a90038792be8f305831c8acda031bb1136357a717c3facad",
+      "signature": "aidl:android.hardware.contexthub.IContextHubEndpoint#addSinkInRegion(SharedDataRegion)",
+      "return_type": "interface IRegisterOffloadSinkCallback { long"
+    },
+    {
+      "binding_id": "9061c34ad528480fe9e27f98da232daaa52e9224e9ea2ab810885bb584602be3",
+      "signature": "aidl:android.hardware.serial.ISerialPortResponseCallback#onResult(SerialPortInfo,ParcelFileDescriptor)",
+      "return_type": "enum ErrorCode { ERROR_PORT_NOT_FOUND = 0,ERROR_ACCESS_DENIED = 1,ERROR_OPENING_PORT = 2,} void"
+    },
+    {
+      "binding_id": "820aa05c2cc98529094207e129c67f0531b1f6441602553b5726462388ab7d40",
+      "signature": "aidl:android.os.IHintManager#getSessionChannel(IBinder)",
+      "return_type": "parcelable SessionCreationReturn { IHintSession session; boolean pipelineThreadLimitExceeded = false; SessionTag tag = SessionTag.APP; } ChannelConfig"
+    },
+    {
+      "binding_id": "e2e91976045ae5124951bac462f9d37907cefc2a580bcc1900574a202ff45f34",
+      "signature": "aidl:android.os.IHintManager#receiveChannelConfig(ChannelConfig config); } HintManagerClientData registerClient(in IHintManagerClient)",
+      "return_type": "parcelable HintManagerClientData { int powerHalVersion; int maxGraphicsPipelineThreads; int maxCpuHeadroomThreads; long preferredRateNanos; SupportInfo supportInfo; } interface IHintManagerClient { oneway void"
+    },
+    {
+      "binding_id": "2a82bda2a7a02710bb13352a200c6c869d2034e5451e54d707e7275de6a173ff",
+      "signature": "aidl:android.os.IPowerManager#reboot(boolean,String,boolean)",
+      "return_type": "parcelable LowPowerStandbyPolicy { String identifier; List<String>exemptPackages; int allowedReasons; List<String>allowedFeatures; } parcelable LowPowerStandbyPortDescription { int protocol; int portMatcher; int portNumber; byte[]localAddress; } void"
+    },
+    {
+      "binding_id": "729591948076c14e3b5a718571c33fb852b1d03dfde2bf8014f8c3f8a9e88cc2",
+      "signature": "aidl:android.os.ITradeInMode#getScreenPartStatus()",
+      "return_type": "enum ScreenPartStatus { UNSUPPORTED = 0,ORIGINAL = 1,REPLACED = 2,} ScreenPartStatus[]"
+    },
+    {
+      "binding_id": "ddb33cb7e270f398ca05d7011a68302c4164d6f9bdf61d0983ea8c75b954633a",
+      "signature": "aidl:android.os.ITradeInMode#getMoistureIntrusionDetected(long)",
+      "return_type": "enum MoistureIntrusionStatus { UNSUPPORTED = -1,UNDETECTED = 0,DETECTED = 1,} MoistureIntrusionStatus"
+    },
+    {
+      "binding_id": "721a4c4c103ac54dde8536d37d190e782e764c337e697c33f516f4e935b42c1a",
+      "signature": "aidl:android.security.intrusiondetection.IIntrusionDetectionServiceCommandCallback#onSuccess()",
+      "return_type": "enum ErrorCode{ UNKNOWN = 0,PERMISSION_DENIED = 1,INVALID_STATE_TRANSITION = 2,TRANSPORT_UNAVAILABLE = 3,DATA_SOURCE_UNAVAILABLE = 4,} void"
+    },
+    {
+      "binding_id": "8848f1163430bc6cd8135c40547172af6dcd73f691885458724bf884688ecb85",
+      "signature": "aidl:android.security.intrusiondetection.IIntrusionDetectionServiceStateCallback#onStateChange(State)",
+      "return_type": "enum State{ UNKNOWN = 0,DISABLED = 1,ENABLED = 2,} void"
+    }
+  ],
+  "current_lexical_counts": {
+    "files": 19781,
+    "type_declarations": 22447,
+    "records": 161693,
+    "unsupported_statements": 2
+  },
+  "nested_type_files": 1024,
+  "nested_declarations": 2584,
+  "full_sql_audit": {
+    "file": "round008-release006-aidl-audit.json",
+    "sha256": "572a4608fd99807328ff346e2b9453504d95a967d378fd19efd1ab568dc46c77",
+    "size_bytes": 141690
+  },
+  "limitations": "Full1024affected-sourceID rows retained in the hashed original, not forwarded. Original lexical statement count preceded the comment-counter correction and is superseded by current-parser-corpus-audit-v2. SQL115malformedbindings and nested-type counts are unaffected. No new published data."
+}

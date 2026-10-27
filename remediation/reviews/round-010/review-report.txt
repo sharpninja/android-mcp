@@ -1,0 +1,142 @@
+```json
+{
+  "review_scope": "Round 010 hostile static review, no tools. Reviewed as untrusted data: design (including the new startup device-resolution/generic Binder section and two new diagrams), catalog README/API-CONTRACT/openapi/JSON schemas/DDL/migrations, extractor tooling and tests, DeviceResolution schema plus device_resolution.py and its 16 fixtures, and supplied 007/005/002 production evidence. Android/HTTP implementation is out of scope; offline fixtures are not credited as runtime.",
+  "verdict": "NOT_READY",
+  "scores": {
+    "design": {
+      "accuracy_0_100": 94,
+      "completeness_0_100": 94,
+      "rationale": "Core bridge/policy/admission/persistence/ADB/RemoteControl/catalog sections remain consistent with bridge-config.sql, schema.sql, contracts and fixtures; R9-04 wording fixed. New section specifies collector facts (SDK_INT_FULL major/minor, extensions, modules, OEM/build, interface version/hash/reachability), three-state applicability, coherent type graph, atomic CAS activation, invalidation triggers, wire-contract-gated generic Binder dispatch and traceability. Deductions: embedded 'editable' Mermaid blocks are stale versus design/sources and the rendered SVGs (R10-08); storage contract and Entry-to-inventory projection for the new requirement are not specified (R10-02, R10-03); graph digest and facts-epoch binding described but not modelled (R10-05)."
+    },
+    "contracts_schema": {
+      "accuracy_0_100": 95,
+      "completeness_0_100": 92,
+      "rationale": "R9-05 verified executable: active_registry/catalog_view delete guards, lowercase 64-hex CHECKs on bindings/sources/registry_entries/overlays, overlay_etags for all states. cat1 and dv1 ETag compositions match code; refresh precondition order 428/400/412 tested. Deductions: openapi refresh uses undeclared scope catalog:write and device-view responses are inconsistent (R10-04); bridge-config.sql has no device-view/capability/wire-contract tables and binding_availability diverges from ResolvedEntry (R10-03); Facts lacks epoch (R10-05)."
+    },
+    "extractor": {
+      "accuracy_0_100": 94,
+      "completeness_0_100": 90,
+      "rationale": "R9-02/R9-03 fixed in code (depth-zero roots select file metadata; declaration_header uses code-masked body delimiter) with fixtures; array/name boundary fix present; same-snapshot annotation routing guarded (no fallback when index exists, formal type-variable and return-type checks). Deductions: no producer for lifecycle/variant/dependency inventory needed by the new requirement; sdk_api_index drops non-current entries from records and ignores sdks; ref() never resolves types (R10-02); annotation sources without platform_api_version still link across snapshots (R10-09)."
+    },
+    "production_catalog_data": {
+      "accuracy_0_100": 84,
+      "completeness_0_100": 70,
+      "rationale": "007 is internally consistent: entry kinds sum to 796212; per-kind declarations sum to 1109083 occurrences; annotations 13334=6509+6825, mapped 12488, unmatched 846=368+478 match reconciliation; aidl statuses sum to 20086; core manifest 1160/1138/22; exports byte-equivalent. Accuracy deductions: built with pre-R8/R9 parsers and pre-R9-05 DDL, 967 unsupported AIDL statements and absent nested AIDL members, 846 unmatched annotations, 6 undefined permission names. Completeness: 508 selected paths not retrieved, 247 relevant outside projects (5255 paths) not imported, 732 unknown, native/generated unknown, 3409 history/future index entries excluded. Acknowledgment earns no credit."
+    }
+  },
+  "overall": {
+    "accuracy_0_100": 92,
+    "completeness_0_100": 80,
+    "verdict": "NOT_READY",
+    "rationale": "All R9 artifact findings are verifiably fixed and 007 materially improves annotation routing and retrieval. The new startup requirement is specified and offline-tested but lacks storage DDL, an Entry-to-inventory projection and extractor support, and production still predates the candidate code while required coverage remains incomplete and partly unscoped."
+  },
+  "findings": [
+    {
+      "id": "R10-01",
+      "severity": "high",
+      "artifact": "evidence/production007-full-code-provenance.json; build-release007-inputs.json; built-in-validation-summary-release007.json; coverage-manifest-release007.compact.json; outside-corpus-classification-latest-summary.json; source007-cache-recomputation.json; validation-report-release007.json",
+      "evidence": "production_equals_latest_candidate=false, ddl_matches_candidate=false; 007 parsers.py 4051f4e8, aidl_lex.py 1859 bytes, build_catalog.py c6d14ba9, migrations 955549f8/3c20c503 (pre-R8/R9, no hash CHECKs/overlay_etags); aidl unsupported total 967 versus 0 with candidate parser on the 19781-file 006 corpus; 151499 AIDL records from 20086 files versus 161693 from 19781 files; java cache fingerprint c5ab437b hashes 007 java_source.py 54fe7a36 and parsers 4051f4e8, so a candidate build rejects caches as 'Stale parser cache'; not-retrieved 508; outside unknown 732, relevant 247 with 5255 declared-kind paths; external_annotations_unmatched 846; undefined_permission_names 6; excluded_history_or_future 3409.",
+      "issue": "Missing source input, not relabelable: no completed release embodies the candidate extractor and DDL, required public binding/permission coverage is incomplete and partly unscoped, and lifecycle records needed by the new requirement were never imported.",
+      "exact_minimal_correction": "Source task: regenerate Java/index caches under the current cache_fingerprint; build, validate, export and reconcile the next release from the candidate snapshot; import the 508 paths and the 5255 relevant-project paths; record an owner scope decision or complete enumeration for the 732 unknown projects and native/generated/protocol sources; publish provenance with both equality flags true.",
+      "verification_needed": "New validation/export/reconciliation/provenance reports; aidl unsupported near 0; per-platform annotation mapping distribution; classification summary without unenumerated projects."
+    },
+    {
+      "id": "R10-02",
+      "severity": "high",
+      "artifact": "catalog/tooling/sdk_api_index.py; catalog/tooling/build_catalog.py; catalog/contracts/DeviceResolution.schema.json; catalog/API-CONTRACT.md",
+      "evidence": "sdk_api_index.parse: 'if not current or not enabled: excluded.append(...);continue' and cached_records consume records only; 'sdks' attribute kept only in api_index_attributes; build_catalog ref() returns status 'unknown' and never sets resolved_binding_id; registry_entries carry no variants, availability Rule, evidence_ids or Dependency; InventoryEntity requires all four; API-CONTRACT: 'current-target SDK-index projection is insufficient as the sole resolver input'.",
+      "issue": "FR-DEV-01/FR-DEV-02/TR-DEV-01 cannot be met from production data: there is no defined or implemented projection from catalog entries to InventoryEntity variants, applicability rules or type dependencies; partly missing input, partly artifact gap.",
+      "exact_minimal_correction": "(a) sdk_api_index: emit excluded entries as records with extras.lifecycle_status='not-current-at-target' and parsed since/removed/sdks; (b) API-CONTRACT: define the projection: variant schema_hash = dispatch_manifest contract digest, evidence_ids = source_ids, a source occurrence at api_level N proves only clause platform [N,0]..[N+1,0], index since/removed give ranges, sdks give extension alternatives, otherwise unknown_reason; (c) build_catalog: resolve TypeReference.resolved_binding_id within the same source snapshot (java owner/nested types, AIDL parcelable/union/enum descriptors) and emit dependencies into a registry extension or table; fixture: production-shaped entry resolves unavailable on an older device.",
+      "verification_needed": "Fixture receipt plus a production-derived InventoryEntity sample validated against DeviceResolution.schema.json."
+    },
+    {
+      "id": "R10-03",
+      "severity": "medium",
+      "artifact": "catalog/bridge-config.sql; design traceability row TR-DEV-02; catalog/API-CONTRACT.md device-views section",
+      "evidence": "bridge-config.sql defines no device_views, capability facts, view generation/epoch or wire-contract tables; binding_availability has single reason_code TEXT, no schema_hash, view_id or epoch while ResolvedEntry has reason_codes[], schema_hash, dependencies and covers types; TR-DEV-02 cites 'SQLite transaction contract'; API-CONTRACT: 'Publication is a single SQLite transaction comparing the scope, current generation, epoch and catalog pins'.",
+      "issue": "The atomic activation/CAS contract exists only as the Python ViewStore; the executable configuration DDL neither stores views nor reconciles the older availability cache with the new view model.",
+      "exact_minimal_correction": "Add device_views(view_id PK, scope columns, registry_id, catalog/overlay generations, capability_epoch, view_generation, inventory_count, facts_id), device_view_entries(view_id, entry_id, entity_kind, state, reason_codes_json, schema_hash, dependencies_json), device_view_active(scope PK, view_id FK, epoch, generation, stale) with triggers enforcing view_generation = prior+1, epoch equality, immutable sealed rows and no pointer delete; extend binding_mappings with interface_version, interface_hash, flags/oneway, proof_source; declare binding_availability a projection of the active view or drop it.",
+      "verification_needed": "DDL fixtures mirroring test_atomic_publication_epoch_invalidation_and_cross_target."
+    },
+    {
+      "id": "R10-04",
+      "severity": "low",
+      "artifact": "catalog/contracts/openapi.json; catalog/API-CONTRACT.md",
+      "evidence": "/v1/catalog/device-views/refresh security ['catalog:write'] while securitySchemes.catalogAuth scopes are only catalog:read and catalog:admin; device-view paths declare no 401/400 although API-CONTRACT says authorization precedes disclosure; refresh 412 lacks the ETag header that entries PUT/DELETE 412 return; DeviceSnapshotResponse is unreferenced; API-CONTRACT title 'contract 1.1' versus info.version 1.2.0.",
+      "issue": "OpenAPI validity and response-set inconsistencies in the additive device-view contract.",
+      "exact_minimal_correction": "Use catalog:admin (or declare catalog:write with owner-only description); add 401/400 to device-view operations; add ETag header to refresh 412; remove DeviceSnapshotResponse or expose it; retitle API-CONTRACT 1.2.",
+      "verification_needed": "test_operation_specific_preconditions extended to device-view paths; OpenAPI lint."
+    },
+    {
+      "id": "R10-05",
+      "severity": "low",
+      "artifact": "catalog/contracts/DeviceResolution.schema.json Facts/ResolvedEntry; catalog/tooling/device_resolution.py resolve()/publish()",
+      "evidence": "Facts required fields contain no capability_epoch or observed_at; resolve(..., capability_epoch=...) is a free argument and facts_id=digest(facts); publish compares snapshot epoch only to store state. Design: 'Capture facts under a capability epoch' and 'bind the selected graph digest to dispatch schema/codec identity', but ResolvedEntry has no graph digest and none is computed.",
+      "issue": "Facts captured under an older epoch can be resolved and published under the current epoch; the per-binding type-graph digest promised by the design is unmodelled.",
+      "exact_minimal_correction": "Add capability_epoch and observed_at to Facts, require facts['capability_epoch']==capability_epoch in resolve() and in publish; add graph_digest = sha256 over the sorted transitive (entry_id,schema_hash) closure to ResolvedEntry, or amend the design to state view_id plus dependencies constitute it.",
+      "verification_needed": "Fixtures rejecting epoch-mismatched facts."
+    },
+    {
+      "id": "R10-06",
+      "severity": "low",
+      "artifact": "catalog/tooling/device_resolution.py module_range/clause/platform_range/ViewStore.invalidate",
+      "evidence": "authoritative is consulted only when state=='absent' (module) or 'absent' (interface); a non-authoritative present/reachable fact yields 'available'; platform_range raises ValueError('Invalid platform applicability interval') inside resolve(), aborting the whole snapshot for one malformed rule; invalidate(reason) validates reason then discards it.",
+      "issue": "Non-authoritative positive facts are treated as proof; one malformed inventory rule denies all bindings instead of being quarantined; invalidation reasons are not auditable.",
+      "exact_minimal_correction": "Return unknown with MODULE_PRESENCE_UNPROVEN/INTERFACE_REACHABILITY_UNPROVEN when authoritative is false (or forbid authoritative=false for positive states in the schema); validate intervals at import and map malformed rules to unknown 'APPLICABILITY_MALFORMED' in resolve; record (epoch, reason) in store history and DDL.",
+      "verification_needed": "Three fixtures."
+    },
+    {
+      "id": "R10-07",
+      "severity": "low",
+      "artifact": "catalog/tests/test_device_resolution.py",
+      "evidence": "test_atomic_publication_epoch_invalidation_and_cross_target sets fresh['target_key']='other-target' after view_id was computed; publish raises ValueError('Snapshot hash mismatch') before the scope comparison; test_availability_is_not_a_permission_grant only calls evaluate with empty rules.",
+      "issue": "Cross-target/profile rejection is not actually exercised; the permission-separation fixture is trivial.",
+      "exact_minimal_correction": "Resolve a snapshot from facts with target_key 'other-target' and publish it into the 'platform:local' store expecting ValueError('Cross-target/profile snapshot'); assert an available entry with a matching Allow rule still denies when schema_hash differs.",
+      "verification_needed": "Updated receipt."
+    },
+    {
+      "id": "R10-08",
+      "severity": "low",
+      "artifact": "design/Android MCP Bridge Design.md (Architecture diagram, Request and approval sequence, capacity section); catalog/README.md",
+      "evidence": "Embedded 'Editable source follows' architecture block has nodes Client/Server/Gate/Sources/Registry/Owner/Binding/ADB/Runtime/Data/Logs while design/sources/architecture.mmd and architecture.svg add Plan/Device/Resolve/View/Contracts; embedded request sequence lacks participant V present in request-sequence.mmd/svg; design cites evidence/catalog-size-release006.json, absent from the bundle; README still presents release006 (39,194 sources, 6,987 unmatched) and calls the same-snapshot probe 'not a published correction' although 007 published it (846).",
+      "issue": "Documentation misstates current editable sources and production state.",
+      "exact_minimal_correction": "Replace embedded Mermaid with the current .mmd text or state the files are authoritative; cite catalog-size-release007.json; update README to 007 figures.",
+      "verification_needed": "Text review."
+    },
+    {
+      "id": "R10-09",
+      "severity": "low",
+      "artifact": "catalog/tooling/build_catalog.py sdk-annotations branch",
+      "evidence": "When s.get('platform_api_version') is None, matches are any existing 'java:'+candidate binding with fallback_supported(..., eligible_source_ids=None), i.e. any snapshot; exercised by test_round3.test_java_lang_annotation_target; same-snapshot constraints require 'Explicit platform version and identical repository/commit'.",
+      "issue": "Latent permissive path links annotations of unknown platform to signatures from any snapshot.",
+      "exact_minimal_correction": "In the source metadata precheck raise ValueError('Explicit platform_api_version required for sdk-annotations'); update fixtures to supply it.",
+      "verification_needed": "Fixture; confirm production annotation sources carry versions (they do: 37.0, 37.2)."
+    }
+  ],
+  "verified_resolutions": [
+    "R9-02: build_catalog selects descriptor/kind/status from declaration_depth 0 roots; test_round9_review nested/multiple-outer fixtures.",
+    "R9-03: aidl_lex.declaration_header uses the code-masked body delimiter; annotation-brace and cpp_header fixtures.",
+    "R9-04: design states 42620/508 selected versus global gaps, UI 1000 local paging versus API 500, scheme naming and extension metadata.",
+    "R9-05: active_registry/catalog_view delete triggers, lowercase 64-hex CHECKs, overlay_etags view; fixtures including changed/missing base.",
+    "R9-06: contextlib.closing in test_round8; receipt tests-regression-050 'Ran 167 tests OK' matches the 167 tests enumerable in the supplied test files.",
+    "Same-snapshot annotation routing: 007 counts 6141 matched / 368 unmatched for 37.0 equal the probe; guards tested in test_versioned_signature_annotations.",
+    "Resolver semantics: major/minor comparison, exclusive removal, extension-not-minor, authoritative absence versus unreachable, variant ambiguity, recursive SCC fixed point, epoch/generation CAS and dv1 ETag match API-CONTRACT; 16 fixtures per device-resolution-after2.txt.",
+    "Portable assets: four .mmd and four Pele 1.10.0 SVG hashes match portable-assets-check.json and the manifest."
+  ],
+  "blockers_to_98_98": [
+    "Completed production release built from the candidate snapshot with regenerated caches and matching DDL (R10-01).",
+    "Required coverage: 508 not-retrieved paths, 5255 relevant outside paths, scope decision or enumeration for 732 unknown projects and native/generated/protocol sources (R10-01).",
+    "Defined and implemented Entry-to-InventoryEntity projection with lifecycle, extension and type-dependency extraction, and its production import (R10-02).",
+    "Executable storage contract for device views, capability facts and wire contracts (R10-03).",
+    "Fix R10-04 through R10-09 with fixtures."
+  ],
+  "limitations": [
+    "No tools: no file hashing, test execution or database inspection; all receipts and production reports are supplied claims read as data.",
+    "The 10 MB-plus native validation report is represented only by its summary and hash; per-source rows were not reviewed.",
+    "The 1087-row project table and 985-row classification were not counted row by row.",
+    "The 'ResourceWarnings treated as errors' test mode is asserted in progress-010.json but not visible in the receipt.",
+    "SVG rendering correctness and DOCX layout were not visually verified."
+  ],
+  "report_complete": true
+}
+```

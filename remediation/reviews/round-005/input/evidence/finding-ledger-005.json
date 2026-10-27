@@ -1,0 +1,152 @@
+{
+  "created_at": "2026-10-26T20:53:44.420760+00:00",
+  "previous_report_sha256": "4b4064c7e1df8cc580857d61176311a6ed7c9f4c27fda0c300af1052814150bf",
+  "previous_scores": {
+    "design": {
+      "accuracy_0_100": 95,
+      "completeness_0_100": 96,
+      "rationale": "Identity (entry_id=binding_id=SHA-256 of language-prefixed signature), single evaluator across generated/generic/known-raw with unknown-raw on separate client_raw_grants, binding.invoke shared entry-point tool_id, admission linearization, persistent service/boot/status truthfulness, separate MCP vs ADB health, three-authority separation, catalog CRUD/ETag/cursor rules and runtime gates (Sections 2, 7, 18, 19) are consistent with the DDL and fixtures. Losses: raw-grant JSON description contradicts RawGrant.schema.json (F-03); unrecognized-node quarantine claim has no implementing artifact (F-09); binding_occurrences/locator naming not reflected in the registry storage table."
+    },
+    "contracts_schema": {
+      "accuracy_0_100": 94,
+      "completeness_0_100": 93,
+      "rationale": "One cat1 ETag formula holds across API-CONTRACT, effective_entries/runtime_catalog views, validate_catalog, builder seeding and contract_reference.tag(); single-published index, deferred published-state FK, overlay/history deferred FK, revision/identity triggers, local/import collision triggers, scoped idempotency, immutable registry_entries and migration generation seeding are enforced and fixture-tested. Gaps: changed/missing-base conflict for imported overlays is service prose only (F-05); Mutation.reason has no retained location (F-06); README identity section omits jvm:/java-source: prefixes (F-08); registries.api_level nullable while Registry JSON requires integer."
+    },
+    "extractor": {
+      "accuracy_0_100": 90,
+      "completeness_0_100": 89,
+      "rationale": "parsers.py scope stack, owner reset, parameter-scoped annotations, symbolic constants, AIDL directions/ids/locators, comment/string masking, external-annotation exact/java.lang/shadow guards, java-source Tree-sitter records, conservative JVM descriptor linking, cache hash/count gates and publish-after-validation ordering are sound. Defects: interface bodies still split with split_top that treats '<' as a bracket, so a shift constant swallows later methods (F-02); parcelable/union/enum type nodes labelled 'unsupported' with stale reasons after enrichment (F-04); assert-based locator alignment in sdk_api_index (F-07); signature reconciliation remains tautological (same line filter both sides)."
+    },
+    "production_catalog_data": {
+      "accuracy_0_100": 64,
+      "completeness_0_100": 30,
+      "rationale": "Migrated release-002 copy now validates against current schema/ETag/AST (supplied report: 135,508 entries, integrity ok, 0 FK/schema failures) but was built by the pre-correction builder: rebuilt_with_corrected_extractor=false, 552 declaration-variant omissions, legacy api_level/channel facts not re-established, 875 unmatched external annotations, 10 of 1,160 permission definitions, 132,403 root permission nodes unknown. Coverage: 4,133 of 37,873 now-retrieved sources imported; release004 is staging with no database or validation; 985 repositories unenumerated; AIDL wire codes/codecs unknown; SDK 37.2 sources/index retrieved but not imported into any release."
+    }
+  },
+  "previous_overall": {
+    "accuracy_0_100": 86,
+    "completeness_0_100": 64,
+    "verdict": "NOT_READY",
+    "rationale": "Design, contracts and extractor are near target with small fixable defects (one medium). Overall completeness is bounded by the required public binding/permission coverage: the only populated release is the legacy release-002 and the corrected release004 import is unbuilt and unvalidated. Acknowledged gaps earn no completeness."
+  },
+  "findings": [
+    {
+      "id": "F-01",
+      "severity": "high",
+      "artifact": "evidence/progress-004.json; evidence/source-coverage-release004.json; evidence/legacy-populated-current-schema-validation.json",
+      "evidence": "progress-004: 'released_snapshot': 'release-002', 'released_source_count': 4133, 'released_permission_definitions': 10, 'production_target': 'release004 staging, no final database/validation'; coverage: 'selected': 102, 'excluded': 985, 'complete': false; legacy validation: 'rebuilt_with_corrected_extractor': 'false', 'declaration_variant_omissions': 552.",
+      "issue": "Missing production input (source task): no release built from the 37,873 retrieved sources, the 1,160-definition core manifest or the SDK 37.2 archive/index; 985 repositories have unknown binding/permission file counts.",
+      "exact_minimal_correction": "Source task runs build_catalog.py on source-inventory-release004.json into a new empty directory, then validate_catalog.py to a report outside it; supply report with sources==37873, permission_definitions>=1160, per-kind reconciliation; add a relevance classification or file enumeration for the 985 excluded projects to the coverage manifest; release-002 untouched.",
+      "verification_needed": "release004 validation-report.json, coverage-manifest with excluded-project classification, catalog_meta rebuilt_with_corrected_extractor=true.",
+      "candidate_status": "missing-production-input",
+      "candidate_change": "Source production target now005, still staging;004 superseded.985excluded repositories and missing semantics unresolved. No production success claimed.",
+      "test_evidence": "tests-regression-027.txt; round004-before.txt; round004-optimized.txt; round004-sdk-index-optimized.txt; legacy-populated-round4-schema-validation.json",
+      "reviewer_revalidation_pending": true
+    },
+    {
+      "id": "F-02",
+      "severity": "medium",
+      "artifact": "catalog/tooling/parsers.py aidl(); catalog/tooling/foundation_extract.py split_top; catalog/tooling/aidl_members.py",
+      "evidence": "parsers.aidl: 'chunks=[c.strip() for c in split_top(body,';') if c.strip()]'; split_top: \"elif c in '(<[{': stack.append(c)\"; aidl_members.chunks docstring 'angle shifts are ordinary expressions' but enrich() applies chunks() only 'if kind not in ('parcelable','union','enum'):return result' after interface handling; no fixture with an interface const using '<<'.",
+      "issue": "An interface constant such as 'const int F = 1 << 2;' pushes two unmatched '<', so every later ';' is nested and all remaining methods collapse into one unsupported chunk (status 'partial'); per-method entries are lost for affected AIDL files. Secondary: enrich() returns without a body when a generic parcelable name is followed by '<T>' (clean[pos]!='{'), leaving members unresolved although aidl() located the body.",
+      "exact_minimal_correction": "In parsers.aidl split interface bodies with aidl_members.chunks(body,';') (balanced ()[]{} and quotes only); in enrich() skip the type-parameter list before testing for '{'. Add fixtures: interface with 'const int F = 1 << 2;' followed by two methods asserting 3 members and 'methods-parsed'; generic parcelable with one field.",
+      "verification_needed": "New fixtures in test_aidl_members.py/test_parsers.py passing; reduced 'partial' AIDL count on release004.",
+      "candidate_status": "candidate-fixed",
+      "candidate_change": "Shared aidl_lex ignores angle shifts/comparisons for AIDL statement separators; interface constants preserve subsequent methods; generic type headers skipped. Actual-source smoke reveals925additional member occurrences, including417methods.",
+      "test_evidence": "tests-regression-027.txt; round004-before.txt; round004-optimized.txt; round004-sdk-index-optimized.txt; legacy-populated-round4-schema-validation.json",
+      "reviewer_revalidation_pending": true
+    },
+    {
+      "id": "F-03",
+      "severity": "low",
+      "artifact": "design/Android MCP Bridge Design.md 'Remediation contract precedence'; catalog/contracts/RawGrant.schema.json; catalog/API-CONTRACT.md",
+      "evidence": "Design: 'The JSON constraint schema is closed: exact connection/descriptor/target/display handles, inclusive nonnegative code range, and allowed flag bits'. Schema required: ['allowed_targets','allowed_handles','allowed_displays','max_items'], description: 'Connection, descriptor, code/flag bounds, hash and effect are authoritative SQL columns and forbidden here'.",
+      "issue": "Design text still describes the pre-R3-06 duplicated JSON contract and omits max_items, contradicting the corrected schema, SQL CHECK and API-CONTRACT.",
+      "exact_minimal_correction": "Replace that sentence with: 'constraints_json is scope-only (allowed_targets, allowed_handles, allowed_displays, max_items); connection, descriptor, code range, flags mask, contract hash and effect are SQL columns; empty sets deny'.",
+      "verification_needed": "Text review.",
+      "candidate_status": "candidate-fixed",
+      "candidate_change": "Design raw constraints description now exact four scope-only JSON fields; all authoritative bounds stay SQL columns.",
+      "test_evidence": "tests-regression-027.txt; round004-before.txt; round004-optimized.txt; round004-sdk-index-optimized.txt; legacy-populated-round4-schema-validation.json",
+      "reviewer_revalidation_pending": true
+    },
+    {
+      "id": "F-04",
+      "severity": "low",
+      "artifact": "catalog/tooling/build_catalog.py aidl branch and add()",
+      "evidence": "\"kind='aidl-interface' if d['declaration_kind']=='interface' else 'unsupported'\"; add(): \"if r['kind']=='unsupported':doc['unresolved'].append(r['extras'].get('parse_error','Structured AIDL members unresolved'))\" and issue(...'Structured AIDL body retained without semantic parse'...); enrich() sets parse_status 'field-metadata-parsed' for the same file.",
+      "issue": "Every parcelable/union/enum type node is published as kind 'unsupported' with an 'unresolved' reason and an issue row even when its members were inventoried, inflating unsupported counts and misstating mapping state (one state per member rule).",
+      "exact_minimal_correction": "Set extras parse_error to d['reason'] only when d['parse_status']=='unsupported'; otherwise emit no issue row and record 'aidl_kind'/parse_status in extensions (or add kinds aidl-parcelable/aidl-union/aidl-enum in a 1.1.0 minor revision).",
+      "verification_needed": "test_structured_aidl_members_survive_publication extended to assert the type node's unresolved list and issues count.",
+      "candidate_status": "candidate-fixed",
+      "candidate_change": "Additive1.1.0 kinds aidl-parcelable/aidl-union/aidl-enum identify parsed type declarations; source unsupported labels/issues only for actual unresolved syntax. Wire resolution remains unknown.",
+      "test_evidence": "tests-regression-027.txt; round004-before.txt; round004-optimized.txt; round004-sdk-index-optimized.txt; legacy-populated-round4-schema-validation.json",
+      "reviewer_revalidation_pending": true
+    },
+    {
+      "id": "F-05",
+      "severity": "low",
+      "artifact": "catalog/migrations/002-evidence-and-publication.sql; catalog/API-CONTRACT.md 'Entry transitions'",
+      "evidence": "Triggers active_local_collision_insert/update check only 'o.imported_binding_id IS NULL AND o.state='active''; contract: 'changed/missing base marks conflict, including suppression tombstones'; overlays has base_record_hash but no trigger compares it at pointer switch.",
+      "issue": "An active imported-override overlay whose base record_sha256 changed or disappeared in the new registry is served by runtime_catalog under the new generation unless the service remembers to mark conflict; the invariant is prose only (same class as R3-07/08).",
+      "exact_minimal_correction": "Add BEFORE INSERT/UPDATE OF registry_id ON active_registry trigger aborting when EXISTS overlay with imported_binding_id NOT NULL, state IN ('active','suppressed') and (no registry_entries row for new.registry_id or record_sha256<>base_record_hash); fixture in test_round3.",
+      "verification_needed": "Schema fixture raising IntegrityError for changed and missing base.",
+      "candidate_status": "candidate-fixed",
+      "candidate_change": "BEFORE INSERT/UPDATE pointer triggers reject active or suppressed imported overlays whose exact base hash is missing or changed, until conflict plus history is committed.",
+      "test_evidence": "tests-regression-027.txt; round004-before.txt; round004-optimized.txt; round004-sdk-index-optimized.txt; legacy-populated-round4-schema-validation.json",
+      "reviewer_revalidation_pending": true
+    },
+    {
+      "id": "F-06",
+      "severity": "low",
+      "artifact": "catalog/contracts/Entry.schema.json Mutation/Entry/HistoryEvent; catalog/contracts/openapi.json",
+      "evidence": "Mutation required includes 'reason'; Entry and HistoryEvent set 'additionalProperties': false and define no 'reason'; Registry.api_level is integer-only while schema.sql registries.api_level is nullable.",
+      "issue": "The mandatory mutation justification cannot be stored or returned in any contract document; a NULL registry api_level would be unrepresentable.",
+      "exact_minimal_correction": "Add optional 'reason' to HistoryEvent (additive 1.1.0) and state it is persisted with the history row; make Registry.api_level ['integer','null'] or NOT NULL in DDL.",
+      "verification_needed": "Schema fixture.",
+      "candidate_status": "candidate-fixed",
+      "candidate_change": "Append-only entry_history_reasons sidecar stores owner justification; HistoryEvent.reason returned by join. Registry.api_level nullable in all duplicated contract definitions. Offline oracle retains supplied reasons.",
+      "test_evidence": "tests-regression-027.txt; round004-before.txt; round004-optimized.txt; round004-sdk-index-optimized.txt; legacy-populated-round4-schema-validation.json",
+      "reviewer_revalidation_pending": true
+    },
+    {
+      "id": "F-07",
+      "severity": "low",
+      "artifact": "catalog/tooling/sdk_api_index.py parse()",
+      "evidence": "'assert [n.tag for n in nodes]==[tag for tag,line in positions]' followed by 'lines={id(n):line for n,(tag,line) in zip(nodes,positions)}'.",
+      "issue": "Under python -O the locator alignment check disappears and zip would silently misassign line locators (R2-12 removed asserts elsewhere).",
+      "exact_minimal_correction": "Replace with 'if [...]!=[...]: raise ValueError('API index locator alignment failed')'.",
+      "verification_needed": "Run test_sdk_api_index under -O.",
+      "candidate_status": "candidate-fixed",
+      "candidate_change": "Explicit API index locator alignment ValueError survives python-O; optimized mocked alignment failure and all SDK index fixtures pass.",
+      "test_evidence": "tests-regression-027.txt; round004-before.txt; round004-optimized.txt; round004-sdk-index-optimized.txt; legacy-populated-round4-schema-validation.json",
+      "reviewer_revalidation_pending": true
+    },
+    {
+      "id": "F-08",
+      "severity": "low",
+      "artifact": "catalog/README.md 'Identity, versions and compatibility'; catalog/tooling/build_catalog.py add()",
+      "evidence": "README lists 'java:owner#method(...)', 'java:owner#field', 'aidl:descriptor#method(...)'; builder: \"canonical=lang+':'+('package:' if r['kind']=='package' else '')+r['canonical']\" with lang in ('java','aidl','jvm','java-source'); API-CONTRACT: 'language-prefixed source signatures defined in README'.",
+      "issue": "jvm:, java-source: and java-source:package: identities exist in data but are undefined in the identity specification.",
+      "exact_minimal_correction": "Enumerate all four prefixes, the package: infix and the jvm descriptor form in README; note they are distinct identities until proven equivalence (extensions.proven_current_sdk_jvm_identity).",
+      "verification_needed": "Text review.",
+      "candidate_status": "candidate-fixed",
+      "candidate_change": "Canonicalizationv2 enumerates alljava/java-source/aidl/jvm namespaces and package infix; proven equivalence never silently retargets identity/grants.",
+      "test_evidence": "tests-regression-027.txt; round004-before.txt; round004-optimized.txt; round004-sdk-index-optimized.txt; legacy-populated-round4-schema-validation.json",
+      "reviewer_revalidation_pending": true
+    },
+    {
+      "id": "F-09",
+      "severity": "low",
+      "artifact": "design 'Canonical permission entry points and retained unknown metadata'; catalog/tooling/build_catalog.py, validate_catalog.py",
+      "evidence": "Design: 'an unrecognized semantic node is quarantined as a known unknown wrapper with reason plus exact raw JSON in x-raw-node'; builder: \"raise ValueError('Permission schema rejected: ...')\"; no fixture produces x-raw-node.",
+      "issue": "Specified reader behavior has no implementing code or fixture; current tooling fails closed instead.",
+      "exact_minimal_correction": "Either add a reader fixture that wraps an unknown-op node into {op:'unknown', reason, 'x-raw-node'} or amend the design to say import-time tooling rejects and only a future reader quarantines.",
+      "verification_needed": "Fixture or text review.",
+      "candidate_status": "candidate-fixed",
+      "candidate_change": "permission_reader.read executable offline helper wraps unknown semantic values with retained parsed JSON and validates; known malformed nodes/unsupported major versions reject. Source bytes preserved separately, generated AST gate remains strict.",
+      "test_evidence": "tests-regression-027.txt; round004-before.txt; round004-optimized.txt; round004-sdk-index-optimized.txt; legacy-populated-round4-schema-validation.json",
+      "reviewer_revalidation_pending": true
+    }
+  ],
+  "additional_note": "Signature per-line reconciliation is a no-drop locator-coverage guard, not independent proof of source grammar correctness. A mutant parser dropping a real fixture member is rejected before publication. Official current SDK index is separate evidence; production import and full coverage remain pending."
+}

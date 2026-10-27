@@ -1,0 +1,410 @@
+{
+  "stage": "design-evidence-pass-2-of-5: five PlantUML class/code SVGs (arc-controller, arc-target, arc-ui, server-core, server-execution) plus Structurizr ArcComponents and CallbackFlow SVGs; findings and consistency checks only, no scoring",
+  "coverage": [
+    {
+      "file": "design-c4/docs/diagrams/arc-controller-classes.svg",
+      "complete": true,
+      "limits": "Full SVG text read: 8 classes (ComposeRemoteControlViewModel, ArcSessionManager, ArcClientAdapter, ArcFrameCodec, ArcProtocolModel, RemoteFrameState, AdmissionGate, CompatibleExternalRuntime), note GMN18, links lnk10-lnk17. Relationship kinds inferred from polygon geometry; rendering/legibility not inspected; PlantUML source behind data-source-line not supplied; sha256 not recomputed."
+    },
+    {
+      "file": "design-c4/docs/diagrams/arc-target-classes.svg",
+      "complete": true,
+      "limits": "Full SVG text read: 10 classes (TargetAdapter, ComposeTargetAdapter, TargetNodeRegistry, ArcFrameCapture, ArcFrameStreamService, ArcInputDispatcher, ArcPropertyMutationService, ArcLogStreamService, UiDispatcher, ArcAuthorizationGate), note GMN24, links lnk12-lnk23. Same inference limits as above."
+    },
+    {
+      "file": "design-c4/docs/diagrams/arc-ui-classes.svg",
+      "complete": true,
+      "limits": "Full SVG text read: 15 classes, notes GMN30/GMN33/GMN36, links lnk17-lnk29. Same inference limits as above."
+    },
+    {
+      "file": "design-c4/docs/diagrams/server-core-classes.svg",
+      "complete": true,
+      "limits": "Full SVG text read: 11 classes, note GMN29, links lnk13-lnk28 including three composition diamonds from BridgeService and one from McpServer. Same inference limits as above."
+    },
+    {
+      "file": "design-c4/docs/diagrams/server-execution-classes.svg",
+      "complete": true,
+      "limits": "Full SVG text read: 11 classes, notes GMN25/GMN28, links lnk13-lnk24. Same inference limits as above."
+    },
+    {
+      "file": "design-c4/docs/diagrams/structurizr-ArcComponents.svg",
+      "complete": true,
+      "limits": "Full SVG text read: system and APK boundaries, 6 components, 1 SQLite container, 1 person, 3 external systems, 13 relationships (lnk15-lnk27). Cannot compare against workspace.dsl in this pass."
+    },
+    {
+      "file": "design-c4/docs/diagrams/structurizr-CallbackFlow.svg",
+      "complete": true,
+      "limits": "Full SVG text read: 5 components, 1 container, 2 external systems, 8 numbered steps (lnk12-lnk19). Cannot compare against workspace.dsl in this pass."
+    }
+  ],
+  "findings": [
+    {
+      "id": "P2-F01",
+      "severity": "high",
+      "area": "MCP protocol exactness (req 9) / dynamic view",
+      "artifact": "design-c4/docs/diagrams/structurizr-CallbackFlow.svg",
+      "evidence": "Steps are: '1: Invoke with typed callback bindings [Authenticated MCP]' (MCP client -> McpServer), 2-5 internal, '6: Deliver callback; bounded local reply only', '7: Ordered bounded append', '8: URI update hint; resource reads supply finite pages' (CallbackBroker -> McpServer). No step returns anything to 'MCP client'; no resources/subscribe step; no final JSON-RPC response for the tools/call opened in step 1.",
+      "issue": "As drawn, the only client-facing message is the tools/call request, which is consistent with the forbidden reading that the POST stream stays open to carry callback updates. The 'URI update hint' presupposes a notifications/resources/updated, but the spec sends that only to sessions that issued resources/subscribe for that exact URI, and no subscribe appears. The finite SubscriptionHandle created in step 5 is never returned.",
+      "exact_minimal_correction": "Insert after step 5: 'McpServer -> MCP client: final JSON-RPC result {subscription handle, journal URI}; POST SSE terminates'. Insert before step 8: 'MCP client -> McpServer: resources/subscribe {uri}'. Relabel step 8 or add step 9: 'McpServer -> MCP client: notifications/resources/updated {uri} on GET SSE/stdio to subscribed session only; client calls resources/read for finite pages'.",
+      "verification_needed": "workspace.dsl dynamic view CallbackFlow step list; design doc MCP section for the same sequence."
+    },
+    {
+      "id": "P2-F02",
+      "severity": "medium",
+      "area": "Callback registration mechanism (req 7) / dynamic view",
+      "artifact": "design-c4/docs/diagrams/structurizr-CallbackFlow.svg",
+      "evidence": "Step 5 'InvocationPlanner -> CallbackBroker: Create scoped registration and journal handle' is followed directly by step 6 'Android OS and target apps -> CallbackBroker: Deliver callback'. There is no step from the bridge to 'Android OS and target apps'.",
+      "issue": "A view titled 'Finite registration' never shows the registration reaching the OS or backend (the SDK/Binder call that installs the listener with its exact pairing/argument/token positions) nor its outcome, so step 6 has no cause.",
+      "exact_minimal_correction": "Insert between 5 and 6: 'InvocationPlanner -> Android OS and target apps: register listener/Binder callback via BackendAdapter.invoke(verifiedPlan)' and 'Android OS and target apps -> InvocationPlanner: registration outcome (or unsupported reason)'.",
+      "verification_needed": "workspace.dsl dynamic view; InvocationFlow view (other pass) may carry the outbound call."
+    },
+    {
+      "id": "P2-F03",
+      "severity": "medium",
+      "area": "Internal consistency: static vs dynamic control flow",
+      "artifact": "design-c4/docs/diagrams/structurizr-CallbackFlow.svg; design-c4/docs/diagrams/server-core-classes.svg; design-c4/docs/diagrams/server-execution-classes.svg",
+      "evidence": "CallbackFlow step 4: 'AdmissionGate -> InvocationPlanner: Admit registration'. server-core AdmissionGate has only '+admit(plan, pins): Admission' and '+recheck(admission): Decision' and dependency edges to CatalogRepository, DeviceViewResolver, AuditLogger; no edge to InvocationPlanner. server-execution InvocationPlanner ('+plan(bindingId, args, callbacks, pins)', '+dispatch(admission): BoundedResult') has no inbound edge from any class. server-core McpServer has edges to ClientAuthenticator, AdmissionGate, FunctionalGroupIndex, McpSessionRegistry only; no edge to InvocationPlanner or McpCallbackResourceAdapter.",
+      "issue": "The dynamic view makes AdmissionGate the caller of the planner, the class contracts make the gate a pure decision function whose Admission is passed to dispatch(admission) by someone else, and that someone is not drawn. The tools/call and resources/read paths have no static edge from McpServer into the execution classes.",
+      "exact_minimal_correction": "Choose one and apply everywhere: (a) add 'McpServer ..> InvocationPlanner' and 'McpServer ..> McpCallbackResourceAdapter' to server-core and change step 4 to 'McpServer -> InvocationPlanner: dispatch(admission)' with step 3 returning Admission; or (b) add '+dispatch(admission)' to AdmissionGate and the static edge 'AdmissionGate ..> InvocationPlanner'.",
+      "verification_needed": "workspace.dsl relationship list; code-diagrams.md PlantUML source."
+    },
+    {
+      "id": "P2-F04",
+      "severity": "medium",
+      "area": "Backend separation (req 3/4) / component view",
+      "artifact": "design-c4/docs/diagrams/structurizr-ArcComponents.svg",
+      "evidence": "Relationship lnk24: 'ArcEngine -> Android OS and target apps: Uses separate authorized ADB backend for generic phone control'. ArcEngine is described 'Internal Kotlin port preserving pinned ARC wire/profile; not implemented'. arc-ui note GMN33: 'Generic phone input uses separate AdbPhoneBackend.' server-execution: AdbPhoneBackend realizes BackendAdapter with no relation to any ARC class.",
+      "issue": "The component view attributes the ADB generic-phone-control path to the ARC engine, contradicting the class-level statement and the requirement that generic phone control is a separate backend that does not depend on the ARC runtime.",
+      "exact_minimal_correction": "Delete lnk24 from ArcEngine. Model AdbPhoneBackend as a component (execution component view) with the edge to 'Android OS and target apps' labelled 'Paired same-device ADB over loopback; screen.state/input.tap on demand'.",
+      "verification_needed": "workspace.dsl; structurizr-ExecutionComponents.svg (other pass) for presence of an ADB component."
+    },
+    {
+      "id": "P2-F05",
+      "severity": "medium",
+      "area": "Canonical policy convergence (req 5) / ARC authorization",
+      "artifact": "design-c4/docs/diagrams/structurizr-ArcComponents.svg; design-c4/docs/diagrams/arc-ui-classes.svg; design-c4/docs/diagrams/arc-target-classes.svg",
+      "evidence": "ArcComponents lnk21: 'ArcEngine -> AdmissionGate: Uses same admission and protected-owner boundary'. arc-ui: 'ArcRequestHandler ..> ArcAuthorizationGate' with '+admitTargetOperation(principal, pins)'; arc-target: ArcInputDispatcher, ArcFrameStreamService and ArcLogStreamService all depend on ArcAuthorizationGate (no members shown). AdmissionGate appears in neither ARC target class diagram and ArcAuthorizationGate has no dependency on AdmissionGate.",
+      "issue": "Two gates with overlapping responsibility and no drawn delegation. The component claim 'same admission' is not realized at class level, leaving a second policy authority that could diverge from canonical policy.",
+      "exact_minimal_correction": "In arc-ui-classes add 'ArcAuthorizationGate ..> AdmissionGate : delegates; no local decision' (and show AdmissionGate as a referenced stub), or remove ArcAuthorizationGate and point the three ARC services and ArcRequestHandler at AdmissionGate.recheck/admit.",
+      "verification_needed": "code-diagrams.md source; design doc ARC authorization section."
+    },
+    {
+      "id": "P2-F06",
+      "severity": "medium",
+      "area": "Class contract consistency across code diagrams (req 10)",
+      "artifact": "design-c4/docs/diagrams/arc-controller-classes.svg; design-c4/docs/diagrams/arc-ui-classes.svg; design-c4/docs/diagrams/arc-target-classes.svg; design-c4/docs/diagrams/server-core-classes.svg",
+      "evidence": "(a) AdmissionGate: server-core '+admit(plan, pins): Admission', '+recheck(admission): Decision' vs arc-controller '+admitClientTargetOperation(plan)'. (b) OwnerCommandFacade: server-core '+submit(command, ownerCapability, etag)', '+observeImmutableStatus()' vs arc-ui '+requireFreshOwnerCapability(command)'. (c) ComposeTargetAdapter: arc-target '+snapshotSelectedRoot()', '+invokeApprovedAction()', '+observeRootGeneration()' vs arc-ui '+captureUnprotectedSelectedRoot()', '+mapDipAndFrameScale()', '+releasePressedInputOnClose()'; TargetAdapter in arc-ui declares '+snapshot(rootGeneration)', '+watchFramesWithinQuota()', '+invokeApprovedAction()', '+sendInput(rootGeneration, events)' and in arc-target declares nothing. (d) Duplicated responsibility: '+releasePressedStateOnClose()' on ArcInputDispatcher vs '+releasePressedInputOnClose()' on ComposeTargetAdapter; '+excludeProtectedSurfaces()' on ArcFrameCapture vs '+captureUnprotectedSelectedRoot()' on ComposeTargetAdapter; '+mapRootDipAndAvaloniaKeyNames(events)' on ArcInputDispatcher vs '+mapDipAndFrameScale()' on ComposeTargetAdapter.",
+      "issue": "The same named class has disjoint public contracts depending on which diagram is read, and the realizing class never declares the interface it realizes. An implementer cannot derive one class from the set, and the diagrams cannot all be 'matching' the same C4 component.",
+      "exact_minimal_correction": "Designate one diagram as authoritative per class, replicate the identical member list elsewhere or draw the class as an empty stub with stereotype «see arc-ui-classes», declare every TargetAdapter operation on ComposeTargetAdapter, and assign each duplicated responsibility to exactly one class (recommend: release-on-close and DIP/key mapping to ArcInputDispatcher; protected-root exclusion to ComposeTargetAdapter; delete the other copy).",
+      "verification_needed": "code-diagrams.md PlantUML sources; design doc class tables."
+    },
+    {
+      "id": "P2-F07",
+      "severity": "medium",
+      "area": "Implementability: backend realization",
+      "artifact": "design-c4/docs/diagrams/server-execution-classes.svg",
+      "evidence": "BackendAdapter (interface): '+invoke(verifiedPlan): Outcome', '+observeCapabilityEpoch()'. BinderBackend ..|> BackendAdapter declares only '+transact(verifiedWirePlan)'. AdbPhoneBackend ..|> BackendAdapter declares only '+screenState(scope)', '+tap(scope, coordinates)'. InvocationPlanner depends on BackendAdapter only.",
+      "issue": "Neither realization declares the interface operations, and nothing states how a verifiedPlan is mapped to tap/screenState or to transact. The generic/raw-to-canonical convergence path (req 5) is asserted by the interface but not by the implementations.",
+      "exact_minimal_correction": "Add '+invoke(verifiedPlan): Outcome' and '+observeCapabilityEpoch()' to both realizations and annotate 'invoke maps plan.operation in {screen.state, input.tap} to screenState/tap; others -> unsupported reason'.",
+      "verification_needed": "design doc backend adapter contract."
+    },
+    {
+      "id": "P2-F08",
+      "severity": "medium",
+      "area": "Ownership/lifecycle (req 2, req 10 'ownership/multiplicity')",
+      "artifact": "design-c4/docs/diagrams/server-core-classes.svg; design-c4/docs/diagrams/server-execution-classes.svg; design-c4/docs/diagrams/arc-target-classes.svg",
+      "evidence": "server-core (title 'proposed ownership and contracts') has composition diamonds only BridgeService 1-1 McpServer, BridgeService 1-1 DeviceViewResolver, BridgeService 1-1 SqliteCatalogRepository, McpServer 1-1 McpSessionRegistry. AdmissionGate, FunctionalGroupIndex, AuditLogger, OwnerCommandFacade, ClientAuthenticator have no owner. server-execution: only CallbackBroker 1-0..* Subscription; InvocationPlanner, CallbackBroker, EventJournal/SqliteEventJournal, CodecRegistry, LocalReplyPolicy, McpCallbackResourceAdapter have no owner. arc-target: only ComposeTargetAdapter 1-1 TargetNodeRegistry; ArcFrameStreamService, ArcLogStreamService, ArcPropertyMutationService, ArcInputDispatcher, UiDispatcher have no owner or multiplicity.",
+      "issue": "The requirement says the Kotlin service owns transport, policy, SQLite, resolver, invocation, callbacks/groups/lifecycle; the diagrams show ownership for three of these and leave policy, groups, invocation, callbacks and audit unowned. Per-connection vs singleton lifetime of the ARC stream services (which carry close/release obligations) is unspecified.",
+      "exact_minimal_correction": "Add composition edges from BridgeService (or an explicit ServiceScope class) to AdmissionGate, FunctionalGroupIndex, AuditLogger, OwnerCommandFacade, InvocationPlanner, CallbackBroker, SqliteEventJournal with multiplicity 1; mark ArcFrameStreamService/ArcLogStreamService/ArcInputDispatcher as 'per ARC connection, owned by ArcSessionRegistry entry' and UiDispatcher as singleton.",
+      "verification_needed": "design doc lifecycle section."
+    },
+    {
+      "id": "P2-F09",
+      "severity": "medium",
+      "area": "UI-to-service boundary (req 2 'bounded unexported local service facade')",
+      "artifact": "design-c4/docs/diagrams/arc-controller-classes.svg; design-c4/docs/diagrams/structurizr-ArcComponents.svg",
+      "evidence": "arc-controller lnk10: 'ComposeRemoteControlViewModel ..> ArcSessionManager' labelled 'local service facade' with no facade class drawn. The only facade anywhere is OwnerCommandFacade ('+submit(command, ownerCapability, etag)', '+requireFreshOwnerCapability(command)'). ArcComponents lnk25: 'Compose management UI -> ArcClientAdapter: Controls explicitly selected remote session through local service' drawn directly, bypassing OwnerCommandFacade.",
+      "issue": "Controller operations (selectTarget, connectAndProbe, requestApprovedInput, disconnect) are routine session commands, not owner-capability transitions, yet the only declared facade requires ownerCapability. Which bounded interface carries them, and whether UI code can reach ArcSessionManager without a facade, is unspecified.",
+      "exact_minimal_correction": "Either add to OwnerCommandFacade '+submitSessionCommand(command, etag)' annotated 'AdmissionGate-checked, no owner capability', or add a ControllerSessionFacade class; draw ViewModel -> facade -> ArcSessionManager in arc-controller and UI -> OwnerCommandFacade -> ArcClientAdapter in ArcComponents.",
+      "verification_needed": "design doc facade command catalogue; workspace.dsl."
+    },
+    {
+      "id": "P2-F10",
+      "severity": "medium",
+      "area": "Protected owner authorization mechanism (req 2, req 5)",
+      "artifact": "design-c4/docs/diagrams/server-core-classes.svg; design-c4/docs/diagrams/arc-ui-classes.svg; design-c4/docs/diagrams/structurizr-ArcComponents.svg",
+      "evidence": "OwnerCommandFacade consumes 'ownerCapability' ('+submit(command, ownerCapability, etag)') and requires it fresh ('+requireFreshOwnerCapability(command)'); ArcComponents describes the component as 'Bounded unexported local Binder commands and owner authentication' and lnk20 'Requires exact fresh owner capability for protected transitions'; note GMN29 'UI reference is not owner authorization'. No class issues or verifies an owner capability; ClientAuthenticator.authenticate(credential): Principal is on the MCP path only; 'fresh' has no stated bound.",
+      "issue": "The one mechanism that prevents UI self-approval bypass is named but not designed: no issuer, no binding to the command, no freshness window, no revocation.",
+      "exact_minimal_correction": "Add OwnerCapabilityVerifier with '+issue(deviceCredentialResult, commandHash): OwnerCapability{nonce, expiresAt}' and '+verify(capability, command)'; edge OwnerCommandFacade ..> OwnerCapabilityVerifier; note 'freshness window N s, single use, bound to command hash and current etag'.",
+      "verification_needed": "design doc protected-owner section; SCR/STB screens for the approval prompt."
+    },
+    {
+      "id": "P2-F11",
+      "severity": "medium",
+      "area": "Revocation/epoch propagation (req 7 revocation, req 8 inflight/cache invalidation)",
+      "artifact": "design-c4/docs/diagrams/server-core-classes.svg; design-c4/docs/diagrams/arc-ui-classes.svg; design-c4/docs/diagrams/server-execution-classes.svg",
+      "evidence": "McpSessionRegistry '+invalidateEpoch(epoch)' and ArcSessionRegistry '+revokeAndCloseStreams()' have no incoming dependency; OwnerCommandFacade links only to AdmissionGate and CatalogRepository; AdmissionGate links to CatalogRepository, DeviceViewResolver, AuditLogger; BackendAdapter '+observeCapabilityEpoch()' has no consumer edge to DeviceViewResolver '+resolve(facts, inventory)' / '+activateCAS(expectedView, stagedView)'.",
+      "issue": "An owner grant change or backend capability change has no drawn path to invalidate MCP sessions, close ARC streams, recheck in-flight callbacks, or trigger view re-resolution; the mechanisms exist as methods with no caller.",
+      "exact_minimal_correction": "Add an EpochPublisher (or '+publishEpoch()' on AdmissionGate) with edges to McpSessionRegistry.invalidateEpoch, ArcSessionRegistry.revokeAndCloseStreams, CallbackBroker (recheck/cancel) and DeviceViewResolver.resolve; add 'DeviceViewResolver ..> BackendAdapter.observeCapabilityEpoch'.",
+      "verification_needed": "design doc epoch/CAS section; Startup and GroupFlow views (other pass)."
+    },
+    {
+      "id": "P2-F12",
+      "severity": "medium",
+      "area": "ARC protocol exactness (req 4 Cancel handling)",
+      "artifact": "design-c4/docs/diagrams/arc-ui-classes.svg",
+      "evidence": "ArcTcpTransport '+closeSocketOnCancel()' next to '+readOneRequestAndStreamResponses()'; note GMN30 'One request/socket. Cancel enum8 is unsupported; the compatible client closes its socket.'; arc-controller GMN18 'Cancel enum8 is not a supported v1 command.'",
+      "issue": "With one request per socket, a Cancel(8) request can only arrive on its own new socket, so a server method named closeSocketOnCancel can only close the socket carrying the Cancel request itself. That is neither 'respond unsupported' nor the client-driven cancellation the notes describe. The server response to a received Cancel(8) is unspecified.",
+      "exact_minimal_correction": "Rename to '+onPeerClosed(): cancelInFlightStream()' and add to GMN30: 'A received Cancel(8) request gets an unsupported-command error response with the terminal end flag, then normal close.'",
+      "verification_needed": "remote_control.proto (other pass): Cancel enum value, status/error representation, end flag field."
+    },
+    {
+      "id": "P2-F13",
+      "severity": "medium",
+      "area": "Callback lifecycle bounds (req 7 disconnect/restart)",
+      "artifact": "design-c4/docs/diagrams/server-execution-classes.svg",
+      "evidence": "Note GMN28: 'Transport disconnect does not imply unregister.' Subscription attributes: '+id: String', '+streamEpoch: String', '+revision: Long', '+state: RegistrationState', '+registrationAndCleanupPins'. CallbackBroker: '+cancel(handle)', '+recoverOrphanedRegistrations()'. No lease, expiry or idle deadline anywhere.",
+      "issue": "If disconnect never implies unregister and nothing expires, OS-side listeners for a client that never returns persist indefinitely, which contradicts 'finite' and 'bounded'.",
+      "exact_minimal_correction": "Add '+leaseDeadline' to Subscription (renewed by resources/read or explicit keepalive) and '+expireLeases()' to CallbackBroker; note 'at expiry: OS registration released, journal retained until retention bound, EventJournal.recordGapOrTerminal(leaseExpired)'.",
+      "verification_needed": "design doc callback lifecycle table."
+    },
+    {
+      "id": "P2-F14",
+      "severity": "medium",
+      "area": "ADB backend mechanism (req 3 same-device paired ADB, remote loopback forwarding)",
+      "artifact": "design-c4/docs/diagrams/server-execution-classes.svg",
+      "evidence": "AdbPhoneBackend declares only '+screenState(scope)' and '+tap(scope, coordinates)'; 'scope' is undefined; no members or collaborators for ADB key pair, pairing (code/port), connect to loopback adbd, authorization state, or reverse/forward mapping.",
+      "issue": "The design relies on the bridge acting as an ADB client to its own device, but no class owns that protocol or its failure modes (wireless debugging off, unpaired key, OEM restriction), so 'explicit unsupported reasons' cannot be produced.",
+      "exact_minimal_correction": "Add AdbSessionManager '+pair(code, port)', '+connect()', '+authState(): AdbState', '+close()' owned by AdbPhoneBackend; define scope = {displayId, adbTransportId}; map authState to observeCapabilityEpoch().",
+      "verification_needed": "design doc ADB section; settings/backends screen (SCR for pairing)."
+    },
+    {
+      "id": "P2-F15",
+      "severity": "medium",
+      "area": "Binder engine acquisition / wire contract verification (req 6)",
+      "artifact": "design-c4/docs/diagrams/server-execution-classes.svg",
+      "evidence": "BinderBackend '+transact(verifiedWirePlan)' only; CodecRegistry '+selectExact(schemaHash, wireProof)'; no class acquires an IBinder, produces a wireProof, or returns an unsupported-reason type.",
+      "issue": "The concept that gates all Binder use (verified exact wire contract, explicit unsupported reasons, no universal access) has no owning class or defined input, so 'wireProof' is an undefined token.",
+      "exact_minimal_correction": "Add BinderEndpointResolver '+acquire(descriptor): AcquireResult{binder | unsupportedReason}' and define WireProof = {interfaceDescriptor, interfaceVersion/hash as reported by the endpoint, transaction-code table source and hash}; edge BinderBackend ..> BinderEndpointResolver.",
+      "verification_needed": "design doc Binder engine section (confirm no hidden ServiceManager assumption)."
+    },
+    {
+      "id": "P2-F16",
+      "severity": "low",
+      "area": "Multiplicity semantics",
+      "artifact": "design-c4/docs/diagrams/arc-ui-classes.svg",
+      "evidence": "lnk18: filled diamond at ArcTcpTransport end (polygon 883-894,281-288 on the transport's bottom edge), labels '1' at the transport and '0..*' at ArcSessionRegistry.",
+      "issue": "Models one transport composing many session registries; a registry is a singleton that holds many sessions.",
+      "exact_minimal_correction": "ArcTcpTransport 1 - 1 ArcSessionRegistry; ArcSessionRegistry 1 ◆- 0..* ArcSession (new class: principal, policy epoch, socket, open streams)."
+    },
+    {
+      "id": "P2-F17",
+      "severity": "low",
+      "area": "Diagram cross-reference hygiene",
+      "artifact": "design-c4/docs/diagrams/arc-controller-classes.svg; design-c4/docs/diagrams/arc-target-classes.svg",
+      "evidence": "arc-controller draws ArcFrameCodec and ArcProtocolModel with empty compartments while arc-ui gives them 3 and 5 members; arc-target draws TargetAdapter and ArcAuthorizationGate empty while arc-ui populates them.",
+      "issue": "Empty boxes read as 'no contract' rather than 'defined elsewhere'.",
+      "exact_minimal_correction": "Add stereotype «see arc-ui-classes» to each stub."
+    },
+    {
+      "id": "P2-F18",
+      "severity": "low",
+      "area": "ARC wire preservation vocabulary",
+      "artifact": "design-c4/docs/diagrams/arc-controller-classes.svg",
+      "evidence": "ArcSessionManager '+validateCapabilitiesAndEpoch()' and RemoteFrameState '+targetGeneration', '+sequence: ULong' on the controller that talks 'unchanged ARC TCP bytes' to CompatibleExternalRuntime.",
+      "issue": "If epoch and generation are not fields of the pinned proto, the names imply protocol additions an Avalonia target cannot supply; the proto scalar type behind 'ULong' is unverified here.",
+      "exact_minimal_correction": "Annotate 'epoch = local policy epoch (not wire); generation = locally derived from snapshot identity' or cite the proto field and tag; state sequence's proto type.",
+      "verification_needed": "remote_control.proto (other pass)."
+    },
+    {
+      "id": "P2-F19",
+      "severity": "low",
+      "area": "CAS token naming (req 5)",
+      "artifact": "design-c4/docs/diagrams/arc-ui-classes.svg; design-c4/docs/diagrams/server-core-classes.svg; design-c4/docs/diagrams/server-execution-classes.svg",
+      "evidence": "'expectedRevision' (ComposeManagementViewModel.submitOwnerCommand, CatalogRepository.commitOverride), 'etag' (OwnerCommandFacade.submit, FunctionalGroupIndex.setActiveCAS), 'revision: Long' (Subscription), 'expectedView' (DeviceViewResolver.activateCAS).",
+      "issue": "Four names for the CAS precondition with no mapping between numeric revision and opaque strong ETag.",
+      "exact_minimal_correction": "One type (StrongEtag) and one parameter name across all CAS entry points; if revision is kept, note 'etag = hash(revision, content)'."
+    },
+    {
+      "id": "P2-F20",
+      "severity": "low",
+      "area": "Protected surface exclusion (req 4)",
+      "artifact": "design-c4/docs/diagrams/arc-target-classes.svg; design-c4/docs/diagrams/arc-ui-classes.svg",
+      "evidence": "ArcFrameCapture '+excludeProtectedSurfaces()' (post-capture masking) vs ComposeTargetAdapter '+captureUnprotectedSelectedRoot()' (root selection) vs GMN33 'Selected ordinary root only. Protected approval/grant screens excluded.'",
+      "issue": "Two mechanisms are implied; a protected dialog hosted inside the selected root's window is covered by neither statement.",
+      "exact_minimal_correction": "State one rule: 'protected screens are separate roots/windows that are never selectable; a snapshot/frame request while a protected root is topmost returns a typed protected-root error'; delete the redundant method."
+    },
+    {
+      "id": "P2-F21",
+      "severity": "low",
+      "area": "ARC stream termination under backpressure",
+      "artifact": "design-c4/docs/diagrams/arc-target-classes.svg",
+      "evidence": "ArcFrameStreamService '+closeSlowConsumerWithTerminal()'.",
+      "issue": "A slow consumer means a full send buffer; writing the terminal response can block the closer.",
+      "exact_minimal_correction": "Annotate 'terminal write bounded by deadline; on timeout close without terminal; peer treats EOF-without-terminal as abnormal end'."
+    },
+    {
+      "id": "P2-F22",
+      "severity": "low",
+      "area": "MCP transport details (req 9 Last-Event-ID, Origin, read cursor)",
+      "artifact": "design-c4/docs/diagrams/server-core-classes.svg; design-c4/docs/diagrams/server-execution-classes.svg",
+      "evidence": "McpServer '+openNotificationStream(session)' has no resume input; no class owns event-id replay buffers; no Origin validation member; '+readResource(uri, cursor, limits)' and McpCallbackResourceAdapter '+readBoundedPage(principal, cursor)' carry a separate cursor although resources/read has no cursor parameter.",
+      "issue": "Resumability policy (supported with bounded buffer, or unsupported with no id fields emitted), Origin validation, and where the application cursor lives (must be inside the URI) are unspecified at class level.",
+      "exact_minimal_correction": "'+openNotificationStream(session, lastEventId?)' plus a note choosing resumability policy; '+validateOrigin(request)' on McpServer; annotate 'cursor parsed from URI query, never a JSON-RPC param'.",
+      "verification_needed": "design doc MCP transport section."
+    },
+    {
+      "id": "P2-F23",
+      "severity": "low",
+      "area": "Callback correlation (req 7 event identity/correlation)",
+      "artifact": "design-c4/docs/diagrams/server-execution-classes.svg",
+      "evidence": "CallbackBroker '+receive(sender, method, payload)' with 1-0..* Subscription whose attributes are id, streamEpoch, revision, state, registrationAndCleanupPins.",
+      "issue": "No attribute identifies the listener object/token that maps an incoming callback to one subscription when several share a method.",
+      "exact_minimal_correction": "Add '+correlation: {listenerIdentity, tokenPosition, tokenValue}' toSubscription'."
+    },
+    {
+      "id": "P2-F24",
+      "severity": "low",
+      "area": "Interfaces without designated implementation",
+      "artifact": "design-c4/docs/diagrams/server-core-classes.svg; design-c4/docs/diagrams/arc-ui-classes.svg; design-c4/docs/diagrams/structurizr-CallbackFlow.svg",
+      "evidence": "ClientAuthenticator (italic, '+authenticate(credential): Principal') and ArcAuthenticator (italic, '+authenticateEnvelopeBearer(): Principal') have no realizing class, unlike CatalogRepository, EventJournal, BackendAdapter and TargetAdapter. CallbackFlow labels the component 'ClientAuthenticator [Component: Kotlin / Keystore]'.",
+      "issue": "The Keystore-backed credential store the component view promises has no class, so credential storage/verification is undefined at code level.",
+      "exact_minimal_correction": "Add KeystoreClientAuthenticator ..|> ClientAuthenticator and ArcBearerAuthenticator ..|> ArcAuthenticator, each with a dependency on the SQLite client table and Keystore."
+    },
+    {
+      "id": "P2-F25",
+      "severity": "low",
+      "area": "Audit and persistence edges (req 2, req 7 per-client logging)",
+      "artifact": "design-c4/docs/diagrams/server-core-classes.svg; design-c4/docs/diagrams/server-execution-classes.svg; design-c4/docs/diagrams/arc-controller-classes.svg; design-c4/docs/diagrams/structurizr-ArcComponents.svg; design-c4/docs/diagrams/structurizr-CallbackFlow.svg",
+      "evidence": "AuditLogger has no outgoing dependency in server-core although ArcComponents lnk18 draws 'AuditLogger -> App-private catalog/configuration'; CallbackBroker has no AuditLogger edge and CallbackFlow has no audit step; ArcSessionManager/ArcClientAdapter have no audit or profile-storage edge although '+selectTarget(profileId)' implies stored target profiles and ArcComponents has no 'ArcClientAdapter -> AuditLogger'.",
+      "issue": "Per-client logging of callback delivery and of outbound controller operations is required but has no drawn path; the audit sink has no class-level persistence dependency.",
+      "exact_minimal_correction": "Add 'AuditLogger ..> AuditRepository (SQLite)', 'CallbackBroker ..> AuditLogger', 'ArcSessionManager ..> AuditLogger', 'ArcSessionManager ..> TargetProfileRepository', and an ArcComponents edge 'ArcClientAdapter -> AuditLogger'."
+    },
+    {
+      "id": "P2-F26",
+      "severity": "low",
+      "area": "Callback delivery target and death handling (req 7 death)",
+      "artifact": "design-c4/docs/diagrams/structurizr-CallbackFlow.svg; design-c4/docs/diagrams/server-execution-classes.svg",
+      "evidence": "Step 6 'Android OS and target apps -> CallbackBroker: Deliver callback' while InvocationPlanner is described 'Typed generic/raw dispatch, codecs, Binder and ADB adapters'; no class in server-execution owns listener stubs, linkToDeath or a death recipient.",
+      "issue": "Which component owns the listener objects that the OS calls is inconsistent between views, and Binder death (a required lifecycle trigger) has no owner.",
+      "exact_minimal_correction": "State 'CallbackBroker owns listener stubs and death recipients' and add '+onBinderDied(sender)' to CallbackBroker, or route step 6 through the adapter inside InvocationPlanner."
+    },
+    {
+      "id": "P2-F27",
+      "severity": "low",
+      "area": "ARC provenance pinning (req 4)",
+      "artifact": "design-c4/docs/diagrams/arc-ui-classes.svg",
+      "evidence": "ArcProtocolModel carries '+protocolVersion = \"1.0\"' and '+transport = \"arc-protobuf-v1\"'; no class or note in any of the five class SVGs carries the pinned upstream commit or package version 0.8.0.",
+      "issue": "The 'exact retained profile' claim is not machine-checkable from the code diagrams.",
+      "exact_minimal_correction": "Add to ArcCompatibilityProfile '+upstreamCommit = \"19792a52a13a3df342f90bab6b246b547e673919\"' and '+packageVersion = \"0.8.0\"'."
+    },
+    {
+      "id": "P2-F28",
+      "severity": "low",
+      "area": "Technology labelling precision",
+      "artifact": "design-c4/docs/diagrams/structurizr-CallbackFlow.svg",
+      "evidence": "Step 1 technology '[Authenticated MCP]'; the McpServer component says 'Pinned MCP2025-11-25 transport'.",
+      "issue": "The transport (Streamable HTTP POST vs stdio) is not named on the one client-facing step.",
+      "exact_minimal_correction": "'[MCP 2025-11-25 Streamable HTTP POST, bearer]' (or stdio where applicable)."
+    },
+    {
+      "id": "P2-F29",
+      "severity": "low",
+      "area": "Responsibility placement",
+      "artifact": "design-c4/docs/diagrams/arc-ui-classes.svg; design-c4/docs/diagrams/arc-controller-classes.svg",
+      "evidence": "Target-side ArcRequestHandler depends on ArcCompatibilityProfile which includes '+validateResponseIdVersionStatus()'; controller-side ArcClientAdapter separately declares '+validateIdVersionStatusAndCommandResult()'.",
+      "issue": "Response validation is a controller concern; the diagram does not say the profile is a shared class, so the duplication reads as misplaced responsibility.",
+      "exact_minimal_correction": "Stereotype ArcCompatibilityProfile «shared by controller and target» and have ArcClientAdapter depend on it, or move validateResponseIdVersionStatus to the controller diagram."
+    },
+    {
+      "id": "P2-F30",
+      "severity": "low",
+      "area": "Framing vs parsing layering",
+      "artifact": "design-c4/docs/diagrams/arc-ui-classes.svg",
+      "evidence": "ArcFrameCodec '+decodeBoundedFrame(): BridgeRequest' and ArcProtocolModel '+parseRequest(bytes): BridgeRequest' both yield the parsed message.",
+      "issue": "Two classes own message parsing; the 8388608-byte bound is attached to a method that also parses, so a length violation and a protobuf violation are not distinguishable in the contract.",
+      "exact_minimal_correction": "'+decodeBoundedFrame(): ByteArray' in ArcFrameCodec; parsing stays in ArcProtocolModel.parseRequest called by ArcRequestHandler; add '+maxFrameBytes = 8388608' to ArcFrameCodec."
+    },
+    {
+      "id": "P2-F31",
+      "severity": "low",
+      "area": "Naming alignment between code and C4 views",
+      "artifact": "design-c4/docs/diagrams/arc-controller-classes.svg; design-c4/docs/diagrams/structurizr-ArcComponents.svg",
+      "evidence": "arc-controller external 'CompatibleExternalRuntime «external»'; ArcComponents 'Compatible external ARC target [Software System]'.",
+      "issue": "Same actor, two names.",
+      "exact_minimal_correction": "Rename the class-diagram actor to CompatibleExternalArcTarget."
+    },
+    {
+      "id": "P2-F32",
+      "severity": "low",
+      "area": "Code diagrams 'matching C4 components' (req 10)",
+      "artifact": "design-c4/docs/diagrams/arc-controller-classes.svg; design-c4/docs/diagrams/arc-target-classes.svg; design-c4/docs/diagrams/arc-ui-classes.svg; design-c4/docs/diagrams/server-core-classes.svg; design-c4/docs/diagrams/server-execution-classes.svg",
+      "evidence": "Titles are 'Kotlin ARC controller UI and client - proposed', 'Kotlin ARC target adapter and UI execution - proposed', 'Internal Kotlin ARC port and Compose boundary - proposed', 'Kotlin server core - proposed ownership and contracts', 'Kotlin invocation and callback contracts - proposed'. None names the parent component (e.g. ArcEngine, ArcClientAdapter) or states 'local image view, not a Structurizr native view'.",
+      "issue": "The class-to-component mapping that justifies the image-view workflow is not carried by the SVGs themselves.",
+      "exact_minimal_correction": "Add a header note per diagram: 'Code view for component <name> in container Android bridge APK; rendered as Structurizr image view'.",
+      "verification_needed": "code-diagrams.md and workspace.dsl image-view declarations (other pass)."
+    },
+    {
+      "id": "P2-F33",
+      "severity": "low",
+      "area": "Controller principal ambiguity",
+      "artifact": "design-c4/docs/diagrams/arc-controller-classes.svg; design-c4/docs/diagrams/structurizr-ArcComponents.svg",
+      "evidence": "ArcSessionManager '+openOwnedSession(principal, targetPins)'; ArcComponents lnk27 'ArcClientAdapter -> AdmissionGate: Checks client target grants before forwarding'.",
+      "issue": "Whether 'principal'/'client' is the local owner only or also an MCP client (which would make the controller a tool path needing an edge from McpServer/InvocationPlanner) is not stated.",
+      "exact_minimal_correction": "Annotate 'principal in {local owner, MCP client with target grant}' and, if MCP clients are allowed, add the corresponding edge in the server component view.",
+      "verification_needed": "structurizr-ServerComponents.svg and InvocationFlow (other pass); design doc."
+    },
+    {
+      "id": "P2-F34",
+      "severity": "low",
+      "area": "Oversize payload policy (req 7 oversize)",
+      "artifact": "design-c4/docs/diagrams/server-execution-classes.svg",
+      "evidence": "EventJournal '+appendOrderedWithinQuota(event)' and '+recordGapOrTerminal(reason)'; no return type and no oversize/truncate/reject outcome.",
+      "issue": "Count/byte quota overflow is representable as a gap, but a single payload larger than the per-event bound has no defined handling.",
+      "exact_minimal_correction": "'+appendOrderedWithinQuota(event): AppendOutcome {appended | droppedGapRecorded | oversizeRejectedSummaryRecorded}'."
+    }
+  ],
+  "verified_resolutions": [
+    "V01 Cancel(8) declared unsupported identically in arc-controller GMN18 and arc-ui GMN30; cancellation modelled as socket close (ArcSessionManager.cancelByClosingSocket). Consistent with req 4, subject to P2-F12 wording.",
+    "V02 One request per socket with repeated stream responses and a terminal flag: ArcTcpTransport.readOneRequestAndStreamResponses, ArcRequestHandler.handleWatch(): ResponseFlow, ArcFrameStreamService.closeSlowConsumerWithTerminal.",
+    "V03 Signed big-endian 4-byte length prefix with bounded frames: ArcFrameCodec.readExactSignedBigEndianLength / decodeBoundedFrame (numeric bound not shown, see P2-F30).",
+    "V04 OK envelope distinct from command success: GMN18 'Validate OK envelope AND CommandResult.succeeded'; ArcClientAdapter.validateIdVersionStatusAndCommandResult.",
+    "V05 No separate handshake; capabilities-first stated as a convention (GMN18); ArcRuntime.getCapabilities(principal).",
+    "V06 Bearer authentication over plaintext loopback TCP with no fake TLS: GMN30, ArcAuthenticator.authenticateEnvelopeBearer, ArcTcpTransport.acceptLoopbackConnection, ArcComponents '[arc-protobuf-v1 loopback TCP]'.",
+    "V07 Input model: mouse/wheel/key/text only, no pointer id or multitouch, Avalonia key names rather than Android keycodes, ordered approved batches, pressed-state release on close (GMN24, ArcInputDispatcher).",
+    "V08 Envelope version '1.0' and unknown-field preservation declared on ArcProtocolModel.",
+    "V09 Upstream FPS not enforced: stream bounded by a local rate/byte quota instead (ArcFrameStreamService.streamWithinLocalRateAndByteQuota).",
+    "V10 Stable/stale node generation and recheck: TargetNodeRegistry.resolveNode(id, generation) / invalidateOnRootReplacement, RemoteFrameState.targetGeneration, GMN24 'Target generation, policy epoch and protected-root gate rechecked', AdmissionGate.recheck.",
+    "V11 Honest status labelling: ArcEngine component says 'not implemented'; all five class diagrams are titled 'proposed'. No artifact in this pass claims the port is implemented.",
+    "V12 Synchronous callback return is local and bounded: GMN25 'No network or agent roundtrip for sync return. Unknown valid deadline/default means unsupported.'; LocalReplyPolicy.validateTypedFallback / replyWithinDeadline; CallbackFlow step 6.",
+    "V13 Durable handle is not a durable OS registration (GMN28); restart handling via CallbackBroker.recoverOrphanedRegistrations and EventJournal.recordGapOrTerminal.",
+    "V14 resources/updated carries URI only, subscription is to an exact owned URI, reads are finite owned pages: McpCallbackResourceAdapter.notifyUriOnly / subscribeOwnedUri / readBoundedPage, EventJournal.readOwnedPage.",
+    "V15 No self-approval bypass statements present and mutually consistent: GMN36 'ARC principal cannot mint local owner approval. The ViewModel is not the external ARC client.'; GMN29 'Unexported bounded local Binder facade. UI reference is not owner authorization.'; ComposeManagementViewModel -> OwnerCommandFacade labelled 'local only'. Mechanism gap recorded as P2-F10.",
+    "V16 Generic phone control assigned to a separate AdbPhoneBackend at class level (GMN33, server-execution) and screen.state/input.tap exposed as on-demand operations; contradicted at component level only by P2-F04.",
+    "V17 Realization and composition notation are used correctly where present (dashed hollow-triangle for ComposeTargetAdapter, BinderBackend, AdbPhoneBackend, SqliteEventJournal, SqliteCatalogRepository; filled diamonds for BridgeService, McpServer, ArcSessionManager, ComposeTargetAdapter, CallbackBroker, ArcTcpTransport).",
+    "V18 All seven SVGs are text-based vector exports with live <text> elements (DejaVu Sans / sans-serif) and a <title>, satisfying the editable-SVG form of req 12 for these files.",
+    "V19 Discovery cannot grant permission: FunctionalGroupIndex depends on AdmissionGate for grant status and exposes setActiveCAS(session, desiredSet, etag) rather than any grant operation.",
+    "V20 Owner-side CAS is present end to end: ComposeManagementViewModel.submitOwnerCommand(expectedRevision), OwnerCommandFacade.submit(command, ownerCapability, etag), CatalogRepository.commitOverride(command, expectedRevision), DeviceViewResolver.activateCAS (naming inconsistency recorded as P2-F19)."
+  ],
+  "cross_artifact_questions": [
+    "Q1 Does workspace.dsl declare AdmissionGate -> InvocationPlanner (used by CallbackFlow step 4)? If yes, server-core-classes is missing the edge; if no, how did the dynamic view validate?",
+    "Q2 Does code-diagrams.md state the class-to-component mapping and label each class SVG as a local image view that is not a Structurizr native view (P2-F32)?",
+    "Q3 remote_control.proto: confirm message names BridgeRequest/BridgeResponse/FrameUpdate/CommandResult, Cancel = 8, Bearer tag 4, the scalar type behind 'sequence: ULong', absence or presence of any epoch/generation field (P2-F18), the enum values that justify ArcLogStreamService and ArcPropertyMutationService, and the frame format implied by captureBoundedPng.",
+    "Q4 Design doc: owner capability issuance and freshness window (P2-F10); facade command subset for controller sessions (P2-F09); subscription lease policy (P2-F13); ADB pairing/connection flow (P2-F14); Binder acquisition and WireProof definition (P2-F15); cursor-in-URI encoding, Last-Event-ID policy and Origin validation (P2-F22); terminal-write deadline (P2-F21); Android boot/foreground-service limits for BridgeService.startDesiredState.",
+    "Q5 structurizr-ExecutionComponents.svg: is AdbPhoneBackend a component with its own edge to Android OS, which would make ArcComponents lnk24 a duplicate rather than the only mention (P2-F04)?",
+    "Q6 structurizr-ServerComponents.svg / InvocationFlow: can MCP clients drive ArcClientAdapter as a tool path, and if so is the edge present (P2-F33)?",
+    "Q7 SCR/STB assets: is there a protected owner approval screen for ADB pairing and for 'fresh owner capability' prompts, and a target-profile selection screen behind ComposeRemoteControlViewModel.selectTarget(profileId)?",
+    "Q8 round013-design-corrections.md and finding-ledger-design014.json: which of P2-F01 to P2-F34 were previously recorded as closed, so that regressions can be distinguished from new defects?",
+    "Q9 structurizr-Deployment.svg: is the remote-host 'adb forward' mapping to device loopback shown for both the MCP endpoint and the ARC listener?",
+    "Q10 Golden cross-language fixtures/test plan and license-notice gate (req 4) and tools/list pagination/list_changed handling (req 9) are absent from these seven SVGs; confirm they are covered in the design doc and build tasks."
+  ],
+  "limitations": [
+    "No tools were used; the seven SVGs were read as raw text. Relationship kinds and multiplicities were inferred from PlantUML polygon coordinates and label positions, not from rendered images.",
+    "PlantUML sources referenced by data-source-line attributes, workspace.dsl, code-diagrams.md, the design document and the pinned proto were not in this pass; cross-artifact claims are posed as questions rather than findings.",
+    "sha256 values in the manifest were not recomputed.",
+    "Visual legibility, overlap and layout quality of the SVGs were not assessed.",
+    "No scoring was performed per instruction; severities are relative within this pass and are not deduplicated against other passes.",
+    "Protocol statements were checked for internal consistency and against the user-supplied primary facts only; spec and proto text were not consulted."
+  ],
+  "report_complete": true
+}

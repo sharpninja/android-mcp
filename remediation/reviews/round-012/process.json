@@ -1,0 +1,136 @@
+{
+  "pid": 2602113,
+  "status": "finished",
+  "event": "completed",
+  "completed_at": "2026-10-27T04:45:25.687873+00:00",
+  "exit_code": 0,
+  "actual_models": [
+    "claude-fable-5-1"
+  ],
+  "requested_effort": "max",
+  "invocation": [
+    "/home/sharpninja/.local/share/mise/installs/claude/2.1.300/claude",
+    "--safe-mode",
+    "--strict-mcp-config",
+    "--mcp-config",
+    "{\"mcpServers\":{}}",
+    "--tools",
+    "",
+    "--permission-mode",
+    "dontAsk",
+    "--no-session-persistence",
+    "--print",
+    "--output-format",
+    "stream-json",
+    "--verbose",
+    "--model",
+    "claude-fable-5-1",
+    "--effort",
+    "max",
+    "--max-turns",
+    "1"
+  ],
+  "cli_version": "2.1.300 (Claude Code)",
+  "visible_response_sha256": "a144c4a8932c417b3f1a80f45c4e2172d910ab66f51e6e459540ebf0f7bda7ba",
+  "report_sha256": "f4474f5a7e9259d1a2431a8f9787e1693a93b5f169f73b5652f29eb9736b56c7",
+  "report_complete": true,
+  "hidden_blocks_excluded": 2,
+  "result_metadata": {
+    "duration_api_ms": 1495522,
+    "stop_reason": "end_turn",
+    "session_id": "83a1dd76-2e39-4a26-9462-4fe70f675b53",
+    "total_cost_usd": 34.4568825,
+    "usage": {
+      "input_tokens": 4,
+      "cache_creation_input_tokens": 941109,
+      "cache_read_input_tokens": 4094,
+      "output_tokens": 79970,
+      "output_tokens_details": {
+        "thinking_tokens": 70817
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 941109,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 15970,
+          "cache_read_input_tokens": 3436,
+          "cache_creation_input_tokens": 11543,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 11543
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    },
+    "modelUsage": {
+      "claude-fable-5-1": {
+        "inputTokens": 928787,
+        "outputTokens": 126899,
+        "cacheReadInputTokens": 7530,
+        "cacheCreationInputTokens": 941109,
+        "webSearchRequests": 0,
+        "costUSD": 34.4568825,
+        "contextWindow": 1000000,
+        "maxOutputTokens": 64000,
+        "thinkingTokens": 106506,
+        "canonicalModel": "claude-fable-5-1",
+        "provider": "firstParty",
+        "costBasis": "list"
+      }
+    },
+    "permission_denials": [],
+    "terminal_reason": "completed",
+    "fast_mode_state": "off",
+    "fast_mode_disabled_reason": "sdk_opt_in_required",
+    "subagent_stats": {
+      "spawned": 0,
+      "requested": {
+        "background": 0,
+        "foreground": 0,
+        "unset": 0
+      },
+      "started_in_background": 0,
+      "max_depth": 0,
+      "spawned_by_subagents": 0,
+      "completed": 0,
+      "failed": 0,
+      "killed": {
+        "parent": 0,
+        "user": 0,
+        "system": 0
+      },
+      "refused": {
+        "depth_limit": 0,
+        "concurrency_limit": 0,
+        "budget": 0
+      },
+      "by_type": {}
+    },
+    "safety_stops": 0,
+    "is_error": false,
+    "num_turns": 3,
+    "subtype": "success",
+    "api_error_status": null,
+    "ttft_ms": 768586,
+    "type": "result",
+    "duration_ms": 1495911,
+    "uuid": "5cdec257-56ab-4667-88d2-1527223d4d48",
+    "ttft_stream_ms": 11747,
+    "time_to_request_ms": 255,
+    "first_content_frame_ms": 11748,
+    "queued_turn_count": 0,
+    "result_index": 0
+  }
+}

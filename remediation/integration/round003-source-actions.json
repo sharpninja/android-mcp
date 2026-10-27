@@ -1,0 +1,38 @@
+{
+  "review": "../reviews/round-003/review-report.reassembled.json",
+  "source_task_active_files_modified": false,
+  "production_release003": "Parent reports deliberately terminated before validation/publication; retain staging as diagnostic evidence, await release004",
+  "actions": [
+    {
+      "id": "R3-02",
+      "scope": "External annotation method targets",
+      "finding": "Metalava simple java.lang types and annotation XML qualified java.lang types can produce unmatched target IDs",
+      "integration": "Try exact first and a bounded java.lang spelling candidate only when unique and type evidence supports it; record matched canonical spelling and reason. No name-only field fallback and no weakening typed field/owner/JVM proof requirements. If new Java/JVM linkage already resolves it, provide its reconciliation evidence instead.",
+      "regression": "Fixture XML a.A void go(java.lang.String) against signature method public void go(String), plus ambiguity rejection"
+    },
+    {
+      "id": "R3-03",
+      "scope": "Permission exports",
+      "finding": "Remediation candidate introduced version1.2.0 output against PermissionSummary1.1.0",
+      "integration": "Original source exporter currently emits1.1.0, so it is not affected unless adopting our newer helper. Validate every exported permission row against PermissionSummary.schema.json."
+    },
+    {
+      "id": "R3-09",
+      "scope": "Permission evidence aggregation",
+      "integration": "Keep absent-annotation occurrences visible alongside positive evidence. Absence is not explicit-none and positive aggregate evidence is not a universal OS authority claim. Preserve source/locator associations and source-dependent variants."
+    },
+    {
+      "id": "N-package-identity",
+      "scope": "Inventory namespace",
+      "finding": "A type a.B and a package a.B can collide under java:a.B",
+      "integration": "Use a distinct package inventory namespace with explicit identity-version migration, preserving legacy IDs/evidence and never silently retargeting grants. Main candidate uses java:package:a.B; type/member spellings unchanged."
+    },
+    {
+      "id": "R3-04",
+      "scope": "Validation evidence",
+      "integration": "A storage copy migration is not a corrected semantic rebuild. Mark legacy provenance as preserved and rebuilt_with_corrected_extractor=false; fresh release must report schema/integrity/FK/provenance/coverage/typed-link reconciliation after all final generators and exports."
+    }
+  ],
+  "existing_publication_only_patch": "publication-gate.patch",
+  "java_getter_workaround": "Confirmed present in separate copied java_source.py via tuple indexing;8 small Java fixtures pass; no production extraction/cache regeneration performed by remediation task"
+}

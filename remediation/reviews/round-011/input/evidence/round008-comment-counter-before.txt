@@ -1,0 +1,15 @@
+test_aidl_reconciliation_comments_are_not_statements (test_round8.Review8.test_aidl_reconciliation_comments_are_not_statements) ... FAIL
+
+======================================================================
+FAIL: test_aidl_reconciliation_comments_are_not_statements (test_round8.Review8.test_aidl_reconciliation_comments_are_not_statements)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_round8.py", line 63, in test_aidl_reconciliation_comments_are_not_statements
+    counts=aidl_lex.inventory_counts(text);self.assertEqual(counts['declarations'],3);self.assertEqual(counts['statements'],4)
+                                                                                      ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 9 != 4
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (failures=1)

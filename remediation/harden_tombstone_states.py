@@ -1,0 +1,2 @@
+import pathlib
+C=pathlib.Path(__file__).resolve().parent/'catalog';p=C/'migrations/001-initial.sql';s=p.read_text();old='CHECK(imported_binding_id IS NULL OR entry_id=imported_binding_id));';new="CHECK(imported_binding_id IS NULL OR entry_id=imported_binding_id),CHECK(state<>'suppressed' OR imported_binding_id IS NOT NULL),CHECK(state<>'deleted' OR imported_binding_id IS NULL));";assert old in s;s=s.replace(old,new);p.write_text(s);(C/'schema.sql').write_text('\n'.join(p.read_text() for p in sorted((C/'migrations').glob('*.sql'))))

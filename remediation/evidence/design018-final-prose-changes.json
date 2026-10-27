@@ -1,0 +1,98 @@
+[
+  {
+    "finding": "F-04",
+    "old": "one Kotlin Android APK, application process and UID initially",
+    "new": "one Kotlin Android APK, application process and UID"
+  },
+  {
+    "finding": "F-04",
+    "old": "known Binder AIDL interfaces and optional Avalonia.RemoteControl cover narrower integrations",
+    "new": "known Binder AIDL interfaces and the required internal Kotlin ARC compatibility engine cover narrower integrations"
+  },
+  {
+    "finding": "F-04",
+    "old": "No target application must embed instrumentation for generic ADB screen/tap control; optional Avalonia Android Runtime/Protocol stays a separate adapter, not desktop Server/Kestrel.",
+    "new": "No target application must embed instrumentation for generic ADB screen/tap control. The required internal Kotlin ArcEngine and ComposeTargetAdapter retain ARC; ArcClientAdapter supports compatible external instrumented targets separately. No desktop Server/Kestrel or managed runtime is embedded."
+  },
+  {
+    "finding": "F-04",
+    "old": "and Avalonia runtime is optional.",
+    "new": "and the internal Kotlin ARC port is required; compatible external ARC targets are optional."
+  },
+  {
+    "finding": "F-24",
+    "old": "Editable source follows.",
+    "new": "Editable sources: [C4 workspace](../architecture/workspace.dsl) and [scoped class definitions](../architecture/code-diagrams.md)."
+  },
+  {
+    "finding": "F-24",
+    "old": "![Resolved view and policy-bound generic Binder dispatch](diagrams/structurizr-Startup.svg)",
+    "new": "![Resolved view and policy-bound generic Binder dispatch](diagrams/structurizr-InvocationFlow.svg)"
+  },
+  {
+    "finding": "F-04",
+    "old": "OpenAPI specification version is1.4.0",
+    "new": "OpenAPI specification version is1.6.0"
+  },
+  {
+    "finding": "F-03",
+    "old": "materialization_strategy CHECK the four closed values above",
+    "new": "materialization_strategy CHECK none/unknown/interface_dynamic_proxy/binder_generic_stub/prebuilt_adapter/unsupported_abstract_class/unsupported_class_subclass; role=proven_non_callback requires none, role=unknown requires unknown, and none is forbidden for callback candidates/proven callbacks; unknown and unsupported strategies require a reason"
+  },
+  {
+    "finding": "F-05",
+    "old": "Ask the owner to unlock or authenticate locally for sensitive approvals if the chosen security profile requires it.",
+    "new": "Every Ask decision uses the protected owner flow and fresh strong biometric/device-credential authentication for its exact immutable command. Missing authentication or UI denies; no weaker approval profile is selected."
+  },
+  {
+    "finding": "F-05",
+    "old": "Ask policy may require the same mechanism by profile, with timeout/missing UI denying.",
+    "new": "Every Ask decision requires the same mechanism; timeout, absent authentication or missing UI denies."
+  },
+  {
+    "finding": "F-08",
+    "old": "a contract, capability or authority change revalidates or rejects it with stale_contract/revoked/epoch_changed.",
+    "new": "admitted but not dispatched calls revalidate changed contract/capability/authority pins and may fail stale_contract/revoked/epoch_changed. Already dispatched unary calls complete against their pinned plan, with epoch_changed annotated; a revoked publication right suppresses their payload. Authority removal requests bounded cancellation and reports unknown effect if completion is unproven. Live handles never retarget: publication/read rechecks current authority, and invalidated registration/cleanup contracts terminate delivery and queue only the recorded safe cleanup."
+  },
+  {
+    "finding": "F-15",
+    "old": "Deleting a referenced group mapping is rejected while an active view pins it or creates a new revision used only after explicit activation; existing evidence remains retrievable by revision.",
+    "new": "An owner delete always creates a new tombstone revision after exact owner/CAS validation. Active group-interest views retain their pinned historical revision until explicit set_active or epoch invalidation; this cannot preserve dispatch authority after a policy/catalog invalidation. The next activation resolving a deleted dependency fails unknown_dependency. A remote session cannot block the owner mutation. Existing evidence remains retrievable by revision."
+  },
+  {
+    "finding": "F-07",
+    "old": "callback.status input is {subscription_id?:string, renew?:boolean=false, expected_revision?:positive_integer, requested_lease_seconds?:integer}.",
+    "new": "callback.status input is {subscription_id?:string, renew?:boolean=false, expected_revision?:positive_integer, requested_lease_seconds?:integer, cursor?:string, limit?:integer=50}. limit is1..100. renew=true requires subscription_id, expected_revision and requested_lease_seconds in1..300; list mode cannot renew."
+  },
+  {
+    "finding": "F-15",
+    "old": "PUT/DELETE are the mutation family; no PATCH alias is defined.",
+    "new": "POST (entry creation/import/pair), PUT and DELETE form the mutation family, each with its specific idempotency/precondition contract; no PATCH alias is defined."
+  },
+  {
+    "finding": "F-06",
+    "old": "A one-use server nonce plus agent nonce, fingerprint and exact proposed label hash are length-prefixed into HMAC-SHA256 under the random bootstrap secret with domain pair-v1. The secret itself is never sent. Nonces expire after60seconds, are single-use and rate-limited; the response returns the new bearer once over the pinned TLS channel. No secret/proof/credential goes to logs. Approval binds the proposed principal and fingerprint; an expired/conflicting window fails without creating an active client.",
+    "new": "The owner first authenticates to open a pairing window of at most10minutes, then creates an individual60second attempt. Its local QR/channel payload is {attempt_id, endpoint, server_certificate_sha256, bootstrap_secret, server_nonce, expires_at}; secret and server_nonce are independently random32bytes, base64url without padding. The agent pins the exact certificate SHA-256 before POST, chooses a random32byte agent_nonce and UTF-8 label (at most128bytes, no normalization), and submits {attempt_id, agent_nonce, label, proof}. Let LP(x)=uint32-big-endian byte_length followed by bytes. proof=HMAC-SHA256(bootstrap_secret, LP(UTF8(pair-v1)) || LP(UTF8(attempt_id)) || LP(server_nonce) || LP(agent_nonce) || LP(raw32byte certificate SHA-256) || LP(SHA256(UTF8(label)))). The secret is never sent over the pairing route. After constant-time verification, atomically reserve that attempt and show the exact proposed-label hash and server certificate fingerprint in the owner prompt. This second fresh owner prompt completes within30seconds and before attempt expiry; POST waits at most30seconds. Deny/expiry returns PAIR_DENIED/PAIR_EXPIRED, consumes the attempt and creates no client. Success commits one disabled-by-default-grants principal and returns its bearer once over pinned TLS. Lost success response requires a new pairing attempt; never replay or log the bearer. Cancel/reuse/conflicting attempts fail without another active client."
+  },
+  {
+    "finding": "F-06",
+    "old": "Paired HTTPS needs a verified TLS-capable Android engine/tunnel adapter; CIO support alone is not evidence of the required server TLS profile. Until that gate passes, do not ship a sensitive cleartext fallback.",
+    "new": "The named TLS hosting candidate is a bounded Kotlin LoopbackTlsHost using Android javax.net.ssl.SSLServerSocket/SSLContext with an app-owned certificate key from AndroidKeyStore. It terminates TLS and supplies a bounded HTTP/1.1 request/SSE adapter to McpServer, with keepalive, parsing, header and slow-client limits from LoopbackHost. This candidate is separate from CIO; never assume CIO provides server TLS. The implementation spike must prove AndroidKeyStore KeyManager compatibility, client certificate pinning and the exact MCP transport before enabling paired_tls or /pair. No cleartext sensitive fallback is allowed. [Android SSLServerSocket](https://developer.android.com/reference/javax/net/ssl/SSLServerSocket) documents the API, not this unimplemented host."
+  },
+  {
+    "finding": "F-25",
+    "old": "BOOT_COMPLETED/ACTION_USER_UNLOCKED reconciles the mirror",
+    "new": "BOOT_COMPLETED (manifest receiver) or ACTION_USER_UNLOCKED (runtime-registered receiver only in the already-running direct-boot process) reconciles the mirror"
+  },
+  {
+    "finding": "F-15",
+    "old": "close/fsync",
+    "new": "flush/fsync and close"
+  },
+  {
+    "finding": "F-17",
+    "reviewed_direct_stream_paragraphs": [
+      1085
+    ]
+  }
+]

@@ -1,0 +1,53 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName DejaVu Sans
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam backgroundColor white
+title Kotlin ARC controller UI and client — proposed
+class ComposeRemoteControlViewModel {
+  +selectTarget(profileId)
+  +connectAndProbe()
+  +requestApprovedInput(events)
+  +disconnect()
+}
+class ArcSessionManager {
+  +openOwnedSession(principal, targetPins)
+  +validateCapabilitiesAndEpoch()
+  +cancelByClosingSocket()
+}
+class ArcClientAdapter {
+  +sendUnary(method, typedPayload)
+  +watchTypedResponses(method)
+  +validateCommandResult()
+}
+class ArcFrameCodec <<reference: arc-ui-classes>>
+class ArcProtocolModel <<reference: arc-ui-classes>>
+class RemoteFrameState {
+  +targetGeneration
+  +sequence: ULong
+  +pixelAndLogicalBounds
+  +renderScale
+}
+class AdmissionGate <<reference: server-core-classes>>
+class SessionCommandFacade <<reference: server-core-classes>>
+class CompatibleExternalArcTarget <<external>>
+ComposeRemoteControlViewModel ..> SessionCommandFacade : bounded unexported Binder facade
+SessionCommandFacade ..> ArcSessionManager : admitted target/session command
+ArcSessionManager "1" *-- "0..*" ArcClientAdapter
+class BridgeService <<reference: server-core-classes>>
+BridgeService "1" *-- "1" ArcSessionManager
+ArcSessionManager ..> AdmissionGate
+class ArcCompatibilityProfile <<reference: arc-ui-classes>>
+ArcClientAdapter ..> ArcCompatibilityProfile : validate ID/version/status
+ArcClientAdapter ..> ArcFrameCodec
+ArcFrameCodec ..> ArcProtocolModel
+ArcClientAdapter --> CompatibleExternalArcTarget : unchanged ARC TCP bytes
+ArcClientAdapter --> RemoteFrameState : generation-pinned observation
+ComposeRemoteControlViewModel ..> RemoteFrameState
+note bottom of ArcClientAdapter
+No separate handshake. Capabilities-first is a convention.
+Validate OK envelope AND CommandResult.succeeded.
+Cancel enum8 is not a supported v1 command.
+end note
+@enduml

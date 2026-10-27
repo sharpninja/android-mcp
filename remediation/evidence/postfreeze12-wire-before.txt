@@ -1,0 +1,23 @@
+FF
+======================================================================
+FAIL: test_stale_revision_or_invalid_verified_codec_cannot_change_selection (test_postfreeze12_wire_evidence.WireEvidenceRevision.test_stale_revision_or_invalid_verified_codec_cannot_change_selection)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_postfreeze12_wire_evidence.py", line 18, in test_stale_revision_or_invalid_verified_codec_cannot_change_selection
+    self.assertIsNotNone(wire);codec={'codec_id':'fixture-codec','schema_hash':self.schema};wire.append(self.db,self.contract,expected_revision=0,proof_state='verified',argument_codec=codec,response_codec=codec,proof_source={'evidence':['fixture']})
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^
+AssertionError: unexpectedly None
+
+======================================================================
+FAIL: test_unknown_proof_can_be_verified_then_revoked_without_rewriting_identity (test_postfreeze12_wire_evidence.WireEvidenceRevision.test_unknown_proof_can_be_verified_then_revoked_without_rewriting_identity)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_postfreeze12_wire_evidence.py", line 12, in test_unknown_proof_can_be_verified_then_revoked_without_rewriting_identity
+    self.assertIsNotNone(wire,'Immutable unknown wire row has no versioned proof-acquisition path')
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: unexpectedly None : Immutable unknown wire row has no versioned proof-acquisition path
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.013s
+
+FAILED (failures=2)

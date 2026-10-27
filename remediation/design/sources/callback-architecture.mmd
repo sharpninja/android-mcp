@@ -1,0 +1,12 @@
+flowchart TD
+  Inventory[Full catalog and callback evidence] --> Resolve[Device and coherent type view]
+  Resolve --> Admit[Canonical policy and wire admission]
+  Client[MCP client] --> Admit
+  Admit --> Proxy[Typed callback proxy and local reply policy]
+  Android[Android callback sender] --> Proxy
+  Proxy --> Broker[Kotlin headless callback broker]
+  Broker --> Journal[Bounded SQLite event journal]
+  Journal --> Resource[Authenticated MCP resource adapter]
+  Resource --> Client
+  Broker --> Cleanup[Verified cleanup and terminal state]
+  UI[Compose management UI] --> Broker

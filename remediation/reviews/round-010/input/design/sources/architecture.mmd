@@ -1,0 +1,16 @@
+flowchart TD
+    Client[Agent or ADB-forwarded host] --> Server[Persistent MCP service]
+    Server --> Plan[Canonical dispatch planner]
+    Sources[SDK AIDL and protocol metadata] --> Registry[Full bindings and types inventory]
+    Device[Device capability snapshot] --> Resolve[Version and type resolver]
+    Registry --> Resolve
+    Resolve --> View[Atomic resolved device view]
+    View --> Plan
+    Plan --> Gate[Shared client policy gate]
+    Owner[Local owner UI] --> Gate
+    Gate --> Binding[Generic Binder engine]
+    Contracts[Verified wire contracts and codecs] --> Binding
+    Gate --> ADB[Paired ADB screen and tap]
+    Gate --> Runtime[Optional Avalonia runtime]
+    Gate --> Data[SQLite audit and configuration]
+    Data --> Logs[Per-client optional logs]

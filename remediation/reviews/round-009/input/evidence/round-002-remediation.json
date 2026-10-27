@@ -1,0 +1,128 @@
+{
+  "round": 2,
+  "verdict": "NOT_READY",
+  "scores": {
+    "design": {
+      "accuracy_0_100": 89,
+      "completeness_0_100": 90,
+      "rationale": "Spec is coherent on identity, single evaluator, admission boundary, persistence, ADB/RemoteControl limits and three-authority separation. Accuracy loss: it asserts bridge-config.sql makes its invariants executable while that DDL diverges in names, enums, columns and omits tables (R2-02); small factual/consistency nits (R2-17). Completeness loss: unknown-raw grant model has no storage/scope schema (R2-03); cross-release registry generation and idempotency/audit storage unspecified (R2-04, R2-08)."
+    },
+    "contracts_schema": {
+      "accuracy_0_100": 86,
+      "completeness_0_100": 84,
+      "rationale": "One cat1 ETag formula is consistent across API-CONTRACT, runtime_catalog view, builder and oracle; registry enum, logic vocabulary and NOT NULL PKs verified. Defects: generation reset per build and duplicated stored etag (R2-04); contract MUSTs not enforced by constraints (R2-07); idempotency scoping unrepresentable (R2-08); schema_version const contradicts minor negotiation claim (R2-11); openapi boilerplate residue (R2-13)."
+    },
+    "extractor": {
+      "accuracy_0_100": 84,
+      "completeness_0_100": 80,
+      "rationale": "parsers.py handles headers, owner reset, symbolic constants, parameter-scoped annotations, AIDL directions/ordinals and distinct locators; N-02 publication ordering fixed. Defects: hardcoded api_level/channel/android_version/registry_version for every source (R2-05); shipped foundation_extract.run() is broken against current schema and retains the F-08 bug (R2-06); stale export vocabulary (R2-10); assert-based verification (R2-12); scope cascade (R2-14); sdk-annotations path untested (R2-15); first-wins divergence hiding (R2-16); schema_hash conflated with document hash (R2-18)."
+    },
+    "production_catalog_data": {
+      "accuracy_0_100": 70,
+      "completeness_0_100": 30,
+      "rationale": "Supplied evidence reports integrity ok, 0 JSON-schema and 0 FK failures, not independently audited. If built with the supplied builder, every one of 4,133 sources carries api_level 37 / channel stable, which is false for evidence, sdk-history and arbitrary-repo AIDL sources. Coverage: 4,133 of 17,822 retrieved and 20,957 selected sources; 10 of 1,160 core manifest permission definitions; SDK 37.2 archive unimported; AIDL parcelable/union/enum members, wire codes and codecs unknown."
+    }
+  },
+  "overall": {
+    "accuracy_0_100": 84,
+    "completeness_0_100": 62,
+    "verdict": "NOT_READY",
+    "rationale": "Design and contract work are near-complete but below 98 due to fixable artifact defects; overall completeness is dominated by materially incomplete production catalog source coverage, which is a missing input owned by the source task, not a relabelable gap."
+  },
+  "changes": [
+    {
+      "id": "R2-01",
+      "change": "MISSING SOURCE INPUT: source task still has only release001/002; current retrieval and SDK37.2 import have not produced release003. No overall acceptance claimed.",
+      "verification": "progress-003.json; coverage-review-summary.json"
+    },
+    {
+      "id": "R2-02",
+      "change": "Reconciled design names/columns/enums with bridge-config.sql, encrypted diagnostic fields, handles/config/targets, dispatched state, indexes and unique execution idempotency. Both SQL schemas coexist in a fixture DB.",
+      "verification": "test_bridge_config_matches_named_design_records; test_bridge_ddl_integrity_and_closed_enums"
+    },
+    {
+      "id": "R2-03",
+      "change": "Added client_raw_grants SQL, closed RawGrant schema and bounded positive ask/allow oracle including connection, descriptor, handle, display, code and flag restrictions. Known schemas always resolve binding policy first.",
+      "verification": "test_positive_raw_grant_never_overrides_known_binding"
+    },
+    {
+      "id": "R2-04",
+      "change": "Added immutable registry_entries keyed by registry+entry and active projection views without stored etag. Input registry version seeds generation; registry IDs include metadata and cursor IDs include registry identity. Standalone serving replacement must advance version.",
+      "verification": "test_source_metadata_and_generation_round_trip; test_registry_switch_selects_immutable_entry_variant; test_cas_tombstones_history_and_cursor"
+    },
+    {
+      "id": "R2-05",
+      "change": "Required explicit catalog metadata and per-source applicability/channel; unknown API levels are nullable. Source identity scheme2 includes immutable provenance fields, with legacy IDs retained by copy migration.",
+      "verification": "test_source_metadata_and_generation_round_trip; test_missing_inventory_metadata_fails_closed"
+    },
+    {
+      "id": "R2-06",
+      "change": "Removed old importer run/CLI; foundation_extract.py now contains only expression helpers used by current parser.",
+      "verification": "test_legacy_extractor_has_no_executable_run"
+    },
+    {
+      "id": "R2-07",
+      "change": "Added imported overlay ID equality, canonical signature checks, revision-increase trigger and registry transition trigger. Updated fixture to legal exact ID and revision2.",
+      "verification": "test_overlay_revision_identity_and_registry_state_constraints"
+    },
+    {
+      "id": "R2-08",
+      "change": "Added principal/operation/key idempotency_records and immutable registry_events/outbox. Legacy import_jobs migrate to clearly separate legacy_import_jobs and cannot replay authenticated API operations.",
+      "verification": "test_scoped_idempotency_storage; test_offline_copy_migration"
+    },
+    {
+      "id": "R2-09",
+      "change": "Actual request-shape resolvers now generate and compare canonical plans for generated/generic/known raw paths, including stale/undecodable rejection.",
+      "verification": "test_binding_rules_dominate_all_aliases"
+    },
+    {
+      "id": "R2-10",
+      "change": "Exporter samples permission/access vocabulary and requires a distinct fresh destination; input release is read-only.",
+      "verification": "test_permission_export_and_optimized_validation"
+    },
+    {
+      "id": "R2-11",
+      "change": "Entry/Mutation envelopes accept documented1.x minor versions; unknown required semantics and major versions remain rejected for invocation. Reserved extension namespaces preserve additive fields.",
+      "verification": "test_minor_schema_and_declaration_variants"
+    },
+    {
+      "id": "R2-12",
+      "change": "Converted validation/fetch runtime assertions to explicit ValueError guards. No network acquisition performed by remediation.",
+      "verification": "test_permission_export_and_optimized_validation (-O tampered input)"
+    },
+    {
+      "id": "R2-13",
+      "change": "Pruned search404 and publish404 ETag boilerplate; current tag exists only for known entry representations.",
+      "verification": "test_operation_specific_preconditions"
+    },
+    {
+      "id": "R2-14",
+      "change": "Explicit scope stack tracks unknown type headers so closing braces do not incorrectly pop the package.",
+      "verification": "test_failed_header_does_not_pop_package"
+    },
+    {
+      "id": "R2-15",
+      "change": "External ZIP fixture covers declaration, parameter, unmatched and malformed XML; malformed member becomes partial issue with raw bytes retained; ordinal locator documented.",
+      "verification": "test_external_annotations_scope_mapping_and_parse_error"
+    },
+    {
+      "id": "R2-16",
+      "change": "Discovery entries expose declaration_variants for return/kind/parameter/modifier differences, retaining occurrence evidence and unresolved reason.",
+      "verification": "test_minor_schema_and_declaration_variants"
+    },
+    {
+      "id": "R2-17",
+      "change": "Removed tools binding_id and documented legacy storagev2. Brightness subclaim rejected on current primary evidence: official Settings.System documents1..255, so retained original range.",
+      "verification": "brightness-primary-source.json"
+    },
+    {
+      "id": "R2-18",
+      "change": "Separated structural schema_hash, permission_hash and complete document_hash. Permission changes still invalidate grants in the publication/policy transaction; provenance-only changes leave schema hash stable.",
+      "verification": "test_dispatch_schema_is_independent_of_provenance"
+    }
+  ],
+  "new_source_identity_scheme": "v2 hashes immutable acquisition metadata; legacy IDs preserved",
+  "tests": "tests-regression-016.txt:38 passed",
+  "migration": "full-copy-migration-final.json:135508 entries,293350 occurrences, integrityok, no FK failures",
+  "additional_change": "Validation report now requires a new explicit path outside immutable release; regression verifies all release bytes unchanged"
+}

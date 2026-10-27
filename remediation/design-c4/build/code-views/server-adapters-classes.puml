@@ -1,0 +1,73 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName DejaVu Sans
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam backgroundColor white
+title Kotlin server host, pairing and committed work — proposed
+left to right direction
+class BridgeService <<reference: server-core-classes>>
+class McpServer <<reference: server-core-classes>>
+class CatalogRepository <<reference: server-core-classes>>
+class SqliteStoreCoordinator <<reference: server-core-classes>>
+class OwnerAuthenticationService <<reference: server-core-classes>>
+class ClientAuthenticator <<reference: server-core-classes>>
+interface LoopbackHost {
+  +bindStartStopAndObserveReadiness()
+  +validateHostOriginAndBoundedRequest()
+  +routeAuthenticatedSessionAndSse()
+}
+class LoopbackTlsHost {
+  +selectPinnedAndroidKeyStoreIdentity()
+}
+class PairingService {
+  +createScopedOneUseAttempt()
+  +validateClientProof()
+  +commitExactOwnerReviewedClient()
+}
+class CatalogAdminHandler {
+  +requireAdminKindWindowOwnerAndCas()
+  +stageSealedImportOrApplyOverride()
+}
+class OutboxDispatcher {
+  +claimCommittedObligationId()
+  +acknowledgeIdempotentDisposition()
+}
+class CallbackCleanupWorker {
+  +runRecordedVerifiedPlanOnce()
+}
+class JournalNotificationWorker {
+  +coalesceCommittedUriHints()
+}
+class EpochInvalidationWorker {
+  +invalidatePublishedEpochsBeforeNewAdmission()
+}
+LoopbackTlsHost ..|> LoopbackHost
+BridgeService "1" *-- "1" LoopbackHost
+BridgeService "1" *-- "1" PairingService
+BridgeService "1" *-- "1" CatalogAdminHandler
+BridgeService "1" *-- "1" OutboxDispatcher
+LoopbackHost ..> McpServer : MCP route
+LoopbackHost ..> PairingService : optional pair route
+LoopbackHost ..> CatalogAdminHandler : disabled by default admin route
+PairingService ..> OwnerAuthenticationService
+PairingService ..> CatalogRepository
+CatalogAdminHandler ..> ClientAuthenticator
+CatalogAdminHandler ..> OwnerAuthenticationService
+CatalogAdminHandler ..> CatalogRepository
+OutboxDispatcher "1" *-- "1" CallbackCleanupWorker
+OutboxDispatcher "1" *-- "1" JournalNotificationWorker
+OutboxDispatcher "1" *-- "1" EpochInvalidationWorker
+OutboxDispatcher ..> SqliteStoreCoordinator
+class CallbackBroker <<reference: server-execution-classes>>
+class McpCallbackResourceAdapter <<reference: server-execution-classes>>
+class DeviceViewResolver <<reference: server-core-classes>>
+CallbackCleanupWorker ..> CallbackBroker : recorded cleanup with current authority
+JournalNotificationWorker ..> McpCallbackResourceAdapter : committed URI only
+EpochInvalidationWorker ..> DeviceViewResolver : publication flow
+note bottom of LoopbackHost
+Parsing/hosting never decides permission.
+Exact credential kind checked before route/session creation.
+Android TLS and MCP SDK integration remain implementation gates.
+end note
+@enduml

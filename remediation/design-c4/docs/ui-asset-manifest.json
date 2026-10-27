@@ -1,0 +1,2435 @@
+{
+  "schema_version": "1.2.0",
+  "canonical_sources": "ui-svg; docs/screens is a generated copy",
+  "reference_unit": "dp",
+  "screens": [
+    {
+      "id": "SCR01",
+      "title": "Dashboard",
+      "requirements": "FR-KT-01 / FR-KT-03",
+      "controls": {
+        "SCR01.C01": "Start / Stop service",
+        "SCR01.C02": "Open subscriptions",
+        "SCR01.C03": "Open navigation",
+        "SCR01.C04": "Open health details"
+      },
+      "states": {
+        "SCR01.S0": "Depicted normal/example state",
+        "SCR01.S1": "Starting: admission closed",
+        "SCR01.S2": "Start denied: owner action required",
+        "SCR01.S3": "Stopped: no listener, no Running badge",
+        "SCR01.S4": "Approval pending: notification opens SCR09 exact queued request, never approves"
+      },
+      "control_specs": {
+        "SCR01.C04": {
+          "kind": "navigation",
+          "behavior": "Show catalog readiness, ARC listener, MCP, ADB and device-view revision independently"
+        },
+        "SCR01.C01": {
+          "kind": "action",
+          "behavior": "Stopped: eligible local foreground-service start intent. Running: ordinary stop through service facade. Neither changes configuration."
+        },
+        "SCR01.C02": {
+          "kind": "action",
+          "behavior": "Exact named action; protected mutations open SCR09; reads never change authority"
+        },
+        "SCR01.C03": {
+          "kind": "navigation",
+          "behavior": "Drawer on phone; rail on wide layout. Destinations SCR01..SCR08,SCR10,SCR11; Back discards only after explicit discard/cancel decision."
+        }
+      },
+      "state_specs": {
+        "SCR01.S0": {
+          "label": "Depicted normal/example state",
+          "enabled_controls": [
+            "SCR01.C01",
+            "SCR01.C02",
+            "SCR01.C03",
+            "SCR01.C04"
+          ],
+          "disabled_controls": [],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR01.S1": {
+          "label": "Starting: admission closed",
+          "enabled_controls": [
+            "SCR01.C02",
+            "SCR01.C03",
+            "SCR01.C04"
+          ],
+          "disabled_controls": [
+            "SCR01.C01"
+          ],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR01.S2": {
+          "label": "Start denied: owner action required",
+          "enabled_controls": [
+            "SCR01.C01",
+            "SCR01.C02",
+            "SCR01.C03",
+            "SCR01.C04"
+          ],
+          "disabled_controls": [],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR01.S3": {
+          "label": "Stopped: no listener, no Running badge",
+          "enabled_controls": [
+            "SCR01.C01",
+            "SCR01.C02",
+            "SCR01.C03",
+            "SCR01.C04"
+          ],
+          "disabled_controls": [],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR01.S4": {
+          "label": "Approval pending: notification opens SCR09 exact queued request, never approves",
+          "enabled_controls": [
+            "SCR01.C01",
+            "SCR01.C02",
+            "SCR01.C03",
+            "SCR01.C04"
+          ],
+          "disabled_controls": [],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        }
+      },
+      "health_example": {
+        "service": "Running",
+        "desired_state": "running",
+        "mcp": "ready",
+        "adb": "offline",
+        "device_view": "ready",
+        "catalog": "ready",
+        "arc_listener": "disabled",
+        "revision": "r9-ready"
+      },
+      "phone_layout": {
+        "width_dp": 390,
+        "navigation": "Top AppBar menu opens modal drawer with all screen destinations; Back returns previous screen. SCR09 disables drawer and intercepts navigation until cancel/complete.",
+        "content": "Single-column scroll, 48dp actions, filters above results; detail/preview replaces list pane with Back; no compressed rail.",
+        "landscape": "Wide rail and list/detail layout when sufficient width; IDs/actions unchanged."
+      }
+    },
+    {
+      "id": "SCR02",
+      "title": "Clients and permissions",
+      "requirements": "FR-KT-02 / canonical client grants",
+      "controls": {
+        "SCR02.C01": "Edit exact grants",
+        "SCR02.C02": "Revoke credential",
+        "SCR02.C03": "Open navigation",
+        "SCR02.C04": "Add client",
+        "SCR02.C05": "Select client",
+        "SCR02.C06": "Choose exact rule",
+        "SCR02.C07": "Discard grant draft"
+      },
+      "states": {
+        "SCR02.S0": "Depicted normal/example state",
+        "SCR02.S1": "No clients: pair locally",
+        "SCR02.S2": "Denied: explain exact scope",
+        "SCR02.S3": "Conflict: reload changed revision"
+      },
+      "control_specs": {
+        "SCR02.C04": {
+          "kind": "navigation",
+          "behavior": "Open SCR11; also enabled in the no-client state"
+        },
+        "SCR02.C05": {
+          "kind": "selector",
+          "behavior": "Stable client ID, credential kind and 12-hex display fingerprint"
+        },
+        "SCR02.C06": {
+          "kind": "editor",
+          "behavior": "Deny / Ask / Allow; canonical binding/schema and target/user scope; draft only"
+        },
+        "SCR02.C07": {
+          "kind": "cancel",
+          "behavior": "Delete unsaved draft; no grant change"
+        },
+        "SCR02.C01": {
+          "kind": "action",
+          "behavior": "Exact named action; protected mutations open SCR09; reads never change authority"
+        },
+        "SCR02.C02": {
+          "kind": "action",
+          "behavior": "Exact named action; protected mutations open SCR09; reads never change authority"
+        },
+        "SCR02.C03": {
+          "kind": "navigation",
+          "behavior": "Drawer on phone; rail on wide layout. Destinations SCR01..SCR08,SCR10,SCR11; Back discards only after explicit discard/cancel decision."
+        }
+      },
+      "state_specs": {
+        "SCR02.S0": {
+          "label": "Depicted normal/example state",
+          "enabled_controls": [
+            "SCR02.C01",
+            "SCR02.C02",
+            "SCR02.C03",
+            "SCR02.C04",
+            "SCR02.C05",
+            "SCR02.C06",
+            "SCR02.C07"
+          ],
+          "disabled_controls": [],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR02.S1": {
+          "label": "No clients: pair locally",
+          "enabled_controls": [
+            "SCR02.C03",
+            "SCR02.C04",
+            "SCR02.C07"
+          ],
+          "disabled_controls": [
+            "SCR02.C01",
+            "SCR02.C02",
+            "SCR02.C05",
+            "SCR02.C06"
+          ],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR02.S2": {
+          "label": "Denied: explain exact scope",
+          "enabled_controls": [
+            "SCR02.C01",
+            "SCR02.C02",
+            "SCR02.C03",
+            "SCR02.C04",
+            "SCR02.C05",
+            "SCR02.C06",
+            "SCR02.C07"
+          ],
+          "disabled_controls": [],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR02.S3": {
+          "label": "Conflict: reload changed revision",
+          "enabled_controls": [
+            "SCR02.C03",
+            "SCR02.C04",
+            "SCR02.C05",
+            "SCR02.C06",
+            "SCR02.C07"
+          ],
+          "disabled_controls": [
+            "SCR02.C01",
+            "SCR02.C02"
+          ],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        }
+      },
+      "health_example": {
+        "service": "Running",
+        "desired_state": "running",
+        "mcp": "ready",
+        "adb": "offline",
+        "device_view": "ready",
+        "catalog": "ready",
+        "arc_listener": "disabled",
+        "revision": "r9-ready"
+      },
+      "phone_layout": {
+        "width_dp": 390,
+        "navigation": "Top AppBar menu opens modal drawer with all screen destinations; Back returns previous screen. SCR09 disables drawer and intercepts navigation until cancel/complete.",
+        "content": "Single-column scroll, 48dp actions, filters above results; detail/preview replaces list pane with Back; no compressed rail.",
+        "landscape": "Wide rail and list/detail layout when sufficient width; IDs/actions unchanged."
+      }
+    },
+    {
+      "id": "SCR03",
+      "title": "Full binding catalog",
+      "requirements": "All bindings / FR-DEV-01",
+      "controls": {
+        "SCR03.C01": "Inspect evidence",
+        "SCR03.C02": "Edit local override",
+        "SCR03.C03": "Open navigation",
+        "SCR03.C04": "Search inventory",
+        "SCR03.C05": "Next catalog page",
+        "SCR03.C06": "Choose import document",
+        "SCR03.C07": "Preview override diff",
+        "SCR03.C08": "Discard override or import"
+      },
+      "states": {
+        "SCR03.S0": "Depicted normal/example state",
+        "SCR03.S1": "No matches: broaden query",
+        "SCR03.S2": "Schema unknown: reason visible",
+        "SCR03.S3": "Stale device view: refresh required",
+        "SCR03.S4": "Override/import preview: dependencies, exact diff, hash and CAS shown; not active"
+      },
+      "control_specs": {
+        "SCR03.C04": {
+          "kind": "query",
+          "behavior": "Text/type/namespace/version/evidence filters; unknown and unavailable included"
+        },
+        "SCR03.C05": {
+          "kind": "pagination",
+          "behavior": "Opaque snapshot cursor and configured byte/page bounds"
+        },
+        "SCR03.C06": {
+          "kind": "document-picker",
+          "behavior": "Android SAF document; stage and validate before a protected activation review"
+        },
+        "SCR03.C07": {
+          "kind": "editor",
+          "behavior": "Exact field/schema/type dependency diff, revisions and CAS conflicts"
+        },
+        "SCR03.C08": {
+          "kind": "cancel",
+          "behavior": "Delete unactivated staging/draft; immutable import remains history"
+        },
+        "SCR03.C01": {
+          "kind": "action",
+          "behavior": "Exact named action; protected mutations open SCR09; reads never change authority"
+        },
+        "SCR03.C02": {
+          "kind": "action",
+          "behavior": "Exact named action; protected mutations open SCR09; reads never change authority"
+        },
+        "SCR03.C03": {
+          "kind": "navigation",
+          "behavior": "Drawer on phone; rail on wide layout. Destinations SCR01..SCR08,SCR10,SCR11; Back discards only after explicit discard/cancel decision."
+        }
+      },
+      "state_specs": {
+        "SCR03.S0": {
+          "label": "Depicted normal/example state",
+          "enabled_controls": [
+            "SCR03.C01",
+            "SCR03.C02",
+            "SCR03.C03",
+            "SCR03.C04",
+            "SCR03.C05",
+            "SCR03.C06",
+            "SCR03.C07",
+            "SCR03.C08"
+          ],
+          "disabled_controls": [],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR03.S1": {
+          "label": "No matches: broaden query",
+          "enabled_controls": [
+            "SCR03.C03",
+            "SCR03.C04",
+            "SCR03.C06",
+            "SCR03.C08"
+          ],
+          "disabled_controls": [
+            "SCR03.C01",
+            "SCR03.C02",
+            "SCR03.C05",
+            "SCR03.C07"
+          ],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR03.S2": {
+          "label": "Schema unknown: reason visible",
+          "enabled_controls": [
+            "SCR03.C01",
+            "SCR03.C03",
+            "SCR03.C04",
+            "SCR03.C05",
+            "SCR03.C06",
+            "SCR03.C08"
+          ],
+          "disabled_controls": [
+            "SCR03.C02",
+            "SCR03.C07"
+          ],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR03.S3": {
+          "label": "Stale device view: refresh required",
+          "enabled_controls": [
+            "SCR03.C01",
+            "SCR03.C03",
+            "SCR03.C04",
+            "SCR03.C05",
+            "SCR03.C06",
+            "SCR03.C08"
+          ],
+          "disabled_controls": [
+            "SCR03.C02",
+            "SCR03.C07"
+          ],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR03.S4": {
+          "label": "Override/import preview: dependencies, exact diff, hash and CAS shown; not active",
+          "enabled_controls": [
+            "SCR03.C01",
+            "SCR03.C02",
+            "SCR03.C03",
+            "SCR03.C04",
+            "SCR03.C05",
+            "SCR03.C06",
+            "SCR03.C07",
+            "SCR03.C08"
+          ],
+          "disabled_controls": [],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        }
+      },
+      "health_example": {
+        "service": "Running",
+        "desired_state": "running",
+        "mcp": "ready",
+        "adb": "offline",
+        "device_view": "ready",
+        "catalog": "ready",
+        "arc_listener": "disabled",
+        "revision": "r9-ready"
+      },
+      "phone_layout": {
+        "width_dp": 390,
+        "navigation": "Top AppBar menu opens modal drawer with all screen destinations; Back returns previous screen. SCR09 disables drawer and intercepts navigation until cancel/complete.",
+        "content": "Single-column scroll, 48dp actions, filters above results; detail/preview replaces list pane with Back; no compressed rail.",
+        "landscape": "Wide rail and list/detail layout when sufficient width; IDs/actions unchanged."
+      }
+    },
+    {
+      "id": "SCR04",
+      "title": "Groups for a job",
+      "requirements": "FR-GRP-01 / 02 / 03",
+      "controls": {
+        "SCR04.C01": "Inspect group summary",
+        "SCR04.C02": "Save group mapping",
+        "SCR04.C03": "Open navigation",
+        "SCR04.C04": "Select client/session",
+        "SCR04.C05": "Describe job",
+        "SCR04.C06": "Search group summaries",
+        "SCR04.C07": "Describe selected group",
+        "SCR04.C08": "Discard mapping draft"
+      },
+      "states": {
+        "SCR04.S0": "Depicted normal/example state",
+        "SCR04.S1": "Empty: unassigned entries searchable",
+        "SCR04.S2": "Budget preview exceeded: save no partial group",
+        "SCR04.S3": "Conflict: reload mapping revision"
+      },
+      "control_specs": {
+        "SCR04.C04": {
+          "kind": "selector",
+          "behavior": "Owner preview only; cannot impersonate an MCP client"
+        },
+        "SCR04.C05": {
+          "kind": "text-field",
+          "behavior": "Task text plus optional constraints; summaries within max_bytes"
+        },
+        "SCR04.C06": {
+          "kind": "query",
+          "behavior": "Deterministic labels/index by default; optional semantic ranking never grants"
+        },
+        "SCR04.C07": {
+          "kind": "pagination",
+          "behavior": "Pinned revision/hash, cursor, max_bytes; fetch only requested manifest page"
+        },
+        "SCR04.C08": {
+          "kind": "cancel",
+          "behavior": "No mapping or session activation change"
+        },
+        "SCR04.C01": {
+          "kind": "action",
+          "behavior": "Exact named action; protected mutations open SCR09; reads never change authority"
+        },
+        "SCR04.C02": {
+          "kind": "action",
+          "behavior": "Protected owner group-mapping override, preview exact revision then SCR09; this is not client-session set_active."
+        },
+        "SCR04.C03": {
+          "kind": "navigation",
+          "behavior": "Drawer on phone; rail on wide layout. Destinations SCR01..SCR08,SCR10,SCR11; Back discards only after explicit discard/cancel decision."
+        }
+      },
+      "state_specs": {
+        "SCR04.S0": {
+          "label": "Depicted normal/example state",
+          "enabled_controls": [
+            "SCR04.C01",
+            "SCR04.C02",
+            "SCR04.C03",
+            "SCR04.C04",
+            "SCR04.C05",
+            "SCR04.C06",
+            "SCR04.C07",
+            "SCR04.C08"
+          ],
+          "disabled_controls": [],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR04.S1": {
+          "label": "Empty: unassigned entries searchable",
+          "enabled_controls": [
+            "SCR04.C01",
+            "SCR04.C02",
+            "SCR04.C03",
+            "SCR04.C04",
+            "SCR04.C05",
+            "SCR04.C06",
+            "SCR04.C07",
+            "SCR04.C08"
+          ],
+          "disabled_controls": [],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR04.S2": {
+          "label": "Budget preview exceeded: save no partial group",
+          "enabled_controls": [
+            "SCR04.C01",
+            "SCR04.C03",
+            "SCR04.C04",
+            "SCR04.C05",
+            "SCR04.C06",
+            "SCR04.C07",
+            "SCR04.C08"
+          ],
+          "disabled_controls": [
+            "SCR04.C02"
+          ],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR04.S3": {
+          "label": "Conflict: reload mapping revision",
+          "enabled_controls": [
+            "SCR04.C01",
+            "SCR04.C03",
+            "SCR04.C04",
+            "SCR04.C05",
+            "SCR04.C06",
+            "SCR04.C07",
+            "SCR04.C08"
+          ],
+          "disabled_controls": [
+            "SCR04.C02"
+          ],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        }
+      },
+      "health_example": {
+        "service": "Running",
+        "desired_state": "running",
+        "mcp": "ready",
+        "adb": "offline",
+        "device_view": "ready",
+        "catalog": "ready",
+        "arc_listener": "disabled",
+        "revision": "r9-ready"
+      },
+      "phone_layout": {
+        "width_dp": 390,
+        "navigation": "Top AppBar menu opens modal drawer with all screen destinations; Back returns previous screen. SCR09 disables drawer and intercepts navigation until cancel/complete.",
+        "content": "Single-column scroll, 48dp actions, filters above results; detail/preview replaces list pane with Back; no compressed rail.",
+        "landscape": "Wide rail and list/detail layout when sufficient width; IDs/actions unchanged."
+      }
+    },
+    {
+      "id": "SCR05",
+      "title": "Callback subscriptions",
+      "requirements": "FR-CB-01 / 02 / 03 / 04",
+      "controls": {
+        "SCR05.C01": "Inspect bounded status",
+        "SCR05.C02": "Cancel via owner review",
+        "SCR05.C03": "Open navigation",
+        "SCR05.C04": "Select subscription",
+        "SCR05.C05": "Read event page",
+        "SCR05.C06": "Refresh status"
+      },
+      "states": {
+        "SCR05.S0": "Depicted normal/example state",
+        "SCR05.S1": "Empty: no registrations",
+        "SCR05.S2": "Cursor expired: show retention boundary",
+        "SCR05.S3": "Backend death/orphan/revoke: payload hidden; cleanup may be unknown",
+        "SCR05.S4": "Closed delivery: show confirmed or unknown cleanup"
+      },
+      "control_specs": {
+        "SCR05.C03": {
+          "kind": "navigation",
+          "behavior": "Drawer on phone; rail on wide layout. Destinations SCR01..SCR08,SCR10,SCR11; Back discards only after explicit discard/cancel decision."
+        },
+        "SCR05.C04": {
+          "kind": "selector",
+          "behavior": "Owner-filtered principal, stream epoch, state, cleanup phase and disposition"
+        },
+        "SCR05.C05": {
+          "kind": "pagination",
+          "behavior": "Bounded owned journal cursor; gap/terminal status separate from payload"
+        },
+        "SCR05.C06": {
+          "kind": "read",
+          "behavior": "Status after owner cancellation, lease expiry, death or cleanup uncertainty"
+        },
+        "SCR05.C01": {
+          "kind": "action",
+          "behavior": "Exact named action; protected mutations open SCR09; reads never change authority"
+        },
+        "SCR05.C02": {
+          "kind": "action",
+          "behavior": "Request protected administrative cancellation in SCR09; mark delivery closed immediately after admitted commit; status/event terminal remains readable."
+        }
+      },
+      "state_specs": {
+        "SCR05.S0": {
+          "label": "Depicted normal/example state",
+          "enabled_controls": [
+            "SCR05.C01",
+            "SCR05.C02",
+            "SCR05.C03",
+            "SCR05.C04",
+            "SCR05.C05",
+            "SCR05.C06"
+          ],
+          "disabled_controls": [],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR05.S1": {
+          "label": "Empty: no registrations",
+          "enabled_controls": [
+            "SCR05.C03",
+            "SCR05.C06"
+          ],
+          "disabled_controls": [
+            "SCR05.C01",
+            "SCR05.C02",
+            "SCR05.C04",
+            "SCR05.C05"
+          ],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR05.S2": {
+          "label": "Cursor expired: show retention boundary",
+          "enabled_controls": [
+            "SCR05.C01",
+            "SCR05.C02",
+            "SCR05.C03",
+            "SCR05.C04",
+            "SCR05.C05",
+            "SCR05.C06"
+          ],
+          "disabled_controls": [],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR05.S3": {
+          "label": "Backend death/orphan/revoke: payload hidden; cleanup may be unknown",
+          "enabled_controls": [
+            "SCR05.C01",
+            "SCR05.C02",
+            "SCR05.C03",
+            "SCR05.C04",
+            "SCR05.C06"
+          ],
+          "disabled_controls": [
+            "SCR05.C05"
+          ],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR05.S4": {
+          "label": "Closed delivery: show confirmed or unknown cleanup",
+          "enabled_controls": [
+            "SCR05.C01",
+            "SCR05.C03",
+            "SCR05.C04",
+            "SCR05.C05",
+            "SCR05.C06"
+          ],
+          "disabled_controls": [
+            "SCR05.C02"
+          ],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        }
+      },
+      "health_example": {
+        "service": "Running",
+        "desired_state": "running",
+        "mcp": "ready",
+        "adb": "offline",
+        "device_view": "ready",
+        "catalog": "ready",
+        "arc_listener": "disabled",
+        "revision": "r9-ready"
+      },
+      "phone_layout": {
+        "width_dp": 390,
+        "navigation": "Top AppBar menu opens modal drawer with all screen destinations; Back returns previous screen. SCR09 disables drawer and intercepts navigation until cancel/complete.",
+        "content": "Single-column scroll, 48dp actions, filters above results; detail/preview replaces list pane with Back; no compressed rail.",
+        "landscape": "Wide rail and list/detail layout when sufficient width; IDs/actions unchanged."
+      }
+    },
+    {
+      "id": "SCR06",
+      "title": "Call logs",
+      "requirements": "Per-client logging / FR-KT-02",
+      "controls": {
+        "SCR06.C01": "Inspect record",
+        "SCR06.C02": "Export selected scope",
+        "SCR06.C03": "Open navigation",
+        "SCR06.C04": "Filter logs",
+        "SCR06.C05": "Choose export document",
+        "SCR06.C06": "Edit retention quotas",
+        "SCR06.C07": "Cancel export"
+      },
+      "states": {
+        "SCR06.S0": "Depicted normal/example state",
+        "SCR06.S1": "Empty: no admitted calls",
+        "SCR06.S2": "Denied: export needs owner auth",
+        "SCR06.S3": "Disk quota: visible retention error",
+        "SCR06.S4": "Export approved: Android create-document picker; cancel writes nothing"
+      },
+      "control_specs": {
+        "SCR06.C04": {
+          "kind": "query",
+          "behavior": "Owner selects client/time/outcome; redacted bounded snapshot"
+        },
+        "SCR06.C05": {
+          "kind": "document-picker",
+          "behavior": "Android SAF create-document after protected exact-snapshot approval"
+        },
+        "SCR06.C06": {
+          "kind": "editor",
+          "behavior": "Protected settings review; mandatory audit reserve and optional-log quotas separate"
+        },
+        "SCR06.C07": {
+          "kind": "cancel",
+          "behavior": "No document written; release sealed export snapshot"
+        },
+        "SCR06.C01": {
+          "kind": "action",
+          "behavior": "Exact named action; protected mutations open SCR09; reads never change authority"
+        },
+        "SCR06.C02": {
+          "kind": "action",
+          "behavior": "Exact named action; protected mutations open SCR09; reads never change authority"
+        },
+        "SCR06.C03": {
+          "kind": "navigation",
+          "behavior": "Drawer on phone; rail on wide layout. Destinations SCR01..SCR08,SCR10,SCR11; Back discards only after explicit discard/cancel decision."
+        }
+      },
+      "state_specs": {
+        "SCR06.S0": {
+          "label": "Depicted normal/example state",
+          "enabled_controls": [
+            "SCR06.C01",
+            "SCR06.C02",
+            "SCR06.C03",
+            "SCR06.C04",
+            "SCR06.C05",
+            "SCR06.C06",
+            "SCR06.C07"
+          ],
+          "disabled_controls": [],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR06.S1": {
+          "label": "Empty: no admitted calls",
+          "enabled_controls": [
+            "SCR06.C01",
+            "SCR06.C03",
+            "SCR06.C04",
+            "SCR06.C06",
+            "SCR06.C07"
+          ],
+          "disabled_controls": [
+            "SCR06.C02",
+            "SCR06.C05"
+          ],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR06.S2": {
+          "label": "Denied: export needs owner auth",
+          "enabled_controls": [
+            "SCR06.C01",
+            "SCR06.C02",
+            "SCR06.C03",
+            "SCR06.C04",
+            "SCR06.C05",
+            "SCR06.C06",
+            "SCR06.C07"
+          ],
+          "disabled_controls": [],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR06.S3": {
+          "label": "Disk quota: visible retention error",
+          "enabled_controls": [
+            "SCR06.C01",
+            "SCR06.C03",
+            "SCR06.C04",
+            "SCR06.C06",
+            "SCR06.C07"
+          ],
+          "disabled_controls": [
+            "SCR06.C02",
+            "SCR06.C05"
+          ],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR06.S4": {
+          "label": "Export approved: Android create-document picker; cancel writes nothing",
+          "enabled_controls": [
+            "SCR06.C01",
+            "SCR06.C02",
+            "SCR06.C03",
+            "SCR06.C04",
+            "SCR06.C05",
+            "SCR06.C06",
+            "SCR06.C07"
+          ],
+          "disabled_controls": [],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        }
+      },
+      "health_example": {
+        "service": "Running",
+        "desired_state": "running",
+        "mcp": "ready",
+        "adb": "offline",
+        "device_view": "ready",
+        "catalog": "ready",
+        "arc_listener": "disabled",
+        "revision": "r9-ready"
+      },
+      "phone_layout": {
+        "width_dp": 390,
+        "navigation": "Top AppBar menu opens modal drawer with all screen destinations; Back returns previous screen. SCR09 disables drawer and intercepts navigation until cancel/complete.",
+        "content": "Single-column scroll, 48dp actions, filters above results; detail/preview replaces list pane with Back; no compressed rail.",
+        "landscape": "Wide rail and list/detail layout when sufficient width; IDs/actions unchanged."
+      }
+    },
+    {
+      "id": "SCR07",
+      "title": "ARC session and control",
+      "requirements": "FR-ARC-01 / 02 / 03 / 04",
+      "controls": {
+        "SCR07.C01": "Connect selected target",
+        "SCR07.C02": "Disconnect / cancel",
+        "SCR07.C03": "Open navigation",
+        "SCR07.C04": "Send typed input; disabled unless connected capability/policy permits",
+        "SCR07.C05": "Select target profile",
+        "SCR07.C06": "Inspect tree or refresh frame",
+        "SCR07.C07": "Pointer or wheel input",
+        "SCR07.C08": "Inspect target details"
+      },
+      "states": {
+        "SCR07.S0": "Depicted normal/example state",
+        "SCR07.S1": "Wrong token: no target content",
+        "SCR07.S2": "Unknown protocol: reject before send",
+        "SCR07.S3": "Protected root: capture/input denied",
+        "SCR07.S4": "Connected: C06 refreshes frame/tree; C04/C07 require current target capability and policy"
+      },
+      "control_specs": {
+        "SCR07.C05": {
+          "kind": "selector",
+          "behavior": "Exact outbound endpoint, target/user/profile and protected bearer reference"
+        },
+        "SCR07.C06": {
+          "kind": "read",
+          "behavior": "Frame viewport and tree selection; ID/version/status then CommandResult checks"
+        },
+        "SCR07.C07": {
+          "kind": "viewport",
+          "behavior": "Current-root dp coordinates; one mouse pointer, serialized lease, no stale-frame guarantee"
+        },
+        "SCR07.C08": {
+          "kind": "read",
+          "behavior": "arc-protobuf-v1 / envelope1.0 / package0.8.0 are distinct; PNG scale and bounds"
+        },
+        "SCR07.C01": {
+          "kind": "action",
+          "behavior": "Exact named action; protected mutations open SCR09; reads never change authority"
+        },
+        "SCR07.C02": {
+          "kind": "action",
+          "behavior": "Exact named action; protected mutations open SCR09; reads never change authority"
+        },
+        "SCR07.C03": {
+          "kind": "navigation",
+          "behavior": "Drawer on phone; rail on wide layout. Destinations SCR01..SCR08,SCR10,SCR11; Back discards only after explicit discard/cancel decision."
+        },
+        "SCR07.C04": {
+          "kind": "action",
+          "behavior": "Exact named action; protected mutations open SCR09; reads never change authority"
+        }
+      },
+      "state_specs": {
+        "SCR07.S0": {
+          "label": "Depicted normal/example state",
+          "enabled_controls": [
+            "SCR07.C01",
+            "SCR07.C02",
+            "SCR07.C03",
+            "SCR07.C05",
+            "SCR07.C08"
+          ],
+          "disabled_controls": [
+            "SCR07.C04",
+            "SCR07.C06",
+            "SCR07.C07"
+          ],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR07.S1": {
+          "label": "Wrong token: no target content",
+          "enabled_controls": [
+            "SCR07.C01",
+            "SCR07.C02",
+            "SCR07.C03",
+            "SCR07.C05",
+            "SCR07.C08"
+          ],
+          "disabled_controls": [
+            "SCR07.C04",
+            "SCR07.C06",
+            "SCR07.C07"
+          ],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR07.S2": {
+          "label": "Unknown protocol: reject before send",
+          "enabled_controls": [
+            "SCR07.C01",
+            "SCR07.C02",
+            "SCR07.C03",
+            "SCR07.C05",
+            "SCR07.C08"
+          ],
+          "disabled_controls": [
+            "SCR07.C04",
+            "SCR07.C06",
+            "SCR07.C07"
+          ],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR07.S3": {
+          "label": "Protected root: capture/input denied",
+          "enabled_controls": [
+            "SCR07.C01",
+            "SCR07.C02",
+            "SCR07.C03",
+            "SCR07.C05",
+            "SCR07.C08"
+          ],
+          "disabled_controls": [
+            "SCR07.C04",
+            "SCR07.C06",
+            "SCR07.C07"
+          ],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR07.S4": {
+          "label": "Connected: C06 refreshes frame/tree; C04/C07 require current target capability and policy",
+          "enabled_controls": [
+            "SCR07.C01",
+            "SCR07.C02",
+            "SCR07.C03",
+            "SCR07.C04",
+            "SCR07.C05",
+            "SCR07.C06",
+            "SCR07.C07",
+            "SCR07.C08"
+          ],
+          "disabled_controls": [],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        }
+      },
+      "health_example": {
+        "service": "Running",
+        "desired_state": "running",
+        "mcp": "ready",
+        "adb": "offline",
+        "device_view": "ready",
+        "catalog": "ready",
+        "arc_listener": "disabled",
+        "revision": "r9-ready"
+      },
+      "phone_layout": {
+        "width_dp": 390,
+        "navigation": "Top AppBar menu opens modal drawer with all screen destinations; Back returns previous screen. SCR09 disables drawer and intercepts navigation until cancel/complete.",
+        "content": "Single-column scroll, 48dp actions, filters above results; detail/preview replaces list pane with Back; no compressed rail.",
+        "landscape": "Wide rail and list/detail layout when sufficient width; IDs/actions unchanged."
+      }
+    },
+    {
+      "id": "SCR08",
+      "title": "Settings and backends",
+      "requirements": "FR-KT-03 / persistent service / ADB",
+      "controls": {
+        "SCR08.C01": "Save with revision",
+        "SCR08.C02": "Review pairing",
+        "SCR08.C03": "Open navigation",
+        "SCR08.C04": "Discard settings draft",
+        "SCR08.C05": "Edit startup and MCP listener",
+        "SCR08.C06": "Edit same-device ADB profile",
+        "SCR08.C07": "Edit inbound ARC listener",
+        "SCR08.C08": "Rotate inbound ARC credential",
+        "SCR08.C09": "Inspect inbound controllers",
+        "SCR08.C10": "Edit log quotas"
+      },
+      "states": {
+        "SCR08.S0": "Depicted normal/example state",
+        "SCR08.S1": "Locked: wait for unlock",
+        "SCR08.S2": "Ineligible start: requires owner action",
+        "SCR08.S3": "Stale settings revision: reject save",
+        "SCR08.S4": "Pairing failed/peer unverified: no Connected state and no new MCP grant",
+        "SCR08.S5": "Inbound ARC disabled: no socket, sessions or exposed root",
+        "SCR08.S6": "Inbound ARC ready: bound127.0.0.1:port, approved ordinary root and controller list"
+      },
+      "control_specs": {
+        "SCR08.C04": {
+          "kind": "cancel",
+          "behavior": "Return to last committed revision without changing boot/listeners/grants"
+        },
+        "SCR08.C05": {
+          "kind": "editor",
+          "behavior": "Boot opt-in, loopback address/port, exact Origin allowlist, TLS profile; all save protected"
+        },
+        "SCR08.C06": {
+          "kind": "editor",
+          "behavior": "Device/user, pairing host/port/code and discovered connect port; no debugging toggle"
+        },
+        "SCR08.C07": {
+          "kind": "editor",
+          "behavior": "Enabled, loopback bind/port, selected ordinary root, per-client action grants"
+        },
+        "SCR08.C08": {
+          "kind": "protected-action",
+          "behavior": "Fresh SCR09 review; invalidate credential epoch and active streams/leases"
+        },
+        "SCR08.C09": {
+          "kind": "read",
+          "behavior": "Bound/listener state, authenticated principals, sessions, root and denied reasons"
+        },
+        "SCR08.C10": {
+          "kind": "editor",
+          "behavior": "Optional payload retention, mandatory audit reserve and journal quotas; protected save"
+        },
+        "SCR08.C01": {
+          "kind": "action",
+          "behavior": "Exact named action; protected mutations open SCR09; reads never change authority"
+        },
+        "SCR08.C02": {
+          "kind": "action",
+          "behavior": "Exact named action; protected mutations open SCR09; reads never change authority"
+        },
+        "SCR08.C03": {
+          "kind": "navigation",
+          "behavior": "Drawer on phone; rail on wide layout. Destinations SCR01..SCR08,SCR10,SCR11; Back discards only after explicit discard/cancel decision."
+        }
+      },
+      "state_specs": {
+        "SCR08.S0": {
+          "label": "Depicted normal/example state",
+          "enabled_controls": [
+            "SCR08.C01",
+            "SCR08.C02",
+            "SCR08.C03",
+            "SCR08.C04",
+            "SCR08.C05",
+            "SCR08.C06",
+            "SCR08.C07",
+            "SCR08.C08",
+            "SCR08.C09",
+            "SCR08.C10"
+          ],
+          "disabled_controls": [],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR08.S1": {
+          "label": "Locked: wait for unlock",
+          "enabled_controls": [
+            "SCR08.C03",
+            "SCR08.C04",
+            "SCR08.C05",
+            "SCR08.C06",
+            "SCR08.C07",
+            "SCR08.C09",
+            "SCR08.C10"
+          ],
+          "disabled_controls": [
+            "SCR08.C01",
+            "SCR08.C02",
+            "SCR08.C08"
+          ],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR08.S2": {
+          "label": "Ineligible start: requires owner action",
+          "enabled_controls": [
+            "SCR08.C01",
+            "SCR08.C02",
+            "SCR08.C03",
+            "SCR08.C04",
+            "SCR08.C05",
+            "SCR08.C06",
+            "SCR08.C07",
+            "SCR08.C08",
+            "SCR08.C09",
+            "SCR08.C10"
+          ],
+          "disabled_controls": [],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR08.S3": {
+          "label": "Stale settings revision: reject save",
+          "enabled_controls": [
+            "SCR08.C03",
+            "SCR08.C04",
+            "SCR08.C05",
+            "SCR08.C06",
+            "SCR08.C07",
+            "SCR08.C09",
+            "SCR08.C10"
+          ],
+          "disabled_controls": [
+            "SCR08.C01",
+            "SCR08.C02",
+            "SCR08.C08"
+          ],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR08.S4": {
+          "label": "Pairing failed/peer unverified: no Connected state and no new MCP grant",
+          "enabled_controls": [
+            "SCR08.C01",
+            "SCR08.C02",
+            "SCR08.C03",
+            "SCR08.C04",
+            "SCR08.C05",
+            "SCR08.C06",
+            "SCR08.C07",
+            "SCR08.C08",
+            "SCR08.C09",
+            "SCR08.C10"
+          ],
+          "disabled_controls": [],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR08.S5": {
+          "label": "Inbound ARC disabled: no socket, sessions or exposed root",
+          "enabled_controls": [
+            "SCR08.C01",
+            "SCR08.C02",
+            "SCR08.C03",
+            "SCR08.C04",
+            "SCR08.C05",
+            "SCR08.C06",
+            "SCR08.C07",
+            "SCR08.C08",
+            "SCR08.C09",
+            "SCR08.C10"
+          ],
+          "disabled_controls": [],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR08.S6": {
+          "label": "Inbound ARC ready: bound127.0.0.1:port, approved ordinary root and controller list",
+          "enabled_controls": [
+            "SCR08.C01",
+            "SCR08.C02",
+            "SCR08.C03",
+            "SCR08.C04",
+            "SCR08.C05",
+            "SCR08.C06",
+            "SCR08.C07",
+            "SCR08.C08",
+            "SCR08.C09",
+            "SCR08.C10"
+          ],
+          "disabled_controls": [],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        }
+      },
+      "health_example": {
+        "service": "Running",
+        "desired_state": "running",
+        "mcp": "ready",
+        "adb": "offline",
+        "device_view": "ready",
+        "catalog": "ready",
+        "arc_listener": "disabled",
+        "revision": "r9-ready"
+      },
+      "phone_layout": {
+        "width_dp": 390,
+        "navigation": "Top AppBar menu opens modal drawer with all screen destinations; Back returns previous screen. SCR09 disables drawer and intercepts navigation until cancel/complete.",
+        "content": "Single-column scroll, 48dp actions, filters above results; detail/preview replaces list pane with Back; no compressed rail.",
+        "landscape": "Wide rail and list/detail layout when sufficient width; IDs/actions unchanged."
+      }
+    },
+    {
+      "id": "SCR09",
+      "title": "Protected owner approval",
+      "requirements": "FR-ARC-04 / canonical Ask approval",
+      "controls": {
+        "SCR09.C01": "Authenticate and approve",
+        "SCR09.C02": "Deny / dismiss",
+        "SCR09.C03": "Locked navigation",
+        "SCR09.C04": "Inspect exact challenge"
+      },
+      "states": {
+        "SCR09.S0": "Depicted normal/example state",
+        "SCR09.S1": "Expired: no execution",
+        "SCR09.S2": "Plan changed: request new review",
+        "SCR09.S3": "Bridge remote input denied; uncertain isolation blocks approval"
+      },
+      "control_specs": {
+        "SCR09.C03": {
+          "kind": "disabled",
+          "behavior": "No route switch until challenge completes/cancels; owner touch remains available"
+        },
+        "SCR09.C04": {
+          "kind": "read",
+          "behavior": "Command hash, revisions, scope, monotonic expiry, queued Ask count; no secrets"
+        },
+        "SCR09.C01": {
+          "kind": "action",
+          "behavior": "Service-owned exact challenge and OS prompt; Activity completion is trusted in this single process, not cryptographic attestation against a compromised app. Exact one-use CAS; timeout/deny makes no commit."
+        },
+        "SCR09.C02": {
+          "kind": "action",
+          "behavior": "Dismiss current challenge, return denial and originating screen. Queue advances without reusing proof."
+        }
+      },
+      "state_specs": {
+        "SCR09.S0": {
+          "label": "Depicted normal/example state",
+          "enabled_controls": [
+            "SCR09.C01",
+            "SCR09.C02",
+            "SCR09.C04"
+          ],
+          "disabled_controls": [
+            "SCR09.C03"
+          ],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR09.S1": {
+          "label": "Expired: no execution",
+          "enabled_controls": [
+            "SCR09.C02",
+            "SCR09.C04"
+          ],
+          "disabled_controls": [
+            "SCR09.C01",
+            "SCR09.C03"
+          ],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR09.S2": {
+          "label": "Plan changed: request new review",
+          "enabled_controls": [
+            "SCR09.C02",
+            "SCR09.C04"
+          ],
+          "disabled_controls": [
+            "SCR09.C01",
+            "SCR09.C03"
+          ],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR09.S3": {
+          "label": "Bridge remote input denied; uncertain isolation blocks approval",
+          "enabled_controls": [
+            "SCR09.C02",
+            "SCR09.C04"
+          ],
+          "disabled_controls": [
+            "SCR09.C01",
+            "SCR09.C03"
+          ],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        }
+      },
+      "health_example": {
+        "service": "Running",
+        "desired_state": "running",
+        "mcp": "ready",
+        "adb": "offline",
+        "device_view": "ready",
+        "catalog": "ready",
+        "arc_listener": "disabled",
+        "revision": "r9-ready"
+      },
+      "phone_layout": {
+        "width_dp": 390,
+        "navigation": "Top AppBar menu opens modal drawer with all screen destinations; Back returns previous screen. SCR09 disables drawer and intercepts navigation until cancel/complete.",
+        "content": "Single-column scroll, 48dp actions, filters above results; detail/preview replaces list pane with Back; no compressed rail.",
+        "landscape": "Wide rail and list/detail layout when sufficient width; IDs/actions unchanged."
+      }
+    },
+    {
+      "id": "SCR10",
+      "title": "Action required",
+      "requirements": "FR-KT-03 / no fabricated readiness",
+      "controls": {
+        "SCR10.C01": "Review prerequisites",
+        "SCR10.C02": "Return to dashboard",
+        "SCR10.C03": "Open navigation",
+        "SCR10.C04": "Open catalog import",
+        "SCR10.C05": "Inspect failure reason"
+      },
+      "states": {
+        "SCR10.S0": "Depicted normal/example state",
+        "SCR10.S1": "No catalog: import validated release",
+        "SCR10.S2": "Probe disconnected: preserve unknown facts",
+        "SCR10.S3": "Cancel: desired Stopped state retained"
+      },
+      "control_specs": {
+        "SCR10.C04": {
+          "kind": "navigation",
+          "behavior": "Route SCR03.C06 when catalog absent; no fabricated ready state"
+        },
+        "SCR10.C05": {
+          "kind": "read",
+          "behavior": "Exact health snapshot and sanitized reason; retry never changes permissions"
+        },
+        "SCR10.C01": {
+          "kind": "action",
+          "behavior": "Exact named action; protected mutations open SCR09; reads never change authority"
+        },
+        "SCR10.C02": {
+          "kind": "action",
+          "behavior": "Exact named action; protected mutations open SCR09; reads never change authority"
+        },
+        "SCR10.C03": {
+          "kind": "navigation",
+          "behavior": "Drawer on phone; rail on wide layout. Destinations SCR01..SCR08,SCR10,SCR11; Back discards only after explicit discard/cancel decision."
+        }
+      },
+      "state_specs": {
+        "SCR10.S0": {
+          "label": "Depicted normal/example state",
+          "enabled_controls": [
+            "SCR10.C01",
+            "SCR10.C02",
+            "SCR10.C03",
+            "SCR10.C04",
+            "SCR10.C05"
+          ],
+          "disabled_controls": [],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR10.S1": {
+          "label": "No catalog: import validated release",
+          "enabled_controls": [
+            "SCR10.C01",
+            "SCR10.C02",
+            "SCR10.C03",
+            "SCR10.C04",
+            "SCR10.C05"
+          ],
+          "disabled_controls": [],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR10.S2": {
+          "label": "Probe disconnected: preserve unknown facts",
+          "enabled_controls": [
+            "SCR10.C01",
+            "SCR10.C02",
+            "SCR10.C03",
+            "SCR10.C04",
+            "SCR10.C05"
+          ],
+          "disabled_controls": [],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR10.S3": {
+          "label": "Cancel: desired Stopped state retained",
+          "enabled_controls": [
+            "SCR10.C01",
+            "SCR10.C02",
+            "SCR10.C03",
+            "SCR10.C04",
+            "SCR10.C05"
+          ],
+          "disabled_controls": [],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        }
+      },
+      "health_example": {
+        "service": "Error",
+        "desired_state": "running",
+        "mcp": "error",
+        "adb": "offline",
+        "device_view": "stale",
+        "catalog": "quarantined",
+        "arc_listener": "disabled",
+        "revision": "r9-error"
+      },
+      "phone_layout": {
+        "width_dp": 390,
+        "navigation": "Top AppBar menu opens modal drawer with all screen destinations; Back returns previous screen. SCR09 disables drawer and intercepts navigation until cancel/complete.",
+        "content": "Single-column scroll, 48dp actions, filters above results; detail/preview replaces list pane with Back; no compressed rail.",
+        "landscape": "Wide rail and list/detail layout when sufficient width; IDs/actions unchanged."
+      }
+    },
+    {
+      "id": "SCR11",
+      "title": "Client pairing",
+      "requirements": "FR-KT-02 / canonical client identity",
+      "controls": {
+        "SCR11.C01": "Generate pairing challenge",
+        "SCR11.C02": "Cancel pairing",
+        "SCR11.C03": "Open navigation",
+        "SCR11.C04": "Choose pairing flow",
+        "SCR11.C05": "Inspect submitted client proof",
+        "SCR11.C06": "Review exact client commit",
+        "SCR11.C07": "Copy manual bearer once"
+      },
+      "states": {
+        "SCR11.S0": "Depicted normal/example state",
+        "SCR11.S1": "Expired challenge: create a new one",
+        "SCR11.S2": "Wrong proof/origin: deny pairing",
+        "SCR11.S3": "Cancel: no principal or grant committed",
+        "SCR11.S4": "Proof submitted: owner exact-commit review pending; no principal yet",
+        "SCR11.S5": "Paired: client committed, all rules Deny until separately approved"
+      },
+      "control_specs": {
+        "SCR11.C04": {
+          "kind": "selector",
+          "behavior": "manual_bearer_setup or pairing_helper_v1; latter requires paired_tls trust"
+        },
+        "SCR11.C05": {
+          "kind": "read",
+          "behavior": "Exact key/fingerprint, nonce, Origin and endpoint; proof alone grants nothing"
+        },
+        "SCR11.C06": {
+          "kind": "protected-action",
+          "behavior": "Fresh SCR09 proof after client response, before principal commit; grants start Deny"
+        },
+        "SCR11.C07": {
+          "kind": "protected-action",
+          "behavior": "Fresh exact-owner reveal; store verifier only; never logs or remote root"
+        },
+        "SCR11.C01": {
+          "kind": "action",
+          "behavior": "Exact named action; protected mutations open SCR09; reads never change authority"
+        },
+        "SCR11.C02": {
+          "kind": "action",
+          "behavior": "Exact named action; protected mutations open SCR09; reads never change authority"
+        },
+        "SCR11.C03": {
+          "kind": "navigation",
+          "behavior": "Drawer on phone; rail on wide layout. Destinations SCR01..SCR08,SCR10,SCR11; Back discards only after explicit discard/cancel decision."
+        }
+      },
+      "state_specs": {
+        "SCR11.S0": {
+          "label": "Depicted normal/example state",
+          "enabled_controls": [
+            "SCR11.C01",
+            "SCR11.C02",
+            "SCR11.C03",
+            "SCR11.C04",
+            "SCR11.C05",
+            "SCR11.C06",
+            "SCR11.C07"
+          ],
+          "disabled_controls": [],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR11.S1": {
+          "label": "Expired challenge: create a new one",
+          "enabled_controls": [
+            "SCR11.C01",
+            "SCR11.C02",
+            "SCR11.C03",
+            "SCR11.C04"
+          ],
+          "disabled_controls": [
+            "SCR11.C05",
+            "SCR11.C06",
+            "SCR11.C07"
+          ],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR11.S2": {
+          "label": "Wrong proof/origin: deny pairing",
+          "enabled_controls": [
+            "SCR11.C01",
+            "SCR11.C02",
+            "SCR11.C03",
+            "SCR11.C04"
+          ],
+          "disabled_controls": [
+            "SCR11.C05",
+            "SCR11.C06",
+            "SCR11.C07"
+          ],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR11.S3": {
+          "label": "Cancel: no principal or grant committed",
+          "enabled_controls": [
+            "SCR11.C01",
+            "SCR11.C02",
+            "SCR11.C03",
+            "SCR11.C04"
+          ],
+          "disabled_controls": [
+            "SCR11.C05",
+            "SCR11.C06",
+            "SCR11.C07"
+          ],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR11.S4": {
+          "label": "Proof submitted: owner exact-commit review pending; no principal yet",
+          "enabled_controls": [
+            "SCR11.C01",
+            "SCR11.C02",
+            "SCR11.C03",
+            "SCR11.C04",
+            "SCR11.C05",
+            "SCR11.C06",
+            "SCR11.C07"
+          ],
+          "disabled_controls": [],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        },
+        "SCR11.S5": {
+          "label": "Paired: client committed, all rules Deny until separately approved",
+          "enabled_controls": [
+            "SCR11.C02",
+            "SCR11.C03",
+            "SCR11.C04",
+            "SCR11.C07"
+          ],
+          "disabled_controls": [
+            "SCR11.C01",
+            "SCR11.C05",
+            "SCR11.C06"
+          ],
+          "effect": "Read-only until exact protected commit; error/conflict never applies a partial mutation.",
+          "recovery": "Owner may inspect reason, explicitly retry when safe, or cancel/discard; no automatic uncertain write replay."
+        }
+      },
+      "health_example": {
+        "service": "Running",
+        "desired_state": "running",
+        "mcp": "ready",
+        "adb": "offline",
+        "device_view": "ready",
+        "catalog": "ready",
+        "arc_listener": "disabled",
+        "revision": "r9-ready"
+      },
+      "phone_layout": {
+        "width_dp": 390,
+        "navigation": "Top AppBar menu opens modal drawer with all screen destinations; Back returns previous screen. SCR09 disables drawer and intercepts navigation until cancel/complete.",
+        "content": "Single-column scroll, 48dp actions, filters above results; detail/preview replaces list pane with Back; no compressed rail.",
+        "landscape": "Wide rail and list/detail layout when sufficient width; IDs/actions unchanged."
+      }
+    }
+  ],
+  "storyboards": [
+    {
+      "id": "STB01",
+      "title": "Agent discovers groups, subscribes and owner cancels",
+      "steps": [
+        {
+          "screen_id": "SCR04",
+          "state_id": "SCR04.S0",
+          "control_id": "SCR04.C06",
+          "actor": "External MCP client",
+          "interaction": "external_event",
+          "action": "Search group summaries",
+          "purpose": "External android.groups.discover; owner preview updates only",
+          "result": "Ranked summaries bounded by max_bytes; no authority granted",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR04",
+          "state_id": "SCR04.S0",
+          "control_id": "SCR04.C07",
+          "actor": "External MCP client",
+          "interaction": "external_event",
+          "action": "Describe selected group",
+          "purpose": "External describe then set_active CAS",
+          "result": "Atomic client group view; portable binding.invoke remains",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR05",
+          "state_id": "SCR05.S0",
+          "control_id": "SCR05.C06",
+          "actor": "External MCP client",
+          "interaction": "external_event",
+          "action": "Refresh status",
+          "purpose": "External binding.invoke with callback, resources/subscribe, bounded read",
+          "result": "Finite handle then URI-only hint and journal read; callback list updates",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR05",
+          "state_id": "SCR05.S0",
+          "control_id": "SCR05.C01",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Inspect bounded status",
+          "purpose": "Owner inspects exact subscription and cleanup phase",
+          "result": "Show exact resulting state; no implicit permission change",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR05",
+          "state_id": "SCR05.S0",
+          "control_id": "SCR05.C02",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Cancel via owner review",
+          "purpose": "Open exact administrative cancellation review",
+          "result": "SCR09 challenge binds selected subscription/revision",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR09",
+          "state_id": "SCR09.S0",
+          "control_id": "SCR09.C01",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Authenticate and approve",
+          "purpose": "Confirm this administrative cancellation",
+          "result": "Delivery closed and recorded cleanup issued once",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR05",
+          "state_id": "SCR05.S4",
+          "control_id": "SCR05.C06",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Refresh status",
+          "purpose": "Read terminal event/status",
+          "result": "Client learns cancellation through callback.status or retained terminal journal; cleanup confirmed or unknown",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR05",
+          "state_id": "SCR05.S3",
+          "control_id": "SCR05.C06",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Refresh status",
+          "purpose": "Inspect cleanup uncertainty without replay",
+          "result": "Show exact resulting state; no implicit permission change",
+          "error": "Uncertain cleanup keeps phase=cleanup and delivery closed",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: Uncertain cleanup keeps phase=cleanup and delivery closed; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR09",
+          "state_id": "SCR09.S0",
+          "control_id": "SCR09.C02",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Deny / dismiss",
+          "purpose": "Cancellation alternative before commit",
+          "result": "Return SCR05; registration unchanged",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        }
+      ],
+      "boundary": "External events are observed on the anchored UI control, not a remote press on that control. Protected mutations require exact local owner authentication; discovery/activation/pairing does not grant device authority. Self-ADB does not grant any MCP client capability."
+    },
+    {
+      "id": "STB02",
+      "title": "ARC select, inspect viewport, control and disconnect",
+      "steps": [
+        {
+          "screen_id": "SCR07",
+          "state_id": "SCR07.S0",
+          "control_id": "SCR07.C05",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Select target profile",
+          "purpose": "Choose exact outbound compatible target profile",
+          "result": "Show exact resulting state; no implicit permission change",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR07",
+          "state_id": "SCR07.S0",
+          "control_id": "SCR07.C01",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Connect selected target",
+          "purpose": "Connect and request capabilities",
+          "result": "First response ID/version/status checked; no handshake",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR07",
+          "state_id": "SCR07.S4",
+          "control_id": "SCR07.C06",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Inspect tree or refresh frame",
+          "purpose": "Inspect frame viewport and selected tree node",
+          "result": "Current-root dimensions/density visible; stale node rejected",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR07",
+          "state_id": "SCR07.S4",
+          "control_id": "SCR07.C07",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Pointer or wheel input",
+          "purpose": "Press, move and release across unary requests",
+          "result": "Principal/root lease serializes current-coordinate input; no wire generation invented",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR07",
+          "state_id": "SCR07.S4",
+          "control_id": "SCR07.C04",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Send typed input; disabled unless connected capability/policy permits",
+          "purpose": "Send key/text using approved named mapping",
+          "result": "Show exact resulting state; no implicit permission change",
+          "error": "Unknown key or failed CommandResult is displayed even with OK envelope",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: Unknown key or failed CommandResult is displayed even with OK envelope; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR07",
+          "state_id": "SCR07.S4",
+          "control_id": "SCR07.C02",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Disconnect / cancel",
+          "purpose": "Disconnect controller",
+          "result": "Best-effort releases then watch socket close; idle lease bound covers network failure",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR07",
+          "state_id": "SCR07.S2",
+          "control_id": "SCR07.C01",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Connect selected target",
+          "purpose": "Inspect wrong-token failure",
+          "result": "Show exact resulting state; no implicit permission change",
+          "error": "No tree/frame data or enabled input controls",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: No tree/frame data or enabled input controls; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR08",
+          "state_id": "SCR08.S6",
+          "control_id": "SCR08.C09",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Inspect inbound controllers",
+          "purpose": "Inspect inbound listener separately from outbound controller",
+          "result": "Bound loopback endpoint, exposed ordinary root and incoming principals shown",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        }
+      ],
+      "boundary": "External events are observed on the anchored UI control, not a remote press on that control. Protected mutations require exact local owner authentication; discovery/activation/pairing does not grant device authority. Self-ADB does not grant any MCP client capability."
+    },
+    {
+      "id": "STB03",
+      "title": "Protected configuration, start and truthful failure",
+      "steps": [
+        {
+          "screen_id": "SCR08",
+          "state_id": "SCR08.S0",
+          "control_id": "SCR08.C05",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Edit startup and MCP listener",
+          "purpose": "Edit exact boot/listener draft",
+          "result": "Show exact resulting state; no implicit permission change",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR08",
+          "state_id": "SCR08.S0",
+          "control_id": "SCR08.C04",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Discard settings draft",
+          "purpose": "Discard alternative",
+          "result": "No committed setting changes",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR08",
+          "state_id": "SCR08.S0",
+          "control_id": "SCR08.C01",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Save with revision",
+          "purpose": "Save reviewed exact draft",
+          "result": "SCR09 shows exact values/revisions",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR09",
+          "state_id": "SCR09.S0",
+          "control_id": "SCR09.C01",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Authenticate and approve",
+          "purpose": "Fresh protected proof and CAS",
+          "result": "Return SCR08 committed revision; queue next pending challenge",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR08",
+          "state_id": "SCR08.S0",
+          "control_id": "SCR08.C03",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Open navigation",
+          "purpose": "Navigate to dashboard",
+          "result": "Show exact resulting state; no implicit permission change",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR01",
+          "state_id": "SCR01.S3",
+          "control_id": "SCR01.C01",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Start / Stop service",
+          "purpose": "Request foreground start",
+          "result": "Starting, admission closed, then actual ready",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR01",
+          "state_id": "SCR01.S0",
+          "control_id": "SCR01.C04",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Open health details",
+          "purpose": "Inspect healthy tuple",
+          "result": "MCP ready is separate from ADB paired-offline",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR10",
+          "state_id": "SCR10.S0",
+          "control_id": "SCR10.C05",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Inspect failure reason",
+          "purpose": "Failure branch after denied/failed start",
+          "result": "Show exact resulting state; no implicit permission change",
+          "error": "Error badge, no Running; exact recovery reason",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: Error badge, no Running; exact recovery reason; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR10",
+          "state_id": "SCR10.S0",
+          "control_id": "SCR10.C01",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Review prerequisites",
+          "purpose": "Explicit retry after prerequisite fixed",
+          "result": "No permission or settings bypass; Starting reevaluated",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR09",
+          "state_id": "SCR09.S0",
+          "control_id": "SCR09.C02",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Deny / dismiss",
+          "purpose": "Deny/cancel configuration review alternative",
+          "result": "Return SCR08 previous committed revision",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        }
+      ],
+      "boundary": "External events are observed on the anchored UI control, not a remote press on that control. Protected mutations require exact local owner authentication; discovery/activation/pairing does not grant device authority. Self-ADB does not grant any MCP client capability."
+    },
+    {
+      "id": "STB04",
+      "title": "Pair proof, exact commit, grant and revoke",
+      "steps": [
+        {
+          "screen_id": "SCR02",
+          "state_id": "SCR02.S1",
+          "control_id": "SCR02.C04",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Add client",
+          "purpose": "Open Add client, including empty-client state",
+          "result": "Show exact resulting state; no implicit permission change",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR11",
+          "state_id": "SCR11.S0",
+          "control_id": "SCR11.C04",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Choose pairing flow",
+          "purpose": "Select helper flow and explicit TLS trust",
+          "result": "Show exact resulting state; no implicit permission change",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR11",
+          "state_id": "SCR11.S0",
+          "control_id": "SCR11.C01",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Generate pairing challenge",
+          "purpose": "Request one-time scoped challenge",
+          "result": "Show exact resulting state; no implicit permission change",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR09",
+          "state_id": "SCR09.S0",
+          "control_id": "SCR09.C01",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Authenticate and approve",
+          "purpose": "Approve pairing window/attempt",
+          "result": "Nonce available for exact client; no principal yet",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR11",
+          "state_id": "SCR11.S4",
+          "control_id": "SCR11.C05",
+          "actor": "External MCP client",
+          "interaction": "external_event",
+          "action": "Inspect submitted client proof",
+          "purpose": "Client presents pinned nonce/key/Origin proof",
+          "result": "Service validates proof; owner sees exact pending fingerprint",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR11",
+          "state_id": "SCR11.S4",
+          "control_id": "SCR11.C06",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Review exact client commit",
+          "purpose": "Review exact submitted client commit",
+          "result": "Show exact resulting state; no implicit permission change",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR09",
+          "state_id": "SCR09.S0",
+          "control_id": "SCR09.C01",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Authenticate and approve",
+          "purpose": "Confirm this client identity/revisions",
+          "result": "Return SCR11 Paired, default Deny",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR11",
+          "state_id": "SCR11.S5",
+          "control_id": "SCR11.C03",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Open navigation",
+          "purpose": "Navigate to clients",
+          "result": "Show exact resulting state; no implicit permission change",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR02",
+          "state_id": "SCR02.S0",
+          "control_id": "SCR02.C01",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Edit exact grants",
+          "purpose": "Edit exact binding/schema/target rule draft",
+          "result": "Show exact resulting state; no implicit permission change",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR09",
+          "state_id": "SCR09.S0",
+          "control_id": "SCR09.C01",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Authenticate and approve",
+          "purpose": "Approve grant CAS",
+          "result": "Return SCR02 Allow/Ask/Deny committed as reviewed",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR02",
+          "state_id": "SCR02.S0",
+          "control_id": "SCR02.C02",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Revoke credential",
+          "purpose": "Request credential revoke",
+          "result": "Show exact resulting state; no implicit permission change",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR09",
+          "state_id": "SCR09.S0",
+          "control_id": "SCR09.C01",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Authenticate and approve",
+          "purpose": "Confirm exact revoke",
+          "result": "Epoch increments, streams/input close, pending calls recheck",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR11",
+          "state_id": "SCR11.S3",
+          "control_id": "SCR11.C02",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Cancel pairing",
+          "purpose": "Cancel attempt alternative",
+          "result": "No client committed",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR11",
+          "state_id": "SCR11.S1",
+          "control_id": "SCR11.C01",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Generate pairing challenge",
+          "purpose": "Expired challenge alternative",
+          "result": "Show exact resulting state; no implicit permission change",
+          "error": "New nonce required; no reuse",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: New nonce required; no reuse; Cancel: return unchanged"
+        }
+      ],
+      "boundary": "External events are observed on the anchored UI control, not a remote press on that control. Protected mutations require exact local owner authentication; discovery/activation/pairing does not grant device authority. Self-ADB does not grant any MCP client capability."
+    },
+    {
+      "id": "STB05",
+      "title": "Catalog preview and scoped log export",
+      "steps": [
+        {
+          "screen_id": "SCR03",
+          "state_id": "SCR03.S0",
+          "control_id": "SCR03.C04",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Search inventory",
+          "purpose": "Search binding/type evidence including unknown",
+          "result": "Show exact resulting state; no implicit permission change",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR03",
+          "state_id": "SCR03.S0",
+          "control_id": "SCR03.C01",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Inspect evidence",
+          "purpose": "Inspect selected evidence and runtime-versus-grant distinction",
+          "result": "Show exact resulting state; no implicit permission change",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR03",
+          "state_id": "SCR03.S0",
+          "control_id": "SCR03.C02",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Edit local override",
+          "purpose": "Edit local override draft",
+          "result": "Show exact resulting state; no implicit permission change",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR03",
+          "state_id": "SCR03.S4",
+          "control_id": "SCR03.C07",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Preview override diff",
+          "purpose": "Preview exact diff and dependency/CAS effects",
+          "result": "Show exact resulting state; no implicit permission change",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR09",
+          "state_id": "SCR09.S0",
+          "control_id": "SCR09.C01",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Authenticate and approve",
+          "purpose": "Approve exact override publication",
+          "result": "Catalog epoch invalidates affected device/group views",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR06",
+          "state_id": "SCR06.S0",
+          "control_id": "SCR06.C04",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Filter logs",
+          "purpose": "Select clients/time/outcome and redacted snapshot",
+          "result": "Show exact resulting state; no implicit permission change",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR06",
+          "state_id": "SCR06.S0",
+          "control_id": "SCR06.C02",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Export selected scope",
+          "purpose": "Request selected-scope export",
+          "result": "SCR09 shows immutable redacted snapshot and limits",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR09",
+          "state_id": "SCR09.S0",
+          "control_id": "SCR09.C01",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Authenticate and approve",
+          "purpose": "Approve exact export snapshot",
+          "result": "Return SCR06 ready for create-document picker",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR06",
+          "state_id": "SCR06.S4",
+          "control_id": "SCR06.C05",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Choose export document",
+          "purpose": "Choose Android SAF destination",
+          "result": "Write only approved redacted snapshot",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR06",
+          "state_id": "SCR06.S4",
+          "control_id": "SCR06.C07",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Cancel export",
+          "purpose": "Cancel picker alternative",
+          "result": "No document written",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR06",
+          "state_id": "SCR06.S3",
+          "control_id": "SCR06.C01",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Inspect record",
+          "purpose": "Quota/audit failure branch",
+          "result": "Show exact resulting state; no implicit permission change",
+          "error": "Mandatory audit failure closes admission; optional logs evicted first",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: Mandatory audit failure closes admission; optional logs evicted first; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR03",
+          "state_id": "SCR03.S0",
+          "control_id": "SCR03.C06",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Choose import document",
+          "purpose": "Absent-catalog import branch",
+          "result": "SAF copy/validation stage; protected activation review required",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        }
+      ],
+      "boundary": "External events are observed on the anchored UI control, not a remote press on that control. Protected mutations require exact local owner authentication; discovery/activation/pairing does not grant device authority. Self-ADB does not grant any MCP client capability."
+    },
+    {
+      "id": "STB06",
+      "title": "Pair self-ADB and inspect independent backend health",
+      "steps": [
+        {
+          "screen_id": "SCR08",
+          "state_id": "SCR08.S0",
+          "control_id": "SCR08.C06",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Edit same-device ADB profile",
+          "purpose": "Enter device/user and Android-provided pairing host/port/code",
+          "result": "Show exact resulting state; no implicit permission change",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR08",
+          "state_id": "SCR08.S0",
+          "control_id": "SCR08.C02",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Review pairing",
+          "purpose": "Request exact pair/connect command",
+          "result": "SCR09 review; no Android debugging toggle",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR09",
+          "state_id": "SCR09.S0",
+          "control_id": "SCR09.C01",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Authenticate and approve",
+          "purpose": "Authenticate exact profile and peer request",
+          "result": "Bounded native pairing/connect starts",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR08",
+          "state_id": "SCR08.S0",
+          "control_id": "SCR08.C09",
+          "actor": "Android backend",
+          "interaction": "external_event",
+          "action": "Inspect inbound controllers",
+          "purpose": "Observe paired peer/backend status",
+          "result": "Status change is evidence, never an MCP grant",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR08",
+          "state_id": "SCR08.S0",
+          "control_id": "SCR08.C03",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Open navigation",
+          "purpose": "Navigate dashboard",
+          "result": "Show exact resulting state; no implicit permission change",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR01",
+          "state_id": "SCR01.S0",
+          "control_id": "SCR01.C04",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Open health details",
+          "purpose": "Inspect MCP ready versus ADB Paired offline/Connected",
+          "result": "Show exact resulting state; no implicit permission change",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR08",
+          "state_id": "SCR08.S4",
+          "control_id": "SCR08.C02",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Review pairing",
+          "purpose": "Wrong peer/code branch",
+          "result": "Show exact resulting state; no implicit permission change",
+          "error": "Unverified peer never becomes Connected",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: Unverified peer never becomes Connected; Cancel: return unchanged"
+        },
+        {
+          "screen_id": "SCR09",
+          "state_id": "SCR09.S0",
+          "control_id": "SCR09.C02",
+          "actor": "Owner",
+          "interaction": "control",
+          "action": "Deny / dismiss",
+          "purpose": "Cancel pairing alternative",
+          "result": "No profile/key change",
+          "error": "Show sanitized denial/failure and retain unchanged revisions",
+          "cancel": "Cancel/back returns without the uncommitted effect",
+          "alternate": "Error: deny without partial commit; Cancel: return unchanged"
+        }
+      ],
+      "boundary": "External events are observed on the anchored UI control, not a remote press on that control. Protected mutations require exact local owner authentication; discovery/activation/pairing does not grant device authority. Self-ADB does not grant any MCP client capability."
+    }
+  ],
+  "implemented_android_ui": false,
+  "shared_status": {
+    "source": "HealthSnapshot",
+    "fields": [
+      "service",
+      "desired_state",
+      "mcp",
+      "adb",
+      "device_view",
+      "catalog",
+      "arc_listener"
+    ],
+    "revision": "One immutable revision shared by AppBar and notification",
+    "error_rule": "Error/Stopped never displays Running"
+  },
+  "external_step_contract": "For interaction=external_event, control_id is an observation anchor only; actor performs the named MCP/backend operation described in purpose, never the UI control action."
+}

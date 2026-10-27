@@ -1,0 +1,214 @@
+I'll assess all eighteen assigned SVG artifacts against the shared `workspace.dsl` and `code-diagrams.md`, recording every material finding with evidence and a minimal fix for the final synthesis, without scoring.
+
+**Outcome of pass-02.** Every one of the eighteen SVGs was inspected in full and each is a faithful, fresh render of the supplied model and class sources. Late additions in both sources, such as the shared-registry ARC authenticator relationship and the AuditLogger export member, appear in the renders, so no stale export was detected. The material problems are in what the sources say and in what the views choose to show, not in rendering fidelity. The strongest residuals are incomplete ARC class ownership, a per-connection versus singleton input path with no session-keyed API, a duplicated dispatch contract on the SDK backend, a catalog interface that cannot support the non-owner group activation the GroupFlow view draws, and an owner-prompt input quiesce that no class realizes. Several model relationships are rendered in no view at all. Scores are deferred to the synthesis as instructed.
+
+`★ Insight ─────────────────────────────────────`
+PlantUML stamps every rendered entity with `data-source-line` relative to its `@startuml`, so a fixed offset per block maps each SVG element back to a `code-diagrams.md` line; the offsets held for all five class diagrams, which is how freshness was confirmed without tools. Structurizr with `!impliedRelationships false` renders a relationship only when both endpoints are explicitly included in a view, so a model relationship can be perfectly valid and still invisible everywhere.
+`─────────────────────────────────────────────────`
+
+## Material findings with evidence and minimal fixes
+
+| ID | Severity | Title | Artifacts |
+|---|---|---|---|
+| P2-01 | Medium | Model relationships rendered in no view | all four component SVGs, `workspace.dsl` |
+| P2-02 | Low | Orphan element in ArcComponents | structurizr-ArcComponents.svg |
+| P2-03 | Medium | ARC class lifetime ownership incomplete | arc-ui-classes.svg, arc-target-classes.svg |
+| P2-04 | Medium | Per-connection input dispatcher reached through a singleton adapter with no session key | arc-target-classes.svg, arc-ui-classes.svg |
+| P2-05 | Medium | Duplicated and contradictory dispatch contract on SdkBindingBackend | server-execution-classes.svg |
+| P2-06 | Medium | CatalogRepository has no member for non-owner session activation drawn in GroupFlow | structurizr-GroupFlow.svg, server-core-classes.svg |
+| P2-07 | Medium | Input quiesce during owner challenge has no realizing mechanism | structurizr-OwnerTransition.svg, server-core-classes.svg |
+| P2-08 | Medium, conditional | Callback proxy realization for abstract classes and Binder endpoints absent | server-execution-classes.svg, structurizr-CallbackFlow.svg |
+| P2-09 | Medium, conditional | Direct-event route carrier and negotiation vehicle unspecified | server-core-classes.svg, ServerComponents |
+| P2-10 | Low to Medium | HealthSnapshot omits ARC listener state | server-core-classes.svg |
+| P2-11 | Low to Medium | ArcSession misattributes version and method validation | structurizr-ArcSession.svg, arc-ui-classes.svg |
+| P2-12 | Low to Medium | Class diagrams omit normative cross-component dependencies | server-execution-classes.svg, server-core-classes.svg |
+| P2-13 | Low | Deployment render drops node qualifications and draws direct host lines | structurizr-Deployment.svg |
+| P2-14 | Low | Stdio named only in one dynamic step | structurizr-CallbackFlow.svg |
+| P2-15 | Low | Start through a facade on a stopped service | structurizr-ServerCoreComponents.svg |
+| P2-16 | Low | Reference-stub convention breaches and naming drift | arc-* class SVGs |
+| P2-17 | Low | Asymmetric "not implemented" marker | structurizr-ArcComponents.svg, ArcSession |
+| P2-18 | Low, conditional | Wire-level claims that another pass must pin | arc-ui, arc-target, arc-controller, ArcSession |
+| P2-19 | Low | No stop or revocation dynamic view | all dynamic SVGs |
+| P2-20 | Low | Ask-consent path has no owner participant, deadline or deny branch | structurizr-InvocationFlow.svg |
+| P2-21 | Low | Editability caveat from pinned text widths | all eighteen SVGs |
+| P2-22 | Low, conditional | Build tooling modeled as runtime containers | structurizr-Containers.svg |
+| P2-23 | Low | McpServer lacks Last-Event-ID and Origin members | server-core-classes.svg |
+| P2-24 | Low | Deployment documentation instance has no relationships | structurizr-Deployment.svg |
+
+- **P2-01 [Medium] Model relationships rendered in no view.** Three component relationships exist in the model but no component view includes both endpoints, so they are invisible in every SVG.
+  - Evidence: `design-c4/architecture/workspace.dsl:59` lifecycle to arc "Owns enabled ARC listener lifecycle"; `workspace.dsl:107` ownerCommands to callbacks "Inspects metadata and explicitly cancels owned registrations"; `workspace.dsl:108` ownerCommands to device "Requests observed capability refresh; no asserted facts".
+  - Evidence: include lists at `workspace.dsl:159`, `:163`, `:167`, `:171`; ArcComponents has arc but not lifecycle, ServerComponents has lifecycle but not arc, no view has ownerCommands together with callbacks or device.
+  - Why it matters: the ARC listener enable path, the owner-side callback cancel path, and the owner-triggered capability refresh are requirement-level controls that the C4 deliverable does not show.
+  - Minimal fix: add `bridge.app.lifecycle` to the ArcComponents include, and add `bridge.app.callbacks bridge.app.device` to the ServerCoreComponents include or create a small OwnerOperations component view; rebuild.
+
+- **P2-02 [Low] Orphan element in ArcComponents.** "Android OS and target apps" is included in the view but has zero rendered relationships, which implies a direct ARC-to-OS boundary that the model does not define.
+  - Evidence: `structurizr-ArcComponents.svg` entity `entity_AndroidOSandtargetapps`; the link list contains no link whose id references it; include at `workspace.dsl:163` ends with `owner android`.
+  - Minimal fix: the P2-01 lifecycle include renders the two android-to-lifecycle relationships and removes the orphan; otherwise drop `android` from that include.
+
+- **P2-03 [Medium] ARC class lifetime ownership incomplete.** The preamble states that composition diamonds denote owned lifetime, and the server-core diagram honors that, but the ARC listener and most ARC collaborators have no owner.
+  - Evidence: `arc-ui-classes.svg` shows only `lnk34` BridgeService to ArcRuntime and `lnk22` ArcTcpTransport to ArcSessionRegistry as compositions; ArcTcpTransport, ArcRequestHandler, ArcCompatibilityProfile, ArcAuthorizationGate, the ArcAuthenticator realization, ComposeTargetAdapter and UiDispatcher are unowned. Source: `design-c4/architecture/code-diagrams.md:412` and `:428`.
+  - Evidence: `arc-target-classes.svg` note `GMN16` declares UiDispatcher and the selected-root adapter to be service singletons, yet no diamond draws that ownership; `server-execution-classes.svg` leaves BinderHandleProvider, WireContractVerifier and LocalReplyPolicy unowned.
+  - Why it matters: `workspace.dsl:59` says the lifecycle component owns the enabled ARC listener, and the class artifact that is supposed to realize ownership contradicts it by silence; this was an explicit residual.
+  - Minimal fix: add to the arc-ui block `BridgeService "1" *-- "0..1" ArcTcpTransport`, `ArcTcpTransport "1" *-- "1" ArcRequestHandler`, `ArcRequestHandler "1" *-- "1" ArcCompatibilityProfile`, `BridgeService "1" *-- "1" ComposeTargetAdapter`, `BridgeService "1" *-- "1" UiDispatcher`, plus realizations `KeystoreClientAuthenticator ..|> ClientAuthenticator` and `ArcBearerAuthenticator ..|> ArcAuthenticator`; in the execution block add `BinderBackend "1" *-- "1" BinderHandleProvider`, `BinderBackend "1" *-- "1" WireContractVerifier`, `CallbackBroker "1" *-- "1" LocalReplyPolicy`.
+
+- **P2-04 [Medium] Per-connection input dispatcher reached through a singleton adapter with no session key.** ArcInputDispatcher is composed per connection and owns pressed state, but the singleton ComposeTargetAdapter depends on it and exposes an input method without any session argument.
+  - Evidence: `arc-target-classes.svg` link `lnk13` ArcConnectionSession "1" to ArcInputDispatcher "0..1", link `lnk22` ComposeTargetAdapter to ArcInputDispatcher, note `GMN16`; `arc-ui-classes.svg` TargetAdapter member `+sendInput(rootGeneration, events)`. Sources: `code-diagrams.md:398`, `:464`, `:496`, `:506`.
+  - Why it matters: ordered input and pressed-state release on close are per-connection guarantees; with the drawn API the adapter cannot select the right dispatcher, so the mechanism is unspecified.
+  - Minimal fix: change the interface and the realization to `+sendInput(session, rootGeneration, events)` and relabel the dependency "resolves the session-owned dispatcher", or route input through `ArcConnectionSession` and draw ArcInputDispatcher depending on the adapter instead.
+
+- **P2-05 [Medium] Duplicated and contradictory dispatch contract on SdkBindingBackend.** The SDK backend realizes BackendAdapter yet declares a planner-shaped dispatch method instead of the interface contract its siblings list.
+  - Evidence: `server-execution-classes.svg` `entity_SdkBindingBackend` members `+preflight(plan): SupportedOrReason` and `+dispatch(admission): BoundedResult`; `entity_InvocationPlanner` has the identical `+dispatch(admission): BoundedResult`; `entity_BackendAdapter` contract is `+invoke(verifiedPlan): Outcome` and `+observeCapabilityEpoch()`, which BinderBackend and AdbPhoneBackend list explicitly. Source: `code-diagrams.md:269` to `:273`.
+  - Why it matters: two components claim to dispatch an Admission, so the single-dispatch guarantee drawn in CallbackFlow step 6 and InvocationFlow step 8 has two candidate owners.
+  - Minimal fix: replace the SdkBindingBackend dispatch member with `+invoke(verifiedPlan): Outcome` and `+observeCapabilityEpoch()`, keeping `preflight`.
+
+- **P2-06 [Medium] CatalogRepository has no member for the non-owner session activation drawn in GroupFlow.** GroupFlow commits a client session's activation through the catalog, but the interface's only commit member demands an owner capability that an MCP session cannot present.
+  - Evidence: `structurizr-GroupFlow.svg` message 10 "CAS commit coherent activation or return stale/conflict" from FunctionalGroupIndex to CatalogRepository, source `workspace.dsl:232`; `server-core-classes.svg` `entity_CatalogRepository` members `streamEffectiveInventory`, `commitOverride(command, expectedRevision, ownerCapability)`, `activateSealedView(pins)`, source `code-diagrams.md:64` to `:68`; FunctionalGroupIndex `+setActiveCAS(session, desiredSet, etag)` at `:80`.
+  - Why it matters: the atomic session activation of requirement 8 has no interface path, and the alternative path through the store coordinator is not drawn either.
+  - Minimal fix: add `+commitSessionView(session, desiredSet, expectedEtag): CommittedViewOrConflict` to CatalogRepository, or redirect GroupFlow step 10 to `bridge.app.storage` and draw `FunctionalGroupIndex ..> SqliteStoreCoordinator`.
+
+- **P2-07 [Medium] Input quiesce during the owner challenge has no realizing mechanism.** The OwnerTransition view places "Quiesce bridge input" on a message to the UI, but ARC input injection and ADB taps run in the service, and no class or policy rule gates them while a challenge is pending.
+  - Evidence: `structurizr-OwnerTransition.svg` message 3 "Quiesce bridge input; display OS BiometricPrompt for service-owned exact challenge", source `workspace.dsl:251`; `server-core-classes.svg` `entity_OwnerAuthenticationService` members issueChallenge, consumeFreshBiometricResult, verifyAndConsume and note `GMN43`; `server-execution-classes.svg` AdbPhoneBackend `+tap(scope, coordinates)`.
+  - Why it matters: ADB input injection runs as the shell user and can press a BiometricPrompt confirmation or device-credential fallback; without a service-side gate the no-self-approval claim rests on an unspecified step.
+  - Minimal fix: add `+quiesceRemoteInputWhilePending(challenge)` to OwnerAuthenticationService, add an AdmissionGate note "deny ARC sendInput and ADB input.tap while an owner challenge is pending; denial does not consume the challenge", and reword step 3 to "Quiesce remote input in the service; request UI to display OS BiometricPrompt".
+
+- **P2-08 [Medium, conditional on pass-01] Callback proxy realization for abstract classes and Binder endpoints absent.** The broker creates a provisional proxy, but nothing shows how an SDK interface listener, an abstract-class callback, or a Binder endpoint is instantiated or classified unsupported.
+  - Evidence: `structurizr-CallbackFlow.svg` messages 7 to 9; `server-execution-classes.svg` `entity_CallbackBroker` members and `entity_Subscription`; no proxy or stub class exists in any class SVG.
+  - Why it matters: reflective proxies cover interfaces only, abstract-class callbacks need generated stubs or an explicit unsupported reason, and requirement 7 demands that classification; the diagrams cannot show which applies.
+  - Minimal fix: add `class CallbackProxyFactory { +forInterface(descriptor); +forAbstractClass(descriptor): GeneratedStubOrUnsupportedReason; +forBinderEndpoint(descriptor): StubOrReason }` owned by CallbackBroker. If Design.md already defines generated stubs this reduces to a diagram omission.
+
+- **P2-09 [Medium, conditional on pass-01] Direct-event route carrier and negotiation vehicle unspecified.** The negotiator and emitter exist, but no artifact names the transport, framing, authentication, or where negotiation happens.
+  - Evidence: `server-core-classes.svg` `entity_DirectStreamNegotiator` and `entity_DirectEventEmitter`; ServerComponents McpServer description "plus separately negotiated direct-event route"; `code-diagrams.md:26` to `:35`.
+  - Why it matters: requirement 9 requires explicit negotiation and authentication with journal fallback and forbids invented standard methods; the diagrams leave all of that open.
+  - Minimal fix: add a note on DirectEventEmitter naming the carrier, for example a separate authenticated loopback listener with length-prefixed events opened with a token from `negotiate()`, and state that absence of negotiation means journal-only.
+
+- **P2-10 [Low to Medium] HealthSnapshot omits ARC listener state.** The model says the lifecycle owns the enabled ARC listener, yet the health value type carries only MCP, ADB, device-view and catalog fields.
+  - Evidence: `server-core-classes.svg` `entity_HealthSnapshot` fields serviceState, mcpListener, adbBackend, deviceView, catalogReadiness; `workspace.dsl:59`.
+  - Minimal fix: add `+arcListener`; the final synthesis should check whether the pass-03 ARC screen shows listener status.
+
+- **P2-11 [Low to Medium] ArcSession misattributes version and method validation.** The dynamic view has AdmissionGate validate principal, version and method, while the class model assigns version and method to ArcCompatibilityProfile and principal to the authenticator, which is not a participant.
+  - Evidence: `structurizr-ArcSession.svg` message 2, source `workspace.dsl:240`; `arc-ui-classes.svg` `entity_ArcCompatibilityProfile` `+validateVersionAndMethod(request)` and `entity_ArcAuthenticator`; relationship `workspace.dsl:120`.
+  - Minimal fix: insert `bridge.app.arc -> bridge.app.auth "Authenticate envelope bearer with expected_kind=arc; reject before target access"` before step 2 and reword step 2 to admit the authenticated principal's exact canonical operation.
+
+- **P2-12 [Low to Medium] Class diagrams omit normative cross-component dependencies.** Several controls the model declares have no class-level counterpart.
+  - Evidence: `workspace.dsl:88` callbacks to policy recheck has no AdmissionGate stub in `server-execution-classes.svg`; `workspace.dsl:109` catalog invalidates device has no observer or invalidate member in `server-core-classes.svg`; `workspace.dsl:65`, `:104`, `:105`, `:73`, `:78` likewise have no dependency drawn.
+  - Minimal fix: add stubs and dashed dependencies, plus `CatalogRepository.observePublications(): Flow<PublicationEpoch>` and `DeviceViewResolver.onPublication(epoch)` so the cache invalidation of requirement 6 has a mechanism.
+
+- **P2-13 [Low] Deployment render drops node qualifications and draws direct host lines.** The exporter shows only node name and technology, so material qualifications live only in the DSL, and derived lines from host client instances to the APK visually bypass the forwarding node.
+  - Evidence: `structurizr-Deployment.svg` cluster text "[Deployment Node: Host loopback]" and "[Deployment Node: Android app]" without descriptions; links `lnk18` and `lnk19` go from MCP client and ARC client instances straight to the APK instance; descriptions at `workspace.dsl:127` "Different UID; explicitly opted-in ARC target, not needed for generic ADB" and `:132` "Logical client protocol lines use an explicit owner-established loopback forward".
+  - Minimal fix: move the qualifications into the technology strings or into the container-level relationship technology, for example "via owner adb forward on host loopback", or document the caveat in the C4 README.
+
+- **P2-14 [Low] Stdio named only in one dynamic step.** Every transport label in the model and SVGs is Streamable HTTP over loopback TCP or ADB forward, yet one step offers stdio as a delivery channel.
+  - Evidence: `structurizr-CallbackFlow.svg` message 17 "GET SSE/stdio: subscribed URI-only resource update", source `workspace.dsl:202`; Containers and Context relationship technologies.
+  - Minimal fix: reword to "GET SSE: subscribed URI-only resource update" or state stdio applicability for this Android deployment explicitly.
+
+- **P2-15 [Low] Start through a facade on a stopped service.** A stopped service cannot receive a facade call, so start must be an Android foreground-service start from the UI.
+  - Evidence: `structurizr-ServerCoreComponents.svg` link at `data-source-line="95"` "Ordinary local start/stop and immutable health; no config/grant change", source `workspace.dsl:119`.
+  - Minimal fix: relabel "Ordinary stop and immutable health; start is a foreground-service start intent from the UI; no config/grant change".
+
+- **P2-16 [Low] Reference-stub convention breaches and naming drift.** The preamble says stubs name their authoritative view, but UiDispatcher is fully declared twice, stub names differ from the C4 elements, and response validation is declared in two places.
+  - Evidence: UiDispatcher full in `arc-ui-classes.svg` and `arc-target-classes.svg`, sources `code-diagrams.md:401` and `:491`; stubs CompatibleExternalRuntime at `:193` and CompatibleArcClient at `:350` versus C4 "Compatible external ARC target" and "Compatible ARC client"; `ArcCompatibilityProfile.validateResponseIdVersionStatus()` at `:371` versus `ArcClientAdapter.validateIdVersionStatusAndCommandResult()` at `:181`; ArcProtocolModel lists only parseRequest and serializeResponse although the controller references it.
+  - Minimal fix: make the arc-target UiDispatcher a stub, rename the two external stubs to match the C4 names, let the controller reference ArcCompatibilityProfile, and add `serializeRequest` and `parseResponse`.
+
+- **P2-17 [Low] Asymmetric "not implemented" marker.** Only ArcEngine says "not implemented" while every component is proposed, which reads as an implementation claim for the rest.
+  - Evidence: ArcEngine box text in `structurizr-ArcComponents.svg` and `structurizr-ArcSession.svg`; `workspace.dsl:22`.
+  - Minimal fix: "proposed port; no implementation claimed", or move the design-only caveat to the container description.
+
+- **P2-18 [Low, conditional on pass-01] Wire-level claims that another pass must pin.** These are correct only if the contract JSON and pinned proto carry them.
+  - Evidence: `arc-ui-classes.svg` note `GMN38` "Received Cancel8 returns UNSUPPORTED then closes" needs a real status enum value; `structurizr-ArcSession.svg` message 5 uses `end_of_stream`; `arc-target-classes.svg` `+captureBoundedPng(root): FrameUpdate`; controller note `GMN22` "CommandResult.succeeded".
+  - Evidence of absence: no SVG states behavior for an unknown method beyond Cancel8, nor that upstream FPS is parsed but not enforced, nor that zero-length frames are legal.
+  - Minimal fix: add to note `GMN38` "unknown or unsupported method returns status X then closes; fps is parsed and preserved, local quota governs; zero-length frame is legal, negative or oversize is rejected".
+
+- **P2-19 [Low] No stop or revocation dynamic view.** Six dynamic views exist, none for ordered shutdown or revocation, although requirement 7 enumerates revocation, disconnect and restart and the candidate list names the no-resumable-stage change.
+  - Evidence: dynamic view keys at `workspace.dsl:174`, `:185`, `:207`, `:222`, `:238`, `:248`; `server-core-classes.svg` BridgeService `+stopWithinDeadline()`; `workspace.dsl:116` "Owns and closes coordinator before service shutdown".
+  - Minimal fix: add a Shutdown dynamic view ordering listener close, stream cancel, recorded cleanup plans, coordinator close, stopForeground; or state that prose owns the ordering.
+
+- **P2-20 [Low] Ask-consent path has no owner participant, deadline or deny branch.** A live tools/call that waits on the owner must be bounded, and the view shows neither the wait nor the timeout result.
+  - Evidence: `structurizr-InvocationFlow.svg` message 4 "Check per-client grant, Ask consent, OS/backend authority and current epochs", source `workspace.dsl:211`; no owner participant in that view.
+  - Minimal fix: add a bounded alternative step "Ask the local owner within a deadline; timeout or denial returns a structured denial; no replay".
+
+- **P2-21 [Low] Editability caveat from pinned text widths.** Every text element carries `textLength` with `lengthAdjust="spacing"`, so manual label edits stretch or compress unless those attributes are removed.
+  - Evidence: any `<text>` element in the eighteen SVGs, for example `arc-ui-classes.svg` maxFrameBytes label with `textLength="236.7969"`.
+  - Minimal fix: a one-line editing note in the README or in `code-diagrams.md`; content is unaffected.
+
+- **P2-22 [Low, conditional on pass-01] Build tooling modeled as runtime containers.** C4 containers are runtime units, and "Documentation build" and "Offline catalog tooling" are placed inside the runtime software system.
+  - Evidence: `structurizr-Containers.svg` entities Offlinecatalogtooling and Documentationbuild; `workspace.dsl:34` and `:35`.
+  - Minimal fix: acceptable as a stated modeling liberty if the README says so; otherwise model them as a separate software system.
+
+- **P2-23 [Low] McpServer lacks Last-Event-ID and Origin members.** Requirement 9 separates transport replay from the application cursor and asks for precise Origin and reconnect handling, but the class shows only the application cursor.
+  - Evidence: `server-core-classes.svg` `entity_McpServer` members handlePost, openNotificationStream(session), readResource(principal, uri, cursor, limits); `structurizr-CallbackFlow.svg` message 19 "separate application cursor" with no transport-resume step.
+  - Minimal fix: `+openNotificationStream(session, lastEventId?)`, `+validateOrigin(request)`, and a note "Last-Event-ID replays undelivered SSE events only; the application cursor lives in the resource URI".
+
+- **P2-24 [Low] Deployment documentation instance has no relationships.** The documentation container instance sits on the build workstation with no rendered line, which is consistent with "no deployed app" but is an unlinked element.
+  - Evidence: `structurizr-Deployment.svg` `entity_ReferenceAndroid.Buildworkstation.Documentationbuild_1`; the only documentation relationship targets the owner person at `workspace.dsl:50`.
+  - Minimal fix: leave as is with a README caveat, or omit the instance from the deployment environment.
+
+## Artifact coverage, fidelity checks and verified resolutions
+
+| Artifact | Source | Fidelity against source | Observations |
+|---|---|---|---|
+| arc-controller-classes.svg | `code-diagrams.md:159` to `:211` | ten entities, ten links, one note, title and multiplicities all present | P2-16; the ArcSessionManager to AdmissionGate dependency is unlabeled, so admit versus recheck is not stated |
+| arc-target-classes.svg | `code-diagrams.md:451` to `:525` | twelve entities, nineteen links, two notes present | P2-04, P2-03, P2-16 |
+| arc-ui-classes.svg | `code-diagrams.md:342` to `:447` | nineteen entities, seventeen links, three notes present; interfaces render with the interface icon | P2-03, P2-18 |
+| server-core-classes.svg | `code-diagrams.md:7` to `:155` | twenty-one entities, forty-two links, three notes present | P2-06, P2-09, P2-10, P2-12, P2-23 |
+| server-execution-classes.svg | `code-diagrams.md:215` to `:338` | eighteen entities, twenty-four links, four notes present; forward-declared interfaces render correctly | P2-05, P2-08, P2-12 |
+| structurizr-Context.svg | `workspace.dsl:150` | seven elements, six relationships, all labels and technologies match | none |
+| structurizr-Containers.svg | `workspace.dsl:154` | ten elements, nine relationships match | P2-22 |
+| structurizr-ServerComponents.svg | `workspace.dsl:158` | fifteen elements, forty-two relationships; complete for the included set | very wide canvas only |
+| structurizr-ArcComponents.svg | `workspace.dsl:162` | fourteen elements, twenty-two relationships; complete for the included set | P2-01, P2-02, P2-17 |
+| structurizr-ServerCoreComponents.svg | `workspace.dsl:166` | twelve elements, twenty-seven relationships; complete for the included set | P2-15 |
+| structurizr-ExecutionComponents.svg | `workspace.dsl:170` | ten elements, twenty-two relationships; complete for the included set | none |
+| structurizr-Startup.svg | `workspace.dsl:174` | eight messages match in order and text | activation ownership question Q5 |
+| structurizr-CallbackFlow.svg | `workspace.dsl:185` | nineteen messages match | P2-14 |
+| structurizr-InvocationFlow.svg | `workspace.dsl:207` | twelve messages match | P2-20 |
+| structurizr-GroupFlow.svg | `workspace.dsl:222` | thirteen messages match | P2-06 |
+| structurizr-ArcSession.svg | `workspace.dsl:238` | seven messages match | P2-11 |
+| structurizr-OwnerTransition.svg | `workspace.dsl:248` | eight messages match | P2-07 |
+| structurizr-Deployment.svg | `workspace.dsl:121` and `:259` | four nodes, two infrastructure nodes, seven relationships match | P2-13, P2-24 |
+
+**Freshness evidence.** The five relationships appended last in the model, `workspace.dsl:116` through `:120`, are rendered in ServerCoreComponents and ArcComponents. The AuditLogger export member and the ArcAuthenticator delegation, both late class additions, are rendered in `server-core-classes.svg` and `arc-ui-classes.svg`. Block-relative `data-source-line` offsets of eight, one hundred sixty, two hundred sixteen, three hundred forty-three and four hundred fifty-two held for every sampled entity across the five class SVGs.
+
+**Renderer and metadata evidence.** All eighteen SVGs use `font-family="DejaVu Sans"` on every text element, which agrees with the supplied statement that the Gradle style include forces the font in all thirteen Structurizr exports. The class SVGs carry `!pragma layout smetana` in their source, consistent with an offline render with no Graphviz dependency. No SVG embeds a PlantUML source or version comment, which is consistent with the reproducibility claim and with the stale-metadata prevention candidate.
+
+**Verified resolutions visible in this pass.**
+- **Explicit logger read and export** are present as `queryRedactedSnapshot` and `exportApprovedSnapshot` on AuditLogger, with the owner export and session query relationships rendered at `data-source-line="93"` and `"94"` in ServerCoreComponents and in ArcComponents.
+- **Single SQLite coordinator** is present: SqliteCatalogRepository, SqliteEventJournal and AuditLogger all depend on SqliteStoreCoordinator, and every persistence-bearing view routes writes through it.
+- **Ordinary local start and stop** is rendered, with the P2-15 precision caveat.
+- **ARC authentication over the shared kind-specific registry** is rendered in ArcComponents at `data-source-line="110"` and as link `lnk11` in `arc-ui-classes.svg`.
+- **Call-order and resource labels** are present: "plan then dispatch admitted plan" and "subscribe / bounded read / URI hint" in `server-core-classes.svg`.
+- **Late-result, uncertain-event and cancel members** exist on CallbackBroker; the state table itself belongs to pass-01.
+- **Pinned ARC facts** are correctly carried: signed four-byte big-endian length, the eight MiB cap, envelope version "1.0", transport constant "arc-protobuf-v1", one request per socket, repeated watch responses with a terminal flag, no handshake, Cancel8 unsupported with socket close, bearer authentication, no fake TLS, OK envelope can carry command failure, mouse, wheel, key and text only with Avalonia key names.
+- **Pinned MCP facts** are correctly carried in InvocationFlow step 12, CallbackFlow steps 11 to 19 and GroupFlow step 13: one final response then normal POST SSE termination, exact-URI subscribe, URI-only updates, finite journal pages with a separate application cursor, best-effort list_changed without eviction guarantees.
+- **Protected owner flow** is coherent: service-owned nonce, exact command and revisions, verify-and-consume inside the serialized CAS commit, no remote self-approval, UI reference not authorization.
+- **Honest boot and status** are present: recordWaitingForUnlock, a Starting notification before slow work, Running exposed only after the listener is ready, backend health kept separate.
+- **No Mermaid** content exists in any assigned artifact.
+
+## Questions for the final synthesis, uncertainties and limitations
+
+Conditional questions, each tied to a finding and to the pass that owns the defining artifact:
+- **Q1 to pass-01:** Does the design state the foreground service type and the Android 15 boot-start restrictions for that type? The diagrams say only "eligible".
+- **Q2 to pass-01:** Does the contract JSON or pinned proto pin the status value returned for Cancel8, the terminal flag field name, the FrameUpdate type and PNG encoding, CommandResult.succeeded, unknown-method behavior, FPS parsed but not enforced, and zero-length legality? See P2-18.
+- **Q3 to pass-01:** Is the direct-event carrier and negotiation vehicle defined in prose? See P2-09.
+- **Q4 to pass-01:** Are abstract-class callbacks realized by generated stubs or classified unsupported? See P2-08.
+- **Q5 to pass-01:** Where is a session's group activation persisted and through which interface, and which object owns the active device-view pointer given both `DeviceViewResolver.activateCAS` and `CatalogRepository.activateSealedView`? See P2-06.
+- **Q6 to pass-01 and pass-03:** Is the quiesce rule and the Ask-consent deadline defined, and do storyboards show the denied or timed-out branch? See P2-07 and P2-20.
+- **Q7 to pass-03:** Does any screen show ARC listener status? If yes, P2-10 becomes a contradiction rather than an omission.
+- **Q8 to pass-01:** Is stdio declared unsupported for this deployment? See P2-14.
+- **Q9 to pass-01:** Does the README carry the deployment-description and container-modeling caveats? See P2-13 and P2-22.
+- **Q10 to pass-01:** Do tool names callback.status, callback.cancel, screen.state and input.tap appear in the manifest, and are ADB tap coordinates defined as display pixels in the current orientation while ARC input is root DIP?
+- **Q11 to pass-01:** Does prose state that the unexported Binder facade is an API boundary inside one process, so that the UI-cannot-bypass claim rests on protected-root exclusion, the OS prompt and input quiesce?
+- **Q12 to pass-01:** Is the biometric result bound cryptographically, for example a CryptoObject signature over nonce, command and revisions, or is it in-process callback trust?
+- **Q13 to pass-01:** Are Origin validation and Last-Event-ID replay defined? See P2-23.
+- **Q14 to pass-03:** Does an ADB pairing storyboard exist, and does it mention the Wi-Fi dependency that same-device wireless debugging imposes?
+
+Uncertainties and limitations of this pass:
+- No tool was used, so the supplied sizes and SHA-256 digests were accepted as stated and not recomputed.
+- Visual overlap and legibility were judged from coordinates only; no rasterization or viewing occurred.
+- `data-source-line` values in the Structurizr SVGs refer to the generated PlantUML, which was not supplied, so they were not cross-checked; the class SVG offsets were.
+- Line numbers cited for `workspace.dsl` and `code-diagrams.md` were derived by counting the supplied text and may be off by one or two where blank lines were ambiguous; the quoted text is the authoritative locator.
+- Proto field names, enum values and MCP page contents were not independently verified; they are deferred to the pass that holds those sources.
+
+`★ Insight ─────────────────────────────────────`
+The two defect families here are typical of a Structurizr plus PlantUML split: the DSL is a single model but each view is a filter, so completeness must be checked per view rather than per model, and the class diagrams are hand-authored so ownership diamonds and interface contracts drift from the component relationships unless a cross-check like the one above is repeated after every edit.
+`─────────────────────────────────────────────────`
+
+END_DESIGN_STAGE_pass-02

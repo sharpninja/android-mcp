@@ -1,0 +1,56 @@
+{
+  "created_at": "2026-10-26T21:02:48.317656+00:00",
+  "finding": "IMM-01",
+  "issue": "Published registry membership/source links could be appended without advancing generation. Discovered after immutable round005 freeze.",
+  "regression_before": "evidence/published-membership-before.txt",
+  "candidate_fix": "Both memberships insert only while staged; builder registers sources before validation/publish; copy migration stages all input registries and restores terminal states/pointer after membership copy.",
+  "tests": "evidence/tests-regression-029.txt:96passed",
+  "full_populated_validation": "Running session82345; evidence/legacy-populated-round005-postfreeze-validation.json will exist only on completion",
+  "patch": "/home/sharpninja/github/2026-10-26/task-3/remediation/integration/registry-seal-postfreeze.patch",
+  "base": "Exact round005 frozen candidate, equivalently coordinated round004-v2 integration before this delta",
+  "files": [
+    {
+      "file": "schema.sql",
+      "base_sha256": "3a622f9d996bfa4ed38138789949caed11b007bfc7b4cd61df3439a7be837010",
+      "new_sha256": "ff990f3584cf600fd278cada3444315d5b7d448a1c46941f9da2e192029e021c"
+    },
+    {
+      "file": "migrations/002-evidence-and-publication.sql",
+      "base_sha256": "53cd71eaa51264077a4cda796bf9c2002b4010367651d374f620f85711cd88ec",
+      "new_sha256": "c62507924b73ad245cac59f75180ff44bb1a574f6a36930c63f7ea5d8c156cfe"
+    },
+    {
+      "file": "tooling/build_catalog.py",
+      "base_sha256": "ded0b0e2fe613932da8730605c5da39104359b12107f03b6741e569b8271bde7",
+      "new_sha256": "7513e93decc158689f2bf1592f674790c4bb8fb8001c6dff55369a09f9695281"
+    },
+    {
+      "file": "tooling/migrate_v3.py",
+      "base_sha256": "8c41bbc35ede3800850a39fcc18b955ff9984201a1267ecd873e92b49297c109",
+      "new_sha256": "739166d0b2c6f8d277dcb08be3915c15ee28add8c5896519d3205355f8ab2dca"
+    },
+    {
+      "file": "tests/test_round3.py",
+      "base_sha256": "131c453532ba0e17f9d5aeb868cf59f791c9a8538431a0df0b86c35e7791e599",
+      "new_sha256": "bef132044288cd432a6329dafa5dc91a0b19911e22cc65bd362f01852f32c838"
+    },
+    {
+      "file": "tests/test_round4.py",
+      "base_sha256": "883fe9cc2065ac639dafa94683f5a337554b32df268652341bed56a126ff3c89",
+      "new_sha256": "a13c635c01d411fae39ddf9f1b8dabd70014048b55c1fa7f34d0613ac1712179"
+    },
+    {
+      "file": "tests/test_remediation.py",
+      "base_sha256": "3e3a6c3fc4228a7c0840b090ef530e6075a89ecc8f5de0b1f77e92e4c1121c7a",
+      "new_sha256": "9b700c3bc534a959e4d340dade6010a0e1598278bff196a233e3c72038d5d418"
+    },
+    {
+      "file": "tests/test_sealed_registry.py",
+      "base_sha256": null,
+      "new_sha256": "94ff2144a96b780a3db8a15e7a74068e7d4bc1f11630a74a572cf6e5710e440b"
+    }
+  ],
+  "source_active_files_modified": false,
+  "independent_reviewer_acceptance": false,
+  "warning": "Adopt into a new immutable source build only; do not interrupt/patch active release005. This is additional to the pinned round004-v2 handoff."
+}

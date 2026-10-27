@@ -1,0 +1,29 @@
+..F........F.
+======================================================================
+FAIL: test_exact_trusted_contract_pin_is_required_for_group_membership (test_source_metadata_crud.MetadataCrud.test_exact_trusted_contract_pin_is_required_for_group_membership)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_source_metadata_crud.py", line 62, in test_exact_trusted_contract_pin_is_required_for_group_membership
+    self.error(422,lambda:self.create(g));g['members'][0]['contract_hash']='b'*64;self.create(g)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_source_metadata_crud.py", line 14, in error
+    with self.assertRaises(Error) as cm:fn()
+         ~~~~~~~~~~~~~~~~~^^^^^^^
+AssertionError: Error not raised
+
+======================================================================
+FAIL: test_unknown_catalog_reference_cannot_be_saved_as_effective_group (test_source_metadata_crud.MetadataCrud.test_unknown_catalog_reference_cannot_be_saved_as_effective_group)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_source_metadata_crud.py", line 58, in test_unknown_catalog_reference_cannot_be_saved_as_effective_group
+    self.error(422,lambda:self.create(g));self.assertIsNone(self.store.row('functional-group',g['group_id']))
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tests/test_source_metadata_crud.py", line 14, in error
+    with self.assertRaises(Error) as cm:fn()
+         ~~~~~~~~~~~~~~~~~^^^^^^^
+AssertionError: Error not raised
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.165s
+
+FAILED (failures=2)
