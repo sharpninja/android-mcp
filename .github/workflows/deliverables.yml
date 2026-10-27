@@ -8,6 +8,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.14'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '26.8.2'
       - run: python tools/check_deliverables.py
       - run: python tools/check_documentation.py
       - run: python -m pip install -r rehydration/producers/release-011/requirements-extraction.txt
@@ -15,3 +18,7 @@ jobs:
       - run: python -m unittest discover -s remediation/catalog/tests
       - run: python -m unittest discover -s rehydration/producers/release-011/tests
       - run: python -m unittest discover -s tools/source_facts
+      - run: python -m unittest discover -s remediation -p 'tests_design*contract.py'
+      - run: python -m unittest discover -s remediation -p 'test_design*.py'
+      - run: python -O -m unittest discover -s remediation -p 'tests_design*contract.py'
+      - run: python -O -m unittest discover -s remediation -p 'test_design*.py'

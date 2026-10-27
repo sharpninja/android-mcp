@@ -2,16 +2,17 @@
 
 All-Kotlin server/Jetpack Compose design, internal ARC compatibility-port specification, C4/Structurizr and class sources, editable SVG screens/storyboards, a self-contained Marp presentation, catalog contracts, extractors and offline tests. **No Android application or deployed bridge is implemented here.**
 
-The last completed independent design review was round 022: **92 accuracy /89 completeness, NOT_ACCEPTED**. Corrected round 023 remains under the original task's supervision. This checkpoint is published at the user's request independently of HV acceptance; it does not claim 98/98.
+The last completed independent design review was round 023: **88 accuracy / 81 completeness, NOT_ACCEPTED**. The current candidate contains locally validated corrections for all 47 consolidated findings; round 024 is active under the original task's supervision. This checkpoint is published at the user's request independently of HV acceptance; it does not claim 98/98.
 
 - [Current design](<remediation/design-c4/docs/Android MCP Bridge Design.md>)
 - [Build the diagrams and offline deck](remediation/design-c4/README.md)
 - [Open the local presentation](remediation/design-c4/docs/storyboards.html)
 - [Screen/control/storyboard specification](remediation/design-c4/docs/ui-screens-and-storyboards.md)
+- [Candidate finding dispositions](remediation/design-c4/docs/review023-dispositions.md) and [validation summary](validation/design023-candidate.json) and [publication checks](validation/design023-publication.json)
 - [Current catalog/reference code](remediation/catalog/README.md)
 - [Rehydrate selected source data and regenerate a catalog](REHYDRATE.md)
 - [Publication allowlist](deliverables.json) and [cleanup provenance](validation/lean-cleanup.json)
-- [Concise independent verdict](validation/hv-round-022.md) and [status](validation/status.json)
+- [Completed independent design verdict](validation/hv-round023-design.md) and [status](validation/status.json)
 - [Third-party provenance and notices](THIRD_PARTY_NOTICES.md)
 
 ## Quick checks
@@ -25,6 +26,9 @@ python -m unittest discover -s tools/tests -v
 python -m unittest discover -s remediation/catalog/tests -v
 python tools/check_deliverables.py
 python tools/check_documentation.py
+# Node is required for the design guardrails; see the pinned toolchain README.
+python -m unittest discover -s remediation -p 'tests_design*contract.py'
+python -m unittest discover -s remediation -p 'test_design*.py'
 ```
 
 The default rehydration plan makes no network requests. Full acquisition/builds require explicit commands and substantial time/disk. Read [REHYDRATE.md](REHYDRATE.md) before running them.

@@ -2,7 +2,7 @@
 
 # Verified design mechanisms after round013
 
-These mechanisms are normative for this revision and replace conflicting earlier wording. They are design contracts, not Kotlin implementation claims. The finding ledger retains all28 original findings, including the brightness claim refuted by the current official source.
+These mechanisms were recorded for historical round013 only and are superseded by the current canonical design. They are design contracts, not Kotlin implementation claims. The finding ledger retains all28 original findings, including the brightness claim refuted by the current official source.
 
 ## Callback object construction and reachability
 

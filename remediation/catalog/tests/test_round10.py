@@ -22,13 +22,13 @@ class Review10(unittest.TestCase):
         facts=fixtures.facts();facts['capability_epoch']=0;facts['observed_at']='2026-10-27T01:00:00Z'
         with self.assertRaisesRegex(ValueError,'epoch'):dr.resolve([fixtures.entity('a')],facts,registry_id=fixtures.h('f'),catalog_generation=1,overlay_generation=0,capability_epoch=1,view_generation=1)
     def test_device_paths_use_declared_scopes_and_response_sets(self):
-        api=json.loads((P/'contracts/openapi.json').read_text());scopes=set(api['components']['securitySchemes']['catalogAuth']['flows']['clientCredentials']['scopes'])
+        api=json.loads((P/'contracts/openapi.json').read_text());scheme=api['components']['securitySchemes']['catalogAuth'];self.assertEqual('http',scheme['type']);scopes=set(scheme['x-server-capabilities'])
         for path,item in api['paths'].items():
             if '/device-views/' not in path:continue
             for method,operation in item.items():
                 if method not in ('get','post'):continue
                 for security in operation['security']:
-                    self.assertTrue(set(security['catalogAuth'])<=scopes)
+                    self.assertEqual([],security['catalogAuth']);self.assertIn(operation['x-required-capability'],scopes)
                 self.assertIn('400',operation['responses']);self.assertIn('401',operation['responses'])
         self.assertIn('ETag',api['paths']['/v1/catalog/device-views/refresh']['post']['responses']['412']['headers'])
     def test_graph_digest_is_recomputed_at_publication(self):

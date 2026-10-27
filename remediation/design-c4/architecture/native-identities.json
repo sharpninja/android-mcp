@@ -1,0 +1,164 @@
+{
+  "schema_version": "bridge-native-v1",
+  "records": [
+    {
+      "operation": "screen.state",
+      "canonical_signature": "bridge-native-v1|operation=screen.state|request=ScreenStateRequest@1|result=ScreenStateResult@1",
+      "binding_id": "306bd0e60a7cd05beee5657eb64502c38810f6b3235b2299b3faaf8a2ee4e8f6",
+      "request_type": "ScreenStateRequest@1",
+      "result_type": "ScreenStateResult@1"
+    },
+    {
+      "operation": "input.tap",
+      "canonical_signature": "bridge-native-v1|operation=input.tap|request=TapRequest@1|result=TapResult@1",
+      "binding_id": "650fc4876a7a63061c520a619e6607d7d82ab6473da76484673b7ae83a61dad5",
+      "request_type": "TapRequest@1",
+      "result_type": "TapResult@1"
+    },
+    {
+      "operation": "settings.brightness.get",
+      "canonical_signature": "bridge-native-v1|operation=settings.brightness.get|request=EmptyRequest@1|result=BrightnessState@1",
+      "binding_id": "04e92ad4dd9eaa87ab20ed857dd4264828f74c51cecb3629bc5f3d85f3fe3035",
+      "request_type": "EmptyRequest@1",
+      "result_type": "BrightnessState@1"
+    },
+    {
+      "operation": "settings.brightness.set",
+      "canonical_signature": "bridge-native-v1|operation=settings.brightness.set|request=BrightnessSetRequest@1|result=BrightnessState@1",
+      "binding_id": "c33c358f85b9d4801e2464ab9a34297cf52fc086e80fc9a5d214b165be35e90d",
+      "request_type": "BrightnessSetRequest@1",
+      "result_type": "BrightnessState@1"
+    },
+    {
+      "operation": "sensors.list",
+      "canonical_signature": "bridge-native-v1|operation=sensors.list|request=SensorListRequest@1|result=SensorListResult@1",
+      "binding_id": "11a4c3c5707e9a2fc90bfef2a1ad29b1e2cf6ae866a5d4e920f882962f527c31",
+      "request_type": "SensorListRequest@1",
+      "result_type": "SensorListResult@1"
+    },
+    {
+      "operation": "sensors.read",
+      "canonical_signature": "bridge-native-v1|operation=sensors.read|request=SensorReadRequest@1|result=SensorSamples@1",
+      "binding_id": "f21013fd37bc29dbd7c993df64c0f78d28eb6704d4a715be3ae48a4ff6ed599c",
+      "request_type": "SensorReadRequest@1",
+      "result_type": "SensorSamples@1"
+    },
+    {
+      "operation": "contacts.list",
+      "canonical_signature": "bridge-native-v1|operation=contacts.list|request=ContactsListRequest@1|result=ContactsPage@1",
+      "binding_id": "09631a0831ee8cec3b99f2277d9fb612397cc5b4f0726c9a2a70de50c9cc4bfc",
+      "request_type": "ContactsListRequest@1",
+      "result_type": "ContactsPage@1"
+    },
+    {
+      "operation": "document.read",
+      "canonical_signature": "bridge-native-v1|operation=document.read|request=DocumentReadRequest@1|result=DocumentChunk@1",
+      "binding_id": "26ad57ccde14d41c4b8aa45c4ebcbec714b8ff65c81753e34c7544e973104a69",
+      "request_type": "DocumentReadRequest@1",
+      "result_type": "DocumentChunk@1"
+    }
+  ],
+  "arc_records": [
+    {
+      "method": 1,
+      "enum_name": "BRIDGE_METHOD_GET_CAPABILITIES",
+      "tool_id": "arc-protobuf-v1:method:1",
+      "canonical_signature": "bridge-arc-v1|package=avalonia.remotecontrol.v1|wire=1.0|method=1:BRIDGE_METHOD_GET_CAPABILITIES|request=avalonia.remotecontrol.v1.GetCapabilitiesRequest|result=avalonia.remotecontrol.v1.GetCapabilitiesResponse",
+      "binding_id": "22c7c084aaf12a4af3a88d8813c3d1b0925805a5b689ccdd2c5c73f0cd923bc5",
+      "request_type": "avalonia.remotecontrol.v1.GetCapabilitiesRequest",
+      "result_type": "avalonia.remotecontrol.v1.GetCapabilitiesResponse",
+      "invocation_state": "requires_schema_policy_and_backend_proof"
+    },
+    {
+      "method": 2,
+      "enum_name": "BRIDGE_METHOD_GET_SNAPSHOT",
+      "tool_id": "arc-protobuf-v1:method:2",
+      "canonical_signature": "bridge-arc-v1|package=avalonia.remotecontrol.v1|wire=1.0|method=2:BRIDGE_METHOD_GET_SNAPSHOT|request=avalonia.remotecontrol.v1.GetSnapshotRequest|result=avalonia.remotecontrol.v1.TreeSnapshot",
+      "binding_id": "4f0ed2efeb8fca545e8daa2c6c69762a308b4f423a7909ba03cf92c4b2775eb4",
+      "request_type": "avalonia.remotecontrol.v1.GetSnapshotRequest",
+      "result_type": "avalonia.remotecontrol.v1.TreeSnapshot",
+      "invocation_state": "requires_schema_policy_and_backend_proof"
+    },
+    {
+      "method": 3,
+      "enum_name": "BRIDGE_METHOD_WATCH_TREE",
+      "tool_id": "arc-protobuf-v1:method:3",
+      "canonical_signature": "bridge-arc-v1|package=avalonia.remotecontrol.v1|wire=1.0|method=3:BRIDGE_METHOD_WATCH_TREE|request=avalonia.remotecontrol.v1.WatchTreeRequest|result=avalonia.remotecontrol.v1.TreeUpdate",
+      "binding_id": "b28a1a348142608fd8c16ccbecaa35dd71ccd6169878806d0cd72345c0c07c7e",
+      "request_type": "avalonia.remotecontrol.v1.WatchTreeRequest",
+      "result_type": "avalonia.remotecontrol.v1.TreeUpdate",
+      "invocation_state": "requires_schema_policy_and_backend_proof"
+    },
+    {
+      "method": 4,
+      "enum_name": "BRIDGE_METHOD_INVOKE_CLICK",
+      "tool_id": "arc-protobuf-v1:method:4",
+      "canonical_signature": "bridge-arc-v1|package=avalonia.remotecontrol.v1|wire=1.0|method=4:BRIDGE_METHOD_INVOKE_CLICK|request=avalonia.remotecontrol.v1.InvokeClickRequest|result=avalonia.remotecontrol.v1.CommandResult",
+      "binding_id": "ccefa04b6574ab85839d22dfc6e6817f1ceeaeb26b4b7cb33d30dd46e9fd7746",
+      "request_type": "avalonia.remotecontrol.v1.InvokeClickRequest",
+      "result_type": "avalonia.remotecontrol.v1.CommandResult",
+      "invocation_state": "requires_schema_policy_and_backend_proof"
+    },
+    {
+      "method": 5,
+      "enum_name": "BRIDGE_METHOD_INVOKE_FOCUS",
+      "tool_id": "arc-protobuf-v1:method:5",
+      "canonical_signature": "bridge-arc-v1|package=avalonia.remotecontrol.v1|wire=1.0|method=5:BRIDGE_METHOD_INVOKE_FOCUS|request=avalonia.remotecontrol.v1.InvokeFocusRequest|result=avalonia.remotecontrol.v1.CommandResult",
+      "binding_id": "f265de257bcfcf2fc7eda416d78b7063307d717cd0301d678dda753388f3d280",
+      "request_type": "avalonia.remotecontrol.v1.InvokeFocusRequest",
+      "result_type": "avalonia.remotecontrol.v1.CommandResult",
+      "invocation_state": "requires_schema_policy_and_backend_proof"
+    },
+    {
+      "method": 6,
+      "enum_name": "BRIDGE_METHOD_SET_PROPERTY",
+      "tool_id": "arc-protobuf-v1:method:6",
+      "canonical_signature": "bridge-arc-v1|package=avalonia.remotecontrol.v1|wire=1.0|method=6:BRIDGE_METHOD_SET_PROPERTY|request=avalonia.remotecontrol.v1.SetPropertyRequest|result=avalonia.remotecontrol.v1.CommandResult",
+      "binding_id": "19620734704e670e55b4217d5e3391e231b1705efdcc40a1089ca08651a70850",
+      "request_type": "avalonia.remotecontrol.v1.SetPropertyRequest",
+      "result_type": "avalonia.remotecontrol.v1.CommandResult",
+      "invocation_state": "requires_schema_policy_and_backend_proof"
+    },
+    {
+      "method": 7,
+      "enum_name": "BRIDGE_METHOD_WATCH_LOGS",
+      "tool_id": "arc-protobuf-v1:method:7",
+      "canonical_signature": "bridge-arc-v1|package=avalonia.remotecontrol.v1|wire=1.0|method=7:BRIDGE_METHOD_WATCH_LOGS|request=avalonia.remotecontrol.v1.WatchLogsRequest|result=avalonia.remotecontrol.v1.LogEntry",
+      "binding_id": "8ace547f02087e186ff9b097a648c7434a76e86e234c603e8426d899d27bcade",
+      "request_type": "avalonia.remotecontrol.v1.WatchLogsRequest",
+      "result_type": "avalonia.remotecontrol.v1.LogEntry",
+      "invocation_state": "requires_schema_policy_and_backend_proof"
+    },
+    {
+      "method": 8,
+      "enum_name": "BRIDGE_METHOD_CANCEL",
+      "tool_id": "arc-protobuf-v1:method:8",
+      "canonical_signature": "bridge-arc-v1|package=avalonia.remotecontrol.v1|wire=1.0|method=8:BRIDGE_METHOD_CANCEL|request=opaque-bytes|result=BRIDGE_STATUS_UNSUPPORTED",
+      "binding_id": "9242ceeae4f164a62f0291d34f0639dd801981ea0ec48690a73045a6ffddad6c",
+      "request_type": "opaque-bytes",
+      "result_type": "BRIDGE_STATUS_UNSUPPORTED",
+      "invocation_state": "unsupported"
+    },
+    {
+      "method": 9,
+      "enum_name": "BRIDGE_METHOD_WATCH_FRAMES",
+      "tool_id": "arc-protobuf-v1:method:9",
+      "canonical_signature": "bridge-arc-v1|package=avalonia.remotecontrol.v1|wire=1.0|method=9:BRIDGE_METHOD_WATCH_FRAMES|request=avalonia.remotecontrol.v1.WatchFramesRequest|result=avalonia.remotecontrol.v1.FrameUpdate",
+      "binding_id": "71e3f215ea2ee80599637887db894811db4c399150467170a6c2734b4e63dfbf",
+      "request_type": "avalonia.remotecontrol.v1.WatchFramesRequest",
+      "result_type": "avalonia.remotecontrol.v1.FrameUpdate",
+      "invocation_state": "requires_schema_policy_and_backend_proof"
+    },
+    {
+      "method": 10,
+      "enum_name": "BRIDGE_METHOD_SEND_INPUT",
+      "tool_id": "arc-protobuf-v1:method:10",
+      "canonical_signature": "bridge-arc-v1|package=avalonia.remotecontrol.v1|wire=1.0|method=10:BRIDGE_METHOD_SEND_INPUT|request=avalonia.remotecontrol.v1.SendInputRequest|result=avalonia.remotecontrol.v1.CommandResult",
+      "binding_id": "85fe7b92538e2d9e494dbc69288fa354b4cc37d6096cd206438b2b860da7f3f5",
+      "request_type": "avalonia.remotecontrol.v1.SendInputRequest",
+      "result_type": "avalonia.remotecontrol.v1.CommandResult",
+      "invocation_state": "requires_schema_policy_and_backend_proof"
+    }
+  ],
+  "arc_proto_sha256": "d22f19ce8d170f92c4e2f27bc2b6e4705337aa3d5fa6aed86d8e7eba2f95e79e"
+}

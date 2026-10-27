@@ -45,12 +45,12 @@ Use one Kotlin Android APK, application process and UID. A persistent foreground
 
 | Proposed project | Contains | Must not contain |
 | --- | --- | --- |
-| bridge.domain (Kotlin) | Client identities, typed policy, canonical requests, decisions, revision values | Android or UI dependencies |
-| bridge.application (Kotlin) | Pairing, policy changes, approvals, admission gate, audit coordination | Direct Binder transactions |
-| bridge.protocol (Kotlin) | MCP mapping, paginated catalog and transport independent session dispatch | Permission decisions hidden in handlers |
+| bridge.domain (Kotlin) | Client identities, typed policy, requests/decisions, revision/health values and repository/backend/codec/journal/credential/auth ports | Application, storage, Android or UI implementation imports |
+| bridge.application (Kotlin) | Policy, approvals, admission, resolver/planner/broker/ARC runtime/session services and domain-port coordination | Android/UI/storage implementation imports |
+| bridge.protocol (Kotlin) | MCP/ARC codecs, wire/session/admin/pairing adapters calling application services | Permission decisions hidden in handlers or Android/storage/UI implementation imports |
 | bridge.bindings (Kotlin runtime) | Offline-generated SDK/AIDL metadata ingestion, versioned schemas and generic marshalling; no app-generated dex/bytecode; platform java.lang.reflect.Proxy is permitted | Assumed schemas for unknown private services |
 | bridge.storage.sqlite (Kotlin) | Repositories, migrations and transactional outbox | Raw bearer secrets |
-| bridge.android (Kotlin) | Android lifecycle, Keystore, capability probes and native, paired-ADB and required internal Kotlin ARC adapters | Policy bypass through reflection or raw dispatch |
+| bridge.android (Kotlin) | Composition root, lifecycle/Keystore/credential vault, capability probes, native/Binder/paired-ADB and Kotlin ARC TCP/Compose platform adapters | Policy bypass through reflection or raw dispatch |
 | bridge.ui (Kotlin Compose) | Kotlin Compose views, ViewModels, local admin workflows | Direct SQL writes or implicit catalog-admin authority |
 | bridge.tests (Kotlin plus offline tooling) | Pure policy tests, contract clients, fake adapters, Android instrumentation | Assumptions that mocks prove OS access |
 
@@ -127,7 +127,7 @@ The authenticated principal is an immutable, random internal client_id resolved 
 
 `manual_bearer_setup` is the interoperable static-header path: fresh local owner authentication creates credential_id.secret once, the owner copies the exact endpoint/TLS trust and Authorization: Bearer value into the selected client, and grants start denied. No bootstrap exchange or agent HMAC is required. Lost reveal requires rotation/revocation; the service stores only the verifier and credential identifier.
 
-`pairing_helper_v1` is the optional helper path over the paired_tls transport profile: opening its owner window creates a fresh60second QR attempt; the client pins its certificate, submits the exact nonce/label proof, then the owner confirms that specific request with a fresh<=30second prompt before the attempt expires. The detailed byte protocol and failure/retry rules are in "Pairing, owner authentication and boot lifecycle". The10minute window permits multiple distinct attempts; it never extends an individual nonce. No bootstrap secret survives its attempt.
+`pairing_helper_v1` is the optional helper path over the paired_tls transport profile: opening its owner window permits a separate trusted local action to create a fresh60second QR attempt; the client pins its certificate, submits the exact nonce/label proof, then the owner confirms that specific request with a fresh<=30second prompt before the attempt expires. The detailed byte protocol and failure/retry rules are in "Pairing, owner authentication and boot lifecycle". The10minute window permits multiple distinct attempts; it never extends an individual nonce. No bootstrap secret survives its attempt.
 
 Use an explicit pairing surface outside the MCP method catalog and enabled only during a local pairing window. Do not expose admin methods, policy mutation or token creation as agent tools. Manual preconfigured bearer authentication is an interoperability profile, not a claim of full MCP OAuth authorization compliance. A standards based authorization adapter may be added when target clients require it. [S5]
 
@@ -429,7 +429,7 @@ Pending ordinary approvals, pairing attempts, MCP sessions and ordinary call arg
 | Table and key | Additional configuration records |
 | --- | --- |
 | resource_grants / PK handle_id | client_id FK clients CASCADE; exact_uri_ciphertext; key_alias; modes CHECK read/write/read_write; enabled CHECK 0/1; revision >= 1; created_at. Index(client_id, enabled). Opaque per client handle; never a caller supplied URI. |
-| bridge_config / PK singleton_id = 1 | row_version >= 1; desired_state CHECK running/stopped; start_on_boot CHECK 0/1; last_stop_reason nullable; fgs_type; transport_profile CHECK paired_tls/reduced_http; loopback_address; port_preference; server_identity_key_alias; retention_days >= 0; audit_size_cap > 0. No secret or private key bytes. |
+| bridge_config / PK singleton_id = 1 | row_version >= 1; desired_state CHECK running/stopped; start_on_boot CHECK 0/1; last_stop_reason nullable; fgs_type; transport_profile CHECK paired_tls/reduced_http; loopback_address; port_preference; server_identity_key_alias; retention_days >= 0; audit_size_cap > 0; audit_retention_authorized CHECK 0/1 DEFAULT0. No secret or private key bytes. |
 
 
 
@@ -641,7 +641,7 @@ The primary arbitrary-app control path is App A agent -> authenticated MCP bridg
 
 | Mode | Connection and trust |
 | --- | --- |
-| Self ADB primary | An embedded/native ADB client connects from the bridge app to this device’s owner-enabled Wireless Debugging service. Android 11+ is the starting compatibility target, subject to device support. Owner explicitly enables and pairs it. LADB demonstrates feasibility, not a selected dependency or license approval. [S17, S18] |
+| Self ADB primary | An embedded/native ADB client connects from the bridge app to this device’s owner-enabled Wireless Debugging service. Wireless Debugging requires Android11+; this design selects API35 as its reference application floor, subject to device support. Owner explicitly enables and pairs it. LADB demonstrates feasibility, not a selected dependency or license approval. [S17, S18] |
 | External ADB host ingress | An already-authorized USB or paired wireless host forwards its localhost socket to the phone's MCP/ARC listener. This carries requests INTO the phone; it is not a phone execution backend and never gives the phone access to the host's ADB server. The host operator/client owns these explicit commands and cleanup; no undeclared host service is shipped. [S19] |
 | ARC runtime target | The required internal Kotlin engine controls its approved Compose root; an additional compatible external runtime target is optional. This specialized protocol route is independent of generic phone ADB automation. [S20] |
 
@@ -783,7 +783,7 @@ and limits are described in [Android's sensitive-activity guidance](https://deve
 | Protected consent | Queued tap/property events cannot enable a client, approve Ask, reveal tokens or export logs. Captures show no protected data. Failure of isolation disables remote mutation. |
 | Native versus shell authority | Tests prove bridge UID grants and ADB shell rights are separate. Nondebuggable private-data/debugger access and secure-window capture remain blocked. |
 | Avalonia target mode | Two separate app UIDs pair deliberately. Wrong target identity, token, protocol or signing/version change fails. Per-principal hooks and all action routes are tested; no reliance on global toggles. |
-| ADB forwards | Multiple authorized devices use explicit serials. Ports are loopback-only, --no-rebind prevents takeover, stop removes only owned forwards, and reconnect never trusts a stale endpoint. |
+| ADB forwards | Multiple authorized devices use explicit serials. Ports are loopback-only, the owner's commands use --no-rebind and never rebind an existing forward; this does not prevent another authorized ADB actor from changing it, stop removes only owned forwards, and reconnect never trusts a stale endpoint. |
 | Optional logging | Cross-client isolation, mode-change races, quota/retention enforcement and purge/export tested for ADB and runtime calls as well as native tools; screenshots, UI text and secrets never enter diagnostic logs. |
 
 
@@ -898,7 +898,7 @@ Use an extensible permission expression tree: permission, allOf, anyOf, conditio
 
 ## Separate catalog CRUD API
 
-`catalog/contracts/openapi.json` and `catalog/API-CONTRACT.md` are authoritative. There is one route family; no PATCH alias.
+`catalog/contracts/openapi.json` and `catalog/API-CONTRACT.md` are authoritative. The following table summarizes core routes; device-view and source-metadata CRUD routes in those contracts remain equally normative. There is one route family; no PATCH alias.
 
 | API shape | Behavior |
 | --- | --- |
@@ -914,7 +914,7 @@ Use an extensible permission expression tree: permission, allOf, anyOf, conditio
 | GET /v1/catalog/registries/{registry_id} | Registry metadata, state and validation evidence. |
 | POST /v1/catalog/registries/{registry_id}/publish | Idempotent atomic publication of validated registry, overlay rebase/conflicts, generation increment and approval invalidation. |
 
-Executable catalog DDL, configuration DDL, offline dispatch manifest generator and contract fixtures accompany this design. They specify and validate contracts; Android hosting and dispatch remain release gates requiring actual implementation/runtime evidence.
+Executable catalog DDL, legacy offline configuration SQL, dispatch manifest generator and contract fixtures accompany this design. The live configuration CHECK domains require regeneration before implementation. They specify and validate contracts; Android hosting and dispatch remain release gates requiring actual implementation/runtime evidence.
 
 Catalog administration uses a distinct authenticated admin scope and explicit owner authorization, never an ordinary device-call permission. Reuse authenticated loopback transport protections or a separately approved management transport; localhost alone is not trusted. CRUD does not grant invocation rights and exposes no client credential or permission mutation as a normal agent tool. No administration endpoint is enabled by this design document.
 
@@ -1008,7 +1008,7 @@ The full offline Python checkpoint projected/resolved 799,527 historical008 entr
 | FR-BIND-01 / AC-BIND-01 | Generic Binder engine uses proven wire/codec contracts and the shared canonical policy plan; unknown wire stays unsupported | Existing policy/known-raw fixtures plus wire-contract planning specification |
 | TR-DEV-03 / AC-DEV-05 | Relevant capability/catalog changes invalidate and refresh the view; availability never grants OS or client authority | Event/invalidation contract and permission-separation fixtures |
 
-Retain every current requirement: Kotlin server and Compose UI (superseding the earlier Avalonia12/.NET UI choice), SQLite configuration/client mapping and logging, persistent headless MCP, optional boot and truthful AppBar/status, separate ADB health, paired same-device ADB and host loopback forwarding, on-demand screen/tap, required internal Kotlin ARC port, all-source inventory/provenance, CRUD/local overrides and future compatibility. No deployment, device/security change or source-corpus completeness claim is made by these additions. Historical full-project review012 was NOT_READY overall93/80; the separate013 design review was91/88 and predates the latest ARC/C4/documentation changes. It verified the prior artifact fixes and found point-applicability/membership defects plus lower-severity parser/contract gaps. The corrected candidate now has explicit point evidence, digest-pinned membership and transitive schema identity; these later changes require fresh independent review; no98/98 agreement is claimed.
+Retain every current requirement: Kotlin server and Compose UI (superseding the earlier Avalonia12/.NET UI choice), SQLite configuration/client mapping and logging, persistent headless MCP, optional boot and truthful AppBar/status, separate ADB health, paired same-device ADB and host loopback forwarding, on-demand screen/tap, required internal Kotlin ARC port, all-source inventory/provenance, CRUD/local overrides and future compatibility. No deployment, device/security change or source-corpus completeness claim is made by these additions. Historical full-project review012 was NOT_READY overall93/80; the separate013 design review was91/88 and predates the latest ARC/C4/documentation changes. It verified the prior artifact fixes and found point-applicability/membership defects plus lower-severity parser/contract gaps. Those are historical review results. Latest completed design-only023 is88accuracy/81completeness NOT_ACCEPTED; this working copy contains later corrections. No98/98 agreement is claimed.
 
 
 ## Architecture diagram
@@ -1033,9 +1033,9 @@ Editable sources: [C4 workspace](../architecture/workspace.dsl) and [scoped clas
 
 ## Remediation contract precedence
 
-This revision addresses the recovered design/contract findings; the source-coverage finding remains open and is tracked in the latest ledger. Stable source-signature IDs are shared across imported occurrences and local overrides; registry schema/permission changes are revisions, not new random identities. No universal OEM/private introspection is promised: unsupported declarations and schemas remain discoverable with evidence and reasons. Catalog metadata is distinct from OS authority and MCP grants. `catalog/API-CONTRACT.md` defines all CRUD states, CAS and cursor rules; `catalog/bridge-config.sql` makes configuration invariants executable; `catalog/tooling/policy_reference.py` and `dispatch_manifest.py` provide offline contract fixtures, not a running bridge. Current diagrams use the shared C4 model and local Structurizr/PlantUML SVG export workflow with Gradle validation.
+This revision addresses design/contract findings. Source coverage is a separately tracked production concern, excluded from design acceptance scores. Stable source-signature IDs are shared across imported occurrences and local overrides; registry schema/permission changes are revisions, not new random identities. No universal OEM/private introspection is promised: unsupported declarations and schemas remain discoverable with evidence and reasons. Catalog metadata is distinct from OS authority and MCP grants. `catalog/API-CONTRACT.md` defines all CRUD states, CAS and cursor rules; `catalog/bridge-config.sql` is a superseded offline legacy fixture, not the live configuration DDL; the current CHECK domains and transaction contract in this design govern implementation; `catalog/tooling/policy_reference.py` and `dispatch_manifest.py` provide offline contract fixtures, not a running bridge. Current diagrams use the shared C4 model and local Structurizr/PlantUML SVG export workflow with Gradle validation.
 
-The catalog SQL and bridge-config.sql can coexist in the same app-private SQLite database; the offline catalog may also be distributed as an immutable standalone file. A serving administration service must use one transactional database for active registry, overlays, policy epochs and audit/outbox, avoiding cross-database atomicity claims. registry_entries stores immutable (registry_id, entry_id) variants; effective_entries selects only active_registry. Publication switches that pointer and increments registry_generation atomically. Raw unknown calls consult explicit client_raw_grants keyed by connection/descriptor and bounded transaction codes/flags, with ordinary binding grants unable to widen that authority.
+The catalog SQL and a regenerated configuration schema following the current live CHECK domains can coexist in the same app-private SQLite database; the offline catalog may also be distributed as an immutable standalone file. A serving administration service must use one transactional database for active registry, overlays, policy epochs and audit/outbox, avoiding cross-database atomicity claims. registry_entries stores immutable (registry_id, entry_id) variants; effective_entries selects only active_registry. Publication switches that pointer and increments registry_generation atomically. Raw unknown calls consult explicit client_raw_grants keyed by connection/descriptor and bounded transaction codes/flags, with ordinary binding grants unable to widen that authority.
 
 
 The raw grant DDL is client_raw_grants(client_id, connection_id, descriptor, code_min, code_max, flags_mask, contract_hash, effect, constraints_json, row_version). constraints_json is scope-only (allowed_targets, allowed_handles, allowed_displays, max_items); connection, descriptor, inclusive code range, flags mask, contract hash and effect are authoritative SQL columns. Empty scope sets deny, and there is no implicit wildcard. Resolve known transactions before checking raw grants: a raw grant can never substitute for a known binding rule. Unknown raw access is a broad authority with explicitly limited observability; ask/allow is available only within every stated bound.
@@ -1047,7 +1047,7 @@ Generated per-binding MCP tool names and binding.invoke share the single policy 
 
 PermissionExpression accepts only known op values. Future x- properties on known nodes are retained; an unrecognized semantic node is quarantined as a known unknown wrapper with reason plus exact parsed JSON value in x-raw-node (and required_semantics as appropriate), never interpreted as permission-free. Original imported bytes remain in versioned evidence. Unsupported major versions stay unsupported for invocation.
 
-settings.brightness.get reports the actual observed signed32-bit rawValue without clamping, plus withinDocumentedRange and the cited documentedRange1..255. An out-of-range observation (including0 on a differing device) is returned with an anomaly flag, rather than fabricated as a valid documented setting or rejected by the output range. The write policy remains bounded to the documented range with default16..240; no automatic mode change is implied.
+settings.brightness.get reports the actual observed signed32-bit rawValue without clamping, plus withinDocumentedRange and the cited documentedRange1..255. An out-of-range observation (including 0 on a differing device) is returned with an anomaly flag, rather than fabricated as a valid documented setting or rejected by the output range. The write policy remains bounded to the documented range with default16..240; no automatic mode change is implied.
 
 Native availability uses the reserved target_key platform:local; app/runtime targets must exist in target_app_profiles. Audit retention is a separate authenticated local-owner maintenance transaction: set bridge_config.audit_retention_authorized=1, perform bounded retention deletes, append maintenance audit evidence, reset the flag to0 before commit. Startup resets a stale flag before admitting calls. No remote catalog or MCP device endpoint can enable maintenance or issue SQL. Optional client-log purge remains separate from mandatory audit retention.
 
@@ -1094,11 +1094,11 @@ The persistent headless service owns CallbackBroker and the journal; closing the
 
 An explicit callback.cancel tool performs idempotent cancellation and verified unregister/dispose using the recorded token mapping. Its result distinguishes locally closed delivery from confirmed remote cleanup and cleanup_unknown. Binder death, target uninstall, device/backend epoch change, permission revocation and lease expiry invalidate delivery. Authorization is rechecked on reads and before event publication; revocation immediately suppresses payload access and queues least-privileged recorded cleanup. It never authorizes an arbitrary new operation on behalf of a revoked client. Transport disconnect alone is not cancellation. A configured lease/grace bounds disconnected retention; a client must explicitly renew within its authorized maximum. resources/unsubscribe stops resource-update hints only; it does not unregister the Android callback. Deactivating a tool group does not orphan subscriptions: the bootstrap cancel/status tools remain available.
 
-### MCP2025-11-25 transport contract
+### MCP 2025-11-25 transport contract
 
 The interoperable baseline uses standard MCP resources. The server advertises resources.subscribe support. The invocation result returns a resource link and events_uri such as android-callback://subscription-id/events. The client may subscribe to that exact URI with resources/subscribe. A coalescible notifications/resources/updated notification contains the URI only. The client then uses resources/read on the advertised URI template android-callback://subscription-id/events{?cursor,limit,max_bytes} to obtain a finite application/json journal page. The no-query URI returns bounded subscription status, retention cursors and a next-read URI; cursor-expanded URIs page history. A page contains events, next_cursor, has_more, oldest_retained_cursor, terminal state and any explicit loss range. The implementation validates and canonicalizes the URI, checks ownership, enforces fixed maxima, and never treats path/query values as SQL or file paths. Cursors bind subscription, stream epoch, principal/credential scope and retention revision; they are integrity-protected and opaque. An expired cursor returns cursor_expired with the available retention boundary, never a fabricated contiguous replay.
 
-On StreamableHTTP, standard notifications can arrive on the client's GET SSE stream; on stdio they are ordinary MCP notification messages. A POST tools/call may use SSE while registration runs, then produces its single final JSON-RPC response and normally terminates that request stream. Callback events do not become additional final responses or indefinite progress updates. Clients lacking resource-subscription support can explicitly perform bounded reads; this is caller-driven retrieval, not a bridge business-monitoring scheduler. A resource link is not a promise that every MCP host automatically subscribes or inserts payloads into agent context.
+On StreamableHTTP, standard notifications can arrive on the client's GET SSE stream. A POST tools/call may use SSE while registration runs, then produces its single final JSON-RPC response and normally terminates that request stream. Callback events do not become additional final responses or indefinite progress updates. Clients lacking resource-subscription support can explicitly perform bounded reads; this is caller-driven retrieval, not a bridge business-monitoring scheduler. A resource link is not a promise that every MCP host automatically subscribes or inserts payloads into agent context.
 
 Direct payload SSE is optional and disabled by default. A future implementation may expose a separately authenticated subscription stream, or a fully documented mutually negotiated experimental extension. It must advertise its exact transport, authorization, schema, limits and cancellation rules and retain the standard resource-read fallback. No custom method is represented as an MCP standard notification. The baseline requires no extension and does not depend on an LLM host implementing one.
 
@@ -1172,7 +1172,7 @@ The Kotlin Compose UI presents a functional-group editor and searchable unassign
 | FR-GRP-03 activate a bounded session view | TR-GRP-03 CAS/epochs, atomic set/dependency budget and portable bootstrap mode | AC-GRP-03 concurrent stale-CAS rejection, no partial activation, cached-schema revocation, handle continuity and static-host fallback fixtures. |
 | FR-GRP-04 manageable mappings and visibility | TR-GRP-04 SQLite import/overlay/history and Compose group/subscription editors | AC-GRP-04 immutable imports, override history and ETag conflicts tested offline; actual Compose/MCP host behavior remains a future implementation acceptance gate. |
 
-Validation status: these newly added requirements are not covered by the frozen round012 review. Latest full-project review012 remains overall93/80 NOT_READY. Separate design-only013 was91/88; it predates the internal ARC/C4/build/documentation revision and is not a current acceptance score. New callback/group contracts, producers, lifecycle reference fixtures and host interoperability require a fresh frozen review. The disclosed full-catalog semantic/coverage and bounded-memory resolution gaps remain open; this design update does not reclassify them as complete.
+Validation status: latest completed design-only023 is88accuracy/81completeness NOT_ACCEPTED; later working-copy changes require fresh review. Historical012/013 results do not establish current acceptance. Android runtime/host interoperability gates remain unimplemented; source/catalog population completeness is a separately tracked concern excluded from the user-requested design-only score.
 
 ## Kotlin server and Jetpack Compose management UI
 
@@ -1186,14 +1186,14 @@ Startup validates config migration, desired-state and keystore availability, obt
 
 The Compose UI preserves client pairing, grants, logging controls, catalog CRUD/overrides/history, full inventory and permission fields, device availability, functional-group editor/job search, loaded-session budgets, subscriptions and cancellation, protected approvals, connection profiles and status. Config CAS commits atomically update storage, policy/cache epochs and a transactional outbox; the service publishes state and standard MCP change hints only after commit. Simultaneous activity and MCP catalog edits either commit against the expected revision or conflict, never silently overwrite. Pending owner approvals bind the exact server plan and are invalidated by relevant revision/identity changes. UI-side validation is a convenience; the server repeats authoritative validation.
 
-Generic phone/app control remains the authorized ADB screen.state/input.tap path, independent of Compose internals. The bridge's ordinary Kotlin UI can be inspected/controlled by that same permitted rendered-screen path, subject to protected-owner-surface restrictions; a Compose semantics/test API is not exposed as a production remote-control bypass. The required internal Kotlin ARC engine and ComposeTargetAdapter retain the pinned ARC protocol without a .NET runtime. An additional protocol-compatible external-target route supports apps that deliberately embed the upstream Android Runtime/Protocol; that external route is optional. Both routes follow the detailed compatibility and target-authentication contract below. If a required adapter has not been implemented and verified, report adapter_unsupported rather than imply cross-runtime method calls or existing port compatibility.
+Generic phone/app control remains the authorized ADB screen.state/input.tap path, independent of Compose internals. The bridge's own management surfaces are remotely inspectable only through explicitly approved redacted views; bridge-controlled ADB/ARC input on those management surfaces is denied, with protected/secret surfaces excluded entirely; a Compose semantics/test API is not exposed as a production remote-control bypass. The required internal Kotlin ARC engine and ComposeTargetAdapter retain the pinned ARC protocol without a .NET runtime. An additional protocol-compatible external-target route supports apps that deliberately embed the upstream Android Runtime/Protocol; that external route is optional. Both routes follow the detailed compatibility and target-authentication contract below. If a required adapter has not been implemented and verified, report adapter_unsupported rather than imply cross-runtime method calls or existing port compatibility.
 
 | Requirement | Kotlin ownership and acceptance |
 | --- | --- |
 | FR-KT-01 Kotlin MCP server | TR-KT-01 BridgeService owns transport, policy, storage, resolution and backends. AC-KT-01 architecture/build checks reject a managed/C# server host; Kotlin contract tests apply the same canonical policy and schema fixtures as offline tooling. |
 | FR-KT-02 Kotlin management UI | TR-KT-02 Compose Activity/ViewModel uses a bounded unexported local facade. AC-KT-02 activity recreation/unbind does not stop admitted service work; direct SQL/unauthorized owner commands are rejected; UI shows stale/disconnected health truthfully. |
 | FR-KT-03 coherent lifecycle/config | TR-KT-03 service coroutine and database ownership, post-commit state/outbox publication and bounded shutdown. AC-KT-03 concurrent CAS conflict, migration failure, delayed callback cleanup, start denial, process death and notification/AppBar transitions are verified in Kotlin/instrumentation acceptance tests. |
-| FR-KT-04 preserve remote control | TR-KT-04 authorized ADB generic control, required internal Kotlin ARC engine/Compose adapter and optional compatible external target. AC-KT-04 ordinary Compose screens support the declared ARC profile and approved generic input; protected approvals cannot be remotely granted; missing/unverified adapters remain explicitly unsupported and cannot satisfy the ARC compatibility acceptance gate. |
+| FR-KT-04 preserve remote control | TR-KT-04 authorized ADB generic control, required internal Kotlin ARC engine/Compose adapter and optional compatible external target. AC-KT-04 ordinary non-management Compose roots support the declared ARC profile and approved generic input; management roots are redacted read-only and protected roots excluded; protected approvals cannot be remotely granted; missing/unverified adapters remain explicitly unsupported and cannot satisfy the ARC compatibility acceptance gate. |
 
 These are new design decisions and acceptance plans, not a Kotlin application implemented by this task. The current deliverables remain design, catalog/schema/extractor tooling and offline executable references. Primary platform references: [Jetpack Compose](https://developer.android.com/compose), [started and bound services](https://developer.android.com/develop/background-work/services/bound-services), [Binder/AIDL threading](https://developer.android.com/develop/background-work/services/aidl).
 
@@ -1292,7 +1292,7 @@ Real Gradle targets are validateArchitecture, generateArchitectureDiagrams, gene
 
 ## Compose screen definitions and user storyboards
 
-Screen definitions and storyboards are native SVG design assets, separate from C4 architecture dynamics. Eleven screen specifications label controls, layouts, actions and state variants for dashboard, clients/permissions, catalog, functional-group owner preview/mapping, callbacks, logs, ARC control, settings, protected owner approval, action-required recovery and client pairing. Six ordered storyboards cover owner inspection/admin cancellation of an agent subscription, ARC control, settings/CAS/start failure, pairing/grants/revocation, and catalog override/log export. Each panel names an actual screen, control, state, actor, result and error/cancel branch. The agent performs its own MCP discovery/activation/registration; the management UI does not impersonate its principal. These are not architecture message sequences. Canonical SVG sources are `ui-svg/`; `docs/screens/` is a checked generated copy. The source assets and ID index are [here](ui-screens-and-storyboards.md).
+Screen definitions and storyboards are native SVG design assets, separate from C4 architecture dynamics. Eleven screen specifications label controls, layouts, actions and state variants for dashboard, clients/permissions, catalog, functional-group owner preview/mapping, callbacks, logs, ARC control, settings, protected owner approval, action-required recovery and client pairing. Six ordered storyboards cover owner inspection/admin cancellation of an agent subscription, ARC control, settings/CAS/start failure, pairing/grants/revocation, and catalog override/log export. Each panel names an actual screen, control, state, actor, result and error/cancel branch. The agent performs its own MCP discovery/activation/registration; the management UI does not impersonate its principal. These are not architecture message sequences. Canonical UI behavior/state/storyboard source is `docs/ui-blueprint.md`; `ui-svg/`, `docs/screens/`, the manifest, UI reference Markdown and Marp source are checked projections. The source assets and ID index are [here](ui-screens-and-storyboards.md).
 
 The slideshow source is [Marp Markdown](../storyboards/storyboard.md), one ordered screen/action step per slide. The [self-contained HTML slideshow](storyboards.html) embeds the SVG assets and provides local navigation; no external hosting is used. Marp CLI4.2.3 and its integrity-locked package graph are task-local tooling. HTML is an optional local presentation of the canonical Markdown/SVG definitions; no live application behavior is implied.
 
@@ -1304,7 +1304,7 @@ The slideshow source is [Marp Markdown](../storyboards/storyboard.md), one order
 | FR-UI-01 SVG screen definitions/storyboards | TR-UI-01 screen/state/control IDs and requirement mapping; ordered user actions with alternate branches. AC-UI-01 visual inspection covers normal/empty/denied/disconnected/error and protected-owner surfaces; actual Compose implementation/instrumentation remains pending. |
 | FR-UI-02 text-based slideshow | TR-UI-02 pinned Marp Markdown source, SVG references and Gradle-rendered self-contained HTML. AC-UI-02 local navigation works, all 62 slides are present and the HTML has no external image/style dependencies. |
 
-Current validation status: round013 reviewed the Kotlin/Compose callback/group design frozen before the internal ARC port, C4/Structurizr/Gradle and Markdown/SVG/storyboard changes. It cannot establish acceptance of this revision. A fresh complete design review is required. Existing full-project98/98 acceptance remains unmet; Design-only acceptance excludes catalog/source population completeness, per the latest user scope.
+Current validation status: round023 completed at88/81 NOT_ACCEPTED. Later working corrections do not inherit its frozen score and require fresh independent review. Design acceptance requires independent accuracy>=98 and completeness>=98, excluding source/catalog population per the latest user scope.
 
 
 ![C4 server core detail](diagrams/structurizr-ServerCoreComponents.svg)
@@ -1342,7 +1342,7 @@ For the API level35 (Android15) or later, 8GiB/128GB reference profile and appro
 
 Large catalog delivery uses an owner-selected Storage Access Framework content URI, not the256KiB JSON request body. BridgeService obtains the owner-granted read capability, preflights capacity, streams bounded copy chunks into a new app-private staging file, hashes the exact copied bytes and fsyncs before matching the independently trusted manifest size/SHA. Only then open the SQLite input read-only for schema/integrity/FK/content validation and atomic activation. Untrusted filenames, archive paths or SQL are never commands. A bounded expiring staged-local-handle identifies this verified copy; POST /v1/catalog/imports carries that handle plus expected pins/idempotency key. An ADB-pushed file is usable only when the owner exposes it through this same supported URI flow; the app does not assume access to /data/local/tmp or another UID's private directory. Abort/quarantine incomplete or mismatched copies and never activate them.
 
-BridgeService owns the optional /v1/catalog administration route on the same authenticated loopback listener as /mcp, with separate route authorization. It is disabled by default and enabled only by fresh local owner action for a bounded maximum10-minute window. Owner-issued credentials.kind=admin are separate from kind=mcp. Admin credentials are rejected on the entire MCP surface, including initialization, tools/list, tools/call, resources/read, resources/subscribe and GET notification streams; ordinary MCP credentials are rejected by admin routes. This check precedes creation/resumption of any MCP session. Admin credential expiry cannot exceed the current management window, revocation closes active admin work before the commit boundary, and every import/mutation needs exact owner authorization and CAS rules. The local Compose facade invokes the same application service without opening HTTP or minting an admin credential. No admin route is active merely because this design contains its specification. POST (entry creation/import/pair), PUT and DELETE form the mutation family, each with its specific idempotency/precondition contract; no PATCH alias is defined.
+BridgeService owns the optional /v1/catalog administration route on the same authenticated loopback listener as /mcp, with separate route authorization. It is disabled by default and enabled only by fresh local owner action for a purpose-scoped window: ordinary CRUD maximum10minutes; a separately owner-approved import-only window uses the capacity-aware import_stage_ttl_seconds up to86400seconds and exposes no unrelated mutations. Owner-issued credentials.kind=admin are separate from kind=mcp. Admin credentials are rejected on the entire MCP surface, including initialization, tools/list, tools/call, resources/read, resources/subscribe and GET notification streams; ordinary MCP credentials are rejected by admin routes. This check precedes creation/resumption of any MCP session. Admin credential expiry cannot exceed the current management window, revocation closes active admin work before the commit boundary, and every import/mutation needs exact owner authorization and CAS rules. The local Compose facade invokes the same application service without opening HTTP or minting an admin credential. No admin route is active merely because this design contains its specification. POST (entry creation/import/pair), PUT and DELETE form the mutation family, each with its specific idempotency/precondition contract; no PATCH alias is defined.
 
 ## Callback/group table and operation contracts
 
@@ -1372,7 +1372,7 @@ The base no-query events_uri returns a bounded status document with state, oldes
 
 Pairing uses a separate POST /pair route on the same listener, outside MCP tools and open only during a local owner's bounded pairing window. It requires the paired_tls profile: the agent pins the server fingerprint supplied through the owner-visible local QR/channel before sending any proof; reduced_http rejects pairing. The owner first authenticates to open a pairing window of at most10minutes, then creates an individual60second attempt. Its local QR/channel payload is {attempt_id, endpoint, server_certificate_sha256, bootstrap_secret, server_nonce, expires_at}; secret and server_nonce are independently random32bytes, base64url without padding. The agent pins the exact certificate SHA-256 before POST, chooses a random32byte agent_nonce and UTF-8 label (at most128bytes, no normalization), and submits {attempt_id, agent_nonce, label, proof}. Let LP(x)=uint32-big-endian byte_length followed by bytes. proof=HMAC-SHA256(bootstrap_secret, LP(UTF8(pair-v1)) || LP(UTF8(attempt_id)) || LP(server_nonce) || LP(agent_nonce) || LP(raw32byte certificate SHA-256) || LP(SHA256(UTF8(label)))). The secret is never sent over the pairing route. After constant-time verification, atomically reserve that attempt and show the exact proposed-label hash and server certificate fingerprint in the owner prompt. This second fresh owner prompt completes within30seconds and before attempt expiry; POST waits at most30seconds. Deny/expiry returns PAIR_DENIED/PAIR_EXPIRED, consumes the attempt and creates no client. Success commits one disabled-by-default-grants principal and returns its bearer once over pinned TLS. Lost success response requires a new pairing attempt; never replay or log the bearer. Cancel/reuse/conflicting attempts fail without another active client. This is an explicit protocol design, not an implemented cryptographic handshake claim.
 
-Fresh local owner authentication uses Android BiometricPrompt with BIOMETRIC_STRONG or DEVICE_CREDENTIAL on the reference API35+ profile. Pairing, credential reveal/rotation, grants, admin enablement and sensitive export require a successful prompt within30seconds, bound to a single nonce, exact command, revision/target scope and current foreground activity. Every Ask decision requires the same mechanism; timeout, absent authentication or missing UI denies. If device authentication is unavailable, sensitive owner transitions remain blocked; the bridge does not weaken the profile or change device security settings. Every bridge-owned remote input/capture path is paused before protected surfaces appear and remains excluded until completion/dismissal; this is not a claim to control foreign privileged input.
+Fresh local owner authentication uses Android BiometricPrompt with BIOMETRIC_STRONG or DEVICE_CREDENTIAL on the reference API 35+ profile. Pairing, credential reveal/rotation, grants, admin enablement and sensitive export require a successful prompt within30seconds, bound to a single nonce, exact command, revision/target scope and current foreground activity. Every Ask decision requires the same mechanism; timeout, absent authentication or missing UI denies. If device authentication is unavailable, sensitive owner transitions remain blocked; the bridge does not weaken the profile or change device security settings. Every bridge-owned remote input/capture path is paused before protected surfaces appear and remains excluded until completion/dismissal; this is not a claim to control foreign privileged input.
 
 The unexported boot receiver is directBootAware and handles LOCKED_BOOT_COMPLETED only to read the minimal nonsecret device-protected mirror and record Waiting for unlock; it performs no network, catalog migration or credential-encrypted access there. BOOT_COMPLETED (manifest receiver) or ACTION_USER_UNLOCKED (runtime-registered receiver only in the already-running direct-boot process) reconciles the mirror against credential-encrypted desired state and requests an eligible foreground-service start. An inconsistent mirror defaults off. The selected candidate foreground-service type is specialUse with a truthful declared subtype describing the local authorized MCP binding gateway; eligibility, platform prerequisites and distribution review are release gates, not presumed approval. No connectedDevice/dataSync label is used unless the actual product behavior qualifies; unsupported start remains explicit.
 
@@ -1562,7 +1562,7 @@ operations retained. The sender endpoint/token mapping, lease/consent bounds,
 death handling and current epochs from the callback chapter remain normative.
 
 The ARC server does not receive a cancellation command for another watch socket.
-An incoming Cancel8 gets the retained UNSUPPORTED result; the compatible client
+An incoming Cancel 8 gets the retained UNSUPPORTED result; the compatible client
 cancels a watch by closing that watch socket. The server closes on peer disconnect,
 revocation or bounded shutdown. A terminal error frame is best-effort within its
 write deadline; a blocked peer is closed without waiting indefinitely. ARC local
@@ -1643,7 +1643,7 @@ Reason envelopes separate `layer` (inventory/applicability/acquisition/authority
 
 The administrative entry ETag is exactly the existing cat1 ETag; dv2, group-view and meta1 ETags belong to their separately named representations. Immutable source and SQLite file SHA-256 values hash original bytes. Catalog effective-document hashes use the checked Python canonical profile already implemented by catalog tooling; the exact meta-json-v1 UTF-8/sorted-codepoint/finite-number profile and literal byte vectors in SOURCE-METADATA-CONTRACT.md define cross-language reproduction, including 1 versus1.0 and negative zero. No implicit RFC8785 or Unicode normalization is claimed. Entry source-signature IDs retain the catalog's versioned language-specific signature namespaces: source identities are never silently replaced by a JVM descriptor. A separately proven erased JVM descriptor maps to that identity for dispatch, with collision/ambiguity rejected before activation. Kotlin must reproduce the pinned profile through golden bytes/hashes, not its default JSON serializer; fixtures cover Unicode, escapes, integers, floating exponents, API metadata aliases and conflicting signatures.
 
-An owner enters independently obtained expected SHA-256 and size (or chooses an explicitly pretrusted signed source manifest) before creating an import stage. POST /v1/catalog/import-stages accepts those values and a bounded multipart file stream under the admin window and owner capability. The service copies to a private file, seals its bytes, validates schema/capacity, and returns an opaque staged handle; GET /v1/catalog/import-stages lists only that admin principal/window's sanitized handles. A stage expires at min(created+15minutes, management-window end), or on credential/window revocation; expiry deletes unactivated staging through bounded cleanup. Final import POST consumes the still-sealed handle with fresh exact owner authorization, expected catalog revision and Idempotency-Key. Local SAF follows the same application service without HTTP/admin credentials. Hold a transient SAF read grant only during copying/hash verification, then release it; no persistent URI permission is required. The allowlisted SQLite schema/quarantine contract above applies before any imported content query.
+An owner enters independently obtained expected SHA-256 and size (or chooses an explicitly pretrusted signed source manifest) before creating an import stage. POST /v1/catalog/import-stages accepts those values and a bounded application/octet-stream body under the import-only admin window and prearmed exact-command authorization. The service copies to a private file, seals its bytes, validates schema/capacity, and returns an opaque staged handle; GET /v1/catalog/import-stages lists only that admin principal/window's sanitized handles. Stage lifetime uses owner-configured import_stage_ttl_seconds (default7200, allowed300..86400 seconds), with a capacity/throughput estimate before copying. The owner selects an import management-window lifetime at least as long as that estimate plus the validation margin, within the same86400second maximum. An insufficient selected lifetime returns STAGE_LIFETIME_INSUFFICIENT before allocation. Expiry, cancellation or credential/window revocation closes the stage and schedules deletion of unactivated bytes. These defaults are unmeasured proposed limits, not a throughput claim; the physical-device import acceptance gate must demonstrate the largest supported artifact fits, otherwise increase the explicitly supported lifetime/capacity or reject the artifact honestly. Final import POST consumes the still-sealed handle with fresh exact owner authorization, expected catalog revision and Idempotency-Key. Local SAF follows the same application service without HTTP/admin credentials. Hold a transient SAF read grant only during copying/hash verification, then release it; no persistent URI permission is required. The allowlisted SQLite schema/quarantine contract above applies before any imported content query.
 
 ### MCP transport edge cases
 
@@ -1655,9 +1655,9 @@ Malformed JSON-RPC structure/unknown method/invalid method parameters follow JSO
 
 An exact schema_hash mismatch makes a client binding grant inert and visibly re-grant-required. No automatic rebind is chosen even for graph-only changes; owner preview creates a new exact rule. Capability generation increments only on semantic observation change, not Activity resume/probe time. Entry-point tools are the enumerated bootstrap/wrapper operations; they only restrict canonical grants. Approval state includes Reserved between Approved and Consumed; a crash before confirmed dispatch maps execution to unknown. Fingerprints show at least12hex characters of SHA256(UTF8(credential_id)), with full hash in details; this display is not server TLS identity. Mandatory admission audit failure denies dispatch; optional logs use the serialized writer outside the decision gate and are evicted first.
 
-screen.state displayId is the logical DisplayManager ID on the reference Android15/API35+ floor. `coordinateSpaceVersion` is `display-pixels-v1` for uncropped physical-pixel output or `image-transform-v1` with a complete affine transform to that space. The reviewed platform adapter must prove logical-to-physical display mapping for screencap versus input using the same display snapshot, or report DISPLAY_MAPPING_UNPROVEN; no assumption that both flags accept the same ID. Target bounds come from the same authorized screen.state observation's fixed reviewed window/display query and verified target identity; unavailable/racing evidence rejects target-scoped tap. Whole-display authority is a separate explicit scope, never fallback. Retain at most8capture references/client with least-recent eviction and30second expiry, bounded by the global capture budget. Brightness read observation is {kind:integer,rawValue,withinDocumentedRange} or {kind:absent|unparseable,anomaly,rawDiagnostic?}; raw diagnostics are bounded/sanitized and never a fabricated value.
+screen.state displayId is the logical DisplayManager ID on the reference Android15/API 35+ floor. `coordinateSpaceVersion` is `display-pixels-v1` for uncropped physical-pixel output or `image-transform-v1` with a complete affine transform to that space. The reviewed platform adapter must prove logical-to-physical display mapping for screencap versus input using the same display snapshot, or report DISPLAY_MAPPING_UNPROVEN; no assumption that both flags accept the same ID. Target bounds come from the same authorized screen.state observation's fixed reviewed window/display query and verified target identity; unavailable/racing evidence rejects target-scoped tap. Whole-display authority is a separate explicit scope, never fallback. Retain at most8capture references/client with least-recent eviction and30second expiry, bounded by the global capture budget. Brightness read observation is {kind:integer,rawValue,withinDocumentedRange} or {kind:absent|unparseable,anomaly,rawDiagnostic?}; raw diagnostics are bounded/sanitized and never a fabricated value.
 
-group_dependencies has an acyclic publication constraint; lifecycle_units pins atomic registration/unregister/type membership; prebuilt_adapters stores ID/version/SHA256/supported methods; cancellations has UNIQUE(client_id,cancellation_id) and sanitized idempotent outcome. connection_profiles rejects profile_id LIKE 'platform:%'; the reserved platform:local route is not a user profile. executions.backend_kind uses the same canonical self_adb/arc_target/native domain as its actual execution backend, never ingress-only external_adb. Legacy avalonia_runtime/executor avalonia rows are migrated explicitly to arc_target after contract verification, not silently interpreted as a managed runtime. runtime fgs_type records the observed last start type and eligibility outcome. Outbox consumers are the callback cleanup worker, committed-journal notification worker and epoch invalidation worker, all idempotent on obligation IDs.
+group_dependencies has an acyclic publication constraint; lifecycle_units pins atomic registration/unregister/type membership; prebuilt_adapters stores ID/version/SHA256/supported methods; cancellations has UNIQUE(client_id,cancellation_id) and sanitized idempotent outcome. connection_profiles rejects profile_id LIKE 'platform:%'; the reserved platform:local route is not a user profile. executions.backend_kind uses the same canonical self_adb/arc_target/native domain as its actual execution backend, never ingress-only external_adb. Legacy avalonia_runtime/executor avalonia rows are migrated explicitly to arc_target after contract verification, not silently interpreted as a managed runtime. runtime fgs_type records the observed last start type and eligibility outcome. Outbox consumers are the callback cleanup worker, committed-journal notification worker and epoch invalidation worker, with stable obligation IDs and operation-specific idempotence: non-idempotent uncertain cleanup is reconciled, never blindly replayed.
 
 Memory budgets are proposed/unmeasured: Java heap<=min(192MiB,memoryClass), no largeHeap; native allocations<=128MiB; total measured service PSS<=384MiB including graphics attributable to it. The lower page/scratch caps remain sub-budgets. Cache seal is HMAC-SHA256 with a non-exportable AndroidKeyStore key without user-authentication requirement so eligible headless startup can verify it; credential/grant reveal retains fresh owner authentication. Proxy Object methods (equals/hashCode/toString) execute locally and never become callback events. Binder callback stubs implement reserved interface version/hash meta transactions from their pinned contract; missing proof reports unsupported, not guessed values.
 
@@ -1672,11 +1672,11 @@ FR-DS-01 / TR-DS-01 / AC-DS-01 trace negotiated DirectStreamNegotiator/emitter, 
 
 The transport marker arc-protobuf-v1 is upstream, not a coined bridge name: pinned commit19792a52a13a3df342f90bab6b246b547e673919, src/Avalonia.RemoteControl.Protocol/RemoteControlProtocol.cs:31 defines AndroidBridgeTransportProtocol. That file's MajorVersion=1 and MinorVersion=0 form DisplayVersion1.0; upstream package0.8.0 is a distribution version and never substitutes for the wire envelope. [Pinned constants](https://github.com/sharpninja/Avalonia.RemoteControl/blob/19792a52a13a3df342f90bab6b246b547e673919/src/Avalonia.RemoteControl.Protocol/RemoteControlProtocol.cs).
 
-ArcFrameCodec.maxFrameBytes=8388608 applies before allocation; negative/oversize length closes without dispatch, truncated headers/bodies and EOF release the connection. Length zero is permitted by upstream framing and decodes to a default protobuf envelope, which fails version/auth validation; do not change this to a framing-level zero rejection. No empty protocol_version, unknown method0 or absent bearer gains authority. An empty request ID is not upgraded to an authenticated session; the server treats it as invalid request input and produces a bounded sanitized error then closes, with the decoded ID if present. The port compatibility fixtures must record this deliberate invalid-request rejection alongside upstream behavior. Missing end_of_stream defaults false; every actual terminal sets it true explicitly. Incoming Cancel8 returns BRIDGE_STATUS_UNSUPPORTED with matching version/ID and end_of_stream=true, then normal socket close; it never cancels another stream.
+ArcFrameCodec.maxFrameBytes=8388608 applies before allocation; negative/oversize length closes without dispatch, truncated headers/bodies and EOF release the connection. Length zero is permitted by upstream framing and decodes to a default protobuf envelope, which fails version/auth validation; do not change this to a framing-level zero rejection. No empty protocol_version, unknown method0 or absent bearer gains authority. An empty request ID is echoed as upstream when version and authentication are valid; it is never used as a session, principal or authority identifier. Internal correlation uses a server-generated connection identity. Fixtures preserve upstream empty-ID behavior. Missing end_of_stream defaults false; every actual terminal sets it true explicitly. Incoming Cancel 8 returns BRIDGE_STATUS_UNSUPPORTED with matching version/ID and end_of_stream=true, then normal socket close; it never cancels another stream.
 
 The client rejects a response envelope version other than1.0 or mismatching request ID before interpreting status or terminal flag. The server rejects a request envelope version other than1.0 without backend dispatch; capabilities payload protocol_version must also be1.0 and consistent with the envelope. A capabilities-first call is convention, not an invented handshake. Any compatibility exception requires an explicitly versioned profile and golden fixtures; no negotiation guesses. A token is newly generated for each bind, stale marker removed at startup, marker created privately only after successful bind, and marker deleted on orderly stop. Abnormal process death may leave a marker file, but reconnect validates live bind/token/version and never trusts that stale file as readiness.
 
-Compose DIP means dp for the selected root; render_scale is that root's Density.density. Root-origin-relative bounds and logical width/height use dp; PNG dimensions are the actual captured pixel dimensions (rounding from root dp*density is recorded, not assumed exact after crop). Tree/node operations pin a root generation. SEND_INPUT has no wire generation field: the server snapshots the current root/transform at admission and serializes the batch against it; stale-frame rejection is not claimed for coordinate input. ArcInputDispatcher maps pointer/wheel to ordered mouse-source MotionEvents on UiDispatcher, exactly one pointer; maps keys using a committed versioned Avalonia-name-to-Android-key table; text uses supported focused editable semantics set-text, otherwise unsupported. The reviewed table starts with Arrow/Enter/Escape/Tab/Back/Delete/Home/End/Page/letter/digit names and explicit unknown rejection, with platform/IME/layout acceptance fixtures before enabling each mapping. It is a port implementation artifact, not invented numeric key equivalence. No unsupported key becomes an arbitrary Android code. ComposeTargetAdapter exposes only the approved property allowlist and stable node generation; stale node or unsupported focus/property/text returns bounded CommandResult failure, which a client inspects even in an OK envelope. Raw shell or foreign UI controllers remain outside ARC's selected-root input/capture guarantee.
+Compose DIP means dp for the selected root; render_scale is that root's Density.density. Root-origin-relative bounds and logical width/height use dp; PNG dimensions are the actual captured pixel dimensions (rounding from root dp*density is recorded, not assumed exact after crop). Tree/node operations pin a root generation. SEND_INPUT has no wire generation field: the server snapshots the current root/transform at admission and serializes the batch against it; stale-frame rejection is not claimed for coordinate input. ArcInputDispatcher maps pointer/wheel to ordered mouse-source MotionEvents on UiDispatcher, exactly one pointer; maps keys using a committed versioned Avalonia-name-to-Android-key table; text inserts at the focused editable selection through a verified commitText/replaceSelection adapter, otherwise unsupported; it never replaces the whole field by default. The pinned upstream raises TextInputEventArgs.Text, which is text insertion, not a set-entire-value command. The reviewed table starts with Arrow/Enter/Escape/Tab/Back/Delete/Home/End/Page/letter/digit names and explicit unknown rejection, with platform/IME/layout acceptance fixtures before enabling each mapping. It is a port implementation artifact, not invented numeric key equivalence. No unsupported key becomes an arbitrary Android code. ComposeTargetAdapter exposes only the approved property allowlist and stable node generation; stale node or unsupported focus/property/text returns bounded CommandResult failure, which a client inspects even in an OK envelope. Raw shell or foreign UI controllers remain outside ARC's selected-root input/capture guarantee.
 
 ### Design vocabulary crosswalk
 
@@ -1748,7 +1748,7 @@ validation and submit transactions through that coordinator. The C4 persistence
 edges therefore converge on it; three independent SQLite writers are not selected.
 BridgeService owns one coordinator, DirectStreamNegotiator, DirectEventEmitter,
 ArcRuntime, ArcSessionManager and SdkBindingBackend. DirectEventEmitter owns bounded
-per-stream state; the existing ARC registry owns per-connection frame/log/input state.
+per-stream state; the ARC connection registry owns frame/log stream leases while the service-scoped input lease spans unary sockets.
 
 ArcAuthenticator is a transport adapter over ClientAuthenticator, not another identity
 or policy authority. ClientAuthenticator.authenticate(credential, expected_kind)
@@ -1853,7 +1853,7 @@ lease. A remote TCP disconnect cannot distinguish idle client from unary complet
 the idle bound is a documented port safety policy, not an upstream wire feature.
 An outbound Kotlin controller sends best-effort releases before disconnecting;
 network failure falls back to the target's lease bound. WATCH socket close cancels
-that stream only. No Cancel8 implementation or wire lease ID is invented.
+that stream only. No Cancel 8 implementation or wire lease ID is invented.
 
 SEND_INPUT has no frame/generation field. Its coordinates apply to the current
 selected root and density captured atomically for that admitted batch. Tree node
@@ -1884,15 +1884,21 @@ intent from the local Activity; the in-process facade handles stop/status once l
 
 Approval Reserved is entered atomically from Approved at admission-gate entry,
 Consumed at the dispatch/commit boundary, or Terminal on expiry, revocation, CAS
-failure or persistence failure; it cannot be reused. Local SAF import stages expire
-15minutes after copy begins, including copy/validation time, or earlier owner cancel;
-HTTP stages additionally expire with their management window. Neither path resumes.
+failure or persistence failure; it cannot be reused. Local SAF import stages use the same capacity-aware import_stage_ttl_seconds policy
+defined under import staging, including copy and validation time. HTTP stages also
+expire at their explicitly selected management-window end. Neither path resumes;
+failure leaves the active catalog untouched and an owner can start a new stage.
 cursor_expired, unsupported_synchronous_reply, buffer_overflow and durability_failed
 are lifecycle reason values; normalized error envelopes use their uppercase aliases.
-For invalid ARC envelope version or empty request ID, a bounded ERROR response uses
-server version1.0 and echoes the received ID (empty if absent), then closes. Clients
-reject mismatched IDs/versions even before interpreting the error. Golden fixtures
-cover both errors. No sensitive target access precedes authentication/validation.
+Version mismatch, including a zero-length default envelope, returns UNSUPPORTED5
+with the pinned upstream message "Unsupported bridge protocol version.", server
+version1.0 and the received request ID, then closes. This validation precedes bearer
+authentication exactly as upstream. An empty request ID with otherwise valid
+version/authentication is accepted and echoed as upstream; it is not a session or
+authority identifier. Internal authorization/correlation uses a server-generated
+connection identity, never uniqueness of request_id. Golden fixtures cover wrong
+version, zero-length default envelope and empty ID separately. Clients reject
+mismatched IDs/versions before interpreting status. No target access precedes auth.
 
 android.groups.describe accepts group_id, exact revision/hash, optional opaque
 cursor and max_bytes bounded by the configured client limit. It returns that pinned
@@ -1928,7 +1934,7 @@ Avalonia.RemoteControl.LogStreamKeepAlive. Runtime options default the idle inte
 to15seconds; nonpositive interval disables keepalive. The protocol entry carries the
 same sequence/time/level/category/message fields as upstream, not a new heartbeat
 envelope. It is still subject to authentication, quotas and stream cancellation.
-The exact pinned RemoteControlLogBuffer constructor and CreateKeepAliveEntry plus
+The exact pinned RemoteControlLogBuffer constructor and CreateKeepAlive plus
 RemoteControlProtocol constants are golden-fixture sources; log filtering and
 dropped_count retain upstream meaning. No undocumented gRPC server is introduced.
 
@@ -1958,8 +1964,8 @@ timeout or failed input quiescence returns a structured denial before dispatch.
 
 
 
-UI contracts are canonical in docs/ui-asset-manifest.json and generated SVG screen
-specifications. SCR08 owns the inbound ARC listener controls/root/credential rotation;
+UI contracts are canonical in docs/ui-blueprint.md; the manifest and SVG screen
+specifications are checked generated projections. SCR08 owns the inbound ARC listener controls/root/credential rotation;
 SCR07 is the separate outbound controller with frame viewport, tree and typed input.
 SCR03 covers SAF import and override dependency/CAS preview. SCR04 mapping saves and
 all SCR08 persistent setting changes are protected; ordinary navigation, reads and
@@ -1974,3 +1980,489 @@ closed; verified cleanup obligations survive independently until resolved/acknow
 Mandatory audit failure is fail-closed for new dispatch; optional logs are evicted
 before the mandatory reserve. Export uses Android SAF create-document after exact
 redacted-snapshot approval and writes nothing if the picker is cancelled.
+
+
+## HTTP administration owner capability acquisition
+
+Every mutating administration request uses prearmed-local-exact-command owner
+authorization. An authenticated admin first presents its sanitized command digest,
+HTTP method/path, proposed revision/ETag, artifact hash/size where applicable and
+admin principal to the local owner review. Only a trusted foreground local action
+may open that review; the HTTP caller cannot open or approve it, and cannot submit
+an owner=true flag or a capability token. After a fresh local biometric result the
+service stores a short-lived single-use authorization bound to that exact command,
+admin principal, window and current epochs. The HTTP request presents only its
+nonsecret challenge reference in X-Owner-Challenge; consumption occurs atomically
+at command reservation/commit with CAS. Missing, expired, mismatched or already
+consumed approval returns403 OWNER_AUTHORIZATION_REQUIRED without waiting for UI.
+No HTTP mutation waits indefinitely or returns a misleading approval-pending202.
+GET requests cannot mutate or consume this authorization. Local SAF uses the same
+owner command service directly. Stage upload approval reserves only the exact
+hash/size upload; final import and publication each require separate fresh approval.
+For an interrupted/uncertain upload, retry the same idempotency key to inspect the
+recorded result; never assume the authorization can be replayed for another command.
+
+Import-stage creation is POST of application/octet-stream with required
+X-Artifact-SHA256 and X-Artifact-Size headers plus Idempotency-Key and the challenge
+reference. The service enforces exact size before/while streaming and matches the
+complete hash before sealing. A201 response contains stage_handle, sha256,
+size_bytes, expires_at and state=sealed; failure never returns a reusable unsealed
+handle. GET returns a bounded cursor page owned by this admin/window. ImportRequest
+local_artifact_id is this stage_handle, not a path or arbitrary file reference.
+Stage upload does not grant invocation authority or publish a registry. Long copy
+work is bounded by the configured window and monotonic stage deadline, not an
+unbounded retained owner capability; only the upload reservation has been consumed.
+
+ARC log keepalives use pinned CreateKeepAlive; Sequence and DroppedCount stay0
+for those upstream keepalive entries. Data-event sequence is distinct from the
+application journal cursor; consumers must not treat a keepalive0 as lost ordering.
+
+
+## Kotlin module DAG and dispatch barrier (round023 correction)
+
+architecture/module-contract.json is the single class/project owner map. Domain
+ports and immutable value objects have no application/storage/platform imports.
+Application services depend only on domain ports. Protocol adapters may call
+application services and domain ports. Storage and generated-binding modules
+implement domain contracts without importing their consumers. Compose ViewModels
+depend on application facades/domain values. Android is the composition root and
+platform adapter module, depending on all lower modules; no lower module imports
+bridge.android or bridge.ui. Tests may depend on all. The code-view owner table and
+Gradle validateModuleGraph check this exact acyclic dependency graph. This is an
+executable design consistency check; actual Kotlin build/import tests remain an
+implementation acceptance gate.
+
+OwnerCapabilityVerifier is a domain interface implemented by the application
+OwnerAuthenticationService and injected into the serialized storage transaction.
+Storage never imports that application class. CatalogRepository.observePublications
+emits immutable facts through a domain Flow contract; it does not import the
+DeviceViewResolver consumer. ArcSessionManager depends on ArcClientPort, implemented
+by the protocol adapter. HealthSnapshot/RemoteFrameState are domain values, not
+Android UI objects. ArcRuntime receives an ArcLogSource port implemented by the
+platform log adapter. SqliteAuditLogger implements the domain AuditLogger port.
+
+InvocationPlanner calls AdmissionGate.beginDispatch for EVERY generated/generic/
+raw/native/SDK/Binder/ADB/ARC plan immediately before backend work. Under one service
+epoch/quiescence barrier, beginDispatch rechecks the exact admitted principal,
+credential, policy, catalog, capability, device-view and group pins, mandatory audit
+reservation and OS/backend authority; then registers an in-flight DispatchPermit.
+The backend runs only while this permit is current. A failed recheck returns a
+structured denial before side effects. endDispatch records observed/unknown outcome
+and releases the permit; backend timeout never claims cancellation of a completed
+side effect. No SQLite write lock is held across Binder, ADB or socket work.
+
+Owner challenge transition takes the same barrier, closes all bridge-controlled
+input admission, suspends protected-surface frame/tree/log access and drains already
+dispatched input permits before opening the OS prompt. The boundary includes raw
+input plans, native convenience calls and ARC-injected actions. A drain timeout
+denies the prompt. Previously admitted but undispatched plans fail beginDispatch.
+Other apps/privileged ADB actors outside this bridge remain outside the stated trust
+boundary. This design does not claim cryptographic isolation from malicious code
+already inside the trusted process.
+
+Credential/policy/catalog/capability commits publish their typed in-memory epochs
+under the same barrier before reopening admission. Epoch types are credential,
+client_policy, registry_overlay, device_capability, resolved_view, group_activation
+and service_boot, each scoped to its owner and compared only within that type.
+Each request/delivery rechecks the current vector. Immediate session/stream closure
+is pushed by the credential owner; persistent outbox workers only coalesce cache
+and notification maintenance, never provide the synchronous security barrier.
+Commit failure keeps admission closed until authoritative state is reconciled.
+
+Outbox claims have a30second renewable lease and stable obligation ID. A completed
+idempotent notification may be retried after lease expiry. A crash after possible
+non-idempotent cleanup dispatch but before acknowledgement becomes outcome_unknown;
+it is not blindly repeated. Only proven idempotence, confirmed endpoint death or
+explicit reconciliation permits a new cleanup attempt. Shutdown attempts already
+verified unregister while backends are live within the stop deadline, then persists
+unknown obligations before closing adapters/storage. Restart never re-registers an
+old callback merely because its handle/journal survived.
+
+Reference defaults (unmeasured, owner-configurable within supported bounds): service
+stop deadline10seconds, remote-input drain2seconds, pending owner Ask queue16,
+ARC frames maximum10fps and4,000,000pixels, encoded frame<=8MiB envelope limit,
+per-connection output queue2frames/16MiB, terminal write deadline1second, SQLite
+busy timeout250ms, MCP sessions32 and ARC sockets16 per service, with per-client
+limits8/4. Frame byte accounting includes envelope overhead and rejects an encoded
+payload that would exceed8388608 bytes. Logs use the separately defined bounded
+journal policy. These are proposed rejection/eviction settings, not measured speed.
+GET MCP SSE replay is at most256notifications/1MiB per session for60seconds; an
+evicted Last-Event-ID causes a documented transport reset and client reread of
+authoritative resources. Application subscription cursors keep separate retention.
+Mandatory outcome-audit persistence failure records an in-memory unknown outcome,
+closes further dispatch and surfaces degraded status; it cannot undo an OS effect.
+Optional logs evict first. Owner-configured audit retention defaults7days/64MiB;
+loss of mandatory durable audit capacity denies new dispatch rather than discarding
+required entries silently. Maintenance closes old session group_activations on
+boot and garbage-collects them after their pinned-history retention expires.
+
+
+## ARC-to-MCP watch adaptation and binary payloads
+
+All ten ARC method identities remain discoverable. Cancel 8 is unavailable for
+invocation with reason ARC_V1_CANCEL_UNSUPPORTED; closing the owned watch socket
+implements subscription cancellation instead of sending Cancel 8. Methods3 WATCH_TREE,
+7 WATCH_LOGS and9 WATCH_FRAMES use binding.invoke's callback specification to create
+a finite subscription result (subscription_id, owned resource URI, stream_epoch,
+initial cursor, cancel handle and lease). The Kotlin ArcTargetBackend/CallbackBroker
+adapter owns one authenticated ARC socket per watch and commits decoded events to
+the same per-client journal before delivery. No infinite tools/call or multiple
+final tool results are introduced. A watch that cannot be set up inside the original
+deadline returns an explicit failed/unknown registration outcome using the callback
+lifecycle. Standard resources/subscribe URI hints and bounded resources/read pages
+are the baseline; direct payload delivery requires the existing negotiated extension.
+
+Frame/tree payloads exceeding the journal inline-event limit are stored in an
+app-private content-addressed ephemeral blob. The journal stores a bounded reference
+with SHA256, exact byte size, media type and an opaque subscription-owned resource
+URI. Blobs count toward a separate per-subscription16MiB budget (two maximum wire
+frames, envelope overhead included), service64MiB total; configured smaller limits
+may explicitly reject a stream before registration. Resource reads are authenticated
+and recheck the same principal/session/subscription lease and current policy; return
+finite chunks<=256KiB with byte offset/next cursor. A blob expires with its event or
+subscription retention, whichever is earlier. Deletion yields an explicit gap/410,
+never a silently broken pointer. Blob creation and journal visibility are staged:
+flush and seal blob, commit reference, then expose; crash-orphan blobs are collected.
+Journal commit failure suppresses delivery and applies durability_failed. No remote
+agent-supplied file path is accepted. Slow consumers use the configured drop/terminal
+policy with explicit sequence gaps; no unbounded frame queue or stored PNG list.
+
+TREE events, LOG events (including upstream keepalive/drop metadata) and FRAME
+references retain original method/request correlation separately from the bridge
+subscription sequence and application cursor. Reconnection of an MCP transport does
+not repeat ARC registration. ARC socket loss closes delivery with a known local
+connection generation and uncertain remote cleanup when relevant; a new explicit
+registration requires current authorization. A wire frame sequence is not evidence
+of external target root identity. RemoteFrameState.connectionEpoch is bridge-local;
+remoteRootGeneration is unknown for unmodified ARC1.0, which has no such wire field.
+Only a separately versioned negotiated extension could supply that additional proof.
+
+## Exact native and ARC identity signatures
+
+These signatures add versioned namespaces; existing imported source signatures are
+unchanged. Native canonical_signature is the UTF8 string
+bridge-native-v1|operation=<name>|request=<type>@1|result=<type>@1
+using exactly ASCII spelling and separators, no spaces/newline or Unicode
+normalization. ARC canonical_signature is
+bridge-arc-v1|package=avalonia.remotecontrol.v1|wire=1.0|method=<decimal>:<enum-name>|request=<proto-type>|result=<proto-type>
+with the exact pinned enum and fully qualified protobuf payload type names. For the enum-only unsupported Cancel 8, request=opaque-bytes and result=BRIDGE_STATUS_UNSUPPORTED explicitly indicate there is no invented Cancel protobuf message. Reserved
+tool_id arc-protobuf-v1:method:N is an entry-point policy key, not the binding ID.
+binding_id is lowercase SHA256 of those exact canonical bytes. Schema_hash remains
+the separate versioned contract/type-graph hash. A future payload-semantic change
+requires a new signature namespace/version; it cannot reuse an existing grant.
+
+Native operations are catalog records, never extra bootstrap tools. The normative
+table in architecture/native-identities.json pins each signature, request/result
+shape ID and resulting binding_id; loading validates hash equality. ARC identities
+are enumerated from the pinned method names/payloads in that same table. Unknown
+methods/types remain visible with reasons rather than deriving a speculative codec.
+
+## Remaining compatibility and platform precision
+
+ARC per-method policy outcomes: GET_CAPABILITIES/GET_SNAPSHOT/WATCH_TREE/WATCH_LOGS/
+WATCH_FRAMES denied access returns the existing terminal UNAUTHORIZED4 envelope
+(internal policy addition with golden fixtures); INVOKE_CLICK/INVOKE_FOCUS/
+SET_PROPERTY/SEND_INPUT denial preserves upstream OK1 plus CommandResult.succeeded=false
+and the existing sanitized CommandResult.message field. Every compatible client inspects envelope AND
+CommandResult. Unknown method0 and Cancel 8 return UNSUPPORTED5, payload parse failures
+ERROR2, missing/bad bearer UNAUTHENTICATED3, server-initiated cancellation CANCELLED6
+when a terminal write is still possible; peer socket close has no promised final
+frame. Unsupported property/key input is a failed CommandResult, not invented proto
+fields. Oversize frame production ends the watch with a bounded ERROR2 if possible,
+then closes. Input lease conflict is a failed CommandResult; root loss similarly
+fails the command or ends a watch with ERROR2. Logs retain upstream dropped_count;
+frame/tree losses close or use explicit bridge journal gaps without changing v1.
+
+Two safety deviations are intentional and must be tested against upstream: unknown
+Avalonia key names return a failed input command (upstream maps to Key.None and raises
+it); only a matching pressed-button release clears that button (upstream clears
+left-button state on any release). Wire fields/enums remain unchanged. The complete
+mapping covers Avalonia key-name strings, text UTF8, modifier state, wheel delta and
+logical-coordinate translation; Android keycodes are not passed as Avalonia names.
+No pointer IDs or multitouch are invented. Mouse move without a pressed button is
+hover; wheel preserves both axes and sign, density/scale conversion is applied once.
+
+Protected roots are SCR09 owner approval and any credential/secret-bearing local
+surface; ordinary management roots may be selected only as redacted read-only roots. Ordinary non-management roots require separate explicit adapter registration and current input policy. Entering any protected overlay suspends remote frame/tree/log
+delivery before it is displayed and drains input; no captured protected pixels/tree
+are queued for later delivery. Review sheets with fresh secrets are likewise never
+ARC roots. This is bridge-controlled input/capture protection, not control of other
+privileged processes. Owner capability references remain service-owned and one use.
+
+Pairing window opening does not create an attempt; a separate trusted local action
+creates one60second attempt. Same-device clients use an explicit Android share intent
+to a user-selected installed package/component, with recipient confirmation and no
+clipboard, URI log or implicit broadcast; the bootstrap secret is single use and
+expires. Cross-device display uses the owner-visible QR. A denied chooser creates
+no consumed/approved credential. The existing client proof/pin checks still apply.
+
+LoopbackTlsHost is a proposed custom Android SSLServerSocket HTTP/1.1 host using the
+MCP Kotlin SDK's protocol/session model only; it does not claim reuse of the Ktor
+StreamableHTTP server transport or a hidden CIO proxy listener. A bounded adapter
+implements the pinned StreamableHTTP request/session/SSE rules. The candidate spike
+must prove header/status semantics, disconnect/cancel, TLS trust/pinning, concurrent
+GET/POST and official-client interoperability. If not proven, this candidate cannot
+ship; using a supported Ktor TLS engine requires an explicitly reviewed replacement.
+CIO and this custom host are alternative evaluation paths, not two composed servers.
+TLS trust distribution is by owner-verified certificate fingerprint/out-of-band
+pairing pin; clients must explicitly pin/trust that identity. No self-signed trust is
+assumed in an arbitrary MCP host. The host parses and verifies TLS/Host/Origin, while
+McpServer enforces initialize/session/protocol semantics and shared authentication.
+Outbound ARC target bearer secrets are owner-provisioned encrypted app-private
+profile references, decrypted only for an admitted exact target/socket, never stored
+in RemoteFrameState, exported logs, tool schemas or discovery summaries.
+
+screen.state returns MCP image content (base64 PNG, image/png) plus structuredContent
+metadata (dimensions, rotation, display, captured_at, coordinate_version, capture_id).
+The image and metadata are one bounded observation, not an autonomous monitor.
+Target-scoped input.tap requires two consecutive foreground package/user/signing
+observations, one at planning and one immediately at beginDispatch, matching exact
+target/profile/display pins. Inconclusive/change denies before tap. A race after
+the final OS observation cannot be eliminated by ADB; the UI must disclose that
+limitation and high-assurance targeting is unavailable without stronger backend proof.
+Group interest updates leave already-dispatched exact-plan calls running under their
+original grant/authority pins; undispatched calls recheck current group/view epochs.
+Activation never keeps authority valid across credential/policy/schema revocation.
+
+
+The exact pinned ARC payload identity table includes method8 as unsupported, not a
+codec claim. Worked canonical strings and hashes are supplied for all native/ARC
+entries in native-identities.json. Schema/type names there are proposed bridge-native
+contracts; before activation each must have a complete versioned schema matching
+the argument/result constraints in this design. The build validates the canonical
+signature/hash and pinned upstream method/payload spelling, not an implemented codec.
+Admission refuses missing schema/type contracts rather than inferring them from a
+human-readable operation name. Current references are offline design fixtures only.
+
+ARC capture of protected overlay content, even from an already-open tree/frame watch,
+is suppressed while owner authentication is pending. The shared gate is checked at
+capture and again before committing delivery, so a frame captured before the boundary
+cannot be delivered after protection begins. Outbound external ARC captures have no
+proof of another app's protected overlays; sensitive remote-controller operations
+cannot claim equivalent isolation. The local adapter can protect only roots it owns.
+
+
+The256KiB LoopbackHost request limit applies to MCP/JSON administration bodies.
+Only the explicitly enabled, separately approved import-stage octet-stream route
+has a larger streaming byte limit: import_max_bytes defaults16GiB, must fit free
+space plus the design scratch budget, and is checked against X-Artifact-Size before
+opening a temporary file. The body is never buffered whole in JVM memory. Count raw
+bytes while copying and reject mismatch/overrun; content decompression is disabled.
+Content-Length, when present, must equal the declared size; chunked input still has
+the exact same counting/hash/deadline bound. No other route inherits this exception.
+The import-only window permits stage/list/final import for that exact approved
+artifact and publication only under separate fresh approval; it cannot edit clients,
+grants, settings or unrelated catalog records. Expiry/revocation closes its work.
+
+MCP notification queue and replay storage are separate bounded buffers: active
+delivery128hints/256KiB coalesces resource updates; replay256hints/1MiB/60seconds
+retains transport event IDs. Neither replaces the callback application journal.
+The secure enrollment/pinning flow and session lifetime still apply on reconnect.
+
+### Round023 correction traceability (candidate, not independent acceptance)
+
+| Finding families | Normative source | Validation evidence / remaining gate |
+| --- | --- | --- |
+| R23-P1-01/07 ARC compatibility | Version/status and per-method behavior above; native-identities.json pins payloads | Pinned upstream comparisons and design023 identity tests; actual Kotlin/.NET golden-wire tests remain a runtime release gate |
+| R23-P1-03/04/06/09 HTTP owner/staging/auth | API-CONTRACT1.6.0 and OpenAPI bearer/stage definitions | Design023 contract tests; no listener or importer implementation claimed |
+| R23-P1-05 native/ARC identities | [Exact identity table](../architecture/native-identities.json) | SHA256/pinned-proto fixture tests, complete native schema activation gate |
+| R23-P2-F01/02/03/06 dispatch, modules and epochs | C4 InvocationFlow/revocation plus [module contract](../architecture/module-contract.json) | Gradle validateModuleGraph, cycle/forbidden-edge regression fixtures; concurrent Android implementation tests still required |
+| R23-P2-F05/07/12/15/28/29/33 boundaries | Protected capture, root evidence, status mapping, shutdown and bounded defaults above | Design fixtures and regenerated diagrams; physical-device lifecycle/race tests remain release gates |
+| R23-P2-F17 clipped class edge | Padded vector canvases | All21diagram browser geometry checks include paths/text in root coordinates, with captures and no external requests |
+
+These rows describe correction locations and honest validation limits; they do not
+assert that a fresh reviewer agreed they are closed or that runtime code exists.
+
+
+PendingOwnerNotifier is a domain port implemented by ForegroundStatusNotifier.
+When Ask arrives with no foreground UI, the policy service posts an actionable
+pending-review notification and retains the original request deadline; opening it
+shows SCR09 only after quiescence. No approve action appears on the notification.
+If notification permission/channel is unavailable the request remains visibly pending
+in local status and expires as denial on its original deadline; no background
+Activity launch or deadline extension is assumed. DeviceCapabilityCollector owns
+supported backend/device observation sources and sends semantic changes to
+DeviceViewResolver.onCapabilityChanged; failure yields unknown/stale, never guessed
+absence. No periodic business-workflow scheduler is introduced.
+
+For HTTP owner prearming, the trusted local catalog preview (SCR03.C07) has an
+external-command review mode: select admin principal/window, method/path and exact
+canonical request fields/artifact hash/size and expected revisions, then request
+SCR09 authentication. It displays the resulting nonsecret challenge reference for
+explicit transfer to that admin. An external caller may provide a proposal as
+untrusted text, but only this local action creates the challenge; proposal text never
+executes code or claims authority. The same preview shows estimated stage lifetime,
+free-space estimate, selected deadline and STAGE_LIFETIME_INSUFFICIENT branch before
+upload. These are screen-contract fields to implement, not a working Android form.
+
+
+SCR03.S4.IMPORT specifies the exact external-admin prearming fields and stage-capacity
+failure branches in the editable SVG; SCR03.C07 opens the same preview on phone as
+a scrollable full-screen detail. SCR03.C08 cancels without activating. Owner review
+remains SCR09 with no remotely activatable approve action. Local facade methods and
+quiescence waits are suspending/nonblocking: do not hold the Android main thread or
+a SQLite writer lock while draining input or waiting for a protected OS prompt.
+
+
+## Canonical UI blueprint and state-sensitive storyboards
+
+The editable Markdown UI blueprint is docs/ui-blueprint.md. Its versioned JSON
+block specifies every control, exact command/read fields, success/error/cancel
+semantics, state enablement, effect/recovery, phone/wide navigation and actor/branch
+storyboard step. Gradle generateUiAssets validates and projects it to the manifest,
+full vector screen definitions, separate state/step panels and composite storyboard
+SVGs, UI reference Markdown and Marp source. SVGs are editable vector exports, but
+durable behavior edits belong in the canonical blueprint and layout edits in the
+rendering source; generated copies never become competing policy authorities.
+The Marp deck embeds the SVG for its named state and focused action, not an unchanged
+normal-state screenshot. Storyboard branch labels are alternatives and show typed
+failure/cancellation dispositions without implying automatic retries.
+
+Control contract gates apply in addition to explicit disabled states: only the
+trusted local management surface may invoke management commands. It may bind the
+unexported service in local-management mode while desired MCP state is Stopped,
+without foreground promotion or opening listeners. That service owns SQLite and
+owner authentication; the UI never opens a competing writer or supplies owner=true.
+After runtime Stop closes its writer, a new explicit bound local-management command
+may lazily reopen the coordinator for config/status only. Unbind closes that local
+lifetime; boot never enables it before unlock. Running device admission still needs
+the persistent eligible foreground service and current shared policy gate.
+
+SCR01 now distinguishes Starting, Running, Stopping, Stopped and Error, with a
+separate Refresh device view action. SCR02 defines draft/commit/reload and bounded
+session inspect/close. SCR03 specifies import validation/activation, admin-window
+prearming and capacity failure. SCR04 defines functional member editing and atomic
+save separate from an MCP client's set_active. SCR05 names route/lease/cursor/gap
+and safe cleanup reconciliation. SCR06/SCR08 share one logging_revision. SCR07
+defines protected outbound profile/secret setup and Connecting/Connected/Disconnected
+states. SCR08 separates ADB pairing/connect/key-rejected/connected and inbound ARC.
+SCR09 defines expiry, changed plan, quiescence failure, lockout/no enrollment and
+cancel without remote navigation. SCR10 names safe explicit retry. SCR11 separates
+window/attempt/proof/exact commit and protected manual bearer reveal; cancel cannot
+undo an already committed principal. The blueprint is a design, not a Kotlin UI.
+
+
+RootHandle carries a security class, not an inferred privilege from a screen title.
+ComposeTargetAdapter resolves only explicitly registered current roots. Management
+roots are management_readonly: tree/frame observation must be redacted and separately
+authorized, while INVOKE_CLICK/FOCUS/SET_PROPERTY/SEND_INPUT fail with the existing
+denied CommandResult regardless of an ARC method grant. SCR09, SCR11 and any secret,
+credential or owner-review overlay are protected and cannot be selected at all.
+An ordinary_unprivileged root may accept authorized ARC input; registration is an
+explicit same-app composition contract, not generic cross-app Compose introspection.
+The management-only reference APK has no default interactive root; golden tests
+supply a fixture root. Optional external ARC target apps may expose their own
+ordinary content under the same wire/policy rules. Generic uninstrumented-app
+control stays the separate authorized ADB path. Bridge-controlled ADB input aimed
+at this bridge's management package is denied with MANAGEMENT_ROOT_INPUT_DENIED;
+otherwise remote physical taps could launder an ARC/MCP principal into local-owner
+session/config actions. Other independent privileged ADB actors remain outside the
+bridge trust boundary. Catalog methods remain visible with root/authority reasons.
+
+
+### Consolidated023 authority and model completion
+
+Origin/Host validation has one owner, LoopbackHost, before routing. McpServer has no
+second validateOrigin implementation: it consumes the host's validated envelope and
+authenticates through ClientAuthenticator before session operations. The host only
+extracts credentials, never authorizes a principal. ReducedLoopbackHttpHost models
+the separately owner-selected reduced_http realization with the already documented
+cleartext limitations; LoopbackTlsHost is the pinned-TLS candidate. Neither silently
+falls back to the other. Sensitive enrollment/admin routes still require paired_tls.
+
+ClientCredentialService implements the default manual_bearer_setup owner commands:
+generate a cryptographically random256-bit bearer, store its verifier and kind/client
+mapping atomically, reveal/share exactly once through the protected local surface,
+and rotate only through fresh exact approval. CredentialVault is a domain port;
+the Android/Keystore composition supplies encrypted backend-secret persistence.
+ArcSessionManager loads a target authorization only for the currently admitted
+profile/pins and passes it to the private ARC client adapter for this socket. It is
+never part of UI state, tools/list, catalog schema, logs or exported receipts. JVM
+immutable-string zeroization is not claimed. The model includes the issue/reveal/
+rotate and target-secret paths rather than treating a UI-supplied flag as proof.
+
+Credential revocation and every owner-protected CAS enter AdmissionGate's protected
+commit barrier. The repository verifies/consumes the exact owner challenge and writes
+state/typed epochs in one transaction. Before the barrier releases, the gate publishes
+committed facts to ClientAuthenticator, which invokes the injected SessionInvalidator
+port (implemented by McpSessionRegistry) and closes affected direct/ARC streams.
+Idle streams close without waiting for a new payload. Every later dispatch/delivery
+also pulls/rechecks authoritative pins. Outbox workers cannot provide this synchronous
+ordering. DeviceCapabilityCollector and backend event adapters deliver supported ADB
+loss/interface/module/permission changes to DeviceViewResolver; unknown observations
+invalidate freshness without manufacturing evidence of absence.
+
+| Epoch/value family | Owner and increment rule | Comparison |
+| --- | --- | --- |
+| credential | credential service; issue/revoke/rotate exact principal | exact scoped epoch; never compare to policy revision |
+| client_policy | policy writer; exact grant/config change | exact client+revision |
+| registry_overlay | catalog writer; publication/overlay CAS | registry ID and monotonic generation pair |
+| device_capability | observed-fact collector; semantic capability change | exact profile/target/user and epoch |
+| resolved_view | resolver; sealed atomic view activation | view ID/hash and generation |
+| group_activation | session-interest writer; atomic set_active | exact client/session revision/hash |
+| service_boot | lifecycle; new service instance | opaque equality only, invalidates process handles |
+| callback_stream | broker; registration/recovery stream lifetime | subscription ID + opaque stream_epoch + sequence |
+| ARC rootEpoch | selected-root registry; root replacement | exact local root ID/epoch; absent from ARC1.0 wire |
+| backend endpoint/bind | backend/lifecycle; connection or bind identity replacement | exact profile/endpoint/instance equality, not API version |
+
+DeviceProtectedBootMirror models only the nonsecret opt-in mirror, read by the
+direct-boot receiver and reconciled after unlock; it contains no client/ADB secret.
+RemoteInputQuiescer explicitly pauses frame/tree/log exposure as well as input.
+An uncertain claimed cleanup obligation becomes cleanup_unknown after restart unless
+its idempotence/current authority is established; stable IDs do not imply exactly-once
+side effects. After service Stop a surviving process keeps old callback delivery
+closed, and local-management rebind cannot resurrect registrations.
+
+### ARC compatibility condition matrix
+
+| Condition / fixture | Pinned upstream behavior | Kotlin profile behavior / response |
+| --- | --- | --- |
+| VERSION_MISMATCH / ARC-G01 | Unsupported version returns UNSUPPORTED5 and exact message | same; zero-length frame decodes default envelope then same result |
+| EMPTY_ID / ARC-G02 | ID echoed, not an auth/session key | same; internal connection correlation is server-generated |
+| BAD_BEARER / ARC-G03 | UNAUTHENTICATED3 | same; no target access |
+| CANCEL8_UNKNOWN / ARC-G04 | UNSUPPORTED5 | same; owned watch cancellation closes socket |
+| UNKNOWN_KEY / ARC-G05 | maps to Key.None and raises event | deliberate safety deviation: OK1 + failed CommandResult.message |
+| RELEASE_OTHER_BUTTON / ARC-G06 | clears shared left-button state | deliberate safety deviation: clear only matching held button |
+| TEXT_INPUT / ARC-G07 | TextInputEventArgs inserts supplied text | insert at focused selection, preserve other text; unsupported adapter fails CommandResult |
+| WHEEL_HOVER / ARC-G08 | wheel Vector(deltaX,deltaY); move without press is hover | preserve both axes/sign as logical wheel steps via versioned platform mapping, never scale by display density; unsupported mapping fails explicitly |
+| SERVER_CANCEL / ARC-G09 | CANCELLED6 when terminal response possible | same; socket close has no guaranteed final frame |
+| POLICY_DENY / ARC-G10 | command result can be OK1/succeeded=false | input/click/focus/property retain failed result; observation deny uses existing UNAUTHORIZED4 as disclosed policy addition |
+| FRAME_OVERSIZE / ARC-G11 | configured pixel/frame constraints | explicit port10fps/4Mpixel/8MiB wire bound; oversize ends with bounded ERROR2 if possible, never fake scale/truncate |
+| ROOT_REPLACED / ARC-G12 | selected runtime root changes | old stream closes with bounded ERROR2 if possible; new explicit watch required; no invented root field |
+| LOG_LOSS / ARC-G13 | dropped_count and keepalive default0 sequence | retain original metadata; bridge journal sequence remains distinct |
+
+The matrix names planned cross-language golden fixtures, not executed Kotlin-port
+tests. Exact platform wheel/key/IME mapping remains gated per supported mapping;
+unknown mappings are visible and return adapter_unsupported. No input is accepted
+merely because a method number exists in the protocol inventory.
+
+
+The C4/code crosswalk lists every proposed class/interface exactly once with its
+actual DSL component ID and Gradle owner. Logical components may include interfaces
+and injected adapters from different acyclic projects; component scope is not a
+source import. SessionInvalidationFanout is the application implementation of the
+domain SessionInvalidator, holding domain PrincipalSessionSink adapters implemented
+by McpSessionRegistry, ArcSessionRegistry and ArcSessionManager. Thus idle MCP/SSE/
+direct, inbound ARC and outbound principal-owned ARC sessions all close on revoke,
+without application imports of concrete protocol classes. Android composition
+injects these exact sinks, with no self-recursive fanout registration.
+
+Per-client log edits from SCR06.C06 and SCR08.C10 share the same client_id and
+client_logging_config.logging_revision. Global audit/journal ceilings are separate
+bridge_config row_version fields in the protected settings draft; they never reuse
+a client's revision. The UI cannot make one global setting silently change another
+client's log rule. Paused is a real health state for temporarily suspended admission
+during an owner challenge while the MCP listener may remain ready; StartRequiresOwnerAction
+and WaitingForUnlock differ from Error. Every generated state snapshot uses the
+closed health domains and numeric revision, and the AppBar/notification render that
+same snapshot rather than inventing a status from the displayed screen.
+
+Internal Kotlin ARC adapter behavior is pinned by the out-of-band profile
+arc-protobuf-v1-kotlin-safe-v1. It retains transport arc-protobuf-v1 and wire envelope
+1.0, with the explicitly documented unknown-key/button-release safety deviations.
+The profile is catalog/owner setup metadata, not an invented protobuf field or
+handshake. External legacy targets retain their observed upstream profile. Golden
+fixtures compare retained bytes and separately assert every declared deviation.
+
+
+[All47 round023 root-cause dispositions](review023-dispositions.md) record exact correction locations, tests/manual evidence and remaining Android release gates. No working-copy self-score is used.

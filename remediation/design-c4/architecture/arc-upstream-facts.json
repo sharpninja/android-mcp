@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0.0",
+  "kind": "Derived protocol/behavior facts verified against pinned upstream; no copied upstream implementation",
+  "commit": "19792a52a13a3df342f90bab6b246b547e673919",
+  "proto_sha256": "d22f19ce8d170f92c4e2f27bc2b6e4705337aa3d5fa6aed86d8e7eba2f95e79e",
+  "handler_sha256": "120edf0daa93ef1193f331e3c35305fcac24248ec6aaefd4b6db8164cd352c6f",
+  "proto_url": "https://github.com/sharpninja/Avalonia.RemoteControl/blob/19792a52a13a3df342f90bab6b246b547e673919/src/Avalonia.RemoteControl.Protocol/Protos/remote_control.proto",
+  "handler_url": "https://github.com/sharpninja/Avalonia.RemoteControl/blob/19792a52a13a3df342f90bab6b246b547e673919/src/Avalonia.RemoteControl.Runtime/Bridge/RemoteControlBridgeRequestHandler.cs",
+  "version_mismatch": {
+    "status_name": "UNSUPPORTED",
+    "status_number": 5,
+    "message": "Unsupported bridge protocol version.",
+    "source_sections": "HandleAsync version branch and HandleResponsesAsync version branch; zero-length protobuf default version also mismatches"
+  },
+  "message_names": [
+    "GetCapabilitiesRequest",
+    "GetCapabilitiesResponse",
+    "GetSnapshotRequest",
+    "WatchTreeRequest",
+    "TreeSnapshot",
+    "TreeUpdate",
+    "TreeNode",
+    "Rect",
+    "PropertyValue",
+    "InvokeClickRequest",
+    "InvokeFocusRequest",
+    "SetPropertyRequest",
+    "WatchFramesRequest",
+    "FrameUpdate",
+    "SendInputRequest",
+    "RemoteInputEvent",
+    "CommandResult",
+    "WatchLogsRequest",
+    "LogEntry",
+    "BridgeRequest",
+    "BridgeResponse"
+  ],
+  "enum_methods": {
+    "BRIDGE_METHOD_UNSPECIFIED": 0,
+    "BRIDGE_METHOD_GET_CAPABILITIES": 1,
+    "BRIDGE_METHOD_GET_SNAPSHOT": 2,
+    "BRIDGE_METHOD_WATCH_TREE": 3,
+    "BRIDGE_METHOD_INVOKE_CLICK": 4,
+    "BRIDGE_METHOD_INVOKE_FOCUS": 5,
+    "BRIDGE_METHOD_SET_PROPERTY": 6,
+    "BRIDGE_METHOD_WATCH_LOGS": 7,
+    "BRIDGE_METHOD_CANCEL": 8,
+    "BRIDGE_METHOD_WATCH_FRAMES": 9,
+    "BRIDGE_METHOD_SEND_INPUT": 10
+  },
+  "provenance_limit": "Facts are offline regression goldens, not a Kotlin port or independently executed cross-language interoperability suite. Source hashes/URLs support re-verification; copied/translated code/schema still needs applicable upstream notices before distribution."
+}

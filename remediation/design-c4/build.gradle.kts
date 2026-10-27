@@ -25,7 +25,9 @@ fun copyVectorWithCanvas(source: File, target: File) {
     val svg = source.readText().replace(Regex("<!--SRC=\\[.*?\\]-->", RegexOption.DOT_MATCHES_ALL), "")
     val end = svg.indexOf('>', svg.indexOf("<svg")) + 1
     check(end > 0) { "Invalid generated SVG root: $source" }
-    target.writeText(svg.substring(0, end) + "<rect data-canvas=\"white\" x=\"0\" y=\"0\" width=\"100%\" height=\"100%\" fill=\"#ffffff\"/>" + svg.substring(end))
+    val padded = svg.replace(Regex("viewBox=\"0 0 ([0-9.]+) ([0-9.]+)\"")) { m -> "viewBox=\"-64 -64 ${(m.groupValues[1].toDouble() + 128)} ${(m.groupValues[2].toDouble() + 128)}\"" }
+    val paddedEnd = padded.indexOf('>', padded.indexOf("<svg")) + 1
+    target.writeText(padded.substring(0, paddedEnd) + "<rect data-canvas=\"white\" x=\"-64\" y=\"-64\" width=\"200%\" height=\"200%\" fill=\"#ffffff\"/>" + padded.substring(paddedEnd))
 }
 
 val verifyToolchain by tasks.registering {
@@ -60,6 +62,21 @@ val verifyToolchain by tasks.registering {
     }
 }
 
+val validateModuleGraph by tasks.registering(Exec::class) {
+    dependsOn(verifyToolchain)
+    inputs.files("architecture/module-contract.json", "architecture/code-diagrams.md", "tooling/validate-modules.cjs")
+    outputs.file(layout.buildDirectory.file("receipts/module-graph.json"))
+    commandLine(providers.environmentVariable("NODE_BIN").orElse("node").get(), "tooling/validate-modules.cjs", "architecture/module-contract.json", "architecture/code-diagrams.md", "build/receipts/module-graph.json")
+}
+
+val validateModelContracts by tasks.registering(Exec::class) {
+    outputs.upToDateWhen { false }
+    dependsOn(verifyToolchain)
+    inputs.files("architecture/workspace.dsl", "architecture/code-diagrams.md", "architecture/module-contract.json", "docs/Android MCP Bridge Design.md", "docs/ui-blueprint.md", "contracts/openapi.json", "contracts/API-CONTRACT.md", "contracts/source-pins.json", "tooling/validate-contracts.cjs")
+    outputs.file(layout.buildDirectory.file("receipts/model-contracts.json"))
+    commandLine(providers.environmentVariable("NODE_BIN").orElse("node").get(), "tooling/validate-contracts.cjs", projectDir.absolutePath)
+}
+
 val extractCodeViews by tasks.registering {
     inputs.file("architecture/code-diagrams.md")
     outputs.dir(layout.buildDirectory.dir("code-views"))
@@ -86,7 +103,8 @@ val renderCodeViews by tasks.registering {
 }
 
 val validateArchitecture by tasks.registering(Exec::class) {
-    dependsOn(renderCodeViews)
+    outputs.file(layout.buildDirectory.file("receipts/architecture-validation.txt"))
+    dependsOn(renderCodeViews, validateModuleGraph, validateModelContracts)
     inputs.files("architecture/workspace.dsl", "architecture/code-diagrams.md", "toolchain-lock.json")
     inputs.files(expectedCodeViews.map { diagrams.file("$it.svg") })
     commandLine(cli.get(), "validate", "-workspace", architecture.file("workspace.dsl").asFile.absolutePath)
@@ -128,24 +146,16 @@ val generateArchitectureDiagrams by tasks.registering {
     }
 }
 
-val generateUiAssets by tasks.registering(Copy::class) {
-    inputs.file("docs/ui-asset-manifest.json")
-    from("ui-svg") { include("*.svg") }
-    into("docs/screens")
-    doFirst {
-        val manifestIds = Regex("\"id\"\\s*:\\s*\"((?:SCR|STB)[0-9]+)\"").findAll(file("docs/ui-asset-manifest.json").readText()).map { it.groupValues[1] }.toList()
-        check(manifestIds.size == manifestIds.toSet().size && manifestIds.toSet() == expectedUiViews.toSet()) { "UI manifest does not declare the exact required screens/storyboards" }
-        check(fileTree("ui-svg") { include("*.svg") }.files.map { it.nameWithoutExtension }.toSet() == expectedUiViews.toSet()) { "Canonical UI source asset missing or unexpected" }
-    }
-    doLast {
-        val exported = fileTree("docs/screens") { include("*.svg") }.files
-        check(exported.map { it.nameWithoutExtension }.toSet() == expectedUiViews.toSet()) { "Exported UI assets differ from manifest" }
-        exported.forEach { check(sha256(it) == sha256(file("ui-svg/${it.name}"))) { "Edit canonical ui-svg source, not generated copy: $it" } }
-    }
+val generateUiAssets by tasks.registering(Exec::class) {
+    dependsOn(verifyToolchain)
+    inputs.files("docs/ui-blueprint.md", "tooling/render-ui.cjs")
+    outputs.dirs("ui-svg", "docs/screens")
+    outputs.files("docs/ui-asset-manifest.json", "docs/ui-screens-and-storyboards.md", "storyboards/storyboard.md", "build/receipts/ui-projection.json")
+    commandLine(providers.environmentVariable("NODE_BIN").orElse("node").get(), "tooling/render-ui.cjs", projectDir.absolutePath)
 }
 
 val renderStoryboards by tasks.registering {
-    dependsOn(generateUiAssets)
+    dependsOn(verifyToolchain, generateUiAssets)
     inputs.files("storyboards/storyboard.md", ".tools/marp/package-lock.json", "build.gradle.kts", fileTree("docs/screens"))
     outputs.file("docs/storyboards.html")
     doLast {
@@ -177,7 +187,7 @@ val verifyDesignDocs by tasks.registering {
     outputs.file(layout.buildDirectory.file("receipts/docs-validation.txt"))
     doLast {
         val svgFiles = fileTree("docs") { include("**/*.svg") }.files
-        val expectedSvgPaths = expectedNativeViews.map { "diagrams/structurizr-$it.svg" } + expectedCodeViews.map { "diagrams/$it.svg" } + expectedUiViews.map { "screens/$it.svg" }
+        val expectedSvgPaths = expectedNativeViews.map { "diagrams/structurizr-$it.svg" } + expectedCodeViews.map { "diagrams/$it.svg" } + expectedUiViews.map { "screens/$it.svg" } + Regex("\"screens/(?:states|steps)/[A-Z0-9.-]+\\.svg\"").findAll(file("docs/ui-asset-manifest.json").readText()).map { it.value.trim('"') }.toSet()
         check(svgFiles.map { it.relativeTo(file("docs")).invariantSeparatorsPath }.toSet() == expectedSvgPaths.toSet()) { "Missing or unexpected vector diagram/screen assets" }
         svgFiles.forEach { svg ->
             val text = svg.readText()
@@ -199,10 +209,10 @@ val verifyDesignDocs by tasks.registering {
 
 val generateArtifactManifest by tasks.registering {
     dependsOn(verifyDesignDocs)
-    inputs.files(fileTree("docs") { exclude("checksums.sha256") }, fileTree("architecture"), fileTree("ui-svg"), fileTree("storyboards"), fileTree("gradle"), fileTree("tooling"), "README.md", "build.gradle.kts", "settings.gradle.kts", "gradle.properties", "gradlew", "gradlew.bat", "toolchain-lock.json", "renderer-lock.json")
+    inputs.files(fileTree("docs") { exclude("checksums.sha256") }, fileTree("architecture"), fileTree("contracts"), fileTree("ui-svg"), fileTree("storyboards"), fileTree("gradle"), fileTree("tooling"), "README.md", "build.gradle.kts", "settings.gradle.kts", "gradle.properties", "gradlew", "gradlew.bat", "toolchain-lock.json", "renderer-lock.json")
     outputs.file("docs/checksums.sha256")
     doLast {
-        val files = (fileTree("docs") { exclude("checksums.sha256") }.files + fileTree("architecture").files + fileTree("ui-svg").files + fileTree("storyboards").files + fileTree("gradle").files + fileTree("tooling").files + listOf("README.md", "build.gradle.kts", "settings.gradle.kts", "gradle.properties", "gradlew", "gradlew.bat", "toolchain-lock.json", "renderer-lock.json").map { file(it) }).filter { !it.path.contains("__pycache__") }.sortedBy { it.relativeTo(projectDir).invariantSeparatorsPath }
+        val files = (fileTree("docs") { exclude("checksums.sha256") }.files + fileTree("architecture").files + fileTree("contracts").files + fileTree("ui-svg").files + fileTree("storyboards").files + fileTree("gradle").files + fileTree("tooling").files + listOf("README.md", "build.gradle.kts", "settings.gradle.kts", "gradle.properties", "gradlew", "gradlew.bat", "toolchain-lock.json", "renderer-lock.json").map { file(it) }).filter { !it.path.contains("__pycache__") }.sortedBy { it.relativeTo(projectDir).invariantSeparatorsPath }
         file("docs/checksums.sha256").writeText(files.joinToString("\n", postfix="\n") { "${sha256(it)}  ${it.relativeTo(projectDir).invariantSeparatorsPath}" })
     }
 }
@@ -215,6 +225,7 @@ tasks.register<Zip>("packageDesignDocs") {
     isReproducibleFileOrder = true
     from("docs") { into("docs") }
     from("architecture") { into("architecture") }
+    from("contracts") { into("contracts") }
     from("ui-svg") { into("ui-svg") }
     from("storyboards") { into("storyboards") }
     from("gradle") { into("gradle") }

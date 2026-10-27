@@ -12,9 +12,7 @@
         "description": "Bounded indexed search of effective catalog view. Inclusion of suppressed records requires admin scope. Stable ordering by entry_id within pinned view. include_suppressed=true includes suppressed, deleted and conflict states; default excludes all three. Any registry/overlay generation change expires the cursor with 410.",
         "security": [
           {
-            "catalogAuth": [
-              "catalog:read"
-            ]
+            "catalogAuth": []
           }
         ],
         "parameters": [
@@ -117,16 +115,15 @@
               }
             }
           }
-        }
+        },
+        "x-required-capability": "catalog:read"
       },
       "post": {
         "operationId": "createLocalEntry",
         "description": "Create local overlay entry only. Server derives canonical ID. Imported ID collision returns 409; use PUT with current ETag to create an override.",
         "security": [
           {
-            "catalogAuth": [
-              "catalog:admin"
-            ]
+            "catalogAuth": []
           }
         ],
         "parameters": [
@@ -140,6 +137,9 @@
               "maxLength": 200
             },
             "description": "Same key and same canonical request hash returns original result. Different hash returns 409."
+          },
+          {
+            "$ref": "#/components/parameters/OwnerChallenge"
           }
         ],
         "responses": {
@@ -182,14 +182,7 @@
             }
           },
           "403": {
-            "description": "Scope denied",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "description": "OWNER_AUTHORIZATION_REQUIRED: absent, expired, consumed or mismatched exact-command owner approval. No blocking HTTP approval wait."
           },
           "409": {
             "description": "Conflict",
@@ -221,7 +214,9 @@
               }
             }
           }
-        }
+        },
+        "x-owner-authorization": "prearmed-local-exact-command",
+        "x-required-capability": "catalog:admin"
       }
     },
     "/v1/catalog/entries/{entry_id}": {
@@ -230,9 +225,7 @@
         "description": "Return effective entry plus ETag. Suppressed/deleted entries return 410; history remains available to admins. Current entry preconditions always use the cat1 ETag in API-CONTRACT.md.",
         "security": [
           {
-            "catalogAuth": [
-              "catalog:read"
-            ]
+            "catalogAuth": []
           }
         ],
         "parameters": [
@@ -323,16 +316,15 @@
               }
             }
           }
-        }
+        },
+        "x-required-capability": "catalog:read"
       },
       "put": {
         "operationId": "replaceOverlay",
         "description": "Full validated Mutation replacement of local overlay only; canonical identity and imported evidence cannot change. Conflicts require x-resolution with current base hash; tombstones require current cat1 ETag and restore to active. Atomic history/revision append. See API-CONTRACT.md.",
         "security": [
           {
-            "catalogAuth": [
-              "catalog:admin"
-            ]
+            "catalogAuth": []
           }
         ],
         "parameters": [
@@ -353,6 +345,9 @@
               "type": "string"
             },
             "description": "Semantically required. Missing returns 428 before generic validation; malformed/weak/list/wildcard returns 400; stale cat1 tag returns 412 with current tag. Obtain current tag from entry GET or history, including conflict/tombstone."
+          },
+          {
+            "$ref": "#/components/parameters/OwnerChallenge"
           }
         ],
         "responses": {
@@ -395,14 +390,7 @@
             }
           },
           "403": {
-            "description": "Scope denied",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "description": "OWNER_AUTHORIZATION_REQUIRED: absent, expired, consumed or mismatched exact-command owner approval. No blocking HTTP approval wait."
           },
           "404": {
             "description": "Not found",
@@ -472,16 +460,16 @@
               }
             }
           }
-        }
+        },
+        "x-owner-authorization": "prearmed-local-exact-command",
+        "x-required-capability": "catalog:admin"
       },
       "delete": {
         "operationId": "suppressEntry",
         "description": "Create and return suppression/deletion tombstone Entry with new cat1 ETag (200). Already tombstoned and matching tag returns identical tombstone, unchanged revision (200). Conflicts return 409 until explicitly resolved. No recursive cascade.",
         "security": [
           {
-            "catalogAuth": [
-              "catalog:admin"
-            ]
+            "catalogAuth": []
           }
         ],
         "parameters": [
@@ -502,6 +490,9 @@
               "type": "string"
             },
             "description": "Semantically required. Missing returns 428 before generic validation; malformed/weak/list/wildcard returns 400; stale cat1 tag returns 412 with current tag. Obtain current tag from entry GET or history, including conflict/tombstone."
+          },
+          {
+            "$ref": "#/components/parameters/OwnerChallenge"
           }
         ],
         "responses": {
@@ -544,14 +535,7 @@
             }
           },
           "403": {
-            "description": "Scope denied",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "description": "OWNER_AUTHORIZATION_REQUIRED: absent, expired, consumed or mismatched exact-command owner approval. No blocking HTTP approval wait."
           },
           "404": {
             "description": "Not found",
@@ -601,7 +585,9 @@
               }
             }
           }
-        }
+        },
+        "x-owner-authorization": "prearmed-local-exact-command",
+        "x-required-capability": "catalog:admin"
       }
     },
     "/v1/catalog/entries/{entry_id}/history": {
@@ -610,9 +596,7 @@
         "description": "Append-only history, paginated with generation-bound cursors. Response ETag is the current administrative cat1 ETag, not a historical revision. Existing imported entries without overlays return empty history plus their current ETag.",
         "security": [
           {
-            "catalogAuth": [
-              "catalog:admin"
-            ]
+            "catalogAuth": []
           }
         ],
         "parameters": [
@@ -713,7 +697,8 @@
               }
             }
           }
-        }
+        },
+        "x-required-capability": "catalog:read"
       }
     },
     "/v1/catalog/imports": {
@@ -722,9 +707,7 @@
         "description": "Stage hash-pinned artifact already present locally. No URL fetching or file-system path traversal. Validate hashes, source signatures, references, schema and full coverage report before eligible publication. Retry is idempotent; no active-view changes.",
         "security": [
           {
-            "catalogAuth": [
-              "catalog:admin"
-            ]
+            "catalogAuth": []
           }
         ],
         "parameters": [
@@ -738,6 +721,9 @@
               "maxLength": 200
             },
             "description": "Same key and same canonical request hash returns original result. Different hash returns 409."
+          },
+          {
+            "$ref": "#/components/parameters/OwnerChallenge"
           }
         ],
         "responses": {
@@ -772,14 +758,7 @@
             }
           },
           "403": {
-            "description": "Scope denied",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "description": "OWNER_AUTHORIZATION_REQUIRED: absent, expired, consumed or mismatched exact-command owner approval. No blocking HTTP approval wait."
           },
           "409": {
             "description": "Conflict",
@@ -811,7 +790,9 @@
               }
             }
           }
-        }
+        },
+        "x-owner-authorization": "prearmed-local-exact-command",
+        "x-required-capability": "catalog:admin"
       }
     },
     "/v1/catalog/registries/{registry_id}": {
@@ -820,9 +801,7 @@
         "description": "",
         "security": [
           {
-            "catalogAuth": [
-              "catalog:admin"
-            ]
+            "catalogAuth": []
           }
         ],
         "parameters": [
@@ -886,7 +865,8 @@
               }
             }
           }
-        }
+        },
+        "x-required-capability": "catalog:read"
       }
     },
     "/v1/catalog/registries/{registry_id}/publish": {
@@ -895,9 +875,7 @@
         "description": "Atomically publish a validated immutable registry only. Compare expected_active_registry_id under BEGIN IMMEDIATE; mark overlay collisions/rebases/conflicts, retire old registry, switch active pointer, increment registry generation and append history/audit/outbox. Same principal/operation/idempotency-key+request replays original result. Failed transaction leaves all state unchanged. No registry If-Match is required because immutable registry ID, validated state and expected active pointer form the CAS precondition.",
         "security": [
           {
-            "catalogAuth": [
-              "catalog:admin"
-            ]
+            "catalogAuth": []
           }
         ],
         "parameters": [
@@ -919,6 +897,9 @@
               "maxLength": 200
             },
             "description": "Same key and same canonical request hash returns original result. Different hash returns 409."
+          },
+          {
+            "$ref": "#/components/parameters/OwnerChallenge"
           }
         ],
         "responses": {
@@ -953,14 +934,7 @@
             }
           },
           "403": {
-            "description": "Scope denied",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "description": "OWNER_AUTHORIZATION_REQUIRED: absent, expired, consumed or mismatched exact-command owner approval. No blocking HTTP approval wait."
           },
           "409": {
             "description": "Conflict",
@@ -1002,7 +976,9 @@
               }
             }
           }
-        }
+        },
+        "x-owner-authorization": "prearmed-local-exact-command",
+        "x-required-capability": "catalog:admin"
       }
     },
     "/v1/catalog/device-views/current": {
@@ -1011,9 +987,7 @@
         "description": "Read bounded current status/header and strong dv2 ETag, including generation-zero bootstrap with null header. Authorized exact profile/target only. stale forbids admission; availability is separate from permission.",
         "security": [
           {
-            "catalogAuth": [
-              "catalog:read"
-            ]
+            "catalogAuth": []
           }
         ],
         "parameters": [
@@ -1066,7 +1040,8 @@
           "401": {
             "description": "Authentication required"
           }
-        }
+        },
+        "x-required-capability": "catalog:read"
       }
     },
     "/v1/catalog/device-views/{view_id}": {
@@ -1075,9 +1050,7 @@
         "description": "Immutable snapshot read for an authorized profile/target. Historical snapshot is not current authority; cursors pin view_id/generation and fail410 on invalidation.",
         "security": [
           {
-            "catalogAuth": [
-              "catalog:read"
-            ]
+            "catalogAuth": []
           }
         ],
         "parameters": [
@@ -1114,7 +1087,8 @@
           "401": {
             "description": "Authentication required"
           }
-        }
+        },
+        "x-required-capability": "catalog:read"
       }
     },
     "/v1/catalog/device-views/refresh": {
@@ -1123,9 +1097,7 @@
         "description": "Authenticated local owner only, within configured backend authority. Request bounded supported metadata refresh; never accept asserted facts, available flags, arbitrary probes or permission changes. Startup/event refresh uses the same internal coordinator. No HTTP service is implemented. After scope authorization, missing/malformed/mismatching strong current-status ETag returns428/400/412. Matched refresh atomically increments epoch and marks stale, including bootstrap; no duplicate stale token can be admitted. Exact dv2 syntax in API-CONTRACT.md.",
         "security": [
           {
-            "catalogAuth": [
-              "catalog:admin"
-            ]
+            "catalogAuth": []
           }
         ],
         "parameters": [
@@ -1137,6 +1109,9 @@
               "type": "string",
               "pattern": "^\"dv2:[0-9a-f]{64}:(0|[1-9][0-9]*):(0|[1-9][0-9]*):(0|[1-9][0-9]*):(0|[1-9][0-9]*):[0-9a-f]{64}\"$"
             }
+          },
+          {
+            "$ref": "#/components/parameters/OwnerChallenge"
           }
         ],
         "requestBody": {
@@ -1187,7 +1162,7 @@
             }
           },
           "403": {
-            "description": "Owner/backend scope denied"
+            "description": "OWNER_AUTHORIZATION_REQUIRED: absent, expired, consumed or mismatched exact-command owner approval. No blocking HTTP approval wait."
           },
           "400": {
             "description": "Malformed or weak/multiple If-Match token"
@@ -1195,7 +1170,9 @@
           "401": {
             "description": "Authentication required"
           }
-        }
+        },
+        "x-owner-authorization": "prearmed-local-exact-command",
+        "x-required-capability": "catalog:admin"
       }
     },
     "/v1/catalog/device-views/{view_id}/entries": {
@@ -1204,9 +1181,7 @@
         "description": "Bounded rows from one immutable snapshot. Full inventory retained. Cursor binds view/profile/target/authenticated reader/filter and expires410 on invalidation; availability never grants invocation.",
         "security": [
           {
-            "catalogAuth": [
-              "catalog:read"
-            ]
+            "catalogAuth": []
           }
         ],
         "parameters": [
@@ -1281,7 +1256,8 @@
               }
             }
           }
-        }
+        },
+        "x-required-capability": "catalog:read"
       }
     },
     "/v1/catalog/callback-descriptors": {
@@ -1289,9 +1265,7 @@
         "operationId": "listCallbackDescriptors",
         "security": [
           {
-            "catalogAuth": [
-              "catalog:read"
-            ]
+            "catalogAuth": []
           }
         ],
         "parameters": [
@@ -1357,48 +1331,8 @@
               }
             }
           },
-          "409": {
-            "description": "Existing identity, dependency or unresolved import conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
           "410": {
             "description": "Expired reader/collection/generation cursor",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "412": {
-            "description": "Stale strong metadata ETag",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Schema, reference, source or semantic validation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "428": {
-            "description": "Required precondition absent",
             "content": {
               "application/json": {
                 "schema": {
@@ -1418,7 +1352,8 @@
             }
           }
         },
-        "description": "Bounded keyset list. Authenticated reader, collection, registry and metadata generation pin cursor; changed or cross-reader cursor410. Active records only for readers; non-active and history require protected owner. Administrative active never means invocable."
+        "description": "Bounded keyset list. Authenticated reader, collection, registry and metadata generation pin cursor; changed or cross-reader cursor410. Active records only for readers; non-active and history require protected owner. Administrative active never means invocable.",
+        "x-required-capability": "catalog:read"
       }
     },
     "/v1/catalog/callback-descriptors/{callback_id}": {
@@ -1426,9 +1361,7 @@
         "operationId": "readCallbackDescriptor",
         "security": [
           {
-            "catalogAuth": [
-              "catalog:read"
-            ]
+            "catalogAuth": []
           }
         ],
         "parameters": [
@@ -1553,15 +1486,14 @@
             }
           }
         },
-        "description": "Exact metadata1.0 resource with strong meta1 ETag; identity/collection must match. Non-active records are owner-only. Returns administrative representation, never runtime registration or group activation."
+        "description": "Exact metadata1.0 resource with strong meta1 ETag; identity/collection must match. Non-active records are owner-only. Returns administrative representation, never runtime registration or group activation.",
+        "x-required-capability": "catalog:read"
       },
       "put": {
         "operationId": "replaceCallbackDescriptor",
         "security": [
           {
-            "catalogAuth": [
-              "catalog:admin"
-            ]
+            "catalogAuth": []
           }
         ],
         "parameters": [
@@ -1590,6 +1522,9 @@
             "schema": {
               "const": "*"
             }
+          },
+          {
+            "$ref": "#/components/parameters/OwnerChallenge"
           }
         ],
         "responses": {
@@ -1614,14 +1549,7 @@
             }
           },
           "403": {
-            "description": "Reader scope or protected owner approval denied",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "description": "OWNER_AUTHORIZATION_REQUIRED: absent, expired, consumed or mismatched exact-command owner approval. No blocking HTTP approval wait."
           },
           "404": {
             "description": "Resource absent",
@@ -1691,6 +1619,14 @@
                   "$ref": "#/components/schemas/MetadataRepresentation"
                 }
               }
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current strong cat1 ETag",
+                "schema": {
+                  "type": "string"
+                }
+              }
             }
           },
           "200": {
@@ -1723,15 +1659,15 @@
             }
           }
         },
-        "description": "Create at this ITEM URI using If-None-Match:* (201 or412 if it exists), OR fully replace using one current If-Match (200). Exactly one precondition: missing428, both400. No collection POST or PATCH. Exact metadata1.0 resource with strong meta1 ETag; identity/collection must match. Non-active records are owner-only. Replace uses current If-Match; conflict requires explicit resolution against base hash and may restore tombstones. Create uses If-None-Match:* at this item URI. No PATCH."
+        "description": "Create at this ITEM URI using If-None-Match:* (201 or412 if it exists), OR fully replace using one current If-Match (200). Exactly one precondition: missing428, both400. No collection POST or PATCH. Exact metadata1.0 resource with strong meta1 ETag; identity/collection must match. Non-active records are owner-only. Replace uses current If-Match; conflict requires explicit resolution against base hash and may restore tombstones. Create uses If-None-Match:* at this item URI. No PATCH.",
+        "x-owner-authorization": "prearmed-local-exact-command",
+        "x-required-capability": "catalog:admin"
       },
       "delete": {
         "operationId": "deleteCallbackDescriptor",
         "security": [
           {
-            "catalogAuth": [
-              "catalog:admin"
-            ]
+            "catalogAuth": []
           }
         ],
         "parameters": [
@@ -1752,6 +1688,9 @@
               "type": "string",
               "minLength": 1
             }
+          },
+          {
+            "$ref": "#/components/parameters/OwnerChallenge"
           }
         ],
         "responses": {
@@ -1776,14 +1715,7 @@
             }
           },
           "403": {
-            "description": "Reader scope or protected owner approval denied",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "description": "OWNER_AUTHORIZATION_REQUIRED: absent, expired, consumed or mismatched exact-command owner approval. No blocking HTTP approval wait."
           },
           "404": {
             "description": "Resource absent",
@@ -1875,7 +1807,9 @@
             }
           }
         },
-        "description": "Exact metadata1.0 resource with strong meta1 ETag; identity/collection must match. Non-active records are owner-only. DELETE appends imported suppression or local tombstone, preserving history. Repeating a stale conditional request returns412 without further effect; GET current state before a fresh intent."
+        "description": "Exact metadata1.0 resource with strong meta1 ETag; identity/collection must match. Non-active records are owner-only. DELETE appends imported suppression or local tombstone, preserving history. Repeating a stale conditional request returns412 without further effect; GET current state before a fresh intent.",
+        "x-owner-authorization": "prearmed-local-exact-command",
+        "x-required-capability": "catalog:admin"
       }
     },
     "/v1/catalog/callback-descriptors/{callback_id}/history": {
@@ -1883,9 +1817,7 @@
         "operationId": "readCallbackDescriptorHistory",
         "security": [
           {
-            "catalogAuth": [
-              "catalog:admin"
-            ]
+            "catalogAuth": []
           }
         ],
         "parameters": [
@@ -2021,7 +1953,8 @@
             }
           }
         },
-        "description": "Protected owner only; bounded revision history with the same reader/generation cursor rules. No deletion of history."
+        "description": "Protected owner only; bounded revision history with the same reader/generation cursor rules. No deletion of history.",
+        "x-required-capability": "catalog:read"
       }
     },
     "/v1/catalog/functional-groups": {
@@ -2029,9 +1962,7 @@
         "operationId": "listFunctionalGroups",
         "security": [
           {
-            "catalogAuth": [
-              "catalog:read"
-            ]
+            "catalogAuth": []
           }
         ],
         "parameters": [
@@ -2097,48 +2028,8 @@
               }
             }
           },
-          "409": {
-            "description": "Existing identity, dependency or unresolved import conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
           "410": {
             "description": "Expired reader/collection/generation cursor",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "412": {
-            "description": "Stale strong metadata ETag",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Schema, reference, source or semantic validation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "428": {
-            "description": "Required precondition absent",
             "content": {
               "application/json": {
                 "schema": {
@@ -2158,7 +2049,8 @@
             }
           }
         },
-        "description": "Bounded keyset list. Authenticated reader, collection, registry and metadata generation pin cursor; changed or cross-reader cursor410. Active records only for readers; non-active and history require protected owner. Administrative active never means invocable."
+        "description": "Bounded keyset list. Authenticated reader, collection, registry and metadata generation pin cursor; changed or cross-reader cursor410. Active records only for readers; non-active and history require protected owner. Administrative active never means invocable.",
+        "x-required-capability": "catalog:read"
       }
     },
     "/v1/catalog/functional-groups/{group_id}": {
@@ -2166,9 +2058,7 @@
         "operationId": "readFunctionalGroup",
         "security": [
           {
-            "catalogAuth": [
-              "catalog:read"
-            ]
+            "catalogAuth": []
           }
         ],
         "parameters": [
@@ -2293,15 +2183,14 @@
             }
           }
         },
-        "description": "Exact metadata1.0 resource with strong meta1 ETag; identity/collection must match. Non-active records are owner-only. Returns administrative representation, never runtime registration or group activation."
+        "description": "Exact metadata1.0 resource with strong meta1 ETag; identity/collection must match. Non-active records are owner-only. Returns administrative representation, never runtime registration or group activation.",
+        "x-required-capability": "catalog:read"
       },
       "put": {
         "operationId": "replaceFunctionalGroup",
         "security": [
           {
-            "catalogAuth": [
-              "catalog:admin"
-            ]
+            "catalogAuth": []
           }
         ],
         "parameters": [
@@ -2330,6 +2219,9 @@
             "schema": {
               "const": "*"
             }
+          },
+          {
+            "$ref": "#/components/parameters/OwnerChallenge"
           }
         ],
         "responses": {
@@ -2354,14 +2246,7 @@
             }
           },
           "403": {
-            "description": "Reader scope or protected owner approval denied",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "description": "OWNER_AUTHORIZATION_REQUIRED: absent, expired, consumed or mismatched exact-command owner approval. No blocking HTTP approval wait."
           },
           "404": {
             "description": "Resource absent",
@@ -2431,6 +2316,14 @@
                   "$ref": "#/components/schemas/MetadataRepresentation"
                 }
               }
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current strong cat1 ETag",
+                "schema": {
+                  "type": "string"
+                }
+              }
             }
           },
           "200": {
@@ -2463,15 +2356,15 @@
             }
           }
         },
-        "description": "Create at this ITEM URI using If-None-Match:* (201 or412 if it exists), OR fully replace using one current If-Match (200). Exactly one precondition: missing428, both400. No collection POST or PATCH. Exact metadata1.0 resource with strong meta1 ETag; identity/collection must match. Non-active records are owner-only. Replace uses current If-Match; conflict requires explicit resolution against base hash and may restore tombstones. Create uses If-None-Match:* at this item URI. No PATCH."
+        "description": "Create at this ITEM URI using If-None-Match:* (201 or412 if it exists), OR fully replace using one current If-Match (200). Exactly one precondition: missing428, both400. No collection POST or PATCH. Exact metadata1.0 resource with strong meta1 ETag; identity/collection must match. Non-active records are owner-only. Replace uses current If-Match; conflict requires explicit resolution against base hash and may restore tombstones. Create uses If-None-Match:* at this item URI. No PATCH.",
+        "x-owner-authorization": "prearmed-local-exact-command",
+        "x-required-capability": "catalog:admin"
       },
       "delete": {
         "operationId": "deleteFunctionalGroup",
         "security": [
           {
-            "catalogAuth": [
-              "catalog:admin"
-            ]
+            "catalogAuth": []
           }
         ],
         "parameters": [
@@ -2492,6 +2385,9 @@
               "type": "string",
               "minLength": 1
             }
+          },
+          {
+            "$ref": "#/components/parameters/OwnerChallenge"
           }
         ],
         "responses": {
@@ -2516,14 +2412,7 @@
             }
           },
           "403": {
-            "description": "Reader scope or protected owner approval denied",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "description": "OWNER_AUTHORIZATION_REQUIRED: absent, expired, consumed or mismatched exact-command owner approval. No blocking HTTP approval wait."
           },
           "404": {
             "description": "Resource absent",
@@ -2615,7 +2504,9 @@
             }
           }
         },
-        "description": "Exact metadata1.0 resource with strong meta1 ETag; identity/collection must match. Non-active records are owner-only. DELETE appends imported suppression or local tombstone, preserving history. Repeating a stale conditional request returns412 without further effect; GET current state before a fresh intent."
+        "description": "Exact metadata1.0 resource with strong meta1 ETag; identity/collection must match. Non-active records are owner-only. DELETE appends imported suppression or local tombstone, preserving history. Repeating a stale conditional request returns412 without further effect; GET current state before a fresh intent.",
+        "x-owner-authorization": "prearmed-local-exact-command",
+        "x-required-capability": "catalog:admin"
       }
     },
     "/v1/catalog/functional-groups/{group_id}/history": {
@@ -2623,9 +2514,7 @@
         "operationId": "readFunctionalGroupHistory",
         "security": [
           {
-            "catalogAuth": [
-              "catalog:admin"
-            ]
+            "catalogAuth": []
           }
         ],
         "parameters": [
@@ -2761,7 +2650,8 @@
             }
           }
         },
-        "description": "Protected owner only; bounded revision history with the same reader/generation cursor rules. No deletion of history."
+        "description": "Protected owner only; bounded revision history with the same reader/generation cursor rules. No deletion of history.",
+        "x-required-capability": "catalog:read"
       }
     },
     "/v1/catalog/entries/{entry_id}/source-metadata": {
@@ -2769,9 +2659,7 @@
         "operationId": "readEntrySourceMetadata",
         "security": [
           {
-            "catalogAuth": [
-              "catalog:read"
-            ]
+            "catalogAuth": []
           }
         ],
         "parameters": [
@@ -2887,24 +2775,157 @@
             }
           }
         },
-        "description": "Follows effective Entry read visibility. Returns produced source evidence or explicit not-produced reason; absent metadata never means no callbacks or unrestricted invocation. Suppressed/deleted entry follows Entry410 behavior."
+        "description": "Follows effective Entry read visibility. Returns produced source evidence or explicit not-produced reason; absent metadata never means no callbacks or unrestricted invocation. Suppressed/deleted entry follows Entry410 behavior.",
+        "x-required-capability": "catalog:read"
+      }
+    },
+    "/v1/catalog/import-stages": {
+      "post": {
+        "operationId": "sealImportStage",
+        "security": [
+          {
+            "catalogAuth": []
+          }
+        ],
+        "x-owner-authorization": "prearmed-local-exact-command",
+        "description": "Copies exact bounded bytes, verifies declared hash/size and quarantined schema before returning a sealed handle. Capacity-aware configured stage/window lifetime; no resumability claim. No active catalog change.",
+        "parameters": [
+          {
+            "name": "X-Artifact-SHA256",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          },
+          {
+            "name": "X-Artifact-Size",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "$ref": "#/components/parameters/OwnerChallenge"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/octet-stream": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Sealed stage",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportStage"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Malformed expected hash/size"
+          },
+          "401": {
+            "description": "Invalid admin credential"
+          },
+          "403": {
+            "description": "OWNER_AUTHORIZATION_REQUIRED"
+          },
+          "409": {
+            "description": "Idempotency conflict"
+          },
+          "413": {
+            "description": "Configured byte/capacity bound exceeded"
+          },
+          "422": {
+            "description": "Hash/size/schema mismatch or STAGE_LIFETIME_INSUFFICIENT"
+          }
+        },
+        "x-required-capability": "catalog:admin"
+      },
+      "get": {
+        "operationId": "listOwnedImportStages",
+        "security": [
+          {
+            "catalogAuth": []
+          }
+        ],
+        "description": "Sanitized handles scoped to this admin and management window, pinned cursor; no cross-principal exposure.",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 500,
+              "default": 100
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Owned sealed/terminal stages within retention",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportStagePage"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid admin credential"
+          },
+          "403": {
+            "description": "Management window closed"
+          },
+          "410": {
+            "description": "Cursor expired"
+          }
+        },
+        "x-required-capability": "catalog:admin"
       }
     }
   },
   "components": {
     "securitySchemes": {
       "catalogAuth": {
-        "type": "oauth2",
-        "description": "Abstract scope contract; deployment and issuer remain unspecified. Do not enable remote access from this document.",
-        "flows": {
-          "clientCredentials": {
-            "tokenUrl": "https://catalog.invalid/not-configured/token",
-            "scopes": {
-              "catalog:read": "Read catalog metadata",
-              "catalog:admin": "Manage local overlays and imports; no invocation grant"
-            }
-          }
-        }
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Owner-issued local credentials.kind=admin bearer; server verifies catalog read/admin capability. No OAuth token endpoint. Mutations additionally require service-owned exact-command local approval.",
+        "x-server-capabilities": [
+          "catalog:read",
+          "catalog:admin"
+        ]
       }
     },
     "schemas": {
@@ -3731,7 +3752,8 @@
             "pattern": "^[0-9a-f]{64}$"
           },
           "local_artifact_id": {
-            "type": "string"
+            "type": "string",
+            "description": "Opaque sealed stage_handle owned by the authenticated admin/window; never a filesystem path."
           },
           "registry_version": {
             "type": "integer",
@@ -7031,6 +7053,78 @@
           "constraint"
         ],
         "additionalProperties": false
+      },
+      "ImportStage": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "stage_handle",
+          "sha256",
+          "size_bytes",
+          "expires_at",
+          "state"
+        ],
+        "properties": {
+          "stage_handle": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "size_bytes": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "state": {
+            "enum": [
+              "sealed",
+              "consumed",
+              "expired",
+              "cancelled"
+            ]
+          }
+        }
+      },
+      "ImportStagePage": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "items",
+          "next_cursor"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "maxItems": 500,
+            "items": {
+              "$ref": "#/components/schemas/ImportStage"
+            }
+          },
+          "next_cursor": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "parameters": {
+      "OwnerChallenge": {
+        "name": "X-Owner-Challenge",
+        "in": "header",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": "Nonsecret reference to a prearmed local exact-command approval owned and consumed by the service. Never a caller-supplied authority token."
       }
     }
   }
