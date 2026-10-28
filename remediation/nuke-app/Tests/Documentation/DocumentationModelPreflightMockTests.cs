@@ -30,7 +30,7 @@ public sealed class ModelPreflightEnvironment
             {
                 var bytes=source.Role==DocumentationInputRole.CanonicalContractOptional
                     ?ModelContractFixture.Current.Copies.Single(copy=>copy.File==DocumentationModelSourceCases.Contracts.Single(contract=>contract.Id==source.ContractId).File).Snapshot.Bytes.ToArray()
-                    :File.ReadAllBytes(Path.Combine(f.Workspace,"remediation/design-c4",source.RelativePath));
+                    :f.ReadOriginalDesignBytes(source.RelativePath);
                 if(scenario=="MODULE-JSON"&&source.RelativePath=="architecture/module-contract.json")bytes=new byte[]{0};
                 content=new(source.RelativePath,bytes,source.MediaType);
             }

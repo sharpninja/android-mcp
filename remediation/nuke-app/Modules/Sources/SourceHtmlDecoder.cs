@@ -7,19 +7,41 @@ using AndroidMcp.BuildTool.Core;
 namespace AndroidMcp.BuildTool.Sources;
 
 /// <summary>The legacy HTML5 entity-unescape rules over pinned official entity data.</summary>
-public sealed class SourceHtmlDecoder : ISourceHtmlDecoder
+public sealed class SourceHtmlDecoder : IProfiledSourceHtmlDecoder
 {
     private const string Resource = "AndroidMcp.BuildTool.Sources.entities.whatwg.json";
     private const string DataSha256 = "d741d877ac77c4194c4ad526b5b4a19aef8dfe411ab840a466891cdbb9f362e6";
     private static readonly Lazy<IReadOnlyDictionary<string, string>> Entries = new(LoadEntries);
     private static readonly Regex Reference = new(@"&(#[0-9]+;?|#[xX][0-9a-fA-F]+;?|[^\t\n\f <&#;]{1,32};?)", RegexOptions.CultureInvariant);
+    private static readonly Regex AttributeReference = new(@"&(#[0-9]+|#[xX][0-9a-fA-F]+|[a-zA-Z][a-zA-Z0-9]*)[;=]?", RegexOptions.CultureInvariant);
     // U+0080 through U+009F substitutions, including the five unchanged C1 controls.
     private const string C1 = "\u20ac\u0081\u201a\u0192\u201e\u2026\u2020\u2021\u02c6\u2030\u0160\u2039\u0152\u008d\u017d\u008f\u0090\u2018\u2019\u201c\u201d\u2022\u2013\u2014\u02dc\u2122\u0161\u203a\u0153\u009d\u017e\u0178";
 
     public string Decode(string text)
     {
         ArgumentNullException.ThrowIfNull(text);
-        return Reference.Replace(text, match => Replace(match.Groups[1].Value));
+        return DecodeText(text);
+    }
+
+    public string Decode(string text, SourceHtmlDecodingProfile profile)
+    {
+        ArgumentNullException.ThrowIfNull(text);
+        return profile switch
+        {
+            SourceHtmlDecodingProfile.Text => DecodeText(text),
+            SourceHtmlDecodingProfile.Attribute => AttributeReference.Replace(text, match => ReplaceAttribute(match.Value)),
+            _ => throw new ArgumentOutOfRangeException(nameof(profile))
+        };
+    }
+
+    private static string DecodeText(string text) => Reference.Replace(text, match => Replace(match.Groups[1].Value));
+
+    private static string ReplaceAttribute(string reference)
+    {
+        // Numeric matches reuse the existing text replacement, including any
+        // unmatched suffix. Named matches require one exact table entry.
+        if (reference.StartsWith("&#", StringComparison.Ordinal)) return DecodeText(reference);
+        return !reference.EndsWith('=') && Entries.Value.TryGetValue(reference[1..], out var value) ? value : reference;
     }
 
     private static IReadOnlyDictionary<string, string> LoadEntries()

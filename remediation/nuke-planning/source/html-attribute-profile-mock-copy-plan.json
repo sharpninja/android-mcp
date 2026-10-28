@@ -1,0 +1,76 @@
+{
+  "at": "2026-10-28T12:42:53",
+  "scope": "Bounded previously mapped permission_reference attribute entity policy; one existing decoder/table gains an additive profile, no new parser or operation.",
+  "originalProducers": [
+    {
+      "path": "remediation/catalog/tooling/permission_reference.py",
+      "sha256": "6678adf0d5cb2dee55206f2262fe629058909f472eb558399a0997a89ac666d6"
+    },
+    {
+      "path": "rehydration/producers/release-011/tooling/permission_reference.py",
+      "sha256": "6678adf0d5cb2dee55206f2262fe629058909f472eb558399a0997a89ac666d6"
+    }
+  ],
+  "legacyDependency": {
+    "path": "/usr/lib/python3.14/html/parser.py",
+    "sha256": "5c5ed245889135564e75dfed9a47aeb6b4d3e5a2e9614d918a986767e3747539",
+    "readAsTextOnly": true,
+    "matcher": "&(#[0-9]+|#[xX][0-9a-fA-F]+|[a-zA-Z][a-zA-Z0-9]*)[;=]?",
+    "policy": "Numeric references always use existing unescape; named references require exact existing entity-table key and no trailing equals. No longest-prefix fallback in attribute mode."
+  },
+  "discriminators": [
+    { "input": "&notit;", "text": "¬it;", "attribute": "&notit;", "reason": "Unknown named reference must not expand a shorter legacy prefix in attributes." },
+    { "input": "&copy=", "text": "©=", "attribute": "&copy=", "reason": "Trailing equals preserves the whole named match in attributes." },
+    { "input": "&ampx", "text": "&x", "attribute": "&ampx", "reason": "Nonexact semicolonless name is preserved in attributes." },
+    { "input": "&copy;=", "text": "©=", "attribute": "©=", "reason": "Exact semicolon-terminated reference ends before the equals; attribute policy is not blanket entity suppression." },
+    { "input": "&copy", "text": "©", "attribute": "©", "reason": "An exact legacy table name without semicolon remains valid." },
+    { "input": "&#65=", "text": "A=", "attribute": "A=", "reason": "Numeric replacement precedes the named trailing-equals guard and keeps its unmatched suffix." }
+  ],
+  "sectionFixtures": [
+    "REF01 whole-section fixture with only data-version-added changed to &notit;",
+    "REF01 whole-section fixture with only data-version-added changed to &copy="
+  ],
+  "sectionProof": "Observe exact typed Attribute call and Text data call; repeat with an injected attribute return sentinel and require introduced_raw to change accordingly. Independently reject missing/duplicate/wrong-profile calls, incorrect metadata, ignored returned values and swallowed decoder failures. Reuse prior full expected metadata and byte immutability assertions.",
+  "files": [
+    {
+      "source": "remediation/nuke-planning/source/SourceHtmlProfileContracts.cs.template",
+      "destination": "remediation/nuke-app/Modules/Sources/SourceHtmlProfileContracts.cs",
+      "sha256": "12dac775bc0b0441f7d763a1863b71dd0bc5be7076f5bd23d66d5d599c77b2c7",
+      "expectedPrior": "absent"
+    },
+    {
+      "source": "remediation/nuke-planning/source/SourceHtmlProfileContractCases.cs.template",
+      "destination": "remediation/nuke-app/Tests/Sources/SourceHtmlProfileContractCases.cs",
+      "sha256": "dc3540be4717a1cd275e0469e74bf29d3772611f370dd5b0263851100f2baa40",
+      "expectedPrior": "absent"
+    },
+    {
+      "source": "remediation/nuke-planning/source/SourceHtmlProfileMockTests.cs.template",
+      "destination": "remediation/nuke-app/Tests/Sources/SourceHtmlProfileMockTests.cs",
+      "sha256": "a5b1ddc2268fa5da66b0f2f815ad35d2548faad3f3a9a9941dfac15ee95d6de2",
+      "expectedPrior": "absent"
+    },
+    {
+      "source": "remediation/nuke-planning/source/PermissionReferenceAttributeContractCases.cs.template",
+      "destination": "remediation/nuke-app/Tests/Sources/PermissionReferenceAttributeContractCases.cs",
+      "sha256": "25d31204d8351f18d67456e7867cf1762cb826b878d48c217322d26dab0d0347",
+      "expectedPrior": "absent"
+    },
+    {
+      "source": "remediation/nuke-planning/source/PermissionReferenceAttributeMockTests.cs.template",
+      "destination": "remediation/nuke-app/Tests/Sources/PermissionReferenceAttributeMockTests.cs",
+      "sha256": "f6d4b89b6231e210be5dd3672458163000bcb475c6321d13aff03f5ed51d290c",
+      "expectedPrior": "absent"
+    }
+  ],
+  "syntaxErrors": 0,
+  "estimatedMockRows": { "profile": 38, "permissionIntegration": 18, "total": 56 },
+  "discovery": "Pending Root mock gate; estimates are not proof.",
+  "unchangedRegressions": "Existing31 text vectors, HTML data/failure cases and13 permission-reference cases remain unchanged; not duplicated in this slice.",
+  "productionEdited": false,
+  "nativeProof": false,
+  "completeHtmlParserConformance": false,
+  "wholeProducerOrCorpusVerified": false,
+  "hvAccepted": false,
+  "safeToDelete": false
+}

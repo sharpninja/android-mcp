@@ -1,0 +1,527 @@
+{
+  "Timestamp": "2026-10-28T13:00:18",
+  "Scope": "Registered one Validate/Catalog operation, same17 actual monolith CLI cases; normal caller proof only",
+  "Trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261028T1253040888097-f38ed5109a7a48e1b21f1ef547514d0e/tests.trx",
+  "TrxSha256": "8849f70c65940822da8b841f691ad41cc6012f0e819bb2cdef20646e28c22e18",
+  "SuitePassed": 504,
+  "Failed": 0,
+  "Skipped": 0,
+  "OwnNative": 17,
+  "RootPlannerNative": 11,
+  "MockRows": 34,
+  "IndependentMockControls": 571,
+  "MockGate": {
+    "Trx": "remediation/nuke-app/artifacts/tests/20261028T1238431673238-3257e28506064311ba9a9fce856212e0/tests.trx",
+    "Sha256": "b6ea2309b76e2fb53d8007a5a10e0825ffae507fb709924c481cbf0d3f2a7e4f",
+    "Total": 139,
+    "OwnRows": 34,
+    "PlannerRows": 22
+  },
+  "NativeFiles": [
+    {
+      "Path": "remediation/nuke-app/Modules/Catalog/CatalogValidator.cs",
+      "Sha256": "1738578be30373d0e191f0a926470aa799e8cc844590572f0f17813634940610"
+    },
+    {
+      "Path": "remediation/nuke-app/Modules/Catalog/CatalogValidationWorkflowContracts.cs",
+      "Sha256": "c33f9141c94c48679744e80a1fc8a8d039da27b08258524b7ddec944655598db"
+    },
+    {
+      "Path": "remediation/nuke-app/Modules/Catalog/CatalogValidationWorkflowReader.cs",
+      "Sha256": "430504d58f2d3c7e9d7ff40420302afc4bebaf328f571b1f11da86066db286fa"
+    },
+    {
+      "Path": "remediation/nuke-app/Build.CatalogValidation.cs",
+      "Sha256": "699c7d953f9113078ef874ac19aa3726e175b9341f59f396a6527b61772a1ff9"
+    },
+    {
+      "Path": "remediation/nuke-app/Build.cs",
+      "Sha256": "82b75311060f493f0e409845a7ce5e038ce02cbbb4472f8dd895a021efc1029e"
+    },
+    {
+      "Path": "remediation/nuke-app/Core/OperationRegistry.cs",
+      "Sha256": "5e34a07b7ff2505b207a02257d234802d68758b8aea77f7345b796c5b8cbbb29"
+    },
+    {
+      "Path": "remediation/nuke-app/Tests/Catalog/CatalogFullValidationRealTests.cs",
+      "Sha256": "e1457dc105bcd7b6a94a0c2c956a291e49ef4d2199dd479f4494f8aa94fa741f"
+    },
+    {
+      "Path": "remediation/nuke-app/Tests/Catalog/CatalogValidationCliCases.cs",
+      "Sha256": "5fdcbf7bbea9db5a2c7300268f8cafa681eb4e8249583972043671c2c2b2a85d"
+    },
+    {
+      "Path": "remediation/nuke-app/Tests/Catalog/CatalogValidationCliRealTests.cs",
+      "Sha256": "81075cff998a1b91794955e2b06744bc6fdb525ec67931d50f662d74fbdc60a9"
+    }
+  ],
+  "NativeResults": [
+    {
+      "Name": "AndroidMcp.BuildTool.Tests.Catalog.CatalogValidationCliRealTests.SameSeventeenCasesBindTheRegisteredMonolithicValidationCaller(test: CatalogValidationCliCase { Id = VAL-CLI-08-wrong-request-hash, Variant = bad-pin-hash, Mode = Release, Original = , Exit = 1, Error = ARTIFACT_PIN_HASH, ReportCreated = False, ExistingReportRetained = False })",
+      "Outcome": "Passed"
+    },
+    {
+      "Name": "AndroidMcp.BuildTool.Tests.Catalog.CatalogValidationCliRealTests.SameSeventeenCasesBindTheRegisteredMonolithicValidationCaller(test: CatalogValidationCliCase { Id = VAL-CLI-10-unknown-mode, Variant = unknown-mode, Mode = , Original = , Exit = 1, Error = CATALOG_VALIDATION_REQUEST, ReportCreated = False, ExistingReportRetained = False })",
+      "Outcome": "Passed"
+    },
+    {
+      "Name": "AndroidMcp.BuildTool.Tests.Catalog.CatalogValidationCliRealTests.SameSeventeenCasesBindTheRegisteredMonolithicValidationCaller(test: CatalogValidationCliCase { Id = CLI-FULL-VAL-02-source-reconciliation-sha, Variant = source-tamper, Mode = Release, Original = CatalogFullValidationCase { Id = FULL-VAL-02-source-reconciliation-sha, Call = CatalogFullValidationCall { Variant = source-tamper, ApplyOriginalOverlay = False }, Expected = CatalogFullValidationReply { Build = CatalogBuildReply { Outcome = ok, FinalDatabase = True, UnpublishedFailure = False, Sources = 3, Bindings = 10, Occurrences = 10, Declarations = 10, PermissionDefinitions = 1, Entries = 10, Inventory = 10, GoIntOccurrences = 1, Integrity = True, ForeignKeys = True, EntrySchemas = True, PermissionSchemas = True, InventorySchemas = True, InventoryStreamHash = True, ExportDatabaseAgreement = True, ImmutableBindings = True, DefaultDeny = True, SourceFingerprintNative = True, OriginalInputsRetained = True, OutputRefusedWithoutMutation = False, KnownCameraPermission = True }, Outcome = rejected, ExistingOutputsUnchanged = True, OriginalInputsRetained = True, SuppressionHidesOne = , RestoreExactDocument = , HistoryRows = , MissingOccurrenceRejected = , EntriesValidated = , Integrity = , ForeignKeyFailures = , SchemaFailures = , InventoryValidated = , ReadOnlyDatabase = , ReportCreated = False, ExistingReportRetained = , ErrorContains = SHA256, Complete = , ApplicabilityRevalidated = , DeclarationVariantOmissions = , NativeProducerIdentity =  } }, Exit = 1, Error = SHA256, ReportCreated = False, ExistingReportRetained = False })",
+      "Outcome": "Passed"
+    },
+    {
+      "Name": "AndroidMcp.BuildTool.Tests.Catalog.CatalogValidationCliRealTests.SameSeventeenCasesBindTheRegisteredMonolithicValidationCaller(test: CatalogValidationCliCase { Id = VAL-CLI-12-missing-release-inventory, Variant = missing-release-inventory, Mode = Release, Original = , Exit = 1, Error = CATALOG_VALIDATION_REQUEST, ReportCreated = False, ExistingReportRetained = False })",
+      "Outcome": "Passed"
+    },
+    {
+      "Name": "AndroidMcp.BuildTool.Tests.Catalog.CatalogValidationCliRealTests.SameSeventeenCasesBindTheRegisteredMonolithicValidationCaller(test: CatalogValidationCliCase { Id = VAL-CLI-09-wrong-request-length, Variant = bad-pin-length, Mode = Release, Original = , Exit = 1, Error = ARTIFACT_PIN_LENGTH, ReportCreated = False, ExistingReportRetained = False })",
+      "Outcome": "Passed"
+    },
+    {
+      "Name": "AndroidMcp.BuildTool.Tests.Catalog.CatalogValidationCliRealTests.SameSeventeenCasesBindTheRegisteredMonolithicValidationCaller(test: CatalogValidationCliCase { Id = VAL-CLI-07-database-report-create-new, Variant = database-existing-report, Mode = Database, Original = , Exit = 1, Error = already exists, ReportCreated = False, ExistingReportRetained = True })",
+      "Outcome": "Passed"
+    },
+    {
+      "Name": "AndroidMcp.BuildTool.Tests.Catalog.CatalogValidationCliRealTests.SameSeventeenCasesBindTheRegisteredMonolithicValidationCaller(test: CatalogValidationCliCase { Id = VAL-CLI-13-missing-release-output, Variant = missing-release-output, Mode = Release, Original = , Exit = 1, Error = CATALOG_VALIDATION_REQUEST, ReportCreated = False, ExistingReportRetained = False })",
+      "Outcome": "Passed"
+    },
+    {
+      "Name": "AndroidMcp.BuildTool.Tests.Catalog.CatalogValidationCliRealTests.SameSeventeenCasesBindTheRegisteredMonolithicValidationCaller(test: CatalogValidationCliCase { Id = CLI-FULL-VAL-05-report-create-new, Variant = existing-report, Mode = Release, Original = CatalogFullValidationCase { Id = FULL-VAL-05-report-create-new, Call = CatalogFullValidationCall { Variant = existing-report, ApplyOriginalOverlay = False }, Expected = CatalogFullValidationReply { Build = CatalogBuildReply { Outcome = ok, FinalDatabase = True, UnpublishedFailure = False, Sources = 3, Bindings = 10, Occurrences = 10, Declarations = 10, PermissionDefinitions = 1, Entries = 10, Inventory = 10, GoIntOccurrences = 1, Integrity = True, ForeignKeys = True, EntrySchemas = True, PermissionSchemas = True, InventorySchemas = True, InventoryStreamHash = True, ExportDatabaseAgreement = True, ImmutableBindings = True, DefaultDeny = True, SourceFingerprintNative = True, OriginalInputsRetained = True, OutputRefusedWithoutMutation = False, KnownCameraPermission = True }, Outcome = rejected, ExistingOutputsUnchanged = True, OriginalInputsRetained = True, SuppressionHidesOne = , RestoreExactDocument = , HistoryRows = , MissingOccurrenceRejected = , EntriesValidated = , Integrity = , ForeignKeyFailures = , SchemaFailures = , InventoryValidated = , ReadOnlyDatabase = , ReportCreated = False, ExistingReportRetained = True, ErrorContains = already exists, Complete = , ApplicabilityRevalidated = , DeclarationVariantOmissions = , NativeProducerIdentity =  } }, Exit = 1, Error = already exists, ReportCreated = False, ExistingReportRetained = True })",
+      "Outcome": "Passed"
+    },
+    {
+      "Name": "AndroidMcp.BuildTool.Tests.Catalog.CatalogValidationCliRealTests.SameSeventeenCasesBindTheRegisteredMonolithicValidationCaller(test: CatalogValidationCliCase { Id = VAL-CLI-11-missing-mode, Variant = missing-mode, Mode = , Original = , Exit = 1, Error = CATALOG_VALIDATION_REQUEST, ReportCreated = False, ExistingReportRetained = False })",
+      "Outcome": "Passed"
+    },
+    {
+      "Name": "AndroidMcp.BuildTool.Tests.Catalog.CatalogValidationCliRealTests.SameSeventeenCasesBindTheRegisteredMonolithicValidationCaller(test: CatalogValidationCliCase { Id = CLI-FULL-VAL-06-original-v3-database-readonly, Variant = database-only, Mode = Database, Original = CatalogFullValidationCase { Id = FULL-VAL-06-original-v3-database-readonly, Call = CatalogFullValidationCall { Variant = database-only, ApplyOriginalOverlay = False }, Expected = CatalogFullValidationReply { Build = CatalogBuildReply { Outcome = ok, FinalDatabase = True, UnpublishedFailure = False, Sources = 3, Bindings = 10, Occurrences = 10, Declarations = 10, PermissionDefinitions = 1, Entries = 10, Inventory = 10, GoIntOccurrences = 1, Integrity = True, ForeignKeys = True, EntrySchemas = True, PermissionSchemas = True, InventorySchemas = True, InventoryStreamHash = True, ExportDatabaseAgreement = True, ImmutableBindings = True, DefaultDeny = True, SourceFingerprintNative = True, OriginalInputsRetained = True, OutputRefusedWithoutMutation = False, KnownCameraPermission = True }, Outcome = ok, ExistingOutputsUnchanged = True, OriginalInputsRetained = True, SuppressionHidesOne = , RestoreExactDocument = , HistoryRows = , MissingOccurrenceRejected = , EntriesValidated = 10, Integrity = ok, ForeignKeyFailures = 0, SchemaFailures = 0, InventoryValidated = , ReadOnlyDatabase = True, ReportCreated = True, ExistingReportRetained = , ErrorContains = , Complete = False, ApplicabilityRevalidated = False, DeclarationVariantOmissions = 0, NativeProducerIdentity = True } }, Exit = 0, Error = , ReportCreated = True, ExistingReportRetained = False })",
+      "Outcome": "Passed"
+    },
+    {
+      "Name": "AndroidMcp.BuildTool.Tests.Catalog.CatalogValidationCliRealTests.SameSeventeenCasesBindTheRegisteredMonolithicValidationCaller(test: CatalogValidationCliCase { Id = CLI-FULL-VAL-04-report-outside-immutable, Variant = report-inside, Mode = Release, Original = CatalogFullValidationCase { Id = FULL-VAL-04-report-outside-immutable, Call = CatalogFullValidationCall { Variant = report-inside, ApplyOriginalOverlay = False }, Expected = CatalogFullValidationReply { Build = CatalogBuildReply { Outcome = ok, FinalDatabase = True, UnpublishedFailure = False, Sources = 3, Bindings = 10, Occurrences = 10, Declarations = 10, PermissionDefinitions = 1, Entries = 10, Inventory = 10, GoIntOccurrences = 1, Integrity = True, ForeignKeys = True, EntrySchemas = True, PermissionSchemas = True, InventorySchemas = True, InventoryStreamHash = True, ExportDatabaseAgreement = True, ImmutableBindings = True, DefaultDeny = True, SourceFingerprintNative = True, OriginalInputsRetained = True, OutputRefusedWithoutMutation = False, KnownCameraPermission = True }, Outcome = rejected, ExistingOutputsUnchanged = True, OriginalInputsRetained = True, SuppressionHidesOne = , RestoreExactDocument = , HistoryRows = , MissingOccurrenceRejected = , EntriesValidated = , Integrity = , ForeignKeyFailures = , SchemaFailures = , InventoryValidated = , ReadOnlyDatabase = , ReportCreated = False, ExistingReportRetained = , ErrorContains = outside immutable, Complete = , ApplicabilityRevalidated = , DeclarationVariantOmissions = , NativeProducerIdentity =  } }, Exit = 1, Error = outside immutable, ReportCreated = False, ExistingReportRetained = False })",
+      "Outcome": "Passed"
+    },
+    {
+      "Name": "AndroidMcp.BuildTool.Tests.Catalog.CatalogValidationCliRealTests.SameSeventeenCasesBindTheRegisteredMonolithicValidationCaller(test: CatalogValidationCliCase { Id = VAL-CLI-15-blank-report, Variant = blank-report, Mode = Release, Original = , Exit = 1, Error = CATALOG_VALIDATION_REQUEST, ReportCreated = False, ExistingReportRetained = False })",
+      "Outcome": "Passed"
+    },
+    {
+      "Name": "AndroidMcp.BuildTool.Tests.Catalog.CatalogValidationCliRealTests.SameSeventeenCasesBindTheRegisteredMonolithicValidationCaller(test: CatalogValidationCliCase { Id = VAL-CLI-17-unknown-member, Variant = unknown-member, Mode = Release, Original = , Exit = 1, Error = CATALOG_VALIDATION_REQUEST, ReportCreated = False, ExistingReportRetained = False })",
+      "Outcome": "Passed"
+    },
+    {
+      "Name": "AndroidMcp.BuildTool.Tests.Catalog.CatalogValidationCliRealTests.SameSeventeenCasesBindTheRegisteredMonolithicValidationCaller(test: CatalogValidationCliCase { Id = VAL-CLI-16-mixed-mode, Variant = mixed-mode, Mode = Database, Original = , Exit = 1, Error = CATALOG_VALIDATION_REQUEST, ReportCreated = False, ExistingReportRetained = False })",
+      "Outcome": "Passed"
+    },
+    {
+      "Name": "AndroidMcp.BuildTool.Tests.Catalog.CatalogValidationCliRealTests.SameSeventeenCasesBindTheRegisteredMonolithicValidationCaller(test: CatalogValidationCliCase { Id = CLI-FULL-VAL-01-original-overlay-full-readonly-validation, Variant = original, Mode = Release, Original = CatalogFullValidationCase { Id = FULL-VAL-01-original-overlay-full-readonly-validation, Call = CatalogFullValidationCall { Variant = original, ApplyOriginalOverlay = True }, Expected = CatalogFullValidationReply { Build = CatalogBuildReply { Outcome = ok, FinalDatabase = True, UnpublishedFailure = False, Sources = 3, Bindings = 10, Occurrences = 10, Declarations = 10, PermissionDefinitions = 1, Entries = 10, Inventory = 10, GoIntOccurrences = 1, Integrity = True, ForeignKeys = True, EntrySchemas = True, PermissionSchemas = True, InventorySchemas = True, InventoryStreamHash = True, ExportDatabaseAgreement = True, ImmutableBindings = True, DefaultDeny = True, SourceFingerprintNative = True, OriginalInputsRetained = True, OutputRefusedWithoutMutation = False, KnownCameraPermission = True }, Outcome = ok, ExistingOutputsUnchanged = True, OriginalInputsRetained = True, SuppressionHidesOne = True, RestoreExactDocument = True, HistoryRows = 2, MissingOccurrenceRejected = True, EntriesValidated = 10, Integrity = ok, ForeignKeyFailures = 0, SchemaFailures = 0, InventoryValidated = True, ReadOnlyDatabase = True, ReportCreated = True, ExistingReportRetained = , ErrorContains = , Complete = False, ApplicabilityRevalidated = , DeclarationVariantOmissions = , NativeProducerIdentity = True } }, Exit = 0, Error = , ReportCreated = True, ExistingReportRetained = False })",
+      "Outcome": "Passed"
+    },
+    {
+      "Name": "AndroidMcp.BuildTool.Tests.Catalog.CatalogValidationCliRealTests.SameSeventeenCasesBindTheRegisteredMonolithicValidationCaller(test: CatalogValidationCliCase { Id = VAL-CLI-14-missing-database, Variant = missing-database, Mode = Database, Original = , Exit = 1, Error = CATALOG_VALIDATION_REQUEST, ReportCreated = False, ExistingReportRetained = False })",
+      "Outcome": "Passed"
+    },
+    {
+      "Name": "AndroidMcp.BuildTool.Tests.Catalog.CatalogValidationCliRealTests.SameSeventeenCasesBindTheRegisteredMonolithicValidationCaller(test: CatalogValidationCliCase { Id = CLI-FULL-VAL-03-entry-export-hash, Variant = export-tamper, Mode = Release, Original = CatalogFullValidationCase { Id = FULL-VAL-03-entry-export-hash, Call = CatalogFullValidationCall { Variant = export-tamper, ApplyOriginalOverlay = False }, Expected = CatalogFullValidationReply { Build = CatalogBuildReply { Outcome = ok, FinalDatabase = True, UnpublishedFailure = False, Sources = 3, Bindings = 10, Occurrences = 10, Declarations = 10, PermissionDefinitions = 1, Entries = 10, Inventory = 10, GoIntOccurrences = 1, Integrity = True, ForeignKeys = True, EntrySchemas = True, PermissionSchemas = True, InventorySchemas = True, InventoryStreamHash = True, ExportDatabaseAgreement = True, ImmutableBindings = True, DefaultDeny = True, SourceFingerprintNative = True, OriginalInputsRetained = True, OutputRefusedWithoutMutation = False, KnownCameraPermission = True }, Outcome = rejected, ExistingOutputsUnchanged = True, OriginalInputsRetained = True, SuppressionHidesOne = , RestoreExactDocument = , HistoryRows = , MissingOccurrenceRejected = , EntriesValidated = , Integrity = , ForeignKeyFailures = , SchemaFailures = , InventoryValidated = , ReadOnlyDatabase = , ReportCreated = False, ExistingReportRetained = , ErrorContains = Entry export, Complete = , ApplicabilityRevalidated = , DeclarationVariantOmissions = , NativeProducerIdentity =  } }, Exit = 1, Error = Entry export, ReportCreated = False, ExistingReportRetained = False })",
+      "Outcome": "Passed"
+    }
+  ],
+  "ObservedChildren": [
+    {
+      "FixtureRoot": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-03aad0008deb44a7ba24362a78f85403",
+      "Request": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-03aad0008deb44a7ba24362a78f85403/validation caller project/workflows/catalog validation.json",
+        "ContentSha256": "5ba8e7bf06e187bb5b086e74d48149c0f8b8091dfbf19155dc7305bd0693cc8a",
+        "Length": 775,
+        "Mode": "Release",
+        "ContentHashIsNotAClaimAboutDeliberatelyWrongCallerPin": true
+      },
+      "Stdout": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-03aad0008deb44a7ba24362a78f85403/validation process receipts/stdout.bin",
+        "Sha256": "ddaf1cfcd654bdd6614cd8afac1a360c4c2276ffe37a9f2698295266c4e45bca"
+      },
+      "Stderr": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-03aad0008deb44a7ba24362a78f85403/validation process receipts/stderr.bin",
+        "Sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "SuccessfulReport": null
+    },
+    {
+      "FixtureRoot": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-235c3c6d99b34257b9577b636f3695e8",
+      "Request": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-235c3c6d99b34257b9577b636f3695e8/validation caller project/workflows/catalog validation.json",
+        "ContentSha256": "73dced8151b636ab69096fb1f4c83f645374e1a1b9c1118d50ba456b588cf1d4",
+        "Length": 769,
+        "Mode": "Release",
+        "ContentHashIsNotAClaimAboutDeliberatelyWrongCallerPin": true
+      },
+      "Stdout": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-235c3c6d99b34257b9577b636f3695e8/validation process receipts/stdout.bin",
+        "Sha256": "0d7cc92259d606bd063491f42598ff6c1427948a579b20e074202c5d6e69644c"
+      },
+      "Stderr": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-235c3c6d99b34257b9577b636f3695e8/validation process receipts/stderr.bin",
+        "Sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "SuccessfulReport": null
+    },
+    {
+      "FixtureRoot": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-273ffa64fbce42e18698f9f19c6d9032",
+      "Request": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-273ffa64fbce42e18698f9f19c6d9032/validation caller project/workflows/catalog validation.json",
+        "ContentSha256": "0b291af53f8fa4b87a18586ac85464fb13d568079316826ee0ea1085bb1e1eac",
+        "Length": 729,
+        "Mode": "Release",
+        "ContentHashIsNotAClaimAboutDeliberatelyWrongCallerPin": true
+      },
+      "Stdout": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-273ffa64fbce42e18698f9f19c6d9032/validation process receipts/stdout.bin",
+        "Sha256": "afd1f3ee1c6be56c66de1b078e3b318bee924f8c15df45505b3ec08d347fbccb"
+      },
+      "Stderr": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-273ffa64fbce42e18698f9f19c6d9032/validation process receipts/stderr.bin",
+        "Sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "SuccessfulReport": null
+    },
+    {
+      "FixtureRoot": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-3083e53eaf684059b8d2344cf7c835c2",
+      "Request": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-3083e53eaf684059b8d2344cf7c835c2/validation caller project/workflows/catalog validation.json",
+        "ContentSha256": "8523808287b8d8a4d0258f1dc2e9125619fe3765a5eaad86c09d47a28b14384c",
+        "Length": 754,
+        "Mode": "Release",
+        "ContentHashIsNotAClaimAboutDeliberatelyWrongCallerPin": true
+      },
+      "Stdout": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-3083e53eaf684059b8d2344cf7c835c2/validation process receipts/stdout.bin",
+        "Sha256": "aa92bcc6b1af61d5c7367420df793ffcfa7e3fc9a7a29c35a6f0d1e6a1601e78"
+      },
+      "Stderr": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-3083e53eaf684059b8d2344cf7c835c2/validation process receipts/stderr.bin",
+        "Sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "SuccessfulReport": null
+    },
+    {
+      "FixtureRoot": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-34f185e0e8a8482cb618a9167be93b15",
+      "Request": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-34f185e0e8a8482cb618a9167be93b15/validation caller project/workflows/catalog validation.json",
+        "ContentSha256": "d34ce7481de32cb92fe4266baec2f03eb422e86f945cba707d599616e7c10d5e",
+        "Length": 747,
+        "Mode": "Release",
+        "ContentHashIsNotAClaimAboutDeliberatelyWrongCallerPin": true
+      },
+      "Stdout": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-34f185e0e8a8482cb618a9167be93b15/validation process receipts/stdout.bin",
+        "Sha256": "cc7bee89b6983f8331efd87f51c3bfbf75c31a235174706e73d7af67b2506c88"
+      },
+      "Stderr": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-34f185e0e8a8482cb618a9167be93b15/validation process receipts/stderr.bin",
+        "Sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "SuccessfulReport": {
+        "Mode": "Release",
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-34f185e0e8a8482cb618a9167be93b15/validation-report.json",
+        "Sha256": "d3d4a674f134b3bb9247fc62135b528cc77fb168a4912049c32d9be7074398d0",
+        "Length": 1538,
+        "Entries": 10,
+        "Integrity": "ok",
+        "Complete": false,
+        "ReadOnly": true,
+        "NativeProducer": {
+          "id": "csharp-nuke-catalog-validator-v1",
+          "sha256": "758a69545425f09624305b761809bf6b66dc7e0c9999d668ff6f27129935c8b8",
+          "identity_kind": "loaded-monolithic-assembly",
+          "historical_python_identity": false
+        }
+      }
+    },
+    {
+      "FixtureRoot": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-4d084c164c0e46e48832e39fb6c10d5b",
+      "Request": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-4d084c164c0e46e48832e39fb6c10d5b/validation caller project/workflows/catalog validation.json",
+        "ContentSha256": "6b797ba20dcdd19ca06a09e2125e8121407909dc83f4a01e3e023453991a8e73",
+        "Length": 566,
+        "Mode": "Database",
+        "ContentHashIsNotAClaimAboutDeliberatelyWrongCallerPin": true
+      },
+      "Stdout": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-4d084c164c0e46e48832e39fb6c10d5b/validation process receipts/stdout.bin",
+        "Sha256": "a88015ce8f82ce5cf2e0cad67ebfe20014ea9db96d4fabf25474da8a3bcb2f4d"
+      },
+      "Stderr": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-4d084c164c0e46e48832e39fb6c10d5b/validation process receipts/stderr.bin",
+        "Sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "SuccessfulReport": null
+    },
+    {
+      "FixtureRoot": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-6d3d6d8d71704be5ba631d20ed27db07",
+      "Request": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-6d3d6d8d71704be5ba631d20ed27db07/validation caller project/workflows/catalog validation.json",
+        "ContentSha256": "c5c4929253b65cc0864fed916b4b9d2075f41d2785c59abaf5b571070fb84315",
+        "Length": 546,
+        "Mode": "Database",
+        "ContentHashIsNotAClaimAboutDeliberatelyWrongCallerPin": true
+      },
+      "Stdout": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-6d3d6d8d71704be5ba631d20ed27db07/validation process receipts/stdout.bin",
+        "Sha256": "a81b49a00811fb0478d5606567af2a06eead85ecdfc5de5ac74e07dc116a8368"
+      },
+      "Stderr": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-6d3d6d8d71704be5ba631d20ed27db07/validation process receipts/stderr.bin",
+        "Sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "SuccessfulReport": null
+    },
+    {
+      "FixtureRoot": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-7bba743b73b04c56aa56f9b3bb394e13",
+      "Request": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-7bba743b73b04c56aa56f9b3bb394e13/validation caller project/workflows/catalog validation.json",
+        "ContentSha256": "e28d7268b2def41be0e03921507d2dc63fc66334dfc6e09c6de1942eea3f1a18",
+        "Length": 495,
+        "Mode": "Release",
+        "ContentHashIsNotAClaimAboutDeliberatelyWrongCallerPin": true
+      },
+      "Stdout": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-7bba743b73b04c56aa56f9b3bb394e13/validation process receipts/stdout.bin",
+        "Sha256": "b614b534154001158f3a7e5dc6db1d66a8044b864cd7a13f74454bd367c1e8e7"
+      },
+      "Stderr": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-7bba743b73b04c56aa56f9b3bb394e13/validation process receipts/stderr.bin",
+        "Sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "SuccessfulReport": null
+    },
+    {
+      "FixtureRoot": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-802a9f632bd34182a4e98c677e45decb",
+      "Request": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-802a9f632bd34182a4e98c677e45decb/validation caller project/workflows/catalog validation.json",
+        "ContentSha256": "201195b9383b9f69ce937eeed63df848aa92c9b7a9bee30532571ae3b337647f",
+        "Length": 510,
+        "Mode": "Release",
+        "ContentHashIsNotAClaimAboutDeliberatelyWrongCallerPin": true
+      },
+      "Stdout": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-802a9f632bd34182a4e98c677e45decb/validation process receipts/stdout.bin",
+        "Sha256": "643e4b3505fbe5eb46141fdf3337991e7c495a82848666f01f18a342e17c74a0"
+      },
+      "Stderr": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-802a9f632bd34182a4e98c677e45decb/validation process receipts/stderr.bin",
+        "Sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "SuccessfulReport": null
+    },
+    {
+      "FixtureRoot": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-8e15f0fbf78043e5a3d1a4612dea477e",
+      "Request": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-8e15f0fbf78043e5a3d1a4612dea477e/validation caller project/workflows/catalog validation.json",
+        "ContentSha256": "6017af46e6f02aec4501f88ae7194522ae152147bac3dd95c2294fdc3ad94916",
+        "Length": 546,
+        "Mode": "Database",
+        "ContentHashIsNotAClaimAboutDeliberatelyWrongCallerPin": true
+      },
+      "Stdout": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-8e15f0fbf78043e5a3d1a4612dea477e/validation process receipts/stdout.bin",
+        "Sha256": "044dc06016a13b68ad74b80960d0940ea570fc3390059620c365ba5ddb1a8e5c"
+      },
+      "Stderr": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-8e15f0fbf78043e5a3d1a4612dea477e/validation process receipts/stderr.bin",
+        "Sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "SuccessfulReport": {
+        "Mode": "Database",
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-8e15f0fbf78043e5a3d1a4612dea477e/validation-report.json",
+        "Sha256": "21812b70eeab857cdedbbfde7bc27278b66539acc5d746fc64c1584ffcab25c8",
+        "Length": 1483,
+        "Entries": 10,
+        "Integrity": "ok",
+        "Complete": false,
+        "ReadOnly": true,
+        "NativeProducer": {
+          "id": "csharp-nuke-catalog-validator-v1",
+          "sha256": "758a69545425f09624305b761809bf6b66dc7e0c9999d668ff6f27129935c8b8",
+          "identity_kind": "loaded-monolithic-assembly",
+          "historical_python_identity": false
+        }
+      }
+    },
+    {
+      "FixtureRoot": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-9ac6462ebcd946c3ba3675fe1305cf9c",
+      "Request": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-9ac6462ebcd946c3ba3675fe1305cf9c/validation caller project/workflows/catalog validation.json",
+        "ContentSha256": "23c167d2757805db26a08485b1e420533e4c4aa979f748c3710f2275b4df7532",
+        "Length": 732,
+        "Mode": "Unexpected",
+        "ContentHashIsNotAClaimAboutDeliberatelyWrongCallerPin": true
+      },
+      "Stdout": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-9ac6462ebcd946c3ba3675fe1305cf9c/validation process receipts/stdout.bin",
+        "Sha256": "870939a6e242b233fffd16f8fa3b2e2bc6a865fdcc0ee3cd319811c2a453fa69"
+      },
+      "Stderr": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-9ac6462ebcd946c3ba3675fe1305cf9c/validation process receipts/stderr.bin",
+        "Sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "SuccessfulReport": null
+    },
+    {
+      "FixtureRoot": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-9e3affb60a094796833fae9496c0bfe0",
+      "Request": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-9e3affb60a094796833fae9496c0bfe0/validation caller project/workflows/catalog validation.json",
+        "ContentSha256": "ec9009e6f05005ed8d6ff113446cf2a077a0ac86f82ba9aba2b7f88e3d50e6aa",
+        "Length": 508,
+        "Mode": "Release",
+        "ContentHashIsNotAClaimAboutDeliberatelyWrongCallerPin": true
+      },
+      "Stdout": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-9e3affb60a094796833fae9496c0bfe0/validation process receipts/stdout.bin",
+        "Sha256": "86403fbf85f854f2ab3b9019149bd443fd98ddc3ec7e7d8f40caa5b1d613985d"
+      },
+      "Stderr": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-9e3affb60a094796833fae9496c0bfe0/validation process receipts/stderr.bin",
+        "Sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "SuccessfulReport": null
+    },
+    {
+      "FixtureRoot": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-9e5c188187f24f5cbb5106df92e911f6",
+      "Request": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-9e5c188187f24f5cbb5106df92e911f6/validation caller project/workflows/catalog validation.json",
+        "ContentSha256": "a5fc8ed0c83147537fecd3a4d84cfbc1a7fa37504505d527aa580e8d8412e5e9",
+        "Length": 729,
+        "Mode": "Release",
+        "ContentHashIsNotAClaimAboutDeliberatelyWrongCallerPin": true
+      },
+      "Stdout": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-9e5c188187f24f5cbb5106df92e911f6/validation process receipts/stdout.bin",
+        "Sha256": "33b5718e9dad617c0f0c1622941d2ea08eafb2b8dfc6a5096ce7ff7500db75d5"
+      },
+      "Stderr": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-9e5c188187f24f5cbb5106df92e911f6/validation process receipts/stderr.bin",
+        "Sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "SuccessfulReport": null
+    },
+    {
+      "FixtureRoot": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-a2012b82e0d0434f840e3e0173422c61",
+      "Request": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-a2012b82e0d0434f840e3e0173422c61/validation caller project/workflows/catalog validation.json",
+        "ContentSha256": "35cc6a8ca5baf71a798cdcde532889333770992b334712b7de31bb0d1528e058",
+        "Length": 297,
+        "Mode": "Database",
+        "ContentHashIsNotAClaimAboutDeliberatelyWrongCallerPin": true
+      },
+      "Stdout": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-a2012b82e0d0434f840e3e0173422c61/validation process receipts/stdout.bin",
+        "Sha256": "90899647e92fb7fdc6c57852ed7d25e22e7780044d9e3b6d61d39c489f0c472a"
+      },
+      "Stderr": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-a2012b82e0d0434f840e3e0173422c61/validation process receipts/stderr.bin",
+        "Sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "SuccessfulReport": null
+    },
+    {
+      "FixtureRoot": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-a51f05fba6194d0cadc775f9fc96ce81",
+      "Request": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-a51f05fba6194d0cadc775f9fc96ce81/validation caller project/workflows/catalog validation.json",
+        "ContentSha256": "03a7399e2445fe3a89589938c5682059f6145e9e04b814950b80f207697545ed",
+        "Length": 712,
+        "Mode": null,
+        "ContentHashIsNotAClaimAboutDeliberatelyWrongCallerPin": true
+      },
+      "Stdout": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-a51f05fba6194d0cadc775f9fc96ce81/validation process receipts/stdout.bin",
+        "Sha256": "3b81c20f8bee07cc5e27b5422e5c7e01c99f31df79101aff4eda30c56efcd078"
+      },
+      "Stderr": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-a51f05fba6194d0cadc775f9fc96ce81/validation process receipts/stderr.bin",
+        "Sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "SuccessfulReport": null
+    },
+    {
+      "FixtureRoot": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-a7388ebf28dc4d60aec6d9bd2d50781d",
+      "Request": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-a7388ebf28dc4d60aec6d9bd2d50781d/validation caller project/workflows/catalog validation.json",
+        "ContentSha256": "4000f587b7aee8b4c8e024e80183f02edadc2e42154561bac7307349bfacc858",
+        "Length": 747,
+        "Mode": "Release",
+        "ContentHashIsNotAClaimAboutDeliberatelyWrongCallerPin": true
+      },
+      "Stdout": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-a7388ebf28dc4d60aec6d9bd2d50781d/validation process receipts/stdout.bin",
+        "Sha256": "6af06a2e0deae2b71e10abadac2f91344fb4593d5fc0c5e30e2da55ceb4242f1"
+      },
+      "Stderr": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-a7388ebf28dc4d60aec6d9bd2d50781d/validation process receipts/stderr.bin",
+        "Sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "SuccessfulReport": null
+    },
+    {
+      "FixtureRoot": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-eefdc50a62f7494fa2bec9b38e548bbe",
+      "Request": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-eefdc50a62f7494fa2bec9b38e548bbe/validation caller project/workflows/catalog validation.json",
+        "ContentSha256": "0cedff2a7e34cd7e7027bd1428e6ab87cd75ff01196dff038ebd8f08d7edea99",
+        "Length": 747,
+        "Mode": "Release",
+        "ContentHashIsNotAClaimAboutDeliberatelyWrongCallerPin": true
+      },
+      "Stdout": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-eefdc50a62f7494fa2bec9b38e548bbe/validation process receipts/stdout.bin",
+        "Sha256": "a0565d7a3b34b034c58b4d867812e6024abfbd3096c7322f7a4d718912fe3970"
+      },
+      "Stderr": {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1252542782128-0657841800f0404680b35b6aa904f38f/native-catalog-build-eefdc50a62f7494fa2bec9b38e548bbe/validation process receipts/stderr.bin",
+        "Sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "SuccessfulReport": null
+    }
+  ],
+  "RegisteredRoute": {
+    "Category": "Validate",
+    "Operation": "Catalog",
+    "Executor": "CatalogValidation",
+    "RequiredParameters": [
+      "project-root",
+      "pipeline-request",
+      "pipeline-request-sha256",
+      "pipeline-request-length"
+    ],
+    "OptionalParameters": [],
+    "Modes": [
+      "Release",
+      "Database"
+    ],
+    "Steps": [
+      "admit-pinned-workflow",
+      "validate-catalog-readonly",
+      "emit-validation-receipt"
+    ]
+  },
+  "Proven": [
+    "Same six original validator cases bind real child processes through unchanged original SQL/report/retention observations",
+    "Two successful native reports verified by exact artifact SHA256 and byte length; ten entries, read-only DB, no schema/FK failures, Complete=false and actual native monolithic identity",
+    "Database-only child uses a copied DB directory without entries export or inventory; release path remains explicit",
+    "Both modes reject existing report without modifying it; raw source/export tamper and report-inside-release fail specifically",
+    "Wrong outer SHA and length, unknown/missing mode, absent release inventory/output, absent database, blank report, mixed mode fields and unknown request member reject without unexpected effects",
+    "NativeProcessRunner/current DLL/native host and request bytes are pinned and retained; no Python, second validator, parser, hash or report writer"
+  ],
+  "Companion": "full-validation-normal-method-proof.json",
+  "Remaining": [
+    "Actual current registered caller is now verified; full legacy validator function/profile equivalence remains pending",
+    "Explicit matched AIDL lexical/count/unbalanced consumer branches; absent claims remain unreconciled",
+    "Unlisted schema/report-before-error, canonical/document/ETag rejection, AST, count reconciliation, duplicate/FK/integrity and exact report-value branches",
+    "Database storage-version rejection and omission shape/sample/rebuild marker branches",
+    "Unrelated invalid schema behavior differs between shared all-schema preflight and legacy DB-only two-schema loading until demonstrated and resolved",
+    "Frozen release011 and other historical caller profiles are not proved by equal source hashes"
+  ],
+  "Acceptance": "No HV, full corpus/profile equivalence, retirement or physical deletion authorization claimed",
+  "Mcp": "Previously reported logging/live-memory approval rejection remains blocked; no retry or surrogate persistence",
+  "AccuracyPercent": 100,
+  "AccuracyBasis": "Exact TRX/source/report/capture pins and bounded passing assertions",
+  "CompletenessPercent": 100,
+  "CompletenessBasis": "Complete requested17-case registered caller milestone; whole validator remaining explicitly open"
+}

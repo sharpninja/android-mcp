@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "at": "2026-10-28T08:52:06",
+  "at": "2026-10-28T12:03:17",
   "owner": "Sources",
   "pythonExecuted": false,
   "nodeExecuted": false,
@@ -487,14 +487,1396 @@
       "accepted_complete": false,
       "safe_to_delete": false,
       "execution_retired": false
+    },
+    {
+      "legacyPath": "remediation/catalog/tests/test_hidl_source.py",
+      "legacySha256": "d011447f8f98071eecd1d269de3472ac901fa4fce04b8231aa19bbd5b67a080a",
+      "owner": "Sources",
+      "category": "Sources",
+      "operation": "Extract",
+      "normal_verified": true,
+      "nativeService": "HidlSourceExtractor.Extract",
+      "nativeTest": "AndroidMcp.BuildTool.Tests.Sources.HidlRealTests.RealHidlUsesUnchangedMockProvenAssertions",
+      "normal_verified_methods": [
+        {
+          "legacy_method": "test_interface_nested_type_and_following_method",
+          "native_case_ids": [
+            "HIDL-01"
+          ],
+          "assertion_equivalence": "Exact original nested Point/get source; record names and order, empty unsupported, second result Point[3], null wire_transaction_id.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_shifts_dont_consume_enum_values_or_following_method",
+          "native_case_ids": [
+            "HIDL-02"
+          ],
+          "assertion_equivalence": "Exact shift/bitwise enum source; ordered final A/B/C/ping names retained.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_nested_template_comma_separation",
+          "native_case_ids": [
+            "HIDL-03"
+          ],
+          "assertion_equivalence": "Exact nested vec and bitfield source; two parameter types in original order.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_annotations_with_braces_and_semicolon_string_are_not_bodies",
+          "native_case_ids": [
+            "HIDL-04"
+          ],
+          "assertion_equivalence": "Exact Callflow and entry annotations with braces/semicolon strings; package/I/m names and exactly one interface annotation.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_comments_and_line_offsets",
+          "native_case_ids": [
+            "HIDL-05"
+          ],
+          "assertion_equivalence": "Exact 300 leading newlines, fake interface comment and real package/I source; exactly two rows and interface physical line302.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_unknown_statement_and_missing_package_retained",
+          "native_case_ids": [
+            "HIDL-06",
+            "HIDL-07"
+          ],
+          "assertion_equivalence": "Both exact original inputs: mystery statement produces final unsupported and one unsupported item; missing package produces first unsupported row.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_oneway_with_results_not_silently_accepted",
+          "native_case_ids": [
+            "HIDL-08"
+          ],
+          "assertion_equivalence": "Exact oneway generates(bool ok) source; final row unsupported.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_source_hidl_version_is_not_android_availability",
+          "native_case_ids": [
+            "HIDL-09"
+          ],
+          "assertion_equivalence": "Exact p@2.7 source; interface HIDL version2.7 and Android availability unknown.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_typedef_and_safe_union",
+          "native_case_ids": [
+            "HIDL-10"
+          ],
+          "assertion_equivalence": "Exact typedef vec<int32_t> Values and safe_union source; original package/Values/Value/number/text names and order.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_type_canonical_does_not_repeat_own_name",
+          "native_case_ids": [
+            "HIDL-20"
+          ],
+          "assertion_equivalence": "Exact original p@1.0 Point-only nested source, rather than HIDL01 richer source; interface canonical p@1.0::I and nested canonical p@1.0::I.Point.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_line_of_method_after_leading_blank_lines",
+          "native_case_ids": [
+            "HIDL-11"
+          ],
+          "assertion_equivalence": "Exact original internal-newline source; final method physical line4.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_missing_semicolon_and_nested_interface_retained_unknown",
+          "native_case_ids": [
+            "HIDL-12",
+            "HIDL-13"
+          ],
+          "assertion_equivalence": "Both exact missing-final-semicolon and nested-interface inputs; each expected unsupported metadata array is explicitly nonempty.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_interface_special_type_is_a_field_not_nested_declaration",
+          "native_case_ids": [
+            "HIDL-14"
+          ],
+          "assertion_equivalence": "Exact Holder/interface instance source; final kind field, return_type interface, empty unsupported.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_type_delimiter_can_touch_variable_name",
+          "native_case_ids": [
+            "HIDL-15"
+          ],
+          "assertion_equivalence": "Exact vec<uint8_t>input and uint32_t[3]output source; input/output names and empty unsupported.",
+          "status": "normal-native-verified"
+        }
+      ],
+      "exactOriginalMethodBodies": [
+        {
+          "method": "test_interface_nested_type_and_following_method",
+          "body": " def test_interface_nested_type_and_following_method(self):\n  result=parse('package android.hardware.test@1.0; interface IFoo { struct Point { int32_t x; }; get(vec<Point> points) generates (bool ok, Point[3] triangle); };')\n  self.assertEqual([r['name'] for r in result['records']],['android.hardware.test@1.0','IFoo','Point','x','get']);self.assertEqual(result['unsupported'],[])\n  method=result['records'][-1];self.assertEqual(method['extras']['results'][1]['type'],'Point[3]');self.assertIsNone(method['extras']['wire_transaction_id'])\n",
+          "nativeCases": [
+            "HIDL-01"
+          ]
+        },
+        {
+          "method": "test_shifts_dont_consume_enum_values_or_following_method",
+          "body": " def test_shifts_dont_consume_enum_values_or_following_method(self):\n  result=parse('package p@1.0; interface I { enum Flags : uint32_t { A=1<<2, B=A|2, C }; ping(); };')\n  self.assertEqual([r['name'] for r in result['records']][-4:],['A','B','C','ping'])\n",
+          "nativeCases": [
+            "HIDL-02"
+          ]
+        },
+        {
+          "method": "test_nested_template_comma_separation",
+          "body": " def test_nested_template_comma_separation(self):\n  result=parse('package p@1.0; interface I { m(vec<vec<int32_t>> a, bitfield<Flags> b); };');method=result['records'][-1]\n  self.assertEqual([p['type'] for p in method['parameters']],['vec<vec<int32_t>>','bitfield<Flags>'])\n",
+          "nativeCases": [
+            "HIDL-03"
+          ]
+        },
+        {
+          "method": "test_annotations_with_braces_and_semicolon_string_are_not_bodies",
+          "body": " def test_annotations_with_braces_and_semicolon_string_are_not_bodies(self):\n  result=parse('package p@1.0; @Callflow(next={\"a;\",\"b\"}) interface I { @entry m(); };')\n  self.assertEqual([r['name'] for r in result['records']],['p@1.0','I','m']);self.assertEqual(len(result['records'][1]['all_annotations']),1)\n",
+          "nativeCases": [
+            "HIDL-04"
+          ]
+        },
+        {
+          "method": "test_comments_and_line_offsets",
+          "body": " def test_comments_and_line_offsets(self):\n  result=parse('\\n'*300+'// interface IFake {};\\npackage p@1.0; interface I {};')\n  self.assertEqual(len(result['records']),2);self.assertEqual(result['records'][1]['line'],302)\n",
+          "nativeCases": [
+            "HIDL-05"
+          ]
+        },
+        {
+          "method": "test_unknown_statement_and_missing_package_retained",
+          "body": " def test_unknown_statement_and_missing_package_retained(self):\n  result=parse('package p@1.0; mystery ?;');self.assertEqual(result['records'][-1]['kind'],'unsupported');self.assertEqual(len(result['unsupported']),1)\n  self.assertEqual(parse('interface I {};')['records'][0]['kind'],'unsupported')\n",
+          "nativeCases": [
+            "HIDL-06",
+            "HIDL-07"
+          ]
+        },
+        {
+          "method": "test_oneway_with_results_not_silently_accepted",
+          "body": " def test_oneway_with_results_not_silently_accepted(self):\n  result=parse('package p@1.0; interface I { oneway m() generates (bool ok); };');self.assertEqual(result['records'][-1]['kind'],'unsupported')\n",
+          "nativeCases": [
+            "HIDL-08"
+          ]
+        },
+        {
+          "method": "test_source_hidl_version_is_not_android_availability",
+          "body": " def test_source_hidl_version_is_not_android_availability(self):\n  result=parse('package p@2.7; interface I {};');r=result['records'][1]\n  self.assertEqual(r['extras']['hidl_package_version'],'2.7');self.assertEqual(r['extras']['android_availability'],'unknown')\n",
+          "nativeCases": [
+            "HIDL-09"
+          ]
+        },
+        {
+          "method": "test_typedef_and_safe_union",
+          "body": " def test_typedef_and_safe_union(self):\n  result=parse('package p@1.0; typedef vec<int32_t> Values; safe_union Value { int32_t number; string text; };')\n  self.assertEqual([r['name'] for r in result['records']],['p@1.0','Values','Value','number','text'])\n",
+          "nativeCases": [
+            "HIDL-10"
+          ]
+        },
+        {
+          "method": "test_type_canonical_does_not_repeat_own_name",
+          "body": " def test_type_canonical_does_not_repeat_own_name(self):\n  result=parse('package p@1.0; interface I { struct Point { int32_t x; }; };')\n  self.assertEqual(result['records'][1]['canonical'],'p@1.0::I');self.assertEqual(result['records'][2]['canonical'],'p@1.0::I.Point')\n",
+          "nativeCases": [
+            "HIDL-20"
+          ]
+        },
+        {
+          "method": "test_line_of_method_after_leading_blank_lines",
+          "body": " def test_line_of_method_after_leading_blank_lines(self):\n  result=parse('package p@1.0;\\ninterface I {\\n\\n m();\\n};')\n  self.assertEqual(result['records'][-1]['line'],4)\n",
+          "nativeCases": [
+            "HIDL-11"
+          ]
+        },
+        {
+          "method": "test_missing_semicolon_and_nested_interface_retained_unknown",
+          "body": " def test_missing_semicolon_and_nested_interface_retained_unknown(self):\n  self.assertTrue(parse('package p@1.0; interface I {}')['unsupported'])\n  self.assertTrue(parse('package p@1.0; interface I { interface INested {}; };')['unsupported'])\n",
+          "nativeCases": [
+            "HIDL-12",
+            "HIDL-13"
+          ]
+        },
+        {
+          "method": "test_interface_special_type_is_a_field_not_nested_declaration",
+          "body": " def test_interface_special_type_is_a_field_not_nested_declaration(self):\n  result=parse('package p@1.0; struct Holder { interface instance; };')\n  self.assertEqual(result['records'][-1]['kind'],'field');self.assertEqual(result['records'][-1]['return_type'],'interface');self.assertEqual(result['unsupported'],[])\n",
+          "nativeCases": [
+            "HIDL-14"
+          ]
+        },
+        {
+          "method": "test_type_delimiter_can_touch_variable_name",
+          "body": " def test_type_delimiter_can_touch_variable_name(self):\n  result=parse('package p@1.0; interface I { m(vec<uint8_t>input) generates (uint32_t[3]output); };')\n  self.assertEqual(result['records'][-1]['parameters'][0]['name'],'input');self.assertEqual(result['records'][-1]['extras']['results'][0]['name'],'output');self.assertEqual(result['unsupported'],[])\n",
+          "nativeCases": [
+            "HIDL-15"
+          ]
+        }
+      ],
+      "pending_methods": [],
+      "normal_verification_scope": "All original test-method literal inputs and assertions in this separately read published file are bound to unchanged native fixture expectations; Python unittest/module bootstrap is replaced by xUnit.",
+      "frozenProfileNote": "Allocated original test-file responsibility only. Shared native source facts do not establish full producer/corpus, Catalog import, historical output byte identity or all version-profile callers. No profile equality inferred from matching file hashes.",
+      "proof": {
+        "trx": "remediation/nuke-app/artifacts/tests/20261028T0932272149996-f28fbdb36475416095271304765987df/tests.trx",
+        "sha256": "4e63adacdd42b76a81d5c0a7ab45dc13d749a69eac3d2c9175fef3be73163583",
+        "groups": {
+          "HidlRealTests": 29,
+          "SdkAvailabilityRealTests": 13
+        },
+        "evidenceIncrement": "Next increment after immutable checkpoint007 candidate; evidence uses retained007 normal proof."
+      },
+      "nativeSourcePins": [
+        {
+          "path": "remediation/nuke-app/Modules/Sources/HidlSourceExtractor.cs",
+          "sha256": "6f276aaddd09e3d0bb1922f8ff48ab7f49d7afa2c546ea821ed9dd0652075af6"
+        },
+        {
+          "path": "remediation/nuke-app/Tests/Sources/HidlContractCases.cs",
+          "sha256": "7ae273447df2964ee9b1a74bebc554eac7055b6146d80a8288203e2039b41421"
+        },
+        {
+          "path": "remediation/nuke-app/Tests/Sources/HidlRealTests.cs",
+          "sha256": "b8eb00278b89677614a72033ae19c1cef2fd0fae408ad2232fbab83c0d129e34"
+        }
+      ],
+      "decommissionable_from_pr": true,
+      "decommissionable_scope": "Only this original test file after all original method inputs/assertions and replacing xUnit discovery are normally verified. Local originals retained; production/corpus/HV duties remain separate.",
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false
+    },
+    {
+      "legacyPath": "rehydration/producers/release-011/tests/test_hidl_source.py",
+      "legacySha256": "d011447f8f98071eecd1d269de3472ac901fa4fce04b8231aa19bbd5b67a080a",
+      "owner": "Sources",
+      "category": "Sources",
+      "operation": "Extract",
+      "normal_verified": true,
+      "nativeService": "HidlSourceExtractor.Extract",
+      "nativeTest": "AndroidMcp.BuildTool.Tests.Sources.HidlRealTests.RealHidlUsesUnchangedMockProvenAssertions",
+      "normal_verified_methods": [
+        {
+          "legacy_method": "test_interface_nested_type_and_following_method",
+          "native_case_ids": [
+            "HIDL-01"
+          ],
+          "assertion_equivalence": "Exact original nested Point/get source; record names and order, empty unsupported, second result Point[3], null wire_transaction_id.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_shifts_dont_consume_enum_values_or_following_method",
+          "native_case_ids": [
+            "HIDL-02"
+          ],
+          "assertion_equivalence": "Exact shift/bitwise enum source; ordered final A/B/C/ping names retained.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_nested_template_comma_separation",
+          "native_case_ids": [
+            "HIDL-03"
+          ],
+          "assertion_equivalence": "Exact nested vec and bitfield source; two parameter types in original order.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_annotations_with_braces_and_semicolon_string_are_not_bodies",
+          "native_case_ids": [
+            "HIDL-04"
+          ],
+          "assertion_equivalence": "Exact Callflow and entry annotations with braces/semicolon strings; package/I/m names and exactly one interface annotation.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_comments_and_line_offsets",
+          "native_case_ids": [
+            "HIDL-05"
+          ],
+          "assertion_equivalence": "Exact 300 leading newlines, fake interface comment and real package/I source; exactly two rows and interface physical line302.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_unknown_statement_and_missing_package_retained",
+          "native_case_ids": [
+            "HIDL-06",
+            "HIDL-07"
+          ],
+          "assertion_equivalence": "Both exact original inputs: mystery statement produces final unsupported and one unsupported item; missing package produces first unsupported row.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_oneway_with_results_not_silently_accepted",
+          "native_case_ids": [
+            "HIDL-08"
+          ],
+          "assertion_equivalence": "Exact oneway generates(bool ok) source; final row unsupported.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_source_hidl_version_is_not_android_availability",
+          "native_case_ids": [
+            "HIDL-09"
+          ],
+          "assertion_equivalence": "Exact p@2.7 source; interface HIDL version2.7 and Android availability unknown.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_typedef_and_safe_union",
+          "native_case_ids": [
+            "HIDL-10"
+          ],
+          "assertion_equivalence": "Exact typedef vec<int32_t> Values and safe_union source; original package/Values/Value/number/text names and order.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_type_canonical_does_not_repeat_own_name",
+          "native_case_ids": [
+            "HIDL-20"
+          ],
+          "assertion_equivalence": "Exact original p@1.0 Point-only nested source, rather than HIDL01 richer source; interface canonical p@1.0::I and nested canonical p@1.0::I.Point.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_line_of_method_after_leading_blank_lines",
+          "native_case_ids": [
+            "HIDL-11"
+          ],
+          "assertion_equivalence": "Exact original internal-newline source; final method physical line4.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_missing_semicolon_and_nested_interface_retained_unknown",
+          "native_case_ids": [
+            "HIDL-12",
+            "HIDL-13"
+          ],
+          "assertion_equivalence": "Both exact missing-final-semicolon and nested-interface inputs; each expected unsupported metadata array is explicitly nonempty.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_interface_special_type_is_a_field_not_nested_declaration",
+          "native_case_ids": [
+            "HIDL-14"
+          ],
+          "assertion_equivalence": "Exact Holder/interface instance source; final kind field, return_type interface, empty unsupported.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_type_delimiter_can_touch_variable_name",
+          "native_case_ids": [
+            "HIDL-15"
+          ],
+          "assertion_equivalence": "Exact vec<uint8_t>input and uint32_t[3]output source; input/output names and empty unsupported.",
+          "status": "normal-native-verified"
+        }
+      ],
+      "exactOriginalMethodBodies": [
+        {
+          "method": "test_interface_nested_type_and_following_method",
+          "body": " def test_interface_nested_type_and_following_method(self):\n  result=parse('package android.hardware.test@1.0; interface IFoo { struct Point { int32_t x; }; get(vec<Point> points) generates (bool ok, Point[3] triangle); };')\n  self.assertEqual([r['name'] for r in result['records']],['android.hardware.test@1.0','IFoo','Point','x','get']);self.assertEqual(result['unsupported'],[])\n  method=result['records'][-1];self.assertEqual(method['extras']['results'][1]['type'],'Point[3]');self.assertIsNone(method['extras']['wire_transaction_id'])\n",
+          "nativeCases": [
+            "HIDL-01"
+          ]
+        },
+        {
+          "method": "test_shifts_dont_consume_enum_values_or_following_method",
+          "body": " def test_shifts_dont_consume_enum_values_or_following_method(self):\n  result=parse('package p@1.0; interface I { enum Flags : uint32_t { A=1<<2, B=A|2, C }; ping(); };')\n  self.assertEqual([r['name'] for r in result['records']][-4:],['A','B','C','ping'])\n",
+          "nativeCases": [
+            "HIDL-02"
+          ]
+        },
+        {
+          "method": "test_nested_template_comma_separation",
+          "body": " def test_nested_template_comma_separation(self):\n  result=parse('package p@1.0; interface I { m(vec<vec<int32_t>> a, bitfield<Flags> b); };');method=result['records'][-1]\n  self.assertEqual([p['type'] for p in method['parameters']],['vec<vec<int32_t>>','bitfield<Flags>'])\n",
+          "nativeCases": [
+            "HIDL-03"
+          ]
+        },
+        {
+          "method": "test_annotations_with_braces_and_semicolon_string_are_not_bodies",
+          "body": " def test_annotations_with_braces_and_semicolon_string_are_not_bodies(self):\n  result=parse('package p@1.0; @Callflow(next={\"a;\",\"b\"}) interface I { @entry m(); };')\n  self.assertEqual([r['name'] for r in result['records']],['p@1.0','I','m']);self.assertEqual(len(result['records'][1]['all_annotations']),1)\n",
+          "nativeCases": [
+            "HIDL-04"
+          ]
+        },
+        {
+          "method": "test_comments_and_line_offsets",
+          "body": " def test_comments_and_line_offsets(self):\n  result=parse('\\n'*300+'// interface IFake {};\\npackage p@1.0; interface I {};')\n  self.assertEqual(len(result['records']),2);self.assertEqual(result['records'][1]['line'],302)\n",
+          "nativeCases": [
+            "HIDL-05"
+          ]
+        },
+        {
+          "method": "test_unknown_statement_and_missing_package_retained",
+          "body": " def test_unknown_statement_and_missing_package_retained(self):\n  result=parse('package p@1.0; mystery ?;');self.assertEqual(result['records'][-1]['kind'],'unsupported');self.assertEqual(len(result['unsupported']),1)\n  self.assertEqual(parse('interface I {};')['records'][0]['kind'],'unsupported')\n",
+          "nativeCases": [
+            "HIDL-06",
+            "HIDL-07"
+          ]
+        },
+        {
+          "method": "test_oneway_with_results_not_silently_accepted",
+          "body": " def test_oneway_with_results_not_silently_accepted(self):\n  result=parse('package p@1.0; interface I { oneway m() generates (bool ok); };');self.assertEqual(result['records'][-1]['kind'],'unsupported')\n",
+          "nativeCases": [
+            "HIDL-08"
+          ]
+        },
+        {
+          "method": "test_source_hidl_version_is_not_android_availability",
+          "body": " def test_source_hidl_version_is_not_android_availability(self):\n  result=parse('package p@2.7; interface I {};');r=result['records'][1]\n  self.assertEqual(r['extras']['hidl_package_version'],'2.7');self.assertEqual(r['extras']['android_availability'],'unknown')\n",
+          "nativeCases": [
+            "HIDL-09"
+          ]
+        },
+        {
+          "method": "test_typedef_and_safe_union",
+          "body": " def test_typedef_and_safe_union(self):\n  result=parse('package p@1.0; typedef vec<int32_t> Values; safe_union Value { int32_t number; string text; };')\n  self.assertEqual([r['name'] for r in result['records']],['p@1.0','Values','Value','number','text'])\n",
+          "nativeCases": [
+            "HIDL-10"
+          ]
+        },
+        {
+          "method": "test_type_canonical_does_not_repeat_own_name",
+          "body": " def test_type_canonical_does_not_repeat_own_name(self):\n  result=parse('package p@1.0; interface I { struct Point { int32_t x; }; };')\n  self.assertEqual(result['records'][1]['canonical'],'p@1.0::I');self.assertEqual(result['records'][2]['canonical'],'p@1.0::I.Point')\n",
+          "nativeCases": [
+            "HIDL-20"
+          ]
+        },
+        {
+          "method": "test_line_of_method_after_leading_blank_lines",
+          "body": " def test_line_of_method_after_leading_blank_lines(self):\n  result=parse('package p@1.0;\\ninterface I {\\n\\n m();\\n};')\n  self.assertEqual(result['records'][-1]['line'],4)\n",
+          "nativeCases": [
+            "HIDL-11"
+          ]
+        },
+        {
+          "method": "test_missing_semicolon_and_nested_interface_retained_unknown",
+          "body": " def test_missing_semicolon_and_nested_interface_retained_unknown(self):\n  self.assertTrue(parse('package p@1.0; interface I {}')['unsupported'])\n  self.assertTrue(parse('package p@1.0; interface I { interface INested {}; };')['unsupported'])\n",
+          "nativeCases": [
+            "HIDL-12",
+            "HIDL-13"
+          ]
+        },
+        {
+          "method": "test_interface_special_type_is_a_field_not_nested_declaration",
+          "body": " def test_interface_special_type_is_a_field_not_nested_declaration(self):\n  result=parse('package p@1.0; struct Holder { interface instance; };')\n  self.assertEqual(result['records'][-1]['kind'],'field');self.assertEqual(result['records'][-1]['return_type'],'interface');self.assertEqual(result['unsupported'],[])\n",
+          "nativeCases": [
+            "HIDL-14"
+          ]
+        },
+        {
+          "method": "test_type_delimiter_can_touch_variable_name",
+          "body": " def test_type_delimiter_can_touch_variable_name(self):\n  result=parse('package p@1.0; interface I { m(vec<uint8_t>input) generates (uint32_t[3]output); };')\n  self.assertEqual(result['records'][-1]['parameters'][0]['name'],'input');self.assertEqual(result['records'][-1]['extras']['results'][0]['name'],'output');self.assertEqual(result['unsupported'],[])\n",
+          "nativeCases": [
+            "HIDL-15"
+          ]
+        }
+      ],
+      "pending_methods": [],
+      "normal_verification_scope": "All original test-method literal inputs and assertions in this separately read published file are bound to unchanged native fixture expectations; Python unittest/module bootstrap is replaced by xUnit.",
+      "frozenProfileNote": "Allocated original test-file responsibility only. Shared native source facts do not establish full producer/corpus, Catalog import, historical output byte identity or all version-profile callers. No profile equality inferred from matching file hashes.",
+      "proof": {
+        "trx": "remediation/nuke-app/artifacts/tests/20261028T0932272149996-f28fbdb36475416095271304765987df/tests.trx",
+        "sha256": "4e63adacdd42b76a81d5c0a7ab45dc13d749a69eac3d2c9175fef3be73163583",
+        "groups": {
+          "HidlRealTests": 29,
+          "SdkAvailabilityRealTests": 13
+        },
+        "evidenceIncrement": "Next increment after immutable checkpoint007 candidate; evidence uses retained007 normal proof."
+      },
+      "nativeSourcePins": [
+        {
+          "path": "remediation/nuke-app/Modules/Sources/HidlSourceExtractor.cs",
+          "sha256": "6f276aaddd09e3d0bb1922f8ff48ab7f49d7afa2c546ea821ed9dd0652075af6"
+        },
+        {
+          "path": "remediation/nuke-app/Tests/Sources/HidlContractCases.cs",
+          "sha256": "7ae273447df2964ee9b1a74bebc554eac7055b6146d80a8288203e2039b41421"
+        },
+        {
+          "path": "remediation/nuke-app/Tests/Sources/HidlRealTests.cs",
+          "sha256": "b8eb00278b89677614a72033ae19c1cef2fd0fae408ad2232fbab83c0d129e34"
+        }
+      ],
+      "decommissionable_from_pr": true,
+      "decommissionable_scope": "Only this original test file after all original method inputs/assertions and replacing xUnit discovery are normally verified. Local originals retained; production/corpus/HV duties remain separate.",
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false
+    },
+    {
+      "legacyPath": "remediation/catalog/tests/test_sdk_availability_evidence.py",
+      "legacySha256": "13e99e792ef4b982b10ff43c166e9a23ccc68e980a8d17488d7c03fd3068dea0",
+      "owner": "Sources",
+      "category": "Sources",
+      "operation": "Extract",
+      "normal_verified": true,
+      "nativeService": "SdkAvailabilitySourceFacts.Enumerate",
+      "nativeTest": "AndroidMcp.BuildTool.Tests.Sources.SdkAvailabilityRealTests.SameLiteralLifecycleCasesUseNativeFacts",
+      "normal_verified_methods": [
+        {
+          "legacy_method": "test_member_keeps_own_and_owner_constraints_separate",
+          "native_case_ids": [
+            "AVAIL-01"
+          ],
+          "assertion_equivalence": "Exact SDK/class/method XML; two rows, exact SDK id/name list, owner removed35 and sdks30:4 remain separate from method removed36.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_absence_remains_absent_and_future_history_not_filtered",
+          "native_case_ids": [
+            "AVAIL-02"
+          ],
+          "assertion_equivalence": "Exact since38 owner/field XML; two rows, field attributes exactly name:f, owner has no removed attribute and field physical line1 is positive.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_new_attributes_preserved",
+          "native_case_ids": [
+            "AVAIL-03"
+          ],
+          "assertion_equivalence": "Exact since37.2/future raw XML; class future attribute remains raw.",
+          "status": "normal-native-verified"
+        }
+      ],
+      "exactOriginalMethodBodies": [
+        {
+          "method": "test_member_keeps_own_and_owner_constraints_separate",
+          "body": " def test_member_keeps_own_and_owner_constraints_separate(self):\n  doc=b'<api version=\"4\"><sdk id=\"30\" name=\"R\"/><class name=\"a/C\" since=\"30\" removed=\"35\" sdks=\"30:4\" module=\"m\"><method name=\"m()V\" since=\"31\" removed=\"36\"/></class></api>'\n  rows,sdks=enumerate_evidence(doc)\n  self.assertEqual(len(rows),2);self.assertEqual(sdks,[{'id':'30','name':'R'}])\n  self.assertEqual(rows[1]['owner_attributes']['removed'],'35')\n  self.assertEqual(rows[1]['attributes']['removed'],'36')\n  self.assertEqual(rows[1]['owner_attributes']['sdks'],'30:4')\n",
+          "nativeCases": [
+            "AVAIL-01"
+          ]
+        },
+        {
+          "method": "test_absence_remains_absent_and_future_history_not_filtered",
+          "body": " def test_absence_remains_absent_and_future_history_not_filtered(self):\n  rows,_=enumerate_evidence(b'<api version=\"4\"><class name=\"a/C\" since=\"38\"><field name=\"f\"/></class></api>')\n  self.assertEqual(len(rows),2);self.assertEqual(rows[1]['attributes'],{'name':'f'})\n  self.assertNotIn('removed',rows[0]['attributes'])\n  self.assertGreater(rows[1]['line'],0)\n",
+          "nativeCases": [
+            "AVAIL-02"
+          ]
+        },
+        {
+          "method": "test_new_attributes_preserved",
+          "body": " def test_new_attributes_preserved(self):\n  rows,_=enumerate_evidence(b'<api version=\"4\"><class name=\"a/C\" since=\"37.2\" future=\"raw\"/></api>')\n  self.assertEqual(rows[0]['attributes']['future'],'raw')\n",
+          "nativeCases": [
+            "AVAIL-03"
+          ]
+        }
+      ],
+      "pending_methods": [],
+      "normal_verification_scope": "All original test-method literal inputs and assertions in this separately read published file are bound to unchanged native fixture expectations; Python unittest/module bootstrap is replaced by xUnit.",
+      "frozenProfileNote": "Allocated original test-file responsibility only. Shared native source facts do not establish full producer/corpus, Catalog import, historical output byte identity or all version-profile callers. No profile equality inferred from matching file hashes.",
+      "proof": {
+        "trx": "remediation/nuke-app/artifacts/tests/20261028T0932272149996-f28fbdb36475416095271304765987df/tests.trx",
+        "sha256": "4e63adacdd42b76a81d5c0a7ab45dc13d749a69eac3d2c9175fef3be73163583",
+        "groups": {
+          "HidlRealTests": 29,
+          "SdkAvailabilityRealTests": 13
+        },
+        "evidenceIncrement": "Next increment after immutable checkpoint007 candidate; evidence uses retained007 normal proof."
+      },
+      "nativeSourcePins": [
+        {
+          "path": "remediation/nuke-app/Modules/Sources/SdkAvailabilitySourceFacts.cs",
+          "sha256": "253f3cb352cdd3e524a862c42b3f63f7d538f72173cf568eb7913f8c23b07ea5"
+        },
+        {
+          "path": "remediation/nuke-app/Tests/Sources/SdkAvailabilityContractCases.cs",
+          "sha256": "af83c3d2cb73368206d8e71d442e89d2c633d4fa823d8e7c93489835d490107a"
+        },
+        {
+          "path": "remediation/nuke-app/Tests/Sources/SdkAvailabilityRealTests.cs",
+          "sha256": "ad951842e43e63820cd7e1a5a17df2709bdb1dca4bf70e0eb601be555c3c049d"
+        }
+      ],
+      "decommissionable_from_pr": true,
+      "decommissionable_scope": "Only this original test file after all original method inputs/assertions and replacing xUnit discovery are normally verified. Local originals retained; production/corpus/HV duties remain separate.",
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false
+    },
+    {
+      "legacyPath": "tools/source_facts/test_sdk_availability_evidence.py",
+      "legacySha256": "13e99e792ef4b982b10ff43c166e9a23ccc68e980a8d17488d7c03fd3068dea0",
+      "owner": "Sources",
+      "category": "Sources",
+      "operation": "Extract",
+      "normal_verified": true,
+      "nativeService": "SdkAvailabilitySourceFacts.Enumerate",
+      "nativeTest": "AndroidMcp.BuildTool.Tests.Sources.SdkAvailabilityRealTests.SameLiteralLifecycleCasesUseNativeFacts",
+      "normal_verified_methods": [
+        {
+          "legacy_method": "test_member_keeps_own_and_owner_constraints_separate",
+          "native_case_ids": [
+            "AVAIL-01"
+          ],
+          "assertion_equivalence": "Exact SDK/class/method XML; two rows, exact SDK id/name list, owner removed35 and sdks30:4 remain separate from method removed36.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_absence_remains_absent_and_future_history_not_filtered",
+          "native_case_ids": [
+            "AVAIL-02"
+          ],
+          "assertion_equivalence": "Exact since38 owner/field XML; two rows, field attributes exactly name:f, owner has no removed attribute and field physical line1 is positive.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_new_attributes_preserved",
+          "native_case_ids": [
+            "AVAIL-03"
+          ],
+          "assertion_equivalence": "Exact since37.2/future raw XML; class future attribute remains raw.",
+          "status": "normal-native-verified"
+        }
+      ],
+      "exactOriginalMethodBodies": [
+        {
+          "method": "test_member_keeps_own_and_owner_constraints_separate",
+          "body": " def test_member_keeps_own_and_owner_constraints_separate(self):\n  doc=b'<api version=\"4\"><sdk id=\"30\" name=\"R\"/><class name=\"a/C\" since=\"30\" removed=\"35\" sdks=\"30:4\" module=\"m\"><method name=\"m()V\" since=\"31\" removed=\"36\"/></class></api>'\n  rows,sdks=enumerate_evidence(doc)\n  self.assertEqual(len(rows),2);self.assertEqual(sdks,[{'id':'30','name':'R'}])\n  self.assertEqual(rows[1]['owner_attributes']['removed'],'35')\n  self.assertEqual(rows[1]['attributes']['removed'],'36')\n  self.assertEqual(rows[1]['owner_attributes']['sdks'],'30:4')\n",
+          "nativeCases": [
+            "AVAIL-01"
+          ]
+        },
+        {
+          "method": "test_absence_remains_absent_and_future_history_not_filtered",
+          "body": " def test_absence_remains_absent_and_future_history_not_filtered(self):\n  rows,_=enumerate_evidence(b'<api version=\"4\"><class name=\"a/C\" since=\"38\"><field name=\"f\"/></class></api>')\n  self.assertEqual(len(rows),2);self.assertEqual(rows[1]['attributes'],{'name':'f'})\n  self.assertNotIn('removed',rows[0]['attributes'])\n  self.assertGreater(rows[1]['line'],0)\n",
+          "nativeCases": [
+            "AVAIL-02"
+          ]
+        },
+        {
+          "method": "test_new_attributes_preserved",
+          "body": " def test_new_attributes_preserved(self):\n  rows,_=enumerate_evidence(b'<api version=\"4\"><class name=\"a/C\" since=\"37.2\" future=\"raw\"/></api>')\n  self.assertEqual(rows[0]['attributes']['future'],'raw')\n",
+          "nativeCases": [
+            "AVAIL-03"
+          ]
+        }
+      ],
+      "pending_methods": [],
+      "normal_verification_scope": "All original test-method literal inputs and assertions in this separately read published file are bound to unchanged native fixture expectations; Python unittest/module bootstrap is replaced by xUnit.",
+      "frozenProfileNote": "Allocated original test-file responsibility only. Shared native source facts do not establish full producer/corpus, Catalog import, historical output byte identity or all version-profile callers. No profile equality inferred from matching file hashes.",
+      "proof": {
+        "trx": "remediation/nuke-app/artifacts/tests/20261028T0932272149996-f28fbdb36475416095271304765987df/tests.trx",
+        "sha256": "4e63adacdd42b76a81d5c0a7ab45dc13d749a69eac3d2c9175fef3be73163583",
+        "groups": {
+          "HidlRealTests": 29,
+          "SdkAvailabilityRealTests": 13
+        },
+        "evidenceIncrement": "Next increment after immutable checkpoint007 candidate; evidence uses retained007 normal proof."
+      },
+      "nativeSourcePins": [
+        {
+          "path": "remediation/nuke-app/Modules/Sources/SdkAvailabilitySourceFacts.cs",
+          "sha256": "253f3cb352cdd3e524a862c42b3f63f7d538f72173cf568eb7913f8c23b07ea5"
+        },
+        {
+          "path": "remediation/nuke-app/Tests/Sources/SdkAvailabilityContractCases.cs",
+          "sha256": "af83c3d2cb73368206d8e71d442e89d2c633d4fa823d8e7c93489835d490107a"
+        },
+        {
+          "path": "remediation/nuke-app/Tests/Sources/SdkAvailabilityRealTests.cs",
+          "sha256": "ad951842e43e63820cd7e1a5a17df2709bdb1dca4bf70e0eb601be555c3c049d"
+        }
+      ],
+      "decommissionable_from_pr": true,
+      "decommissionable_scope": "Only this original test file after all original method inputs/assertions and replacing xUnit discovery are normally verified. Local originals retained; production/corpus/HV duties remain separate.",
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false
+    },
+    {
+      "legacyPath": "remediation/catalog/tests/test_aidl_members.py",
+      "legacySha256": "31139a1bcb61b3f0818e7123b7e713c38930946c6e2bfb79e079b363546d3b4c",
+      "owner": "Sources",
+      "category": "Sources",
+      "operation": "Extract",
+      "normal_verified": true,
+      "nativeService": "AidlSourceExtractor.Extract",
+      "nativeTest": "AndroidMcp.BuildTool.Tests.Sources.SourceExtractionRealTests.RealProviderPassesUnchangedMockGateAssertions",
+      "normal_verified_methods": [
+        {
+          "legacy_method": "test_parcelable_fields_annotations_and_values",
+          "native_case_ids": [
+            "AIDL-02"
+          ],
+          "assertion_equivalence": "Exact original parcelable input including newlines/indentation. Three member names/order, nullable annotation, int[] field type, quoted a;b constant value and null wire tags are included in the unchanged row golden.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_enum_shifts_and_union_declaration_ordinals_not_tags",
+          "native_case_ids": [
+            "AIDL-03",
+            "AIDL-04"
+          ],
+          "assertion_equivalence": "Both exact original enum and union inputs. Enum A/B/C order and raw shift expression1<<1; union ordinals0/1 and null wire tags are included in unchanged row goldens.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_interface_constant_is_metadata_and_repeated_lines_are_distinct",
+          "native_case_ids": [
+            "AIDL-10",
+            "AIDL-11"
+          ],
+          "assertion_equivalence": "Both exact original interface constant/method and repeated parcelable field inputs. Final enriched first member is field C; field physical lines2/3 are included in unchanged row goldens. This is the legacy enrich caller and does not require the retired low-level unsupported constant wrapper.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_external_parcelable_and_unknown_nested_schema_stay_visible",
+          "native_case_ids": [
+            "AIDL-MEMBER-EXTERNAL-PH",
+            "AIDL-MEMBER-PARTIAL-GOOD"
+          ],
+          "assertion_equivalence": "Both exact original inputs: quoted P.h external declaration has no members; new_syntax remains unsupported before the following good field and partial status. Native row assertions retain source order, complete raw schema and unknown wire/codec facts.",
+          "status": "normal-native-verified",
+          "retired_assertions": [],
+          "native_test": "AndroidMcp.BuildTool.Tests.Sources.ParserRemainingRealTests.SameThreeOriginalInputsUseTheExistingAidlExtractor",
+          "proof": {
+            "trx": "remediation/nuke-app/artifacts/tests/20261028T1157227170014-afdadfa28def499d83e628684361de5c/tests.trx",
+            "sha256": "342108b0e6880ef611b6d084de8769705068325ddc38ec54629721bcae47b38d",
+            "nativeCases": [
+              "AIDL-MEMBER-EXTERNAL-PH",
+              "AIDL-MEMBER-PARTIAL-GOOD"
+            ],
+            "priorMockTrx": "remediation/nuke-app/artifacts/tests/20261028T1139584011024-81142eceb3484b23959972066a00841f/tests.trx",
+            "priorMockSha256": "0d1f5fa755a37e8bf8da1f1104cb77e3557c62da2640f44a8ed024612409e1c6",
+            "priorMockChecks": 249
+          }
+        }
+      ],
+      "exactOriginalMethodBodies": [
+        {
+          "method": "test_parcelable_fields_annotations_and_values",
+          "body": " def test_parcelable_fields_annotations_and_values(self):\n  result=self.parse('package a; parcelable P {\\n @nullable String name;\\n int[] values={1,2};\\n const String S=\"a;b\";\\n}')\n  self.assertEqual([m['name'] for m in result['members']],['name','values','S']);self.assertTrue(result['members'][0]['annotations']);self.assertEqual(result['members'][1]['return_type'],'int[]');self.assertEqual(result['members'][2]['extras']['constant_raw'],'\"a;b\"');self.assertTrue(all(m['extras']['wire_tag'] is None for m in result['members']))\n",
+          "nativeCases": [
+            "AIDL-02"
+          ]
+        },
+        {
+          "method": "test_enum_shifts_and_union_declaration_ordinals_not_tags",
+          "body": " def test_enum_shifts_and_union_declaration_ordinals_not_tags(self):\n  result=self.parse('package a; enum E { A=1<<0, B=1<<1, C, }');self.assertEqual([m['name'] for m in result['members']],['A','B','C']);self.assertEqual(result['members'][1]['extras']['constant_raw'],'1<<1')\n  union=self.parse('package a; union U { int x; String y; }');self.assertEqual([m['extras']['declared_ordinal'] for m in union['members']],[0,1]);self.assertTrue(all(m['extras']['wire_tag'] is None for m in union['members']))\n",
+          "nativeCases": [
+            "AIDL-03",
+            "AIDL-04"
+          ]
+        },
+        {
+          "method": "test_interface_constant_is_metadata_and_repeated_lines_are_distinct",
+          "body": " def test_interface_constant_is_metadata_and_repeated_lines_are_distinct(self):\n  result=self.parse('package a; interface I { const int C=3; void x(); }');self.assertEqual(result['members'][0]['kind'],'field');self.assertEqual(result['members'][0]['name'],'C')\n  fields=self.parse('package a; parcelable P {\\n int x;\\n int y;\\n}')['members'];self.assertEqual([m['line'] for m in fields],[2,3])\n",
+          "nativeCases": [
+            "AIDL-10",
+            "AIDL-11"
+          ]
+        },
+        {
+          "method": "test_external_parcelable_and_unknown_nested_schema_stay_visible",
+          "body": " def test_external_parcelable_and_unknown_nested_schema_stay_visible(self):\n  self.assertEqual(self.parse('package a; parcelable P cpp_header \"P.h\";')['members'],[])\n  result=self.parse('package a; parcelable P { new_syntax; int good; }');self.assertEqual(result['members'][0]['kind'],'unsupported');self.assertEqual(result['members'][1]['name'],'good');self.assertIn('partial',result['parse_status'])\n",
+          "nativeCases": [
+            "AIDL-MEMBER-EXTERNAL-PH",
+            "AIDL-MEMBER-PARTIAL-GOOD"
+          ]
+        }
+      ],
+      "pending_methods": [],
+      "frozenProfileNote": "All exact original test-method behavior scopes have direct native bindings or the explicitly recorded obsolete intermediate-assertion retirement. Eligibility covers replacing this test execution only; retained producer/profile/cache/corpus and broader Catalog import callers remain separate. No physical original deletion or pre-Ready HV requirement.",
+      "proof": {
+        "trx": "remediation/nuke-app/artifacts/tests/20261028T0932272149996-f28fbdb36475416095271304765987df/tests.trx",
+        "sha256": "4e63adacdd42b76a81d5c0a7ab45dc13d749a69eac3d2c9175fef3be73163583",
+        "nativeCases": [
+          "AIDL-02",
+          "AIDL-03",
+          "AIDL-04",
+          "AIDL-10",
+          "AIDL-11"
+        ],
+        "evidenceIncrement": "Next after checkpoint007 candidate"
+      },
+      "decommissionable_from_pr": true,
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false,
+      "additional_proofs": [
+        {
+          "trx": "remediation/nuke-app/artifacts/tests/20261028T1157227170014-afdadfa28def499d83e628684361de5c/tests.trx",
+          "sha256": "342108b0e6880ef611b6d084de8769705068325ddc38ec54629721bcae47b38d",
+          "nativeClass": "AndroidMcp.BuildTool.Tests.Sources.ParserRemainingRealTests",
+          "nativeCases": [
+            "AIDL-MEMBER-EXTERNAL-PH",
+            "AIDL-MEMBER-PARTIAL-GOOD"
+          ],
+          "retiredAssertionsCountedAsSatisfied": 0
+        }
+      ]
+    },
+    {
+      "legacyPath": "rehydration/producers/release-011/tests/test_aidl_members.py",
+      "legacySha256": "31139a1bcb61b3f0818e7123b7e713c38930946c6e2bfb79e079b363546d3b4c",
+      "owner": "Sources",
+      "category": "Sources",
+      "operation": "Extract",
+      "normal_verified": true,
+      "nativeService": "AidlSourceExtractor.Extract",
+      "nativeTest": "AndroidMcp.BuildTool.Tests.Sources.SourceExtractionRealTests.RealProviderPassesUnchangedMockGateAssertions",
+      "normal_verified_methods": [
+        {
+          "legacy_method": "test_parcelable_fields_annotations_and_values",
+          "native_case_ids": [
+            "AIDL-02"
+          ],
+          "assertion_equivalence": "Exact original parcelable input including newlines/indentation. Three member names/order, nullable annotation, int[] field type, quoted a;b constant value and null wire tags are included in the unchanged row golden.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_enum_shifts_and_union_declaration_ordinals_not_tags",
+          "native_case_ids": [
+            "AIDL-03",
+            "AIDL-04"
+          ],
+          "assertion_equivalence": "Both exact original enum and union inputs. Enum A/B/C order and raw shift expression1<<1; union ordinals0/1 and null wire tags are included in unchanged row goldens.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_interface_constant_is_metadata_and_repeated_lines_are_distinct",
+          "native_case_ids": [
+            "AIDL-10",
+            "AIDL-11"
+          ],
+          "assertion_equivalence": "Both exact original interface constant/method and repeated parcelable field inputs. Final enriched first member is field C; field physical lines2/3 are included in unchanged row goldens. This is the legacy enrich caller and does not require the retired low-level unsupported constant wrapper.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_external_parcelable_and_unknown_nested_schema_stay_visible",
+          "native_case_ids": [
+            "AIDL-MEMBER-EXTERNAL-PH",
+            "AIDL-MEMBER-PARTIAL-GOOD"
+          ],
+          "assertion_equivalence": "Both exact original inputs: quoted P.h external declaration has no members; new_syntax remains unsupported before the following good field and partial status. Native row assertions retain source order, complete raw schema and unknown wire/codec facts.",
+          "status": "normal-native-verified",
+          "retired_assertions": [],
+          "native_test": "AndroidMcp.BuildTool.Tests.Sources.ParserRemainingRealTests.SameThreeOriginalInputsUseTheExistingAidlExtractor",
+          "proof": {
+            "trx": "remediation/nuke-app/artifacts/tests/20261028T1157227170014-afdadfa28def499d83e628684361de5c/tests.trx",
+            "sha256": "342108b0e6880ef611b6d084de8769705068325ddc38ec54629721bcae47b38d",
+            "nativeCases": [
+              "AIDL-MEMBER-EXTERNAL-PH",
+              "AIDL-MEMBER-PARTIAL-GOOD"
+            ],
+            "priorMockTrx": "remediation/nuke-app/artifacts/tests/20261028T1139584011024-81142eceb3484b23959972066a00841f/tests.trx",
+            "priorMockSha256": "0d1f5fa755a37e8bf8da1f1104cb77e3557c62da2640f44a8ed024612409e1c6",
+            "priorMockChecks": 249
+          }
+        }
+      ],
+      "exactOriginalMethodBodies": [
+        {
+          "method": "test_parcelable_fields_annotations_and_values",
+          "body": " def test_parcelable_fields_annotations_and_values(self):\n  result=self.parse('package a; parcelable P {\\n @nullable String name;\\n int[] values={1,2};\\n const String S=\"a;b\";\\n}')\n  self.assertEqual([m['name'] for m in result['members']],['name','values','S']);self.assertTrue(result['members'][0]['annotations']);self.assertEqual(result['members'][1]['return_type'],'int[]');self.assertEqual(result['members'][2]['extras']['constant_raw'],'\"a;b\"');self.assertTrue(all(m['extras']['wire_tag'] is None for m in result['members']))\n",
+          "nativeCases": [
+            "AIDL-02"
+          ]
+        },
+        {
+          "method": "test_enum_shifts_and_union_declaration_ordinals_not_tags",
+          "body": " def test_enum_shifts_and_union_declaration_ordinals_not_tags(self):\n  result=self.parse('package a; enum E { A=1<<0, B=1<<1, C, }');self.assertEqual([m['name'] for m in result['members']],['A','B','C']);self.assertEqual(result['members'][1]['extras']['constant_raw'],'1<<1')\n  union=self.parse('package a; union U { int x; String y; }');self.assertEqual([m['extras']['declared_ordinal'] for m in union['members']],[0,1]);self.assertTrue(all(m['extras']['wire_tag'] is None for m in union['members']))\n",
+          "nativeCases": [
+            "AIDL-03",
+            "AIDL-04"
+          ]
+        },
+        {
+          "method": "test_interface_constant_is_metadata_and_repeated_lines_are_distinct",
+          "body": " def test_interface_constant_is_metadata_and_repeated_lines_are_distinct(self):\n  result=self.parse('package a; interface I { const int C=3; void x(); }');self.assertEqual(result['members'][0]['kind'],'field');self.assertEqual(result['members'][0]['name'],'C')\n  fields=self.parse('package a; parcelable P {\\n int x;\\n int y;\\n}')['members'];self.assertEqual([m['line'] for m in fields],[2,3])\n",
+          "nativeCases": [
+            "AIDL-10",
+            "AIDL-11"
+          ]
+        },
+        {
+          "method": "test_external_parcelable_and_unknown_nested_schema_stay_visible",
+          "body": " def test_external_parcelable_and_unknown_nested_schema_stay_visible(self):\n  self.assertEqual(self.parse('package a; parcelable P cpp_header \"P.h\";')['members'],[])\n  result=self.parse('package a; parcelable P { new_syntax; int good; }');self.assertEqual(result['members'][0]['kind'],'unsupported');self.assertEqual(result['members'][1]['name'],'good');self.assertIn('partial',result['parse_status'])\n",
+          "nativeCases": [
+            "AIDL-MEMBER-EXTERNAL-PH",
+            "AIDL-MEMBER-PARTIAL-GOOD"
+          ]
+        }
+      ],
+      "pending_methods": [],
+      "frozenProfileNote": "All exact original test-method behavior scopes have direct native bindings or the explicitly recorded obsolete intermediate-assertion retirement. Eligibility covers replacing this test execution only; retained producer/profile/cache/corpus and broader Catalog import callers remain separate. No physical original deletion or pre-Ready HV requirement.",
+      "proof": {
+        "trx": "remediation/nuke-app/artifacts/tests/20261028T0932272149996-f28fbdb36475416095271304765987df/tests.trx",
+        "sha256": "4e63adacdd42b76a81d5c0a7ab45dc13d749a69eac3d2c9175fef3be73163583",
+        "nativeCases": [
+          "AIDL-02",
+          "AIDL-03",
+          "AIDL-04",
+          "AIDL-10",
+          "AIDL-11"
+        ],
+        "evidenceIncrement": "Next after checkpoint007 candidate"
+      },
+      "decommissionable_from_pr": true,
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false,
+      "additional_proofs": [
+        {
+          "trx": "remediation/nuke-app/artifacts/tests/20261028T1157227170014-afdadfa28def499d83e628684361de5c/tests.trx",
+          "sha256": "342108b0e6880ef611b6d084de8769705068325ddc38ec54629721bcae47b38d",
+          "nativeClass": "AndroidMcp.BuildTool.Tests.Sources.ParserRemainingRealTests",
+          "nativeCases": [
+            "AIDL-MEMBER-EXTERNAL-PH",
+            "AIDL-MEMBER-PARTIAL-GOOD"
+          ],
+          "retiredAssertionsCountedAsSatisfied": 0
+        }
+      ]
+    },
+    {
+      "legacyPath": "remediation/catalog/tests/test_parsers.py",
+      "legacySha256": "d27384a2c3dd8d6eced29756e234a04040a658c1f0ee5257c6b1232431d2747d",
+      "owner": "Sources",
+      "category": "Sources",
+      "operation": "Extract",
+      "normal_verified": true,
+      "nativeService": "Existing AidlSourceExtractor/SignatureSourceExtractor -> PermissionExpressionSourceFacts consumer composition",
+      "nativeTest": "AndroidMcp.BuildTool.Tests.Sources.ParserOriginalRealTests.ExistingNativeConsumersUseTheSameOriginalFixtureAssertions",
+      "normal_verified_methods": [
+        {
+          "legacy_method": "test_overloads_and_annotations",
+          "native_case_ids": [
+            "PARSER-OVERLOADS"
+          ],
+          "assertion_equivalence": "Exact original signature text, including all indentation, through ISourceExtractor; permission annotation then interpreted by existing IPermissionExpressionSourceFacts. Every original assertion is preserved through the existing migrated consumer; no legacy helper API is added.",
+          "status": "normal-native-verified",
+          "retired_assertions": null
+        },
+        {
+          "legacy_method": "test_permission_modes",
+          "native_case_ids": [
+            "MODE-VALUE",
+            "MODE-ALL",
+            "MODE-CONDITIONAL",
+            "MODE-READ",
+            "MODE-MANUAL",
+            "MODE-NONE",
+            "MODE-ABSENT",
+            "MODE-SYMBOL",
+            "MODE-AIDL-UNQUALIFIED",
+            "MODE-PREDICATE",
+            "MODE-BARE-READ"
+          ],
+          "assertion_equivalence": "Eleven original annotation fragments preserved literally. Nine loop/additional modes and symbol mode are embedded in a normal signature callable; EnforcePermission is embedded in an AIDL declaration with aidl=true. Existing extractor annotations feed the actual permission seam; no new annotations helper API. Every original assertion is preserved through the existing migrated consumer; no legacy helper API is added.",
+          "status": "normal-native-verified",
+          "retired_assertions": null
+        },
+        {
+          "legacy_method": "test_parameter_permission_not_callable",
+          "native_case_ids": [
+            "PARSER-PARAMETER"
+          ],
+          "assertion_equivalence": "Exact original member fragment embedded in its normal package/type signature consumer; callable permission remains unknown while parameter annotation remains present. Every original assertion is preserved through the existing migrated consumer; no legacy helper API is added.",
+          "status": "normal-native-verified",
+          "retired_assertions": null
+        },
+        {
+          "legacy_method": "test_aidl",
+          "native_case_ids": [
+            "PARSER-AIDL"
+          ],
+          "assertion_equivalence": "Exact original indented whole AIDL input, with every nonretired original assertion and additional final constant/unknown wire checks. All original nonretired assertions pass. The old unsupported-constant intermediate assertion is explicitly retired, not satisfied; final constant field/raw value and unknown wire status are independently required.",
+          "status": "normal-native-verified-with-explicit-intermediate-assertion-retirement",
+          "retired_assertions": {
+            "assertion": "members[2].kind == unsupported",
+            "satisfied": false,
+            "retired": true,
+            "decision": "remediation/nuke-planning/source/aidl-intermediate-shape-decision.json",
+            "decisionSha256": "7a62fbac2995ef103ad1da017371f44bbab6108ab947a56f4db3409f5519eaf3"
+          }
+        },
+        {
+          "legacy_method": "test_source_unknown_retained",
+          "native_case_ids": [
+            "PARSER-UNKNOWN"
+          ],
+          "assertion_equivalence": "Exact original signature input and final unsupported/raw assertion. Every original assertion is preserved through the existing migrated consumer; no legacy helper API is added.",
+          "status": "normal-native-verified",
+          "retired_assertions": null
+        },
+        {
+          "legacy_method": "test_owner_reset_after_type",
+          "native_case_ids": [
+            "PARSER-OWNER"
+          ],
+          "assertion_equivalence": "Exact original signature input, final unsupported and without-owner error assertion. Every original assertion is preserved through the existing migrated consumer; no legacy helper API is added.",
+          "status": "normal-native-verified",
+          "retired_assertions": null
+        },
+        {
+          "legacy_method": "test_comment_quoted",
+          "native_case_ids": [
+            "PARSER-COMMENT"
+          ],
+          "assertion_equivalence": "Exact original constant/comment fragment embedded unchanged in an AIDL interface constant consumer; quoted //x is retained in raw and value, with no direct new comment API. Every original assertion is preserved through the existing migrated consumer; no legacy helper API is added.",
+          "status": "normal-native-verified",
+          "retired_assertions": null
+        },
+        {
+          "legacy_method": "test_aidl_structured",
+          "native_case_ids": [
+            "PARSER-STRUCTURED-STATUS"
+          ],
+          "assertion_equivalence": "Exact original structured parcelable input and descriptor assertion. The obsolete low-level unresolved-fields parse_status contains retained clause is explicitly retired, not satisfied. Existing enriched field n, complete raw schema, JavaDerive annotation, final field-metadata-parsed status and unknown wire/codec assertions pass on the one native extractor.",
+          "status": "normal-native-verified-with-explicit-intermediate-assertion-retirement",
+          "retired_assertions": [
+            {
+              "assertion": "parse_status contains 'retained'",
+              "satisfied": false,
+              "retired": true,
+              "decision": "remediation/nuke-planning/source/aidl-structured-status-decision.json",
+              "decisionSha256": "cc98f3a70710fe685523be35419c36ba1648b552bfe633948ab545925922d47b",
+              "scope": "Obsolete unresolved-field intermediate label only, final source inventory and wire unknowns preserved."
+            }
+          ],
+          "native_test": "AndroidMcp.BuildTool.Tests.Sources.ParserRemainingRealTests.SameThreeOriginalInputsUseTheExistingAidlExtractor",
+          "proof": {
+            "trx": "remediation/nuke-app/artifacts/tests/20261028T1157227170014-afdadfa28def499d83e628684361de5c/tests.trx",
+            "sha256": "342108b0e6880ef611b6d084de8769705068325ddc38ec54629721bcae47b38d",
+            "nativeCases": [
+              "PARSER-STRUCTURED-STATUS"
+            ],
+            "priorMockTrx": "remediation/nuke-app/artifacts/tests/20261028T1139584011024-81142eceb3484b23959972066a00841f/tests.trx",
+            "priorMockSha256": "0d1f5fa755a37e8bf8da1f1104cb77e3557c62da2640f44a8ed024612409e1c6",
+            "priorMockChecks": 249
+          }
+        }
+      ],
+      "exactOriginalMethodBodies": [
+        {
+          "method": "test_overloads_and_annotations",
+          "body": " def test_overloads_and_annotations(self):\n  text='''package a {\n public @interface Ann {\n method public abstract String value();\n }\n public class Outer.Inner<T> {\n ctor public Outer.Inner();\n method @RequiresPermission(\"example.permission.P\") public <T extends java.lang.Object> java.util.List<T> go(@Nullable java.util.Map<String,java.util.List<T>>, int);\n method public void go(int);\n field public static final String S = \"hello // no comment\";\n }\n }'''\n  rs=list(p.signature(text));self.assertFalse(any(r['kind']=='unsupported' for r in rs));self.assertEqual(rs[1]['kind'],'annotation');ms=[x for x in rs if x['name']=='go'];self.assertNotEqual(ms[0]['canonical'],ms[1]['canonical']);self.assertEqual(ms[0]['parameters'][0]['type'],'java.util.Map<String,java.util.List<T>>');self.assertEqual(ms[0]['return_type'],'java.util.List<T>');self.assertEqual(p.permission(ms[0]['annotations'])['name'],'example.permission.P')\n",
+          "cases": [
+            "PARSER-OVERLOADS"
+          ],
+          "status": "mock-first-staged-unrun"
+        },
+        {
+          "method": "test_permission_modes",
+          "body": " def test_permission_modes(self):\n  for text,op in [('@RequiresPermission(value=\"example.permission.X\")','permission'),('@RequiresPermission(allOf={\"example.permission.A\",\"example.permission.B\"})','all'),('@RequiresPermission(anyOf={\"example.permission.A\",\"example.permission.B\"},conditional=true)','conditional'),('@RequiresPermission.Read(@RequiresPermission(\"example.permission.X\"))','access'),('@PermissionManuallyEnforced','manual'),('@RequiresNoPermission','explicit-none'),('','unknown')]:self.assertEqual(p.permission(p.annotations(text)[1])['op'],op)\n  self.assertEqual(p.permission(p.annotations('@RequiresPermission(android.Manifest.permission.X)')[1],{'android.Manifest.permission.X':'android.permission.X'})['name'],'android.permission.X')\n  self.assertEqual(p.permission(p.annotations('@EnforcePermission(\"X\")')[1],aidl=True)['op'],'unknown')\n  self.assertEqual(p.permission(p.annotations('@RequiresPermission(\"carrier privileges\")')[1])['op'],'unknown')\n  self.assertEqual(p.permission(p.annotations('@RequiresPermission.Read')[1])['op'],'access')\n",
+          "cases": [
+            "MODE-VALUE",
+            "MODE-ALL",
+            "MODE-CONDITIONAL",
+            "MODE-READ",
+            "MODE-MANUAL",
+            "MODE-NONE",
+            "MODE-ABSENT",
+            "MODE-SYMBOL",
+            "MODE-AIDL-UNQUALIFIED",
+            "MODE-PREDICATE",
+            "MODE-BARE-READ"
+          ],
+          "status": "mock-first-staged-unrun"
+        },
+        {
+          "method": "test_parameter_permission_not_callable",
+          "body": " def test_parameter_permission_not_callable(self):\n  r=p.member('method public void x(@RequiresPermission(\"example.permission.P\") String);','a.A','a');self.assertEqual(p.permission(r['annotations'])['op'],'unknown');self.assertTrue(r['parameters'][0]['annotations'])\n",
+          "cases": [
+            "PARSER-PARAMETER"
+          ],
+          "status": "mock-first-staged-unrun"
+        },
+        {
+          "method": "test_aidl",
+          "body": " def test_aidl(self):\n  text='''package a; import b.B;\n @EnforcePermission(\"android.permission.X\") oneway interface IFoo {\n @RequiresNoPermission void ping(in B b, out int[] value) = 7;\n @PermissionManuallyEnforced oneway void send(in String s);\n const int C=3;\n }'''\n  d=p.aidl(text);self.assertEqual(d['descriptor'],'a.IFoo');self.assertTrue(d['oneway']);self.assertEqual(len(d['members']),3);self.assertEqual(d['members'][0]['extras']['declared_method_id'],7);self.assertIsNone(d['members'][0]['extras']['wire_transaction_code']);self.assertEqual(d['members'][0]['parameters'][1]['direction'],'out');self.assertEqual(d['members'][2]['kind'],'unsupported');self.assertEqual(p.permission(d['annotations'],aidl=True)['name'],'android.permission.X')\n",
+          "cases": [
+            "PARSER-AIDL"
+          ],
+          "status": "mock-first-staged-unrun-with-explicit-retired-intermediate-assertion"
+        },
+        {
+          "method": "test_source_unknown_retained",
+          "body": " def test_source_unknown_retained(self):\n  r=list(p.signature('package a {\\n strange new declaration;\\n}'));self.assertEqual(r[1]['kind'],'unsupported');self.assertEqual(r[1]['raw'],'strange new declaration;')\n",
+          "cases": [
+            "PARSER-UNKNOWN"
+          ],
+          "status": "mock-first-staged-unrun"
+        },
+        {
+          "method": "test_owner_reset_after_type",
+          "body": " def test_owner_reset_after_type(self):\n  rs=list(p.signature('package a {\\n public class A {\\n method public void x();\\n }\\n method public void orphan();\\n}'))\n  self.assertEqual(rs[-1]['kind'],'unsupported');self.assertIn('without owner',rs[-1]['extras']['parse_error'])\n",
+          "cases": [
+            "PARSER-OWNER"
+          ],
+          "status": "mock-first-staged-unrun"
+        },
+        {
+          "method": "test_comment_quoted",
+          "body": " def test_comment_quoted(self):self.assertIn('\"//x\"',p.without_comments('const String X=\"//x\"; // hi'))\n",
+          "cases": [
+            "PARSER-COMMENT"
+          ],
+          "status": "mock-first-staged-unrun"
+        },
+        {
+          "method": "test_aidl_structured",
+          "body": " def test_aidl_structured(self):\n  d=p.aidl('package a; @JavaDerive(toString=true) parcelable P { int n; }');self.assertEqual(d['descriptor'],'a.P');self.assertIn('retained',d['parse_status'])\n",
+          "nativeCases": [
+            "PARSER-STRUCTURED-STATUS"
+          ]
+        }
+      ],
+      "pending_methods": [],
+      "frozenProfileNote": "All exact original test-method behavior scopes have direct native bindings or the explicitly recorded obsolete intermediate-assertion retirement. Eligibility covers replacing this test execution only; retained producer/profile/cache/corpus and broader Catalog import callers remain separate. No physical original deletion or pre-Ready HV requirement.",
+      "proof": {
+        "trx": "remediation/nuke-app/artifacts/tests/20261028T1031428612166-2668ec025a714c868f4dcc367a5b32ba/tests.trx",
+        "sha256": "b231b18839867a362b62c0c956e155a312d9dee6cacc2e21e8059da87b8eb560",
+        "nativeCases": 17,
+        "mockChecks": 468,
+        "evidenceIncrement": "Working next increment after checkpoint007"
+      },
+      "decommissionable_from_pr": true,
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false,
+      "additional_proofs": [
+        {
+          "trx": "remediation/nuke-app/artifacts/tests/20261028T1157227170014-afdadfa28def499d83e628684361de5c/tests.trx",
+          "sha256": "342108b0e6880ef611b6d084de8769705068325ddc38ec54629721bcae47b38d",
+          "nativeClass": "AndroidMcp.BuildTool.Tests.Sources.ParserRemainingRealTests",
+          "nativeCases": [
+            "PARSER-STRUCTURED-STATUS"
+          ],
+          "retiredAssertionsCountedAsSatisfied": 0
+        }
+      ]
+    },
+    {
+      "legacyPath": "rehydration/producers/release-011/tests/test_parsers.py",
+      "legacySha256": "d27384a2c3dd8d6eced29756e234a04040a658c1f0ee5257c6b1232431d2747d",
+      "owner": "Sources",
+      "category": "Sources",
+      "operation": "Extract",
+      "normal_verified": true,
+      "nativeService": "Existing AidlSourceExtractor/SignatureSourceExtractor -> PermissionExpressionSourceFacts consumer composition",
+      "nativeTest": "AndroidMcp.BuildTool.Tests.Sources.ParserOriginalRealTests.ExistingNativeConsumersUseTheSameOriginalFixtureAssertions",
+      "normal_verified_methods": [
+        {
+          "legacy_method": "test_overloads_and_annotations",
+          "native_case_ids": [
+            "PARSER-OVERLOADS"
+          ],
+          "assertion_equivalence": "Exact original signature text, including all indentation, through ISourceExtractor; permission annotation then interpreted by existing IPermissionExpressionSourceFacts. Every original assertion is preserved through the existing migrated consumer; no legacy helper API is added.",
+          "status": "normal-native-verified",
+          "retired_assertions": null
+        },
+        {
+          "legacy_method": "test_permission_modes",
+          "native_case_ids": [
+            "MODE-VALUE",
+            "MODE-ALL",
+            "MODE-CONDITIONAL",
+            "MODE-READ",
+            "MODE-MANUAL",
+            "MODE-NONE",
+            "MODE-ABSENT",
+            "MODE-SYMBOL",
+            "MODE-AIDL-UNQUALIFIED",
+            "MODE-PREDICATE",
+            "MODE-BARE-READ"
+          ],
+          "assertion_equivalence": "Eleven original annotation fragments preserved literally. Nine loop/additional modes and symbol mode are embedded in a normal signature callable; EnforcePermission is embedded in an AIDL declaration with aidl=true. Existing extractor annotations feed the actual permission seam; no new annotations helper API. Every original assertion is preserved through the existing migrated consumer; no legacy helper API is added.",
+          "status": "normal-native-verified",
+          "retired_assertions": null
+        },
+        {
+          "legacy_method": "test_parameter_permission_not_callable",
+          "native_case_ids": [
+            "PARSER-PARAMETER"
+          ],
+          "assertion_equivalence": "Exact original member fragment embedded in its normal package/type signature consumer; callable permission remains unknown while parameter annotation remains present. Every original assertion is preserved through the existing migrated consumer; no legacy helper API is added.",
+          "status": "normal-native-verified",
+          "retired_assertions": null
+        },
+        {
+          "legacy_method": "test_aidl",
+          "native_case_ids": [
+            "PARSER-AIDL"
+          ],
+          "assertion_equivalence": "Exact original indented whole AIDL input, with every nonretired original assertion and additional final constant/unknown wire checks. All original nonretired assertions pass. The old unsupported-constant intermediate assertion is explicitly retired, not satisfied; final constant field/raw value and unknown wire status are independently required.",
+          "status": "normal-native-verified-with-explicit-intermediate-assertion-retirement",
+          "retired_assertions": {
+            "assertion": "members[2].kind == unsupported",
+            "satisfied": false,
+            "retired": true,
+            "decision": "remediation/nuke-planning/source/aidl-intermediate-shape-decision.json",
+            "decisionSha256": "7a62fbac2995ef103ad1da017371f44bbab6108ab947a56f4db3409f5519eaf3"
+          }
+        },
+        {
+          "legacy_method": "test_source_unknown_retained",
+          "native_case_ids": [
+            "PARSER-UNKNOWN"
+          ],
+          "assertion_equivalence": "Exact original signature input and final unsupported/raw assertion. Every original assertion is preserved through the existing migrated consumer; no legacy helper API is added.",
+          "status": "normal-native-verified",
+          "retired_assertions": null
+        },
+        {
+          "legacy_method": "test_owner_reset_after_type",
+          "native_case_ids": [
+            "PARSER-OWNER"
+          ],
+          "assertion_equivalence": "Exact original signature input, final unsupported and without-owner error assertion. Every original assertion is preserved through the existing migrated consumer; no legacy helper API is added.",
+          "status": "normal-native-verified",
+          "retired_assertions": null
+        },
+        {
+          "legacy_method": "test_comment_quoted",
+          "native_case_ids": [
+            "PARSER-COMMENT"
+          ],
+          "assertion_equivalence": "Exact original constant/comment fragment embedded unchanged in an AIDL interface constant consumer; quoted //x is retained in raw and value, with no direct new comment API. Every original assertion is preserved through the existing migrated consumer; no legacy helper API is added.",
+          "status": "normal-native-verified",
+          "retired_assertions": null
+        },
+        {
+          "legacy_method": "test_aidl_structured",
+          "native_case_ids": [
+            "PARSER-STRUCTURED-STATUS"
+          ],
+          "assertion_equivalence": "Exact original structured parcelable input and descriptor assertion. The obsolete low-level unresolved-fields parse_status contains retained clause is explicitly retired, not satisfied. Existing enriched field n, complete raw schema, JavaDerive annotation, final field-metadata-parsed status and unknown wire/codec assertions pass on the one native extractor.",
+          "status": "normal-native-verified-with-explicit-intermediate-assertion-retirement",
+          "retired_assertions": [
+            {
+              "assertion": "parse_status contains 'retained'",
+              "satisfied": false,
+              "retired": true,
+              "decision": "remediation/nuke-planning/source/aidl-structured-status-decision.json",
+              "decisionSha256": "cc98f3a70710fe685523be35419c36ba1648b552bfe633948ab545925922d47b",
+              "scope": "Obsolete unresolved-field intermediate label only, final source inventory and wire unknowns preserved."
+            }
+          ],
+          "native_test": "AndroidMcp.BuildTool.Tests.Sources.ParserRemainingRealTests.SameThreeOriginalInputsUseTheExistingAidlExtractor",
+          "proof": {
+            "trx": "remediation/nuke-app/artifacts/tests/20261028T1157227170014-afdadfa28def499d83e628684361de5c/tests.trx",
+            "sha256": "342108b0e6880ef611b6d084de8769705068325ddc38ec54629721bcae47b38d",
+            "nativeCases": [
+              "PARSER-STRUCTURED-STATUS"
+            ],
+            "priorMockTrx": "remediation/nuke-app/artifacts/tests/20261028T1139584011024-81142eceb3484b23959972066a00841f/tests.trx",
+            "priorMockSha256": "0d1f5fa755a37e8bf8da1f1104cb77e3557c62da2640f44a8ed024612409e1c6",
+            "priorMockChecks": 249
+          }
+        }
+      ],
+      "exactOriginalMethodBodies": [
+        {
+          "method": "test_overloads_and_annotations",
+          "body": " def test_overloads_and_annotations(self):\n  text='''package a {\n public @interface Ann {\n method public abstract String value();\n }\n public class Outer.Inner<T> {\n ctor public Outer.Inner();\n method @RequiresPermission(\"example.permission.P\") public <T extends java.lang.Object> java.util.List<T> go(@Nullable java.util.Map<String,java.util.List<T>>, int);\n method public void go(int);\n field public static final String S = \"hello // no comment\";\n }\n }'''\n  rs=list(p.signature(text));self.assertFalse(any(r['kind']=='unsupported' for r in rs));self.assertEqual(rs[1]['kind'],'annotation');ms=[x for x in rs if x['name']=='go'];self.assertNotEqual(ms[0]['canonical'],ms[1]['canonical']);self.assertEqual(ms[0]['parameters'][0]['type'],'java.util.Map<String,java.util.List<T>>');self.assertEqual(ms[0]['return_type'],'java.util.List<T>');self.assertEqual(p.permission(ms[0]['annotations'])['name'],'example.permission.P')\n",
+          "cases": [
+            "PARSER-OVERLOADS"
+          ],
+          "status": "mock-first-staged-unrun"
+        },
+        {
+          "method": "test_permission_modes",
+          "body": " def test_permission_modes(self):\n  for text,op in [('@RequiresPermission(value=\"example.permission.X\")','permission'),('@RequiresPermission(allOf={\"example.permission.A\",\"example.permission.B\"})','all'),('@RequiresPermission(anyOf={\"example.permission.A\",\"example.permission.B\"},conditional=true)','conditional'),('@RequiresPermission.Read(@RequiresPermission(\"example.permission.X\"))','access'),('@PermissionManuallyEnforced','manual'),('@RequiresNoPermission','explicit-none'),('','unknown')]:self.assertEqual(p.permission(p.annotations(text)[1])['op'],op)\n  self.assertEqual(p.permission(p.annotations('@RequiresPermission(android.Manifest.permission.X)')[1],{'android.Manifest.permission.X':'android.permission.X'})['name'],'android.permission.X')\n  self.assertEqual(p.permission(p.annotations('@EnforcePermission(\"X\")')[1],aidl=True)['op'],'unknown')\n  self.assertEqual(p.permission(p.annotations('@RequiresPermission(\"carrier privileges\")')[1])['op'],'unknown')\n  self.assertEqual(p.permission(p.annotations('@RequiresPermission.Read')[1])['op'],'access')\n",
+          "cases": [
+            "MODE-VALUE",
+            "MODE-ALL",
+            "MODE-CONDITIONAL",
+            "MODE-READ",
+            "MODE-MANUAL",
+            "MODE-NONE",
+            "MODE-ABSENT",
+            "MODE-SYMBOL",
+            "MODE-AIDL-UNQUALIFIED",
+            "MODE-PREDICATE",
+            "MODE-BARE-READ"
+          ],
+          "status": "mock-first-staged-unrun"
+        },
+        {
+          "method": "test_parameter_permission_not_callable",
+          "body": " def test_parameter_permission_not_callable(self):\n  r=p.member('method public void x(@RequiresPermission(\"example.permission.P\") String);','a.A','a');self.assertEqual(p.permission(r['annotations'])['op'],'unknown');self.assertTrue(r['parameters'][0]['annotations'])\n",
+          "cases": [
+            "PARSER-PARAMETER"
+          ],
+          "status": "mock-first-staged-unrun"
+        },
+        {
+          "method": "test_aidl",
+          "body": " def test_aidl(self):\n  text='''package a; import b.B;\n @EnforcePermission(\"android.permission.X\") oneway interface IFoo {\n @RequiresNoPermission void ping(in B b, out int[] value) = 7;\n @PermissionManuallyEnforced oneway void send(in String s);\n const int C=3;\n }'''\n  d=p.aidl(text);self.assertEqual(d['descriptor'],'a.IFoo');self.assertTrue(d['oneway']);self.assertEqual(len(d['members']),3);self.assertEqual(d['members'][0]['extras']['declared_method_id'],7);self.assertIsNone(d['members'][0]['extras']['wire_transaction_code']);self.assertEqual(d['members'][0]['parameters'][1]['direction'],'out');self.assertEqual(d['members'][2]['kind'],'unsupported');self.assertEqual(p.permission(d['annotations'],aidl=True)['name'],'android.permission.X')\n",
+          "cases": [
+            "PARSER-AIDL"
+          ],
+          "status": "mock-first-staged-unrun-with-explicit-retired-intermediate-assertion"
+        },
+        {
+          "method": "test_source_unknown_retained",
+          "body": " def test_source_unknown_retained(self):\n  r=list(p.signature('package a {\\n strange new declaration;\\n}'));self.assertEqual(r[1]['kind'],'unsupported');self.assertEqual(r[1]['raw'],'strange new declaration;')\n",
+          "cases": [
+            "PARSER-UNKNOWN"
+          ],
+          "status": "mock-first-staged-unrun"
+        },
+        {
+          "method": "test_owner_reset_after_type",
+          "body": " def test_owner_reset_after_type(self):\n  rs=list(p.signature('package a {\\n public class A {\\n method public void x();\\n }\\n method public void orphan();\\n}'))\n  self.assertEqual(rs[-1]['kind'],'unsupported');self.assertIn('without owner',rs[-1]['extras']['parse_error'])\n",
+          "cases": [
+            "PARSER-OWNER"
+          ],
+          "status": "mock-first-staged-unrun"
+        },
+        {
+          "method": "test_comment_quoted",
+          "body": " def test_comment_quoted(self):self.assertIn('\"//x\"',p.without_comments('const String X=\"//x\"; // hi'))\n",
+          "cases": [
+            "PARSER-COMMENT"
+          ],
+          "status": "mock-first-staged-unrun"
+        },
+        {
+          "method": "test_aidl_structured",
+          "body": " def test_aidl_structured(self):\n  d=p.aidl('package a; @JavaDerive(toString=true) parcelable P { int n; }');self.assertEqual(d['descriptor'],'a.P');self.assertIn('retained',d['parse_status'])\n",
+          "nativeCases": [
+            "PARSER-STRUCTURED-STATUS"
+          ]
+        }
+      ],
+      "pending_methods": [],
+      "frozenProfileNote": "All exact original test-method behavior scopes have direct native bindings or the explicitly recorded obsolete intermediate-assertion retirement. Eligibility covers replacing this test execution only; retained producer/profile/cache/corpus and broader Catalog import callers remain separate. No physical original deletion or pre-Ready HV requirement.",
+      "proof": {
+        "trx": "remediation/nuke-app/artifacts/tests/20261028T1031428612166-2668ec025a714c868f4dcc367a5b32ba/tests.trx",
+        "sha256": "b231b18839867a362b62c0c956e155a312d9dee6cacc2e21e8059da87b8eb560",
+        "nativeCases": 17,
+        "mockChecks": 468,
+        "evidenceIncrement": "Working next increment after checkpoint007"
+      },
+      "decommissionable_from_pr": true,
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false,
+      "additional_proofs": [
+        {
+          "trx": "remediation/nuke-app/artifacts/tests/20261028T1157227170014-afdadfa28def499d83e628684361de5c/tests.trx",
+          "sha256": "342108b0e6880ef611b6d084de8769705068325ddc38ec54629721bcae47b38d",
+          "nativeClass": "AndroidMcp.BuildTool.Tests.Sources.ParserRemainingRealTests",
+          "nativeCases": [
+            "PARSER-STRUCTURED-STATUS"
+          ],
+          "retiredAssertionsCountedAsSatisfied": 0
+        }
+      ]
     }
   ],
   "totals": {
-    "paths": 6,
-    "normalVerifiedTestFiles": 6,
+    "paths": 14,
+    "normalVerifiedTestFiles": 14,
     "partialVerifiedTestFiles": 0,
-    "normalVerifiedOriginalTestMethods": 28,
-    "decommissionableFromPr": 6,
+    "normalVerifiedOriginalTestMethods": 86,
+    "decommissionableFromPr": 14,
     "acceptedComplete": 0,
     "safeToDelete": 0
   },
@@ -558,6 +1940,144 @@
       {
         "path": "remediation/nuke-app/Tests/Sources/SdkXmlRealTests.cs",
         "sha256": "348f4a20c8fd9d808ef0997df950bc3f1f087a3946c8e3295dd9fb4c5e324634"
+      }
+    ]
+  },
+  "hidlAvailabilityOriginalProof": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T0932272149996-f28fbdb36475416095271304765987df/tests.trx",
+    "sha256": "4e63adacdd42b76a81d5c0a7ab45dc13d749a69eac3d2c9175fef3be73163583",
+    "groups": {
+      "HidlRealTests": 29,
+      "SdkAvailabilityRealTests": 13
+    },
+    "failed": 0,
+    "skipped": 0,
+    "globalCounters": "<Counters total=\"59119\" executed=\"59119\" passed=\"59119\" failed=\"0\" error=\"0\" timeout=\"0\" aborted=\"0\" inconclusive=\"0\" passedButRunAborted=\"0\" notRunnable=\"0\" notExecuted=\"0\" disconnected=\"0\" warning=\"0\" completed=\"0\" inProgress=\"0\" pending=\"0\" xmlns=\"http://microsoft.com/schemas/VisualStudio/TeamTest/2010\" />",
+    "additionalFiles": 4,
+    "additionalOriginalMethodScopes": 34,
+    "evidenceIncrement": "Next after checkpoint007 candidate, not a mutation of007 proof/copies.",
+    "absentReleaseAvailability": "No published release011 test_sdk_availability_evidence.py exists. The distinct tools/source_facts test caller was separately read in full and all three literal methods reconciled; no hash-only parity inference."
+  },
+  "aidlMemberPartialProof": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T0932272149996-f28fbdb36475416095271304765987df/tests.trx",
+    "sha256": "4e63adacdd42b76a81d5c0a7ab45dc13d749a69eac3d2c9175fef3be73163583",
+    "passedNativeCases": 5,
+    "additionalOriginalMethodScopes": 6,
+    "normalFileClosureAdded": 0,
+    "remainingOriginalMethodsPerFile": 1,
+    "nativePins": [
+      {
+        "path": "remediation/nuke-app/Modules/Sources/AidlSourceExtractor.cs",
+        "sha256": "cdc2a9b5e9e1048936cf817bb4df89746f6c8351c127ca682cb929a801b242b6"
+      },
+      {
+        "path": "remediation/nuke-app/Tests/Sources/SourceExtractionContractCases.cs",
+        "sha256": "f41db12dcc56fa4ddc16b5f8e576f18946689adb7c6875b9071ca80a506a24e2"
+      },
+      {
+        "path": "remediation/nuke-app/Tests/Sources/SourceExtractionRealTests.cs",
+        "sha256": "a2bf01503957fd3059daba069dc3b3792f425d5b330f8a7cdcdc163a79717ad5"
+      }
+    ]
+  },
+  "parserOriginalCompositionProof": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T1031428612166-2668ec025a714c868f4dcc367a5b32ba/tests.trx",
+    "sha256": "b231b18839867a362b62c0c956e155a312d9dee6cacc2e21e8059da87b8eb560",
+    "groups": {
+      "ParserOriginalRealTests": 17,
+      "ParserOriginalMockTests": 468
+    },
+    "failed": 0,
+    "skipped": 0,
+    "globalCounters": "<Counters total=\"1095\" executed=\"1095\" passed=\"1095\" failed=\"0\" error=\"0\" timeout=\"0\" aborted=\"0\" inconclusive=\"0\" passedButRunAborted=\"0\" notRunnable=\"0\" notExecuted=\"0\" disconnected=\"0\" warning=\"0\" completed=\"0\" inProgress=\"0\" pending=\"0\" xmlns=\"http://microsoft.com/schemas/VisualStudio/TeamTest/2010\" />",
+    "exactOriginalMethodScopesAdded": 14,
+    "normalFileClosureAdded": 0,
+    "retiredIntermediateAssertionsPerOriginal": 1,
+    "retiredAssertionsCountedAsSatisfied": 0,
+    "productionBehaviorChanges": 0,
+    "nativeSourcePins": [
+      {
+        "path": "remediation/nuke-app/Modules/Sources/AidlSourceExtractor.cs",
+        "sha256": "cdc2a9b5e9e1048936cf817bb4df89746f6c8351c127ca682cb929a801b242b6"
+      },
+      {
+        "path": "remediation/nuke-app/Modules/Sources/SignatureSourceExtractor.cs",
+        "sha256": "c4a2cd247613c3038e2d8c04d41ab6e9f62570030e0d28627c0b699f8cf28a01"
+      },
+      {
+        "path": "remediation/nuke-app/Modules/Sources/PermissionExpressionSourceFacts.cs",
+        "sha256": "3d8f81b29db3ee718d6c01ba8d4e6000cef68e25353c61ad7dcc7447b384343f"
+      },
+      {
+        "path": "remediation/nuke-app/Modules/Sources/SourceSyntax.cs",
+        "sha256": "aa56fb2ba3ab82f821d60a2738e0a86021e95aee2b3b90e0b39033bd5829711f"
+      },
+      {
+        "path": "remediation/nuke-app/Core/ContentHash.cs",
+        "sha256": "06b7f908c78d70c2c7295d84f1384b7be503c0faa96c7afb32a36b31f3fc31c6"
+      },
+      {
+        "path": "remediation/nuke-app/Tests/Sources/ParserOriginalContractCases.cs",
+        "sha256": "9ed2691c48ace645b83b3062b0bb904abc64135dd50a208e232c84a343c772bb"
+      },
+      {
+        "path": "remediation/nuke-app/Tests/Sources/ParserOriginalMockTests.cs",
+        "sha256": "08faf934c6f02c4ac567405ee5810ec400ab7b89da8725fb07d06bbdb1310b27"
+      },
+      {
+        "path": "remediation/nuke-app/Tests/Sources/ParserOriginalRealTests.cs",
+        "sha256": "5268f47564ee5efe58a721049ba3a9436bebfc19890d60c4105ffcf6b149b031"
+      }
+    ]
+  },
+  "parserRemainingCompositionProof": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T1157227170014-afdadfa28def499d83e628684361de5c/tests.trx",
+    "sha256": "342108b0e6880ef611b6d084de8769705068325ddc38ec54629721bcae47b38d",
+    "groups": {
+      "ParserRemainingRealTests": 3
+    },
+    "priorMockProof": {
+      "trx": "remediation/nuke-app/artifacts/tests/20261028T1139584011024-81142eceb3484b23959972066a00841f/tests.trx",
+      "sha256": "0d1f5fa755a37e8bf8da1f1104cb77e3557c62da2640f44a8ed024612409e1c6",
+      "class": "AndroidMcp.BuildTool.Tests.Sources.ParserRemainingMockTests",
+      "passed": 249
+    },
+    "originalMethodScopesAdded": 4,
+    "normalTestFilesCompleted": [
+      "remediation/catalog/tests/test_parsers.py",
+      "rehydration/producers/release-011/tests/test_parsers.py",
+      "remediation/catalog/tests/test_aidl_members.py",
+      "rehydration/producers/release-011/tests/test_aidl_members.py"
+    ],
+    "productionChanges": 0,
+    "newParsers": 0,
+    "retiredAssertionsCountedAsSatisfied": 0,
+    "hvAccepted": false,
+    "safeToDelete": false,
+    "nativeSourcePins": [
+      {
+        "path": "remediation/nuke-app/Modules/Sources/AidlSourceExtractor.cs",
+        "sha256": "cdc2a9b5e9e1048936cf817bb4df89746f6c8351c127ca682cb929a801b242b6"
+      },
+      {
+        "path": "remediation/nuke-app/Modules/Sources/SourceSyntax.cs",
+        "sha256": "aa56fb2ba3ab82f821d60a2738e0a86021e95aee2b3b90e0b39033bd5829711f"
+      },
+      {
+        "path": "remediation/nuke-app/Core/ContentHash.cs",
+        "sha256": "06b7f908c78d70c2c7295d84f1384b7be503c0faa96c7afb32a36b31f3fc31c6"
+      },
+      {
+        "path": "remediation/nuke-app/Tests/Sources/ParserRemainingContractCases.cs",
+        "sha256": "497a705929d1265a6f102251d6e925a41e40ff6df5823c6326cb749e0e31f90a"
+      },
+      {
+        "path": "remediation/nuke-app/Tests/Sources/ParserRemainingMockTests.cs",
+        "sha256": "3e0513b3b0ee44a4e695bfcdc1020ca949d02924b387faf52a7f101d45804844"
+      },
+      {
+        "path": "remediation/nuke-app/Tests/Sources/ParserRemainingRealTests.cs",
+        "sha256": "49f86e08da52a43f8f2d122a81dfac178a3f1704a434e47c4b391ac046d5c7dd"
       }
     ]
   }

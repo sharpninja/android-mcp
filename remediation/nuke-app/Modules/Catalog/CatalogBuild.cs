@@ -20,7 +20,7 @@ public sealed record CatalogSourceIntake(ISourceExtractGenerationReader Reader,S
 /// <summary>Offline native source-to-sealed-catalog generation. No runtime authority or device observations.</summary>
 public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher dispatcher,IPermissionExpressionSourceFacts permissions,
     IAnnotationTargetSourceFacts formals,IStructuralTypeHeaderSourceFacts headers,ICanonicalJson canonical,ISourceXmlFormatter? xmlFormatter=null,
-    Func<string,IStreamingArtifactStore>? outputStores=null,Func<string,CatalogDatabase>? stagingDatabases=null,IJvmSourceLinker? sourceJvm=null,Action<CatalogImportObservation>? observeImport=null,CatalogSourceIntake? sourceIntake=null)
+    Func<string,IStreamingArtifactStore>? outputStores=null,Func<string,CatalogDatabase>? stagingDatabases=null,IJvmSourceLinker? sourceJvm=null,Action<CatalogImportObservation>? observeImport=null,CatalogSourceIntake? sourceIntake=null,CatalogSourceMetadata? sourceMetadata=null)
 {
     public const string ProducerId="csharp-nuke-catalog-v1";
     public string ProducerFingerprint {get;}=ContentHash.Sha256(File.ReadAllBytes(typeof(CatalogBuild).Assembly.Location));
@@ -206,7 +206,42 @@ public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher
             foreach(var input in inputs)
             {
                 var source=input.Source;var sid=S(source["source_id"]);var kind=S(source["kind"]);var count=0;var unsupported=0;var facts=raw.Facts(sid);
-                if(facts.Issues.Count!=0)
+                var hidlEvidence=kind=="evidence" && S(source["scope"])=="aosp-pinned-hidl-source-evidence";
+                var retainedNative=(kind is "evidence" or "sdk-history") && (S(source["scope"]) is "aosp-native-binder-candidate-evidence" or "aosp-native-binder-search-candidate-evidence" or "aosp-interface-version-evidence");
+                string? retainedEncoding=null;
+                if(hidlEvidence || retainedNative)
+                {
+                    byte[] retainedBytes;
+                    if(input.Facade && raw.RawEvidence(sid) is { } evidence)retainedBytes=Convert.FromBase64String(evidence);
+                    else
+                    {
+                        if(input.CacheHit)throw Failure("SOURCE_EXTRACT_RAW_EVIDENCE","Required retained source evidence is absent from the admitted cache");
+                        retainedBytes=await File.ReadAllBytesAsync(ArtifactPaths.Resolve(sourceRoot,S(source["local_path"])),cancellationToken);
+                    }
+                    if(retainedBytes.LongLength!=input.Length || Sha(retainedBytes)!=S(source["sha256"]))throw Failure("input-changed","Retained source evidence differs from admitted bytes");
+                    string retainedText;
+                    try{retainedText=SourceText.DecodeUtf8(retainedBytes);retainedEncoding="utf-8";}
+                    catch(DecoderFallbackException){retainedText=Convert.ToBase64String(retainedBytes);retainedEncoding="base64";}
+                    var reason=hidlEvidence
+                        ? retainedEncoding=="utf-8" ? "Full HIDL declared source retained; compiler/type/import/wire/runtime validity not established" : "Non-UTF8 HIDL source retained losslessly; no declarations inferred"
+                        : "Unnormalized interface/native metadata retained losslessly; no descriptor, transaction, type or wire inference";
+                    Execute("INSERT INTO issues(source_id,line,category,reason,raw) VALUES($source,NULL,$category,$reason,$raw)",("$source",sid),("$category",hidlEvidence?"hidl-source":"source-format-unknown"),("$reason",reason),("$raw",retainedText));
+                }
+                else if(kind=="sdk-annotations")
+                {
+                    var archive=facts.Metadata?["annotation_archive"] as JsonObject ?? throw Failure("source-annotation-metadata-missing","SDK annotation producer did not supply its archive concern");
+                    foreach(var issue in archive["issues"]!.AsArray().OfType<JsonObject>())
+                    {
+                        var code=S(issue["code"]);var member=S(issue["archive_member"]);var reason=S(issue["reason"]);
+                        // Original public SQL retains member text using replacement
+                        // decoding. Source metadata separately retains exact member
+                        // bytes/encoding and the immutable archive input is preserved.
+                        var memberRaw=S(issue["raw_encoding"])=="base64" ? Encoding.UTF8.GetString(Convert.FromBase64String(S(issue["raw"]))) : S(issue["raw"]);
+                        if(code=="annotation-xml")reason+=" "+member;
+                        Execute("INSERT INTO issues(source_id,line,category,reason,raw) VALUES($source,NULL,$category,$reason,$raw)",("$source",sid),("$category",code),("$reason",reason),("$raw",memberRaw));
+                    }
+                }
+                else if(facts.Issues.Count!=0)
                 {
                     var rawEvidence=input.Facade ? raw.RawEvidence(sid) ?? throw Failure("SOURCE_EXTRACT_RAW_EVIDENCE","Required admitted issue evidence is absent") : Convert.ToBase64String(await File.ReadAllBytesAsync(ArtifactPaths.Resolve(sourceRoot,S(source["local_path"])),cancellationToken));
                     foreach(var issue in facts.Issues) Execute("INSERT INTO issues(source_id,line,category,reason,raw) VALUES($source,NULL,$category,$reason,$raw)",("$source",sid),("$category",issue.Code),("$reason",issue.Reason),("$raw",rawEvidence));
@@ -259,7 +294,17 @@ public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher
                     }
                     count++;declarationCount++;if(S(row["kind"])=="unsupported") unsupported++;
                 }
-                var report=new JsonObject{["source_id"]=sid,["kind"]=kind,["input_bytes"]=input.Length,["declarations"]=count,["unsupported"]=unsupported,["structural_status"]=facts.StructuralStatus.ToString(),["source_metadata"]=facts.Metadata?.DeepClone()};reports.Add(report);
+                var report=new JsonObject{["source_id"]=sid,["kind"]=kind,["input_bytes"]=input.Length,["declarations"]=count,["unsupported"]=unsupported,["structural_status"]=facts.StructuralStatus.ToString(),["source_metadata"]=facts.Metadata?.DeepClone()};
+                if(hidlEvidence)
+                {
+                    report["status"]=retainedEncoding=="base64" ? "hidl-source-encoding-unknown" : unsupported>0 ? "hidl-structural-source-partial" : "hidl-declared-structure-parsed";
+                    report["compiler_validation"]=false;report["normalizer_complete"]=false;report["raw_source_encoding"]=retainedEncoding;report["raw_source_retained_in_issues"]=true;
+                    if(retainedEncoding=="utf-8")
+                    {report["imports"]=facts.Metadata?["imports"]?.DeepClone() ?? new JsonArray();report["wire_resolution"]="unknown";report["android_availability"]="unknown";}
+                }
+                else if(retainedNative)
+                {report["status"]="raw-binding-source-retained-unsupported";report["raw_source_encoding"]=retainedEncoding;report["raw_source_retained_in_issues"]=true;}
+                reports.Add(report);
             }
             var annotationImporter=new CatalogAnnotationImporter(db,transaction,sources,currentTargets,currentKeys,currentOwners,indexPlatforms,canonical,permissions,formals,symbols);
             foreach(var input in inputs.Where(input=>S(input.Source["kind"])=="sdk-annotations"))
@@ -279,6 +324,11 @@ public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher
             {
                 using var command=db.Command("SELECT source_id,line,document_json FROM binding_declarations"+(entry is null ? "" : " WHERE binding_id=$entry")+" ORDER BY source_id,line",transaction,entry is null ? [] : [("$entry",entry)]);
                 using var reader=command.ExecuteReader();while(reader.Read()) yield return new(reader.GetString(0),reader.GetInt32(1),JsonNode.Parse(reader.GetString(2))!.AsObject());
+            }
+            IEnumerable<CatalogMetadataOccurrence> ReadMetadataOccurrences(string entry)
+            {
+                using var command=db.Command("SELECT source_id,document_json,record_sha256 FROM binding_declarations WHERE binding_id=$entry ORDER BY source_id,line",transaction,("$entry",entry));
+                using var reader=command.ExecuteReader();while(reader.Read())yield return new(reader.GetString(0),reader.GetString(1),reader.GetString(2));
             }
             IEnumerable<string> BindingIds()
             {using var command=db.Command("SELECT binding_id FROM bindings ORDER BY binding_id",transaction);using var reader=command.ExecuteReader();while(reader.Read()) yield return reader.GetString(0);}
@@ -308,6 +358,7 @@ public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher
                 }
                 document["extensions"]!["occurrence_count"]=rows.Length;
                 var entity=projection.Entity(group.Key,rows);document["extensions"]!["device_resolution_variants"]=entity["variants"]!.DeepClone();document["extensions"]!["device_resolution_contract_version"]="2.1.0";
+                if(sourceMetadata is not null)document=sourceMetadata.AttachOccurrences(document,ReadMetadataOccurrences(group.Key));
                 Execute("INSERT INTO registry_entries VALUES($registry,$id,$doc,$hash)",("$registry",registry),("$id",group.Key),("$doc",Text(document)),("$hash",Hash(document)));
                 Execute("INSERT INTO registry_inventory VALUES($registry,$id,$doc,$hash)",("$registry",registry),("$id",group.Key),("$doc",Text(entity)),("$hash",Hash(entity)));
             }

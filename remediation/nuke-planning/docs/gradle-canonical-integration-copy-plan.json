@@ -1,0 +1,42 @@
+{
+  "status": "Prepared only; canonical Gradle files not copied",
+  "generationManifest": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gradle-projection-native-001/generation-manifest.json",
+  "generationManifestSha256": "eb7c3cbb87dd6e2c739a6917f7399fab3b3d6f61a5dab50683cdb1f3052acc58",
+  "inputCount": 0,
+  "outputCount": 2,
+  "files": [
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gradle-projection-native-001/build.gradle.kts",
+      "sourceSha256": "27fd8e364d815c471f79101c2707bf11e7e492359dbaf56b9c8a7aa097fb08a8",
+      "sourceLength": 2902,
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/design-c4/build.gradle.kts",
+      "expectedPriorSha256": "877c30e3bf39f6254e8d9ca952e73fe68a04de60fa07a0a358e541616ac469d8",
+      "expectedPriorLength": 18128,
+      "retainPriorAt": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/docs/fixtures/gradle-original/build.gradle.kts.fixture"
+    },
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gradle-projection-native-001/tooling/nuke-design-stages.json",
+      "sourceSha256": "ff525f15ae03010de357da0aa2b7179a040e11ee3869ce11f3923359f48a77af",
+      "sourceLength": 1417,
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/design-c4/tooling/nuke-design-stages.json",
+      "expectedPriorSha256": null,
+      "retainPriorAt": null
+    }
+  ],
+  "historicalFixtureReadInventory": {
+    "scope": "All remediation/nuke-app/Tests C# source, exact build.gradle.kts and original SHA references",
+    "matches": [
+      "Tests/Documentation/DesignGradleProjectionMockTests.cs: ScriptPath is a virtual artifact name; Script reads pinned gradle-native-delegate.with-dotnet-host.txt",
+      "Tests/Documentation/DesignGradleNativeHostForwardingMockTests.cs: original and corrected bytes read explicit pinned text fixtures"
+    ],
+    "mutableCanonicalHistoricalReadsFound": 0,
+    "requiredAdapterChanges": 0,
+    "preserved": "Old script fixture cf251efbbed05d0f54626a6f01063705735d1fe0447d654ddfa7653c6e95ae65 and corrected fixture 27fd8e364d815c471f79101c2707bf11e7e492359dbaf56b9c8a7aa097fb08a8 remain unchanged. Retain canonical original before integration. No expected pin rewrite."
+  },
+  "afterCopyChecks": [
+    "Verify current canonical two files exactly match actual emitter output identities",
+    "Run native Gradle projection consistency and existing forwarding tests",
+    "Actual Gradle tasks listing and delegate invocation use only this generated C# delegate; do not execute retained historical script",
+    "Do not infer actual Gradle/JDK compatibility from the completed emitter or NUKE alias CLI tests"
+  ]
+}

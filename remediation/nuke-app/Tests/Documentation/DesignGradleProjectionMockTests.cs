@@ -44,7 +44,9 @@ public static class DesignGradleProjectionCases
     {
         var path=Path.Combine(DocumentationFixture.Current.Workspace,"remediation/nuke-planning/docs/fixtures/gradle-native-delegate.txt");
         var bytes=File.ReadAllBytes(path);Assert.Equal("cf251efbbed05d0f54626a6f01063705735d1fe0447d654ddfa7653c6e95ae65",DocumentationFixture.Hash(bytes));
-        return new(ScriptPath,bytes,"text/plain");
+        // Keep the original independent pin; the reviewed54-byte delta adds
+        // NUKE's required global host argument to the same single invocation.
+        return DesignGradleNativeHostForwardingCases.CorrectedScript();
     }
     public static DesignGradleProjection Expected(DesignGradleProjectionCase test)=>new(Descriptor(test),Script());
     public static void AssertProjection(DesignGradleProjectionCase test,IDesignGradleProjection provider)

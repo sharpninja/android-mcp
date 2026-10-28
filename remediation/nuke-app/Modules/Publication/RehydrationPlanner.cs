@@ -134,8 +134,11 @@ public sealed class RehydrationPlanner(ICanonicalJson canonical):IRehydrationSee
                     state.Pin=state.Pin with{SizeBytes=state.Pin.SizeBytes??length,GitBlob=state.Pin.GitBlob??gitBlob};
                 }
                 else{state=new(unique.Count,sourcePin);unique.Add(local,state);}
+                // Keep all-row integrity evidence in Pin for conflict admission.
+                // Generic rehydrate separately selects the exact last row.
+                state.LastPin=sourcePin;state.LastSnapshot=snapshot;
                 state.Rows.Add(rowIndex);if(snapshot is not null)state.Snapshots.Add(snapshot);
-                // Capture the exact last logical row before ordinary first-pin projection.
+                // Capture the exact last logical row for Seed's typed projection.
                 // Seed consumes typed values; OriginalRow is audit evidence only.
                 var candidates=new List<RehydrationSeedCandidate>{new(0,RehydrationSeedCandidateKind.LocalPath,local)};
                 if(snapshot?.BundlePath is {} seedBundle)candidates.Add(new(1,RehydrationSeedCandidateKind.RequiredLocalSnapshot,seedBundle));
@@ -145,10 +148,11 @@ public sealed class RehydrationPlanner(ICanonicalJson canonical):IRehydrationSee
                 projectedRows.Add(new(rowIndex,logical,OptionalText(row,"kind"),state.Index,cacheState?.Index,context,row.Clone()));
             }
             foreach(var collision in unique.Keys.Intersect(caches.Keys,StringComparer.Ordinal).Order(StringComparer.Ordinal))Fail("PATH_ROLE_CONFLICT",collision);
-            long known=0;foreach(var item in unique.Values)known=checked(known+(item.Pin.SizeBytes??0));
-            var unknown=unique.Count(x=>x.Value.Pin.SizeBytes is null);
+            var physicalSources=unique.Values.Select(s=>s.Freeze(request.Profile)).ToArray();
+            long known=0;foreach(var item in physicalSources)known=checked(known+(item.Pin.SizeBytes??0));
+            var unknown=physicalSources.Count(x=>x.Pin.SizeBytes is null);
             var projection=new RehydrationSourceProjection(release!,digest,request.Profile,Array.AsReadOnly(projectedRows.ToArray()),
-                Array.AsReadOnly(unique.Values.Select(s=>s.Freeze(request.Profile)).ToArray()),
+                Array.AsReadOnly(physicalSources),
                 Array.AsReadOnly(caches.Values.Select(c=>c.Freeze(digest)).ToArray()),
                 Array.AsReadOnly(Enumerable.Range(0,Math.Min(request.Limit??unique.Count,unique.Count)).ToArray()),request.Resume);
             var flow=new OperationKey[]{new(Category.Sources,Operation.Fetch),new(Category.Sources,Operation.Extract),new(Category.Catalog,Operation.Build),new(Category.Validate,Operation.Catalog),new(Category.Catalog,Operation.Export)};
@@ -207,22 +211,28 @@ public sealed class RehydrationPlanner(ICanonicalJson canonical):IRehydrationSee
     {
         public int Index { get; }=index;
         public SourcePin Pin { get; set; }=pin;
+        public SourcePin LastPin { get; set; }=pin;
+        public SnapshotRequirement? LastSnapshot { get; set; }
         public List<int> Rows { get; }=[];
         public List<SnapshotRequirement> Snapshots { get; }=[];
         public RehydrationPhysicalSource Freeze(AcquisitionCompatibilityProfile profile)
         {
+            var generic=profile==AcquisitionCompatibilityProfile.GenericRehydrate;
+            var selectedPin=generic?LastPin:Pin;
+            SnapshotRequirement[] selectedSnapshots = generic
+                ? (LastSnapshot is {} snapshot ? [snapshot] : []) : Snapshots.ToArray();
             var indexes=Array.AsReadOnly(Rows.ToArray());var prerequisites=new List<RehydrationPrerequisite>();
-            void Missing(RehydrationPrerequisiteCode code)=>prerequisites.Add(new(code,indexes,Pin.LocalPath,"Missing pinned prerequisite; exact existing target may be reused."));
-            if(Snapshots.Any(s=>s.BundlePath is null))Missing(RehydrationPrerequisiteCode.RequiredImmutableSnapshot);
-            if(profile==AcquisitionCompatibilityProfile.CanonicalRestore && Pin.Archive is {ArchiveSha256:null} archive)
+            void Missing(RehydrationPrerequisiteCode code)=>prerequisites.Add(new(code,indexes,selectedPin.LocalPath,"Missing pinned prerequisite; exact existing target may be reused."));
+            if(selectedSnapshots.Any(s=>s.BundlePath is null))Missing(RehydrationPrerequisiteCode.RequiredImmutableSnapshot);
+            if(profile==AcquisitionCompatibilityProfile.CanonicalRestore && selectedPin.Archive is {ArchiveSha256:null} archive)
             {
                 if(string.IsNullOrWhiteSpace(archive.ETag))Missing(RehydrationPrerequisiteCode.CanonicalArchiveETag);
                 if(string.IsNullOrWhiteSpace(archive.PlatformVersion))Missing(RehydrationPrerequisiteCode.CanonicalArchivePlatformVersion);
                 if(archive.RepositoryXml.IsEmpty)Missing(RehydrationPrerequisiteCode.CanonicalArchiveRepositoryXml);
                 if(archive.SizeBytes is null)Missing(RehydrationPrerequisiteCode.CanonicalArchiveSize);
             }
-            var executable=Snapshots.Count>0?Pin with{RequiredLocalSnapshot=Snapshots.Select(s=>s.BundlePath).FirstOrDefault(p=>p is not null)}:Pin;
-            return new(Index,executable,indexes,Array.AsReadOnly(Snapshots.ToArray()),Array.AsReadOnly(prerequisites.ToArray()));
+            var executable=!generic&&selectedSnapshots.Length>0?selectedPin with{RequiredLocalSnapshot=selectedSnapshots.Select(s=>s.BundlePath).FirstOrDefault(p=>p is not null)}:selectedPin;
+            return new(Index,executable,indexes,Array.AsReadOnly(selectedSnapshots),Array.AsReadOnly(prerequisites.ToArray()));
         }
     }
     private sealed class CacheProjectionState(int index,string path,string sha,string parser,string source,string? kind,int? count)

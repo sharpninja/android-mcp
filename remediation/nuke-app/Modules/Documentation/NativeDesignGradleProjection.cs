@@ -7,6 +7,20 @@ namespace AndroidMcp.BuildTool.Documentation;
 /// <summary>Pure checked-in Gradle projection from the two existing C# metadata authorities.</summary>
 public sealed class NativeDesignGradleProjection(ICanonicalJson canonical,IArtifactReceiptVerifier verifier):IDesignGradleProjection
 {
+    // Existing projection and immutable generation runtime remain the only
+    // serialization and commit authorities. No project inputs or tools are read.
+    public ArtifactGenerationRecipe CreateRecipe(DesignStageManifest stages,OperationDefinition operation)=>new([],inputs=>
+    {
+        if(inputs.Count!=0)throw new ArgumentException("Gradle projection accepts no source artifacts",nameof(inputs));
+        var projection=Render(stages,operation);
+        IReadOnlyList<Artifact> artifacts=[projection.Descriptor,projection.BuildScript];
+        return new(artifacts.Select(artifact=>artifact.RelativePath).ToArray(),token=>
+        {
+            token.ThrowIfCancellationRequested();
+            return Task.FromResult(artifacts);
+        });
+    });
+
     public DesignGradleProjection Render(DesignStageManifest stages,OperationDefinition operation)
     {
         var parameters=operation.RequiredParameters.Select(name=>(Name:name,Required:true))
@@ -54,6 +68,7 @@ val nukeDesignCompatibility by tasks.registering(Exec::class) {
         check(selected.isNotEmpty()) { "Select at least one declared design alias" }
         val arguments = mutableListOf(nativeHost.absolutePath, "run", "--no-restore", "--project", buildProject.absolutePath,
             "--", "--root", buildProject.parentFile.absolutePath,
+            "--dotnet-host", nativeHost.absolutePath,
             "--target", nukeDesignDescriptor["target"] as String,
             "--operation", nukeDesignDescriptor["operation"] as String,
             "--" + nukeDesignDescriptor["alias_parameter"], selected.joinToString(","),

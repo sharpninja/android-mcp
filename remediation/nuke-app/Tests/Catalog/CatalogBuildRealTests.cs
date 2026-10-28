@@ -63,7 +63,10 @@ public sealed class NativeCatalogBuildProvider:ICatalogBuildCaseProvider
         var canonical=new CanonicalJson();var facts=new SourceTypeFacts(new JvmSourceLinker(),canonical);
         var dispatcher=SourceDispatcher ?? new SourcesExtractionDispatcher(new ISourceExtractor[]{new SignatureSourceExtractor(value=>ContentHash.Sha256(value.Span)),new ManifestSourceExtractor(),new AidlSourceExtractor(value=>ContentHash.Sha256(value.Span))},SourceExtractionProfile.CurrentCandidate);
         var intake=IntakeFactory?.Invoke(new(root,inventoryPath,output,stage,inventory,original)).GetAwaiter().GetResult();
-        var service=new CatalogBuild(Root(),dispatcher,new PermissionExpressionSourceFacts(),facts,facts,canonical,outputStores:StoreFactory,stagingDatabases:StageFactory,observeImport:ImportObserver,sourceIntake:intake);
+        using var metadataRuntime=new SourcesRuntimeFactory().Create(SourceExtractionProfile.CurrentCandidate);
+        var metadataConcerns=metadataRuntime.Concerns;
+        var metadata=new CatalogSourceMetadata(Path.Combine(Root(),"contracts/SourceContractMetadata.schema.json"),canonical,metadataConcerns.Callbacks,metadataConcerns.Taxonomy);
+        var service=new CatalogBuild(Root(),dispatcher,new PermissionExpressionSourceFacts(),facts,facts,canonical,outputStores:StoreFactory,stagingDatabases:StageFactory,observeImport:ImportObserver,sourceIntake:intake,sourceMetadata:metadata);
         CatalogBuildException? failure=null;
         try
         {

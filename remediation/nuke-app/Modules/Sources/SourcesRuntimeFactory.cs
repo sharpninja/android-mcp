@@ -25,7 +25,10 @@ public sealed class SourcesRuntimeFactory : ISourcesRuntimeFactory
         var inspector = new StrictJsonInspector();
         concerns = new(new PermissionExpressionSourceFacts(), permission, typeFacts, typeFacts, facts, facts, facts,
             new SoongSourceFacts(new GlobMatcher()), new ApexManifestSourceFacts(inspector), new NativeAbiSourceFacts(inspector),
-            new PublishedInterfaceHashSourceFacts(), html);
+            new PublishedInterfaceHashSourceFacts(), html)
+        {
+            AidlInventory = new AidlLexicalInventorySourceFacts()
+        };
         // These are actual providers. Alias/profile decisions exist once in the
         // dispatcher. Pure concern services above do not become declarations.
         managedProviders = Array.AsReadOnly<ProviderRegistration>(

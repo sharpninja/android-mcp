@@ -1,0 +1,142 @@
+{
+  "at": "2026-10-28T12:36:14",
+  "scope": "Only the optional AidlInventory runtime concern and one shared factory instance, with existing constructor/deconstruction preserved.",
+  "nativeAPI": "ISourcesRuntime.Concerns.AidlInventory : IAidlLexicalInventorySourceFacts?",
+  "factory": "SourcesRuntimeFactory",
+  "implementation": "AidlLexicalInventorySourceFacts",
+  "lexicalFunctionBodyProof": {
+    "path": "remediation/nuke-planning/source/aidl-lexical-inventory-native-body-proof.json",
+    "sha256": "88938a39bcd5d2839a9c3a04273a25099c4d45a2736399e43f2d7eb262a0d87e"
+  },
+  "mockRows": 61,
+  "nativeRows": 7,
+  "receipts": [
+    {
+      "trx": "remediation/nuke-app/artifacts/tests/20261028T1225375590281-b4c2fe0ac9e34b7ebeaff1041587f3f3/tests.trx",
+      "sha256": "99b68976552358bcca597625bd4105e24309e3a414f01426ef8424b98b78e5af",
+      "class": "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests",
+      "passed": 61,
+      "globalCounters": "<Counters total=\"916\" executed=\"916\" passed=\"916\" failed=\"0\" error=\"0\" timeout=\"0\" aborted=\"0\" inconclusive=\"0\" passedButRunAborted=\"0\" notRunnable=\"0\" notExecuted=\"0\" disconnected=\"0\" warning=\"0\" completed=\"0\" inProgress=\"0\" pending=\"0\" xmlns=\"http://microsoft.com/schemas/VisualStudio/TeamTest/2010\" />",
+      "resultNames": [
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.EveryLexicalFieldRejectsAnIndependentWrongConcern(profile: \"current-candidate\", id: \"LEX-UNBALANCED\", property: \"Issues\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.CorrectFactoryMocksShareOneStatelessConcernAcrossBothProfiles(profile: \"current-candidate\", id: \"LEX-NESTED-ORIGINAL\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.EveryLexicalFieldRejectsAnIndependentWrongConcern(profile: \"current-candidate\", id: \"LEX-UNBALANCED\", property: \"ExpectedRecords\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.MissingTransientNullAndFailingConcernMocksCannotPass(profile: \"current-candidate\", id: \"LEX-NO-DECLARATION\", fault: \"provider-failure\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.MissingTransientNullAndFailingConcernMocksCannotPass(profile: \"release-011\", id: \"LEX-UNBALANCED\", fault: \"missing-concern\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.EveryLexicalFieldRejectsAnIndependentWrongConcern(profile: \"current-candidate\", id: \"LEX-NESTED-ORIGINAL\", property: \"Reconciled\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.EveryLexicalFieldRejectsAnIndependentWrongConcern(profile: \"release-011\", id: \"LEX-NESTED-ORIGINAL\", property: \"Reconciled\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.MissingTransientNullAndFailingConcernMocksCannotPass(profile: \"current-candidate\", id: \"LEX-NO-DECLARATION\", fault: \"missing-concern\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.MissingTransientNullAndFailingConcernMocksCannotPass(profile: \"current-candidate\", id: \"LEX-UNBALANCED\", fault: \"missing-concern\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.EveryLexicalFieldRejectsAnIndependentWrongConcern(profile: \"current-candidate\", id: \"LEX-NO-DECLARATION\", property: \"Statements\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.MissingTransientNullAndFailingConcernMocksCannotPass(profile: \"current-candidate\", id: \"LEX-NESTED-ORIGINAL\", fault: \"provider-failure\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.EveryLexicalFieldRejectsAnIndependentWrongConcern(profile: \"release-011\", id: \"LEX-NO-DECLARATION\", property: \"Statements\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.MissingTransientNullAndFailingConcernMocksCannotPass(profile: \"release-011\", id: \"LEX-NO-DECLARATION\", fault: \"transient-concern\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.MissingTransientNullAndFailingConcernMocksCannotPass(profile: \"current-candidate\", id: \"LEX-NESTED-ORIGINAL\", fault: \"null-result\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.CorrectFactoryMocksShareOneStatelessConcernAcrossBothProfiles(profile: \"release-011\", id: \"LEX-UNBALANCED\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.EveryLexicalFieldRejectsAnIndependentWrongConcern(profile: \"release-011\", id: \"LEX-UNBALANCED\", property: \"Reconciled\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.EveryLexicalFieldRejectsAnIndependentWrongConcern(profile: \"release-011\", id: \"LEX-NO-DECLARATION\", property: \"Declarations\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.EveryLexicalFieldRejectsAnIndependentWrongConcern(profile: \"release-011\", id: \"LEX-NESTED-ORIGINAL\", property: \"Declarations\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.MissingTransientNullAndFailingConcernMocksCannotPass(profile: \"release-011\", id: \"LEX-UNBALANCED\", fault: \"null-result\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.MissingTransientNullAndFailingConcernMocksCannotPass(profile: \"current-candidate\", id: \"LEX-NESTED-ORIGINAL\", fault: \"transient-concern\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.CorrectFactoryMocksShareOneStatelessConcernAcrossBothProfiles(profile: \"current-candidate\", id: \"LEX-UNBALANCED\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.MissingTransientNullAndFailingConcernMocksCannotPass(profile: \"release-011\", id: \"LEX-NO-DECLARATION\", fault: \"provider-failure\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.EveryLexicalFieldRejectsAnIndependentWrongConcern(profile: \"release-011\", id: \"LEX-UNBALANCED\", property: \"Declarations\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.EveryLexicalFieldRejectsAnIndependentWrongConcern(profile: \"release-011\", id: \"LEX-NESTED-ORIGINAL\", property: \"Issues\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.MissingTransientNullAndFailingConcernMocksCannotPass(profile: \"current-candidate\", id: \"LEX-NO-DECLARATION\", fault: \"transient-concern\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.EveryLexicalFieldRejectsAnIndependentWrongConcern(profile: \"release-011\", id: \"LEX-NO-DECLARATION\", property: \"ExpectedRecords\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.MissingTransientNullAndFailingConcernMocksCannotPass(profile: \"current-candidate\", id: \"LEX-NO-DECLARATION\", fault: \"null-result\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.EveryLexicalFieldRejectsAnIndependentWrongConcern(profile: \"current-candidate\", id: \"LEX-UNBALANCED\", property: \"Statements\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.MissingTransientNullAndFailingConcernMocksCannotPass(profile: \"release-011\", id: \"LEX-NESTED-ORIGINAL\", fault: \"transient-concern\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.EveryLexicalFieldRejectsAnIndependentWrongConcern(profile: \"current-candidate\", id: \"LEX-NO-DECLARATION\", property: \"Declarations\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.EveryLexicalFieldRejectsAnIndependentWrongConcern(profile: \"release-011\", id: \"LEX-UNBALANCED\", property: \"Statements\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.EveryLexicalFieldRejectsAnIndependentWrongConcern(profile: \"release-011\", id: \"LEX-NO-DECLARATION\", property: \"Reconciled\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.MissingTransientNullAndFailingConcernMocksCannotPass(profile: \"current-candidate\", id: \"LEX-UNBALANCED\", fault: \"null-result\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.MissingTransientNullAndFailingConcernMocksCannotPass(profile: \"current-candidate\", id: \"LEX-UNBALANCED\", fault: \"transient-concern\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.ExistingTwelveArgumentConstructionAndDeconstructionRemainValid",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.EveryLexicalFieldRejectsAnIndependentWrongConcern(profile: \"release-011\", id: \"LEX-NESTED-ORIGINAL\", property: \"ExpectedRecords\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.EveryLexicalFieldRejectsAnIndependentWrongConcern(profile: \"current-candidate\", id: \"LEX-UNBALANCED\", property: \"Reconciled\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.EveryLexicalFieldRejectsAnIndependentWrongConcern(profile: \"current-candidate\", id: \"LEX-NO-DECLARATION\", property: \"ExpectedRecords\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.EveryLexicalFieldRejectsAnIndependentWrongConcern(profile: \"release-011\", id: \"LEX-UNBALANCED\", property: \"Issues\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.MissingTransientNullAndFailingConcernMocksCannotPass(profile: \"release-011\", id: \"LEX-NO-DECLARATION\", fault: \"missing-concern\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.MissingTransientNullAndFailingConcernMocksCannotPass(profile: \"release-011\", id: \"LEX-NO-DECLARATION\", fault: \"null-result\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.MissingTransientNullAndFailingConcernMocksCannotPass(profile: \"release-011\", id: \"LEX-NESTED-ORIGINAL\", fault: \"provider-failure\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.EveryLexicalFieldRejectsAnIndependentWrongConcern(profile: \"current-candidate\", id: \"LEX-NESTED-ORIGINAL\", property: \"Statements\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.EveryLexicalFieldRejectsAnIndependentWrongConcern(profile: \"current-candidate\", id: \"LEX-NESTED-ORIGINAL\", property: \"Issues\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.MissingTransientNullAndFailingConcernMocksCannotPass(profile: \"release-011\", id: \"LEX-NESTED-ORIGINAL\", fault: \"missing-concern\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.EveryLexicalFieldRejectsAnIndependentWrongConcern(profile: \"current-candidate\", id: \"LEX-NESTED-ORIGINAL\", property: \"ExpectedRecords\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.MissingTransientNullAndFailingConcernMocksCannotPass(profile: \"release-011\", id: \"LEX-UNBALANCED\", fault: \"transient-concern\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.EveryLexicalFieldRejectsAnIndependentWrongConcern(profile: \"release-011\", id: \"LEX-UNBALANCED\", property: \"ExpectedRecords\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.EveryLexicalFieldRejectsAnIndependentWrongConcern(profile: \"current-candidate\", id: \"LEX-NESTED-ORIGINAL\", property: \"Declarations\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.MissingTransientNullAndFailingConcernMocksCannotPass(profile: \"current-candidate\", id: \"LEX-UNBALANCED\", fault: \"provider-failure\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.MissingTransientNullAndFailingConcernMocksCannotPass(profile: \"release-011\", id: \"LEX-NESTED-ORIGINAL\", fault: \"null-result\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.EveryLexicalFieldRejectsAnIndependentWrongConcern(profile: \"release-011\", id: \"LEX-NO-DECLARATION\", property: \"Issues\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.EveryLexicalFieldRejectsAnIndependentWrongConcern(profile: \"current-candidate\", id: \"LEX-NO-DECLARATION\", property: \"Reconciled\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.MissingTransientNullAndFailingConcernMocksCannotPass(profile: \"current-candidate\", id: \"LEX-NESTED-ORIGINAL\", fault: \"missing-concern\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.CorrectFactoryMocksShareOneStatelessConcernAcrossBothProfiles(profile: \"release-011\", id: \"LEX-NESTED-ORIGINAL\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.EveryLexicalFieldRejectsAnIndependentWrongConcern(profile: \"release-011\", id: \"LEX-NESTED-ORIGINAL\", property: \"Statements\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.CorrectFactoryMocksShareOneStatelessConcernAcrossBothProfiles(profile: \"current-candidate\", id: \"LEX-NO-DECLARATION\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.MissingTransientNullAndFailingConcernMocksCannotPass(profile: \"release-011\", id: \"LEX-UNBALANCED\", fault: \"provider-failure\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.CorrectFactoryMocksShareOneStatelessConcernAcrossBothProfiles(profile: \"release-011\", id: \"LEX-NO-DECLARATION\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.EveryLexicalFieldRejectsAnIndependentWrongConcern(profile: \"current-candidate\", id: \"LEX-UNBALANCED\", property: \"Declarations\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests.EveryLexicalFieldRejectsAnIndependentWrongConcern(profile: \"current-candidate\", id: \"LEX-NO-DECLARATION\", property: \"Issues\")"
+      ]
+    },
+    {
+      "trx": "remediation/nuke-app/artifacts/tests/20261028T1229582650605-1ad2539399f2429d951a87d20302597f/tests.trx",
+      "sha256": "a739d3d4894af8e4dd6b6fbb92106d193373f9c7c9f097b20a4350b48231e871",
+      "class": "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeRealTests",
+      "passed": 7,
+      "globalCounters": "<Counters total=\"22\" executed=\"22\" passed=\"22\" failed=\"0\" error=\"0\" timeout=\"0\" aborted=\"0\" inconclusive=\"0\" passedButRunAborted=\"0\" notRunnable=\"0\" notExecuted=\"0\" disconnected=\"0\" warning=\"0\" completed=\"0\" inProgress=\"0\" pending=\"0\" xmlns=\"http://microsoft.com/schemas/VisualStudio/TeamTest/2010\" />",
+      "resultNames": [
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeRealTests.SameFiniteCasesUseOneConcernFromTheActualFactory(profile: \"release-011\", id: \"LEX-UNBALANCED\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeRealTests.SameFiniteCasesUseOneConcernFromTheActualFactory(profile: \"current-candidate\", id: \"LEX-NO-DECLARATION\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeRealTests.SameFiniteCasesUseOneConcernFromTheActualFactory(profile: \"current-candidate\", id: \"LEX-UNBALANCED\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeRealTests.SameFiniteCasesUseOneConcernFromTheActualFactory(profile: \"release-011\", id: \"LEX-NESTED-ORIGINAL\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeRealTests.SameFiniteCasesUseOneConcernFromTheActualFactory(profile: \"release-011\", id: \"LEX-NO-DECLARATION\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeRealTests.SameExistingRecordConstructorAndDeconstructionArePreserved",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeRealTests.SameFiniteCasesUseOneConcernFromTheActualFactory(profile: \"current-candidate\", id: \"LEX-NESTED-ORIGINAL\")"
+      ]
+    }
+  ],
+  "nativePins": [
+    {
+      "path": "remediation/nuke-app/Modules/Sources/SourcesRuntimeContracts.cs",
+      "sha256": "b8a48c2a5e84d6a311383ec94a8fc33756446d73e7768c75627e5b2f9e2242e3"
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Sources/SourcesRuntimeFactory.cs",
+      "sha256": "e7c0180031a1d5516d487a24210d9b6d4ee9ea617253bec820a7d1a3a2959d2f"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/AidlInventoryRuntimeContractCases.cs",
+      "sha256": "f6e6604199c6014bb2f75cc33d513637d88251a3e346124cee6c704e459dcf5c"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/AidlInventoryRuntimeMockTests.cs",
+      "sha256": "9291eaef3fb7fa6da30410073aaaa2c6168aabf2c00cea04eb1ae0ec5edfb61c"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/AidlInventoryRuntimeRealTests.cs",
+      "sha256": "1e9deebc74348ca1a728d3010cc14e95d9b6bdd42e02e1b24499f70a102ad57b"
+    }
+  ],
+  "proved": [
+    "Both existing profiles retrieve one identical stateless concern from the same factory.",
+    "Exact nested, unbalanced and no-declaration results use the same case assertions twice through the runtime boundary.",
+    "Legacy twelve-argument record construction and deconstruction remain available; the new property is additive and optional.",
+    "Factory mock controls independently reject missing/transient/null/failing concerns and every incorrect output field."
+  ],
+  "consumerRule": "Catalog may now consume the concern. Explicit matched AIDL reconciliation must require the actual concern and positive independent count equality; absent claims stay unknown/unreconciled. No parser, count implementation, alias or operation is duplicated.",
+  "unchangedDispatcherRegistration": true,
+  "unchangedFactoryConstructor": true,
+  "actualCatalogMatchedBranchProven": false,
+  "wholeLegacyModuleVerified": false,
+  "wholeProducerOrCorpusVerified": false,
+  "authorityLedgerChanged": false,
+  "retainedFactoryPrior": {
+    "path": "remediation/nuke-planning/source/SourcesRuntimeFactory.pre-aidl-inventory.cs.snapshot",
+    "sha256": "cad5570c2b3251d54449138075ed2ff0f0370a848431ad092573432dcc8d9239"
+  },
+  "hvAccepted": false,
+  "safeToDelete": false
+}

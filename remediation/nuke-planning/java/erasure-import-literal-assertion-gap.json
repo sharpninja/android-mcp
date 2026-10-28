@@ -1,0 +1,35 @@
+{
+  "scope": "Read-only exact original helper assertions; no production failure claim",
+  "originalFiles": [
+    "publication/android-mcp-git/remediation/catalog/tests/test_annotation_jvm_erasure_import.py",
+    "publication/android-mcp-git/rehydration/producers/release-011/tests/test_annotation_jvm_erasure_import.py"
+  ],
+  "originalSha256": "c918750834a2b1f60d9d2a853ea8dcdfbb8109d5e2b193aaedf991b69ceb77db",
+  "independentlyReadBothCopies": true,
+  "originalHelper": "XmlJvmImport.check",
+  "originalAssertions": [
+    "self.assertEqual(bid,hashlib.sha256(expected.encode()).hexdigest() if expected else None)",
+    "SELECT count(*) FROM permission_relations WHERE binding_id=? AND annotation='external' returns 1 for the matched bid"
+  ],
+  "currentObserver": "Tests/Catalog/CatalogAnnotationImportRealTests.cs NativeCatalogAnnotationImportProvider.Import",
+  "currentObservation": [
+    "SELECT b.signature,e.scope,e.document_json FROM annotation_evidence e LEFT JOIN bindings b ON b.binding_id=e.binding_id",
+    "CatalogAnnotationImportReply.BindingSignature compares expected canonical string, not raw binding_id hash",
+    "ExternalPermissionRelations counts all permission_relations WHERE annotation='external', not the matched binding_id"
+  ],
+  "whyExistingProofIsIndirect": "A changed binding_id with matching signature, or an external permission relation attached to another valid binding, is not directly distinguished by those two observer fields. Production SHA construction and foreign keys are separate invariants.",
+  "minimalFollowThrough": [
+    "Catalog-owned bounded literal assertion adapter reads raw annotation_evidence.binding_id and compares the shared SHA256 authority applied to the independently expected signature, preserving expected null cases",
+    "Query external relation count for that exact binding_id, retaining the existing total-count check",
+    "Mock negative control: wrong binding id while correct signature is retained",
+    "Mock negative control: sole external relation belongs to another existing binding",
+    "Bind the same assertions to existing ANN-03/04/05/06 fixtures without copying the archive/provider/SQL importer"
+  ],
+  "sourceOwnerInformed": true,
+  "catalogOwnerInformed": true,
+  "rootInformed": true,
+  "appChanges": false,
+  "dotnetExecuted": false,
+  "wholeTestFileNormalClosureClaimed": false,
+  "fullHistoricalProfileParityClaimed": false
+}

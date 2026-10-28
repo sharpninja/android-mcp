@@ -39,7 +39,7 @@ public sealed class CompositionEnvironment
         else
         {
             SourceSpecs=[new("architecture/workspace.dsl","text/plain"),new("architecture/code-diagrams.md","text/markdown"),new("architecture/module-contract.json","application/json"),new("architecture/render-skin.puml","text/plain"),new("toolchain-lock.json","application/json"),new("renderer-lock.json","application/json")];
-            Inputs=SourceSpecs.Select(s=>new Artifact(s.RelativePath,s.RelativePath=="toolchain-lock.json"?RendererProfileCases.Original().Toolchain.Bytes:File.ReadAllBytes(Path.Combine(f.Workspace,"remediation/design-c4",s.RelativePath)),s.MediaType)).ToArray();
+            Inputs=SourceSpecs.Select(s=>new Artifact(s.RelativePath,s.RelativePath=="toolchain-lock.json"?RendererProfileCases.Original().Toolchain.Bytes:f.ReadOriginalDesignBytes(s.RelativePath),s.MediaType)).ToArray();
             Output=CodeViews.Concat(PackageInput.Artifacts.Where(a=>a.RelativePath.StartsWith("docs/diagrams/",StringComparison.Ordinal))).ToArray();Assert.Equal(27,Output.Count);
         }
     }

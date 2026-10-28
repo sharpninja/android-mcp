@@ -11,8 +11,10 @@ public sealed class ToolingDocumentationMigrationRealTests
     [Fact]
     public void CanonicalSourceDataBindsTheSameIndependentSnapshotAssertions()=>ToolingDocumentationMigrationCases.AssertSnapshot(()=>
     {
-        var designRoot=Path.GetFullPath("../../design-c4",ToolingDocumentationMigrationCases.Root);
+        // Preserve the reviewed workstation-migration snapshot assertions when
+        // current presentation-only source data is promoted separately.
+        var fixture=DocumentationFixture.Current;
         return ToolingDocumentationMigrationCases.Files.Select(file=>new Artifact(file.CanonicalPath,
-            File.ReadAllBytes(Path.Combine(designRoot,file.CanonicalPath)),file.MediaType)).ToArray();
+            fixture.ReadOriginalDesignBytes(file.CanonicalPath),file.MediaType)).ToArray();
     });
 }

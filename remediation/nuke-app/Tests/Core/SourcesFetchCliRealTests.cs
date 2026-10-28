@@ -1,9 +1,10 @@
 using System.Text;
 using AndroidMcp.BuildTool.Core;
+using AndroidMcp.BuildTool.Publication;
 using Xunit;
 namespace AndroidMcp.BuildTool.Tests.Core;
 
-public sealed class NativeSourcesFetchCliProbe:ISourcesFetchCliProbe
+public sealed class NativeSourcesFetchCliProbe(RehydrationPlanRequest? fixtureRequest=null):ISourcesFetchCliProbe
 {
     public async Task<SourcesFetchCliObservation> RunAsync()
     {
@@ -13,7 +14,7 @@ public sealed class NativeSourcesFetchCliProbe:ISourcesFetchCliProbe
         Directory.CreateDirectory(Path.Combine(runtime,".nuke"));
         var inputStore=new FileArtifactStore(input,bytes=>ContentHash.Sha256(bytes.Span));
         var bundleStore=new FileArtifactStore(bundle,bytes=>ContentHash.Sha256(bytes.Span));
-        var fixture=SourcesFetchCliCases.Request();
+        var fixture=fixtureRequest??SourcesFetchCliCases.Request();
         await inputStore.WriteAsync(fixture.Recipe);await inputStore.WriteAsync(fixture.Lock);
         await bundleStore.WriteAsync(new("snapshots/a.txt",Encoding.ASCII.GetBytes("abc"),"application/octet-stream"));
         await bundleStore.WriteAsync(new("snapshots/api.txt",Encoding.ASCII.GetBytes("def"),"application/octet-stream"));
@@ -21,6 +22,7 @@ public sealed class NativeSourcesFetchCliProbe:ISourcesFetchCliProbe
         var host=Environment.ProcessPath??throw new InvalidOperationException("Native dotnet host is unavailable.");
         Assert.Equal("dotnet",Path.GetFileNameWithoutExtension(host));
         var args=SourcesFetchCliCases.Arguments(runtime,input,bundle,output).ToList();
+        args[args.IndexOf("--acquisition-profile")+1]=fixture.Profile.ToString();
         args[1]=typeof(Build).Assembly.Location;
         args[args.IndexOf("--dotnet-host")+1]=host;
         args.InsertRange(1,["--runtimeconfig",Path.Combine(AppContext.BaseDirectory,"AndroidMcp.Build.Tests.runtimeconfig.json"),

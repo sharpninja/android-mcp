@@ -1,0 +1,982 @@
+{
+  "timestamp": "2026-10-28T10:44:24",
+  "state": "checkpoint007-plus-six-direct-literal-assertion-proof",
+  "acceptedComplete": false,
+  "trackingDoneChanged": false,
+  "appChanged": false,
+  "pythonExecuted": false,
+  "distinctOriginalFunctions": 33,
+  "distinctOriginalAssertions": 60.0,
+  "fullyDirectOriginalMethods": 33,
+  "pendingOriginalLiteralAssertions": 0,
+  "primaryFileClaims": [
+    {
+      "legacy_path": "remediation/catalog/tests/test_java_context.py",
+      "publishedPath": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tests/test_java_context.py",
+      "sha256": "b410e5d69d6631ce811dda81d7064ced3f698b96454f0d1e9fbbe7c1ef3c3ad6",
+      "profile": "canonical",
+      "bodyReadIndependently": true,
+      "testMethods": [
+        {
+          "name": "test_imports_retained_in_runtime_source_details",
+          "sourceLine": 5,
+          "bodyLf": " def test_imports_retained_in_runtime_source_details(self):\n  sources=[dict(kind='java-source',path='C.java',metadata_cache=dict(path='cache.gz',sha256='abc',parser_sha256='def'))]\n  stats=[dict(cache_path='cache.gz',cache_sha256='abc',parser_sha256='def',package='a',imports={'List':'java.util.List'},wildcard_imports=['other'],parser='tested',parse_errors=0)]\n  java_context.attach(sources,stats)\n  self.assertEqual(sources[0]['java_file_context']['imports'],{'List':'java.util.List'})\n  self.assertEqual(sources[0]['java_file_context']['wildcard_imports'],['other'])",
+          "originalAssertions": 2,
+          "existingCase": "CTX-imports",
+          "behavior": "Exact single Java source/cache and report inputs, explicit import List and wildcard other retained",
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "sourceInvariantProofSeparate": true,
+          "resolvedLiteralAssertions": [
+            "imports object equals the exact single-key object, excluding extra aliases"
+          ],
+          "directLiteralDeltaCases": [
+            "ORIG-CONTEXT-IMPORTS-EXACT"
+          ]
+        },
+        {
+          "name": "test_mismatched_context_rejected",
+          "sourceLine": 11,
+          "bodyLf": " def test_mismatched_context_rejected(self):\n  sources=[dict(kind='java-source',path='C.java',metadata_cache=dict(path='cache.gz',sha256='abc',parser_sha256='def'))]\n  with self.assertRaisesRegex(ValueError,'context cache mismatch'):java_context.attach(sources,[dict(cache_path='cache.gz',cache_sha256='wrong',parser_sha256='def')])",
+          "originalAssertions": 1,
+          "existingCase": "CTX-cache",
+          "behavior": "Exact wrong cache SHA rejects with context cache mismatch",
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "sourceInvariantProofSeparate": false
+        }
+      ],
+      "normal_verified_methods": [
+        "test_imports_retained_in_runtime_source_details",
+        "test_mismatched_context_rejected"
+      ],
+      "pending_methods": [],
+      "eligibleWholeTestMethodBehaviorRetirement": true,
+      "producerProfileOrCallerActivationProven": false,
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "methodProofScope": "Original listed test bodies/assertions only; producer/profile/corpus/caller activation separate"
+    },
+    {
+      "legacy_path": "remediation/catalog/tests/test_java_source.py",
+      "publishedPath": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tests/test_java_source.py",
+      "sha256": "40a4c3aac9f8fbfd8e466c9ff7385eaeb4d5d0fbb7432f031fc567fc62086134",
+      "profile": "canonical",
+      "bodyReadIndependently": true,
+      "testMethods": [
+        {
+          "name": "test_nested_overloads_fields_and_annotations",
+          "sourceLine": 8,
+          "bodyLf": " def test_nested_overloads_fields_and_annotations(self):\n  text='''package a; import java.util.List; import android.annotation.RequiresPermission;\n  public class Outer<T> {\n   public static final String P=\"android.permission.CAMERA\", Q=\"android.permission.RECORD_AUDIO\";\n   public Outer() {}\n   @RequiresPermission(value=\"android.permission.CAMERA\",conditional=true)\n   public List<String> go(@Deprecated final String x, int... ns) { return null; }\n   public void go(int n) {}\n   public static class Inner { public int value; }\n   public @interface A { String value() default \"\"; }\n  }'''\n  result=java_source.parse(text,'Fixture.java');rs=result['records'];self.assertEqual(result['parse_errors'],0)\n  self.assertIn('a.Outer.Inner',{r['owner'] for r in rs});self.assertEqual(sum(r['name']=='go' for r in rs),2)\n  self.assertEqual({r['name'] for r in rs if r['kind']=='field' and r['owner']=='a.Outer'},{'P','Q'})\n  method=next(r for r in rs if r['name']=='go' and len(r['parameters'])==2)\n  self.assertEqual(method['parameters'][1]['type'],'int...');self.assertTrue(method['parameters'][0]['annotations'])\n  self.assertEqual(method['annotations'][0]['name'],'android.annotation.RequiresPermission');self.assertTrue(any(r['kind']=='annotation' for r in rs))",
+          "originalAssertions": 8,
+          "existingCase": "JAVA-01",
+          "behavior": "Exact Fixture.java input, nested owner, overloads, both field declarators, varargs, parameter annotation, qualified RequiresPermission, annotation declaration",
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "sourceInvariantProofSeparate": true,
+          "resolvedLiteralAssertions": [
+            "owner set includes a.Outer.Inner",
+            "field names filtered by owner a.Outer equal P/Q",
+            "numeric parse_errors equals zero"
+          ],
+          "directLiteralDeltaCases": [
+            "ORIG-JAVA-OWNER",
+            "ORIG-JAVA-FIELD-OWNERS",
+            "ORIG-JAVA-PARSE-ZERO"
+          ]
+        },
+        {
+          "name": "test_method_body_local_types_not_public_surface",
+          "sourceLine": 25,
+          "bodyLf": " def test_method_body_local_types_not_public_surface(self):\n  rs=java_source.parse('package a; public class C { public void x(){ class Local { int y; } } }','C.java')['records']\n  self.assertFalse(any(r['name']=='Local' for r in rs));self.assertFalse(any(r['name']=='y' for r in rs))",
+          "originalAssertions": 2,
+          "existingCase": "JAVA-02",
+          "behavior": "Exact C.java local class and its field excluded",
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "sourceInvariantProofSeparate": false
+        },
+        {
+          "name": "test_interface_implicit_public_and_directions_unknown",
+          "sourceLine": 28,
+          "bodyLf": " def test_interface_implicit_public_and_directions_unknown(self):\n  rs=java_source.parse('package a; public interface I { String NAME=\"p\"; void f(String p); }','I.java')['records']\n  self.assertEqual(next(r for r in rs if r['name']=='f')['extras']['effective_visibility'],'public')\n  self.assertIsNone(next(r for r in rs if r['name']=='f')['parameters'][0]['direction'])",
+          "originalAssertions": 2,
+          "existingCase": "JAVA-03",
+          "behavior": "Exact I.java effective public method and null parameter direction",
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "sourceInvariantProofSeparate": false
+        },
+        {
+          "name": "test_parse_error_retained",
+          "sourceLine": 32,
+          "bodyLf": " def test_parse_error_retained(self):\n  r=java_source.parse('package a; public class X { public void broken( }','X.java');self.assertGreater(r['parse_errors'],0);self.assertTrue(r['issues'])",
+          "originalAssertions": 2,
+          "existingCase": "JAVA-04",
+          "behavior": "Exact X.java invalid source retains structural issue and unsupported record",
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "sourceInvariantProofSeparate": true,
+          "resolvedLiteralAssertions": [
+            "numeric parse_errors is greater than zero"
+          ],
+          "directLiteralDeltaCases": [
+            "ORIG-JAVA-PARSE-POSITIVE"
+          ]
+        },
+        {
+          "name": "test_enum_and_multiple_array_declarators",
+          "sourceLine": 34,
+          "bodyLf": " def test_enum_and_multiple_array_declarators(self):\n  rs=java_source.parse('package a; public enum E { RED,BLUE; public int a[],b; }','E.java')['records']\n  self.assertEqual({r['name'] for r in rs if r['extras'].get('enum_constant')},{'RED','BLUE'})\n  self.assertEqual(next(r for r in rs if r['kind']=='field' and r['name']=='a')['return_type'],'int[]');self.assertEqual(next(r for r in rs if r['kind']=='field' and r['name']=='b')['return_type'],'int')",
+          "originalAssertions": 3,
+          "existingCase": "JAVA-05",
+          "behavior": "Exact E.java RED/BLUE constants and a:int[], b:int",
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "sourceInvariantProofSeparate": true,
+          "resolvedLiteralAssertions": [
+            "exact enum-flag set excludes non-enum a/b"
+          ],
+          "directLiteralDeltaCases": [
+            "ORIG-JAVA-ENUM-SET"
+          ]
+        },
+        {
+          "name": "test_repeated_large_line_numbers",
+          "sourceLine": 38,
+          "bodyLf": " def test_repeated_large_line_numbers(self):\n  text='\\n'*300+'package a;\\npublic class C {\\n public int x;\\n public void f(int n){}\\n}'\n  for _ in range(100):\n   rows=java_source.parse(text,'Large.java')['records']\n   self.assertEqual(next(r for r in rows if r['kind']=='field')['line'],303)",
+          "originalAssertions": 1,
+          "existingCase": "JAVA-06",
+          "behavior": "Exact Large.java input, 100 repeated native parses, field line303",
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "sourceInvariantProofSeparate": false
+        },
+        {
+          "name": "test_annotation_like_comment_is_not_metadata",
+          "sourceLine": 43,
+          "bodyLf": " def test_annotation_like_comment_is_not_metadata(self):\n  rows=java_source.parse('package a; public /* @NotAnAnnotation( */ class C { public /* @other( */ int x; }','Comments.java')['records']\n  self.assertEqual(next(r for r in rows if r['kind']=='field')['name'],'x')\n  self.assertFalse(any(r['annotations'] for r in rows))",
+          "originalAssertions": 2,
+          "existingCase": "JAVA-07",
+          "behavior": "Exact Comments.java comment annotations excluded, field x retained",
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "sourceInvariantProofSeparate": false
+        },
+        {
+          "name": "test_apostrophe_in_annotation_comment",
+          "sourceLine": 47,
+          "bodyLf": " def test_apostrophe_in_annotation_comment(self):\n  text='''package a; @LongDef(value={1, // because it'd wrap\\n 2}) public @interface Bits {}'''\n  rows=java_source.parse(text,'Bits.java')['records']\n  annotation=next(r for r in rows if r['kind']=='annotation')\n  self.assertEqual(len(annotation['annotations']),1)\n  self.assertIn('1,',annotation['annotations'][0]['arguments'])",
+          "originalAssertions": 2,
+          "existingCase": "JAVA-08",
+          "behavior": "Exact Bits.java apostrophe comment, one LongDef and raw arguments retaining 1,",
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "sourceInvariantProofSeparate": false
+        }
+      ],
+      "normal_verified_methods": [
+        "test_nested_overloads_fields_and_annotations",
+        "test_method_body_local_types_not_public_surface",
+        "test_interface_implicit_public_and_directions_unknown",
+        "test_parse_error_retained",
+        "test_enum_and_multiple_array_declarators",
+        "test_repeated_large_line_numbers",
+        "test_annotation_like_comment_is_not_metadata",
+        "test_apostrophe_in_annotation_comment"
+      ],
+      "pending_methods": [],
+      "eligibleWholeTestMethodBehaviorRetirement": true,
+      "producerProfileOrCallerActivationProven": false,
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "methodProofScope": "Original listed test bodies/assertions only; producer/profile/corpus/caller activation separate"
+    },
+    {
+      "legacy_path": "remediation/catalog/tests/test_jvm_source_link.py",
+      "publishedPath": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tests/test_jvm_source_link.py",
+      "sha256": "7cb00260092fa4b8d3e86b78a9921536a8169211b7f56332b876108899332041",
+      "profile": "canonical",
+      "bodyReadIndependently": true,
+      "testMethods": [
+        {
+          "name": "test_exact_owner_primitives_and_known_reference_type",
+          "sourceLine": 5,
+          "bodyLf": " def test_exact_owner_primitives_and_known_reference_type(self):\n  owners={'a.C':'a/C','java.lang.String':'java/lang/String'}\n  r=dict(kind='method',owner='a.C',name='go',return_type='void',parameters=[dict(type='java.lang.String[]'),dict(type='int')],extras=dict(owner_binary_name='a/C'))\n  self.assertEqual(link.key(r,owners),'a/C#go([Ljava/lang/String;I)V')",
+          "originalAssertions": 1,
+          "existingCase": "KEY-primitives",
+          "behavior": "Exact two-owner map and record produce a/C#go([Ljava/lang/String;I)V",
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "sourceInvariantProofSeparate": false
+        },
+        {
+          "name": "test_unresolved_type_variable_never_guessed",
+          "sourceLine": 9,
+          "bodyLf": " def test_unresolved_type_variable_never_guessed(self):\n  r=dict(kind='method',owner='a.C',name='go',return_type='T',parameters=[],extras=dict(owner_binary_name='a/C'))\n  self.assertIsNone(link.key(r,{'a.C':'a/C'}))",
+          "originalAssertions": 1,
+          "existingCase": "KEY-T",
+          "behavior": "Exact a.C-only owner map rejects unresolved return T",
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "sourceInvariantProofSeparate": false
+        },
+        {
+          "name": "test_unqualified_java_lang_name_might_be_shadowed",
+          "sourceLine": 12,
+          "bodyLf": " def test_unqualified_java_lang_name_might_be_shadowed(self):\n  self.assertIsNone(link.encode('String','a.C',{'java.lang.String':'java/lang/String'}))",
+          "originalAssertions": 1,
+          "existingCase": "ENC-String",
+          "behavior": "Exact java.lang.String-only map rejects String alias",
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "sourceInvariantProofSeparate": false
+        },
+        {
+          "name": "test_untyped_index_field_cannot_prove_typed_jvm_identity",
+          "sourceLine": 14,
+          "bodyLf": " def test_untyped_index_field_cannot_prove_typed_jvm_identity(self):\n  r=dict(kind='field',owner='a.C.Inner',name='X',extras=dict(owner_binary_name='a/C$Inner'))\n  self.assertIsNone(link.key(r,{'a.C.Inner':'a/C$Inner'}))",
+          "originalAssertions": 1,
+          "existingCase": "KEY-field",
+          "behavior": "Exact nested owner-only map and untyped field rejected",
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "sourceInvariantProofSeparate": false
+        }
+      ],
+      "normal_verified_methods": [
+        "test_exact_owner_primitives_and_known_reference_type",
+        "test_unresolved_type_variable_never_guessed",
+        "test_unqualified_java_lang_name_might_be_shadowed",
+        "test_untyped_index_field_cannot_prove_typed_jvm_identity"
+      ],
+      "pending_methods": [],
+      "eligibleWholeTestMethodBehaviorRetirement": true,
+      "producerProfileOrCallerActivationProven": false,
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "methodProofScope": "Original listed test bodies/assertions only; producer/profile/corpus/caller activation separate"
+    },
+    {
+      "legacy_path": "rehydration/producers/release-011/tests/test_java_context.py",
+      "publishedPath": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tests/test_java_context.py",
+      "sha256": "b410e5d69d6631ce811dda81d7064ced3f698b96454f0d1e9fbbe7c1ef3c3ad6",
+      "profile": "release011-frozen",
+      "bodyReadIndependently": true,
+      "testMethods": [
+        {
+          "name": "test_imports_retained_in_runtime_source_details",
+          "sourceLine": 5,
+          "bodyLf": " def test_imports_retained_in_runtime_source_details(self):\n  sources=[dict(kind='java-source',path='C.java',metadata_cache=dict(path='cache.gz',sha256='abc',parser_sha256='def'))]\n  stats=[dict(cache_path='cache.gz',cache_sha256='abc',parser_sha256='def',package='a',imports={'List':'java.util.List'},wildcard_imports=['other'],parser='tested',parse_errors=0)]\n  java_context.attach(sources,stats)\n  self.assertEqual(sources[0]['java_file_context']['imports'],{'List':'java.util.List'})\n  self.assertEqual(sources[0]['java_file_context']['wildcard_imports'],['other'])",
+          "originalAssertions": 2,
+          "existingCase": "CTX-imports",
+          "behavior": "Exact single Java source/cache and report inputs, explicit import List and wildcard other retained",
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "sourceInvariantProofSeparate": true,
+          "resolvedLiteralAssertions": [
+            "imports object equals the exact single-key object, excluding extra aliases"
+          ],
+          "directLiteralDeltaCases": [
+            "ORIG-CONTEXT-IMPORTS-EXACT"
+          ]
+        },
+        {
+          "name": "test_mismatched_context_rejected",
+          "sourceLine": 11,
+          "bodyLf": " def test_mismatched_context_rejected(self):\n  sources=[dict(kind='java-source',path='C.java',metadata_cache=dict(path='cache.gz',sha256='abc',parser_sha256='def'))]\n  with self.assertRaisesRegex(ValueError,'context cache mismatch'):java_context.attach(sources,[dict(cache_path='cache.gz',cache_sha256='wrong',parser_sha256='def')])",
+          "originalAssertions": 1,
+          "existingCase": "CTX-cache",
+          "behavior": "Exact wrong cache SHA rejects with context cache mismatch",
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "sourceInvariantProofSeparate": false
+        }
+      ],
+      "normal_verified_methods": [
+        "test_imports_retained_in_runtime_source_details",
+        "test_mismatched_context_rejected"
+      ],
+      "pending_methods": [],
+      "eligibleWholeTestMethodBehaviorRetirement": true,
+      "producerProfileOrCallerActivationProven": false,
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "methodProofScope": "Original listed test bodies/assertions only; producer/profile/corpus/caller activation separate"
+    },
+    {
+      "legacy_path": "rehydration/producers/release-011/tests/test_java_source.py",
+      "publishedPath": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tests/test_java_source.py",
+      "sha256": "40a4c3aac9f8fbfd8e466c9ff7385eaeb4d5d0fbb7432f031fc567fc62086134",
+      "profile": "release011-frozen",
+      "bodyReadIndependently": true,
+      "testMethods": [
+        {
+          "name": "test_nested_overloads_fields_and_annotations",
+          "sourceLine": 8,
+          "bodyLf": " def test_nested_overloads_fields_and_annotations(self):\n  text='''package a; import java.util.List; import android.annotation.RequiresPermission;\n  public class Outer<T> {\n   public static final String P=\"android.permission.CAMERA\", Q=\"android.permission.RECORD_AUDIO\";\n   public Outer() {}\n   @RequiresPermission(value=\"android.permission.CAMERA\",conditional=true)\n   public List<String> go(@Deprecated final String x, int... ns) { return null; }\n   public void go(int n) {}\n   public static class Inner { public int value; }\n   public @interface A { String value() default \"\"; }\n  }'''\n  result=java_source.parse(text,'Fixture.java');rs=result['records'];self.assertEqual(result['parse_errors'],0)\n  self.assertIn('a.Outer.Inner',{r['owner'] for r in rs});self.assertEqual(sum(r['name']=='go' for r in rs),2)\n  self.assertEqual({r['name'] for r in rs if r['kind']=='field' and r['owner']=='a.Outer'},{'P','Q'})\n  method=next(r for r in rs if r['name']=='go' and len(r['parameters'])==2)\n  self.assertEqual(method['parameters'][1]['type'],'int...');self.assertTrue(method['parameters'][0]['annotations'])\n  self.assertEqual(method['annotations'][0]['name'],'android.annotation.RequiresPermission');self.assertTrue(any(r['kind']=='annotation' for r in rs))",
+          "originalAssertions": 8,
+          "existingCase": "JAVA-01",
+          "behavior": "Exact Fixture.java input, nested owner, overloads, both field declarators, varargs, parameter annotation, qualified RequiresPermission, annotation declaration",
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "sourceInvariantProofSeparate": true,
+          "resolvedLiteralAssertions": [
+            "owner set includes a.Outer.Inner",
+            "field names filtered by owner a.Outer equal P/Q",
+            "numeric parse_errors equals zero"
+          ],
+          "directLiteralDeltaCases": [
+            "ORIG-JAVA-OWNER",
+            "ORIG-JAVA-FIELD-OWNERS",
+            "ORIG-JAVA-PARSE-ZERO"
+          ]
+        },
+        {
+          "name": "test_method_body_local_types_not_public_surface",
+          "sourceLine": 25,
+          "bodyLf": " def test_method_body_local_types_not_public_surface(self):\n  rs=java_source.parse('package a; public class C { public void x(){ class Local { int y; } } }','C.java')['records']\n  self.assertFalse(any(r['name']=='Local' for r in rs));self.assertFalse(any(r['name']=='y' for r in rs))",
+          "originalAssertions": 2,
+          "existingCase": "JAVA-02",
+          "behavior": "Exact C.java local class and its field excluded",
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "sourceInvariantProofSeparate": false
+        },
+        {
+          "name": "test_interface_implicit_public_and_directions_unknown",
+          "sourceLine": 28,
+          "bodyLf": " def test_interface_implicit_public_and_directions_unknown(self):\n  rs=java_source.parse('package a; public interface I { String NAME=\"p\"; void f(String p); }','I.java')['records']\n  self.assertEqual(next(r for r in rs if r['name']=='f')['extras']['effective_visibility'],'public')\n  self.assertIsNone(next(r for r in rs if r['name']=='f')['parameters'][0]['direction'])",
+          "originalAssertions": 2,
+          "existingCase": "JAVA-03",
+          "behavior": "Exact I.java effective public method and null parameter direction",
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "sourceInvariantProofSeparate": false
+        },
+        {
+          "name": "test_parse_error_retained",
+          "sourceLine": 32,
+          "bodyLf": " def test_parse_error_retained(self):\n  r=java_source.parse('package a; public class X { public void broken( }','X.java');self.assertGreater(r['parse_errors'],0);self.assertTrue(r['issues'])",
+          "originalAssertions": 2,
+          "existingCase": "JAVA-04",
+          "behavior": "Exact X.java invalid source retains structural issue and unsupported record",
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "sourceInvariantProofSeparate": true,
+          "resolvedLiteralAssertions": [
+            "numeric parse_errors is greater than zero"
+          ],
+          "directLiteralDeltaCases": [
+            "ORIG-JAVA-PARSE-POSITIVE"
+          ]
+        },
+        {
+          "name": "test_enum_and_multiple_array_declarators",
+          "sourceLine": 34,
+          "bodyLf": " def test_enum_and_multiple_array_declarators(self):\n  rs=java_source.parse('package a; public enum E { RED,BLUE; public int a[],b; }','E.java')['records']\n  self.assertEqual({r['name'] for r in rs if r['extras'].get('enum_constant')},{'RED','BLUE'})\n  self.assertEqual(next(r for r in rs if r['kind']=='field' and r['name']=='a')['return_type'],'int[]');self.assertEqual(next(r for r in rs if r['kind']=='field' and r['name']=='b')['return_type'],'int')",
+          "originalAssertions": 3,
+          "existingCase": "JAVA-05",
+          "behavior": "Exact E.java RED/BLUE constants and a:int[], b:int",
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "sourceInvariantProofSeparate": true,
+          "resolvedLiteralAssertions": [
+            "exact enum-flag set excludes non-enum a/b"
+          ],
+          "directLiteralDeltaCases": [
+            "ORIG-JAVA-ENUM-SET"
+          ]
+        },
+        {
+          "name": "test_repeated_large_line_numbers",
+          "sourceLine": 38,
+          "bodyLf": " def test_repeated_large_line_numbers(self):\n  text='\\n'*300+'package a;\\npublic class C {\\n public int x;\\n public void f(int n){}\\n}'\n  for _ in range(100):\n   rows=java_source.parse(text,'Large.java')['records']\n   self.assertEqual(next(r for r in rows if r['kind']=='field')['line'],303)",
+          "originalAssertions": 1,
+          "existingCase": "JAVA-06",
+          "behavior": "Exact Large.java input, 100 repeated native parses, field line303",
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "sourceInvariantProofSeparate": false
+        },
+        {
+          "name": "test_annotation_like_comment_is_not_metadata",
+          "sourceLine": 43,
+          "bodyLf": " def test_annotation_like_comment_is_not_metadata(self):\n  rows=java_source.parse('package a; public /* @NotAnAnnotation( */ class C { public /* @other( */ int x; }','Comments.java')['records']\n  self.assertEqual(next(r for r in rows if r['kind']=='field')['name'],'x')\n  self.assertFalse(any(r['annotations'] for r in rows))",
+          "originalAssertions": 2,
+          "existingCase": "JAVA-07",
+          "behavior": "Exact Comments.java comment annotations excluded, field x retained",
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "sourceInvariantProofSeparate": false
+        },
+        {
+          "name": "test_apostrophe_in_annotation_comment",
+          "sourceLine": 47,
+          "bodyLf": " def test_apostrophe_in_annotation_comment(self):\n  text='''package a; @LongDef(value={1, // because it'd wrap\\n 2}) public @interface Bits {}'''\n  rows=java_source.parse(text,'Bits.java')['records']\n  annotation=next(r for r in rows if r['kind']=='annotation')\n  self.assertEqual(len(annotation['annotations']),1)\n  self.assertIn('1,',annotation['annotations'][0]['arguments'])",
+          "originalAssertions": 2,
+          "existingCase": "JAVA-08",
+          "behavior": "Exact Bits.java apostrophe comment, one LongDef and raw arguments retaining 1,",
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "sourceInvariantProofSeparate": false
+        }
+      ],
+      "normal_verified_methods": [
+        "test_nested_overloads_fields_and_annotations",
+        "test_method_body_local_types_not_public_surface",
+        "test_interface_implicit_public_and_directions_unknown",
+        "test_parse_error_retained",
+        "test_enum_and_multiple_array_declarators",
+        "test_repeated_large_line_numbers",
+        "test_annotation_like_comment_is_not_metadata",
+        "test_apostrophe_in_annotation_comment"
+      ],
+      "pending_methods": [],
+      "eligibleWholeTestMethodBehaviorRetirement": true,
+      "producerProfileOrCallerActivationProven": false,
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "methodProofScope": "Original listed test bodies/assertions only; producer/profile/corpus/caller activation separate"
+    },
+    {
+      "legacy_path": "rehydration/producers/release-011/tests/test_jvm_source_link.py",
+      "publishedPath": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tests/test_jvm_source_link.py",
+      "sha256": "7cb00260092fa4b8d3e86b78a9921536a8169211b7f56332b876108899332041",
+      "profile": "release011-frozen",
+      "bodyReadIndependently": true,
+      "testMethods": [
+        {
+          "name": "test_exact_owner_primitives_and_known_reference_type",
+          "sourceLine": 5,
+          "bodyLf": " def test_exact_owner_primitives_and_known_reference_type(self):\n  owners={'a.C':'a/C','java.lang.String':'java/lang/String'}\n  r=dict(kind='method',owner='a.C',name='go',return_type='void',parameters=[dict(type='java.lang.String[]'),dict(type='int')],extras=dict(owner_binary_name='a/C'))\n  self.assertEqual(link.key(r,owners),'a/C#go([Ljava/lang/String;I)V')",
+          "originalAssertions": 1,
+          "existingCase": "KEY-primitives",
+          "behavior": "Exact two-owner map and record produce a/C#go([Ljava/lang/String;I)V",
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "sourceInvariantProofSeparate": false
+        },
+        {
+          "name": "test_unresolved_type_variable_never_guessed",
+          "sourceLine": 9,
+          "bodyLf": " def test_unresolved_type_variable_never_guessed(self):\n  r=dict(kind='method',owner='a.C',name='go',return_type='T',parameters=[],extras=dict(owner_binary_name='a/C'))\n  self.assertIsNone(link.key(r,{'a.C':'a/C'}))",
+          "originalAssertions": 1,
+          "existingCase": "KEY-T",
+          "behavior": "Exact a.C-only owner map rejects unresolved return T",
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "sourceInvariantProofSeparate": false
+        },
+        {
+          "name": "test_unqualified_java_lang_name_might_be_shadowed",
+          "sourceLine": 12,
+          "bodyLf": " def test_unqualified_java_lang_name_might_be_shadowed(self):\n  self.assertIsNone(link.encode('String','a.C',{'java.lang.String':'java/lang/String'}))",
+          "originalAssertions": 1,
+          "existingCase": "ENC-String",
+          "behavior": "Exact java.lang.String-only map rejects String alias",
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "sourceInvariantProofSeparate": false
+        },
+        {
+          "name": "test_untyped_index_field_cannot_prove_typed_jvm_identity",
+          "sourceLine": 14,
+          "bodyLf": " def test_untyped_index_field_cannot_prove_typed_jvm_identity(self):\n  r=dict(kind='field',owner='a.C.Inner',name='X',extras=dict(owner_binary_name='a/C$Inner'))\n  self.assertIsNone(link.key(r,{'a.C.Inner':'a/C$Inner'}))",
+          "originalAssertions": 1,
+          "existingCase": "KEY-field",
+          "behavior": "Exact nested owner-only map and untyped field rejected",
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "sourceInvariantProofSeparate": false
+        }
+      ],
+      "normal_verified_methods": [
+        "test_exact_owner_primitives_and_known_reference_type",
+        "test_unresolved_type_variable_never_guessed",
+        "test_unqualified_java_lang_name_might_be_shadowed",
+        "test_untyped_index_field_cannot_prove_typed_jvm_identity"
+      ],
+      "pending_methods": [],
+      "eligibleWholeTestMethodBehaviorRetirement": true,
+      "producerProfileOrCallerActivationProven": false,
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "methodProofScope": "Original listed test bodies/assertions only; producer/profile/corpus/caller activation separate"
+    },
+    {
+      "legacy_path": "tools/source_facts/test_callback_source_facts.py",
+      "publishedPath": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_callback_source_facts.py",
+      "sha256": "f834dbcd5aa546cc1a18b081367bd6cff8035d4ae86a4cf476395dfdca28a65a",
+      "profile": "current normalized source-fact leaf producer",
+      "bodyReadIndependently": true,
+      "testMethods": [
+        {
+          "name": "test_missing_sdk_parameter_name_is_preserved_without_crash",
+          "sourceLine": 4,
+          "bodyLf": " def test_missing_sdk_parameter_name_is_preserved_without_crash(self):\n  method=self.method();method['extensions']['parameters'][0]['name']=None\n  result=registration_candidates(method,self.types());self.assertIsNone(result[0]['parameter_name'])",
+          "originalAssertions": 1,
+          "existingCase": "ORIG-CB01",
+          "fixtureSteps": [
+            "FACT-CB11"
+          ],
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "nativeBinding": "CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions"
+        },
+        {
+          "name": "test_name_never_proves_callback_lifecycle",
+          "sourceLine": 10,
+          "bodyLf": " def test_name_never_proves_callback_lifecycle(self):\n  value=type_candidate(self.types()['b'*64]);self.assertTrue(value['is_candidate']);self.assertFalse(value['callback_lifecycle_proven'])",
+          "originalAssertions": 2,
+          "existingCase": "ORIG-CB02",
+          "fixtureSteps": [
+            "FACT-CB01"
+          ],
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "nativeBinding": "CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions"
+        },
+        {
+          "name": "test_parameter_position_and_permission_are_retained",
+          "sourceLine": 12,
+          "bodyLf": " def test_parameter_position_and_permission_are_retained(self):\n  rows=registration_candidates(self.method(),self.types());self.assertEqual(rows[0]['parameter_index'],0);self.assertEqual(rows[0]['permission'],dict(op='unknown'));self.assertFalse(rows[0]['registration_guaranteed'])",
+          "originalAssertions": 3,
+          "existingCase": "ORIG-CB03",
+          "fixtureSteps": [
+            "FACT-CB06"
+          ],
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "nativeBinding": "CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions"
+        },
+        {
+          "name": "test_binder_endpoint_candidate_does_not_require_callback_name",
+          "sourceLine": 14,
+          "bodyLf": " def test_binder_endpoint_candidate_does_not_require_callback_name(self):\n  method=self.method();method['arguments'][0]['text']='a.IEndpoint';method['extensions']['parameters'][0]['name']='endpoint';types=self.types();types['b'*64]=dict(name='IEndpoint',kind='aidl-interface',extensions=dict(language='aidl'))\n  self.assertEqual(len(registration_candidates(method,types)),1)",
+          "originalAssertions": 1,
+          "existingCase": "ORIG-CB04",
+          "fixtureSteps": [
+            "FACT-CB17"
+          ],
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "nativeBinding": "CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions"
+        },
+        {
+          "name": "test_callback_executor_annotation_alone_is_not_callback_parameter",
+          "sourceLine": 17,
+          "bodyLf": " def test_callback_executor_annotation_alone_is_not_callback_parameter(self):\n  method=self.method();method['arguments']=[dict(text='Executor',status='unknown')];method['extensions']['parameters']=[dict(name='executor',annotations=[dict(name='CallbackExecutor')])]\n  self.assertEqual(registration_candidates(method,{}),[])",
+          "originalAssertions": 1,
+          "existingCase": "ORIG-CB05",
+          "fixtureSteps": [
+            "FACT-CB12"
+          ],
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "nativeBinding": "CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions"
+        },
+        {
+          "name": "test_overloads_and_parameter_positions_have_different_ids",
+          "sourceLine": 20,
+          "bodyLf": " def test_overloads_and_parameter_positions_have_different_ids(self):\n  first=self.method();second=self.method();second['entry_id']='c'*64\n  self.assertNotEqual(registration_candidates(first,self.types())[0]['candidate_id'],registration_candidates(second,self.types())[0]['candidate_id'])",
+          "originalAssertions": 1,
+          "existingCase": "ORIG-CB06",
+          "fixtureSteps": [
+            "FACT-CB06",
+            "FACT-CB14"
+          ],
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "nativeBinding": "CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions"
+        },
+        {
+          "name": "test_unregistration_pair_remains_candidate",
+          "sourceLine": 23,
+          "bodyLf": " def test_unregistration_pair_remains_candidate(self):\n  first=registration_candidates(self.method(),self.types());second=self.method('unregisterListener');second['entry_id']='c'*64;rows=first+registration_candidates(second,self.types());pairs=possible_pairs(rows)\n  self.assertEqual(len(pairs),1);self.assertFalse(pairs[0]['lifecycle_pair_proven'])",
+          "originalAssertions": 2,
+          "existingCase": "ORIG-CB07",
+          "fixtureSteps": [
+            "FACT-CB06",
+            "FACT-CB20",
+            "FACT-CB18"
+          ],
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "nativeBinding": "CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions"
+        },
+        {
+          "name": "test_inherited_oneway_controls_endpoint_reply_mode",
+          "sourceLine": 26,
+          "bodyLf": " def test_inherited_oneway_controls_endpoint_reply_mode(self):\n  method=self.method('onEvent');method['extensions'].update(oneway=False,language='aidl')\n  self.assertEqual(endpoint_method(method,dict(extensions=dict(oneway=True)))['reply_mode'],'oneway')",
+          "originalAssertions": 1,
+          "existingCase": "ORIG-CB08",
+          "fixtureSteps": [
+            "FACT-CB07"
+          ],
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "nativeBinding": "CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions"
+        },
+        {
+          "name": "test_missing_inherited_aidl_flag_does_not_prove_synchronous",
+          "sourceLine": 29,
+          "bodyLf": " def test_missing_inherited_aidl_flag_does_not_prove_synchronous(self):\n  method=self.method('onEvent');method['extensions'].update(oneway=False,language='aidl')\n  self.assertEqual(endpoint_method(method)['reply_mode'],'unknown')",
+          "originalAssertions": 1,
+          "existingCase": "ORIG-CB09",
+          "fixtureSteps": [
+            "FACT-CB08"
+          ],
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "nativeBinding": "CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions"
+        },
+        {
+          "name": "test_explicit_false_both_aidl_flags_prove_reply_mode",
+          "sourceLine": 32,
+          "bodyLf": " def test_explicit_false_both_aidl_flags_prove_reply_mode(self):\n  method=self.method('onEvent');method['extensions'].update(oneway=False,interface_oneway=False,language='aidl')\n  self.assertEqual(endpoint_method(method)['reply_mode'],'synchronous')",
+          "originalAssertions": 1,
+          "existingCase": "ORIG-CB10",
+          "fixtureSteps": [
+            "FACT-CB09"
+          ],
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "nativeBinding": "CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions"
+        },
+        {
+          "name": "test_hidl_method_flag_has_no_interface_oneway_inheritance",
+          "sourceLine": 35,
+          "bodyLf": " def test_hidl_method_flag_has_no_interface_oneway_inheritance(self):\n  method=self.method('onEvent');method['extensions'].update(oneway=False,language='hidl')\n  self.assertEqual(endpoint_method(method)['reply_mode'],'synchronous')",
+          "originalAssertions": 1,
+          "existingCase": "ORIG-CB11",
+          "fixtureSteps": [
+            "FACT-CB10"
+          ],
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "nativeBinding": "CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions"
+        },
+        {
+          "name": "test_missing_oneway_not_invented_synchronous",
+          "sourceLine": 38,
+          "bodyLf": " def test_missing_oneway_not_invented_synchronous(self):\n  self.assertEqual(endpoint_method(self.method('onEvent'))['reply_mode'],'unknown')",
+          "originalAssertions": 1,
+          "existingCase": "ORIG-CB12",
+          "fixtureSteps": [
+            "FACT-CB05"
+          ],
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "nativeBinding": "CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions"
+        },
+        {
+          "name": "test_same_short_name_does_not_prove_type_resolution",
+          "sourceLine": 40,
+          "bodyLf": " def test_same_short_name_does_not_prove_type_resolution(self):\n  method=self.method();method['arguments'][0]=dict(text='Listener',status='unknown');item=registration_candidates(method,self.types())[0]\n  self.assertIsNone(item['type_id']);self.assertEqual(item['confidence'],'name-heuristic-unresolved-type')",
+          "originalAssertions": 2,
+          "existingCase": "ORIG-CB13",
+          "fixtureSteps": [
+            "FACT-CB13"
+          ],
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "nativeBinding": "CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions"
+        }
+      ],
+      "normal_verified_methods": [
+        "test_missing_sdk_parameter_name_is_preserved_without_crash",
+        "test_name_never_proves_callback_lifecycle",
+        "test_parameter_position_and_permission_are_retained",
+        "test_binder_endpoint_candidate_does_not_require_callback_name",
+        "test_callback_executor_annotation_alone_is_not_callback_parameter",
+        "test_overloads_and_parameter_positions_have_different_ids",
+        "test_unregistration_pair_remains_candidate",
+        "test_inherited_oneway_controls_endpoint_reply_mode",
+        "test_missing_inherited_aidl_flag_does_not_prove_synchronous",
+        "test_explicit_false_both_aidl_flags_prove_reply_mode",
+        "test_hidl_method_flag_has_no_interface_oneway_inheritance",
+        "test_missing_oneway_not_invented_synchronous",
+        "test_same_short_name_does_not_prove_type_resolution"
+      ],
+      "pending_methods": [],
+      "eligibleWholeTestMethodBehaviorRetirement": true,
+      "producerProfileOrCallerActivationProven": false,
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "methodProofScope": "Original listed test bodies/assertions only; producer/profile/corpus/caller activation separate"
+    },
+    {
+      "legacy_path": "tools/source_facts/test_functional_source_facts.py",
+      "publishedPath": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_functional_source_facts.py",
+      "sha256": "b2d9eadf05f480bdd0a3dceef1b5ebab62095379cdb33d9593073782025c90f2",
+      "profile": "current normalized source-fact leaf producer",
+      "bodyReadIndependently": true,
+      "testMethods": [
+        {
+          "name": "test_explicit_service_annotation_retained_without_automatic_group_policy",
+          "sourceLine": 6,
+          "bodyLf": " def test_explicit_service_annotation_retained_without_automatic_group_policy(self):\n  row=taxonomy(self.doc())['functional_evidence'][0];self.assertEqual(row['service_string_literal'],'clipboard');self.assertTrue(row['annotation_namespace_proven']);self.assertFalse(row['functional_group_membership_proven'])",
+          "originalAssertions": 3,
+          "existingCase": "ORIG-FN01",
+          "fixtureSteps": [
+            "FACT-FN01"
+          ],
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "nativeBinding": "CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions"
+        },
+        {
+          "name": "test_custom_annotation_name_not_borrowed_as_android_annotation",
+          "sourceLine": 8,
+          "bodyLf": " def test_custom_annotation_name_not_borrowed_as_android_annotation(self):\n  self.assertFalse(taxonomy(self.doc('custom.SystemService'))['functional_evidence'][0]['annotation_namespace_proven'])",
+          "originalAssertions": 1,
+          "existingCase": "ORIG-FN02",
+          "fixtureSteps": [
+            "FACT-FN02"
+          ],
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "nativeBinding": "CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions"
+        },
+        {
+          "name": "test_short_annotation_requires_import",
+          "sourceLine": 10,
+          "bodyLf": " def test_short_annotation_requires_import(self):\n  doc=self.doc('SystemService','Context.CLIPBOARD_SERVICE');self.assertFalse(taxonomy(doc)['functional_evidence'][0]['annotation_namespace_proven']);doc['extensions']['imports']=['android.annotation.SystemService'];self.assertTrue(taxonomy(doc)['functional_evidence'][0]['annotation_namespace_proven'])",
+          "originalAssertions": 2,
+          "existingCase": "ORIG-FN03",
+          "fixtureSteps": [
+            "FACT-FN03",
+            "FACT-FN04"
+          ],
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "nativeBinding": "CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions"
+        },
+        {
+          "name": "test_symbol_kept_separate_from_string_literal",
+          "sourceLine": 12,
+          "bodyLf": " def test_symbol_kept_separate_from_string_literal(self):\n  row=taxonomy(self.doc(arguments='value=Context.CLIPBOARD_SERVICE'))['functional_evidence'][0];self.assertIsNone(row['service_string_literal']);self.assertEqual(row['service_symbol_expression'],'Context.CLIPBOARD_SERVICE')",
+          "originalAssertions": 2,
+          "existingCase": "ORIG-FN04",
+          "fixtureSteps": [
+            "FACT-FN05"
+          ],
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "nativeBinding": "CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions"
+        },
+        {
+          "name": "test_package_namespace_does_not_become_functional_group",
+          "sourceLine": 14,
+          "bodyLf": " def test_package_namespace_does_not_become_functional_group(self):\n  doc=self.doc();doc['extensions']['annotations']=[];result=taxonomy(doc);self.assertEqual(result['classification'],'unclassified-searchable');self.assertEqual(result['imported_group_memberships'],[]);self.assertFalse(result['namespace_search_evidence']['functional_group_inferred'])",
+          "originalAssertions": 3,
+          "existingCase": "ORIG-FN05",
+          "fixtureSteps": [
+            "FACT-FN06"
+          ],
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "nativeBinding": "CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions"
+        },
+        {
+          "name": "test_expression_not_evaluated",
+          "sourceLine": 16,
+          "bodyLf": " def test_expression_not_evaluated(self):\n  row=taxonomy(self.doc(arguments='selectService()'))['functional_evidence'][0];self.assertIsNone(row['service_string_literal']);self.assertIsNone(row['service_symbol_expression'])",
+          "originalAssertions": 2,
+          "existingCase": "ORIG-FN06",
+          "fixtureSteps": [
+            "FACT-FN07"
+          ],
+          "directLiteralClosure": true,
+          "pendingLiteralAssertions": [],
+          "nativeBinding": "CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions"
+        }
+      ],
+      "normal_verified_methods": [
+        "test_explicit_service_annotation_retained_without_automatic_group_policy",
+        "test_custom_annotation_name_not_borrowed_as_android_annotation",
+        "test_short_annotation_requires_import",
+        "test_symbol_kept_separate_from_string_literal",
+        "test_package_namespace_does_not_become_functional_group",
+        "test_expression_not_evaluated"
+      ],
+      "pending_methods": [],
+      "eligibleWholeTestMethodBehaviorRetirement": true,
+      "producerProfileOrCallerActivationProven": false,
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "methodProofScope": "Original listed test bodies/assertions only; producer/profile/corpus/caller activation separate"
+    }
+  ],
+  "independentlyReadOtherPublishedCopies": [
+    {
+      "sha256": "f834dbcd5aa546cc1a18b081367bd6cff8035d4ae86a4cf476395dfdca28a65a",
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp/source-project/test_callback_source_facts.py",
+      "bodyReadIndependently": true,
+      "bodyEqualsInspectedPrimary": true,
+      "role": "alternate published provenance copy; no producer/caller activation inferred"
+    },
+    {
+      "sha256": "b2d9eadf05f480bdd0a3dceef1b5ebab62095379cdb33d9593073782025c90f2",
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp/source-project/test_functional_source_facts.py",
+      "bodyReadIndependently": true,
+      "bodyEqualsInspectedPrimary": true,
+      "role": "alternate published provenance copy; no producer/caller activation inferred"
+    }
+  ],
+  "nativeSourcePins": [
+    {
+      "sha256": "7714eb4713e5ae1390a161cbd1560d2b4f1731af5192e71171733d5b7c46b394",
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Sources/Java/JavaSourceExtractor.cs"
+    },
+    {
+      "sha256": "8caf7c9c9535ad63c738d301ffea9bd85aac74151371b06a4ed72148080eeae8",
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Sources/Java/JavaSemanticServices.cs"
+    },
+    {
+      "sha256": "e58cd6aa51e887acf9148a4d0f4b4f3f443da79bad54a893e434a91a3adc6fbf",
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Sources/Java/JavaNativeParser.cs"
+    },
+    {
+      "sha256": "d450a5f54169393b1b4639a8efbd1caabc6e82edee860aab9eafce0631ba7ac9",
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Sources/SourceFactProducer.cs"
+    },
+    {
+      "sha256": "dcefa28793dc37b4e54888d76e26de7851f6aedd8d7c65f61f217946626cc8b5",
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/Java/JavaContractCases.cs"
+    },
+    {
+      "sha256": "e7384733b5a6b9e9065e6647ee66b296675532df0760d8386343c6e722e617c4",
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/Java/JavaSemanticCases.cs"
+    },
+    {
+      "sha256": "050cfe06b2872270974642a746c00ce18b86b99d0dba79c49f734eb76f0ce3b9",
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/Java/JavaAstRealTests.cs"
+    },
+    {
+      "sha256": "7851821b0acd3300e1a71d44b4ddf824eb7f6949bc5a629499b8be1fecdedc70",
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/Java/JavaSemanticRealTests.cs"
+    },
+    {
+      "sha256": "9dc101d56c521a3cbe991f33f9ab6db49de06b4850093d466a5f6cc04b578854",
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/Java/JavaMockGateTests.cs"
+    },
+    {
+      "sha256": "98958de8562c2db836bc76b6c86444aa8030a3568a637192d02d715561e6a7fc",
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/CallbackFunctionalOriginalCases.cs"
+    },
+    {
+      "sha256": "7a81f71d4dbc9502787747fed277e57eaa56b4b0693e6cef3a8d874ba5f89720",
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/CallbackFunctionalOriginalRealTests.cs"
+    },
+    {
+      "sha256": "8335418307dfb71637e17f80c3959e6b553236ef43c9cf1c402ee849f187255d",
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/CallbackFunctionalOriginalMockTests.cs"
+    },
+    {
+      "sha256": "ee4dea2cf5b5a0289d7c4ff1b742bdc7ab99b24d4c3c83073654609cfbe565d6",
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/SourceFactContractCases.cs"
+    }
+  ],
+  "proof": {
+    "eachScope": {
+      "CallbackFunctionalOriginalMockTests": 38,
+      "JavaAstRealTests": 13,
+      "JavaMockGateTests": 83,
+      "CallbackFunctionalOriginalRealTests": 19,
+      "JavaSemanticRealTests": 44,
+      "SourceFactRealTests": 36
+    },
+    "zeroNonPassInTheseScopes": true,
+    "source": {
+      "sha256": "4e63adacdd42b76a81d5c0a7ab45dc13d749a69eac3d2c9175fef3be73163583",
+      "path": "remediation/nuke-app/artifacts/tests/20261028T0932272149996-f28fbdb36475416095271304765987df/tests.trx",
+      "passed": 59119
+    },
+    "isolated": {
+      "sha256": "6a785aa8c7f763b5180b9612e067ff4493c61bf3656299ebbe506c535d43d39b",
+      "path": "/home/sharpninja/github/2026-10-26/task-2/checkpoint007-clean-20261028T094138-attempt02/tree/remediation/nuke-app/artifacts/tests/20261028T0957361288672-3ae10a9c49e048e2aec56b422244c2a1/tests.trx",
+      "passed": 59119
+    },
+    "bothIndependentlyStreamedAndHashed": true
+  },
+  "priorEvidence": {
+    "callbackFunctional": "callback-functional/callback-functional-normal-parity-evidence.json",
+    "javaSha256": "aa4e043459108063a0635dfd6cd8d32616823dce2372d0a7c5279df26f685cda",
+    "java": "java-normal-parity-evidence.json",
+    "callbackFunctionalSha256": "08e0492da175fb99f2fc89bc57720020103d8eeba950468b80d6061a9d20f540"
+  },
+  "frameworkResponsibilities": [
+    "Java setUp module-presence requirement maps to existing fail-closed native fixture/loader admission, not Python import execution",
+    "Callback method/types and functional doc helpers are exact fixture inputs guarded by the existing19-function replay",
+    "unittest runner/import boilerplate uses the existing NUKE Validate/Tests adapter, no standalone target required"
+  ],
+  "limitations": [
+    "Canonical/release011 identical test bodies do not establish frozen producer identity, cache schema/profile, corpus or recipe/caller equivalence",
+    "JVM/context and callback/functional production are managed C#; AST13 uses the pinned in-process native parser",
+    "Catalog aggregate attachment and end-to-end consumers require their separate owner receipts; this ledger does not assert their current implementation state",
+    "Only the listed test-method behavior is a retirement candidate; no physical deletion, execution-retired or requirement-done state is changed",
+    "No full Google API corpus, Android runtime, HV or acceptance claim",
+    "The six earlier indirect-only literal assertions now have direct same-case proof; the pre-delta ledger remains retained. This closes test-method assertions, not producer profile/corpus/caller activation."
+  ],
+  "resolvedOriginalLiteralAssertions": 6,
+  "literalDeltaProof": {
+    "trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261028T1039525534696-058391d8c0094673b9484f7706514b98/tests.trx",
+    "sha256": "b2bb9a36cf00bf54d60771faff2e593423af6c39551e2c1ebb1caac8793a56a6",
+    "selectedBatchPassed": 367,
+    "realPassed": 6,
+    "mockPassed": 12,
+    "failed": 0,
+    "skipped": 0,
+    "independentlyRead": true,
+    "astAssertionRows": 5,
+    "managedContextAssertionRows": 1,
+    "negativeControlIterations": 14,
+    "cases": [
+      {
+        "testName": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaOriginalLiteralAssertionRealTests.SameSixOriginalLiteralAssertionsBindExistingNativeCasesAndContexts(id: \"ORIG-JAVA-ENUM-SET\")",
+        "outcome": "Passed"
+      },
+      {
+        "testName": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaOriginalLiteralAssertionRealTests.SameSixOriginalLiteralAssertionsBindExistingNativeCasesAndContexts(id: \"ORIG-JAVA-OWNER\")",
+        "outcome": "Passed"
+      },
+      {
+        "testName": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaOriginalLiteralAssertionRealTests.SameSixOriginalLiteralAssertionsBindExistingNativeCasesAndContexts(id: \"ORIG-CONTEXT-IMPORTS-EXACT\")",
+        "outcome": "Passed"
+      },
+      {
+        "testName": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaOriginalLiteralAssertionRealTests.SameSixOriginalLiteralAssertionsBindExistingNativeCasesAndContexts(id: \"ORIG-JAVA-PARSE-ZERO\")",
+        "outcome": "Passed"
+      },
+      {
+        "testName": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaOriginalLiteralAssertionRealTests.SameSixOriginalLiteralAssertionsBindExistingNativeCasesAndContexts(id: \"ORIG-JAVA-PARSE-POSITIVE\")",
+        "outcome": "Passed"
+      },
+      {
+        "testName": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaOriginalLiteralAssertionRealTests.SameSixOriginalLiteralAssertionsBindExistingNativeCasesAndContexts(id: \"ORIG-JAVA-FIELD-OWNERS\")",
+        "outcome": "Passed"
+      }
+    ],
+    "sources": [
+      {
+        "path": "remediation/nuke-app/Tests/Sources/Java/JavaOriginalLiteralAssertionCases.cs",
+        "sha256": "56d4e6e666163a715ce447b3194f4a24a5847ce337cacab7f06df97764fb6963"
+      },
+      {
+        "path": "remediation/nuke-app/Tests/Sources/Java/JavaOriginalLiteralAssertionMockTests.cs",
+        "sha256": "1ff73409353e4fda99e73d20e0f869fef6dae3dea3adcbeb334b69127cc06071"
+      },
+      {
+        "path": "remediation/nuke-app/Tests/Sources/Java/JavaOriginalLiteralAssertionRealTests.cs",
+        "sha256": "8826e05205bd7981eeb83dfdb82f5293aa41cfe44fd3f68ac792622b4bcf4d69"
+      }
+    ],
+    "parserChanged": false,
+    "sharedSubsetComparerChanged": false,
+    "originalInputBytesChanged": false,
+    "priorLedger": "published-java-sourcefact-method-closure-007.before-literal-proof.json",
+    "priorLedgerSha256": "cce018978ea1e0ed9505b57b47b8de7b491dacb109fa0a594de1fcdce354cb85"
+  }
+}

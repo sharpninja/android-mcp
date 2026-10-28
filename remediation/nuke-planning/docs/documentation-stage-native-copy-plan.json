@@ -1,0 +1,69 @@
+{
+  "preparedAtLocal": "2026-10-28T10:32:10",
+  "status": "Staged only; fresh coherent copy grant and native test execution pending",
+  "mockGate": {
+    "trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261028T1027154788842-d032a247dcb3414893b947e1c5bccb40/tests.trx",
+    "sha256": "6708fe9195fbcc3dbaa16ec9fda701ef2323cde2ac05aeeea24912d8dae2f57e",
+    "ownedPassed": { "DocumentationManifestMockTests": 62, "DocumentationPrebuiltPackageMockTests": 46, "DesignDocumentationStageMockTests": 42 },
+    "verification": "Exact TRX hash and fully qualified owned result names independently checked; all150 outcomes Passed"
+  },
+  "files": [
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/docs/staging/DocumentationManifestBuilder.cs.pending",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Documentation/DocumentationManifestBuilder.cs",
+      "sourceSha256": "c3dd4f5f80b39ccada1be13a54fdf3cf2ed2d47d5d318952d4805ba10f3df14d",
+      "sourceLength": 2494,
+      "expectedPriorSha256": null
+    },
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/docs/staging/DocumentationPackageBuilder.prebuilt.cs.pending",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Documentation/DocumentationPackageBuilder.cs",
+      "sourceSha256": "053ace3874e3dfeb725a2fdbf970df7c1f61444bfba12fba7b0b9ba9cb69ccf1",
+      "sourceLength": 3072,
+      "expectedPriorSha256": "f88010778fd07d4da68d8efa731ce4991d853b2bdf0ae73a2b7b5709e38413ea",
+      "retainPriorAt": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/docs/staging/DocumentationPackageBuilder.before-prebuilt.cs.pending"
+    },
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/docs/staging/DesignCompositionRecipeFactory.documentation-stages.cs.pending",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Documentation/DesignCompositionRecipeFactory.cs",
+      "sourceSha256": "5d2d300a85eee2f4286b5994040861a61833487cef62913eff3546839a45bc81",
+      "sourceLength": 11874,
+      "expectedPriorSha256": "6af54bf2051c5501d726c2815c0c393120825eae632eda8858c74303015152c2",
+      "retainPriorAt": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/docs/staging/DesignCompositionRecipeFactory.before-documentation-stages.cs.pending"
+    },
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/docs/staging/DocumentationManifestRealTests.cs.pending",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Documentation/DocumentationManifestRealTests.cs",
+      "sourceSha256": "25896f3d6f0fbca75605a3f4bd54d123b47e3610f8353df5936098fd7ecfa5cf",
+      "sourceLength": 658,
+      "expectedPriorSha256": null
+    },
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/docs/staging/DocumentationPrebuiltPackageRealTests.cs.pending",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Documentation/DocumentationPrebuiltPackageRealTests.cs",
+      "sourceSha256": "cd44ecb9012700ee1713ab5023043adaac528db752cfbafc589fb528bbef20f8",
+      "sourceLength": 866,
+      "expectedPriorSha256": null
+    },
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/docs/staging/DesignDocumentationStageRealTests.cs.pending",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Documentation/DesignDocumentationStageRealTests.cs",
+      "sourceSha256": "901727ea93ad5435852ce98545d71c2a8ad475ab3ec0930985b4d918364a095e",
+      "sourceLength": 914,
+      "expectedPriorSha256": null
+    }
+  ],
+  "nativeDiscoveryPending": { "DocumentationManifestRealTests": 27, "DocumentationPrebuiltPackageRealTests": 19, "DesignDocumentationStageRealTests": 24, "total": 70 },
+  "regressionsRequired": [ "DocumentationPackageMockTests", "DocumentationPackageRealTests", "DesignFullArchitectureRecipeMockTests", "DesignFullArchitectureRecipeRealTests", "DesignCompositionMockTests", "DesignCompositionRealTests" ],
+  "rootComposition": {
+    "manifest": "One DocumentationManifestBuilder(shared receipt verifier) instance",
+    "package": "DocumentationPackageBuilder(existing checker, shared receipt verifier, same manifest instance)",
+    "factory": "Append existing GeneratedDesign validator, same manifest instance, same GeneratedDesign source planner used by collector, and shared receipt verifier after existing model preflight constructor argument",
+    "request": "Use the approved optional DocumentationStages options; package policy is consulted only when Package is selected",
+    "runtime": "Existing shared immutable runtime and collector precommit hook; no alternate graph or filesystem loop"
+  },
+  "preserved": [ "Old six-input architecture method", "Old 250-output full-architecture default", "Old package policy error codes and deterministic ZIP bytes", "All existing assertions and golden bytes", "Captured source identity rechecks", "Only explicitly declared render-skin equality coalescing and generated design Markdown replacement" ],
+  "notProven": [ "Native implementation compilation and execution", "Actual complete stage CLI and Gradle caller execution", "Title-margin rendering or canonical visual correction", "Full legacy migration or hostile validation acceptance" ],
+  "appCopies": 0,
+  "dotnetRuns": 0
+}

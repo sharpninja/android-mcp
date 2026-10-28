@@ -319,7 +319,7 @@ workspace "Android MCP Bridge" "All-Kotlin service and Compose UI; internal ARC 
         }
         deployment * "ReferenceAndroid" Deployment "Reference deployment; not installed by this task" {
             include *
-            autoLayout lr
+            autoLayout tb
         }
         image bridge.app ServerCoreClasses {
             image ../docs/diagrams/server-core-classes.svg

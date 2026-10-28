@@ -8,6 +8,8 @@
     <RootNamespace>AndroidMcp.BuildTool</RootNamespace>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     <NukeTelemetryVersion>1</NukeTelemetryVersion>
+    <!-- Retained generated/test artifacts are never production source items. -->
+    <DefaultItemExcludes>$(DefaultItemExcludes);artifacts/**</DefaultItemExcludes>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Nuke.Common" Version="10.1.0" />

@@ -20,9 +20,8 @@ public static class ModuleGraphContractCases
         static JsonObject Dependencies(params (string Name,string[] Targets)[] values)=>new(values.Select(v=>new KeyValuePair<string,JsonNode?>(v.Name,new JsonArray(v.Targets.Select(t=>(JsonNode?)JsonValue.Create(t)).ToArray()))));
         static ModuleValidationInput Input(JsonObject owners,JsonObject dependencies,string source,bool domainPorts=false)=>new(new JsonObject{{"classes",owners},{"dependencies",dependencies},{"interfaces_are_domain_ports",domainPorts}},source);
         var fixture=DocumentationFixture.Current;
-        var codePath=Path.Combine(fixture.Workspace,"remediation/design-c4/architecture/code-diagrams.md");
         var modelPath=Path.Combine(fixture.Workspace,"remediation/design-c4/architecture/module-contract.json");
-        var codeBytes=File.ReadAllBytes(codePath);var modelBytes=File.ReadAllBytes(modelPath);
+        var codeBytes=fixture.ReadOriginalDesignBytes("architecture/code-diagrams.md");var modelBytes=File.ReadAllBytes(modelPath);
         if(DocumentationFixture.Hash(codeBytes)!=fixture.ExpectedHashes["remediation/design-c4/architecture/code-diagrams.md"]||DocumentationFixture.Hash(modelBytes)!=fixture.ExpectedHashes["remediation/design-c4/architecture/module-contract.json"])
             throw new InvalidOperationException("Pinned module-graph inputs changed");
         return

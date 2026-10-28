@@ -97,6 +97,20 @@ public sealed class DocumentationFixture
         Assert.Equal(migration.BeforeSha256,originalHash);
         return migration.AfterSha256;
     }
+    // Historical contract cases preserve their admitted workstation-migration
+    // input bytes after later current-source presentation changes. The existing
+    // fixture authority and carrier map retain ownership of physical locations.
+    public byte[] ReadOriginalDesignBytes(string relative)
+    {
+        var pin=ToolingDocumentationMigrationCases.Files.SingleOrDefault(file=>file.CanonicalPath==relative);
+        if(pin is not null)
+        {
+            var artifact=ToolingDocumentationMigrationCases.Proposed().Single(file=>file.RelativePath==relative);
+            Assert.Equal(pin.AfterSha256,Hash(artifact.Bytes.Span));
+            return artifact.Bytes.ToArray();
+        }
+        return File.ReadAllBytes(ArtifactPaths.Resolve(Path.Combine(Workspace,"remediation/design-c4"),relative));
+    }
     public static string Text(JsonObject node,string key) => node[key]?.GetValue<string>() ?? "";
     public static string Utf8(Artifact artifact) => Encoding.UTF8.GetString(artifact.Bytes.Span);
     public static string Hash(ReadOnlySpan<byte> bytes) => Convert.ToHexStringLower(SHA256.HashData(bytes));

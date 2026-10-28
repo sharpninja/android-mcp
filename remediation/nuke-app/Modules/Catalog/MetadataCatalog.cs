@@ -10,6 +10,8 @@ namespace AndroidMcp.BuildTool.Catalog;
 
 public sealed record MetadataSnapshot(string Kind,string Key,int Revision,string Origin,string State,
     string? BaseHash,string ContentHash,string Document,string Reason,string ETag);
+public sealed record MetadataRevision(string Kind,string Key,int Revision,string Origin,string State,
+    string? BaseHash,string ContentHash,string Document,string Reason);
 public sealed record MetadataCursor(string Reader,long Generation);
 public sealed record MetadataCatalogIdentity(string Kind,string ContractHash);
 
@@ -19,14 +21,14 @@ public sealed partial class MetadataCatalog
     private readonly CatalogDatabase database;
     private readonly ICanonicalJson canonical;
     private readonly IContentHash hashes;
-    private readonly JsonSchema groupSchema;
+    private readonly CatalogSourceMetadata sourceMetadata;
     private readonly IReadOnlyDictionary<string,MetadataCatalogIdentity> catalogIndex;
     private readonly object sync=new();
     public MetadataCatalog(CatalogDatabase database,ICanonicalJson canonical,IContentHash hashes,string schemaPath,
         IReadOnlyDictionary<string,MetadataCatalogIdentity>? catalogIndex=null)
     {
         this.database=database;this.canonical=canonical;this.hashes=hashes;
-        groupSchema=JsonSchema.FromText(File.ReadAllText(schemaPath));
+        sourceMetadata=new CatalogSourceMetadata(Path.Combine(Path.GetDirectoryName(Path.GetFullPath(schemaPath))!,"SourceContractMetadata.schema.json"),canonical);
         this.catalogIndex=catalogIndex ?? new Dictionary<string,MetadataCatalogIdentity>(StringComparer.Ordinal);
     }
     private SqliteCommand Command(string sql,SqliteTransaction? transaction=null,params (string Name,object? Value)[] parameters)=>
@@ -64,25 +66,54 @@ public sealed partial class MetadataCatalog
     }
     private string ValidateDocument(string kind,string key,JsonElement document,SqliteTransaction transaction)
     {
-        if(kind!="functional-group") throw new CatalogException(422,"Unsupported metadata kind in the group increment");
-        if(!groupSchema.Evaluate(document,new EvaluationOptions{RequireFormatValidation=true,OutputFormat=OutputFormat.Flag}).IsValid ||
-            document.GetProperty("group_id").GetString()!=key) throw new CatalogException(422,"Invalid functional group or identity mismatch");
-        foreach(var dependency in document.GetProperty("dependencies").EnumerateArray())
+        try
         {
-            var target=Row("functional-group",dependency.GetProperty("group_id").GetString()!,transaction);
-            if(target is null || target.State!="active" || target.Revision!=dependency.GetProperty("revision").GetInt32() ||
-                target.ContentHash!=dependency.GetProperty("content_hash").GetString()) throw new CatalogException(422,"Unknown or stale group dependency");
+            var value=JsonNode.Parse(document.GetRawText()) as JsonObject ?? throw new FormatException("Metadata document must be an object");
+            if(kind=="functional-group")
+            {
+                if(value["group_id"]?.GetValue<string>()!=key)throw new FormatException("Group identity mismatch");
+                var groups=new Dictionary<string,CatalogMetadataGroupPin>(StringComparer.Ordinal);
+                using(var command=Command("SELECT r.resource_id,r.revision,r.content_hash,r.document_json FROM metadata_heads h JOIN metadata_revisions r USING(kind,resource_id,revision) WHERE h.kind='functional-group' AND r.state='active'",transaction))
+                using(var rows=command.ExecuteReader())while(rows.Read())groups.Add(rows.GetString(0),new(rows.GetInt32(1),rows.GetString(2),JsonNode.Parse(rows.GetString(3))!.AsObject()));
+                sourceMetadata.ValidateGroup(value,groups);
+            }
+            else if(kind=="callback-descriptor")
+            {
+                if(value["callback_id"]?.GetValue<string>()!=key)throw new FormatException("Callback identity mismatch");
+                sourceMetadata.ValidateDescriptor(value);
+            }
+            else throw new FormatException("Unknown metadata kind");
+            void Pin(string identity,string? contractHash=null,bool typeRequired=false)
+            {
+                if(!catalogIndex.TryGetValue(identity,out var target) || contractHash is not null && target.ContractHash!=contractHash ||
+                    typeRequired && target.Kind is not ("class" or "interface" or "aidl-interface" or "parcelable" or "enum" or "struct" or "union" or "typedef" or "annotation"))
+                    throw new CatalogException(422,"Unknown or incompatible trusted catalog reference");
+            }
+            if(kind=="functional-group")
+            {
+                foreach(var member in value["members"]!.AsArray())Pin(member!["binding_id"]!.GetValue<string>(),member["contract_hash"]!.GetValue<string>());
+                foreach(var identity in value["required_type_ids"]!.AsArray())Pin(identity!.GetValue<string>(),typeRequired:true);
+            }
+            else
+            {
+                Pin(value["type_id"]!.GetValue<string>(),value["type_contract_hash"]!.GetValue<string>(),true);
+                foreach(var method in value["methods"]!.AsArray())
+                {
+                    Pin(method!["method_id"]!.GetValue<string>(),method["contract_hash"]!.GetValue<string>());
+                    foreach(var identity in method["required_type_ids"]!.AsArray())Pin(identity!.GetValue<string>(),typeRequired:true);
+                }
+                foreach(var identity in value["registration_binding_ids"]!.AsArray())Pin(identity!.GetValue<string>());
+                if(value["cleanup"]!["binding_id"] is JsonValue cleanup)Pin(cleanup.GetValue<string>(),value["cleanup"]!["contract_hash"]?.GetValue<string>());
+            }
+            return Encoding.UTF8.GetString(canonical.Serialize(document));
         }
-        void Pin(string identity,string? contractHash=null,bool typeRequired=false)
-        {
-            if(!catalogIndex.TryGetValue(identity,out var target) || contractHash is not null && target.ContractHash!=contractHash ||
-                typeRequired && target.Kind is not ("class" or "interface" or "aidl-interface" or "parcelable" or "enum" or "struct" or "union" or "typedef" or "annotation"))
-                throw new CatalogException(422,"Unknown or incompatible trusted catalog reference");
-        }
-        foreach(var member in document.GetProperty("members").EnumerateArray())
-            Pin(member.GetProperty("binding_id").GetString()!,member.GetProperty("contract_hash").GetString());
-        foreach(var identity in document.GetProperty("required_type_ids").EnumerateArray()) Pin(identity.GetString()!,typeRequired:true);
-        return Encoding.UTF8.GetString(canonical.Serialize(document));
+        catch(Exception error)when(error is FormatException or JsonException or InvalidOperationException or KeyNotFoundException or ArgumentException)
+        {throw new CatalogException(422,error.Message);}
+    }
+    public JsonObject Representation(string kind,string key)
+    {
+        var row=Get(kind,key);return new(){["kind"]=row.Kind,["resource_id"]=row.Key,["revision"]=row.Revision,["origin"]=row.Origin,["state"]=row.State,
+            ["base_hash"]=row.BaseHash,["content_hash"]=row.ContentHash,["document"]=JsonNode.Parse(row.Document),["reason"]=row.Reason,["etag"]=row.ETag};
     }
     private void Append(string kind,string key,string body,string origin,string state,string? baseHash,string reason,SqliteTransaction transaction)
     {
@@ -149,6 +180,16 @@ public sealed partial class MetadataCatalog
             var clean=old is null || old.Origin=="imported" && old.State=="active" && old.ContentHash==old.BaseHash;
             Append(kind,key,clean ? body : old!.Document,clean ? "imported" : "overlay",clean ? "active" : "conflict",hash,reason,transaction);
         });
+    }
+    public IReadOnlyList<MetadataRevision> History(string kind,string key)
+    {
+        lock(sync)
+        {
+            using var command=Command("SELECT kind,resource_id,revision,origin,state,base_hash,content_hash,document_json,reason FROM metadata_revisions WHERE kind=$kind AND resource_id=$key ORDER BY revision",null,("$kind",kind),("$key",key));
+            using var rows=command.ExecuteReader();var result=new List<MetadataRevision>();
+            while(rows.Read())result.Add(new(rows.GetString(0),rows.GetString(1),rows.GetInt32(2),rows.GetString(3),rows.GetString(4),rows.IsDBNull(5)?null:rows.GetString(5),rows.GetString(6),rows.GetString(7),rows.GetString(8)));
+            return result.ToArray();
+        }
     }
     public MetadataCursor Cursor(string reader) { lock(sync) return new(reader,Generation); }
     public void ContinuePage(MetadataCursor cursor,string reader)

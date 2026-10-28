@@ -40,8 +40,23 @@ public sealed class NativeTestGateEvidenceProducer(IProcessRunner runner,IProces
             };
             // A failed/locked overwrite on Windows is a failed process, never permission to
             // label the old loaded host fresh or to advance through a self-reported receipt.
+            IReadOnlyDictionary<string,string> environment=new Dictionary<string,string>();
+            if(index==2&&facts is ITestGateTestHostOriginProvider origin)
+            {
+                environment=await origin.PrepareTestHostEnvironmentAsync(request,cancellationToken);
+                const string originKey="ANDROIDMCP_TEST_GATE_ORIGIN_REQUEST";
+                if(environment.Count!=1||!environment.TryGetValue(originKey,out var path)||string.IsNullOrWhiteSpace(path))
+                    throw new TestGateFactsException("ORIGIN_ENVIRONMENT_INVALID","The origin provider must supply only the fixed challenge key.");
+                try
+                {
+                    var expected=Path.Combine(request.ReceiptDirectory,"origin-request.json");
+                    if(Path.GetFullPath(path)!=Path.GetFullPath(expected))throw new ArgumentException("Challenge belongs to another run.");
+                    ArtifactPaths.Resolve(request.WorkspaceRoot,Relative(request.WorkspaceRoot,path));
+                }
+                catch(ArgumentException){throw new TestGateFactsException("ORIGIN_ENVIRONMENT_INVALID","Challenge path is outside this admitted run.");}
+            }
             var result=await runner.RunAsync(new(request.DotNet,arguments,request.WorkspaceRoot,
-                new Dictionary<string,string>(),Path.Combine(request.ReceiptDirectory,"process-"+index)),cancellationToken);
+                environment,Path.Combine(request.ReceiptDirectory,"process-"+index)),cancellationToken);
             executedSteps.Add(step);
             var output=await captures.ReadAsync(result,false,cancellationToken);
             var error=await captures.ReadAsync(result,true,cancellationToken);

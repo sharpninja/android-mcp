@@ -10,6 +10,19 @@ public sealed partial class Build
 {
     private async Task FetchSources()
     {
+        var context=CreateSourceBatchContext();
+        var operation=new SourcesFetchOperation(context.Planner,context.Batch);
+        var result=await operation.RunAsync(new(await ReadSourcesRecipe(context.InputRoot),
+            Generation??"source-acquisition","sources/acquisition.json",CachePolicy??SourceBatchCachePolicy.PreserveAliases));
+        Console.WriteLine(JsonSerializer.Serialize(new{result.Manifest,result.Reused,result.Receipt.GenerationId,
+            CurrentCounts=new SourcesFetchInvocationProjection().Project(result),
+            result.Receipt.TotalRows,result.Receipt.SelectedRows,result.Receipt.ProcessedRows,
+            result.Receipt.TotalPhysicalSources,result.Receipt.SelectedPhysicalSources,result.Receipt.Complete,
+            result.Receipt.HistoricalByteIdentityClaimed,OutputRoot=context.OutputRoot}));
+    }
+
+    private (string InputRoot,string OutputRoot,RehydrationPlanner Planner,SourceBatch Batch) CreateSourceBatchContext()
+    {
         var input=Path.TrimEndingDirectorySeparator(Path.GetFullPath(ProjectRoot!));
         var output=Path.TrimEndingDirectorySeparator(Path.GetFullPath(OutputRoot!));
         var bundled=Path.TrimEndingDirectorySeparator(Path.GetFullPath(BundleRoot!));
@@ -23,15 +36,8 @@ public sealed partial class Build
         var canonical=new CanonicalJson();
         var destination=new FileArtifactStore(output,bytes=>ContentHash.Sha256(bytes.Span));
         var bundle=new FileArtifactStore(bundled,bytes=>ContentHash.Sha256(bytes.Span));
-        var operation=new SourcesFetchOperation(new RehydrationPlanner(canonical),
-            new SourceBatch(HttpByteTransport.Create(),destination,bundle,
-                new FileArtifactLeaseProvider(Path.Combine(output,".leases")),canonical));
-        var result=await operation.RunAsync(new(await ReadSourcesRecipe(input),
-            Generation??"source-acquisition","sources/acquisition.json",CachePolicy??SourceBatchCachePolicy.PreserveAliases));
-        Console.WriteLine(JsonSerializer.Serialize(new{result.Manifest,result.Reused,result.Receipt.GenerationId,
-            result.Receipt.TotalRows,result.Receipt.SelectedRows,result.Receipt.ProcessedRows,
-            result.Receipt.TotalPhysicalSources,result.Receipt.SelectedPhysicalSources,result.Receipt.Complete,
-            result.Receipt.HistoricalByteIdentityClaimed,OutputRoot=output}));
+        return (input,output,new RehydrationPlanner(canonical),new SourceBatch(HttpByteTransport.Create(),destination,bundle,
+            new FileArtifactLeaseProvider(Path.Combine(output,".leases")),canonical));
     }
 
     private static string InputRelative(string root,string requested)

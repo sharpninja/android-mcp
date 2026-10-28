@@ -1,6 +1,6 @@
 namespace AndroidMcp.BuildTool.Core;
 
-public enum OperationExecutor { Pending, MockTests, Tests, DocumentationAssets, NativeParser, SourcesFetch, PublicationCheck, SourcesPlan, Architecture, CatalogBuild, BrowserQa, SourcesInventory, SdkReferenceCopy, SourcesExtract, CatalogBuildFromSources }
+public enum OperationExecutor { Pending, MockTests, Tests, DocumentationAssets, NativeParser, SourcesFetch, PublicationCheck, SourcesPlan, Architecture, CatalogBuild, BrowserQa, SourcesInventory, SdkReferenceCopy, SourcesExtract, CatalogBuildFromSources, SourcesSeed, GradleCompatibility, GradleProjection, CatalogValidation }
 public sealed record OperationDefinition(OperationKey Key, string Description,
     IReadOnlyList<string> RequiredParameters, IReadOnlyList<string> OptionalParameters,
     IReadOnlyList<PlannedStep> Steps, OperationExecutor Executor=OperationExecutor.Pending);
@@ -16,6 +16,10 @@ public sealed class OperationRegistry
             definitions.Add(new(new(category,operation), $"{category}/{operation}",required,optional,steps,executor));
         Add(Category.Sources,Operation.Plan,["project-root","source-manifest","recipe-lock","output-root"],
             ["release","limit","acquisition-profile"],OperationExecutor.SourcesPlan,new PlannedStep("source-plan",[]));
+        Add(Category.Sources,Operation.Seed,["project-root","source-manifest","recipe-lock","output-root","bundle-root"],
+            ["generation","release","acquisition-profile"],OperationExecutor.SourcesSeed,
+            new("validate-locked-recipe",[]),new("project-seed-candidates",["validate-locked-recipe"]),
+            new("seed-available-sources",["project-seed-candidates"]),new("seal-seed-result",["seed-available-sources"]));
         Add(Category.Sources,Operation.Fetch,["project-root","source-manifest","recipe-lock","output-root","bundle-root"],
             ["generation","release","limit","acquisition-profile","cache-policy"],OperationExecutor.SourcesFetch,
             new("validate-locked-recipe",[]),new("preflight-selected-sources",["validate-locked-recipe"]),
@@ -41,14 +45,22 @@ public sealed class OperationRegistry
             new("seal-catalog",["build-catalog"]));
         Add(Category.Design,Operation.Assets,["project-root","output-root"],["generation"],OperationExecutor.DocumentationAssets,
             new("validate-design-inputs",[]),new("project-ui",["validate-design-inputs"]));
+        Add(Category.Design,Operation.GradleProjection,["output-root"],["generation"],OperationExecutor.GradleProjection,
+            new PlannedStep("emit-gradle-projection",[]));
         Add(Category.Design,Operation.Architecture,["project-root","output-root","cache-root","work-root","receipt-root","docker-identity","renderer-user","tool-access"],
             ["generation","offline-gradle-checksum-proof"],OperationExecutor.Architecture,
             new("validate-architecture-inputs",[]),new("preflight-native-context",["validate-architecture-inputs"]),
             new("verify-pinned-tools",["preflight-native-context"]),new("generate-architecture",["verify-pinned-tools"]),new("seal-generation",["generate-architecture"]));
+        Add(Category.Design,Operation.GradleCompatibility,["project-root","output-root","cache-root","work-root","receipt-root","docker-identity","renderer-user","tool-access","design-aliases","design-registry-sha256"],
+            ["generation","offline-gradle-checksum-proof","catalog-root","policy-relative-path"],OperationExecutor.GradleCompatibility,
+            new PlannedStep("design-stage-union",[]));
         Add(Category.Design,Operation.BrowserQa,["project-root","output-root","browser-identity","ui-manifest-sha256","expected-architecture-diagrams"],
             ["architecture-root","architecture-manifest-sha256","viewport-width","viewport-height"],OperationExecutor.BrowserQa,
             new("validate-browser-generations",[]),new("run-native-browser-qa",["validate-browser-generations"]),
             new("seal-browser-evidence",["run-native-browser-qa"]));
+        Add(Category.Validate,Operation.Catalog,["project-root","pipeline-request","pipeline-request-sha256","pipeline-request-length"],[],OperationExecutor.CatalogValidation,
+            new("admit-pinned-workflow",[]),new("validate-catalog-readonly",["admit-pinned-workflow"]),
+            new("emit-validation-receipt",["validate-catalog-readonly"]));
         Add(Category.Validate,Operation.Toolchain,[],["toolchain-check","project-root","pipeline-request","pipeline-request-sha256","pipeline-request-length"],OperationExecutor.SdkReferenceCopy,new PlannedStep("verify-toolchain",[]));
         Add(Category.Review,Operation.Prepare,["snapshot"],[],OperationExecutor.Pending,new("verify-review-evidence",[]),new("prepare-review",[]));
         Add(Category.Publish,Operation.Check,["git-checkout","git-identity","receipt-root"],["policy-relative-path"],OperationExecutor.PublicationCheck,new PlannedStep("check-deliverables",[]));

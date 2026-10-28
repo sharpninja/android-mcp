@@ -30,7 +30,7 @@ public static class DocumentationPackageCases
         Assert.Equal(221,result.Count(a=>a.RelativePath.StartsWith("docs/",StringComparison.Ordinal)&&a.RelativePath.EndsWith(".svg",StringComparison.Ordinal)));
         result.Add(fixture.Input.BlueprintMarkdown);
         foreach(var path in new[]{"architecture/workspace.dsl","architecture/code-diagrams.md"})
-        {var bytes=File.ReadAllBytes(Path.Combine(fixture.Workspace,"remediation/design-c4",path));Assert.Equal(fixture.ExpectedHashes["remediation/design-c4/"+path],DocumentationFixture.Hash(bytes));result.Add(new(path,bytes,"text/plain"));}
+        {var bytes=fixture.ReadOriginalDesignBytes(path);Assert.Equal(fixture.ExpectedHashes["remediation/design-c4/"+path],DocumentationFixture.Hash(bytes));result.Add(new(path,bytes,"text/plain"));}
         result.Add(new("architecture/render-skin.puml",Encoding.UTF8.GetBytes("skinparam defaultFontName DejaVu Sans\nskinparam backgroundColor white\nskinparam shadowing false\n"),"text/plain"));
         result.Add(new("build-tool/AndroidMcp.Build.csproj",Encoding.UTF8.GetBytes("<Project Sdk=\"Microsoft.NET.Sdk\"/>\n"),"application/xml"));
         result.Add(new("build-tool/Modules/Example.cs",Encoding.UTF8.GetBytes("namespace AndroidMcp.BuildTool;\n"),"text/plain"));

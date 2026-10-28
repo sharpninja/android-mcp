@@ -27,7 +27,7 @@ public static class GeneratedDesignValidationCorpusCases
             }
             else
             {
-                var bytes=File.ReadAllBytes(Path.Combine(root,source.RelativePath));
+                var bytes=fixture.ReadOriginalDesignBytes(source.RelativePath);
                 var additional=DocumentationSelectedProjectSourceCases.AdditionalSourcePins.SingleOrDefault(pin=>pin.Path==source.RelativePath);
                 if(additional is not null){Assert.Equal(additional.Length,bytes.Length);Assert.Equal(additional.Sha256,ContentHash.Sha256(bytes));}
                 else if(source.RelativePath==DocumentationAssetPaths.Blueprint)Assert.Equal(fixture.HealthMigration["afterSha256"]!.GetValue<string>(),ContentHash.Sha256(bytes));

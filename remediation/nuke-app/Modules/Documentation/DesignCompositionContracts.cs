@@ -4,7 +4,7 @@ using AndroidMcp.BuildTool.Modules.Sources.Acquisition;
 namespace AndroidMcp.BuildTool.Documentation;
 
 public sealed record DesignArchitectureRequest(string GenerationId,ArchitectureRendererContext Renderer,
-    ToolArtifactAccess ToolAccess,string? OfflineGradleChecksumProof);
+    ToolArtifactAccess ToolAccess,string? OfflineGradleChecksumProof,DesignDocumentationStageOptions? DocumentationStages=null);
 public sealed record DesignPackageRequest(string GenerationId,IReadOnlyList<StoredArtifact> Sources,
     IReadOnlyList<string> RequiredPaths,ReadOnlyMemory<byte> Policy);
 public sealed record ArchitectureCompositionPlan(IReadOnlyList<Artifact> Inputs,DocumentationRendererProfile Profile,

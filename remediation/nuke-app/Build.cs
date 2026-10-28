@@ -92,6 +92,12 @@ public sealed partial class Build : NukeBuild
     public string? PolicyRelativePath { get; set; }
     [Parameter("Stable generation identifier for reproducible generated documentation")]
     public string? Generation { get; set; }
+    [Parameter("Comma-separated existing Gradle design aliases, resolved by the shared stage registry")]
+    public string? DesignAliases { get; set; }
+    [Parameter("Explicit SHA256 of the current shared design stage registry")]
+    public string? DesignRegistrySha256 { get; set; }
+    [Parameter("Optional separate catalog contract root for selected documentation stages")]
+    public string? CatalogRoot { get; set; }
     [Parameter("JSON ToolIdentity for the already installed, content-pinned native compiler")]
     public string? CompilerIdentity { get; set; }
     [Parameter("Optional native-source cache directory")]
@@ -101,7 +107,9 @@ public sealed partial class Build : NukeBuild
     [Parameter("Exact pinned Java native source-lock manifest required by native integration tests")]
     public string? JavaNativeManifest { get; set; }
 
-    public static int Main(string[] args) => args.FirstOrDefault()=="--internal-process-probe"
+    public static int Main(string[] args) => args.FirstOrDefault()=="--sdk-evaluation-once"
+        ? RunSdkEvaluationOnceAsync(args).GetAwaiter().GetResult()
+        : args.FirstOrDefault()=="--internal-process-probe"
         ? ProcessContractProbe.Run(args.Skip(1).ToArray())
         : NukeExitCode.Normalize(Execute<Build>(x => x.Validate));
 
@@ -143,6 +151,7 @@ public sealed partial class Build : NukeBuild
         Add("git-checkout",GitCheckout); Add("test-filter",TestFilter);
         Add("git-identity",GitIdentity);Add("policy-relative-path",PolicyRelativePath);
         Add("generation",Generation);
+        Add("design-aliases",DesignAliases);Add("design-registry-sha256",DesignRegistrySha256);Add("catalog-root",CatalogRoot);
         Add("compiler-identity",CompilerIdentity);Add("cache-root",CacheRoot);Add("receipt-root",ReceiptRoot);
         Add("java-native-manifest",JavaNativeManifest);
         var registry=new OperationRegistry();
@@ -155,11 +164,15 @@ public sealed partial class Build : NukeBuild
             case OperationExecutor.DocumentationAssets: GenerateAssets().GetAwaiter().GetResult();break;
             case OperationExecutor.NativeParser: BuildNativeParser().GetAwaiter().GetResult();break;
             case OperationExecutor.SourcesFetch: FetchSources().GetAwaiter().GetResult();break;
+            case OperationExecutor.SourcesSeed: SeedSources().GetAwaiter().GetResult();break;
             case OperationExecutor.PublicationCheck: CheckPublication().GetAwaiter().GetResult();break;
             case OperationExecutor.SourcesPlan: PlanSources().GetAwaiter().GetResult();break;
             case OperationExecutor.Architecture: GenerateArchitecture().GetAwaiter().GetResult();break;
+            case OperationExecutor.GradleCompatibility: GenerateGradleCompatibility().GetAwaiter().GetResult();break;
+            case OperationExecutor.GradleProjection: GenerateGradleProjection().GetAwaiter().GetResult();break;
             case OperationExecutor.CatalogBuild: BuildCatalog().GetAwaiter().GetResult();break;
             case OperationExecutor.CatalogBuildFromSources: BuildCatalogFromSources().GetAwaiter().GetResult();break;
+            case OperationExecutor.CatalogValidation: ValidateCatalog().GetAwaiter().GetResult();break;
             case OperationExecutor.BrowserQa: RunBrowserQa().GetAwaiter().GetResult();break;
             case OperationExecutor.SourcesInventory: InventorySources().GetAwaiter().GetResult();break;
             case OperationExecutor.SourcesExtract: ExtractSources().GetAwaiter().GetResult();break;
@@ -203,6 +216,7 @@ public sealed partial class Build : NukeBuild
             DotNetTasks.DotNetBuild(s => s
                 .SetProcessToolPath(DotNetHost!)
                 .SetProjectFile(project)
+                .SetNoIncremental(true)
                 .SetNoRestore(true)
                 .SetProperty("BuildProjectReferences", "false"));
             var oldManifest=Environment.GetEnvironmentVariable("ANDROIDMCP_JAVA_NATIVE_MANIFEST");

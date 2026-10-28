@@ -20,8 +20,8 @@ public static class ArchitecturePreparationCases
     public static IEnumerable<object[]> CodeCases=>CreateCode().Select(c=>new object[]{c});
     public static IReadOnlyList<CodeViewCase> CreateCode()
     {
-        var fixture=DocumentationFixture.Current;var root=Path.Combine(fixture.Workspace,"remediation/design-c4");
-        var workspace=File.ReadAllBytes(Path.Combine(root,"architecture/workspace.dsl"));var code=File.ReadAllBytes(Path.Combine(root,"architecture/code-diagrams.md"));
+        var fixture=DocumentationFixture.Current;
+        var workspace=fixture.ReadOriginalDesignBytes("architecture/workspace.dsl");var code=fixture.ReadOriginalDesignBytes("architecture/code-diagrams.md");
         Assert.Equal(fixture.ExpectedHashes["remediation/design-c4/architecture/workspace.dsl"],DocumentationFixture.Hash(workspace));
         Assert.Equal(fixture.ExpectedHashes["remediation/design-c4/architecture/code-diagrams.md"],DocumentationFixture.Hash(code));
         var input=new ArchitecturePreparationInput(new("architecture/workspace.dsl",workspace,"text/plain"),new("architecture/code-diagrams.md",code,"text/markdown"));

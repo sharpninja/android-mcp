@@ -31,7 +31,7 @@ public sealed class CatalogPipelineWorkflowOperation(string catalogRoot,string a
         using var runtime=runtimes.Create(selectedProfile,identity.JavaAdmission);
         var concerns=runtime.Concerns;
         var builder=new CatalogBuild(catalogRoot,runtime.Dispatcher,concerns.PermissionExpressions,concerns.AnnotationTargets,
-            concerns.TypeHeaders,canonical);
+            concerns.TypeHeaders,canonical,sourceMetadata:new CatalogSourceMetadata(Path.Combine(catalogRoot,"contracts/SourceContractMetadata.schema.json"),canonical,concerns.Callbacks,concerns.Taxonomy));
         // Bridge bytes are consumed in memory. No manifest, lease, stage or
         // output is materialized before Build's sole Source.Open admission.
         return await builder.BuildAsync(input,request.OutputRoot,request.StageRoot,cancellationToken);

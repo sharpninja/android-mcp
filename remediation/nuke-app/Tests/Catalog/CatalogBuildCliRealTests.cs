@@ -5,10 +5,10 @@ using Xunit;
 
 namespace AndroidMcp.BuildTool.Tests.Catalog;
 
-public sealed class NativeCatalogBuildCliProbe:ICatalogBuildCliProbe
+public sealed class NativeCatalogBuildCliProbe(Func<Func<CatalogBuildInvocation,Task<CatalogBuildException?>>,NativeCatalogBuildProvider>? providerFactory=null,string? javaNativeManifest=null):ICatalogBuildCliProbe
 {
     public Task<CatalogBuildCliObservation> RunAsync(CatalogBuildCase test)=>Task.Run(()=>Run(test));
-    private static CatalogBuildCliObservation Run(CatalogBuildCase test)
+    private CatalogBuildCliObservation Run(CatalogBuildCase test)
     {
         // The shared fixture provider creates the exact original source inputs
         // and independently validates every DB/export field after this delegate.
@@ -17,13 +17,12 @@ public sealed class NativeCatalogBuildCliProbe:ICatalogBuildCliProbe
         var host=Environment.ProcessPath ?? throw new InvalidOperationException("Native dotnet host is unavailable");
         Assert.Equal("dotnet",Path.GetFileNameWithoutExtension(host));var dll=typeof(AndroidMcp.BuildTool.Build).Assembly.Location;
         var tool=new ToolIdentity(host,ContentHash.Sha256(File.ReadAllBytes(host)),Environment.Version.ToString());var dllHash=ContentHash.Sha256(File.ReadAllBytes(dll));
-        using var provider=new NativeCatalogBuildProvider
+        async Task<CatalogBuildException?> Execute(CatalogBuildInvocation invocation)
         {
-            Execution=async invocation=>
-            {
                 manifest=invocation.InventoryPath;output=invocation.OutputDirectory;stage=invocation.StageDirectory;
                 var root=Path.GetDirectoryName(manifest)!;runtime=Path.Combine(root,"isolated nuke runtime");Directory.CreateDirectory(Path.Combine(runtime,".nuke"));
                 var arguments=CatalogBuildCliCases.Arguments(host,dll,runtime,NativeSchemaProvider.Root(),manifest,output,stage).ToList();
+                if(javaNativeManifest is not null)arguments.AddRange(["--java-native-manifest",javaNativeManifest]);
                 arguments.InsertRange(1,["--runtimeconfig",Path.Combine(AppContext.BaseDirectory,"AndroidMcp.Build.Tests.runtimeconfig.json"),"--depsfile",Path.Combine(AppContext.BaseDirectory,"AndroidMcp.Build.Tests.deps.json")]);
                 actualArguments=arguments.ToArray();
                 // This invokes the current compiled monolith. It never invokes
@@ -46,8 +45,8 @@ public sealed class NativeCatalogBuildCliProbe:ICatalogBuildCliProbe
                 if((stdout+stderr).Contains("Output must be empty; preserve immutable earlier publication",StringComparison.Ordinal))
                 {registered=true;return new CatalogBuildException("nonempty-output","Observed registered build's populated-output refusal");}
                 throw new InvalidOperationException("Catalog CLI did not reach a recorded domain outcome. Fixture retained at "+root+Environment.NewLine+stdout+Environment.NewLine+stderr);
-            }
-        };
+        }
+        using var provider=providerFactory?.Invoke(Execute)??new NativeCatalogBuildProvider{Execution=Execute};
         var build=provider.Build(test.Call);Assert.NotNull(process);Assert.NotNull(actualArguments);
         return new(build,process.ExitCode,File.Exists(process.StandardOutputPath),File.Exists(process.StandardErrorPath),dllPinned,hostPinned,registered,
             actualArguments,host,dll,runtime!,NativeSchemaProvider.Root(),manifest!,output!,stage!);

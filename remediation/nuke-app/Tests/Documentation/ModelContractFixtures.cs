@@ -23,7 +23,7 @@ public sealed class ModelContractFixture
         var fixture=DocumentationFixture.Current;var root=Path.Combine(fixture.Workspace,"remediation/design-c4");
         Artifact Read(string path,string media)
         {
-            var bytes=File.ReadAllBytes(Path.Combine(root,path));
+            var bytes=fixture.ReadOriginalDesignBytes(path);
             if(fixture.ExpectedHashes.TryGetValue("remediation/design-c4/"+path,out var expected))Assert.Equal(expected,DocumentationFixture.Hash(bytes));
             return new(path,bytes,media);
         }

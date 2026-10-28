@@ -39,7 +39,8 @@ public sealed partial class Build
         // Admission/ABI checks happen through the shared source factory before
         // CatalogBuild opens a stage or final artifact. Runtime owns disposal.
         using var runtime=sourcesFactory.Create(profile,java);var concerns=runtime.Concerns;
-        var service=new CatalogBuild(project,runtime.Dispatcher,concerns.PermissionExpressions,concerns.AnnotationTargets,concerns.TypeHeaders,canonical);
+        var service=new CatalogBuild(project,runtime.Dispatcher,concerns.PermissionExpressions,concerns.AnnotationTargets,concerns.TypeHeaders,canonical,
+            sourceMetadata:new CatalogSourceMetadata(Path.Combine(project,"contracts/SourceContractMetadata.schema.json"),canonical,concerns.Callbacks,concerns.Taxonomy));
         var result=await service.BuildAsync(manifest,output,stage);
         Console.WriteLine(JsonSerializer.Serialize(new{result.RegistryId,result.ProducerFingerprint,result.Artifacts,Counts=result.Validation["counts"],Complete=false,OutputRoot=output}));
     }

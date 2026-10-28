@@ -44,7 +44,7 @@ public sealed class JvmSourceLinker : IJvmSourceLinker
             else if(depth==0)outer.Append(item);
         }
         if(depth!=0)return null;
-        return owners.TryGetValue(outer.ToString().Trim(),out var binary) ? prefix+"L"+binary+";" : null;
+        return owners.TryGetValue(outer.ToString().Trim(),out var binary) && !string.IsNullOrEmpty(binary) ? prefix+"L"+binary+";" : null;
     }
     public string? Key(JsonObject declaration,IReadOnlyDictionary<string,string> owners)
     {

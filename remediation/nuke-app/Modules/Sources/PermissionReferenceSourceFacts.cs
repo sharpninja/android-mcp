@@ -7,7 +7,7 @@ using AndroidMcp.BuildTool.Core;
 namespace AndroidMcp.BuildTool.Sources;
 
 /// <summary>Named documentation sections, never compiled definitions or grants.</summary>
-public sealed class PermissionReferenceSourceFacts(ISourceHtmlDecoder decoder) : IPermissionReferenceSourceFacts
+public sealed class PermissionReferenceSourceFacts(IProfiledSourceHtmlDecoder decoder) : IPermissionReferenceSourceFacts
 {
     private static readonly UTF8Encoding Utf8 = new(false, true);
     private static readonly Regex TagName = new(@"^/?\s*([A-Za-z][^\t\n\r\f />]*)", RegexOptions.CultureInvariant);
@@ -115,7 +115,7 @@ public sealed class PermissionReferenceSourceFacts(ISourceHtmlDecoder decoder) :
                 foreach (Match attribute in Attributes.Matches(token[match.Length..].TrimEnd('/')))
                 {
                     var value = attribute.Groups[2].Success ? attribute.Groups[2].Value : attribute.Groups[3].Success ? attribute.Groups[3].Value : attribute.Groups[4].Success ? attribute.Groups[4].Value : null;
-                    attributes[attribute.Groups[1].Value.ToLowerInvariant()] = value is null ? null : decoder.Decode(value);
+                    attributes[attribute.Groups[1].Value.ToLowerInvariant()] = value is null ? null : decoder.Decode(value, SourceHtmlDecodingProfile.Attribute);
                 }
                 Start(tag, attributes, 1 + text.AsSpan(0, offset).Count('\n'));
                 if (token.TrimEnd().EndsWith('/')) End(tag);

@@ -1,6 +1,8 @@
+using AndroidMcp.BuildTool.Core;
+
 namespace AndroidMcp.BuildTool.Documentation;
 
-/// <summary>The existing nine project descriptors, shared by source planning and stage input selection.</summary>
+/// <summary>One set of project descriptors shared by source planning and stage input selection.</summary>
 public sealed class DocumentationProjectSourceCatalog : IDocumentationSelectedProjectSourceCatalog
 {
     private static readonly IReadOnlyList<DocumentationProjectInput> Sources=Array.AsReadOnly(new[]
@@ -33,4 +35,26 @@ public sealed class DocumentationProjectSourceCatalog : IDocumentationSelectedPr
         DocumentationProjectSourceScope.GeneratedDesign=>GeneratedSources,
         _=>throw new ArgumentOutOfRangeException(nameof(scope))
     };
+
+    public IReadOnlyList<DocumentationProjectInput> DescribeProjectSources(DesignStagePlan selection)
+    {
+        ArgumentNullException.ThrowIfNull(selection);
+        var admitted=new DesignStagePlanner().Select(new(selection.Aliases,selection.RegistrySha256));
+        if(selection.Errors.Count!=0||admitted.Errors.Count!=0||!admitted.Stages.SequenceEqual(selection.Stages)||!admitted.Aliases.SequenceEqual(selection.Aliases))
+            throw new ArchitectureAssetException("DESIGN_STAGE_SELECTION","Use the current admitted Core stage union");
+        if(selection.Stages.Contains(DesignStage.DocsVerify))return GeneratedSources;
+        if(selection.Stages.Contains(DesignStage.ModelContracts))return Sources;
+        var required=new HashSet<DocumentationProjectInputKind>();
+        // Requirements of selected services only. Dependencies and aliases are
+        // already resolved by Core; no second graph or alias map exists here.
+        if(selection.Stages.Contains(DesignStage.Tools))
+        {required.Add(DocumentationProjectInputKind.ToolchainLock);required.Add(DocumentationProjectInputKind.RendererLock);}
+        if(selection.Stages.Contains(DesignStage.UiAssets))
+        {required.Add(DocumentationProjectInputKind.BlueprintMarkdown);required.Add(DocumentationProjectInputKind.DesignMarkdown);}
+        if(selection.Stages.Contains(DesignStage.ModuleGraph))
+        {required.Add(DocumentationProjectInputKind.ModuleContract);required.Add(DocumentationProjectInputKind.CodeMarkdown);}
+        if(selection.Stages.Contains(DesignStage.CodeExtract))
+        {required.Add(DocumentationProjectInputKind.WorkspaceDsl);required.Add(DocumentationProjectInputKind.CodeMarkdown);}
+        return Array.AsReadOnly(Sources.Where(source=>required.Contains(source.Kind)).ToArray());
+    }
 }

@@ -8,9 +8,9 @@ public sealed class NativeTestGateSdkEvaluator(TestGateNativeFactsConfiguration 
     private static readonly HashSet<string> SourceItemKinds=new(StringComparer.Ordinal)
     {
         "Compile","EmbeddedResource","AdditionalFiles","Analyzer","EditorConfigFiles",
-        "GlobalAnalyzerConfigFiles","Content","None"
+        "Content","None"
     };
-    private static readonly HashSet<string> SourceFileProperties=new(StringComparer.Ordinal)
+    internal static readonly HashSet<string> SourceFileProperties=new(StringComparer.Ordinal)
     {
         "ProjectAssetsFile","NuGetLockFilePath","CodeAnalysisRuleSet","AppConfig",
         "AssemblyOriginatorKeyFile","Win32Resource","Win32Manifest"
@@ -22,7 +22,7 @@ public sealed class NativeTestGateSdkEvaluator(TestGateNativeFactsConfiguration 
             throw Error("SDK_CONFIGURATION_MISMATCH");
         if(!new CanonicalJson().Serialize(System.Text.Json.JsonSerializer.SerializeToElement(request.Sdk)).AsSpan().SequenceEqual(
             new CanonicalJson().Serialize(System.Text.Json.JsonSerializer.SerializeToElement(configuration.Sdk))))throw Error("SDK_PIN_MISMATCH");
-        Admit(request.Run.HostProject);Admit(request.Run.TestsProject);
+        Admit(request.Run.HostProject,"HostProject",request.Run.HostProject);Admit(request.Run.TestsProject,"TestsProject",request.Run.TestsProject);
         var projects=new List<TestGateEvaluatedProject>();
         var pending=new Queue<string>();var seen=new HashSet<string>(StringComparer.Ordinal);
         pending.Enqueue(request.Run.HostProject);pending.Enqueue(request.Run.TestsProject);
@@ -32,13 +32,13 @@ public sealed class NativeTestGateSdkEvaluator(TestGateNativeFactsConfiguration 
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 if(!seen.Add(path))continue;
-                Admit(path);
+                Admit(path,"Project",path);
                 var native=await session.LoadProjectAsync(path,cancellationToken);
                 if(native.ProjectFullPath!=path||native.EvaluationIssues.Count!=0)throw Error("SOURCE_INPUTS_UNRESOLVED");
                 if(Path.GetFullPath(native.ToolsPath)!=Path.GetFullPath(request.Sdk.SdkDirectory))throw Error("SDK_PIN_MISMATCH");
                 if(native.Configuration!=request.Configuration||native.TargetFramework!=request.TargetFramework)
                     throw Error("SDK_CONFIGURATION_MISMATCH");
-                Admit(native.TargetPath);
+                Admit(native.TargetPath,"TargetPath",path);
                 var inputs=new List<TestGateEvaluatedInput>{new("Project",path,path)};
                 var references=new List<string>();var imports=new List<string>();
                 foreach(var item in native.Items)
@@ -46,7 +46,7 @@ public sealed class NativeTestGateSdkEvaluator(TestGateNativeFactsConfiguration 
                     if(!SourceItemKinds.Contains(item.ItemType)&&item.ItemType!="ProjectReference")continue;
                     if(string.IsNullOrWhiteSpace(item.EvaluatedInclude)||string.IsNullOrWhiteSpace(item.FullPath)||
                         string.IsNullOrWhiteSpace(item.DefiningProjectFullPath))throw Error("SOURCE_INPUTS_UNRESOLVED");
-                    Admit(item.FullPath);Admit(item.DefiningProjectFullPath);
+                    Admit(item.FullPath,item.ItemType+".FullPath",path);Admit(item.DefiningProjectFullPath,item.ItemType+".DefiningProjectFullPath",path);
                     if(item.ItemType=="ProjectReference")
                     {
                         if(!references.Contains(item.FullPath,StringComparer.Ordinal))references.Add(item.FullPath);
@@ -58,14 +58,14 @@ public sealed class NativeTestGateSdkEvaluator(TestGateNativeFactsConfiguration 
                 {
                     if(string.IsNullOrWhiteSpace(import.ImportedProjectFullPath)||string.IsNullOrWhiteSpace(import.ImportingProjectFullPath))
                         throw Error("SOURCE_INPUTS_UNRESOLVED");
-                    Admit(import.ImportedProjectFullPath);Admit(import.ImportingProjectFullPath);
+                    Admit(import.ImportedProjectFullPath,"Import.ImportedProjectFullPath",path);Admit(import.ImportingProjectFullPath,"Import.ImportingProjectFullPath",path);
                     if(!imports.Contains(import.ImportedProjectFullPath,StringComparer.Ordinal))imports.Add(import.ImportedProjectFullPath);
                 }
                 foreach(var property in native.ParticipatingFileProperties)
                 {
                     if(!SourceFileProperties.Contains(property.Key))throw Error("SOURCE_INPUTS_UNRESOLVED");
                     if(string.IsNullOrWhiteSpace(property.Value))continue;
-                    Admit(property.Value);inputs.Add(new(property.Key,property.Value,path));
+                    Admit(property.Value,"Property."+property.Key,path);inputs.Add(new(property.Key,property.Value,path));
                 }
                 projects.Add(new(path,native.TargetPath,inputs,imports,references,[],[]));
             }
@@ -79,7 +79,7 @@ public sealed class NativeTestGateSdkEvaluator(TestGateNativeFactsConfiguration 
                 if(observed.Copies.Count!=1)throw Error("RESOLVED_REFERENCE_CONFLICT");
                 var copy=observed.Copies[0];
                 if(copy.SourcePath!=host.TargetPath||copy.ReferencedProject!=request.Run.HostProject)throw Error("RESOLVED_REFERENCE_MISMATCH");
-                Admit(copy.DestinationPath);
+                Admit(copy.DestinationPath,"ResolvedCopy.DestinationPath",request.Run.TestsProject);
                 var index=projects.FindIndex(project=>project.ProjectPath==request.Run.TestsProject);
                 projects[index]=projects[index] with {ResolvedCopies=observed.Copies};
             }
@@ -87,7 +87,7 @@ public sealed class NativeTestGateSdkEvaluator(TestGateNativeFactsConfiguration 
         }
         return new(projects,request.Sdk.AssemblyFiles);
     }
-    private void Admit(string path)
+    private void Admit(string path,string role,string project)
     {
         if(string.IsNullOrWhiteSpace(path)||!Path.IsPathFullyQualified(path))throw Error("SOURCE_INPUTS_UNRESOLVED");
         foreach(var root in configuration.ApprovedReadRoots)
@@ -95,9 +95,9 @@ public sealed class NativeTestGateSdkEvaluator(TestGateNativeFactsConfiguration 
             var relative=Path.GetRelativePath(Path.GetFullPath(root),Path.GetFullPath(path)).Replace('\\','/');
             if(!ArtifactPaths.IsRelative(relative))continue;
             try{ArtifactPaths.Resolve(root,relative);return;}
-            catch(ArgumentException){throw Error("INPUT_SCOPE_VIOLATION");}
+            catch(ArgumentException){throw NativeTestGateSdkSessionFactory.ScopeFailure("Native path traverses a linked or escaped input.",path,role,project);}
         }
-        throw Error("INPUT_SCOPE_VIOLATION");
+        throw NativeTestGateSdkSessionFactory.ScopeFailure("Native path is outside the admitted participating roots.",path,role,project);
     }
     private static TestGateFactsException Error(string code)=>new(code,"Native SDK source evaluation unavailable: "+code);
 }

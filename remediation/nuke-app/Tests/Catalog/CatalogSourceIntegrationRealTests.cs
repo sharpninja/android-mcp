@@ -1,6 +1,7 @@
 using System.Text;
 using System.Text.Json.Nodes;
 using AndroidMcp.BuildTool.Core;
+using AndroidMcp.BuildTool.Catalog;
 using AndroidMcp.BuildTool.Sources;
 using AndroidMcp.BuildTool.Sources.Java;
 using Microsoft.Data.Sqlite;
@@ -10,13 +11,12 @@ namespace AndroidMcp.BuildTool.Tests.Catalog;
 
 public sealed class NativeCatalogSourceIntegrationProvider:ICatalogSourceIntegrationCaseProvider
 {
-    public CatalogSourceIntegrationReply Import(CatalogSourceIntegrationCall call)
-    {
-        var java=call.Variant=="java-jvm-link" ? new SourceJavaAdmission(Environment.GetEnvironmentVariable("ANDROIDMCP_JAVA_NATIVE_MANIFEST") ?? throw new InvalidOperationException("Selected pinned Java native manifest required for the original Java/JVM integration case")) : null;
-        using var runtime=new SourcesRuntimeFactory(new JavaSourceRuntimeLoader()).Create(SourceExtractionProfile.CurrentCandidate,java);
-        using var provider=new NativeCatalogBuildProvider
+    internal static NativeCatalogBuildProvider CreateProvider(CatalogSourceIntegrationCall call,ISourcesExtractionDispatcher dispatcher,
+        Func<CatalogBuildInvocation,Task<CatalogBuildException?>>? execution=null)
+    {        return new NativeCatalogBuildProvider
         {
-            SourceDispatcher=runtime.Dispatcher,
+            SourceDispatcher=dispatcher,
+            Execution=execution,
             SourceValues=values=>
             {
                 if(call.Variant=="structured-aidl") values[2]=("aidl","IFoo.aidl",CatalogSourceIntegrationCases.Structured);
@@ -42,7 +42,17 @@ public sealed class NativeCatalogSourceIntegrationProvider:ICatalogSourceIntegra
                 }
             }
         };
-        var result=provider.Build(new("source-integration"));var output=Path.Combine(provider.EvidenceRoot,"out");
+    }
+    public CatalogSourceIntegrationReply Import(CatalogSourceIntegrationCall call)
+    {
+        var java=call.Variant=="java-jvm-link" ? new SourceJavaAdmission(Environment.GetEnvironmentVariable("ANDROIDMCP_JAVA_NATIVE_MANIFEST") ?? throw new InvalidOperationException("Selected pinned Java native manifest required for the original Java/JVM integration case")) : null;
+        using var runtime=new SourcesRuntimeFactory(new JavaSourceRuntimeLoader()).Create(SourceExtractionProfile.CurrentCandidate,java);
+        using var provider=CreateProvider(call,runtime.Dispatcher);
+        var result=provider.Build(new("source-integration"));return Observe(call,provider,result);
+    }
+    internal static CatalogSourceIntegrationReply Observe(CatalogSourceIntegrationCall call,NativeCatalogBuildProvider provider,CatalogBuildReply result)
+    {
+        var output=Path.Combine(provider.EvidenceRoot,"out");
         if(result.Outcome!="ok")
         {var failure=JsonNode.Parse(File.ReadAllText(Path.Combine(output,"validation-failure.json")))!;return new(result.Outcome,result.FinalDatabase,FailureReason:failure["error"]!.GetValue<string>(),OriginalsRetained:result.OriginalInputsRetained);}
         var docs=File.ReadLines(Path.Combine(output,"entries.jsonl")).Where(line=>line.Length!=0).Select(line=>JsonNode.Parse(line)!.AsObject()).ToArray();

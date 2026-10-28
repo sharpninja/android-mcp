@@ -11,6 +11,11 @@ skinparam defaultFontName DejaVu Sans
 skinparam classAttributeIconSize 0
 skinparam shadowing false
 skinparam backgroundColor white
+<style>
+title {
+  Margin 0 0 96 0
+}
+</style>
 title Kotlin server core — proposed ownership and contracts (UML class notation)
 interface BackendAdapter <<reference: server-execution-classes>>
 class AdbConnectionManager <<reference: server-execution-classes>>

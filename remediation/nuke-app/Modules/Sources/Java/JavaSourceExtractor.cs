@@ -98,7 +98,7 @@ public sealed class JavaSourceExtractor(JavaNativeParser parser) : ISourceExtrac
         {
             var clean=SourceSyntax.TypeName(Text(node)+extra);
             foreach(var import in imports)
-                if(!import.Value.StartsWith("java.lang.",StringComparison.Ordinal))clean=SourceSyntax.Rx(@"(?<![\w.$])"+Regex.Escape(import.Key)+@"(?![\w$])").Replace(clean,_=>import.Value);
+                if(import.Value!="java.lang."+import.Key)clean=SourceSyntax.Rx(@"(?<![\w.$])"+Regex.Escape(import.Key)+@"(?![\w$])").Replace(clean,_=>import.Value);
             return clean;
         }
         private JsonObject Parameter(JavaNativeParser.Node node)
@@ -118,31 +118,40 @@ public sealed class JavaSourceExtractor(JavaNativeParser parser) : ISourceExtrac
             var (modifiers,metadata)=Modifiers(node);parameters??=new();var body=tree.Field(node,"body");
             var header=raw??(body.IsNull?Text(node):tree.Slice(tree.Start(node),tree.Start(body))).Trim();extra??=new();
             var visibility=modifiers.FirstOrDefault(x=>x is "public" or "protected" or "private")??
-                (extra["owner_kind"]?.GetValue<string>() is "interface" or "annotation" && kind is "method" or "field" ? "public":"package");
+                ((extra["owner_kind"]?.GetValue<string>() is "interface" or "annotation") && (kind is "method" or "field" or "class" or "interface" or "enum" or "annotation") ? "public":"package");
             var extras=new JsonObject{["source_path"]=source.RelativePath,["source_byte_range"]=Range(node),["modifiers"]=SourceSyntax.Strings(modifiers),["effective_visibility"]=visibility,
                 ["owner_binary_name"]=owner is not null?binaryByOwner.GetValueOrDefault(owner):null,["public_sdk_membership"]="unknown until checked against published SDK metadata"};
             foreach(var field in extra)extras[field.Key]=field.Value?.DeepClone();
             var row=SourceSyntax.Row(kind,canonical??owner+"#"+name,owner,package,name,header,tree.Line(node),returnType,parameters,extras:extras);
             row["annotations"]=(annotations??metadata).DeepClone();row["all_annotations"]=Annotations(header,node);return row;
         }
-        private void Type(JavaNativeParser.Node node,string? outer,int depth)
+        private void Type(JavaNativeParser.Node node,string? outer,int depth,string? ownerKind=null)
         {
             if(depth>128){Issue(node,"Nested type depth exceeds128");return;}
             var name=Text(tree.Field(node,"name"));var owner=outer is null?(package.Length>0?package+".":"")+name:outer+"."+name;var kind=TypeKinds[Kind(node)];
             binaryByOwner[owner]=outer is null?(package.Length>0?package.Replace('.','/')+"/":"")+name:binaryByOwner[outer]+"$"+name;
-            records.Add(Row(node,kind,owner,name,canonical:owner,extra:new(){["declaration_kind"]=Kind(node),["type_parameters"]=Text(tree.Field(node,"type_parameters")),
+            records.Add(Row(node,kind,owner,name,canonical:owner,extra:new(){["owner_kind"]=ownerKind,["declaration_kind"]=Kind(node),["type_parameters"]=Text(tree.Field(node,"type_parameters")),
                 ["superclass"]=Text(tree.Field(node,"superclass")),["interfaces"]=Text(tree.Field(node,"interfaces"))}));
-            foreach(var child in tree.Children(tree.Field(node,"body")))Child(child,owner,kind,depth);
+            var recordParameters=Kind(node)=="record_declaration"?tree.Field(node,"parameters"):default;
+            foreach(var component in tree.Children(recordParameters))
+            {
+                if(Kind(component) is not ("formal_parameter" or "spread_parameter"))continue;
+                var value=Parameter(component);
+                records.Add(Row(component,"field",owner,value["name"]?.GetValue<string>()??"",value["type"]!.GetValue<string>(),annotations:new JsonArray(),
+                    extra:new(){["owner_kind"]=kind,["record_component"]=true,["record_component_annotations"]=value["annotations"]!.DeepClone(),
+                        ["annotation_scope"]="component; target propagation unresolved",["effective_visibility"]="unknown; source record component metadata"}));
+            }
+            foreach(var child in tree.Children(tree.Field(node,"body")))Child(child,owner,kind,depth,recordParameters);
         }
-        private void Child(JavaNativeParser.Node node,string owner,string ownerKind,int depth)
+        private void Child(JavaNativeParser.Node node,string owner,string ownerKind,int depth,JavaNativeParser.Node recordParameters)
         {
             var nodeKind=Kind(node);
-            if(TypeKinds.ContainsKey(nodeKind)){Type(node,owner,depth+1);return;}
-            if(nodeKind=="enum_body_declarations"){foreach(var child in tree.Children(node))Child(child,owner,ownerKind,depth);return;}
+            if(TypeKinds.ContainsKey(nodeKind)){Type(node,owner,depth+1,ownerKind);return;}
+            if(nodeKind=="enum_body_declarations"){foreach(var child in tree.Children(node))Child(child,owner,ownerKind,depth,recordParameters);return;}
             if(nodeKind is "method_declaration" or "constructor_declaration" or "compact_constructor_declaration" or "annotation_type_element_declaration")
             {
                 var constructor=nodeKind is "constructor_declaration" or "compact_constructor_declaration";var name=Text(tree.Field(node,"name"));var parameters=new JsonArray();var receivers=new List<string>();
-                foreach(var parameter in tree.Children(tree.Field(node,"parameters")))
+                foreach(var parameter in tree.Children(nodeKind=="compact_constructor_declaration"?recordParameters:tree.Field(node,"parameters")))
                     if(Kind(parameter) is "formal_parameter" or "spread_parameter")parameters.Add(Parameter(parameter));else if(Kind(parameter)=="receiver_parameter")receivers.Add(Text(parameter));
                 var canonical=owner+"#"+(constructor?"<init>":name)+"("+string.Join(',',parameters.Select(x=>x!["type"]!.GetValue<string>()))+")";
                 records.Add(Row(node,constructor?"constructor":"method",owner,name,constructor?null:TypeText(tree.Field(node,"type")),parameters,canonical,Modifiers(node).Annotations,

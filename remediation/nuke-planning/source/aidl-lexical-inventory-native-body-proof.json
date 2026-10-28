@@ -1,0 +1,285 @@
+{
+  "at": "2026-10-28T12:12:02",
+  "scope": "Exact retained inventory_counts body obligation implemented once through existing SourceSyntax primitives, bounded by source review and the same eleven native fixtures.",
+  "originalSources": [
+    {
+      "path": "remediation/catalog/tooling/aidl_lex.py",
+      "sha256": "fcf991a4340a9fee9675b6be9bcdca7f1b890647a4733d84372088dd934994c9",
+      "function": "inventory_counts",
+      "exactOriginalBody": "def inventory_counts(text):\n    \"\"\"Independent lexical no-drop counts; no type or wire interpretation.\"\"\"\n    counts=dict(declarations=0,statements=0,reconciled=True,issues=[])\n    def visit(fragment):\n        for start,end in declaration_spans(fragment):\n            raw=fragment[start:end];header=re.search(r'\\b(interface|parcelable|union|enum)\\s+[\\w.]+',code_mask(raw))\n            if not header:continue\n            counts['declarations']+=1\n            try:bounds=body_range(raw,header.end())\n            except ValueError as error:\n                counts['reconciled']=False;counts['issues'].append(str(error));continue\n            if bounds is None:continue\n            a,b=bounds;body=comment_mask(raw[a+1:b]);nested=declaration_spans(body)\n            remaining=mask_spans(body,nested)\n            counts['statements']+=sum(1 for _ in chunks(remaining,',' if header.group(1)=='enum' else ';'))\n            visit(body)\n    visit(text)\n    counts['expected_records']=counts['declarations']+counts['statements'] if counts['declarations'] else 1\n    return counts\n",
+      "independentlyReadAsText": true
+    },
+    {
+      "path": "rehydration/producers/release-011/tooling/aidl_lex.py",
+      "sha256": "fcf991a4340a9fee9675b6be9bcdca7f1b890647a4733d84372088dd934994c9",
+      "function": "inventory_counts",
+      "exactOriginalBody": "def inventory_counts(text):\n    \"\"\"Independent lexical no-drop counts; no type or wire interpretation.\"\"\"\n    counts=dict(declarations=0,statements=0,reconciled=True,issues=[])\n    def visit(fragment):\n        for start,end in declaration_spans(fragment):\n            raw=fragment[start:end];header=re.search(r'\\b(interface|parcelable|union|enum)\\s+[\\w.]+',code_mask(raw))\n            if not header:continue\n            counts['declarations']+=1\n            try:bounds=body_range(raw,header.end())\n            except ValueError as error:\n                counts['reconciled']=False;counts['issues'].append(str(error));continue\n            if bounds is None:continue\n            a,b=bounds;body=comment_mask(raw[a+1:b]);nested=declaration_spans(body)\n            remaining=mask_spans(body,nested)\n            counts['statements']+=sum(1 for _ in chunks(remaining,',' if header.group(1)=='enum' else ';'))\n            visit(body)\n    visit(text)\n    counts['expected_records']=counts['declarations']+counts['statements'] if counts['declarations'] else 1\n    return counts\n",
+      "independentlyReadAsText": true
+    }
+  ],
+  "nativeService": "AndroidMcp.BuildTool.Sources.AidlLexicalInventorySourceFacts.Inventory",
+  "dependencies": [
+    "SourceSyntax.Mask",
+    "SourceSyntax.DeclarationSpans",
+    "SourceSyntax.MaskSpans",
+    "SourceSyntax.Chunks",
+    "SourceSyntax.ClosingDelimiter",
+    "SourceSyntax.Rx"
+  ],
+  "bodyBranchBindings": [
+    {
+      "original": "visit declaration_spans; header on code_mask; declarations += 1",
+      "cases": [
+        "LEX-NESTED-ORIGINAL",
+        "LEX-QUOTED-DECOY"
+      ]
+    },
+    {
+      "original": "body_range absent -> declaration only",
+      "cases": [
+        "LEX-QUOTED-EXTERNAL"
+      ]
+    },
+    {
+      "original": "Unbalanced AIDL declaration body -> reconciled false, exact issue, continue",
+      "cases": [
+        "LEX-UNBALANCED",
+        "LEX-NESTED-UNBALANCED"
+      ]
+    },
+    {
+      "original": "comment_mask retains literal quoted data; mask nested spans before delimiter chunks",
+      "cases": [
+        "LEX-COMMENTS",
+        "LEX-NESTED-UNKNOWN",
+        "LEX-NESTED-ORIGINAL"
+      ]
+    },
+    {
+      "original": "enum comma vs other semicolon; angle shifts do not open nesting",
+      "cases": [
+        "LEX-SHIFT",
+        "LEX-ENUM-SHIFT"
+      ]
+    },
+    {
+      "original": "recurse nested declarations and sum declaration plus statement count",
+      "cases": [
+        "LEX-NESTED-ORIGINAL",
+        "LEX-NESTED-UNKNOWN"
+      ]
+    },
+    {
+      "original": "no declarations -> expected_records1, reconciled remains true",
+      "cases": [
+        "LEX-NO-DECLARATION",
+        "LEX-EMPTY"
+      ]
+    }
+  ],
+  "exactInputProof": {
+    "path": "remediation/nuke-planning/source/aidl-lexical-inventory-mock-copy-plan.json",
+    "sha256": "df99b4e0e325808edf816a459f6a157a324ddc9510edc8412f9179fb6bc9a593",
+    "originalLiteralsVerified": 8,
+    "authoredControls": 3
+  },
+  "fixtures": [
+    "LEX-COMMENTS",
+    "LEX-SHIFT",
+    "LEX-ENUM-SHIFT",
+    "LEX-NESTED-UNKNOWN",
+    "LEX-NESTED-ORIGINAL",
+    "LEX-UNBALANCED",
+    "LEX-NESTED-UNBALANCED",
+    "LEX-NO-DECLARATION",
+    "LEX-EMPTY",
+    "LEX-QUOTED-EXTERNAL",
+    "LEX-QUOTED-DECOY"
+  ],
+  "nativeFixtureRows": 11,
+  "nativeNullCallerPreconditionRows": 1,
+  "mockRows": 80,
+  "receipts": [
+    {
+      "trx": "remediation/nuke-app/artifacts/tests/20261028T1157227170014-afdadfa28def499d83e628684361de5c/tests.trx",
+      "sha256": "342108b0e6880ef611b6d084de8769705068325ddc38ec54629721bcae47b38d",
+      "class": "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests",
+      "passed": 80,
+      "globalCounters": "<Counters total=\"15705\" executed=\"15705\" passed=\"15705\" failed=\"0\" error=\"0\" timeout=\"0\" aborted=\"0\" inconclusive=\"0\" passedButRunAborted=\"0\" notRunnable=\"0\" notExecuted=\"0\" disconnected=\"0\" warning=\"0\" completed=\"0\" inProgress=\"0\" pending=\"0\" xmlns=\"http://microsoft.com/schemas/VisualStudio/TeamTest/2010\" />",
+      "resultNames": [
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.NullResultsAndProviderFailuresCannotMasqueradeAsEmptyInventory(id: \"LEX-NESTED-UNKNOWN\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-NESTED-UNKNOWN\", property: \"Reconciled\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.NullResultsAndProviderFailuresCannotMasqueradeAsEmptyInventory(id: \"LEX-QUOTED-DECOY\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.OriginalUnbalancedReasonCannotBeOmittedChangedOrDuplicated(id: \"LEX-UNBALANCED\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-NESTED-UNBALANCED\", property: \"Reconciled\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-NESTED-UNKNOWN\", property: \"Statements\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-QUOTED-DECOY\", property: \"Reconciled\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-ENUM-SHIFT\", property: \"Declarations\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.CorrectMocksPreserveExactSourceAndOriginalLexicalCounts(id: \"LEX-EMPTY\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-NESTED-UNBALANCED\", property: \"ExpectedRecords\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-NO-DECLARATION\", property: \"Issues\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.NullResultsAndProviderFailuresCannotMasqueradeAsEmptyInventory(id: \"LEX-EMPTY\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-EMPTY\", property: \"Reconciled\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-NESTED-UNBALANCED\", property: \"Statements\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-NO-DECLARATION\", property: \"Declarations\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-NO-DECLARATION\", property: \"Statements\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.CorrectMocksPreserveExactSourceAndOriginalLexicalCounts(id: \"LEX-NESTED-ORIGINAL\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-ENUM-SHIFT\", property: \"Issues\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.NullResultsAndProviderFailuresCannotMasqueradeAsEmptyInventory(id: \"LEX-QUOTED-EXTERNAL\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-COMMENTS\", property: \"Reconciled\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-QUOTED-EXTERNAL\", property: \"Reconciled\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.NullResultsAndProviderFailuresCannotMasqueradeAsEmptyInventory(id: \"LEX-ENUM-SHIFT\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.CorrectMocksPreserveExactSourceAndOriginalLexicalCounts(id: \"LEX-QUOTED-DECOY\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-SHIFT\", property: \"Reconciled\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.NullResultsAndProviderFailuresCannotMasqueradeAsEmptyInventory(id: \"LEX-NESTED-UNBALANCED\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-SHIFT\", property: \"Issues\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-NESTED-ORIGINAL\", property: \"Issues\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-QUOTED-DECOY\", property: \"Statements\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-QUOTED-DECOY\", property: \"Issues\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-NESTED-ORIGINAL\", property: \"Reconciled\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-SHIFT\", property: \"Statements\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-QUOTED-EXTERNAL\", property: \"Issues\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-NESTED-UNBALANCED\", property: \"Declarations\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.CorrectMocksPreserveExactSourceAndOriginalLexicalCounts(id: \"LEX-SHIFT\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.CorrectMocksPreserveExactSourceAndOriginalLexicalCounts(id: \"LEX-ENUM-SHIFT\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.CorrectMocksPreserveExactSourceAndOriginalLexicalCounts(id: \"LEX-NO-DECLARATION\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-QUOTED-EXTERNAL\", property: \"Declarations\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-NESTED-UNKNOWN\", property: \"Issues\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-SHIFT\", property: \"ExpectedRecords\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-UNBALANCED\", property: \"Reconciled\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.OriginalUnbalancedReasonCannotBeOmittedChangedOrDuplicated(id: \"LEX-NESTED-UNBALANCED\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-ENUM-SHIFT\", property: \"ExpectedRecords\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-COMMENTS\", property: \"Issues\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-UNBALANCED\", property: \"Declarations\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-NO-DECLARATION\", property: \"Reconciled\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-EMPTY\", property: \"Issues\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.NullResultsAndProviderFailuresCannotMasqueradeAsEmptyInventory(id: \"LEX-SHIFT\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-NO-DECLARATION\", property: \"ExpectedRecords\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.CorrectMocksPreserveExactSourceAndOriginalLexicalCounts(id: \"LEX-UNBALANCED\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-COMMENTS\", property: \"ExpectedRecords\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.NullResultsAndProviderFailuresCannotMasqueradeAsEmptyInventory(id: \"LEX-NO-DECLARATION\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-QUOTED-DECOY\", property: \"Declarations\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-SHIFT\", property: \"Declarations\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.CorrectMocksPreserveExactSourceAndOriginalLexicalCounts(id: \"LEX-NESTED-UNKNOWN\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-NESTED-ORIGINAL\", property: \"Declarations\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.NullResultsAndProviderFailuresCannotMasqueradeAsEmptyInventory(id: \"LEX-COMMENTS\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-NESTED-UNKNOWN\", property: \"ExpectedRecords\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.NullSourceIsAPreconditionFailureWhileEmptySourceHasOriginalOneRecordExpectation",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-EMPTY\", property: \"Statements\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.CorrectMocksPreserveExactSourceAndOriginalLexicalCounts(id: \"LEX-COMMENTS\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-COMMENTS\", property: \"Declarations\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-UNBALANCED\", property: \"Issues\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-QUOTED-DECOY\", property: \"ExpectedRecords\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-QUOTED-EXTERNAL\", property: \"Statements\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-NESTED-UNBALANCED\", property: \"Issues\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-UNBALANCED\", property: \"Statements\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.NullResultsAndProviderFailuresCannotMasqueradeAsEmptyInventory(id: \"LEX-NESTED-ORIGINAL\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.NullResultsAndProviderFailuresCannotMasqueradeAsEmptyInventory(id: \"LEX-UNBALANCED\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-QUOTED-EXTERNAL\", property: \"ExpectedRecords\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.CorrectMocksPreserveExactSourceAndOriginalLexicalCounts(id: \"LEX-NESTED-UNBALANCED\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-NESTED-ORIGINAL\", property: \"ExpectedRecords\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.CorrectMocksPreserveExactSourceAndOriginalLexicalCounts(id: \"LEX-QUOTED-EXTERNAL\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-ENUM-SHIFT\", property: \"Statements\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-NESTED-UNKNOWN\", property: \"Declarations\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-EMPTY\", property: \"Declarations\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-ENUM-SHIFT\", property: \"Reconciled\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-NESTED-ORIGINAL\", property: \"Statements\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-COMMENTS\", property: \"Statements\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-EMPTY\", property: \"ExpectedRecords\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock(id: \"LEX-UNBALANCED\", property: \"ExpectedRecords\")"
+      ],
+      "resultGroups": [
+        {
+          "method": "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.CorrectMocksPreserveExactSourceAndOriginalLexicalCounts",
+          "passed": 11
+        },
+        {
+          "method": "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.EachCountFlagAndIssueFieldRejectsAnIndependentWrongMock",
+          "passed": 55
+        },
+        {
+          "method": "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.NullResultsAndProviderFailuresCannotMasqueradeAsEmptyInventory",
+          "passed": 11
+        },
+        {
+          "method": "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.NullSourceIsAPreconditionFailureWhileEmptySourceHasOriginalOneRecordExpectation",
+          "passed": 1
+        },
+        {
+          "method": "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests.OriginalUnbalancedReasonCannotBeOmittedChangedOrDuplicated",
+          "passed": 2
+        }
+      ]
+    },
+    {
+      "trx": "remediation/nuke-app/artifacts/tests/20261028T1206275903368-14a93f886b16408c9653d51fbed89206/tests.trx",
+      "sha256": "29217532f2a476eb4c1d942cf94be81531d64f0db33878f95d63b5b8558b39e6",
+      "class": "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryRealTests",
+      "passed": 12,
+      "globalCounters": "<Counters total=\"89\" executed=\"89\" passed=\"89\" failed=\"0\" error=\"0\" timeout=\"0\" aborted=\"0\" inconclusive=\"0\" passedButRunAborted=\"0\" notRunnable=\"0\" notExecuted=\"0\" disconnected=\"0\" warning=\"0\" completed=\"0\" inProgress=\"0\" pending=\"0\" xmlns=\"http://microsoft.com/schemas/VisualStudio/TeamTest/2010\" />",
+      "resultNames": [
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryRealTests.SameElevenCasesUseTheSharedNativeLexicalInventory(id: \"LEX-COMMENTS\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryRealTests.SameElevenCasesUseTheSharedNativeLexicalInventory(id: \"LEX-NESTED-UNBALANCED\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryRealTests.SameElevenCasesUseTheSharedNativeLexicalInventory(id: \"LEX-EMPTY\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryRealTests.SameElevenCasesUseTheSharedNativeLexicalInventory(id: \"LEX-ENUM-SHIFT\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryRealTests.SameElevenCasesUseTheSharedNativeLexicalInventory(id: \"LEX-SHIFT\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryRealTests.SameElevenCasesUseTheSharedNativeLexicalInventory(id: \"LEX-UNBALANCED\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryRealTests.SameElevenCasesUseTheSharedNativeLexicalInventory(id: \"LEX-QUOTED-EXTERNAL\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryRealTests.SameElevenCasesUseTheSharedNativeLexicalInventory(id: \"LEX-NESTED-UNKNOWN\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryRealTests.SameElevenCasesUseTheSharedNativeLexicalInventory(id: \"LEX-QUOTED-DECOY\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryRealTests.SameElevenCasesUseTheSharedNativeLexicalInventory(id: \"LEX-NO-DECLARATION\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryRealTests.SameElevenCasesUseTheSharedNativeLexicalInventory(id: \"LEX-NESTED-ORIGINAL\")",
+        "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryRealTests.SameNullCallerPreconditionUsesTheNativeService"
+      ],
+      "resultGroups": [
+        {
+          "method": "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryRealTests.SameElevenCasesUseTheSharedNativeLexicalInventory",
+          "passed": 11
+        },
+        {
+          "method": "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryRealTests.SameNullCallerPreconditionUsesTheNativeService",
+          "passed": 1
+        }
+      ]
+    }
+  ],
+  "nativePins": [
+    {
+      "path": "remediation/nuke-app/Modules/Sources/AidlLexicalInventoryContracts.cs",
+      "sha256": "20b51af04ff44d1423ad86dc8d7d21d2ba7f31361ca9085d1316b70dc7cebbf2"
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Sources/AidlLexicalInventorySourceFacts.cs",
+      "sha256": "a38ffb65f3bd7e2668d5f213356972db69060620a1be0d774bc137d24ab32147"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/AidlLexicalInventoryContractCases.cs",
+      "sha256": "8088881106fdbcf7b21fcf9ddda90064a4ea9f1eade19f13920ca07db3427c62"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/AidlLexicalInventoryMockTests.cs",
+      "sha256": "8633295735c7b4b361bc1d7b48ebd0897b433a3958f63956bd4153a3adb2ac41"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/AidlLexicalInventoryRealTests.cs",
+      "sha256": "c6846e2ec186f92c4cd63ce4a04281f2e7f0659f8f557446f7209bed1409bcc0"
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Sources/SourceSyntax.cs",
+      "sha256": "aa56fb2ba3ab82f821d60a2738e0a86021e95aee2b3b90e0b39033bd5829711f"
+    }
+  ],
+  "callerPreconditionDelta": "C# null caller input throws ArgumentNullException; empty string retains the original no-declaration sentinel. No Python exception-type or runtime dependency is claimed.",
+  "callerState": "Catalog may consume this one proven pure service. Missing matched-report claim/counts remain unreconciled; no parsed-row-count or Clean-status substitution. Runtime concern composition is a separate mock-first increment.",
+  "normalFunctionBodyBoundedProof": true,
+  "wholeLegacyModuleVerified": false,
+  "wholeProducerOrCorpusVerified": false,
+  "authorityLedgerChanged": false,
+  "compilerValidation": false,
+  "typeInference": false,
+  "wireInference": false,
+  "pythonExecuted": false,
+  "nodeExecuted": false,
+  "hvAccepted": false,
+  "safeToDelete": false
+}

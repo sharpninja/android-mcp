@@ -101,10 +101,10 @@ public sealed class DocumentationSelectedProjectSourceMockTests
     [Fact]
     public void UnknownScopeFallbackIsIndividuallyRejected()=>Assert.NotNull(Record.Exception(()=>Assert.Throws<ArgumentOutOfRangeException>(()=>new ScriptedSelectedProjectSourceCatalog([],admitUnknown:true).DescribeProjectSources((DocumentationProjectSourceScope)999))));
     [Fact]
-    public void EachAdditionalFullCorpusSourceIsPinnedActualData()
+    public void EachAdditionalHistoricalCorpusSourceRetainsPinnedData()
     {
         foreach(var pin in DocumentationSelectedProjectSourceCases.AdditionalSourcePins)
-        {var bytes=File.ReadAllBytes(Path.Combine(DocumentationFixture.Current.Workspace,"remediation/design-c4",pin.Path));Assert.Equal(pin.Length,bytes.Length);Assert.Equal(pin.Sha256,DocumentationFixture.Hash(bytes));}
+        {var bytes=DocumentationFixture.Current.ReadOriginalDesignBytes(pin.Path);Assert.Equal(pin.Length,bytes.Length);Assert.Equal(pin.Sha256,DocumentationFixture.Hash(bytes));}
     }
     [Theory,MemberData(nameof(DocumentationSelectedProjectSourceCases.PlanCases),MemberType=typeof(DocumentationSelectedProjectSourceCases))]
     public void CorrectSelectedPlanReusesAllOriginalPinRejectionCases(DocumentationProjectSourceScope scope,DocumentationSourcePlanCase test)
