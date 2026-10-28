@@ -4,7 +4,7 @@ namespace AndroidMcp.BuildTool.Core;
 public sealed record ToolIdentity(string ExecutablePath, string Sha256, string Version);
 public sealed record ProcessRequest(ToolIdentity Tool, IReadOnlyList<string> Arguments,
     string WorkingDirectory, IReadOnlyDictionary<string,string> PublicEnvironment,
-    string ReceiptDirectory, string? StandardInputPath = null);
+    string ReceiptDirectory, string? StandardInputPath = null, bool ClearEnvironment = false);
 public sealed record ProcessResult(int ExitCode, string StandardOutputPath,
     string StandardErrorPath, DateTimeOffset StartedAt, DateTimeOffset EndedAt,
     bool Cancelled);

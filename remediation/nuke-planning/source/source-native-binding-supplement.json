@@ -1,0 +1,1876 @@
+{
+  "at": "2026-10-28T00:23:22",
+  "basis": "Published file bodies and exact callers read as text; explicit allocations preserve unresolved behavior. No coverage inferred from basename or hash equality.",
+  "count": 31,
+  "entries": [
+    {
+      "legacyPath": "remediation/catalog/tests/test_aidl_members.py",
+      "legacySha256": "31139a1bcb61b3f0818e7123b7e713c38930946c6e2bfb79e079b363546d3b4c",
+      "owner": "Sources",
+      "category": "Sources",
+      "operations": [
+        "Extract"
+      ],
+      "nativeServices": [
+        "AidlSourceExtractor",
+        "SourceSyntax"
+      ],
+      "nativeTests": [
+        "SourceExtractionRealTests"
+      ],
+      "legacyFunctions": [
+        {
+          "name": "parse",
+          "line": 6
+        },
+        {
+          "name": "test_parcelable_fields_annotations_and_values",
+          "line": 7
+        },
+        {
+          "name": "test_enum_shifts_and_union_declaration_ordinals_not_tags",
+          "line": 10
+        },
+        {
+          "name": "test_external_parcelable_and_unknown_nested_schema_stay_visible",
+          "line": 13
+        },
+        {
+          "name": "test_interface_constant_is_metadata_and_repeated_lines_are_distinct",
+          "line": 16
+        }
+      ],
+      "directImports": [
+        "import pathlib,sys,unittest",
+        "from parsers import aidl",
+        "from aidl_members import enrich"
+      ],
+      "status": "bounded-native-extractor-proof",
+      "remaining": [
+        "Structured AIDL20case native fixture bindings exist; full file assertion/profile/CLI equivalence is not accepted merely by a shared input or hash."
+      ],
+      "additionalResponsibilities": [
+        "Sources owns shared pure extraction/lexical facts once; Catalog owns storage/import/projection call-site rules."
+      ],
+      "profile": "current-candidate",
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "pythonExecuted": false
+    },
+    {
+      "legacyPath": "rehydration/producers/release-011/tests/test_aidl_members.py",
+      "legacySha256": "31139a1bcb61b3f0818e7123b7e713c38930946c6e2bfb79e079b363546d3b4c",
+      "owner": "Sources",
+      "category": "Sources",
+      "operations": [
+        "Extract"
+      ],
+      "nativeServices": [
+        "AidlSourceExtractor",
+        "SourceSyntax"
+      ],
+      "nativeTests": [
+        "SourceExtractionRealTests"
+      ],
+      "legacyFunctions": [
+        {
+          "name": "parse",
+          "line": 6
+        },
+        {
+          "name": "test_parcelable_fields_annotations_and_values",
+          "line": 7
+        },
+        {
+          "name": "test_enum_shifts_and_union_declaration_ordinals_not_tags",
+          "line": 10
+        },
+        {
+          "name": "test_external_parcelable_and_unknown_nested_schema_stay_visible",
+          "line": 13
+        },
+        {
+          "name": "test_interface_constant_is_metadata_and_repeated_lines_are_distinct",
+          "line": 16
+        }
+      ],
+      "directImports": [
+        "import pathlib,sys,unittest",
+        "from parsers import aidl",
+        "from aidl_members import enrich"
+      ],
+      "status": "bounded-native-extractor-proof",
+      "remaining": [
+        "Structured AIDL20case native fixture bindings exist; full file assertion/profile/CLI equivalence is not accepted merely by a shared input or hash."
+      ],
+      "additionalResponsibilities": [
+        "Sources owns shared pure extraction/lexical facts once; Catalog owns storage/import/projection call-site rules."
+      ],
+      "profile": "release-011-frozen: explicit producer profile binding pending",
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "pythonExecuted": false
+    },
+    {
+      "legacyPath": "remediation/catalog/tests/test_parsers.py",
+      "legacySha256": "d27384a2c3dd8d6eced29756e234a04040a658c1f0ee5257c6b1232431d2747d",
+      "owner": "Sources",
+      "category": "Sources",
+      "operations": [
+        "Extract"
+      ],
+      "nativeServices": [
+        "AidlSourceExtractor",
+        "SignatureSourceExtractor",
+        "PermissionExpressionSourceFacts",
+        "SourceSyntax"
+      ],
+      "nativeTests": [
+        "SourceExtractionRealTests",
+        "PermissionExpressionRealTests"
+      ],
+      "legacyFunctions": [
+        {
+          "name": "test_overloads_and_annotations",
+          "line": 5
+        },
+        {
+          "name": "test_permission_modes",
+          "line": 18
+        },
+        {
+          "name": "test_parameter_permission_not_callable",
+          "line": 24
+        },
+        {
+          "name": "test_aidl",
+          "line": 26
+        },
+        {
+          "name": "test_source_unknown_retained",
+          "line": 34
+        },
+        {
+          "name": "test_owner_reset_after_type",
+          "line": 36
+        },
+        {
+          "name": "test_comment_quoted",
+          "line": 39
+        },
+        {
+          "name": "test_aidl_structured",
+          "line": 40
+        }
+      ],
+      "directImports": [
+        "import unittest,pathlib,sys,json",
+        "import parsers as p"
+      ],
+      "status": "partial-native-extractor-permission-proof",
+      "remaining": [
+        "Direct legacy parser helper entrypoints and all8method assertion composition must be reconciled;24extractor and25permission AST native cases do not by themselves prove whole-file parity."
+      ],
+      "additionalResponsibilities": [
+        "Sources owns shared pure extraction/lexical facts once; Catalog owns storage/import/projection call-site rules."
+      ],
+      "profile": "current-candidate",
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "pythonExecuted": false
+    },
+    {
+      "legacyPath": "rehydration/producers/release-011/tests/test_parsers.py",
+      "legacySha256": "d27384a2c3dd8d6eced29756e234a04040a658c1f0ee5257c6b1232431d2747d",
+      "owner": "Sources",
+      "category": "Sources",
+      "operations": [
+        "Extract"
+      ],
+      "nativeServices": [
+        "AidlSourceExtractor",
+        "SignatureSourceExtractor",
+        "PermissionExpressionSourceFacts",
+        "SourceSyntax"
+      ],
+      "nativeTests": [
+        "SourceExtractionRealTests",
+        "PermissionExpressionRealTests"
+      ],
+      "legacyFunctions": [
+        {
+          "name": "test_overloads_and_annotations",
+          "line": 5
+        },
+        {
+          "name": "test_permission_modes",
+          "line": 18
+        },
+        {
+          "name": "test_parameter_permission_not_callable",
+          "line": 24
+        },
+        {
+          "name": "test_aidl",
+          "line": 26
+        },
+        {
+          "name": "test_source_unknown_retained",
+          "line": 34
+        },
+        {
+          "name": "test_owner_reset_after_type",
+          "line": 36
+        },
+        {
+          "name": "test_comment_quoted",
+          "line": 39
+        },
+        {
+          "name": "test_aidl_structured",
+          "line": 40
+        }
+      ],
+      "directImports": [
+        "import unittest,pathlib,sys,json",
+        "import parsers as p"
+      ],
+      "status": "partial-native-extractor-permission-proof",
+      "remaining": [
+        "Direct legacy parser helper entrypoints and all8method assertion composition must be reconciled;24extractor and25permission AST native cases do not by themselves prove whole-file parity."
+      ],
+      "additionalResponsibilities": [
+        "Sources owns shared pure extraction/lexical facts once; Catalog owns storage/import/projection call-site rules."
+      ],
+      "profile": "release-011-frozen: explicit producer profile binding pending",
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "pythonExecuted": false
+    },
+    {
+      "legacyPath": "remediation/catalog/tests/test_hidl_source.py",
+      "legacySha256": "d011447f8f98071eecd1d269de3472ac901fa4fce04b8231aa19bbd5b67a080a",
+      "owner": "Sources",
+      "category": "Sources",
+      "operations": [
+        "Extract"
+      ],
+      "nativeServices": [
+        "HidlSourceExtractor",
+        "SourceSyntax"
+      ],
+      "nativeTests": [
+        "HidlRealTests"
+      ],
+      "legacyFunctions": [
+        {
+          "name": "test_interface_nested_type_and_following_method",
+          "line": 5
+        },
+        {
+          "name": "test_shifts_dont_consume_enum_values_or_following_method",
+          "line": 9
+        },
+        {
+          "name": "test_nested_template_comma_separation",
+          "line": 12
+        },
+        {
+          "name": "test_annotations_with_braces_and_semicolon_string_are_not_bodies",
+          "line": 15
+        },
+        {
+          "name": "test_comments_and_line_offsets",
+          "line": 18
+        },
+        {
+          "name": "test_unknown_statement_and_missing_package_retained",
+          "line": 21
+        },
+        {
+          "name": "test_oneway_with_results_not_silently_accepted",
+          "line": 24
+        },
+        {
+          "name": "test_source_hidl_version_is_not_android_availability",
+          "line": 26
+        },
+        {
+          "name": "test_typedef_and_safe_union",
+          "line": 29
+        },
+        {
+          "name": "test_type_canonical_does_not_repeat_own_name",
+          "line": 32
+        },
+        {
+          "name": "test_line_of_method_after_leading_blank_lines",
+          "line": 35
+        },
+        {
+          "name": "test_missing_semicolon_and_nested_interface_retained_unknown",
+          "line": 38
+        },
+        {
+          "name": "test_interface_special_type_is_a_field_not_nested_declaration",
+          "line": 41
+        },
+        {
+          "name": "test_type_delimiter_can_touch_variable_name",
+          "line": 44
+        }
+      ],
+      "directImports": [
+        "import unittest,pathlib,sys",
+        "from hidl_source import parse"
+      ],
+      "status": "bounded-native-29case-proof",
+      "remaining": [
+        "14original method input/assertion groups contribute29native cases; frozen profile routing and whole producer integration remain pending."
+      ],
+      "additionalResponsibilities": [
+        "Sources owns shared pure extraction/lexical facts once; Catalog owns storage/import/projection call-site rules."
+      ],
+      "profile": "current-candidate",
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "pythonExecuted": false
+    },
+    {
+      "legacyPath": "rehydration/producers/release-011/tests/test_hidl_source.py",
+      "legacySha256": "d011447f8f98071eecd1d269de3472ac901fa4fce04b8231aa19bbd5b67a080a",
+      "owner": "Sources",
+      "category": "Sources",
+      "operations": [
+        "Extract"
+      ],
+      "nativeServices": [
+        "HidlSourceExtractor",
+        "SourceSyntax"
+      ],
+      "nativeTests": [
+        "HidlRealTests"
+      ],
+      "legacyFunctions": [
+        {
+          "name": "test_interface_nested_type_and_following_method",
+          "line": 5
+        },
+        {
+          "name": "test_shifts_dont_consume_enum_values_or_following_method",
+          "line": 9
+        },
+        {
+          "name": "test_nested_template_comma_separation",
+          "line": 12
+        },
+        {
+          "name": "test_annotations_with_braces_and_semicolon_string_are_not_bodies",
+          "line": 15
+        },
+        {
+          "name": "test_comments_and_line_offsets",
+          "line": 18
+        },
+        {
+          "name": "test_unknown_statement_and_missing_package_retained",
+          "line": 21
+        },
+        {
+          "name": "test_oneway_with_results_not_silently_accepted",
+          "line": 24
+        },
+        {
+          "name": "test_source_hidl_version_is_not_android_availability",
+          "line": 26
+        },
+        {
+          "name": "test_typedef_and_safe_union",
+          "line": 29
+        },
+        {
+          "name": "test_type_canonical_does_not_repeat_own_name",
+          "line": 32
+        },
+        {
+          "name": "test_line_of_method_after_leading_blank_lines",
+          "line": 35
+        },
+        {
+          "name": "test_missing_semicolon_and_nested_interface_retained_unknown",
+          "line": 38
+        },
+        {
+          "name": "test_interface_special_type_is_a_field_not_nested_declaration",
+          "line": 41
+        },
+        {
+          "name": "test_type_delimiter_can_touch_variable_name",
+          "line": 44
+        }
+      ],
+      "directImports": [
+        "import unittest,pathlib,sys",
+        "from hidl_source import parse"
+      ],
+      "status": "bounded-native-29case-proof",
+      "remaining": [
+        "14original method input/assertion groups contribute29native cases; frozen profile routing and whole producer integration remain pending."
+      ],
+      "additionalResponsibilities": [
+        "Sources owns shared pure extraction/lexical facts once; Catalog owns storage/import/projection call-site rules."
+      ],
+      "profile": "release-011-frozen: explicit producer profile binding pending",
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "pythonExecuted": false
+    },
+    {
+      "legacyPath": "remediation/catalog/tests/test_hidl_import.py",
+      "legacySha256": "f2ed5252f0134c57e2f5d39354c9bad86b440aac1fe5d8c29f34b86e15c88691",
+      "owner": "Catalog",
+      "category": "Catalog",
+      "operations": [
+        "Import"
+      ],
+      "nativeServices": [
+        "HidlSourceExtractor",
+        "Catalog build/import composition pending"
+      ],
+      "nativeTests": [
+        "HidlRealTests"
+      ],
+      "legacyFunctions": [
+        {
+          "name": "fixture",
+          "line": 5
+        },
+        {
+          "name": "test_structural_records_and_multi_results_survive_schema_gate",
+          "line": 7
+        },
+        {
+          "name": "test_package_version_cannot_become_android_api_applicability",
+          "line": 14
+        },
+        {
+          "name": "test_invalid_utf8_retains_source_without_binding_inference",
+          "line": 19
+        }
+      ],
+      "directImports": [
+        "import unittest,pathlib,tempfile,sys,json,sqlite3,contextlib,base64",
+        "import build_catalog,test_build,hashlib,copy"
+      ],
+      "status": "pending-catalog-import-composition",
+      "remaining": [
+        "Actual build_catalog.build caller checks SQLite schema-gated5declarations, multi-results, unknown permissions/codecs/device applicability, failed applicability publication, and invalid UTF8 raw issue retention. Extractor29native cases alone do not prove these storage/publication assertions."
+      ],
+      "additionalResponsibilities": [
+        "Sources owns shared pure extraction/lexical facts once; Catalog owns storage/import/projection call-site rules."
+      ],
+      "profile": "current-candidate",
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "pythonExecuted": false
+    },
+    {
+      "legacyPath": "rehydration/producers/release-011/tests/test_hidl_import.py",
+      "legacySha256": "f2ed5252f0134c57e2f5d39354c9bad86b440aac1fe5d8c29f34b86e15c88691",
+      "owner": "Catalog",
+      "category": "Catalog",
+      "operations": [
+        "Import"
+      ],
+      "nativeServices": [
+        "HidlSourceExtractor",
+        "Catalog build/import composition pending"
+      ],
+      "nativeTests": [
+        "HidlRealTests"
+      ],
+      "legacyFunctions": [
+        {
+          "name": "fixture",
+          "line": 5
+        },
+        {
+          "name": "test_structural_records_and_multi_results_survive_schema_gate",
+          "line": 7
+        },
+        {
+          "name": "test_package_version_cannot_become_android_api_applicability",
+          "line": 14
+        },
+        {
+          "name": "test_invalid_utf8_retains_source_without_binding_inference",
+          "line": 19
+        }
+      ],
+      "directImports": [
+        "import unittest,pathlib,tempfile,sys,json,sqlite3,contextlib,base64",
+        "import build_catalog,test_build,hashlib,copy"
+      ],
+      "status": "pending-catalog-import-composition",
+      "remaining": [
+        "Actual build_catalog.build caller checks SQLite schema-gated5declarations, multi-results, unknown permissions/codecs/device applicability, failed applicability publication, and invalid UTF8 raw issue retention. Extractor29native cases alone do not prove these storage/publication assertions."
+      ],
+      "additionalResponsibilities": [
+        "Sources owns shared pure extraction/lexical facts once; Catalog owns storage/import/projection call-site rules."
+      ],
+      "profile": "release-011-frozen: explicit producer profile binding pending",
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "pythonExecuted": false
+    },
+    {
+      "legacyPath": "remediation/catalog/tests/test_permission_reference.py",
+      "legacySha256": "7e5a7af183bbe5ea915c77fdf9d87ad8658f5d69bf6bdaff7bd64b77087dd6d7",
+      "owner": "Sources",
+      "category": "Sources",
+      "operations": [
+        "Extract"
+      ],
+      "nativeServices": [
+        "IPermissionReferenceSourceFacts",
+        "SourceHtmlDecoder staged dependency"
+      ],
+      "nativeTests": [
+        "PermissionReferenceMockGateTests"
+      ],
+      "legacyFunctions": [
+        {
+          "name": "field",
+          "line": 4
+        },
+        {
+          "name": "test_literals_and_major_minor_facts_not_guessed",
+          "line": 7
+        },
+        {
+          "name": "test_missing_value_and_deprecated_are_not_permission_absence_or_removal",
+          "line": 10
+        },
+        {
+          "name": "test_duplicate_names_remain_evidence_and_are_flagged",
+          "line": 13
+        },
+        {
+          "name": "test_script_text_cannot_create_a_documented_field",
+          "line": 16
+        }
+      ],
+      "directImports": [
+        "import unittest,pathlib,sys",
+        "from permission_reference import parse"
+      ],
+      "status": "mock-only-reference-facts",
+      "remaining": [
+        "13independent HTML fact fixtures have green mocks; native HTML section parser, full entity data equivalence and callers pending."
+      ],
+      "additionalResponsibilities": [
+        "Sources owns shared pure extraction/lexical facts once; Catalog owns storage/import/projection call-site rules."
+      ],
+      "profile": "current-candidate",
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "pythonExecuted": false
+    },
+    {
+      "legacyPath": "rehydration/producers/release-011/tests/test_permission_reference.py",
+      "legacySha256": "7e5a7af183bbe5ea915c77fdf9d87ad8658f5d69bf6bdaff7bd64b77087dd6d7",
+      "owner": "Sources",
+      "category": "Sources",
+      "operations": [
+        "Extract"
+      ],
+      "nativeServices": [
+        "IPermissionReferenceSourceFacts",
+        "SourceHtmlDecoder staged dependency"
+      ],
+      "nativeTests": [
+        "PermissionReferenceMockGateTests"
+      ],
+      "legacyFunctions": [
+        {
+          "name": "field",
+          "line": 4
+        },
+        {
+          "name": "test_literals_and_major_minor_facts_not_guessed",
+          "line": 7
+        },
+        {
+          "name": "test_missing_value_and_deprecated_are_not_permission_absence_or_removal",
+          "line": 10
+        },
+        {
+          "name": "test_duplicate_names_remain_evidence_and_are_flagged",
+          "line": 13
+        },
+        {
+          "name": "test_script_text_cannot_create_a_documented_field",
+          "line": 16
+        }
+      ],
+      "directImports": [
+        "import unittest,pathlib,sys",
+        "from permission_reference import parse"
+      ],
+      "status": "mock-only-reference-facts",
+      "remaining": [
+        "13independent HTML fact fixtures have green mocks; native HTML section parser, full entity data equivalence and callers pending."
+      ],
+      "additionalResponsibilities": [
+        "Sources owns shared pure extraction/lexical facts once; Catalog owns storage/import/projection call-site rules."
+      ],
+      "profile": "release-011-frozen: explicit producer profile binding pending",
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "pythonExecuted": false
+    },
+    {
+      "legacyPath": "remediation/catalog/tests/test_permission_reference_import.py",
+      "legacySha256": "e9f56cb3f5f7f984b2eca7eb19557f76c1f73af4df22c4975eb585ce23dcfd3e",
+      "owner": "Catalog",
+      "category": "Catalog",
+      "operations": [
+        "Import"
+      ],
+      "nativeServices": [
+        "IPermissionReferenceSourceFacts",
+        "Catalog symbol/reference import pending"
+      ],
+      "nativeTests": [
+        "PermissionReferenceMockGateTests"
+      ],
+      "legacyFunctions": [
+        {
+          "name": "test_documented_constants_are_symbols_not_manifest_definitions",
+          "line": 5
+        }
+      ],
+      "directImports": [
+        "import unittest,pathlib,sys,tempfile,json,sqlite3,contextlib",
+        "import build_catalog,test_build,copy,hashlib"
+      ],
+      "status": "pending-symbol-import-composition",
+      "remaining": [
+        "Actual build_catalog.build assertion requires documentation symbol value retained but0manifest permission definitions, raw protection text and0declarations. No catalog import binding exists yet."
+      ],
+      "additionalResponsibilities": [
+        "Sources owns shared pure extraction/lexical facts once; Catalog owns storage/import/projection call-site rules."
+      ],
+      "profile": "current-candidate",
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "pythonExecuted": false
+    },
+    {
+      "legacyPath": "rehydration/producers/release-011/tests/test_permission_reference_import.py",
+      "legacySha256": "e9f56cb3f5f7f984b2eca7eb19557f76c1f73af4df22c4975eb585ce23dcfd3e",
+      "owner": "Catalog",
+      "category": "Catalog",
+      "operations": [
+        "Import"
+      ],
+      "nativeServices": [
+        "IPermissionReferenceSourceFacts",
+        "Catalog symbol/reference import pending"
+      ],
+      "nativeTests": [
+        "PermissionReferenceMockGateTests"
+      ],
+      "legacyFunctions": [
+        {
+          "name": "test_documented_constants_are_symbols_not_manifest_definitions",
+          "line": 5
+        }
+      ],
+      "directImports": [
+        "import unittest,pathlib,sys,tempfile,json,sqlite3,contextlib",
+        "import build_catalog,test_build,copy,hashlib"
+      ],
+      "status": "pending-symbol-import-composition",
+      "remaining": [
+        "Actual build_catalog.build assertion requires documentation symbol value retained but0manifest permission definitions, raw protection text and0declarations. No catalog import binding exists yet."
+      ],
+      "additionalResponsibilities": [
+        "Sources owns shared pure extraction/lexical facts once; Catalog owns storage/import/projection call-site rules."
+      ],
+      "profile": "release-011-frozen: explicit producer profile binding pending",
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "pythonExecuted": false
+    },
+    {
+      "legacyPath": "remediation/catalog/tests/test_sdk_api_index.py",
+      "legacySha256": "9bc1be4f88ad9311215ecf3e914acee0f583bcd00e7fe8d97559a9123b5c4f3b",
+      "owner": "Sources",
+      "category": "Sources",
+      "operations": [
+        "Extract"
+      ],
+      "nativeServices": [
+        "SdkApiIndexExtractor",
+        "JvmDescriptor",
+        "SdkXmlVersion"
+      ],
+      "nativeTests": [
+        "SdkXmlRealTests"
+      ],
+      "legacyFunctions": [
+        {
+          "name": "test_minor_lifecycle_and_removed_members",
+          "line": 5
+        },
+        {
+          "name": "test_field_type_and_type_kind_are_not_invented",
+          "line": 13
+        },
+        {
+          "name": "test_invalid_method_descriptor_retained_unknown",
+          "line": 17
+        }
+      ],
+      "directImports": [
+        "import unittest,pathlib,sys",
+        "import sdk_api_index as api"
+      ],
+      "status": "bounded-native-sdk-30case-proof",
+      "remaining": [
+        "Original3methods require own/owner lifecycle, minor target version,2excluded history/future summary, unknown field type/kind and malformed descriptor retention. Exact summary/caller/profile composition remains pending beyond current30fixture bound."
+      ],
+      "additionalResponsibilities": [
+        "Sources owns shared pure extraction/lexical facts once; Catalog owns storage/import/projection call-site rules."
+      ],
+      "profile": "current-candidate",
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "pythonExecuted": false
+    },
+    {
+      "legacyPath": "rehydration/producers/release-011/tests/test_sdk_api_index.py",
+      "legacySha256": "9bc1be4f88ad9311215ecf3e914acee0f583bcd00e7fe8d97559a9123b5c4f3b",
+      "owner": "Sources",
+      "category": "Sources",
+      "operations": [
+        "Extract"
+      ],
+      "nativeServices": [
+        "SdkApiIndexExtractor",
+        "JvmDescriptor",
+        "SdkXmlVersion"
+      ],
+      "nativeTests": [
+        "SdkXmlRealTests"
+      ],
+      "legacyFunctions": [
+        {
+          "name": "test_minor_lifecycle_and_removed_members",
+          "line": 5
+        },
+        {
+          "name": "test_field_type_and_type_kind_are_not_invented",
+          "line": 13
+        },
+        {
+          "name": "test_invalid_method_descriptor_retained_unknown",
+          "line": 17
+        }
+      ],
+      "directImports": [
+        "import unittest,pathlib,sys",
+        "import sdk_api_index as api"
+      ],
+      "status": "bounded-native-sdk-30case-proof",
+      "remaining": [
+        "Original3methods require own/owner lifecycle, minor target version,2excluded history/future summary, unknown field type/kind and malformed descriptor retention. Exact summary/caller/profile composition remains pending beyond current30fixture bound."
+      ],
+      "additionalResponsibilities": [
+        "Sources owns shared pure extraction/lexical facts once; Catalog owns storage/import/projection call-site rules."
+      ],
+      "profile": "release-011-frozen: explicit producer profile binding pending",
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "pythonExecuted": false
+    },
+    {
+      "legacyPath": "remediation/catalog/tests/test_sdk_availability_evidence.py",
+      "legacySha256": "13e99e792ef4b982b10ff43c166e9a23ccc68e980a8d17488d7c03fd3068dea0",
+      "owner": "Sources",
+      "category": "Sources",
+      "operations": [
+        "Extract"
+      ],
+      "nativeServices": [
+        "SDK availability evidence producer pending",
+        "SourceXml"
+      ],
+      "nativeTests": [
+        "pending-SDK-availability-evidence-same-methods"
+      ],
+      "legacyFunctions": [
+        {
+          "name": "test_member_keeps_own_and_owner_constraints_separate",
+          "line": 4
+        },
+        {
+          "name": "test_absence_remains_absent_and_future_history_not_filtered",
+          "line": 11
+        },
+        {
+          "name": "test_new_attributes_preserved",
+          "line": 16
+        }
+      ],
+      "directImports": [
+        "import unittest",
+        "from sdk_availability_evidence import enumerate_evidence"
+      ],
+      "status": "pending-native-availability-evidence",
+      "remaining": [
+        "enumerate_evidence must retain separate owner/member literal attributes, SDK definition rows, future/unremoved evidence, raw new attributes and source line. Existing API index projection is not this pure evidence producer."
+      ],
+      "additionalResponsibilities": [
+        "Sources owns shared pure extraction/lexical facts once; Catalog owns storage/import/projection call-site rules."
+      ],
+      "profile": "current-candidate",
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "pythonExecuted": false
+    },
+    {
+      "legacyPath": "remediation/catalog/tests/test_annotation_jvm_erasure.py",
+      "legacySha256": "4fca71f6c2342e826de0bd676a2eee2ac56285097174840d94d850a4d369ca65",
+      "owner": "Sources",
+      "category": "Sources",
+      "operations": [
+        "Extract"
+      ],
+      "nativeServices": [
+        "Annotation XML target/formal-name linker pending",
+        "Java.JvmSourceLinker shared type descriptor seam"
+      ],
+      "nativeTests": [
+        "pending-XML-JVM-erasure7methods"
+      ],
+      "legacyFunctions": [
+        {
+          "name": "test_qualified_generic_outer_erasure_has_exact_descriptor",
+          "line": 6
+        },
+        {
+          "name": "test_type_variable_is_not_erased_to_object_by_guess",
+          "line": 9
+        },
+        {
+          "name": "test_unqualified_java_lang_alias_not_guessed",
+          "line": 11
+        },
+        {
+          "name": "test_parameterized_array_and_parameter_annotation_ordinal",
+          "line": 13
+        },
+        {
+          "name": "test_malformed_generics_and_void_parameters_rejected",
+          "line": 15
+        },
+        {
+          "name": "test_constructor_and_same_name_regular_method_differ",
+          "line": 17
+        },
+        {
+          "name": "test_nested_binary_owner_is_known_not_inferred",
+          "line": 19
+        }
+      ],
+      "directImports": [
+        "import pathlib,sys,unittest",
+        "from annotation_link import xml_jvm_key"
+      ],
+      "status": "pending-native-annotation-target-key",
+      "remaining": [
+        "xml_jvm_key7methods cover qualified generic erasure, no guessed top-level variable/java.lang alias, parameterized arrays+ordinal, malformed generic/void parameter rejection, constructor/name collision, explicit nested binary owner. Do not conflate Java source key proof with this XML spelling parser."
+      ],
+      "additionalResponsibilities": [
+        "Sources owns shared pure extraction/lexical facts once; Catalog owns storage/import/projection call-site rules."
+      ],
+      "profile": "current-candidate",
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "pythonExecuted": false
+    },
+    {
+      "legacyPath": "rehydration/producers/release-011/tests/test_annotation_jvm_erasure.py",
+      "legacySha256": "4fca71f6c2342e826de0bd676a2eee2ac56285097174840d94d850a4d369ca65",
+      "owner": "Sources",
+      "category": "Sources",
+      "operations": [
+        "Extract"
+      ],
+      "nativeServices": [
+        "Annotation XML target/formal-name linker pending",
+        "Java.JvmSourceLinker shared type descriptor seam"
+      ],
+      "nativeTests": [
+        "pending-XML-JVM-erasure7methods"
+      ],
+      "legacyFunctions": [
+        {
+          "name": "test_qualified_generic_outer_erasure_has_exact_descriptor",
+          "line": 6
+        },
+        {
+          "name": "test_type_variable_is_not_erased_to_object_by_guess",
+          "line": 9
+        },
+        {
+          "name": "test_unqualified_java_lang_alias_not_guessed",
+          "line": 11
+        },
+        {
+          "name": "test_parameterized_array_and_parameter_annotation_ordinal",
+          "line": 13
+        },
+        {
+          "name": "test_malformed_generics_and_void_parameters_rejected",
+          "line": 15
+        },
+        {
+          "name": "test_constructor_and_same_name_regular_method_differ",
+          "line": 17
+        },
+        {
+          "name": "test_nested_binary_owner_is_known_not_inferred",
+          "line": 19
+        }
+      ],
+      "directImports": [
+        "import pathlib,sys,unittest",
+        "from annotation_link import xml_jvm_key"
+      ],
+      "status": "pending-native-annotation-target-key",
+      "remaining": [
+        "xml_jvm_key7methods cover qualified generic erasure, no guessed top-level variable/java.lang alias, parameterized arrays+ordinal, malformed generic/void parameter rejection, constructor/name collision, explicit nested binary owner. Do not conflate Java source key proof with this XML spelling parser."
+      ],
+      "additionalResponsibilities": [
+        "Sources owns shared pure extraction/lexical facts once; Catalog owns storage/import/projection call-site rules."
+      ],
+      "profile": "release-011-frozen: explicit producer profile binding pending",
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "pythonExecuted": false
+    },
+    {
+      "legacyPath": "remediation/catalog/tests/test_annotation_jvm_erasure_import.py",
+      "legacySha256": "c918750834a2b1f60d9d2a853ea8dcdfbb8109d5e2b193aaedf991b69ceb77db",
+      "owner": "Catalog",
+      "category": "Catalog",
+      "operations": [
+        "Import"
+      ],
+      "nativeServices": [
+        "Annotation XML target linker pending",
+        "SdkApiIndexExtractor",
+        "Catalog annotation evidence import pending"
+      ],
+      "nativeTests": [
+        "pending-annotation-import4methods"
+      ],
+      "legacyFunctions": [
+        {
+          "name": "source",
+          "line": 6
+        },
+        {
+          "name": "check",
+          "line": 8
+        },
+        {
+          "name": "test_generic_outer_erasure_matches_exact_current_descriptor",
+          "line": 23
+        },
+        {
+          "name": "test_top_level_type_variable_not_guessed",
+          "line": 25
+        },
+        {
+          "name": "test_current_index_is_not_borrowed_for_other_platform",
+          "line": 27
+        },
+        {
+          "name": "test_regular_method_with_class_name_is_not_constructor",
+          "line": 29
+        }
+      ],
+      "directImports": [
+        "import unittest,pathlib,tempfile,sys,json,gzip,sqlite3,contextlib,zipfile,hashlib",
+        "from xml.sax.saxutils import escape",
+        "import build_catalog,sdk_api_index,test_build,copy,cache_fingerprint"
+      ],
+      "status": "pending-annotation-import-composition",
+      "remaining": [
+        "build_catalog.build must bind exact current-SDK erased descriptor only within platform, preserve target_match_kind, reject unknown T, distinguish constructor from same-name method and persist exactly1external permission relation."
+      ],
+      "additionalResponsibilities": [
+        "Sources owns shared pure extraction/lexical facts once; Catalog owns storage/import/projection call-site rules."
+      ],
+      "profile": "current-candidate",
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "pythonExecuted": false
+    },
+    {
+      "legacyPath": "rehydration/producers/release-011/tests/test_annotation_jvm_erasure_import.py",
+      "legacySha256": "c918750834a2b1f60d9d2a853ea8dcdfbb8109d5e2b193aaedf991b69ceb77db",
+      "owner": "Catalog",
+      "category": "Catalog",
+      "operations": [
+        "Import"
+      ],
+      "nativeServices": [
+        "Annotation XML target linker pending",
+        "SdkApiIndexExtractor",
+        "Catalog annotation evidence import pending"
+      ],
+      "nativeTests": [
+        "pending-annotation-import4methods"
+      ],
+      "legacyFunctions": [
+        {
+          "name": "source",
+          "line": 6
+        },
+        {
+          "name": "check",
+          "line": 8
+        },
+        {
+          "name": "test_generic_outer_erasure_matches_exact_current_descriptor",
+          "line": 23
+        },
+        {
+          "name": "test_top_level_type_variable_not_guessed",
+          "line": 25
+        },
+        {
+          "name": "test_current_index_is_not_borrowed_for_other_platform",
+          "line": 27
+        },
+        {
+          "name": "test_regular_method_with_class_name_is_not_constructor",
+          "line": 29
+        }
+      ],
+      "directImports": [
+        "import unittest,pathlib,tempfile,sys,json,gzip,sqlite3,contextlib,zipfile,hashlib",
+        "from xml.sax.saxutils import escape",
+        "import build_catalog,sdk_api_index,test_build,copy,cache_fingerprint"
+      ],
+      "status": "pending-annotation-import-composition",
+      "remaining": [
+        "build_catalog.build must bind exact current-SDK erased descriptor only within platform, preserve target_match_kind, reject unknown T, distinguish constructor from same-name method and persist exactly1external permission relation."
+      ],
+      "additionalResponsibilities": [
+        "Sources owns shared pure extraction/lexical facts once; Catalog owns storage/import/projection call-site rules."
+      ],
+      "profile": "release-011-frozen: explicit producer profile binding pending",
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "pythonExecuted": false
+    },
+    {
+      "legacyPath": "remediation/catalog/tests/test_source_annotation_targets.py",
+      "legacySha256": "3f7618620e38b72f0937b9b48d1224ba5c96247c6b94a57c0bb8c0890ecf8245",
+      "owner": "Catalog",
+      "category": "Catalog",
+      "operations": [
+        "Import"
+      ],
+      "nativeServices": [
+        "Annotation XML target/formal-name linker pending",
+        "SdkApiIndexExtractor",
+        "Catalog annotation import pending"
+      ],
+      "nativeTests": [
+        "pending-source-annotation-target2methods"
+      ],
+      "legacyFunctions": [
+        {
+          "name": "source",
+          "line": 7
+        },
+        {
+          "name": "annotation",
+          "line": 10
+        },
+        {
+          "name": "test_shadowed_type_variable_does_not_match_java_lang_alias",
+          "line": 14
+        },
+        {
+          "name": "test_current_sdk_annotation_maps_to_exact_jvm_target",
+          "line": 18
+        }
+      ],
+      "directImports": [
+        "import unittest,pathlib,tempfile,hashlib,json,gzip,zipfile,sqlite3,sys",
+        "import build_catalog as b,sdk_api_index,cache_fingerprint",
+        "import test_build as base_module"
+      ],
+      "status": "pending-snapshot-qualified-annotation-composition",
+      "remaining": [
+        "Actual SQL assertions require a shadowed String formal to remain unmatched and current37.2SDK exact JVM key binding; source cache and parser pin setup are distinct dependencies."
+      ],
+      "additionalResponsibilities": [
+        "Sources owns shared pure extraction/lexical facts once; Catalog owns storage/import/projection call-site rules."
+      ],
+      "profile": "current-candidate",
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "pythonExecuted": false
+    },
+    {
+      "legacyPath": "rehydration/producers/release-011/tests/test_source_annotation_targets.py",
+      "legacySha256": "3f7618620e38b72f0937b9b48d1224ba5c96247c6b94a57c0bb8c0890ecf8245",
+      "owner": "Catalog",
+      "category": "Catalog",
+      "operations": [
+        "Import"
+      ],
+      "nativeServices": [
+        "Annotation XML target/formal-name linker pending",
+        "SdkApiIndexExtractor",
+        "Catalog annotation import pending"
+      ],
+      "nativeTests": [
+        "pending-source-annotation-target2methods"
+      ],
+      "legacyFunctions": [
+        {
+          "name": "source",
+          "line": 7
+        },
+        {
+          "name": "annotation",
+          "line": 10
+        },
+        {
+          "name": "test_shadowed_type_variable_does_not_match_java_lang_alias",
+          "line": 14
+        },
+        {
+          "name": "test_current_sdk_annotation_maps_to_exact_jvm_target",
+          "line": 18
+        }
+      ],
+      "directImports": [
+        "import unittest,pathlib,tempfile,hashlib,json,gzip,zipfile,sqlite3,sys",
+        "import build_catalog as b,sdk_api_index,cache_fingerprint",
+        "import test_build as base_module"
+      ],
+      "status": "pending-snapshot-qualified-annotation-composition",
+      "remaining": [
+        "Actual SQL assertions require a shadowed String formal to remain unmatched and current37.2SDK exact JVM key binding; source cache and parser pin setup are distinct dependencies."
+      ],
+      "additionalResponsibilities": [
+        "Sources owns shared pure extraction/lexical facts once; Catalog owns storage/import/projection call-site rules."
+      ],
+      "profile": "release-011-frozen: explicit producer profile binding pending",
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "pythonExecuted": false
+    },
+    {
+      "legacyPath": "remediation/catalog/tests/test_versioned_signature_annotations.py",
+      "legacySha256": "d680f33c50a29b063e4e5071545f5ed236806fdb797f905c901af66113e1a979",
+      "owner": "Catalog",
+      "category": "Catalog",
+      "operations": [
+        "Import"
+      ],
+      "nativeServices": [
+        "Annotation XML signature linker pending",
+        "SignatureSourceExtractor",
+        "Catalog annotation parse report pending"
+      ],
+      "nativeTests": [
+        "pending-versioned-signature-annotation7methods"
+      ],
+      "legacyFunctions": [
+        {
+          "name": "fixture",
+          "line": 6
+        },
+        {
+          "name": "test_archive_resolution_counts_are_distinct_from_parse_status",
+          "line": 24
+        },
+        {
+          "name": "test_matching_snapshot_and_version_resolves_legacy_signature",
+          "line": 28
+        },
+        {
+          "name": "test_different_snapshot_is_not_used_as_fallback",
+          "line": 30
+        },
+        {
+          "name": "test_different_platform_is_not_used_as_fallback",
+          "line": 32
+        },
+        {
+          "name": "test_existing_index_blocks_signature_backfill_for_absent_target",
+          "line": 34
+        },
+        {
+          "name": "test_same_snapshot_formal_type_variable_remains_ambiguous",
+          "line": 36
+        },
+        {
+          "name": "test_same_snapshot_return_type_conflict_stays_unresolved",
+          "line": 38
+        }
+      ],
+      "directImports": [
+        "import pathlib,sys,unittest,tempfile,json,sqlite3,hashlib,gzip",
+        "import build_catalog,sdk_api_index,test_source_annotation_targets"
+      ],
+      "status": "pending-versioned-signature-annotation-composition",
+      "remaining": [
+        "Seven original methods pin archive mapping counts separate from parse status, same snapshot+version fallback, rejection across revision/platform, index-presence blocking fallback, formal ambiguity, and return conflict. Shared signature parse proof does not establish these caller rules."
+      ],
+      "additionalResponsibilities": [
+        "Sources owns shared pure extraction/lexical facts once; Catalog owns storage/import/projection call-site rules."
+      ],
+      "profile": "current-candidate",
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "pythonExecuted": false
+    },
+    {
+      "legacyPath": "rehydration/producers/release-011/tests/test_versioned_signature_annotations.py",
+      "legacySha256": "d680f33c50a29b063e4e5071545f5ed236806fdb797f905c901af66113e1a979",
+      "owner": "Catalog",
+      "category": "Catalog",
+      "operations": [
+        "Import"
+      ],
+      "nativeServices": [
+        "Annotation XML signature linker pending",
+        "SignatureSourceExtractor",
+        "Catalog annotation parse report pending"
+      ],
+      "nativeTests": [
+        "pending-versioned-signature-annotation7methods"
+      ],
+      "legacyFunctions": [
+        {
+          "name": "fixture",
+          "line": 6
+        },
+        {
+          "name": "test_archive_resolution_counts_are_distinct_from_parse_status",
+          "line": 24
+        },
+        {
+          "name": "test_matching_snapshot_and_version_resolves_legacy_signature",
+          "line": 28
+        },
+        {
+          "name": "test_different_snapshot_is_not_used_as_fallback",
+          "line": 30
+        },
+        {
+          "name": "test_different_platform_is_not_used_as_fallback",
+          "line": 32
+        },
+        {
+          "name": "test_existing_index_blocks_signature_backfill_for_absent_target",
+          "line": 34
+        },
+        {
+          "name": "test_same_snapshot_formal_type_variable_remains_ambiguous",
+          "line": 36
+        },
+        {
+          "name": "test_same_snapshot_return_type_conflict_stays_unresolved",
+          "line": 38
+        }
+      ],
+      "directImports": [
+        "import pathlib,sys,unittest,tempfile,json,sqlite3,hashlib,gzip",
+        "import build_catalog,sdk_api_index,test_source_annotation_targets"
+      ],
+      "status": "pending-versioned-signature-annotation-composition",
+      "remaining": [
+        "Seven original methods pin archive mapping counts separate from parse status, same snapshot+version fallback, rejection across revision/platform, index-presence blocking fallback, formal ambiguity, and return conflict. Shared signature parse proof does not establish these caller rules."
+      ],
+      "additionalResponsibilities": [
+        "Sources owns shared pure extraction/lexical facts once; Catalog owns storage/import/projection call-site rules."
+      ],
+      "profile": "release-011-frozen: explicit producer profile binding pending",
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "pythonExecuted": false
+    },
+    {
+      "legacyPath": "remediation/catalog/tests/test_unnormalized_source_retention.py",
+      "legacySha256": "9c8ed7ab045230ef917d082c851b20fa1f3d465ceb2e1167f9574a4fc361820c",
+      "owner": "Catalog",
+      "category": "Catalog",
+      "operations": [
+        "Import"
+      ],
+      "nativeServices": [
+        "HidlSourceExtractor",
+        "Source raw evidence operation boundary pending",
+        "Catalog issues/parse_reports import pending"
+      ],
+      "nativeTests": [
+        "HidlRealTests",
+        "pending-raw-byte-import2methods"
+      ],
+      "legacyFunctions": [
+        {
+          "name": "fixture",
+          "line": 5
+        },
+        {
+          "name": "test_hidl_source_retains_raw_bytes_and_declared_only_structure_without_wire_claims",
+          "line": 11
+        },
+        {
+          "name": "test_non_utf8_native_evidence_is_lossless",
+          "line": 15
+        }
+      ],
+      "directImports": [
+        "import unittest,pathlib,sys,tempfile,json,sqlite3,base64,contextlib",
+        "import build_catalog,test_build,copy,hashlib"
+      ],
+      "status": "partial-extractor-pending-raw-evidence-import",
+      "remaining": [
+        "Current body requires declarations>=2, normalizer_complete=false, compiler_validation=false, wire_resolution=unknown, Android availability=unknown, lossless UTF8/base64. Frozen body separately pins declarations=3 and raw_schema facts. Preserve both profile obligations; no inferred equivalence."
+      ],
+      "additionalResponsibilities": [
+        "Sources owns shared pure extraction/lexical facts once; Catalog owns storage/import/projection call-site rules."
+      ],
+      "profile": "current-candidate",
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "pythonExecuted": false
+    },
+    {
+      "legacyPath": "rehydration/producers/release-011/tests/test_unnormalized_source_retention.py",
+      "legacySha256": "08e88e08a55ddb44a7a61f9992ad078a189ce1d00763af4f4ff8ad652f9fbd83",
+      "owner": "Catalog",
+      "category": "Catalog",
+      "operations": [
+        "Import"
+      ],
+      "nativeServices": [
+        "HidlSourceExtractor",
+        "Source raw evidence operation boundary pending",
+        "Catalog issues/parse_reports import pending"
+      ],
+      "nativeTests": [
+        "HidlRealTests",
+        "pending-raw-byte-import2methods"
+      ],
+      "legacyFunctions": [
+        {
+          "name": "fixture",
+          "line": 5
+        },
+        {
+          "name": "test_hidl_raw_schema_and_declared_structure_are_retained",
+          "line": 11
+        },
+        {
+          "name": "test_non_utf8_native_evidence_is_lossless",
+          "line": 15
+        }
+      ],
+      "directImports": [
+        "import unittest,pathlib,sys,tempfile,json,sqlite3,base64,contextlib",
+        "import build_catalog,test_source_annotation_targets"
+      ],
+      "status": "partial-extractor-pending-raw-evidence-import",
+      "remaining": [
+        "Current body requires declarations>=2, normalizer_complete=false, compiler_validation=false, wire_resolution=unknown, Android availability=unknown, lossless UTF8/base64. Frozen body separately pins declarations=3 and raw_schema facts. Preserve both profile obligations; no inferred equivalence."
+      ],
+      "additionalResponsibilities": [
+        "Sources owns shared pure extraction/lexical facts once; Catalog owns storage/import/projection call-site rules."
+      ],
+      "profile": "release-011-frozen: explicit producer profile binding pending",
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "pythonExecuted": false
+    },
+    {
+      "legacyPath": "remediation/catalog/tests/test_source_integration.py",
+      "legacySha256": "2ba39bbd83c4ae3b647b97d064f7b1b4eb3725d4ab0460bec98969302eeca055",
+      "owner": "Catalog",
+      "category": "Catalog",
+      "operations": [
+        "Import"
+      ],
+      "nativeServices": [
+        "AidlSourceExtractor",
+        "Java.JavaSourceExtractor",
+        "SdkApiIndexExtractor",
+        "Acquisition.SourceCache",
+        "Catalog end-to-end build/export pending"
+      ],
+      "nativeTests": [
+        "SourceExtractionRealTests",
+        "SdkXmlRealTests",
+        "pending-source-integration4methods"
+      ],
+      "legacyFunctions": [
+        {
+          "name": "test_structured_aidl_members_survive_publication",
+          "line": 9
+        },
+        {
+          "name": "test_cached_java_and_current_index_import_with_distinct_evidence",
+          "line": 26
+        },
+        {
+          "name": "test_cache_hash_failure_does_not_publish",
+          "line": 52
+        },
+        {
+          "name": "test_malformed_aidl_is_preserved_as_unknown",
+          "line": 66
+        }
+      ],
+      "directImports": [
+        "import unittest,pathlib,tempfile,json,hashlib,sqlite3,sys,zipfile,gzip",
+        "import build_catalog as b",
+        "import cache_fingerprint",
+        "import test_build as base_module",
+        "        import java_source, sdk_api_index"
+      ],
+      "status": "partial-producers-pending-catalog-integration",
+      "remaining": [
+        "Four build callers assert schema1.1.0 export, structured AIDL wire tags unknown,0semantic gap,5sources, distinct Java/JVM evidence with sharedpermission and exact key, corrupt cache blocks output, malformed AIDL retainedraw+issue. Producer tests alone do not establish side effects."
+      ],
+      "additionalResponsibilities": [
+        "Sources owns shared pure extraction/lexical facts once; Catalog owns storage/import/projection call-site rules."
+      ],
+      "profile": "current-candidate",
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "pythonExecuted": false
+    },
+    {
+      "legacyPath": "rehydration/producers/release-011/tests/test_source_integration.py",
+      "legacySha256": "2ba39bbd83c4ae3b647b97d064f7b1b4eb3725d4ab0460bec98969302eeca055",
+      "owner": "Catalog",
+      "category": "Catalog",
+      "operations": [
+        "Import"
+      ],
+      "nativeServices": [
+        "AidlSourceExtractor",
+        "Java.JavaSourceExtractor",
+        "SdkApiIndexExtractor",
+        "Acquisition.SourceCache",
+        "Catalog end-to-end build/export pending"
+      ],
+      "nativeTests": [
+        "SourceExtractionRealTests",
+        "SdkXmlRealTests",
+        "pending-source-integration4methods"
+      ],
+      "legacyFunctions": [
+        {
+          "name": "test_structured_aidl_members_survive_publication",
+          "line": 9
+        },
+        {
+          "name": "test_cached_java_and_current_index_import_with_distinct_evidence",
+          "line": 26
+        },
+        {
+          "name": "test_cache_hash_failure_does_not_publish",
+          "line": 52
+        },
+        {
+          "name": "test_malformed_aidl_is_preserved_as_unknown",
+          "line": 66
+        }
+      ],
+      "directImports": [
+        "import unittest,pathlib,tempfile,json,hashlib,sqlite3,sys,zipfile,gzip",
+        "import build_catalog as b",
+        "import cache_fingerprint",
+        "import test_build as base_module",
+        "        import java_source, sdk_api_index"
+      ],
+      "status": "partial-producers-pending-catalog-integration",
+      "remaining": [
+        "Four build callers assert schema1.1.0 export, structured AIDL wire tags unknown,0semantic gap,5sources, distinct Java/JVM evidence with sharedpermission and exact key, corrupt cache blocks output, malformed AIDL retainedraw+issue. Producer tests alone do not establish side effects."
+      ],
+      "additionalResponsibilities": [
+        "Sources owns shared pure extraction/lexical facts once; Catalog owns storage/import/projection call-site rules."
+      ],
+      "profile": "release-011-frozen: explicit producer profile binding pending",
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "pythonExecuted": false
+    },
+    {
+      "legacyPath": "remediation/catalog/tests/test_structured_type_source_scopes.py",
+      "legacySha256": "94ffd5c2ca53933b513c5b48f8a84477a5b11161714c6ea2855fa6024529f331",
+      "owner": "Catalog",
+      "category": "Catalog",
+      "operations": [
+        "Project"
+      ],
+      "nativeServices": [
+        "Catalog snapshot-scoped Projection pending",
+        "Catalog contract digest pending",
+        "Source structured type facts"
+      ],
+      "nativeTests": [
+        "pending-structured-source-scopes7methods"
+      ],
+      "legacyFunctions": [
+        {
+          "name": "project",
+          "line": 6
+        },
+        {
+          "name": "test_versioned_source_fields_are_not_combined",
+          "line": 17
+        },
+        {
+          "name": "test_hidl_field_type_changes_semantic_digest",
+          "line": 19
+        },
+        {
+          "name": "test_serialized_field_order_changes_digest",
+          "line": 21
+        },
+        {
+          "name": "test_hidl_typedef_target_changes_digest",
+          "line": 23
+        },
+        {
+          "name": "test_hidl_enum_storage_type_changes_digest",
+          "line": 25
+        },
+        {
+          "name": "test_hidl_enum_expression_changes_digest",
+          "line": 27
+        },
+        {
+          "name": "test_raw_header_comments_and_proof_prose_do_not_change_digest",
+          "line": 29
+        }
+      ],
+      "directImports": [
+        "import unittest,pathlib,sys,sqlite3,json,hashlib,contextlib,copy",
+        "from catalog_projection import Projection",
+        "from dispatch_manifest import contract_digest"
+      ],
+      "status": "pending-snapshot-structural-projection",
+      "remaining": [
+        "Projection.project+contract_digest7methods require per-source declared shapes, field order/type, typedef target, enum storage/expression to affect digest while raw header/proof prose do not. Do not merge snapshots or duplicate source lexical rules."
+      ],
+      "additionalResponsibilities": [
+        "Sources owns shared pure extraction/lexical facts once; Catalog owns storage/import/projection call-site rules."
+      ],
+      "profile": "current-candidate",
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "pythonExecuted": false
+    },
+    {
+      "legacyPath": "rehydration/producers/release-011/tests/test_structured_type_source_scopes.py",
+      "legacySha256": "94ffd5c2ca53933b513c5b48f8a84477a5b11161714c6ea2855fa6024529f331",
+      "owner": "Catalog",
+      "category": "Catalog",
+      "operations": [
+        "Project"
+      ],
+      "nativeServices": [
+        "Catalog snapshot-scoped Projection pending",
+        "Catalog contract digest pending",
+        "Source structured type facts"
+      ],
+      "nativeTests": [
+        "pending-structured-source-scopes7methods"
+      ],
+      "legacyFunctions": [
+        {
+          "name": "project",
+          "line": 6
+        },
+        {
+          "name": "test_versioned_source_fields_are_not_combined",
+          "line": 17
+        },
+        {
+          "name": "test_hidl_field_type_changes_semantic_digest",
+          "line": 19
+        },
+        {
+          "name": "test_serialized_field_order_changes_digest",
+          "line": 21
+        },
+        {
+          "name": "test_hidl_typedef_target_changes_digest",
+          "line": 23
+        },
+        {
+          "name": "test_hidl_enum_storage_type_changes_digest",
+          "line": 25
+        },
+        {
+          "name": "test_hidl_enum_expression_changes_digest",
+          "line": 27
+        },
+        {
+          "name": "test_raw_header_comments_and_proof_prose_do_not_change_digest",
+          "line": 29
+        }
+      ],
+      "directImports": [
+        "import unittest,pathlib,sys,sqlite3,json,hashlib,contextlib,copy",
+        "from catalog_projection import Projection",
+        "from dispatch_manifest import contract_digest"
+      ],
+      "status": "pending-snapshot-structural-projection",
+      "remaining": [
+        "Projection.project+contract_digest7methods require per-source declared shapes, field order/type, typedef target, enum storage/expression to affect digest while raw header/proof prose do not. Do not merge snapshots or duplicate source lexical rules."
+      ],
+      "additionalResponsibilities": [
+        "Sources owns shared pure extraction/lexical facts once; Catalog owns storage/import/projection call-site rules."
+      ],
+      "profile": "release-011-frozen: explicit producer profile binding pending",
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "pythonExecuted": false
+    },
+    {
+      "legacyPath": "remediation/catalog/tests/test_round11.py",
+      "legacySha256": "d8a367efac4145f51c7e05514b4f94abffea6943c77981ce256b40e766b31772",
+      "owner": "Catalog",
+      "category": "Catalog",
+      "operations": [
+        "Project"
+      ],
+      "nativeServices": [
+        "Catalog Projection.lifecycle_rule/project/entity pending",
+        "DeviceResolver",
+        "Catalog contract digest/dispatch generation pending",
+        "CatalogDatabase/DeviceViewStore",
+        "Source structural header/formal-name facts pending"
+      ],
+      "nativeTests": [
+        "pending-exact-round11-method-bindings"
+      ],
+      "legacyFunctions": [
+        {
+          "name": "test_source_point_is_unknown_outside_proven_minor",
+          "line": 6
+        },
+        {
+          "name": "test_inconsistent_since_sdks_is_unknown",
+          "line": 11
+        },
+        {
+          "name": "test_lifecycle_text_does_not_change_declared_type_contract",
+          "line": 15
+        },
+        {
+          "name": "test_type_reference_proof_text_is_not_semantic_shape",
+          "line": 19
+        },
+        {
+          "name": "test_direction_nullable_and_hidl_outputs_affect_contract",
+          "line": 21
+        },
+        {
+          "name": "test_missing_or_unknown_kind_rejects_without_fabricating_a_binding",
+          "line": 26
+        },
+        {
+          "name": "test_interface_oneway_semantics_apply_to_all_methods",
+          "line": 32
+        },
+        {
+          "name": "test_builder_propagates_interface_oneway_to_method_contract",
+          "line": 34
+        },
+        {
+          "name": "test_builder_async_flags_are_scoped_and_ignore_quoted_or_nested_tokens",
+          "line": 41
+        },
+        {
+          "name": "test_proven_supertype_change_affects_type_contract_and_graph",
+          "line": 56
+        },
+        {
+          "name": "test_imported_aidl_type_and_noninvocable_fields",
+          "line": 62
+        },
+        {
+          "name": "test_same_count_foreign_inventory_cannot_activate",
+          "line": 72
+        },
+        {
+          "name": "test_formal_name_cannot_resolve_to_package_class",
+          "line": 77
+        },
+        {
+          "name": "test_valid_hash_cannot_substitute_selected_contract",
+          "line": 82
+        },
+        {
+          "name": "test_sql_inventory_digest_and_selected_contract_guards",
+          "line": 87
+        },
+        {
+          "name": "test_verified_wire_evidence_cannot_be_empty_or_duplicate",
+          "line": 96
+        },
+        {
+          "name": "test_abbreviated_java_lang_needs_declared_same_snapshot_type",
+          "line": 106
+        },
+        {
+          "name": "test_malformed_legacy_header_quarantines_without_aborting_projection",
+          "line": 109
+        },
+        {
+          "name": "test_type_root_does_not_acquire_an_implicit_self_dependency",
+          "line": 112
+        }
+      ],
+      "directImports": [
+        "import copy,hashlib,json,pathlib,sqlite3,sys,tempfile,unittest",
+        "import catalog_projection as cp,device_resolution as dr,dispatch_manifest,build_catalog,test_build,test_device_resolution as f",
+        "  import test_round8",
+        "  import test_round8",
+        "  import device_view_storage as storage"
+      ],
+      "status": "pending-cross-service-round11-assertion-binding",
+      "remaining": [
+        "Actual frozen body calls lifecycle_rule, applicability, contract_digest/generate, build_catalog.build, ViewStore.publish and SQL guards. Preserve exact-minor source point unknowns, inconsistent SDK lifecycle unknowns, nonsemantic lifecycle/proof text, semantic direction/nullability/HIDLoutputs/oneway/supertypes, missing-kind refusal, imported AIDL types and noninvocable fields, foreign inventory rejection, selected contract guards, wire bounds/evidence/uniqueness, same-snapshot java.lang proof, formal shadowing, and malformed-header quarantine. Existing individual native service proofs do not establish these combined original assertions."
+      ],
+      "additionalResponsibilities": [
+        "Sources owns shared pure extraction/lexical facts once; Catalog owns storage/import/projection call-site rules."
+      ],
+      "profile": "current-candidate",
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "pythonExecuted": false
+    },
+    {
+      "legacyPath": "rehydration/producers/release-011/tests/test_round11.py",
+      "legacySha256": "ceb10453ca116f7a4b7dd21def54b438314dd85dacb2a14f8d54c496d1c6a74c",
+      "owner": "Catalog",
+      "category": "Catalog",
+      "operations": [
+        "Project"
+      ],
+      "nativeServices": [
+        "Catalog Projection.lifecycle_rule/project/entity pending",
+        "DeviceResolver",
+        "Catalog contract digest/dispatch generation pending",
+        "CatalogDatabase/DeviceViewStore",
+        "Source structural header/formal-name facts pending"
+      ],
+      "nativeTests": [
+        "pending-exact-round11-method-bindings"
+      ],
+      "legacyFunctions": [
+        {
+          "name": "test_source_point_is_unknown_outside_proven_minor",
+          "line": 6
+        },
+        {
+          "name": "test_inconsistent_since_sdks_is_unknown",
+          "line": 11
+        },
+        {
+          "name": "test_lifecycle_text_does_not_change_declared_type_contract",
+          "line": 15
+        },
+        {
+          "name": "test_type_reference_proof_text_is_not_semantic_shape",
+          "line": 19
+        },
+        {
+          "name": "test_direction_nullable_and_hidl_outputs_affect_contract",
+          "line": 21
+        },
+        {
+          "name": "test_missing_or_unknown_kind_rejects_without_fabricating_a_binding",
+          "line": 26
+        },
+        {
+          "name": "test_interface_oneway_semantics_apply_to_all_methods",
+          "line": 32
+        },
+        {
+          "name": "test_proven_supertype_change_affects_type_contract_and_graph",
+          "line": 34
+        },
+        {
+          "name": "test_imported_aidl_type_and_noninvocable_fields",
+          "line": 40
+        },
+        {
+          "name": "test_same_count_foreign_inventory_cannot_activate",
+          "line": 50
+        },
+        {
+          "name": "test_formal_name_cannot_resolve_to_package_class",
+          "line": 55
+        },
+        {
+          "name": "test_valid_hash_cannot_substitute_selected_contract",
+          "line": 60
+        },
+        {
+          "name": "test_sql_inventory_digest_and_selected_contract_guards",
+          "line": 65
+        },
+        {
+          "name": "test_verified_wire_evidence_cannot_be_empty_or_duplicate",
+          "line": 74
+        },
+        {
+          "name": "test_abbreviated_java_lang_needs_declared_same_snapshot_type",
+          "line": 84
+        },
+        {
+          "name": "test_malformed_legacy_header_quarantines_without_aborting_projection",
+          "line": 87
+        }
+      ],
+      "directImports": [
+        "import copy,hashlib,json,pathlib,sqlite3,sys,tempfile,unittest",
+        "import catalog_projection as cp,device_resolution as dr,dispatch_manifest,build_catalog,test_build,test_device_resolution as f",
+        "  import device_view_storage as storage"
+      ],
+      "status": "pending-cross-service-round11-assertion-binding",
+      "remaining": [
+        "Actual frozen body calls lifecycle_rule, applicability, contract_digest/generate, build_catalog.build, ViewStore.publish and SQL guards. Preserve exact-minor source point unknowns, inconsistent SDK lifecycle unknowns, nonsemantic lifecycle/proof text, semantic direction/nullability/HIDLoutputs/oneway/supertypes, missing-kind refusal, imported AIDL types and noninvocable fields, foreign inventory rejection, selected contract guards, wire bounds/evidence/uniqueness, same-snapshot java.lang proof, formal shadowing, and malformed-header quarantine. Existing individual native service proofs do not establish these combined original assertions."
+      ],
+      "additionalResponsibilities": [
+        "Sources owns shared pure extraction/lexical facts once; Catalog owns storage/import/projection call-site rules."
+      ],
+      "profile": "release-011-frozen: explicit producer profile binding pending",
+      "acceptedComplete": false,
+      "safeToDelete": false,
+      "pythonExecuted": false
+    }
+  ]
+}

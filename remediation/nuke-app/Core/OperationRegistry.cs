@@ -1,6 +1,6 @@
 namespace AndroidMcp.BuildTool.Core;
 
-public enum OperationExecutor { Pending, MockTests, Tests, DocumentationAssets, NativeParser }
+public enum OperationExecutor { Pending, MockTests, Tests, DocumentationAssets, NativeParser, SourcesFetch, PublicationCheck, SourcesPlan, Architecture, CatalogBuild }
 public sealed record OperationDefinition(OperationKey Key, string Description,
     IReadOnlyList<string> RequiredParameters, IReadOnlyList<string> OptionalParameters,
     IReadOnlyList<PlannedStep> Steps, OperationExecutor Executor=OperationExecutor.Pending);
@@ -14,17 +14,27 @@ public sealed class OperationRegistry
         var definitions = new List<OperationDefinition>();
         void Add(Category category, Operation operation, string[] required, string[] optional, OperationExecutor executor, params PlannedStep[] steps) =>
             definitions.Add(new(new(category,operation), $"{category}/{operation}",required,optional,steps,executor));
-        Add(Category.Sources,Operation.Plan,[],[],OperationExecutor.Pending,new PlannedStep("source-plan",[]));
+        Add(Category.Sources,Operation.Plan,["project-root","source-manifest","recipe-lock","output-root"],
+            ["release","limit","acquisition-profile"],OperationExecutor.SourcesPlan,new PlannedStep("source-plan",[]));
+        Add(Category.Sources,Operation.Fetch,["project-root","source-manifest","recipe-lock","output-root","bundle-root"],
+            ["generation","release","limit","acquisition-profile","cache-policy"],OperationExecutor.SourcesFetch,
+            new("validate-locked-recipe",[]),new("preflight-selected-sources",["validate-locked-recipe"]),
+            new("acquire-selected-sources",["preflight-selected-sources"]),new("seal-acquisition",["acquire-selected-sources"]));
         Add(Category.Sources,Operation.NativeParser,["compiler-identity","output-root"],["project-root","cache-root","receipt-root"],OperationExecutor.NativeParser,
             new("verify-compiler-identity",[]),new("acquire-native-sources",["verify-compiler-identity"]),
             new("build-native-parser",["acquire-native-sources"]),new("verify-native-parser",["build-native-parser"]));
-        Add(Category.Catalog,Operation.Build,["source-manifest","output-root"],[],OperationExecutor.Pending,
+        Add(Category.Catalog,Operation.Build,["project-root","source-manifest","output-root","stage-root"],
+            ["java-native-manifest","extraction-profile"],OperationExecutor.CatalogBuild,
             new("validate-source-manifest",[]),new("build-catalog",["validate-source-manifest"]));
         Add(Category.Design,Operation.Assets,["project-root","output-root"],["generation"],OperationExecutor.DocumentationAssets,
             new("validate-design-inputs",[]),new("project-ui",["validate-design-inputs"]));
+        Add(Category.Design,Operation.Architecture,["project-root","output-root","cache-root","work-root","receipt-root","docker-identity","renderer-user","tool-access"],
+            ["generation","offline-gradle-checksum-proof"],OperationExecutor.Architecture,
+            new("validate-architecture-inputs",[]),new("preflight-native-context",["validate-architecture-inputs"]),
+            new("verify-pinned-tools",["preflight-native-context"]),new("generate-architecture",["verify-pinned-tools"]),new("seal-generation",["generate-architecture"]));
         Add(Category.Validate,Operation.Toolchain,[],[],OperationExecutor.Pending,new PlannedStep("verify-toolchain",[]));
         Add(Category.Review,Operation.Prepare,["snapshot"],[],OperationExecutor.Pending,new("verify-review-evidence",[]),new("prepare-review",[]));
-        Add(Category.Publish,Operation.Check,["git-checkout"],[],OperationExecutor.Pending,new PlannedStep("check-deliverables",[]));
+        Add(Category.Publish,Operation.Check,["git-checkout","git-identity","receipt-root"],["policy-relative-path"],OperationExecutor.PublicationCheck,new PlannedStep("check-deliverables",[]));
         Add(Category.Validate,Operation.MockGate,[],["test-filter"],OperationExecutor.MockTests,new PlannedStep("mock-tests",[]));
         Add(Category.Validate,Operation.Tests,[],["test-filter","java-native-manifest"],OperationExecutor.Tests,new PlannedStep("all-tests",[]));
         Definitions = definitions.AsReadOnly();

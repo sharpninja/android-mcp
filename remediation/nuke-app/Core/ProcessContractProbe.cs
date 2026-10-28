@@ -19,6 +19,12 @@ internal static class ProcessContractProbe
             Console.OpenStandardOutput().Write("ready"u8);Console.Out.Flush();
             while(!File.Exists(gate))Thread.Sleep(10);
         }
+        else if(arguments[1]=="environment")
+        {
+            const string name="ANDROIDMCP_DUMMY_ENV";
+            if(arguments.Length!=3||arguments[2]!=name)throw new InvalidOperationException("Environment fixture permits only its test-owned dummy variable.");
+            Console.OpenStandardOutput().Write(JsonSerializer.SerializeToUtf8Bytes(new Dictionary<string,string?>{{name,Environment.GetEnvironmentVariable(name)}}));
+        }
         else Console.OpenStandardOutput().Write(JsonSerializer.SerializeToUtf8Bytes(arguments.Skip(2).ToArray()));
         return exit;
     }

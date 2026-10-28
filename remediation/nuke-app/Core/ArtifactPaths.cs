@@ -20,13 +20,23 @@ public static class ArtifactPaths
     {
         var parts=Segments(relativePath);
         var path=Path.GetFullPath(rootDirectory);
-        RejectReparse(path);
+        // The selected root may be an ordinary directory reached through a
+        // reparse point above it. Inspect that chain before creating anything.
+        var ancestors=new Stack<string>();
+        for(DirectoryInfo? ancestor=new(path);ancestor is not null;ancestor=ancestor.Parent)
+            ancestors.Push(ancestor.FullName);
+        foreach(var ancestor in ancestors)RejectReparse(ancestor);
         foreach(var part in parts){path=Path.Combine(path,part);RejectReparse(path);}
         return path;
     }
     private static void RejectReparse(string path)
     {
-        if((Directory.Exists(path)||File.Exists(path)) && (File.GetAttributes(path)&FileAttributes.ReparsePoint)!=0)
+        FileAttributes attributes;
+        try { attributes=File.GetAttributes(path); }
+        catch(FileNotFoundException) { return; }
+        catch(DirectoryNotFoundException) { return; }
+        // Exists() deliberately hides dangling links; GetAttributes does not.
+        if((attributes&FileAttributes.ReparsePoint)!=0)
             throw new ArgumentException("Artifact paths cannot traverse reparse points.",nameof(path));
     }
 }

@@ -7,6 +7,7 @@ namespace AndroidMcp.BuildTool.Sources;
 internal readonly record struct SourceSpan(int Start, int End);
 internal sealed record SourceAnnotation(int Start, int End, JsonObject Document);
 internal sealed record AnnotatedSource(string Masked, IReadOnlyList<SourceAnnotation> Annotations);
+internal enum SourceSyntaxProfile { DeclarationSource, LegacySignature }
 
 // Shared lexical primitives. Imported input is data; no expression evaluator,
 // compiler, runtime type loader, network operation or subprocess exists here.
@@ -17,19 +18,19 @@ internal static class SourceSyntax
     internal static JsonArray Strings(IEnumerable<string> values) => new(values.Select(x => (JsonNode?)JsonValue.Create(x)).ToArray());
     internal static JsonArray Annotations(IEnumerable<SourceAnnotation> values) => Array(values.Select(x => x.Document));
 
-    internal static string Mask(string text, bool strings)
+    internal static string Mask(string text, bool strings, SourceSyntaxProfile profile = SourceSyntaxProfile.DeclarationSource)
     {
         var result = text.ToCharArray();
         for (var i = 0; i < text.Length;)
         {
             var start = i;
             var isComment = false;
-            if (text[i] == '/' && i + 1 < text.Length && text[i + 1] == '/')
+            if (profile == SourceSyntaxProfile.DeclarationSource && text[i] == '/' && i + 1 < text.Length && text[i + 1] == '/')
             {
                 isComment = true; i += 2;
                 while (i < text.Length && text[i] != '\n') i++;
             }
-            else if (text[i] == '/' && i + 1 < text.Length && text[i + 1] == '*')
+            else if (profile == SourceSyntaxProfile.DeclarationSource && text[i] == '/' && i + 1 < text.Length && text[i + 1] == '*')
             {
                 isComment = true; i += 2;
                 while (i + 1 < text.Length && !(text[i] == '*' && text[i + 1] == '/')) i++;
@@ -51,10 +52,10 @@ internal static class SourceSyntax
         return new string(result);
     }
 
-    internal static AnnotatedSource ParseAnnotations(string text)
+    internal static AnnotatedSource ParseAnnotations(string text, SourceSyntaxProfile profile = SourceSyntaxProfile.DeclarationSource)
     {
         var clean = text.ToCharArray(); var annotations = new List<SourceAnnotation>();
-        var code = Mask(text, true);
+        var code = Mask(text, true, profile);
         for (var i = 0; i < text.Length; i++)
         {
             if (code[i] != '@') continue;
@@ -65,7 +66,7 @@ internal static class SourceSyntax
             var arguments = "";
             if (probe < text.Length && text[probe] == '(')
             {
-                var close = ClosingDelimiter(text, probe, '(', ')');
+                var close = ClosingDelimiter(text, probe, '(', ')', profile);
                 if (close < 0) throw new FormatException("Unclosed annotation");
                 arguments = text[(probe + 1)..close]; end = close + 1;
             }
@@ -81,9 +82,9 @@ internal static class SourceSyntax
         return new(new string(clean), annotations);
     }
 
-    internal static int ClosingDelimiter(string text, int start, char opening, char closing)
+    internal static int ClosingDelimiter(string text, int start, char opening, char closing, SourceSyntaxProfile profile = SourceSyntaxProfile.DeclarationSource)
     {
-        var code = Mask(text, true); var depth = 0;
+        var code = Mask(text, true, profile); var depth = 0;
         for (var i = start; i < code.Length; i++)
         {
             if (code[i] == opening) depth++;
@@ -92,9 +93,9 @@ internal static class SourceSyntax
         return -1;
     }
 
-    internal static IEnumerable<(string Raw, int Start)> Chunks(string text, char separator, bool genericAngles = false)
+    internal static IEnumerable<(string Raw, int Start)> Chunks(string text, char separator, bool genericAngles = false, SourceSyntaxProfile profile = SourceSyntaxProfile.DeclarationSource)
     {
-        foreach (var span in DelimiterSpans(text, 0, text.Length, separator, genericAngles))
+        foreach (var span in DelimiterSpans(text, 0, text.Length, separator, genericAngles, profile: profile))
         {
             var part = Trimmed(text, span.Start, span.End);
             if (part.Raw.Length > 0) yield return part;
@@ -102,9 +103,9 @@ internal static class SourceSyntax
     }
 
     internal static IEnumerable<SourceSpan> DelimiterSpans(string text, int start, int end, char separator,
-        bool genericAngles = false, bool anglesAtTopLevel = false, string? masked = null)
+        bool genericAngles = false, bool anglesAtTopLevel = false, string? masked = null, SourceSyntaxProfile profile = SourceSyntaxProfile.DeclarationSource)
     {
-        var code = masked ?? Mask(text, true); var stack = new Stack<char>(); var begin = start; var angle = 0;
+        var code = masked ?? Mask(text, true, profile); var stack = new Stack<char>(); var begin = start; var angle = 0;
         for (var i = start; i < end; i++)
         {
             var c = code[i];
@@ -170,9 +171,9 @@ internal static class SourceSyntax
         return new string(chars);
     }
 
-    internal static string TypeName(string text)
+    internal static string TypeName(string text, SourceSyntaxProfile profile = SourceSyntaxProfile.DeclarationSource)
     {
-        var clean = ParseAnnotations(text).Masked;
+        var clean = ParseAnnotations(text, profile).Masked;
         clean = Rx(@"\b(final|optional)\s+").Replace(clean, "").Trim();
         clean = Rx(@"\s+").Replace(clean, " ");
         return Rx(@"\s*([<>,\[\]])\s*").Replace(clean, "$1");

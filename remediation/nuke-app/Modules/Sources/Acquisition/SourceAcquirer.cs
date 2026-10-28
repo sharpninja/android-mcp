@@ -53,7 +53,7 @@ public sealed class SourceAcquirer(IByteTransport transport,IArtifactStore store
         if(pin.SizeBytes is not null&&bytes.Length!=pin.SizeBytes)throw new TransportException("SOURCE_SIZE","Source size differs.");
         if(pin.GitBlob is not null&&ContentHash.GitBlobSha1Legacy(bytes)!=pin.GitBlob)throw new TransportException("SOURCE_GIT_BLOB","Source Git content address differs.");
     }
-    private static void ValidatePin(SourcePin pin)
+    internal static void ValidatePin(SourcePin pin)
     {
         _=ArtifactPaths.Segments(pin.LocalPath);if(pin.RequiredLocalSnapshot is not null)_=ArtifactPaths.Segments(pin.RequiredLocalSnapshot);
         if(pin.Archive is not null){_=ArtifactPaths.Segments(pin.Archive.Member);if(pin.Archive.ArchiveLocalPath is not null)_=ArtifactPaths.Segments(pin.Archive.ArchiveLocalPath);}

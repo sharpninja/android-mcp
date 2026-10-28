@@ -1,10 +1,11 @@
 using Microsoft.Data.Sqlite;
+using AndroidMcp.BuildTool.Core;
 
 namespace AndroidMcp.BuildTool.Catalog;
 
 public enum CatalogSchemaProfile { Entry, Bridge, Metadata, Combined }
 
-/// <summary>Private offline SQLite fixture database using the retained canonical DDL.</summary>
+/// <summary>One retained canonical schema engine for private memory or file-backed staging databases.</summary>
 public sealed class CatalogDatabase:IDisposable
 {
     public SqliteConnection Connection { get; }
@@ -17,22 +18,29 @@ public sealed class CatalogDatabase:IDisposable
         CatalogSchemaProfile.Combined=>["schema.sql","bridge-config.sql","migrations/source_metadata_ddl.sql"],
         _=>throw new ArgumentOutOfRangeException(nameof(profile))
     };
-    public static CatalogDatabase CreateInMemory(string catalogRoot,CatalogSchemaProfile profile)
+    private static string[] Scripts(string catalogRoot,CatalogSchemaProfile profile)=>SchemaFiles(profile).Select(path=>File.ReadAllText(Path.Combine(catalogRoot,path))).ToArray();
+    public static CatalogDatabase CreateInMemory(string catalogRoot,CatalogSchemaProfile profile)=>Open(Scripts(catalogRoot,profile),":memory:",SqliteOpenMode.ReadWriteCreate);
+    public static CatalogDatabase CreateFile(string catalogRoot,CatalogSchemaProfile profile,string databasePath)
     {
-        // Resolve and read all prerequisites before opening the private database.
-        var scripts=SchemaFiles(profile).Select(path=>File.ReadAllText(Path.Combine(catalogRoot,path))).ToArray();
-        var connection=new SqliteConnection(new SqliteConnectionStringBuilder
-        { DataSource=":memory:",ForeignKeys=true,Pooling=false }.ToString());
+        // Resolve/read every prerequisite before creating any stage file.
+        var scripts=Scripts(catalogRoot,profile);var full=Path.GetFullPath(databasePath);var parent=Path.GetDirectoryName(full)!;
+        full=ArtifactPaths.Resolve(parent,Path.GetFileName(full));Directory.CreateDirectory(parent);
+        full=ArtifactPaths.Resolve(parent,Path.GetFileName(full));
+        // CreateNew refuses an earlier stage without changing its bytes. Failed
+        // initialization retains this private file; it is never a final marker.
+        using(var file=new FileStream(full,FileMode.CreateNew,FileAccess.Write,FileShare.None)) file.Flush(true);
+        return Open(scripts,full,SqliteOpenMode.ReadWrite);
+    }
+    private static CatalogDatabase Open(IReadOnlyList<string> scripts,string dataSource,SqliteOpenMode mode)
+    {
+        var connection=new SqliteConnection(new SqliteConnectionStringBuilder{DataSource=dataSource,Mode=mode,ForeignKeys=true,Pooling=false}.ToString());
         try
         {
             connection.Open();
-            foreach(var script in scripts)
-            {
-                using var command=connection.CreateCommand();command.CommandText=script;command.ExecuteNonQuery();
-            }
+            foreach(var script in scripts){using var command=connection.CreateCommand();command.CommandText=script;command.ExecuteNonQuery();}
             return new(connection);
         }
-        catch { connection.Dispose();throw; }
+        catch{connection.Dispose();throw;}
     }
     public SqliteCommand Command(string sql,SqliteTransaction? transaction=null,params (string Name,object? Value)[] parameters)
     {

@@ -1,0 +1,714 @@
+{
+  "at": "2026-10-28T02:22:59",
+  "sessionId": "Codex-20261028T030809Z-plugin-session",
+  "requestId": "req-20261028T064409Z-turn-2b30",
+  "gate": {
+    "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261028T0219538536256-d5f4f35381e64599b2d84f44cd52268f/tests.trx",
+    "sha256": "aa3a8e0544dbf881a1d71d623332b8d806d2220f3c3389a7171080975414f9f3",
+    "total": 324,
+    "passed": 323,
+    "failed": 1,
+    "skipped": 0,
+    "nativePlanCliCases": 1,
+    "foreignFailures": [
+      {
+        "name": "AndroidMcp.BuildTool.Tests.Documentation.Browser.BrowserQaRealTests.SameSevenOfflineInputsAndEveryAssertionBindToNativeChromium(id: \"QA-overflow\")",
+        "outcome": "Failed",
+        "details": "Assert.Equal() Failure: Values differ\nExpected: 1\nActual:   2   at AndroidMcp.BuildTool.Tests.Sources.SourceExtractionContractCases.AssertSubset(JsonNode expected, JsonNode actual, String path) in /home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/SourceExtractionContractCases.cs:line 307\n   at AndroidMcp.BuildTool.Tests.Sources.SourceExtractionContractCases.AssertSubset(JsonNode expected, JsonNode actual, String path) in /home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/SourceExtractionContractCases.cs:line 302\n   at AndroidMcp.BuildTool.Tests.Sources.SourceExtractionContractCases.AssertSubset(JsonNode expected, JsonNode actual, String path) in /home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/SourceExtractionContractCases.cs:line 308\n   at AndroidMcp.BuildTool.Tests.Sources.SourceExtractionContractCases.AssertSubset(JsonNode expected, JsonNode actual, String path) in /home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/SourceExtractionContractCases.cs:line 302\n   at AndroidMcp.BuildTool.Tests.Documentation.Browser.BrowserQaCases.AssertContract(BrowserQaCase test, IBrowserQaOperation provider, IArtifactStore output, BrowserQaRequest request) in /home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Documentation/Browser/BrowserQaContractCases.cs:line 35\n   at AndroidMcp.BuildTool.Tests.Documentation.Browser.BrowserQaRealTests.SameSevenOfflineInputsAndEveryAssertionBindToNativeChromium(String id) in /home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Documentation/Browser/BrowserQaRealTests.cs:line 27\n--- End of stack trace from previous location ---"
+      }
+    ]
+  },
+  "fixtureRoot": "/tmp/android-mcp-sources-plan/6317e8dacbef4c7992af27880b2e7d8a/fixture with spaces",
+  "summary": {
+    "Manifest": {
+      "RelativePath": "rehydration-plan.json",
+      "Sha256": "a96e149194e1da53a53a2ac2b061580f615bae17039504ed38b1e73ca2f86140",
+      "Length": 1762,
+      "MediaType": "application/json"
+    },
+    "Release": "fixture-release",
+    "RecipeSha256": "61d5ec886f2084e1e34e2ede91c8a5743bcee08f28689969f93a84f08ac8f4f3",
+    "SourceRows": 5,
+    "UniqueSourcePaths": 4,
+    "SelectedPaths": 4,
+    "Network": false,
+    "Complete": false,
+    "HistoricalByteIdentityClaimed": false,
+    "RequiredSnapshots": [
+      {
+        "SourcePath": "snapshot/api.txt",
+        "LocalPath": "blobs/snapshot",
+        "BundlePath": null,
+        "Sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "Length": 3
+      }
+    ],
+    "ArchiveMembers": [
+      {
+        "SourcePath": "sdk/api.xml",
+        "LocalPath": "blobs/sdk",
+        "Url": "https://example.invalid/platform.zip",
+        "Member": "android-37.2/data/api-versions.xml",
+        "ArchiveSha256": null,
+        "MemberSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      {
+        "SourcePath": "sdk/pinned.xml",
+        "LocalPath": "blobs/pinned",
+        "Url": "https://example.invalid/pinned.zip",
+        "Member": "android/data/api-versions.xml",
+        "ArchiveSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "MemberSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+      }
+    ],
+    "SourceProjection": {
+      "Release": "fixture-release",
+      "RecipeSha256": "61d5ec886f2084e1e34e2ede91c8a5743bcee08f28689969f93a84f08ac8f4f3",
+      "Profile": 0,
+      "Rows": [
+        {
+          "RowIndex": 0,
+          "LogicalPath": "api/A.java",
+          "Kind": "java-source",
+          "PhysicalSourceIndex": 0,
+          "CacheAliasIndex": 0,
+          "Context": {
+            "Repository": "fixture/repository",
+            "Revision": "r1",
+            "SourceSurface": "public",
+            "Scope": "selected",
+            "License": "Apache-2.0",
+            "SourceReleaseContext": "acquisition context only",
+            "SelectionOrigins": [
+              "declared",
+              {
+                "row": 17
+              }
+            ],
+            "SelectionReasons": [
+              "fixture",
+              "alias-preserved"
+            ]
+          },
+          "OriginalRow": {
+            "git_blob": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "kind": "java-source",
+            "license": "Apache-2.0",
+            "local_path": "blobs/a",
+            "metadata_cache": {
+              "kind": "java-source",
+              "parser_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+              "path": "cache/a.gz",
+              "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "path": "api/A.java",
+            "repository": "fixture/repository",
+            "revision": "r1",
+            "scope": "selected",
+            "selection_origins": [
+              "declared",
+              {
+                "row": 17
+              }
+            ],
+            "selection_reasons": [
+              "fixture",
+              "alias-preserved"
+            ],
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "size_bytes": 3,
+            "source_release_context": "acquisition context only",
+            "source_surface": "public",
+            "unknown_evidence": {
+              "nested": [
+                1,
+                2,
+                3
+              ],
+              "nullable": null
+            },
+            "url": "https://example.invalid/blobs/a"
+          }
+        },
+        {
+          "RowIndex": 1,
+          "LogicalPath": "sdk/api.xml",
+          "Kind": "sdk-api-index",
+          "PhysicalSourceIndex": 1,
+          "CacheAliasIndex": 1,
+          "Context": {
+            "Repository": "fixture/repository",
+            "Revision": "r2",
+            "SourceSurface": "public",
+            "Scope": "selected",
+            "License": "Apache-2.0",
+            "SourceReleaseContext": "acquisition context only",
+            "SelectionOrigins": [
+              "declared",
+              {
+                "row": 17
+              }
+            ],
+            "SelectionReasons": [
+              "fixture",
+              "alias-preserved"
+            ]
+          },
+          "OriginalRow": {
+            "kind": "sdk-api-index",
+            "license": "Apache-2.0",
+            "local_path": "blobs/sdk",
+            "metadata_cache": {
+              "kind": "sdk-api-index",
+              "parser_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+              "path": "cache/sdk.gz",
+              "records": 1,
+              "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "source_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+            },
+            "path": "sdk/api.xml",
+            "repository": "fixture/repository",
+            "revision": "r2",
+            "scope": "selected",
+            "selection_origins": [
+              "declared",
+              {
+                "row": 17
+              }
+            ],
+            "selection_reasons": [
+              "fixture",
+              "alias-preserved"
+            ],
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "size_bytes": 3,
+            "source_release_context": "acquisition context only",
+            "source_surface": "public",
+            "transport": {
+              "archive_member": "android-37.2/data/api-versions.xml",
+              "archive_url": "https://example.invalid/platform.zip",
+              "kind": "bounded-sdk-zip-range-member",
+              "whole_archive_hash_verified": false
+            },
+            "unknown_evidence": {
+              "nested": [
+                1,
+                2,
+                3
+              ],
+              "nullable": null
+            },
+            "url": "https://example.invalid/blobs/sdk"
+          }
+        },
+        {
+          "RowIndex": 2,
+          "LogicalPath": "aliases/A.java",
+          "Kind": "java-source",
+          "PhysicalSourceIndex": 0,
+          "CacheAliasIndex": 0,
+          "Context": {
+            "Repository": "fixture/repository",
+            "Revision": "r1",
+            "SourceSurface": "system",
+            "Scope": "selected",
+            "License": "Apache-2.0",
+            "SourceReleaseContext": {
+              "meaning": "acquisition only",
+              "release": "fixture"
+            },
+            "SelectionOrigins": [
+              "declared",
+              {
+                "row": 17
+              }
+            ],
+            "SelectionReasons": [
+              "fixture",
+              "alias-preserved"
+            ]
+          },
+          "OriginalRow": {
+            "git_blob": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "kind": "java-source",
+            "license": "Apache-2.0",
+            "local_path": "blobs/a",
+            "metadata_cache": {
+              "kind": "java-source",
+              "parser_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+              "path": "cache/a.gz",
+              "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "path": "aliases/A.java",
+            "repository": "fixture/repository",
+            "revision": "r1",
+            "scope": "selected",
+            "selection_origins": [
+              "declared",
+              {
+                "row": 17
+              }
+            ],
+            "selection_reasons": [
+              "fixture",
+              "alias-preserved"
+            ],
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "size_bytes": 3,
+            "source_release_context": {
+              "meaning": "acquisition only",
+              "release": "fixture"
+            },
+            "source_surface": "system",
+            "unknown_evidence": {
+              "nested": [
+                1,
+                2,
+                3
+              ],
+              "nullable": null
+            },
+            "url": "https://example.invalid/blobs/a"
+          }
+        },
+        {
+          "RowIndex": 3,
+          "LogicalPath": "snapshot/api.txt",
+          "Kind": "signature",
+          "PhysicalSourceIndex": 2,
+          "CacheAliasIndex": null,
+          "Context": {
+            "Repository": "fixture/repository",
+            "Revision": "r3",
+            "SourceSurface": "public",
+            "Scope": "selected",
+            "License": "Apache-2.0",
+            "SourceReleaseContext": "acquisition context only",
+            "SelectionOrigins": [
+              "declared",
+              {
+                "row": 17
+              }
+            ],
+            "SelectionReasons": [
+              "fixture",
+              "alias-preserved"
+            ]
+          },
+          "OriginalRow": {
+            "kind": "signature",
+            "license": "Apache-2.0",
+            "local_path": "blobs/snapshot",
+            "path": "snapshot/api.txt",
+            "repository": "fixture/repository",
+            "revision": "r3",
+            "scope": "selected",
+            "selection_origins": [
+              "declared",
+              {
+                "row": 17
+              }
+            ],
+            "selection_reasons": [
+              "fixture",
+              "alias-preserved"
+            ],
+            "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "size_bytes": 3,
+            "source_release_context": "acquisition context only",
+            "source_surface": "public",
+            "transport": {
+              "immutable_url": false
+            },
+            "unknown_evidence": {
+              "nested": [
+                1,
+                2,
+                3
+              ],
+              "nullable": null
+            },
+            "url": "https://example.invalid/blobs/snapshot"
+          }
+        },
+        {
+          "RowIndex": 4,
+          "LogicalPath": "sdk/pinned.xml",
+          "Kind": "sdk-api-index",
+          "PhysicalSourceIndex": 3,
+          "CacheAliasIndex": null,
+          "Context": {
+            "Repository": "fixture/repository",
+            "Revision": "r4",
+            "SourceSurface": "public",
+            "Scope": "selected",
+            "License": "Apache-2.0",
+            "SourceReleaseContext": "acquisition context only",
+            "SelectionOrigins": [
+              "declared",
+              {
+                "row": 17
+              }
+            ],
+            "SelectionReasons": [
+              "fixture",
+              "alias-preserved"
+            ]
+          },
+          "OriginalRow": {
+            "kind": "sdk-api-index",
+            "license": "Apache-2.0",
+            "local_path": "blobs/pinned",
+            "path": "sdk/pinned.xml",
+            "repository": "fixture/repository",
+            "revision": "r4",
+            "scope": "selected",
+            "selection_origins": [
+              "declared",
+              {
+                "row": 17
+              }
+            ],
+            "selection_reasons": [
+              "fixture",
+              "alias-preserved"
+            ],
+            "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "size_bytes": 3,
+            "source_release_context": "acquisition context only",
+            "source_surface": "public",
+            "transport": {
+              "archive_member": "android/data/api-versions.xml",
+              "archive_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "archive_url": "https://example.invalid/pinned.zip"
+            },
+            "unknown_evidence": {
+              "nested": [
+                1,
+                2,
+                3
+              ],
+              "nullable": null
+            },
+            "url": "https://example.invalid/blobs/pinned"
+          }
+        }
+      ],
+      "PhysicalSources": [
+        {
+          "PhysicalSourceIndex": 0,
+          "Pin": {
+            "LocalPath": "blobs/a",
+            "Url": "https://example.invalid/blobs/a",
+            "Revision": "r1",
+            "Sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "SizeBytes": 3,
+            "GitBlob": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "Encoding": 0,
+            "RequiredLocalSnapshot": null,
+            "Archive": null,
+            "Compatibility": 0
+          },
+          "SelectionRowIndices": [
+            0,
+            2
+          ],
+          "RequiredSnapshots": [],
+          "Prerequisites": []
+        },
+        {
+          "PhysicalSourceIndex": 1,
+          "Pin": {
+            "LocalPath": "blobs/sdk",
+            "Url": "https://example.invalid/blobs/sdk",
+            "Revision": "r2",
+            "Sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "SizeBytes": 3,
+            "GitBlob": null,
+            "Encoding": 0,
+            "RequiredLocalSnapshot": null,
+            "Archive": {
+              "Url": "https://example.invalid/platform.zip",
+              "Member": "android-37.2/data/api-versions.xml",
+              "ArchiveSha256": null,
+              "ArchiveSha1": null,
+              "SizeBytes": null,
+              "ETag": null,
+              "ArchiveLocalPath": null,
+              "Compatibility": 0,
+              "RepositoryXml": "",
+              "PlatformVersion": null,
+              "PackagePath": null
+            },
+            "Compatibility": 0
+          },
+          "SelectionRowIndices": [
+            1
+          ],
+          "RequiredSnapshots": [],
+          "Prerequisites": [
+            {
+              "Code": 1,
+              "SelectionRowIndices": [
+                1
+              ],
+              "Path": "blobs/sdk",
+              "Reason": "Missing pinned prerequisite; exact existing target may be reused."
+            },
+            {
+              "Code": 2,
+              "SelectionRowIndices": [
+                1
+              ],
+              "Path": "blobs/sdk",
+              "Reason": "Missing pinned prerequisite; exact existing target may be reused."
+            },
+            {
+              "Code": 3,
+              "SelectionRowIndices": [
+                1
+              ],
+              "Path": "blobs/sdk",
+              "Reason": "Missing pinned prerequisite; exact existing target may be reused."
+            },
+            {
+              "Code": 4,
+              "SelectionRowIndices": [
+                1
+              ],
+              "Path": "blobs/sdk",
+              "Reason": "Missing pinned prerequisite; exact existing target may be reused."
+            }
+          ]
+        },
+        {
+          "PhysicalSourceIndex": 2,
+          "Pin": {
+            "LocalPath": "blobs/snapshot",
+            "Url": "https://example.invalid/blobs/snapshot",
+            "Revision": "r3",
+            "Sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "SizeBytes": 3,
+            "GitBlob": null,
+            "Encoding": 0,
+            "RequiredLocalSnapshot": null,
+            "Archive": null,
+            "Compatibility": 0
+          },
+          "SelectionRowIndices": [
+            3
+          ],
+          "RequiredSnapshots": [
+            {
+              "SourcePath": "snapshot/api.txt",
+              "LocalPath": "blobs/snapshot",
+              "BundlePath": null,
+              "Sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "Length": 3
+            }
+          ],
+          "Prerequisites": [
+            {
+              "Code": 0,
+              "SelectionRowIndices": [
+                3
+              ],
+              "Path": "blobs/snapshot",
+              "Reason": "Missing pinned prerequisite; exact existing target may be reused."
+            }
+          ]
+        },
+        {
+          "PhysicalSourceIndex": 3,
+          "Pin": {
+            "LocalPath": "blobs/pinned",
+            "Url": "https://example.invalid/blobs/pinned",
+            "Revision": "r4",
+            "Sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "SizeBytes": 3,
+            "GitBlob": null,
+            "Encoding": 0,
+            "RequiredLocalSnapshot": null,
+            "Archive": {
+              "Url": "https://example.invalid/pinned.zip",
+              "Member": "android/data/api-versions.xml",
+              "ArchiveSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "ArchiveSha1": null,
+              "SizeBytes": null,
+              "ETag": null,
+              "ArchiveLocalPath": null,
+              "Compatibility": 0,
+              "RepositoryXml": "",
+              "PlatformVersion": null,
+              "PackagePath": null
+            },
+            "Compatibility": 0
+          },
+          "SelectionRowIndices": [
+            4
+          ],
+          "RequiredSnapshots": [],
+          "Prerequisites": []
+        }
+      ],
+      "CacheAliases": [
+        {
+          "CacheAliasIndex": 0,
+          "CachePath": "cache/a.gz",
+          "Pin": null,
+          "SelectionRowIndices": [
+            0,
+            2
+          ],
+          "Prerequisites": [
+            {
+              "Code": 7,
+              "SelectionRowIndices": [
+                0,
+                2
+              ],
+              "Path": "cache/a.gz",
+              "Reason": "Missing pinned prerequisite; exact existing target may be reused."
+            }
+          ]
+        },
+        {
+          "CacheAliasIndex": 1,
+          "CachePath": "cache/sdk.gz",
+          "Pin": {
+            "Path": "cache/sdk.gz",
+            "Kind": "sdk-api-index",
+            "GZipSha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "ProducerFingerprint": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "RecordCount": 1,
+            "SourceSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "RecipeSha256": "61d5ec886f2084e1e34e2ede91c8a5743bcee08f28689969f93a84f08ac8f4f3"
+          },
+          "SelectionRowIndices": [
+            1
+          ],
+          "Prerequisites": []
+        }
+      ],
+      "SelectedPhysicalSourceIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "Resume": true
+    },
+    "Caveats": [
+      "Selected corpus only; expected counts are not observed validation.",
+      "Owner-supplied mutable snapshots and historical byte identity remain explicit limitations.",
+      "Legacy environment and producer pins are evidence; they do not authorize legacy execution.",
+      "Operation references are plans, not a claim that root execution adapters are ready.",
+      "Archive bytes are not verified by planning.",
+      "Container SHA256 is unavailable for some members; member identity remains pinned."
+    ],
+    "OutputRoot": "/tmp/android-mcp-sources-plan/6317e8dacbef4c7992af27880b2e7d8a/fixture with spaces/pure plan output"
+  },
+  "copies": [
+    {
+      "relativePath": "locked inputs/rehydration/fixture.json",
+      "source": "/tmp/android-mcp-sources-plan/6317e8dacbef4c7992af27880b2e7d8a/fixture with spaces/locked inputs/rehydration/fixture.json",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-plan-cli-live-evidence/locked inputs/rehydration/fixture.json",
+      "sha256": "61d5ec886f2084e1e34e2ede91c8a5743bcee08f28689969f93a84f08ac8f4f3",
+      "length": 4510
+    },
+    {
+      "relativePath": "locked inputs/rehydration/fixture.lock.json",
+      "source": "/tmp/android-mcp-sources-plan/6317e8dacbef4c7992af27880b2e7d8a/fixture with spaces/locked inputs/rehydration/fixture.lock.json",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-plan-cli-live-evidence/locked inputs/rehydration/fixture.lock.json",
+      "sha256": "cb87b8012ed5a31bdee99691fa2034c7818142aae9d7f1cb0170ba2940dc8162",
+      "length": 153
+    },
+    {
+      "relativePath": "pure plan output/rehydration-plan.json",
+      "source": "/tmp/android-mcp-sources-plan/6317e8dacbef4c7992af27880b2e7d8a/fixture with spaces/pure plan output/rehydration-plan.json",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-plan-cli-live-evidence/pure plan output/rehydration-plan.json",
+      "sha256": "a96e149194e1da53a53a2ac2b061580f615bae17039504ed38b1e73ca2f86140",
+      "length": 1762
+    },
+    {
+      "relativePath": "process-1/stderr.bin",
+      "source": "/tmp/android-mcp-sources-plan/6317e8dacbef4c7992af27880b2e7d8a/fixture with spaces/process-1/stderr.bin",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-plan-cli-live-evidence/process-1/stderr.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    {
+      "relativePath": "process-1/stdout.bin",
+      "source": "/tmp/android-mcp-sources-plan/6317e8dacbef4c7992af27880b2e7d8a/fixture with spaces/process-1/stdout.bin",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-plan-cli-live-evidence/process-1/stdout.bin",
+      "sha256": "127675a737a3c4d92983e67c2b92692a03130415a401a4f6dcab539e57627e8a",
+      "length": 13264
+    },
+    {
+      "relativePath": "process-2/stderr.bin",
+      "source": "/tmp/android-mcp-sources-plan/6317e8dacbef4c7992af27880b2e7d8a/fixture with spaces/process-2/stderr.bin",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-plan-cli-live-evidence/process-2/stderr.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    {
+      "relativePath": "process-2/stdout.bin",
+      "source": "/tmp/android-mcp-sources-plan/6317e8dacbef4c7992af27880b2e7d8a/fixture with spaces/process-2/stdout.bin",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-plan-cli-live-evidence/process-2/stdout.bin",
+      "sha256": "6d5c93772870e500dd031dcb83a1e5cfd7e4c3332aa1c3b2625a5417928fa058",
+      "length": 2843
+    },
+    {
+      "relativePath": "isolated nuke runtime/.nuke/build.schema.json",
+      "source": "/tmp/android-mcp-sources-plan/6317e8dacbef4c7992af27880b2e7d8a/fixture with spaces/isolated nuke runtime/.nuke/build.schema.json",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-plan-cli-live-evidence/isolated nuke runtime/.nuke/build.schema.json",
+      "sha256": "75a55ec97e1f0e5895fea79a5c0f34c4937ccd0a847202342a4fa1e25123c217",
+      "length": 8764
+    },
+    {
+      "relativePath": "isolated nuke runtime/.nuke/parameters.json",
+      "source": "/tmp/android-mcp-sources-plan/6317e8dacbef4c7992af27880b2e7d8a/fixture with spaces/isolated nuke runtime/.nuke/parameters.json",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-plan-cli-live-evidence/isolated nuke runtime/.nuke/parameters.json",
+      "sha256": "350a88dc9a193d4283df18bd69605fa5f55bccaff68035f712d3741a012345a1",
+      "length": 39
+    },
+    {
+      "relativePath": "isolated nuke runtime/.nuke/temp/build-attempt.log",
+      "source": "/tmp/android-mcp-sources-plan/6317e8dacbef4c7992af27880b2e7d8a/fixture with spaces/isolated nuke runtime/.nuke/temp/build-attempt.log",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-plan-cli-live-evidence/isolated nuke runtime/.nuke/temp/build-attempt.log",
+      "sha256": "964c0b9016b1db7ec1c8394a7c6149c96bd720af856edc8499c2f16f487ed888",
+      "length": 33
+    },
+    {
+      "relativePath": "isolated nuke runtime/.nuke/temp/build.2026-10-28_02-20-07.log",
+      "source": "/tmp/android-mcp-sources-plan/6317e8dacbef4c7992af27880b2e7d8a/fixture with spaces/isolated nuke runtime/.nuke/temp/build.2026-10-28_02-20-07.log",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-plan-cli-live-evidence/isolated nuke runtime/.nuke/temp/build.2026-10-28_02-20-07.log",
+      "sha256": "ca591b637245a6c37c83d1d1c478c3b7cdd45e865bf50148442d07496a11ab85",
+      "length": 1535
+    },
+    {
+      "relativePath": "isolated nuke runtime/.nuke/temp/build.2026-10-28_02-20-09.log",
+      "source": "/tmp/android-mcp-sources-plan/6317e8dacbef4c7992af27880b2e7d8a/fixture with spaces/isolated nuke runtime/.nuke/temp/build.2026-10-28_02-20-09.log",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-plan-cli-live-evidence/isolated nuke runtime/.nuke/temp/build.2026-10-28_02-20-09.log",
+      "sha256": "b6de7d5bdaa2abdf3cb539665feb585d58e706e9a2e696cd151c31e7fe0f46a8",
+      "length": 2310
+    },
+    {
+      "relativePath": "isolated nuke runtime/.nuke/temp/build.log",
+      "source": "/tmp/android-mcp-sources-plan/6317e8dacbef4c7992af27880b2e7d8a/fixture with spaces/isolated nuke runtime/.nuke/temp/build.log",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-plan-cli-live-evidence/isolated nuke runtime/.nuke/temp/build.log",
+      "sha256": "130b6102f1434aa9b85c35dca43d3a0f9c38e74833a669131508902d2bf05530",
+      "length": 2580
+    }
+  ],
+  "observations": [
+    "SAME native test asserted first CLI exit0, second existing-output exit nonzero, unchanged manifest and input identities.",
+    "Current output contains exactly one native pure plan manifest; no source or bundle bytes were supplied.",
+    "Typed stdout retains canonical archive proof codes1-4, immutable snapshot code0 with null bundle path and historical cache count code7 with null cache pin.",
+    "Second stdout contains the exact fresh-output rejection; native probe source/TRX support argv and exit claims, not an independent OS-level argv capture.",
+    "Mixed gate has one foreign Browser QA-overflow failure; no whole-project green or hostile acceptance claim."
+  ],
+  "hostileAcceptance": "pending parent whole-project acceptance"
+}

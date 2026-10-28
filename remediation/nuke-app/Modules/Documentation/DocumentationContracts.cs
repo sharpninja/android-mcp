@@ -14,7 +14,8 @@ public interface IDocumentationProjector
 
 public sealed record DesignIssue(string Code, string ArtifactPath, string Subject);
 public sealed record ModuleValidationInput(System.Text.Json.Nodes.JsonObject ModuleContract, string CodeMarkdown);
-public sealed record ModuleValidationResult(int ClassCount, IReadOnlyList<string> ModuleEdges, IReadOnlyList<DesignIssue> Issues);
+public sealed record ModuleValidationResult(int ClassCount, IReadOnlyList<string> ModuleEdges, IReadOnlyList<DesignIssue> Issues,
+    IReadOnlyList<string>? DeclaredClasses=null);
 public interface IModuleGraphValidator
 {
     ModuleValidationResult Validate(ModuleValidationInput input);

@@ -1,0 +1,78 @@
+{
+  "at": "2026-10-27T23:53:56",
+  "workspace": "/home/sharpninja/github/2026-10-26/task-3",
+  "files": [
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/StrictJsonInspectionContracts.cs.template",
+      "target": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Core/StrictJsonInspectionContracts.cs",
+      "sha256": "60e7329aff01f6182f0cd071c784c89ac2a25a59d06b38c7f7cc3bddc1a83b9c",
+      "state": "mock-only-ready",
+      "productionImplementationIncluded": false
+    },
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/StrictJsonInspectionMockTests.cs.template",
+      "target": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Core/StrictJsonInspectionMockTests.cs",
+      "sha256": "8559327eb9782af2c21b9d8ddb350fa057b2d70cbf9613144bd94da5500fb46f",
+      "state": "mock-only-ready",
+      "productionImplementationIncluded": false
+    },
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/ApexManifestContracts.cs.template",
+      "target": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Sources/ApexManifestContracts.cs",
+      "sha256": "ed2d2e89214028ac471d0bf35e0d2ab1efad0b6615e4e992b5012286409138b2",
+      "state": "mock-only-ready",
+      "productionImplementationIncluded": false
+    },
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/ApexManifestContractCases.cs.template",
+      "target": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/ApexManifestContractCases.cs",
+      "sha256": "621bf44c9474088c440fcbda61f2dae7a41c9bbc3ad0660fb3a717086ed4fe75",
+      "state": "mock-only-ready",
+      "productionImplementationIncluded": false
+    },
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/ApexManifestMockGateTests.cs.template",
+      "target": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/ApexManifestMockGateTests.cs",
+      "sha256": "984df3d4fa4589ff5fed6681a39a18e3bb710e04f9d15bdbe54535e11754cb6b",
+      "state": "mock-only-ready",
+      "productionImplementationIncluded": false
+    },
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/NativeAbiContracts.cs.template",
+      "target": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Sources/NativeAbiContracts.cs",
+      "sha256": "a7714f4475341bb1acfa3423681dc280a2cc8d0f508d243a5fd17819ff4d1723",
+      "state": "mock-only-ready",
+      "productionImplementationIncluded": false
+    },
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/NativeAbiContractCases.cs.template",
+      "target": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/NativeAbiContractCases.cs",
+      "sha256": "37d727e4431aa71ec061b9119c10909b7f213a92d1b6bc55e9d94e8c6bc90f9d",
+      "state": "mock-only-ready",
+      "productionImplementationIncluded": false
+    },
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/NativeAbiMockGateTests.cs.template",
+      "target": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/NativeAbiMockGateTests.cs",
+      "sha256": "f6315875a69ca7060ffb51f67cebfe0503b89ee2432d854e2bea8402ae1e61eb",
+      "state": "mock-only-ready",
+      "productionImplementationIncluded": false
+    }
+  ],
+  "fixtureGroups": {
+    "strictJson": 46,
+    "apex": 23,
+    "nativeAbi": 18
+  },
+  "requirements": [
+    "FR-BUILD-004",
+    "TEST-BUILD-004"
+  ],
+  "dependencies": [
+    "Existing Core CanonicalJsonErrors constants",
+    "Existing Tests/Sources SourceExtractionCase and SourceMutationCases",
+    "Existing xUnit/BCL framework references only"
+  ],
+  "inspectorProductionAuth": "Pending green mock gate and parent acknowledgment",
+  "currentAppState": "checkpoint003 frozen; no copy authorized by this map"
+}

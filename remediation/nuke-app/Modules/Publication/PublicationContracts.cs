@@ -1,4 +1,5 @@
 using AndroidMcp.BuildTool.Core;
+using AndroidMcp.BuildTool.Modules.Sources.Acquisition;
 
 namespace AndroidMcp.BuildTool.Publication;
 
@@ -26,13 +27,15 @@ public interface IPublicationStager
 // The recipe and lock are data. Planning never reads arbitrary source files,
 // starts a process, downloads, extracts, or claims a historical byte match.
 public sealed record RehydrationPlanRequest(Artifact Recipe, Artifact Lock, string? ExpectedRelease = null,
-    int? Limit = null, bool Resume = true, bool AllowFileFixtures = false);
+    int? Limit = null, bool Resume = true, bool AllowFileFixtures = false,
+    AcquisitionCompatibilityProfile Profile = AcquisitionCompatibilityProfile.CanonicalRestore);
 public sealed record SnapshotRequirement(string SourcePath, string LocalPath, string? BundlePath, string Sha256, long? Length);
 public sealed record ArchiveRequirement(string SourcePath,string LocalPath,string Url,string Member,string? ArchiveSha256,string MemberSha256);
 public sealed record RehydrationPlan(string Release, string RecipeSha256, int SourceRows, int UniqueSourcePaths,
     long KnownSourceBytes, int UnknownSizePaths, IReadOnlyList<SnapshotRequirement> RequiredSnapshots,
     IReadOnlyList<OperationKey> Operations, Artifact Manifest, bool Network, bool Complete,
-    bool HistoricalByteIdentityClaimed, IReadOnlyList<string> Caveats,IReadOnlyList<ArchiveRequirement>? ArchiveMembers=null);
+    bool HistoricalByteIdentityClaimed, IReadOnlyList<string> Caveats,IReadOnlyList<ArchiveRequirement>? ArchiveMembers=null,
+    RehydrationSourceProjection? SourceProjection=null);
 public sealed record RehydrationPlanResult(RehydrationPlan? Plan, IReadOnlyList<PublicationIssue> Issues)
 {
     public bool IsValid => Plan is not null && Issues.Count == 0;

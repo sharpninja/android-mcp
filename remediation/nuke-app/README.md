@@ -1,33 +1,33 @@
 # Native NUKE migration checkpoint
 
-This is an incomplete migration. [Current status](../../MIGRATION-STATUS.md) and the [copied-gate receipt](../../validation/nuke-publication-checkpoint.json) distinguish verified native cases from remaining legacy parity. One production C# NUKE application hosts all categories; Tests is a test library. Never execute legacy Python or custom Node.
+This migration is incomplete. [Current progress](../../MIGRATION-STATUS.md), the [copied-gate receipt](../../validation/nuke-publication-checkpoint.json) and [sealed component status](../../validation/nuke-migration-checkpoint.json) distinguish verified scope from remaining parity. Never execute retained Python/custom Node commands.
 
-## Bootstrap and local verification
+## Native local verification
 
-Install the exact approved SDK from global.json. Dependencies and sources are pinned by the project/lock files and NuGet.Config. Select an installed native .NET executable, without a provisioning shim.
-
-From remediation/nuke-app in PowerShell:
+Install the exact approved SDK from global.json and select its native executable, without a provisioning shim. NuGet.Config and package lock files pin dependencies. From remediation/nuke-app in PowerShell:
 
 ```powershell
 $dotnetHost = '/absolute/path/to/approved/native/dotnet'
 & $dotnetHost restore Tests/AndroidMcp.Build.Tests.csproj --configfile NuGet.Config --locked-mode
 & $dotnetHost build AndroidMcp.Build.csproj --no-restore
 & $dotnetHost run --no-build --no-restore -- --target Validate --root (Get-Location).Path --operation MockGate --dotnet-host $dotnetHost
-```
-
-The complete suite additionally requires a pinned native Java parser manifest and its verified native artifact. Use Sources/NativeParser with an approved compiler identity and output root; its authoritative required/optional parameters are defined once in Core/OperationRegistry.cs. Native source acquisition may access the network; select its pins and compiler deliberately. A prior manifest and artifact can be reused after verifying their recorded hashes. No system parser substitution or Python/Node bootstrap is used.
-
-```powershell
 $nativeManifest = '/absolute/path/to/verified/native-source-lock.json'
 & $dotnetHost run --no-build --no-restore -- --target Validate --root (Get-Location).Path --operation Tests --java-native-manifest $nativeManifest --dotnet-host $dotnetHost
 ```
 
-Full TRX and process logs stay under ignored artifacts/. The publication receipt carries hashes and counts, not captured binaries or full logs. MockGate proves assertion discrimination with fakes; the full Tests operation also exercises real bindings. Neither alone establishes full legacy or deployed-runtime parity.
+The complete suite requires the pinned Java parser manifest and native artifact. Sources/NativeParser admits the selected compiler and pinned sources; its legal parameters are defined once in Core/OperationRegistry.cs. Reuse existing artifacts only after verifying their recorded hashes. Do not substitute a system parser or bootstrap Python/Node. Full TRX/process outputs stay under ignored artifacts/; concise publication receipts carry their hashes and counts. Normal tests include controlled real bindings, not an external HV launch.
 
-## Commands and boundaries
+## Read-only publication check
 
-Core/OperationRegistry.cs is authoritative for legal category/operation pairs, parameters, dependencies and executable adapters. Functional categories become NUKE targets; one --operation parameter selects a task. OperationHelpBuilder produces help from that registry and pinned project metadata; no independent command vocabulary is maintained here.
+Publish/Check reads tracked paths and filesystem metadata, applies the shared allowlist policy and retains complete local captures. It never stages, commits or pushes Git. Select an admitted native Git identity with the exact observed executable path, SHA256 and version using the shared ToolIdentity schema. Store the machine-local identity descriptor outside tracked files, and use a fresh receipt root.
 
-Kotlin remains the Android server/UI language. Gradle remains a thin orchestration facade. Sources, schemas and the UI blueprint remain authoritative; generated outputs are views. Publication Stage copies an immutable bundle, not a git index, and never commits or pushes.
+```powershell
+$checkout = '/absolute/path/to/checkout'
+$gitIdentity = '/absolute/path/to/local/admitted-git-identity.json'
+$receipts = '/absolute/path/to/fresh/local/receipts'
+& $dotnetHost run --no-build --no-restore -- --target Publish --root (Get-Location).Path --operation Check --git-checkout $checkout --git-identity $gitIdentity --receipt-root $receipts
+```
 
-The migration belongs on the feature branch and existing draft PR to main. Finish migration and normal verification, then mark ready; HV and remediation occur in the PR afterward. No HV before ready, no GitHub Actions, no main push and no merge without separate authorization.
+Core/OperationRegistry.cs and its generated OperationHelpBuilder view are the sole command/parameter vocabulary. Functional categories are targets and --operation selects a task. Publication Stage means an immutable copied bundle, not a Git index. Sources/Fetch defaults to the validated pinned canonical restore profile; no missing immutable snapshot or archive proof silently turns into a network fallback.
+
+Keep the feature branch and existing draft PR. Complete migration and normal verification before marking ready; HV/remediation happen in the PR afterward. No GitHub Actions, pre-ready HV, main push or merge.

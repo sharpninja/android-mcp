@@ -1,0 +1,136 @@
+{
+  "at": "2026-10-28T01:06:09",
+  "state": "QA production staged; parent copy and native execution pending",
+  "requirements": [
+    "FR-BUILD-003",
+    "FR-BUILD-005",
+    "TEST-BUILD-003",
+    "TEST-BUILD-005"
+  ],
+  "sessionId": "Codex-20261028T040249Z-plugin-session",
+  "requestId": "req-20261028T040251Z-turn-5515",
+  "gates": [
+    {
+      "sha256": "219c7587d1c0532a454205f8464ad7a4fedce02563a30190a40b4cbc1f2bdae7",
+      "claims": [
+        {
+          "failed": 0,
+          "class": "CdpMockTests",
+          "passed": 18,
+          "skipped": 0
+        },
+        {
+          "failed": 0,
+          "class": "CdpLifecycleMockTests",
+          "passed": 3,
+          "skipped": 0
+        },
+        {
+          "failed": 0,
+          "class": "CdpTransportMockTests",
+          "passed": 14,
+          "skipped": 0
+        }
+      ],
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261028T0019475790572-166ee1d9909346a8a23fc7f82aaf5b31/tests.trx"
+    },
+    {
+      "sha256": "714af8177cfc93fb06fcd45d5773a2a0ded96e09a428c2377aa471146ef29ffa",
+      "claims": [
+        {
+          "failed": 0,
+          "class": "CdpTransportRealTests",
+          "passed": 7,
+          "skipped": 0
+        },
+        {
+          "failed": 0,
+          "class": "BrowserQaMockTests",
+          "passed": 14,
+          "skipped": 0
+        },
+        {
+          "failed": 0,
+          "class": "CdpRealTests",
+          "passed": 9,
+          "skipped": 0
+        },
+        {
+          "failed": 0,
+          "class": "CdpLifecycleRealTests",
+          "passed": 3,
+          "skipped": 0
+        }
+      ],
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261028T0032088974137-6ae377b388274cc68d47b2e59cdb180c/tests.trx"
+    },
+    {
+      "sha256": "949b8e0f2955b091eb711360e6be850a733e8c5392d2b2e09e5cd2df57ca32fb",
+      "claims": [
+        {
+          "failed": 0,
+          "class": "ProcessSessionEnvironmentMockTests",
+          "passed": 2,
+          "skipped": 0
+        },
+        {
+          "failed": 0,
+          "class": "BrowserQaDenominatorMockTests",
+          "passed": 2,
+          "skipped": 0
+        }
+      ],
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261028T0047366853112-ac0d0a73a57a4c16af68b0b7d4c04ad5/tests.trx"
+    },
+    {
+      "sha256": "c9c0df0db3d9edb315d997620cf88fb8fe96ddf4e5a99b5eef348e3ef683a869",
+      "claims": [
+        {
+          "failed": 0,
+          "class": "ProcessSessionEnvironmentRealTests",
+          "passed": 2,
+          "skipped": 0
+        }
+      ],
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261028T0053017392896-585f00d4780b45b0abd56331edbecfda/tests.trx"
+    }
+  ],
+  "stagedFiles": [
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/browser/BrowserDom.cs",
+      "sha256": "d301463a18587fc353ea516bf358f75dfed8a2cbbe5319d3b4c18508d72cfa94"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/browser/BrowserSession.cs",
+      "sha256": "cd0500c023facfec843f9a864bc7f9efe63bfae6573d873f6e78fd2b6c2692e1"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/browser/BrowserQaOperation.cs",
+      "sha256": "fcad99bf96058d267bf19ceae8b34ddb4ab33dfb7d80eb3aee6400c1e4052bbb"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/browser/BrowserQaRealTests.cs",
+      "sha256": "2d23351580ae1dbbb3a85979888909f212c222b0bc180f7c57c5f3d209faa559"
+    }
+  ],
+  "copyHelper": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/browser/Copy-QaProduction.ps1",
+  "nativeTestsPending": {
+    "BrowserQaRealTests": 7,
+    "BrowserQaDenominatorRealTests": 2
+  },
+  "actualBrowserExecuted": false,
+  "fullUiSvgQaExecuted": false,
+  "nativeC4QaExecuted": false,
+  "visualInspectionExecuted": false,
+  "acceptedComplete": false,
+  "safeToDelete": false,
+  "logging": {
+    "destination": "Required Codex MCP plugin, LAB-OMARCHY:7147, workspace task-3",
+    "action": "Browser-Work.ps1 -Action LogProgress",
+    "state": "denied-before-execution; not retried",
+    "needs": "Fresh explicit operator authorization before retry",
+    "reason": "Automatic approval review stated that the operator had not authorized sending project paths, test hashes and design decisions to that destination."
+  },
+  "accuracy": 99,
+  "accuracyScope": "Mechanically verified selected test classes, source hashes and explicit unexecuted scope"
+}

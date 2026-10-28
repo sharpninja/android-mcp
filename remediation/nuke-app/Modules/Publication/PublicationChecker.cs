@@ -1,14 +1,13 @@
-using System.Text;
 using System.Text.Json;
-using System.Text.RegularExpressions;
 using AndroidMcp.BuildTool.Core;
 
 namespace AndroidMcp.BuildTool.Publication;
 
 // Pure policy semantics. Filesystem observations come from the root adapter;
 // artifact-store boundary validation still applies independently.
-public sealed class PublicationChecker(ICanonicalJson canonical) : IPublicationChecker
+public sealed class PublicationChecker(ICanonicalJson canonical,IGlobMatcher? globMatcher=null) : IPublicationChecker
 {
+    private readonly IGlobMatcher matcher=globMatcher??new GlobMatcher();
     public PublicationCheckResult Check(ReadOnlyMemory<byte> policy, IReadOnlyList<PublicationFile> files)
     {
         var issues=new List<PublicationIssue>();
@@ -38,8 +37,8 @@ public sealed class PublicationChecker(ICanonicalJson canonical) : IPublicationC
             else if(!portable.Add(file.Path))issues.Add(new("PORTABLE_PATH_COLLISION",file.Path));
             if(file.Length<0)issues.Add(new("INVALID_LENGTH",file.Path));
             if(!PublicationNames.Relative(file.Path)){issues.Add(new("UNSAFE_PATH",file.Path));continue;}
-            if(!allow.Any(p=>PublicationGlob.Match(file.Path,p))){issues.Add(new("NOT_ALLOWED",file.Path));continue;}
-            if(deny.Any(p=>PublicationGlob.Match(file.Path,p)))issues.Add(new("DENIED",file.Path));
+            if(!allow.Any(p=>matcher.Matches(file.Path,p,GlobMatchingProfile.PublicationFilename))){issues.Add(new("NOT_ALLOWED",file.Path));continue;}
+            if(deny.Any(p=>matcher.Matches(file.Path,p,GlobMatchingProfile.PublicationFilename)))issues.Add(new("DENIED",file.Path));
             if(file.Kind!=PublicationFileKind.Regular)issues.Add(new("NOT_REGULAR",file.Path));
             if(file.Length>maximum)issues.Add(new("TOO_LARGE",file.Path));
         }
@@ -57,38 +56,3 @@ internal static class PublicationNames
         value!="." && value!=".." && value.All(c=>char.IsAsciiLetterOrDigit(c) || c is '-' or '_' or '.');
 }
 
-// fnmatchcase semantics used by the existing allowlist: '*' includes '/', '?'
-// is one character and bracket expressions support ranges/negation. No glob
-// filesystem expansion, culture-dependent case folding, or shell invocation.
-internal static class PublicationGlob
-{
-    public static bool Match(string text,string glob)
-    {
-        var b=new StringBuilder("\\A");
-        for(var i=0;i<glob.Length;i++)
-        {
-            var c=glob[i];
-            if(c=='*')b.Append(".*");
-            else if(c=='?')b.Append('.');
-            else if(c=='[')
-            {
-                var end=i+1;
-                if(end<glob.Length && glob[end]=='!')end++;
-                if(end<glob.Length && glob[end]==']')end++;
-                while(end<glob.Length && glob[end]!=']')end++;
-                if(end==glob.Length){b.Append("\\[");continue;}
-                var chars=glob[(i+1)..end];
-                b.Append('[');
-                if(chars.StartsWith('!')){b.Append('^');chars=chars[1..];}
-                // Escape regex-only class operators; retain glob ranges.
-                foreach(var item in chars)
-                { if(item is '\\' or ']' or '[' or '^')b.Append('\\');b.Append(item); }
-                b.Append(']');i=end;
-            }
-            else b.Append(Regex.Escape(c.ToString()));
-        }
-        b.Append("\\z");
-        try{return Regex.IsMatch(text,b.ToString(),RegexOptions.CultureInvariant|RegexOptions.Singleline|RegexOptions.NonBacktracking);}
-        catch(ArgumentException){return false;}
-    }
-}

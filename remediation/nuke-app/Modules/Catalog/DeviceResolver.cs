@@ -166,17 +166,31 @@ public sealed class DeviceResolver
         { writer.WriteStartObject();writer.WriteString("entry_id",dependency.EntryId);writer.WriteString("schema_hash",dependency.ContractHash);writer.WriteEndObject(); }
         writer.WriteEndArray();
     })));
-    public JsonElement Resolve(IReadOnlyList<JsonElement> inventory,JsonElement facts,DeviceResolutionPins pins)
+    internal void ValidateSnapshot(JsonElement snapshot)=>Validate(snapshot,"Snapshot");
+    internal void ValidateFacts(JsonElement facts)
     {
         _=canonical.Serialize(facts);Validate(facts,"Facts");
         if(!DateTimeOffset.TryParse(Text(facts,"observed_at"),CultureInfo.InvariantCulture,DateTimeStyles.None,out _)) throw new InvalidDataException("Invalid observation timestamp");
+    }
+    internal void ValidateInventoryEntity(JsonElement entity)
+    { _=canonical.Serialize(entity);Validate(entity,"InventoryEntity"); }
+    internal string InventoryDigest(IReadOnlyList<JsonElement> inventory)
+    {
+        using var bytes=new MemoryStream();
+        foreach(var entity in inventory.OrderBy(x=>Text(x,"entry_id"),StringComparer.Ordinal))
+        { bytes.Write(canonical.Serialize(entity));bytes.WriteByte((byte)'\n'); }
+        return ContentHash.Sha256(bytes.GetBuffer().AsSpan(0,checked((int)bytes.Length)));
+    }
+    public JsonElement Resolve(IReadOnlyList<JsonElement> inventory,JsonElement facts,DeviceResolutionPins pins)
+    {
+        ValidateFacts(facts);
         if(facts.GetProperty("capability_epoch").GetInt64()!=pins.CapabilityEpoch) throw new InvalidDataException("Captured facts capability epoch mismatch");
         foreach(var counter in new[]{pins.CatalogGeneration,pins.OverlayGeneration,pins.CapabilityEpoch,pins.ViewGeneration})
             if(counter<0 || counter>CounterLimit) throw new InvalidDataException("Invalid snapshot counter");
         var rows=new SortedDictionary<string,Row>(StringComparer.Ordinal);
         foreach(var entity in inventory)
         {
-            _=canonical.Serialize(entity);Validate(entity,"InventoryEntity");var key=Text(entity,"entry_id");var kind=Text(entity,"entity_kind");
+            ValidateInventoryEntity(entity);var key=Text(entity,"entry_id");var kind=Text(entity,"entity_kind");
             if(rows.ContainsKey(key)) throw new InvalidDataException("Duplicate inventory identity");
             var variants=new List<Variant>();
             foreach(var item in entity.GetProperty("variants").EnumerateArray())
@@ -236,10 +250,7 @@ public sealed class DeviceResolver
             row.SchemaHash=canonical.Hash(Record(writer=>
             { writer.WriteStartObject();writer.WriteString("schema_format","closure3");writer.WriteString("contract_hash",row.ContractHash);writer.WriteString("graph_digest",row.GraphDigest);writer.WriteEndObject(); }));
         }
-        using var inventoryBytes=new MemoryStream();
-        foreach(var entity in inventory.OrderBy(x=>Text(x,"entry_id"),StringComparer.Ordinal))
-        { inventoryBytes.Write(canonical.Serialize(entity));inventoryBytes.WriteByte((byte)'\n'); }
-        var inventoryHash=ContentHash.Sha256(inventoryBytes.GetBuffer().AsSpan(0,checked((int)inventoryBytes.Length)));
+        var inventoryHash=InventoryDigest(inventory);
         var body=Record(writer=>
         {
             writer.WriteStartObject();writer.WriteString("schema_version","3.0.0");writer.WriteString("registry_id",pins.RegistryId);

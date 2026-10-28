@@ -23,7 +23,7 @@ public sealed class CdpCommandException(string method,int code,string message,Js
 public sealed class CdpProtocolException(string message,Exception? inner=null):IOException(message,inner);
 public sealed class CdpDisconnectedException(string message):IOException(message);
 public sealed record BrowserQaRequest(string ProjectRoot,string OutputRoot,ToolIdentity Browser,
-    string RendererProfile="native",int ViewportWidth=1440,int ViewportHeight=960);
+    string RendererProfile="native",int ViewportWidth=1440,int ViewportHeight=960,int ExpectedArchitectureDiagrams=21);
 public sealed record BrowserQaResult(StoredArtifact Receipt,bool Passed,int Slides,int Images,int SvgFiles,
     IReadOnlyList<StoredArtifact> Captures,IReadOnlyList<string> Failures);
 public interface IBrowserQaOperation

@@ -72,6 +72,6 @@ public sealed class ScriptedCdpWire(CdpCase test):ICdpMessageTransport
         return Task.CompletedTask;
     }
     public async Task<ReadOnlyMemory<byte>?> ReceiveAsync(CancellationToken cancellationToken=default)
-    {var bytes=await incoming.Reader.ReadAsync(cancellationToken);lock(Received)Received.Add(bytes);return bytes is null?null:new ReadOnlyMemory<byte>(bytes);}
+    {var bytes=await incoming.Reader.ReadAsync(cancellationToken);lock(Received)Received.Add(bytes);if(bytes is null)return (ReadOnlyMemory<byte>?)null;return new ReadOnlyMemory<byte>(bytes);}
     public ValueTask DisposeAsync(){incoming.Writer.TryComplete();return ValueTask.CompletedTask;}
 }

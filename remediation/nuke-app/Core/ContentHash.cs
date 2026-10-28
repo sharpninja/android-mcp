@@ -8,6 +8,7 @@ namespace AndroidMcp.BuildTool.Core;
 public static class ContentHash
 {
     public static string Sha256(ReadOnlySpan<byte> bytes)=>Convert.ToHexStringLower(SHA256.HashData(bytes));
+    public static string Sha256(Stream bytes)=>Convert.ToHexStringLower(SHA256.HashData(bytes));
     public static string AidlSha1Legacy(ReadOnlySpan<byte> bytes)=>LegacySha1(bytes,[]);
     public static string GitBlobSha1Legacy(ReadOnlySpan<byte> payload)
     {

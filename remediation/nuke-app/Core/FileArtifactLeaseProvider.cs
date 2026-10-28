@@ -10,13 +10,15 @@ public sealed class FileArtifactLeaseProvider(string leaseRoot):IArtifactLeasePr
     {
         if(string.IsNullOrWhiteSpace(scope))throw new ArgumentException("Lease scope is required.",nameof(scope));
         if(!OperatingSystem.IsLinux() && !OperatingSystem.IsWindows())throw new PlatformNotSupportedException("File leases are verified on Linux/Windows only.");
-        var path=ArtifactPaths.Resolve(leaseRoot,ContentHash.Sha256(Encoding.UTF8.GetBytes(scope))+".lock");
+        var relativeLeasePath=ContentHash.Sha256(Encoding.UTF8.GetBytes(scope))+".lock";
+        var path=ArtifactPaths.Resolve(leaseRoot,relativeLeasePath);
         var gate=Gates.GetOrAdd(path,_=>new SemaphoreSlim(1,1));
         await gate.WaitAsync(cancellationToken);
         FileStream? stream=null;
         try
         {
             Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+            path=ArtifactPaths.Resolve(leaseRoot,relativeLeasePath);
             stream=new FileStream(path,FileMode.OpenOrCreate,FileAccess.ReadWrite,FileShare.ReadWrite);
             while(true)
             {

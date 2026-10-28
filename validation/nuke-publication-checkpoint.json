@@ -1,94 +1,53 @@
 {
-  "checkpoint": "003",
-  "localTimestamp": "2026-10-27T23:57:56",
+  "checkpoint": "004",
+  "localTimestamp": "2026-10-28T02:40:20",
   "sdk": "10.0.403",
-  "handoffFiles": 299,
-  "handoffBytes": 3273209,
-  "manifestSha256": "8d1cd943f0ccc31d5065943aa49585b32e59f0ebe4f6cef2243af01629329e68",
-  "portableDeltaSha256": "6926210f9686aa6f0785dda97f07f1bd68ef6c349293be14b0d3daeb2d5af28b",
-  "portableDeltaFiles": 7,
-  "goldenFixtureBytes": 32513,
-  "sourcePriorAndPostcopyPinsVerified": true,
+  "manifestSha256": "62eefa146084b28b415c0e1f83e904708a7bacb00cfac0e1cf0e3689a2ed6186",
+  "handoffFiles": 522,
+  "handoffBytes": 5797451,
+  "sourcePriorPostcopyPinsVerified": true,
+  "originalInputsRetained": true,
   "lockedRestoreSucceeded": true,
   "nativeHostBuildSucceeded": true,
-  "nativeTestBuildSucceeded": true,
-  "warnings": 0,
-  "errors": 0,
-  "scope": "Full currently implemented C# suite, mock and real bindings; not complete legacy parity",
-  "total": 24517,
-  "passed": 24517,
+  "total": 37372,
+  "passed": 37372,
   "failed": 0,
   "notExecuted": 0,
-  "trxSha256": "c6960a57601f3dc524ce9d28be86ef1337979caa18f9cbf8858da5b564641af0",
-  "trxLocalRelativePath": "remediation/nuke-app/artifacts/tests/20261027T2355593696151-98d7489de1db42e29fbeaac2b09b45e2/tests.trx",
-  "sourceOwnerTrxSha256": "4abb7928083c084949288c352ac7aa50de79657386c71da1e386bb935f84232c",
+  "warnings": 0,
+  "errors": 0,
+  "scope": "Full currently implemented C# suite, mock and real bindings; not complete legacy parity or independent acceptance",
+  "trxSha256": "6e432569c2200d35584a84943a53b59cedfa3320964b5fb49ee313716eeef8e8",
+  "trxLocalRelativePath": "remediation/nuke-app/artifacts/tests/20261028T0238185766862-bba9264601b64f8ebf5d896290a4d85c/tests.trx",
+  "sourceOwnerTrxSha256": "ae345d3950aacef09a58fdae9ba1489a62044c7257016cd2e93e0f1fc972de27",
   "nativeJavaManifestSha256": "e9fa6885c4d800dd1c74ef72f478f0b81885811f2b9fb84665d76dc18f3ff0c1",
-  "architectureFocused": {
-    "trxLocalRelativePath": "remediation/nuke-app/artifacts/tests/20261027T2355511129071-355e3945b4454bd8ab6a077e8bb9ac02/tests.trx",
-    "failed": 0,
-    "total": 48,
-    "passed": 48,
-    "notExecuted": 0,
-    "trxSha256": "6758c0bd2dd81e4b59b1cf03ac22753c090b43ed0e9dcc603fd9b3589ade7092"
-  },
-  "priorFailedGate": {
-    "trxLocalRelativePath": "remediation/nuke-app/artifacts/tests/20261027T2349314186073-86cbfd134cc74719b435f31519f3b1e5/tests.trx",
-    "failed": 4,
-    "total": 24505,
-    "passed": 24501,
-    "notExecuted": 0,
-    "trxSha256": "8a89b519a23e19b4510045d9ad9c92ab3a41844991e987b898a18eaece2c2901",
-    "reason": "Six pinned editable code-view goldens were omitted from source handoff; MemberData fixture creation failed. Seven-row portable correction preserves assertion/output bytes and restores twelve discovery cases."
-  },
-  "publicationScope": [
-    {
-      "name": "OperationHelpMockTests",
-      "passed": 20
-    },
-    {
-      "name": "OperationHelpRealTests",
-      "passed": 10
-    },
-    {
-      "name": "PublicationMockTests",
-      "passed": 34
-    },
-    {
-      "name": "PublicationRealTests",
-      "passed": 17
-    },
-    {
-      "name": "RehydrationBoundaryMockTests",
-      "passed": 32
-    },
-    {
-      "name": "RehydrationBoundaryRealTests",
-      "passed": 16
-    },
-    {
-      "name": "RehydrationMockTests",
-      "passed": 48
-    },
-    {
-      "name": "RehydrationRealTests",
-      "passed": 24
-    },
-    {
-      "name": "StageMockTests",
-      "passed": 40
-    },
-    {
-      "name": "StageRealTests",
-      "passed": 20
-    }
-  ],
-  "executableOperations": [
+  "ownerVerifiedCliOperations": [
     "Validate/MockGate",
     "Validate/Tests",
     "Design/Assets",
-    "Sources/NativeParser"
+    "Sources/NativeParser",
+    "Sources/Fetch",
+    "Sources/Plan",
+    "Publish/Check"
   ],
-  "registeredOperations": 9,
+  "registeredOperations": 11,
+  "verifiedStreaming": {
+    "sharedFileArtifactStore": true,
+    "boundedComparisonBytes": 81920,
+    "mockCases": 52,
+    "byteHashSeamPreserved": true,
+    "nativeCases": 26
+  },
+  "browserCases": 9,
+  "browserCasesPassed": 9,
+  "historicalFailedReceiptsRetainedLocally": true,
+  "priorCopiedGate": {
+    "passed": 37359,
+    "total": 37372,
+    "notExecuted": 0,
+    "trxSha256": "c06f6ce8ef3a29754de700e183f803bc4853a56271e6466a577c722909dd8810",
+    "reason": "All13failures reported Disk quota exceeded under /tmp, including native compiler stderr. Retained first outputs and reran unchanged sources with owned temp root under ignored artifacts.",
+    "failed": 13
+  },
   "migrationComplete": false,
   "productionParityProven": false,
   "independentAcceptance": false,
@@ -96,11 +55,15 @@
   "customNodeExecuted": false,
   "hvExecuted": false,
   "githubActions": [],
-  "reviewOrder": "Complete migration and normal verification; mark draft ready; then review/remediate in PR. No merge authorization.",
+  "reviewOrder": "Finish migration and normal verification; mark existing draft PR ready; review/remediate in PR afterward. No merge authorization.",
+  "leanBoundary": "No raw CLI/reviewer streams, private MCP/identity descriptors, binaries, generated caches or corpora. Full4.93MBhistorical inventory excluded; compact198row projection retained with original local inputs.",
   "publicationAdaptations": [
-    "Preserved publication ignore rules and FUNDING",
-    "Updated readable status/usage and exact allowlist entries",
-    "No C# source/test changes after passing copied full gate",
-    "Retained failed gate and originals; no generated build trees or native binaries published"
+    "Preserved README/ignore/allowlist/FUNDING during guarded copy",
+    "Exact source and LICENSE policy entries only",
+    "No C# changes after copied full gate"
+  ],
+  "deferredFormatting": [
+    "remediation/nuke-app/Modules/Publication/PublicationChecker.cs:58: new blank line at EOF.",
+    "remediation/nuke-app/Tests/Core/ProcessSessionStreamHashTests.cs:71: trailing whitespace."
   ]
 }

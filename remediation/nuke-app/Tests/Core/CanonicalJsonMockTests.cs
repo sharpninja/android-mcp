@@ -252,3 +252,69 @@ public sealed class ProfiledCanonicalJsonRealTests
     [Fact]
     public void NativeUnknownProfileUsesSameAssertions()=>ProfiledCanonicalJsonMockTests.AssertUndefinedProfileRejected(new CanonicalJson());
 }
+
+// Append to the owned CanonicalJsonMockTests.cs only after the current compile window.
+// Existing baseline/profile vectors and assertions remain byte-for-byte unchanged.
+public static class MixedCanonicalJsonCases
+{
+    public static IReadOnlyList<CanonicalJsonCase> Values { get; } =
+    [
+        new("MIX-01-root-duplicate-before-nonfinite","{\"x\":1,\"n\":1e400,\"x\":2}",null,CanonicalJsonErrors.DuplicateProperty),
+        new("MIX-02-sorted-earlier-child-nonfinite","{\"z\":{\"x\":1,\"x\":2},\"a\":1e400}",null,CanonicalJsonErrors.NonfiniteNumber),
+        new("MIX-03-sorted-earlier-child-duplicate","{\"z\":1e400,\"a\":{\"x\":1,\"x\":2}}",null,CanonicalJsonErrors.DuplicateProperty),
+        new("MIX-04-escaped-root-duplicate-before-child-unicode","{\"bad\":\"\\ud800\",\"x\":1,\"\\u0078\":2}",null,CanonicalJsonErrors.DuplicateProperty),
+        new("MIX-05-own-name-unicode-before-own-duplicate","{\"\\ud800\":1,\"x\":1,\"x\":2}",null,CanonicalJsonErrors.InvalidUnicode),
+        new("MIX-06-own-duplicate-before-later-own-name-unicode","{\"x\":1,\"x\":2,\"\\ud800\":1}",null,CanonicalJsonErrors.DuplicateProperty),
+        new("MIX-07-array-index-nonfinite-first","[1e400,{\"x\":1,\"x\":2}]",null,CanonicalJsonErrors.NonfiniteNumber),
+        new("MIX-08-array-index-duplicate-first","[{\"x\":1,\"x\":2},1e400]",null,CanonicalJsonErrors.DuplicateProperty),
+        new("MIX-09-unicode-scalar-child-order","{\"😀\":{\"x\":1,\"x\":2},\"\uE000\":1e400}",null,CanonicalJsonErrors.NonfiniteNumber),
+        new("MIX-10-own-late-name-unicode-before-child-nonfinite","{\"a\":1e400,\"\\ud800\":1}",null,CanonicalJsonErrors.InvalidUnicode),
+        new("MIX-11-child-own-escaped-duplicate-before-its-values","{\"a\":{\"bad\":\"\\ud800\",\"x\":1,\"\\u0078\":2}}",null,CanonicalJsonErrors.DuplicateProperty)
+    ];
+    public static IEnumerable<object[]> All=>Values.SelectMany(value=>new[]{false,true}.SelectMany(element=>
+        new JsonSerializationProfile?[]{null,JsonSerializationProfile.Utf8Canonical,JsonSerializationProfile.LegacyAsciiIdentity}
+            .Select(profile=>new object[]{value,element,profile!})));
+}
+[Trait("Gate","Mock")]
+public sealed class MixedCanonicalJsonMockTests
+{
+    [Theory,MemberData(nameof(MixedCanonicalJsonCases.All),MemberType=typeof(MixedCanonicalJsonCases))]
+    public void CorrectPrecedencePasses(CanonicalJsonCase test,bool elementInput,JsonSerializationProfile? profile)
+    {
+        if(profile is null)
+        {
+            var fake=new ScriptedCanonicalJson(test);CanonicalJsonCases.AssertCase(test,elementInput,fake);Assert.Equal(2,fake.Calls);
+        }
+        else
+        {
+            var fake=new ScriptedProfiledCanonicalJson(new(test,profile.Value));
+            CanonicalJsonCases.AssertCase(test,elementInput,new ProfileBoundCanonicalJson(fake,profile.Value));Assert.Equal(2,fake.Calls);
+        }
+    }
+    [Theory,MemberData(nameof(MixedCanonicalJsonCases.All),MemberType=typeof(MixedCanonicalJsonCases))]
+    public void EveryCompetingCodeAndMissingErrorRejected(CanonicalJsonCase test,bool elementInput,JsonSerializationProfile? profile)
+    {
+        var codes=new[]{CanonicalJsonErrors.DuplicateProperty,CanonicalJsonErrors.NonfiniteNumber,CanonicalJsonErrors.InvalidUnicode,
+            CanonicalJsonErrors.InvalidJson,CanonicalJsonErrors.UndefinedValue};
+        foreach(var code in codes.Where(code=>code!=test.Error))
+        {
+            ICanonicalJson fake=profile is null ? new ScriptedCanonicalJson(test,wrongError:code) :
+                new ProfileBoundCanonicalJson(new ScriptedProfiledCanonicalJson(new(test,profile.Value),wrongError:code),profile.Value);
+            Assert.NotNull(Record.Exception(()=>CanonicalJsonCases.AssertCase(test,elementInput,fake)));
+        }
+        ICanonicalJson missing=profile is null ? new ScriptedCanonicalJson(test,omitError:true) :
+            new ProfileBoundCanonicalJson(new ScriptedProfiledCanonicalJson(new(test,profile.Value),omitError:true),profile.Value);
+        Assert.NotNull(Record.Exception(()=>CanonicalJsonCases.AssertCase(test,elementInput,missing)));
+    }
+}
+
+[Trait("Gate","Real")]
+public sealed class MixedCanonicalJsonRealTests
+{
+    [Theory,MemberData(nameof(MixedCanonicalJsonCases.All),MemberType=typeof(MixedCanonicalJsonCases))]
+    public void NativeSharedInspectionPreservesSamePrecedence(CanonicalJsonCase test,bool elementInput,JsonSerializationProfile? profile)
+    {
+        ICanonicalJson provider=profile is null ? new CanonicalJson() : new ProfileBoundCanonicalJson(new CanonicalJson(),profile.Value);
+        CanonicalJsonCases.AssertCase(test,elementInput,provider);
+    }
+}

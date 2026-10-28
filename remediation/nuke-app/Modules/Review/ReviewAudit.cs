@@ -56,7 +56,7 @@ public sealed class UnavailableReviewAudit : IReviewAudit
 
 public static class ReviewAuditPolicy
 {
-    public const string ReviewerAgent = "Claude";
+    public const string ReviewerAgent = "ClaudeCode";
     public const string PluginName = "mcpserver-claude-code-plugin";
     public static void VerifyBootstrap(ReviewSnapshot snapshot, ReviewAuditBootstrapEvidence proof)
     {
@@ -74,7 +74,7 @@ public static class ReviewAuditPolicy
         var related = CallIds(receipts);
         ReviewPrepareService.Require(proof.Persisted && proof.Head == snapshot.Head && proof.RunId == snapshot.RunId &&
             proof.ReviewerAgent == ReviewerAgent && proof.ActualModel == ReviewLaunchService.Model && proof.ActualEffort == ReviewLaunchService.Effort &&
-            Regex.IsMatch(proof.SessionId, "^Claude-[0-9]{8}T[0-9]{6}Z-[a-z0-9-]+$") && Regex.IsMatch(proof.RequestId, "^req-[0-9]{8}T[0-9]{6}Z-[a-z0-9-]+$") &&
+            Regex.IsMatch(proof.SessionId, "^ClaudeCode-[0-9]{8}T[0-9]{6}Z-[a-z0-9-]+$") && Regex.IsMatch(proof.RequestId, "^req-[0-9]{8}T[0-9]{6}Z-[a-z0-9-]+$") &&
             proof.ParentSessionId == snapshot.ParentSessionId && proof.ParentRequestId == snapshot.ParentRequestId && proof.FullVisibleVerdict == report &&
             proof.RelatedCallIds.Distinct(StringComparer.Ordinal).Count() == related.Count && proof.RelatedCallIds.ToHashSet(StringComparer.Ordinal).SetEquals(related),
             "REVIEWER_AUDIT_UNAVAILABLE", "Actual reviewer-own MCP turn/read-back, identity, full verdict or call coverage is unverified.");

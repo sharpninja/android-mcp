@@ -61,6 +61,16 @@ public static class WireProofCases
                 [Error("invalid-expected-revision"),initial]);
         yield return new("WIRE-12-transaction-owned",[new("begin-fixture-transaction"),Verified(),new("rollback-fixture-transaction"),new()],
             [new("ok"),Error("transaction-owned"),new("ok"),initial]);
+        // Keep the second original method's exact codec/evidence literals rather
+        // than substituting the convenience fixture used by the other cases.
+        var originalCodec="{\"codec_id\":\"fixture-codec\",\"schema_hash\":\""+Schema+"\"}";
+        const string originalEvidence="{\"evidence\":[\"fixture\"]}";
+        var originalSelected=Row(1,"verified",originalCodec,originalEvidence);
+        yield return new("WIRE-13-original-second-method-literals",
+            [new("append",0L,"verified",JsonNode.Parse(originalCodec)!.AsObject(),JsonNode.Parse(originalCodec)!.AsObject(),JsonNode.Parse(originalEvidence)!.AsObject()),
+             new("append",0L,"unknown",new(),new(),new()),
+             new("append",1L,"verified",new(),new(),JsonNode.Parse(originalEvidence)!.AsObject()),new()],
+            [originalSelected,Error("revision-changed",1),Error("constraint",1),originalSelected]);
     }
     public static void AssertCase(WireCase test,IWireCaseProvider provider)
     {

@@ -232,7 +232,7 @@ public sealed class ReviewAudit : IReviewAuditTransport
         FullReport = expectedFullVerdict;
         return Task.FromResult(new ReviewAuditCompletionEvidence(snapshot.Head, snapshot.RunId,
             Fault == "wrong-post-agent" ? "Codex" : ReviewAuditPolicy.ReviewerAgent, ReviewLaunchService.Model, ReviewLaunchService.Effort,
-            "Claude-20261028T000000Z-review", "req-20261028T000001Z-review", snapshot.ParentSessionId, snapshot.ParentRequestId,
+            "ClaudeCode-20261028T000000Z-review", "req-20261028T000001Z-review", snapshot.ParentSessionId, snapshot.ParentRequestId,
             Fault == "altered-verdict" ? expectedFullVerdict + " altered" : expectedFullVerdict,
             ReviewAuditPolicy.CallIds(receipts), Fault != "unpersisted-own-turn"));
     }

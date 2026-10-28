@@ -1,6 +1,7 @@
 using System.IO.Compression;
 using System.Text.Json;
 using AndroidMcp.BuildTool.Core;
+using AndroidMcp.BuildTool.Modules.Sources.Acquisition;
 
 namespace AndroidMcp.BuildTool.Publication;
 
@@ -11,6 +12,7 @@ public sealed class RehydrationPlanner(ICanonicalJson canonical):IRehydrationPla
     {
         try
         {
+            if(!Enum.IsDefined(request.Profile))Fail("INVALID_PROFILE","");
             if(request.Limit<0)Fail("INVALID_LIMIT","");
             using var lockDocument=JsonDocument.Parse(canonical.Serialize(request.Lock.Bytes));
             var pin=lockDocument.RootElement;
@@ -39,32 +41,50 @@ public sealed class RehydrationPlanner(ICanonicalJson canonical):IRehydrationPla
             foreach(var file in producerFiles){Path(file.Name);Pin(file.Value.GetString()??"",file.Name);}
             if(pin.GetProperty("source_rows").GetInt32()!=rows.Length || pin.GetProperty("producer_files").GetInt32()!=producerFiles.Length)
                 Fail("LOCK_COUNT_MISMATCH","");
-            var unique=new Dictionary<string,(string Sha,long? Length)>(StringComparer.Ordinal);
-            var caches=new Dictionary<string,(string Sha,string Parser,string Source)>(StringComparer.Ordinal);
+            var unique=new Dictionary<string,SourceProjectionState>(StringComparer.Ordinal);
+            var caches=new Dictionary<string,CacheProjectionState>(StringComparer.Ordinal);
+            var projectedRows=new List<RehydrationSourceRow>();
             var snapshots=new List<SnapshotRequirement>();
             var archives=new List<ArchiveRequirement>();
-            foreach(var row in rows)
+            for(var rowIndex=0;rowIndex<rows.Length;rowIndex++)
             {
+                var row=rows[rowIndex];
                 var logical=Text(row,"path");var local=Text(row,"local_path");Path(logical);Path(local);
                 var sha=Text(row,"sha256");Pin(sha,local);
                 long? length=row.TryGetProperty("size_bytes",out var size) && size.ValueKind!=JsonValueKind.Null ? size.GetInt64() : null;
                 if(length<0)Fail("INVALID_LENGTH",local);
-                if(unique.TryGetValue(local,out var old) && (old.Sha!=sha || old.Length is not null && length is not null && old.Length!=length))
+                var hasSource=unique.TryGetValue(local,out var old);
+                if(hasSource && (old!.Pin.Sha256!=sha || old.Pin.SizeBytes is not null && length is not null && old.Pin.SizeBytes!=length))
                     Fail("CONFLICTING_SOURCE_ALIAS",local);
-                unique[local]=(sha,length??(unique.TryGetValue(local,out old)?old.Length:null));
+                CacheProjectionState? cacheState=null;
                 if(row.TryGetProperty("metadata_cache",out var cache) && cache.ValueKind!=JsonValueKind.Null)
                 {
                     var cachePath=Text(cache,"path");Path(cachePath);
                     var cacheSha=Text(cache,"sha256");var parserSha=Text(cache,"parser_sha256");Pin(cacheSha,cachePath);Pin(parserSha,cachePath);
                     var cacheSource=Text(cache,"source_sha256");Pin(cacheSource,cachePath);
                     if(cacheSource!=sha)Fail("CACHE_SOURCE_MISMATCH",cachePath);
-                    var identity=(cacheSha,parserSha,cacheSource);
-                    if(caches.TryGetValue(cachePath,out var previous) && previous!=identity)Fail("CONFLICTING_CACHE_ALIAS",cachePath);
-                    caches[cachePath]=identity;
+                    var cacheKind=OptionalText(cache,"kind")??OptionalText(row,"kind");
+                    if(cacheKind is not ("java-source" or "sdk-api-index"))cacheKind=null;
+                    int? records=cache.TryGetProperty("records",out var count) && count.ValueKind!=JsonValueKind.Null?count.GetInt32():null;
+                    if(records<0)Fail("INVALID_RECIPE",cachePath);
+                    if(caches.TryGetValue(cachePath,out cacheState))
+                    {
+                        if(cacheState.Sha!=cacheSha || cacheState.Parser!=parserSha || cacheState.Source!=cacheSource ||
+                            cacheState.Kind is not null && cacheKind is not null && cacheState.Kind!=cacheKind ||
+                            cacheState.Count is not null && records is not null && cacheState.Count!=records)
+                            Fail("CONFLICTING_CACHE_ALIAS",cachePath);
+                        cacheState.Kind??=cacheKind;cacheState.Count??=records;
+                    }
+                    else
+                    {
+                        cacheState=new(caches.Count,cachePath,cacheSha,parserSha,cacheSource,cacheKind,records);
+                        caches.Add(cachePath,cacheState);
+                    }
+                    cacheState.Rows.Add(rowIndex);
                 }
                 var transport=row.TryGetProperty("transport",out var t) && t.ValueKind==JsonValueKind.Object ? t : default;
                 string? archiveMember=null,archivePin=null;
-                var url=Text(row,"url");
+                var sourceUrl=Text(row,"url");var url=sourceUrl;
                 if(transport.ValueKind==JsonValueKind.Object && (transport.TryGetProperty("archive_url",out _) || transport.TryGetProperty("archive_member",out _) || transport.TryGetProperty("archive_sha256",out _)))
                 {
                     var archiveUrl=Text(transport,"archive_url");archiveMember=Text(transport,"archive_member");
@@ -73,19 +93,51 @@ public sealed class RehydrationPlanner(ICanonicalJson canonical):IRehydrationPla
                     if(transport.TryGetProperty("archive_sha256",out var archiveHash) && archiveHash.ValueKind!=JsonValueKind.Null)
                     {archivePin=archiveHash.GetString()??"";Pin(archivePin,local);}
                 }
-                if(!Uri.TryCreate(url,UriKind.Absolute,out var uri) || uri.UserInfo.Length>0 ||
-                    (uri.Scheme!=Uri.UriSchemeHttps && !(request.AllowFileFixtures && uri.Scheme==Uri.UriSchemeFile)))Fail("UNSUPPORTED_TRANSPORT",local);
+                var uri=Endpoint(url,request.AllowFileFixtures,local);
+                var sourceUri=Endpoint(sourceUrl,request.AllowFileFixtures,local);
                 if(archiveMember is not null)archives.Add(new(logical,local,url,archiveMember,archivePin,sha));
+                SourceArchivePin? archive=null;
+                if(archiveMember is not null)
+                {
+                    var archiveSha1=OptionalText(transport,"archive_sha1");
+                    if(archiveSha1 is not null)GitPin(archiveSha1,local);
+                    var archiveLocal=OptionalText(transport,"archive_local_path");if(archiveLocal is not null)Path(archiveLocal);
+                    long? archiveLength=transport.TryGetProperty("archive_size_bytes",out var archiveSize) && archiveSize.ValueKind!=JsonValueKind.Null?archiveSize.GetInt64():null;
+                    if(archiveLength<0)Fail("INVALID_LENGTH",local);
+                    var xml=OptionalText(transport,"repository_xml");
+                    archive=new(uri,archiveMember,archivePin,archiveSha1,archiveLength,OptionalText(transport,"etag"),archiveLocal,request.Profile,
+                        xml is null?default:System.Text.Encoding.UTF8.GetBytes(xml),OptionalText(transport,"platform_version")??OptionalText(row,"platform_api_version"),OptionalText(transport,"package_path"));
+                }
+                var gitBlob=OptionalText(row,"git_blob");if(gitBlob is not null)GitPin(gitBlob,local);
+                var encoding=OptionalText(transport,"kind") is "gitiles-text" or "gitiles-base64"?SourceWireEncoding.GitilesText:SourceWireEncoding.Raw;
+                SnapshotRequirement? snapshot=null;
                 if(transport.ValueKind==JsonValueKind.Object && transport.TryGetProperty("immutable_url",out var immutable) && immutable.ValueKind==JsonValueKind.False)
                 {
                     var bundle=transport.TryGetProperty("required_local_snapshot",out var bundlePath) && bundlePath.ValueKind!=JsonValueKind.Null ? bundlePath.GetString() : null;
                     if(bundle is not null)Path(bundle);
-                    snapshots.Add(new(logical,local,bundle,sha,length));
+                    snapshot=new(logical,local,bundle,sha,length);snapshots.Add(snapshot);
                 }
+                var sourcePin=new SourcePin(local,sourceUri,OptionalText(row,"revision")??"",sha,length,gitBlob,encoding,snapshot?.BundlePath,archive,request.Profile);
+                SourceProjectionState state;
+                if(hasSource)
+                {
+                    state=old!;
+                    if(state.Pin.GitBlob is not null && gitBlob is not null && state.Pin.GitBlob!=gitBlob)Fail("CONFLICTING_SOURCE_ALIAS",local);
+                    state.Pin=state.Pin with{SizeBytes=state.Pin.SizeBytes??length,GitBlob=state.Pin.GitBlob??gitBlob};
+                }
+                else{state=new(unique.Count,sourcePin);unique.Add(local,state);}
+                state.Rows.Add(rowIndex);if(snapshot is not null)state.Snapshots.Add(snapshot);
+                var context=new RehydrationRowContext(OptionalText(row,"repository"),OptionalText(row,"revision"),OptionalText(row,"source_surface"),OptionalText(row,"scope"),OptionalText(row,"license"),Preserve(row,"source_release_context"),
+                    Array.AsReadOnly(Elements(row,"selection_origins")),Array.AsReadOnly(Strings(row,"selection_reasons")));
+                projectedRows.Add(new(rowIndex,logical,OptionalText(row,"kind"),state.Index,cacheState?.Index,context,row.Clone()));
             }
             foreach(var collision in unique.Keys.Intersect(caches.Keys,StringComparer.Ordinal).Order(StringComparer.Ordinal))Fail("PATH_ROLE_CONFLICT",collision);
-            long known=0;foreach(var item in unique.Values)known=checked(known+(item.Length??0));
-            var unknown=unique.Count(x=>x.Value.Length is null);
+            long known=0;foreach(var item in unique.Values)known=checked(known+(item.Pin.SizeBytes??0));
+            var unknown=unique.Count(x=>x.Value.Pin.SizeBytes is null);
+            var projection=new RehydrationSourceProjection(release!,digest,request.Profile,Array.AsReadOnly(projectedRows.ToArray()),
+                Array.AsReadOnly(unique.Values.Select(s=>s.Freeze(request.Profile)).ToArray()),
+                Array.AsReadOnly(caches.Values.Select(c=>c.Freeze(digest)).ToArray()),
+                Array.AsReadOnly(Enumerable.Range(0,Math.Min(request.Limit??unique.Count,unique.Count)).ToArray()),request.Resume);
             var flow=new OperationKey[]{new(Category.Sources,Operation.Fetch),new(Category.Sources,Operation.Extract),new(Category.Catalog,Operation.Build),new(Category.Validate,Operation.Catalog),new(Category.Catalog,Operation.Export)};
             var manifest=canonical.Serialize(JsonSerializer.SerializeToUtf8Bytes(new
             {
@@ -102,7 +154,7 @@ public sealed class RehydrationPlanner(ICanonicalJson canonical):IRehydrationPla
             if(archives.Count>0)caveats.Add("Archive bytes are not verified by planning.");
             if(archives.Any(a=>a.ArchiveSha256 is null))caveats.Add("Container SHA256 is unavailable for some members; member identity remains pinned.");
             return new(new(release!,digest,rows.Length,unique.Count,known,unknown,snapshots,flow,
-                new("rehydration-plan.json",manifest,"application/json"),false,false,false,caveats,archives),[]);
+                new("rehydration-plan.json",manifest,"application/json"),false,false,false,caveats,archives,projection),[]);
         }
         catch(PlanningFailure e){return new(null,[new(e.Code,e.Path)]);}
         catch(OverflowException){return new(null,[new("INVALID_LENGTH","")]);}
@@ -110,6 +162,74 @@ public sealed class RehydrationPlanner(ICanonicalJson canonical):IRehydrationPla
         {return new(null,[new("INVALID_RECIPE","")]);}
     }
     private static string Text(JsonElement value,string key)=>value.TryGetProperty(key,out var field) && field.ValueKind==JsonValueKind.String ? field.GetString()??"" : "";
+    private static string? OptionalText(JsonElement value,string key)
+    {
+        if(value.ValueKind!=JsonValueKind.Object || !value.TryGetProperty(key,out var field) || field.ValueKind==JsonValueKind.Null)return null;
+        if(field.ValueKind!=JsonValueKind.String)Fail("INVALID_RECIPE",key);
+        return field.GetString();
+    }
+    private static JsonElement[] Elements(JsonElement row,string key)
+    {
+        if(!row.TryGetProperty(key,out var value) || value.ValueKind==JsonValueKind.Null)return [];
+        if(value.ValueKind!=JsonValueKind.Array)Fail("INVALID_RECIPE",key);
+        return value.EnumerateArray().Select(x=>x.Clone()).ToArray();
+    }
+    private static string[] Strings(JsonElement row,string key)
+    {
+        if(!row.TryGetProperty(key,out var value) || value.ValueKind==JsonValueKind.Null)return [];
+        if(value.ValueKind!=JsonValueKind.Array)Fail("INVALID_RECIPE",key);
+        return value.EnumerateArray().Select(x=>x.GetString()??throw new FormatException()).ToArray();
+    }
+    private static Uri Endpoint(string value,bool allowFile,string path)
+    {
+        if(!Uri.TryCreate(value,UriKind.Absolute,out var uri) || uri.UserInfo.Length>0 ||
+            (uri.Scheme!=Uri.UriSchemeHttps && !(allowFile && uri.Scheme==Uri.UriSchemeFile)))Fail("UNSUPPORTED_TRANSPORT",path);
+        return uri!;
+    }
+    private static void GitPin(string value,string path)
+    {if(value.Length!=40 || !value.All(c=>c is >= '0' and <= '9' or >= 'a' and <= 'f'))Fail("INVALID_GIT_BLOB",path);}
+    private sealed class SourceProjectionState(int index,SourcePin pin)
+    {
+        public int Index { get; }=index;
+        public SourcePin Pin { get; set; }=pin;
+        public List<int> Rows { get; }=[];
+        public List<SnapshotRequirement> Snapshots { get; }=[];
+        public RehydrationPhysicalSource Freeze(AcquisitionCompatibilityProfile profile)
+        {
+            var indexes=Array.AsReadOnly(Rows.ToArray());var prerequisites=new List<RehydrationPrerequisite>();
+            void Missing(RehydrationPrerequisiteCode code)=>prerequisites.Add(new(code,indexes,Pin.LocalPath,"Missing pinned prerequisite; exact existing target may be reused."));
+            if(Snapshots.Any(s=>s.BundlePath is null))Missing(RehydrationPrerequisiteCode.RequiredImmutableSnapshot);
+            if(profile==AcquisitionCompatibilityProfile.CanonicalRestore && Pin.Archive is {ArchiveSha256:null} archive)
+            {
+                if(string.IsNullOrWhiteSpace(archive.ETag))Missing(RehydrationPrerequisiteCode.CanonicalArchiveETag);
+                if(string.IsNullOrWhiteSpace(archive.PlatformVersion))Missing(RehydrationPrerequisiteCode.CanonicalArchivePlatformVersion);
+                if(archive.RepositoryXml.IsEmpty)Missing(RehydrationPrerequisiteCode.CanonicalArchiveRepositoryXml);
+                if(archive.SizeBytes is null)Missing(RehydrationPrerequisiteCode.CanonicalArchiveSize);
+            }
+            var executable=Snapshots.Count>0?Pin with{RequiredLocalSnapshot=Snapshots.Select(s=>s.BundlePath).FirstOrDefault(p=>p is not null)}:Pin;
+            return new(Index,executable,indexes,Array.AsReadOnly(Snapshots.ToArray()),Array.AsReadOnly(prerequisites.ToArray()));
+        }
+    }
+    private sealed class CacheProjectionState(int index,string path,string sha,string parser,string source,string? kind,int? count)
+    {
+        public int Index { get; }=index;
+        public string Path { get; }=path;
+        public string Sha { get; }=sha;
+        public string Parser { get; }=parser;
+        public string Source { get; }=source;
+        public string? Kind { get; set; }=kind;
+        public int? Count { get; set; }=count;
+        public List<int> Rows { get; }=[];
+        public RehydrationCacheAlias Freeze(string recipe)
+        {
+            var indexes=Array.AsReadOnly(Rows.ToArray());var prerequisites=new List<RehydrationPrerequisite>();
+            void Missing(RehydrationPrerequisiteCode code)=>prerequisites.Add(new(code,indexes,Path,"Missing pinned prerequisite; exact existing target may be reused."));
+            if(Kind is null)Missing(RehydrationPrerequisiteCode.HistoricalCacheKind);
+            if(Count is null)Missing(RehydrationPrerequisiteCode.HistoricalCacheRecordCount);
+            HistoricalCachePin? pin=Kind is not null && Count is not null?new(Path,Kind,Sha,Parser,Count.Value,Source,recipe):null;
+            return new(Index,Path,pin,indexes,Array.AsReadOnly(prerequisites.ToArray()));
+        }
+    }
     private static JsonElement? Preserve(JsonElement value,string key)=>value.TryGetProperty(key,out var field)?field.Clone():null;
     private static void Path(string value){if(!PublicationNames.Relative(value))Fail("UNSAFE_PATH",value);}
     private static void Pin(string value,string path){if(!PublicationNames.Pin(value))Fail("INVALID_PIN",path);}

@@ -11,17 +11,17 @@ public static class PlannerContractCases
 {
     public static IEnumerable<object[]> Cases => new[]
     {
-        new PlannerCase("REG-01", Request("Sources", "Plan"), new(Category.Sources,Operation.Plan), ["source-plan"], []),
-        new PlannerCase("REG-02", Request("Catalog", "Build", ("source-manifest","sources.json"),("output-root","new-output")), new(Category.Catalog,Operation.Build), ["validate-source-manifest","build-catalog"], [], ["build-catalog<-validate-source-manifest"]),
+        new PlannerCase("REG-01", Request("Sources", "Plan",("project-root","inputs"),("source-manifest","recipe.json"),("recipe-lock","recipe.lock.json"),("output-root","plan")), new(Category.Sources,Operation.Plan), ["source-plan"], []),
+        new PlannerCase("REG-02", Request("Catalog", "Build", ("project-root","catalog-contracts"),("source-manifest","sources.json"),("output-root","new-output"),("stage-root","private-stage")), new(Category.Catalog,Operation.Build), ["validate-source-manifest","build-catalog"], [], ["build-catalog<-validate-source-manifest"]),
         new PlannerCase("REG-03", Request("Design", "Assets", ("project-root","project"),("output-root","new-output")), new(Category.Design,Operation.Assets), ["validate-design-inputs","project-ui"], [], ["project-ui<-validate-design-inputs"]),
         new PlannerCase("REG-04", Request("Validate", "Toolchain"), new(Category.Validate,Operation.Toolchain), ["verify-toolchain"], []),
         new PlannerCase("REG-05", Request("Review", "Prepare", ("snapshot","snapshot")), new(Category.Review,Operation.Prepare), ["verify-review-evidence","prepare-review"], []),
-        new PlannerCase("REG-06", Request("Publish", "Check", ("git-checkout","repository")), new(Category.Publish,Operation.Check), ["check-deliverables"], []),
+        new PlannerCase("REG-06", Request("Publish", "Check", ("git-checkout","repository"),("git-identity","git.json"),("receipt-root","receipts")), new(Category.Publish,Operation.Check), ["check-deliverables"], []),
         new PlannerCase("REG-07", Request("NotACategory", "Plan"), null, [], ["UNKNOWN_CATEGORY"]),
         new PlannerCase("REG-08", Request("Sources", "NotAnOperation"), null, [], ["UNKNOWN_OPERATION"]),
         new PlannerCase("REG-09", Request("Sources", "Sync"), null, [], ["ILLEGAL_CATEGORY_OPERATION"]),
-        new PlannerCase("REG-10", Request("Catalog", "Build"), null, [], ["MISSING_PARAMETER:output-root","MISSING_PARAMETER:source-manifest"]),
-        new PlannerCase("REG-11", Request("Sources", "Plan", ("unrecognized-option","x")), null, [], ["UNSUPPORTED_PARAMETER:unrecognized-option"])
+        new PlannerCase("REG-10", Request("Catalog", "Build"), null, [], ["MISSING_PARAMETER:project-root","MISSING_PARAMETER:output-root","MISSING_PARAMETER:source-manifest","MISSING_PARAMETER:stage-root"]),
+        new PlannerCase("REG-11", Request("Sources", "Plan", ("project-root","inputs"),("source-manifest","recipe.json"),("recipe-lock","recipe.lock.json"),("output-root","plan"),("unrecognized-option","x")), null, [], ["UNSUPPORTED_PARAMETER:unrecognized-option"])
     }.Select(x => new object[] { x });
 
     public static OperationRequest Request(string category, string operation, params (string Key,string Value)[] parameters) =>
