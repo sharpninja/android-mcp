@@ -80,6 +80,29 @@ public sealed partial class Build
         ArtifactGenerationRuntime Runtime(string root,IArtifactStore destination)=>new(source,destination,new FileArtifactLeaseProvider(Path.Combine(root,".leases")),verifier,generationManifests,"design-assets/"+hashes.Sha256(Encoding.UTF8.GetBytes(root)));
         var clock=new SystemClock();var processes=new NativeProcessRunner(clock);var transport=new ArchitectureRendererTransport(processes);
         var preparation=new ArchitectureAssetPreparation();var generation=Generation??"gradle-compatibility";
+        ArtifactGenerationPreparation? buildPayload=null;
+        if(Has(DesignStage.Package))
+        {
+            if(string.IsNullOrWhiteSpace(PipelineRequest)||string.IsNullOrWhiteSpace(PipelineRequestSha256)||PipelineRequestLength is null)
+                throw new InvalidOperationException("Package selection requires pinned --pipeline-request, --pipeline-request-sha256 and --pipeline-request-length for the native build host.");
+            var requestPin=new StoredArtifact(InputRelative(input,PipelineRequest),PipelineRequestSha256,PipelineRequestLength.Value,"application/json");
+            var hostConfiguration=await new DocumentationBuildPayloadHostReader(new PinnedArtifactReader(source),strict).ReadAsync(requestPin,Path.GetFullPath(DotNetHost!));
+            configuration.Add(new(requestPin.RelativePath,await new PinnedArtifactReader(source).ReadAsync(requestPin),requestPin.MediaType));
+            var buildRoot=Path.GetFullPath(RootDirectory);
+            var nativeRun=new TestGateProducerRequest(buildRoot,Path.Combine(buildRoot,"AndroidMcp.Build.csproj"),
+                Path.Combine(buildRoot,"Tests/AndroidMcp.Build.Tests.csproj"),hostConfiguration.DotNet,
+                Path.Combine(buildRoot,"artifacts","tests","documentation-source-"+hashes.Sha256(Encoding.UTF8.GetBytes(output))),null,[]);
+            var native=await ComposeNativeTestServices(nativeRun,hostConfiguration.Native);
+            var buildSource=new FileArtifactStore(buildRoot,bytes=>hashes.Sha256(bytes.Span));
+            var payloadRoot=ArtifactPaths.Resolve(work,"build-source");var payloadStore=new FileArtifactStore(payloadRoot,bytes=>hashes.Sha256(bytes.Span));
+            var payloadRuntime=new ArtifactGenerationRuntime(buildSource,payloadStore,new FileArtifactLeaseProvider(Path.Combine(payloadRoot,".leases")),verifier,generationManifests,
+                "build-source/"+hashes.Sha256(Encoding.UTF8.GetBytes(payloadRoot)));
+            buildPayload=await new DocumentationBuildPayloadPreparationFactory(nativeRun,hostConfiguration.Native,hostConfiguration.PrerequisiteScopes,
+                native.Facts,new PinnedArtifactReader(buildSource),new PinnedArtifactReader(payloadStore),new DocumentationBuildPayloadPlanner(strict,verifier),canonical,
+                payloadRuntime,generation+"-build-source").PrepareAsync();
+        }
+        else if(PipelineRequest is not null||PipelineRequestSha256 is not null||PipelineRequestLength is not null)
+            throw new InvalidOperationException("Native build host configuration is only consumed by the package selection.");
         var legacyReceipts=new DocumentationLegacyReceipts(canonical,strict,verifier);
         var composer=new ArchitectureProjectionComposer(Runtime(work,workStore),workStore,verifier,preparation,transport,
             new NativeRendererImageAdmission(processes,new ProcessCaptureReader(receiptRoot),transport,hashes),generation+"-work",legacyReceipts);
@@ -88,7 +111,7 @@ public sealed partial class Build
         var preflight=new DocumentationModelPreflight(new DocumentationModelReader(),projector,new ModelContractValidator(hashes),modules,strict);
         var manifests=new DocumentationManifestBuilder(verifier);var packages=new DocumentationPackageBuilder(new PublicationChecker(canonical),verifier,manifests);
         var html=new SourceHtmlDecoder();var documents=new GeneratedDesignValidator(new ArchitectureViewIndexReader(),new ArtifactReferenceResolver(html.Decode),strict,verifier,html);
-        var factory=new DesignCompositionRecipeFactory(profiles,modules,preparation,composer,bootstrap,packages,preflight,documents,manifests,sourcePlanner,verifier,projector,legacyReceipts);
+        var factory=new DesignCompositionRecipeFactory(profiles,modules,preparation,composer,bootstrap,packages,preflight,documents,manifests,sourcePlanner,verifier,projector,legacyReceipts,buildPayload);
         // No fictitious ToolIdentity is created for CodeExtract; its admitted
         // subset requires no renderer context and never dereferences this value.
         var request=new DesignArchitectureRequest(generation,context!,ToolAccess!.Value,OfflineGradleChecksumProof,

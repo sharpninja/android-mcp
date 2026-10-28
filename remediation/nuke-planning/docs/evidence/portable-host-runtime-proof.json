@@ -1,0 +1,54 @@
+{
+  "localTimestamp": "2026-10-28T18:11:06",
+  "nativePayloadPackageProof": "remediation/nuke-planning/docs/evidence/portable-build-source-package-cli-proof.json",
+  "exportedBootstrap": {
+    "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/portable-package-002/exported-bootstrap-proof.json",
+    "sha256": "2b7ee556a9c92e6788b14b954779e1984b6ea55332e20f9bdf42fb5a00b56b18",
+    "payloadFiles": 287,
+    "steps": [
+      {
+        "stdoutSha256": "5d1ad29330d0386950310b7d80510fa84a0f0b331f01325882968388a104c3b8",
+        "exitCode": 0,
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "name": "locked-restore"
+      },
+      {
+        "stdoutSha256": "105415a4fbccab3de5a54318d3976fc9866b8e76cd1ca221599a5f33190e118a",
+        "exitCode": 0,
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "name": "bootstrap-build"
+      },
+      {
+        "stdoutSha256": "cee8629dc7901f6b4957e255c7922716daf65749aa650b8381e6d1fea85814d7",
+        "exitCode": 0,
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "name": "nuke-help"
+      }
+    ]
+  },
+  "fourFileGate": {
+    "trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261028T1810162371709-29b8226784f449a99348770ff57bcc15/tests.trx",
+    "sha256": "59d834a0dcef09eefa97bd0ec6f8e7aeca79f2aa364f0416ba6ed9d5fccd31bf",
+    "passed": 327,
+    "failed": 0,
+    "skipped": 0,
+    "exactClassCounts": {
+      "NativeArtifactIdentityRealTests": 29,
+      "NativeArtifactIdentityMockTests": 58,
+      "ArtifactReadOpenerMockTests": 40
+    }
+  },
+  "scope": "Exported native C# host locked restore/bootstrap/help. Four-file identity mapper uses controlled syscall outcomes; opener is mock-only. No actual Windows/Linux syscall or completed codec claim.",
+  "priorPackageFailure": {
+    "path": "remediation/nuke-app/artifacts/portable-package-001",
+    "code": "INPUT_SCOPE_VIOLATION",
+    "reason": "Caller receipt layout corrected to existing artifacts/tests/<run>; evaluator admission unchanged."
+  },
+  "fullMigrationComplete": false,
+  "hv": false,
+  "remaining": [
+    "Complete Gradle/wrapper support export and clean caller invocation",
+    "Legacy method/caller closures",
+    "Native opener, bounded reader and release-part codec"
+  ]
+}

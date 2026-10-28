@@ -8,6 +8,10 @@ public sealed partial class Build
 {
     internal static async Task<ITestGateEvidenceProducer> ComposeNativeTestEvidenceProducer(TestGateProducerRequest run,
         TestGateNativeFactsConfiguration configuration)
+        =>(await ComposeNativeTestServices(run,configuration)).Evidence;
+
+    internal static async Task<(ITestGateNativeFacts Facts,ITestGateEvidenceProducer Evidence)> ComposeNativeTestServices(TestGateProducerRequest run,
+        TestGateNativeFactsConfiguration configuration)
     {
         var store=new FileArtifactStore(run.WorkspaceRoot,bytes=>ContentHash.Sha256(bytes.Span));
         var runner=new NativeProcessRunner(new SystemClock());
@@ -37,7 +41,7 @@ public sealed partial class Build
             new ScopedTestGateNativeFileReader(configuration.ApprovedReadRoots),
             new RuntimeHostTestGateModuleSource(typeof(Build).Assembly),store,
             new CryptographicTestGateNonceSource(),new SharedStoreTestGateOriginArtifactWriter(store));
-        return new NativeTestGateEvidenceProducer(runner,captures,facts,new TestBuildPlanAdmission(),
-            new TrxResultAdmission(),store);
+        return (facts,new NativeTestGateEvidenceProducer(runner,captures,facts,new TestBuildPlanAdmission(),
+            new TrxResultAdmission(),store));
     }
 }

@@ -10,7 +10,7 @@ public sealed record DesignGradleCliPlanningCase(string Id,OperationRequest Requ
 public static class DesignGradleCliPlanningCases
 {
     public static readonly string[] Required=["project-root","output-root","cache-root","work-root","receipt-root","docker-identity","renderer-user","tool-access","design-aliases","design-registry-sha256"];
-    public static readonly string[] Optional=["generation","offline-gradle-checksum-proof","catalog-root","policy-relative-path"];
+    public static readonly string[] Optional=["generation","offline-gradle-checksum-proof","catalog-root","policy-relative-path","pipeline-request","pipeline-request-sha256","pipeline-request-length"];
     public static readonly PlannedStep[] Steps=[new("design-stage-union",[])];
     public static DesignGradleProjectionCase ProjectionCase()=>DesignGradleProjectionCases.Original() with
     {Operation=new(new(Category.Design,Operation.GradleCompatibility),"Design/GradleCompatibility",Required,Optional,Steps)};
@@ -28,6 +28,7 @@ public static class DesignGradleCliPlanningCases
             var rows=new List<DesignGradleCliPlanningCase>{new("DESIGN-GRADLE-REQUIRED",new("Design","GradleCompatibility",Parameters()),[])};
             var optional=Parameters();optional["design-aliases"]="exportArchitecture,packageDesignDocs";optional["tool-access"]="Offline";
             optional.Add("generation","fixture-union");optional.Add("offline-gradle-checksum-proof","proof/gradle.json");optional.Add("catalog-root","/fixture/catalog");optional.Add("policy-relative-path","tooling/design-source-policy.json");
+            optional.Add("pipeline-request","tooling/native-build-host.json");optional.Add("pipeline-request-sha256",new string('a',64));optional.Add("pipeline-request-length","321");
             rows.Add(new("DESIGN-GRADLE-OPTIONAL",new("Design","GradleCompatibility",optional),[]));
             rows.Add(new("DESIGN-GRADLE-ALL-MISSING",new("Design","GradleCompatibility",new Dictionary<string,string>()),Required.Select(key=>new PlanError("MISSING_PARAMETER",key,"Supply --"+key+".")).ToArray()));
             foreach(var key in Required)
@@ -79,6 +80,8 @@ public sealed class DesignGradleCliPlanningMockTests
         var policy=Assert.Single(descriptor["parameters"]!.AsArray(),node=>node!["name"]!.GetValue<string>()=="policy-relative-path")!;
         Assert.Equal("nukePolicyRelativePath",policy["property"]!.GetValue<string>());Assert.False(policy["required"]!.GetValue<bool>());
         Assert.Equal(new DesignStagePlanner().Describe().Metadata.Aliases.Select(alias=>alias.Name),descriptor["aliases"]!.AsArray().Select(node=>node!.GetValue<string>()));
+        foreach(var name in new[]{"pipeline-request","pipeline-request-sha256","pipeline-request-length"})
+        {var field=Assert.Single(descriptor["parameters"]!.AsArray(),node=>node!["name"]!.GetValue<string>()==name)!;Assert.False(field["required"]!.GetValue<bool>());}
         Assert.Equal(DesignGradleProjectionCases.Script().Bytes.ToArray(),expected.BuildScript.Bytes.ToArray());
     }
     [Theory,MemberData(nameof(DesignGradleCliPlanningCases.Cases),MemberType=typeof(DesignGradleCliPlanningCases))]

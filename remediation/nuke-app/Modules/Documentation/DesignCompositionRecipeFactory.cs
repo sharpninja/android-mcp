@@ -11,7 +11,8 @@ public sealed class DesignCompositionRecipeFactory(IDocumentationRendererProfile
     IDocumentationPackageBuilder packages,IDocumentationModelPreflight? modelPreflight=null,
     IGeneratedDesignValidator? documents=null,IDocumentationManifestBuilder? manifests=null,
     IDocumentationModelSourcePlanner? documentationSources=null,IArtifactReceiptVerifier? artifactReceipts=null,
-    IDocumentationProjector? uiProjector=null,DocumentationLegacyReceipts? legacyReceipts=null):IDesignFullArchitectureRecipeFactory
+    IDocumentationProjector? uiProjector=null,DocumentationLegacyReceipts? legacyReceipts=null,
+    ArtifactGenerationPreparation? buildPayload=null):IDesignFullArchitectureRecipeFactory
 {
     private const string ChecksumPath="docs/checksums.sha256",ArchivePath="package/android-mcp-design-source.zip";
     private readonly IDesignStagePlanner stages=new DesignStagePlanner();
@@ -103,13 +104,17 @@ public sealed class DesignCompositionRecipeFactory(IDocumentationRendererProfile
                     throw new ArchitectureAssetException("DESIGN_OUTPUT_COLLISION","Receipt output ownership collides");
             }
             var prerequisiteReceipts=SelectedPrerequisiteReceipts(selection,model.Modules,model.Contracts,model.Ui.Artifacts);
+            var payload=selection.Stages.Contains(DesignStage.Package)?buildPayload:null;
+            if(payload is not null&&payload.VerifyBeforeCommitAsync is null)
+                throw new ArchitectureAssetException("BUILD_SOURCE_RECHECK_REQUIRED","Bind the child native-source recheck before package publication");
             var exportSupport=ExplicitExport(selection);
-            var paths=CompletionPaths(inputs,model.Ui.Artifacts,prepared.OutputPaths,capturedSources.Receipt.RelativePath,selection,exportSupport,additionalReceipts);
+            var paths=CompletionPaths(inputs,model.Ui.Artifacts,prepared.OutputPaths,capturedSources.Receipt.RelativePath,selection,exportSupport,additionalReceipts,payload?.OutputPaths??[]);
             return new(paths,async token=>
             {
                 token.ThrowIfCancellationRequested();
                 var architecture=await prepared.MaterializeAsync(token);
                 var union=PublishedUnion(inputs,model.Ui.Artifacts,architecture,capturedSources.Receipt,exportSupport);
+                if(payload is not null)foreach(var artifact in await payload.MaterializeAsync(token))Add(union,artifact);
                 foreach(var receipt in prerequisiteReceipts)Add(union,receipt);
                 var admitted=union.Values.OrderBy(artifact=>artifact.RelativePath,StringComparer.Ordinal).ToArray();
                 var workspace=inputs.Single(a=>a.RelativePath=="architecture/workspace.dsl");
@@ -136,7 +141,11 @@ public sealed class DesignCompositionRecipeFactory(IDocumentationRendererProfile
                     Add(union,package.Archive);
                 }
                 return union.Values.ToArray();
-            },token=>sourceCollection.VerifyUnchangedAsync(capturedSources,token));
+            },async token=>
+            {
+                await sourceCollection.VerifyUnchangedAsync(capturedSources,token);
+                if(payload?.VerifyBeforeCommitAsync is {} verifyPayload)await verifyPayload(token);
+            });
         });
 
     private IReadOnlyList<Artifact> SelectedPrerequisiteReceipts(DesignStagePlan selection,ModuleValidationResult? module,
@@ -160,7 +169,7 @@ public sealed class DesignCompositionRecipeFactory(IDocumentationRendererProfile
     }
 
     private IReadOnlyList<string> CompletionPaths(IReadOnlyList<Artifact> inputs,IReadOnlyList<Artifact> ui,
-        IReadOnlyList<string> architecture,string observationPath,DesignStagePlan selection,bool exportSupport,IReadOnlyList<string> additionalReceipts)
+        IReadOnlyList<string> architecture,string observationPath,DesignStagePlan selection,bool exportSupport,IReadOnlyList<string> additionalReceipts,IReadOnlyList<string> payloadPaths)
     {
         var paths=new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         foreach(var artifact in inputs)Declare(artifact.RelativePath);
@@ -175,6 +184,7 @@ public sealed class DesignCompositionRecipeFactory(IDocumentationRendererProfile
             Declare(path);
         }
         Declare(observationPath);
+        foreach(var path in payloadPaths)Declare(path);
         foreach(var path in additionalReceipts)Declare(path);
         if(selection.Stages.Contains(DesignStage.Manifest))Declare(ChecksumPath);
         if(selection.Stages.Contains(DesignStage.Package))Declare(ArchivePath);

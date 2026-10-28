@@ -22,6 +22,10 @@ public sealed class DesignDocumentationStageEnvironment
     public DesignStagePlan Selection {get;}
     public IReadOnlyList<Artifact> Architecture {get;}
     public bool LegacyReceiptsEnabled {get;}
+    public bool BuildPayloadProvided {get;}
+    public bool BuildPayloadSelected=>BuildPayloadProvided&&Has(DesignStage.Package);
+    public IReadOnlyList<Artifact> BuildPayloadArtifacts {get;}
+    public ArtifactGenerationPreparation? BuildPayload {get;}
     public DocumentationLegacyReceipts LegacyReceipts {get;}=new(new CanonicalJson(),new StrictJsonInspector(),new ArtifactReceiptVerifier(new NativeContentHash()));
     public IReadOnlyList<Artifact> LegacyPrerequisites {get;}
     public Artifact LegacyArchitecture {get;}
@@ -36,9 +40,9 @@ public sealed class DesignDocumentationStageEnvironment
         .Single(input=>input.Kind==DocumentationProjectInputKind.RenderSkin).Source.RelativePath;
     public bool ExplicitExport=>Scenario.StartsWith("EXPORT-",StringComparison.Ordinal);
     public bool Has(DesignStage stage)=>Selection.Stages.Contains(stage);
-    public DesignDocumentationStageEnvironment(string scenario,bool legacyReceipts=false)
+    public DesignDocumentationStageEnvironment(string scenario,bool legacyReceipts=false,bool buildPayload=false)
     {
-        Scenario=scenario;LegacyReceiptsEnabled=legacyReceipts;var corpus=GeneratedDesignValidationCorpusCases.Create()[0];var fixture=DocumentationFixture.Current;
+        Scenario=scenario;LegacyReceiptsEnabled=legacyReceipts;BuildPayloadProvided=buildPayload;var corpus=GeneratedDesignValidationCorpusCases.Create()[0];var fixture=DocumentationFixture.Current;
         Inputs=SourcePlan.Sources.Where(source=>source.Role!=DocumentationInputRole.CanonicalContractOptional)
             .Select(source=>source.RelativePath==DocumentationAssetPaths.Design?fixture.Input.DesignMarkdown:corpus.Input.Artifacts.Single(a=>a.RelativePath==source.RelativePath)).ToArray();
         Assert.Equal(18,Inputs.Count);
@@ -87,6 +91,20 @@ public sealed class DesignDocumentationStageEnvironment
         Selection=planner.Select(new(aliases,planner.Describe().Sha256));Assert.Empty(Selection.Errors);
         Request=Original.Request with{DocumentationStages=new([],new byte[]{7,8,9})};
         if(scenario=="OPTIONS-MISSING")Request=Request with{DocumentationStages=null};
+        BuildPayloadArtifacts=new Artifact[]{new("build-tool/AndroidMcp.Build.csproj",Encoding.UTF8.GetBytes("<Project Sdk=\"Microsoft.NET.Sdk\"/>\n"),"application/xml"),
+            new("build-tool/Modules/Example.cs",Encoding.UTF8.GetBytes("namespace PayloadFixture;\n"),"text/plain"),
+            new("build-tool/source-generation.json",Encoding.UTF8.GetBytes("{\"fixture\":\"retained child manifest\"}\n"),"application/json")};
+        if(scenario is "PAYLOAD-COLLISION" or "PAYLOAD-UNSAFE")BuildPayloadArtifacts=BuildPayloadArtifacts.Select((artifact,index)=>index==0?artifact with{RelativePath=scenario=="PAYLOAD-COLLISION"?"README.md":"../escape.cs"}:artifact).ToArray();
+        BuildPayload=buildPayload?new(BuildPayloadArtifacts.Select(artifact=>artifact.RelativePath).ToArray(),token=>
+        {
+            Trace.Add("payload.materialize");Assert.Equal(Cancellation.Token,token);token.ThrowIfCancellationRequested();
+            if(Scenario=="PAYLOAD-FAIL")throw new IOException("payload child failed before commit");
+            return Task.FromResult(BuildPayloadArtifacts);
+        },scenario=="PAYLOAD-HOOK-MISSING"?null:token=>
+        {
+            Trace.Add("payload.verify");Assert.Equal(Cancellation.Token,token);token.ThrowIfCancellationRequested();
+            if(Scenario=="PAYLOAD-SOURCE-CHANGED")throw new DocumentationBuildPayloadException("BUILD_SOURCE_CHANGED");return Task.CompletedTask;
+        }):null;
         Architecture=ExplicitExport?new ArchitectureSubsetEnvironment(new("COMPLETION-EXPORT",aliases)).ExpectedPublic:
             Original.Architecture.Code.Concat(corpus.Input.Artifacts.Where(a=>a.RelativePath.StartsWith("docs/diagrams/",StringComparison.Ordinal))).ToArray();
         if(scenario is "EXPORT-SKIN-BYTES" or "EXPORT-SKIN-LENGTH" or "EXPORT-SKIN-MEDIA")
@@ -111,6 +129,7 @@ public sealed class DesignDocumentationStageEnvironment
         foreach(var output in Preflight.Ui.Artifacts)union[output.RelativePath]=output;
         foreach(var output in Architecture)if(!union.ContainsKey(output.RelativePath))union.Add(output.RelativePath,output);
         union.Add(Snapshot.Receipt.RelativePath,Snapshot.Receipt);
+        if(BuildPayloadSelected)foreach(var artifact in BuildPayloadArtifacts)union.TryAdd(artifact.RelativePath,artifact);
         if(legacyReceipts)foreach(var receipt in LegacyPrerequisites)union.TryAdd(receipt.RelativePath,receipt);
         BeforeUnion=union.Values.OrderBy(a=>a.RelativePath,StringComparer.Ordinal).ToArray();
         if(legacyReceipts)
@@ -198,6 +217,8 @@ public static class DesignDocumentationStageCases
             var expectedError=e.Scenario=="LEGACY-ARCH-MISSING"?"LEGACY_RECEIPT_PENDING":e.Scenario.EndsWith("UNVALIDATED",StringComparison.Ordinal)?"LEGACY_RECEIPT_UNVALIDATED":"DESIGN_OUTPUT_COLLISION";
             Assert.Equal(expectedError,Assert.IsType<ArchitectureAssetException>(early).Code);Assert.DoesNotContain("bootstrap",e.Trace);Assert.DoesNotContain("docs.before",e.Trace);return;
         }
+        if(e.BuildPayloadSelected&&e.Scenario is "PAYLOAD-COLLISION" or "PAYLOAD-UNSAFE" or "PAYLOAD-HOOK-MISSING")
+        {Assert.Equal(e.Scenario=="PAYLOAD-HOOK-MISSING"?"BUILD_SOURCE_RECHECK_REQUIRED":"DESIGN_OUTPUT_COLLISION",Assert.IsType<ArchitectureAssetException>(early).Code);Assert.DoesNotContain("bootstrap",e.Trace);Assert.DoesNotContain("payload.materialize",e.Trace);return;}
         Assert.Null(early);Assert.NotNull(preparation);Assert.NotNull(preparation.VerifyBeforeCommitAsync);
         var expected=e.BaseUnion.Concat(e.Has(DesignStage.Manifest)?new[]{e.Manifest.Checksums}:Array.Empty<Artifact>()).Concat(e.Has(DesignStage.Package)?new[]{e.Package.Archive}:Array.Empty<Artifact>()).ToArray();
         Assert.Equal(expected.Select(a=>a.RelativePath).Order(StringComparer.Ordinal),preparation.OutputPaths.Order(StringComparer.Ordinal));
@@ -205,6 +226,7 @@ public static class DesignDocumentationStageCases
         IReadOnlyList<Artifact>? result=null;var error=await Record.ExceptionAsync(async()=>result=await preparation.MaterializeAsync(e.Cancellation.Token));
         if(e.Scenario=="CANCEL"){Assert.IsAssignableFrom<OperationCanceledException>(error);Assert.Equal(5,e.Trace.Count);return;}
         if(e.Scenario=="RENDER-FAIL"){Assert.Equal("RENDERER_PROCESS",Assert.IsType<ArchitectureAssetException>(error).Code);Assert.DoesNotContain("docs.before",e.Trace);return;}
+        if(e.Scenario=="PAYLOAD-FAIL"){Assert.IsType<IOException>(error);Assert.DoesNotContain("docs.before",e.Trace);Assert.DoesNotContain("manifest",e.Trace);Assert.DoesNotContain("package",e.Trace);Assert.DoesNotContain("sources.verify",e.Trace);return;}
         if(e.Scenario is "EXPORT-SKIN-BYTES" or "EXPORT-SKIN-LENGTH" or "EXPORT-SKIN-MEDIA")
         {Assert.Equal("DESIGN_OUTPUT_COLLISION",Assert.IsType<ArchitectureAssetException>(error).Code);Assert.DoesNotContain("docs.before",e.Trace);Assert.DoesNotContain("manifest",e.Trace);Assert.DoesNotContain("package",e.Trace);Assert.DoesNotContain("sources.verify",e.Trace);return;}
         if(e.Scenario is "BEFORE-FAIL" or "AFTER-FAIL")
@@ -218,9 +240,11 @@ public static class DesignDocumentationStageCases
         foreach(var source in e.Inputs.Where(a=>a.RelativePath!=DocumentationAssetPaths.Design))Assert.Same(source,result.Single(a=>a.RelativePath==source.RelativePath));
         Assert.Same(e.Preflight.Ui.Artifacts.Single(a=>a.RelativePath==DocumentationAssetPaths.Design),result.Single(a=>a.RelativePath==DocumentationAssetPaths.Design));
         Assert.DoesNotContain("sources.verify",e.Trace);var check=await Record.ExceptionAsync(()=>preparation.VerifyBeforeCommitAsync(e.Cancellation.Token));
-        if(e.Scenario=="SOURCE-CHANGED")Assert.Equal("MODEL_SOURCE_CHANGED",Assert.IsType<DocumentationSourceCollectionException>(check).Code);else Assert.Null(check);
-        var trace=new List<string>{"sources.plan","profile","model","code","subset.prepare","subset.materialize","bootstrap","render","docs.before"};
-        if(e.Has(DesignStage.Manifest))trace.AddRange(["manifest","docs.after"]);if(e.Has(DesignStage.Package))trace.Add("package");trace.Add("sources.verify");Assert.Equal(trace,e.Trace);
+        if(e.Scenario=="SOURCE-CHANGED")Assert.Equal("MODEL_SOURCE_CHANGED",Assert.IsType<DocumentationSourceCollectionException>(check).Code);
+        else if(e.Scenario=="PAYLOAD-SOURCE-CHANGED")Assert.Equal("BUILD_SOURCE_CHANGED",Assert.IsType<DocumentationBuildPayloadException>(check).Code);else Assert.Null(check);
+        var trace=new List<string>{"sources.plan","profile","model","code","subset.prepare","subset.materialize","bootstrap","render"};
+        if(e.BuildPayloadSelected)trace.Add("payload.materialize");trace.Add("docs.before");
+        if(e.Has(DesignStage.Manifest))trace.AddRange(["manifest","docs.after"]);if(e.Has(DesignStage.Package))trace.Add("package");trace.Add("sources.verify");if(e.BuildPayloadSelected&&e.Scenario!="SOURCE-CHANGED")trace.Add("payload.verify");Assert.Equal(trace,e.Trace);
         for(var index=0;index<sourceBytes.Length;index++)Assert.Equal(sourceBytes[index],e.Inputs[index].Bytes.ToArray());
     }
 }
@@ -244,6 +268,12 @@ public sealed class ScriptedDesignDocumentationStageFactory(DesignDocumentationS
                 if(inner.OutputPaths.Any(owned.Contains))throw new ArchitectureAssetException("DESIGN_OUTPUT_COLLISION","Receipt output ownership collides");
             }
             var prerequisiteReceipts=e.LegacyReceiptsEnabled?new[]{e.LegacyReceipts.Module(model.Modules),e.LegacyReceipts.Model(model.Contracts),e.LegacyReceipts.Ui(model.Ui.Artifacts.Single(artifact=>artifact.RelativePath=="docs/ui-asset-manifest.json"))}:Array.Empty<Artifact>();
+            if(e.BuildPayloadSelected)
+            {
+                if(e.BuildPayload!.VerifyBeforeCommitAsync is null)throw new ArchitectureAssetException("BUILD_SOURCE_RECHECK_REQUIRED","Bind the child source recheck");
+                if(e.BuildPayload.OutputPaths.Any(path=>!ArtifactPaths.IsRelative(path)||inputs.Any(artifact=>artifact.RelativePath==path)||model.Ui.Artifacts.Any(artifact=>artifact.RelativePath==path)||inner.OutputPaths.Contains(path,StringComparer.Ordinal)))
+                    throw new ArchitectureAssetException("DESIGN_OUTPUT_COLLISION","Payload cannot replace a declared document artifact");
+            }
             var permitted=new HashSet<string>(inputs.Select(a=>a.RelativePath),StringComparer.Ordinal);permitted.Remove(DocumentationAssetPaths.Design);
             if(e.ExplicitExport)permitted.Remove(e.RenderSkinPath);
             if(mutation!="collision"&&inner.OutputPaths.Concat(model.Ui.Artifacts.Select(a=>a.RelativePath)).Any(path=>permitted.Contains(path)))throw new ArchitectureAssetException("DESIGN_OUTPUT_COLLISION","Only the owned generated design Markdown can replace its source");
@@ -265,6 +295,11 @@ public sealed class ScriptedDesignDocumentationStageFactory(DesignDocumentationS
                     union[value.RelativePath]=value;
                 }
                 union.Add(snapshot.Receipt.RelativePath,snapshot.Receipt);
+                if(e.BuildPayloadSelected&&mutation!="payload-omit")
+                {
+                    var payload=await e.BuildPayload!.MaterializeAsync(token);
+                    foreach(var artifact in payload)union.Add(artifact.RelativePath,mutation=="payload-bytes"?artifact with{Bytes=new byte[]{0}}:artifact);
+                }
                 foreach(var receipt in prerequisiteReceipts)
                 {
                     if(mutation=="legacy-module"&&receipt.RelativePath==e.LegacyPrerequisites[0].RelativePath||mutation=="legacy-model"&&receipt.RelativePath==e.LegacyPrerequisites[1].RelativePath||mutation=="legacy-ui"&&receipt.RelativePath==e.LegacyPrerequisites[2].RelativePath)continue;
@@ -289,7 +324,11 @@ public sealed class ScriptedDesignDocumentationStageFactory(DesignDocumentationS
                 }
                 if(e.Has(DesignStage.Package)){var package=s.Build(new(admitted,request.DocumentationStages.RequiredPackagePaths,request.DocumentationStages.PackagePolicy),manifest!);union.Add(package.Archive.RelativePath,package.Archive);}
                 var result=union.Values.ToArray();return mutation=="result-source"?result.Where(a=>a.RelativePath!="README.md").ToArray():mutation=="legacy-output-alias"?result.Where(artifact=>artifact.RelativePath!="validation/module-graph.json").ToArray():result;
-            },mutation=="hook"?null:token=>sources.VerifyUnchangedAsync(snapshot,mutation=="hook-token"?CancellationToken.None:token));
+            },mutation=="hook"?null:async token=>
+            {
+                await sources.VerifyUnchangedAsync(snapshot,mutation=="hook-token"?CancellationToken.None:token);
+                if(e.BuildPayloadSelected&&mutation!="payload-hook")await e.BuildPayload!.VerifyBeforeCommitAsync!(token);
+            });
         });
     }
     public ArtifactGenerationRecipe Architecture(DesignArchitectureRequest request)=>throw new InvalidOperationException("Existing legacy recipe assertions remain unchanged");

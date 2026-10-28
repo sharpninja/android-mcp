@@ -52,7 +52,7 @@ public sealed class OperationRegistry
             new("validate-architecture-inputs",[]),new("preflight-native-context",["validate-architecture-inputs"]),
             new("verify-pinned-tools",["preflight-native-context"]),new("generate-architecture",["verify-pinned-tools"]),new("seal-generation",["generate-architecture"]));
         Add(Category.Design,Operation.GradleCompatibility,["project-root","output-root","cache-root","work-root","receipt-root","docker-identity","renderer-user","tool-access","design-aliases","design-registry-sha256"],
-            ["generation","offline-gradle-checksum-proof","catalog-root","policy-relative-path"],OperationExecutor.GradleCompatibility,
+            ["generation","offline-gradle-checksum-proof","catalog-root","policy-relative-path","pipeline-request","pipeline-request-sha256","pipeline-request-length"],OperationExecutor.GradleCompatibility,
             new PlannedStep("design-stage-union",[]));
         Add(Category.Design,Operation.BrowserQa,["project-root","output-root","browser-identity","ui-manifest-sha256","expected-architecture-diagrams"],
             ["architecture-root","architecture-manifest-sha256","viewport-width","viewport-height"],OperationExecutor.BrowserQa,
