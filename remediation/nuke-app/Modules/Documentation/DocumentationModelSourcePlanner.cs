@@ -5,7 +5,7 @@ using AndroidMcp.BuildTool.Core;
 namespace AndroidMcp.BuildTool.Documentation;
 
 /// <summary>One pin-to-route authority. No filesystem, hash algorithm, network or process execution.</summary>
-public sealed class DocumentationModelSourcePlanner(IStrictJsonInspector strict):IDocumentationModelSourcePlanner
+public sealed class DocumentationModelSourcePlanner(IStrictJsonInspector strict,DocumentationProjectSourceScope scope=DocumentationProjectSourceScope.Model):IDocumentationModelSourcePlanner
 {
     private sealed record ContractRoute(DocumentationContractId Id,string File,string CanonicalPin,string CatalogPath,string MediaType);
     private static readonly ContractRoute[] Routes=
@@ -33,12 +33,7 @@ public sealed class DocumentationModelSourcePlanner(IStrictJsonInspector strict)
                 if(canonical!=route.CanonicalPin||hash is null||!Regex.IsMatch(hash,"^[a-f0-9]{64}$")||!pins.TryAdd(route.Id,hash))
                     throw new FormatException("Substituted path, invalid hash or duplicate contract pin");
             }
-            var sources=new List<DocumentationModelSourceSpec>();
-            void Project(string path,string media)=>sources.Add(new("project:"+path,DocumentationInputRole.ProjectRequired,null,path,media,null));
-            Project("architecture/workspace.dsl","text/plain");Project("architecture/code-diagrams.md","text/markdown");
-            Project("architecture/module-contract.json","application/json");Project("architecture/render-skin.puml","text/plain");
-            Project("toolchain-lock.json","application/json");Project("renderer-lock.json","application/json");
-            Project(DocumentationAssetPaths.Blueprint,"text/markdown");Project(DocumentationAssetPaths.Design,"text/markdown");Project("contracts/source-pins.json","application/json");
+            var sources=new DocumentationProjectSourceCatalog().DescribeProjectSources(scope).Select(input=>input.Source).ToList();
             foreach(var route in Routes)sources.Add(new("snapshot:"+route.Id,DocumentationInputRole.ContractSnapshotRequired,route.Id,"contracts/"+route.File,route.MediaType,pins[route.Id]));
             foreach(var route in Routes)sources.Add(new("canonical:"+route.Id,DocumentationInputRole.CanonicalContractOptional,route.Id,route.CatalogPath,route.MediaType,pins[route.Id]));
             return new(sources.AsReadOnly());

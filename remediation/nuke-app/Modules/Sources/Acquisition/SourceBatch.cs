@@ -8,7 +8,7 @@ namespace AndroidMcp.BuildTool.Modules.Sources.Acquisition;
 
 /// <summary>Acquire Publication's selected physical pins, retaining all logical audit rows.</summary>
 public sealed class SourceBatch(IByteTransport transport,IArtifactStore store,IArtifactStore bundle,
-    IArtifactLeaseProvider leases,ICanonicalJson canonical):ISourceBatch,ISourceBatchReader
+    IArtifactLeaseProvider leases,ICanonicalJson canonical):ISourceBatch,ISourceBatchReader,ISourceBatchSeeder
 {
     public Task<SourceBatchResult> RunAsync(SourceBatchRequest request,CancellationToken cancellationToken=default)
         =>RunCoreAsync(request,false,null,cancellationToken);
@@ -129,6 +129,120 @@ public sealed class SourceBatch(IByteTransport transport,IArtifactStore store,IA
         return new(result,manifest,false);
     }
 
+    public async Task<SourceSeedResult> SeedOnlyAsync(SourceBatchSeedRequest request,CancellationToken cancellationToken=default)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        Validate(request.Acquisition);ValidateSeed(request);
+        var acquisition=request.Acquisition;var projection=request.SeedProjection;
+        var identity=canonical.Hash(JsonSerializer.SerializeToElement(request));
+        await using var lease=await leases.AcquireAsync("source-batch/"+acquisition.ReceiptPath,cancellationToken);
+        var sealedBytes=await Optional(store,acquisition.ReceiptPath,cancellationToken);
+        if(sealedBytes is not null)
+        {
+            if(!acquisition.Projection.Resume)Fail("BATCH_RESUME");
+            SourceSeedReceipt prior;
+            try
+            {
+                var normalized=canonical.Serialize(sealedBytes.Value);
+                if(!normalized.AsSpan().SequenceEqual(sealedBytes.Value.Span))Fail("SEED_SEALED");
+                prior=JsonSerializer.Deserialize<SourceSeedReceipt>(normalized)??throw new JsonException();
+            }
+            catch(Exception problem)when(problem is JsonException or CanonicalJsonException or NotSupportedException)
+            {throw new TransportException("SEED_SEALED","Seed receipt is malformed; original retained.");}
+            if(prior.RequestSha256!=identity||!Same(prior.Acquisition,acquisition)||!Same(prior.SeedProjection,projection))Fail("SEED_IDENTITY");
+            VerifySeedReceipt(request,prior);
+            await VerifyOutputs(prior.Outputs,cancellationToken);
+            foreach(var entry in prior.Entries.Where(entry=>entry.Artifact is not null))
+                SourceAcquirer.Verify((await store.ReadAsync(entry.Artifact!.RelativePath,cancellationToken)).Span,
+                    projection.Sources.Single(source=>source.PhysicalSourceIndex==entry.PhysicalSourceIndex).Pin);
+            // Newly available bundle candidates cannot mutate an already sealed partial generation.
+            return new(prior,new(acquisition.ReceiptPath,ContentHash.Sha256(sealedBytes.Value.Span),sealedBytes.Value.Length,"application/json"),
+                new(0,prior.Entries.Count(entry=>entry.Status!=SourceSeedStatus.Absent),prior.Entries.Count(entry=>entry.Status==SourceSeedStatus.Absent)),true);
+        }
+
+        var prepared=new List<(RehydrationSeedSource Source,SourceSeedStatus Status,ReadOnlyMemory<byte>? Bytes,string? Candidate)>();
+        foreach(var source in projection.Sources)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            var existing=await Optional(store,source.Pin.LocalPath,cancellationToken);
+            if(existing is not null)
+            {
+                SourceAcquirer.Verify(existing.Value.Span,source.Pin);
+                if(!acquisition.Projection.Resume)Fail("BATCH_RESUME");
+                prepared.Add((source,SourceSeedStatus.Reused,existing.Value,null));continue;
+            }
+            ReadOnlyMemory<byte>? selected=null;string? candidatePath=null;
+            foreach(var candidate in source.BundleCandidates)
+            {
+                var bytes=await Optional(bundle,candidate.Path,cancellationToken);
+                if(bytes is null)continue;
+                // First existing candidate must verify; corruption never falls through.
+                SourceAcquirer.Verify(bytes.Value.Span,source.Pin);
+                selected=bytes.Value.ToArray();candidatePath=candidate.Path;break;
+            }
+            prepared.Add((source,selected is null?SourceSeedStatus.Absent:SourceSeedStatus.Imported,selected,candidatePath));
+        }
+        var outputs=new List<StoredArtifact>();var entries=new List<SourceSeedEntry>();
+        // Every target/candidate above is verified before the first copy, preserving original batch preflight behavior.
+        foreach(var item in prepared)
+        {
+            cancellationToken.ThrowIfCancellationRequested();StoredArtifact? artifact=null;
+            if(item.Status==SourceSeedStatus.Imported)
+                artifact=await WriteMissing(new(item.Source.Pin.LocalPath,item.Bytes!.Value,"application/octet-stream"),cancellationToken);
+            else if(item.Status==SourceSeedStatus.Reused)
+                artifact=new(item.Source.Pin.LocalPath,item.Source.Pin.Sha256,item.Bytes!.Value.Length,"application/octet-stream");
+            if(artifact is not null)Add(outputs,artifact);
+            entries.Add(new(item.Source.PhysicalSourceIndex,item.Status,artifact,item.Candidate));
+        }
+        var counts=new SourceSeedCounts(entries.Count(entry=>entry.Status==SourceSeedStatus.Imported),entries.Count(entry=>entry.Status==SourceSeedStatus.Reused),entries.Count(entry=>entry.Status==SourceSeedStatus.Absent));
+        var receipt=new SourceSeedReceipt(identity,acquisition,entries,counts,outputs,counts.Absent==0,false,projection);
+        VerifySeedReceipt(request,receipt);await VerifyOutputs(outputs,cancellationToken);
+        var manifest=await store.WriteAsync(new(acquisition.ReceiptPath,canonical.Serialize(JsonSerializer.SerializeToElement(receipt)),"application/json"),cancellationToken);
+        return new(receipt,manifest,counts,false);
+    }
+    private static void ValidateSeed(SourceBatchSeedRequest request)
+    {
+        var acquisition=request.Acquisition;var basis=acquisition.Projection;
+        if(!basis.SelectedPhysicalSourceIndices.Order().SequenceEqual(basis.PhysicalSources.Select(source=>source.PhysicalSourceIndex).Order()))Fail("SEED_SELECTION");
+        if(acquisition.CachePolicy!=SourceBatchCachePolicy.PreserveAliases)Fail("SEED_CACHE_POLICY");
+        var seed=request.SeedProjection;
+        if(seed is null||seed.Release!=basis.Release||seed.RecipeSha256!=basis.RecipeSha256||seed.Sources is null||
+            !seed.Sources.Select(source=>source.PhysicalSourceIndex).SequenceEqual(basis.PhysicalSources.Select(source=>source.PhysicalSourceIndex)))Fail("SEED_PROJECTION");
+        foreach(var source in seed.Sources)
+        {
+            var physical=basis.PhysicalSources.Single(item=>item.PhysicalSourceIndex==source.PhysicalSourceIndex);
+            if(source.WinningSelectionRowIndex!=physical.SelectionRowIndices.Max()||source.Pin is null||source.Pin.LocalPath!=physical.Pin.LocalPath||source.Pin.Sha256!=physical.Pin.Sha256||source.Pin.Compatibility!=basis.Profile)Fail("SEED_PROJECTION");
+            SourceAcquirer.ValidatePin(source.Pin);
+            var row=basis.Rows.Single(item=>item.RowIndex==source.WinningSelectionRowIndex);
+            var snapshot=source.RequiredSnapshot;
+            if(snapshot is not null&&(snapshot.SourcePath!=row.LogicalPath||snapshot.LocalPath!=source.Pin.LocalPath||snapshot.Sha256!=source.Pin.Sha256||snapshot.Length!=source.Pin.SizeBytes))Fail("SEED_PROJECTION");
+            var path=snapshot?.BundlePath;
+            if(path!=source.Pin.RequiredLocalSnapshot||source.BundleCandidates is null||source.BundleCandidates.Count!=(path is null?1:2))Fail("SEED_PROJECTION");
+            var first=source.BundleCandidates[0];
+            if(first.CandidateOrdinal!=0||first.Kind!=RehydrationSeedCandidateKind.LocalPath||first.Path!=source.Pin.LocalPath)Fail("SEED_PROJECTION");
+            if(path is not null)
+            {
+                _=ArtifactPaths.Segments(path);var second=source.BundleCandidates[1];
+                if(second.CandidateOrdinal!=1||second.Kind!=RehydrationSeedCandidateKind.RequiredLocalSnapshot||second.Path!=path)Fail("SEED_PROJECTION");
+            }
+        }
+    }
+    private void VerifySeedReceipt(SourceBatchSeedRequest request,SourceSeedReceipt receipt)
+    {
+        if(receipt.Entries is null||receipt.Outputs is null||receipt.OriginalCounts is null||receipt.Entries.Count!=request.SeedProjection.Sources.Count||receipt.HistoricalByteIdentityClaimed)Fail("SEED_SEALED");
+        foreach(var pair in receipt.Entries.Zip(request.SeedProjection.Sources))
+        {
+            var entry=pair.First;var source=pair.Second;
+            if(entry.PhysicalSourceIndex!=source.PhysicalSourceIndex||!Enum.IsDefined(entry.Status))Fail("SEED_SEALED");
+            if(entry.Status==SourceSeedStatus.Absent){if(entry.Artifact is not null||entry.BundleCandidate is not null)Fail("SEED_SEALED");continue;}
+            var artifact=entry.Artifact;
+            if(artifact is null||artifact.RelativePath!=source.Pin.LocalPath||artifact.Sha256!=source.Pin.Sha256||artifact.Length<0||artifact.MediaType!="application/octet-stream"||source.Pin.SizeBytes is not null&&artifact.Length!=source.Pin.SizeBytes)Fail("SEED_SEALED");
+            if(entry.Status==SourceSeedStatus.Reused&&entry.BundleCandidate is not null||entry.Status==SourceSeedStatus.Imported&&!source.BundleCandidates.Any(candidate=>candidate.Path==entry.BundleCandidate))Fail("SEED_SEALED");
+        }
+        var counts=new SourceSeedCounts(receipt.Entries.Count(entry=>entry.Status==SourceSeedStatus.Imported),receipt.Entries.Count(entry=>entry.Status==SourceSeedStatus.Reused),receipt.Entries.Count(entry=>entry.Status==SourceSeedStatus.Absent));
+        if(receipt.OriginalCounts!=counts||receipt.RawComplete!=(counts.Absent==0)||!receipt.Outputs.SequenceEqual(receipt.Entries.Where(entry=>entry.Artifact is not null).Select(entry=>entry.Artifact!)))Fail("SEED_SEALED");
+    }
+    private bool Same<T>(T left,T right)=>canonical.Serialize(JsonSerializer.SerializeToElement(left)).AsSpan().SequenceEqual(canonical.Serialize(JsonSerializer.SerializeToElement(right)));
     private static HashSet<int> SelectedRows(RehydrationSourceProjection projection)=>projection.Rows.Where(x=>projection.SelectedPhysicalSourceIndices.Contains(x.PhysicalSourceIndex)).Select(x=>x.RowIndex).ToHashSet();
     private static void Validate(SourceBatchRequest request)
     {
@@ -220,3 +334,5 @@ public sealed class SourceBatch(IByteTransport transport,IArtifactStore store,IA
         public async Task<StoredArtifact> WriteAsync(Artifact artifact,CancellationToken cancellationToken=default){var stored=await inner.WriteAsync(artifact,cancellationToken);Add(outputs,stored);return stored;}
     }
 }
+
+

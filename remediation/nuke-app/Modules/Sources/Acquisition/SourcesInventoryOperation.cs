@@ -30,12 +30,19 @@ public sealed class SourcesInventoryOperation(IRehydrationPlanner planner,ISourc
         var resumed=await reader.ResumeOnlyAsync(new(new(prior.GenerationId,pin.RelativePath,projection,prior.CachePolicy),pin),cancellationToken);
         if(!resumed.Reused)throw new SourcesInventoryException("INVENTORY_SEALED",[]);
         if(resumed.Manifest!=pin)throw new SourcesInventoryException("INVENTORY_ACQUISITION_PIN",[]);
+        var receipt=Describe(resumed);
+        var manifest=new Artifact(request.ManifestPath,canonical.Serialize(JsonSerializer.SerializeToElement(receipt)),"application/json");
+        return new(receipt,await output.WriteAsync(manifest,cancellationToken));
+    }
+    internal static SourcesInventoryReceipt Describe(SourceBatchResult resumed)
+    {
+        var projection=resumed.Receipt.Projection;
         var selected=projection.SelectedPhysicalSourceIndices.ToHashSet();
         var entries=projection.PhysicalSources.Select(source=>new SourceInventoryEntry(source.PhysicalSourceIndex,
             selected.Contains(source.PhysicalSourceIndex)?SourceInventoryDisposition.VerifiedSelected:SourceInventoryDisposition.NotSelected,
             selected.Contains(source.PhysicalSourceIndex)?resumed.Receipt.Sources.Single(item=>item.PhysicalSourceIndex==source.PhysicalSourceIndex).Source:null)).ToArray();
-        var receipt=new SourcesInventoryReceipt(resumed,entries,selected.Count,projection.PhysicalSources.Count-selected.Count,resumed.Receipt.Complete,false,false);
-        var manifest=new Artifact(request.ManifestPath,canonical.Serialize(JsonSerializer.SerializeToElement(receipt)),"application/json");
-        return new(receipt,await output.WriteAsync(manifest,cancellationToken));
+        return new(resumed,entries,selected.Count,projection.PhysicalSources.Count-selected.Count,resumed.Receipt.Complete,false,false);
     }
 }
+
+

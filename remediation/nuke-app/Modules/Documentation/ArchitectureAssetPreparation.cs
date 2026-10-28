@@ -10,12 +10,12 @@ namespace AndroidMcp.BuildTool.Documentation;
 /// <summary>Pure editable code extraction and final vector presentation profile.</summary>
 public sealed class ArchitectureAssetPreparation : IArchitectureAssetPreparation
 {
+    private static readonly IArchitectureViewIndexReader Views=new ArchitectureViewIndexReader();
     public IReadOnlyList<Artifact> ExtractCodeViews(ArchitecturePreparationInput input)
     {
-        var dsl = Encoding.UTF8.GetString(input.Workspace.Bytes.Span);
         var code = Encoding.UTF8.GetString(input.CodeMarkdown.Bytes.Span);
-        var expected = Regex.Matches(dsl,@"(?m)^\s*image\s+\.\./docs/diagrams/([a-z-]+)\.svg\s*$")
-            .Select(m=>m.Groups[1].Value).ToHashSet(StringComparer.Ordinal);
+        var expected = Views.Read(input.Workspace).ImageSvgPaths
+            .Select(path=>Path.GetFileNameWithoutExtension(path)).ToHashSet(StringComparer.Ordinal);
         if(expected.Count==0)throw new ArchitectureAssetException("MISSING_CODE_VIEW","Workspace declares no editable code-view images");
         var blocks = Regex.Matches(code,@"(?ms)^## ([a-z-]+)[^\n]*\r?\n.*?```plantuml\r?\n(.*?)\r?\n```");
         var extracted = new Dictionary<string,string>(StringComparer.Ordinal);

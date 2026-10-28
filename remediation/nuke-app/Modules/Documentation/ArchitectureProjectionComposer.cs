@@ -1,6 +1,5 @@
 using System.Text;
 using System.Text.Json;
-using System.Text.RegularExpressions;
 using AndroidMcp.BuildTool.Core;
 using AndroidMcp.BuildTool.Modules.Sources.Acquisition;
 
@@ -16,7 +15,7 @@ public sealed class ArchitectureProjectionComposer(IArtifactGenerationRuntime wo
     private const string DiagramPrefix="docs/diagrams/";
     private const string DockerConfig=".docker-cli/config.json";
     private const string Skin="architecture/render-skin.puml";
-    private static readonly Regex NativeView=new(@"(?m)^\s*(?:(?:systemContext|container|component|dynamic)\s+\S+|deployment\s+\S+\s+(?:""[^""]*""|\S+))\s+([A-Za-z_][A-Za-z0-9_]*)\s+""[^""]*""\s*\{",RegexOptions.CultureInvariant);
+    private static readonly IArchitectureViewIndexReader Views=new ArchitectureViewIndexReader();
     private readonly IDesignStagePlanner stages=new DesignStagePlanner();
 
     public ArchitectureCompositionPlan Plan(IReadOnlyList<Artifact> inputs,DocumentationRendererProfile profile,IReadOnlyList<Artifact> codeViews)
@@ -118,9 +117,9 @@ public sealed class ArchitectureProjectionComposer(IArtifactGenerationRuntime wo
     }
     private static string[] NativeKeys(IReadOnlyList<Artifact> inputs)
     {
-        var dsl=inputs.Single(a=>a.RelativePath=="architecture/workspace.dsl");var keys=NativeView.Matches(Encoding.UTF8.GetString(dsl.Bytes.Span)).Select(match=>match.Groups[1].Value).ToArray();
-        if(keys.Length==0||keys.Distinct(StringComparer.Ordinal).Count()!=keys.Length)throw new ArchitectureAssetException("NATIVE_VIEW_PLAN","Native workspace view keys must be present and unique");
-        return keys.Order(StringComparer.Ordinal).ToArray();
+        var dsl=inputs.Single(a=>a.RelativePath=="architecture/workspace.dsl");var keys=Views.Read(dsl).NativeKeys;
+        if(keys.Count==0||keys.Distinct(StringComparer.Ordinal).Count()!=keys.Count)throw new ArchitectureAssetException("NATIVE_VIEW_PLAN","Native workspace view keys must be present and unique");
+        return keys.ToArray();
     }
     private static ReadOnlyMemory<byte> ApplyExistingProfile(ReadOnlyMemory<byte> raw)
     {

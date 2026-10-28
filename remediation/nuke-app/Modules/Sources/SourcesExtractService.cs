@@ -7,9 +7,9 @@ using AndroidMcp.BuildTool.Publication;
 namespace AndroidMcp.BuildTool.Sources;
 
 /// <summary>The shared native cache intake and raw miss resolver. Publication is a later gated increment.</summary>
-public sealed class SourcesExtractService(IArtifactStore rawSources, IArtifactStore generations,
-    ISourcesRuntimeFactory runtimes, ISealedSourceCache cache, ICanonicalJson canonical)
-    : ISourceExtractGenerationReader, ISourceExtractResolver
+public sealed partial class SourcesExtractService(IArtifactStore rawSources, IArtifactStore generations,
+    ISourcesRuntimeFactory runtimes, ISealedSourceCache cache, ICanonicalJson canonical, IArtifactLeaseProvider? leases = null)
+    : ISourceExtractGenerationReader, ISourceExtractResolver, ISourcesExtractOperation
 {
     private readonly ICanonicalJson json = canonical;
     private readonly ISealedSourceCache sealedCache = cache;
@@ -20,14 +20,14 @@ public sealed class SourcesExtractService(IArtifactStore rawSources, IArtifactSt
     public async Task<ISourceExtractGeneration> OpenAsync(SourceExtractGenerationRequest request, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(request); cancellationToken.ThrowIfCancellationRequested();
-        SourceExtractIndex? index = null;
+        SourceExtractIndex? index = null; var indexPins = new List<StoredArtifact>();
         if (request.TrustedIndex is not null)
         {
             var manifest = await ReadPinnedJson<SourceExtractGenerationManifest>(request.TrustedIndex, cancellationToken);
             if (manifest.Schema != ManifestSchema || string.IsNullOrWhiteSpace(manifest.GenerationId) || manifest.IndexData is null || manifest.Outputs is null ||
                 !manifest.Outputs.Contains(manifest.IndexData)) throw Failure("INDEX_SCHEMA", "Native generation commit does not own its index-data pin");
             index = await ReadPinnedJson<SourceExtractIndex>(manifest.IndexData, cancellationToken);
-            ValidateIndex(request, index);
+            ValidateIndex(request, index); indexPins.Add(request.TrustedIndex); indexPins.Add(manifest.IndexData);
         }
         // Dependency/ABI admission on hits is permitted. Extract and raw reads
         // remain absent until a miss/noncache row is actually requested.
@@ -39,7 +39,7 @@ public sealed class SourcesExtractService(IArtifactStore rawSources, IArtifactSt
                 if (runtime is not ISourcesCacheRuntime capabilities || index.Rows.Any(row => row.Kind is null || !capabilities.CacheProducerKinds.Contains(row.Kind)))
                     throw Failure("CACHE_CAPABILITY", "Committed cache row is not backed by an actual cache-producing runtime registration");
             }
-            return new Generation(this, request, runtime, index?.Rows ?? []);
+            return new Generation(this, request, runtime, index?.Rows ?? [], indexPins);
         }
         catch { runtime.Dispose(); throw; }
     }
@@ -141,11 +141,13 @@ public sealed class SourcesExtractService(IArtifactStore rawSources, IArtifactSt
     private static JsonObject? Clone(JsonObject? value) => value is null ? null : (JsonObject)value.DeepClone();
 
     private sealed class Generation(SourcesExtractService service, SourceExtractGenerationRequest request, ISourcesRuntime runtime,
-        IReadOnlyList<SourceExtractIndexRow> admitted) : ISourceExtractGeneration
+        IReadOnlyList<SourceExtractIndexRow> admitted, IReadOnlyList<StoredArtifact> indexPins) : ISourceExtractGeneration
     {
         private readonly Dictionary<int, SourceExtractIndexRow> indexed = admitted.ToDictionary(row => row.RowIndex);
         private readonly Dictionary<string, SourceCacheLookup> lookups = new(StringComparer.Ordinal);
         private bool disposed;
+        internal IReadOnlySet<string> CacheProducerKinds => runtime is ISourcesCacheRuntime capabilities ? capabilities.CacheProducerKinds : throw Failure("CACHE_CAPABILITY", "Runtime does not declare cache-producing registrations");
+        internal IReadOnlyList<StoredArtifact> IndexPins => indexPins;
         public async Task<SourceExtractRow> ReadAsync(RehydrationSourceRow requested, CancellationToken cancellationToken = default)
         {
             ObjectDisposedException.ThrowIf(disposed, this); cancellationToken.ThrowIfCancellationRequested();

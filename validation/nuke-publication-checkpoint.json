@@ -1,309 +1,132 @@
 {
-  "checkpoint": "006",
-  "localTimestamp": "2026-10-28T06:49:59",
-  "sdk": "10.0.403",
-  "manifestSha256": "aaf56f5f72f130cc841e5783592ad9c30567c5ba2ca99d4e1f104d356aed8555",
-  "handoffFiles": 781,
-  "handoffBytes": 11557962,
-  "publishedHandoffFiles": 801,
-  "effectiveSourceFiles": 802,
-  "effectiveSourceBytes": 12686481.0,
-  "sourcePriorPostcopyPinsVerified": true,
-  "originalInputsRetained": true,
-  "lockedRestoreSucceeded": true,
-  "nativeHostBuildSucceeded": true,
-  "total": 54900,
-  "passed": 54900,
+  "checkpoint": "007",
+  "timestamp": "2026-10-28T10:12:35",
+  "manifestSha256": "a7d01ab6c865f2b3ed7f778e11189313ea9e0f0a98597b7b542d2b1b229d30c1",
+  "handoffFiles": 964,
+  "handoffBytes": 14611957,
+  "cleanTestedIdenticalPaths": 963,
+  "codeAndProjectFilesCompared": 679,
+  "additionalMetadataOnly": "validation/nuke-portable-verification-007.json",
+  "fullRunRepeatedInPublication": false,
+  "verificationReason": "All copied code/project inputs match the isolated fresh-build full59119 gate byte-for-byte; only portable proof/publication metadata changed.",
+  "total": 59119,
+  "passed": 59119,
   "failed": 0,
   "notExecuted": 0,
   "warnings": 0,
   "errors": 0,
-  "scope": "Full currently implemented C# suite, mock and real bindings; not complete legacy parity or independent acceptance",
-  "trxSha256": "2960c16953275898c0863d779cc117242ac79918908d4ca1c4645815d9f1f309",
-  "trxLocalRelativePath": "remediation/nuke-app/artifacts/tests/20261028T0644566746855-d264336712594c2ea0f9151c77d16c9a/tests.trx",
-  "sourceOwnerTrxSha256": "b133979b555bcb9c5befb48a945b73d8795f476698302173ad658d5210e76e26",
-  "forceFreshHostAndTests": true,
-  "ownedTemporaryRoot": true,
-  "nativeJavaManifestSha256": "e9fa6885c4d800dd1c74ef72f478f0b81885811f2b9fb84665d76dc18f3ff0c1",
-  "ownerVerifiedCliOperations": [
-    "Validate/MockGate",
-    "Validate/Tests",
-    "Design/Assets",
-    "Sources/NativeParser",
-    "Sources/Fetch",
-    "Sources/Plan",
-    "Publish/Check",
-    "Catalog/Build",
-    "Design/Architecture",
-    "Design/BrowserQa",
-    "Sources/Inventory"
-  ],
-  "registeredOperations": 13,
-  "verifiedStreaming": {
-    "mockCases": 52,
-    "byteHashSeamPreserved": true,
-    "boundedComparisonBytes": 81920,
-    "sharedFileArtifactStore": true,
-    "nativeCases": 26
+  "trxSha256": "6a785aa8c7f763b5180b9612e067ff4493c61bf3656299ebbe506c535d43d39b",
+  "sourceOwnerTrxSha256": "4e63adacdd42b76a81d5c0a7ab45dc13d749a69eac3d2c9175fef3be73163583",
+  "portableVerification": "validation/nuke-portable-verification-007.json",
+  "focusedPassed": 823,
+  "firstCleanFailure": {
+    "failed": 10,
+    "total": 58327,
+    "trxSha256": "7cf1b417ed2d0a5ad3e90f34188c0222593bbb04eca70f6820fe999700c7b46d",
+    "passed": 58317
   },
-  "browserCases": 9,
-  "browserCasesPassed": 9,
-  "historicalFailedReceiptsRetainedLocally": true,
-  "priorCheckpoint004Gate": {
-    "total": 37372,
-    "failed": 13,
-    "reason": "Historical checkpoint004 quota-failed gate retained; unchanged-source rerun passed. Subsequent gates use owned process-local temp roots.",
-    "notExecuted": 0,
-    "trxSha256": "c06f6ce8ef3a29754de700e183f803bc4853a56271e6466a577c722909dd8810",
-    "passed": 37359
-  },
-  "localHistoryExclusion": {
-    "runtimeTestAndRehydrationReferenceCheck": "No literal references found, including compressed selected recipes; v2 predecessor pointer is local-history provenance.",
-    "sha256": "e94e2ac7e49ad1c4b11e3c8197a97e0494e89c42f7687383da6b8d8bf4a685b7",
-    "path": "remediation/nuke-planning/publication/legacy-unmapped-role-supplement.json",
-    "retainedOriginalAndIgnoredCopy": true
-  },
-  "migrationComplete": false,
-  "productionParityProven": false,
-  "independentAcceptance": false,
-  "pythonExecuted": false,
-  "customNodeExecuted": false,
-  "hvExecuted": false,
-  "githubActions": [],
-  "reviewOrder": "Finish migration and normal verification; mark existing draft PR ready; review/remediate in PR afterward. No merge authorization.",
-  "leanBoundary": "No raw CLI/reviewer streams, private MCP/identity descriptors, binaries, generated caches or corpora. Full4.93MBhistorical inventory excluded; compact198row projection retained with original local inputs.",
-  "publicationAdaptations": [
-    "Preserved README/ignore/allowlist/FUNDING during guarded copy",
-    "Exact source and LICENSE policy entries only",
-    "No C# changes after copied full gate"
-  ],
-  "componentScopes": {
-    "runtime": "One shared hash/JSON/path/store/process/glob authority. Strict CreateNew byte mode passed25native cases with existing byte/stream regressions. Runtime-origin writer passed13native cases; actual SDK post-target facts, build/initializer admission composition remain pending. Shared pinned-reader36mock cases passed; its native implementation is not in this checkpoint. Large-payload stream reading and strict stream creation remain pending.",
-    "documentation": "Current native Assets generated222 artifacts. Architecture003 rendered the current NUKE DSL into21SVG+6editablePUML. Paired native browser QA passed108slides,107images,238SVG and138captures. All9contact sheets and21diagram captures were directly inspected; TWO layout interferences remain open (server-core title route, Deployment sandbox-header route). Subset25native, full-model preflight9native and source collection have same-case proof. Outer composition, DocsVerify, packaging and Gradle forwarding remain pending.",
-    "publication": "Native Check/Stage/Rehydrate/Help and typed one-pass source projection remain verified. Additive PlanSeed12native cases preserve old Plan serialization and last-row seed provenance. Nine dated publication wrapper executions were retired with retained receipts; generic privacy/audit duties and reusable chunk codec with eight original tests remain open. No Git-writing production service or hidden source upload.",
-    "catalog": "Catalog/Build retains seven actual CLI scenarios. Native source-cache generation intake9cases and corrected annotation archive10cases passed. Private SQLite raw capture, bounded identity replay and streaming final artifacts remain verified; global indexes and per-source extraction remain resident. Verified Inventory-to-Build pipeline caller, effective-inventory integration and declared-versus-consumed historical audit extension remain pending. No whole-corpus, constant-memory or historical byte-identity claim.",
-    "source": "Sources/Fetch, Plan and Inventory have actual CLI proof. Native sealed-cache reading/resolution, binary annotation archive dispatch, target normalization, HTML attribute facts, callback and functional facts have same-case native bindings. Source generation writer and end-to-end Extract CLI remain pending; current writer mock gate is692 cases, not the earlier706 estimate. No complete corpus or legacy parity claim.",
-    "review": "Normal review workflow tests use fake provider/audit dependencies. Strengthened actual-facts2070mock cases and native origin13 passed, but actual SDK querying, producer/initializer wiring and official audit runtime composition remain pending. No HV/provider review has run during migration."
-  },
-  "legacyDisposition": {
-    "publishedTracked": 198,
-    "representedPublished": 198,
-    "publishedUnmappedOwners": 0,
-    "totalNormalizedPaths": 1464,
-    "additionalSourceTaskPaths": 1266,
-    "manifestPinnedEvidenceCopies": 776,
-    "sha256Conflicts": 0,
-    "unmappedOwners": 0,
-    "ownerOverlaps": 0,
-    "normalVerified": 14,
-    "normalVerifiedMethodScopes": 23,
-    "executionRetired": 158,
-    "retainedCopyRoleVerified": 146,
-    "normalMethodClosureDelegated": 146,
-    "normalMethodClosureOpen": 1450,
-    "byteIdentityGroups": 585,
-    "sourceDomainBehaviorGroups": 82,
-    "acceptedComplete": 0,
-    "scopeExclusions": 0,
-    "safeToDelete": 0,
-    "pathRolesNormallyClosed": 160,
-    "primaryByteGroupsNormallyClosed": 13,
-    "primaryByteGroupsNormalClosureOpen": 572,
-    "sourcePrimaryByteGroupsNormalClosureOpen": 81
-  },
-  "knownManualVisualFindings": [
+  "restoredDiscovery": 792,
+  "exactTrackingOmissions": [
     {
-      "id": "VQA-DIAGRAM-001",
-      "description": "The long upper relationship route crosses the centered Kotlin server-core title, visually striking through its text.",
-      "status": "unresolved",
-      "owner": "Documentation architecture rendering/source layout"
+      "omitFromFuturePublication": "remediation/nuke-planning/docs/fixtures/current-tooling.code-diagrams.md",
+      "expectedPreviousSha256": "31c781d2e8d28c1fe39b52e2e31179b1e2fb4351532936b4ecfcab5f4c22cf7e",
+      "expectedLength": 42064,
+      "retainOriginalLocally": true,
+      "includeReplacement": "remediation/nuke-planning/docs/fixtures/current-tooling.code-diagrams.md.fixture",
+      "replacementSha256": "31c781d2e8d28c1fe39b52e2e31179b1e2fb4351532936b4ecfcab5f4c22cf7e",
+      "replacementLength": 42064,
+      "virtualFixturePathUnchanged": "remediation/nuke-planning/docs/fixtures/current-tooling.code-diagrams.md"
     },
     {
-      "id": "VQA-DIAGRAM-002",
-      "description": "The diagonal Android bridge APK to paired-adbd relationship route passes through the One app UID sandbox heading/subtitle band, interfering with the deployment-node text.",
-      "status": "unresolved",
-      "owner": "Documentation architecture rendering/source layout"
+      "omitFromFuturePublication": "remediation/nuke-planning/docs/fixtures/current-tooling.design.md",
+      "expectedPreviousSha256": "d364de8eb28f27dd80cf834d3758374f80206fe6f4a15fe9da172904ef99cac7",
+      "expectedLength": 325205,
+      "retainOriginalLocally": true,
+      "includeReplacement": "remediation/nuke-planning/docs/fixtures/current-tooling.design.md.fixture",
+      "replacementSha256": "d364de8eb28f27dd80cf834d3758374f80206fe6f4a15fe9da172904ef99cac7",
+      "replacementLength": 325205,
+      "virtualFixturePathUnchanged": "remediation/nuke-planning/docs/fixtures/current-tooling.design.md"
+    },
+    {
+      "omitFromFuturePublication": "remediation/nuke-planning/docs/fixtures/current-tooling.README.md",
+      "expectedPreviousSha256": "78d47af9952baecff756426fefd52a069e62aca070166eff807f47e8c7795516",
+      "expectedLength": 4836,
+      "retainOriginalLocally": true,
+      "includeReplacement": "remediation/nuke-planning/docs/fixtures/current-tooling.README.md.fixture",
+      "replacementSha256": "78d47af9952baecff756426fefd52a069e62aca070166eff807f47e8c7795516",
+      "replacementLength": 4836,
+      "virtualFixturePathUnchanged": "remediation/nuke-planning/docs/fixtures/current-tooling.README.md"
+    },
+    {
+      "omitFromFuturePublication": "remediation/nuke-planning/docs/fixtures/pre-nuke-tooling.code-diagrams.md",
+      "expectedPreviousSha256": "3a75a05e90a60231e1851f6cd23f779c887b0d4c8713c75a1bf24854f073b837",
+      "expectedLength": 42039,
+      "retainOriginalLocally": true,
+      "includeReplacement": "remediation/nuke-planning/docs/fixtures/pre-nuke-tooling.code-diagrams.md.fixture",
+      "replacementSha256": "3a75a05e90a60231e1851f6cd23f779c887b0d4c8713c75a1bf24854f073b837",
+      "replacementLength": 42039,
+      "virtualFixturePathUnchanged": "remediation/nuke-planning/docs/fixtures/pre-nuke-tooling.code-diagrams.md"
+    },
+    {
+      "omitFromFuturePublication": "remediation/nuke-planning/docs/fixtures/pre-nuke-tooling.design.md",
+      "expectedPreviousSha256": "0e3bcfcc202ade99cc9e19c5b376b42b848971f28ea624f145ccac066b46a71b",
+      "expectedLength": 324206,
+      "retainOriginalLocally": true,
+      "includeReplacement": "remediation/nuke-planning/docs/fixtures/pre-nuke-tooling.design.md.fixture",
+      "replacementSha256": "0e3bcfcc202ade99cc9e19c5b376b42b848971f28ea624f145ccac066b46a71b",
+      "replacementLength": 324206,
+      "virtualFixturePathUnchanged": "remediation/nuke-planning/docs/fixtures/pre-nuke-tooling.design.md"
+    },
+    {
+      "omitFromFuturePublication": "remediation/nuke-planning/docs/fixtures/pre-nuke-tooling.README.md",
+      "expectedPreviousSha256": "6169f84191b95dd3843ca5b72e95a80a96aae7b08a5402c3fdd48d6ada68c2f5",
+      "expectedLength": 6515,
+      "retainOriginalLocally": true,
+      "includeReplacement": "remediation/nuke-planning/docs/fixtures/pre-nuke-tooling.README.md.fixture",
+      "replacementSha256": "6169f84191b95dd3843ca5b72e95a80a96aae7b08a5402c3fdd48d6ada68c2f5",
+      "replacementLength": 6515,
+      "virtualFixturePathUnchanged": "remediation/nuke-planning/docs/fixtures/pre-nuke-tooling.README.md"
+    },
+    {
+      "omitFromFuturePublication": "remediation/nuke-planning/docs/ui-blueprint.pre-health-migration.md",
+      "expectedPreviousSha256": "9f164a4b14e1a7a8db5fa88eef1ee015b261335314e3b98903cf4f201fea6058",
+      "expectedLength": 319159,
+      "retainOriginalLocally": true,
+      "includeReplacement": "remediation/nuke-planning/docs/ui-blueprint.pre-health-migration.md.fixture",
+      "replacementSha256": "9f164a4b14e1a7a8db5fa88eef1ee015b261335314e3b98903cf4f201fea6058",
+      "replacementLength": 319159,
+      "virtualFixturePathUnchanged": "remediation/nuke-planning/docs/ui-blueprint.pre-health-migration.md"
     }
   ],
-  "manualVisualReceipt": {
-    "sha256": "048d5aed1d824e07271f1cb7416f86e70952190644433280fddaf6dcfdca9c67",
-    "path": "remediation/nuke-planning/browser/current-design-diagram-visual-inspection.json"
-  },
-  "authorizedPortableFixtureCorrection": {
-    "baseManifestSha256": "aaf56f5f72f130cc841e5783592ad9c30567c5ba2ca99d4e1f104d356aed8555",
-    "copyReceiptSha256": "bdeea8f25219cf94db6cd8f604e1f2972733155ddc9b977b34de393f5e7c68b5",
-    "sourceEvidenceSha256": "83e3f5307d47ea5ece773fc094a95388d7c0ff2727e38a3dfe5edb320c024dbf",
-    "files": [
-      {
-        "destination": "remediation/nuke-app/Tests/Documentation/DocumentationPackageMockTests.cs",
-        "sha256": "3560c1a7de1a42d7b8cfe39a7ebf563b34f39b6bb91af5346ced647bee2456c7",
-        "bytes": 11809,
-        "expected_previous_sha256": "c8d1f8937052757926308a42651c9f79577aae6d36633360ca72bf49fb24c6fd"
-      },
-      {
-        "destination": "remediation/nuke-planning/docs/fixtures/architecture-svg-original/arc-controller-classes.svg",
-        "sha256": "218eeb00d4482f1572e650790da0d64a93cefe0daa850e8ccc496de770c28e04",
-        "bytes": 49909,
-        "expected_previous_sha256": null
-      },
-      {
-        "destination": "remediation/nuke-planning/docs/fixtures/architecture-svg-original/arc-target-classes.svg",
-        "sha256": "a75d7911a2eb911deeb377b09ff1addf031b1155de3f4ebc1b96a2b2bac48cf5",
-        "bytes": 44688,
-        "expected_previous_sha256": null
-      },
-      {
-        "destination": "remediation/nuke-planning/docs/fixtures/architecture-svg-original/arc-ui-classes.svg",
-        "sha256": "f045e10fec80751d2ca0676db7697e798fa8ec332f6c74dbb0daa04c5c7cec64",
-        "bytes": 63606,
-        "expected_previous_sha256": null
-      },
-      {
-        "destination": "remediation/nuke-planning/docs/fixtures/architecture-svg-original/server-adapters-classes.svg",
-        "sha256": "7030591d54264d532947a5aecba67eef165200b5d05a72d653aeb3f812d86c76",
-        "bytes": 52333,
-        "expected_previous_sha256": null
-      },
-      {
-        "destination": "remediation/nuke-planning/docs/fixtures/architecture-svg-original/server-core-classes.svg",
-        "sha256": "83d3e464c2eca0d440edf9f50251fda7d80b98d6975c59a1e88f491a021362a7",
-        "bytes": 122997,
-        "expected_previous_sha256": null
-      },
-      {
-        "destination": "remediation/nuke-planning/docs/fixtures/architecture-svg-original/server-execution-classes.svg",
-        "sha256": "138f47b86469680b8251bd428a59b2e20269f4ee4a5480308900325e26ba889f",
-        "bytes": 75815,
-        "expected_previous_sha256": null
-      },
-      {
-        "destination": "remediation/nuke-planning/docs/fixtures/architecture-svg-original/structurizr-ArcComponents.svg",
-        "sha256": "277aa6ef8bf28731ccb5718e0edd493318d96729f4a8bc8eca6f8f28f1b5b79b",
-        "bytes": 96871,
-        "expected_previous_sha256": null
-      },
-      {
-        "destination": "remediation/nuke-planning/docs/fixtures/architecture-svg-original/structurizr-ArcSession.svg",
-        "sha256": "38cc24283743e63e29ac9ba8270e49dbbde8ca92152207aed52d9913bfb9c677",
-        "bytes": 14603,
-        "expected_previous_sha256": null
-      },
-      {
-        "destination": "remediation/nuke-planning/docs/fixtures/architecture-svg-original/structurizr-CallbackFlow.svg",
-        "sha256": "168590466bd2b2a391585f4931552e894f03fc94378278b4635fcd9e9067c6a9",
-        "bytes": 24859,
-        "expected_previous_sha256": null
-      },
-      {
-        "destination": "remediation/nuke-planning/docs/fixtures/architecture-svg-original/structurizr-Containers.svg",
-        "sha256": "bb435792d5c603f151c442d17b0a0869db7ef315b2caf5febd25c09d953489d2",
-        "bytes": 46245,
-        "expected_previous_sha256": null
-      },
-      {
-        "destination": "remediation/nuke-planning/docs/fixtures/architecture-svg-original/structurizr-Context.svg",
-        "sha256": "4e453bdaa339677e47bc9662abc7aa1e7f3523a60dc9539d719825bfd3f114e9",
-        "bytes": 31274,
-        "expected_previous_sha256": null
-      },
-      {
-        "destination": "remediation/nuke-planning/docs/fixtures/architecture-svg-original/structurizr-CredentialRevocation.svg",
-        "sha256": "31635d81dbfb51f5f439cdab5d29e41823352de1e0c324a89ddc7619ecdb8bce",
-        "bytes": 19127,
-        "expected_previous_sha256": null
-      },
-      {
-        "destination": "remediation/nuke-planning/docs/fixtures/architecture-svg-original/structurizr-Deployment.svg",
-        "sha256": "510113d44b482623efe967fd79eff2bca838b5f314a389c29ef3bbc3be51add0",
-        "bytes": 62169,
-        "expected_previous_sha256": null
-      },
-      {
-        "destination": "remediation/nuke-planning/docs/fixtures/architecture-svg-original/structurizr-ExecutionComponents.svg",
-        "sha256": "1b916983dd9502a9943843a0aed52dafbcee9687057cda61a085d1ecc597dfb8",
-        "bytes": 83112,
-        "expected_previous_sha256": null
-      },
-      {
-        "destination": "remediation/nuke-planning/docs/fixtures/architecture-svg-original/structurizr-GroupFlow.svg",
-        "sha256": "4169dfb2c8c628005ae7bb282aaa80ae659542202844b79c3fb62ae16f7660b1",
-        "bytes": 20211,
-        "expected_previous_sha256": null
-      },
-      {
-        "destination": "remediation/nuke-planning/docs/fixtures/architecture-svg-original/structurizr-InvocationFlow.svg",
-        "sha256": "bfa846646d1f166dbe8ddf10e5461c5f798124b315dd49eea95f04801768b75a",
-        "bytes": 30151,
-        "expected_previous_sha256": null
-      },
-      {
-        "destination": "remediation/nuke-planning/docs/fixtures/architecture-svg-original/structurizr-OwnerTransition.svg",
-        "sha256": "2ea3cb60d94bc6e9390148fda08b9a341d1f1ea8cc3cf337711ab1b08b06c4b3",
-        "bytes": 16618,
-        "expected_previous_sha256": null
-      },
-      {
-        "destination": "remediation/nuke-planning/docs/fixtures/architecture-svg-original/structurizr-ServerComponents.svg",
-        "sha256": "a1ecd24c5e2ea361d4e4f48a66dec687ebaaa856c6680b7edee0ebc0cac8e3ab",
-        "bytes": 127460,
-        "expected_previous_sha256": null
-      },
-      {
-        "destination": "remediation/nuke-planning/docs/fixtures/architecture-svg-original/structurizr-ServerCoreComponents.svg",
-        "sha256": "4ad39c20cfa57d8e2af0f8d1ece8e35a7fb816bb047585ea043d62757408e856",
-        "bytes": 113845,
-        "expected_previous_sha256": null
-      },
-      {
-        "destination": "remediation/nuke-planning/docs/fixtures/architecture-svg-original/structurizr-Shutdown.svg",
-        "sha256": "64b2e1e8c69e7e381452aa7562f98712e59b89ba502670df5bb65af712e86719",
-        "bytes": 18440,
-        "expected_previous_sha256": null
-      },
-      {
-        "destination": "remediation/nuke-planning/docs/fixtures/architecture-svg-original/structurizr-Startup.svg",
-        "sha256": "a3042d6126333a7446d114103f0408d662e777da0e7e6742ecb36947a521829c",
-        "bytes": 14100,
-        "expected_previous_sha256": null
-      }
-    ],
-    "currentSvgCount": 21,
-    "goldenSvgCount": 21,
-    "currentVsGoldenDifferentHashCount": 21,
-    "priorHelperRetained": true,
-    "expectedHashesAndAssertionsUnchanged": true,
-    "failedGate": {
-      "total": 54891,
-      "failed": 181,
-      "parameterizedNamesAbsent": 12,
-      "notExecuted": 0,
-      "trxSha256": "b4318b02755ac83c0f5e75e4d2682adcab948036e8ddb346766d10592a4c5570",
-      "passed": 54710,
-      "discoveryErrorPlaceholders": 3
-    },
-    "focusedGate": {
-      "trxSha256": "0893570371af2e5d90d8658d273e453f05efcfeaadaf6d5a9fd212cbc080242c",
-      "passed": 190,
-      "notExecuted": 0,
-      "failed": 0
-    },
-    "fixedFullGate": {
-      "trxSha256": "2960c16953275898c0863d779cc117242ac79918908d4ca1c4645815d9f1f309",
-      "passed": 54900,
-      "notExecuted": 0,
-      "failed": 0
-    },
-    "allPriorReceiptsRetained": true,
-    "acceptedComplete": false
-  },
-  "additionalLocalHistoryExclusion": {
-    "path": "remediation/nuke-planning/publication/legacy-publication-eleven-closure.json",
-    "recipeReferences": 0,
-    "sha256": "396ef790021d9625b105796e80db2a9ab0c400d1c20d160f6b8909fced059bda",
-    "compressedRecipesChecked": 1,
-    "runtimeTestAndUsageReferences": 0,
-    "retainedOriginalAndIgnoredCopy": true,
-    "benignSupersessionPointer": "Corrected v2 points to retained local history; not a runtime/rehydration dependency.",
-    "historyRewritten": false
-  }
+  "originalsRetainedLocally": true,
+  "ownerVerifiedCliOperations": [
+    "Sources/Plan",
+    "Sources/Fetch",
+    "Sources/Inventory",
+    "Sources/Extract",
+    "Sources/NativeParser",
+    "Catalog/Build",
+    "Catalog/BuildFromSources",
+    "Design/Assets",
+    "Design/Architecture",
+    "Design/BrowserQa",
+    "Validate/Toolchain",
+    "Publish/Check",
+    "Validate/MockGate",
+    "Validate/Tests"
+  ],
+  "registeredOperations": 15,
+  "migrationComplete": false,
+  "fullLegacyParity": false,
+  "independentAcceptance": false,
+  "pythonExecuted": false,
+  "nodeExecuted": false,
+  "hvExecuted": false,
+  "githubActions": [],
+  "readyForReview": false,
+  "deferredFormatting": [
+    "remediation/nuke-app/Modules/Sources/Acquisition/SourceBatch.cs:337: new blank line at EOF.",
+    "remediation/nuke-app/Modules/Sources/Acquisition/SourcesInventoryOperation.cs:47: new blank line at EOF.",
+    "remediation/nuke-app/Tests/Sources/Acquisition/SourceSeedContractTests.cs:222: new blank line at EOF."
+  ]
 }

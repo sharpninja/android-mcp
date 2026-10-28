@@ -1,50 +1,37 @@
 # NUKE migration progress
 
-**INCOMPLETE: checkpoint006, draft PR for progress tracking.** One C# NUKE application hosts functional categories selected by typed operation parameters. Kotlin remains the Android server/UI language; Gradle remains orchestration. No GitHub Actions.
+**INCOMPLETE: checkpoint007, draft PR for progress tracking.** One C# NUKE application uses category targets and typed operation parameters. Kotlin/Compose remain the Android server/UI technology; Gradle remains orchestration. Strict DRY and no Python, custom Node or GitHub Actions apply.
 
-## Verified copied checkpoint
+## Verified portable checkpoint
 
-Pinned SDK10.0.403 locked restore, host/test builds and the full currently implemented C# suite passed: **54,900 passed, zero failed or skipped, zero build warnings/errors**. The [publication receipt](validation/nuke-publication-checkpoint.json) records the exact copied TRX and source-owner pins. The [sealed component status](validation/nuke-migration-checkpoint.json) is authoritative for individual component scope and its 11 owner-verified CLI paths; Core/OperationRegistry.cs defines all 13 registered category/operation contracts. A registered adapter and an actual successful CLI workflow are distinct evidence levels.
+The source and independently isolated clean trees both passed **59,119/59,119**, zero failed/skipped and zero build warnings. The isolated run used a locked restore, fresh native host/test builds, the admitted Java manifest and owned process-local temporary paths. The publication code and project inputs match that tested tree exactly. See the [publication receipt](validation/nuke-publication-checkpoint.json), [portable proof](validation/nuke-portable-verification-007.json) and [sealed component status](validation/nuke-migration-checkpoint.json).
 
-Source scope: Sources/Fetch, Plan and Inventory have actual CLI proof. Native sealed-cache reading/resolution, binary annotation archive dispatch, target normalization, HTML attribute facts, callback and functional facts have same-case native bindings. Source generation writer and end-to-end Extract CLI remain pending; current writer mock gate is692 cases, not the earlier706 estimate. No complete corpus or legacy parity claim.
+The first isolated run had58,317passes and10failures with58,327discovered. Two omitted JSON fixture dependencies caused a792case discovery deficit. Only those two pinned JSON files were added; no C#, expected hashes or assertions changed. The affected823cases and the complete59,119case suite then passed. All failed receipts remain local. Seven historical Markdown files leave tracking while identical .md.fixture carriers retain their exact bytes and virtual names; local originals and Git history remain retained.
 
-Documentation scope: Current native Assets generated222 artifacts. Architecture003 rendered the current NUKE DSL into21SVG+6editablePUML. Paired native browser QA passed108slides,107images,238SVG and138captures. All9contact sheets and21diagram captures were directly inspected; TWO layout interferences remain open (server-core title route, Deployment sandbox-header route). Subset25native, full-model preflight9native and source collection have same-case proof. Outer composition, DocsVerify, packaging and Gradle forwarding remain pending.
+## Current native scope
 
-Catalog scope: Catalog/Build retains seven actual CLI scenarios. Native source-cache generation intake9cases and corrected annotation archive10cases passed. Private SQLite raw capture, bounded identity replay and streaming final artifacts remain verified; global indexes and per-source extraction remain resident. Verified Inventory-to-Build pipeline caller, effective-inventory integration and declared-versus-consumed historical audit extension remain pending. No whole-corpus, constant-memory or historical byte-identity claim.
+Source: Sources/Plan, Fetch, Inventory and Extract have actual CLI proof on one pinned SDK fixture, including fresh generation, verified cache reuse and bad-pin refusal. The source writer16, generation reader45 and selection6 native cases remain bounded component proof. Original SDK metadata assertions have three native cases plus prior XML30 and availability13 regressions, with a truthful native parser-description delta. No complete corpus or whole-producer parity claim.
 
-Review scope: Normal review workflow tests use fake provider/audit dependencies. Strengthened actual-facts2070mock cases and native origin13 passed, but actual SDK querying, producer/initializer wiring and official audit runtime composition remain pending. No HV/provider review has run during migration.
+Catalog: Legacy Catalog/Build retains seven actual CLI cases. Catalog/BuildFromSources has one actual combined acquisition/inventory/extraction/cache/Catalog fixture plus11 native workflow cases, explicit provided per-row normalization, preserved original rows/context, declared-versus-consumed cache audit and bad-pin refusal. Database and exports agree on the fixture. Global indexes and per-source extraction remain resident. No whole-corpus, constant-memory or historical byte-identity claim.
 
-Publication scope: Native Check/Stage/Rehydrate/Help and typed one-pass source projection remain verified. Additive PlanSeed12native cases preserve old Plan serialization and last-row seed provenance. Nine dated publication wrapper executions were retired with retained receipts; generic privacy/audit duties and reusable chunk codec with eight original tests remain open. No Git-writing production service or hidden source upload.
+Documentation: Assets222, Architecture003 with21SVG+6PUML, and paired browser QA108slides/107images/238SVG/138captures remain verified. The same129 generated-document fixtures passed387 native and387 mock checks. Historical data carriers retain exact bytes and virtual names. Delivered VQA001/002 remain open; a separate trial clears Deployment visually but not the server-core title and is not promoted. Full-model host composition, DocsVerify caller, packaging and Gradle forwarding remain pending.
 
-Shared runtime scope: One shared hash/JSON/path/store/process/glob authority. Strict CreateNew byte mode passed25native cases with existing byte/stream regressions. Runtime-origin writer passed13native cases; actual SDK post-target facts, build/initializer admission composition remain pending. Shared pinned-reader36mock cases passed; its native implementation is not in this checkpoint. Large-payload stream reading and strict stream creation remain pending.
+Review: Normal review workflow tests use fake provider/audit dependencies. A real SDK query produced one Debug/net10.0 reference-copy descriptor after the native directory-admission fix. Full source evaluation binding, producer/initializer freshness wiring and official audit runtime composition remain pending. No HV/provider review has run during migration.
 
-## Open manual diagram findings
+Publication: Native Check/Stage/Rehydrate/Help and typed one-pass source projection remain verified. Additive PlanSeed12native cases preserve old Plan serialization and last-row seed provenance. Nine dated publication wrapper executions were retired with retained receipts; generic privacy/audit duties and reusable chunk codec with eight original tests remain open. No Git-writing production service or hidden source upload.
 
-- **VQA-DIAGRAM-001 (open):** The long upper relationship route crosses the centered Kotlin server-core title, visually striking through its text.
-- **VQA-DIAGRAM-002 (open):** The diagonal Android bridge APK to paired-adbd relationship route passes through the One app UID sandbox heading/subtitle band, interfering with the deployment-node text.
+Shared Core: One shared hash/JSON/path/store/process/glob authority. Strict byte creation25 and strict streaming9 native cases preserve the earlier byte/stream contracts; source artifact reading18 native and OS identity mapping remain pending, with reader36 and identity58 mocks only. Shared pinned-reader18 native and36 mock cases passed. A real SDK reference-copy query succeeded; controlled-session source projection10 native cases do not prove actual private SDK binding or full producer freshness.
 
-The [sealed manual receipt](remediation/nuke-planning/browser/current-design-diagram-visual-inspection.json) is the source for these findings. Automated bounds and browser checks do not establish the absence of internal route/text collisions. These findings remain open in this draft checkpoint.
+## Remaining work and review order
 
-## Portable fixture verification
+The sealed status and exact per-file/method disposition are authoritative. Test totals, assigned ownership and dated execution retirements do not establish complete legacy parity. Full documentation/package/Gradle and review runtime composition remain pending. Delivered **VQA-DIAGRAM-001** and **VQA-DIAGRAM-002** remain open; an unpromoted trial is not a delivered fix. No Android application or deployed bridge is implemented here.
 
-The first copied run had54,710passes and181failures (54,891discovered cases): current003SVGs occupied historical golden fixture paths. Twelve parameterized cases became three discovery-error placeholders. The minimal22file correction separates21pinned old SVG fixtures and changes only the loader path. All21current SVG hashes differ from their old goldens and remain unchanged. The SAME190affected cases then passed, followed by the full54,900case copied gate. Original expected hashes/assertions, prior helper and all failed receipts are retained. See [correction receipt](validation/nuke-publication-delta.json).
+Keep legacy Python/custom Node references dormant until their exact replacements or reviewed retirements and callers are verified. Never execute them. Corpora, raw streams, caches, historical databases and generated binaries remain outside this lean publication tree. Preserve originals.
 
-Earlier failed receipts remain local; the copied full gate is current. These bounded fixtures do not prove whole-corpus scalability or full legacy parity.
-
-## Remaining migration work
-
-Complete the pending workflows and method-level closure recorded in the component scopes above and the sealed status. Those paragraphs distinguish actual CLI proof, native bindings, mock-only scope and remaining composition; registered operations and owner assignments do not prove behavioral closure. The sealed legacy disposition records 1464 normalized paths, 14 normally verified file roles and 0 accepted-complete files. No Android application or deployed bridge is implemented here.
-
-Legacy Python/custom Node sources remain dormant references until each replacement or retirement and every caller has verified parity. **Never execute them.** Corpora, raw captures, historical databases and generated binaries remain outside the lean tree. Selected provenance, required pinned parser data/licenses and compact parity fixtures are retained; full historical acquisition inventories remain local.
-
-## Usage and review order
-
-- [Native local verification and command boundaries](remediation/nuke-app/README.md)
-- [Publication input mapping](remediation/nuke-planning/publication/INPUT-MAPPING.md)
+- [Native NUKE usage](remediation/nuke-app/README.md)
 - [Source parity plan](remediation/nuke-planning/source/SOURCE-PARITY-PLAN.md)
 - [Catalog parity plan](remediation/nuke-planning/catalog/PARITY-PLAN.md)
 - [Documentation port plan](remediation/nuke-planning/docs/design-tooling-port.md)
+- [Publication input mapping](remediation/nuke-planning/publication/INPUT-MAPPING.md)
 
-Strict DRY applies: one typed registry, shared contracts, recipe parser, matching and immutable storage engines. Keep this PR draft until migration and normal local verification finish, then mark ready as authorized. **No HV before ready.** Review and remediation occur in the PR afterward; no98/98acceptance or merge is claimed.
-
-The superseded first Publication11 audit draft is retained only as local history, with its ignored local copy and original preserved. The corrected v2 remains published; its predecessor pointer is provenance, not a runtime or recipe dependency. Git history is preserved.
+Keep PR#1 draft until migration and normal verification finish, then mark ready as authorized. **No HV before ready.** Review/remediation happen in the PR afterward; no acceptance or merge is claimed. No GitHub Actions.

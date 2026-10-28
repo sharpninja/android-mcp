@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
@@ -39,17 +40,27 @@ public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher
         return result;
     }
     private sealed record Input(JsonObject Source,long Length,bool CacheHit=false,bool Facade=false);
-    public async Task<CatalogBuildResult> BuildAsync(string inventoryPath,string outputDirectory,string privateStageDirectory,CancellationToken cancellationToken=default)
+    public Task<CatalogBuildResult> BuildAsync(string inventoryPath,string outputDirectory,string privateStageDirectory,CancellationToken cancellationToken=default)=>
+        BuildCoreAsync(inventoryPath,null,outputDirectory,privateStageDirectory,cancellationToken);
+    public Task<CatalogBuildResult> BuildAsync(CatalogInventoryBridgeResult bridge,string outputDirectory,string privateStageDirectory,CancellationToken cancellationToken=default)=>
+        BuildCoreAsync(null,bridge,outputDirectory,privateStageDirectory,cancellationToken);
+    private async Task<CatalogBuildResult> BuildCoreAsync(string? inventoryPath,CatalogInventoryBridgeResult? bridge,string outputDirectory,string privateStageDirectory,CancellationToken cancellationToken)
     {
-        var output=Path.GetFullPath(outputDirectory);var inventoryFull=Path.GetFullPath(inventoryPath);
+        var output=Path.GetFullPath(outputDirectory);var inventoryFull=inventoryPath is null ? null : Path.GetFullPath(inventoryPath);var intake=bridge?.SourceExtraction ?? sourceIntake;
         ISourceExtractGeneration? opened=null;byte[]? admittedBytes=null;JsonObject? admittedSpec=null;Dictionary<int,RehydrationSourceRow>? admittedRows=null;
+        ExceptionDispatchInfo? deferredManifestError=null;
+        async Task<JsonObject> ReadManifest()
+        {
+            admittedBytes=bridge is null ? await File.ReadAllBytesAsync(inventoryFull!,cancellationToken) : bridge.LegacyManifest.Bytes.ToArray();
+            _=canonical.Serialize(admittedBytes);return JsonNode.Parse(admittedBytes)!.AsObject();
+        }
         try
         {
-            if(sourceIntake is not null)
+            if(intake is not null)
             {
-                opened=await sourceIntake.Reader.OpenAsync(sourceIntake.Request,cancellationToken);
-                admittedBytes=await File.ReadAllBytesAsync(inventoryFull,cancellationToken);_=canonical.Serialize(admittedBytes);admittedSpec=JsonNode.Parse(admittedBytes)!.AsObject();
-                var rows=admittedSpec["sources"]!.AsArray();var projection=sourceIntake.Request.Projection;
+                opened=await intake.Reader.OpenAsync(intake.Request,cancellationToken);
+                admittedSpec=await ReadManifest();
+                var rows=admittedSpec["sources"]!.AsArray();var projection=intake.Request.Projection;
                 if(rows.Count!=projection.Rows.Count || projection.Rows.Select(row=>row.RowIndex).Distinct().Count()!=projection.Rows.Count)
                     throw Failure("catalog-source-row-mismatch","Inventory and admitted projection have different logical membership");
                 foreach(var row in projection.Rows)
@@ -61,6 +72,19 @@ public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher
         catch(SourceExtractException error){opened?.Dispose();throw new CatalogBuildException(error.Code,error.Message,error);}
         catch{opened?.Dispose();throw;}
         using var generation=opened;
+        if(intake is null)
+        {
+            try{admittedSpec=await ReadManifest();}
+            catch(Exception error)when(error is IOException or JsonException or CanonicalJsonException or InvalidOperationException)
+            {
+                // Preserve ordinary legacy failure publication semantics while
+                // reading/strict-parsing a valid manifest only once.
+                deferredManifestError=ExceptionDispatchInfo.Capture(error);
+            }
+        }
+        if(bridge is null && admittedSpec?["x-native-catalog-input"] is JsonObject marker &&
+            marker["requires_typed_context"] is JsonValue required && required.TryGetValue<bool>(out var typedRequired) && typedRequired)
+            throw Failure("catalog-typed-context-required","A Catalog bridge manifest requires its admitted typed context");
         _=ArtifactPaths.Resolve(output,"catalog.sqlite");_=ArtifactPaths.Resolve(privateStageDirectory,"generation.lock");
         await using var lease=await new FileArtifactLeaseProvider(privateStageDirectory).AcquireAsync(output,cancellationToken);
         if(Directory.Exists(output) && Directory.EnumerateFileSystemEntries(output).Any()) throw Failure("nonempty-output","Output must be empty; preserve immutable earlier publication");
@@ -71,20 +95,22 @@ public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher
         {
             var rawPath=ArtifactPaths.Resolve(privateStageDirectory,Guid.NewGuid().ToString("N")+"/source-records.sqlite");
             using var raw=new CatalogImportStage(rawPath,canonical);observeImport?.Invoke(new("raw-stage",rawPath));
-            var inventoryBytes=admittedBytes ?? await File.ReadAllBytesAsync(inventoryFull,cancellationToken);
-            // The canonical authority performs strict UTF8, duplicate-name and finite-number inspection.
-            _=canonical.Serialize(inventoryBytes);var spec=admittedSpec ?? JsonNode.Parse(inventoryBytes)!.AsObject();
+            deferredManifestError?.Throw();
+            var inventoryBytes=admittedBytes!;var spec=admittedSpec!;
             var metadata=spec["catalog"]?.AsObject() ?? throw Failure("catalog-metadata","Required catalog metadata is absent");
             var version=Positive(metadata["registry_version"],"registry_version");_=Positive(metadata["api_level"],"api_level");
             foreach(var name in new[]{"android_version","coverage"}) if(string.IsNullOrEmpty(S(metadata[name]))) throw Failure("catalog-metadata",name+" must be nonempty");
-            var sourceRoot=Path.GetDirectoryName(inventoryFull)!;var inputs=new List<Input>();
-            foreach(var candidate in spec["sources"]!.AsArray().Select((node,index)=>(Source:node!.AsObject(),Index:index)).Where(item=>S(item.Source["status"])=="downloaded" && (admittedRows is null || admittedRows.ContainsKey(item.Index))).OrderBy(item=>S(item.Source["kind"])=="sdk-api-index" ? 0 : 1))
+            var sourceRoot=bridge?.AcquisitionRawRoot ?? Path.GetDirectoryName(inventoryFull!)!;var inputs=new List<Input>();
+            foreach(var candidate in spec["sources"]!.AsArray().Select((node,index)=>(Source:node!.AsObject(),Index:index)).Where(item=>(bridge is null ? S(item.Source["status"])=="downloaded" : bridge.VerifiedLogicalRows.Contains(item.Index)) && (admittedRows is null || admittedRows.ContainsKey(item.Index))).OrderBy(item=>S(item.Source["kind"])=="sdk-api-index" ? 0 : 1))
             {
-                cancellationToken.ThrowIfCancellationRequested();var source=(JsonObject)candidate.Source.DeepClone();
+                cancellationToken.ThrowIfCancellationRequested();
+                // Only Catalog's owned view is normalized. Admitted OriginalRow
+                // and Source reader/context remain the exact native projection.
+                var source=(JsonObject)(bridge?.NormalizedSources is { } normalized ? normalized[candidate.Index] : candidate.Source).DeepClone();
                 if(!source.ContainsKey("api_level") || string.IsNullOrEmpty(S(source["channel"]))) throw Failure("source-metadata","Explicit source api_level/channel metadata required");
                 if(source["api_level"] is not null) _=Positive(source["api_level"],"source api_level");
                 if(S(source["kind"])=="sdk-annotations" && string.IsNullOrEmpty(S(source["platform_api_version"]))) throw Failure("source-metadata","Explicit platform_api_version required for sdk-annotations");
-                if(S(source["scope"])=="aosp-pinned-hidl-source-evidence" && (source["api_level"] is not null || source["platform_api_version"] is not null))
+                if(S(candidate.Source["scope"])=="aosp-pinned-hidl-source-evidence" && (source["api_level"] is not null || source["platform_api_version"] is not null))
                     throw Failure("source-metadata","HIDL release context does not establish Android applicability");
                 byte[]? bytes=null;
                 if(generation is null)
@@ -114,10 +140,11 @@ public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher
                 else
                 {
                     var row=await generation.ReadAsync(admittedRows![candidate.Index],cancellationToken);
-                    if(row.RowIndex!=candidate.Index || row.SourceLength<0 || row.CacheHit && (sourceIntake!.Request.TrustedIndex is null || row.CacheReceipt is null || row.CacheSeal is null))
+                    if(row.RowIndex!=candidate.Index || row.SourceLength<0 || row.CacheHit && (intake!.Request.TrustedIndex is null || row.CacheReceipt is null || row.CacheSeal is null))
                         throw Failure("catalog-source-row-mismatch","Source reader response does not match its admitted row/cache authority");
-                    source["x-native-source-intake"]=new JsonObject{["producer"]=JsonSerializer.SerializeToNode(sourceIntake!.Request.Producer),["profile_id"]=sourceIntake.Request.Profile.Id,
-                        ["context"]=JsonSerializer.SerializeToNode(row.Context),["source_length"]=row.SourceLength,["cache_hit"]=row.CacheHit,["cache_receipt"]=JsonSerializer.SerializeToNode(row.CacheReceipt),["cache_seal"]=JsonSerializer.SerializeToNode(row.CacheSeal)};
+                    source["x-native-source-intake"]=new JsonObject{["producer"]=JsonSerializer.SerializeToNode(intake!.Request.Producer),["profile_id"]=intake.Request.Profile.Id,
+                        ["context"]=JsonSerializer.SerializeToNode(row.Context),["source_length"]=row.SourceLength,["cache_hit"]=row.CacheHit,["cache_receipt"]=JsonSerializer.SerializeToNode(row.CacheReceipt),["cache_seal"]=JsonSerializer.SerializeToNode(row.CacheSeal),
+                        ["historical_cache_disposition"]=source["metadata_cache"] is null ? "not-declared" : "declared-unconsumed-unverified",["historical_cache"]=source["metadata_cache"]?.DeepClone(),["historical_records_consumed"]=false,["historical_identity_claimed"]=false};
                     raw.Capture(S(source["source_id"]),row);length=row.SourceLength;hit=row.CacheHit;
                 }
                 observeImport?.Invoke(new("source-captured",rawPath,S(source["source_id"]),Count:raw.Count(S(source["source_id"]))));
@@ -332,7 +359,7 @@ public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher
             db.Dispose();
             foreach(var input in inputs.Where(input=>!input.CacheHit))
             {using var source=File.OpenRead(ArtifactPaths.Resolve(sourceRoot,S(input.Source["local_path"])));if(ContentHash.Sha256(source)!=S(input.Source["sha256"])) throw Failure("input-changed","Source changed before final publication marker");}
-            if(!(await File.ReadAllBytesAsync(inventoryFull,cancellationToken)).AsSpan().SequenceEqual(inventoryBytes)) throw Failure("input-changed","Inventory changed before final publication marker");
+            if(bridge is not null ? !bridge.LegacyManifest.Bytes.Span.SequenceEqual(inventoryBytes) : !(await File.ReadAllBytesAsync(inventoryFull!,cancellationToken)).AsSpan().SequenceEqual(inventoryBytes)) throw Failure("input-changed","Inventory changed before final publication marker");
             string FileHash(string path){using var stream=File.OpenRead(path);return ContentHash.Sha256(stream);}
             var stageHash=FileHash(stage);var final=await WriteStream("catalog.sqlite",async (stream,token)=>
             {await using var source=File.OpenRead(stage);await source.CopyToAsync(stream,65536,token);},"application/vnd.sqlite3");

@@ -15,6 +15,7 @@ namespace AndroidMcp.BuildTool.Tests.Catalog;
 
 public sealed class NativeCatalogSourceIntakeProvider:ICatalogSourceIntakeCaseProvider
 {
+    internal CatalogIntakeHistoricalAuditReply? HistoricalAudit {get;private set;}
     public async Task<CatalogSourceIntakeReply> ImportAsync(CatalogSourceIntakeCall call)
     {
         var java=new SourceJavaAdmission(Environment.GetEnvironmentVariable("ANDROIDMCP_JAVA_NATIVE_MANIFEST") ?? throw new InvalidOperationException("Selected pinned Java native manifest required"));
@@ -35,6 +36,11 @@ public sealed class NativeCatalogSourceIntakeProvider:ICatalogSourceIntakeCasePr
             {
                 foreach(var source in inventory["sources"]!.AsArray().OfType<JsonObject>().Where(source=>source["kind"]!.GetValue<string>() is "java-source" or "sdk-api-index")) source["platform_api_version"]="37.2";
                 var cached=CachedRows(call.Variant);
+                if(call.Variant=="declared-historical")
+                {
+                    var source=inventory["sources"]![3]!;source["metadata_cache"]=new JsonObject{["path"]="historical/missing-java-cache.gz",["sha256"]=new string('9',64),["parser_sha256"]=new string('8',64),
+                        ["source_sha256"]=source["sha256"]!.DeepClone(),["kind"]="java-source",["records"]=999};
+                }
                 foreach(var index in cached)
                 {
                     var source=inventory["sources"]![index]!;source["local_path"]=source["kind"]!.GetValue<string>()=="java-source" ? "missing raw/C.java" : "missing raw/api.xml";
@@ -86,6 +92,7 @@ public sealed class NativeCatalogSourceIntakeProvider:ICatalogSourceIntakeCasePr
         var captured=rawPath is not null && File.Exists(rawPath) ? Count(rawPath,"SELECT count(*) FROM source_records") : 0;
         var output=Path.Combine(provider.EvidenceRoot,"out");var stage=Path.Combine(provider.EvidenceRoot,"private-stage");var final=Path.Combine(output,"catalog.sqlite");
         var success=result.Outcome=="ok";bool? context=null,separate=null,audit=null,lossless=null;
+        string? historicalDisposition=null;var historicalRetained=false;var historicalBodyAbsent=false;var nativeReceiptSeparate=false;var historicalIdentityNotClaimed=false;
         if(success)
         {
             context=true;separate=true;audit=true;lossless=true;
@@ -98,6 +105,14 @@ public sealed class NativeCatalogSourceIntakeProvider:ICatalogSourceIntakeCasePr
                 separate &= rows.GetString(0)!=saved.SnapshotId;
                 audit &= details["profile_id"]!.GetValue<string>()==request.Profile.Id && JsonNode.DeepEquals(details["producer"],JsonSerializer.SerializeToNode(request.Producer));
                 if(details["cache_hit"]!.GetValue<bool>()) audit &= details["cache_receipt"] is not null && details["cache_seal"] is not null;
+                if(call.Variant=="declared-historical" && source["metadata_cache"] is JsonObject historical)
+                {
+                    historicalDisposition=details["historical_cache_disposition"]!.GetValue<string>();historicalRetained=JsonNode.DeepEquals(historical,details["historical_cache"]);
+                    historicalBodyAbsent=!File.Exists(ArtifactPaths.Resolve(provider.EvidenceRoot,historical["path"]!.GetValue<string>()));
+                    var receipt=details["cache_receipt"]!.Deserialize<SourceCacheReceipt>()!;
+                    nativeReceiptSeparate=receipt.Path!=historical["path"]!.GetValue<string>() && receipt.ProducerId==request.Producer.ProducerId && receipt.RecordCount!=historical["records"]!.GetValue<int>();
+                    historicalIdentityNotClaimed=!details["historical_records_consumed"]!.GetValue<bool>() && !details["historical_identity_claimed"]!.GetValue<bool>() && source["x-native-cache-audit"] is null;
+                }
             }
             rows.Close();
             if(call.Variant=="diagnostic-hit")
@@ -106,9 +121,11 @@ public sealed class NativeCatalogSourceIntakeProvider:ICatalogSourceIntakeCasePr
                 var wanted=Encoding.UTF8.GetBytes(CatalogSourceIntegrationCases.Index.Replace("f(I)V","bad(I",StringComparison.Ordinal));lossless=Convert.FromBase64String(saved).AsSpan().SequenceEqual(wanted);
             }
         }
-        return new(success ? result : null,success ? null : result.Outcome,reader.Opens,reader.Resolutions,reader.Hits,rawStore.Reads,captured,reader.BeforeEffects,
+        var observed=new CatalogSourceIntakeReply(success ? result : null,success ? null : result.Outcome,reader.Opens,reader.Resolutions,reader.Hits,rawStore.Reads,captured,reader.BeforeEffects,
             hitPaths.All(path=>!File.Exists(ArtifactPaths.Resolve(provider.EvidenceRoot,path))),forbidden.Calls==0,context,separate,audit,lossless,reader.Disposed,result.OriginalInputsRetained,
             !Directory.Exists(output) && !Directory.Exists(stage),File.Exists(final));
+        if(call.Variant=="declared-historical") HistoricalAudit=new(observed,historicalDisposition ?? "missing-audit",historicalRetained,historicalBodyAbsent,nativeReceiptSeparate,historicalIdentityNotClaimed);
+        return observed;
     }
     private static IReadOnlyList<int> CachedRows(string variant)=>variant switch{"no-index"=>[],"one-hit"=>[3],"logical-alias"=>[3,4,5],_=>[3,4]};
     private static string Hash(ReadOnlyMemory<byte> bytes)=>ContentHash.Sha256(bytes.Span);

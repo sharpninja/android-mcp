@@ -1,0 +1,107 @@
+{
+  "observedAtLocal": "2026-10-28T07:30:25",
+  "status": "Planned only; no raw Markdown copies or app changes performed",
+  "scope": "Exactly7 retained source-data files and2 active caller files; no generic filename exclusion",
+  "files": [
+    {
+      "virtualFixturePath": "remediation/nuke-planning/docs/fixtures/current-tooling.code-diagrams.md",
+      "retainedOriginal": "remediation/nuke-planning/docs/fixtures/current-tooling.code-diagrams.md",
+      "plannedPhysicalPath": "remediation/nuke-planning/docs/fixtures/current-tooling.code-diagrams.md.fixture",
+      "sha256": "31c781d2e8d28c1fe39b52e2e31179b1e2fb4351532936b4ecfcab5f4c22cf7e",
+      "length": 42064,
+      "destinationCurrentlyExists": false,
+      "futurePublicationOmitOriginalOnlyAfterCarrierProof": true
+    },
+    {
+      "virtualFixturePath": "remediation/nuke-planning/docs/fixtures/current-tooling.design.md",
+      "retainedOriginal": "remediation/nuke-planning/docs/fixtures/current-tooling.design.md",
+      "plannedPhysicalPath": "remediation/nuke-planning/docs/fixtures/current-tooling.design.md.fixture",
+      "sha256": "d364de8eb28f27dd80cf834d3758374f80206fe6f4a15fe9da172904ef99cac7",
+      "length": 325205,
+      "destinationCurrentlyExists": false,
+      "futurePublicationOmitOriginalOnlyAfterCarrierProof": true
+    },
+    {
+      "virtualFixturePath": "remediation/nuke-planning/docs/fixtures/current-tooling.README.md",
+      "retainedOriginal": "remediation/nuke-planning/docs/fixtures/current-tooling.README.md",
+      "plannedPhysicalPath": "remediation/nuke-planning/docs/fixtures/current-tooling.README.md.fixture",
+      "sha256": "78d47af9952baecff756426fefd52a069e62aca070166eff807f47e8c7795516",
+      "length": 4836,
+      "destinationCurrentlyExists": false,
+      "futurePublicationOmitOriginalOnlyAfterCarrierProof": true
+    },
+    {
+      "virtualFixturePath": "remediation/nuke-planning/docs/fixtures/pre-nuke-tooling.code-diagrams.md",
+      "retainedOriginal": "remediation/nuke-planning/docs/fixtures/pre-nuke-tooling.code-diagrams.md",
+      "plannedPhysicalPath": "remediation/nuke-planning/docs/fixtures/pre-nuke-tooling.code-diagrams.md.fixture",
+      "sha256": "3a75a05e90a60231e1851f6cd23f779c887b0d4c8713c75a1bf24854f073b837",
+      "length": 42039,
+      "destinationCurrentlyExists": false,
+      "futurePublicationOmitOriginalOnlyAfterCarrierProof": true
+    },
+    {
+      "virtualFixturePath": "remediation/nuke-planning/docs/fixtures/pre-nuke-tooling.design.md",
+      "retainedOriginal": "remediation/nuke-planning/docs/fixtures/pre-nuke-tooling.design.md",
+      "plannedPhysicalPath": "remediation/nuke-planning/docs/fixtures/pre-nuke-tooling.design.md.fixture",
+      "sha256": "0e3bcfcc202ade99cc9e19c5b376b42b848971f28ea624f145ccac066b46a71b",
+      "length": 324206,
+      "destinationCurrentlyExists": false,
+      "futurePublicationOmitOriginalOnlyAfterCarrierProof": true
+    },
+    {
+      "virtualFixturePath": "remediation/nuke-planning/docs/fixtures/pre-nuke-tooling.README.md",
+      "retainedOriginal": "remediation/nuke-planning/docs/fixtures/pre-nuke-tooling.README.md",
+      "plannedPhysicalPath": "remediation/nuke-planning/docs/fixtures/pre-nuke-tooling.README.md.fixture",
+      "sha256": "6169f84191b95dd3843ca5b72e95a80a96aae7b08a5402c3fdd48d6ada68c2f5",
+      "length": 6515,
+      "destinationCurrentlyExists": false,
+      "futurePublicationOmitOriginalOnlyAfterCarrierProof": true
+    },
+    {
+      "virtualFixturePath": "remediation/nuke-planning/docs/ui-blueprint.pre-health-migration.md",
+      "retainedOriginal": "remediation/nuke-planning/docs/ui-blueprint.pre-health-migration.md",
+      "plannedPhysicalPath": "remediation/nuke-planning/docs/ui-blueprint.pre-health-migration.md.fixture",
+      "sha256": "9f164a4b14e1a7a8db5fa88eef1ee015b261335314e3b98903cf4f201fea6058",
+      "length": 319159,
+      "destinationCurrentlyExists": false,
+      "futurePublicationOmitOriginalOnlyAfterCarrierProof": true
+    }
+  ],
+  "activeCallers": [
+    {
+      "path": "remediation/nuke-app/Tests/Documentation/ToolingDocumentationMigrationMockTests.cs",
+      "sha256": "bd4768added9e2c057be0c9450f2522560cdeb2a32fb1844dd98a95bbf75d1ab",
+      "reads": [
+        "ToolingDocumentationMigrationCases.Proposed line29: dynamically constructed current-tooling names",
+        "ToolingDocumentationMigrationCases.Retained line32: dynamically constructed pre-nuke-tooling names"
+      ]
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Documentation/DocumentationProjectionMockTests.cs",
+      "sha256": "a846ffec43d1a9fa471fa381a188af7b46c067f5bafcc453c96d3d1b04cda111",
+      "reads": [
+        "ApprovedHealthMigrationChangesOnlyTwelveExistingHealthFields line269: original pre-health Markdown bytes"
+      ]
+    }
+  ],
+  "ordinaryDocumentationRetainedAsMarkdown": [
+    "remediation/nuke-planning/docs/fixtures/tooling-source-migration-notes.md"
+  ],
+  "historicalReferencesRetainedWithoutRewrite": [
+    "remediation/nuke-planning/docs/health-migration-and-gate-chronology.json",
+    "remediation/nuke-planning/docs/evidence/tooling-source-migration-proposal.json",
+    "remediation/nuke-planning/docs/evidence/tooling-current-source-applied-005.json",
+    "remediation/nuke-app/Tests/Publication/Fixtures/publication-policy-checkpoint003.json"
+  ],
+  "carrier": "One explicit test-only virtual-to-physical map; preserve virtual Artifact names, media and every original byte/hash. No filesystem resolver or hash algorithm added.",
+  "gates": [
+    "Correct map mocks and each wrong mapping/unknown-path control before provider",
+    "Same cases native; existing17tooling mocks+1real, full2637projection and canonical manifest binding unchanged",
+    "Portable isolated-copy gates before exact7old physical.md omissions in future publication; local originals remain retained"
+  ],
+  "nonClaims": [
+    "No repository-wide document checker pass",
+    "No publication omissions performed",
+    "No canonical model or golden SVG/deck changes"
+  ]
+}

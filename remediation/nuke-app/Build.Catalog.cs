@@ -34,12 +34,7 @@ public sealed partial class Build
             .Any(source=>source["status"]?.GetValue<string>()=="downloaded" && source["kind"]?.GetValue<string>()=="java-source");
         if(needsJava && string.IsNullOrWhiteSpace(JavaNativeManifest))
             throw new InvalidOperationException("Downloaded java-source rows require an explicitly selected java-native-manifest before catalog outputs");
-        var profile=ExtractionProfile switch
-        {
-            null or "current-candidate"=>SourceExtractionProfile.CurrentCandidate,
-            "release-011"=>SourceExtractionProfile.RELEASE011,
-            _=>throw new InvalidOperationException("Unknown source extraction profile")
-        };
+        var profile=SourceExtractionProfile.Resolve(ExtractionProfile);
         var java=string.IsNullOrWhiteSpace(JavaNativeManifest) ? null : new SourceJavaAdmission(Path.GetFullPath(JavaNativeManifest,project));
         // Admission/ABI checks happen through the shared source factory before
         // CatalogBuild opens a stage or final artifact. Runtime owns disposal.

@@ -266,7 +266,7 @@ public sealed class DocumentationProjectionMockTests
     public void ApprovedHealthMigrationChangesOnlyTwelveExistingHealthFields()
     {
         var f=DocumentationFixture.Current;
-        var originalBytes=File.ReadAllBytes(Path.Combine(f.Workspace,"remediation/nuke-planning/docs/ui-blueprint.pre-health-migration.md"));
+        var originalBytes=File.ReadAllBytes(Path.Combine(f.Workspace,"remediation/nuke-planning/docs",new DocumentationFixtureCarrierMap().Resolve("ui-blueprint.pre-health-migration.md")));
         Assert.Equal(f.HealthMigration["beforeSha256"]!.GetValue<string>(),DocumentationFixture.Hash(originalBytes));
         var originalBlock=Regex.Match(Encoding.UTF8.GetString(originalBytes),"```json ui-blueprint-v2\\n([\\s\\S]*?)\\n```").Groups[1].Value;
         var current=f.Blueprint.DeepClone();

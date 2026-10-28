@@ -2,7 +2,7 @@ using Nuke.Common.IO;
 namespace AndroidMcp.BuildTool.Core;
 
 /// <summary>Immutable generation store. Originals and failed partial writes are retained.</summary>
-public sealed class FileArtifactStore : IStreamingArtifactStore, ICreateNewArtifactStore
+public sealed class FileArtifactStore : ICreateNewStreamingArtifactStore
 {
     private readonly AbsolutePath root;
     private readonly Func<ReadOnlyMemory<byte>, string> sha256;
@@ -32,10 +32,18 @@ public sealed class FileArtifactStore : IStreamingArtifactStore, ICreateNewArtif
     }
 
     public Task<StoredArtifact> WriteStreamAsync(string relativePath, string mediaType,
-        Func<Stream, CancellationToken, Task> producer, CancellationToken cancellationToken = default)
+        Func<Stream, CancellationToken, Task> producer, CancellationToken cancellationToken = default) =>
+        WriteProducedAsync(relativePath, mediaType, producer, cancellationToken, false);
+
+    public Task<StoredArtifact> WriteNewStreamAsync(string relativePath, string mediaType,
+        Func<Stream, CancellationToken, Task> producer, CancellationToken cancellationToken = default) =>
+        WriteProducedAsync(relativePath, mediaType, producer, cancellationToken, true);
+
+    private Task<StoredArtifact> WriteProducedAsync(string relativePath, string mediaType,
+        Func<Stream, CancellationToken, Task> producer, CancellationToken cancellationToken, bool requireNew)
     {
         ArgumentNullException.ThrowIfNull(producer);
-        return WriteCoreAsync(relativePath, mediaType, producer, cancellationToken, null);
+        return WriteCoreAsync(relativePath, mediaType, producer, cancellationToken, null, requireNew);
     }
 
     public async Task<ReadOnlyMemory<byte>> ReadAsync(string relativePath, CancellationToken cancellationToken = default) =>

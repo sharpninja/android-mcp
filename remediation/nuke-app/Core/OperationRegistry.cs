@@ -1,6 +1,6 @@
 namespace AndroidMcp.BuildTool.Core;
 
-public enum OperationExecutor { Pending, MockTests, Tests, DocumentationAssets, NativeParser, SourcesFetch, PublicationCheck, SourcesPlan, Architecture, CatalogBuild, BrowserQa, SourcesInventory }
+public enum OperationExecutor { Pending, MockTests, Tests, DocumentationAssets, NativeParser, SourcesFetch, PublicationCheck, SourcesPlan, Architecture, CatalogBuild, BrowserQa, SourcesInventory, SdkReferenceCopy, SourcesExtract, CatalogBuildFromSources }
 public sealed record OperationDefinition(OperationKey Key, string Description,
     IReadOnlyList<string> RequiredParameters, IReadOnlyList<string> OptionalParameters,
     IReadOnlyList<PlannedStep> Steps, OperationExecutor Executor=OperationExecutor.Pending);
@@ -24,12 +24,21 @@ public sealed class OperationRegistry
             ["release","limit","acquisition-profile"],OperationExecutor.SourcesInventory,
             new("validate-source-plan",[]),new("admit-acquisition-receipt",["validate-source-plan"]),
             new("verify-acquisition-readonly",["admit-acquisition-receipt"]),new("seal-source-inventory",["verify-acquisition-readonly"]));
+        Add(Category.Sources,Operation.Extract,["project-root","pipeline-request","pipeline-request-sha256","pipeline-request-length"],[],OperationExecutor.SourcesExtract,
+            new("admit-pinned-workflow",[]),new("admit-locked-recipe",["admit-pinned-workflow"]),
+            new("verify-source-inventory",["admit-locked-recipe"]),new("capture-runtime-identity",["verify-source-inventory"]),
+            new("extract-source-generation",["capture-runtime-identity"]),new("seal-extraction",["extract-source-generation"]));
         Add(Category.Sources,Operation.NativeParser,["compiler-identity","output-root"],["project-root","cache-root","receipt-root"],OperationExecutor.NativeParser,
             new("verify-compiler-identity",[]),new("acquire-native-sources",["verify-compiler-identity"]),
             new("build-native-parser",["acquire-native-sources"]),new("verify-native-parser",["build-native-parser"]));
         Add(Category.Catalog,Operation.Build,["project-root","source-manifest","output-root","stage-root"],
             ["java-native-manifest","extraction-profile"],OperationExecutor.CatalogBuild,
             new("validate-source-manifest",[]),new("build-catalog",["validate-source-manifest"]));
+        Add(Category.Catalog,Operation.BuildFromSources,["project-root","pipeline-request","pipeline-request-sha256","pipeline-request-length"],[],OperationExecutor.CatalogBuildFromSources,
+            new("admit-pinned-workflow",[]),new("admit-locked-recipe",["admit-pinned-workflow"]),
+            new("verify-source-inventory",["admit-locked-recipe"]),new("capture-runtime-identity",["verify-source-inventory"]),
+            new("project-effective-inventory",["capture-runtime-identity"]),new("build-catalog",["project-effective-inventory"]),
+            new("seal-catalog",["build-catalog"]));
         Add(Category.Design,Operation.Assets,["project-root","output-root"],["generation"],OperationExecutor.DocumentationAssets,
             new("validate-design-inputs",[]),new("project-ui",["validate-design-inputs"]));
         Add(Category.Design,Operation.Architecture,["project-root","output-root","cache-root","work-root","receipt-root","docker-identity","renderer-user","tool-access"],
@@ -40,7 +49,7 @@ public sealed class OperationRegistry
             ["architecture-root","architecture-manifest-sha256","viewport-width","viewport-height"],OperationExecutor.BrowserQa,
             new("validate-browser-generations",[]),new("run-native-browser-qa",["validate-browser-generations"]),
             new("seal-browser-evidence",["run-native-browser-qa"]));
-        Add(Category.Validate,Operation.Toolchain,[],[],OperationExecutor.Pending,new PlannedStep("verify-toolchain",[]));
+        Add(Category.Validate,Operation.Toolchain,[],["toolchain-check","project-root","pipeline-request","pipeline-request-sha256","pipeline-request-length"],OperationExecutor.SdkReferenceCopy,new PlannedStep("verify-toolchain",[]));
         Add(Category.Review,Operation.Prepare,["snapshot"],[],OperationExecutor.Pending,new("verify-review-evidence",[]),new("prepare-review",[]));
         Add(Category.Publish,Operation.Check,["git-checkout","git-identity","receipt-root"],["policy-relative-path"],OperationExecutor.PublicationCheck,new PlannedStep("check-deliverables",[]));
         Add(Category.Validate,Operation.MockGate,[],["test-filter"],OperationExecutor.MockTests,new PlannedStep("mock-tests",[]));

@@ -1,0 +1,108 @@
+{
+  "recordedLocalTime": "2026-10-28T09:05:19",
+  "scope": "GeneratedDesign pure artifact validation, finite normal contract proof",
+  "acceptedComplete": false,
+  "humanValidationPerformed": false,
+  "trackedDoneStateChanged": false,
+  "gate": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T0859121755791-d1689055d4824920b3d8810254e10957/tests.trx",
+    "sha256": "3b6bc551e5dded54b837cb78183e0ccc9f26121fac5d38d2c609e6388e3620cd",
+    "selectedBatchPassed": 849,
+    "selectedBatchFailed": 0,
+    "selectedBatchSkipped": 0,
+    "ownResultsIndependentlyRead": true,
+    "distinctFixtures": 129,
+    "syntheticFixtures": 127,
+    "fullCorpusPhaseFixtures": 2,
+    "mockClass": "AndroidMcp.BuildTool.Tests.Documentation.Validation.GeneratedDesignValidationMockTests",
+    "mockPassed": 387,
+    "realClass": "AndroidMcp.BuildTool.Tests.Documentation.Validation.GeneratedDesignValidationRealTests",
+    "realPassed": 387,
+    "eachTheoryPassed": 129,
+    "realTheories": [
+      "IdenticalGeneratedDesignCasesBindPureNativeValidator",
+      "IdenticalOutputControlsRejectMutatedNativeResults",
+      "IdenticalInputIntegrityControlsRejectMutationsAfterNativeValidation"
+    ]
+  },
+  "implementation": {
+    "path": "remediation/nuke-app/Modules/Documentation/Validation/GeneratedDesignValidator.cs",
+    "sha256": "49a42e2a89f92c148baa6e890299cce811cf1b2b67ab7bb91cc5d789909ab93e",
+    "interface": "IGeneratedDesignValidator.Validate(GeneratedDesignValidationInput)",
+    "authorities": ["DocumentationModel from existing reader/preflight", "IArchitectureViewIndexReader", "IArtifactReferenceResolver", "IStrictJsonInspector", "IArtifactReceiptVerifier and shared IContentHash", "ISourceHtmlDecoder"],
+    "filesystemOrProcessEngineAdded": false,
+    "modelOrDslParserAdded": false,
+    "htmlSyntax": "One private bounded six-tag start-tag reader; comments/raw script/style handling and raw entity values. Existing shared decoder classifies/decodes; no entity table or generic DOM library.",
+    "xmlSyntax": "BCL XmlReader/XDocument with DtdProcessing.Prohibit and null XmlResolver; per-file parse diagnostics retained"
+  },
+  "pinnedCases": [
+    {"path":"remediation/nuke-app/Tests/Documentation/Validation/GeneratedDesignValidationCases.cs","sha256":"6047afaf2381e9aa62cbd159b09e8c049caad28953a287761fa0ed6e49797007"},
+    {"path":"remediation/nuke-app/Tests/Documentation/Validation/GeneratedDesignValidationCorpusCases.cs","sha256":"c356935d65c884274c8afcf7f2d795ab7e0dafaffc3ff704d7baa79a5dd60265"},
+    {"path":"remediation/nuke-app/Tests/Documentation/Validation/GeneratedDesignValidationMockTests.cs","sha256":"bc7496e8dedc14181ca2166a40d999b80313f8a76802d9b53db7472b6855579c"},
+    {"path":"remediation/nuke-app/Tests/Documentation/Validation/GeneratedDesignValidationRealTests.cs","sha256":"67642402d8b9b973bc13ac9fca0a896a5f945a70315bf4ca0b6b6871e7ba749b"}
+  ],
+  "originalMethodMap": [
+    {
+      "path":"remediation/design-c4/build.gradle.kts","sha256":"877c30e3bf39f6254e8d9ca952e73fe68a04de60fa07a0a358e541616ac469d8","method":"renderStoryboards.doLast","startLine":159,
+      "coveredClauses":["confined admitted storyboard SVG references","raw img occurrence count","exact double-quoted SVG data URI occurrence count","no residual Screen Markdown","raw external src/href and CSS URL scan"],
+      "nativeBindings":["GeneratedDesignValidator.Validate HTML/embed branch","IArtifactReferenceResolver"],
+      "caseSelectors":["DV-HTML-*","DV-EMBED-*","DV-CORPUS-PINNED-BEFORE","DV-CORPUS-PINNED-AFTER"],
+      "remaining":"Legacy Node/Marp rendering invocation and Gradle task caller are not implemented by this validator. Native projection/browser proof is separate."
+    },
+    {
+      "path":"remediation/design-c4/build.gradle.kts","sha256":"877c30e3bf39f6254e8d9ca952e73fe68a04de60fa07a0a358e541616ac469d8","method":"verifyDesignDocs.doLast","startLine":186,
+      "coveredClauses":["exact docs SVG path set derived from existing view/model authorities","literal vector text markers and SVG XML/root/namespace","no SRC/raster/script","selected docs/contracts/README/storyboard/code Markdown links","current Mermaid fence rejection"],
+      "nativeBindings":["GeneratedDesignValidator.Validate","AdmitUiManifest","ValidateVector","SelectedMarkdown"],
+      "caseSelectors":["DV-INPUT-*","DV-MODEL-*","DV-SET-*","DV-XML-*","DV-LINK-*","DV-ORDER-*","DV-CORPUS-*"],
+      "remaining":"Filesystem source admission, Gradle task dispatch and emitted validation receipt still require the shared outer recipe/CLI adapter."
+    },
+    {
+      "path":"remediation/design-c4/build.gradle.kts","sha256":"877c30e3bf39f6254e8d9ca952e73fe68a04de60fa07a0a358e541616ac469d8","method":"generateArtifactManifest.doLast","startLine":212,
+      "coveredClauses":["AfterManifest accepts the existing package checksum format and verifies listed hashes/targets","self exclusion and malformed/duplicate/path policies explicit"],
+      "nativeBindings":["GeneratedDesignValidator.ValidateChecksums","existing DocumentationPackageBuilder and common receipt/hash authority"],
+      "caseSelectors":["DV-MANIFEST-*","DV-CORPUS-PINNED-AFTER"],
+      "remaining":"Checksum emission and complete emission coverage belong to the existing package builder; stage caller conjunction is pending. A valid empty/partial list does not prove complete coverage."
+    },
+    {
+      "path":"publication/android-mcp-git/tools/check_documentation.py","sha256":"4abd62deef22df29c323832ecfd094df9f27162bc9023fd913cb0954ceb417d3","method":"check(root)","startLine":13,
+      "coveredClauses":["listed design checksums","docs SVG XML","editable UI copy bytes within generated model roles","bounded offline HTML assets","four result counters explicitly scoped to GeneratedDesign"],
+      "nativeBindings":["GeneratedDesignValidator.ValidateChecksums","ValidateVector","Validate copy branch","AssetAttributes"],
+      "caseSelectors":["DV-XML-*","DV-COPY-*","DV-HTML-*","DV-MANIFEST-*","DV-CORPUS-*"],
+      "remaining":"Original root.rglob Markdown scope, any-scheme exclusion, percent decoding and directory existence differ from Gradle. RepositoryProfile plus admitted namespace/directories and physical fixture publication handling remain pending; this method is not fully closed."
+    },
+    {
+      "path":"publication/android-mcp-git/tools/check_documentation.py","sha256":"4abd62deef22df29c323832ecfd094df9f27162bc9023fd913cb0954ceb417d3","method":"check.Assets.handle_starttag(tag, attrs)","startLine":34,
+      "coveredClauses":["exact six tag families","src/href attributes and duplicates","single HTML entity decode","case-sensitive value prefixes","comments/raw script text excluded from parsed-tag rule"],
+      "nativeBindings":["GeneratedDesignValidator.AssetAttributes","IArtifactReferenceResolver RepositoryOfflineAsset","ISourceHtmlDecoder"],
+      "caseSelectors":["DV-HTML-TAG-*","DV-HTML-VALUE-*","DV-HTML-COMMENT","DV-HTML-RAW-SCRIPT","DV-HTML-QUOTED-GREATER","DV-HTML-DECODE-ONCE","DV-HTML-SPACE-EQUALS","DV-HTML-UNQUOTED","DV-HTML-UPPERCASE-TAG-ATTRIBUTE","DV-HTML-DUPLICATE-ATTRIBUTES"],
+      "remaining":"Native pure syntax/asset boundary normal proof only; standalone repository caller remains pending."
+    },
+    {
+      "path":"publication/android-mcp-git/tools/check_documentation.py","sha256":"4abd62deef22df29c323832ecfd094df9f27162bc9023fd913cb0954ceb417d3","method":"main()","startLine":43,
+      "coveredClauses":[],"nativeBindings":[],"caseSelectors":[],
+      "remaining":"Argument parsing, whole-repository namespace capture, JSON report and exit behavior require the monolithic caller adapter; not closed here."
+    }
+  ],
+  "fullCorpus": {
+    "sourceAuthority":"DocumentationSelectedProjectSourceCases.ExpectedPlan(GeneratedDesign) and AdditionalSourcePins; no second routing map",
+    "requiredSources":18,"beforeManifestArtifacts":260,"afterManifestArtifacts":261,
+    "docsSvg":221,"compatibilitySvg":17,"admittedMarkdownFiles":10,"markdownLinksChecked":261,"afterManifestChecksumRows":260,
+    "trace":"remediation/nuke-planning/java/docsverify/generated-design-markdown-trace.fixture.json",
+    "traceSha256":"e1811c8320b4e1db432e807ee482900f8e8af9f212d98506ea9c9b7be4bae81a",
+    "vectorData":"Existing independently pinned golden carriers; does not claim new rendering or current architecture semantic/visual acceptance",
+    "currentLockAdmission":"Pinned existing redirect migration before/after plus existing REDIRECT-OBSERVED semantic fixture; historical original lock tests unchanged"
+  },
+  "fixtureDataBoundary": {
+    "oneMap":"remediation/nuke-app/Tests/Documentation/DocumentationFixtureCarrierMap.cs",
+    "mapSha256":"7b61e60ab17a2c10ed939a3573f401d184d12d42ee53bb7e3f46a1077e5cd2b2",
+    "exactHistoricalDataFiles":7,
+    "canonicalCurrentDocsPassThroughMap":false,
+    "originalLocalBytesRetained":true,
+    "omissionCandidate":"remediation/nuke-planning/docs/evidence/markdown-fixture-publication-omission-candidate.json",
+    "omissionCandidateSha256":"962e65b6ff05af12319c1a43945e1e41f79a1574be9329f8a62906656b5de8ec",
+    "status":"Data copies/map/caller proof separate; exact7 future publication omissions and isolated-copy proof pending. No basename exclusion in validator."
+  },
+  "approvedDiagnosticPolicies":["Both raw Gradle and parsed HTML failures retained as separate codes","BeforeManifest rejects a preexisting checksum artifact","Malformed checksum row counts one examined row","Empty/partial checksum validity makes no full-coverage claim"],
+  "retainedFailedAttempts":["Initial missing namespace compile failure ran no tests","Historical/current lock mismatch prevented all three MemberData entrypoints from materializing129cases; later provenance selection corrected without repinning historical expectations"],
+  "remaining":["RepositoryProfile and admitted whole namespace/directories","DocsVerify/Manifest/Package recipe and CLI conjunction","Actual current paired generation validation through the caller","Publication fixture omissions with isolated-copy proof","Two previously recorded diagram layout findings and human validation"]
+}

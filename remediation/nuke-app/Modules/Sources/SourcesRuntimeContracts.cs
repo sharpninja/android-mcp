@@ -4,7 +4,7 @@ namespace AndroidMcp.BuildTool.Sources;
 
 // The selected manifest is admitted locally before any source output is opened.
 // Loading cannot fetch, build, install, or fall back to a system parser.
-public sealed record SourceJavaAdmission(string ManifestPath);
+public sealed record SourceJavaAdmission(string ManifestPath, string? ExpectedManifestSha256 = null, long? ExpectedManifestLength = null);
 public interface IJavaSourceRuntime : IDisposable
 {
     ISourceExtractor Extractor { get; }

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "at": "2026-10-28T04:47:30",
+  "at": "2026-10-28T08:52:06",
   "owner": "Sources",
   "pythonExecuted": false,
   "nodeExecuted": false,
@@ -10,19 +10,53 @@
     "sha256": "a3021c2293cc8d81d9ef9b178a4ca7539b3a06af9d0557a1b8c4cc5b62abb2ea"
   },
   "proof": {
-    "trx": "remediation/nuke-app/artifacts/tests/20261028T0442363779064-59c5e32b424d45158156550d093e5a3e/tests.trx",
-    "sha256": "9f81e68ee33d8d846bef5a9f7d44aa8b87c1318449eeda07b23d5cc38ddd5486",
-    "ownNativeTypeFacts": 27,
-    "ownNativeTargetFacts": 14,
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T0615091911800-8e2555d1e62940e3aaf3d6a89351fd1d/tests.trx",
+    "sha256": "b133979b555bcb9c5befb48a945b73d8795f476698302173ad658d5210e76e26",
+    "ownNativeCounts": {
+      "SourceTypeFactsRealTests": 27,
+      "SdkAnnotationTargetRealTests": 14,
+      "PermissionReferenceRealTests": 13
+    },
     "ownFailed": 0,
     "ownSkipped": 0,
-    "globalCounters": "<Counters total=\"46904\" executed=\"46904\" passed=\"46904\" failed=\"0\" error=\"0\" timeout=\"0\" aborted=\"0\" inconclusive=\"0\" passedButRunAborted=\"0\" notRunnable=\"0\" notExecuted=\"0\" disconnected=\"0\" warning=\"0\" completed=\"0\" inProgress=\"0\" pending=\"0\" xmlns=\"http://microsoft.com/schemas/VisualStudio/TeamTest/2010\" />",
-    "globalFailuresDoNotBecomeOwnSuccess": true
+    "globalCounters": "<Counters total=\"54900\" executed=\"54900\" passed=\"54900\" failed=\"0\" error=\"0\" timeout=\"0\" aborted=\"0\" inconclusive=\"0\" passedButRunAborted=\"0\" notRunnable=\"0\" notExecuted=\"0\" disconnected=\"0\" warning=\"0\" completed=\"0\" inProgress=\"0\" pending=\"0\" xmlns=\"http://microsoft.com/schemas/VisualStudio/TeamTest/2010\" />"
   },
   "nativeSourcePins": [
     {
+      "path": "remediation/nuke-app/Build.cs",
+      "sha256": "2cd07fe7929382ef3dd5eb4f976507592d48515f34a5010b882c065f04f0ae3f"
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Sources/PermissionReferenceSourceFacts.cs",
+      "sha256": "ab38451ca55ded544a2ba93f6377b24a4404e09410a0563a72988b7556e84292"
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Sources/SdkApiIndexExtractor.cs",
+      "sha256": "6940f01cadd5b8c0f03e3dfcdb1088876de06c38c767f7a939c646de6d7f2cf9"
+    },
+    {
       "path": "remediation/nuke-app/Modules/Sources/SourceTypeFacts.cs",
       "sha256": "53ada450d613e1e8eeb33e5cf4dfcbfea4115f9c7247ce328ac9db33f8e2a418"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/PermissionReferenceContractCases.cs",
+      "sha256": "55f9c95c7ed1072465dff7def0817cdfe4b4fa38c22ae1b4d745b93355affd2b"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/PermissionReferenceRealTests.cs",
+      "sha256": "b025c4dd5386678a964effadb64457426e49b577e28e7155d5c342c0a5619edf"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/SdkAnnotationTargetRealTests.cs",
+      "sha256": "16d24b949ed096eb41cff64466a846831d7dcdc2a460a5e12b56d163944e3faa"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/SdkXmlContractCases.cs",
+      "sha256": "fbe547b02fe0b953f0ae82957eaaadb6a61143e83e3d225534d6ba36ab1a8498"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/SdkXmlRealTests.cs",
+      "sha256": "348f4a20c8fd9d808ef0997df950bc3f1f087a3946c8e3295dd9fb4c5e324634"
     },
     {
       "path": "remediation/nuke-app/Tests/Sources/SourceTypeFactsContractCases.cs",
@@ -31,10 +65,6 @@
     {
       "path": "remediation/nuke-app/Tests/Sources/SourceTypeFactsRealTests.cs",
       "sha256": "4447a2ed5a9903af7ca4e88ec9e6e9c8f9de15a671e5c6edc08a1b07ac48360e"
-    },
-    {
-      "path": "remediation/nuke-app/Tests/Sources/SdkAnnotationTargetRealTests.cs",
-      "sha256": "16d24b949ed096eb41cff64466a846831d7dcdc2a460a5e12b56d163944e3faa"
     }
   ],
   "entries": [
@@ -113,7 +143,9 @@
       "accepted_complete": false,
       "safe_to_delete": false,
       "execution_retired": false,
-      "frozenProfileNote": "Both actual source bodies were read separately and all literal inputs/assertions match the native cases. The pure helper has one LegacySignature lexical policy, with no separate release implementation. Release CLI/import/corpus composition is not claimed by these seven test-method closures."
+      "frozenProfileNote": "Both actual source bodies were read separately and all literal inputs/assertions match the native cases. The pure helper has one LegacySignature lexical policy, with no separate release implementation. Release CLI/import/corpus composition is not claimed by these seven test-method closures.",
+      "decommissionable_from_pr": true,
+      "decommissionable_scope": "Only this original test file after all original method inputs/assertions and replacement xUnit discovery are normally verified. Local originals retained; production/corpus requirements and HV remain separate."
     },
     {
       "legacyPath": "rehydration/producers/release-011/tests/test_annotation_jvm_erasure.py",
@@ -190,23 +222,343 @@
       "accepted_complete": false,
       "safe_to_delete": false,
       "execution_retired": false,
-      "frozenProfileNote": "Both actual source bodies were read separately and all literal inputs/assertions match the native cases. The pure helper has one LegacySignature lexical policy, with no separate release implementation. Release CLI/import/corpus composition is not claimed by these seven test-method closures."
+      "frozenProfileNote": "Both actual source bodies were read separately and all literal inputs/assertions match the native cases. The pure helper has one LegacySignature lexical policy, with no separate release implementation. Release CLI/import/corpus composition is not claimed by these seven test-method closures.",
+      "decommissionable_from_pr": true,
+      "decommissionable_scope": "Only this original test file after all original method inputs/assertions and replacement xUnit discovery are normally verified. Local originals retained; production/corpus requirements and HV remain separate."
+    },
+    {
+      "legacyPath": "remediation/catalog/tests/test_permission_reference.py",
+      "legacySha256": "7e5a7af183bbe5ea915c77fdf9d87ad8658f5d69bf6bdaff7bd64b77087dd6d7",
+      "owner": "Sources",
+      "category": "Sources",
+      "operation": "Extract",
+      "normal_verified": true,
+      "nativeService": "PermissionReferenceSourceFacts.Parse",
+      "nativeTest": "AndroidMcp.BuildTool.Tests.Sources.PermissionReferenceRealTests.SameCasesAndAssertionsBindNativeDocumentationFacts",
+      "normal_verification_scope": "Both actual test bodies fully read separately. All four original inputs/assertions and fixture-only field helper match REF01..04; producer HTML attribute/corpus parity not claimed.",
+      "normal_verified_methods": [
+        {
+          "legacy_method": "test_literals_and_major_minor_facts_not_guessed",
+          "native_case_ids": [
+            "REF-01"
+          ],
+          "assertion_equivalence": "Exact field helper, entity-quoted other.permission.X, introduced_raw37.2 and protection internal|role, without version inference.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_missing_value_and_deprecated_are_not_permission_absence_or_removal",
+          "native_case_ids": [
+            "REF-02"
+          ],
+          "assertion_equivalence": "Exact introduced1/deprecated16 body, null value/removed_raw and deprecated_raw16.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_duplicate_names_remain_evidence_and_are_flagged",
+          "native_case_ids": [
+            "REF-03"
+          ],
+          "assertion_equivalence": "Exact two X fields with a.permission.X and b.permission.X, two rows retained and duplicate names exactly X.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_script_text_cannot_create_a_documented_field",
+          "native_case_ids": [
+            "REF-04"
+          ],
+          "assertion_equivalence": "Exact FAKE field inside script followed by REAL, only REAL named field emitted.",
+          "status": "normal-native-verified"
+        }
+      ],
+      "pending_methods": [],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false,
+      "frozenProfileNote": "Exact four original test methods share one managed producer and current xUnit caller. Full HTML attributes/entity-profile and production/corpus callers remain separate open duties.",
+      "decommissionable_from_pr": true,
+      "decommissionable_scope": "Only this original test file after all original method inputs/assertions and replacement xUnit discovery are normally verified. Local originals retained; production/corpus requirements and HV remain separate."
+    },
+    {
+      "legacyPath": "rehydration/producers/release-011/tests/test_permission_reference.py",
+      "legacySha256": "7e5a7af183bbe5ea915c77fdf9d87ad8658f5d69bf6bdaff7bd64b77087dd6d7",
+      "owner": "Sources",
+      "category": "Sources",
+      "operation": "Extract",
+      "normal_verified": true,
+      "nativeService": "PermissionReferenceSourceFacts.Parse",
+      "nativeTest": "AndroidMcp.BuildTool.Tests.Sources.PermissionReferenceRealTests.SameCasesAndAssertionsBindNativeDocumentationFacts",
+      "normal_verification_scope": "Both actual test bodies fully read separately. All four original inputs/assertions and fixture-only field helper match REF01..04; producer HTML attribute/corpus parity not claimed.",
+      "normal_verified_methods": [
+        {
+          "legacy_method": "test_literals_and_major_minor_facts_not_guessed",
+          "native_case_ids": [
+            "REF-01"
+          ],
+          "assertion_equivalence": "Exact field helper, entity-quoted other.permission.X, introduced_raw37.2 and protection internal|role, without version inference.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_missing_value_and_deprecated_are_not_permission_absence_or_removal",
+          "native_case_ids": [
+            "REF-02"
+          ],
+          "assertion_equivalence": "Exact introduced1/deprecated16 body, null value/removed_raw and deprecated_raw16.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_duplicate_names_remain_evidence_and_are_flagged",
+          "native_case_ids": [
+            "REF-03"
+          ],
+          "assertion_equivalence": "Exact two X fields with a.permission.X and b.permission.X, two rows retained and duplicate names exactly X.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_script_text_cannot_create_a_documented_field",
+          "native_case_ids": [
+            "REF-04"
+          ],
+          "assertion_equivalence": "Exact FAKE field inside script followed by REAL, only REAL named field emitted.",
+          "status": "normal-native-verified"
+        }
+      ],
+      "pending_methods": [],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false,
+      "frozenProfileNote": "Exact four original test methods share one managed producer and current xUnit caller. Full HTML attributes/entity-profile and production/corpus callers remain separate open duties.",
+      "decommissionable_from_pr": true,
+      "decommissionable_scope": "Only this original test file after all original method inputs/assertions and replacement xUnit discovery are normally verified. Local originals retained; production/corpus requirements and HV remain separate."
+    },
+    {
+      "legacyPath": "remediation/catalog/tests/test_sdk_api_index.py",
+      "legacySha256": "9bc1be4f88ad9311215ecf3e914acee0f583bcd00e7fe8d97559a9123b5c4f3b",
+      "owner": "Sources",
+      "category": "Sources",
+      "operation": "Extract",
+      "normal_verified": true,
+      "nativeService": "SdkApiIndexExtractor.Extract",
+      "nativeTest": "AndroidMcp.BuildTool.Tests.Sources.SdkLegacyMetadataRealTests.RealSdkMetadataPassesUnchangedMockAssertions",
+      "normal_verification_scope": "All three original test-method inputs and assertions are bound to the same native extractor and frozen fixtures. Python unittest/module bootstrap is replaced by xUnit; all original local bytes are retained.",
+      "normal_verified_methods": [
+        {
+          "legacy_method": "test_minor_lifecycle_and_removed_members",
+          "native_case_ids": [
+            "SDK-01"
+          ],
+          "assertion_equivalence": "Exact API4 lifecycle XML and explicit37.2 target. Five records, outer excluded_history_or_future2, current-at-target3, method return long, String[]/int parameter order, dotted nested owner and binary JVM owner are all asserted by the unchanged whole-row golden and new summary assertions.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_field_type_and_type_kind_are_not_invented",
+          "native_case_ids": [
+            "SDK-02"
+          ],
+          "assertion_equivalence": "Exact original API4 android/Manifest$permission/CAMERA XML and explicit37.2 target. First row type, null field return and unknown field_type_status are included in the unchanged whole-row golden.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_invalid_method_descriptor_retained_unknown",
+          "native_case_ids": [
+            "SDK-LEGACY-BROKEN"
+          ],
+          "assertion_equivalence": "Exact original single broken(wat) method XML and explicit37.2 target. Last row unsupported and descriptor substring in parse_error are asserted directly. SDK-03 with a following ok method is retained only as an additional no-drop regression, not substituted for this original fixture.",
+          "status": "normal-native-verified"
+        }
+      ],
+      "exactOriginalMethodBodies": [
+        {
+          "method": "test_minor_lifecycle_and_removed_members",
+          "body": " def test_minor_lifecycle_and_removed_members(self):\n  xml=b'''<api version=\"4\"><class name=\"a/Outer$Inner\" since=\"37.1\"><method name=\"&lt;init>()V\"/><method name=\"f([Ljava/lang/String;I)J\" since=\"37.2\"/><field name=\"OLD\" removed=\"37.2\"/><field name=\"FUTURE\" since=\"37.3\"/></class></api>'''\n  result=api.parse(xml,'37.2');rs=result['records']\n  self.assertEqual(len(rs),5);self.assertEqual(result['excluded_history_or_future'],2)\n  self.assertEqual(sum(r['extras']['lifecycle_status']=='current-at-target' for r in rs),3)\n  method=next(r for r in rs if r['name']=='f');self.assertEqual(method['return_type'],'long')\n  self.assertEqual([p['type'] for p in method['parameters']],['java.lang.String[]','int'])\n  self.assertEqual(method['owner'],'a.Outer.Inner');self.assertEqual(method['extras']['jvm_owner'],'a/Outer$Inner')\n",
+          "nativeCases": [
+            "SDK-01"
+          ]
+        },
+        {
+          "method": "test_field_type_and_type_kind_are_not_invented",
+          "body": " def test_field_type_and_type_kind_are_not_invented(self):\n  rows=api.parse(b'<api version=\"4\"><class name=\"android/Manifest$permission\"><field name=\"CAMERA\"/></class></api>','37.2')['records']\n  self.assertEqual(rows[0]['kind'],'type');self.assertIsNone(rows[1]['return_type'])\n  self.assertEqual(rows[1]['extras']['field_type_status'],'unknown')\n",
+          "nativeCases": [
+            "SDK-02"
+          ]
+        },
+        {
+          "method": "test_invalid_method_descriptor_retained_unknown",
+          "body": " def test_invalid_method_descriptor_retained_unknown(self):\n  rows=api.parse(b'<api version=\"4\"><class name=\"a/C\"><method name=\"broken(wat)\"/></class></api>','37.2')['records']\n  self.assertEqual(rows[-1]['kind'],'unsupported');self.assertIn('descriptor',rows[-1]['extras']['parse_error'])\n",
+          "nativeCases": [
+            "SDK-LEGACY-BROKEN"
+          ]
+        }
+      ],
+      "pending_methods": [],
+      "frozenProfileNote": "Both actual canonical and release011 test files were fully read separately. Exact inputs and assertions use one native extractor. This closes the allocated test-file responsibility only, not complete producer/corpus/CLI or historical cache byte identity. line_locator_semantics deliberately describes .NET XmlReader instead of historical Expat; physical XML line behavior is retained.",
+      "description_delta": {
+        "field": "line_locator_semantics",
+        "historical": "physical XML line from Expat parser",
+        "native": "physical XML line from .NET XmlReader",
+        "scope": "Truthful producer-description metadata delta, explicitly authorized; no claim all old metadata strings or cache bytes are identical."
+      },
+      "proof": {
+        "trx": "remediation/nuke-app/artifacts/tests/20261028T0847033449199-39180dee3acd46bebf121fae4e119940/tests.trx",
+        "sha256": "57555b552b5d3ea8047a96b6119b57adf44076e69358f167ac566014bf6d6ca0",
+        "nativeCases": 3,
+        "mockChecks": 89
+      },
+      "decommissionable_from_pr": true,
+      "decommissionable_scope": "Only this original test file after all three original method inputs/assertions and replacement xUnit discovery are normally verified. No physical deletion; production helper/corpus/HV obligations remain separate.",
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false
+    },
+    {
+      "legacyPath": "rehydration/producers/release-011/tests/test_sdk_api_index.py",
+      "legacySha256": "9bc1be4f88ad9311215ecf3e914acee0f583bcd00e7fe8d97559a9123b5c4f3b",
+      "owner": "Sources",
+      "category": "Sources",
+      "operation": "Extract",
+      "normal_verified": true,
+      "nativeService": "SdkApiIndexExtractor.Extract",
+      "nativeTest": "AndroidMcp.BuildTool.Tests.Sources.SdkLegacyMetadataRealTests.RealSdkMetadataPassesUnchangedMockAssertions",
+      "normal_verification_scope": "All three original test-method inputs and assertions are bound to the same native extractor and frozen fixtures. Python unittest/module bootstrap is replaced by xUnit; all original local bytes are retained.",
+      "normal_verified_methods": [
+        {
+          "legacy_method": "test_minor_lifecycle_and_removed_members",
+          "native_case_ids": [
+            "SDK-01"
+          ],
+          "assertion_equivalence": "Exact API4 lifecycle XML and explicit37.2 target. Five records, outer excluded_history_or_future2, current-at-target3, method return long, String[]/int parameter order, dotted nested owner and binary JVM owner are all asserted by the unchanged whole-row golden and new summary assertions.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_field_type_and_type_kind_are_not_invented",
+          "native_case_ids": [
+            "SDK-02"
+          ],
+          "assertion_equivalence": "Exact original API4 android/Manifest$permission/CAMERA XML and explicit37.2 target. First row type, null field return and unknown field_type_status are included in the unchanged whole-row golden.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_invalid_method_descriptor_retained_unknown",
+          "native_case_ids": [
+            "SDK-LEGACY-BROKEN"
+          ],
+          "assertion_equivalence": "Exact original single broken(wat) method XML and explicit37.2 target. Last row unsupported and descriptor substring in parse_error are asserted directly. SDK-03 with a following ok method is retained only as an additional no-drop regression, not substituted for this original fixture.",
+          "status": "normal-native-verified"
+        }
+      ],
+      "exactOriginalMethodBodies": [
+        {
+          "method": "test_minor_lifecycle_and_removed_members",
+          "body": " def test_minor_lifecycle_and_removed_members(self):\n  xml=b'''<api version=\"4\"><class name=\"a/Outer$Inner\" since=\"37.1\"><method name=\"&lt;init>()V\"/><method name=\"f([Ljava/lang/String;I)J\" since=\"37.2\"/><field name=\"OLD\" removed=\"37.2\"/><field name=\"FUTURE\" since=\"37.3\"/></class></api>'''\n  result=api.parse(xml,'37.2');rs=result['records']\n  self.assertEqual(len(rs),5);self.assertEqual(result['excluded_history_or_future'],2)\n  self.assertEqual(sum(r['extras']['lifecycle_status']=='current-at-target' for r in rs),3)\n  method=next(r for r in rs if r['name']=='f');self.assertEqual(method['return_type'],'long')\n  self.assertEqual([p['type'] for p in method['parameters']],['java.lang.String[]','int'])\n  self.assertEqual(method['owner'],'a.Outer.Inner');self.assertEqual(method['extras']['jvm_owner'],'a/Outer$Inner')\n",
+          "nativeCases": [
+            "SDK-01"
+          ]
+        },
+        {
+          "method": "test_field_type_and_type_kind_are_not_invented",
+          "body": " def test_field_type_and_type_kind_are_not_invented(self):\n  rows=api.parse(b'<api version=\"4\"><class name=\"android/Manifest$permission\"><field name=\"CAMERA\"/></class></api>','37.2')['records']\n  self.assertEqual(rows[0]['kind'],'type');self.assertIsNone(rows[1]['return_type'])\n  self.assertEqual(rows[1]['extras']['field_type_status'],'unknown')\n",
+          "nativeCases": [
+            "SDK-02"
+          ]
+        },
+        {
+          "method": "test_invalid_method_descriptor_retained_unknown",
+          "body": " def test_invalid_method_descriptor_retained_unknown(self):\n  rows=api.parse(b'<api version=\"4\"><class name=\"a/C\"><method name=\"broken(wat)\"/></class></api>','37.2')['records']\n  self.assertEqual(rows[-1]['kind'],'unsupported');self.assertIn('descriptor',rows[-1]['extras']['parse_error'])\n",
+          "nativeCases": [
+            "SDK-LEGACY-BROKEN"
+          ]
+        }
+      ],
+      "pending_methods": [],
+      "frozenProfileNote": "Both actual canonical and release011 test files were fully read separately. Exact inputs and assertions use one native extractor. This closes the allocated test-file responsibility only, not complete producer/corpus/CLI or historical cache byte identity. line_locator_semantics deliberately describes .NET XmlReader instead of historical Expat; physical XML line behavior is retained.",
+      "description_delta": {
+        "field": "line_locator_semantics",
+        "historical": "physical XML line from Expat parser",
+        "native": "physical XML line from .NET XmlReader",
+        "scope": "Truthful producer-description metadata delta, explicitly authorized; no claim all old metadata strings or cache bytes are identical."
+      },
+      "proof": {
+        "trx": "remediation/nuke-app/artifacts/tests/20261028T0847033449199-39180dee3acd46bebf121fae4e119940/tests.trx",
+        "sha256": "57555b552b5d3ea8047a96b6119b57adf44076e69358f167ac566014bf6d6ca0",
+        "nativeCases": 3,
+        "mockChecks": 89
+      },
+      "decommissionable_from_pr": true,
+      "decommissionable_scope": "Only this original test file after all three original method inputs/assertions and replacement xUnit discovery are normally verified. No physical deletion; production helper/corpus/HV obligations remain separate.",
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false
     }
   ],
   "totals": {
-    "paths": 2,
-    "normalVerifiedTestFiles": 2,
-    "normalVerifiedOriginalTestMethods": 14,
+    "paths": 6,
+    "normalVerifiedTestFiles": 6,
+    "partialVerifiedTestFiles": 0,
+    "normalVerifiedOriginalTestMethods": 28,
+    "decommissionableFromPr": 6,
     "acceptedComplete": 0,
     "safeToDelete": 0
   },
   "remaining": [
-    "The other annotation_link functions and Catalog scoped lookup/import/storage are separate responsibilities; these XML key test closures do not imply their parity.",
-    "SDK annotation ZIP/XML/binary composition remains pending its own staged mock/native gates.",
-    "No original file is deleted or hidden, and no migration/HV acceptance state is changed."
+    "Whole annotation_link and permission_reference producer/corpus/current caller duties are separate from these exact original test-method closures.",
+    "HTML attribute/profile compatibility remains open. No generic producer parity is inferred from these four tests.",
+    "Local originals retained, no physical deletion or HV/migration acceptance."
   ],
   "decisions": [
     "Do not withhold ordinary verified test-method closures merely because HV is deferred.",
     "Do not propagate two published test-file closures to additional historical copies solely because hashes match. Each historical role/caller/profile remains separately retained in the sole inventory."
-  ]
+  ],
+  "callerReplacement": {
+    "source": "Build.cs179-210",
+    "method": "RunTests(false)",
+    "scope": "Unfiltered default native Tests.csproj xUnit member-data execution, observed full54900discoveries. Original Python sys.path/bootstrap/unittest runner replaced, never executed.",
+    "genericLegacyRunnerParityClaim": false
+  },
+  "sdkPartialProof": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T0615091911800-8e2555d1e62940e3aaf3d6a89351fd1d/tests.trx",
+    "sha256": "b133979b555bcb9c5befb48a945b73d8795f476698302173ad658d5210e76e26",
+    "exactCase": "SDK-02",
+    "passed": 1,
+    "remainingOriginalMethodsPerFile": 2,
+    "scope": "One exact existing original test method in each of two separately read files, not full SDK producer parity",
+    "supersededBy": "sdkNativeProof: all three exact original fixtures now normally verified, including single broken descriptor and outer summary."
+  },
+  "sdkNativeProof": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T0847033449199-39180dee3acd46bebf121fae4e119940/tests.trx",
+    "sha256": "57555b552b5d3ea8047a96b6119b57adf44076e69358f167ac566014bf6d6ca0",
+    "groups": {
+      "SdkLegacyMetadataRealTests": 3,
+      "SdkLegacyMetadataMockTests": 89,
+      "SdkXmlRealTests": 30,
+      "SdkAvailabilityRealTests": 13
+    },
+    "failed": 0,
+    "skipped": 0,
+    "globalCounters": "<Counters total=\"192\" executed=\"192\" passed=\"192\" failed=\"0\" error=\"0\" timeout=\"0\" aborted=\"0\" inconclusive=\"0\" passedButRunAborted=\"0\" notRunnable=\"0\" notExecuted=\"0\" disconnected=\"0\" warning=\"0\" completed=\"0\" inProgress=\"0\" pending=\"0\" xmlns=\"http://microsoft.com/schemas/VisualStudio/TeamTest/2010\" />",
+    "nativeSourcePins": [
+      {
+        "path": "remediation/nuke-app/Modules/Sources/SdkApiIndexExtractor.cs",
+        "sha256": "52956ceb5f5b242d98f00fc1521ed9b630c609dcb1dbe92cc3ca13a46f2cc8a3"
+      },
+      {
+        "path": "remediation/nuke-app/Tests/Sources/SdkLegacyMetadataContractCases.cs",
+        "sha256": "f799c1e33341d73b4fa0ba32d655d5aaf7e8d733c8169603f55a44a87d222ecd"
+      },
+      {
+        "path": "remediation/nuke-app/Tests/Sources/SdkLegacyMetadataMockTests.cs",
+        "sha256": "b0056c75d727c2cd90f85f3fd664998bf0a4949c9cede8c4e02755476897d7a5"
+      },
+      {
+        "path": "remediation/nuke-app/Tests/Sources/SdkLegacyMetadataRealTests.cs",
+        "sha256": "91cf638f120e0b46802d0b18ca7af30e4df5478d8b6a6064e76cb8574ec260e6"
+      },
+      {
+        "path": "remediation/nuke-app/Tests/Sources/SdkXmlContractCases.cs",
+        "sha256": "fbe547b02fe0b953f0ae82957eaaadb6a61143e83e3d225534d6ba36ab1a8498"
+      },
+      {
+        "path": "remediation/nuke-app/Tests/Sources/SdkXmlRealTests.cs",
+        "sha256": "348f4a20c8fd9d808ef0997df950bc3f1f087a3946c8e3295dd9fb4c5e324634"
+      }
+    ]
+  }
 }

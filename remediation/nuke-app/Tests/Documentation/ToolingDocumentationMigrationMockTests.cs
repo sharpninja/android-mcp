@@ -25,11 +25,12 @@ public static class ToolingDocumentationMigrationCases
             return Path.Combine(directory?.FullName??throw new InvalidOperationException("Tooling migration fixtures unavailable"),"remediation/nuke-planning/docs");
         }
     }
+    private static string CarrierPath(string path,string media)=>media=="text/markdown"?new DocumentationFixtureCarrierMap().Resolve(path):path;
     public static IReadOnlyList<Artifact> Proposed()=>Files.Select(file=>new Artifact(file.CanonicalPath,
-        File.ReadAllBytes(Path.Combine(Root,"fixtures/current-tooling."+file.ProposedName)),file.MediaType)).ToArray();
+        File.ReadAllBytes(Path.Combine(Root,CarrierPath("fixtures/current-tooling."+file.ProposedName,file.MediaType))),file.MediaType)).ToArray();
     public static string Retained(FileCase file)
     {
-        var bytes=File.ReadAllBytes(Path.Combine(Root,"fixtures/pre-nuke-tooling."+file.RetainedName));
+        var bytes=File.ReadAllBytes(Path.Combine(Root,CarrierPath("fixtures/pre-nuke-tooling."+file.RetainedName,file.MediaType)));
         Assert.Equal(file.BeforeSha256,DocumentationFixture.Hash(bytes));return Encoding.UTF8.GetString(bytes);
     }
     public static void AssertSnapshot(Func<IReadOnlyList<Artifact>> provider)

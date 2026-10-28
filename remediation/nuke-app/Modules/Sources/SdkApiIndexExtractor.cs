@@ -20,6 +20,7 @@ public sealed class SdkApiIndexExtractor : ISourceExtractor
             throw new ArgumentException("Explicit numeric platform API required", nameof(source));
         var index = SdkApiXml.Read(source);
         var records = new List<JsonObject>(); var issues = new List<SourceIssue>(); var classOrdinal = 0;
+        var excluded = new JsonArray(); var legacyIssues = new JsonArray();
         foreach (var owner in index.Root.Elements("class"))
         {
             classOrdinal++;
@@ -34,6 +35,13 @@ public sealed class SdkApiIndexExtractor : ISourceExtractor
             {
                 var literal = SdkApiXml.Attributes(node);
                 var lifecycle = node == owner ? ownerLifecycle : Active(literal, ownerLifecycle.Attributes, target!);
+                if (!ownerLifecycle.Current || !lifecycle.Current)
+                    excluded.Add(new JsonObject
+                    {
+                        ["owner"] = ownerBinary, ["tag"] = node.Name.LocalName,
+                        ["attributes"] = SdkApiXml.Json(literal),
+                        ["reason"] = lifecycle.Known ? "not applicable at target platform API" : "unknown API lifecycle"
+                    });
                 var extensions = new JsonArray(); string? lifecycleReason = null;
                 if (lifecycle.Attributes.TryGetValue("sdks", out var extensionText) && extensionText.Length > 0)
                     foreach (var token in extensionText.Split(','))
@@ -82,6 +90,7 @@ public sealed class SdkApiIndexExtractor : ISourceExtractor
                     {
                         kind = "unsupported"; extras["parse_error"] = error.Message;
                         issues.Add(new("sdk-descriptor", error.Message, null, null));
+                        legacyIssues.Add(new JsonObject { ["owner"] = ownerBinary, ["name"] = originalName, ["error"] = error.Message });
                     }
                 }
                 else extras["field_type_status"] = "unknown";
@@ -90,7 +99,22 @@ public sealed class SdkApiIndexExtractor : ISourceExtractor
                 memberOrdinal++;
             }
         }
-        return new(records, issues, issues.Count == 0 ? StructuralParseStatus.Clean : StructuralParseStatus.Partial);
+        var counts = new JsonObject();
+        foreach (var record in records)
+        {
+            var kind = record["kind"]!.GetValue<string>();
+            counts[kind] = (counts[kind]?.GetValue<int>() ?? 0) + 1;
+        }
+        var metadata = new JsonObject
+        {
+            ["excluded_history_or_future"] = excluded.Count, ["excluded"] = excluded,
+            ["records_scope"] = "All lifecycle records retained; excluded is a historical not-current diagnostic, not omission from records",
+            ["issues"] = legacyIssues, ["counts_by_kind"] = counts,
+            ["target_platform_api"] = source.Context.PlatformVersion,
+            ["index_format_version"] = index.Root.Attribute("version")?.Value,
+            ["line_locator_semantics"] = "physical XML line from .NET XmlReader"
+        };
+        return new(records, issues, issues.Count == 0 ? StructuralParseStatus.Clean : StructuralParseStatus.Partial, metadata);
     }
 
     private sealed record Lifecycle(bool Current, Dictionary<string, string> Attributes, bool Known);

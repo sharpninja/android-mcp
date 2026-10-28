@@ -44,6 +44,14 @@ public sealed partial class Build : NukeBuild
     public SourceBatchCachePolicy? CachePolicy { get; set; }
     [Parameter("Canonical project input or catalog-contract directory")]
     public string? ProjectRoot { get; set; }
+    [Parameter("Project-root-relative caller-pinned typed workflow request")]
+    public string? PipelineRequest { get; set; }
+    [Parameter("Explicit trusted SHA256 of the workflow request")]
+    public string? PipelineRequestSha256 { get; set; }
+    [Parameter("Explicit trusted workflow request byte length")]
+    public long? PipelineRequestLength { get; set; }
+    [Parameter("Explicit bounded native toolchain check; no generic toolchain approval is implied")]
+    public ToolchainCheck? ToolchainCheck { get; set; }
     [Parameter("Output directory, separate from retained inputs")]
     public string? OutputRoot { get; set; }
     [Parameter("Private catalog staging directory, separate from final output")]
@@ -114,6 +122,9 @@ public sealed partial class Build : NukeBuild
         var parameters=new Dictionary<string,string>(StringComparer.Ordinal);
         void Add(string key,string? value) { if(value is not null) parameters.Add(key,value); }
         Add("source-manifest",SourceManifest); Add("project-root",ProjectRoot);
+        Add("pipeline-request",PipelineRequest);Add("pipeline-request-sha256",PipelineRequestSha256);
+        Add("pipeline-request-length",PipelineRequestLength?.ToString(System.Globalization.CultureInfo.InvariantCulture));
+        Add("toolchain-check",ToolchainCheck?.ToString());
         Add("recipe-lock",RecipeLock);Add("bundle-root",BundleRoot);Add("release",Release);
         Add("acquisition-root",AcquisitionRoot);Add("acquisition-manifest",AcquisitionManifest);
         Add("acquisition-manifest-sha256",AcquisitionManifestSha256);
@@ -148,8 +159,14 @@ public sealed partial class Build : NukeBuild
             case OperationExecutor.SourcesPlan: PlanSources().GetAwaiter().GetResult();break;
             case OperationExecutor.Architecture: GenerateArchitecture().GetAwaiter().GetResult();break;
             case OperationExecutor.CatalogBuild: BuildCatalog().GetAwaiter().GetResult();break;
+            case OperationExecutor.CatalogBuildFromSources: BuildCatalogFromSources().GetAwaiter().GetResult();break;
             case OperationExecutor.BrowserQa: RunBrowserQa().GetAwaiter().GetResult();break;
             case OperationExecutor.SourcesInventory: InventorySources().GetAwaiter().GetResult();break;
+            case OperationExecutor.SourcesExtract: ExtractSources().GetAwaiter().GetResult();break;
+            case OperationExecutor.SdkReferenceCopy:
+                if(ToolchainCheck!=Core.ToolchainCheck.SdkReferenceCopy)
+                    throw new InvalidOperationException("Validate/Toolchain requires an explicitly selected supported check; no generic validation executed.");
+                CheckSdkReference().GetAwaiter().GetResult();break;
             default: throw new InvalidOperationException($"{category}/{Operation} has a valid plan but its execution adapter is not yet ported. No action executed.");
         }
     }

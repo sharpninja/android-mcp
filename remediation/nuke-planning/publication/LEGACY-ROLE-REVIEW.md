@@ -33,7 +33,3 @@ Every row remains `accepted_complete=false`, `safe_to_delete=false`, and `scope_
 ## Merge route
 
 The Source owner should verify the baseline hash or explicitly rebase this proposal, review the66exact-SHA domain links first, then confirm the manual/lexical proposals against actual recipe pins and callers. Add source-claim evidence to the single authoritative union rather than maintaining this derived JSON as a parallel truth. Record explicit requirement-retirement decisions separately through the authorized requirement store. Leave unconfirmed ownership and behavior obligations open; keep every original.
-
-## Publication history boundary
-
-The first proposal is retained only in the original workspace and ignored local publication copy. It is excluded from Git as noncurrent history. The v2 predecessor pointer records provenance to that retained local draft and is not a required runtime or rehydration input. The latest v2 proposal and Root decisions remain published.
