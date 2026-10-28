@@ -1,5 +1,7 @@
 # Android MCP bridge — lean design and offline tooling
 
+> **NUKE migration in progress:** see [progress and remaining work](MIGRATION-STATUS.md). Do not execute Python tooling or legacy commands. This branch is an incomplete tracking checkpoint; normal migration validation precedes ready-for-review, and HV follows in the PR.
+
 All-Kotlin server/Jetpack Compose design, internal ARC compatibility-port specification, C4/Structurizr and class sources, editable SVG screens/storyboards, a self-contained Marp presentation, catalog contracts, extractors and offline tests. **No Android application or deployed bridge is implemented here.**
 
 The last completed independent design verdict remains round 023: **88 accuracy / 81 completeness, NOT_ACCEPTED**. Round 024 completed its core and architecture passes; provider credits blocked the UI pass before inference, so no unified round024 score exists. The current corrected candidate passes local tests, rendering and manual visual QA. Grok CLI rejected the requested `grok-4.7-high` model ID before inference. The user has since requested resuming with Claude Opus-5.5 at XHigh; the main task owns exact configuration verification and review launch. A new resolved model or 98/98 acceptance is not yet verified.
@@ -16,23 +18,9 @@ The last completed independent design verdict remains round 023: **88 accuracy /
 - [Completed independent design verdict](validation/hv-round023-design.md) and [status](validation/status.json)
 - [Third-party provenance and notices](THIRD_PARTY_NOTICES.md)
 
-## Quick checks
+## Migration checks
 
-From the checkout root, using an environment with the pinned extraction dependencies:
-
-```sh
-python tools/rehydrate.py --help
-python tools/rehydrate.py plan --workspace ../android-mcp-data
-python -m unittest discover -s tools/tests -v
-python -m unittest discover -s remediation/catalog/tests -v
-python tools/check_deliverables.py
-python tools/check_documentation.py
-# Node is required for the design guardrails; see the pinned toolchain README.
-python -m unittest discover -s remediation -p 'tests_design*contract.py'
-python -m unittest discover -s remediation -p 'test_design*.py'
-```
-
-The default rehydration plan makes no network requests. Full acquisition/builds require explicit commands and substantial time/disk. Read [REHYDRATE.md](REHYDRATE.md) before running them.
+The current workflow is tracking-only. Native NUKE build/test and rehydration commands will be published with their implementation and verification evidence. Older tooling instructions, including [REHYDRATE.md](REHYDRATE.md), are retained as migration references and must not be executed until their callers are replaced. See [MIGRATION-STATUS.md](MIGRATION-STATUS.md) for the removal and readiness gates.
 
 ## What changed in this forward cleanup
 
