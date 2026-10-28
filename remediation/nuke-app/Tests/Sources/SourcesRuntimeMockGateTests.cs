@@ -70,6 +70,10 @@ public sealed class SourcesRuntimeMockGateTests
                 return new(fault == "invent-permission-entry" ? [new JsonObject { ["canonical"] = "invented" }] : [], [], StructuralParseStatus.Clean,
                     new JsonObject { ["permission_reference"] = fault == "wrong-permission-metadata" ? new JsonObject() : result.DeepClone() });
             }));
+            // Authorized seventh-kind expectation only. New binary/report/cache
+            // composition assertions are independently mock-proven in the120slice.
+            providers.Add(new ScriptedSourceExtractor("sdk-annotations", _ => new([], [], StructuralParseStatus.Clean,
+                new JsonObject { ["annotation_archive"] = new JsonObject() })));
             if (resource is not null && fault != "omit-java") providers.Add(resource.Extractor);
             if (fault?.StartsWith("omit:", StringComparison.Ordinal) == true) providers.RemoveAll(x => x.Kind == fault[5..]);
             if (fault == "early-disposal") resource?.Dispose();

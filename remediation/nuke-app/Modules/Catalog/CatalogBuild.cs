@@ -5,6 +5,7 @@ using System.Text.Json.Nodes;
 using AndroidMcp.BuildTool.Core;
 using AndroidMcp.BuildTool.Sources;
 using AndroidMcp.BuildTool.Sources.Java;
+using AndroidMcp.BuildTool.Publication;
 using Json.Schema;
 using Microsoft.Data.Sqlite;
 
@@ -13,11 +14,12 @@ namespace AndroidMcp.BuildTool.Catalog;
 public sealed class CatalogBuildException(string code,string message,Exception? inner=null):IOException(message,inner)
 { public string Code {get;}=code; }
 public sealed record CatalogBuildResult(string RegistryId,string ProducerFingerprint,IReadOnlyList<StoredArtifact> Artifacts,JsonObject Validation,string StagingDatabasePath,string RawSourceStagePath);
+public sealed record CatalogSourceIntake(ISourceExtractGenerationReader Reader,SourceExtractGenerationRequest Request);
 
 /// <summary>Offline native source-to-sealed-catalog generation. No runtime authority or device observations.</summary>
 public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher dispatcher,IPermissionExpressionSourceFacts permissions,
     IAnnotationTargetSourceFacts formals,IStructuralTypeHeaderSourceFacts headers,ICanonicalJson canonical,ISourceXmlFormatter? xmlFormatter=null,
-    Func<string,IStreamingArtifactStore>? outputStores=null,Func<string,CatalogDatabase>? stagingDatabases=null,IJvmSourceLinker? sourceJvm=null,Action<CatalogImportObservation>? observeImport=null)
+    Func<string,IStreamingArtifactStore>? outputStores=null,Func<string,CatalogDatabase>? stagingDatabases=null,IJvmSourceLinker? sourceJvm=null,Action<CatalogImportObservation>? observeImport=null,CatalogSourceIntake? sourceIntake=null)
 {
     public const string ProducerId="csharp-nuke-catalog-v1";
     public string ProducerFingerprint {get;}=ContentHash.Sha256(File.ReadAllBytes(typeof(CatalogBuild).Assembly.Location));
@@ -36,10 +38,29 @@ public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher
             throw Failure("catalog-metadata",label+" must be a positive integer");
         return result;
     }
-    private sealed record Input(JsonObject Source,long Length);
+    private sealed record Input(JsonObject Source,long Length,bool CacheHit=false,bool Facade=false);
     public async Task<CatalogBuildResult> BuildAsync(string inventoryPath,string outputDirectory,string privateStageDirectory,CancellationToken cancellationToken=default)
     {
         var output=Path.GetFullPath(outputDirectory);var inventoryFull=Path.GetFullPath(inventoryPath);
+        ISourceExtractGeneration? opened=null;byte[]? admittedBytes=null;JsonObject? admittedSpec=null;Dictionary<int,RehydrationSourceRow>? admittedRows=null;
+        try
+        {
+            if(sourceIntake is not null)
+            {
+                opened=await sourceIntake.Reader.OpenAsync(sourceIntake.Request,cancellationToken);
+                admittedBytes=await File.ReadAllBytesAsync(inventoryFull,cancellationToken);_=canonical.Serialize(admittedBytes);admittedSpec=JsonNode.Parse(admittedBytes)!.AsObject();
+                var rows=admittedSpec["sources"]!.AsArray();var projection=sourceIntake.Request.Projection;
+                if(rows.Count!=projection.Rows.Count || projection.Rows.Select(row=>row.RowIndex).Distinct().Count()!=projection.Rows.Count)
+                    throw Failure("catalog-source-row-mismatch","Inventory and admitted projection have different logical membership");
+                foreach(var row in projection.Rows)
+                    if(row.RowIndex<0 || row.RowIndex>=rows.Count || canonical.Hash(Element(rows[row.RowIndex]))!=canonical.Hash(row.OriginalRow))
+                        throw Failure("catalog-source-row-mismatch","Inventory row differs from the exact admitted OriginalRow");
+                var selected=projection.SelectedPhysicalSourceIndices.ToHashSet();admittedRows=projection.Rows.Where(row=>selected.Contains(row.PhysicalSourceIndex)).ToDictionary(row=>row.RowIndex);
+            }
+        }
+        catch(SourceExtractException error){opened?.Dispose();throw new CatalogBuildException(error.Code,error.Message,error);}
+        catch{opened?.Dispose();throw;}
+        using var generation=opened;
         _=ArtifactPaths.Resolve(output,"catalog.sqlite");_=ArtifactPaths.Resolve(privateStageDirectory,"generation.lock");
         await using var lease=await new FileArtifactLeaseProvider(privateStageDirectory).AcquireAsync(output,cancellationToken);
         if(Directory.Exists(output) && Directory.EnumerateFileSystemEntries(output).Any()) throw Failure("nonempty-output","Output must be empty; preserve immutable earlier publication");
@@ -50,22 +71,25 @@ public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher
         {
             var rawPath=ArtifactPaths.Resolve(privateStageDirectory,Guid.NewGuid().ToString("N")+"/source-records.sqlite");
             using var raw=new CatalogImportStage(rawPath,canonical);observeImport?.Invoke(new("raw-stage",rawPath));
-            var inventoryBytes=await File.ReadAllBytesAsync(inventoryFull,cancellationToken);
+            var inventoryBytes=admittedBytes ?? await File.ReadAllBytesAsync(inventoryFull,cancellationToken);
             // The canonical authority performs strict UTF8, duplicate-name and finite-number inspection.
-            _=canonical.Serialize(inventoryBytes);var spec=JsonNode.Parse(inventoryBytes)!.AsObject();
+            _=canonical.Serialize(inventoryBytes);var spec=admittedSpec ?? JsonNode.Parse(inventoryBytes)!.AsObject();
             var metadata=spec["catalog"]?.AsObject() ?? throw Failure("catalog-metadata","Required catalog metadata is absent");
             var version=Positive(metadata["registry_version"],"registry_version");_=Positive(metadata["api_level"],"api_level");
             foreach(var name in new[]{"android_version","coverage"}) if(string.IsNullOrEmpty(S(metadata[name]))) throw Failure("catalog-metadata",name+" must be nonempty");
             var sourceRoot=Path.GetDirectoryName(inventoryFull)!;var inputs=new List<Input>();
-            foreach(var original in spec["sources"]!.AsArray().OfType<JsonObject>().Where(item=>S(item["status"])=="downloaded").OrderBy(item=>S(item["kind"])=="sdk-api-index" ? 0 : 1))
+            foreach(var candidate in spec["sources"]!.AsArray().Select((node,index)=>(Source:node!.AsObject(),Index:index)).Where(item=>S(item.Source["status"])=="downloaded" && (admittedRows is null || admittedRows.ContainsKey(item.Index))).OrderBy(item=>S(item.Source["kind"])=="sdk-api-index" ? 0 : 1))
             {
-                cancellationToken.ThrowIfCancellationRequested();var source=(JsonObject)original.DeepClone();
+                cancellationToken.ThrowIfCancellationRequested();var source=(JsonObject)candidate.Source.DeepClone();
                 if(!source.ContainsKey("api_level") || string.IsNullOrEmpty(S(source["channel"]))) throw Failure("source-metadata","Explicit source api_level/channel metadata required");
                 if(source["api_level"] is not null) _=Positive(source["api_level"],"source api_level");
                 if(S(source["kind"])=="sdk-annotations" && string.IsNullOrEmpty(S(source["platform_api_version"]))) throw Failure("source-metadata","Explicit platform_api_version required for sdk-annotations");
                 if(S(source["scope"])=="aosp-pinned-hidl-source-evidence" && (source["api_level"] is not null || source["platform_api_version"] is not null))
                     throw Failure("source-metadata","HIDL release context does not establish Android applicability");
-                var path=ArtifactPaths.Resolve(sourceRoot,S(source["local_path"]));var bytes=await File.ReadAllBytesAsync(path,cancellationToken);
+                byte[]? bytes=null;
+                if(generation is null)
+                {
+                var path=ArtifactPaths.Resolve(sourceRoot,S(source["local_path"]));bytes=await File.ReadAllBytesAsync(path,cancellationToken);
                 if(Sha(bytes)!=S(source["sha256"])) throw Failure("source-sha-mismatch","SHA256 mismatch "+S(source["path"]));
                 if(ContentHash.GitBlobSha1Legacy(bytes)!=S(source["git_blob"])) throw Failure("git-blob-mismatch","Git blob mismatch "+S(source["path"]));
                 if(source["metadata_cache"] is JsonObject cache)
@@ -77,13 +101,27 @@ public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher
                     source["x-native-cache-audit"]=new JsonObject{["disposition"]="verified-unused/native-raw-reextraction",["historical_cache"]=cache.DeepClone(),
                         ["historical_context"]=source["java_file_context"]?.DeepClone(),["records_consumed"]=false,["historical_identity_claimed"]=false};
                 }
+                }
                 var acquisition=new JsonObject();foreach(var key in new[]{"url","revision","sha256","retrieved_at","path","api_level","channel","kind","license","scope"}) acquisition[key]=source[key]?.DeepClone();
                 source["source_id"]=Hash(new JsonObject{["acquisition"]=acquisition,["processing_sha256"]=producerFingerprint});
                 source["x-source-identity-version"]=3;source["x-native-producer"]=producer.DeepClone();
-                var context=new SourceContext(S(source["repository"]),S(source["revision"]),S(source["source_id"]),source["platform_api_version"]?.GetValue<string>());
-                var extracted=dispatcher.Extract(new(S(source["path"]),bytes,context),S(source["kind"]),S(source["scope"]));
-                raw.Capture(S(source["source_id"]),extracted);observeImport?.Invoke(new("source-captured",rawPath,S(source["source_id"]),Count:raw.Count(S(source["source_id"]))));
-                inputs.Add(new(source,bytes.LongLength));
+                long length;var hit=false;
+                if(generation is null)
+                {
+                    var context=new SourceContext(S(source["repository"]),S(source["revision"]),S(source["source_id"]),source["platform_api_version"]?.GetValue<string>());
+                    var extracted=dispatcher.Extract(new(S(source["path"]),bytes!,context),S(source["kind"]),S(source["scope"]));raw.Capture(S(source["source_id"]),extracted);length=bytes!.LongLength;
+                }
+                else
+                {
+                    var row=await generation.ReadAsync(admittedRows![candidate.Index],cancellationToken);
+                    if(row.RowIndex!=candidate.Index || row.SourceLength<0 || row.CacheHit && (sourceIntake!.Request.TrustedIndex is null || row.CacheReceipt is null || row.CacheSeal is null))
+                        throw Failure("catalog-source-row-mismatch","Source reader response does not match its admitted row/cache authority");
+                    source["x-native-source-intake"]=new JsonObject{["producer"]=JsonSerializer.SerializeToNode(sourceIntake!.Request.Producer),["profile_id"]=sourceIntake.Request.Profile.Id,
+                        ["context"]=JsonSerializer.SerializeToNode(row.Context),["source_length"]=row.SourceLength,["cache_hit"]=row.CacheHit,["cache_receipt"]=JsonSerializer.SerializeToNode(row.CacheReceipt),["cache_seal"]=JsonSerializer.SerializeToNode(row.CacheSeal)};
+                    raw.Capture(S(source["source_id"]),row);length=row.SourceLength;hit=row.CacheHit;
+                }
+                observeImport?.Invoke(new("source-captured",rawPath,S(source["source_id"]),Count:raw.Count(S(source["source_id"]))));
+                inputs.Add(new(source,length,hit,generation is not null));
             }
             var stage=ArtifactPaths.Resolve(privateStageDirectory,Guid.NewGuid().ToString("N")+"/catalog.staging.sqlite");
             using var db=stagingDatabases?.Invoke(stage) ?? CatalogDatabase.CreateFile(catalogRoot,CatalogSchemaProfile.Entry,stage);
@@ -113,6 +151,8 @@ public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher
             var symbols=symbolValues.Where(item=>item.Value.Count==1).ToDictionary(item=>item.Key,item=>item.Value.Single(),StringComparer.Ordinal);
             var currentOwners=new Dictionary<string,Dictionary<string,string>>(StringComparer.Ordinal);
             var currentKeys=new Dictionary<string,Dictionary<string,string>>(StringComparer.Ordinal);
+            var currentTargets=new Dictionary<string,Dictionary<string,string?>>(StringComparer.Ordinal);
+            var indexPlatforms=inputs.Where(input=>S(input.Source["kind"])=="sdk-api-index").Select(input=>S(input.Source["platform_api_version"])).Where(value=>value.Length!=0).ToHashSet(StringComparer.Ordinal);
             foreach(var input in inputs.Where(input=>S(input.Source["kind"])=="sdk-api-index"))
             {
                 var detected=new HashSet<string>(StringComparer.Ordinal);
@@ -125,7 +165,10 @@ public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher
                     detected.Add(platform);if(!currentOwners.TryGetValue(platform,out var owners)){owners=new(StringComparer.Ordinal);currentOwners.Add(platform,owners);}
                     if(!currentKeys.TryGetValue(platform,out var keys)){keys=new(StringComparer.Ordinal);currentKeys.Add(platform,keys);}
                     var signature=S(row["canonical"]);if(!signature.Contains('#')) owners[S(row["owner"])]=S(extra["jvm_owner"]);
-                    keys[signature]=ContentHash.Sha256(Encoding.UTF8.GetBytes("jvm:"+signature));
+                    var binding=ContentHash.Sha256(Encoding.UTF8.GetBytes("jvm:"+signature));keys[signature]=binding;
+                    if(!currentTargets.TryGetValue(platform,out var targets)){targets=new(StringComparer.Ordinal);currentTargets.Add(platform,targets);}indexPlatforms.Add(platform);
+                    var target=!signature.Contains('#') ? S(row["owner"]) : S(row["owner"])+"#"+S(row["name"])+(S(row["kind"]) is "method" or "constructor" ? "("+string.Join(',',row["parameters"]!.AsArray().Select(value=>S(value!["type"])))+")" : "");
+                    if(targets.TryGetValue(target,out var previous) && previous!=binding) targets[target]=null;else targets.TryAdd(target,binding);
                 }
                 if(detected.Count>1) throw Failure("source-index-metadata","API index mixes target platform versions");
             }
@@ -136,7 +179,11 @@ public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher
             foreach(var input in inputs)
             {
                 var source=input.Source;var sid=S(source["source_id"]);var kind=S(source["kind"]);var count=0;var unsupported=0;var facts=raw.Facts(sid);
-                foreach(var issue in facts.Issues) Execute("INSERT INTO issues(source_id,line,category,reason,raw) VALUES($source,NULL,$category,$reason,$raw)",("$source",sid),("$category",issue.Code),("$reason",issue.Reason),("$raw",Convert.ToBase64String(await File.ReadAllBytesAsync(ArtifactPaths.Resolve(sourceRoot,S(source["local_path"])),cancellationToken))));
+                if(facts.Issues.Count!=0)
+                {
+                    var rawEvidence=input.Facade ? raw.RawEvidence(sid) ?? throw Failure("SOURCE_EXTRACT_RAW_EVIDENCE","Required admitted issue evidence is absent") : Convert.ToBase64String(await File.ReadAllBytesAsync(ArtifactPaths.Resolve(sourceRoot,S(source["local_path"])),cancellationToken));
+                    foreach(var issue in facts.Issues) Execute("INSERT INTO issues(source_id,line,category,reason,raw) VALUES($source,NULL,$category,$reason,$raw)",("$source",sid),("$category",issue.Code),("$reason",issue.Reason),("$raw",rawEvidence));
+                }
                 if(kind=="aidl")
                 {
                     var schema=facts.Metadata?["aidl_schema"] as JsonObject ?? throw Failure("source-aidl-metadata-missing","AIDL source producer did not supply its raw schema concern");
@@ -186,8 +233,20 @@ public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher
                     count++;declarationCount++;if(S(row["kind"])=="unsupported") unsupported++;
                 }
                 var report=new JsonObject{["source_id"]=sid,["kind"]=kind,["input_bytes"]=input.Length,["declarations"]=count,["unsupported"]=unsupported,["structural_status"]=facts.StructuralStatus.ToString(),["source_metadata"]=facts.Metadata?.DeepClone()};reports.Add(report);
-                Execute("INSERT INTO parse_reports VALUES($source,$doc)",("$source",sid),("$doc",Text(report)));
             }
+            var annotationImporter=new CatalogAnnotationImporter(db,transaction,sources,currentTargets,currentKeys,currentOwners,indexPlatforms,canonical,permissions,formals,symbols);
+            foreach(var input in inputs.Where(input=>S(input.Source["kind"])=="sdk-annotations"))
+            {
+                var sid=S(input.Source["source_id"]);var archive=raw.Facts(sid).Metadata?["annotation_archive"] as JsonObject ?? throw Failure("source-annotation-metadata-missing","SDK annotation producer did not supply its archive concern");
+                var attached=annotationImporter.Attach(input.Source,archive);var report=reports.OfType<JsonObject>().Single(value=>S(value["source_id"])==sid);
+                report["annotations"]=attached.Annotations;report["mapped_annotations"]=attached.Mapped;report["unmatched_annotations"]=attached.Annotations-attached.Mapped;
+                report["mapping_status"]=attached.Annotations==attached.Mapped ? "complete" : "partial";report["platform_api_version"]=input.Source["platform_api_version"]?.DeepClone();
+                report["xml_documents"]=archive["counts"]?["xml_documents"]?.DeepClone();report["items"]=archive["counts"]?["items"]?.DeepClone();report["status"]=archive["status"]?.DeepClone();
+                var platform=S(input.Source["platform_api_version"]);
+                if(!indexPlatforms.Contains(platform) && attached.Mapped<attached.Annotations)
+                {report["status"]="partial";Execute("INSERT INTO issues(source_id,line,category,reason,raw) VALUES($source,NULL,'annotation-platform',$reason,$raw)",("$source",sid),("$reason","No imported SDK API index for annotation platform "+platform+" and unresolved same-snapshot signature targets remain"),("$raw",S(input.Source["path"])));}
+            }
+            foreach(var report in reports.OfType<JsonObject>()) Execute("INSERT INTO parse_reports VALUES($source,$doc)",("$source",S(report["source_id"])),("$doc",Text(report)));
             raw.Dispose();
             IEnumerable<CatalogDeclaration> ReadDeclarations(string? entry=null)
             {
@@ -271,7 +330,7 @@ public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher
             // Export cursors finish before closing the actual file-backed stage.
             // No backup database, move or deletion substitutes for this source.
             db.Dispose();
-            foreach(var input in inputs)
+            foreach(var input in inputs.Where(input=>!input.CacheHit))
             {using var source=File.OpenRead(ArtifactPaths.Resolve(sourceRoot,S(input.Source["local_path"])));if(ContentHash.Sha256(source)!=S(input.Source["sha256"])) throw Failure("input-changed","Source changed before final publication marker");}
             if(!(await File.ReadAllBytesAsync(inventoryFull,cancellationToken)).AsSpan().SequenceEqual(inventoryBytes)) throw Failure("input-changed","Inventory changed before final publication marker");
             string FileHash(string path){using var stream=File.OpenRead(path);return ContentHash.Sha256(stream);}
@@ -282,7 +341,7 @@ public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher
         }
         catch(Exception error) when(error is not OperationCanceledException)
         {
-            var code=error is CatalogBuildException failure ? failure.Code : "catalog-build-failed";
+            var code=error switch{CatalogBuildException failure=>failure.Code,SourceExtractException source=>source.Code,_=>"catalog-build-failed"};
             var receipt=new JsonObject{["published"]=false,["code"]=code,["error_type"]=error.GetType().Name,["error"]=error.Message,["native_producer"]=producer.DeepClone()};
             await store.WriteAsync(new("validation-failure.json",canonical.Serialize(Element(receipt)),"application/json"),cancellationToken);
             if(error is CatalogBuildException) throw;throw new CatalogBuildException(code,error.Message,error);

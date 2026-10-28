@@ -1,0 +1,626 @@
+{
+  "timestamp": "2026-10-28T06:15:48",
+  "state": "normal-exact-original-function-evidence-only",
+  "acceptedComplete": false,
+  "trackingDoneChanged": false,
+  "requirements": [
+    "FR-BUILD-004",
+    "TR-BUILD-TOOL-004",
+    "TEST-BUILD-004"
+  ],
+  "originalFunctions": 19,
+  "originalAssertions": 31,
+  "mapping": [
+    {
+      "id": "ORIG-CB01",
+      "function": "test_missing_sdk_parameter_name_is_preserved_without_crash",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_callback_source_facts.py",
+      "publishedTestSha256": "f834dbcd5aa546cc1a18b081367bd6cff8035d4ae86a4cf476395dfdca28a65a",
+      "sourceStartLine": 4,
+      "sourceBodyLf": " def test_missing_sdk_parameter_name_is_preserved_without_crash(self):\n  method=self.method();method['extensions']['parameters'][0]['name']=None\n  result=registration_candidates(method,self.types());self.assertIsNone(result[0]['parameter_name'])",
+      "originalAssertions": 1,
+      "existingFixtureSteps": [
+        "FACT-CB11"
+      ],
+      "mockCorrectAndControlResults": [
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.ExactOriginalFunctionInputsAssertionsAndCompositionsPassCorrectMocks(id: \"ORIG-CB01\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.EachOriginalAssertionRejectsIndependentWrongFact(id: \"ORIG-CB01\")",
+          "outcome": "Passed"
+        }
+      ],
+      "nativeResult": {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions(id: \"ORIG-CB01\")",
+        "outcome": "Passed"
+      },
+      "normalFixtureParity": "observed",
+      "hvAcceptance": "pending"
+    },
+    {
+      "id": "ORIG-CB02",
+      "function": "test_name_never_proves_callback_lifecycle",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_callback_source_facts.py",
+      "publishedTestSha256": "f834dbcd5aa546cc1a18b081367bd6cff8035d4ae86a4cf476395dfdca28a65a",
+      "sourceStartLine": 10,
+      "sourceBodyLf": " def test_name_never_proves_callback_lifecycle(self):\n  value=type_candidate(self.types()['b'*64]);self.assertTrue(value['is_candidate']);self.assertFalse(value['callback_lifecycle_proven'])",
+      "originalAssertions": 2,
+      "existingFixtureSteps": [
+        "FACT-CB01"
+      ],
+      "mockCorrectAndControlResults": [
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.EachOriginalAssertionRejectsIndependentWrongFact(id: \"ORIG-CB02\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.ExactOriginalFunctionInputsAssertionsAndCompositionsPassCorrectMocks(id: \"ORIG-CB02\")",
+          "outcome": "Passed"
+        }
+      ],
+      "nativeResult": {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions(id: \"ORIG-CB02\")",
+        "outcome": "Passed"
+      },
+      "normalFixtureParity": "observed",
+      "hvAcceptance": "pending"
+    },
+    {
+      "id": "ORIG-CB03",
+      "function": "test_parameter_position_and_permission_are_retained",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_callback_source_facts.py",
+      "publishedTestSha256": "f834dbcd5aa546cc1a18b081367bd6cff8035d4ae86a4cf476395dfdca28a65a",
+      "sourceStartLine": 12,
+      "sourceBodyLf": " def test_parameter_position_and_permission_are_retained(self):\n  rows=registration_candidates(self.method(),self.types());self.assertEqual(rows[0]['parameter_index'],0);self.assertEqual(rows[0]['permission'],dict(op='unknown'));self.assertFalse(rows[0]['registration_guaranteed'])",
+      "originalAssertions": 3,
+      "existingFixtureSteps": [
+        "FACT-CB06"
+      ],
+      "mockCorrectAndControlResults": [
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.ExactOriginalFunctionInputsAssertionsAndCompositionsPassCorrectMocks(id: \"ORIG-CB03\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.EachOriginalAssertionRejectsIndependentWrongFact(id: \"ORIG-CB03\")",
+          "outcome": "Passed"
+        }
+      ],
+      "nativeResult": {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions(id: \"ORIG-CB03\")",
+        "outcome": "Passed"
+      },
+      "normalFixtureParity": "observed",
+      "hvAcceptance": "pending"
+    },
+    {
+      "id": "ORIG-CB04",
+      "function": "test_binder_endpoint_candidate_does_not_require_callback_name",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_callback_source_facts.py",
+      "publishedTestSha256": "f834dbcd5aa546cc1a18b081367bd6cff8035d4ae86a4cf476395dfdca28a65a",
+      "sourceStartLine": 14,
+      "sourceBodyLf": " def test_binder_endpoint_candidate_does_not_require_callback_name(self):\n  method=self.method();method['arguments'][0]['text']='a.IEndpoint';method['extensions']['parameters'][0]['name']='endpoint';types=self.types();types['b'*64]=dict(name='IEndpoint',kind='aidl-interface',extensions=dict(language='aidl'))\n  self.assertEqual(len(registration_candidates(method,types)),1)",
+      "originalAssertions": 1,
+      "existingFixtureSteps": [
+        "FACT-CB17"
+      ],
+      "mockCorrectAndControlResults": [
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.ExactOriginalFunctionInputsAssertionsAndCompositionsPassCorrectMocks(id: \"ORIG-CB04\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.EachOriginalAssertionRejectsIndependentWrongFact(id: \"ORIG-CB04\")",
+          "outcome": "Passed"
+        }
+      ],
+      "nativeResult": {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions(id: \"ORIG-CB04\")",
+        "outcome": "Passed"
+      },
+      "normalFixtureParity": "observed",
+      "hvAcceptance": "pending"
+    },
+    {
+      "id": "ORIG-CB05",
+      "function": "test_callback_executor_annotation_alone_is_not_callback_parameter",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_callback_source_facts.py",
+      "publishedTestSha256": "f834dbcd5aa546cc1a18b081367bd6cff8035d4ae86a4cf476395dfdca28a65a",
+      "sourceStartLine": 17,
+      "sourceBodyLf": " def test_callback_executor_annotation_alone_is_not_callback_parameter(self):\n  method=self.method();method['arguments']=[dict(text='Executor',status='unknown')];method['extensions']['parameters']=[dict(name='executor',annotations=[dict(name='CallbackExecutor')])]\n  self.assertEqual(registration_candidates(method,{}),[])",
+      "originalAssertions": 1,
+      "existingFixtureSteps": [
+        "FACT-CB12"
+      ],
+      "mockCorrectAndControlResults": [
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.EachOriginalAssertionRejectsIndependentWrongFact(id: \"ORIG-CB05\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.ExactOriginalFunctionInputsAssertionsAndCompositionsPassCorrectMocks(id: \"ORIG-CB05\")",
+          "outcome": "Passed"
+        }
+      ],
+      "nativeResult": {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions(id: \"ORIG-CB05\")",
+        "outcome": "Passed"
+      },
+      "normalFixtureParity": "observed",
+      "hvAcceptance": "pending"
+    },
+    {
+      "id": "ORIG-CB06",
+      "function": "test_overloads_and_parameter_positions_have_different_ids",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_callback_source_facts.py",
+      "publishedTestSha256": "f834dbcd5aa546cc1a18b081367bd6cff8035d4ae86a4cf476395dfdca28a65a",
+      "sourceStartLine": 20,
+      "sourceBodyLf": " def test_overloads_and_parameter_positions_have_different_ids(self):\n  first=self.method();second=self.method();second['entry_id']='c'*64\n  self.assertNotEqual(registration_candidates(first,self.types())[0]['candidate_id'],registration_candidates(second,self.types())[0]['candidate_id'])",
+      "originalAssertions": 1,
+      "existingFixtureSteps": [
+        "FACT-CB06",
+        "FACT-CB14"
+      ],
+      "mockCorrectAndControlResults": [
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.ExactOriginalFunctionInputsAssertionsAndCompositionsPassCorrectMocks(id: \"ORIG-CB06\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.EachOriginalAssertionRejectsIndependentWrongFact(id: \"ORIG-CB06\")",
+          "outcome": "Passed"
+        }
+      ],
+      "nativeResult": {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions(id: \"ORIG-CB06\")",
+        "outcome": "Passed"
+      },
+      "normalFixtureParity": "observed",
+      "hvAcceptance": "pending"
+    },
+    {
+      "id": "ORIG-CB07",
+      "function": "test_unregistration_pair_remains_candidate",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_callback_source_facts.py",
+      "publishedTestSha256": "f834dbcd5aa546cc1a18b081367bd6cff8035d4ae86a4cf476395dfdca28a65a",
+      "sourceStartLine": 23,
+      "sourceBodyLf": " def test_unregistration_pair_remains_candidate(self):\n  first=registration_candidates(self.method(),self.types());second=self.method('unregisterListener');second['entry_id']='c'*64;rows=first+registration_candidates(second,self.types());pairs=possible_pairs(rows)\n  self.assertEqual(len(pairs),1);self.assertFalse(pairs[0]['lifecycle_pair_proven'])",
+      "originalAssertions": 2,
+      "existingFixtureSteps": [
+        "FACT-CB06",
+        "FACT-CB20",
+        "FACT-CB18"
+      ],
+      "mockCorrectAndControlResults": [
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.EachOriginalAssertionRejectsIndependentWrongFact(id: \"ORIG-CB07\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.ExactOriginalFunctionInputsAssertionsAndCompositionsPassCorrectMocks(id: \"ORIG-CB07\")",
+          "outcome": "Passed"
+        }
+      ],
+      "nativeResult": {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions(id: \"ORIG-CB07\")",
+        "outcome": "Passed"
+      },
+      "normalFixtureParity": "observed",
+      "hvAcceptance": "pending"
+    },
+    {
+      "id": "ORIG-CB08",
+      "function": "test_inherited_oneway_controls_endpoint_reply_mode",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_callback_source_facts.py",
+      "publishedTestSha256": "f834dbcd5aa546cc1a18b081367bd6cff8035d4ae86a4cf476395dfdca28a65a",
+      "sourceStartLine": 26,
+      "sourceBodyLf": " def test_inherited_oneway_controls_endpoint_reply_mode(self):\n  method=self.method('onEvent');method['extensions'].update(oneway=False,language='aidl')\n  self.assertEqual(endpoint_method(method,dict(extensions=dict(oneway=True)))['reply_mode'],'oneway')",
+      "originalAssertions": 1,
+      "existingFixtureSteps": [
+        "FACT-CB07"
+      ],
+      "mockCorrectAndControlResults": [
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.EachOriginalAssertionRejectsIndependentWrongFact(id: \"ORIG-CB08\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.ExactOriginalFunctionInputsAssertionsAndCompositionsPassCorrectMocks(id: \"ORIG-CB08\")",
+          "outcome": "Passed"
+        }
+      ],
+      "nativeResult": {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions(id: \"ORIG-CB08\")",
+        "outcome": "Passed"
+      },
+      "normalFixtureParity": "observed",
+      "hvAcceptance": "pending"
+    },
+    {
+      "id": "ORIG-CB09",
+      "function": "test_missing_inherited_aidl_flag_does_not_prove_synchronous",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_callback_source_facts.py",
+      "publishedTestSha256": "f834dbcd5aa546cc1a18b081367bd6cff8035d4ae86a4cf476395dfdca28a65a",
+      "sourceStartLine": 29,
+      "sourceBodyLf": " def test_missing_inherited_aidl_flag_does_not_prove_synchronous(self):\n  method=self.method('onEvent');method['extensions'].update(oneway=False,language='aidl')\n  self.assertEqual(endpoint_method(method)['reply_mode'],'unknown')",
+      "originalAssertions": 1,
+      "existingFixtureSteps": [
+        "FACT-CB08"
+      ],
+      "mockCorrectAndControlResults": [
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.EachOriginalAssertionRejectsIndependentWrongFact(id: \"ORIG-CB09\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.ExactOriginalFunctionInputsAssertionsAndCompositionsPassCorrectMocks(id: \"ORIG-CB09\")",
+          "outcome": "Passed"
+        }
+      ],
+      "nativeResult": {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions(id: \"ORIG-CB09\")",
+        "outcome": "Passed"
+      },
+      "normalFixtureParity": "observed",
+      "hvAcceptance": "pending"
+    },
+    {
+      "id": "ORIG-CB10",
+      "function": "test_explicit_false_both_aidl_flags_prove_reply_mode",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_callback_source_facts.py",
+      "publishedTestSha256": "f834dbcd5aa546cc1a18b081367bd6cff8035d4ae86a4cf476395dfdca28a65a",
+      "sourceStartLine": 32,
+      "sourceBodyLf": " def test_explicit_false_both_aidl_flags_prove_reply_mode(self):\n  method=self.method('onEvent');method['extensions'].update(oneway=False,interface_oneway=False,language='aidl')\n  self.assertEqual(endpoint_method(method)['reply_mode'],'synchronous')",
+      "originalAssertions": 1,
+      "existingFixtureSteps": [
+        "FACT-CB09"
+      ],
+      "mockCorrectAndControlResults": [
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.EachOriginalAssertionRejectsIndependentWrongFact(id: \"ORIG-CB10\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.ExactOriginalFunctionInputsAssertionsAndCompositionsPassCorrectMocks(id: \"ORIG-CB10\")",
+          "outcome": "Passed"
+        }
+      ],
+      "nativeResult": {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions(id: \"ORIG-CB10\")",
+        "outcome": "Passed"
+      },
+      "normalFixtureParity": "observed",
+      "hvAcceptance": "pending"
+    },
+    {
+      "id": "ORIG-CB11",
+      "function": "test_hidl_method_flag_has_no_interface_oneway_inheritance",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_callback_source_facts.py",
+      "publishedTestSha256": "f834dbcd5aa546cc1a18b081367bd6cff8035d4ae86a4cf476395dfdca28a65a",
+      "sourceStartLine": 35,
+      "sourceBodyLf": " def test_hidl_method_flag_has_no_interface_oneway_inheritance(self):\n  method=self.method('onEvent');method['extensions'].update(oneway=False,language='hidl')\n  self.assertEqual(endpoint_method(method)['reply_mode'],'synchronous')",
+      "originalAssertions": 1,
+      "existingFixtureSteps": [
+        "FACT-CB10"
+      ],
+      "mockCorrectAndControlResults": [
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.EachOriginalAssertionRejectsIndependentWrongFact(id: \"ORIG-CB11\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.ExactOriginalFunctionInputsAssertionsAndCompositionsPassCorrectMocks(id: \"ORIG-CB11\")",
+          "outcome": "Passed"
+        }
+      ],
+      "nativeResult": {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions(id: \"ORIG-CB11\")",
+        "outcome": "Passed"
+      },
+      "normalFixtureParity": "observed",
+      "hvAcceptance": "pending"
+    },
+    {
+      "id": "ORIG-CB12",
+      "function": "test_missing_oneway_not_invented_synchronous",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_callback_source_facts.py",
+      "publishedTestSha256": "f834dbcd5aa546cc1a18b081367bd6cff8035d4ae86a4cf476395dfdca28a65a",
+      "sourceStartLine": 38,
+      "sourceBodyLf": " def test_missing_oneway_not_invented_synchronous(self):\n  self.assertEqual(endpoint_method(self.method('onEvent'))['reply_mode'],'unknown')",
+      "originalAssertions": 1,
+      "existingFixtureSteps": [
+        "FACT-CB05"
+      ],
+      "mockCorrectAndControlResults": [
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.ExactOriginalFunctionInputsAssertionsAndCompositionsPassCorrectMocks(id: \"ORIG-CB12\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.EachOriginalAssertionRejectsIndependentWrongFact(id: \"ORIG-CB12\")",
+          "outcome": "Passed"
+        }
+      ],
+      "nativeResult": {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions(id: \"ORIG-CB12\")",
+        "outcome": "Passed"
+      },
+      "normalFixtureParity": "observed",
+      "hvAcceptance": "pending"
+    },
+    {
+      "id": "ORIG-CB13",
+      "function": "test_same_short_name_does_not_prove_type_resolution",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_callback_source_facts.py",
+      "publishedTestSha256": "f834dbcd5aa546cc1a18b081367bd6cff8035d4ae86a4cf476395dfdca28a65a",
+      "sourceStartLine": 40,
+      "sourceBodyLf": " def test_same_short_name_does_not_prove_type_resolution(self):\n  method=self.method();method['arguments'][0]=dict(text='Listener',status='unknown');item=registration_candidates(method,self.types())[0]\n  self.assertIsNone(item['type_id']);self.assertEqual(item['confidence'],'name-heuristic-unresolved-type')",
+      "originalAssertions": 2,
+      "existingFixtureSteps": [
+        "FACT-CB13"
+      ],
+      "mockCorrectAndControlResults": [
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.EachOriginalAssertionRejectsIndependentWrongFact(id: \"ORIG-CB13\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.ExactOriginalFunctionInputsAssertionsAndCompositionsPassCorrectMocks(id: \"ORIG-CB13\")",
+          "outcome": "Passed"
+        }
+      ],
+      "nativeResult": {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions(id: \"ORIG-CB13\")",
+        "outcome": "Passed"
+      },
+      "normalFixtureParity": "observed",
+      "hvAcceptance": "pending"
+    },
+    {
+      "id": "ORIG-FN01",
+      "function": "test_explicit_service_annotation_retained_without_automatic_group_policy",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_functional_source_facts.py",
+      "publishedTestSha256": "b2d9eadf05f480bdd0a3dceef1b5ebab62095379cdb33d9593073782025c90f2",
+      "sourceStartLine": 6,
+      "sourceBodyLf": " def test_explicit_service_annotation_retained_without_automatic_group_policy(self):\n  row=taxonomy(self.doc())['functional_evidence'][0];self.assertEqual(row['service_string_literal'],'clipboard');self.assertTrue(row['annotation_namespace_proven']);self.assertFalse(row['functional_group_membership_proven'])",
+      "originalAssertions": 3,
+      "existingFixtureSteps": [
+        "FACT-FN01"
+      ],
+      "mockCorrectAndControlResults": [
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.EachOriginalAssertionRejectsIndependentWrongFact(id: \"ORIG-FN01\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.ExactOriginalFunctionInputsAssertionsAndCompositionsPassCorrectMocks(id: \"ORIG-FN01\")",
+          "outcome": "Passed"
+        }
+      ],
+      "nativeResult": {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions(id: \"ORIG-FN01\")",
+        "outcome": "Passed"
+      },
+      "normalFixtureParity": "observed",
+      "hvAcceptance": "pending"
+    },
+    {
+      "id": "ORIG-FN02",
+      "function": "test_custom_annotation_name_not_borrowed_as_android_annotation",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_functional_source_facts.py",
+      "publishedTestSha256": "b2d9eadf05f480bdd0a3dceef1b5ebab62095379cdb33d9593073782025c90f2",
+      "sourceStartLine": 8,
+      "sourceBodyLf": " def test_custom_annotation_name_not_borrowed_as_android_annotation(self):\n  self.assertFalse(taxonomy(self.doc('custom.SystemService'))['functional_evidence'][0]['annotation_namespace_proven'])",
+      "originalAssertions": 1,
+      "existingFixtureSteps": [
+        "FACT-FN02"
+      ],
+      "mockCorrectAndControlResults": [
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.ExactOriginalFunctionInputsAssertionsAndCompositionsPassCorrectMocks(id: \"ORIG-FN02\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.EachOriginalAssertionRejectsIndependentWrongFact(id: \"ORIG-FN02\")",
+          "outcome": "Passed"
+        }
+      ],
+      "nativeResult": {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions(id: \"ORIG-FN02\")",
+        "outcome": "Passed"
+      },
+      "normalFixtureParity": "observed",
+      "hvAcceptance": "pending"
+    },
+    {
+      "id": "ORIG-FN03",
+      "function": "test_short_annotation_requires_import",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_functional_source_facts.py",
+      "publishedTestSha256": "b2d9eadf05f480bdd0a3dceef1b5ebab62095379cdb33d9593073782025c90f2",
+      "sourceStartLine": 10,
+      "sourceBodyLf": " def test_short_annotation_requires_import(self):\n  doc=self.doc('SystemService','Context.CLIPBOARD_SERVICE');self.assertFalse(taxonomy(doc)['functional_evidence'][0]['annotation_namespace_proven']);doc['extensions']['imports']=['android.annotation.SystemService'];self.assertTrue(taxonomy(doc)['functional_evidence'][0]['annotation_namespace_proven'])",
+      "originalAssertions": 2,
+      "existingFixtureSteps": [
+        "FACT-FN03",
+        "FACT-FN04"
+      ],
+      "mockCorrectAndControlResults": [
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.ExactOriginalFunctionInputsAssertionsAndCompositionsPassCorrectMocks(id: \"ORIG-FN03\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.EachOriginalAssertionRejectsIndependentWrongFact(id: \"ORIG-FN03\")",
+          "outcome": "Passed"
+        }
+      ],
+      "nativeResult": {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions(id: \"ORIG-FN03\")",
+        "outcome": "Passed"
+      },
+      "normalFixtureParity": "observed",
+      "hvAcceptance": "pending"
+    },
+    {
+      "id": "ORIG-FN04",
+      "function": "test_symbol_kept_separate_from_string_literal",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_functional_source_facts.py",
+      "publishedTestSha256": "b2d9eadf05f480bdd0a3dceef1b5ebab62095379cdb33d9593073782025c90f2",
+      "sourceStartLine": 12,
+      "sourceBodyLf": " def test_symbol_kept_separate_from_string_literal(self):\n  row=taxonomy(self.doc(arguments='value=Context.CLIPBOARD_SERVICE'))['functional_evidence'][0];self.assertIsNone(row['service_string_literal']);self.assertEqual(row['service_symbol_expression'],'Context.CLIPBOARD_SERVICE')",
+      "originalAssertions": 2,
+      "existingFixtureSteps": [
+        "FACT-FN05"
+      ],
+      "mockCorrectAndControlResults": [
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.ExactOriginalFunctionInputsAssertionsAndCompositionsPassCorrectMocks(id: \"ORIG-FN04\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.EachOriginalAssertionRejectsIndependentWrongFact(id: \"ORIG-FN04\")",
+          "outcome": "Passed"
+        }
+      ],
+      "nativeResult": {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions(id: \"ORIG-FN04\")",
+        "outcome": "Passed"
+      },
+      "normalFixtureParity": "observed",
+      "hvAcceptance": "pending"
+    },
+    {
+      "id": "ORIG-FN05",
+      "function": "test_package_namespace_does_not_become_functional_group",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_functional_source_facts.py",
+      "publishedTestSha256": "b2d9eadf05f480bdd0a3dceef1b5ebab62095379cdb33d9593073782025c90f2",
+      "sourceStartLine": 14,
+      "sourceBodyLf": " def test_package_namespace_does_not_become_functional_group(self):\n  doc=self.doc();doc['extensions']['annotations']=[];result=taxonomy(doc);self.assertEqual(result['classification'],'unclassified-searchable');self.assertEqual(result['imported_group_memberships'],[]);self.assertFalse(result['namespace_search_evidence']['functional_group_inferred'])",
+      "originalAssertions": 3,
+      "existingFixtureSteps": [
+        "FACT-FN06"
+      ],
+      "mockCorrectAndControlResults": [
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.EachOriginalAssertionRejectsIndependentWrongFact(id: \"ORIG-FN05\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.ExactOriginalFunctionInputsAssertionsAndCompositionsPassCorrectMocks(id: \"ORIG-FN05\")",
+          "outcome": "Passed"
+        }
+      ],
+      "nativeResult": {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions(id: \"ORIG-FN05\")",
+        "outcome": "Passed"
+      },
+      "normalFixtureParity": "observed",
+      "hvAcceptance": "pending"
+    },
+    {
+      "id": "ORIG-FN06",
+      "function": "test_expression_not_evaluated",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_functional_source_facts.py",
+      "publishedTestSha256": "b2d9eadf05f480bdd0a3dceef1b5ebab62095379cdb33d9593073782025c90f2",
+      "sourceStartLine": 16,
+      "sourceBodyLf": " def test_expression_not_evaluated(self):\n  row=taxonomy(self.doc(arguments='selectService()'))['functional_evidence'][0];self.assertIsNone(row['service_string_literal']);self.assertIsNone(row['service_symbol_expression'])",
+      "originalAssertions": 2,
+      "existingFixtureSteps": [
+        "FACT-FN07"
+      ],
+      "mockCorrectAndControlResults": [
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.ExactOriginalFunctionInputsAssertionsAndCompositionsPassCorrectMocks(id: \"ORIG-FN06\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests.EachOriginalAssertionRejectsIndependentWrongFact(id: \"ORIG-FN06\")",
+          "outcome": "Passed"
+        }
+      ],
+      "nativeResult": {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalRealTests.ExistingNativeProducerUsesExactOriginalFunctionInputsAndAssertions(id: \"ORIG-FN06\")",
+        "outcome": "Passed"
+      },
+      "normalFixtureParity": "observed",
+      "hvAcceptance": "pending"
+    }
+  ],
+  "mock": {
+    "sha256": "502d19c3e49f43a13d6549186c07cba60fe3598635d4ed09a226b8dc0e35fef0",
+    "passed": 38,
+    "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261028T0603553197765-a78a7c400cd140b48153b0741bace0b7/tests.trx",
+    "nonpass": 0
+  },
+  "native": {
+    "sha256": "c3019057e96811792099329bfddc9700cece388600adaea6fee05a5c4771c51e",
+    "passed": 19,
+    "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261028T0612183005176-28b5a9c8c7e24c3192f544f227540b93/tests.trx",
+    "nonpass": 0
+  },
+  "sourcePins": [
+    {
+      "path": "remediation/catalog/tooling/callback_source_facts.py",
+      "sha256": "1ed4e0dfca74b9e501527f059034c51a74e966d12bb7ca67fb85169030f082df",
+      "bytes": 5063
+    },
+    {
+      "path": "remediation/catalog/tooling/functional_source_facts.py",
+      "sha256": "38ee75b78d6b8f56ddf047841e41a5498d84be04d617773f218dc0957d3e5520",
+      "bytes": 1831
+    },
+    {
+      "path": "publication/android-mcp-git/tools/source_facts/callback_source_facts.py",
+      "sha256": "1ed4e0dfca74b9e501527f059034c51a74e966d12bb7ca67fb85169030f082df",
+      "bytes": 5063
+    },
+    {
+      "path": "publication/android-mcp-git/tools/source_facts/functional_source_facts.py",
+      "sha256": "38ee75b78d6b8f56ddf047841e41a5498d84be04d617773f218dc0957d3e5520",
+      "bytes": 1831
+    },
+    {
+      "path": "publication/android-mcp-git/tools/source_facts/test_callback_source_facts.py",
+      "sha256": "f834dbcd5aa546cc1a18b081367bd6cff8035d4ae86a4cf476395dfdca28a65a",
+      "bytes": 4135
+    },
+    {
+      "path": "publication/android-mcp-git/tools/source_facts/test_functional_source_facts.py",
+      "sha256": "b2d9eadf05f480bdd0a3dceef1b5ebab62095379cdb33d9593073782025c90f2",
+      "bytes": 2124
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Sources/SourceFactProducer.cs",
+      "sha256": "d450a5f54169393b1b4639a8efbd1caabc6e82edee860aab9eafce0631ba7ac9",
+      "bytes": 16254
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Sources/SourceFactContracts.cs",
+      "sha256": "f39c7a043feb636ef34c7e4e146576ff9fb321bc7265feb970777848522cb97a",
+      "bytes": 825
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Sources/SourcesRuntimeFactory.cs",
+      "sha256": "cad5570c2b3251d54449138075ed2ff0f0370a848431ad092573432dcc8d9239",
+      "bytes": 5725
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/SourceFactContractCases.cs",
+      "sha256": "ee4dea2cf5b5a0289d7c4ff1b742bdc7ab99b24d4c3c83073654609cfbe565d6",
+      "bytes": 27651
+    }
+  ],
+  "producer": "Existing shared SourceFactProducer through ICallbackSourceFacts/IFunctionalTaxonomySourceFacts",
+  "producerChanged": false,
+  "newParserOrDto": false,
+  "limitations": [
+    "Catalog aggregate envelope/immutable occurrence attachment is separate and pending",
+    "No corpus discovery/runtime callback materialization/group-policy/authority proof",
+    "No HV launched per parent gate; no requirement or TODO accepted-complete state"
+  ],
+  "accuracy": 99,
+  "completeness": 99,
+  "ratingScope": "Only the19 listed original function inputs/assertions/compositions and31 discriminating controls"
+}

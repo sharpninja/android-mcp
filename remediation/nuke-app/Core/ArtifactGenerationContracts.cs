@@ -1,9 +1,10 @@
 namespace AndroidMcp.BuildTool.Core;
 
-// Proposed Core ownership. No transaction implementation exists in this increment.
+// Shared immutable-generation contracts. Domains provide projection and optional observation checks.
 public sealed record ArtifactSourceSpec(string RelativePath,string MediaType,StoredArtifact? ExpectedIdentity=null);
 public sealed record ArtifactGenerationPreparation(IReadOnlyList<string> OutputPaths,
-    Func<CancellationToken,Task<IReadOnlyList<Artifact>>> MaterializeAsync);
+    Func<CancellationToken,Task<IReadOnlyList<Artifact>>> MaterializeAsync,
+    Func<CancellationToken,Task>? VerifyBeforeCommitAsync=null);
 public sealed record ArtifactGenerationRecipe(IReadOnlyList<ArtifactSourceSpec> Sources,
     Func<IReadOnlyList<Artifact>,ArtifactGenerationPreparation> Prepare);
 public sealed record ArtifactGenerationResult(string GenerationId,IReadOnlyList<StoredArtifact> Inputs,

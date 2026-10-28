@@ -6,10 +6,17 @@ using AndroidMcp.BuildTool.Modules.Sources.Acquisition;
 namespace AndroidMcp.BuildTool.Publication;
 
 /// <summary>Pure recipe validation and operation references. Never acquisition or extraction.</summary>
-public sealed class RehydrationPlanner(ICanonicalJson canonical):IRehydrationPlanner
+public sealed class RehydrationPlanner(ICanonicalJson canonical):IRehydrationSeedPlanner
 {
-    public RehydrationPlanResult Plan(RehydrationPlanRequest request)
+    public RehydrationPlanResult Plan(RehydrationPlanRequest request) => PlanCore(request,out _);
+    public RehydrationSeedPlanResult PlanSeed(RehydrationPlanRequest request)
     {
+        var baseline=PlanCore(request,out var seedProjection);
+        return new(baseline,seedProjection);
+    }
+    private RehydrationPlanResult PlanCore(RehydrationPlanRequest request,out RehydrationSeedProjection? seedProjection)
+    {
+        seedProjection=null;
         try
         {
             if(!Enum.IsDefined(request.Profile))Fail("INVALID_PROFILE","");
@@ -42,6 +49,7 @@ public sealed class RehydrationPlanner(ICanonicalJson canonical):IRehydrationPla
             if(pin.GetProperty("source_rows").GetInt32()!=rows.Length || pin.GetProperty("producer_files").GetInt32()!=producerFiles.Length)
                 Fail("LOCK_COUNT_MISMATCH","");
             var unique=new Dictionary<string,SourceProjectionState>(StringComparer.Ordinal);
+            var seedSources=new Dictionary<int,RehydrationSeedSource>();
             var caches=new Dictionary<string,CacheProjectionState>(StringComparer.Ordinal);
             var projectedRows=new List<RehydrationSourceRow>();
             var snapshots=new List<SnapshotRequirement>();
@@ -127,6 +135,11 @@ public sealed class RehydrationPlanner(ICanonicalJson canonical):IRehydrationPla
                 }
                 else{state=new(unique.Count,sourcePin);unique.Add(local,state);}
                 state.Rows.Add(rowIndex);if(snapshot is not null)state.Snapshots.Add(snapshot);
+                // Capture the exact last logical row before ordinary first-pin projection.
+                // Seed consumes typed values; OriginalRow is audit evidence only.
+                var candidates=new List<RehydrationSeedCandidate>{new(0,RehydrationSeedCandidateKind.LocalPath,local)};
+                if(snapshot?.BundlePath is {} seedBundle)candidates.Add(new(1,RehydrationSeedCandidateKind.RequiredLocalSnapshot,seedBundle));
+                seedSources[state.Index]=new(state.Index,rowIndex,sourcePin,snapshot,Array.AsReadOnly(candidates.ToArray()));
                 var context=new RehydrationRowContext(OptionalText(row,"repository"),OptionalText(row,"revision"),OptionalText(row,"source_surface"),OptionalText(row,"scope"),OptionalText(row,"license"),Preserve(row,"source_release_context"),
                     Array.AsReadOnly(Elements(row,"selection_origins")),Array.AsReadOnly(Strings(row,"selection_reasons")));
                 projectedRows.Add(new(rowIndex,logical,OptionalText(row,"kind"),state.Index,cacheState?.Index,context,row.Clone()));
@@ -153,8 +166,10 @@ public sealed class RehydrationPlanner(ICanonicalJson canonical):IRehydrationPla
             var caveats=new List<string>{"Selected corpus only; expected counts are not observed validation.","Owner-supplied mutable snapshots and historical byte identity remain explicit limitations.","Legacy environment and producer pins are evidence; they do not authorize legacy execution.","Operation references are plans, not a claim that root execution adapters are ready."};
             if(archives.Count>0)caveats.Add("Archive bytes are not verified by planning.");
             if(archives.Any(a=>a.ArchiveSha256 is null))caveats.Add("Container SHA256 is unavailable for some members; member identity remains pinned.");
-            return new(new(release!,digest,rows.Length,unique.Count,known,unknown,snapshots,flow,
+            var baseline=new RehydrationPlanResult(new(release!,digest,rows.Length,unique.Count,known,unknown,snapshots,flow,
                 new("rehydration-plan.json",manifest,"application/json"),false,false,false,caveats,archives,projection),[]);
+            seedProjection=new(release!,digest,Array.AsReadOnly(seedSources.OrderBy(s=>s.Key).Select(s=>s.Value).ToArray()));
+            return baseline;
         }
         catch(PlanningFailure e){return new(null,[new(e.Code,e.Path)]);}
         catch(OverflowException){return new(null,[new("INVALID_LENGTH","")]);}

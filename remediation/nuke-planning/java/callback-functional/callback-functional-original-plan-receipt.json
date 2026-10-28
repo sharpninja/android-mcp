@@ -1,0 +1,281 @@
+{
+  "timestamp": "2026-10-28T05:58:41",
+  "state": "outside-app-contract-and-mocks-uncompiled",
+  "requirements": [
+    "FR-BUILD-004",
+    "TR-BUILD-TOOL-004",
+    "TEST-BUILD-004"
+  ],
+  "parentSession": "Codex-20261028T005928Z-plugin-session",
+  "parentRequest": "req-20261028T011209Z-turn-1f08",
+  "existingImplementation": "One SourceFactProducer implements all5 callback/functional methods through existing interfaces",
+  "productionChanged": false,
+  "newProductionPlanned": false,
+  "originalFunctions": 19,
+  "callbackFunctions": 13,
+  "functionalFunctions": 6,
+  "mockTests": 38,
+  "independentNegativeControls": 31,
+  "mapping": [
+    {
+      "id": "ORIG-CB01",
+      "function": "test_missing_sdk_parameter_name_is_preserved_without_crash",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_callback_source_facts.py",
+      "existingFixtureSteps": [
+        "FACT-CB11"
+      ],
+      "negativeControls": 1
+    },
+    {
+      "id": "ORIG-CB02",
+      "function": "test_name_never_proves_callback_lifecycle",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_callback_source_facts.py",
+      "existingFixtureSteps": [
+        "FACT-CB01"
+      ],
+      "negativeControls": 2
+    },
+    {
+      "id": "ORIG-CB03",
+      "function": "test_parameter_position_and_permission_are_retained",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_callback_source_facts.py",
+      "existingFixtureSteps": [
+        "FACT-CB06"
+      ],
+      "negativeControls": 3
+    },
+    {
+      "id": "ORIG-CB04",
+      "function": "test_binder_endpoint_candidate_does_not_require_callback_name",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_callback_source_facts.py",
+      "existingFixtureSteps": [
+        "FACT-CB17"
+      ],
+      "negativeControls": 1
+    },
+    {
+      "id": "ORIG-CB05",
+      "function": "test_callback_executor_annotation_alone_is_not_callback_parameter",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_callback_source_facts.py",
+      "existingFixtureSteps": [
+        "FACT-CB12"
+      ],
+      "negativeControls": 1
+    },
+    {
+      "id": "ORIG-CB06",
+      "function": "test_overloads_and_parameter_positions_have_different_ids",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_callback_source_facts.py",
+      "existingFixtureSteps": [
+        "FACT-CB06",
+        "FACT-CB14"
+      ],
+      "negativeControls": 1
+    },
+    {
+      "id": "ORIG-CB07",
+      "function": "test_unregistration_pair_remains_candidate",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_callback_source_facts.py",
+      "existingFixtureSteps": [
+        "FACT-CB06",
+        "FACT-CB20",
+        "FACT-CB18"
+      ],
+      "negativeControls": 2
+    },
+    {
+      "id": "ORIG-CB08",
+      "function": "test_inherited_oneway_controls_endpoint_reply_mode",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_callback_source_facts.py",
+      "existingFixtureSteps": [
+        "FACT-CB07"
+      ],
+      "negativeControls": 1
+    },
+    {
+      "id": "ORIG-CB09",
+      "function": "test_missing_inherited_aidl_flag_does_not_prove_synchronous",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_callback_source_facts.py",
+      "existingFixtureSteps": [
+        "FACT-CB08"
+      ],
+      "negativeControls": 1
+    },
+    {
+      "id": "ORIG-CB10",
+      "function": "test_explicit_false_both_aidl_flags_prove_reply_mode",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_callback_source_facts.py",
+      "existingFixtureSteps": [
+        "FACT-CB09"
+      ],
+      "negativeControls": 1
+    },
+    {
+      "id": "ORIG-CB11",
+      "function": "test_hidl_method_flag_has_no_interface_oneway_inheritance",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_callback_source_facts.py",
+      "existingFixtureSteps": [
+        "FACT-CB10"
+      ],
+      "negativeControls": 1
+    },
+    {
+      "id": "ORIG-CB12",
+      "function": "test_missing_oneway_not_invented_synchronous",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_callback_source_facts.py",
+      "existingFixtureSteps": [
+        "FACT-CB05"
+      ],
+      "negativeControls": 1
+    },
+    {
+      "id": "ORIG-CB13",
+      "function": "test_same_short_name_does_not_prove_type_resolution",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_callback_source_facts.py",
+      "existingFixtureSteps": [
+        "FACT-CB13"
+      ],
+      "negativeControls": 2
+    },
+    {
+      "id": "ORIG-FN01",
+      "function": "test_explicit_service_annotation_retained_without_automatic_group_policy",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_functional_source_facts.py",
+      "existingFixtureSteps": [
+        "FACT-FN01"
+      ],
+      "negativeControls": 3
+    },
+    {
+      "id": "ORIG-FN02",
+      "function": "test_custom_annotation_name_not_borrowed_as_android_annotation",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_functional_source_facts.py",
+      "existingFixtureSteps": [
+        "FACT-FN02"
+      ],
+      "negativeControls": 1
+    },
+    {
+      "id": "ORIG-FN03",
+      "function": "test_short_annotation_requires_import",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_functional_source_facts.py",
+      "existingFixtureSteps": [
+        "FACT-FN03",
+        "FACT-FN04"
+      ],
+      "negativeControls": 2
+    },
+    {
+      "id": "ORIG-FN04",
+      "function": "test_symbol_kept_separate_from_string_literal",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_functional_source_facts.py",
+      "existingFixtureSteps": [
+        "FACT-FN05"
+      ],
+      "negativeControls": 2
+    },
+    {
+      "id": "ORIG-FN05",
+      "function": "test_package_namespace_does_not_become_functional_group",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_functional_source_facts.py",
+      "existingFixtureSteps": [
+        "FACT-FN06"
+      ],
+      "negativeControls": 3
+    },
+    {
+      "id": "ORIG-FN06",
+      "function": "test_expression_not_evaluated",
+      "publishedTest": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_functional_source_facts.py",
+      "existingFixtureSteps": [
+        "FACT-FN07"
+      ],
+      "negativeControls": 2
+    }
+  ],
+  "sourcePins": [
+    {
+      "path": "remediation/catalog/tooling/callback_source_facts.py",
+      "sha256": "1ed4e0dfca74b9e501527f059034c51a74e966d12bb7ca67fb85169030f082df",
+      "bytes": 5063
+    },
+    {
+      "path": "remediation/catalog/tooling/functional_source_facts.py",
+      "sha256": "38ee75b78d6b8f56ddf047841e41a5498d84be04d617773f218dc0957d3e5520",
+      "bytes": 1831
+    },
+    {
+      "path": "publication/android-mcp-git/tools/source_facts/callback_source_facts.py",
+      "sha256": "1ed4e0dfca74b9e501527f059034c51a74e966d12bb7ca67fb85169030f082df",
+      "bytes": 5063
+    },
+    {
+      "path": "publication/android-mcp-git/tools/source_facts/functional_source_facts.py",
+      "sha256": "38ee75b78d6b8f56ddf047841e41a5498d84be04d617773f218dc0957d3e5520",
+      "bytes": 1831
+    },
+    {
+      "path": "publication/android-mcp-git/tools/source_facts/test_callback_source_facts.py",
+      "sha256": "f834dbcd5aa546cc1a18b081367bd6cff8035d4ae86a4cf476395dfdca28a65a",
+      "bytes": 4135
+    },
+    {
+      "path": "publication/android-mcp-git/tools/source_facts/test_functional_source_facts.py",
+      "sha256": "b2d9eadf05f480bdd0a3dceef1b5ebab62095379cdb33d9593073782025c90f2",
+      "bytes": 2124
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Sources/SourceFactProducer.cs",
+      "sha256": "d450a5f54169393b1b4639a8efbd1caabc6e82edee860aab9eafce0631ba7ac9",
+      "bytes": 16254
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Sources/SourceFactContracts.cs",
+      "sha256": "f39c7a043feb636ef34c7e4e146576ff9fb321bc7265feb970777848522cb97a",
+      "bytes": 825
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Sources/SourcesRuntimeFactory.cs",
+      "sha256": "cad5570c2b3251d54449138075ed2ff0f0370a848431ad092573432dcc8d9239",
+      "bytes": 5725
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/SourceFactContractCases.cs",
+      "sha256": "ee4dea2cf5b5a0289d7c4ff1b742bdc7ab99b24d4c3c83073654609cfbe565d6",
+      "bytes": 27651
+    }
+  ],
+  "stagedFiles": [
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/callback-functional/CallbackFunctionalOriginalCases.cs",
+      "sha256": "98958de8562c2db836bc76b6c86444aa8030a3568a637192d02d715561e6a7fc",
+      "bytes": 11258
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/callback-functional/CallbackFunctionalOriginalMockTests.cs",
+      "sha256": "8335418307dfb71637e17f80c3959e6b553236ef43c9cf1c402ee849f187255d",
+      "bytes": 5422
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/callback-functional/CALLBACK-FUNCTIONAL-PARITY-PLAN.md",
+      "sha256": "64a023fd58b634e00e3d2e12dd7ca6c02a805100d3b775ac8e44e26a36ff929e",
+      "bytes": 5916
+    }
+  ],
+  "existingNativeEvidence": {
+    "sha256": "1710c9c9002a753ab1263f0dc844ed66ee9f05b532c9c22143b1c4a9a259bba6",
+    "sourceFactRealTestsPassed": 36,
+    "nonpass": 0,
+    "scope": "33fulloutputs plus3proofrejections, independent of new19 exact-function compositions",
+    "trx": "artifacts/tests/20261027T2223135515272-a43f277846054c2d8d987d8b21fc057d/tests.trx"
+  },
+  "pending": [
+    "Root fresh copy grant for2new test-only files",
+    "Mock38 gate before existing producer native19 binding",
+    "Catalog aggregate envelope/occurrence attachment through same concern interfaces remains separate",
+    "No full-corpus/runtime/authority/functional-policy or HV acceptance claim"
+  ],
+  "accuracy": 99,
+  "completeness": 95,
+  "ratingScope": "Existing implementation inspection and staged exact-original mapping only"
+}

@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using System.Text.Json.Nodes;
 using AndroidMcp.BuildTool.Core;
 using AndroidMcp.BuildTool.Sources.Java;
@@ -8,10 +9,12 @@ namespace AndroidMcp.BuildTool.Sources;
 public sealed class SourcesRuntimeFactory : ISourcesRuntimeFactory
 {
     private readonly IJavaSourceRuntimeLoader? javaLoader;
-    private readonly IReadOnlyList<ISourceExtractor> managedProviders;
+    private sealed record ProviderRegistration(ISourceExtractor Provider, bool CacheProducer);
+    private readonly IReadOnlyList<ProviderRegistration> managedProviders;
     private readonly SourcesRuntimeConcerns concerns;
 
-    public SourcesRuntimeFactory(IJavaSourceRuntimeLoader? javaLoader = null, IPermissionReferenceSourceFacts? permissionReference = null)
+    public SourcesRuntimeFactory(IJavaSourceRuntimeLoader? javaLoader = null, IPermissionReferenceSourceFacts? permissionReference = null,
+        ISdkAnnotationArchiveSourceFacts? annotationArchive = null)
     {
         this.javaLoader = javaLoader;
         var canonical = new CanonicalJson();
@@ -25,11 +28,12 @@ public sealed class SourcesRuntimeFactory : ISourcesRuntimeFactory
             new PublishedInterfaceHashSourceFacts(), html);
         // These are actual providers. Alias/profile decisions exist once in the
         // dispatcher. Pure concern services above do not become declarations.
-        managedProviders = Array.AsReadOnly<ISourceExtractor>(
+        managedProviders = Array.AsReadOnly<ProviderRegistration>(
         [
-            new AidlSourceExtractor(Hash), new SignatureSourceExtractor(Hash),
-            new ManifestSourceExtractor(), new HidlSourceExtractor(), new SdkApiIndexExtractor(),
-            new PermissionReferenceAdapter(permission)
+            new(new AidlSourceExtractor(Hash), false), new(new SignatureSourceExtractor(Hash), false),
+            new(new ManifestSourceExtractor(), false), new(new HidlSourceExtractor(), false), new(new SdkApiIndexExtractor(), true),
+            new(new PermissionReferenceAdapter(permission), false),
+            new(new AnnotationArchiveAdapter(annotationArchive ?? new SdkAnnotationArchiveSourceFacts(typeFacts, new SourceXmlFormatter())), false)
         ]);
     }
 
@@ -46,10 +50,11 @@ public sealed class SourcesRuntimeFactory : ISourcesRuntimeFactory
             {
                 resource = javaLoader!.Open(java) ?? throw new InvalidOperationException("Java admission loader returned no owned runtime");
                 if (resource.Extractor.Kind != "java-source") throw new ArgumentException("Admitted Java provider kind must be java-source", nameof(java));
-                providers.Add(resource.Extractor);
+                providers.Add(new(resource.Extractor, true));
             }
-            var dispatcher = new SourcesExtractionDispatcher(providers, profile);
-            return new Runtime(dispatcher, concerns, resource);
+            var dispatcher = new SourcesExtractionDispatcher(providers.Select(registration => registration.Provider), profile);
+            var cacheKinds = providers.Where(registration => registration.CacheProducer).Select(registration => registration.Provider.Kind).ToFrozenSet(StringComparer.Ordinal);
+            return new Runtime(dispatcher, concerns, resource, cacheKinds);
         }
         catch
         {
@@ -66,11 +71,24 @@ public sealed class SourcesRuntimeFactory : ISourcesRuntimeFactory
         public ExtractionResult Extract(SourceDocument source) => new([], [], StructuralParseStatus.Clean,
             new JsonObject { ["permission_reference"] = permission.Parse(source.Bytes).DeepClone() });
     }
-    private sealed class Runtime(ISourcesExtractionDispatcher dispatcher, SourcesRuntimeConcerns concerns, IJavaSourceRuntime? java) : ISourcesRuntime
+    private sealed class AnnotationArchiveAdapter(ISdkAnnotationArchiveSourceFacts archive) : IBinarySourceExtractor
+    {
+        public string Kind => "sdk-annotations";
+        public ExtractionResult Extract(SourceDocument source)
+        {
+            var report = archive.Parse(source.Bytes);
+            var status = report["status"]?.GetValue<string>() switch
+            { "parsed" => StructuralParseStatus.Clean, "partial" => StructuralParseStatus.Partial, _ => throw new FormatException("Unrecognized SDK annotation archive status") };
+            var issues = report["issues"]!.AsArray().Select(issue => new SourceIssue(issue!["code"]!.GetValue<string>(), issue["reason"]!.GetValue<string>(), null, null)).ToArray();
+            return new([], issues, status, new JsonObject { ["annotation_archive"] = report.DeepClone() });
+        }
+    }
+    private sealed class Runtime(ISourcesExtractionDispatcher dispatcher, SourcesRuntimeConcerns concerns, IJavaSourceRuntime? java, FrozenSet<string> cacheKinds) : ISourcesCacheRuntime
     {
         private int disposed;
         public ISourcesExtractionDispatcher Dispatcher { get { Check(); return dispatcher; } }
         public SourcesRuntimeConcerns Concerns { get { Check(); return concerns; } }
+        public IReadOnlySet<string> CacheProducerKinds { get { Check(); return cacheKinds; } }
         private void Check()
         {
             if (Volatile.Read(ref disposed) != 0) throw new ObjectDisposedException(nameof(Runtime));

@@ -26,6 +26,14 @@ public sealed partial class Build : NukeBuild
     public string? RecipeLock { get; set; }
     [Parameter("Explicit immutable source bundle directory")]
     public string? BundleRoot { get; set; }
+    [Parameter("Retained immutable acquisition generation root for read-only inventory")]
+    public string? AcquisitionRoot { get; set; }
+    [Parameter("Acquisition-root-relative sealed source batch manifest path")]
+    public string? AcquisitionManifest { get; set; }
+    [Parameter("Explicit trusted SHA256 of the acquisition manifest")]
+    public string? AcquisitionManifestSha256 { get; set; }
+    [Parameter("Explicit trusted acquisition manifest byte length")]
+    public long? AcquisitionManifestLength { get; set; }
     [Parameter("Optional expected recipe release")]
     public string? Release { get; set; }
     [Parameter("Optional selected physical source limit; logical rows remain retained")]
@@ -107,6 +115,9 @@ public sealed partial class Build : NukeBuild
         void Add(string key,string? value) { if(value is not null) parameters.Add(key,value); }
         Add("source-manifest",SourceManifest); Add("project-root",ProjectRoot);
         Add("recipe-lock",RecipeLock);Add("bundle-root",BundleRoot);Add("release",Release);
+        Add("acquisition-root",AcquisitionRoot);Add("acquisition-manifest",AcquisitionManifest);
+        Add("acquisition-manifest-sha256",AcquisitionManifestSha256);
+        Add("acquisition-manifest-length",AcquisitionManifestLength?.ToString(System.Globalization.CultureInfo.InvariantCulture));
         Add("limit",Limit?.ToString(System.Globalization.CultureInfo.InvariantCulture));
         Add("acquisition-profile",AcquisitionProfile?.ToString());Add("cache-policy",CachePolicy?.ToString());
         Add("output-root",OutputRoot); Add("snapshot",Snapshot);
@@ -138,6 +149,7 @@ public sealed partial class Build : NukeBuild
             case OperationExecutor.Architecture: GenerateArchitecture().GetAwaiter().GetResult();break;
             case OperationExecutor.CatalogBuild: BuildCatalog().GetAwaiter().GetResult();break;
             case OperationExecutor.BrowserQa: RunBrowserQa().GetAwaiter().GetResult();break;
+            case OperationExecutor.SourcesInventory: InventorySources().GetAwaiter().GetResult();break;
             default: throw new InvalidOperationException($"{category}/{Operation} has a valid plan but its execution adapter is not yet ported. No action executed.");
         }
     }

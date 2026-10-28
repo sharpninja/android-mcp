@@ -1,3 +1,4 @@
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace AndroidMcp.BuildTool.Sources;
@@ -5,6 +6,8 @@ namespace AndroidMcp.BuildTool.Sources;
 // Literal source-format compatibility primitives shared by build, APEX and hash facts.
 internal static class SourceText
 {
+    private static readonly UTF8Encoding Utf8 = new(false, true);
+    internal static string DecodeUtf8(ReadOnlySpan<byte> bytes) => Utf8.GetString(bytes);
     private static readonly Regex BuildTrivia = new("\"(?:\\\\.|[^\"\\\\])*\"|/\\*.*?\\*/|//[^\\n]*", RegexOptions.CultureInvariant | RegexOptions.Singleline);
     internal static string MaskBuildComments(string text) => BuildTrivia.Replace(text, match =>
         match.Value.StartsWith('"') ? match.Value : new string(match.Value.Select(character => character == '\n' ? '\n' : ' ').ToArray()));

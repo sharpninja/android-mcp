@@ -65,6 +65,13 @@ public sealed class ArtifactGenerationRuntime(IArtifactStore source,IArtifactSto
         }
         if(changed.Count>0)throw new ArtifactGenerationException("INPUT_CHANGED","Source changed; outputs remain uncommitted: "+string.Join(", ",changed));
         cancellationToken.ThrowIfCancellationRequested();
+        if(preparation.VerifyBeforeCommitAsync is {} verifyBeforeCommit)
+        {
+            try{await verifyBeforeCommit(cancellationToken);}
+            catch(OperationCanceledException){throw;}
+            catch(Exception error){throw new ArtifactGenerationException("PRECOMMIT_VALIDATION_FAILED","Additional source observations changed; outputs remain uncommitted",error);}
+        }
+        cancellationToken.ThrowIfCancellationRequested();
         var manifest=manifests.Create(generationId,admitted,written);
         if(manifest.RelativePath!=manifests.RelativePath)throw new ArtifactGenerationException("MANIFEST_PATH_MISMATCH","Manifest factory changed its preflighted path");
         StoredArtifact commit;

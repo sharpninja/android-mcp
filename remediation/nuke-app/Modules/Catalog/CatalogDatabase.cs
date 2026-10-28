@@ -25,6 +25,12 @@ public sealed class CatalogDatabase:IDisposable
         // Resolve/read every prerequisite before creating any stage file.
         return CreatePrivateFile(databasePath,Scripts(catalogRoot,profile));
     }
+    public static CatalogDatabase OpenExisting(string databasePath,bool readOnly=true)
+    {
+        // ReadWrite never implies ReadWriteCreate. Admission applies no DDL and
+        // cannot create a missing database or its parent directory.
+        return Open([],Path.GetFullPath(databasePath),readOnly ? SqliteOpenMode.ReadOnly : SqliteOpenMode.ReadWrite);
+    }
     internal static CatalogDatabase CreatePrivateFile(string databasePath,IReadOnlyList<string> scripts)
     {
         var full=Path.GetFullPath(databasePath);var parent=Path.GetDirectoryName(full)!;

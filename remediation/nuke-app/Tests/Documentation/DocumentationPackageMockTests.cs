@@ -25,7 +25,7 @@ public static class DocumentationPackageCases
         using var pins=JsonDocument.Parse(File.ReadAllBytes(Path.Combine(fixture.Workspace,"remediation/nuke-planning/docs/saved-fixture-inventory.json")));
         // The saved diagram bytes remain independent original fixtures. They do not prove native rendering.
         foreach(var pin in pins.RootElement.GetProperty("docsVectorFixtures").EnumerateArray().Where(p=>p.GetProperty("path").GetString()!.StartsWith("remediation/design-c4/docs/diagrams/",StringComparison.Ordinal)))
-        {var path=pin.GetProperty("path").GetString()!;var bytes=File.ReadAllBytes(Path.Combine(fixture.Workspace,path));Assert.Equal(pin.GetProperty("sha256").GetString(),DocumentationFixture.Hash(bytes));result.Add(new(path["remediation/design-c4/".Length..],bytes,"image/svg+xml"));}
+        {var path=pin.GetProperty("path").GetString()!;var bytes=File.ReadAllBytes(Path.Combine(fixture.Workspace,"remediation/nuke-planning/docs/fixtures/architecture-svg-original",Path.GetFileName(path)));Assert.Equal(pin.GetProperty("sha256").GetString(),DocumentationFixture.Hash(bytes));result.Add(new(path["remediation/design-c4/".Length..],bytes,"image/svg+xml"));}
         Assert.Equal(21,result.Count(a=>a.RelativePath.StartsWith("docs/diagrams/",StringComparison.Ordinal)));
         Assert.Equal(221,result.Count(a=>a.RelativePath.StartsWith("docs/",StringComparison.Ordinal)&&a.RelativePath.EndsWith(".svg",StringComparison.Ordinal)));
         result.Add(fixture.Input.BlueprintMarkdown);

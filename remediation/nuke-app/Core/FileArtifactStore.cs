@@ -2,7 +2,7 @@ using Nuke.Common.IO;
 namespace AndroidMcp.BuildTool.Core;
 
 /// <summary>Immutable generation store. Originals and failed partial writes are retained.</summary>
-public sealed class FileArtifactStore : IStreamingArtifactStore
+public sealed class FileArtifactStore : IStreamingArtifactStore, ICreateNewArtifactStore
 {
     private readonly AbsolutePath root;
     private readonly Func<ReadOnlyMemory<byte>, string> sha256;
@@ -15,14 +15,20 @@ public sealed class FileArtifactStore : IStreamingArtifactStore
         this.streamSha256 = streamSha256 ?? ContentHash.Sha256;
     }
 
-    public Task<StoredArtifact> WriteAsync(Artifact artifact, CancellationToken cancellationToken = default)
+    public Task<StoredArtifact> WriteAsync(Artifact artifact, CancellationToken cancellationToken = default) =>
+        WriteBytesAsync(artifact, cancellationToken, false);
+
+    public Task<StoredArtifact> WriteNewAsync(Artifact artifact, CancellationToken cancellationToken = default) =>
+        WriteBytesAsync(artifact, cancellationToken, true);
+
+    private Task<StoredArtifact> WriteBytesAsync(Artifact artifact, CancellationToken cancellationToken, bool requireNew)
     {
         Resolve(artifact.RelativePath);
         cancellationToken.ThrowIfCancellationRequested();
         var bytes = artifact.Bytes.ToArray();
         var digest = sha256(bytes); // Preserve the existing byte-hash constructor seam.
         return WriteCoreAsync(artifact.RelativePath, artifact.MediaType,
-            (output, token) => output.WriteAsync(bytes, token).AsTask(), cancellationToken, digest);
+            (output, token) => output.WriteAsync(bytes, token).AsTask(), cancellationToken, digest, requireNew);
     }
 
     public Task<StoredArtifact> WriteStreamAsync(string relativePath, string mediaType,
@@ -36,13 +42,17 @@ public sealed class FileArtifactStore : IStreamingArtifactStore
         await File.ReadAllBytesAsync(Resolve(relativePath), cancellationToken);
 
     private async Task<StoredArtifact> WriteCoreAsync(string relativePath, string mediaType,
-        Func<Stream, CancellationToken, Task> producer, CancellationToken token, string? byteDigest)
+        Func<Stream, CancellationToken, Task> producer, CancellationToken token, string? byteDigest, bool requireNew = false)
     {
         var path = Resolve(relativePath);
         token.ThrowIfCancellationRequested();
         FileStream destination;
         var compare = File.Exists(path);
-        if (compare) destination = OpenExisting(path);
+        if (compare)
+        {
+            if (requireNew) throw AlreadyExists(relativePath);
+            destination = OpenExisting(path);
+        }
         else
         {
             Directory.CreateDirectory(Path.GetDirectoryName(path)!);
@@ -54,6 +64,7 @@ public sealed class FileArtifactStore : IStreamingArtifactStore
             }
             catch (IOException) when (File.Exists(path))
             {
+                if (requireNew) throw AlreadyExists(relativePath);
                 // A competing creator owns the existing bytes. Opening/verification may
                 // fail while its exclusive write is active; never truncate or replace it.
                 path = Resolve(relativePath);
@@ -85,6 +96,7 @@ public sealed class FileArtifactStore : IStreamingArtifactStore
 
     private static FileStream OpenExisting(string path) => new(path, FileMode.Open, FileAccess.Read,
         FileShare.Read, 81920, FileOptions.Asynchronous | FileOptions.SequentialScan);
+    private static IOException AlreadyExists(string path) => new($"Artifact already exists and was retained: {path}");
     private static IOException Conflict(string path) => new($"Existing artifact differs and was retained: {path}");
     private string Resolve(string relativePath) => ArtifactPaths.Resolve(root, relativePath);
 

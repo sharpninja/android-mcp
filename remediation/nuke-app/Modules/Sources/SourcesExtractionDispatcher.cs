@@ -20,7 +20,6 @@ public sealed class SourcesExtractionDispatcher : ISourcesExtractionDispatcher
     ];
     private static readonly IReadOnlyDictionary<string, IReadOnlyList<Alias>> Profiles = new Dictionary<string, IReadOnlyList<Alias>>(StringComparer.Ordinal)
     { [SourceExtractionProfile.RELEASE011.Id] = LegacyAliases, [SourceExtractionProfile.CurrentCandidate.Id] = LegacyAliases };
-    private static readonly UTF8Encoding Utf8 = new(false, true);
     private readonly IReadOnlyDictionary<string, ISourceExtractor> extractors;
     private readonly IReadOnlyList<Alias> aliases;
     private readonly SourceExtractionProfile profile;
@@ -51,15 +50,19 @@ public sealed class SourcesExtractionDispatcher : ISourcesExtractionDispatcher
             ["repository"] = source.Context.Repository, ["revision"] = source.Context.Revision, ["snapshot_id"] = source.Context.SnapshotId,
             ["platform_version"] = source.Context.PlatformVersion, ["profile_id"] = profile.Id
         };
-        string text;
-        try { text = Utf8.GetString(source.Bytes.Span); }
-        catch (DecoderFallbackException error) { return Unsupported(source, identity, null, "source-encoding-unsupported", error.Message); }
-
         var alias = aliases.FirstOrDefault(x => x.Kind == kind && x.Scope == (kind == "evidence" ? scope : null));
-        if (alias is null && kind is "evidence" or "sdk-history")
-            return Unsupported(source, identity, text, "source-format-unknown", "Source evidence retained without declaration, runtime, version or wire inference");
+        var retainedEvidence = alias is null && kind is "evidence" or "sdk-history";
         var canonicalKind = alias?.Extractor ?? kind;
-        if (canonicalKind is null || !extractors.TryGetValue(canonicalKind, out var extractor))
+        var extractor = !retainedEvidence && canonicalKind is not null && extractors.TryGetValue(canonicalKind, out var selected) ? selected : null;
+        string? text = null;
+        if (extractor is not IBinarySourceExtractor)
+        {
+            try { text = SourceText.DecodeUtf8(source.Bytes.Span); }
+            catch (DecoderFallbackException error) { return Unsupported(source, identity, null, "source-encoding-unsupported", error.Message); }
+        }
+        if (retainedEvidence)
+            return Unsupported(source, identity, text, "source-format-unknown", "Source evidence retained without declaration, runtime, version or wire inference");
+        if (extractor is null)
             return Unsupported(source, identity, text, "source-kind-unsupported", "No registered extractor for the declared source kind and scope");
         ExtractionResult parsed;
         try { parsed = extractor.Extract(source with { Bytes = source.Bytes.ToArray() }); }

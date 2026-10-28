@@ -10,7 +10,7 @@ namespace AndroidMcp.BuildTool.Tests.Sources;
 public sealed record SourceRuntimeRig(ISourcesRuntimeFactory Factory, RecordingSourceJavaLoader Java, RecordingPermissionReference Permission);
 public static class SourcesRuntimeContractCases
 {
-    internal static readonly string[] ManagedKinds = ["aidl", "hidl-source", "manifest", "permission-reference", "sdk-api-index", "signature"];
+    internal static readonly string[] ManagedKinds = ["aidl", "hidl-source", "manifest", "permission-reference", "sdk-annotations", "sdk-api-index", "signature"];
     internal static readonly SourceJavaAdmission Admission = new("fixtures/selected-native-source-lock.json");
     public static IEnumerable<object[]> Cases => new[] { "release-011", "current-candidate" }.SelectMany(profile => new[] { false, true }.Select(java => new object[] { profile, java }));
     public static SourceExtractionProfile Profile(string id) => id == "release-011" ? SourceExtractionProfile.RELEASE011 : SourceExtractionProfile.CurrentCandidate;

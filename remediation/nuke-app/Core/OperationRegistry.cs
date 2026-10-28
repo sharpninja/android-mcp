@@ -1,6 +1,6 @@
 namespace AndroidMcp.BuildTool.Core;
 
-public enum OperationExecutor { Pending, MockTests, Tests, DocumentationAssets, NativeParser, SourcesFetch, PublicationCheck, SourcesPlan, Architecture, CatalogBuild, BrowserQa }
+public enum OperationExecutor { Pending, MockTests, Tests, DocumentationAssets, NativeParser, SourcesFetch, PublicationCheck, SourcesPlan, Architecture, CatalogBuild, BrowserQa, SourcesInventory }
 public sealed record OperationDefinition(OperationKey Key, string Description,
     IReadOnlyList<string> RequiredParameters, IReadOnlyList<string> OptionalParameters,
     IReadOnlyList<PlannedStep> Steps, OperationExecutor Executor=OperationExecutor.Pending);
@@ -20,6 +20,10 @@ public sealed class OperationRegistry
             ["generation","release","limit","acquisition-profile","cache-policy"],OperationExecutor.SourcesFetch,
             new("validate-locked-recipe",[]),new("preflight-selected-sources",["validate-locked-recipe"]),
             new("acquire-selected-sources",["preflight-selected-sources"]),new("seal-acquisition",["acquire-selected-sources"]));
+        Add(Category.Sources,Operation.Inventory,["project-root","source-manifest","recipe-lock","acquisition-root","acquisition-manifest","acquisition-manifest-sha256","acquisition-manifest-length","output-root"],
+            ["release","limit","acquisition-profile"],OperationExecutor.SourcesInventory,
+            new("validate-source-plan",[]),new("admit-acquisition-receipt",["validate-source-plan"]),
+            new("verify-acquisition-readonly",["admit-acquisition-receipt"]),new("seal-source-inventory",["verify-acquisition-readonly"]));
         Add(Category.Sources,Operation.NativeParser,["compiler-identity","output-root"],["project-root","cache-root","receipt-root"],OperationExecutor.NativeParser,
             new("verify-compiler-identity",[]),new("acquire-native-sources",["verify-compiler-identity"]),
             new("build-native-parser",["acquire-native-sources"]),new("verify-native-parser",["build-native-parser"]));

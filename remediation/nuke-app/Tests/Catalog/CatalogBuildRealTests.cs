@@ -12,6 +12,7 @@ using Xunit;
 namespace AndroidMcp.BuildTool.Tests.Catalog;
 
 public sealed record CatalogBuildInvocation(CatalogBuild Service,string InventoryPath,string OutputDirectory,string StageDirectory);
+public sealed record CatalogIntakeFixture(string Root,string InventoryPath,string OutputDirectory,string StageDirectory,JsonObject Inventory,IDictionary<string,byte[]> Originals);
 public sealed class NativeCatalogBuildProvider:ICatalogBuildCaseProvider
 {
     // Keep generated source, staging and output evidence for inspection. These
@@ -25,6 +26,7 @@ public sealed class NativeCatalogBuildProvider:ICatalogBuildCaseProvider
     internal Action<JsonObject,string,IDictionary<string,byte[]>>? InventorySetup {get;init;}
     internal ISourcesExtractionDispatcher? SourceDispatcher {get;init;}
     internal Action<CatalogImportObservation>? ImportObserver {get;init;}
+    internal Func<CatalogIntakeFixture,Task<CatalogSourceIntake>>? IntakeFactory {get;init;}
     private static string Root()=>NativeSchemaProvider.Root();
     private static string Hash(byte[] bytes)=>ContentHash.Sha256(bytes);
     public CatalogBuildReply Build(CatalogBuildCall call)
@@ -60,7 +62,8 @@ public sealed class NativeCatalogBuildProvider:ICatalogBuildCaseProvider
         if(call.Variant=="nonempty-output"){Directory.CreateDirectory(output);File.WriteAllText(Path.Combine(output,"prior.txt"),"immutable previous generation");}
         var canonical=new CanonicalJson();var facts=new SourceTypeFacts(new JvmSourceLinker(),canonical);
         var dispatcher=SourceDispatcher ?? new SourcesExtractionDispatcher(new ISourceExtractor[]{new SignatureSourceExtractor(value=>ContentHash.Sha256(value.Span)),new ManifestSourceExtractor(),new AidlSourceExtractor(value=>ContentHash.Sha256(value.Span))},SourceExtractionProfile.CurrentCandidate);
-        var service=new CatalogBuild(Root(),dispatcher,new PermissionExpressionSourceFacts(),facts,facts,canonical,outputStores:StoreFactory,stagingDatabases:StageFactory,observeImport:ImportObserver);
+        var intake=IntakeFactory?.Invoke(new(root,inventoryPath,output,stage,inventory,original)).GetAwaiter().GetResult();
+        var service=new CatalogBuild(Root(),dispatcher,new PermissionExpressionSourceFacts(),facts,facts,canonical,outputStores:StoreFactory,stagingDatabases:StageFactory,observeImport:ImportObserver,sourceIntake:intake);
         CatalogBuildException? failure=null;
         try
         {

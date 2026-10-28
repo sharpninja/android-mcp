@@ -11,7 +11,7 @@ using AndroidMcp.BuildTool.Core;
 namespace AndroidMcp.BuildTool.Documentation;
 
 /// <summary>Pure in-memory projections. File writes and operation planning belong to the shared host.</summary>
-public sealed class DocumentationProjector : IDocumentationProjector
+public sealed class DocumentationProjector : IParsedDocumentationProjector
 {
     private readonly IDocumentationModelReader models;
     public DocumentationProjector():this(new DocumentationModelReader()) { }
@@ -20,9 +20,10 @@ public sealed class DocumentationProjector : IDocumentationProjector
     private const string NavigationEnd = "<!-- GENERATED UI NAVIGATION END -->";
     private static readonly JsonSerializerOptions JsonOptions = new() { WriteIndented = true };
 
-    public DocumentationProjection Project(DocumentationInput input)
+    public DocumentationProjection Project(DocumentationInput input)=>Project(input,models.Read(input.BlueprintMarkdown));
+
+    public DocumentationProjection Project(DocumentationInput input,DocumentationModel model)
     {
-        var model=models.Read(input.BlueprintMarkdown);
         var blueprint=model.Blueprint;var screens=model.Screens;var stories=model.Storyboards;var screenIndex=model.ScreensById;
         var output = new Dictionary<string,Artifact>(StringComparer.Ordinal);
         var variantFiles = new List<string>();
