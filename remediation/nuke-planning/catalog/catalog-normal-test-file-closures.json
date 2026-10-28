@@ -1,0 +1,207 @@
+{
+  "schemaVersion": "1.0.0",
+  "localTimestamp": "2026-10-28T15:40:23",
+  "scope": "Normal closure of two complete original metadata test executions. Not whole producer/corpus/acceptance parity.",
+  "proof": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T1620389268457-b6d2cf03bfc547a4861d96fe7e0a8210/tests.trx",
+    "sha256": "2c75f9e02309e3cf1012b3600e34a0cded9c7f14a6e93377b21b4880f572569f",
+    "total": 65222,
+    "passed": 65222,
+    "failed": 0,
+    "skipped": 0,
+    "exactClassCounts": {
+      "CanonicalJsonRealTests": 64,
+      "CatalogAggregateMetadataRealTests": 17,
+      "MetadataCrudRealTests": 13,
+      "CatalogMetadataLeafRealTests": 19,
+      "CatalogMetadataObligationRealTests": 11
+    },
+    "scope": "Current unfiltered full Root gate, complete original native method sets and known source-delta reconciliation. No HV or whole-producer claim."
+  },
+  "nativeSourcePins": [
+    {
+      "path": "remediation/nuke-app/Build.Catalog.cs",
+      "sha256": "73ab269a7efb88e18b627f5e0f7a09e52e083fd39f8ceac88492b078568557c1"
+    },
+    {
+      "path": "remediation/nuke-app/Core/CanonicalJson.cs",
+      "sha256": "05136e62d7dc96146e2fe8db0646db3b5dbcff6779cef21eacc756751bbba222"
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Catalog/CatalogBuild.cs",
+      "sha256": "5f86d91ed306a6b2c8889cc548fabe0c5aac40fb53baf9b3fe114a7dc7cb0f81"
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Catalog/CatalogPipelineWorkflowOperation.cs",
+      "sha256": "1ccca79dd78720d16403351134f644d3fd9bb8dfee8545835c31bc877831d328"
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Catalog/CatalogSourceMetadata.cs",
+      "sha256": "deefc253f31a3c9912ab3cedea9e25aa56a18bd6dcbf0934c3855ffb58133b9b"
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Catalog/MetadataCatalog.cs",
+      "sha256": "f25d8646f59d1799c52fac941a2f9cdf8cf13e23ef627e46773928eb655c1521"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Catalog/CatalogAggregateMetadataCases.cs",
+      "sha256": "87a3577f7520d1d52ec8167396c37bce1688e738970c73174e650311288ebc04"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Catalog/CatalogAggregateMetadataRealTests.cs",
+      "sha256": "6df65956bf271103a742d0bd26ad511496e323558f62da3425bacb5e02579bf2"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Catalog/CatalogAnnotationIssueCases.cs",
+      "sha256": "9a1b13d3b89f73383f683bd2f77b1e6d212d78deb6731a4f261aacd9dbc8bd08"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Catalog/CatalogAnnotationIssueRealTests.cs",
+      "sha256": "8a73249357502ef49a40e016d5c858e3e8ada5b99261b983a069a6c5c43f705a"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Catalog/CatalogMetadataObligationCases.cs",
+      "sha256": "9e56d52905c8fd029141297358ad03dcb7c3831e7f4a01d423c83cd220058baa"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Catalog/CatalogMetadataObligationRealTests.cs",
+      "sha256": "a774129ce5c79852cc219500d40c5dfd4fd65c4cb1d4207d2dac49d684642e04"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Catalog/MetadataCrudCases.cs",
+      "sha256": "319b7c509ed75813a86ac748b8e2fc8c18c5721c7ef852267abc32b101730a42"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Catalog/MetadataCrudRealTests.cs",
+      "sha256": "70e20eafd260e418da4a0257d9b4914e45693ccc71a115271132be0e8c648b17"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Core/CanonicalJsonMockTests.cs",
+      "sha256": "32d652308493ae59fee21e6ea79110844d62900b4bf94e0873f0960308a73104"
+    }
+  ],
+  "requireUnchangedNativePins": true,
+  "entries": [
+    {
+      "legacyPath": "remediation/catalog/tests/test_source_metadata_contract.py",
+      "legacySha256": "2b28b2567020a46dfeae40996f15c1bb41418fae6a50f77bfe82d2fe0d6e4b8a",
+      "owner": "Catalog",
+      "category": "Catalog",
+      "operation": "Validate",
+      "normal_verified": true,
+      "normal_verified_methods": [],
+      "reuseExistingMethodClaims": [
+        "test_aggregate_metadata_does_not_borrow_oneway_from_another_version",
+        "test_all_unclassified_entries_remain_unknown_and_searchable",
+        "test_attach_preserves_inputs_and_uses_one_canonical_extension",
+        "test_computed_native_descriptor_keeps_unresolved_expression",
+        "test_duplicate_source_variant_context_cannot_be_flattened_into_one_entry",
+        "test_entry_identity_mismatch_rejected_before_attach",
+        "test_generated_schema_is_available",
+        "test_immutable_builder_occurrences_attach_before_effective_record_hash",
+        "test_materialization_does_not_auto_subclass_abstract_types",
+        "test_named_listener_is_candidate_never_registrable",
+        "test_native_evidence_identity_is_not_a_binding_id",
+        "test_null_source_parameter_direction_means_unresolved_not_input",
+        "test_producer_dto_retains_selector_and_ordered_hash_candidates",
+        "test_reply_mode_cannot_invent_synchronous_from_missing_owner_flag",
+        "test_source_metadata_cannot_claim_runtime_or_client_authority",
+        "test_unknown_fields_are_rejected_in_known_contract",
+        "test_unknown_hidl_source_constraint_is_retained_without_positive_clause"
+      ],
+      "nativeService": "Existing CatalogSourceMetadata, MetadataCatalog, CatalogDatabase and CanonicalJson authorities",
+      "nativeTest": "CatalogAggregateMetadataRealTests, CatalogMetadataObligationRealTests, MetadataCrudRealTests, CatalogMetadataLeafRealTests and exact CanonicalJson vector",
+      "pending_methods": [],
+      "normal_verification_scope": "Exact original test-file execution and all original assertions, reusing the existing owner method claims without adding method counts. Test fixture and framework responsibilities independently inspected.",
+      "frameworkResponsibilities": "unittest import/setup/cleanup, in-memory sqlite3, jsonschema and tempfile fixture setup are replaced by the existing monolith xUnit project, real CatalogDatabase in-memory profile, native schema service and retained fixture/native builder. The occurrence case really builds catalog.sqlite and reads binding_declarations before checking hash/idempotence/tamper assertions. No Python execution.",
+      "frozenProfileNote": "These are test executions only. Complete source_metadata_reference/store producer modules, generic runtime/corpus integration, unlisted inputs and HV acceptance remain separate responsibilities. Test helpers are preserved by the native same-case fixtures.",
+      "decommissionable_from_pr": true,
+      "decommissionable_scope": "Exact two test-file executions only; all local originals retained. No removal of producer modules, no physical deletion, no readiness claim.",
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false
+    },
+    {
+      "legacyPath": "remediation/catalog/tests/test_source_metadata_crud.py",
+      "legacySha256": "34aa4c6f90d2bfb99c29bc46a84b36eb2e377fc5cd226baef16ec2f3b29a25ee",
+      "owner": "Catalog",
+      "category": "Catalog",
+      "operation": "Validate",
+      "normal_verified": true,
+      "normal_verified_methods": [],
+      "reuseExistingMethodClaims": [
+        "test_cursor_cannot_transfer_to_another_reader",
+        "test_delete_is_tombstone_and_idempotent_with_fresh_cas",
+        "test_descriptor_uses_trusted_type_pin_and_explicit_unsupported_materialization",
+        "test_exact_trusted_contract_pin_is_required_for_group_membership",
+        "test_failed_schema_validation_rolls_back_without_generation_change",
+        "test_history_and_selected_head_cannot_be_deleted_or_rewritten",
+        "test_imported_base_is_immutable_and_local_suppression_does_not_grant",
+        "test_json_null_schema_cannot_pass_sql_check",
+        "test_lifecycle_pair_is_an_atomic_group_unit",
+        "test_meta_json_literal_unicode_and_numeric_vectors",
+        "test_metadata_openapi_has_only_resolvable_local_references",
+        "test_new_import_conflicts_with_overlay_and_requires_explicit_rebase",
+        "test_owner_and_creation_preconditions",
+        "test_public_representation_matches_local_openapi_component",
+        "test_put_cas_and_reader_cursor_invalidation",
+        "test_same_reader_can_retry_current_cursor_without_consuming_it",
+        "test_unknown_catalog_reference_cannot_be_saved_as_effective_group",
+        "test_unknown_dependency_rejected_and_does_not_create_partial_group",
+        "test_unknown_descriptor_can_preserve_unknown_materialization"
+      ],
+      "nativeService": "Existing CatalogSourceMetadata, MetadataCatalog, CatalogDatabase and CanonicalJson authorities",
+      "nativeTest": "CatalogAggregateMetadataRealTests, CatalogMetadataObligationRealTests, MetadataCrudRealTests, CatalogMetadataLeafRealTests and exact CanonicalJson vector",
+      "pending_methods": [],
+      "normal_verification_scope": "Exact original test-file execution and all original assertions, reusing the existing owner method claims without adding method counts. Test fixture and framework responsibilities independently inspected.",
+      "frameworkResponsibilities": "unittest import/setup/cleanup, in-memory sqlite3, jsonschema and tempfile fixture setup are replaced by the existing monolith xUnit project, real CatalogDatabase in-memory profile, native schema service and retained fixture/native builder. The occurrence case really builds catalog.sqlite and reads binding_declarations before checking hash/idempotence/tamper assertions. No Python execution.",
+      "frozenProfileNote": "These are test executions only. Complete source_metadata_reference/store producer modules, generic runtime/corpus integration, unlisted inputs and HV acceptance remain separate responsibilities. Test helpers are preserved by the native same-case fixtures.",
+      "decommissionable_from_pr": true,
+      "decommissionable_scope": "Exact two test-file executions only; all local originals retained. No removal of producer modules, no physical deletion, no readiness claim.",
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false
+    }
+  ],
+  "normalVerifiedTestFiles": 2,
+  "normalVerifiedOriginalMethods": 36,
+  "additionalMethodScopes": 0,
+  "sourceMethodReceipts": [
+    {
+      "path": "remediation/nuke-planning/catalog/evidence/metadata-annotation-normal-method-closure.json",
+      "sha256": "d7d75bbd6d809f4afcb532774e563e8350b39eb26b98ac5f1c414229e660c0e0"
+    },
+    {
+      "path": "remediation/nuke-planning/catalog/evidence/metadata-prior-group-normal-method-closure.json",
+      "sha256": "c53d09a4274df87ef83399caf1903c6d6409e8690011b639db3c9570459597a2"
+    }
+  ],
+  "reconciliation": "Exact all-method sets and literal bodies checked. Existing native providers were read: aggregate occurrences use actual builder and SQLite; CRUD uses native schema/storage constraints; descriptor/OpenAPI and exact metadata canonical vector use current real services. No additional user feature or infrastructure.",
+  "currentProofReconciliation": {
+    "localTimestamp": "2026-10-28T16:28:23",
+    "priorProof": {
+      "trx": "remediation/nuke-app/artifacts/tests/20261028T1530238651985-a53179df0e9d4478bdd4c56ab7b6ba4b/tests.trx",
+      "sha256": "9e9bd02efbfdde7d86e9c8a9040090074645f7d482828b6e87cd010e8ed7ce4f",
+      "total": 65117,
+      "passed": 65117,
+      "failed": 0,
+      "skipped": 0,
+      "exactClassCounts": {
+        "CanonicalJsonRealTests": 64,
+        "CatalogAggregateMetadataRealTests": 17,
+        "MetadataCrudRealTests": 13,
+        "CatalogMetadataLeafRealTests": 19,
+        "CatalogMetadataObligationRealTests": 11
+      }
+    },
+    "changedPins": [
+      {
+        "path": "remediation/nuke-app/Modules/Catalog/CatalogSourceMetadata.cs",
+        "previous": "179975fdc2e8054a8edcac47e4571221ad36990b2d1b9ac7b99f74e1a8e93cad",
+        "current": "deefc253f31a3c9912ab3cedea9e25aa56a18bd6dcbf0934c3855ffb58133b9b"
+      }
+    ],
+    "reason": "Only the metadata numeric zero comparison and exact current README portability assertion changed. Original methods, test inputs/assertions and historical fixtures retained. The new full gate verifies the current source pins.",
+    "oldReceiptRetained": "/home/sharpninja/github/2026-10-26/task-3/remediation/retained/normal-closure-updates/catalog-normal-test-file-closures.json.61b4b48fe82119adb482da9a0dfc2b3a13efd4bbbac92da292dc0902e5fca26b.json"
+  }
+}

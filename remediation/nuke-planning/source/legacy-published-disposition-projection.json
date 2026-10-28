@@ -1,30 +1,30 @@
 {
   "schemaVersion": "1.0.0",
-  "at": "2026-10-28T14:46:47",
+  "at": "2026-10-28T16:32:40",
   "authoritative": false,
   "projectionOnly": true,
   "derivedFrom": {
     "path": "remediation/nuke-planning/source/legacy-port-disposition-inventory.json",
-    "sha256": "569e75df96291444688c160262d482dae24763a6e2a5f8aff65ac5e60ef12ecf",
+    "sha256": "26c8a99b734a9053db7620b6b7b26afe0f04fecc0ef8112e8fe84f00b9c2b18e",
     "totalNormalizedPaths": 1464,
     "additionalLocalPathsRetained": 1266
   },
   "identityManifest": {
     "path": "remediation/nuke-planning/source/legacy-python-tracked-manifest.json",
-    "sha256": "bd2c5e19d2ec9867e3f2460f98a389cf9d13030163aa5921df187417f0dee546",
+    "sha256": "1dd4bd6bc1056dc37d5f88fc8fe0c6bb699ecd811e812e1e9a95ac1e1ce10316",
     "publishedPythonCount": 198,
-    "headAtIdentityRead": "5763ea84bb89a61c206a4aee9c144f17c9850ee8"
+    "headAtIdentityRead": "47afb3b7eef813107a256b52c2ad12219d9efa9e"
   },
   "totals": {
     "entries": 198,
     "unmappedPrimaryOwners": 0,
-    "normalVerified": 23,
+    "normalVerified": 25,
     "executionRetired": 0,
     "normalVerifiedMethodScopes": 202,
     "acceptedComplete": 0,
     "scopeExclusions": 0,
     "safeToDelete": 0,
-    "decommissionableFromPr": 23
+    "decommissionableFromPr": 25
   },
   "rules": [
     "This is a generated published-only projection of one authoritative union inventory, not a second maintained inventory.",
@@ -9442,16 +9442,18 @@
       "owner": "Catalog",
       "category": "Catalog",
       "operations": [
-        "pending-explicit-registry-binding"
+        "Validate"
       ],
       "services": [
+        "Existing CatalogSourceMetadata, MetadataCatalog, CatalogDatabase and CanonicalJson authorities",
         "remediation/nuke-app/Modules/Catalog/CatalogBuild.cs",
         "remediation/nuke-app/Modules/Catalog/CatalogPipelineWorkflowOperation.cs",
         "remediation/nuke-app/Modules/Catalog/CatalogSourceMetadata.cs",
         "remediation/nuke-app/Modules/Catalog/MetadataCatalog.cs"
       ],
-      "migration_status": "partial-explicit-catalog-allocation",
+      "migration_status": "normal-native-original-test-methods-verified",
       "native_tests_or_pending": [
+        "CatalogAggregateMetadataRealTests, CatalogMetadataObligationRealTests, MetadataCrudRealTests, CatalogMetadataLeafRealTests and exact CanonicalJson vector",
         "remediation/nuke-app/Tests/Catalog/CatalogAggregateMetadataCases.cs",
         "remediation/nuke-app/Tests/Catalog/CatalogAggregateMetadataRealTests.cs",
         "remediation/nuke-app/Tests/Catalog/CatalogAnnotationIssueCases.cs",
@@ -9460,12 +9462,11 @@
         "remediation/nuke-app/Tests/Catalog/CatalogMetadataObligationRealTests.cs"
       ],
       "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate.",
         "Catalog supplied current normal assertion/method evidence separately from whole-file closure and HV acceptance."
       ],
       "remaining": [
-        "Exact owner assertion-method closure only. Current/historical caller/profile and fullfile proof remain separate.",
-        "Sources owns pure fact producers separately. Catalog has no SourceMetadataReference implementation yet; do not infer these17 methods from producer or canonicalizer counts.",
-        "This supplement closes only the listed assertion scopes. Existing group proofs remain separate; whole metadata/legacy build caller coverage, corpus parity and HV acceptance are not inferred. Optional factory injection absence guards and unlisted evidence-join permutations are not claimed by these original cases."
+        "These are test executions only. Complete source_metadata_reference/store producer modules, generic runtime/corpus integration, unlisted inputs and HV acceptance remain separate responsibilities. Test helpers are preserved by the native same-case fixtures."
       ],
       "artifact_role": "published-legacy-port-baseline",
       "primary_code_path": "remediation/catalog/tests/test_source_metadata_contract.py",
@@ -9473,8 +9474,8 @@
       "byte_identical_path_count": 3,
       "same_bytes_imply_profile_or_caller_parity": false,
       "standalone_nuke_target_required": false,
-      "normal_verified": false,
-      "normal_verification_status": "partial-explicit-normal-method-verification",
+      "normal_verified": true,
+      "normal_verification_status": "normal-original-test-methods-verified",
       "normal_verified_methods": [
         {
           "method": "test_generated_schema_is_available",
@@ -9647,7 +9648,7 @@
           "scope": "Owner-explicit original assertion scenario; caller/fixture setup deltas and full-file remainder retained in evidence."
         }
       ],
-      "pending_methods": "<module-body-and-required-callers>",
+      "pending_methods": null,
       "pending_method_list_basis": "Exact owner-supplied function/method anchors when available; module/caller closure is explicit. Lexical proposal anchors are not an AST or exhaustive branch inventory.",
       "execution_retired": false,
       "retention_normal_verified": false,
@@ -9656,9 +9657,9 @@
       "generic_behavior_retired": false,
       "retirement_decision": null,
       "hv_acceptance": "Deferred by user until Ready; not used as a prerequisite to record normal implementation verification.",
-      "decommissionable_from_pr": false,
+      "decommissionable_from_pr": true,
       "decommissionable_scope": [
-        null
+        "Exact two test-file executions only; all local originals retained. No removal of producer modules, no physical deletion, no readiness claim."
       ],
       "decommissionable_means_physical_delete": false,
       "evidence_refs": [
@@ -9689,6 +9690,13 @@
           "role": "explicit-catalog-normal-method-scope",
           "source_sha256": "2b28b2567020a46dfeae40996f15c1bb41418fae6a50f77bfe82d2fe0d6e4b8a",
           "method": null
+        },
+        {
+          "evidence": "remediation/nuke-planning/catalog/catalog-normal-test-file-closures.json",
+          "owner": "Catalog",
+          "role": "explicit-source-normal-verification",
+          "source_sha256": "2b28b2567020a46dfeae40996f15c1bb41418fae6a50f77bfe82d2fe0d6e4b8a",
+          "method": null
         }
       ],
       "accepted_complete": false,
@@ -9701,10 +9709,11 @@
       "owner": "Catalog",
       "category": "Catalog",
       "operations": [
-        "pending-explicit-registry-binding"
+        "Validate"
       ],
       "services": [
         "Core/CanonicalJson.cs",
+        "Existing CatalogSourceMetadata, MetadataCatalog, CatalogDatabase and CanonicalJson authorities",
         "Modules/Catalog/CatalogDatabase.cs",
         "Modules/Catalog/MetadataCatalog.cs",
         "remediation/nuke-app/Modules/Catalog/CatalogBuild.cs",
@@ -9712,8 +9721,9 @@
         "remediation/nuke-app/Modules/Catalog/CatalogSourceMetadata.cs",
         "remediation/nuke-app/Modules/Catalog/MetadataCatalog.cs"
       ],
-      "migration_status": "partial-explicit-catalog-allocation",
+      "migration_status": "normal-native-original-test-methods-verified",
       "native_tests_or_pending": [
+        "CatalogAggregateMetadataRealTests, CatalogMetadataObligationRealTests, MetadataCrudRealTests, CatalogMetadataLeafRealTests and exact CanonicalJson vector",
         "remediation/nuke-app/Tests/Catalog/CatalogAggregateMetadataCases.cs",
         "remediation/nuke-app/Tests/Catalog/CatalogAggregateMetadataRealTests.cs",
         "remediation/nuke-app/Tests/Catalog/CatalogAnnotationIssueCases.cs",
@@ -9728,13 +9738,11 @@
         "Tests/Core/CanonicalJsonMockTests.cs:literal Unicode/numeric vector"
       ],
       "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate.",
         "Catalog supplied current normal assertion/method evidence separately from whole-file closure and HV acceptance."
       ],
       "remaining": [
-        "Exact owner assertion-method closure only. Current/historical caller/profile and fullfile proof remain separate.",
-        "Full group semantic validation, callback descriptors and trusted pins, source attachment, public representation and OpenAPI bindings remain explicit pending.",
-        "Module-body history read API and additional descriptor/group/pinned reference guards are a separate approved mock-first increment. Full producer/caller completeness and HV acceptance are not implied by original test assertion closure.",
-        "This supplement closes only the listed assertion scopes. Existing group proofs remain separate; whole metadata/legacy build caller coverage, corpus parity and HV acceptance are not inferred. Optional factory injection absence guards and unlisted evidence-join permutations are not claimed by these original cases."
+        "These are test executions only. Complete source_metadata_reference/store producer modules, generic runtime/corpus integration, unlisted inputs and HV acceptance remain separate responsibilities. Test helpers are preserved by the native same-case fixtures."
       ],
       "artifact_role": "published-legacy-port-baseline",
       "primary_code_path": "remediation/catalog/tests/test_source_metadata_crud.py",
@@ -9742,8 +9750,8 @@
       "byte_identical_path_count": 2,
       "same_bytes_imply_profile_or_caller_parity": false,
       "standalone_nuke_target_required": false,
-      "normal_verified": false,
-      "normal_verification_status": "partial-explicit-normal-method-verification",
+      "normal_verified": true,
+      "normal_verification_status": "normal-original-test-methods-verified",
       "normal_verified_methods": [
         {
           "method": "test_lifecycle_pair_is_an_atomic_group_unit",
@@ -9940,7 +9948,7 @@
           "scope": "Owner-explicit original assertion scenario; caller/fixture setup deltas and full-file remainder retained in evidence."
         }
       ],
-      "pending_methods": "<module-body-and-required-callers>",
+      "pending_methods": null,
       "pending_method_list_basis": "Exact owner-supplied function/method anchors when available; module/caller closure is explicit. Lexical proposal anchors are not an AST or exhaustive branch inventory.",
       "execution_retired": false,
       "retention_normal_verified": false,
@@ -9949,9 +9957,9 @@
       "generic_behavior_retired": false,
       "retirement_decision": null,
       "hv_acceptance": "Deferred by user until Ready; not used as a prerequisite to record normal implementation verification.",
-      "decommissionable_from_pr": false,
+      "decommissionable_from_pr": true,
       "decommissionable_scope": [
-        null
+        "Exact two test-file executions only; all local originals retained. No removal of producer modules, no physical deletion, no readiness claim."
       ],
       "decommissionable_means_physical_delete": false,
       "evidence_refs": [
@@ -9987,6 +9995,13 @@
           "evidence": "remediation/nuke-planning/catalog/evidence/metadata-prior-group-normal-method-closure.json",
           "owner": "Catalog",
           "role": "explicit-catalog-normal-method-scope",
+          "source_sha256": "34aa4c6f90d2bfb99c29bc46a84b36eb2e377fc5cd226baef16ec2f3b29a25ee",
+          "method": null
+        },
+        {
+          "evidence": "remediation/nuke-planning/catalog/catalog-normal-test-file-closures.json",
+          "owner": "Catalog",
+          "role": "explicit-source-normal-verification",
           "source_sha256": "34aa4c6f90d2bfb99c29bc46a84b36eb2e377fc5cd226baef16ec2f3b29a25ee",
           "method": null
         }

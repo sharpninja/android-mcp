@@ -154,7 +154,7 @@ public sealed class CatalogSourceMetadata
         Reject(units.Values.Any(roles=>!roles.SetEquals(["register","cleanup"])),"Registration and cleanup must be one coherent group unit");
         var types=value["required_type_ids"]!.AsArray();Reject(types.Select(S).Distinct(StringComparer.Ordinal).Count()!=types.Count,"Duplicate type dependency");
         var dependencies=Objects(value["dependencies"]).ToArray();Reject(dependencies.Select(row=>S(row["group_id"])).Distinct(StringComparer.Ordinal).Count()!=dependencies.Length || dependencies.Any(row=>S(row["group_id"])==S(value["group_id"])),"Duplicate/self group dependency");
-        Reject(value["estimated_tokens"]!.GetValue<int>()!=0 && S(value["estimator_version"]).Length==0,"Nonzero token estimate needs estimator version");
+        Reject(!JsonNode.DeepEquals(value["estimated_tokens"],JsonValue.Create(0)) && S(value["estimator_version"]).Length==0,"Nonzero token estimate needs estimator version");
         if(knownGroups is not null)
         {
             var path=new HashSet<string>(StringComparer.Ordinal);var done=new HashSet<string>(StringComparer.Ordinal);

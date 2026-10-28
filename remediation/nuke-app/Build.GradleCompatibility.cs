@@ -80,14 +80,15 @@ public sealed partial class Build
         ArtifactGenerationRuntime Runtime(string root,IArtifactStore destination)=>new(source,destination,new FileArtifactLeaseProvider(Path.Combine(root,".leases")),verifier,generationManifests,"design-assets/"+hashes.Sha256(Encoding.UTF8.GetBytes(root)));
         var clock=new SystemClock();var processes=new NativeProcessRunner(clock);var transport=new ArchitectureRendererTransport(processes);
         var preparation=new ArchitectureAssetPreparation();var generation=Generation??"gradle-compatibility";
+        var legacyReceipts=new DocumentationLegacyReceipts(canonical,strict,verifier);
         var composer=new ArchitectureProjectionComposer(Runtime(work,workStore),workStore,verifier,preparation,transport,
-            new NativeRendererImageAdmission(processes,new ProcessCaptureReader(receiptRoot),transport,hashes),generation+"-work");
+            new NativeRendererImageAdmission(processes,new ProcessCaptureReader(receiptRoot),transport,hashes),generation+"-work",legacyReceipts);
         var bootstrap=new DocumentationToolBootstrap(new ToolArtifactAcquirer(HttpByteTransport.Create(clock),toolStore,new FileArtifactLeaseProvider(Path.Combine(cache,".leases")),canonical));
         var modules=new ModuleGraphValidator();var projector=new DocumentationProjector(new DocumentationModelReader());
         var preflight=new DocumentationModelPreflight(new DocumentationModelReader(),projector,new ModelContractValidator(hashes),modules,strict);
         var manifests=new DocumentationManifestBuilder(verifier);var packages=new DocumentationPackageBuilder(new PublicationChecker(canonical),verifier,manifests);
         var html=new SourceHtmlDecoder();var documents=new GeneratedDesignValidator(new ArchitectureViewIndexReader(),new ArtifactReferenceResolver(html.Decode),strict,verifier,html);
-        var factory=new DesignCompositionRecipeFactory(profiles,modules,preparation,composer,bootstrap,packages,preflight,documents,manifests,sourcePlanner,verifier,projector);
+        var factory=new DesignCompositionRecipeFactory(profiles,modules,preparation,composer,bootstrap,packages,preflight,documents,manifests,sourcePlanner,verifier,projector,legacyReceipts);
         // No fictitious ToolIdentity is created for CodeExtract; its admitted
         // subset requires no renderer context and never dereferences this value.
         var request=new DesignArchitectureRequest(generation,context!,ToolAccess!.Value,OfflineGradleChecksumProof,
@@ -110,6 +111,6 @@ public sealed partial class Build
         });
         var result=await Runtime(output,finalStore).ExecuteAsync(generation,recipe);
         Console.WriteLine(JsonSerializer.Serialize(new{result.GenerationId,selection.Aliases,Stages=selection.Stages.Select(stage=>stage.ToString()),InputCount=result.Inputs.Count,OutputCount=result.Outputs.Count,result.Manifest,OutputRoot=output,
-            Scope="Native Core alias union; legacy five receipt publications and complete portable build-source payload remain explicit completion duties"}));
+            Scope="Native Core alias union with bound validation and documentation-completion receipts; standalone module/model/UI receipt aliases and complete portable build-source payload remain open"}));
     }
 }

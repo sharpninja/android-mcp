@@ -11,7 +11,7 @@ public sealed class DesignCompositionRecipeFactory(IDocumentationRendererProfile
     IDocumentationPackageBuilder packages,IDocumentationModelPreflight? modelPreflight=null,
     IGeneratedDesignValidator? documents=null,IDocumentationManifestBuilder? manifests=null,
     IDocumentationModelSourcePlanner? documentationSources=null,IArtifactReceiptVerifier? artifactReceipts=null,
-    IDocumentationProjector? uiProjector=null):IDesignFullArchitectureRecipeFactory
+    IDocumentationProjector? uiProjector=null,DocumentationLegacyReceipts? legacyReceipts=null):IDesignFullArchitectureRecipeFactory
 {
     private const string ChecksumPath="docs/checksums.sha256",ArchivePath="package/android-mcp-design-source.zip";
     private readonly IDesignStagePlanner stages=new DesignStagePlanner();
@@ -89,17 +89,38 @@ public sealed class DesignCompositionRecipeFactory(IDocumentationRendererProfile
                     return model.Ui.Artifacts.Concat(architecture).Append(capturedSources.Receipt).ToArray();
                 },token=>sourceCollection.VerifyUnchangedAsync(capturedSources,token));
             }
+            var architectureReceipt=DocumentationLegacyReceipts.Publication(DesignStage.ArchitectureValidate).Path;
+            var additionalReceipts=legacyReceipts?.Describe(selection,true).Where(path=>path!=architectureReceipt).ToArray()??[];
+            if(legacyReceipts is not null)
+            {
+                if(!prepared.OutputPaths.Contains(architectureReceipt,StringComparer.Ordinal))
+                    throw new ArchitectureAssetException("LEGACY_RECEIPT_PENDING","Bind the existing validation-phase receipt producer");
+                var owned=additionalReceipts.ToHashSet(StringComparer.OrdinalIgnoreCase);
+                if(prepared.OutputPaths.Any(owned.Contains))
+                    throw new ArchitectureAssetException("DESIGN_OUTPUT_COLLISION","Receipt output ownership collides");
+            }
+            var prerequisiteReceipts=legacyReceipts is null?Array.Empty<Artifact>():new[]{legacyReceipts.Module(model.Modules),
+                legacyReceipts.Model(model.Contracts),legacyReceipts.Ui(model.Ui.Artifacts.Single(artifact=>artifact.RelativePath=="docs/ui-asset-manifest.json"))};
             var exportSupport=ExplicitExport(selection);
-            var paths=CompletionPaths(inputs,model.Ui.Artifacts,prepared.OutputPaths,capturedSources.Receipt.RelativePath,selection,exportSupport);
+            var paths=CompletionPaths(inputs,model.Ui.Artifacts,prepared.OutputPaths,capturedSources.Receipt.RelativePath,selection,exportSupport,additionalReceipts);
             return new(paths,async token=>
             {
                 token.ThrowIfCancellationRequested();
                 var architecture=await prepared.MaterializeAsync(token);
                 var union=PublishedUnion(inputs,model.Ui.Artifacts,architecture,capturedSources.Receipt,exportSupport);
+                foreach(var receipt in prerequisiteReceipts)Add(union,receipt);
                 var admitted=union.Values.OrderBy(artifact=>artifact.RelativePath,StringComparer.Ordinal).ToArray();
                 var workspace=inputs.Single(a=>a.RelativePath=="architecture/workspace.dsl");
                 var uiManifest=model.Ui.Artifacts.Single(a=>a.RelativePath=="docs/ui-asset-manifest.json");
-                RequireValid(documents!.Validate(new(admitted,model.Model,workspace,uiManifest,DocumentationValidationPhase.BeforeManifest)));
+                var before=documents!.Validate(new(admitted,model.Model,workspace,uiManifest,DocumentationValidationPhase.BeforeManifest));
+                RequireValid(before);
+                if(legacyReceipts is not null)
+                {
+                    Add(union,legacyReceipts.Docs(before));
+                    union=legacyReceipts.AddPackageAliases(union.Values.ToArray(),selection.Stages.Contains(DesignStage.Package))
+                        .ToDictionary(artifact=>artifact.RelativePath,StringComparer.Ordinal);
+                    admitted=union.Values.OrderBy(artifact=>artifact.RelativePath,StringComparer.Ordinal).ToArray();
+                }
                 DocumentationManifest? manifest=null;
                 if(selection.Stages.Contains(DesignStage.Manifest))
                 {
@@ -123,7 +144,7 @@ public sealed class DesignCompositionRecipeFactory(IDocumentationRendererProfile
     }
 
     private IReadOnlyList<string> CompletionPaths(IReadOnlyList<Artifact> inputs,IReadOnlyList<Artifact> ui,
-        IReadOnlyList<string> architecture,string observationPath,DesignStagePlan selection,bool exportSupport)
+        IReadOnlyList<string> architecture,string observationPath,DesignStagePlan selection,bool exportSupport,IReadOnlyList<string> additionalReceipts)
     {
         var paths=new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         foreach(var artifact in inputs)Declare(artifact.RelativePath);
@@ -138,6 +159,7 @@ public sealed class DesignCompositionRecipeFactory(IDocumentationRendererProfile
             Declare(path);
         }
         Declare(observationPath);
+        foreach(var path in additionalReceipts)Declare(path);
         if(selection.Stages.Contains(DesignStage.Manifest))Declare(ChecksumPath);
         if(selection.Stages.Contains(DesignStage.Package))Declare(ArchivePath);
         return paths.Order(StringComparer.Ordinal).ToArray();

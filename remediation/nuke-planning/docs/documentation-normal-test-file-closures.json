@@ -25,18 +25,18 @@
     }
   ],
   "proof": {
-    "trx": "publication/android-mcp-git/remediation/nuke-app/artifacts/tests/20261028T1430297401701-4c6547e273f04b13a963ea563993bde3/tests.trx",
-    "sha256": "4b6a5c52f97aad19b41b07c90bccb1fb26ec227457bb97600a1eb973d2b2984c",
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T1620389268457-b6d2cf03bfc547a4861d96fe7e0a8210/tests.trx",
+    "sha256": "2c75f9e02309e3cf1012b3600e34a0cded9c7f14a6e93377b21b4880f572569f",
+    "total": 65222,
+    "passed": 65222,
+    "failed": 0,
+    "skipped": 0,
     "exactClassCounts": {
       "ModuleGraphRealTests": 10,
       "CurrentLayoutModelValidationRealTests": 2,
       "NativeProducerLifecycleRealTests": 1
     },
-    "total": 64998,
-    "passed": 64998,
-    "failed": 0,
-    "skipped": 0,
-    "scope": "Clean copied checkpoint008 full suite and exact unchanged component source pins, including historical/current README isolation; no HV."
+    "scope": "Current unfiltered full Root gate, complete original native method sets and known source-delta reconciliation. No HV or whole-producer claim."
   },
   "nativeSourcePins": [
     {
@@ -57,7 +57,7 @@
     },
     {
       "path": "remediation/nuke-app/Tests/Documentation/CurrentLayoutModelValidationRealTests.cs",
-      "sha256": "013370564ed4c1413b1ad1e8f05f18b0341d2b345b93346692f92ca796327de8"
+      "sha256": "c04fff69099e8148e8011a2d8149890b1818ac40c8344f7176be7677b39a9237"
     },
     {
       "path": "remediation/nuke-app/Tests/Documentation/DocumentationProjectionMockTests.cs",
@@ -103,5 +103,31 @@
     "path": "remediation/nuke-app/Build.cs",
     "sha256": "82b75311060f493f0e409845a7ce5e038ce02cbbb4472f8dd895a021efc1029e"
   },
-  "requireUnchangedNativePins": true
+  "requireUnchangedNativePins": true,
+  "currentProofReconciliation": {
+    "localTimestamp": "2026-10-28T16:28:20",
+    "priorProof": {
+      "trx": "publication/android-mcp-git/remediation/nuke-app/artifacts/tests/20261028T1430297401701-4c6547e273f04b13a963ea563993bde3/tests.trx",
+      "sha256": "4b6a5c52f97aad19b41b07c90bccb1fb26ec227457bb97600a1eb973d2b2984c",
+      "exactClassCounts": {
+        "ModuleGraphRealTests": 10,
+        "CurrentLayoutModelValidationRealTests": 2,
+        "NativeProducerLifecycleRealTests": 1
+      },
+      "total": 64998,
+      "passed": 64998,
+      "failed": 0,
+      "skipped": 0,
+      "scope": "Clean copied checkpoint008 full suite and exact unchanged component source pins, including historical/current README isolation; no HV."
+    },
+    "changedPins": [
+      {
+        "path": "remediation/nuke-app/Tests/Documentation/CurrentLayoutModelValidationRealTests.cs",
+        "previous": "013370564ed4c1413b1ad1e8f05f18b0341d2b345b93346692f92ca796327de8",
+        "current": "c04fff69099e8148e8011a2d8149890b1818ac40c8344f7176be7677b39a9237"
+      }
+    ],
+    "reason": "Only the metadata numeric zero comparison and exact current README portability assertion changed. Original methods, test inputs/assertions and historical fixtures retained. The new full gate verifies the current source pins.",
+    "oldReceiptRetained": "/home/sharpninja/github/2026-10-26/task-3/remediation/retained/normal-closure-updates/documentation-normal-test-file-closures.json.cbe3e7975758ecb95101ca61515ae0a5aa0803ac750d23d841b08e735cb71987.json"
+  }
 }

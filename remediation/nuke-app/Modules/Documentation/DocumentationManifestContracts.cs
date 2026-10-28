@@ -22,4 +22,5 @@ public sealed class DesignDocumentationValidationException(GeneratedDesignValida
 {
     public string Code=>"DESIGN_DOCUMENTATION_INVALID";
     public GeneratedDesignValidationResult Result {get;}=result;
+    public override string ToString()=>base.ToString()+Environment.NewLine+"validationResult="+System.Text.Json.JsonSerializer.Serialize(Result);
 }

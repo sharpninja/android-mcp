@@ -1,23 +1,23 @@
 {
-  "at": "2026-10-28T14:46:49",
+  "at": "2026-10-28T16:32:42",
   "projection_only": true,
   "authoritative_inventory": {
     "path": "remediation/nuke-planning/source/legacy-port-disposition-inventory.json",
-    "sha256": "569e75df96291444688c160262d482dae24763a6e2a5f8aff65ac5e60ef12ecf"
+    "sha256": "26c8a99b734a9053db7620b6b7b26afe0f04fecc0ef8112e8fe84f00b9c2b18e"
   },
   "scope": "Published198only. Additional1266localhistoricalpaths are retained in the sole union and are not inflated into independent published port tasks.",
   "totals": {
     "published_paths": 198,
     "canonical_responsibility_groups": 134,
-    "normally_verified_files": 23,
-    "partially_verified_files": 15,
+    "normally_verified_files": 25,
+    "partially_verified_files": 13,
     "files_without_normal_method_proof": 160,
     "normal_method_bindings_by_file": 202,
     "unique_method_bindings_by_group": 145,
     "published_execution_retirements": 0,
-    "pr_eligible_paths": 23,
-    "normally_closed_groups": 13,
-    "open_canonical_groups": 121,
+    "pr_eligible_paths": 25,
+    "normally_closed_groups": 15,
+    "open_canonical_groups": 119,
     "safe_to_delete": 0,
     "hv_accepted": 0
   },
@@ -29,12 +29,12 @@
       ],
       "published_paths": 85,
       "canonical_responsibility_groups": 53,
-      "normal_file_proofs": 0,
+      "normal_file_proofs": 2,
       "normal_method_bindings_by_file": 60,
-      "normally_closed_groups": 0,
-      "open_canonical_groups": 53,
+      "normally_closed_groups": 2,
+      "open_canonical_groups": 51,
       "published_execution_retirements": 0,
-      "pr_eligible_test_or_file_paths": 0
+      "pr_eligible_test_or_file_paths": 2
     },
     {
       "category": "Design",
@@ -490,12 +490,15 @@
         "canonical-or-explicit-owner-profile"
       ],
       "services": [
+        "Existing CatalogSourceMetadata, MetadataCatalog, CatalogDatabase and CanonicalJson authorities",
         "remediation/nuke-app/Modules/Catalog/CatalogBuild.cs",
         "remediation/nuke-app/Modules/Catalog/CatalogPipelineWorkflowOperation.cs",
         "remediation/nuke-app/Modules/Catalog/CatalogSourceMetadata.cs",
         "remediation/nuke-app/Modules/Catalog/MetadataCatalog.cs"
       ],
-      "normally_verified_file_paths": [],
+      "normally_verified_file_paths": [
+        "remediation/catalog/tests/test_source_metadata_contract.py"
+      ],
       "normal_method_bindings": [
         {
           "method": "test_aggregate_metadata_does_not_borrow_oneway_from_another_version",
@@ -668,11 +671,9 @@
           ]
         }
       ],
-      "normally_closed_all_published_paths": false,
+      "normally_closed_all_published_paths": true,
       "remaining_caller_and_profile_duties": [
-        "Exact owner assertion-method closure only. Current/historical caller/profile and fullfile proof remain separate.",
-        "Sources owns pure fact producers separately. Catalog has no SourceMetadataReference implementation yet; do not infer these17 methods from producer or canonicalizer counts.",
-        "This supplement closes only the listed assertion scopes. Existing group proofs remain separate; whole metadata/legacy build caller coverage, corpus parity and HV acceptance are not inferred. Optional factory injection absence guards and unlisted evidence-join permutations are not claimed by these original cases."
+        "These are test executions only. Complete source_metadata_reference/store producer modules, generic runtime/corpus integration, unlisted inputs and HV acceptance remain separate responsibilities. Test helpers are preserved by the native same-case fixtures."
       ]
     },
     {
@@ -858,6 +859,7 @@
       ],
       "services": [
         "Core/CanonicalJson.cs",
+        "Existing CatalogSourceMetadata, MetadataCatalog, CatalogDatabase and CanonicalJson authorities",
         "Modules/Catalog/CatalogDatabase.cs",
         "Modules/Catalog/MetadataCatalog.cs",
         "remediation/nuke-app/Modules/Catalog/CatalogBuild.cs",
@@ -865,7 +867,9 @@
         "remediation/nuke-app/Modules/Catalog/CatalogSourceMetadata.cs",
         "remediation/nuke-app/Modules/Catalog/MetadataCatalog.cs"
       ],
-      "normally_verified_file_paths": [],
+      "normally_verified_file_paths": [
+        "remediation/catalog/tests/test_source_metadata_crud.py"
+      ],
       "normal_method_bindings": [
         {
           "method": "test_cursor_cannot_transfer_to_another_reader",
@@ -1058,12 +1062,9 @@
           ]
         }
       ],
-      "normally_closed_all_published_paths": false,
+      "normally_closed_all_published_paths": true,
       "remaining_caller_and_profile_duties": [
-        "Exact owner assertion-method closure only. Current/historical caller/profile and fullfile proof remain separate.",
-        "Full group semantic validation, callback descriptors and trusted pins, source attachment, public representation and OpenAPI bindings remain explicit pending.",
-        "Module-body history read API and additional descriptor/group/pinned reference guards are a separate approved mock-first increment. Full producer/caller completeness and HV acceptance are not implied by original test assertion closure.",
-        "This supplement closes only the listed assertion scopes. Existing group proofs remain separate; whole metadata/legacy build caller coverage, corpus parity and HV acceptance are not inferred. Optional factory injection absence guards and unlisted evidence-join permutations are not claimed by these original cases."
+        "These are test executions only. Complete source_metadata_reference/store producer modules, generic runtime/corpus integration, unlisted inputs and HV acceptance remain separate responsibilities. Test helpers are preserved by the native same-case fixtures."
       ]
     },
     {
@@ -18511,21 +18512,23 @@
       "owner": "Catalog",
       "category": "Catalog",
       "operations": [
-        "pending-explicit-registry-binding"
+        "Validate"
       ],
       "canonical_responsibility_key": "Catalog|Catalog|2b28b2567020a46dfeae40996f15c1bb41418fae6a50f77bfe82d2fe0d6e4b8a",
       "primary_code_path": "remediation/catalog/tests/test_source_metadata_contract.py",
       "explicit_profiles": "canonical-or-explicit-owner-profile",
       "services": [
+        "Existing CatalogSourceMetadata, MetadataCatalog, CatalogDatabase and CanonicalJson authorities",
         "remediation/nuke-app/Modules/Catalog/CatalogBuild.cs",
         "remediation/nuke-app/Modules/Catalog/CatalogPipelineWorkflowOperation.cs",
         "remediation/nuke-app/Modules/Catalog/CatalogSourceMetadata.cs",
         "remediation/nuke-app/Modules/Catalog/MetadataCatalog.cs"
       ],
       "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate.",
         "Catalog supplied current normal assertion/method evidence separately from whole-file closure and HV acceptance."
       ],
-      "normal_file_verified": false,
+      "normal_file_verified": true,
       "normal_verified_methods": [
         {
           "method": "test_generated_schema_is_available",
@@ -18698,7 +18701,7 @@
           "scope": "Owner-explicit original assertion scenario; caller/fixture setup deltas and full-file remainder retained in evidence."
         }
       ],
-      "decommissionable_from_pr": false,
+      "decommissionable_from_pr": true,
       "execution_retired": false,
       "retirement_decision": null,
       "original_retained_verified": true,
@@ -18804,30 +18807,13 @@
           "indent": 1
         }
       ],
-      "pending_function_anchors": [
-        {
-          "name": "module",
-          "line": 7,
-          "indent": 1
-        },
-        {
-          "name": "doc",
-          "line": 10,
-          "indent": 1
-        },
-        {
-          "name": "source",
-          "line": 12,
-          "indent": 1
-        }
-      ],
-      "pending_owner_method_list": "<module-body-and-required-callers>",
+      "pending_function_anchors": [],
+      "pending_owner_method_list": null,
       "remaining": [
-        "Exact owner assertion-method closure only. Current/historical caller/profile and fullfile proof remain separate.",
-        "Sources owns pure fact producers separately. Catalog has no SourceMetadataReference implementation yet; do not infer these17 methods from producer or canonicalizer counts.",
-        "This supplement closes only the listed assertion scopes. Existing group proofs remain separate; whole metadata/legacy build caller coverage, corpus parity and HV acceptance are not inferred. Optional factory injection absence guards and unlisted evidence-join permutations are not claimed by these original cases."
+        "These are test executions only. Complete source_metadata_reference/store producer modules, generic runtime/corpus integration, unlisted inputs and HV acceptance remain separate responsibilities. Test helpers are preserved by the native same-case fixtures."
       ],
       "bounded_service_test_evidence": [
+        "CatalogAggregateMetadataRealTests, CatalogMetadataObligationRealTests, MetadataCrudRealTests, CatalogMetadataLeafRealTests and exact CanonicalJson vector",
         "remediation/nuke-app/Tests/Catalog/CatalogAggregateMetadataCases.cs",
         "remediation/nuke-app/Tests/Catalog/CatalogAggregateMetadataRealTests.cs",
         "remediation/nuke-app/Tests/Catalog/CatalogAnnotationIssueCases.cs",
@@ -18846,13 +18832,14 @@
       "owner": "Catalog",
       "category": "Catalog",
       "operations": [
-        "pending-explicit-registry-binding"
+        "Validate"
       ],
       "canonical_responsibility_key": "Catalog|Catalog|34aa4c6f90d2bfb99c29bc46a84b36eb2e377fc5cd226baef16ec2f3b29a25ee",
       "primary_code_path": "remediation/catalog/tests/test_source_metadata_crud.py",
       "explicit_profiles": "canonical-or-explicit-owner-profile",
       "services": [
         "Core/CanonicalJson.cs",
+        "Existing CatalogSourceMetadata, MetadataCatalog, CatalogDatabase and CanonicalJson authorities",
         "Modules/Catalog/CatalogDatabase.cs",
         "Modules/Catalog/MetadataCatalog.cs",
         "remediation/nuke-app/Modules/Catalog/CatalogBuild.cs",
@@ -18861,9 +18848,10 @@
         "remediation/nuke-app/Modules/Catalog/MetadataCatalog.cs"
       ],
       "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate.",
         "Catalog supplied current normal assertion/method evidence separately from whole-file closure and HV acceptance."
       ],
-      "normal_file_verified": false,
+      "normal_file_verified": true,
       "normal_verified_methods": [
         {
           "method": "test_lifecycle_pair_is_an_atomic_group_unit",
@@ -19060,7 +19048,7 @@
           "scope": "Owner-explicit original assertion scenario; caller/fixture setup deltas and full-file remainder retained in evidence."
         }
       ],
-      "decommissionable_from_pr": false,
+      "decommissionable_from_pr": true,
       "execution_retired": false,
       "retirement_decision": null,
       "original_retained_verified": true,
@@ -19186,41 +19174,13 @@
           "indent": 2
         }
       ],
-      "pending_function_anchors": [
-        {
-          "name": "setUp",
-          "line": 7,
-          "indent": 1
-        },
-        {
-          "name": "group",
-          "line": 9,
-          "indent": 1
-        },
-        {
-          "name": "create",
-          "line": 11,
-          "indent": 1
-        },
-        {
-          "name": "error",
-          "line": 13,
-          "indent": 1
-        },
-        {
-          "name": "visit",
-          "line": 89,
-          "indent": 2
-        }
-      ],
-      "pending_owner_method_list": "<module-body-and-required-callers>",
+      "pending_function_anchors": [],
+      "pending_owner_method_list": null,
       "remaining": [
-        "Exact owner assertion-method closure only. Current/historical caller/profile and fullfile proof remain separate.",
-        "Full group semantic validation, callback descriptors and trusted pins, source attachment, public representation and OpenAPI bindings remain explicit pending.",
-        "Module-body history read API and additional descriptor/group/pinned reference guards are a separate approved mock-first increment. Full producer/caller completeness and HV acceptance are not implied by original test assertion closure.",
-        "This supplement closes only the listed assertion scopes. Existing group proofs remain separate; whole metadata/legacy build caller coverage, corpus parity and HV acceptance are not inferred. Optional factory injection absence guards and unlisted evidence-join permutations are not claimed by these original cases."
+        "These are test executions only. Complete source_metadata_reference/store producer modules, generic runtime/corpus integration, unlisted inputs and HV acceptance remain separate responsibilities. Test helpers are preserved by the native same-case fixtures."
       ],
       "bounded_service_test_evidence": [
+        "CatalogAggregateMetadataRealTests, CatalogMetadataObligationRealTests, MetadataCrudRealTests, CatalogMetadataLeafRealTests and exact CanonicalJson vector",
         "remediation/nuke-app/Tests/Catalog/CatalogAggregateMetadataCases.cs",
         "remediation/nuke-app/Tests/Catalog/CatalogAggregateMetadataRealTests.cs",
         "remediation/nuke-app/Tests/Catalog/CatalogAnnotationIssueCases.cs",
@@ -28659,26 +28619,6 @@
       "derived_from_inventory": true,
       "owner": "Catalog",
       "category": "Catalog",
-      "canonical_responsibility_key": "Catalog|Catalog|2b28b2567020a46dfeae40996f15c1bb41418fae6a50f77bfe82d2fe0d6e4b8a",
-      "published_paths": [
-        "remediation/catalog/tests/test_source_metadata_contract.py"
-      ],
-      "services": [
-        "remediation/nuke-app/Modules/Catalog/CatalogBuild.cs",
-        "remediation/nuke-app/Modules/Catalog/CatalogPipelineWorkflowOperation.cs",
-        "remediation/nuke-app/Modules/Catalog/CatalogSourceMetadata.cs",
-        "remediation/nuke-app/Modules/Catalog/MetadataCatalog.cs"
-      ],
-      "remaining": [
-        "Exact owner assertion-method closure only. Current/historical caller/profile and fullfile proof remain separate.",
-        "Sources owns pure fact producers separately. Catalog has no SourceMetadataReference implementation yet; do not infer these17 methods from producer or canonicalizer counts.",
-        "This supplement closes only the listed assertion scopes. Existing group proofs remain separate; whole metadata/legacy build caller coverage, corpus parity and HV acceptance are not inferred. Optional factory injection absence guards and unlisted evidence-join permutations are not claimed by these original cases."
-      ]
-    },
-    {
-      "derived_from_inventory": true,
-      "owner": "Catalog",
-      "category": "Catalog",
       "canonical_responsibility_key": "Catalog|Catalog|2ba39bbd83c4ae3b647b97d064f7b1b4eb3725d4ab0460bec98969302eeca055",
       "published_paths": [
         "rehydration/producers/release-011/tests/test_source_integration.py",
@@ -28774,30 +28714,6 @@
         "No coverage inferred from file names, method counts or preserved hashes.",
         "pending exact method/profile assertion binding; current bounded native services do not prove this complete method",
         "release-011 exact profile parity pending; no inference from basename or equal SHA256"
-      ]
-    },
-    {
-      "derived_from_inventory": true,
-      "owner": "Catalog",
-      "category": "Catalog",
-      "canonical_responsibility_key": "Catalog|Catalog|34aa4c6f90d2bfb99c29bc46a84b36eb2e377fc5cd226baef16ec2f3b29a25ee",
-      "published_paths": [
-        "remediation/catalog/tests/test_source_metadata_crud.py"
-      ],
-      "services": [
-        "Core/CanonicalJson.cs",
-        "Modules/Catalog/CatalogDatabase.cs",
-        "Modules/Catalog/MetadataCatalog.cs",
-        "remediation/nuke-app/Modules/Catalog/CatalogBuild.cs",
-        "remediation/nuke-app/Modules/Catalog/CatalogPipelineWorkflowOperation.cs",
-        "remediation/nuke-app/Modules/Catalog/CatalogSourceMetadata.cs",
-        "remediation/nuke-app/Modules/Catalog/MetadataCatalog.cs"
-      ],
-      "remaining": [
-        "Exact owner assertion-method closure only. Current/historical caller/profile and fullfile proof remain separate.",
-        "Full group semantic validation, callback descriptors and trusted pins, source attachment, public representation and OpenAPI bindings remain explicit pending.",
-        "Module-body history read API and additional descriptor/group/pinned reference guards are a separate approved mock-first increment. Full producer/caller completeness and HV acceptance are not implied by original test assertion closure.",
-        "This supplement closes only the listed assertion scopes. Existing group proofs remain separate; whole metadata/legacy build caller coverage, corpus parity and HV acceptance are not inferred. Optional factory injection absence guards and unlisted evidence-join permutations are not claimed by these original cases."
       ]
     },
     {

@@ -1,0 +1,77 @@
+{
+  "localTimestamp": "2026-10-28T16:08:32",
+  "scope": "Existing validate_group estimated_tokens zero/nonzero semantics after schema admission; no new numeric bounds.",
+  "requirements": [
+    "FR-BUILD-004",
+    "TR-BUILD-TOOL-004",
+    "TEST-BUILD-004",
+    "TEST-BUILD-007"
+  ],
+  "mockBeforeProduction": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T1600072282310-577e1332808a4447b1443fe1ab0d45ef/tests.trx",
+    "sha256": "c71f6b181a855a303c1861a3a056be2f2a3bc9a47359359ebcda1c83473f3684",
+    "passed": 104,
+    "failed": 0,
+    "skipped": 0,
+    "buildWarnings": 0,
+    "exactClass": "CatalogMetadataNumericDomainMockTests",
+    "exactClassPassed": 28
+  },
+  "nativeAffectedGate": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T1601243065120-8cd749066dac40178de58753850b78cb/tests.trx",
+    "sha256": "fc1d3bf78847624b12140f646212cebd080b6edea97ff2923171a59f537044a2",
+    "passed": 280,
+    "failed": 0,
+    "skipped": 0,
+    "buildWarnings": 0,
+    "exactClass": "CatalogMetadataNumericDomainRealTests",
+    "exactClassPassed": 14
+  },
+  "productionChange": "One Int32 conversion replaced with JsonNode.DeepEquals against numeric zero. No new parser, rounding, clamp, schema rule or package version.",
+  "vectors": [
+    "0",
+    "0.0",
+    "0e8",
+    "2147483647",
+    "2147483648",
+    "9223372036854775807",
+    "9223372036854775808",
+    "1.0",
+    "1e0",
+    "1e20",
+    "positive estimates without estimator version",
+    "unchanged negative and non-integer schema rejection"
+  ],
+  "sources": [
+    {
+      "path": "remediation/nuke-app/Modules/Catalog/CatalogSourceMetadata.cs",
+      "sha256": "deefc253f31a3c9912ab3cedea9e25aa56a18bd6dcbf0934c3855ffb58133b9b"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Catalog/CatalogMetadataNumericDomainMockTests.cs",
+      "sha256": "a906c0c1f55d49a85280b4a9d256cc1e1d40b95274e22e9b678a8e5c5e612b38"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Catalog/CatalogMetadataNumericDomainRealTests.cs",
+      "sha256": "38d28dede16cb3109d875ce18a4faec62b98094a4b0c56b66b97e487f3c85500"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Catalog/CatalogMetadataBodyCases.cs",
+      "sha256": "a9e9390b7e24310c6fa0211068e5f2a1a413e94e5c56b3d751dac3fda3b30fcb"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Catalog/CatalogMetadataBodyRealTests.cs",
+      "sha256": "8589f8a8a48592f10f6c48d6992ba9a751053324f23968b7027f9a4c6e386633"
+    }
+  ],
+  "semanticReferences": [
+    "https://learn.microsoft.com/en-us/dotnet/api/system.text.json.jsonelement.deepequals?view=net-10.0",
+    "https://raw.githubusercontent.com/dotnet/runtime/v10.0.0/src/libraries/System.Text.Json/src/System/Text/Json/Nodes/JsonValueOfElement.cs"
+  ],
+  "limits": [
+    "Finite original-domain vectors, not a claim that every unbounded JSON-schema numeric case is proven.",
+    "Dependency revision and SQLite revision-width domains remain open.",
+    "Whole producer/corpus/file parity, later full suite and HV acceptance are not claimed.",
+    "No Python, custom Node, Actions, provider calls, credentials or publication edits."
+  ]
+}
