@@ -13,6 +13,9 @@ class ModuleGraph(unittest.TestCase):
  def test_forbidden_concrete_edge_rejected(self):
   result=self.run_model({'classes':{'Repository':'storage','OwnerAuthenticationService':'application'},'dependencies':{'storage':['domain'],'application':['domain'],'domain':[]}},'class Repository\nclass OwnerAuthenticationService\nRepository ..> OwnerAuthenticationService')
   self.assertNotEqual(0,result.returncode);self.assertIn('Forbidden dependency',result.stderr)
+ def test_domain_port_invariant_rejects_platform_interface(self):
+  result=self.run_model({'classes':{'LoopbackHost':'bridge.android'},'dependencies':{'bridge.android':[]},'interfaces_are_domain_ports':True},'interface LoopbackHost')
+  self.assertNotEqual(0,result.returncode);self.assertIn('Interface port outside bridge.domain',result.stderr)
  def test_entire_current_class_graph_is_owned_and_acyclic(self):
   result=self.run_model(json.loads((P/'architecture/module-contract.json').read_text()),(P/'architecture/code-diagrams.md').read_text())
   self.assertEqual(0,result.returncode,result.stderr)

@@ -4,10 +4,15 @@ theme: default
 paginate: true
 size: 16:9
 style: |
-  section { font-family: "DejaVu Sans", sans-serif; font-size:18px; line-height:1.25; color:#20354a; }
+  section { position:relative; padding:50px 60% 50px 60px; font-family: "DejaVu Sans", sans-serif; font-size:18px; line-height:1.25; color:#20354a; }
   section p { margin:0.5em 0; }
   h1 { font-size:26px; margin:0 0 0.45em; }
+  section.cover { padding:60px; }
+  section img[alt="Screen"] { position:absolute; right:24px; top:50px; width:54%; height:calc(100% - 100px); object-fit:contain; }
+  section p:has(> img[alt="Screen"]) { margin:0; height:0; line-height:0; }
 ---
+
+<!-- _class: cover -->
 
 # Kotlin Compose UI storyboards
 
@@ -17,7 +22,7 @@ Explicit actor, state, action and branch IDs. Alternatives are labeled, not auto
 
 # STB01-1 · Agent calls android.groups.discover for job; UI is observation anchor
 
-![bg right:58% contain](../docs/screens/steps/STB01-1.svg)
+![Screen](../docs/screens/steps/STB01-1.svg)
 
 **External MCP client** · `SCR04.S0`
 
@@ -37,7 +42,7 @@ Next: STB01-2; error: END_WITH_TYPED_ERROR.
 
 # STB01-2 · Agent calls android.groups.describe then android.groups.set_active with CAS
 
-![bg right:58% contain](../docs/screens/steps/STB01-2.svg)
+![Screen](../docs/screens/steps/STB01-2.svg)
 
 **External MCP client** · `SCR04.S0`
 
@@ -57,7 +62,7 @@ Next: STB01-8; error: END_WITH_TYPED_ERROR.
 
 # STB01-3 · Deny branch: agent invokes denied binding
 
-![bg right:58% contain](../docs/screens/steps/STB01-3.svg)
+![Screen](../docs/screens/steps/STB01-3.svg)
 
 **External MCP client** · `SCR02.S2`
 
@@ -77,7 +82,7 @@ Next: END_WITH_RECORDED_ALTERNATIVE; error: END_WITH_TYPED_ERROR.
 
 # STB01-4 · Ask branch: agent submits one prepared exact invocation
 
-![bg right:58% contain](../docs/screens/steps/STB01-4.svg)
+![Screen](../docs/screens/steps/STB01-4.svg)
 
 **External MCP client** · `SCR01.S4`
 
@@ -97,7 +102,7 @@ Next: END_WITH_RECORDED_ALTERNATIVE; error: END_WITH_TYPED_ERROR.
 
 # STB01-5 · Owner approves this one Ask after quiescence
 
-![bg right:58% contain](../docs/screens/steps/STB01-5.svg)
+![Screen](../docs/screens/steps/STB01-5.svg)
 
 **Owner** · `SCR09.S0`
 
@@ -117,7 +122,7 @@ Next: STB01-8; error: END_WITH_TYPED_ERROR.
 
 # STB01-6 · Ask timeout branch
 
-![bg right:58% contain](../docs/screens/steps/STB01-6.svg)
+![Screen](../docs/screens/steps/STB01-6.svg)
 
 **Owner** · `SCR09.S1`
 
@@ -137,7 +142,7 @@ Next: END_WITH_RECORDED_ALTERNATIVE; error: END_WITH_TYPED_ERROR.
 
 # STB01-7 · Ask denied/cancelled branch
 
-![bg right:58% contain](../docs/screens/steps/STB01-7.svg)
+![Screen](../docs/screens/steps/STB01-7.svg)
 
 **Owner** · `SCR09.S0`
 
@@ -157,7 +162,7 @@ Next: END_WITH_RECORDED_ALTERNATIVE; error: END_WITH_TYPED_ERROR.
 
 # STB01-8 · Agent binding.invoke sets callback; then resources/subscribe and resources/read
 
-![bg right:58% contain](../docs/screens/steps/STB01-8.svg)
+![Screen](../docs/screens/steps/STB01-8.svg)
 
 **External MCP client** · `SCR05.S0`
 
@@ -177,7 +182,7 @@ Next: STB01-9; error: END_WITH_TYPED_ERROR.
 
 # STB01-9 · Owner reads exact live subscription status
 
-![bg right:58% contain](../docs/screens/steps/STB01-9.svg)
+![Screen](../docs/screens/steps/STB01-9.svg)
 
 **Owner** · `SCR05.S0`
 
@@ -197,7 +202,7 @@ Next: STB01-11; error: END_WITH_TYPED_ERROR.
 
 # STB01-10 · Retention branch: application cursor expired
 
-![bg right:58% contain](../docs/screens/steps/STB01-10.svg)
+![Screen](../docs/screens/steps/STB01-10.svg)
 
 **Owner** · `SCR05.S2`
 
@@ -217,7 +222,7 @@ Next: END_WITH_RECORDED_ALTERNATIVE; error: END_WITH_TYPED_ERROR.
 
 # STB01-11 · Owner requests administrative cancellation
 
-![bg right:58% contain](../docs/screens/steps/STB01-11.svg)
+![Screen](../docs/screens/steps/STB01-11.svg)
 
 **Owner** · `SCR05.S0`
 
@@ -237,7 +242,7 @@ Next: STB01-12; error: END_WITH_TYPED_ERROR.
 
 # STB01-12 · Approve only this subscription cancel
 
-![bg right:58% contain](../docs/screens/steps/STB01-12.svg)
+![Screen](../docs/screens/steps/STB01-12.svg)
 
 **Owner** · `SCR09.S0`
 
@@ -257,7 +262,7 @@ Next: STB01-13; error: END_WITH_TYPED_ERROR.
 
 # STB01-13 · Agent observes retained terminal status
 
-![bg right:58% contain](../docs/screens/steps/STB01-13.svg)
+![Screen](../docs/screens/steps/STB01-13.svg)
 
 **External MCP client** · `SCR05.S4`
 
@@ -277,7 +282,7 @@ Next: END; error: END_WITH_TYPED_ERROR.
 
 # STB01-14 · Uncertain cleanup branch: review available evidence
 
-![bg right:58% contain](../docs/screens/steps/STB01-14.svg)
+![Screen](../docs/screens/steps/STB01-14.svg)
 
 **Owner** · `SCR05.S3`
 
@@ -297,7 +302,7 @@ Next: END_WITH_RECORDED_ALTERNATIVE; error: END_WITH_TYPED_ERROR.
 
 # STB01-15 · No safe retry proof
 
-![bg right:58% contain](../docs/screens/steps/STB01-15.svg)
+![Screen](../docs/screens/steps/STB01-15.svg)
 
 **Owner** · `SCR05.S5`
 
@@ -317,7 +322,7 @@ Next: END_WITH_RECORDED_ALTERNATIVE; error: END_WITH_TYPED_ERROR.
 
 # STB02-1 · Owner creates exact target profile and secret reference
 
-![bg right:58% contain](../docs/screens/steps/STB02-1.svg)
+![Screen](../docs/screens/steps/STB02-1.svg)
 
 **Owner** · `SCR07.S0`
 
@@ -337,7 +342,7 @@ Next: STB02-2; error: END_WITH_TYPED_ERROR.
 
 # STB02-2 · Approve outbound profile save
 
-![bg right:58% contain](../docs/screens/steps/STB02-2.svg)
+![Screen](../docs/screens/steps/STB02-2.svg)
 
 **Owner** · `SCR09.S0`
 
@@ -357,7 +362,7 @@ Next: STB02-3; error: END_WITH_TYPED_ERROR.
 
 # STB02-3 · Select saved target profile without connecting
 
-![bg right:58% contain](../docs/screens/steps/STB02-3.svg)
+![Screen](../docs/screens/steps/STB02-3.svg)
 
 **Owner** · `SCR07.S0`
 
@@ -377,7 +382,7 @@ Next: STB02-4; error: END_WITH_TYPED_ERROR.
 
 # STB02-4 · Explicit Connect requests capabilities-first convention
 
-![bg right:58% contain](../docs/screens/steps/STB02-4.svg)
+![Screen](../docs/screens/steps/STB02-4.svg)
 
 **Owner** · `SCR07.S0`
 
@@ -397,7 +402,7 @@ Next: STB02-5; error: END_WITH_TYPED_ERROR.
 
 # STB02-5 · Inspect connection attempt
 
-![bg right:58% contain](../docs/screens/steps/STB02-5.svg)
+![Screen](../docs/screens/steps/STB02-5.svg)
 
 **Owner** · `SCR07.S5`
 
@@ -417,7 +422,7 @@ Next: STB02-6; error: END_WITH_TYPED_ERROR.
 
 # STB02-6 · Connected: inspect bounded tree/frame
 
-![bg right:58% contain](../docs/screens/steps/STB02-6.svg)
+![Screen](../docs/screens/steps/STB02-6.svg)
 
 **Owner** · `SCR07.S4`
 
@@ -437,7 +442,7 @@ Next: STB02-7; error: END_WITH_TYPED_ERROR.
 
 # STB02-7 · Send one allowed key/text operation
 
-![bg right:58% contain](../docs/screens/steps/STB02-7.svg)
+![Screen](../docs/screens/steps/STB02-7.svg)
 
 **Owner** · `SCR07.S4`
 
@@ -457,7 +462,7 @@ Next: STB02-8; error: END_WITH_TYPED_ERROR.
 
 # STB02-8 · Pointer/wheel operation under current input lease
 
-![bg right:58% contain](../docs/screens/steps/STB02-8.svg)
+![Screen](../docs/screens/steps/STB02-8.svg)
 
 **Owner** · `SCR07.S4`
 
@@ -477,7 +482,7 @@ Next: STB02-13; error: END_WITH_TYPED_ERROR.
 
 # STB02-9 · Wrong-token branch
 
-![bg right:58% contain](../docs/screens/steps/STB02-9.svg)
+![Screen](../docs/screens/steps/STB02-9.svg)
 
 **Owner** · `SCR07.S1`
 
@@ -497,7 +502,7 @@ Next: END_WITH_RECORDED_ALTERNATIVE; error: END_WITH_TYPED_ERROR.
 
 # STB02-10 · Wrong-version branch
 
-![bg right:58% contain](../docs/screens/steps/STB02-10.svg)
+![Screen](../docs/screens/steps/STB02-10.svg)
 
 **Owner** · `SCR07.S2`
 
@@ -517,7 +522,7 @@ Next: END_WITH_RECORDED_ALTERNATIVE; error: END_WITH_TYPED_ERROR.
 
 # STB02-11 · Protected-root branch
 
-![bg right:58% contain](../docs/screens/steps/STB02-11.svg)
+![Screen](../docs/screens/steps/STB02-11.svg)
 
 **Owner** · `SCR07.S3`
 
@@ -537,7 +542,7 @@ Next: END_WITH_RECORDED_ALTERNATIVE; error: END_WITH_TYPED_ERROR.
 
 # STB02-12 · Lease-conflict branch
 
-![bg right:58% contain](../docs/screens/steps/STB02-12.svg)
+![Screen](../docs/screens/steps/STB02-12.svg)
 
 **Owner** · `SCR07.S6`
 
@@ -557,7 +562,7 @@ Next: END_WITH_RECORDED_ALTERNATIVE; error: END_WITH_TYPED_ERROR.
 
 # STB02-13 · Explicit disconnect/cancel watch
 
-![bg right:58% contain](../docs/screens/steps/STB02-13.svg)
+![Screen](../docs/screens/steps/STB02-13.svg)
 
 **Owner** · `SCR07.S4`
 
@@ -577,7 +582,7 @@ Next: STB02-14; error: END_WITH_TYPED_ERROR.
 
 # STB02-14 · Disconnected result
 
-![bg right:58% contain](../docs/screens/steps/STB02-14.svg)
+![Screen](../docs/screens/steps/STB02-14.svg)
 
 **Owner** · `SCR07.S0`
 
@@ -597,7 +602,7 @@ Next: END; error: END_WITH_TYPED_ERROR.
 
 # STB03-1 · Edit boot/listener draft
 
-![bg right:58% contain](../docs/screens/steps/STB03-1.svg)
+![Screen](../docs/screens/steps/STB03-1.svg)
 
 **Owner** · `SCR08.S0`
 
@@ -617,7 +622,7 @@ Next: STB03-3; error: END_WITH_TYPED_ERROR.
 
 # STB03-2 · Discard-settings alternative
 
-![bg right:58% contain](../docs/screens/steps/STB03-2.svg)
+![Screen](../docs/screens/steps/STB03-2.svg)
 
 **Owner** · `SCR08.S0`
 
@@ -637,7 +642,7 @@ Next: END_WITH_RECORDED_ALTERNATIVE; error: END_WITH_TYPED_ERROR.
 
 # STB03-3 · Save exact configuration draft
 
-![bg right:58% contain](../docs/screens/steps/STB03-3.svg)
+![Screen](../docs/screens/steps/STB03-3.svg)
 
 **Owner** · `SCR08.S0`
 
@@ -657,7 +662,7 @@ Next: STB03-4; error: END_WITH_TYPED_ERROR.
 
 # STB03-4 · Authenticate exact settings CAS
 
-![bg right:58% contain](../docs/screens/steps/STB03-4.svg)
+![Screen](../docs/screens/steps/STB03-4.svg)
 
 **Owner** · `SCR09.S0`
 
@@ -677,7 +682,7 @@ Next: STB03-5; error: END_WITH_TYPED_ERROR.
 
 # STB03-5 · Local eligible foreground Start
 
-![bg right:58% contain](../docs/screens/steps/STB03-5.svg)
+![Screen](../docs/screens/steps/STB03-5.svg)
 
 **Owner** · `SCR01.S3`
 
@@ -697,7 +702,7 @@ Next: STB03-6; error: END_WITH_TYPED_ERROR.
 
 # STB03-6 · Observe Starting health tuple
 
-![bg right:58% contain](../docs/screens/steps/STB03-6.svg)
+![Screen](../docs/screens/steps/STB03-6.svg)
 
 **Owner** · `SCR01.S1`
 
@@ -717,7 +722,7 @@ Next: STB03-7; error: END_WITH_TYPED_ERROR.
 
 # STB03-7 · Observe actual Running tuple
 
-![bg right:58% contain](../docs/screens/steps/STB03-7.svg)
+![Screen](../docs/screens/steps/STB03-7.svg)
 
 **Owner** · `SCR01.S0`
 
@@ -737,7 +742,7 @@ Next: STB03-8; error: END_WITH_TYPED_ERROR.
 
 # STB03-8 · Owner-enabled OS Wireless Debugging pairing profile
 
-![bg right:58% contain](../docs/screens/steps/STB03-8.svg)
+![Screen](../docs/screens/steps/STB03-8.svg)
 
 **Owner** · `SCR08.S0`
 
@@ -757,7 +762,7 @@ Next: STB03-9; error: END_WITH_TYPED_ERROR.
 
 # STB03-9 · Inspect pairing progress
 
-![bg right:58% contain](../docs/screens/steps/STB03-9.svg)
+![Screen](../docs/screens/steps/STB03-9.svg)
 
 **Owner** · `SCR08.S7`
 
@@ -777,7 +782,7 @@ Next: STB03-10; error: END_WITH_TYPED_ERROR.
 
 # STB03-10 · Inspect verified identity connection attempt
 
-![bg right:58% contain](../docs/screens/steps/STB03-10.svg)
+![Screen](../docs/screens/steps/STB03-10.svg)
 
 **Owner** · `SCR08.S8`
 
@@ -797,7 +802,7 @@ Next: STB03-11; error: END_WITH_TYPED_ERROR.
 
 # STB03-11 · ADB connected result
 
-![bg right:58% contain](../docs/screens/steps/STB03-11.svg)
+![Screen](../docs/screens/steps/STB03-11.svg)
 
 **Owner** · `SCR08.S9`
 
@@ -817,7 +822,7 @@ Next: STB03-12; error: END_WITH_TYPED_ERROR.
 
 # STB03-12 · Agent invokes approved ADB-backed screen.state/input.tap
 
-![bg right:58% contain](../docs/screens/steps/STB03-12.svg)
+![Screen](../docs/screens/steps/STB03-12.svg)
 
 **External MCP client** · `SCR01.S0`
 
@@ -837,7 +842,7 @@ Next: STB03-16; error: END_WITH_TYPED_ERROR.
 
 # STB03-13 · Key-rejected branch
 
-![bg right:58% contain](../docs/screens/steps/STB03-13.svg)
+![Screen](../docs/screens/steps/STB03-13.svg)
 
 **Owner** · `SCR08.S10`
 
@@ -857,7 +862,7 @@ Next: END_WITH_RECORDED_ALTERNATIVE; error: END_WITH_TYPED_ERROR.
 
 # STB03-14 · Foreground/bind failure branch
 
-![bg right:58% contain](../docs/screens/steps/STB03-14.svg)
+![Screen](../docs/screens/steps/STB03-14.svg)
 
 **Owner** · `SCR10.S0`
 
@@ -877,7 +882,7 @@ Next: END_WITH_RECORDED_ALTERNATIVE; error: END_WITH_TYPED_ERROR.
 
 # STB03-15 · Prerequisite corrected: explicit safe retry
 
-![bg right:58% contain](../docs/screens/steps/STB03-15.svg)
+![Screen](../docs/screens/steps/STB03-15.svg)
 
 **Owner** · `SCR10.S4`
 
@@ -897,7 +902,7 @@ Next: STB03-16; error: END_WITH_TYPED_ERROR.
 
 # STB03-16 · Explicit Stop
 
-![bg right:58% contain](../docs/screens/steps/STB03-16.svg)
+![Screen](../docs/screens/steps/STB03-16.svg)
 
 **Owner** · `SCR01.S0`
 
@@ -917,7 +922,7 @@ Next: STB03-17; error: END_WITH_TYPED_ERROR.
 
 # STB03-17 · Observe Stopping then Stopped
 
-![bg right:58% contain](../docs/screens/steps/STB03-17.svg)
+![Screen](../docs/screens/steps/STB03-17.svg)
 
 **Owner** · `SCR01.S5`
 
@@ -937,7 +942,7 @@ Next: END; error: END_WITH_TYPED_ERROR.
 
 # STB03-18 · Boot before unlock branch
 
-![bg right:58% contain](../docs/screens/steps/STB03-18.svg)
+![Screen](../docs/screens/steps/STB03-18.svg)
 
 **Owner** · `SCR08.S1`
 
@@ -957,7 +962,7 @@ Next: END_WITH_RECORDED_ALTERNATIVE; error: END_WITH_TYPED_ERROR.
 
 # STB04-1 · No clients: Add client opens enrollment
 
-![bg right:58% contain](../docs/screens/steps/STB04-1.svg)
+![Screen](../docs/screens/steps/STB04-1.svg)
 
 **Owner** · `SCR02.S1`
 
@@ -977,7 +982,7 @@ Next: STB04-2; error: END_WITH_TYPED_ERROR.
 
 # STB04-2 · Choose helper or manual profile
 
-![bg right:58% contain](../docs/screens/steps/STB04-2.svg)
+![Screen](../docs/screens/steps/STB04-2.svg)
 
 **Owner** · `SCR11.S0`
 
@@ -997,7 +1002,7 @@ Next: STB04-3; error: END_WITH_TYPED_ERROR.
 
 # STB04-3 · Local action creates approved window/one60s attempt
 
-![bg right:58% contain](../docs/screens/steps/STB04-3.svg)
+![Screen](../docs/screens/steps/STB04-3.svg)
 
 **Owner** · `SCR11.S0`
 
@@ -1017,7 +1022,7 @@ Next: STB04-4; error: END_WITH_TYPED_ERROR.
 
 # STB04-4 · Client submits enrollment proof
 
-![bg right:58% contain](../docs/screens/steps/STB04-4.svg)
+![Screen](../docs/screens/steps/STB04-4.svg)
 
 **External MCP client** · `SCR11.S4`
 
@@ -1037,7 +1042,7 @@ Next: STB04-5; error: END_WITH_TYPED_ERROR.
 
 # STB04-5 · Owner requests exact enrollment commit
 
-![bg right:58% contain](../docs/screens/steps/STB04-5.svg)
+![Screen](../docs/screens/steps/STB04-5.svg)
 
 **Owner** · `SCR11.S4`
 
@@ -1057,7 +1062,7 @@ Next: STB04-6; error: END_WITH_TYPED_ERROR.
 
 # STB04-6 · Approve exact principal commit
 
-![bg right:58% contain](../docs/screens/steps/STB04-6.svg)
+![Screen](../docs/screens/steps/STB04-6.svg)
 
 **Owner** · `SCR09.S0`
 
@@ -1077,7 +1082,7 @@ Next: STB04-7; error: END_WITH_TYPED_ERROR.
 
 # STB04-7 · Paired result; cancellation no longer available
 
-![bg right:58% contain](../docs/screens/steps/STB04-7.svg)
+![Screen](../docs/screens/steps/STB04-7.svg)
 
 **Owner** · `SCR11.S5`
 
@@ -1097,7 +1102,7 @@ Next: STB04-8; error: END_WITH_TYPED_ERROR.
 
 # STB04-8 · Draft exact canonical binding/schema/target rule
 
-![bg right:58% contain](../docs/screens/steps/STB04-8.svg)
+![Screen](../docs/screens/steps/STB04-8.svg)
 
 **Owner** · `SCR02.S0`
 
@@ -1117,7 +1122,7 @@ Next: STB04-9; error: END_WITH_TYPED_ERROR.
 
 # STB04-9 · Open exact grant commit review
 
-![bg right:58% contain](../docs/screens/steps/STB04-9.svg)
+![Screen](../docs/screens/steps/STB04-9.svg)
 
 **Owner** · `SCR02.S0`
 
@@ -1137,7 +1142,7 @@ Next: STB04-10; error: END_WITH_TYPED_ERROR.
 
 # STB04-10 · Approve grant CAS
 
-![bg right:58% contain](../docs/screens/steps/STB04-10.svg)
+![Screen](../docs/screens/steps/STB04-10.svg)
 
 **Owner** · `SCR09.S0`
 
@@ -1157,7 +1162,7 @@ Next: STB04-11; error: END_WITH_TYPED_ERROR.
 
 # STB04-11 · Inspect active sessions
 
-![bg right:58% contain](../docs/screens/steps/STB04-11.svg)
+![Screen](../docs/screens/steps/STB04-11.svg)
 
 **Owner** · `SCR02.S0`
 
@@ -1177,7 +1182,7 @@ Next: STB04-12; error: END_WITH_TYPED_ERROR.
 
 # STB04-12 · End one selected session through exact review
 
-![bg right:58% contain](../docs/screens/steps/STB04-12.svg)
+![Screen](../docs/screens/steps/STB04-12.svg)
 
 **Owner** · `SCR02.S0`
 
@@ -1197,7 +1202,7 @@ Next: STB04-13; error: END_WITH_TYPED_ERROR.
 
 # STB04-13 · Revoke credential through separate exact review
 
-![bg right:58% contain](../docs/screens/steps/STB04-13.svg)
+![Screen](../docs/screens/steps/STB04-13.svg)
 
 **Owner** · `SCR02.S0`
 
@@ -1217,7 +1222,7 @@ Next: STB04-14; error: END_WITH_TYPED_ERROR.
 
 # STB04-14 · Approve exact revoke
 
-![bg right:58% contain](../docs/screens/steps/STB04-14.svg)
+![Screen](../docs/screens/steps/STB04-14.svg)
 
 **Owner** · `SCR09.S0`
 
@@ -1237,7 +1242,7 @@ Next: STB04-15; error: END_WITH_TYPED_ERROR.
 
 # STB04-15 · Revoked result
 
-![bg right:58% contain](../docs/screens/steps/STB04-15.svg)
+![Screen](../docs/screens/steps/STB04-15.svg)
 
 **Owner** · `SCR02.S4`
 
@@ -1257,7 +1262,7 @@ Next: END; error: END_WITH_TYPED_ERROR.
 
 # STB04-16 · Expired-attempt branch
 
-![bg right:58% contain](../docs/screens/steps/STB04-16.svg)
+![Screen](../docs/screens/steps/STB04-16.svg)
 
 **Owner** · `SCR11.S1`
 
@@ -1277,7 +1282,7 @@ Next: END_WITH_RECORDED_ALTERNATIVE; error: END_WITH_TYPED_ERROR.
 
 # STB04-17 · Wrong proof/origin branch
 
-![bg right:58% contain](../docs/screens/steps/STB04-17.svg)
+![Screen](../docs/screens/steps/STB04-17.svg)
 
 **Owner** · `SCR11.S2`
 
@@ -1297,7 +1302,7 @@ Next: END_WITH_RECORDED_ALTERNATIVE; error: END_WITH_TYPED_ERROR.
 
 # STB04-18 · Authenticator unavailable/lockout branch
 
-![bg right:58% contain](../docs/screens/steps/STB04-18.svg)
+![Screen](../docs/screens/steps/STB04-18.svg)
 
 **Owner** · `SCR09.S4`
 
@@ -1317,7 +1322,7 @@ Next: END_WITH_RECORDED_ALTERNATIVE; error: END_WITH_TYPED_ERROR.
 
 # STB04-19 · Changed plan/CAS branch
 
-![bg right:58% contain](../docs/screens/steps/STB04-19.svg)
+![Screen](../docs/screens/steps/STB04-19.svg)
 
 **Owner** · `SCR09.S2`
 
@@ -1337,7 +1342,7 @@ Next: END_WITH_RECORDED_ALTERNATIVE; error: END_WITH_TYPED_ERROR.
 
 # STB04-20 · Biometric cancelled/failed branch
 
-![bg right:58% contain](../docs/screens/steps/STB04-20.svg)
+![Screen](../docs/screens/steps/STB04-20.svg)
 
 **Owner** · `SCR09.S5`
 
@@ -1357,7 +1362,7 @@ Next: END_WITH_RECORDED_ALTERNATIVE; error: END_WITH_TYPED_ERROR.
 
 # STB04-21 · Manual bearer alternative: protected one-time reveal
 
-![bg right:58% contain](../docs/screens/steps/STB04-21.svg)
+![Screen](../docs/screens/steps/STB04-21.svg)
 
 **Owner** · `SCR11.S6`
 
@@ -1377,7 +1382,7 @@ Next: END_WITH_RECORDED_ALTERNATIVE; error: END_WITH_TYPED_ERROR.
 
 # STB05-1 · Catalog absent: open safe import flow
 
-![bg right:58% contain](../docs/screens/steps/STB05-1.svg)
+![Screen](../docs/screens/steps/STB05-1.svg)
 
 **Owner** · `SCR10.S1`
 
@@ -1397,7 +1402,7 @@ Next: STB05-2; error: END_WITH_TYPED_ERROR.
 
 # STB05-2 · Choose expected validated release via SAF
 
-![bg right:58% contain](../docs/screens/steps/STB05-2.svg)
+![Screen](../docs/screens/steps/STB05-2.svg)
 
 **Owner** · `SCR03.S6`
 
@@ -1417,7 +1422,7 @@ Next: STB05-4; error: END_WITH_TYPED_ERROR.
 
 # STB05-3 · Import validation failure branch
 
-![bg right:58% contain](../docs/screens/steps/STB05-3.svg)
+![Screen](../docs/screens/steps/STB05-3.svg)
 
 **Owner** · `SCR03.S5`
 
@@ -1437,7 +1442,7 @@ Next: END_WITH_RECORDED_ALTERNATIVE; error: END_WITH_TYPED_ERROR.
 
 # STB05-4 · Validated sealed import preview
 
-![bg right:58% contain](../docs/screens/steps/STB05-4.svg)
+![Screen](../docs/screens/steps/STB05-4.svg)
 
 **Owner** · `SCR03.S7`
 
@@ -1457,7 +1462,7 @@ Next: STB05-5; error: END_WITH_TYPED_ERROR.
 
 # STB05-5 · Request exact registry activation
 
-![bg right:58% contain](../docs/screens/steps/STB05-5.svg)
+![Screen](../docs/screens/steps/STB05-5.svg)
 
 **Owner** · `SCR03.S7`
 
@@ -1477,7 +1482,7 @@ Next: STB05-6; error: END_WITH_TYPED_ERROR.
 
 # STB05-6 · Approve exact import publication CAS
 
-![bg right:58% contain](../docs/screens/steps/STB05-6.svg)
+![Screen](../docs/screens/steps/STB05-6.svg)
 
 **Owner** · `SCR09.S0`
 
@@ -1497,7 +1502,7 @@ Next: STB05-7; error: END_WITH_TYPED_ERROR.
 
 # STB05-7 · Inspect active imported evidence
 
-![bg right:58% contain](../docs/screens/steps/STB05-7.svg)
+![Screen](../docs/screens/steps/STB05-7.svg)
 
 **Owner** · `SCR03.S0`
 
@@ -1517,7 +1522,7 @@ Next: STB05-8; error: END_WITH_TYPED_ERROR.
 
 # STB05-8 · Draft local override
 
-![bg right:58% contain](../docs/screens/steps/STB05-8.svg)
+![Screen](../docs/screens/steps/STB05-8.svg)
 
 **Owner** · `SCR03.S0`
 
@@ -1537,7 +1542,7 @@ Next: STB05-9; error: END_WITH_TYPED_ERROR.
 
 # STB05-9 · Preview exact override/admin command fields
 
-![bg right:58% contain](../docs/screens/steps/STB05-9.svg)
+![Screen](../docs/screens/steps/STB05-9.svg)
 
 **Owner** · `SCR03.S4`
 
@@ -1557,7 +1562,7 @@ Next: STB05-10; error: END_WITH_TYPED_ERROR.
 
 # STB05-10 · Approve exact override commit
 
-![bg right:58% contain](../docs/screens/steps/STB05-10.svg)
+![Screen](../docs/screens/steps/STB05-10.svg)
 
 **Owner** · `SCR09.S0`
 
@@ -1577,7 +1582,7 @@ Next: STB05-12; error: END_WITH_TYPED_ERROR.
 
 # STB05-11 · Discard alternative before commit
 
-![bg right:58% contain](../docs/screens/steps/STB05-11.svg)
+![Screen](../docs/screens/steps/STB05-11.svg)
 
 **Owner** · `SCR03.S4`
 
@@ -1597,7 +1602,7 @@ Next: END_WITH_RECORDED_ALTERNATIVE; error: END_WITH_TYPED_ERROR.
 
 # STB05-12 · Create small functional mapping draft from searchable unassigned entries
 
-![bg right:58% contain](../docs/screens/steps/STB05-12.svg)
+![Screen](../docs/screens/steps/STB05-12.svg)
 
 **Owner** · `SCR04.S1`
 
@@ -1617,7 +1622,7 @@ Next: STB05-13; error: END_WITH_TYPED_ERROR.
 
 # STB05-13 · Save coherent mapping through exact owner review
 
-![bg right:58% contain](../docs/screens/steps/STB05-13.svg)
+![Screen](../docs/screens/steps/STB05-13.svg)
 
 **Owner** · `SCR04.S4`
 
@@ -1637,7 +1642,7 @@ Next: STB05-14; error: END_WITH_TYPED_ERROR.
 
 # STB05-14 · Approve functional mapping CAS
 
-![bg right:58% contain](../docs/screens/steps/STB05-14.svg)
+![Screen](../docs/screens/steps/STB05-14.svg)
 
 **Owner** · `SCR09.S0`
 
@@ -1657,7 +1662,7 @@ Next: STB05-17; error: END_WITH_TYPED_ERROR.
 
 # STB05-15 · Oversized/dependency failure branch
 
-![bg right:58% contain](../docs/screens/steps/STB05-15.svg)
+![Screen](../docs/screens/steps/STB05-15.svg)
 
 **Owner** · `SCR04.S2`
 
@@ -1677,7 +1682,7 @@ Next: END_WITH_RECORDED_ALTERNATIVE; error: END_WITH_TYPED_ERROR.
 
 # STB05-16 · Mapping conflict branch
 
-![bg right:58% contain](../docs/screens/steps/STB05-16.svg)
+![Screen](../docs/screens/steps/STB05-16.svg)
 
 **Owner** · `SCR04.S3`
 
@@ -1697,7 +1702,7 @@ Next: END_WITH_RECORDED_ALTERNATIVE; error: END_WITH_TYPED_ERROR.
 
 # STB05-17 · Local enable import-only HTTP admin window
 
-![bg right:58% contain](../docs/screens/steps/STB05-17.svg)
+![Screen](../docs/screens/steps/STB05-17.svg)
 
 **Owner** · `SCR03.S8`
 
@@ -1717,7 +1722,7 @@ Next: STB05-18; error: END_WITH_TYPED_ERROR.
 
 # STB05-18 · Prearm exact external HTTP upload/import request
 
-![bg right:58% contain](../docs/screens/steps/STB05-18.svg)
+![Screen](../docs/screens/steps/STB05-18.svg)
 
 **Owner** · `SCR03.S4`
 
@@ -1737,7 +1742,7 @@ Next: STB05-19; error: END_WITH_TYPED_ERROR.
 
 # STB05-19 · Choose redacted call-log export scope
 
-![bg right:58% contain](../docs/screens/steps/STB05-19.svg)
+![Screen](../docs/screens/steps/STB05-19.svg)
 
 **Owner** · `SCR06.S0`
 
@@ -1757,7 +1762,7 @@ Next: STB05-20; error: END_WITH_TYPED_ERROR.
 
 # STB05-20 · Request exact snapshot export approval
 
-![bg right:58% contain](../docs/screens/steps/STB05-20.svg)
+![Screen](../docs/screens/steps/STB05-20.svg)
 
 **Owner** · `SCR06.S0`
 
@@ -1777,7 +1782,7 @@ Next: STB05-21; error: END_WITH_TYPED_ERROR.
 
 # STB05-21 · Approve only sealed export snapshot
 
-![bg right:58% contain](../docs/screens/steps/STB05-21.svg)
+![Screen](../docs/screens/steps/STB05-21.svg)
 
 **Owner** · `SCR09.S0`
 
@@ -1797,7 +1802,7 @@ Next: STB05-22; error: END_WITH_TYPED_ERROR.
 
 # STB05-22 · Create-document picker writes approved snapshot
 
-![bg right:58% contain](../docs/screens/steps/STB05-22.svg)
+![Screen](../docs/screens/steps/STB05-22.svg)
 
 **Owner** · `SCR06.S4`
 
@@ -1817,7 +1822,7 @@ Next: STB05-25; error: END_WITH_TYPED_ERROR.
 
 # STB05-23 · Picker-cancel alternative
 
-![bg right:58% contain](../docs/screens/steps/STB05-23.svg)
+![Screen](../docs/screens/steps/STB05-23.svg)
 
 **Owner** · `SCR06.S4`
 
@@ -1837,7 +1842,7 @@ Next: END_WITH_RECORDED_ALTERNATIVE; error: END_WITH_TYPED_ERROR.
 
 # STB05-24 · Partial-write branch
 
-![bg right:58% contain](../docs/screens/steps/STB05-24.svg)
+![Screen](../docs/screens/steps/STB05-24.svg)
 
 **Owner** · `SCR06.S5`
 
@@ -1857,7 +1862,7 @@ Next: END_WITH_RECORDED_ALTERNATIVE; error: END_WITH_TYPED_ERROR.
 
 # STB05-25 · Edit logging/retention quotas
 
-![bg right:58% contain](../docs/screens/steps/STB05-25.svg)
+![Screen](../docs/screens/steps/STB05-25.svg)
 
 **Owner** · `SCR06.S0`
 
@@ -1877,7 +1882,7 @@ Next: END; error: END_WITH_TYPED_ERROR.
 
 # STB05-26 · Mandatory audit reserve exhausted branch
 
-![bg right:58% contain](../docs/screens/steps/STB05-26.svg)
+![Screen](../docs/screens/steps/STB05-26.svg)
 
 **Owner** · `SCR06.S3`
 
@@ -1897,7 +1902,7 @@ Next: END_WITH_RECORDED_ALTERNATIVE; error: END_WITH_TYPED_ERROR.
 
 # STB05-27 · Inspect runtime admission failure on dashboard
 
-![bg right:58% contain](../docs/screens/steps/STB05-27.svg)
+![Screen](../docs/screens/steps/STB05-27.svg)
 
 **Owner** · `SCR01.S6`
 
@@ -1917,7 +1922,7 @@ Next: END_WITH_RECORDED_ALTERNATIVE; error: END_WITH_TYPED_ERROR.
 
 # STB06-1 · Draft inbound listener and allowed ordinary root
 
-![bg right:58% contain](../docs/screens/steps/STB06-1.svg)
+![Screen](../docs/screens/steps/STB06-1.svg)
 
 **Owner** · `SCR08.S5`
 
@@ -1937,7 +1942,7 @@ Next: STB06-2; error: END_WITH_TYPED_ERROR.
 
 # STB06-2 · Request protected enable/save
 
-![bg right:58% contain](../docs/screens/steps/STB06-2.svg)
+![Screen](../docs/screens/steps/STB06-2.svg)
 
 **Owner** · `SCR08.S0`
 
@@ -1957,7 +1962,7 @@ Next: STB06-3; error: END_WITH_TYPED_ERROR.
 
 # STB06-3 · Approve exact ARC configuration
 
-![bg right:58% contain](../docs/screens/steps/STB06-3.svg)
+![Screen](../docs/screens/steps/STB06-3.svg)
 
 **Owner** · `SCR09.S0`
 
@@ -1977,7 +1982,7 @@ Next: STB06-4; error: END_WITH_TYPED_ERROR.
 
 # STB06-4 · Compatible client authenticates to inbound listener
 
-![bg right:58% contain](../docs/screens/steps/STB06-4.svg)
+![Screen](../docs/screens/steps/STB06-4.svg)
 
 **Compatible ARC client** · `SCR08.S6`
 
@@ -1997,7 +2002,7 @@ Next: STB06-5; error: END_WITH_TYPED_ERROR.
 
 # STB06-5 · Inbound authorized redacted watch on management_readonly root
 
-![bg right:58% contain](../docs/screens/steps/STB06-5.svg)
+![Screen](../docs/screens/steps/STB06-5.svg)
 
 **Compatible ARC client** · `SCR08.S6`
 
@@ -2017,7 +2022,7 @@ Next: STB06-7; error: END_WITH_TYPED_ERROR.
 
 # STB06-6 · Owner challenge cannot isolate bridge input branch
 
-![bg right:58% contain](../docs/screens/steps/STB06-6.svg)
+![Screen](../docs/screens/steps/STB06-6.svg)
 
 **Owner** · `SCR09.S3`
 
@@ -2037,7 +2042,7 @@ Next: END_WITH_RECORDED_ALTERNATIVE; error: END_WITH_TYPED_ERROR.
 
 # STB06-7 · Normal protected challenge: capture/input suspended
 
-![bg right:58% contain](../docs/screens/steps/STB06-7.svg)
+![Screen](../docs/screens/steps/STB06-7.svg)
 
 **Owner** · `SCR09.S0`
 
@@ -2057,7 +2062,7 @@ Next: STB06-8; error: END_WITH_TYPED_ERROR.
 
 # STB06-8 · Deny challenge and resume ordinary admission safely
 
-![bg right:58% contain](../docs/screens/steps/STB06-8.svg)
+![Screen](../docs/screens/steps/STB06-8.svg)
 
 **Owner** · `SCR09.S0`
 
@@ -2077,7 +2082,7 @@ Next: STB06-9; error: END_WITH_TYPED_ERROR.
 
 # STB06-9 · Rotate inbound ARC credential through exact review
 
-![bg right:58% contain](../docs/screens/steps/STB06-9.svg)
+![Screen](../docs/screens/steps/STB06-9.svg)
 
 **Owner** · `SCR08.S6`
 
@@ -2097,7 +2102,7 @@ Next: STB06-10; error: END_WITH_TYPED_ERROR.
 
 # STB06-10 · Approve rotation
 
-![bg right:58% contain](../docs/screens/steps/STB06-10.svg)
+![Screen](../docs/screens/steps/STB06-10.svg)
 
 **Owner** · `SCR09.S0`
 
@@ -2117,7 +2122,7 @@ Next: STB06-11; error: END_WITH_TYPED_ERROR.
 
 # STB06-11 · Client closes watch socket or receives revoke
 
-![bg right:58% contain](../docs/screens/steps/STB06-11.svg)
+![Screen](../docs/screens/steps/STB06-11.svg)
 
 **Compatible ARC client** · `SCR08.S6`
 
@@ -2137,7 +2142,7 @@ Next: END; error: END_WITH_TYPED_ERROR.
 
 # STB06-12 · Disabled-result observation
 
-![bg right:58% contain](../docs/screens/steps/STB06-12.svg)
+![Screen](../docs/screens/steps/STB06-12.svg)
 
 **System/backend event** · `SCR08.S5`
 

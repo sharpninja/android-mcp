@@ -8,7 +8,7 @@ Use Gradle8.14.3 with Java21, the exact StructurizrCLI2025.11.09 image digest in
 
 Run ./gradlew --offline validateArchitecture generateArchitectureDiagrams generateUiAssets renderStoryboards verifyDesignDocs packageDesignDocs. The same invocation is used inside the pinned container with only this docs project mounted, NODE_BIN selecting a compatible existing read-only Node runtime, network disabled and no exposed ports. STRUCTURIZR_CLI defaults to the existing image's /usr/local/structurizr-cli/structurizr.sh. The README records the actual invocation and receipts once complete.
 
-validateModuleGraph checks the proposed acyclic Kotlin ownership/import graph. validateModelContracts checks dispatch/revoke/refresh model edges, class responsibilities, API route/bearer consistency and non-placeholder UI contracts. validateArchitecture depends on that check and locally rendered code-view images and fails on invalid DSL. generateArchitectureDiagrams exports native C4 views through Structurizr then renders SVGs locally; image views scope the editable inline PlantUML class detail. generateUiAssets validates the canonical Markdown UI blueprint and projects vector screen/state/storyboard SVGs, manifest, reference Markdown and Marp source. renderStoryboards embeds SVG assets into a finite local Marp HTML deck. verifyDesignDocs fails on missing outputs, broken Markdown links or raster/script substitutions. packageDesignDocs creates a deterministic archive of current docs/SVG/source/build configuration, explicitly marked history notes and validation receipts. No diagram is sent to a public renderer and no Structurizr workspace is uploaded.
+validateModuleGraph checks the proposed acyclic Kotlin ownership/import graph. validateModelContracts checks dispatch/revoke/refresh model edges, class responsibilities, API route/bearer consistency and non-placeholder UI contracts. validateArchitecture depends on that check and locally rendered code-view images and fails on invalid DSL. generateArchitectureDiagrams exports native C4 views through Structurizr then renders SVGs locally; image views scope the editable inline PlantUML class detail. generateUiAssets validates the canonical Markdown UI blueprint and projects vector screen/state/storyboard SVGs, manifest, reference Markdown and Marp source. renderStoryboards embeds SVG assets into a finite local Marp HTML deck. verifyDesignDocs fails on missing outputs, broken Markdown links or raster/script substitutions. packageDesignDocs creates a deterministic archive of current docs/SVG/source/build configuration, explicitly marked history notes and concise path-free model/docs validation receipts. No diagram is sent to a public renderer and no Structurizr workspace is uploaded.
 
 ## Tooling and license
 
@@ -26,3 +26,20 @@ Canonical UI behavior/state/storyboard source is [ui-blueprint.md](docs/ui-bluep
 
 
 Deployment lines between host client instances and the APK are logical protocol relationships carried by the explicit owner-established loopback ADB forward, not additional direct network ingress. The on-device agent is a separate-UID local process. Offline catalog tooling represents a workstation process; the documentation toolchain is a separate software system outside the Android runtime; an unlinked documentation instance denotes local build output only. Edit SVG labels through DSL/PlantUML sources and regenerate; textLength is renderer output, not an editor constraint on source.
+
+
+### Wrapper distribution cache before offline execution
+
+After `python3 tooling/bootstrap.py`, run the official wrapper once with network
+access and the intended cache: `./gradlew -g .gradle-home --version`. The wrapper
+downloads its pinned distribution from services.gradle.org and verifies the committed
+distributionSha256Sum before execution. This step requires an existing compatible
+JDK; run it inside the same pinned renderer environment if the host lacks one.
+The bootstrap's `.tools/gradle-8.14.3` extraction is not the wrapper dists cache.
+Only after the wrapper version check succeeds should the documented `--offline`
+build be used. No Android build, global software install or public service is implied.
+
+The portable validation directory contains only docs-validation.txt,
+architecture-validation.txt, module-graph.json, model-contracts.json and
+ui-projection.json. Full local invocation, historical build/HV receipts, screenshots
+and machine paths are excluded. The checksum manifest pins all portable sources.

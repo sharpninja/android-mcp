@@ -2957,7 +2957,11 @@ and Android verification remain implementation release gates.
             "Exact command hash/scope/revisions,nonce,original deadline and queue position",
             "Current challenge ID; FIFO queue excluding expired entries",
             "Principal/operation/hash/revisions/phase,queued count; secrets redacted"
-          ]
+          ],
+          "health": {
+            "service": "Paused",
+            "pause_reason": "OWNER_CHALLENGE"
+          }
         },
         "SCR09.S1": {
           "label": "Expired challenge: no execution",
@@ -6242,6 +6246,11 @@ and Android verification remain implementation release gates.
       "binding",
       "ready",
       "error"
+    ],
+    "pause_reason": [
+      null,
+      "OWNER_CHALLENGE",
+      "CATALOG_MIGRATION"
     ]
   }
 }

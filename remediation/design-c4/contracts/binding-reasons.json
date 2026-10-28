@@ -1,0 +1,96 @@
+{
+  "schema_version": "bridge-binding-reason-v1",
+  "scope": "Initial normative bridge design reason vocabulary, not a claim of all future errors",
+  "codes": [
+    {
+      "code": "UNKNOWN_SEMANTICS",
+      "layer": "inventory"
+    },
+    {
+      "code": "UNSUPPORTED_SCHEMA",
+      "layer": "inventory"
+    },
+    {
+      "code": "PLATFORM_APPLICABILITY_UNPROVEN",
+      "layer": "applicability"
+    },
+    {
+      "code": "TYPE_DEPENDENCY_UNAVAILABLE",
+      "layer": "applicability"
+    },
+    {
+      "code": "VERSION_UNAVAILABLE",
+      "layer": "applicability"
+    },
+    {
+      "code": "NON_SDK_BLOCKED",
+      "layer": "acquisition"
+    },
+    {
+      "code": "HIDL_BACKEND_UNAVAILABLE",
+      "layer": "acquisition"
+    },
+    {
+      "code": "PACKAGE_NOT_VISIBLE",
+      "layer": "acquisition"
+    },
+    {
+      "code": "NOT_ON_BRIDGE_CLASSPATH",
+      "layer": "acquisition"
+    },
+    {
+      "code": "DISPLAY_MAPPING_UNPROVEN",
+      "layer": "acquisition"
+    },
+    {
+      "code": "OS_UNAVAILABLE",
+      "layer": "authority"
+    },
+    {
+      "code": "BIND_PERMISSION_MISSING",
+      "layer": "authority"
+    },
+    {
+      "code": "OS_PERMISSION_REQUIRED",
+      "layer": "authority"
+    },
+    {
+      "code": "WIRE_CONTRACT_UNPROVEN",
+      "layer": "codec"
+    },
+    {
+      "code": "CALLBACK_ADAPTER_UNSUPPORTED",
+      "layer": "codec"
+    },
+    {
+      "code": "ADB_WIFI_UNAVAILABLE",
+      "layer": "transport"
+    },
+    {
+      "code": "SERVICE_UNAVAILABLE",
+      "layer": "transport"
+    },
+    {
+      "code": "RATE_LIMITED",
+      "layer": "transport"
+    },
+    {
+      "code": "OUTCOME_UNKNOWN",
+      "layer": "transport"
+    },
+    {
+      "code": "POLICY_DENIED",
+      "layer": "policy"
+    },
+    {
+      "code": "APPROVAL_EXPIRED",
+      "layer": "policy"
+    },
+    {
+      "code": "MANAGEMENT_ROOT_INPUT_DENIED",
+      "layer": "policy"
+    }
+  ],
+  "unknown_code_behavior": "Preserve layer/code/reason text, deny invocation; never infer authority",
+  "catalog_admin_error_namespace": "Separate lowercase Error.schema.json enum"
+}

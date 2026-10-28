@@ -52,7 +52,7 @@ class Design023Contracts(unittest.TestCase):
   facts=json.loads((R/'design-c4/architecture/arc-upstream-facts.json').read_text())
   self.assertEqual(facts['proto_sha256'],data['arc_proto_sha256'])
   self.assertEqual(set(range(1,11)),{x['method'] for x in data['arc_records']})
-  self.assertEqual(8,len(data['records']))
+  self.assertEqual({'screen.state','input.tap','settings.brightness.get','settings.brightness.set','sensors.list','sensors.read','contacts.list','document.read','device.battery.read'},{x['operation'] for x in data['records']})
   ids=set()
   for record in data['records']+data['arc_records']:
    self.assertEqual(hashlib.sha256(record['canonical_signature'].encode()).hexdigest(),record['binding_id'])

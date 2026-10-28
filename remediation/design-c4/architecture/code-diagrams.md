@@ -1,6 +1,6 @@
 # C4 code-level detail, using UML class notation
 
-Structurizr has no native class view. These editable inline PlantUML definitions are rendered locally and referenced by image views in workspace.dsl. They are proposed Kotlin classes/interfaces, not implemented Android code. Composition diamonds denote owned lifetime; dashed arrows denote dependency, and quoted labels denote multiplicity. Server blocks are app-scoped cross-component code views; the crosswalk below maps owning components/projects. Other blocks identify their scoped C4 components. Member lists show selected responsibilities, not every Kotlin member. A reference stub explicitly names its authoritative view; realizations inherit the full interface contract. Local epochs/generations are bridge metadata unless the pinned proto has the corresponding field.
+Structurizr has no native class view. These editable inline PlantUML definitions are rendered locally and referenced by image views in workspace.dsl. They are proposed Kotlin classes/interfaces, not implemented Android code. Composition diamonds denote owned lifetime; dashed arrows denote dependency, and quoted labels denote multiplicity. All six blocks are app-scoped cross-component code views; their headings name their focal components and the crosswalk maps every owning component/project. Image views attach to bridge.app. Solid directed associations show references or message connections, not inheritance; dashed triangle arrows denote interface realization. Member lists show selected responsibilities, not every Kotlin member. A reference stub explicitly names its authoritative view; realizations inherit the full interface contract. Local epochs/generations are bridge metadata unless the pinned proto has the corresponding field.
 
 ## server-core-classes — bridge.app.transport and server ownership
 
@@ -17,6 +17,10 @@ class AdbConnectionManager <<reference: server-execution-classes>>
 class CallbackBroker <<reference: server-execution-classes>>
 class ClientCredentialService <<reference: arc-controller-classes>>
 left to right direction
+interface LifecycleCommands {
+  +requestStop()
+  +observeImmutableHealth()
+}
 class BridgeService {
   +startDesiredState()
   +stopWithinDeadline()
@@ -25,7 +29,7 @@ class BridgeService {
 class McpServer {
   +handlePost(request): Response
   +openNotificationStream(session, lastEventId)
-  +readResource(principal, uri, cursor, limits)
+  +readResource(principal, uri, limits)
 }
 class DirectStreamNegotiator {
   +negotiate(clientCaps, serverCaps): AgreedProfile
@@ -46,6 +50,7 @@ DirectStreamNegotiator ..> DirectEventEmitter
 class HealthSnapshot {
   +revision: Long
   +serviceState
+  +pauseReason: OwnerChallengeOrMigrationOrNull
   +desiredState
   +mcpListener
   +adbBackend
@@ -61,6 +66,7 @@ class BootCompletedReceiver {
   +recordWaitingForUnlock()
   +requestEligibleStart()
 }
+BridgeService ..|> LifecycleCommands
 BridgeService ..> HealthSnapshot
 BridgeService "1" *-- "1" ForegroundStatusNotifier
 class DeviceProtectedBootMirror {
@@ -90,9 +96,10 @@ class AdmissionGate {
 }
 interface CatalogRepository {
   +streamEffectiveInventory(snapshot)
-  +commitOverride(command, expectedRevision, ownerCapability)
+  +commitOverride(command, expectedRevision, challengeRef)
   +activateSealedView(pins)
   +commitSessionView(session, desiredSet, expectedEtag)
+  +commitCredentialCAS(command, challengeRef, expectedRevision)
   +observePublications(): Flow
 }
 class SqliteStoreCoordinator {
@@ -135,6 +142,8 @@ class OwnerCommandFacade {
   +requestChallenge(exactCommand, revisions)
   +deliverPlatformAuthCompletion(challengeRef, completion)
   +observeImmutableStatus()
+  +observePendingExecutionChallenges()
+  +resolveExecutionConsent(challengeRef, decision)
 }
 BridgeService "1" *-- "1" McpServer
 BridgeService "1" *-- "1" DeviceViewResolver
@@ -155,7 +164,7 @@ Credential/policy owner publishes invalidation at the service barrier.
 Registry closes affected sessions/SSE; every delivery also rechecks current epochs.
 end note
 note bottom of AdmissionGate
-Owner challenge pending: input admission closed, prior input drained.
+Owner challenge pending: all finite dispatch admission closed, prior finite permits drained.
 ARC input/actions and every ADB/raw input path recheck the same gate.
 Quiescence failure means no protected prompt.
 end note
@@ -171,7 +180,7 @@ class OwnerAuthenticationService {
   +quiesceRemoteInputWhilePending(challenge)
 }
 class RemoteInputQuiescer {
-  +closeInputAdmissionAndDrain(deadline)
+  +closeDispatchAdmissionAndDrain(deadline)
   +pauseSensitiveFrameTreeAndLogExposure()
   +reopenAfterLastChallenge()
 }
@@ -187,11 +196,14 @@ class SessionCommandFacade {
   +observeOwnedSessionStatus()
 }
 OwnerCommandFacade ..> OwnerAuthenticationService : verify and consume exact command capability
+AdmissionGate ..> OwnerAuthenticationService : exact prepared Ask consent; fresh protected authentication, denial/timeout means no permit
 interface OwnerCapabilityVerifier {
   +verifyAndConsumeExactAtCommit(command, revisions, challengeRef)
 }
 OwnerAuthenticationService ..|> OwnerCapabilityVerifier
 SqliteCatalogRepository ..> OwnerCapabilityVerifier : injected port; same serialized CAS boundary
+SessionCommandFacade ..> LifecycleCommands : bounded local stop/status port
+OwnerCommandFacade ..> LifecycleCommands : immutable status only
 SessionCommandFacade ..> AdmissionGate
 note bottom of SessionCommandFacade
 Service derives owned principal/session context.
@@ -205,6 +217,8 @@ UI object or JSON principal is never owner authorization.
 end note
 BridgeService "1" *-- "1" AdmissionGate
 BridgeService "1" *-- "1" ClientAuthenticator
+BridgeService "1" *-- "1" SessionInvalidationFanout
+BridgeService "1" *-- "1" ClientCredentialService
 BridgeService "1" *-- "1" FunctionalGroupIndex
 BridgeService "1" *-- "1" AuditLogger
 BridgeService "1" *-- "1" OwnerCommandFacade
@@ -297,9 +311,22 @@ interface ArcClientPort {
   +closeOwnedConnection()
 }
 ArcClientAdapter ..|> ArcClientPort
+interface ArcClientFactory {
+  +openApprovedConnection(plan): ArcClientPort
+}
+class ProtocolArcClientFactory
+ProtocolArcClientFactory ..|> ArcClientFactory
+ProtocolArcClientFactory ..> ArcClientAdapter : constructs per-connection adapter from admitted plan
+ArcSessionManager ..> ArcClientFactory : injected domain factory; no protocol import
 ArcSessionManager "1" *-- "0..*" ArcClientPort
+ArcClientAdapter "1" *-- "1" ArcFrameCodec
+note bottom of ArcClientFactory
+Android composition injects ProtocolArcClientFactory. Each client owns its codec.
+Target credentials are loaded only through admitted CredentialVault access.
+end note
 class BridgeService <<reference: server-core-classes>>
 BridgeService "1" *-- "1" ArcSessionManager
+BridgeService "1" *-- "1" ProtocolArcClientFactory
 interface CredentialVault {
   +storeVerifierAndEncryptedBackendReference(command)
   +loadAdmittedBackendAuthorization(profile, pins)
@@ -313,6 +340,8 @@ class ClientCredentialService {
   +revealOnce(exactOwnerCommand)
   +rotateCredential(exactOwnerCommand)
 }
+class CatalogRepository <<reference: server-core-classes>>
+KeystoreCredentialVault ..> CatalogRepository : credential verifier writes use the single serialized repository writer
 ClientCredentialService ..> CredentialVault
 ArcSessionManager ..> CredentialVault : admitted outbound secret only, never UI frame state
 ArcSessionManager ..> AdmissionGate
@@ -392,6 +421,15 @@ end note
 interface CodecRegistry {
   +selectExact(schemaHash, wireProof)
 }
+class VerifiedCodecRegistry {
+  +selectExact(schemaHash, wireProof)
+  +rejectMissingAmbiguousOrStaleProof()
+}
+VerifiedCodecRegistry ..|> CodecRegistry
+note bottom of VerifiedCodecRegistry
+Immutable trusted generated codec table indexed by exact schema hash and wire proof.
+Current backend/interface pins must match. No guessed transaction layout or dynamic compilation.
+end note
 class SdkBindingBackend {
   +preflight(plan): SupportedOrReason
   +invoke(verifiedPlan): Outcome
@@ -403,6 +441,17 @@ interface CallbackProxyFactory {
   +forClass(descriptor): PrebuiltStubOrReason
   +forBinderEndpoint(descriptor): VerifiedStubOrReason
 }
+class VerifiedCallbackProxyFactory {
+  +forInterface(descriptor)
+  +forClass(descriptor): PrebuiltStubOrReason
+  +forBinderEndpoint(descriptor): VerifiedStubOrReason
+}
+VerifiedCallbackProxyFactory ..|> CallbackProxyFactory
+note bottom of VerifiedCallbackProxyFactory
+SDK interfaces use reviewed proxy adapters; classes use prebuilt typed stubs.
+Binder endpoints require exact verified transaction/codec tables.
+Missing inherited methods or unsupported class construction remain explicit reasons.
+end note
 class CallbackBroker {
   +register(admission): SubscriptionHandle
   +receive(sender, method, payload)
@@ -452,7 +501,8 @@ BinderBackend ..> CodecRegistry
 class BridgeService <<reference: server-core-classes>>
 BridgeService "1" *-- "1" CallbackBroker
 BridgeService "1" *-- "1" SqliteEventJournal
-BridgeService "1" *-- "1" CodecRegistry
+BridgeService "1" *-- "1" VerifiedCodecRegistry
+BridgeService ..> VerifiedCallbackProxyFactory : constructs and injects; CallbackBroker owns lifetime
 BridgeService "1" *-- "1" BinderBackend
 BridgeService "1" *-- "1" AdbPhoneBackend
 BridgeService "1" *-- "1" SdkBindingBackend
@@ -463,6 +513,8 @@ CallbackBroker "1" *-- "0..*" Subscription
 CallbackBroker "1" *-- "1" CallbackProxyFactory
 class AdmissionGate <<reference: server-core-classes>>
 CallbackBroker ..> AdmissionGate : recheck event/reply/cleanup authority
+interface PrincipalSessionSink <<reference: server-core-classes>>
+CallbackBroker ..|> PrincipalSessionSink
 CallbackBroker ..> EventJournal
 CallbackBroker "1" *-- "1" LocalReplyPolicy
 SqliteEventJournal ..|> EventJournal
@@ -545,6 +597,8 @@ class ArcRuntime {
 interface TargetAdapter {
   +snapshot(rootEpoch)
   +classifyRegisteredRoot(): RootSecurityClass
+  +registerRoot(root, classification)
+  +selectRegisteredRoot(rootId)
   +watchFramesWithinQuota(connectionContext, rootPins)
   +invokeApprovedAction(verifiedPlan)
   +sendInput(principalContext, currentRoot, events)
@@ -556,6 +610,7 @@ class UiDispatcher {
 class ComposeManagementViewModel {
   +observeStatusAndDrafts()
   +submitOwnerCommand(expectedRevision)
+  +reviewExactExecutionConsent(challengeRef, decision)
 }
 class OwnerCommandFacade <<reference: server-core-classes>>
 class AdmissionGate <<reference: server-core-classes>>
@@ -575,6 +630,7 @@ ArcFrameCodec ..> ArcProtocolModel
 ArcTcpTransport ..> ArcRequestHandler
 ArcRequestHandler ..> ArcCompatibilityProfile
 ArcRequestHandler ..> ArcRuntime
+ArcRuntime ..> AdmissionGate : beginDispatch/endDispatch around every finite target action; same quiescence permit
 ArcRuntime ..> TargetAdapter
 class BridgeService <<reference: server-core-classes>>
 BridgeService "1" *-- "1" ArcTcpTransport
@@ -588,9 +644,11 @@ ArcRequestHandler "1" *-- "1" ArcAuthorizationGate
 ArcRequestHandler "1" *-- "1" ArcAuthenticator
 ComposeTargetAdapter ..|> TargetAdapter
 ComposeTargetAdapter ..> UiDispatcher
+class SessionCommandFacade <<reference: server-core-classes>>
+ComposeManagementViewModel ..> SessionCommandFacade : bounded start/stop/status route
 ComposeManagementViewModel ..> OwnerCommandFacade : local only
 note right of ArcTcpTransport
-Authenticated plaintext loopback TCP, no fake TLS.
+Plaintext loopback TCP; bearer authenticated in each ARC request envelope, no fake TLS.
 One request/socket. Received Cancel 8 returns UNSUPPORTED then closes.
 The controller cancels a watch by closing its own watch socket.
 Zero-length frame is legal; negative/oversize is rejected before allocation.
@@ -598,7 +656,9 @@ Unknown methods (including 0) return UNSUPPORTED; Cancel 8 remains unsupported.
 FPS field is parsed, not enforced upstream; local quotas are explicit port policy.
 end note
 note bottom of ComposeTargetAdapter
-Explicit registered root only: management_readonly or ordinary_unprivileged.
+Classify every registration: management_readonly, ordinary_unprivileged or protected_excluded.
+Select only first two; protected/secret roots can never be selected.
+Node IDs are never reused within the process boot epoch; root replacement invalidates every old ID.
 No input/actions on management roots; protected/secret roots are not selectable.
 Protected approval/grant screens excluded.
 Protected transition also suspends frame/tree/log delivery before the OS prompt.
@@ -625,6 +685,8 @@ interface TargetAdapter <<reference: arc-ui-classes>>
 class ComposeTargetAdapter {
   +snapshot(rootEpoch)
   +classifyRegisteredRoot(): RootSecurityClass
+  +registerRoot(root, classification)
+  +selectRegisteredRoot(rootId)
   +watchFramesWithinQuota(connectionContext, rootPins)
   +invokeApprovedAction(verifiedPlan)
   +sendInput(principalContext, currentRoot, events)
@@ -634,6 +696,7 @@ class ComposeTargetAdapter {
 class TargetNodeRegistry {
   +resolveNode(id, generation)
   +invalidateOnRootReplacement()
+  +allocateNeverReusedBootScopedNodeId()
 }
 class ArcFrameCapture {
   +captureBoundedPng(root): FrameUpdate
@@ -663,6 +726,8 @@ class ArcInputLeaseRegistry {
 }
 class BridgeService <<reference: server-core-classes>>
 BridgeService "1" *-- "1" ArcInputLeaseRegistry
+interface PrincipalSessionSink <<reference: server-core-classes>>
+ArcInputLeaseRegistry ..|> PrincipalSessionSink
 ArcInputLeaseRegistry "1" *-- "0..1" ArcInputDispatcher
 interface ArcStreamLease {
   +closeOwnedStreamWithinDeadline()
@@ -715,6 +780,7 @@ end note
 | ArcAuthorizationGate | bridge.app.arc | bridge.application |
 | ArcBearerAuthenticator | bridge.app.arc | bridge.application |
 | ArcClientAdapter | bridge.app.arcController | bridge.protocol |
+| ArcClientFactory | bridge.app.arcController | bridge.domain |
 | ArcClientPort | bridge.app.arcController | bridge.domain |
 | ArcCompatibilityProfile | bridge.app.arc | bridge.protocol |
 | ArcConnectionSession | bridge.app.arc | bridge.protocol |
@@ -764,12 +830,14 @@ end note
 | ForegroundStatusNotifier | bridge.app.lifecycle | bridge.android |
 | FunctionalGroupIndex | bridge.app.groups | bridge.application |
 | HealthSnapshot | bridge.app.lifecycle | bridge.domain |
+| HttpRouteDispatcher | bridge.app.transport | bridge.domain |
 | InvocationPlanner | bridge.app.invoke | bridge.application |
 | JournalNotificationWorker | bridge.app.transport | bridge.protocol |
 | KeystoreClientAuthenticator | bridge.app.auth | bridge.android |
 | KeystoreCredentialVault | bridge.app.auth | bridge.android |
+| LifecycleCommands | bridge.app.lifecycle | bridge.domain |
 | LocalReplyPolicy | bridge.app.callbacks | bridge.domain |
-| LoopbackHost | bridge.app.transport | bridge.android |
+| LoopbackHost | bridge.app.transport | bridge.domain |
 | LoopbackTlsHost | bridge.app.transport | bridge.android |
 | McpCallbackResourceAdapter | bridge.app.callbacks | bridge.protocol |
 | McpServer | bridge.app.transport | bridge.protocol |
@@ -781,6 +849,8 @@ end note
 | PairingService | bridge.app.transport | bridge.protocol |
 | PendingOwnerNotifier | bridge.app.policy | bridge.domain |
 | PrincipalSessionSink | bridge.app.auth | bridge.domain |
+| ProtocolArcClientFactory | bridge.app.arcController | bridge.protocol |
+| ProtocolHttpRouter | bridge.app.transport | bridge.protocol |
 | ReducedLoopbackHttpHost | bridge.app.transport | bridge.android |
 | RemoteFrameState | bridge.app.arcController | bridge.domain |
 | RemoteInputQuiescer | bridge.app.policy | bridge.application |
@@ -796,6 +866,8 @@ end note
 | TargetAdapter | bridge.app.arc | bridge.domain |
 | TargetNodeRegistry | bridge.app.arc | bridge.android |
 | UiDispatcher | bridge.app.arc | bridge.android |
+| VerifiedCallbackProxyFactory | bridge.app.callbacks | bridge.android |
+| VerifiedCodecRegistry | bridge.app.invoke | bridge.bindings |
 | WireContractVerifier | bridge.app.invoke | bridge.bindings |
 
 The machine-readable [module contract](module-contract.json) owns this mapping.
@@ -804,6 +876,19 @@ interface/value ports live in bridge.domain. Runtime composition is performed on
 by bridge.android. The Gradle validation checks every drawn class and dependency
 against the permitted acyclic graph, including reference stubs. Concrete adapters
 are injected through domain ports; a reverse Flow of values is not a source import.
+
+Strong ETags are representation-specific opaque tokens, never a bare numeric revision.
+The facade validates the supplied ETag against the pinned representation, deriving
+typed ExpectedRevision facts for the repository. challengeRef is a nonsecret lookup
+key to a service-owned single-use proof, not a capability value supplied by UI/JSON.
+The injected OwnerCapabilityVerifier resolves/consumes it at the same CAS commit.
+AdmissionGate owns authorization/barrier state; RemoteInputQuiescer orchestrates
+drain/suspend/reopen using that gate and the exposure adapters. Neither has a second
+authority. Resolver Flow and EpochInvalidationWorker notifications are idempotent
+hints; only activateCAS can install a new device-view generation. Current epoch
+comparison under admission remains authoritative even if either notification lags.
+McpServer parses the application cursor from the exact resource URI; cursor is not
+a separate MCP resources/read parameter.
 
 SVG textLength attributes are renderer output; edit DSL/PlantUML sources and regenerate,
 or remove those attributes before manual SVG text editing. No SVG is runtime app code.
@@ -865,9 +950,19 @@ BridgeService "1" *-- "1" LoopbackHost
 BridgeService "1" *-- "1" PairingService
 BridgeService "1" *-- "1" CatalogAdminHandler
 BridgeService "1" *-- "1" OutboxDispatcher
-LoopbackHost ..> McpServer : MCP route
-LoopbackHost ..> PairingService : optional pair route
-LoopbackHost ..> CatalogAdminHandler : disabled by default admin route
+interface HttpRouteDispatcher {
+  +routeBoundedRequest(request): Response
+}
+class ProtocolHttpRouter
+ProtocolHttpRouter ..|> HttpRouteDispatcher
+LoopbackTlsHost ..> HttpRouteDispatcher : injected bounded route port
+ReducedLoopbackHttpHost ..> HttpRouteDispatcher : injected bounded route port
+BridgeService "1" *-- "1" ProtocolHttpRouter
+ProtocolHttpRouter ..> McpServer : MCP route
+ProtocolHttpRouter ..> PairingService : optional pair route
+ProtocolHttpRouter ..> CatalogAdminHandler : disabled by default admin route
+class DirectEventEmitter <<reference: server-core-classes>>
+ProtocolHttpRouter ..> DirectEventEmitter : negotiated direct-event route
 PairingService ..> OwnerAuthenticationService
 PairingService ..> CatalogRepository
 CatalogAdminHandler ..> ClientAuthenticator

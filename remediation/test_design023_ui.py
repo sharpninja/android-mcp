@@ -22,7 +22,7 @@ class UiBlueprint(unittest.TestCase):
     self.assertEqual(set(sp['enabled_controls']),enabled);self.assertEqual(set(sp['disabled_controls']),disabled)
   self.assertIn('Service Stopped',(P/'docs/screens/states/SCR01.S3.svg').read_text());self.assertNotIn('Service Running',(P/'docs/screens/states/SCR01.S3.svg').read_text())
  def test_storyboard_images_match_named_state_and_branch_success_does_not_force_error(self):
-  deck=(P/'storyboards/storyboard.md').read_text();images=re.findall(r'!\[bg[^]]*]\(([^)]+)\)',deck);steps=[x for s in self.m['storyboards'] for x in s['steps']];self.assertEqual(len(steps),len(images))
+  deck=(P/'storyboards/storyboard.md').read_text();images=re.findall(r'!\[Screen]\(([^)]+)\)',deck);steps=[x for s in self.m['storyboards'] for x in s['steps']];self.assertEqual(len(steps),len(images))
   for st,img in zip(steps,images):
    r=ET.parse((P/'storyboards'/img).resolve()).getroot();self.assertEqual(st['state_id'],r.get('data-screen-state'));self.assertEqual(st['control_id'],r.get('data-focus-control'))
    if st['interaction']=='control':self.assertIn(st['control_id'],self.s[st['screen_id']]['state_specs'][st['state_id']]['enabled_controls'])

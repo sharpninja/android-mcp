@@ -4,6 +4,7 @@ function validate(contract, source) {
   const errors=[];
   const names=[...source.matchAll(/^(?:class|interface|enum) (\w+)/gm)].map(x=>x[1]);
   for (const name of new Set(names)) if (!contract.classes[name]) errors.push('Class has no unique owner: '+name);
+  if(contract.interfaces_are_domain_ports)for(const [,name] of source.matchAll(/^interface (\w+)/gm))if(contract.classes[name]!=='bridge.domain')errors.push('Interface port outside bridge.domain: '+name);
   const edges=new Set();
   for(const [,view,body] of source.matchAll(/## ([a-z-]+)[^\n]*\n[\s\S]*?```plantuml\n([\s\S]*?)\n```/g)){
     const declared=new Set([...body.matchAll(/^(?:class|interface|enum) (\w+)/gm)].map(x=>x[1]));

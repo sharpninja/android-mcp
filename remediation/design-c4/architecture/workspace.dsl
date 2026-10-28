@@ -14,21 +14,21 @@ workspace "Android MCP Bridge" "All-Kotlin service and Compose UI; internal ARC 
         bridge = softwareSystem "Android MCP bridge" "Full versioned inventory, including unknown/unavailable entries; separate authority and contextual discovery" {
             app = container "Android bridge APK" "One UID and one process in this reference design; Kotlin service owns authoritative state" "Kotlin / Jetpack Compose" {
                 lifecycle = component "BridgeService" "Foreground lifecycle, boot eligibility and truthful status" "Kotlin Android Service"
-                transport = component "McpServer" "Pinned MCP 2025-11-25 sessions/resources plus separately negotiated direct-event route" "Kotlin"
+                transport = component "McpServer" "Pinned MCP sessions/resources, host/pair/admin and journal notification adapters; separately negotiated direct events" "Kotlin"
                 auth = component "ClientAuthenticator" "Credential, principal and session ownership" "Kotlin / Keystore"
                 policy = component "AdmissionGate" "Canonical policy, approvals, epochs and dispatch boundary" "Kotlin"
                 catalog = component "CatalogRepository" "Immutable imports, local overlays, credentials/configuration, CAS, full inventory" "Kotlin / SQLite"
-                device = component "DeviceViewResolver" "Observed version applicability and coherent binding/type activation" "Kotlin"
+                device = component "DeviceViewResolver" "Observed version applicability, coherent binding/type activation and idempotent epoch notification worker" "Kotlin"
                 groups = component "FunctionalGroupIndex" "Bounded job discovery and atomic session activation" "Kotlin"
-                invoke = component "InvocationPlanner" "Typed generic/raw dispatch, codecs, Binder, ADB and ARC target adapters" "Kotlin"
+                invoke = component "InvocationPlanner" "Typed generic/raw dispatch, codec selection, Binder/SDK and admitted ADB/ARC adapter routing" "Kotlin"
                 callbacks = component "CallbackBroker" "Registration, bounded journal, local reply and cleanup obligations" "Kotlin"
                 arc = component "ArcEngine" "Proposed Kotlin port preserving pinned ARC wire/profile; no app implementation claimed" "Kotlin / protobuf"
                 arcController = component "ArcClientAdapter" "Controller-side session/profile and compatible external-target connection" "Kotlin / protobuf"
-                ui = component "Compose management UI" "Screen definitions and registered ComposeTargetAdapter root; management roots read-only, protected roots excluded" "Kotlin / Compose"
+                ui = component "Compose management UI" "Compose screen/view-model projections; selected roots use the ArcEngine-owned adapter; protected roots excluded" "Kotlin / Compose"
                 ownerCommands = component "OwnerCommandFacade" "Protected owner commands; nonce/revision-bound fresh authentication" "Kotlin"
                 sessionCommands = component "SessionCommandFacade" "Bounded unexported session commands; server-derived principal and canonical policy" "Kotlin"
                 adb = component "AdbPhoneBackend" "Separate paired ADB connection manager and on-demand phone operations" "Kotlin"
-                storage = component "SqliteStoreCoordinator" "One serialized writer connection and bounded read-only snapshots" "Kotlin / SQLite"
+                storage = component "SqliteStoreCoordinator" "One serialized writer and bounded reads; platform OutboxDispatcher dispatches committed worker obligations" "Kotlin / SQLite"
                 audit = component "AuditLogger" "Mandatory audit and configurable per-client payload logging" "Kotlin"
             }
             db = container "App-private catalog/configuration" "Catalog snapshots, client/principal mappings, grants/logging configuration, groups/views, journal and audit; secret keys remain in Keystore" "SQLite" {
@@ -44,7 +44,7 @@ workspace "Android MCP Bridge" "All-Kotlin service and Compose UI; internal ARC 
         sources -> bridge "Supplies pinned offline inventory/protocol inputs"
         owner -> bridge.app "Uses local Compose management and protected approvals"
         agent -> bridge.app "Bounded discovery/invocation/resource reads" "Authenticated loopback MCP Streamable HTTP 2025-11-25"
-        arcClient -> bridge.app "One request/socket or bounded watch" "arc-protobuf-v1; envelope 1.0; authenticated raw loopback TCP"
+        arcClient -> bridge.app "One request/socket or bounded watch" "arc-protobuf-v1; envelope 1.0; raw loopback TCP with bearer-in-envelope authentication"
         bridge.app -> arcTarget "First request/response validates pinned profile; no handshake" "ARC raw TCP; signed 4-byte BE; envelope 1.0; loopback"
         bridge.app -> android "SDK/Binder and separately paired ADB calls, probes and death signals"
         bridge.app -> bridge.db "Reads catalog/policy/groups/views; writes overlays/journal/audit via one serialized writer connection" "App-private SQLite"
@@ -64,7 +64,7 @@ workspace "Android MCP Bridge" "All-Kotlin service and Compose UI; internal ARC 
         bridge.app.transport -> bridge.app.auth "Authenticates every request and reconnect"
         bridge.app.transport -> bridge.app.policy "Submits exact proposed plan for canonical admission"
         bridge.app.transport -> bridge.app.groups "Requests bounded discovery or activation"
-        bridge.app.policy -> bridge.app.ui "Requests exact bounded Ask challenge after input quiescence; no automatic approval"
+        bridge.app.policy -> bridge.app.ui "Requests exact bounded Ask challenge after finite-operation quiescence; no automatic approval"
         bridge.app.ui -> bridge.app.policy "Returns exact challenge result or denial; same-process trust is disclosed"
         bridge.app.auth -> bridge.app.callbacks "Revokes credential-owned subscriptions and delivery"
         bridge.app.auth -> bridge.app.arc "Revokes inbound streams and input leases"
@@ -74,7 +74,7 @@ workspace "Android MCP Bridge" "All-Kotlin service and Compose UI; internal ARC 
         bridge.app.transport -> bridge.app.invoke "Plans bounded operation then dispatches canonical Admission"
         bridge.app.policy -> bridge.app.transport "Returns admission bound to exact plan and current pins"
         bridge.app.invoke -> bridge.app.transport "Returns finite outcome without replaying uncertain effects"
-        bridge.app.transport -> agent "Returns finite results, subscribed URI-only notifications or explicitly negotiated direct-event SSE" "MCP 2025-11-25"
+        bridge.app.transport -> agent "Returns finite MCP results/URI-only hints or negotiated non-MCP direct-event SSE" "MCP 2025-11-25; direct events are a separate negotiated HTTP route"
         bridge.app.policy -> bridge.app.audit "Records canonical admission decision"
         bridge.app.invoke -> bridge.app.audit "Records dispatch and bounded outcome, including unknown effect"
         bridge.app.device -> bridge.app.catalog "Reads streamed inventory; stages and atomically activates resolved view"
@@ -85,7 +85,7 @@ workspace "Android MCP Bridge" "All-Kotlin service and Compose UI; internal ARC 
         bridge.app.invoke -> android "Performs authorized SDK/Binder operation"
         bridge.app.invoke -> bridge.app.arcController "ArcTargetBackend forwards exact admitted canonical ARC operation"
         bridge.app.invoke -> bridge.app.adb "Dispatches admitted bounded ADB plan"
-        bridge.app.adb -> android "Paired same-device ADB; on-demand screen.state/input.tap"
+        bridge.app.adb -> android "Paired same-device ADB; on-demand screen state and coordinate tap"
         android -> bridge.app.invoke "Returns registration or invocation outcome"
         bridge.app.invoke -> bridge.app.callbacks "Registers typed callback proxy and cleanup plan"
         android -> bridge.app.callbacks "Calls verified callback endpoint; authority remains separate"
@@ -127,6 +127,11 @@ workspace "Android MCP Bridge" "All-Kotlin service and Compose UI; internal ARC 
         bridge.app.arc -> arcClient "Sends one result or bounded watch responses with matching ID/version"
         bridge.app.ownerCommands -> bridge.app.ui "Returns protected command result or explicit failure"
 
+        bridge.app.storage -> bridge.app.callbacks "Dispatches committed verified cleanup worker obligation"
+        bridge.app.storage -> bridge.app.transport "Dispatches coalesced committed URI-hint notification worker"
+        bridge.app.storage -> bridge.app.device "Dispatches idempotent committed epoch notification worker"
+        bridge.app.lifecycle -> bridge.app.invoke "Closes admitted SDK/Binder backend resources within stop deadline"
+        bridge.app.lifecycle -> bridge.app.adb "Closes ADB collectors and owned connection resources"
         bridge.app.storage -> bridge.db "Owns the single writer connection and bounded snapshot readers"
         bridge.app.lifecycle -> bridge.app.storage "Owns and closes coordinator before service shutdown"
         bridge.app.ownerCommands -> bridge.app.audit "Exports exact redacted snapshot after fresh owner authorization"
@@ -184,7 +189,7 @@ workspace "Android MCP Bridge" "All-Kotlin service and Compose UI; internal ARC 
             autoLayout tb
         }
         component bridge.app ExecutionComponents "C4 detail: device view, invocation and callbacks" {
-            include bridge.app.policy bridge.app.device bridge.app.invoke bridge.app.adb bridge.app.callbacks bridge.app.transport bridge.app.catalog bridge.app.storage bridge.db android
+            include bridge.app.policy bridge.app.device bridge.app.invoke bridge.app.arcController bridge.app.adb bridge.app.callbacks bridge.app.transport bridge.app.catalog bridge.app.storage bridge.db android
             autoLayout tb
         }
         dynamic bridge.app Startup "Startup: trusted inventory and atomic device view" {
@@ -260,7 +265,7 @@ workspace "Android MCP Bridge" "All-Kotlin service and Compose UI; internal ARC 
             autoLayout tb
         }
         dynamic bridge.app ArcSession "ARC one request per socket; compatible stream lifetime" {
-            arcClient -> bridge.app.arc "Open authenticated raw loopback TCP; one length-prefixed request"
+            arcClient -> bridge.app.arc "Open raw loopback TCP with bearer-in-envelope authentication; one length-prefixed request"
             bridge.app.arc -> bridge.app.auth "Validate version first, then authenticate expected_kind=arc, then validate method before target access"
             bridge.app.arc -> bridge.app.policy "Admit authenticated principal and exact reserved ARC method identity"
             bridge.app.arc -> bridge.app.ui "Access only selected unprotected root after admission"
@@ -273,13 +278,14 @@ workspace "Android MCP Bridge" "All-Kotlin service and Compose UI; internal ARC 
         dynamic bridge.app OwnerTransition "Fresh owner capability bound to exact CAS command" {
             owner -> bridge.app.ui "Choose protected command and inspect exact scope/revisions"
             bridge.app.ui -> bridge.app.ownerCommands "Request nonce and protected authentication challenge"
-            bridge.app.ownerCommands -> bridge.app.ui "Service closes/drains bridge input and pauses frame/tree/log exposure before protected OS prompt"
+            bridge.app.ownerCommands -> bridge.app.ui "Service closes/drains all finite bridge dispatch and pauses frame/tree/log exposure before protected OS prompt"
             owner -> bridge.app.ui "Complete protected OS biometric/device credential prompt or deny/cancel"
             bridge.app.ui -> bridge.app.ownerCommands "Deliver platform-auth completion bound to service challenge; no JSON owner assertion"
             bridge.app.ownerCommands -> bridge.app.policy "Validate fresh owner capability and current command/revisions"
             bridge.app.policy -> bridge.app.catalog "Verify-and-consume capability at serialized CAS commit; reject mismatch"
             bridge.app.catalog -> bridge.app.policy "Return committed epoch facts before admission resumes"
             bridge.app.policy -> bridge.app.auth "Publish affected credential/policy epochs synchronously"
+            bridge.app.ownerCommands -> bridge.app.policy "Reopen only after last challenge reaches terminal disposition; success, denial, expiry and cancellation share finalizer"
             bridge.app.ownerCommands -> bridge.app.ui "Return committed revision or denial/conflict; no remote self-approval"
             autoLayout tb
         }
@@ -288,6 +294,8 @@ workspace "Android MCP Bridge" "All-Kotlin service and Compose UI; internal ARC 
             bridge.app.lifecycle -> bridge.app.transport "Close admission and listener; finish/cancel owned work within deadline"
             bridge.app.lifecycle -> bridge.app.arc "Close ARC listener, watches and logical input leases"
             bridge.app.lifecycle -> bridge.app.callbacks "Suppress delivery; attempt recorded verified unregister within stop deadline before backend close; persist unresolved disposition"
+            bridge.app.lifecycle -> bridge.app.invoke "Close admitted SDK/Binder backend resources within remaining stop deadline"
+            bridge.app.lifecycle -> bridge.app.adb "Close ADB collectors and owned connection resources; preserve unknown disposition"
             bridge.app.lifecycle -> bridge.app.storage "Drain committed writer work and close coordinator"
             bridge.app.lifecycle -> android "Publish Stopped, stopForeground and service; no automatic restart"
             autoLayout tb
@@ -318,17 +326,17 @@ workspace "Android MCP Bridge" "All-Kotlin service and Compose UI; internal ARC 
         }
         image bridge.app ServerAdapterClasses {
             image ../docs/diagrams/server-adapters-classes.svg
-            title "C4 code-level detail: host, pairing, admin and committed work"
+            title "C4 code-level detail: host, pairing, admin and committed work (UML class notation)"
         }
-        image bridge.app.arc ArcUiClasses {
+        image bridge.app ArcUiClasses {
             image ../docs/diagrams/arc-ui-classes.svg
             title "C4 code-level detail: internal ARC engine and Compose adapter (UML class notation)"
         }
-        image bridge.app.arcController ArcControllerClasses {
+        image bridge.app ArcControllerClasses {
             image ../docs/diagrams/arc-controller-classes.svg
             title "C4 code-level detail: controller Compose UI and ARC client (UML class notation)"
         }
-        image bridge.app.arc ArcTargetClasses {
+        image bridge.app ArcTargetClasses {
             image ../docs/diagrams/arc-target-classes.svg
             title "C4 code-level detail: Compose tree, frame, input and property adapters (UML class notation)"
         }

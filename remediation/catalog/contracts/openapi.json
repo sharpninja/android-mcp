@@ -587,7 +587,28 @@
           }
         },
         "x-owner-authorization": "prearmed-local-exact-command",
-        "x-required-capability": "catalog:admin"
+        "x-required-capability": "catalog:admin",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "reason": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 4096
+                  }
+                },
+                "required": [
+                  "reason"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
       }
     },
     "/v1/catalog/entries/{entry_id}/history": {
@@ -1416,48 +1437,8 @@
               }
             }
           },
-          "409": {
-            "description": "Existing identity, dependency or unresolved import conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
           "410": {
             "description": "Expired reader/collection/generation cursor",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "412": {
-            "description": "Stale strong metadata ETag",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Schema, reference, source or semantic validation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "428": {
-            "description": "Required precondition absent",
             "content": {
               "application/json": {
                 "schema": {
@@ -1622,7 +1603,7 @@
             },
             "headers": {
               "ETag": {
-                "description": "Current strong cat1 ETag",
+                "description": "Current strong meta1 ETag",
                 "schema": {
                   "type": "string"
                 }
@@ -1892,48 +1873,8 @@
               }
             }
           },
-          "409": {
-            "description": "Existing identity, dependency or unresolved import conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
           "410": {
             "description": "Expired reader/collection/generation cursor",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "412": {
-            "description": "Stale strong metadata ETag",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Schema, reference, source or semantic validation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "428": {
-            "description": "Required precondition absent",
             "content": {
               "application/json": {
                 "schema": {
@@ -1954,7 +1895,7 @@
           }
         },
         "description": "Protected owner only; bounded revision history with the same reader/generation cursor rules. No deletion of history.",
-        "x-required-capability": "catalog:read"
+        "x-required-capability": "catalog:admin"
       }
     },
     "/v1/catalog/functional-groups": {
@@ -2113,48 +2054,8 @@
               }
             }
           },
-          "409": {
-            "description": "Existing identity, dependency or unresolved import conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
           "410": {
             "description": "Expired reader/collection/generation cursor",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "412": {
-            "description": "Stale strong metadata ETag",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Schema, reference, source or semantic validation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "428": {
-            "description": "Required precondition absent",
             "content": {
               "application/json": {
                 "schema": {
@@ -2319,7 +2220,7 @@
             },
             "headers": {
               "ETag": {
-                "description": "Current strong cat1 ETag",
+                "description": "Current strong meta1 ETag",
                 "schema": {
                   "type": "string"
                 }
@@ -2589,48 +2490,8 @@
               }
             }
           },
-          "409": {
-            "description": "Existing identity, dependency or unresolved import conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
           "410": {
             "description": "Expired reader/collection/generation cursor",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "412": {
-            "description": "Stale strong metadata ETag",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Schema, reference, source or semantic validation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "428": {
-            "description": "Required precondition absent",
             "content": {
               "application/json": {
                 "schema": {
@@ -2651,7 +2512,7 @@
           }
         },
         "description": "Protected owner only; bounded revision history with the same reader/generation cursor rules. No deletion of history.",
-        "x-required-capability": "catalog:read"
+        "x-required-capability": "catalog:admin"
       }
     },
     "/v1/catalog/entries/{entry_id}/source-metadata": {
@@ -2714,48 +2575,8 @@
               }
             }
           },
-          "409": {
-            "description": "Existing identity, dependency or unresolved import conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
           "410": {
             "description": "Expired reader/collection/generation cursor",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "412": {
-            "description": "Stale strong metadata ETag",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Schema, reference, source or semantic validation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "428": {
-            "description": "Required precondition absent",
             "content": {
               "application/json": {
                 "schema": {

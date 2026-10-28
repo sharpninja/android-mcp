@@ -73,7 +73,7 @@
     "ArcPropertyMutationService": "bridge.android",
     "ArcLogStreamService": "bridge.android",
     "UiDispatcher": "bridge.android",
-    "LoopbackHost": "bridge.android",
+    "LoopbackHost": "bridge.domain",
     "LoopbackTlsHost": "bridge.android",
     "OutboxDispatcher": "bridge.android",
     "ComposeManagementViewModel": "bridge.ui",
@@ -90,7 +90,14 @@
     "ReducedLoopbackHttpHost": "bridge.android",
     "KeystoreCredentialVault": "bridge.android",
     "PrincipalSessionSink": "bridge.domain",
-    "SessionInvalidationFanout": "bridge.application"
+    "SessionInvalidationFanout": "bridge.application",
+    "VerifiedCodecRegistry": "bridge.bindings",
+    "VerifiedCallbackProxyFactory": "bridge.android",
+    "ArcClientFactory": "bridge.domain",
+    "ProtocolArcClientFactory": "bridge.protocol",
+    "HttpRouteDispatcher": "bridge.domain",
+    "ProtocolHttpRouter": "bridge.protocol",
+    "LifecycleCommands": "bridge.domain"
   },
   "dependencies": {
     "bridge.domain": [],
@@ -219,6 +226,13 @@
     "ComposeManagementViewModel": "bridge.app.ui",
     "ComposeRemoteControlViewModel": "bridge.app.ui",
     "CompatibleArcClient": "arcClient",
-    "CompatibleExternalArcTarget": "arcTarget"
+    "CompatibleExternalArcTarget": "arcTarget",
+    "VerifiedCodecRegistry": "bridge.app.invoke",
+    "VerifiedCallbackProxyFactory": "bridge.app.callbacks",
+    "ArcClientFactory": "bridge.app.arcController",
+    "ProtocolArcClientFactory": "bridge.app.arcController",
+    "HttpRouteDispatcher": "bridge.app.transport",
+    "ProtocolHttpRouter": "bridge.app.transport",
+    "LifecycleCommands": "bridge.app.lifecycle"
   }
 }

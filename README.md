@@ -2,16 +2,17 @@
 
 All-Kotlin server/Jetpack Compose design, internal ARC compatibility-port specification, C4/Structurizr and class sources, editable SVG screens/storyboards, a self-contained Marp presentation, catalog contracts, extractors and offline tests. **No Android application or deployed bridge is implemented here.**
 
-The last completed independent design review was round 023: **88 accuracy / 81 completeness, NOT_ACCEPTED**. The current candidate contains locally validated corrections for all 47 consolidated findings; round 024 is active under the original task's supervision. This checkpoint is published at the user's request independently of HV acceptance; it does not claim 98/98.
+The last completed independent design verdict remains round 023: **88 accuracy / 81 completeness, NOT_ACCEPTED**. Round 024 completed its core and architecture passes; provider credits blocked the UI pass before inference, so no unified round024 score exists. The current corrected candidate passes local tests, rendering and manual visual QA. Grok CLI rejected the requested `grok-4.7-high` model ID before inference. The user has since requested resuming with Claude Opus-5.5 at XHigh; the main task owns exact configuration verification and review launch. A new resolved model or 98/98 acceptance is not yet verified.
 
 - [Current design](<remediation/design-c4/docs/Android MCP Bridge Design.md>)
 - [Build the diagrams and offline deck](remediation/design-c4/README.md)
 - [Open the local presentation](remediation/design-c4/docs/storyboards.html)
 - [Screen/control/storyboard specification](remediation/design-c4/docs/ui-screens-and-storyboards.md)
-- [Candidate finding dispositions](remediation/design-c4/docs/review023-dispositions.md) and [validation summary](validation/design023-candidate.json) and [publication checks](validation/design023-publication.json)
+- [Candidate finding dispositions](remediation/design-c4/docs/review024-dispositions.md) and [validation summary](validation/design024-local-validation.json) and [publication checks](validation/design024-publication.json)
 - [Current catalog/reference code](remediation/catalog/README.md)
 - [Rehydrate selected source data and regenerate a catalog](REHYDRATE.md)
 - [Publication allowlist](deliverables.json) and [cleanup provenance](validation/lean-cleanup.json)
+- Completed partial round024 reports: [core](validation/hv-round024-pass1.md) and [architecture](validation/hv-round024-pass2.md); no unified score
 - [Completed independent design verdict](validation/hv-round023-design.md) and [status](validation/status.json)
 - [Third-party provenance and notices](THIRD_PARTY_NOTICES.md)
 

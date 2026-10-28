@@ -5,28 +5,32 @@ import base64,json,re,unittest,xml.etree.ElementTree as ET
 P=Path(__file__).resolve().parent/'design-c4'
 
 class DeckParser(HTMLParser):
-    def __init__(self):super().__init__();self.figures=[];self.literal_images=[]
+    def __init__(self):super().__init__();self.images=[];self.literal_images=[]
     def handle_starttag(self,tag,attrs):
         a=dict(attrs)
-        if tag=='figure':self.figures.append(a.get('style',''))
+        if tag=='img' and a.get('alt')=='Screen':self.images.append(a.get('src',''))
     def handle_data(self,data):
-        if '![bg ' in data:self.literal_images.append(data[:80])
+        if '![' in data and '](' in data:self.literal_images.append(data[:80])
 
 class Design022Contract(unittest.TestCase):
-    def test_slides_contain_actual_vector_backgrounds_not_raw_markdown(self):
+    def test_slides_contain_actual_vector_images_not_raw_markdown(self):
         m=json.loads((P/'docs/ui-asset-manifest.json').read_text())
         steps=[step for story in m['storyboards'] for step in story['steps']]
         parser=DeckParser();parser.feed((P/'docs/storyboards.html').read_text())
         self.assertFalse(parser.literal_images,'Marp rejected an SVG data-URI Markdown image')
-        self.assertEqual(len(steps),len(parser.figures))
-        for style,step in zip(parser.figures,steps):
+        self.assertEqual(len(steps),len(parser.images))
+        for style,step in zip(parser.images,steps):
             encoded=re.search(r'data:image/svg\+xml;base64,([A-Za-z0-9+/=]+)',style)
-            self.assertIsNotNone(encoded,'Background must be an embedded vector SVG')
+            self.assertIsNotNone(encoded,'Image must be an embedded vector SVG')
             raw=base64.b64decode(encoded[1])
             self.assertEqual((P/'docs/screens/steps'/(step['step_id']+'.svg')).read_bytes(),raw)
             state_panel=ET.fromstring(raw)
             self.assertEqual(step['state_id'],state_panel.get('data-screen-state'))
             self.assertEqual(step['control_id'],state_panel.get('data-focus-control'))
+    def test_slideshow_uses_standard_svg_images(self):
+        source=(P/'storyboards/storyboard.md').read_text()
+        self.assertNotIn('![bg ',source)
+        self.assertEqual(107,source.count('![Screen]('))
     def test_error_status_fixture_uses_actual_closed_health_domains(self):
         m=json.loads((P/'docs/ui-asset-manifest.json').read_text())
         screen=next(x for x in m['screens'] if x['id']=='SCR10');h=screen['health_example']

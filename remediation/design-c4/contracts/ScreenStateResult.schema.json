@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:android-mcp:ScreenStateResult:1",
+  "type": "object",
+  "properties": {
+    "captureId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "capturedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "coordinateSpaceVersion": {
+      "type": "string",
+      "enum": [
+        "display-pixels-v1",
+        "image-transform-v1"
+      ]
+    },
+    "displayId": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "width": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "height": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "rotation": {
+      "type": "integer",
+      "enum": [
+        0,
+        90,
+        180,
+        270
+      ]
+    },
+    "imageToDisplayTransform": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 6,
+      "maxItems": 6
+    }
+  },
+  "required": [
+    "captureId",
+    "capturedAt",
+    "coordinateSpaceVersion",
+    "displayId",
+    "width",
+    "height",
+    "rotation"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "coordinateSpaceVersion": {
+            "const": "image-transform-v1"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "imageToDisplayTransform"
+        ]
+      }
+    }
+  ]
+}

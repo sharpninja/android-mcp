@@ -22,7 +22,7 @@ fun sha256(file: File): String {
 }
 fun javaCommand(): String = File(System.getProperty("java.home"), "bin/java").absolutePath
 fun copyVectorWithCanvas(source: File, target: File) {
-    val svg = source.readText().replace(Regex("<!--SRC=\\[.*?\\]-->", RegexOption.DOT_MATCHES_ALL), "")
+    val svg = source.readText().replace(Regex("<!--SRC=\\[.*?\\]-->", RegexOption.DOT_MATCHES_ALL), "").replace(Regex("<title>(.*?)</title>", RegexOption.DOT_MATCHES_ALL)) { m -> "<title>" + m.groupValues[1].replace(Regex("&lt;/?size(?::[^&]+)?&gt;"), "") + "</title>" }
     val end = svg.indexOf('>', svg.indexOf("<svg")) + 1
     check(end > 0) { "Invalid generated SVG root: $source" }
     val padded = svg.replace(Regex("viewBox=\"0 0 ([0-9.]+) ([0-9.]+)\"")) { m -> "viewBox=\"-64 -64 ${(m.groupValues[1].toDouble() + 128)} ${(m.groupValues[2].toDouble() + 128)}\"" }
@@ -72,6 +72,7 @@ val validateModuleGraph by tasks.registering(Exec::class) {
 val validateModelContracts by tasks.registering(Exec::class) {
     outputs.upToDateWhen { false }
     dependsOn(verifyToolchain)
+    dependsOn("generateUiAssets")
     inputs.files("architecture/workspace.dsl", "architecture/code-diagrams.md", "architecture/module-contract.json", "docs/Android MCP Bridge Design.md", "docs/ui-blueprint.md", "contracts/openapi.json", "contracts/API-CONTRACT.md", "contracts/source-pins.json", "tooling/validate-contracts.cjs")
     outputs.file(layout.buildDirectory.file("receipts/model-contracts.json"))
     commandLine(providers.environmentVariable("NODE_BIN").orElse("node").get(), "tooling/validate-contracts.cjs", projectDir.absolutePath)
@@ -150,6 +151,7 @@ val generateUiAssets by tasks.registering(Exec::class) {
     dependsOn(verifyToolchain)
     inputs.files("docs/ui-blueprint.md", "tooling/render-ui.cjs")
     outputs.dirs("ui-svg", "docs/screens")
+    outputs.file("docs/Android MCP Bridge Design.md")
     outputs.files("docs/ui-asset-manifest.json", "docs/ui-screens-and-storyboards.md", "storyboards/storyboard.md", "build/receipts/ui-projection.json")
     commandLine(providers.environmentVariable("NODE_BIN").orElse("node").get(), "tooling/render-ui.cjs", projectDir.absolutePath)
 }
@@ -168,14 +170,14 @@ val renderStoryboards by tasks.registering {
         }.toList()
         val node = providers.environmentVariable("NODE_BIN").orElse("node").get()
         // Render ordinary relative SVG Markdown first. Markdown-it rejects SVG
-        // data URLs as Markdown links; embed only after Marp has emitted figures.
+        // data URLs as Markdown links; embed only after Marp has emitted img tags.
         val process = ProcessBuilder(node, file(".tools/marp/node_modules/@marp-team/marp-cli/marp-cli.js").absolutePath, deck.absolutePath, "--html", "-o", file("docs/storyboards.html").absolutePath).inheritIO().start()
         val exit = process.waitFor()
         check(exit == 0) { "Pinned Marp slideshow rendering failed (exit=$exit)" }
         var rendered = file("docs/storyboards.html").readText()
-        check(Regex("<figure\\s").findAll(rendered).count() == images.size) { "Marp did not render every screen image" }
+        check(Regex("<img\\s").findAll(rendered).count() == images.size) { "Marp did not render every screen image" }
         images.distinctBy { it.first }.forEach { (relative, data) -> rendered = rendered.replace(relative, data) }
-        check(!rendered.contains("![bg ") && Regex("background-image:url\\(&quot;data:image/svg\\+xml;base64,").findAll(rendered).count() == images.size) { "Screen backgrounds are not embedded vector images" }
+        check(!rendered.contains("![Screen]") && Regex("src=\"data:image/svg\\+xml;base64,").findAll(rendered).count() == images.size) { "Screens are not embedded vector images" }
         file("docs/storyboards.html").writeText(rendered)
         check(!Regex("(?:src|href)=[\"'](?:https?:)?//|url\\(\\s*[\"']?(?:https?:)?//", RegexOption.IGNORE_CASE).containsMatchIn(file("docs/storyboards.html").readText())) { "Slideshow contains external assets" }
     }
@@ -195,7 +197,7 @@ val verifyDesignDocs by tasks.registering {
             check(!text.contains("<!--SRC=[")) { "Stale embedded renderer metadata: $svg" }
             check(!text.contains("<image", ignoreCase = true) && !text.contains("<script", ignoreCase = true)) { "Raster/script not allowed in vector SVG: $svg" }
         }
-        (fileTree("docs") { include("**/*.md") }.files + setOf(file("README.md"), file("storyboards/storyboard.md"), file("architecture/code-diagrams.md"))).forEach { md ->
+        (fileTree("docs") { include("**/*.md") }.files + fileTree("contracts") { include("**/*.md") }.files + setOf(file("README.md"), file("storyboards/storyboard.md"), file("architecture/code-diagrams.md"))).forEach { md ->
             val text = md.readText()
             check(!text.contains("```mer" + "maid", ignoreCase = true)) { "Obsolete diagram source in current docs" }
             Regex("!?\\[[^]]*]\\(([^)]+)\\)").findAll(text).forEach { match ->
@@ -230,6 +232,6 @@ tasks.register<Zip>("packageDesignDocs") {
     from("storyboards") { into("storyboards") }
     from("gradle") { into("gradle") }
     from("tooling") { into("tooling"); exclude("**/__pycache__/**") }
-    from("build/receipts") { into("validation") }
+    from("build/receipts") { into("validation"); include("docs-validation.txt", "architecture-validation.txt", "module-graph.json", "model-contracts.json", "ui-projection.json") }
     from(listOf("README.md", "build.gradle.kts", "settings.gradle.kts", "gradle.properties", "gradlew", "gradlew.bat", "toolchain-lock.json", "renderer-lock.json"))
 }
