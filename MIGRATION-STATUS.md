@@ -46,3 +46,5 @@ Legacy Python/custom Node sources remain dormant references until each replaceme
 - [Documentation port plan](remediation/nuke-planning/docs/design-tooling-port.md)
 
 Strict DRY applies: one typed registry, shared contracts, recipe parser, matching and immutable storage engines. Keep this PR draft until migration and normal local verification finish, then mark ready as authorized. **No HV before ready.** Review and remediation occur in the PR afterward; no98/98acceptance or merge is claimed.
+
+The superseded first Publication11 audit draft is retained only as local history, with its ignored local copy and original preserved. The corrected v2 remains published; its predecessor pointer is provenance, not a runtime or recipe dependency. Git history is preserved.
