@@ -1,6 +1,6 @@
 # NUKE migration progress
 
-**INCOMPLETE — draft PR for progress tracking.** This checkpoint includes the initial NUKE host, typed contracts, mock fixtures, initial native implementations and migration plans. It disables legacy Python CI and does not claim production parity.
+**INCOMPLETE — draft PR for progress tracking.** This checkpoint includes the initial NUKE host, typed contracts, mock fixtures, initial native implementations and migration plans. Validation is local-only; no GitHub Actions are configured or planned. It does not claim production parity.
 
 ## Required implementation
 
@@ -11,7 +11,7 @@ The included host exposes Validate --operation MockGate. Native AIDL/signature e
 ## Progress checklist
 
 - [x] Create a branch checkpoint and progress-tracking draft PR.
-- [x] Remove Python CI execution; add locked native .NET build and NUKE mock checks.
+- [x] Remove assistant-added GitHub Actions; retain local locked native .NET build and NUKE mock checks.
 - [x] Preserve upstream main changes, including FUNDING.
 - [ ] Publish the shared NUKE category/operation registry and configuration.
 - [ ] Port acquisition, rehydration, source parsing and extraction.
@@ -19,7 +19,7 @@ The included host exposes Validate --operation MockGate. Native AIDL/signature e
 - [ ] Port design generation, rendering, visual QA and packaging.
 - [ ] Port review/publication orchestration with the required review-order safeguard.
 - [ ] Map every legacy Python file to a verified replacement or justified retirement.
-- [ ] Update all callers, Gradle/CI integration and usage documentation.
+- [ ] Update all callers, Gradle integration and local usage documentation. Do not add GitHub Actions.
 - [ ] Verify real C# behavior and parity with representative fixtures and native test receipts.
 - [ ] Validate the lean deliverable allowlist, reproducibility and cross-environment usage.
 - [ ] Complete migration and normal build/test/parity verification, then mark this PR ready for review.
@@ -29,7 +29,7 @@ The included host exposes Validate --operation MockGate. Native AIDL/signature e
 
 Legacy Python files remain tracked as dormant migration references. They are not approved execution paths. Existing Python commands in older documents and scripts are historical instructions pending replacement; do not run them. Removal requires a per-file replacement/retirement mapping, verified behavior and updated callers.
 
-The checkpoint workflow performs a native locked restore, C# host build and NUKE mock gate. A green mock gate does not mean production generation, application behavior, or migration parity is complete. No new HV, acceptance score, 98/98 result or merge authorization is claimed. Full source datasets, caches, historical snapshots and large review archives remain outside the lean publication scope.
+Local verification performs a native locked restore, C# host build and NUKE mock gate. A green mock gate does not mean production generation, application behavior, or migration parity is complete. No new HV, acceptance score, 98/98 result or merge authorization is claimed. Full source datasets, caches, historical snapshots and large review archives remain outside the lean publication scope.
 
 ## Checkpoint evidence
 

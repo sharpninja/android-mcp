@@ -20,7 +20,7 @@ The last completed independent design verdict remains round 023: **88 accuracy /
 
 ## Migration checks
 
-The current workflow runs a locked native .NET restore, C# host build and NUKE mock gate. See [NUKE usage](remediation/nuke-app/README.md). Mock success does not establish production parity; full rehydration and production commands remain pending. Older tooling instructions, including [REHYDRATE.md](REHYDRATE.md), are retained as migration references and must not be executed until their callers are replaced. See [MIGRATION-STATUS.md](MIGRATION-STATUS.md) for the removal and readiness gates.
+Validation is local-only: run a locked native .NET restore, C# host build and NUKE mock gate. No GitHub Actions are configured or planned. See [NUKE usage](remediation/nuke-app/README.md). Mock success does not establish production parity; full rehydration and production commands remain pending. Older tooling instructions, including [REHYDRATE.md](REHYDRATE.md), are retained as migration references and must not be executed until their callers are replaced. See [MIGRATION-STATUS.md](MIGRATION-STATUS.md) for the removal and readiness gates.
 
 ## What changed in this forward cleanup
 

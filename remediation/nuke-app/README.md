@@ -55,7 +55,7 @@ remain canonical; generated views do not become competing authorities.
   library substitution; validate its ABI and lifetime behavior.
 - Finish native documentation generation, architecture rendering, browser QA,
   deterministic packaging and thin Gradle delegates.
-- Replace all documented rehydration, CI, validation, publication and review
+- Replace all documented rehydration, local validation, publication and review
   entrypoints; retain originals locally and publish no caches or corpora.
 - Supply fresh full unit/integration TRX and review the completed migration and
   design-contract impacts in the PR. No Google API completeness scoring.
@@ -67,3 +67,5 @@ claim the 98/98 independent acceptance threshold has been met.
 ## Review order
 
 Complete normal build/test/parity verification, then mark the draft PR ready for review. Do not run HV before marking ready. Review and remediation occur in the PR afterward; do not merge without separate authorization. The current bootstrap host exposes only Validate/MockGate and has no provider launch path.
+
+Validation is local-only. Run the native commands above; do not add GitHub Actions. The assistant-added publication workflow has been removed.
