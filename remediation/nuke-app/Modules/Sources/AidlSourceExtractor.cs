@@ -7,10 +7,13 @@ namespace AndroidMcp.BuildTool.Sources;
 public sealed class AidlSourceExtractor(Func<ReadOnlyMemory<byte>, string> contentHash) : ISourceExtractor
 {
     public string Kind => "aidl";
+    private const string GenericReason = "All source bytes retained; generated transaction IDs, resolved imports and wire codecs unknown";
+    private const string StructuredReason = "Source fields/enumerants inventoried; imports, runtime type resolution, wire tags/layouts and codecs remain unverified";
 
     private sealed class Declaration
     {
         internal required JsonObject Record { get; init; }
+        internal JsonObject Schema { get; init; } = new();
         internal List<JsonObject> Members { get; } = [];
         internal List<Declaration> Children { get; } = [];
         internal List<SourceIssue> Issues { get; } = [];
@@ -24,24 +27,32 @@ public sealed class AidlSourceExtractor(Func<ReadOnlyMemory<byte>, string> conte
         var code = SourceSyntax.Mask(text, true);
         var package = SourceSyntax.Rx(@"\bpackage\s+([\w.]+)\s*;").Match(code).Groups[1].Value;
         var imports = SourceSyntax.Rx(@"\bimport\s+([\w.]+)\s*;").Matches(code).Select(x => x.Groups[1].Value).ToArray();
+        // The legacy whole-file parser rejects an unclosed annotation before
+        // declaration selection. Preserve that source as one unknown schema.
+        try { _ = SourceSyntax.ParseAnnotations(SourceSyntax.Mask(text, false)); }
+        catch (FormatException error) { return Unknown(source, text, "", [], "AIDL annotation/syntax unresolved: " + error.Message, true); }
         var spans = SourceSyntax.DeclarationSpans(text);
         if (spans.Count == 0)
-        {
-            var reason = "No supported top-level AIDL declaration";
-            var row = SourceSyntax.Row("unsupported", "unparsed-source:" + source.Context.Repository + ":" + source.RelativePath + ":" + contentHash(source.Bytes),
-                null, package, Path.GetFileName(source.RelativePath), text, 1, extras: new() { ["parse_error"] = reason, ["source_bytes_retained"] = true });
-            return new([row], [new("aidl-semantic-gap", reason, null, null)], StructuralParseStatus.Unsupported);
-        }
+            return Unknown(source, text, package, imports, "No supported top-level AIDL declaration", false);
         var roots = new List<Declaration>();
         foreach (var span in spans) roots.Add(Parse(source, text, span.Start, span.End, package, imports, null, 0));
-        var records = new List<JsonObject>(); var issues = new List<SourceIssue>(); var ordinal = 0;
+        var records = new List<JsonObject>(); var issues = new List<SourceIssue>(); var ordinal = 0; var declarations = new List<Declaration>();
         var status = StructuralParseStatus.Clean;
         foreach (var declaration in roots) Flatten(declaration);
-        return new(records, issues, status);
+        var first = roots[0].Schema;
+        var states = declarations.Select(item => item.Schema["parse_status"]!.GetValue<string>()).ToArray();
+        var schemaStatus = declarations.Count > 1 && states.Any(value => value is "unsupported" or "partial" or "field-metadata-partial") ? "partial"
+            : roots.Count == 1 ? first["parse_status"]!.GetValue<string>() : "declarations-inventoried";
+        var rootDescriptor = roots.Count == 1 && first["declaration_kind"]?.GetValue<string>() == "interface" ? first["descriptor"]?.GetValue<string>() : null;
+        var rootKind = roots.Count == 1 ? first["declaration_kind"]?.GetValue<string>() : "multiple";
+        return new(records, issues, status, new JsonObject
+        { ["aidl_schema"] = SchemaPayload(package, rootDescriptor, rootKind, text, schemaStatus, imports, declarations.Select(item => item.Schema)) });
 
         void Flatten(Declaration declaration)
         {
-            declaration.Record["extras"]!["declaration_ordinal"] = ordinal++;
+            declaration.Record["extras"]!["declaration_ordinal"] = ordinal;
+            declaration.Schema["declaration_ordinal"] = ordinal++;
+            declarations.Add(declaration);
             records.Add(declaration.Record); records.AddRange(declaration.Members); issues.AddRange(declaration.Issues);
             if (Rank(declaration.Status) > Rank(status)) status = declaration.Status;
             foreach (var child in declaration.Children) Flatten(child);
@@ -67,12 +78,14 @@ public sealed class AidlSourceExtractor(Func<ReadOnlyMemory<byte>, string> conte
         {
             ["aidl_kind"] = kind, ["imports"] = SourceSyntax.Strings(imports), ["parse_status"] = "declaration-only",
             ["oneway"] = oneway, ["declaration_ordinal"] = 0, ["parent_descriptor"] = parent, ["declaration_depth"] = depth,
-            ["schema_resolution_reason"] = "All source bytes retained; generated transaction IDs, resolved imports and wire codecs unknown"
+            ["schema_resolution_reason"] = GenericReason
         };
         var declaration = new Declaration
         {
             Record = SourceSyntax.Row("aidl-" + kind, descriptor, descriptor, package, name[(name.LastIndexOf('.') + 1)..], rawHeader,
-                SourceSyntax.Line(text, start + matched.Index), annotations: topAnnotations.Annotations, extras: extras)
+                SourceSyntax.Line(text, start + matched.Index), annotations: topAnnotations.Annotations, extras: extras),
+            Schema = DeclarationMetadata(descriptor, kind, "declaration-only", GenericReason, SourceSyntax.Line(text, start + matched.Index), 0,
+                SourceSyntax.CodePointOffset(text, start), SourceSyntax.CodePointOffset(text, end), parent, depth)
         };
         if (opening < 0) return declaration;
         var closing = SourceSyntax.ClosingDelimiter(region, opening, '{', '}');
@@ -80,6 +93,8 @@ public sealed class AidlSourceExtractor(Func<ReadOnlyMemory<byte>, string> conte
         {
             var reason = closing < 0 ? "Unbalanced declaration body" : "Nested AIDL declaration depth exceeds128";
             declaration.Record["kind"] = "unsupported"; extras["parse_status"] = "unsupported"; extras["parse_error"] = reason;
+            extras["schema_resolution_reason"] = reason;
+            declaration.Schema["parse_status"] = "unsupported"; declaration.Schema["reason"] = reason;
             declaration.Status = StructuralParseStatus.Malformed;
             declaration.Issues.Add(Issue("aidl-semantic-gap", reason, text, start, end));
             declaration.Issues.Add(Issue("aidl-reconciliation", "AIDL lexical reconciliation unresolved; full source retained", text, start, end));
@@ -121,6 +136,9 @@ public sealed class AidlSourceExtractor(Func<ReadOnlyMemory<byte>, string> conte
             declaration.Members.Add(member); ordinal++;
         }
         extras["parse_status"] = kind == "interface" ? unsupported ? "partial" : "methods-parsed" : unsupported ? "field-metadata-partial" : "field-metadata-parsed";
+        var schemaReason = kind == "interface" ? GenericReason : StructuredReason;
+        extras["schema_resolution_reason"] = schemaReason;
+        declaration.Schema["parse_status"] = extras["parse_status"]!.DeepClone(); declaration.Schema["reason"] = schemaReason;
         if (unsupported)
         {
             declaration.Status = StructuralParseStatus.Partial;
@@ -133,12 +151,38 @@ public sealed class AidlSourceExtractor(Func<ReadOnlyMemory<byte>, string> conte
             var bad = SourceSyntax.Row("unsupported", "unparsed-source:" + source.Context.Repository + ":" + source.RelativePath + ":" + contentHash(source.Bytes), null,
                 package, Path.GetFileName(source.RelativePath), region, SourceSyntax.Line(text, start),
                 extras: new() { ["parse_error"] = reason, ["source_bytes_retained"] = true });
-            var result = new Declaration { Record = bad, Status = StructuralParseStatus.Malformed };
+            var result = new Declaration { Record = bad, Status = StructuralParseStatus.Malformed,
+                Schema = DeclarationMetadata(null, null, "unsupported", reason) };
             result.Issues.Add(Issue("aidl-semantic-gap", reason, text, start, end));
             result.Issues.Add(Issue("aidl-reconciliation", "AIDL annotation/syntax unresolved; full source retained", text, start, end));
             return result;
         }
     }
+
+    private ExtractionResult Unknown(SourceDocument source, string text, string package, string[] imports, string reason, bool syntaxFailure)
+    {
+        var row = SourceSyntax.Row("unsupported", "unparsed-source:" + source.Context.Repository + ":" + source.RelativePath + ":" + contentHash(source.Bytes),
+            null, package, Path.GetFileName(source.RelativePath), text, 1, extras: new() { ["parse_error"] = reason, ["source_bytes_retained"] = true });
+        var issues = new List<SourceIssue> { new("aidl-semantic-gap", reason, null, null) };
+        if (syntaxFailure) issues.Add(new("aidl-reconciliation", "AIDL lexical reconciliation unresolved; full source retained", null, null));
+        return new([row], issues, syntaxFailure ? StructuralParseStatus.Malformed : StructuralParseStatus.Unsupported,
+            new JsonObject { ["aidl_schema"] = SchemaPayload(package, null, null, text, "unsupported", imports, [DeclarationMetadata(null, null, "unsupported", reason)]) });
+    }
+
+    private static JsonObject DeclarationMetadata(string? descriptor, string? kind, string status, string reason,
+        int? line = null, int? ordinal = null, int? start = null, int? end = null, string? parent = null, int? depth = null) => new()
+    {
+        ["descriptor"] = descriptor, ["declaration_kind"] = kind, ["parse_status"] = status, ["reason"] = reason,
+        ["declaration_line"] = line, ["declaration_ordinal"] = ordinal,
+        ["declaration_span"] = start.HasValue ? new JsonArray(start.Value, end!.Value) : null,
+        ["parent_descriptor"] = parent, ["declaration_depth"] = depth
+    };
+    private static JsonObject SchemaPayload(string package, string? descriptor, string? kind, string text, string status, string[] imports, IEnumerable<JsonObject> declarations) => new()
+    {
+        ["package"] = package, ["descriptor"] = descriptor, ["declaration_kind"] = kind, ["raw_schema"] = text, ["parse_status"] = status,
+        ["transaction_metadata"] = new JsonObject { ["imports"] = SourceSyntax.Strings(imports), ["wire_status"] = "unknown", ["declarations"] = new JsonArray(declarations.Select(item => (JsonNode)item.DeepClone()).ToArray()) },
+        ["codec_status"] = "unknown"
+    };
 
     private static JsonObject Field(string raw, string descriptor, string package, string kind, int ordinal, int line)
     {

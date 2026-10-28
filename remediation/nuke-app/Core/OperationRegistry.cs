@@ -1,6 +1,6 @@
 namespace AndroidMcp.BuildTool.Core;
 
-public enum OperationExecutor { Pending, MockTests, Tests, DocumentationAssets, NativeParser, SourcesFetch, PublicationCheck, SourcesPlan, Architecture, CatalogBuild }
+public enum OperationExecutor { Pending, MockTests, Tests, DocumentationAssets, NativeParser, SourcesFetch, PublicationCheck, SourcesPlan, Architecture, CatalogBuild, BrowserQa }
 public sealed record OperationDefinition(OperationKey Key, string Description,
     IReadOnlyList<string> RequiredParameters, IReadOnlyList<string> OptionalParameters,
     IReadOnlyList<PlannedStep> Steps, OperationExecutor Executor=OperationExecutor.Pending);
@@ -32,6 +32,10 @@ public sealed class OperationRegistry
             ["generation","offline-gradle-checksum-proof"],OperationExecutor.Architecture,
             new("validate-architecture-inputs",[]),new("preflight-native-context",["validate-architecture-inputs"]),
             new("verify-pinned-tools",["preflight-native-context"]),new("generate-architecture",["verify-pinned-tools"]),new("seal-generation",["generate-architecture"]));
+        Add(Category.Design,Operation.BrowserQa,["project-root","output-root","browser-identity","ui-manifest-sha256","expected-architecture-diagrams"],
+            ["architecture-root","architecture-manifest-sha256","viewport-width","viewport-height"],OperationExecutor.BrowserQa,
+            new("validate-browser-generations",[]),new("run-native-browser-qa",["validate-browser-generations"]),
+            new("seal-browser-evidence",["run-native-browser-qa"]));
         Add(Category.Validate,Operation.Toolchain,[],[],OperationExecutor.Pending,new PlannedStep("verify-toolchain",[]));
         Add(Category.Review,Operation.Prepare,["snapshot"],[],OperationExecutor.Pending,new("verify-review-evidence",[]),new("prepare-review",[]));
         Add(Category.Publish,Operation.Check,["git-checkout","git-identity","receipt-root"],["policy-relative-path"],OperationExecutor.PublicationCheck,new PlannedStep("check-deliverables",[]));

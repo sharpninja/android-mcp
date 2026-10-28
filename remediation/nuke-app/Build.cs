@@ -52,6 +52,20 @@ public sealed partial class Build : NukeBuild
     public ToolArtifactAccess? ToolAccess { get; set; }
     [Parameter("Retained published Gradle checksum proof, relative to the tool cache")]
     public string? OfflineGradleChecksumProof { get; set; }
+    [Parameter("Content-pinned native Chromium ToolIdentity JSON file")]
+    public string? BrowserIdentity { get; set; }
+    [Parameter("Separate immutable generated architecture input root")]
+    public string? ArchitectureRoot { get; set; }
+    [Parameter("Explicit SHA256 of the selected UI generation manifest")]
+    public string? UiManifestSha256 { get; set; }
+    [Parameter("Explicit SHA256 of the selected architecture generation manifest")]
+    public string? ArchitectureManifestSha256 { get; set; }
+    [Parameter("Explicit diagram denominator; zero means labelled UI-only scope")]
+    public int? ExpectedArchitectureDiagrams { get; set; }
+    [Parameter("Optional positive browser viewport width")]
+    public int? ViewportWidth { get; set; }
+    [Parameter("Optional positive browser viewport height")]
+    public int? ViewportHeight { get; set; }
     [Parameter("Immutable review snapshot")]
     public string? Snapshot { get; set; }
     [Parameter("Publication checkout for read-only deliverable checks")]
@@ -73,7 +87,7 @@ public sealed partial class Build : NukeBuild
 
     public static int Main(string[] args) => args.FirstOrDefault()=="--internal-process-probe"
         ? ProcessContractProbe.Run(args.Skip(1).ToArray())
-        : Execute<Build>(x => x.Validate);
+        : NukeExitCode.Normalize(Execute<Build>(x => x.Validate));
 
     public Target Sources => CategoryTarget(Category.Sources);
     public Target Catalog => CategoryTarget(Category.Catalog);
@@ -99,6 +113,11 @@ public sealed partial class Build : NukeBuild
         Add("stage-root",StageRoot);Add("extraction-profile",ExtractionProfile);Add("work-root",WorkRoot);
         Add("docker-identity",DockerIdentity);Add("renderer-user",RendererUser);Add("tool-access",ToolAccess?.ToString());
         Add("offline-gradle-checksum-proof",OfflineGradleChecksumProof);
+        Add("browser-identity",BrowserIdentity);Add("architecture-root",ArchitectureRoot);
+        Add("ui-manifest-sha256",UiManifestSha256);Add("architecture-manifest-sha256",ArchitectureManifestSha256);
+        Add("expected-architecture-diagrams",ExpectedArchitectureDiagrams?.ToString(System.Globalization.CultureInfo.InvariantCulture));
+        Add("viewport-width",ViewportWidth?.ToString(System.Globalization.CultureInfo.InvariantCulture));
+        Add("viewport-height",ViewportHeight?.ToString(System.Globalization.CultureInfo.InvariantCulture));
         Add("git-checkout",GitCheckout); Add("test-filter",TestFilter);
         Add("git-identity",GitIdentity);Add("policy-relative-path",PolicyRelativePath);
         Add("generation",Generation);
@@ -117,6 +136,8 @@ public sealed partial class Build : NukeBuild
             case OperationExecutor.PublicationCheck: CheckPublication().GetAwaiter().GetResult();break;
             case OperationExecutor.SourcesPlan: PlanSources().GetAwaiter().GetResult();break;
             case OperationExecutor.Architecture: GenerateArchitecture().GetAwaiter().GetResult();break;
+            case OperationExecutor.CatalogBuild: BuildCatalog().GetAwaiter().GetResult();break;
+            case OperationExecutor.BrowserQa: RunBrowserQa().GetAwaiter().GetResult();break;
             default: throw new InvalidOperationException($"{category}/{Operation} has a valid plan but its execution adapter is not yet ported. No action executed.");
         }
     }

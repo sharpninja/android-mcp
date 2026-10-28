@@ -68,6 +68,6 @@ public sealed class ProcessSessionStreamHashMockTests
         Assert.NotNull(Record.Exception(()=>ProcessStreamHashCases.AssertContract(test,stream=>Correct(test,stream).ToUpperInvariant())));
         Assert.NotNull(Record.Exception(()=>ProcessStreamHashCases.AssertContract(test,stream=>{var value=Correct(test,stream);stream.Dispose();return value;})));
         if(test.Vector.Bytes.Length>0)Assert.NotNull(Record.Exception(()=>ProcessStreamHashCases.AssertContract(test,_=>test.Vector.Sha256)));
-        if(test.Mode=="position")Assert.NotNull(Record.Exception(()=>ProcessStreamHashCases.AssertContract(test,stream=>{stream.Position=0;return Correct(test,stream);}))); 
+        if(test.Mode=="position")Assert.NotNull(Record.Exception(()=>ProcessStreamHashCases.AssertContract(test,stream=>{stream.Position=0;return Correct(test,stream);})));
     }
 }

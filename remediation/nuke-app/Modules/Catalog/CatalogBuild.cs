@@ -4,6 +4,7 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using AndroidMcp.BuildTool.Core;
 using AndroidMcp.BuildTool.Sources;
+using AndroidMcp.BuildTool.Sources.Java;
 using Json.Schema;
 using Microsoft.Data.Sqlite;
 
@@ -11,15 +12,17 @@ namespace AndroidMcp.BuildTool.Catalog;
 
 public sealed class CatalogBuildException(string code,string message,Exception? inner=null):IOException(message,inner)
 { public string Code {get;}=code; }
-public sealed record CatalogBuildResult(string RegistryId,string ProducerFingerprint,IReadOnlyList<StoredArtifact> Artifacts,JsonObject Validation);
+public sealed record CatalogBuildResult(string RegistryId,string ProducerFingerprint,IReadOnlyList<StoredArtifact> Artifacts,JsonObject Validation,string StagingDatabasePath,string RawSourceStagePath);
 
 /// <summary>Offline native source-to-sealed-catalog generation. No runtime authority or device observations.</summary>
 public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher dispatcher,IPermissionExpressionSourceFacts permissions,
-    IAnnotationTargetSourceFacts formals,IStructuralTypeHeaderSourceFacts headers,ICanonicalJson canonical,ISourceXmlFormatter? xmlFormatter=null)
+    IAnnotationTargetSourceFacts formals,IStructuralTypeHeaderSourceFacts headers,ICanonicalJson canonical,ISourceXmlFormatter? xmlFormatter=null,
+    Func<string,IStreamingArtifactStore>? outputStores=null,Func<string,CatalogDatabase>? stagingDatabases=null,IJvmSourceLinker? sourceJvm=null,Action<CatalogImportObservation>? observeImport=null)
 {
     public const string ProducerId="csharp-nuke-catalog-v1";
     public string ProducerFingerprint {get;}=ContentHash.Sha256(File.ReadAllBytes(typeof(CatalogBuild).Assembly.Location));
     private readonly ISourceXmlFormatter xml=xmlFormatter ?? new SourceXmlFormatter();
+    private readonly IJvmSourceLinker sourceJvm=sourceJvm ?? new JvmSourceLinker();
     private static string S(JsonNode? value)=>value?.GetValue<string>() ?? "";
     private static JsonElement Element(JsonNode? value)=>JsonSerializer.SerializeToElement(value);
     private string Text(JsonNode? value)=>Encoding.UTF8.GetString(canonical.Serialize(Element(value)));
@@ -33,18 +36,20 @@ public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher
             throw Failure("catalog-metadata",label+" must be a positive integer");
         return result;
     }
-    private sealed record Input(JsonObject Source,byte[] Bytes,ExtractionResult Extraction);
+    private sealed record Input(JsonObject Source,long Length);
     public async Task<CatalogBuildResult> BuildAsync(string inventoryPath,string outputDirectory,string privateStageDirectory,CancellationToken cancellationToken=default)
     {
         var output=Path.GetFullPath(outputDirectory);var inventoryFull=Path.GetFullPath(inventoryPath);
         _=ArtifactPaths.Resolve(output,"catalog.sqlite");_=ArtifactPaths.Resolve(privateStageDirectory,"generation.lock");
         await using var lease=await new FileArtifactLeaseProvider(privateStageDirectory).AcquireAsync(output,cancellationToken);
         if(Directory.Exists(output) && Directory.EnumerateFileSystemEntries(output).Any()) throw Failure("nonempty-output","Output must be empty; preserve immutable earlier publication");
-        var store=new FileArtifactStore(output,Sha);var artifacts=new List<StoredArtifact>();
+        var store=outputStores?.Invoke(output) ?? new FileArtifactStore(output,Sha);var artifacts=new List<StoredArtifact>();
         var producerFingerprint=ProducerFingerprint;
         var producer=new JsonObject{["id"]=ProducerId,["assembly_sha256"]=producerFingerprint,["historical_python_identity"]=false};
         try
         {
+            var rawPath=ArtifactPaths.Resolve(privateStageDirectory,Guid.NewGuid().ToString("N")+"/source-records.sqlite");
+            using var raw=new CatalogImportStage(rawPath,canonical);observeImport?.Invoke(new("raw-stage",rawPath));
             var inventoryBytes=await File.ReadAllBytesAsync(inventoryFull,cancellationToken);
             // The canonical authority performs strict UTF8, duplicate-name and finite-number inspection.
             _=canonical.Serialize(inventoryBytes);var spec=JsonNode.Parse(inventoryBytes)!.AsObject();
@@ -77,9 +82,12 @@ public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher
                 source["x-source-identity-version"]=3;source["x-native-producer"]=producer.DeepClone();
                 var context=new SourceContext(S(source["repository"]),S(source["revision"]),S(source["source_id"]),source["platform_api_version"]?.GetValue<string>());
                 var extracted=dispatcher.Extract(new(S(source["path"]),bytes,context),S(source["kind"]),S(source["scope"]));
-                inputs.Add(new(source,bytes,extracted));
+                raw.Capture(S(source["source_id"]),extracted);observeImport?.Invoke(new("source-captured",rawPath,S(source["source_id"]),Count:raw.Count(S(source["source_id"]))));
+                inputs.Add(new(source,bytes.LongLength));
             }
-            using var db=CatalogDatabase.CreateInMemory(catalogRoot,CatalogSchemaProfile.Entry);using var transaction=db.Connection.BeginTransaction(deferred:false);
+            var stage=ArtifactPaths.Resolve(privateStageDirectory,Guid.NewGuid().ToString("N")+"/catalog.staging.sqlite");
+            using var db=stagingDatabases?.Invoke(stage) ?? CatalogDatabase.CreateFile(catalogRoot,CatalogSchemaProfile.Entry,stage);
+            using var transaction=db.Connection.BeginTransaction(deferred:false);
             void Execute(string sql,params (string Name,object? Value)[] values){using var command=db.Command(sql,transaction,values);command.ExecuteNonQuery();}
             long Count(string table){using var command=db.Command("SELECT count(*) FROM "+table,transaction);return (long)command.ExecuteScalar()!;}
             var sources=inputs.ToDictionary(input=>S(input.Source["source_id"]),input=>input.Source,StringComparer.Ordinal);
@@ -95,7 +103,7 @@ public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher
             }
             var symbolValues=new Dictionary<string,HashSet<string>>(StringComparer.Ordinal);
             foreach(var input in inputs)
-            foreach(var row in input.Extraction.Records.Where(row=>S(row["kind"])=="field" && row["extras"]?["constant_raw"] is not null))
+            foreach(var row in raw.Records(S(input.Source["source_id"])).Where(row=>S(row["kind"])=="field" && row["extras"]?["constant_raw"] is not null))
             {
                 string? value;try{value=JsonSerializer.Deserialize<string>(S(row["extras"]!["constant_raw"]));}catch(JsonException){continue;}
                 if(value is null || !value.Contains(".permission.",StringComparison.Ordinal) && !S(row["owner"]).EndsWith(".permission",StringComparison.Ordinal)) continue;
@@ -103,23 +111,47 @@ public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher
                 Execute("INSERT OR IGNORE INTO permission_symbols VALUES($symbol,$value,$source,$line)",("$symbol",symbol),("$value",value),("$source",S(input.Source["source_id"])),("$line",row["line"]!.GetValue<int>()));
             }
             var symbols=symbolValues.Where(item=>item.Value.Count==1).ToDictionary(item=>item.Key,item=>item.Value.Single(),StringComparer.Ordinal);
+            var currentOwners=new Dictionary<string,Dictionary<string,string>>(StringComparer.Ordinal);
+            var currentKeys=new Dictionary<string,Dictionary<string,string>>(StringComparer.Ordinal);
+            foreach(var input in inputs.Where(input=>S(input.Source["kind"])=="sdk-api-index"))
+            {
+                var detected=new HashSet<string>(StringComparer.Ordinal);
+                foreach(var row in raw.Records(S(input.Source["source_id"])))
+                {
+                    var extra=row["extras"]!.AsObject();var status=extra["lifecycle_status"]?.GetValue<string>();
+                    if(status is not (null or "current-at-target")) continue;
+                    var platform=S(extra["target_platform_api"]);if(platform.Length==0) throw Failure("source-index-metadata","API index lacks target platform version");
+                    if(input.Source["platform_api_version"] is not null && S(input.Source["platform_api_version"])!=platform) throw Failure("source-index-metadata","API index target platform mismatch");
+                    detected.Add(platform);if(!currentOwners.TryGetValue(platform,out var owners)){owners=new(StringComparer.Ordinal);currentOwners.Add(platform,owners);}
+                    if(!currentKeys.TryGetValue(platform,out var keys)){keys=new(StringComparer.Ordinal);currentKeys.Add(platform,keys);}
+                    var signature=S(row["canonical"]);if(!signature.Contains('#')) owners[S(row["owner"])]=S(extra["jvm_owner"]);
+                    keys[signature]=ContentHash.Sha256(Encoding.UTF8.GetBytes("jvm:"+signature));
+                }
+                if(detected.Count>1) throw Failure("source-index-metadata","API index mixes target platform versions");
+            }
             var astSchema=JsonSchema.FromText(File.ReadAllText(Path.Combine(catalogRoot,"contracts/PermissionExpression.schema.json")));
             void ValidatePermission(JsonObject value)
             {if(!astSchema.Evaluate(Element(value),new(){OutputFormat=OutputFormat.Flag}).IsValid) throw Failure("invalid-permission-ast","Permission schema rejected source declaration");}
-            var declarations=new List<CatalogDeclaration>();var reports=new JsonArray();
+            var reports=new JsonArray();var linkedPermissions=0;long declarationCount=0;
             foreach(var input in inputs)
             {
-                var source=input.Source;var sid=S(source["source_id"]);var kind=S(source["kind"]);var count=0;
-                foreach(var issue in input.Extraction.Issues) Execute("INSERT INTO issues(source_id,line,category,reason,raw) VALUES($source,NULL,$category,$reason,$raw)",("$source",sid),("$category",issue.Code),("$reason",issue.Reason),("$raw",Convert.ToBase64String(input.Bytes)));
+                var source=input.Source;var sid=S(source["source_id"]);var kind=S(source["kind"]);var count=0;var unsupported=0;var facts=raw.Facts(sid);
+                foreach(var issue in facts.Issues) Execute("INSERT INTO issues(source_id,line,category,reason,raw) VALUES($source,NULL,$category,$reason,$raw)",("$source",sid),("$category",issue.Code),("$reason",issue.Reason),("$raw",Convert.ToBase64String(await File.ReadAllBytesAsync(ArtifactPaths.Resolve(sourceRoot,S(source["local_path"])),cancellationToken))));
+                if(kind=="aidl")
+                {
+                    var schema=facts.Metadata?["aidl_schema"] as JsonObject ?? throw Failure("source-aidl-metadata-missing","AIDL source producer did not supply its raw schema concern");
+                    Execute("INSERT INTO aidl_schemas VALUES($source,$package,$descriptor,$kind,$raw,$status,$metadata,$codec)",("$source",sid),("$package",schema["package"]?.GetValue<string>()),("$descriptor",schema["descriptor"]?.GetValue<string>()),
+                        ("$kind",schema["declaration_kind"]?.GetValue<string>()),("$raw",schema["raw_schema"]!.GetValue<string>()),("$status",schema["parse_status"]!.GetValue<string>()),("$metadata",Text(schema["transaction_metadata"])),("$codec",schema["codec_status"]!.GetValue<string>()));
+                }
                 if(kind=="manifest")
                 {
-                    foreach(var row in input.Extraction.Records.Where(row=>S(row["kind"])=="manifest-permission" && row["name"] is not null))
+                    foreach(var row in raw.Records(sid).Where(row=>S(row["kind"])=="manifest-permission" && row["name"] is not null))
                     {
                         var definition=new JsonObject{["attributes"]=row["attributes"]?.DeepClone(),["children"]=new JsonArray((row["children"] as JsonArray ?? []).OfType<JsonObject>().Select(child=>(JsonNode)JsonValue.Create(xml.Serialize(child))!).ToArray())};
                         Execute("INSERT OR IGNORE INTO permission_definitions VALUES($name,$source,$level,$attributes)",("$name",S(row["name"])),("$source",sid),("$level",row["protection_level_raw"]?.GetValue<string>()),("$attributes",Text(definition)));
                     }
                 }
-                else foreach(var row in input.Extraction.Records)
+                else foreach(var row in raw.Records(sid))
                 {
                     if(row["canonical"] is null) throw Failure("source-concern-unadmitted","Source concern is retained but has no declaration normalizer for "+kind);
                     var language=kind switch{"sdk-api-index"=>"jvm","java-source"=>"java-source","aidl"=>"aidl",_=>S(source["scope"])=="aosp-pinned-hidl-source-evidence" ? "hidl" : "java"};
@@ -127,6 +159,15 @@ public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher
                     var ast=permissions.Permission((JsonArray)row["annotations"]!.DeepClone(),symbols,language=="aidl");ValidatePermission(ast);
                     var extra=new JsonObject{["language"]=language,["source_kind"]=kind,["source_path"]=source["path"]?.DeepClone(),["source_scope"]=source["scope"]?.DeepClone(),["annotations"]=row["all_annotations"]!.DeepClone(),["parameters"]=row["parameters"]!.DeepClone()};
                     foreach(var property in row["extras"]!.AsObject()) extra[property.Key]=property.Value?.DeepClone();
+                    string? targetJvm=null;
+                    if(language=="java-source")
+                    {
+                        var platform=S(source["platform_api_version"]);var owners=currentOwners.GetValueOrDefault(platform) ?? new Dictionary<string,string>(StringComparer.Ordinal);
+                        var key=sourceJvm.Key(row,owners);
+                        if(key is not null && currentKeys.GetValueOrDefault(platform)?.TryGetValue(key,out targetJvm)==true) extra["proven_current_sdk_jvm_identity"]=key;
+                        extra["identity_scope"]="Source-spelled type identity; wildcard/type-variable resolution unknown; no JVM equivalence inferred without proof";
+                    }
+                    else if(language=="jvm") extra["identity_scope"]="Published JVM owner/member key; methods include descriptors; field descriptor/type and Java type kind may be unknown";
                     foreach(var parameter in extra["parameters"]!.AsArray().OfType<JsonObject>())
                     {var requirement=permissions.Permission((JsonArray)parameter["annotations"]!.DeepClone(),symbols,language=="aidl");ValidatePermission(requirement);parameter["permission"]=requirement;}
                     JsonObject Reference(string text)=>new(){["text"]=text,["status"]="unknown",["codec_status"]="unknown",["reason"]="Source type retained; runtime resolver/codec not verified"};
@@ -138,57 +179,106 @@ public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher
                     Execute("INSERT INTO occurrences VALUES($id,$source,$line)",("$id",bid),("$source",sid),("$line",line));
                     Execute("INSERT INTO binding_declarations VALUES($id,$source,$line,$doc,$hash)",("$id",bid),("$source",sid),("$line",line),("$doc",Text(document)),("$hash",Hash(document)));
                     Execute("INSERT INTO permission_relations(binding_id,source_id,line,annotation,logic,expression_json,raw_annotation) VALUES($id,$source,$line,$annotation,$logic,$expression,$raw)",("$id",bid),("$source",sid),("$line",line),("$annotation",string.Join(',',row["annotations"]!.AsArray().Select(annotation=>S(annotation!["name"])))),("$logic",S(ast["op"])),("$expression",Text(ast)),("$raw",Text(row["annotations"])));
-                    declarations.Add(new(sid,line,document));count++;
+                    if(targetJvm is not null && S(ast["op"])!="unknown")
+                    {
+                        Execute("INSERT INTO permission_relations(binding_id,source_id,line,annotation,logic,expression_json,raw_annotation) VALUES($id,$source,$line,'source declaration; exact JVM descriptor link',$logic,$expression,$raw)",("$id",targetJvm),("$source",sid),("$line",line),("$logic",S(ast["op"])),("$expression",Text(ast)),("$raw",Text(row["annotations"])));linkedPermissions++;
+                    }
+                    count++;declarationCount++;if(S(row["kind"])=="unsupported") unsupported++;
                 }
-                var report=new JsonObject{["source_id"]=sid,["kind"]=kind,["input_bytes"]=input.Bytes.Length,["declarations"]=count,["unsupported"]=input.Extraction.Records.Count(row=>S(row["kind"])=="unsupported"),["structural_status"]=input.Extraction.StructuralStatus.ToString(),["source_metadata"]=input.Extraction.Metadata?.DeepClone()};reports.Add(report);
+                var report=new JsonObject{["source_id"]=sid,["kind"]=kind,["input_bytes"]=input.Length,["declarations"]=count,["unsupported"]=unsupported,["structural_status"]=facts.StructuralStatus.ToString(),["source_metadata"]=facts.Metadata?.DeepClone()};reports.Add(report);
                 Execute("INSERT INTO parse_reports VALUES($source,$doc)",("$source",sid),("$doc",Text(report)));
             }
-            var contracts=new CatalogContracts(canonical);var projection=new CatalogProjection(sources,declarations,formals,headers,contracts,canonical);
-            var entries=new List<JsonObject>();var inventory=new List<JsonObject>();
-            foreach(var group in declarations.GroupBy(row=>S(row.Document["entry_id"])).OrderBy(group=>group.Key,StringComparer.Ordinal))
+            raw.Dispose();
+            IEnumerable<CatalogDeclaration> ReadDeclarations(string? entry=null)
             {
-                var rows=group.Select(row=>row with{Document=projection.Project(row.Document,row.SourceId)}).OrderBy(row=>SourceRank(sources[row.SourceId])).ThenBy(row=>S(sources[row.SourceId]["path"]),Comparer<string>.Create(StrictJsonInspector.CompareScalars)).ToArray();
+                using var command=db.Command("SELECT source_id,line,document_json FROM binding_declarations"+(entry is null ? "" : " WHERE binding_id=$entry")+" ORDER BY source_id,line",transaction,entry is null ? [] : [("$entry",entry)]);
+                using var reader=command.ExecuteReader();while(reader.Read()) yield return new(reader.GetString(0),reader.GetInt32(1),JsonNode.Parse(reader.GetString(2))!.AsObject());
+            }
+            IEnumerable<string> BindingIds()
+            {using var command=db.Command("SELECT binding_id FROM bindings ORDER BY binding_id",transaction);using var reader=command.ExecuteReader();while(reader.Read()) yield return reader.GetString(0);}
+            var contracts=new CatalogContracts(canonical);var projection=new CatalogProjection(sources,()=>ReadDeclarations(),formals,headers,contracts,canonical);
+            foreach(var group in BindingIds().Select(key=>new KeyValuePair<string,int>(key,0)))
+            {
+                var rows=ReadDeclarations(group.Key).Select(row=>row with{Document=projection.Project(row.Document,row.SourceId)}).OrderBy(row=>SourceRank(sources[row.SourceId])).ThenBy(row=>S(sources[row.SourceId]["path"]),Comparer<string>.Create(StrictJsonInspector.CompareScalars)).ToArray();
+                observeImport?.Invoke(new("entry-batch",rawPath,EntryId:group.Key,Count:rows.Length));
                 var document=(JsonObject)rows[0].Document.DeepClone();document["provenance"]=new JsonArray(rows.SelectMany(row=>row.Document["provenance"]!.AsArray()).Select(value=>value!.DeepClone()).ToArray());
+                var permissionRows=new List<(JsonObject Expression,string Source,long Line,string? Annotation)>();
+                using(var query=db.Command("SELECT expression_json,source_id,line,annotation FROM permission_relations WHERE binding_id=$id ORDER BY id",transaction,("$id",group.Key)))
+                using(var reader=query.ExecuteReader()) while(reader.Read()) permissionRows.Add((JsonNode.Parse(reader.GetString(0))!.AsObject(),reader.GetString(1),reader.GetInt64(2),reader.IsDBNull(3) ? null : reader.GetString(3)));
+                static bool Absent(JsonObject expression)=>S(expression["op"])=="unknown" && S(expression["reason"]).StartsWith("No declared recognized",StringComparison.Ordinal);
+                var known=new Dictionary<string,JsonObject>(StringComparer.Ordinal);
+                foreach(var row in permissionRows) if(!Absent(row.Expression)) known[Text(PermissionSemantic(row.Expression))]=row.Expression;
+                if(known.Count==1) document["permission"]=known.Values.Single().DeepClone();
+                else if(known.Count>1) document["permission"]=new JsonObject{["op"]="unknown",["reason"]="Source-dependent or conflicting permission metadata; select exact declaration evidence"};
+                if(known.Count>1 || known.Count!=0 && permissionRows.Any(row=>Absent(row.Expression)))
+                {
+                    var variants=new Dictionary<string,JsonObject>(StringComparer.Ordinal);
+                    foreach(var row in permissionRows)
+                    {
+                        var key=Text(PermissionSemantic(row.Expression));if(!variants.TryGetValue(key,out var variant)){variant=(JsonObject)row.Expression.DeepClone();variant["x-occurrences"]=new JsonArray();variants.Add(key,variant);}
+                        variant["x-occurrences"]!.AsArray().Add(new JsonObject{["source_id"]=row.Source,["line"]=row.Line,["annotation"]=row.Annotation});if(Absent(row.Expression)) variant["x-absence-of-annotation"]=true;
+                    }
+                    document["extensions"]!["permission_variants"]=new JsonArray(variants.Values.Select(value=>(JsonNode)value).ToArray());
+                }
                 document["extensions"]!["occurrence_count"]=rows.Length;
                 var entity=projection.Entity(group.Key,rows);document["extensions"]!["device_resolution_variants"]=entity["variants"]!.DeepClone();document["extensions"]!["device_resolution_contract_version"]="2.1.0";
-                entries.Add(document);inventory.Add(entity);
                 Execute("INSERT INTO registry_entries VALUES($registry,$id,$doc,$hash)",("$registry",registry),("$id",group.Key),("$doc",Text(document)),("$hash",Hash(document)));
                 Execute("INSERT INTO registry_inventory VALUES($registry,$id,$doc,$hash)",("$registry",registry),("$id",group.Key),("$doc",Text(entity)),("$hash",Hash(entity)));
             }
             var entrySchema=JsonSchema.FromText(File.ReadAllText(Path.Combine(catalogRoot,"contracts/Entry.schema.json")));var resolver=new DeviceResolver(canonical,Path.Combine(catalogRoot,"contracts/DeviceResolution.schema.json"));
-            foreach(var entry in entries) if(!entrySchema.Evaluate(Element(entry),new(){OutputFormat=OutputFormat.Flag}).IsValid) throw Failure("invalid-entry","Entry schema rejected "+S(entry["entry_id"]));
-            foreach(var item in inventory) resolver.ValidateInventoryEntity(Element(item));
+            IEnumerable<JsonObject> ValidationDocuments(string table)
+            {using var command=db.Command("SELECT document_json FROM "+table+" ORDER BY entry_id",transaction);using var reader=command.ExecuteReader();while(reader.Read()) yield return JsonNode.Parse(reader.GetString(0))!.AsObject();}
+            foreach(var entry in ValidationDocuments("registry_entries")) if(!entrySchema.Evaluate(Element(entry),new(){OutputFormat=OutputFormat.Flag}).IsValid) throw Failure("invalid-entry","Entry schema rejected "+S(entry["entry_id"]));
+            foreach(var item in ValidationDocuments("registry_inventory")) resolver.ValidateInventoryEntity(Element(item));
             using(var integrity=db.Command("PRAGMA integrity_check",transaction)) if((string)integrity.ExecuteScalar()! !="ok") throw Failure("integrity","SQLite integrity check failed");
             using(var foreign=db.Command("PRAGMA foreign_key_check",transaction)) using(var reader=foreign.ExecuteReader()) if(reader.Read()) throw Failure("foreign-key","SQLite foreign-key check failed");
-            if(Count("bindings")!=entries.Count || Count("occurrences")!=declarations.Count || inventory.Count!=entries.Count) throw Failure("reconciliation","Catalog count reconciliation failed");
-            var counts=new JsonObject();foreach(var table in new[]{"sources","bindings","occurrences","binding_declarations","permission_definitions","permission_symbols","permission_relations","aidl_schemas","annotation_evidence","issues"}) counts[table]=Count(table);counts["effective_entries"]=entries.Count;
-            var validation=new JsonObject{["integrity_check"]="ok",["foreign_key_check"]=new JsonArray(),["json_schema_failures"]=new JsonArray(),["counts"]=counts,["source_reports"]=reports,["complete"]=false,["native_producer"]=producer.DeepClone()};
+            var entryCount=Count("registry_entries");if(Count("bindings")!=entryCount || Count("occurrences")!=declarationCount || Count("registry_inventory")!=entryCount) throw Failure("reconciliation","Catalog count reconciliation failed");
+            var counts=new JsonObject();foreach(var table in new[]{"sources","bindings","occurrences","binding_declarations","permission_definitions","permission_symbols","permission_relations","aidl_schemas","annotation_evidence","issues"}) counts[table]=Count(table);counts["effective_entries"]=entryCount;
+            var validation=new JsonObject{["integrity_check"]="ok",["foreign_key_check"]=new JsonArray(),["json_schema_failures"]=new JsonArray(),["counts"]=counts,["source_reports"]=reports,["proven_jvm_source_permission_links"]=linkedPermissions,["complete"]=false,["native_producer"]=producer.DeepClone()};
             foreach(var source in sources.Keys) Execute("INSERT INTO registry_sources VALUES($registry,$source)",("$registry",registry),("$source",source));
             Execute("UPDATE registries SET state='validated',validation_json=$doc WHERE registry_id=$id",("$doc",Text(validation)),("$id",registry));Execute("UPDATE registries SET state='published' WHERE registry_id=$id",("$id",registry));Execute("INSERT INTO active_registry(singleton,registry_id) VALUES(1,$id)",("$id",registry));
             foreach(var pair in new Dictionary<string,string>{{"schema_version","1.2.0"},{"entry_contract_version","1.1.0"},{"device_resolution_contract_version","2.1.0"},{"source_set_hash",sourceSet},{"coverage",S(metadata["coverage"])},{"source_inventory_sha256",Sha(inventoryBytes)},{"authority","Metadata only; no OS capability or MCP client grant"},{"native_producer_id","csharp-nuke-catalog-v1"},{"native_producer_sha256",producerFingerprint}})
                 Execute("INSERT INTO catalog_meta VALUES($key,$value)",("$key",pair.Key),("$value",pair.Value));
             transaction.Commit();
-            async Task Write(string name,ReadOnlyMemory<byte> bytes,string media="application/json")=>artifacts.Add(await store.WriteAsync(new(name,bytes,media),cancellationToken));
+            async Task<StoredArtifact> WriteStream(string name,Func<Stream,CancellationToken,Task> produce,string media="application/json")
+            {
+                try{var artifact=await store.WriteStreamAsync(name,media,produce,cancellationToken);artifacts.Add(artifact);return artifact;}
+                catch(IOException error){throw new CatalogBuildException("export-failure","Catalog export failed; partial output and stage retained",error);}
+            }
+            Task<StoredArtifact> Write(string name,ReadOnlyMemory<byte> bytes,string media="application/json")=>WriteStream(name,async (stream,token)=>
+            {for(var offset=0;offset<bytes.Length;offset+=65536) await stream.WriteAsync(bytes.Slice(offset,Math.Min(65536,bytes.Length-offset)),token);},media);
+            Task<StoredArtifact> WriteLines(string name,Func<IEnumerable<string>> lines)=>WriteStream(name,async (stream,token)=>
+            {await using var writer=new StreamWriter(stream,new UTF8Encoding(false),4096,true);foreach(var line in lines()){await writer.WriteAsync(line.AsMemory(),token);await writer.WriteAsync("\n".AsMemory(),token);}await writer.FlushAsync(token);},"application/x-ndjson");
+            IEnumerable<string> TableLines(string table)
+            {
+                using var command=db.Command("SELECT * FROM "+table+" ORDER BY "+(table=="issues" ? "id" : "1,2"));using var reader=command.ExecuteReader();
+                while(reader.Read()){var value=new JsonObject();for(var index=0;index<reader.FieldCount;index++) value[reader.GetName(index)]=reader.IsDBNull(index) ? null : JsonSerializer.SerializeToNode(reader.GetValue(index));yield return Text(value);}
+            }
+            IEnumerable<string> DocumentLines(string table)
+            {using var command=db.Command("SELECT document_json FROM "+table+" ORDER BY entry_id");using var reader=command.ExecuteReader();while(reader.Read()) yield return reader.GetString(0);}
+            IEnumerable<JsonObject> EntryDocuments()=>DocumentLines("registry_entries").Select(line=>JsonNode.Parse(line)!.AsObject());
             foreach(var table in new[]{"sources","source_details","bindings","occurrences","binding_declarations","permission_definitions","permission_symbols","permission_relations","aidl_schemas","annotation_evidence","issues","parse_reports"})
             {
-                var lines=new StringBuilder();using(var command=db.Command("SELECT * FROM "+table+" ORDER BY "+(table=="issues" ? "id" : "1,2"))) using(var reader=command.ExecuteReader()) while(reader.Read())
-                {var value=new JsonObject();for(var index=0;index<reader.FieldCount;index++) value[reader.GetName(index)]=reader.IsDBNull(index) ? null : JsonSerializer.SerializeToNode(reader.GetValue(index));lines.Append(Text(value)).Append('\n');}
-                await Write(table+".jsonl",Encoding.UTF8.GetBytes(lines.ToString()),"application/x-ndjson");
+                await WriteLines(table+".jsonl",()=>TableLines(table));
             }
-            var entryBytes=Encoding.UTF8.GetBytes(string.Concat(entries.Select(entry=>Text(entry)+"\n")));var inventoryBytesOut=Encoding.UTF8.GetBytes(string.Concat(inventory.Select(item=>Text(item)+"\n")));
-            await Write("entries.jsonl",entryBytes,"application/x-ndjson");await Write("device_inventory.jsonl",inventoryBytesOut,"application/x-ndjson");
-            await Write("device_inventory_manifest.json",canonical.Serialize(Element(new JsonObject{["contract"]="urn:android-binding-catalog:2.1.0:DeviceResolution",["registry_id"]=registry,["entries"]=entries.Count,["inventory_sha256"]=Sha(inventoryBytesOut),["semantic_scope"]="Full versioned metadata inventory; no device observation or permission grant"})));
-            await Write("catalog.json",canonical.Serialize(Element(new JsonObject{["schema_version"]="1.2.0",["complete"]=false,["entries"]=new JsonArray(entries.Select(entry=>(JsonNode)entry.DeepClone()).ToArray())})));
-            await Write("dispatch_manifest.json",canonical.Serialize(Element(new CatalogAliases(canonical,contracts).Generate(entries))));await Write("validation.json",canonical.Serialize(Element(validation)));
-            // Retained source database lives outside the final artifact set. Never move/delete it.
-            var stage=ArtifactPaths.Resolve(privateStageDirectory,Guid.NewGuid().ToString("N")+"/catalog.staging.sqlite");Directory.CreateDirectory(Path.GetDirectoryName(stage)!);
-            using(var target=new SqliteConnection(new SqliteConnectionStringBuilder{DataSource=stage,Pooling=false}.ToString())){target.Open();db.Connection.BackupDatabase(target);}
+            await WriteLines("entries.jsonl",()=>DocumentLines("registry_entries"));var inventoryArtifact=await WriteLines("device_inventory.jsonl",()=>DocumentLines("registry_inventory"));
+            await Write("device_inventory_manifest.json",canonical.Serialize(Element(new JsonObject{["contract"]="urn:android-binding-catalog:2.1.0:DeviceResolution",["registry_id"]=registry,["entries"]=entryCount,["inventory_sha256"]=inventoryArtifact.Sha256,["semantic_scope"]="Full versioned metadata inventory; no device observation or permission grant"})));
+            async Task WriteArray(Stream stream,CancellationToken token,string prefix,IEnumerable<string> items,string suffix)
+            {await using var writer=new StreamWriter(stream,new UTF8Encoding(false),4096,true);await writer.WriteAsync(prefix.AsMemory(),token);var first=true;foreach(var item in items){if(!first) await writer.WriteAsync(",".AsMemory(),token);await writer.WriteAsync(item.AsMemory(),token);first=false;}await writer.WriteAsync(suffix.AsMemory(),token);await writer.FlushAsync(token);}
+            await WriteStream("catalog.json",(stream,token)=>WriteArray(stream,token,"{\"schema_version\":\"1.2.0\",\"complete\":false,\"entries\":[",DocumentLines("registry_entries"),"]}"));
+            await WriteStream("dispatch_manifest.json",(stream,token)=>WriteArray(stream,token,"{\"format_version\":\"1.1.0\",\"contract_format_version\":3,\"aliases\":[",new CatalogAliases(canonical,contracts).EnumerateOrdered(EntryDocuments()).Select(Text),"]}"));
+            await Write("validation.json",canonical.Serialize(Element(validation)));
+            // Export cursors finish before closing the actual file-backed stage.
+            // No backup database, move or deletion substitutes for this source.
+            db.Dispose();
             foreach(var input in inputs)
-                if(!(await File.ReadAllBytesAsync(ArtifactPaths.Resolve(sourceRoot,S(input.Source["local_path"])),cancellationToken)).AsSpan().SequenceEqual(input.Bytes)) throw Failure("input-changed","Source changed before final publication marker");
+            {using var source=File.OpenRead(ArtifactPaths.Resolve(sourceRoot,S(input.Source["local_path"])));if(ContentHash.Sha256(source)!=S(input.Source["sha256"])) throw Failure("input-changed","Source changed before final publication marker");}
             if(!(await File.ReadAllBytesAsync(inventoryFull,cancellationToken)).AsSpan().SequenceEqual(inventoryBytes)) throw Failure("input-changed","Inventory changed before final publication marker");
-            var finalBytes=await File.ReadAllBytesAsync(stage,cancellationToken);await Write("catalog.sqlite",finalBytes,"application/vnd.sqlite3");
-            if(!(await store.ReadAsync("catalog.sqlite",cancellationToken)).Span.SequenceEqual(finalBytes)) throw Failure("final-copy-mismatch","Final database copy differs from retained staging source");
-            return new(registry,producerFingerprint,artifacts.ToArray(),validation);
+            string FileHash(string path){using var stream=File.OpenRead(path);return ContentHash.Sha256(stream);}
+            var stageHash=FileHash(stage);var final=await WriteStream("catalog.sqlite",async (stream,token)=>
+            {await using var source=File.OpenRead(stage);await source.CopyToAsync(stream,65536,token);},"application/vnd.sqlite3");
+            if(final.Sha256!=stageHash || FileHash(ArtifactPaths.Resolve(output,"catalog.sqlite"))!=stageHash) throw Failure("final-copy-mismatch","Final database copy differs from retained staging source");
+            return new(registry,producerFingerprint,artifacts.ToArray(),validation,stage,rawPath);
         }
         catch(Exception error) when(error is not OperationCanceledException)
         {
@@ -199,4 +289,9 @@ public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher
         }
     }
     private static int SourceRank(JsonObject source)=>S(source["kind"])=="sdk-signature" ? 0 : S(source["kind"])=="source-signature" ? Path.GetFileName(S(source["path"]))=="current.txt" ? 1 : 2 : 3;
+    private static JsonNode? PermissionSemantic(JsonNode? value)
+    {
+        if(value is JsonObject obj){var result=new JsonObject();foreach(var pair in obj) if(!pair.Key.StartsWith("x-",StringComparison.Ordinal)) result[pair.Key]=PermissionSemantic(pair.Value);return result;}
+        if(value is JsonArray array) return new JsonArray(array.Select(PermissionSemantic).ToArray());return value?.DeepClone();
+    }
 }

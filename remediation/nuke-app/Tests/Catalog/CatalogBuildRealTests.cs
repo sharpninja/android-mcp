@@ -11,12 +11,20 @@ using Xunit;
 
 namespace AndroidMcp.BuildTool.Tests.Catalog;
 
+public sealed record CatalogBuildInvocation(CatalogBuild Service,string InventoryPath,string OutputDirectory,string StageDirectory);
 public sealed class NativeCatalogBuildProvider:ICatalogBuildCaseProvider
 {
     // Keep generated source, staging and output evidence for inspection. These
     // temporary roots are owned by this provider and never hold prior inputs.
     private readonly string root=Path.Combine(Path.GetTempPath(),"native-catalog-build-"+Guid.NewGuid().ToString("N"));
     internal string EvidenceRoot=>root;
+    internal Func<string,IStreamingArtifactStore>? StoreFactory {get;init;}
+    internal Func<string,CatalogDatabase>? StageFactory {get;init;}
+    internal Func<CatalogBuildInvocation,Task<CatalogBuildException?>>? Execution {get;init;}
+    internal Action<List<(string Kind,string Path,string Text)>>? SourceValues {get;init;}
+    internal Action<JsonObject,string,IDictionary<string,byte[]>>? InventorySetup {get;init;}
+    internal ISourcesExtractionDispatcher? SourceDispatcher {get;init;}
+    internal Action<CatalogImportObservation>? ImportObserver {get;init;}
     private static string Root()=>NativeSchemaProvider.Root();
     private static string Hash(byte[] bytes)=>ContentHash.Sha256(bytes);
     public CatalogBuildReply Build(CatalogBuildCall call)
@@ -25,6 +33,7 @@ public sealed class NativeCatalogBuildProvider:ICatalogBuildCaseProvider
         {("sdk-signature","api.txt",CatalogBuildCases.Signature),("manifest","AndroidManifest.xml",CatalogBuildCases.Manifest),("aidl","IFoo.aidl",CatalogBuildCases.Aidl)};
         if(call.Variant=="invalid-permission-ast") values[0]=(values[0].Kind,values[0].Path,values[0].Text.Replace("@RequiresPermission(android.Manifest.permission.CAMERA)","@RequiresPermission(allOf={})",StringComparison.Ordinal));
         if(call.Variant is "duplicate-source" or "verified-unused-cache-duplicate-source") values.Add(("sdk-signature","second.txt",CatalogBuildCases.Signature));
+        SourceValues?.Invoke(values);
         var sources=new JsonArray();var original=new Dictionary<string,byte[]>(StringComparer.Ordinal);
         foreach(var (kind,path,text) in values)
         {
@@ -46,12 +55,19 @@ public sealed class NativeCatalogBuildProvider:ICatalogBuildCaseProvider
             sources[0]!["java_file_context"]=CatalogBuildCacheCases.HistoricalContext();
         }
         var inventory=new JsonObject{["catalog"]=new JsonObject{["registry_version"]=1,["android_version"]="fixture",["api_level"]=37,["coverage"]="fixture partial"},["sources"]=sources};
+        InventorySetup?.Invoke(inventory,root,original);
         var inventoryPath=Path.Combine(root,"inventory.json");var inventoryBytes=JsonSerializer.SerializeToUtf8Bytes(inventory);File.WriteAllBytes(inventoryPath,inventoryBytes);original.Add("inventory.json",inventoryBytes);
         if(call.Variant=="nonempty-output"){Directory.CreateDirectory(output);File.WriteAllText(Path.Combine(output,"prior.txt"),"immutable previous generation");}
         var canonical=new CanonicalJson();var facts=new SourceTypeFacts(new JvmSourceLinker(),canonical);
-        var dispatcher=new SourcesExtractionDispatcher(new ISourceExtractor[]{new SignatureSourceExtractor(value=>ContentHash.Sha256(value.Span)),new ManifestSourceExtractor(),new AidlSourceExtractor(value=>ContentHash.Sha256(value.Span))},SourceExtractionProfile.CurrentCandidate);
-        var service=new CatalogBuild(Root(),dispatcher,new PermissionExpressionSourceFacts(),facts,facts,canonical);
-        CatalogBuildException? failure=null;try{service.BuildAsync(inventoryPath,output,stage).GetAwaiter().GetResult();}catch(CatalogBuildException error){failure=error;}
+        var dispatcher=SourceDispatcher ?? new SourcesExtractionDispatcher(new ISourceExtractor[]{new SignatureSourceExtractor(value=>ContentHash.Sha256(value.Span)),new ManifestSourceExtractor(),new AidlSourceExtractor(value=>ContentHash.Sha256(value.Span))},SourceExtractionProfile.CurrentCandidate);
+        var service=new CatalogBuild(Root(),dispatcher,new PermissionExpressionSourceFacts(),facts,facts,canonical,outputStores:StoreFactory,stagingDatabases:StageFactory,observeImport:ImportObserver);
+        CatalogBuildException? failure=null;
+        try
+        {
+            if(Execution is not null) failure=Execution(new(service,inventoryPath,output,stage)).GetAwaiter().GetResult();
+            else service.BuildAsync(inventoryPath,output,stage).GetAwaiter().GetResult();
+        }
+        catch(CatalogBuildException error){failure=error;}
         var preserved=original.All(pair=>File.ReadAllBytes(Path.Combine(root,pair.Key)).AsSpan().SequenceEqual(pair.Value));
         var final=File.Exists(Path.Combine(output,"catalog.sqlite"));var failurePath=Path.Combine(output,"validation-failure.json");
         if(failure is not null)

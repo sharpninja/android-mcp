@@ -29,13 +29,16 @@ public sealed class BrowserQaOperation(IProcessSessionFactory sessions,IProcessR
         await store.WriteAsync(new("browser-identity.json",Canonical.Serialize(JsonSerializer.SerializeToElement(identity)),"application/json"),cancellationToken);
         return identity;
     }
-    public async Task<BrowserQaResult> RunAsync(BrowserQaRequest request,CancellationToken cancellationToken=default)
+    public Task<BrowserQaResult> RunAsync(BrowserQaRequest request,CancellationToken cancellationToken=default)=>request.GenerationSelection is null
+        ?RunCoreAsync(request,null,cancellationToken)
+        :new BrowserQaGenerationVerifier().AdmitAndRunAsync(request,(admitted,token)=>RunCoreAsync(request,admitted,token),cancellationToken);
+    private async Task<BrowserQaResult> RunCoreAsync(BrowserQaRequest request,BrowserQaGenerationAdmission? admitted,CancellationToken cancellationToken)
     {
         var inputRoot=Path.GetFullPath(request.ProjectRoot);var outputRoot=Path.GetFullPath(request.OutputRoot);
         if(request.RendererProfile!="native"||request.ViewportWidth<=0||request.ViewportHeight<=0||request.ExpectedArchitectureDiagrams<0)throw new ArgumentException("Browser QA requires a native renderer, positive viewport dimensions and an explicit nonnegative diagram denominator.");
         var outputRelative=Path.GetRelativePath(inputRoot,outputRoot).Replace(Path.DirectorySeparatorChar,'/');
-        if(outputRelative=="."||ArtifactPaths.IsRelative(outputRelative))throw new ArgumentException("Browser QA output must be outside its immutable input tree.");
-        if(Directory.Exists(outputRoot)&&Directory.EnumerateFileSystemEntries(outputRoot).Any())throw new IOException("Browser QA output generation must be fresh.");
+        if(request.GenerationSelection is null&&(outputRelative=="."||ArtifactPaths.IsRelative(outputRelative)))throw new ArgumentException("Browser QA output must be outside its immutable input tree.");
+        if(request.GenerationSelection is null&&Directory.Exists(outputRoot)&&Directory.EnumerateFileSystemEntries(outputRoot).Any())throw new IOException("Browser QA output generation must be fresh.");
         _=ArtifactPaths.Resolve(outputRoot,"browser-qa.json");
         var store=Store(outputRoot);var captures=new List<StoredArtifact>();BrowserSession? browser=null;
         try
@@ -43,15 +46,17 @@ public sealed class BrowserQaOperation(IProcessSessionFactory sessions,IProcessR
             var manifestPath=ArtifactPaths.Resolve(inputRoot,"docs/ui-asset-manifest.json");var htmlPath=ArtifactPaths.Resolve(inputRoot,"docs/storyboards.html");
             var manifestBytes=await File.ReadAllBytesAsync(manifestPath,cancellationToken);_=Canonical.Serialize(manifestBytes);var manifest=JsonNode.Parse(manifestBytes,documentOptions:new JsonDocumentOptions{MaxDepth=int.MaxValue})!.AsObject();
             var steps=manifest["storyboards"]!.AsArray().SelectMany(x=>x!["steps"]!.AsArray()).Select(x=>x!.AsObject()).ToArray();
-            var svgFiles=Directory.EnumerateFiles(inputRoot,"*.svg",SearchOption.AllDirectories).OrderBy(x=>Relative(inputRoot,x),StringComparer.Ordinal).ToArray();
-            foreach(var path in svgFiles)_=ArtifactPaths.Resolve(inputRoot,Relative(inputRoot,path));
+            var svgFiles=admitted?.SvgFiles.ToArray()??Directory.EnumerateFiles(inputRoot,"*.svg",SearchOption.AllDirectories)
+                .Select(path=>new BrowserQaGenerationSvg(inputRoot,Relative(inputRoot,path),"",0,"ui")).OrderBy(file=>file.RelativePath,StringComparer.Ordinal).ToArray();
+            foreach(var file in svgFiles)_=file.AbsolutePath;
             foreach(var state in manifest["state_svg_files"]!.AsArray())if(!File.Exists(ArtifactPaths.Resolve(inputRoot,"docs/"+state!.GetValue<string>())))throw new IOException("Declared state SVG is absent: "+state);
-            var inputFiles=svgFiles.Concat(new[]{manifestPath,htmlPath}).OrderBy(x=>Relative(inputRoot,x),StringComparer.Ordinal).ToArray();
-            var inputHashes=new JsonArray();foreach(var path in inputFiles){var bytes=await File.ReadAllBytesAsync(path,cancellationToken);inputHashes.Add(new JsonObject{["path"]=Relative(inputRoot,path),["sha256"]=ContentHash.Sha256(bytes),["bytes"]=bytes.LongLength});}
+            var inputFiles=svgFiles.Select(file=>(Path:file.AbsolutePath,Label:file.RelativePath,Role:file.Role)).Concat(new[]{manifestPath,htmlPath}.Select(path=>(Path:path,Label:Relative(inputRoot,path),Role:"ui"))).OrderBy(file=>file.Label,StringComparer.Ordinal);
+            var inputHashes=new JsonArray();foreach(var file in inputFiles){var bytes=await File.ReadAllBytesAsync(file.Path,cancellationToken);var identity=new JsonObject{["path"]=file.Label,["sha256"]=ContentHash.Sha256(bytes),["bytes"]=bytes.LongLength};if(admitted is not null)identity["source_role"]=file.Role;inputHashes.Add(identity);}
             Directory.CreateDirectory(outputRoot);var tool=await ProbeAsync(request.Browser,outputRoot,outputRoot,cancellationToken);
             if(tool.Version!=request.Browser.Version)throw new IOException("Chromium version differs from its supplied content identity.");
             browser=await BrowserSession.OpenAsync(request with{ProjectRoot=inputRoot,OutputRoot=outputRoot},sessions,store,clock,cancellationToken);
             var failures=new HashSet<string>(StringComparer.Ordinal);var report=new JsonObject{["producer"]="androidmcp-native-browser-qa-v1",["scope"]="Offline design only; no Android or device/runtime proof",["at"]=clock.Now.ToString("o"),["inputs"]=inputHashes,["tool"]=Node(tool),["expected_slides"]=steps.Length+1};
+            if(admitted is not null){report["generation_scope"]=admitted.Scope;report["generation_inputs"]=Node(admitted.Generations);report["verified_architecture_paths"]=Node(admitted.SvgFiles.Where(file=>file.Role=="architecture").Select(file=>file.RelativePath).ToArray());}
             await browser.NavigateAsync(htmlPath,cancellationToken);var ready=await browser.EvaluateAsync("ready",null,cancellationToken);
             report["font_status"]=ready["font_status"]!.DeepClone();if(Text(ready,"font_status")!="loaded")failures.Add("fonts");
             if(ready["sections"]!.GetValue<int>()!=steps.Length+1)failures.Add("slide-count");
@@ -83,12 +88,12 @@ public sealed class BrowserQaOperation(IProcessSessionFactory sessions,IProcessR
                 shots.Add(new JsonObject{["slide"]=i,["step"]=i==0?"cover":Text(steps[i-1],"step_id"),["file"]=path,["sha256"]=saved.Sha256,["forced_capture_selection"]=forced,["overflow"]=geometry["overflow"]!.DeepClone()});
             }
             report["shots"]=shots;var checks=new JsonArray();var diagrams=0;await browser.ViewportAsync(1440,1000,cancellationToken);
-            foreach(var path in svgFiles)
+            foreach(var file in svgFiles)
             {
-                await browser.NavigateAsync(path,cancellationToken);var geometry=await browser.EvaluateAsync("svg",null,cancellationToken);geometry["file"]=Relative(inputRoot,path);
-                geometry["sha256"]=ContentHash.Sha256(await File.ReadAllBytesAsync(path,cancellationToken));if(geometry["outside"]!.AsArray().Count>0)failures.Add("svg");
-                if(Relative(inputRoot,path).StartsWith("docs/diagrams/",StringComparison.Ordinal))
-                {diagrams++;var saved=await SavePngAsync(store,"diagrams/"+Relative(inputRoot,path)["docs/diagrams/".Length..]+".png",await browser.ScreenshotAsync(true,cancellationToken),captures,cancellationToken);geometry["screenshot"]=saved.RelativePath;}
+                await browser.NavigateAsync(file.AbsolutePath,cancellationToken);var geometry=await browser.EvaluateAsync("svg",null,cancellationToken);geometry["file"]=file.RelativePath;
+                geometry["sha256"]=ContentHash.Sha256(await File.ReadAllBytesAsync(file.AbsolutePath,cancellationToken));if(geometry["outside"]!.AsArray().Count>0)failures.Add("svg");
+                if(file.RelativePath.StartsWith("docs/diagrams/",StringComparison.Ordinal))
+                {diagrams++;var saved=await SavePngAsync(store,"diagrams/"+file.RelativePath["docs/diagrams/".Length..]+".png",await browser.ScreenshotAsync(true,cancellationToken),captures,cancellationToken);geometry["screenshot"]=saved.RelativePath;}
                 checks.Add(geometry.DeepClone());
             }
             report["svg_checks"]=checks;report["diagrams"]=diagrams;report["expected_diagrams"]=request.ExpectedArchitectureDiagrams;if(diagrams!=request.ExpectedArchitectureDiagrams)failures.Add("diagram-count");
@@ -100,6 +105,7 @@ public sealed class BrowserQaOperation(IProcessSessionFactory sessions,IProcessR
                 var saved=await SavePngAsync(store,path,Convert.FromBase64String(Text(rendered,"png")),captures,cancellationToken);contacts.Add(new JsonObject{["file"]=path,["slides"]=indices,["sha256"]=saved.Sha256});
             }
             report["contacts"]=contacts;await browser.CloseAsync(cancellationToken);
+            if(admitted is not null)await new BrowserQaGenerationVerifier().VerifyUnchangedAsync(admitted,cancellationToken);
             report["external_requests"]=Node(browser.ExternalRequests);if(browser.ExternalRequests.Count>0)failures.Add("external");
             report["launch"]=new JsonObject{["executable"]=browser.Launch.Tool.ExecutablePath,["sha256"]=browser.Launch.Tool.Sha256,["argv"]=Node(browser.Launch.Arguments),["request"]=Node(browser.Launch)};
             report["shutdown"]=new JsonObject{["graceful_close_requested"]=true,["close_acknowledged"]=browser.CloseAcknowledged,["expected_transport_end"]=browser.ExpectedShutdownTransportEnd,["terminal_transport_code"]=browser.TransportErrorCode,["terminal_transport_error"]=browser.EventsError?.ToString(),["stopped"]=browser.Stopped,["exit_code"]=browser.Exit!.ExitCode,["result"]=Node(browser.Exit)};

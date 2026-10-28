@@ -8,7 +8,7 @@ namespace AndroidMcp.BuildTool.Modules.Review;
 /// Neither collaborator is replaced by caller assertions. No process, shell, network or mutation API.</summary>
 public sealed class OfficialPluginReviewAuditTransport(IReviewOfficialPurposeInvoker purpose,
     IReviewProviderRuntimeEvidenceSource runtime, IArtifactStore store, ICanonicalJson canonical,
-    string workspacePath) : IReviewAuditTransport
+    string workspacePath,IReviewCumulativeVerdictEvidenceSource? cumulativeEvidence = null) : IReviewAuditTransport
 {
     private const string Source = ReviewAuditPolicy.ReviewerAgent;
     private const int PageSize = 100;
@@ -63,6 +63,13 @@ public sealed class OfficialPluginReviewAuditTransport(IReviewOfficialPurposeInv
     {
         // Collect actual observed metadata and paginated read-back. No retry follows denied/unavailable purposes.
         var provider = await runtime.ObserveAsync(snapshot,receipts,cancellationToken);
+        var calls = ReviewAuditPolicy.CallIds(receipts);
+        var finalCallId = calls.Order(StringComparer.Ordinal).LastOrDefault();
+        var lastRuntime = provider.Runtime.Where(x=>x.ProviderCallId == finalCallId).ToArray();
+        var requiresCumulative = lastRuntime.Length == 1 && lastRuntime[0].FullVisibleReport != expectedFullVerdict;
+        ReviewObservedCumulativeVerdict? cumulative = null;
+        if(requiresCumulative && cumulativeEvidence is not null)
+            cumulative = await cumulativeEvidence.ObserveAsync(snapshot,receipts,cancellationToken);
         var turns = new List<ReviewOfficialPersistedTurn>();
         var offset = 0;
         int? total = null;
@@ -85,7 +92,6 @@ public sealed class OfficialPluginReviewAuditTransport(IReviewOfficialPurposeInv
             offset += PageSize;
         } while(true);
 
-        var calls = ReviewAuditPolicy.CallIds(receipts);
         Require(calls.Count > 0 && provider.Runtime.Count == calls.Count && provider.ReviewerTurns.Count == calls.Count &&
             provider.Runtime.Select(x=>x.ProviderCallId).ToHashSet(StringComparer.Ordinal).SetEquals(calls) &&
             provider.ReviewerTurns.Select(x=>x.ProviderCallId).ToHashSet(StringComparer.Ordinal).SetEquals(calls) &&
@@ -114,8 +120,14 @@ public sealed class OfficialPluginReviewAuditTransport(IReviewOfficialPurposeInv
             Require(turn.WorkspacePath == workspacePath && turn.Head == snapshot.Head && turn.RunId == snapshot.RunId &&
                 turn.ParentSessionId == snapshot.ParentSessionId && turn.ParentRequestId == snapshot.ParentRequestId &&
                 turn.ReviewerSessionSource == Source && turn.SessionId == link.SessionId && turn.RequestId == link.RequestId &&
-                turn.ProviderNativeSessionId == observed.ProviderNativeSessionId && turn.ProviderCallId == call && turn.Status == "completed" &&
-                turn.FullVisibleVerdict == observed.FullVisibleReport,"Persisted own-turn identity, terminal state or complete report differs.");
+                turn.ProviderNativeSessionId == observed.ProviderNativeSessionId && turn.ProviderCallId == call && turn.Status == "completed",
+                "Persisted own-turn identity or terminal state differs.");
+            if(requiresCumulative && call == finalCallId)
+            {
+                Require(cumulative is not null,"Cumulative final-turn evidence is unavailable; completed calls are never retried.");
+                await VerifyCumulativeAsync(snapshot,calls,expectedFullVerdict,observed,link,turn,cumulative!,cancellationToken);
+            }
+            else Require(turn.FullVisibleVerdict == observed.FullVisibleReport,"Persisted own-turn complete report differs.");
             Require(turn.Evidence.Count > 0,"Persisted own-turn evidence is absent.");
             foreach(var evidence in turn.Evidence)
             {
@@ -133,6 +145,42 @@ public sealed class OfficialPluginReviewAuditTransport(IReviewOfficialPurposeInv
         Require(final.FullVisibleVerdict == expectedFullVerdict,"Entire final visible verdict differs from persisted read-back.");
         return new(snapshot.Head,snapshot.RunId,Source,ReviewLaunchService.Model,ReviewLaunchService.Effort,final.SessionId,final.RequestId,
             snapshot.ParentSessionId,snapshot.ParentRequestId,expectedFullVerdict,calls,true);
+    }
+
+    private async Task VerifyCumulativeAsync(ReviewSnapshot snapshot,IReadOnlyList<string> calls,string expectedFullVerdict,
+        ReviewObservedProviderRuntime observed,ReviewObservedReviewerTurnLink ownLink,ReviewOfficialPersistedTurn turn,
+        ReviewObservedCumulativeVerdict cumulative,CancellationToken cancellationToken)
+    {
+        var link = cumulative.Turn;
+        Require(link.ProviderCallId == observed.ProviderCallId && link.ReviewerSessionSource == Source &&
+            link.SessionId == ownLink.SessionId && link.RequestId == ownLink.RequestId &&
+            cumulative.RelatedProviderCallIds.Count == calls.Count &&
+            cumulative.RelatedProviderCallIds.ToHashSet(StringComparer.Ordinal).SetEquals(calls) &&
+            cumulative.FullVisibleVerdict == expectedFullVerdict && turn.FullVisibleVerdict == expectedFullVerdict &&
+            cumulative.FinalCallVisibleReport == observed.FullVisibleReport,
+            "Cumulative verdict, per-call report, coverage or same-turn identity differs.");
+        Require(turn.Evidence.Contains(link.ToolResultProof) && turn.Evidence.Contains(cumulative.CallReportEntryProof),
+            "Both model-authored cumulative and per-call sections must be present in the persisted final turn.");
+        using var completion = await JsonProofAsync(link.ToolResultProof,cancellationToken);
+        VerifyCumulativeScope(completion.RootElement,snapshot,link);
+        Require(Text(completion.RootElement,"role") == "cumulative-final-verdict" &&
+            Text(completion.RootElement,"fullVisibleVerdict") == expectedFullVerdict &&
+            Strings(completion.RootElement,"relatedProviderCallIds").Count == calls.Count &&
+            Strings(completion.RootElement,"relatedProviderCallIds").ToHashSet(StringComparer.Ordinal).SetEquals(calls),
+            "Actual scoped completion does not prove the entire cumulative verdict and call coverage.");
+        using var entry = await JsonProofAsync(cumulative.CallReportEntryProof,cancellationToken);
+        VerifyCumulativeScope(entry.RootElement,snapshot,link);
+        Require(Text(entry.RootElement,"role") == "provider-call-report" &&
+            Text(entry.RootElement,"fullVisibleReport") == observed.FullVisibleReport,
+            "The actual final-call report section is missing or differs.");
+    }
+    private static void VerifyCumulativeScope(JsonElement proof,ReviewSnapshot snapshot,ReviewObservedReviewerTurnLink link)
+    {
+        Require(Text(proof,"RunId") == snapshot.RunId && Text(proof,"Head") == snapshot.Head &&
+            Text(proof,"ParentSessionId") == snapshot.ParentSessionId && Text(proof,"ParentRequestId") == snapshot.ParentRequestId &&
+            Text(proof,"sourceType") == Source && Text(proof,"sessionId") == link.SessionId &&
+            Text(proof,"requestId") == link.RequestId && Text(proof,"providerCallId") == link.ProviderCallId,
+            "Cumulative source projection has different root or actual reviewer IDs.");
     }
 
     private async Task<ReadOnlyMemory<byte>> ReadProofAsync(StoredArtifact proof,CancellationToken cancellationToken)

@@ -10,6 +10,7 @@ namespace AndroidMcp.BuildTool.Sources.Java;
 // compiler, byte hashing, canonical serialization and storage use shared seams.
 public sealed class JavaNativeWorkflow(IByteTransport transport,INativeArchiveExtractor archives,IProcessRunner processes,IClock clock) : IJavaNativeWorkflow
 {
+    public const string ManifestSchema="androidmcp-java-native-source-lock-v1",RuntimeVersion="0.25.2",GrammarVersion="0.23.5";
     public async Task<JavaNativeWorkflowResult> RunAsync(JavaNativeWorkflowRequest request,CancellationToken cancellationToken=default)
     {
         var output=Path.GetFullPath(request.OutputRoot);var cache=Path.GetFullPath(request.CacheRoot??Path.Combine(output,"native-sources"));
@@ -47,8 +48,8 @@ public sealed class JavaNativeWorkflow(IByteTransport transport,INativeArchiveEx
         var hashes=selected.ToDictionary(x=>x.RelativePath,x=>x.Sha256,StringComparer.Ordinal);
         var build=await new JavaNativeBuilder(processes,outputStore).BuildAsync(new(cache,hashes,request.Compiler,Path.Combine(output,"work","native"),Path.Combine(receipts,"compile"),"native/linux-x64/libandroidmcp_java_parser.so"),cancellationToken);
         var sourceLock=new JsonObject{
-            ["schema"]="androidmcp-java-native-source-lock-v1",["created_at"]=clock.Now.ToString("o"),["workflow_request"]=JsonSerializer.SerializeToNode(request),["runtime_version"]="0.25.2",["runtime_tag_object"]=JavaNativeBuilder.RuntimeTagObject,["runtime_commit"]=JavaNativeBuilder.RuntimeCommit,
-            ["grammar_version"]="0.23.5",["grammar_commit"]=JavaNativeBuilder.GrammarCommit,["runtime_archive_sha256"]=runtime.ArchiveSha256,["grammar_archive_sha256"]=grammar.ArchiveSha256,
+            ["schema"]=ManifestSchema,["created_at"]=clock.Now.ToString("o"),["workflow_request"]=JsonSerializer.SerializeToNode(request),["runtime_version"]=RuntimeVersion,["runtime_tag_object"]=JavaNativeBuilder.RuntimeTagObject,["runtime_commit"]=JavaNativeBuilder.RuntimeCommit,
+            ["grammar_version"]=GrammarVersion,["grammar_commit"]=JavaNativeBuilder.GrammarCommit,["runtime_archive_sha256"]=runtime.ArchiveSha256,["grammar_archive_sha256"]=grammar.ArchiveSha256,
             ["runtime_archive_metadata"]=JsonSerializer.SerializeToNode(runtime.Metadata??[]),["grammar_archive_metadata"]=JsonSerializer.SerializeToNode(grammar.Metadata??[]),
             ["rid"]="linux-x64",["compiler"]=JsonSerializer.SerializeToNode(request.Compiler),["compiler_version_receipt"]=JsonSerializer.SerializeToNode(versionResult),
             ["native_artifact"]=new JsonObject{["relative_path"]=build.Artifact.RelativePath,["sha256"]=build.Artifact.Sha256,["length"]=build.Artifact.Length,["language_abi"]=build.LanguageAbi},

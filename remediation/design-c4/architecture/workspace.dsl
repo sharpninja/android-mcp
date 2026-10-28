@@ -8,8 +8,15 @@ workspace "Android MCP Bridge" "All-Kotlin service and Compose UI; internal ARC 
         arcTarget = softwareSystem "Compatible external ARC target" "Opted-in Avalonia or Kotlin target retaining ARC wire"
         android = softwareSystem "Android OS and target apps" "Final OS authority, Binder services, adbd and uninstrumented targets"
         sources = softwareSystem "Versioned public sources" "SDK, AOSP, permissions, AIDL and protocol evidence; unknown coverage retained"
-        documentationSystem = softwareSystem "Local documentation toolchain" "Workstation design tooling, outside the Android runtime system" {
-            documentation = container "Documentation build" "Local model validation and Markdown/SVG/storyboard packaging; never an APK component" "Gradle / Structurizr / Marp"
+        documentationSystem = softwareSystem "Local workstation tooling" "One native C# NUKE application, outside the Android runtime system" {
+            documentation = container "Android MCP build tooling" "One category/operation registry and private stage DAG; local source/catalog/design/validation/package modules; never an APK component" "C# / .NET / NUKE" {
+                acquisition = component "Source acquisition" "Pinned source and tool acquisition through shared transport, stores and leases" "C#"
+                catalog = component "Catalog tooling" "Source extraction, schema validation and portable catalog generation" "C#"
+                design = component "Documentation projection" "Canonical Markdown to editable SVG, Structurizr/PlantUML and self-contained offline HTML" "C#"
+                validation = component "Shared validation" "Canonical model/module/document contracts, invoked by public validation and generation prerequisites" "C#"
+                packaging = component "Portable packaging" "Deterministic source/configuration/artifact packaging through shared receipt and publication policies" "C#"
+                planning = component "Operation registry and stage planner" "Single typed category/operation authority; Gradle compatibility aliases select one union of private stages" "C# / NUKE"
+            }
         }
         bridge = softwareSystem "Android MCP bridge" "Full versioned inventory, including unknown/unavailable entries; separate authority and contextual discovery" {
             app = container "Android bridge APK" "One UID and one process in this reference design; Kotlin service owns authoritative state" "Kotlin / Jetpack Compose" {
@@ -34,7 +41,6 @@ workspace "Android MCP Bridge" "All-Kotlin service and Compose UI; internal ARC 
             db = container "App-private catalog/configuration" "Catalog snapshots, client/principal mappings, grants/logging configuration, groups/views, journal and audit; secret keys remain in Keystore" "SQLite" {
                 tags "Database"
             }
-            tooling = container "Offline catalog tooling" "Source acquisition/extraction/schema validation and reference fixtures; no phone operations" "Python"
         }
         owner -> bridge "Manages authorized local bridge settings"
         agent -> bridge "Discovers and invokes authorized Android capabilities" "MCP 2025-11-25"
@@ -48,13 +54,13 @@ workspace "Android MCP Bridge" "All-Kotlin service and Compose UI; internal ARC 
         bridge.app -> arcTarget "First request/response validates pinned profile; no handshake" "ARC raw TCP; signed 4-byte BE; envelope 1.0; loopback"
         bridge.app -> android "SDK/Binder and separately paired ADB calls, probes and death signals"
         bridge.app -> bridge.db "Reads catalog/policy/groups/views; writes overlays/journal/audit via one serialized writer connection" "App-private SQLite"
-        bridge.tooling -> bridge.app "Produces portable catalog release; owner selects SAF document; importer verifies hashes/schema and stages atomic activation" "Owner-mediated validated import by SAF or disabled-by-default authenticated admin route; no deployment"
+        documentationSystem.documentation -> bridge.app "Produces portable catalog release; owner selects SAF document; importer verifies hashes/schema and stages atomic activation" "Owner-mediated validated import by SAF or disabled-by-default authenticated admin route; no deployment"
         documentationSystem.documentation -> owner "Produces editable Markdown, SVGs, local HTML and portable ZIP" "Local files only"
         owner -> bridge.app.ui "Manages local settings and reviews protected approvals"
         agent -> bridge.app.transport "Discovers jobs, invokes bindings and reads callback journal" "MCP 2025-11-25 Streamable HTTP over authenticated loopback TCP/owner adb forward"
         arcClient -> bridge.app.arc "Inspects approved target tree/frames and requests guarded input" "arc-protobuf-v1 loopback TCP"
-        sources -> bridge.tooling "Supplies immutable pinned input evidence"
-        bridge.tooling -> bridge.app.catalog "Supplies validated versioned catalog release"
+        sources -> documentationSystem.documentation "Supplies immutable pinned input evidence"
+        documentationSystem.documentation -> bridge.app.catalog "Supplies validated versioned catalog release"
         bridge.app.lifecycle -> bridge.app.transport "Starts and stops listener according to actual readiness"
         bridge.app.lifecycle -> bridge.app.catalog "Loads trusted catalog and configuration"
         bridge.app.lifecycle -> bridge.app.device "Requests startup resolution and refresh on supported backend/device capability changes"
@@ -156,7 +162,6 @@ workspace "Android MCP Bridge" "All-Kotlin service and Compose UI; internal ARC 
                 forwarder = infrastructureNode "ADB loopback forwarding" "adb forward --no-rebind tcp:0 to the selected phone loopback listener; allocated host port is recorded" "Owner-managed ADB transport"
             }
             deploymentNode "Build workstation" "Local offline tools and renderer; no automatic phone deployment" "Existing pinned toolchain" {
-                containerInstance bridge.tooling
                 containerInstance documentationSystem.documentation
             }
             phone.sandbox.runtime -> phone.adbd "Same-device paired ADB connection; separate backend health and authority"
@@ -172,7 +177,7 @@ workspace "Android MCP Bridge" "All-Kotlin service and Compose UI; internal ARC 
             include *
             autoLayout lr
         }
-        container bridge Containers "C4 containers: runtime and offline tooling" {
+        container bridge Containers "C4 containers: Kotlin runtime and external workstation tooling" {
             include *
             autoLayout lr
         }

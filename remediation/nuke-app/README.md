@@ -25,7 +25,7 @@ Publish/Check reads tracked paths and filesystem metadata, applies the shared al
 $checkout = '/absolute/path/to/checkout'
 $gitIdentity = '/absolute/path/to/local/admitted-git-identity.json'
 $receipts = '/absolute/path/to/fresh/local/receipts'
-& $dotnetHost run --no-build --no-restore -- --target Publish --root (Get-Location).Path --operation Check --git-checkout $checkout --git-identity $gitIdentity --receipt-root $receipts
+& $dotnetHost run --no-build --no-restore -- --target Publish --root (Get-Location).Path --operation Check --git-checkout $checkout --git-identity $gitIdentity --receipt-root $receipts --dotnet-host $dotnetHost
 ```
 
 Core/OperationRegistry.cs and its generated OperationHelpBuilder view are the sole command/parameter vocabulary. Functional categories are targets and --operation selects a task. Publication Stage means an immutable copied bundle, not a Git index. Sources/Fetch defaults to the validated pinned canonical restore profile; no missing immutable snapshot or archive proof silently turns into a network fallback.

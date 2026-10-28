@@ -5,9 +5,15 @@ using AndroidMcp.BuildTool.Core;
 
 namespace AndroidMcp.BuildTool.Modules.Sources.Acquisition;
 
-public sealed class SourceCache(IArtifactStore store,IArtifactLeaseProvider leases,ICanonicalJson canonical):ISourceCache
+public sealed class SourceCache(IArtifactStore store,IArtifactLeaseProvider leases,ICanonicalJson canonical):ISealedSourceCache
 {
     public async Task<SourceCacheReceipt> WriteAsync(SourceCacheRequest request,CancellationToken cancellationToken=default)
+        =>(await PublishCoreAsync(request,cancellationToken)).Receipt;
+
+    public Task<SourceCachePublication> PublishAsync(SourceCacheRequest request,CancellationToken cancellationToken=default)
+        =>PublishCoreAsync(request,cancellationToken);
+
+    private async Task<SourceCachePublication> PublishCoreAsync(SourceCacheRequest request,CancellationToken cancellationToken)
     {
         Validate(request);await using var lease=await leases.AcquireAsync("source-cache/"+request.Path,cancellationToken);
         var records=canonical.Serialize(request.RecordsJson);using var parsed=JsonDocument.Parse(records);
@@ -26,25 +32,75 @@ public sealed class SourceCache(IArtifactStore store,IArtifactLeaseProvider leas
         catch(FileNotFoundException){}catch(DirectoryNotFoundException){}
         if(existingReceipt is not null)
         {
-            var old=JsonSerializer.Deserialize<SourceCacheReceipt>(existingReceipt.Value.Span)??throw new TransportException("CACHE_RECEIPT","Cache receipt missing.");
+            var old=ParseReceipt(existingReceipt.Value);
             if(old!=receipt)throw new TransportException("CACHE_IDENTITY","Cache pins changed; use a new generation.");
-            _=await ReadAsync(request,cancellationToken);return old;
+            var verified=await ReadCoreAsync(request,cancellationToken);
+            return new(old,new(verified.Seal.Data,Pin(sidecar,existingReceipt.Value,"application/json"),old.RecordCount));
         }
-        // A previous crash may leave the immutable data artifact; WriteAsync only accepts identical bytes.
-        await store.WriteAsync(new(request.Path,compressed,"application/gzip"),cancellationToken);
-        await store.WriteAsync(new(sidecar,canonical.Serialize(JsonSerializer.SerializeToElement(receipt)),"application/json"),cancellationToken);
-        return receipt;
+        // The same encoder and immutable write path serve both legacy WriteAsync and sealed publication.
+        var data=await store.WriteAsync(new(request.Path,compressed,"application/gzip"),cancellationToken);
+        var metadata=await store.WriteAsync(new(sidecar,canonical.Serialize(JsonSerializer.SerializeToElement(receipt)),"application/json"),cancellationToken);
+        return new(receipt,new(data,metadata,count));
     }
+
     public async Task<ReadOnlyMemory<byte>> ReadAsync(SourceCacheRequest request,CancellationToken cancellationToken=default)
+        =>(await ReadCoreAsync(request,cancellationToken)).RecordsJson;
+
+    private async Task<SourceCacheLookup> ReadCoreAsync(SourceCacheRequest request,CancellationToken cancellationToken)
     {
         Validate(request);var sidecar=await store.ReadAsync(request.Path+".csharp-cache.json",cancellationToken);
-        var receipt=JsonSerializer.Deserialize<SourceCacheReceipt>(sidecar.Span)??throw new TransportException("CACHE_RECEIPT","Cache receipt missing.");
-        if(receipt.Path!=request.Path||receipt.ProducerId!=request.ProducerId||receipt.ProfileId!=request.ProfileId||receipt.RecipeSha256!=request.RecipeSha256||receipt.SourceSha256!=request.SourceSha256||receipt.ProducerFingerprint!=Fingerprint(request)||receipt.HistoricalGZipSha256!=request.HistoricalGZipSha256)throw new TransportException("CACHE_IDENTITY","Cache pins differ.");
-        var compressed=await store.ReadAsync(request.Path,cancellationToken);if(ContentHash.Sha256(compressed.Span)!=receipt.GZipSha256)throw new TransportException("CACHE_HASH","Cache bytes changed.");
-        if(request.StrictHistoricalBytes&&receipt.GZipSha256!=request.HistoricalGZipSha256&&request.HistoricalGZipSha256 is not null)throw new TransportException("CACHE_BYTES","Historical gzip bytes differ.");
+        var receipt=ParseReceipt(sidecar);ValidateReceiptIdentity(request,receipt);
+        var compressed=await store.ReadAsync(request.Path,cancellationToken);
+        if(ContentHash.Sha256(compressed.Span)!=receipt.GZipSha256)throw new TransportException("CACHE_HASH","Cache bytes changed.");
+        ValidateHistoricalBytes(request,receipt);
         var (bytes,count)=await ReadRecordsAsync(compressed,canonical,cancellationToken);
-        if(count!=receipt.RecordCount||!canonical.Serialize(bytes).AsSpan().SequenceEqual(canonical.Serialize(request.RecordsJson)))throw new TransportException("CACHE_RECORDS","Cache records/count changed.");return bytes;
+        if(count!=receipt.RecordCount||!canonical.Serialize(bytes).AsSpan().SequenceEqual(canonical.Serialize(request.RecordsJson)))throw new TransportException("CACHE_RECORDS","Cache records/count changed.");
+        return new(bytes,receipt,new(Pin(request.Path,compressed,"application/gzip"),Pin(request.Path+".csharp-cache.json",sidecar,"application/json"),count));
     }
+
+    public async Task<SourceCacheLookup> LookupAsync(SourceCacheRequest identity,SourceCacheSeal trustedSeal,CancellationToken cancellationToken=default)
+    {
+        cancellationToken.ThrowIfCancellationRequested();Validate(identity);ValidateSeal(identity,trustedSeal);
+        var sidecar=await store.ReadAsync(trustedSeal.Sidecar.RelativePath,cancellationToken);
+        if(sidecar.Length!=trustedSeal.Sidecar.Length||ContentHash.Sha256(sidecar.Span)!=trustedSeal.Sidecar.Sha256)
+            throw new TransportException("CACHE_SIDECAR_HASH","Cache sidecar differs from the trusted native index.");
+        var receipt=ParseReceipt(sidecar);ValidateReceiptIdentity(identity,receipt);
+        if(receipt.RecordCount!=trustedSeal.RecordCount)throw new TransportException("CACHE_RECORDS","Cache count differs from the trusted native index.");
+        if(receipt.GZipSha256!=trustedSeal.Data.Sha256)throw new TransportException("CACHE_IDENTITY","Cache gzip identity differs from the trusted native index.");
+        var compressed=await store.ReadAsync(trustedSeal.Data.RelativePath,cancellationToken);
+        if(compressed.Length!=trustedSeal.Data.Length||ContentHash.Sha256(compressed.Span)!=trustedSeal.Data.Sha256)
+            throw new TransportException("CACHE_HASH","Cache gzip differs from the trusted native index.");
+        ValidateHistoricalBytes(identity,receipt);
+        var (bytes,count)=await ReadRecordsAsync(compressed,canonical,cancellationToken);
+        if(count!=trustedSeal.RecordCount)throw new TransportException("CACHE_RECORDS","Decoded count differs from the trusted native index.");
+        // Deliberately never inspect identity.RecordsJson: cache lookup precedes extraction.
+        return new(bytes,receipt,trustedSeal);
+    }
+
+    private void ValidateReceiptIdentity(SourceCacheRequest request,SourceCacheReceipt receipt)
+    {
+        if(receipt.Path!=request.Path||receipt.ProducerId!=request.ProducerId||receipt.ProfileId!=request.ProfileId||receipt.RecipeSha256!=request.RecipeSha256||receipt.SourceSha256!=request.SourceSha256||receipt.ProducerFingerprint!=Fingerprint(request)||receipt.HistoricalGZipSha256!=request.HistoricalGZipSha256)
+            throw new TransportException("CACHE_IDENTITY","Cache pins differ.");
+    }
+    private static void ValidateHistoricalBytes(SourceCacheRequest request,SourceCacheReceipt receipt)
+    {
+        if(request.StrictHistoricalBytes&&receipt.GZipSha256!=request.HistoricalGZipSha256&&request.HistoricalGZipSha256 is not null)
+            throw new TransportException("CACHE_BYTES","Historical gzip bytes differ.");
+    }
+    private static SourceCacheReceipt ParseReceipt(ReadOnlyMemory<byte> sidecar)
+        =>JsonSerializer.Deserialize<SourceCacheReceipt>(sidecar.Span)??throw new TransportException("CACHE_RECEIPT","Cache receipt missing.");
+    private static StoredArtifact Pin(string path,ReadOnlyMemory<byte> bytes,string mediaType)
+        =>new(path,ContentHash.Sha256(bytes.Span),bytes.Length,mediaType);
+    private static void ValidateSeal(SourceCacheRequest identity,SourceCacheSeal? seal)
+    {
+        if(seal is null||seal.Data is null||seal.Sidecar is null||seal.RecordCount<0||
+            seal.Data.RelativePath!=identity.Path||seal.Sidecar.RelativePath!=identity.Path+".csharp-cache.json"||
+            seal.Data.Length<0||seal.Sidecar.Length<0||seal.Data.MediaType!="application/gzip"||seal.Sidecar.MediaType!="application/json"||
+            !IsHash(seal.Data.Sha256)||!IsHash(seal.Sidecar.Sha256))
+            throw new TransportException("CACHE_SEAL","Exact native data, sidecar and count pins are required.");
+    }
+    private static bool IsHash(string? value)=>value is not null&&Regex.IsMatch(value,"^[a-f0-9]{64}$");
+
     internal static async Task<(byte[] Bytes,int Count)> ReadRecordsAsync(ReadOnlyMemory<byte> compressed,ICanonicalJson canonical,CancellationToken cancellationToken)
     {
         using var input=new MemoryStream(compressed.ToArray(),false);using var gzip=new GZipStream(input,CompressionMode.Decompress);using var output=new MemoryStream();

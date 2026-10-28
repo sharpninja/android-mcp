@@ -18,7 +18,9 @@ public static class RendererProfileCases
         var f=DocumentationFixture.Current;
         Artifact Read(string name)
         {
-            var path="remediation/design-c4/"+name;var bytes=File.ReadAllBytes(Path.Combine(f.Workspace,path));
+            var path="remediation/design-c4/"+name;
+            var retained=name=="toolchain-lock.json"?"remediation/nuke-planning/docs/fixtures/toolchain-lock.pre-redirect-admission.json":path;
+            var bytes=File.ReadAllBytes(Path.Combine(f.Workspace,retained));
             Assert.Equal(f.ExpectedHashes[path],DocumentationFixture.Hash(bytes));return new(name,bytes,"application/json");
         }
         var toolchain=Read("toolchain-lock.json");var renderer=Read("renderer-lock.json");

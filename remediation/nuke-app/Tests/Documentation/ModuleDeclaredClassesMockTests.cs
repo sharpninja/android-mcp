@@ -11,7 +11,7 @@ public static class ModuleDeclaredClassCases
         if(test.Id=="MOD-ORIGINAL-FULL-GRAPH")
         {
             var fixture=DocumentationFixture.Current;var data=JsonNode.Parse(File.ReadAllBytes(Path.Combine(fixture.Workspace,"remediation/nuke-planning/docs/fixtures/model-contract-type-index.fixture.json")))!;
-            Assert.Equal(data["codeSha256"]!.GetValue<string>(),fixture.ExpectedHashes["remediation/design-c4/architecture/code-diagrams.md"]);
+            Assert.Equal(DocumentationFixture.CurrentSourceHash("remediation/design-c4/architecture/code-diagrams.md",data["codeSha256"]!.GetValue<string>()),fixture.ExpectedHashes["remediation/design-c4/architecture/code-diagrams.md"]);
             var names=data["declaredClasses"]!.AsArray().Select(n=>n!.GetValue<string>()).ToArray();Assert.Equal(96,names.Length);return names;
         }
         return test.Id switch

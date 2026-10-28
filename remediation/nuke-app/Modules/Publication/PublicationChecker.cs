@@ -55,4 +55,3 @@ internal static class PublicationNames
     public static bool Generation(string value)=>value.Length is >0 and <=128 &&
         value!="." && value!=".." && value.All(c=>char.IsAsciiLetterOrDigit(c) || c is '-' or '_' or '.');
 }
-

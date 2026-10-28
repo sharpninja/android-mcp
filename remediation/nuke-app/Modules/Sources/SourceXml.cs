@@ -25,6 +25,21 @@ internal static class SourceXml
             catch (XmlException error) { throw new FormatException("XML parse failed: " + error.Message, error); }
         }
     }
+    // Raw qualified names preserve the legacy Expat locator pass separately
+    // from namespace-expanded XElement selection. One secure reader policy.
+    internal static IReadOnlyList<(string Name, int Line)> StartElementLocations(ReadOnlyMemory<byte> bytes, IReadOnlyList<string> names)
+    {
+        using var stream = new MemoryStream(bytes.ToArray(), false);
+        using var reader = XmlReader.Create(stream, Settings());
+        var result = new List<(string, int)>();
+        try
+        {
+            while (reader.Read()) if (reader.NodeType == XmlNodeType.Element && names.Contains(reader.Name, StringComparer.Ordinal))
+                result.Add((reader.Name, ((IXmlLineInfo)reader).LineNumber));
+        }
+        catch (XmlException error) { throw new FormatException("XML parse failed: " + error.Message, error); }
+        return result;
+    }
     internal static Dictionary<string,string> Attributes(XElement element) => element.Attributes().Where(x => !x.IsNamespaceDeclaration)
         .ToDictionary(x => x.Name.ToString(), x => x.Value, StringComparer.Ordinal);
     internal static JsonObject Json(IReadOnlyDictionary<string,string> values) => new(values.Select(x => new KeyValuePair<string,JsonNode?>(x.Key, JsonValue.Create(x.Value))));

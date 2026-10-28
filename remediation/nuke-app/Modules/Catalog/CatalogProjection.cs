@@ -33,6 +33,9 @@ public sealed class CatalogProjection
     {if(!values.TryGetValue(key,out var result)){result=new(StringComparer.Ordinal);values.Add(key,result);}return result;}
     public CatalogProjection(IReadOnlyDictionary<string,JsonObject> sources,IReadOnlyList<CatalogDeclaration> declarations,
         IAnnotationTargetSourceFacts formalFacts,IStructuralTypeHeaderSourceFacts headerFacts,CatalogContracts contracts,ICanonicalJson canonical,CatalogLifecycle? lifecycle=null)
+        :this(sources,()=>declarations,formalFacts,headerFacts,contracts,canonical,lifecycle) { }
+    public CatalogProjection(IReadOnlyDictionary<string,JsonObject> sources,Func<IEnumerable<CatalogDeclaration>> declarations,
+        IAnnotationTargetSourceFacts formalFacts,IStructuralTypeHeaderSourceFacts headerFacts,CatalogContracts contracts,ICanonicalJson canonical,CatalogLifecycle? lifecycle=null)
     {
         this.sources=sources.ToDictionary(item=>item.Key,item=>(JsonObject)item.Value.DeepClone(),StringComparer.Ordinal);
         this.formalFacts=formalFacts;this.headerFacts=headerFacts;this.contracts=contracts;this.canonical=canonical;this.lifecycle=lifecycle ?? new();
@@ -43,8 +46,8 @@ public sealed class CatalogProjection
                 : new JsonArray(id);
             snapshots.Add(id,canonical.Hash(JsonSerializer.SerializeToElement(key)));
         }
-        var types=declarations.Where(row=>CatalogContracts.IsTypeKind(String(row.Document["kind"]) ?? "")).ToArray();
-        foreach(var row in types)
+        var types=()=>declarations().Where(row=>CatalogContracts.IsTypeKind(String(row.Document["kind"]) ?? ""));
+        foreach(var row in types())
         {
             var doc=row.Document;var owner=Owner(doc);var key=(row.SourceId,owner);
             try{Set(formals,key).UnionWith(formalFacts.FormalNames(Raw(doc)));}
@@ -52,14 +55,14 @@ public sealed class CatalogProjection
             var qualified=owner.Length!=0 ? owner : String(doc["canonical_signature"])!.Split(':',2)[1].Replace('/','.').Replace('$','.');
             Set(index,(snapshots[row.SourceId],String(Extra(doc)["language"])!,qualified)).Add(String(doc["entry_id"])!);
         }
-        foreach(var row in declarations)
+        foreach(var row in declarations())
         {
             var kind=String(row.Document["kind"]);var language=String(Extra(row.Document)["language"]);
             if(kind is not ("field" or "enum-constant") || language is not ("aidl" or "hidl")) continue;
             var key=(row.SourceId,Owner(row.Document));if(!fields.TryGetValue(key,out var list)){list=[];fields.Add(key,list);}
             list.Add(row with{Document=(JsonObject)row.Document.DeepClone()});
         }
-        foreach(var row in types)
+        foreach(var row in types())
             Set(typeHashes,(snapshots[row.SourceId],String(row.Document["entry_id"])!)).Add(contracts.Digest(JsonSerializer.SerializeToElement(Project(row.Document,row.SourceId))));
     }
     public JsonObject TypeReference(JsonObject value,JsonObject document,string sourceId)

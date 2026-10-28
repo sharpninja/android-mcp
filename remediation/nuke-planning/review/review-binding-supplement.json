@@ -1,9 +1,29 @@
 {
-  "localTimestamp": "2026-10-28T00:17:31",
+  "localTimestamp": "2026-10-28T02:49:48",
   "sourceCount": 40,
+  "ownerCounts": {
+    "Review": 38,
+    "Documentation": 2
+  },
   "scope": "Design and NUKE impacts only; source/evidence retained; no Python executed",
   "establishedEvidence": "446 chronological Review mock/native checks through checkpoint003 freeze; 92 native service cases use injected I/O, not live CLI/MCP",
-  "pendingIncrement": "Initial typed mock gate passed 41 scenarios plus 6735 individual controls. Manifest URL and page-count fixture corrections require the current-input re-gate; no production adapter or live official binding exists yet.",
+  "establishedTypedAudit": {
+    "mockScenarios": 41,
+    "individualMockControls": 6735,
+    "nativeScenarios": 41,
+    "mockTrx": "remediation/nuke-app/artifacts/tests/20261028T0019475790572-166ee1d9909346a8a23fc7f82aaf5b31/tests.trx",
+    "mockTrxSha256": "219c7587d1c0532a454205f8464ad7a4fedce02563a30190a40b4cbc1f2bdae7",
+    "nativeTrx": "remediation/nuke-app/artifacts/tests/20261028T0032088974137-6ae377b388274cc68d47b2e59cdb180c/tests.trx",
+    "nativeTrxSha256": "714af8177cfc93fb06fcd45d5773a2a0ded96e09a428c2377aa471146ef29ffa",
+    "proofKind": "native service with injected purpose/runtime I/O; not live plugin/provider parity"
+  },
+  "pendingIncrement": "10 critical cumulative audit scenarios and individual field controls staged only, unrun. Actual official purpose/runtime binding and Review CLI wiring remain open.",
+  "unresolvedParity": [
+    "Exact legacy supervisor 2/3/2 plus one synthesis fixture not fully bound",
+    "Per-source branch/assertion equivalence remains pending",
+    "Superseded Fable/max/128000 and empty MCP-config expectations require explicit current-requirement disposition",
+    "Historical/retired labels are not scope waivers"
+  ],
   "noRequirementCompletion": true,
   "records": [
     {
@@ -11,6 +31,7 @@
       "legacySha256": "e5e8d3dded7a49a1aa3d2341dd2a6869c79cf09e11bd7ea54cd25c09631f0fd5",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewPrepareService",
         "ReviewAssessService",
@@ -27,7 +48,28 @@
         "ReviewVerdictNativeTests",
         "ReviewPrerequisiteNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewNativeTests.cs",
+          "sourceSha256": "45257c33c91a33db33752d2466413163f97c84a954a62d7a4f9656c496033bf4"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewSafetyNativeTests.cs",
+          "sourceSha256": "53dfd230c9e2b0c9db1f2ba5d81e1f11dfd3abb06deb516dfdf50f22ab99a533"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewVerdictNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewVerdictNativeTests.cs",
+          "sourceSha256": "4fa43d71c936fdf6439464efd7e43f3321b10f5fbd0cdff9847c03485ab28196"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewPrerequisiteNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewPrerequisiteNativeTests.cs",
+          "sourceSha256": "cd18430f5640a1d3b8f17845c5006b4453e761ee9f7b189e4f657f337aebec1e"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -40,6 +82,7 @@
       "legacySha256": "ad5d2c6076c2ee7133bb7826a73aa86d990b09faab2cd89e5ce552cae24db7bd",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewWorkflow",
         "ReviewPrepareService",
@@ -59,7 +102,28 @@
         "ReviewRecoveryNativeTests",
         "ReviewFinalFragmentNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewNativeTests.cs",
+          "sourceSha256": "45257c33c91a33db33752d2466413163f97c84a954a62d7a4f9656c496033bf4"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewSafetyNativeTests.cs",
+          "sourceSha256": "53dfd230c9e2b0c9db1f2ba5d81e1f11dfd3abb06deb516dfdf50f22ab99a533"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewRecoveryNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewRecoveryNativeTests.cs",
+          "sourceSha256": "dfe6b055b725908f7547e991ab544ce3426a619a958075f6ea4181147cd5f14f"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewFinalFragmentNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewFinalFragmentNativeTests.cs",
+          "sourceSha256": "8e734592cb43c7beab45138d810b97a7358b59e4c51e045c2946ae7249fcdf26"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -72,6 +136,7 @@
       "legacySha256": "f9b0e0cfc0921c4d3c896aaa0c26a9c7573d9fdb22360f1c12b214500bfd7429",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewWorkflow",
         "ReviewPrepareService",
@@ -91,7 +156,28 @@
         "ReviewRecoveryNativeTests",
         "ReviewFinalFragmentNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewNativeTests.cs",
+          "sourceSha256": "45257c33c91a33db33752d2466413163f97c84a954a62d7a4f9656c496033bf4"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewSafetyNativeTests.cs",
+          "sourceSha256": "53dfd230c9e2b0c9db1f2ba5d81e1f11dfd3abb06deb516dfdf50f22ab99a533"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewRecoveryNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewRecoveryNativeTests.cs",
+          "sourceSha256": "dfe6b055b725908f7547e991ab544ce3426a619a958075f6ea4181147cd5f14f"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewFinalFragmentNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewFinalFragmentNativeTests.cs",
+          "sourceSha256": "8e734592cb43c7beab45138d810b97a7358b59e4c51e045c2946ae7249fcdf26"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -104,6 +190,7 @@
       "legacySha256": "c5eaf5743b326d2214f275ca029378a25885227a8a4fbaf295521cb7849f6e65",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewWorkflow",
         "ReviewPrepareService",
@@ -123,7 +210,28 @@
         "ReviewRecoveryNativeTests",
         "ReviewFinalFragmentNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewNativeTests.cs",
+          "sourceSha256": "45257c33c91a33db33752d2466413163f97c84a954a62d7a4f9656c496033bf4"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewSafetyNativeTests.cs",
+          "sourceSha256": "53dfd230c9e2b0c9db1f2ba5d81e1f11dfd3abb06deb516dfdf50f22ab99a533"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewRecoveryNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewRecoveryNativeTests.cs",
+          "sourceSha256": "dfe6b055b725908f7547e991ab544ce3426a619a958075f6ea4181147cd5f14f"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewFinalFragmentNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewFinalFragmentNativeTests.cs",
+          "sourceSha256": "8e734592cb43c7beab45138d810b97a7358b59e4c51e045c2946ae7249fcdf26"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -136,6 +244,7 @@
       "legacySha256": "2fff5edbb8b89bd1980e6f8c9429a084a073170b8bcb6d5f309fa8ff64dd8d2a",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewWorkflow",
         "ReviewPrepareService",
@@ -155,7 +264,28 @@
         "ReviewRecoveryNativeTests",
         "ReviewFinalFragmentNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewNativeTests.cs",
+          "sourceSha256": "45257c33c91a33db33752d2466413163f97c84a954a62d7a4f9656c496033bf4"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewSafetyNativeTests.cs",
+          "sourceSha256": "53dfd230c9e2b0c9db1f2ba5d81e1f11dfd3abb06deb516dfdf50f22ab99a533"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewRecoveryNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewRecoveryNativeTests.cs",
+          "sourceSha256": "dfe6b055b725908f7547e991ab544ce3426a619a958075f6ea4181147cd5f14f"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewFinalFragmentNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewFinalFragmentNativeTests.cs",
+          "sourceSha256": "8e734592cb43c7beab45138d810b97a7358b59e4c51e045c2946ae7249fcdf26"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -168,6 +298,7 @@
       "legacySha256": "9d2e6d60a650aae5d1ce079aa98a2fc437d9591601049a39bd02a4d5c8d7123f",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewWorkflow",
         "ReviewPrepareService",
@@ -187,7 +318,28 @@
         "ReviewRecoveryNativeTests",
         "ReviewFinalFragmentNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewNativeTests.cs",
+          "sourceSha256": "45257c33c91a33db33752d2466413163f97c84a954a62d7a4f9656c496033bf4"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewSafetyNativeTests.cs",
+          "sourceSha256": "53dfd230c9e2b0c9db1f2ba5d81e1f11dfd3abb06deb516dfdf50f22ab99a533"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewRecoveryNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewRecoveryNativeTests.cs",
+          "sourceSha256": "dfe6b055b725908f7547e991ab544ce3426a619a958075f6ea4181147cd5f14f"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewFinalFragmentNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewFinalFragmentNativeTests.cs",
+          "sourceSha256": "8e734592cb43c7beab45138d810b97a7358b59e4c51e045c2946ae7249fcdf26"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -200,6 +352,7 @@
       "legacySha256": "150498f1c807be5af2df7812d190a0a727baecf6fedf841179fb0f1229d31c46",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewLaunchService"
       ],
@@ -213,7 +366,18 @@
         "ReviewNativeTests",
         "ReviewSafetyNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewNativeTests.cs",
+          "sourceSha256": "45257c33c91a33db33752d2466413163f97c84a954a62d7a4f9656c496033bf4"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewSafetyNativeTests.cs",
+          "sourceSha256": "53dfd230c9e2b0c9db1f2ba5d81e1f11dfd3abb06deb516dfdf50f22ab99a533"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -226,6 +390,7 @@
       "legacySha256": "11ec9a085124dbb3f065da8abbf824d2e7f41441603ef9df878baece1c7639a8",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewLaunchService"
       ],
@@ -239,7 +404,18 @@
         "ReviewNativeTests",
         "ReviewSafetyNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewNativeTests.cs",
+          "sourceSha256": "45257c33c91a33db33752d2466413163f97c84a954a62d7a4f9656c496033bf4"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewSafetyNativeTests.cs",
+          "sourceSha256": "53dfd230c9e2b0c9db1f2ba5d81e1f11dfd3abb06deb516dfdf50f22ab99a533"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -252,6 +428,7 @@
       "legacySha256": "c407b8d24df8f039f1a9583df4d81e948bce15c2d2d3339bad921b50a61735d8",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewWorkflow",
         "ReviewPrepareService",
@@ -271,7 +448,28 @@
         "ReviewRecoveryNativeTests",
         "ReviewFinalFragmentNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewNativeTests.cs",
+          "sourceSha256": "45257c33c91a33db33752d2466413163f97c84a954a62d7a4f9656c496033bf4"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewSafetyNativeTests.cs",
+          "sourceSha256": "53dfd230c9e2b0c9db1f2ba5d81e1f11dfd3abb06deb516dfdf50f22ab99a533"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewRecoveryNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewRecoveryNativeTests.cs",
+          "sourceSha256": "dfe6b055b725908f7547e991ab544ce3426a619a958075f6ea4181147cd5f14f"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewFinalFragmentNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewFinalFragmentNativeTests.cs",
+          "sourceSha256": "8e734592cb43c7beab45138d810b97a7358b59e4c51e045c2946ae7249fcdf26"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -284,6 +482,7 @@
       "legacySha256": "91934cbffd6c6c78be99698268f6636f80b3c3863c44ca1933da6357dc336941",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewLaunchService"
       ],
@@ -297,7 +496,18 @@
         "ReviewNativeTests",
         "ReviewSafetyNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewNativeTests.cs",
+          "sourceSha256": "45257c33c91a33db33752d2466413163f97c84a954a62d7a4f9656c496033bf4"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewSafetyNativeTests.cs",
+          "sourceSha256": "53dfd230c9e2b0c9db1f2ba5d81e1f11dfd3abb06deb516dfdf50f22ab99a533"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -310,8 +520,10 @@
       "legacySha256": "2161c5e964a3a4c9626c4b07f4b598a208e8a1baf8c4fe5b68b069f676b8db89",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "RequiredPluginReviewAudit",
+        "OfficialPluginReviewAuditTransport",
         "IReviewAuditTransport",
         "ReviewAuditPolicy"
       ],
@@ -322,23 +534,37 @@
         "Review/Assess"
       ],
       "testClasses": [
-        "ReviewAuditNativeTests"
+        "ReviewAuditNativeTests",
+        "ReviewOfficialTransportNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewAuditNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewAuditNativeTests.cs",
+          "sourceSha256": "e55d63ddc02792be79fdee7374ef36fd0344d4c7519d25cead0e1cec76a83816"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.Staging.ReviewOfficialTransportNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewOfficialTransportNativeTests.cs",
+          "sourceSha256": "31d4ec61e8e5152e63b1a45612fa69f7806ca1657a96318550eb1a9bfe4dd6d6"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
       "liveCliPluginParity": "not-run-no-claim",
       "priorDisposition": "retained-source-native-successor",
-      "note": "Native normalization/SPI has injected unit evidence. Genuine official purpose binding, runtime metadata and reviewer-own persistence remain unverified."
+      "note": "Native normalization/SPI and 41 typed transport scenarios have injected unit evidence. Genuine official purpose binding, runtime metadata and reviewer-own persistence remain unverified."
     },
     {
       "legacy": "remediation/record_review_scope_blocker.py",
       "legacySha256": "71e8b44297ad7cd5401d1e2edcb9e3b1ca3564af32027de721b4ecc32e6ff775",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "RequiredPluginReviewAudit",
+        "OfficialPluginReviewAuditTransport",
         "IReviewAuditTransport",
         "ReviewAuditPolicy"
       ],
@@ -349,23 +575,37 @@
         "Review/Assess"
       ],
       "testClasses": [
-        "ReviewAuditNativeTests"
+        "ReviewAuditNativeTests",
+        "ReviewOfficialTransportNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewAuditNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewAuditNativeTests.cs",
+          "sourceSha256": "e55d63ddc02792be79fdee7374ef36fd0344d4c7519d25cead0e1cec76a83816"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.Staging.ReviewOfficialTransportNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewOfficialTransportNativeTests.cs",
+          "sourceSha256": "31d4ec61e8e5152e63b1a45612fa69f7806ca1657a96318550eb1a9bfe4dd6d6"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
       "liveCliPluginParity": "not-run-no-claim",
       "priorDisposition": "retained-source-native-successor",
-      "note": "Native normalization/SPI has injected unit evidence. Genuine official purpose binding, runtime metadata and reviewer-own persistence remain unverified."
+      "note": "Native normalization/SPI and 41 typed transport scenarios have injected unit evidence. Genuine official purpose binding, runtime metadata and reviewer-own persistence remain unverified."
     },
     {
       "legacy": "remediation/record_current_review_status.py",
       "legacySha256": "4d5161c4c23aac17dcbfd7421cb5b824fd9a694dac634551d3be1488709fd535",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "RequiredPluginReviewAudit",
+        "OfficialPluginReviewAuditTransport",
         "IReviewAuditTransport",
         "ReviewAuditPolicy"
       ],
@@ -376,23 +616,37 @@
         "Review/Assess"
       ],
       "testClasses": [
-        "ReviewAuditNativeTests"
+        "ReviewAuditNativeTests",
+        "ReviewOfficialTransportNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewAuditNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewAuditNativeTests.cs",
+          "sourceSha256": "e55d63ddc02792be79fdee7374ef36fd0344d4c7519d25cead0e1cec76a83816"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.Staging.ReviewOfficialTransportNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewOfficialTransportNativeTests.cs",
+          "sourceSha256": "31d4ec61e8e5152e63b1a45612fa69f7806ca1657a96318550eb1a9bfe4dd6d6"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
       "liveCliPluginParity": "not-run-no-claim",
       "priorDisposition": "retained-source-native-successor",
-      "note": "Native normalization/SPI has injected unit evidence. Genuine official purpose binding, runtime metadata and reviewer-own persistence remain unverified."
+      "note": "Native normalization/SPI and 41 typed transport scenarios have injected unit evidence. Genuine official purpose binding, runtime metadata and reviewer-own persistence remain unverified."
     },
     {
       "legacy": "remediation/reconcile_review023.py",
       "legacySha256": "7a2f0a05db43c1f6275990282edccdf382406ce7fd93e6e98052a34b0b572e10",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "RequiredPluginReviewAudit",
+        "OfficialPluginReviewAuditTransport",
         "IReviewAuditTransport",
         "ReviewAuditPolicy"
       ],
@@ -403,21 +657,34 @@
         "Review/Assess"
       ],
       "testClasses": [
-        "ReviewAuditNativeTests"
+        "ReviewAuditNativeTests",
+        "ReviewOfficialTransportNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewAuditNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewAuditNativeTests.cs",
+          "sourceSha256": "e55d63ddc02792be79fdee7374ef36fd0344d4c7519d25cead0e1cec76a83816"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.Staging.ReviewOfficialTransportNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewOfficialTransportNativeTests.cs",
+          "sourceSha256": "31d4ec61e8e5152e63b1a45612fa69f7806ca1657a96318550eb1a9bfe4dd6d6"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
       "liveCliPluginParity": "not-run-no-claim",
       "priorDisposition": "retained-source-native-successor",
-      "note": "Native normalization/SPI has injected unit evidence. Genuine official purpose binding, runtime metadata and reviewer-own persistence remain unverified."
+      "note": "Native normalization/SPI and 41 typed transport scenarios have injected unit evidence. Genuine official purpose binding, runtime metadata and reviewer-own persistence remain unverified."
     },
     {
       "legacy": "remediation/test_hv_invariants.py",
       "legacySha256": "e41ac64f34f2fb4b2b9a467794453e865d3d3a3e53747f9b9de0fe25fae0d5b6",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewPrepareService",
         "ReviewLaunchService",
@@ -435,7 +702,38 @@
         "ReviewRecoveryMockGate",
         "ReviewRecoveryNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewMockGate",
+          "path": "remediation/nuke-app/Tests/Review/ReviewContractTests.cs",
+          "sourceSha256": "d00cc28be731921bb8ad2d35c79cd97bd8137f6fb591763bc6a3abb7e7cc16b0"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewNativeTests.cs",
+          "sourceSha256": "45257c33c91a33db33752d2466413163f97c84a954a62d7a4f9656c496033bf4"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyMockGate",
+          "path": "remediation/nuke-app/Tests/Review/ReviewSafetyContracts.cs",
+          "sourceSha256": "169745027df15b9d7e55e7685ed58c1979043f949163bdc2722ea94b45ee855c"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewSafetyNativeTests.cs",
+          "sourceSha256": "53dfd230c9e2b0c9db1f2ba5d81e1f11dfd3abb06deb516dfdf50f22ab99a533"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewRecoveryMockGate",
+          "path": "remediation/nuke-app/Tests/Review/ReviewRecoveryContracts.cs",
+          "sourceSha256": "a4d1a2c6f08dc6a93e6c037a2b9a6e83fbe67e684d80a3303b8809892d7a415d"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewRecoveryNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewRecoveryNativeTests.cs",
+          "sourceSha256": "dfe6b055b725908f7547e991ab544ce3426a619a958075f6ea4181147cd5f14f"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -448,6 +746,7 @@
       "legacySha256": "fa745c2af79c9d91ef974e5213cc95301a658ae0ebf847aca2341c119d8cd06e",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewPrepareService",
         "ReviewLaunchService",
@@ -465,7 +764,38 @@
         "ReviewRecoveryMockGate",
         "ReviewRecoveryNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewMockGate",
+          "path": "remediation/nuke-app/Tests/Review/ReviewContractTests.cs",
+          "sourceSha256": "d00cc28be731921bb8ad2d35c79cd97bd8137f6fb591763bc6a3abb7e7cc16b0"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewNativeTests.cs",
+          "sourceSha256": "45257c33c91a33db33752d2466413163f97c84a954a62d7a4f9656c496033bf4"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyMockGate",
+          "path": "remediation/nuke-app/Tests/Review/ReviewSafetyContracts.cs",
+          "sourceSha256": "169745027df15b9d7e55e7685ed58c1979043f949163bdc2722ea94b45ee855c"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewSafetyNativeTests.cs",
+          "sourceSha256": "53dfd230c9e2b0c9db1f2ba5d81e1f11dfd3abb06deb516dfdf50f22ab99a533"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewRecoveryMockGate",
+          "path": "remediation/nuke-app/Tests/Review/ReviewRecoveryContracts.cs",
+          "sourceSha256": "a4d1a2c6f08dc6a93e6c037a2b9a6e83fbe67e684d80a3303b8809892d7a415d"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewRecoveryNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewRecoveryNativeTests.cs",
+          "sourceSha256": "dfe6b055b725908f7547e991ab544ce3426a619a958075f6ea4181147cd5f14f"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -478,6 +808,7 @@
       "legacySha256": "7918d76b3e976db18a116b4c409b6f43a57a35f44f9e9dbb47f31da5f0d8d9cc",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewPrepareService",
         "ReviewLaunchService",
@@ -495,7 +826,38 @@
         "ReviewRecoveryMockGate",
         "ReviewRecoveryNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewMockGate",
+          "path": "remediation/nuke-app/Tests/Review/ReviewContractTests.cs",
+          "sourceSha256": "d00cc28be731921bb8ad2d35c79cd97bd8137f6fb591763bc6a3abb7e7cc16b0"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewNativeTests.cs",
+          "sourceSha256": "45257c33c91a33db33752d2466413163f97c84a954a62d7a4f9656c496033bf4"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyMockGate",
+          "path": "remediation/nuke-app/Tests/Review/ReviewSafetyContracts.cs",
+          "sourceSha256": "169745027df15b9d7e55e7685ed58c1979043f949163bdc2722ea94b45ee855c"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewSafetyNativeTests.cs",
+          "sourceSha256": "53dfd230c9e2b0c9db1f2ba5d81e1f11dfd3abb06deb516dfdf50f22ab99a533"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewRecoveryMockGate",
+          "path": "remediation/nuke-app/Tests/Review/ReviewRecoveryContracts.cs",
+          "sourceSha256": "a4d1a2c6f08dc6a93e6c037a2b9a6e83fbe67e684d80a3303b8809892d7a415d"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewRecoveryNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewRecoveryNativeTests.cs",
+          "sourceSha256": "dfe6b055b725908f7547e991ab544ce3426a619a958075f6ea4181147cd5f14f"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -508,6 +870,7 @@
       "legacySha256": "a1a628ab1879d5f050025a1bdbb9d8a7af1306426e506c4c8f387f10babf6003",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewLaunchService"
       ],
@@ -521,7 +884,18 @@
         "ReviewNativeTests",
         "ReviewSafetyNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewNativeTests.cs",
+          "sourceSha256": "45257c33c91a33db33752d2466413163f97c84a954a62d7a4f9656c496033bf4"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewSafetyNativeTests.cs",
+          "sourceSha256": "53dfd230c9e2b0c9db1f2ba5d81e1f11dfd3abb06deb516dfdf50f22ab99a533"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -534,6 +908,7 @@
       "legacySha256": "c397e00869482379dc1875557f2ccc32e980445cb332296f1c69207dce84a8d8",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewWorkflow",
         "ReviewPrepareService",
@@ -553,7 +928,28 @@
         "ReviewRecoveryNativeTests",
         "ReviewFinalFragmentNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewNativeTests.cs",
+          "sourceSha256": "45257c33c91a33db33752d2466413163f97c84a954a62d7a4f9656c496033bf4"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewSafetyNativeTests.cs",
+          "sourceSha256": "53dfd230c9e2b0c9db1f2ba5d81e1f11dfd3abb06deb516dfdf50f22ab99a533"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewRecoveryNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewRecoveryNativeTests.cs",
+          "sourceSha256": "dfe6b055b725908f7547e991ab544ce3426a619a958075f6ea4181147cd5f14f"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewFinalFragmentNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewFinalFragmentNativeTests.cs",
+          "sourceSha256": "8e734592cb43c7beab45138d810b97a7358b59e4c51e045c2946ae7249fcdf26"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -566,6 +962,7 @@
       "legacySha256": "660224b14d201553a07f01baba605778628ecffcfdb6beb93b3634310fe6c2bb",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewWorkflow",
         "ReviewPrepareService",
@@ -585,7 +982,28 @@
         "ReviewRecoveryNativeTests",
         "ReviewFinalFragmentNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewNativeTests.cs",
+          "sourceSha256": "45257c33c91a33db33752d2466413163f97c84a954a62d7a4f9656c496033bf4"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewSafetyNativeTests.cs",
+          "sourceSha256": "53dfd230c9e2b0c9db1f2ba5d81e1f11dfd3abb06deb516dfdf50f22ab99a533"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewRecoveryNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewRecoveryNativeTests.cs",
+          "sourceSha256": "dfe6b055b725908f7547e991ab544ce3426a619a958075f6ea4181147cd5f14f"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewFinalFragmentNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewFinalFragmentNativeTests.cs",
+          "sourceSha256": "8e734592cb43c7beab45138d810b97a7358b59e4c51e045c2946ae7249fcdf26"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -598,6 +1016,7 @@
       "legacySha256": "c1b2b3b3874aca1182454b64b54803c363b146c7203a039f13030528608ec169",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewWorkflow",
         "ReviewPrepareService",
@@ -617,7 +1036,28 @@
         "ReviewRecoveryNativeTests",
         "ReviewFinalFragmentNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewNativeTests.cs",
+          "sourceSha256": "45257c33c91a33db33752d2466413163f97c84a954a62d7a4f9656c496033bf4"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewSafetyNativeTests.cs",
+          "sourceSha256": "53dfd230c9e2b0c9db1f2ba5d81e1f11dfd3abb06deb516dfdf50f22ab99a533"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewRecoveryNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewRecoveryNativeTests.cs",
+          "sourceSha256": "dfe6b055b725908f7547e991ab544ce3426a619a958075f6ea4181147cd5f14f"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewFinalFragmentNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewFinalFragmentNativeTests.cs",
+          "sourceSha256": "8e734592cb43c7beab45138d810b97a7358b59e4c51e045c2946ae7249fcdf26"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -630,6 +1070,7 @@
       "legacySha256": "937c43f4f0bee5cfbb9b3be7f822d7cc87c9dfcde714da6c9115b352550a7e20",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewLaunchService",
         "IProcessRunner",
@@ -646,7 +1087,33 @@
         "ReviewStartupNativeTests",
         "ReviewFinalFragmentNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewNativeTests.cs",
+          "sourceSha256": "45257c33c91a33db33752d2466413163f97c84a954a62d7a4f9656c496033bf4"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewSafetyNativeTests.cs",
+          "sourceSha256": "53dfd230c9e2b0c9db1f2ba5d81e1f11dfd3abb06deb516dfdf50f22ab99a533"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewRecoveryNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewRecoveryNativeTests.cs",
+          "sourceSha256": "dfe6b055b725908f7547e991ab544ce3426a619a958075f6ea4181147cd5f14f"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewStartupNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewStartupNativeTests.cs",
+          "sourceSha256": "f1618ca052f27331aaac97d9b5a41debb811cc6c65e07f68703d8af69414f536"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewFinalFragmentNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewFinalFragmentNativeTests.cs",
+          "sourceSha256": "8e734592cb43c7beab45138d810b97a7358b59e4c51e045c2946ae7249fcdf26"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -659,6 +1126,7 @@
       "legacySha256": "75ae82d461722b3dbc5f92ad6f2156dd47cd632697f76d7fccc9c4198900a220",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewLaunchService",
         "IProcessRunner",
@@ -675,7 +1143,33 @@
         "ReviewStartupNativeTests",
         "ReviewFinalFragmentNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewNativeTests.cs",
+          "sourceSha256": "45257c33c91a33db33752d2466413163f97c84a954a62d7a4f9656c496033bf4"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewSafetyNativeTests.cs",
+          "sourceSha256": "53dfd230c9e2b0c9db1f2ba5d81e1f11dfd3abb06deb516dfdf50f22ab99a533"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewRecoveryNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewRecoveryNativeTests.cs",
+          "sourceSha256": "dfe6b055b725908f7547e991ab544ce3426a619a958075f6ea4181147cd5f14f"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewStartupNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewStartupNativeTests.cs",
+          "sourceSha256": "f1618ca052f27331aaac97d9b5a41debb811cc6c65e07f68703d8af69414f536"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewFinalFragmentNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewFinalFragmentNativeTests.cs",
+          "sourceSha256": "8e734592cb43c7beab45138d810b97a7358b59e4c51e045c2946ae7249fcdf26"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -688,6 +1182,7 @@
       "legacySha256": "5f3668a23ea14f80a190e044df13fb72121cbcf424ae70e120f1b63b6f87d05b",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewLaunchService",
         "IProcessRunner",
@@ -704,7 +1199,33 @@
         "ReviewStartupNativeTests",
         "ReviewFinalFragmentNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewNativeTests.cs",
+          "sourceSha256": "45257c33c91a33db33752d2466413163f97c84a954a62d7a4f9656c496033bf4"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewSafetyNativeTests.cs",
+          "sourceSha256": "53dfd230c9e2b0c9db1f2ba5d81e1f11dfd3abb06deb516dfdf50f22ab99a533"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewRecoveryNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewRecoveryNativeTests.cs",
+          "sourceSha256": "dfe6b055b725908f7547e991ab544ce3426a619a958075f6ea4181147cd5f14f"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewStartupNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewStartupNativeTests.cs",
+          "sourceSha256": "f1618ca052f27331aaac97d9b5a41debb811cc6c65e07f68703d8af69414f536"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewFinalFragmentNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewFinalFragmentNativeTests.cs",
+          "sourceSha256": "8e734592cb43c7beab45138d810b97a7358b59e4c51e045c2946ae7249fcdf26"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -717,6 +1238,7 @@
       "legacySha256": "2bb150773f214808b78bb20b9bcecb35c539d8fc47daa0f4d48ec09bae61b1d4",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewRecoverService",
         "ReviewLaunchService.ResumeAsync"
@@ -729,7 +1251,23 @@
         "ReviewSafetyNativeTests",
         "ReviewRecoveryNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewNativeTests.cs",
+          "sourceSha256": "45257c33c91a33db33752d2466413163f97c84a954a62d7a4f9656c496033bf4"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewSafetyNativeTests.cs",
+          "sourceSha256": "53dfd230c9e2b0c9db1f2ba5d81e1f11dfd3abb06deb516dfdf50f22ab99a533"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewRecoveryNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewRecoveryNativeTests.cs",
+          "sourceSha256": "dfe6b055b725908f7547e991ab544ce3426a619a958075f6ea4181147cd5f14f"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -742,6 +1280,7 @@
       "legacySha256": "8b8048fc5e23e5b4327c45abd36e555fa4224d9bb4a5e3688e08662070518748",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewRecoverService",
         "ReviewLaunchService.ResumeAsync"
@@ -754,7 +1293,23 @@
         "ReviewSafetyNativeTests",
         "ReviewRecoveryNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewNativeTests.cs",
+          "sourceSha256": "45257c33c91a33db33752d2466413163f97c84a954a62d7a4f9656c496033bf4"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewSafetyNativeTests.cs",
+          "sourceSha256": "53dfd230c9e2b0c9db1f2ba5d81e1f11dfd3abb06deb516dfdf50f22ab99a533"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewRecoveryNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewRecoveryNativeTests.cs",
+          "sourceSha256": "dfe6b055b725908f7547e991ab544ce3426a619a958075f6ea4181147cd5f14f"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -767,6 +1322,7 @@
       "legacySha256": "16989ea6f0064a4e3ed230be185cc5f6b1602407baf67af9935386385255e28a",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewRecoverService",
         "ReviewLaunchService.ResumeAsync"
@@ -779,7 +1335,23 @@
         "ReviewSafetyNativeTests",
         "ReviewRecoveryNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewNativeTests.cs",
+          "sourceSha256": "45257c33c91a33db33752d2466413163f97c84a954a62d7a4f9656c496033bf4"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewSafetyNativeTests.cs",
+          "sourceSha256": "53dfd230c9e2b0c9db1f2ba5d81e1f11dfd3abb06deb516dfdf50f22ab99a533"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewRecoveryNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewRecoveryNativeTests.cs",
+          "sourceSha256": "dfe6b055b725908f7547e991ab544ce3426a619a958075f6ea4181147cd5f14f"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -792,6 +1364,7 @@
       "legacySha256": "dc9448df935a0cbe2f59a7254ac53430a9748d0f7e1d97e5a751263b402351c1",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewRecoverService",
         "ReviewLaunchService.ResumeAsync"
@@ -804,7 +1377,23 @@
         "ReviewSafetyNativeTests",
         "ReviewRecoveryNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewNativeTests.cs",
+          "sourceSha256": "45257c33c91a33db33752d2466413163f97c84a954a62d7a4f9656c496033bf4"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewSafetyNativeTests.cs",
+          "sourceSha256": "53dfd230c9e2b0c9db1f2ba5d81e1f11dfd3abb06deb516dfdf50f22ab99a533"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewRecoveryNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewRecoveryNativeTests.cs",
+          "sourceSha256": "dfe6b055b725908f7547e991ab544ce3426a619a958075f6ea4181147cd5f14f"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -817,6 +1406,7 @@
       "legacySha256": "7bb1b1710e361b08af3412429ea85c59dda405539a829e8ca92ac2c925e27598",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewRecoverService",
         "ReviewLaunchService.ResumeAsync"
@@ -829,7 +1419,23 @@
         "ReviewSafetyNativeTests",
         "ReviewRecoveryNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewNativeTests.cs",
+          "sourceSha256": "45257c33c91a33db33752d2466413163f97c84a954a62d7a4f9656c496033bf4"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewSafetyNativeTests.cs",
+          "sourceSha256": "53dfd230c9e2b0c9db1f2ba5d81e1f11dfd3abb06deb516dfdf50f22ab99a533"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewRecoveryNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewRecoveryNativeTests.cs",
+          "sourceSha256": "dfe6b055b725908f7547e991ab544ce3426a619a958075f6ea4181147cd5f14f"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -842,6 +1448,7 @@
       "legacySha256": "e02a7e7b9ba86a2c56b76e78591fd9c7ce9f8b96cf5530cf7f3fa3f1d1c9b38f",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewRecoverService",
         "ReviewLaunchService.ResumeAsync"
@@ -854,7 +1461,23 @@
         "ReviewSafetyNativeTests",
         "ReviewRecoveryNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewNativeTests.cs",
+          "sourceSha256": "45257c33c91a33db33752d2466413163f97c84a954a62d7a4f9656c496033bf4"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewSafetyNativeTests.cs",
+          "sourceSha256": "53dfd230c9e2b0c9db1f2ba5d81e1f11dfd3abb06deb516dfdf50f22ab99a533"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewRecoveryNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewRecoveryNativeTests.cs",
+          "sourceSha256": "dfe6b055b725908f7547e991ab544ce3426a619a958075f6ea4181147cd5f14f"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -867,6 +1490,7 @@
       "legacySha256": "e62e8721a6a05a77ed4337c529c788ab20312cba1342a6fe90193d3a871dea1d",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewRecoverService",
         "ReviewLaunchService.ResumeAsync"
@@ -879,7 +1503,23 @@
         "ReviewSafetyNativeTests",
         "ReviewRecoveryNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewNativeTests.cs",
+          "sourceSha256": "45257c33c91a33db33752d2466413163f97c84a954a62d7a4f9656c496033bf4"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewSafetyNativeTests.cs",
+          "sourceSha256": "53dfd230c9e2b0c9db1f2ba5d81e1f11dfd3abb06deb516dfdf50f22ab99a533"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewRecoveryNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewRecoveryNativeTests.cs",
+          "sourceSha256": "dfe6b055b725908f7547e991ab544ce3426a619a958075f6ea4181147cd5f14f"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -892,6 +1532,7 @@
       "legacySha256": "5c72d823090a6ac812c4ea65f90f060a8c133aeed73f71a27e88012394d795b5",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewPrepareService",
         "ReviewAssessService",
@@ -909,7 +1550,33 @@
         "ReviewPayloadNativeTests",
         "ReviewStartupNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewPrerequisiteNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewPrerequisiteNativeTests.cs",
+          "sourceSha256": "cd18430f5640a1d3b8f17845c5006b4453e761ee9f7b189e4f657f337aebec1e"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewPrivacyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewPrivacyNativeTests.cs",
+          "sourceSha256": "fdebd6a48b0e5a6e47e2710c03d055f976c48b835dd73583e7959a782daa6513"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewReadinessNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewReadinessNativeTests.cs",
+          "sourceSha256": "17cb4fb9504db8e79a5e57c69727874d282dff5573a7fda5627aed29b4e6bbd0"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewPayloadNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewPayloadNativeTests.cs",
+          "sourceSha256": "e6f881e1e3d6c77bcfbd6a5e5f2c31a9cfd545be392fe1e31ff800133092fc13"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewStartupNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewStartupNativeTests.cs",
+          "sourceSha256": "f1618ca052f27331aaac97d9b5a41debb811cc6c65e07f68703d8af69414f536"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -922,6 +1589,7 @@
       "legacySha256": "c180528f98c259d2f4bd6d84430565013c2342fae344c36a020d247717bfc3f0",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewPrepareService",
         "ReviewAssessService",
@@ -939,7 +1607,33 @@
         "ReviewPayloadNativeTests",
         "ReviewStartupNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewPrerequisiteNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewPrerequisiteNativeTests.cs",
+          "sourceSha256": "cd18430f5640a1d3b8f17845c5006b4453e761ee9f7b189e4f657f337aebec1e"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewPrivacyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewPrivacyNativeTests.cs",
+          "sourceSha256": "fdebd6a48b0e5a6e47e2710c03d055f976c48b835dd73583e7959a782daa6513"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewReadinessNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewReadinessNativeTests.cs",
+          "sourceSha256": "17cb4fb9504db8e79a5e57c69727874d282dff5573a7fda5627aed29b4e6bbd0"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewPayloadNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewPayloadNativeTests.cs",
+          "sourceSha256": "e6f881e1e3d6c77bcfbd6a5e5f2c31a9cfd545be392fe1e31ff800133092fc13"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewStartupNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewStartupNativeTests.cs",
+          "sourceSha256": "f1618ca052f27331aaac97d9b5a41debb811cc6c65e07f68703d8af69414f536"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -952,6 +1646,7 @@
       "legacySha256": "b37f089d4df304764579a629cc54a81fdaef699085b5f1c867d6daee0aed82ea",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewPrepareService",
         "ReviewAssessService",
@@ -969,7 +1664,33 @@
         "ReviewPayloadNativeTests",
         "ReviewStartupNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewPrerequisiteNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewPrerequisiteNativeTests.cs",
+          "sourceSha256": "cd18430f5640a1d3b8f17845c5006b4453e761ee9f7b189e4f657f337aebec1e"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewPrivacyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewPrivacyNativeTests.cs",
+          "sourceSha256": "fdebd6a48b0e5a6e47e2710c03d055f976c48b835dd73583e7959a782daa6513"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewReadinessNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewReadinessNativeTests.cs",
+          "sourceSha256": "17cb4fb9504db8e79a5e57c69727874d282dff5573a7fda5627aed29b4e6bbd0"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewPayloadNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewPayloadNativeTests.cs",
+          "sourceSha256": "e6f881e1e3d6c77bcfbd6a5e5f2c31a9cfd545be392fe1e31ff800133092fc13"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewStartupNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewStartupNativeTests.cs",
+          "sourceSha256": "f1618ca052f27331aaac97d9b5a41debb811cc6c65e07f68703d8af69414f536"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -982,6 +1703,7 @@
       "legacySha256": "5679fefbcab9d3710548ba3980df7dd93ef2850b02e641836c626860a39bef39",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewPrepareService",
         "ReviewAssessService",
@@ -999,7 +1721,33 @@
         "ReviewPayloadNativeTests",
         "ReviewStartupNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewPrerequisiteNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewPrerequisiteNativeTests.cs",
+          "sourceSha256": "cd18430f5640a1d3b8f17845c5006b4453e761ee9f7b189e4f657f337aebec1e"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewPrivacyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewPrivacyNativeTests.cs",
+          "sourceSha256": "fdebd6a48b0e5a6e47e2710c03d055f976c48b835dd73583e7959a782daa6513"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewReadinessNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewReadinessNativeTests.cs",
+          "sourceSha256": "17cb4fb9504db8e79a5e57c69727874d282dff5573a7fda5627aed29b4e6bbd0"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewPayloadNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewPayloadNativeTests.cs",
+          "sourceSha256": "e6f881e1e3d6c77bcfbd6a5e5f2c31a9cfd545be392fe1e31ff800133092fc13"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewStartupNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewStartupNativeTests.cs",
+          "sourceSha256": "f1618ca052f27331aaac97d9b5a41debb811cc6c65e07f68703d8af69414f536"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -1012,6 +1760,7 @@
       "legacySha256": "f5793714e98e7b231ae3fd297a2856e491142a6948c98acfd3222698a4b00209",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewPrepareService",
         "ReviewAssessService",
@@ -1029,7 +1778,33 @@
         "ReviewPayloadNativeTests",
         "ReviewStartupNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewPrerequisiteNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewPrerequisiteNativeTests.cs",
+          "sourceSha256": "cd18430f5640a1d3b8f17845c5006b4453e761ee9f7b189e4f657f337aebec1e"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewPrivacyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewPrivacyNativeTests.cs",
+          "sourceSha256": "fdebd6a48b0e5a6e47e2710c03d055f976c48b835dd73583e7959a782daa6513"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewReadinessNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewReadinessNativeTests.cs",
+          "sourceSha256": "17cb4fb9504db8e79a5e57c69727874d282dff5573a7fda5627aed29b4e6bbd0"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewPayloadNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewPayloadNativeTests.cs",
+          "sourceSha256": "e6f881e1e3d6c77bcfbd6a5e5f2c31a9cfd545be392fe1e31ff800133092fc13"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewStartupNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewStartupNativeTests.cs",
+          "sourceSha256": "f1618ca052f27331aaac97d9b5a41debb811cc6c65e07f68703d8af69414f536"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -1042,6 +1817,7 @@
       "legacySha256": "aada20abe127fd6ffdbb32a8f36705f57a20b12e1e349a1a003cfc03031a63d9",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewWorkflow",
         "ReviewPrepareService",
@@ -1061,7 +1837,28 @@
         "ReviewRecoveryNativeTests",
         "ReviewFinalFragmentNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewNativeTests.cs",
+          "sourceSha256": "45257c33c91a33db33752d2466413163f97c84a954a62d7a4f9656c496033bf4"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewSafetyNativeTests.cs",
+          "sourceSha256": "53dfd230c9e2b0c9db1f2ba5d81e1f11dfd3abb06deb516dfdf50f22ab99a533"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewRecoveryNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewRecoveryNativeTests.cs",
+          "sourceSha256": "dfe6b055b725908f7547e991ab544ce3426a619a958075f6ea4181147cd5f14f"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewFinalFragmentNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewFinalFragmentNativeTests.cs",
+          "sourceSha256": "8e734592cb43c7beab45138d810b97a7358b59e4c51e045c2946ae7249fcdf26"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -1074,6 +1871,7 @@
       "legacySha256": "4cb75138e5db1a4fa5f210c9f61f855ae88a9aedab49a2038ecea2c7364958e3",
       "originalRetained": true,
       "legacyExecuted": false,
+      "owner": "Review",
       "nativeServiceCandidates": [
         "ReviewWorkflow",
         "ReviewPrepareService",
@@ -1093,7 +1891,28 @@
         "ReviewRecoveryNativeTests",
         "ReviewFinalFragmentNativeTests"
       ],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewNativeTests.cs",
+          "sourceSha256": "45257c33c91a33db33752d2466413163f97c84a954a62d7a4f9656c496033bf4"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewSafetyNativeTests.cs",
+          "sourceSha256": "53dfd230c9e2b0c9db1f2ba5d81e1f11dfd3abb06deb516dfdf50f22ab99a533"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewRecoveryNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewRecoveryNativeTests.cs",
+          "sourceSha256": "dfe6b055b725908f7547e991ab544ce3426a619a958075f6ea4181147cd5f14f"
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Review.ReviewFinalFragmentNativeTests",
+          "path": "remediation/nuke-app/Tests/Review/ReviewFinalFragmentNativeTests.cs",
+          "sourceSha256": "8e734592cb43c7beab45138d810b97a7358b59e4c51e045c2946ae7249fcdf26"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
@@ -1106,38 +1925,60 @@
       "legacySha256": "1d797710bcb0e2a9e987269d681739901a4816924e8d290e3aba37d9c5beb916",
       "originalRetained": true,
       "legacyExecuted": false,
-      "nativeServiceCandidates": [],
+      "owner": "Documentation",
+      "nativeServiceCandidates": [
+        "LosslessEvidenceService"
+      ],
       "categoryOperations": [
         "Design/Factor",
         "Design/Reconstruct"
       ],
-      "testClasses": [],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testClasses": [
+        "LosslessEvidenceRealTests"
+      ],
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.LosslessEvidenceRealTests",
+          "path": "remediation/nuke-app/Tests/Documentation/LosslessEvidenceRealTests.cs",
+          "sourceSha256": "7e3559889cddbc2665dac8885b1654d6124cce753cfe8d66894e268cb322eaf4"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
       "liveCliPluginParity": "not-run-no-claim",
       "priorDisposition": "retained-source-native-successor",
-      "note": "Documentation owner supplies authoritative exact native service/test mapping. No duplicate Review implementation or Review parity claim."
+      "note": "Documentation owns LosslessEvidenceService algorithm and its real fixture tests. Review-specific caller/recipe and original assertion parity remain pending; no duplicate Review implementation or completion claim."
     },
     {
       "legacy": "remediation/test_factor_design_evidence.py",
       "legacySha256": "12961101499ff4e7a81e0021112549578fa30c3b9ac2dbb359d8e82875813b5f",
       "originalRetained": true,
       "legacyExecuted": false,
-      "nativeServiceCandidates": [],
+      "owner": "Documentation",
+      "nativeServiceCandidates": [
+        "LosslessEvidenceService"
+      ],
       "categoryOperations": [
         "Design/Factor",
         "Design/Reconstruct"
       ],
-      "testClasses": [],
-      "testNamespace": "AndroidMcp.BuildTool.Tests.Review",
+      "testClasses": [
+        "LosslessEvidenceRealTests"
+      ],
+      "testBindings": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.LosslessEvidenceRealTests",
+          "path": "remediation/nuke-app/Tests/Documentation/LosslessEvidenceRealTests.cs",
+          "sourceSha256": "7e3559889cddbc2665dac8885b1654d6124cce753cfe8d66894e268cb322eaf4"
+        }
+      ],
       "applicability": "pending-authoritative-source-disposition",
       "parity": "pending-source-level-equivalence",
       "executableCategoryComposition": "pending-root-wiring",
       "liveCliPluginParity": "not-run-no-claim",
       "priorDisposition": "retained-source-native-successor",
-      "note": "Documentation owner supplies authoritative exact native service/test mapping. No duplicate Review implementation or Review parity claim."
+      "note": "Documentation owns LosslessEvidenceService algorithm and its real fixture tests. Review-specific caller/recipe and original assertion parity remain pending; no duplicate Review implementation or completion claim."
     }
   ]
 }

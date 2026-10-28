@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "1.0.0",
+  "at": "2026-10-28T04:47:30",
+  "owner": "Sources",
+  "pythonExecuted": false,
+  "nodeExecuted": false,
+  "hvAcceptance": "Deferred until Ready by user; normal method verification is recorded independently.",
+  "sourceInventory": {
+    "path": "remediation/nuke-planning/source/legacy-port-disposition-inventory.json",
+    "sha256": "a3021c2293cc8d81d9ef9b178a4ca7539b3a06af9d0557a1b8c4cc5b62abb2ea"
+  },
+  "proof": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T0442363779064-59c5e32b424d45158156550d093e5a3e/tests.trx",
+    "sha256": "9f81e68ee33d8d846bef5a9f7d44aa8b87c1318449eeda07b23d5cc38ddd5486",
+    "ownNativeTypeFacts": 27,
+    "ownNativeTargetFacts": 14,
+    "ownFailed": 0,
+    "ownSkipped": 0,
+    "globalCounters": "<Counters total=\"46904\" executed=\"46904\" passed=\"46904\" failed=\"0\" error=\"0\" timeout=\"0\" aborted=\"0\" inconclusive=\"0\" passedButRunAborted=\"0\" notRunnable=\"0\" notExecuted=\"0\" disconnected=\"0\" warning=\"0\" completed=\"0\" inProgress=\"0\" pending=\"0\" xmlns=\"http://microsoft.com/schemas/VisualStudio/TeamTest/2010\" />",
+    "globalFailuresDoNotBecomeOwnSuccess": true
+  },
+  "nativeSourcePins": [
+    {
+      "path": "remediation/nuke-app/Modules/Sources/SourceTypeFacts.cs",
+      "sha256": "53ada450d613e1e8eeb33e5cf4dfcbfea4115f9c7247ce328ac9db33f8e2a418"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/SourceTypeFactsContractCases.cs",
+      "sha256": "27caf96a551057406fd3425012fba2c9e6e3302d99415df589cbae2bce407b33"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/SourceTypeFactsRealTests.cs",
+      "sha256": "4447a2ed5a9903af7ca4e88ec9e6e9c8f9de15a671e5c6edc08a1b07ac48360e"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/SdkAnnotationTargetRealTests.cs",
+      "sha256": "16d24b949ed096eb41cff64466a846831d7dcdc2a460a5e12b56d163944e3faa"
+    }
+  ],
+  "entries": [
+    {
+      "legacyPath": "remediation/catalog/tests/test_annotation_jvm_erasure.py",
+      "legacySha256": "4fca71f6c2342e826de0bd676a2eee2ac56285097174840d94d850a4d369ca65",
+      "owner": "Sources",
+      "category": "Sources",
+      "operation": "Extract",
+      "normal_verified": true,
+      "normal_verification_scope": "All seven original test-method inputs and assertions are bound to the native source-owned XmlJvmKey service. Python framework/module bootstrap is replaced by xUnit; no old producer execution is claimed.",
+      "nativeService": "SourceTypeFacts.XmlJvmKey",
+      "nativeTest": "AndroidMcp.BuildTool.Tests.Sources.SourceTypeFactsRealTests.NativeXmlKeysUseTheSameOriginalSpellingAssertions",
+      "normal_verified_methods": [
+        {
+          "legacy_method": "test_qualified_generic_outer_erasure_has_exact_descriptor",
+          "native_case_ids": [
+            "XMLKEY-01"
+          ],
+          "assertion_equivalence": "Exact explicit generic outer erasure descriptor; original owner dictionary unchanged.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_type_variable_is_not_erased_to_object_by_guess",
+          "native_case_ids": [
+            "XMLKEY-02",
+            "XMLKEY-03"
+          ],
+          "assertion_equivalence": "Both parameter T and return T remain null, without Object inference.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_unqualified_java_lang_alias_not_guessed",
+          "native_case_ids": [
+            "XMLKEY-04"
+          ],
+          "assertion_equivalence": "Unqualified String remains unresolved/null.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_parameterized_array_and_parameter_annotation_ordinal",
+          "native_case_ids": [
+            "XMLKEY-05"
+          ],
+          "assertion_equivalence": "Exact known outer generic array descriptor and retained ordinal suffix handling.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_malformed_generics_and_void_parameters_rejected",
+          "native_case_ids": [
+            "XMLKEY-06",
+            "XMLKEY-07"
+          ],
+          "assertion_equivalence": "Malformed generic and void parameter independently return null.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_constructor_and_same_name_regular_method_differ",
+          "native_case_ids": [
+            "XMLKEY-08",
+            "XMLKEY-09"
+          ],
+          "assertion_equivalence": "Constructor <init>()V and ordinary A()I remain distinct.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_nested_binary_owner_is_known_not_inferred",
+          "native_case_ids": [
+            "XMLKEY-10"
+          ],
+          "assertion_equivalence": "Exact known nested binary owner a/A$Inner returned.",
+          "status": "normal-native-verified"
+        }
+      ],
+      "pending_methods": [],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false,
+      "frozenProfileNote": "Both actual source bodies were read separately and all literal inputs/assertions match the native cases. The pure helper has one LegacySignature lexical policy, with no separate release implementation. Release CLI/import/corpus composition is not claimed by these seven test-method closures."
+    },
+    {
+      "legacyPath": "rehydration/producers/release-011/tests/test_annotation_jvm_erasure.py",
+      "legacySha256": "4fca71f6c2342e826de0bd676a2eee2ac56285097174840d94d850a4d369ca65",
+      "owner": "Sources",
+      "category": "Sources",
+      "operation": "Extract",
+      "normal_verified": true,
+      "normal_verification_scope": "All seven original test-method inputs and assertions are bound to the native source-owned XmlJvmKey service. Python framework/module bootstrap is replaced by xUnit; no old producer execution is claimed.",
+      "nativeService": "SourceTypeFacts.XmlJvmKey",
+      "nativeTest": "AndroidMcp.BuildTool.Tests.Sources.SourceTypeFactsRealTests.NativeXmlKeysUseTheSameOriginalSpellingAssertions",
+      "normal_verified_methods": [
+        {
+          "legacy_method": "test_qualified_generic_outer_erasure_has_exact_descriptor",
+          "native_case_ids": [
+            "XMLKEY-01"
+          ],
+          "assertion_equivalence": "Exact explicit generic outer erasure descriptor; original owner dictionary unchanged.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_type_variable_is_not_erased_to_object_by_guess",
+          "native_case_ids": [
+            "XMLKEY-02",
+            "XMLKEY-03"
+          ],
+          "assertion_equivalence": "Both parameter T and return T remain null, without Object inference.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_unqualified_java_lang_alias_not_guessed",
+          "native_case_ids": [
+            "XMLKEY-04"
+          ],
+          "assertion_equivalence": "Unqualified String remains unresolved/null.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_parameterized_array_and_parameter_annotation_ordinal",
+          "native_case_ids": [
+            "XMLKEY-05"
+          ],
+          "assertion_equivalence": "Exact known outer generic array descriptor and retained ordinal suffix handling.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_malformed_generics_and_void_parameters_rejected",
+          "native_case_ids": [
+            "XMLKEY-06",
+            "XMLKEY-07"
+          ],
+          "assertion_equivalence": "Malformed generic and void parameter independently return null.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_constructor_and_same_name_regular_method_differ",
+          "native_case_ids": [
+            "XMLKEY-08",
+            "XMLKEY-09"
+          ],
+          "assertion_equivalence": "Constructor <init>()V and ordinary A()I remain distinct.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_nested_binary_owner_is_known_not_inferred",
+          "native_case_ids": [
+            "XMLKEY-10"
+          ],
+          "assertion_equivalence": "Exact known nested binary owner a/A$Inner returned.",
+          "status": "normal-native-verified"
+        }
+      ],
+      "pending_methods": [],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false,
+      "frozenProfileNote": "Both actual source bodies were read separately and all literal inputs/assertions match the native cases. The pure helper has one LegacySignature lexical policy, with no separate release implementation. Release CLI/import/corpus composition is not claimed by these seven test-method closures."
+    }
+  ],
+  "totals": {
+    "paths": 2,
+    "normalVerifiedTestFiles": 2,
+    "normalVerifiedOriginalTestMethods": 14,
+    "acceptedComplete": 0,
+    "safeToDelete": 0
+  },
+  "remaining": [
+    "The other annotation_link functions and Catalog scoped lookup/import/storage are separate responsibilities; these XML key test closures do not imply their parity.",
+    "SDK annotation ZIP/XML/binary composition remains pending its own staged mock/native gates.",
+    "No original file is deleted or hidden, and no migration/HV acceptance state is changed."
+  ],
+  "decisions": [
+    "Do not withhold ordinary verified test-method closures merely because HV is deferred.",
+    "Do not propagate two published test-file closures to additional historical copies solely because hashes match. Each historical role/caller/profile remains separately retained in the sole inventory."
+  ]
+}

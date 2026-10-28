@@ -13,20 +13,17 @@ namespace AndroidMcp.BuildTool.Documentation;
 /// <summary>Pure in-memory projections. File writes and operation planning belong to the shared host.</summary>
 public sealed class DocumentationProjector : IDocumentationProjector
 {
+    private readonly IDocumentationModelReader models;
+    public DocumentationProjector():this(new DocumentationModelReader()) { }
+    public DocumentationProjector(IDocumentationModelReader modelReader){models=modelReader;}
     private const string NavigationBegin = "<!-- GENERATED UI NAVIGATION BEGIN -->";
     private const string NavigationEnd = "<!-- GENERATED UI NAVIGATION END -->";
     private static readonly JsonSerializerOptions JsonOptions = new() { WriteIndented = true };
 
     public DocumentationProjection Project(DocumentationInput input)
     {
-        var source = Encoding.UTF8.GetString(input.BlueprintMarkdown.Bytes.Span);
-        var blocks = Regex.Matches(source,"```json ui-blueprint-v2\\r?\\n([\\s\\S]*?)\\r?\\n```");
-        if (blocks.Count != 1) throw new InvalidDataException("Exactly one canonical ui-blueprint-v2 block is required");
-        var blueprint = JsonNode.Parse(blocks[0].Groups[1].Value)!.AsObject();
-        if (Value(blueprint,"schema_version") != "2.0.0") throw new InvalidDataException("Unsupported UI blueprint schema");
-        var screens = blueprint["screens"]!.AsArray().Select(n=>n!.AsObject()).ToArray();
-        var stories = blueprint["storyboards"]!.AsArray().Select(n=>n!.AsObject()).ToArray();
-        var screenIndex = screens.ToDictionary(s=>Value(s,"id"),StringComparer.Ordinal);
+        var model=models.Read(input.BlueprintMarkdown);
+        var blueprint=model.Blueprint;var screens=model.Screens;var stories=model.Storyboards;var screenIndex=model.ScreensById;
         var output = new Dictionary<string,Artifact>(StringComparer.Ordinal);
         var variantFiles = new List<string>();
         void Write(string path,string text,string mediaType)

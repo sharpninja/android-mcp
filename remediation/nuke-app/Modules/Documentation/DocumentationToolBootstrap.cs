@@ -19,7 +19,8 @@ public sealed class DocumentationToolBootstrap(IToolArtifactAcquirer tools):IDoc
             if(pin.SizeBytes is null||pin.SizeBytes<0||!ArtifactPaths.IsRelative(pin.LocalPath))throw new ArchitectureAssetException("BOOTSTRAP_ARGUMENT","Tool cache path and exact byte length must be admitted");
             var zip=pin.LocalPath==".tools/gradle-"+profile.GradleVersion+"-bin.zip";
             var bounded=new ToolArtifactBounds(pin.SizeBytes.Value,zip?512L*1024*1024:0,zip?128L*1024*1024:0,zip?10000:0);
-            var artifact=new ToolArtifactPin(pin.LocalPath,pin.Revision,pin.Url,pin.Sha256,pin.SizeBytes.Value,zip?ToolArtifactFormat.Zip:ToolArtifactFormat.Stored,bounded,zip?new Uri(pin.Url.AbsoluteUri+".sha256"):null);
+            var redirects=profile.ToolRedirects is {} declared&&declared.TryGetValue(pin.LocalPath,out var allowed)?allowed:null;
+            var artifact=new ToolArtifactPin(pin.LocalPath,pin.Revision,pin.Url,pin.Sha256,pin.SizeBytes.Value,zip?ToolArtifactFormat.Zip:ToolArtifactFormat.Stored,bounded,zip?new Uri(pin.Url.AbsoluteUri+".sha256"):null,redirects);
             return new ToolArtifactRequest(artifact,access,pin.LocalPath,zip?".tools":null,zip&&access==ToolArtifactAccess.Offline?offlineGradleChecksumProof:null);
         }).ToArray();
         var result=new List<ToolArtifactReceipt>();

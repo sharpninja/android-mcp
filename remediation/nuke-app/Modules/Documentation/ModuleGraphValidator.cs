@@ -54,6 +54,6 @@ public sealed class ModuleGraphValidator : IModuleGraphValidator
             active.Add(module);foreach(var target in Targets(module))Visit(target);active.Remove(module);complete.Add(module);
         }
         foreach(var module in dependencies.Select(p=>p.Key))Visit(module);
-        return new(names.Length,edges.Order(StringComparer.Ordinal).ToArray(),issues);
+        return new(names.Length,edges.Order(StringComparer.Ordinal).ToArray(),issues,names);
     }
 }

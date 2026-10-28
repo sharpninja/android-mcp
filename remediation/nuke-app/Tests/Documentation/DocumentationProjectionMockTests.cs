@@ -45,7 +45,7 @@ public sealed class DocumentationFixture
         Workspace = directory?.FullName ?? throw new InvalidOperationException("Canonical design fixture workspace unavailable");
         Inventory = JsonNode.Parse(File.ReadAllBytes(Path.Combine(Workspace,"remediation/nuke-planning/docs/saved-fixture-inventory.json")))!.AsObject();
         ExpectedHashes = Inventory["baselineFiles"]!.AsArray().Concat(Inventory["docsVectorFixtures"]!.AsArray())
-            .Select(n => n!.AsObject()).ToDictionary(n => Text(n,"path"),n => Text(n,"sha256"),StringComparer.Ordinal);
+            .Select(n => n!.AsObject()).ToDictionary(n => Text(n,"path"),n => CurrentSourceHash(Text(n,"path"),Text(n,"sha256")),StringComparer.Ordinal);
         HealthMigration = JsonNode.Parse(File.ReadAllBytes(Path.Combine(Workspace,"remediation/nuke-planning/docs/health-migration-and-gate-chronology.json")))!.AsObject();
         if (HealthMigration["beforeSha256"]!.GetValue<string>() != ExpectedHashes["remediation/design-c4/docs/ui-blueprint.md"])
             throw new InvalidOperationException("Health migration does not reference the pinned original input");
@@ -90,6 +90,13 @@ public sealed class DocumentationFixture
         }).ToArray());
     }
 
+    public static string CurrentSourceHash(string inventoryPath,string originalHash)
+    {
+        var migration=ToolingDocumentationMigrationCases.Files.SingleOrDefault(file=>"remediation/design-c4/"+file.CanonicalPath==inventoryPath);
+        if(migration is null)return originalHash;
+        Assert.Equal(migration.BeforeSha256,originalHash);
+        return migration.AfterSha256;
+    }
     public static string Text(JsonObject node,string key) => node[key]?.GetValue<string>() ?? "";
     public static string Utf8(Artifact artifact) => Encoding.UTF8.GetString(artifact.Bytes.Span);
     public static string Hash(ReadOnlySpan<byte> bytes) => Convert.ToHexStringLower(SHA256.HashData(bytes));

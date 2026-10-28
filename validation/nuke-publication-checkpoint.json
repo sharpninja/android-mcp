@@ -1,24 +1,27 @@
 {
-  "checkpoint": "004",
-  "localTimestamp": "2026-10-28T02:40:20",
+  "checkpoint": "005",
+  "localTimestamp": "2026-10-28T04:58:49",
   "sdk": "10.0.403",
-  "manifestSha256": "62eefa146084b28b415c0e1f83e904708a7bacb00cfac0e1cf0e3689a2ed6186",
-  "handoffFiles": 522,
-  "handoffBytes": 5797451,
+  "manifestSha256": "028ee7cbb65bbcdc1a31308b8ced85e4470d29cf93963cbba87ff52b4142205c",
+  "handoffFiles": 664,
+  "handoffBytes": 9155143,
+  "publishedHandoffFiles": 663,
   "sourcePriorPostcopyPinsVerified": true,
   "originalInputsRetained": true,
   "lockedRestoreSucceeded": true,
   "nativeHostBuildSucceeded": true,
-  "total": 37372,
-  "passed": 37372,
+  "total": 46904,
+  "passed": 46904,
   "failed": 0,
   "notExecuted": 0,
   "warnings": 0,
   "errors": 0,
   "scope": "Full currently implemented C# suite, mock and real bindings; not complete legacy parity or independent acceptance",
-  "trxSha256": "6e432569c2200d35584a84943a53b59cedfa3320964b5fb49ee313716eeef8e8",
-  "trxLocalRelativePath": "remediation/nuke-app/artifacts/tests/20261028T0238185766862-bba9264601b64f8ebf5d896290a4d85c/tests.trx",
-  "sourceOwnerTrxSha256": "ae345d3950aacef09a58fdae9ba1489a62044c7257016cd2e93e0f1fc972de27",
+  "trxSha256": "934e70d447afd8711b6798e5ebe7c5fdffa69a188461b656b26868df37348127",
+  "trxLocalRelativePath": "remediation/nuke-app/artifacts/tests/20261028T0454058861876-3ccb40d747d94a81b6c2187ec9388f50/tests.trx",
+  "sourceOwnerTrxSha256": "9f81e68ee33d8d846bef5a9f7d44aa8b87c1318449eeda07b23d5cc38ddd5486",
+  "forceFreshHostAndTests": true,
+  "ownedTemporaryRoot": true,
   "nativeJavaManifestSha256": "e9fa6885c4d800dd1c74ef72f478f0b81885811f2b9fb84665d76dc18f3ff0c1",
   "ownerVerifiedCliOperations": [
     "Validate/MockGate",
@@ -27,26 +30,35 @@
     "Sources/NativeParser",
     "Sources/Fetch",
     "Sources/Plan",
-    "Publish/Check"
+    "Publish/Check",
+    "Catalog/Build",
+    "Design/Architecture",
+    "Design/BrowserQa"
   ],
-  "registeredOperations": 11,
+  "registeredOperations": 12,
   "verifiedStreaming": {
-    "sharedFileArtifactStore": true,
-    "boundedComparisonBytes": 81920,
     "mockCases": 52,
+    "sharedFileArtifactStore": true,
     "byteHashSeamPreserved": true,
+    "boundedComparisonBytes": 81920,
     "nativeCases": 26
   },
   "browserCases": 9,
   "browserCasesPassed": 9,
   "historicalFailedReceiptsRetainedLocally": true,
-  "priorCopiedGate": {
-    "passed": 37359,
+  "priorCheckpoint004Gate": {
     "total": 37372,
-    "notExecuted": 0,
+    "passed": 37359,
+    "failed": 13,
+    "reason": "Historical checkpoint004 quota-failed gate retained; unchanged-source rerun passed. Subsequent gates use owned process-local temp roots.",
     "trxSha256": "c06f6ce8ef3a29754de700e183f803bc4853a56271e6466a577c722909dd8810",
-    "reason": "All13failures reported Disk quota exceeded under /tmp, including native compiler stderr. Retained first outputs and reran unchanged sources with owned temp root under ignored artifacts.",
-    "failed": 13
+    "notExecuted": 0
+  },
+  "localHistoryExclusion": {
+    "runtimeTestAndRehydrationReferenceCheck": "No literal references found, including compressed selected recipes; v2 predecessor pointer is local-history provenance.",
+    "sha256": "e94e2ac7e49ad1c4b11e3c8197a97e0494e89c42f7687383da6b8d8bf4a685b7",
+    "retainedOriginalAndIgnoredCopy": true,
+    "path": "remediation/nuke-planning/publication/legacy-unmapped-role-supplement.json"
   },
   "migrationComplete": false,
   "productionParityProven": false,
@@ -61,9 +73,5 @@
     "Preserved README/ignore/allowlist/FUNDING during guarded copy",
     "Exact source and LICENSE policy entries only",
     "No C# changes after copied full gate"
-  ],
-  "deferredFormatting": [
-    "remediation/nuke-app/Modules/Publication/PublicationChecker.cs:58: new blank line at EOF.",
-    "remediation/nuke-app/Tests/Core/ProcessSessionStreamHashTests.cs:71: trailing whitespace."
   ]
 }

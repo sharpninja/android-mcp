@@ -23,7 +23,11 @@ public sealed class CatalogDatabase:IDisposable
     public static CatalogDatabase CreateFile(string catalogRoot,CatalogSchemaProfile profile,string databasePath)
     {
         // Resolve/read every prerequisite before creating any stage file.
-        var scripts=Scripts(catalogRoot,profile);var full=Path.GetFullPath(databasePath);var parent=Path.GetDirectoryName(full)!;
+        return CreatePrivateFile(databasePath,Scripts(catalogRoot,profile));
+    }
+    internal static CatalogDatabase CreatePrivateFile(string databasePath,IReadOnlyList<string> scripts)
+    {
+        var full=Path.GetFullPath(databasePath);var parent=Path.GetDirectoryName(full)!;
         full=ArtifactPaths.Resolve(parent,Path.GetFileName(full));Directory.CreateDirectory(parent);
         full=ArtifactPaths.Resolve(parent,Path.GetFileName(full));
         // CreateNew refuses an earlier stage without changing its bytes. Failed

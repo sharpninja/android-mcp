@@ -8,15 +8,25 @@ namespace AndroidMcp.BuildTool.Modules.Sources.Acquisition;
 
 /// <summary>Acquire Publication's selected physical pins, retaining all logical audit rows.</summary>
 public sealed class SourceBatch(IByteTransport transport,IArtifactStore store,IArtifactStore bundle,
-    IArtifactLeaseProvider leases,ICanonicalJson canonical):ISourceBatch
+    IArtifactLeaseProvider leases,ICanonicalJson canonical):ISourceBatch,ISourceBatchReader
 {
-    public async Task<SourceBatchResult> RunAsync(SourceBatchRequest request,CancellationToken cancellationToken=default)
+    public Task<SourceBatchResult> RunAsync(SourceBatchRequest request,CancellationToken cancellationToken=default)
+        =>RunCoreAsync(request,false,null,cancellationToken);
+    public Task<SourceBatchResult> ResumeOnlyAsync(SourceBatchResumeRequest request,CancellationToken cancellationToken=default)
+        =>RunCoreAsync(request.Acquisition,true,request.RequiredManifest,cancellationToken);
+    private async Task<SourceBatchResult> RunCoreAsync(SourceBatchRequest request,bool resumeOnly,StoredArtifact? requiredManifest,CancellationToken cancellationToken)
     {
         Validate(request);
+        if(resumeOnly&&(requiredManifest is null||requiredManifest.RelativePath!=request.ReceiptPath))Fail("BATCH_RECEIPT_PIN");
         var projection=request.Projection;
         var identity=canonical.Hash(JsonSerializer.SerializeToElement(request));
         await using var lease=await leases.AcquireAsync("source-batch/"+request.ReceiptPath,cancellationToken);
         var sealedBytes=await Optional(store,request.ReceiptPath,cancellationToken);
+        if(resumeOnly)
+        {
+            if(sealedBytes is null)Fail("BATCH_REQUIRED_RECEIPT");
+            if(sealedBytes.Value.Length!=requiredManifest!.Length||ContentHash.Sha256(sealedBytes.Value.Span)!=requiredManifest.Sha256||requiredManifest.MediaType!="application/json")Fail("BATCH_RECEIPT_PIN");
+        }
         if(sealedBytes is not null)
         {
             if(!projection.Resume)Fail("BATCH_RESUME");
