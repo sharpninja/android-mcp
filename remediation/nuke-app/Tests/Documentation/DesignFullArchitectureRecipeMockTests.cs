@@ -12,14 +12,23 @@ public sealed class FullArchitectureRecipeEnvironment
     public ArchitectureSubsetEnvironment Architecture {get;}
     public List<string> Trace {get;}=[];
     public List<CancellationToken> Tokens {get;}=[];
+    public bool LegacyReceiptsEnabled {get;}
+    public DocumentationProjection UiProjection {get;}
     public IReadOnlyList<Artifact> Inputs=>Model.Input.RequiredArtifacts;
     public DocumentationModelSourceSnapshot Snapshot=>Model.Input.Sources;
     public DesignStagePlan Selection=>Architecture.Selection;
     public DesignArchitectureRequest Request=>Architecture.Inner.Composition.ArchitectureRequest;
-    public IReadOnlyList<Artifact> Expected=>Model.Ui.Artifacts.Concat(Architecture.ExpectedPublic).Append(Snapshot.Receipt).OrderBy(artifact=>artifact.RelativePath,StringComparer.Ordinal).ToArray();
-    public FullArchitectureRecipeEnvironment(string scenario)
+    public IReadOnlyList<Artifact> ExpectedReceipts=>LegacyReceiptsEnabled?StandaloneModelReceiptCases.ExpectedReceipts(this):[];
+    public IReadOnlyList<Artifact> Expected=>UiProjection.Artifacts.Concat(Architecture.ExpectedPublic).Append(Snapshot.Receipt).Concat(ExpectedReceipts).OrderBy(artifact=>artifact.RelativePath,StringComparer.Ordinal).ToArray();
+    public FullArchitectureRecipeEnvironment(string scenario,bool legacyReceipts=false)
     {
-        Scenario=scenario;Model=new(scenario=="ABSENT"?"OPTIONAL-CANONICAL-ABSENT":"FULL");
+        Scenario=scenario;LegacyReceiptsEnabled=legacyReceipts;Model=new(scenario=="ABSENT"?"OPTIONAL-CANONICAL-ABSENT":"FULL");
+        UiProjection=Model.Ui;
+        if(legacyReceipts)
+        {
+            var genuine=LegacyReceiptCases.NativeUiInput();
+            UiProjection=UiProjection with{Artifacts=UiProjection.Artifacts.Select(artifact=>artifact.RelativePath==genuine.RelativePath?genuine:artifact).ToArray()};
+        }
         Architecture=new(new("OUTER",scenario=="MODEL-ONLY"?["validateModelContracts"]:scenario=="EXPORT"?["exportArchitecture"]:scenario=="PENDING"?["verifyDesignDocs"]:["generateArchitectureDiagrams"]));
     }
 }
@@ -28,7 +37,7 @@ public sealed class RecordingFullArchitectureServices(FullArchitectureRecipeEnvi
     public DocumentationRendererProfile Read(Artifact tools,Artifact renderer)
     {e.Trace.Add("profile");Assert.Same(e.Inputs.Single(a=>a.RelativePath=="toolchain-lock.json"),tools);Assert.Same(e.Inputs.Single(a=>a.RelativePath=="renderer-lock.json"),renderer);return e.Architecture.Inner.Composition.Profile;}
     public DocumentationModelPreflightResult Prepare(DocumentationModelPreflightInput input)
-    {e.Trace.Add("model");Assert.Same(e.Inputs,input.RequiredArtifacts);Assert.Same(e.Snapshot,input.Sources);Assert.Equal(e.Selection.Stages.Contains(DesignStage.ModuleGraph),input.EnforceModuleGraph);if(e.Scenario=="MODEL-FAIL")throw new ModelContractException(["outer model fixture"]);return new(e.Model.Model,e.Model.Ui,e.Model.Modules,e.Model.Validated);}
+    {e.Trace.Add("model");Assert.Same(e.Inputs,input.RequiredArtifacts);Assert.Same(e.Snapshot,input.Sources);Assert.Equal(e.Selection.Stages.Contains(DesignStage.ModuleGraph),input.EnforceModuleGraph);if(e.Scenario=="MODEL-FAIL")throw new ModelContractException(["outer model fixture"]);return new(e.Model.Model,e.UiProjection,e.Model.Modules,e.Model.Validated);}
     public IReadOnlyList<Artifact> ExtractCodeViews(ArchitecturePreparationInput input)
     {e.Trace.Add("code");Assert.Same(e.Inputs.Single(a=>a.RelativePath=="architecture/workspace.dsl"),input.Workspace);Assert.Same(e.Inputs.Single(a=>a.RelativePath=="architecture/code-diagrams.md"),input.CodeMarkdown);return e.Architecture.Code;}
     public Artifact NormalizeVector(Artifact rawSvg,string outputPath)=>throw new InvalidOperationException("The shared renderer owns normalization");
@@ -89,10 +98,10 @@ public sealed class ScriptedFullArchitectureRecipeFactory(FullArchitectureRecipe
             var model=services.Prepare(new(inputs,snapshot,selection.Stages.Contains(DesignStage.ModuleGraph)));
             var code=selection.Stages.Contains(DesignStage.CodeExtract)?services.ExtractCodeViews(new(inputs.Single(a=>a.RelativePath=="architecture/workspace.dsl"),inputs.Single(a=>a.RelativePath=="architecture/code-diagrams.md"))):Array.Empty<Artifact>();
             var inner=services.PrepareSubset(selection,inputs,profile,code,request.Renderer,async token=>{await services.AcquireAsync(profile,request.ToolAccess,request.OfflineGradleChecksumProof,mutation=="tool-token"?CancellationToken.None:token);});
-            var paths=model.Ui.Artifacts.Select(a=>a.RelativePath).Concat(inner.OutputPaths).Append(snapshot.Receipt.RelativePath).ToArray();
+            var paths=model.Ui.Artifacts.Select(a=>a.RelativePath).Concat(inner.OutputPaths).Append(snapshot.Receipt.RelativePath).Concat(e.ExpectedReceipts.Select(artifact=>artifact.RelativePath)).ToArray();
             return new(paths,async token=>
             {
-                var architecture=await inner.MaterializeAsync(token);var output=model.Ui.Artifacts.Concat(architecture).Append(snapshot.Receipt).ToArray();
+                var architecture=await inner.MaterializeAsync(token);var output=model.Ui.Artifacts.Concat(architecture).Append(snapshot.Receipt).Concat(e.ExpectedReceipts).ToArray();
                 return mutation=="outputs"?output.Skip(1).ToArray():output;
             },mutation=="hook"?null:token=>sourceCollection.VerifyUnchangedAsync(snapshot,mutation=="hook-token"?CancellationToken.None:token));
         });

@@ -1,0 +1,96 @@
+{
+  "localTimestamp": "2026-10-28T16:56:17",
+  "status": "Actual canonical Manifest CLI succeeded; independent hash/size and receipt checks passed.",
+  "run": "remediation/nuke-app/artifacts/documentation-manifest-cli-001",
+  "terminal": {
+    "state": "terminal",
+    "exitCode": 0,
+    "localStarted": "2026-10-28T16:55:37",
+    "localFinished": "2026-10-28T16:56:06",
+    "stdoutSha256": "15c964b3478000823c90eb102f6ab946c52c232300188c59f7bab6dc584ab8d8",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "generationManifestPresent": true
+  },
+  "manifestSha256": "e60fed7466126e455e7d1024ffe223685489e864c4c1090edb2dff8cd998dba3",
+  "inputsVerified": 20,
+  "outputsVerified": 273,
+  "svgDiagramsByteIdenticalToCanonical": 21,
+  "allSvgArtifacts": 238,
+  "editableClassViews": 6,
+  "renderSkinSources": 1,
+  "legacyReceipts": [
+    {
+      "path": "build/receipts/architecture-validation.txt",
+      "sha256": "6fcc182dfba1fb28c74c8f75ff546444903a71ec735122f271d0c3ab1ab1bd22",
+      "size_bytes": 113,
+      "media_type": "text/plain"
+    },
+    {
+      "path": "build/receipts/docs-validation.txt",
+      "sha256": "94a3317902d1900854e80bbad4d91b3375d0329575ddce6fd9f19945d74e0c25",
+      "size_bytes": 93,
+      "media_type": "text/plain"
+    },
+    {
+      "path": "build/receipts/model-contracts.json",
+      "sha256": "435a607a20839e1b814239c75c4607c74ea00eeb5823ceaaaad0101cdf5dcfb4",
+      "size_bytes": 131,
+      "media_type": "application/json"
+    },
+    {
+      "path": "build/receipts/module-graph.json",
+      "sha256": "bc15b594c8b48282e5ecd751562fa6602d4d0d68fd0a023028d652d9ee4d4ba8",
+      "size_bytes": 566,
+      "media_type": "application/json"
+    },
+    {
+      "path": "build/receipts/ui-projection.json",
+      "sha256": "bc324e8643254b70b6863bbad8aa2ff8f737f0acfad77d9bb178426838b17575",
+      "size_bytes": 5492,
+      "media_type": "application/json"
+    }
+  ],
+  "moduleClasses": 96,
+  "modelScreens": 11,
+  "modelStates": 76,
+  "implementedAndroidUi": false,
+  "checksumEntries": 272,
+  "archiveEntries": 0,
+  "previousFailure": {
+    "run": "documentation-completion-cli-002",
+    "issues": [
+      {
+        "Code": "DOCS_LINK_INVALID",
+        "ArtifactPath": "README.md",
+        "Subject": "namespace-escape"
+      },
+      {
+        "Code": "DOCS_LINK_INVALID",
+        "ArtifactPath": "README.md",
+        "Subject": "namespace-escape"
+      },
+      {
+        "Code": "DOCS_LINK_INVALID",
+        "ArtifactPath": "README.md",
+        "Subject": "namespace-escape"
+      }
+    ],
+    "parseDiagnostics": 0,
+    "expectedAndActualSvgPaths": 221,
+    "initialHiddenFindingRun": "documentation-completion-cli-001",
+    "allLogsRetained": true
+  },
+  "correction": {
+    "beforeReadmeSha256": "63c2001e58a0ca58aaaa70489dd9b10e1de0694f800b139e08eb22fbebc9315f",
+    "afterReadmeSha256": "9ede705ed26e8444e6d3458ad3f844f143b258772e86f88cb53ae2c86b94a492",
+    "scope": "Three repository-only progress links became explicit code references outside the portable namespace. Historical data, source pins, validator and SVG bytes were not changed."
+  },
+  "diagnosticMockGate": "remediation/nuke-app/artifacts/tests/20261028T1611467268057-0b328f1027d74b769fb31e541bd54067/tests.trx",
+  "diagnosticNativeGate": "remediation/nuke-app/artifacts/tests/20261028T1613034183210-355982dc51584d368dd50902b2e25a94/tests.trx",
+  "correctedSourceGate": "remediation/nuke-app/artifacts/tests/20261028T1617119739017-42f1f28e674442f59ca9028bccc16f46/tests.trx",
+  "limits": [
+    "Only the named Manifest caller and observed payload are proven; full portable build-source payload remains separate.",
+    "Normal verification only; no HV, Android implementation/device operation, Python, Node, Actions or publication writes.",
+    "Normal full-suite receipt is separate; no acceptance claim from this operational proof."
+  ]
+}

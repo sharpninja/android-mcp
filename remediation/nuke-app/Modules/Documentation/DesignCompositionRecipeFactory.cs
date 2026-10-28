@@ -28,13 +28,14 @@ public sealed class DesignCompositionRecipeFactory(IDocumentationRendererProfile
         {
             Artifact Input(string path)=>inputs.Single(artifact=>artifact.RelativePath==path);
             var profile=Has(DesignStage.Tools)?profiles.Read(Input("toolchain-lock.json"),Input("renderer-lock.json")):null;
+            ModuleValidationResult? moduleResult=null;
             if(Has(DesignStage.ModuleGraph))
             {
                 var inspected=new StrictJsonInspector().Inspect(Input("architecture/module-contract.json").Bytes);
                 if(inspected.CanonicalDiagnostics.Count!=0||inspected.Value is null)
                     throw new ArchitectureAssetException("MODULE_CONTRACT","Module contract failed shared strict JSON admission");
-                var module=modules.Validate(new(JsonNode.Parse(inspected.Value.Value.GetRawText())!.AsObject(),Encoding.UTF8.GetString(Input("architecture/code-diagrams.md").Bytes.Span)));
-                if(module.Issues.Count!=0)throw new ArchitectureAssetException("MODULE_CONTRACT","Selected module graph failed");
+                moduleResult=modules.Validate(new(JsonNode.Parse(inspected.Value.Value.GetRawText())!.AsObject(),Encoding.UTF8.GetString(Input("architecture/code-diagrams.md").Bytes.Span)));
+                if(moduleResult.Issues.Count!=0)throw new ArchitectureAssetException("MODULE_CONTRACT","Selected module graph failed");
             }
             var ui=Has(DesignStage.UiAssets)
                 ?(uiProjector??throw new ArchitectureAssetException("DESIGN_STAGE_PENDING","Bind the existing UI projector for the selected narrow stage"))
@@ -45,10 +46,11 @@ public sealed class DesignCompositionRecipeFactory(IDocumentationRendererProfile
                 ??throw new ArchitectureAssetException("DESIGN_STAGE_SELECTION","Bind the existing architecture subset composer");
             Func<CancellationToken,Task>? admit=Has(DesignStage.Tools)?async token=>{await tools.AcquireAsync(profile!,request.ToolAccess,request.OfflineGradleChecksumProof,token);}:null;
             var prepared=subset.PrepareSubset(selection,inputs,profile,code,Has(DesignStage.Tools)?request.Renderer:null,admit);
-            return new(ui.Select(artifact=>artifact.RelativePath).Concat(prepared.OutputPaths).ToArray(),async token=>
+            var receipts=SelectedPrerequisiteReceipts(selection,moduleResult,null,ui);
+            return new(ui.Select(artifact=>artifact.RelativePath).Concat(prepared.OutputPaths).Concat(receipts.Select(artifact=>artifact.RelativePath)).ToArray(),async token=>
             {
                 token.ThrowIfCancellationRequested();
-                return ui.Concat(await prepared.MaterializeAsync(token)).ToArray();
+                return ui.Concat(await prepared.MaterializeAsync(token)).Concat(receipts).ToArray();
             });
         });
     }
@@ -82,11 +84,12 @@ public sealed class DesignCompositionRecipeFactory(IDocumentationRendererProfile
                 async token=>{await tools.AcquireAsync(profile,request.ToolAccess,request.OfflineGradleChecksumProof,token);});
             if(!complete)
             {
-                // Preserve the existing 250-output full-architecture recipe exactly.
-                return new(model.Ui.Artifacts.Select(a=>a.RelativePath).Concat(prepared.OutputPaths).Append(capturedSources.Receipt.RelativePath).ToArray(),async token=>
+                // Default construction preserves its existing output union.
+                var receipts=SelectedPrerequisiteReceipts(selection,model.Modules,model.Contracts,model.Ui.Artifacts);
+                return new(model.Ui.Artifacts.Select(a=>a.RelativePath).Concat(prepared.OutputPaths).Append(capturedSources.Receipt.RelativePath).Concat(receipts.Select(a=>a.RelativePath)).ToArray(),async token=>
                 {
                     var architecture=await prepared.MaterializeAsync(token);
-                    return model.Ui.Artifacts.Concat(architecture).Append(capturedSources.Receipt).ToArray();
+                    return model.Ui.Artifacts.Concat(architecture).Append(capturedSources.Receipt).Concat(receipts).ToArray();
                 },token=>sourceCollection.VerifyUnchangedAsync(capturedSources,token));
             }
             var architectureReceipt=DocumentationLegacyReceipts.Publication(DesignStage.ArchitectureValidate).Path;
@@ -99,8 +102,7 @@ public sealed class DesignCompositionRecipeFactory(IDocumentationRendererProfile
                 if(prepared.OutputPaths.Any(owned.Contains))
                     throw new ArchitectureAssetException("DESIGN_OUTPUT_COLLISION","Receipt output ownership collides");
             }
-            var prerequisiteReceipts=legacyReceipts is null?Array.Empty<Artifact>():new[]{legacyReceipts.Module(model.Modules),
-                legacyReceipts.Model(model.Contracts),legacyReceipts.Ui(model.Ui.Artifacts.Single(artifact=>artifact.RelativePath=="docs/ui-asset-manifest.json"))};
+            var prerequisiteReceipts=SelectedPrerequisiteReceipts(selection,model.Modules,model.Contracts,model.Ui.Artifacts);
             var exportSupport=ExplicitExport(selection);
             var paths=CompletionPaths(inputs,model.Ui.Artifacts,prepared.OutputPaths,capturedSources.Receipt.RelativePath,selection,exportSupport,additionalReceipts);
             return new(paths,async token=>
@@ -136,6 +138,20 @@ public sealed class DesignCompositionRecipeFactory(IDocumentationRendererProfile
                 return union.Values.ToArray();
             },token=>sourceCollection.VerifyUnchangedAsync(capturedSources,token));
         });
+
+    private IReadOnlyList<Artifact> SelectedPrerequisiteReceipts(DesignStagePlan selection,ModuleValidationResult? module,
+        ModelContractValidationResult? model,IReadOnlyList<Artifact> ui)
+    {
+        if(legacyReceipts is null)return [];
+        var result=new List<Artifact>();
+        if(selection.Stages.Contains(DesignStage.ModuleGraph))
+            result.Add(legacyReceipts.Module(module??throw new ArchitectureAssetException("LEGACY_RECEIPT_PENDING","Selected module authority is absent")));
+        if(selection.Stages.Contains(DesignStage.ModelContracts))
+            result.Add(legacyReceipts.Model(model??throw new ArchitectureAssetException("LEGACY_RECEIPT_PENDING","Selected model authority is absent")));
+        if(selection.Stages.Contains(DesignStage.UiAssets))
+            result.Add(legacyReceipts.Ui(ui.Single(artifact=>artifact.RelativePath=="docs/ui-asset-manifest.json")));
+        return result;
+    }
 
     private bool ExplicitExport(DesignStagePlan selection)
     {

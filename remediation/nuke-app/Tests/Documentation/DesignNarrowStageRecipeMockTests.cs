@@ -15,17 +15,26 @@ public sealed class DesignNarrowRecipeEnvironment
     public FullArchitectureRecipeEnvironment Original {get;}=new("FULL");
     public ArchitectureSubsetEnvironment Subset {get;}
     public IReadOnlyList<Artifact> Inputs {get;}
-    public IReadOnlyList<Artifact> Ui=>Has(DesignStage.UiAssets)?Original.Model.Ui.Artifacts:[];
+    public bool LegacyReceiptsEnabled {get;}
+    public DocumentationProjection UiProjection {get;}
+    public IReadOnlyList<Artifact> Ui=>Has(DesignStage.UiAssets)?UiProjection.Artifacts:[];
     public IReadOnlyList<Artifact> Code=>Has(DesignStage.CodeExtract)?Original.Architecture.Code:[];
-    public IReadOnlyList<Artifact> Expected=>Ui.Concat(Subset.ExpectedPublic).ToArray();
+    public IReadOnlyList<Artifact> ExpectedReceipts=>LegacyReceiptsEnabled?StandaloneNarrowReceiptCases.ExpectedReceipts(this):[];
+    public IReadOnlyList<Artifact> Expected=>Ui.Concat(Subset.ExpectedPublic).Concat(ExpectedReceipts).ToArray();
     public DesignArchitectureRequest Request {get;}
     public DesignStagePlan Selection=>Case.Source.Selection;
     public List<string> Trace {get;}=[];
     public CancellationTokenSource Cancellation {get;}=new();
     public bool Has(DesignStage stage)=>Selection.Stages.Contains(stage);
-    public DesignNarrowRecipeEnvironment(DesignNarrowRecipeCase test)
+    public DesignNarrowRecipeEnvironment(DesignNarrowRecipeCase test,bool legacyReceipts=false)
     {
-        Case=test;Subset=new(new(test.Id,Selection.Aliases.ToArray()));
+        Case=test;LegacyReceiptsEnabled=legacyReceipts;Subset=new(new(test.Id,Selection.Aliases.ToArray()));
+        UiProjection=Original.Model.Ui;
+        if(legacyReceipts&&Has(DesignStage.UiAssets))
+        {
+            var genuine=LegacyReceiptCases.NativeUiInput();
+            UiProjection=UiProjection with{Artifacts=UiProjection.Artifacts.Select(artifact=>artifact.RelativePath==genuine.RelativePath?genuine:artifact).ToArray()};
+        }
         Inputs=test.Source.Reject||Has(DesignStage.ModelContracts)?[]:
             DesignStageSourceCases.Expected(test.Source).Select(descriptor=>Original.Inputs.Single(input=>input.RelativePath==descriptor.Source.RelativePath)).ToArray();
         Request=Original.Request with{Renderer=Has(DesignStage.Tools)?Original.Request.Renderer:null!};
@@ -45,7 +54,7 @@ public sealed class RecordingNarrowStageServices(DesignNarrowRecipeEnvironment e
         return e.Original.Model.Modules with{Issues=e.Case.Failure=="module"?[new("MODULE_CYCLE","architecture/module-contract.json","fixture")]:[]};
     }
     public DocumentationProjection Project(DocumentationInput input)
-    {e.Trace.Add("ui");Assert.True(e.Has(DesignStage.UiAssets));Assert.Same(e.Input(DocumentationAssetPaths.Blueprint),input.BlueprintMarkdown);Assert.Same(e.Input(DocumentationAssetPaths.Design),input.DesignMarkdown);if(e.Case.Failure=="ui")throw new InvalidDataException("narrow UI fixture");return e.Original.Model.Ui;}
+    {e.Trace.Add("ui");Assert.True(e.Has(DesignStage.UiAssets));Assert.Same(e.Input(DocumentationAssetPaths.Blueprint),input.BlueprintMarkdown);Assert.Same(e.Input(DocumentationAssetPaths.Design),input.DesignMarkdown);if(e.Case.Failure=="ui")throw new InvalidDataException("narrow UI fixture");return e.UiProjection;}
     public IReadOnlyList<Artifact> ExtractCodeViews(ArchitecturePreparationInput input)
     {e.Trace.Add("code");Assert.True(e.Has(DesignStage.CodeExtract));Assert.Same(e.Input("architecture/workspace.dsl"),input.Workspace);Assert.Same(e.Input("architecture/code-diagrams.md"),input.CodeMarkdown);if(e.Case.Failure=="code")throw new ArchitectureAssetException("CODE_BLOCK","narrow fixture");return e.Code;}
     public ArtifactGenerationPreparation PrepareSubset(DesignStagePlan selection,IReadOnlyList<Artifact> inputs,DocumentationRendererProfile? profile,IReadOnlyList<Artifact> code,ArchitectureRendererContext? context,Func<CancellationToken,Task>? admit)
@@ -119,8 +128,8 @@ public sealed class ScriptedNarrowStageRecipeFactory(DesignNarrowRecipeEnvironme
             Func<CancellationToken,Task>? tools=e.Has(DesignStage.Tools)?async token=>{await s.AcquireAsync(profile!,request.ToolAccess,request.OfflineGradleChecksumProof,mutation=="token"?CancellationToken.None:token);}:null;
             if(mutation=="early-tools")tools!(e.Cancellation.Token).GetAwaiter().GetResult();
             var subset=s.PrepareSubset(selection,inputs,profile,code,e.Has(DesignStage.Tools)?request.Renderer:null,tools);
-            return new(ui.Select(a=>a.RelativePath).Concat(subset.OutputPaths).ToArray(),async token=>
-            {if(mutation!="cancel")token.ThrowIfCancellationRequested();var output=ui.Concat(await subset.MaterializeAsync(token)).ToArray();return mutation=="output"?output.Skip(1).ToArray():output;});
+            return new(ui.Select(a=>a.RelativePath).Concat(subset.OutputPaths).Concat(e.ExpectedReceipts.Select(a=>a.RelativePath)).ToArray(),async token=>
+            {if(mutation!="cancel")token.ThrowIfCancellationRequested();var output=ui.Concat(await subset.MaterializeAsync(token)).Concat(e.ExpectedReceipts).ToArray();return mutation=="output"?output.Skip(1).ToArray():output;});
         });
     }
 }

@@ -111,6 +111,6 @@ public sealed partial class Build
         });
         var result=await Runtime(output,finalStore).ExecuteAsync(generation,recipe);
         Console.WriteLine(JsonSerializer.Serialize(new{result.GenerationId,selection.Aliases,Stages=selection.Stages.Select(stage=>stage.ToString()),InputCount=result.Inputs.Count,OutputCount=result.Outputs.Count,result.Manifest,OutputRoot=output,
-            Scope="Native Core alias union with bound validation and documentation-completion receipts; standalone module/model/UI receipt aliases and complete portable build-source payload remain open"}));
+            Scope="Native Core alias union with bound selected validation and documentation-completion receipts; complete portable build-source payload remains open"}));
     }
 }
