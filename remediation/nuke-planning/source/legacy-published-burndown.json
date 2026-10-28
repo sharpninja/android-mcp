@@ -1,23 +1,23 @@
 {
-  "at": "2026-10-28T13:31:07",
+  "at": "2026-10-28T14:46:49",
   "projection_only": true,
   "authoritative_inventory": {
     "path": "remediation/nuke-planning/source/legacy-port-disposition-inventory.json",
-    "sha256": "40e5e43a01a49a94f67c71a3d0f39c01050ff32102a3f058ab2fb55501850bab"
+    "sha256": "569e75df96291444688c160262d482dae24763a6e2a5f8aff65ac5e60ef12ecf"
   },
   "scope": "Published198only. Additional1266localhistoricalpaths are retained in the sole union and are not inflated into independent published port tasks.",
   "totals": {
     "published_paths": 198,
     "canonical_responsibility_groups": 134,
-    "normally_verified_files": 22,
-    "partially_verified_files": 16,
+    "normally_verified_files": 23,
+    "partially_verified_files": 15,
     "files_without_normal_method_proof": 160,
     "normal_method_bindings_by_file": 202,
     "unique_method_bindings_by_group": 145,
     "published_execution_retirements": 0,
-    "pr_eligible_paths": 22,
-    "normally_closed_groups": 12,
-    "open_canonical_groups": 122,
+    "pr_eligible_paths": 23,
+    "normally_closed_groups": 13,
+    "open_canonical_groups": 121,
     "safe_to_delete": 0,
     "hv_accepted": 0
   },
@@ -43,12 +43,12 @@
       ],
       "published_paths": 10,
       "canonical_responsibility_groups": 10,
-      "normal_file_proofs": 0,
+      "normal_file_proofs": 1,
       "normal_method_bindings_by_file": 9,
-      "normally_closed_groups": 0,
-      "open_canonical_groups": 10,
+      "normally_closed_groups": 1,
+      "open_canonical_groups": 9,
       "published_execution_retirements": 0,
-      "pr_eligible_test_or_file_paths": 0
+      "pr_eligible_test_or_file_paths": 1
     },
     {
       "category": "Publish",
@@ -2454,7 +2454,9 @@
       "services": [
         "ModuleGraphValidator"
       ],
-      "normally_verified_file_paths": [],
+      "normally_verified_file_paths": [
+        "remediation/test_design_module_graph.py"
+      ],
       "normal_method_bindings": [
         {
           "method": "test_domain_port_invariant_rejects_platform_interface",
@@ -2497,8 +2499,10 @@
           ]
         }
       ],
-      "normally_closed_all_published_paths": false,
-      "remaining_caller_and_profile_duties": []
+      "normally_closed_all_published_paths": true,
+      "remaining_caller_and_profile_duties": [
+        "Only this exact original four-method test-file execution is normally verified. Generic validator CLI/package receipt compatibility, full documentation tooling, other historical versions, corpus claims and HV remain separate."
+      ]
     },
     {
       "key": "Documentation|Design|09e648d07d127ba5d58aabb0c108b80bcb24db2c46ba74218de7dfce46865d02",
@@ -15533,8 +15537,7 @@
       "owner": "Sources",
       "category": "Sources",
       "operations": [
-        "Extract",
-        "pending-explicit-registry-binding"
+        "Extract"
       ],
       "canonical_responsibility_key": "Sources|Sources|7e5a7af183bbe5ea915c77fdf9d87ad8658f5d69bf6bdaff7bd64b77087dd6d7",
       "primary_code_path": "remediation/catalog/tests/test_permission_reference.py",
@@ -23100,7 +23103,7 @@
       "owner": "Documentation",
       "category": "Design",
       "operations": [
-        "pending-explicit-registry-binding"
+        "Architecture"
       ],
       "canonical_responsibility_key": "Documentation|Design|09903f374e64cfe7d99318b9765eb969c2f6a685075cebe11f85567b3c7541da",
       "primary_code_path": "remediation/test_design_module_graph.py",
@@ -23108,8 +23111,10 @@
       "services": [
         "ModuleGraphValidator"
       ],
-      "additional_responsibilities": [],
-      "normal_file_verified": false,
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
+      "normal_file_verified": true,
       "normal_verified_methods": [
         {
           "method": "test_reproduces_cyclic_old_crosswalk",
@@ -23180,7 +23185,7 @@
           "scope": "Owner-explicit same-original method fixture claim; caller/helper/file closure remains separate."
         }
       ],
-      "decommissionable_from_pr": false,
+      "decommissionable_from_pr": true,
       "execution_retired": false,
       "retirement_decision": null,
       "original_retained_verified": true,
@@ -23211,16 +23216,13 @@
           "indent": 1
         }
       ],
-      "pending_function_anchors": [
-        {
-          "name": "run_model",
-          "line": 6,
-          "indent": 1
-        }
+      "pending_function_anchors": [],
+      "pending_owner_method_list": null,
+      "remaining": [
+        "Only this exact original four-method test-file execution is normally verified. Generic validator CLI/package receipt compatibility, full documentation tooling, other historical versions, corpus claims and HV remain separate."
       ],
-      "pending_owner_method_list": "<module-body-and-required-callers>",
-      "remaining": [],
       "bounded_service_test_evidence": [
+        "AndroidMcp.BuildTool.Tests.Documentation.ModuleGraphRealTests and CurrentLayoutModelValidationRealTests",
         "remediation/nuke-app/Tests/Documentation/ModuleGraphRealTests.cs"
       ],
       "anchor_limit": "Lexical source-text anchors, not Python execution/AST or automatic proof each nested helper is an independent required feature. Same bytes share one implementation authority, but profile/caller obligations are retained.",
@@ -28379,52 +28381,2287 @@
   ],
   "critical_remaining": [
     {
-      "owner": "Sources/Root/Catalog",
-      "functions": [
-        "SourcesExtractService.ExtractAsync",
-        "SourceProducerIdentityBuilder.Create",
-        "Sources/Extract typed CLI",
-        "Catalog generated-index intake"
+      "derived_from_inventory": true,
+      "owner": "Acquisition",
+      "category": "Sources",
+      "canonical_responsibility_key": "Acquisition|Sources|1391e23478beb75566be938d06ab567322970cf2767127bbb698a60e2a0383d7",
+      "published_paths": [
+        "rehydration/producers/release-011/tests/test_sdk_zip_metadata.py",
+        "remediation/catalog/tests/test_sdk_zip_metadata.py"
       ],
-      "remaining": "Service writer16, actual cache roundtrip4 and identity12 native cases proven. One actual offline SDK pipeline and Catalog continuation now pass85gate; authoritative Catalog milestone catalog-sources-cli-milestone-007.json pins exact child evidence. Full original-function/profile/corpus caller equivalence remains per-entry pending and is not inferred from this fixture."
+      "services": [
+        "Modules/Sources/Acquisition/MetadataArchiveReader.cs:Read",
+        "Modules/Sources/Acquisition/SourceArchiveAcquirer.cs:HttpRangeSource"
+      ],
+      "remaining": [
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Native deterministic ZIP fixture asserts selected member bytes, untouched android.jar payload, complete entry inventory and total reads under10000.",
+        "Original source.properties API37.2 text and XML version3 literal fixture is not copied verbatim; semantic transport proof is present, exact literal fixture parity remains distinct."
+      ]
     },
     {
-      "owner": "Sources/Acquisition",
-      "functions": [
-        "SourcesExtractService.ReadPinnedJson"
+      "derived_from_inventory": true,
+      "owner": "Acquisition",
+      "category": "Sources",
+      "canonical_responsibility_key": "Acquisition|Sources|17a33b47d8c95b25cfd60c543d928885c805fe6baf842fe9537f95d77f1ea8f7",
+      "published_paths": [
+        "rehydration/producers/release-011/tooling/fetch_snapshot.py",
+        "remediation/catalog/tooling/fetch_snapshot.py"
       ],
-      "remaining": "Delegate bytes to proved Core.IPinnedArtifactReader while preserving Source domain media/JSON/schema/errorcodes and45reader regressions."
+      "services": [
+        "Acquisition helper-owned single SourceAcquirer with shared transport/artifact store"
+      ],
+      "remaining": [
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
     },
     {
+      "derived_from_inventory": true,
+      "owner": "Acquisition",
+      "category": "Sources",
+      "canonical_responsibility_key": "Acquisition|Sources|2348c8fb1bfcd9b99acfa62432c4a6f00e1ee3da12c613bdaf1bd926f0e157a9",
+      "published_paths": [
+        "rehydration/producers/release-011/tooling/sdk_zip_metadata.py",
+        "remediation/catalog/tooling/sdk_zip_metadata.py"
+      ],
+      "services": [
+        "Acquisition helper-owned MetadataArchiveReader and shared byte transport"
+      ],
+      "remaining": [
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Acquisition",
+      "category": "Sources",
+      "canonical_responsibility_key": "Acquisition|Sources|4b008c2d46b2f5d26e95812cac5a0bd6f5ea56260388e3cd5276d813098e1e81",
+      "published_paths": [
+        "rehydration/producers/release-011/tests/test_bundled_http_snapshot.py",
+        "remediation/catalog/tests/test_bundled_http_snapshot.py"
+      ],
+      "services": [
+        "Core/ArtifactPaths.cs:Segments",
+        "Modules/Sources/Acquisition/SourceAcquirer.cs:AcquireAsync/Verify",
+        "Modules/Sources/Acquisition/SourceBatch.cs:RunAsync"
+      ],
+      "remaining": [
+        "Exact original HTTP bytes+fixed SHA256/Git blob, no fallback, changed retained bytes and escaping bundled-path assertions use the SAME native/mock harness.",
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "No complete original caller/profile equivalence or hostile acceptance claim.",
+        "SourceBatch64mock then32real passed; exact original7fixture14mock passed, same7real bindings copied and awaiting root gate."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Acquisition",
+      "category": "Sources",
+      "canonical_responsibility_key": "Acquisition|Sources|6b84caecf36b3dd46d646d8c72d4b7fbe5131d9d61e09f8216c8378b5cc06442",
+      "published_paths": [
+        "remediation/catalog/tooling/restore_snapshot.py"
+      ],
+      "services": [
+        "Acquisition helper-owned single SourceAcquirer with shared transport/artifact store"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Acquisition",
+      "category": "Sources",
+      "canonical_responsibility_key": "Acquisition|Sources|72b6697f69924a2077b2b24c322ede08cdfce7450a6ddd2f785fe2fc8bc14835",
+      "published_paths": [
+        "rehydration/producers/release-011/tooling/restore_snapshot.py"
+      ],
+      "services": [
+        "Acquisition helper-owned single SourceAcquirer with shared transport/artifact store"
+      ],
+      "remaining": [
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Acquisition",
+      "category": "Sources",
+      "canonical_responsibility_key": "Acquisition|Sources|c065ca471f9b0ce23dfd5f562fad38de770cdaddd6d3108623c9a1c791c2ccd2",
+      "published_paths": [
+        "rehydration/producers/release-011/tests/test_restore_snapshot.py",
+        "remediation/catalog/tests/test_restore_snapshot.py"
+      ],
+      "services": [
+        "Modules/Sources/Acquisition/SourceAcquirer.cs:AcquireAsync",
+        "Modules/Sources/Acquisition/SourceArchiveAcquirer.cs:ReadMemberAsync"
+      ],
+      "remaining": [
+        "Current full-ZIP native case proves archive download/hash/member then target resume, not exact preexisting cached archive tamper fixture from original.",
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Legacy restore.main default dry-run is caller/root dispatch behavior; Publication pure plan has no effects but CLI equivalence requires composition proof."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Acquisition",
+      "category": "Sources",
+      "canonical_responsibility_key": "Acquisition|Sources|fceef48aa6acbad07d5ab75e9aefa4e270c33f7ccca8bc1fb8a065144794f98d",
+      "published_paths": [
+        "rehydration/producers/release-011/tooling/cache_fingerprint.py",
+        "remediation/catalog/tooling/cache_fingerprint.py"
+      ],
+      "services": [
+        "Acquisition helper-owned SourceCache; new C# producer/runtime/profile pins; shared ContentHash"
+      ],
+      "remaining": [
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|0166a3ffc33a7a806f8610b4d481370a51152f90472555a25c145805383e3a92",
+      "published_paths": [
+        "rehydration/producers/release-011/tooling/export_permissions.py",
+        "remediation/catalog/tooling/export_permissions.py"
+      ],
+      "services": [
+        "Catalog-owned planned PermissionExporter"
+      ],
+      "remaining": [
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|08e88e08a55ddb44a7a61f9992ad078a189ce1d00763af4f4ff8ad652f9fbd83",
+      "published_paths": [
+        "rehydration/producers/release-011/tests/test_unnormalized_source_retention.py"
+      ],
+      "services": [
+        "Catalog issues/parse_reports import pending",
+        "HidlSourceExtractor",
+        "Source raw evidence operation boundary pending"
+      ],
+      "remaining": [
+        "Current body requires declarations>=2, normalizer_complete=false, compiler_validation=false, wire_resolution=unknown, Android availability=unknown, lossless UTF8/base64. Frozen body separately pins declarations=3 and raw_schema facts. Preserve both profile obligations; no inferred equivalence.",
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|0be3313508241b304ea14e1a32d9a935091970dd8c660a1f13a9d0fa91418915",
+      "published_paths": [
+        "rehydration/producers/release-011/tests/test_device_view_storage.py",
+        "remediation/catalog/tests/test_device_view_storage.py"
+      ],
+      "services": [
+        "CatalogBuild/sealed registry publication integration pending",
+        "CatalogDatabase",
+        "CatalogReference",
+        "DeviceResolver",
+        "DeviceViewStore pending mock-first native bindings",
+        "Modules/Catalog/CatalogDatabase.cs",
+        "Modules/Catalog/DeviceResolver.cs",
+        "Modules/Catalog/DeviceViewStore.cs",
+        "PolicyReference; route/view composition pending",
+        "scoped CatalogProjection/EffectiveInventory/DispatchManifest pending"
+      ],
+      "remaining": [
+        "current profile partially native-bound; see native-parity-supplement.json for bounded receipts",
+        "Current-profile offline storage proof; frozen-release profile equivalence and end-to-end Catalog/Build composition remain pending.",
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "pending exact method/profile assertion binding; current bounded native services do not prove this complete method",
+        "release-011 exact profile parity pending; no inference from basename or equal SHA256"
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|11ad7da214c182985b3903846d56df0ce2b012e3da7854454570077f040ee0e7",
+      "published_paths": [
+        "remediation/catalog/tooling/source_metadata_store.py"
+      ],
+      "services": [
+        "Catalog-owned planned permission/metadata/proof validators and stores; consumes sole Source fact producer"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|1bcf158c3fa0956e3a9eb08aa219033d4115ae734daf92910f3196d7f76ccc35",
+      "published_paths": [
+        "rehydration/producers/release-011/tests/test_round9_review.py",
+        "remediation/catalog/tests/test_round9_review.py"
+      ],
+      "services": [
+        "CatalogBuild/sealed registry publication integration pending",
+        "CatalogDatabase",
+        "CatalogReference",
+        "DeviceResolver",
+        "DeviceViewStore pending mock-first native bindings",
+        "PolicyReference; route/view composition pending",
+        "scoped CatalogProjection/EffectiveInventory/DispatchManifest pending"
+      ],
+      "remaining": [
+        "current profile partially native-bound; see native-parity-supplement.json for bounded receipts",
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "No coverage inferred from file names, method counts or preserved hashes.",
+        "pending exact method/profile assertion binding; current bounded native services do not prove this complete method",
+        "release-011 exact profile parity pending; no inference from basename or equal SHA256"
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|25e615adadb6ee953ce17b1c4ec8db71133777fbf288b2506a937cd9192e980d",
+      "published_paths": [
+        "rehydration/producers/release-011/tests/test_round3.py",
+        "remediation/catalog/tests/test_round3.py"
+      ],
+      "services": [
+        "CatalogBuild/sealed registry publication integration pending",
+        "CatalogDatabase",
+        "CatalogReference",
+        "DeviceResolver",
+        "DeviceViewStore pending mock-first native bindings",
+        "PolicyReference; route/view composition pending",
+        "remediation/nuke-app/Modules/Catalog/CatalogValidator.cs",
+        "scoped CatalogProjection/EffectiveInventory/DispatchManifest pending"
+      ],
+      "remaining": [
+        "current profile partially native-bound; see native-parity-supplement.json for bounded receipts",
+        "Exact owner assertion-method closure only. Current/historical caller/profile and fullfile proof remain separate.",
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "No coverage inferred from file names, method counts or preserved hashes.",
+        "pending exact method/profile assertion binding; current bounded native services do not prove this complete method",
+        "release-011 exact profile parity pending; no inference from basename or equal SHA256",
+        "Whole-path registered CLI activation, positive matched AIDL consumer, all unlisted report/error/count/omission branches, historical/profile-specific callers. Exact list in validate-catalog-operation-proposal.md; no full function/module/corpus closure inferred."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|2b28b2567020a46dfeae40996f15c1bb41418fae6a50f77bfe82d2fe0d6e4b8a",
+      "published_paths": [
+        "remediation/catalog/tests/test_source_metadata_contract.py"
+      ],
+      "services": [
+        "remediation/nuke-app/Modules/Catalog/CatalogBuild.cs",
+        "remediation/nuke-app/Modules/Catalog/CatalogPipelineWorkflowOperation.cs",
+        "remediation/nuke-app/Modules/Catalog/CatalogSourceMetadata.cs",
+        "remediation/nuke-app/Modules/Catalog/MetadataCatalog.cs"
+      ],
+      "remaining": [
+        "Exact owner assertion-method closure only. Current/historical caller/profile and fullfile proof remain separate.",
+        "Sources owns pure fact producers separately. Catalog has no SourceMetadataReference implementation yet; do not infer these17 methods from producer or canonicalizer counts.",
+        "This supplement closes only the listed assertion scopes. Existing group proofs remain separate; whole metadata/legacy build caller coverage, corpus parity and HV acceptance are not inferred. Optional factory injection absence guards and unlisted evidence-join permutations are not claimed by these original cases."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|2ba39bbd83c4ae3b647b97d064f7b1b4eb3725d4ab0460bec98969302eeca055",
+      "published_paths": [
+        "rehydration/producers/release-011/tests/test_source_integration.py",
+        "remediation/catalog/tests/test_source_integration.py"
+      ],
+      "services": [
+        "Acquisition.SourceCache",
+        "AidlSourceExtractor",
+        "Catalog end-to-end build/export pending",
+        "Java.JavaSourceExtractor",
+        "Modules/Catalog/CatalogBuild.cs",
+        "SdkApiIndexExtractor"
+      ],
+      "remaining": [
+        "Four build callers assert schema1.1.0 export, structured AIDL wire tags unknown,0semantic gap,5sources, distinct Java/JVM evidence with sharedpermission and exact key, corrupt cache blocks output, malformed AIDL retainedraw+issue. Producer tests alone do not establish side effects.",
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "The historical cached-Java setup uses approved verified-unused synthetic cache bytes and raw native re-extraction. Historical cache-consumption/byte parity and an actual Java-selected registered CLI case remain pending. No complete migration or HV acceptance follows from four assertion scenarios."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|2cdf196b8e31b0a9b89b3b8e81339afde699f9c376d8ed85972ebcb4f715cba4",
+      "published_paths": [
+        "rehydration/producers/release-011/tests/test_round9.py",
+        "remediation/catalog/tests/test_round9.py"
+      ],
+      "services": [
+        "CatalogBuild/sealed registry publication integration pending",
+        "CatalogDatabase",
+        "CatalogReference",
+        "DeviceResolver",
+        "DeviceViewStore pending mock-first native bindings",
+        "PolicyReference; route/view composition pending",
+        "scoped CatalogProjection/EffectiveInventory/DispatchManifest pending"
+      ],
+      "remaining": [
+        "current profile partially native-bound; see native-parity-supplement.json for bounded receipts",
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "No coverage inferred from file names, method counts or preserved hashes.",
+        "pending exact method/profile assertion binding; current bounded native services do not prove this complete method",
+        "release-011 exact profile parity pending; no inference from basename or equal SHA256"
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|2e1c5f56d6d03011c89b074d7fda663babd410fcb1b0bf4e7b039939a7e428be",
+      "published_paths": [
+        "rehydration/producers/release-011/tests/test_postfreeze10.py",
+        "remediation/catalog/tests/test_postfreeze10.py"
+      ],
+      "services": [
+        "CatalogBuild/sealed registry publication integration pending",
+        "CatalogDatabase",
+        "CatalogReference",
+        "DeviceResolver",
+        "DeviceViewStore pending mock-first native bindings",
+        "PolicyReference; route/view composition pending",
+        "scoped CatalogProjection/EffectiveInventory/DispatchManifest pending"
+      ],
+      "remaining": [
+        "current profile partially native-bound; see native-parity-supplement.json for bounded receipts",
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "No coverage inferred from file names, method counts or preserved hashes.",
+        "pending exact method/profile assertion binding; current bounded native services do not prove this complete method",
+        "release-011 exact profile parity pending; no inference from basename or equal SHA256"
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|33e853b41dbf6fae70f90fb3ff699eab3110734375f2efa99dfa6a71aba387db",
+      "published_paths": [
+        "rehydration/producers/release-011/tests/test_postfreeze11.py",
+        "remediation/catalog/tests/test_postfreeze11.py"
+      ],
+      "services": [
+        "CatalogBuild/sealed registry publication integration pending",
+        "CatalogDatabase",
+        "CatalogReference",
+        "DeviceResolver",
+        "DeviceViewStore pending mock-first native bindings",
+        "PolicyReference; route/view composition pending",
+        "scoped CatalogProjection/EffectiveInventory/DispatchManifest pending"
+      ],
+      "remaining": [
+        "current profile partially native-bound; see native-parity-supplement.json for bounded receipts",
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "No coverage inferred from file names, method counts or preserved hashes.",
+        "pending exact method/profile assertion binding; current bounded native services do not prove this complete method",
+        "release-011 exact profile parity pending; no inference from basename or equal SHA256"
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|34aa4c6f90d2bfb99c29bc46a84b36eb2e377fc5cd226baef16ec2f3b29a25ee",
+      "published_paths": [
+        "remediation/catalog/tests/test_source_metadata_crud.py"
+      ],
+      "services": [
+        "Core/CanonicalJson.cs",
+        "Modules/Catalog/CatalogDatabase.cs",
+        "Modules/Catalog/MetadataCatalog.cs",
+        "remediation/nuke-app/Modules/Catalog/CatalogBuild.cs",
+        "remediation/nuke-app/Modules/Catalog/CatalogPipelineWorkflowOperation.cs",
+        "remediation/nuke-app/Modules/Catalog/CatalogSourceMetadata.cs",
+        "remediation/nuke-app/Modules/Catalog/MetadataCatalog.cs"
+      ],
+      "remaining": [
+        "Exact owner assertion-method closure only. Current/historical caller/profile and fullfile proof remain separate.",
+        "Full group semantic validation, callback descriptors and trusted pins, source attachment, public representation and OpenAPI bindings remain explicit pending.",
+        "Module-body history read API and additional descriptor/group/pinned reference guards are a separate approved mock-first increment. Full producer/caller completeness and HV acceptance are not implied by original test assertion closure.",
+        "This supplement closes only the listed assertion scopes. Existing group proofs remain separate; whole metadata/legacy build caller coverage, corpus parity and HV acceptance are not inferred. Optional factory injection absence guards and unlisted evidence-join permutations are not claimed by these original cases."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|35a2e0c775920224db2c75d2713ff4264ff1f4f99186867c406f771d80e93d35",
+      "published_paths": [
+        "remediation/catalog/tooling/build_catalog.py"
+      ],
+      "services": [
+        "Catalog-owned planned CatalogBuild pipeline consumes source services"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|367176a7f938cf4678159d66a1ede0d3caf483bf27f91e1e5c030a69f7376543",
+      "published_paths": [
+        "rehydration/producers/release-011/tests/test_round5.py",
+        "remediation/catalog/tests/test_round5.py"
+      ],
+      "services": [
+        "CatalogBuild/sealed registry publication integration pending",
+        "CatalogDatabase",
+        "CatalogReference",
+        "DeviceResolver",
+        "DeviceViewStore pending mock-first native bindings",
+        "PolicyReference; route/view composition pending",
+        "scoped CatalogProjection/EffectiveInventory/DispatchManifest pending"
+      ],
+      "remaining": [
+        "current profile partially native-bound; see native-parity-supplement.json for bounded receipts",
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "No coverage inferred from file names, method counts or preserved hashes.",
+        "pending exact method/profile assertion binding; current bounded native services do not prove this complete method",
+        "release-011 exact profile parity pending; no inference from basename or equal SHA256"
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|3c85a83c1db6fb3a213416ee2776c2996a6f96db10f678d8233ac1fd56ec33d7",
+      "published_paths": [
+        "rehydration/producers/release-011/tooling/contract_reference.py",
+        "remediation/catalog/tooling/contract_reference.py"
+      ],
+      "services": [
+        "Observed Modules/Catalog/CatalogReference.cs; shared canonical/hash services"
+      ],
+      "remaining": [
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|3f7618620e38b72f0937b9b48d1224ba5c96247c6b94a57c0bb8c0890ecf8245",
+      "published_paths": [
+        "rehydration/producers/release-011/tests/test_source_annotation_targets.py",
+        "remediation/catalog/tests/test_source_annotation_targets.py"
+      ],
+      "services": [
+        "Annotation XML target/formal-name linker pending",
+        "Catalog annotation import pending",
+        "Modules/Catalog/CatalogAnnotationImporter.cs",
+        "Modules/Catalog/CatalogBuild.cs",
+        "Modules/Sources/SdkAnnotationArchiveSourceFacts.cs",
+        "Modules/Sources/SourceTypeFacts.cs",
+        "SdkApiIndexExtractor"
+      ],
+      "remaining": [
+        "Actual SQL assertions require a shadowed String formal to remain unmatched and current37.2SDK exact JVM key binding; source cache and parser pin setup are distinct dependencies.",
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Mapped original assertion bodies normal-verified. Authorized native cache regeneration and separate native producer bytes remain distinct from historical byte/profile parity; HV not accepted."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|44657411a0465736f5577a316ab62566d0b5919dcd849d9cabba8179fdd89fb4",
+      "published_paths": [
+        "remediation/catalog/tooling/source_metadata_reference.py"
+      ],
+      "services": [
+        "Catalog-owned planned permission/metadata/proof validators and stores; consumes sole Source fact producer"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|48235332f9fa537e2f1cbdbd57c6c6f0c29b21a18c94d12d0fb8171c0d916f5a",
+      "published_paths": [
+        "remediation/catalog/tooling/device_resolution.py"
+      ],
+      "services": [
+        "Catalog-owned planned resolver/view store/manifest service with compatibility profiles"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|50e4504e81443dacdf605cb850ca7be1f8ff92b7eb1ca54ee369328eb2cec1b5",
+      "published_paths": [
+        "rehydration/producers/release-011/tests/test_device_catalog_pipeline.py",
+        "remediation/catalog/tests/test_device_catalog_pipeline.py"
+      ],
+      "services": [
+        "CatalogBuild/sealed registry publication integration pending",
+        "CatalogDatabase",
+        "CatalogReference",
+        "DeviceResolver",
+        "DeviceViewStore pending mock-first native bindings",
+        "Modules/Catalog/CatalogAliases.cs",
+        "Modules/Catalog/CatalogBuild.cs",
+        "Modules/Catalog/CatalogCanonicalRoute.cs",
+        "Modules/Catalog/CatalogInventory.cs",
+        "Modules/Catalog/CatalogInventoryValidator.cs",
+        "Modules/Catalog/CatalogViewPolicy.cs",
+        "Modules/Catalog/DeviceResolver.cs",
+        "Modules/Catalog/DeviceViewStore.cs",
+        "Modules/Sources/SdkApiIndexExtractor.cs",
+        "PolicyReference; route/view composition pending",
+        "remediation/nuke-app/Modules/Catalog/CatalogAliases.cs",
+        "remediation/nuke-app/Modules/Catalog/CatalogCanonicalRoute.cs",
+        "remediation/nuke-app/Modules/Catalog/CatalogInventoryValidator.cs",
+        "remediation/nuke-app/Modules/Catalog/CatalogViewPolicy.cs",
+        "scoped CatalogProjection/EffectiveInventory/DispatchManifest pending"
+      ],
+      "remaining": [
+        "Actual typed CLI chain requires explicit row normalization and runtime proof",
+        "All historical byte/profile equivalence and complete migration/HV acceptance remain pending",
+        "All seven original assertion scopes normal-verified. Explicit synthetic verified-unused SDK cache differs from historical cache payload carrier; full historical byte/profile parity, known raw route caller, whole validator and typed CLI migration acceptance not inferred.",
+        "current profile partially native-bound; see native-parity-supplement.json for bounded receipts",
+        "Exact owner assertion-method closure only. Current/historical caller/profile and fullfile proof remain separate.",
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Full validate_catalog.run reconciliation/reporting remains pending beyond inventory validator",
+        "Known raw route canonicalization and other original contract-model callers are separate pending scopes",
+        "MCP audit denied and not retried",
+        "pending exact method/profile assertion binding; current bounded native services do not prove this complete method",
+        "release-011 exact profile parity pending; no inference from basename or equal SHA256",
+        "The SDK historical cache fixture is explicitly synthetic verified-unused evidence with native raw re-extraction. It is not decoded, assigned an old producer identity or used as historical byte-parity proof."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|5194078b1dc21a95044e3c82d6d8d77616a39979bdcc1ac94e0db81bf4c59170",
+      "published_paths": [
+        "rehydration/producers/release-011/tooling/build_catalog.py"
+      ],
+      "services": [
+        "Catalog-owned planned CatalogBuild pipeline consumes source services"
+      ],
+      "remaining": [
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|565785beb3fe91e339aa6c3d55c72c18dafc86fb22693ff028ccaf4cf45244b5",
+      "published_paths": [
+        "rehydration/producers/release-011/tests/test_effective_device_inventory.py",
+        "remediation/catalog/tests/test_effective_device_inventory.py"
+      ],
+      "services": [
+        "CatalogBuild/sealed registry publication integration pending",
+        "CatalogDatabase",
+        "CatalogReference",
+        "DeviceResolver",
+        "DeviceViewStore pending mock-first native bindings",
+        "Modules/Catalog/CatalogDatabase.cs",
+        "Modules/Catalog/CatalogInventory.cs",
+        "Modules/Catalog/CatalogViewPolicy.cs",
+        "Modules/Catalog/DeviceResolver.cs",
+        "Modules/Catalog/PolicyReference.cs",
+        "PolicyReference; route/view composition pending",
+        "remediation/nuke-app/Modules/Catalog/CatalogInventory.cs",
+        "remediation/nuke-app/Modules/Catalog/CatalogViewPolicy.cs",
+        "scoped CatalogProjection/EffectiveInventory/DispatchManifest pending"
+      ],
+      "remaining": [
+        "Actual typed CLI chain normalization/wiring/native proof remains pending",
+        "All five original overlay/inventory/dispatch composition methods require native bindings; resolver availability and base policy alone do not establish them.",
+        "All five preserved original method assertion scopes normal-verified; full historical profile equivalence and runtime/host coordinator acceptance not inferred. Seven producer/inventory/alias/export pipeline methods are a separate pending file.",
+        "current profile partially native-bound; see native-parity-supplement.json for bounded receipts",
+        "Exact owner assertion-method closure only. Current/historical caller/profile and fullfile proof remain separate.",
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Full historical profile/byte parity not inferred",
+        "MCP audit remains denied and unretried",
+        "pending exact method/profile assertion binding; current bounded native services do not prove this complete method",
+        "release-011 exact profile parity pending; no inference from basename or equal SHA256"
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|5806c46219d7aa445d0a152ec907204d09ef26b3e5ef169036fe58133a5030c2",
+      "published_paths": [
+        "remediation/catalog/tooling/dispatch_manifest.py"
+      ],
+      "services": [
+        "Catalog-owned planned resolver/view store/manifest service with compatibility profiles"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|67de30565b887bfdbf40ab25a1b9e2118524c5508a99fbdc5b26728ddb6a9373",
+      "published_paths": [
+        "remediation/catalog/tests/test_postfreeze12_wire_evidence.py"
+      ],
+      "services": [
+        "Modules/Catalog/WireProofStore.cs"
+      ],
+      "remaining": [
+        "Both preserved original literal fixture scenarios now have normal native assertions. Additional direct stored-record corruption and complete frozen-profile equivalence remain pending; no runtime wire authority or HV acceptance.",
+        "Exact original fixture-codec/evidence fixture second-method case is now in WireProofCases.cs but not yet native-proved. Direct stored-record corruption extension remains pending."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|77e8320a25fe6408ee7f9cba9c70b2545c0932fae056a7b9830267c2af6cc9a4",
+      "published_paths": [
+        "rehydration/producers/release-011/tests/test_round8.py",
+        "remediation/catalog/tests/test_round8.py"
+      ],
+      "services": [
+        "CatalogBuild/sealed registry publication integration pending",
+        "CatalogDatabase",
+        "CatalogReference",
+        "DeviceResolver",
+        "DeviceViewStore pending mock-first native bindings",
+        "PolicyReference; route/view composition pending",
+        "scoped CatalogProjection/EffectiveInventory/DispatchManifest pending"
+      ],
+      "remaining": [
+        "current profile partially native-bound; see native-parity-supplement.json for bounded receipts",
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "No coverage inferred from file names, method counts or preserved hashes.",
+        "pending exact method/profile assertion binding; current bounded native services do not prove this complete method",
+        "release-011 exact profile parity pending; no inference from basename or equal SHA256"
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|78793812aac2c602f56f46d6596af0a3b91be1746d584b3a45b9b8b37fd4c397",
+      "published_paths": [
+        "rehydration/producers/release-011/tests/test_round7.py",
+        "remediation/catalog/tests/test_round7.py"
+      ],
+      "services": [
+        "CatalogBuild/sealed registry publication integration pending",
+        "CatalogDatabase",
+        "CatalogReference",
+        "DeviceResolver",
+        "DeviceViewStore pending mock-first native bindings",
+        "PolicyReference; route/view composition pending",
+        "scoped CatalogProjection/EffectiveInventory/DispatchManifest pending"
+      ],
+      "remaining": [
+        "current profile partially native-bound; see native-parity-supplement.json for bounded receipts",
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "No coverage inferred from file names, method counts or preserved hashes.",
+        "pending exact method/profile assertion binding; current bounded native services do not prove this complete method",
+        "release-011 exact profile parity pending; no inference from basename or equal SHA256"
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|84963aedb123754dfcadbe1d9a756c6dac3236529b81b7018f259bed2a5a1283",
+      "published_paths": [
+        "rehydration/producers/release-011/tooling/dispatch_manifest.py"
+      ],
+      "services": [
+        "Catalog-owned planned resolver/view store/manifest service with compatibility profiles"
+      ],
+      "remaining": [
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|8b75ee9c4f9308f769ccf3bca5776f66ad5fe7a5c6f9906f7765f855055c866d",
+      "published_paths": [
+        "rehydration/producers/release-011/tests/test_device_resolution.py"
+      ],
+      "services": [
+        "CatalogBuild/sealed registry publication integration pending",
+        "CatalogDatabase",
+        "CatalogReference",
+        "DeviceResolver",
+        "DeviceViewStore pending mock-first native bindings",
+        "PolicyReference; route/view composition pending",
+        "scoped CatalogProjection/EffectiveInventory/DispatchManifest pending"
+      ],
+      "remaining": [
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "pending exact method/profile assertion binding; current bounded native services do not prove this complete method",
+        "release-011 exact profile parity pending; no inference from basename or equal SHA256"
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|8d9708bd98e312de63f97c9a21e9c7345c8af0bd04f55ebb820e5acb762958f7",
+      "published_paths": [
+        "remediation/catalog/tests/test_round10.py"
+      ],
+      "services": [
+        "CatalogBuild/sealed registry publication integration pending",
+        "CatalogDatabase",
+        "CatalogReference",
+        "DeviceResolver",
+        "DeviceViewStore pending mock-first native bindings",
+        "PolicyReference; route/view composition pending",
+        "scoped CatalogProjection/EffectiveInventory/DispatchManifest pending"
+      ],
+      "remaining": [
+        "current profile partially native-bound; see native-parity-supplement.json for bounded receipts",
+        "No coverage inferred from file names, method counts or preserved hashes.",
+        "pending exact method/profile assertion binding; current bounded native services do not prove this complete method"
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|94ffd5c2ca53933b513c5b48f8a84477a5b11161714c6ea2855fa6024529f331",
+      "published_paths": [
+        "rehydration/producers/release-011/tests/test_structured_type_source_scopes.py",
+        "remediation/catalog/tests/test_structured_type_source_scopes.py"
+      ],
+      "services": [
+        "Catalog contract digest pending",
+        "Catalog snapshot-scoped Projection pending",
+        "CatalogBuild/sealed registry publication integration pending",
+        "CatalogDatabase",
+        "CatalogReference",
+        "DeviceResolver",
+        "DeviceViewStore pending mock-first native bindings",
+        "Modules/Catalog/CatalogContracts.cs",
+        "Modules/Catalog/CatalogProjection.cs",
+        "Modules/Sources/SourceTypeFacts.cs",
+        "PolicyReference; route/view composition pending",
+        "scoped CatalogProjection/EffectiveInventory/DispatchManifest pending",
+        "Source structured type facts"
+      ],
+      "remaining": [
+        "current profile partially native-bound; see native-parity-supplement.json for bounded receipts",
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "pending exact method/profile assertion binding; current bounded native services do not prove this complete method",
+        "Projection.project+contract_digest7methods require per-source declared shapes, field order/type, typedef target, enum storage/expression to affect digest while raw header/proof prose do not. Do not merge snapshots or duplicate source lexical rules.",
+        "release-011 exact profile parity pending; no inference from basename or equal SHA256",
+        "This proves the legacy-shaped direct projection fixture assertions, not source extraction or full historical profile equivalence."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|95b7bc59f9528d849030cd56cfd23915433931876b8eb24714307aa756c833e5",
+      "published_paths": [
+        "rehydration/producers/release-011/tests/test_contract_models.py",
+        "remediation/catalog/tests/test_contract_models.py"
+      ],
+      "services": [
+        "CatalogBuild/sealed registry publication integration pending",
+        "CatalogDatabase",
+        "CatalogReference",
+        "DeviceResolver",
+        "DeviceViewStore pending mock-first native bindings",
+        "Modules/Catalog/CatalogAliases.cs",
+        "Modules/Catalog/CatalogDatabase.cs",
+        "Modules/Catalog/CatalogReference.cs",
+        "Modules/Catalog/PolicyReference.cs",
+        "PolicyReference; route/view composition pending",
+        "scoped CatalogProjection/EffectiveInventory/DispatchManifest pending"
+      ],
+      "remaining": [
+        "current profile partially native-bound; see native-parity-supplement.json for bounded receipts",
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Generated aliases, route/raw policy composition and complete assertion-by-assertion method allocation remain pending.",
+        "Offline default-deny aliases are verified in bounded build fixtures. View-selected aliases, route/raw policy composition and full original method/profile equivalence remain pending.",
+        "pending exact method/profile assertion binding; current bounded native services do not prove this complete method",
+        "release-011 exact profile parity pending; no inference from basename or equal SHA256"
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|95e6957ad9e4d951588eed55b43393a6ebb5cdaf173993157e83df6d57925765",
+      "published_paths": [
+        "rehydration/producers/release-011/tests/test_round2.py",
+        "remediation/catalog/tests/test_round2.py"
+      ],
+      "services": [
+        "CatalogBuild/sealed registry publication integration pending",
+        "CatalogDatabase",
+        "CatalogReference",
+        "DeviceResolver",
+        "DeviceViewStore pending mock-first native bindings",
+        "PolicyReference; route/view composition pending",
+        "remediation/nuke-app/Modules/Catalog/CatalogBuild.cs",
+        "remediation/nuke-app/Modules/Catalog/CatalogPipelineWorkflowOperation.cs",
+        "remediation/nuke-app/Modules/Catalog/CatalogSourceMetadata.cs",
+        "remediation/nuke-app/Modules/Catalog/MetadataCatalog.cs",
+        "scoped CatalogProjection/EffectiveInventory/DispatchManifest pending"
+      ],
+      "remaining": [
+        "current profile partially native-bound; see native-parity-supplement.json for bounded receipts",
+        "Exact owner assertion-method closure only. Current/historical caller/profile and fullfile proof remain separate.",
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "No coverage inferred from file names, method counts or preserved hashes.",
+        "pending exact method/profile assertion binding; current bounded native services do not prove this complete method",
+        "release-011 exact profile parity pending; no inference from basename or equal SHA256",
+        "This supplement closes only the listed assertion scopes. Existing group proofs remain separate; whole metadata/legacy build caller coverage, corpus parity and HV acceptance are not inferred. Optional factory injection absence guards and unlisted evidence-join permutations are not claimed by these original cases."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|9c8ed7ab045230ef917d082c851b20fa1f3d465ceb2e1167f9574a4fc361820c",
+      "published_paths": [
+        "remediation/catalog/tests/test_unnormalized_source_retention.py"
+      ],
+      "services": [
+        "Catalog issues/parse_reports import pending",
+        "HidlSourceExtractor",
+        "remediation/nuke-app/Modules/Catalog/CatalogBuild.cs",
+        "Source raw evidence operation boundary pending"
+      ],
+      "remaining": [
+        "Current body requires declarations>=2, normalizer_complete=false, compiler_validation=false, wire_resolution=unknown, Android availability=unknown, lossless UTF8/base64. Frozen body separately pins declarations=3 and raw_schema facts. Preserve both profile obligations; no inferred equivalence.",
+        "Exact owner assertion-method closure only. Current/historical caller/profile and fullfile proof remain separate.",
+        "Malformed annotation archive per-member SQL/raw compatibility, aggregate source metadata callers/CRUD and remaining whole build caller assertions are separate pending scopes. No whole corpus parity or HV acceptance claim."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|9f968f5d88b10641cde92fbef258e51c663546c1e92ce4f41de16216dbdffcef",
+      "published_paths": [
+        "remediation/catalog/tests/test_device_resolution.py"
+      ],
+      "services": [
+        "CatalogBuild/sealed registry publication integration pending",
+        "CatalogDatabase",
+        "CatalogReference",
+        "DeviceResolver",
+        "DeviceViewStore pending mock-first native bindings",
+        "Modules/Catalog/CatalogLifecycle.cs",
+        "Modules/Catalog/DeviceResolver.cs",
+        "PolicyReference; route/view composition pending",
+        "scoped CatalogProjection/EffectiveInventory/DispatchManifest pending"
+      ],
+      "remaining": [
+        "current profile partially native-bound; see native-parity-supplement.json for bounded receipts",
+        "pending exact method/profile assertion binding; current bounded native services do not prove this complete method",
+        "Pure resolver and storage/lifecycle are native-proved for allocated cases. View-policy composition and complete method/profile equivalence still require explicit bindings."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|a2c3d3d4f1a5222a1281714af2bf99aeed871ad1f8b8b1b533dbd8d90f9b0b6c",
+      "published_paths": [
+        "rehydration/producers/release-011/tooling/policy_reference.py",
+        "remediation/catalog/tooling/policy_reference.py"
+      ],
+      "services": [
+        "Observed Modules/Catalog/PolicyReference.cs"
+      ],
+      "remaining": [
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|a347aa198cc3204f4d6c2c75f396a185f431290bcbe433cd908a06fe41ad0103",
+      "published_paths": [
+        "remediation/catalog/tooling/wire_proof_reference.py"
+      ],
+      "services": [
+        "Catalog-owned planned permission/metadata/proof validators and stores; consumes sole Source fact producer"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|ab95c5d571a9d1149667268037267ec031c09cc31676a272f8d4bb02059fd43b",
+      "published_paths": [
+        "remediation/catalog/tests/test_round12.py"
+      ],
+      "services": [],
+      "remaining": [
+        "No coverage inferred from file names, method counts or preserved hashes."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|ae01c86dc449e37164681b8099bb7e830ca4c882e611ff21c80b70b3bfb9375b",
+      "published_paths": [
+        "rehydration/producers/release-011/tooling/catalog_projection.py",
+        "remediation/catalog/tooling/catalog_projection.py"
+      ],
+      "services": [
+        "Catalog-owned planned inventory projection service"
+      ],
+      "remaining": [
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|c918750834a2b1f60d9d2a853ea8dcdfbb8109d5e2b193aaedf991b69ceb77db",
+      "published_paths": [
+        "rehydration/producers/release-011/tests/test_annotation_jvm_erasure_import.py",
+        "remediation/catalog/tests/test_annotation_jvm_erasure_import.py"
+      ],
+      "services": [
+        "Annotation XML target linker pending",
+        "Catalog annotation evidence import pending",
+        "Modules/Catalog/CatalogAnnotationImporter.cs",
+        "Modules/Catalog/CatalogBuild.cs",
+        "Modules/Sources/SdkAnnotationArchiveSourceFacts.cs",
+        "Modules/Sources/SourceTypeFacts.cs",
+        "SdkApiIndexExtractor"
+      ],
+      "remaining": [
+        "build_catalog.build must bind exact current-SDK erased descriptor only within platform, preserve target_match_kind, reject unknown T, distinguish constructor from same-name method and persist exactly1external permission relation.",
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Mapped original assertion bodies normal-verified. Authorized native cache regeneration and separate native producer bytes remain distinct from historical byte/profile parity; HV not accepted."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|ceb10453ca116f7a4b7dd21def54b438314dd85dacb2a14f8d54c496d1c6a74c",
+      "published_paths": [
+        "rehydration/producers/release-011/tests/test_round11.py"
+      ],
+      "services": [
+        "Catalog contract digest/dispatch generation pending",
+        "Catalog Projection.lifecycle_rule/project/entity pending",
+        "CatalogDatabase/DeviceViewStore",
+        "DeviceResolver",
+        "Source structural header/formal-name facts pending"
+      ],
+      "remaining": [
+        "Actual frozen body calls lifecycle_rule, applicability, contract_digest/generate, build_catalog.build, ViewStore.publish and SQL guards. Preserve exact-minor source point unknowns, inconsistent SDK lifecycle unknowns, nonsemantic lifecycle/proof text, semantic direction/nullability/HIDLoutputs/oneway/supertypes, missing-kind refusal, imported AIDL types and noninvocable fields, foreign inventory rejection, selected contract guards, wire bounds/evidence/uniqueness, same-snapshot java.lang proof, formal shadowing, and malformed-header quarantine. Existing individual native service proofs do not establish these combined original assertions.",
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|d680f33c50a29b063e4e5071545f5ed236806fdb797f905c901af66113e1a979",
+      "published_paths": [
+        "rehydration/producers/release-011/tests/test_versioned_signature_annotations.py",
+        "remediation/catalog/tests/test_versioned_signature_annotations.py"
+      ],
+      "services": [
+        "Annotation XML signature linker pending",
+        "Catalog annotation parse report pending",
+        "Modules/Catalog/CatalogAnnotationImporter.cs",
+        "Modules/Catalog/CatalogBuild.cs",
+        "Modules/Sources/SdkAnnotationArchiveSourceFacts.cs",
+        "Modules/Sources/SourceTypeFacts.cs",
+        "SignatureSourceExtractor"
+      ],
+      "remaining": [
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Seven original methods pin archive mapping counts separate from parse status, same snapshot+version fallback, rejection across revision/platform, index-presence blocking fallback, formal ambiguity, and return conflict. Shared signature parse proof does not establish these caller rules.",
+        "test_archive_resolution_counts_are_distinct_from_parse_status; test_different_platform_is_not_used_as_fallback; test_existing_index_blocks_signature_backfill_for_absent_target; test_same_snapshot_return_type_conflict_stays_unresolved"
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|d8a367efac4145f51c7e05514b4f94abffea6943c77981ce256b40e766b31772",
+      "published_paths": [
+        "remediation/catalog/tests/test_round11.py"
+      ],
+      "services": [
+        "Catalog contract digest/dispatch generation pending",
+        "Catalog Projection.lifecycle_rule/project/entity pending",
+        "CatalogDatabase/DeviceViewStore",
+        "DeviceResolver",
+        "Source structural header/formal-name facts pending"
+      ],
+      "remaining": [
+        "Actual frozen body calls lifecycle_rule, applicability, contract_digest/generate, build_catalog.build, ViewStore.publish and SQL guards. Preserve exact-minor source point unknowns, inconsistent SDK lifecycle unknowns, nonsemantic lifecycle/proof text, semantic direction/nullability/HIDLoutputs/oneway/supertypes, missing-kind refusal, imported AIDL types and noninvocable fields, foreign inventory rejection, selected contract guards, wire bounds/evidence/uniqueness, same-snapshot java.lang proof, formal shadowing, and malformed-header quarantine. Existing individual native service proofs do not establish these combined original assertions.",
+        "No coverage inferred from file names, method counts or preserved hashes."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|dadaac3954f7ee3e9990eea2a044ea16e2c7654ef396bd6947531e623c44105d",
+      "published_paths": [
+        "rehydration/producers/release-011/tooling/device_view_storage.py",
+        "remediation/catalog/tooling/device_view_storage.py"
+      ],
+      "services": [
+        "Catalog-owned planned resolver/view store/manifest service with compatibility profiles"
+      ],
+      "remaining": [
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|e04129213f87be4c19ef30774835f8ff2a07b1ae2bb860bbbcb9ea8c4ef816c4",
+      "published_paths": [
+        "rehydration/producers/release-011/tests/test_remediation.py",
+        "remediation/catalog/tests/test_remediation.py"
+      ],
+      "services": [
+        "CatalogBuild/sealed registry publication integration pending",
+        "CatalogDatabase",
+        "CatalogReference",
+        "DeviceResolver",
+        "DeviceViewStore pending mock-first native bindings",
+        "Modules/Catalog/CatalogDatabase.cs",
+        "PolicyReference; route/view composition pending",
+        "scoped CatalogProjection/EffectiveInventory/DispatchManifest pending"
+      ],
+      "remaining": [
+        "Combined natural-key invariant uncovered and fixed two Root-copy TEXT key gaps. Other original methods require explicit owner allocation; no whole-file parity claim.",
+        "current profile partially native-bound; see native-parity-supplement.json for bounded receipts",
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "pending exact method/profile assertion binding; current bounded native services do not prove this complete method",
+        "release-011 exact profile parity pending; no inference from basename or equal SHA256"
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|e2869d4b2e4c1175eeb490c8792f5656346d0c765b4150660574b940e76ace5c",
+      "published_paths": [
+        "rehydration/producers/release-011/tests/test_round4.py",
+        "remediation/catalog/tests/test_round4.py"
+      ],
+      "services": [
+        "CatalogBuild/sealed registry publication integration pending",
+        "CatalogDatabase",
+        "CatalogReference",
+        "DeviceResolver",
+        "DeviceViewStore pending mock-first native bindings",
+        "PolicyReference; route/view composition pending",
+        "scoped CatalogProjection/EffectiveInventory/DispatchManifest pending"
+      ],
+      "remaining": [
+        "current profile partially native-bound; see native-parity-supplement.json for bounded receipts",
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "No coverage inferred from file names, method counts or preserved hashes.",
+        "pending exact method/profile assertion binding; current bounded native services do not prove this complete method",
+        "release-011 exact profile parity pending; no inference from basename or equal SHA256"
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|e4eff83d352313b155c2b7b572df6f2e4f98f8fb2876e0eeaabb7fa39663de5e",
+      "published_paths": [
+        "rehydration/producers/release-011/tooling/migrate_v3.py",
+        "remediation/catalog/tooling/migrate_v3.py"
+      ],
+      "services": [
+        "Catalog-owned planned copy/verify/retain migration service"
+      ],
+      "remaining": [
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|e9ce2b6dbb35b6e7689c6df830a9af8e82dde1091f9eae67c4e3ff767d8896a0",
+      "published_paths": [
+        "rehydration/producers/release-011/tests/test_build.py",
+        "remediation/catalog/tests/test_build.py"
+      ],
+      "services": [
+        "Build.Catalog.cs",
+        "CatalogBuild/sealed registry publication integration pending",
+        "CatalogDatabase",
+        "CatalogReference",
+        "DeviceResolver",
+        "DeviceViewStore pending mock-first native bindings",
+        "Modules/Catalog/CatalogAliases.cs",
+        "Modules/Catalog/CatalogBuild.cs",
+        "PolicyReference; route/view composition pending",
+        "remediation/nuke-app/Modules/Catalog/CatalogValidator.cs",
+        "scoped CatalogProjection/EffectiveInventory/DispatchManifest pending"
+      ],
+      "remaining": [
+        "current profile partially native-bound; see native-parity-supplement.json for bounded receipts",
+        "Exact owner assertion-method closure only. Current/historical caller/profile and fullfile proof remain separate.",
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Original overlay suppression/restore/history and independent validator nonmutation remain pending. Exact original raw-tampered-file case is now native-verified, independently of the retained declared-SHA mutation case. Cursor4/Build7/CLI7/Source4/cache2/stream4 all pass in full005. No full historical producer or representative SDK scalability claim.",
+        "pending exact method/profile assertion binding; current bounded native services do not prove this complete method",
+        "release-011 exact profile parity pending; no inference from basename or equal SHA256",
+        "Whole-path registered CLI activation, positive matched AIDL consumer, all unlisted report/error/count/omission branches, historical/profile-specific callers. Exact list in validate-catalog-operation-proposal.md; no full function/module/corpus closure inferred."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|e9f56cb3f5f7f984b2eca7eb19557f76c1f73af4df22c4975eb585ce23dcfd3e",
+      "published_paths": [
+        "rehydration/producers/release-011/tests/test_permission_reference_import.py",
+        "remediation/catalog/tests/test_permission_reference_import.py"
+      ],
+      "services": [
+        "Catalog symbol/reference import pending",
+        "IPermissionReferenceSourceFacts"
+      ],
+      "remaining": [
+        "Actual build_catalog.build assertion requires documentation symbol value retained but0manifest permission definitions, raw protection text and0declarations. No catalog import binding exists yet.",
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "No coverage inferred from file names, method counts or preserved hashes."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|ec9b368f68d3fb94f2c71fd9b84b26fa3c6e48c7b05c6c6fd3136f666048e5ce",
+      "published_paths": [
+        "rehydration/producers/release-011/tooling/permission_reader.py",
+        "remediation/catalog/tooling/permission_reader.py"
+      ],
+      "services": [
+        "Catalog-owned planned permission/metadata/proof validators and stores; consumes sole Source fact producer"
+      ],
+      "remaining": [
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|eeab26910bc0068b6b2a9bfe01100ac1f80d0cd286235071c82bcc82e8b36597",
+      "published_paths": [
+        "rehydration/producers/release-011/tests/test_round10.py"
+      ],
+      "services": [
+        "CatalogBuild/sealed registry publication integration pending",
+        "CatalogDatabase",
+        "CatalogReference",
+        "DeviceResolver",
+        "DeviceViewStore pending mock-first native bindings",
+        "PolicyReference; route/view composition pending",
+        "scoped CatalogProjection/EffectiveInventory/DispatchManifest pending"
+      ],
+      "remaining": [
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "pending exact method/profile assertion binding; current bounded native services do not prove this complete method",
+        "release-011 exact profile parity pending; no inference from basename or equal SHA256"
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|f075be7941c7e50fc9a353bbd3dd78d5fe2eecc3f8d3d8de877fb579cec30adb",
+      "published_paths": [
+        "rehydration/producers/release-011/tooling/device_resolution.py"
+      ],
+      "services": [
+        "Catalog-owned planned resolver/view store/manifest service with compatibility profiles"
+      ],
+      "remaining": [
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|f2ed5252f0134c57e2f5d39354c9bad86b440aac1fe5d8c29f34b86e15c88691",
+      "published_paths": [
+        "rehydration/producers/release-011/tests/test_hidl_import.py",
+        "remediation/catalog/tests/test_hidl_import.py"
+      ],
+      "services": [
+        "Catalog build/import composition pending",
+        "HidlSourceExtractor",
+        "remediation/nuke-app/Modules/Catalog/CatalogBuild.cs"
+      ],
+      "remaining": [
+        "Actual build_catalog.build caller checks SQLite schema-gated5declarations, multi-results, unknown permissions/codecs/device applicability, failed applicability publication, and invalid UTF8 raw issue retention. Extractor29native cases alone do not prove these storage/publication assertions.",
+        "Exact owner assertion-method closure only. Current/historical caller/profile and fullfile proof remain separate.",
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Malformed annotation archive per-member SQL/raw compatibility, aggregate source metadata callers/CRUD and remaining whole build caller assertions are separate pending scopes. No whole corpus parity or HV acceptance claim."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|f41b89a59ee27996419ca6f7f7bdcde12a6e1ce98f40defa6a25a3f87d341b05",
+      "published_paths": [
+        "rehydration/producers/release-011/tooling/effective_device_inventory.py",
+        "remediation/catalog/tooling/effective_device_inventory.py"
+      ],
+      "services": [
+        "Catalog-owned planned inventory projection service"
+      ],
+      "remaining": [
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Catalog",
+      "category": "Catalog",
+      "canonical_responsibility_key": "Catalog|Catalog|fa5929663be1144c542bd33b017497062bae5111c62d4469efb466fe466df50a",
+      "published_paths": [
+        "rehydration/producers/release-011/tests/test_sealed_registry.py",
+        "remediation/catalog/tests/test_sealed_registry.py"
+      ],
+      "services": [
+        "CatalogBuild/sealed registry publication integration pending",
+        "CatalogDatabase",
+        "CatalogReference",
+        "DeviceResolver",
+        "DeviceViewStore pending mock-first native bindings",
+        "Modules/Catalog/CatalogBuild.cs",
+        "Modules/Catalog/CatalogDatabase.cs",
+        "PolicyReference; route/view composition pending",
+        "scoped CatalogProjection/EffectiveInventory/DispatchManifest pending"
+      ],
+      "remaining": [
+        "current profile partially native-bound; see native-parity-supplement.json for bounded receipts",
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "pending exact method/profile assertion binding; current bounded native services do not prove this complete method",
+        "release-011 exact profile parity pending; no inference from basename or equal SHA256",
+        "Whole-file assertion-by-assertion publication/overlay/idempotency parity remains pending."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Documentation",
+      "category": "Design",
+      "canonical_responsibility_key": "Documentation|Design|09e648d07d127ba5d58aabb0c108b80bcb24db2c46ba74218de7dfce46865d02",
+      "published_paths": [
+        "remediation/test_design024_core_contract.py"
+      ],
+      "services": [
+        "DocumentationProjector"
+      ],
+      "remaining": [
+        "Documentation cross-artifact/source invariant validator and this original method full native binding remain pending in Documentation ownership.",
+        "No full-method parity claim from this projection binding; preserve the original method inputs, source invariants, errors and side effects in the authoritative reconciliation."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Documentation",
+      "category": "Design",
+      "canonical_responsibility_key": "Documentation|Design|550488c894bd585bfeefa539bc81e6dad45c671f6bfd2d3ab4b7d3b52f16c18e",
+      "published_paths": [
+        "remediation/test_design024_contract.py"
+      ],
+      "services": [
+        "ModuleGraphValidator"
+      ],
+      "remaining": [
+        "Documentation cross-artifact/source invariant validator and this original method full native binding remain pending in Documentation ownership.",
+        "Native C4 SVG generation/runtime validation remains pending; pure extraction/normalization and recording-process transport are only primitives."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Documentation",
+      "category": "Design",
+      "canonical_responsibility_key": "Documentation|Design|629f66fc32f5b2110d6b1d6b5e340a02a7d7abb40f06c519291d00614c8452ee",
+      "published_paths": [
+        "remediation/test_design023_guardrails.py"
+      ],
+      "services": [],
+      "remaining": [
+        "Documentation cross-artifact/source invariant validator and this original method full native binding remain pending in Documentation ownership."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Documentation",
+      "category": "Design",
+      "canonical_responsibility_key": "Documentation|Design|6503118aaebba7c2418af7a5b4130771c8b02245000f30fdd5fc62e731df7c94",
+      "published_paths": [
+        "remediation/tests_design018_contract.py"
+      ],
+      "services": [
+        "DocumentationProjector"
+      ],
+      "remaining": [
+        "Documentation cross-artifact/source invariant validator and this original method full native binding remain pending in Documentation ownership.",
+        "Native C4 SVG generation/runtime validation remains pending; pure extraction/normalization and recording-process transport are only primitives."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Documentation",
+      "category": "Design",
+      "canonical_responsibility_key": "Documentation|Design|92b77e3d2a09416a56f3f64beca23f3c2732e32ed777176fa9fadbd6bedc1ce1",
+      "published_paths": [
+        "remediation/design-c4/tooling/bootstrap.py"
+      ],
+      "services": [
+        "DocumentationRendererProfileReader",
+        "DocumentationToolBootstrap",
+        "ToolArtifactAcquirer",
+        "ToolZipExtractor"
+      ],
+      "remaining": [
+        "Old profile15/bootstrap7 plus new redirect profile12/bootstrap3 native cases passed; Architecture002 composed native bootstrap and admitted exact observed Gradle published-checksum redirect before network-disabled rendering; existing cache bytes are not a new binary-download claim; Gradlecaller/wrapperproperties retirement remains pending; Node/Marp acquisition retired by approved stack change"
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Documentation",
+      "category": "Design",
+      "canonical_responsibility_key": "Documentation|Design|9577ce4eda3c646420caaf7156967dc4110e248112b1423674261f98128879ad",
+      "published_paths": [
+        "remediation/tests_design020_contract.py"
+      ],
+      "services": [
+        "DocumentationProjector"
+      ],
+      "remaining": [
+        "Documentation cross-artifact/source invariant validator and this original method full native binding remain pending in Documentation ownership.",
+        "No full-method parity claim from this projection binding; preserve the original method inputs, source invariants, errors and side effects in the authoritative reconciliation."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Documentation",
+      "category": "Design",
+      "canonical_responsibility_key": "Documentation|Design|97e3672e88f191549b03f9b94decd730ea8830bfb1ff98295a357f25dea780bf",
+      "published_paths": [
+        "remediation/test_design023_ui.py"
+      ],
+      "services": [
+        "DocumentationProjector"
+      ],
+      "remaining": [
+        "Documentation cross-artifact/source invariant validator and this original method full native binding remain pending in Documentation ownership.",
+        "No full-method parity claim from this projection binding; preserve the original method inputs, source invariants, errors and side effects in the authoritative reconciliation."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Documentation",
+      "category": "Design",
+      "canonical_responsibility_key": "Documentation|Design|d09c7b97c52e6f51153531f0b6471e26afeb55466bb9346a01746276b9bdd9d3",
+      "published_paths": [
+        "remediation/tests_design022_contract.py"
+      ],
+      "services": [
+        "DocumentationProjector"
+      ],
+      "remaining": [
+        "Documentation cross-artifact/source invariant validator and this original method full native binding remain pending in Documentation ownership.",
+        "No full-method parity claim from this projection binding; preserve the original method inputs, source invariants, errors and side effects in the authoritative reconciliation."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Documentation",
+      "category": "Design",
+      "canonical_responsibility_key": "Documentation|Design|fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+      "published_paths": [
+        "remediation/tests_design023_contract.py"
+      ],
+      "services": [],
+      "remaining": [
+        "Documentation cross-artifact/source invariant validator and this original method full native binding remain pending in Documentation ownership.",
+        "Gradle thin delegate/caller equivalence and toolchain category integration remain pending; native locks/bootstrap/acquirer service proof is narrower."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Documentation",
+      "category": "Validate",
+      "canonical_responsibility_key": "Documentation|Validate|4abd62deef22df29c323832ecfd094df9f27162bc9023fd913cb0954ceb417d3",
+      "published_paths": [
+        "tools/check_documentation.py"
+      ],
+      "services": [
+        "HTML Assets.handle_starttag parser pending",
+        "Repository documentation validator pending"
+      ],
+      "remaining": [
+        "Exact check() committed checksums, all repository markdown percent-decoded local links excluding .git, all SVG XML parse and full HTML remote-asset syntax remain unbound. main() CLI/root/JSON/exit pending."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Java",
+      "category": "Sources",
+      "canonical_responsibility_key": "Java|Sources|4276f8abb3c0040fd1c8b4e9da52a163eb35d2d7716319327a884c0ed83fc55d",
+      "published_paths": [
+        "rehydration/producers/release-011/tooling/java_context.py",
+        "remediation/catalog/tooling/java_context.py"
+      ],
+      "services": [
+        "Java helper-owned JavaSourceExtractor/JavaFileContext/JvmSourceLinker with pinned native runtime0.25.2+grammar0.23.5"
+      ],
+      "remaining": [
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Java",
+      "category": "Sources",
+      "canonical_responsibility_key": "Java|Sources|6cc57fd9f4dcf7b8f432377ad486242583c02cb280d7ea7e383b7c41afb4f5cb",
+      "published_paths": [
+        "rehydration/producers/release-011/tooling/jvm_source_link.py",
+        "remediation/catalog/tooling/jvm_source_link.py"
+      ],
+      "services": [
+        "Java helper-owned JavaSourceExtractor/JavaFileContext/JvmSourceLinker with pinned native runtime0.25.2+grammar0.23.5"
+      ],
+      "remaining": [
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Java",
+      "category": "Sources",
+      "canonical_responsibility_key": "Java|Sources|ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
+      "published_paths": [
+        "rehydration/producers/release-011/tooling/java_source.py",
+        "remediation/catalog/tooling/java_source.py"
+      ],
+      "services": [
+        "Java helper-owned JavaSourceExtractor/JavaFileContext/JvmSourceLinker with pinned native runtime0.25.2+grammar0.23.5"
+      ],
+      "remaining": [
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Root",
+      "category": "Publish",
+      "canonical_responsibility_key": "Root|Publish|6b575f941a427a815b5430a0b406f7020477f213f3032bfa46c178f9cfe08bc1",
+      "published_paths": [
+        "tools/check_deliverables.py"
+      ],
+      "services": [
+        "PublicationChecker.Check"
+      ],
+      "remaining": [
+        "violations() unsafe/allow/deny/symlink/size semantics have bounded native cases; full exact method IO and main() git-ls-files/policy-read/printing/exit adapter require root reconciliation."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Root",
+      "category": "Sources",
+      "canonical_responsibility_key": "Root|Sources|2acc1913674998f90ae2148fcd6934a63116e1406e231790b7ce350ce6cf7910",
+      "published_paths": [
+        "tools/tests/test_rehydrate.py"
+      ],
+      "services": [
+        "HistoricalSourceCache",
+        "HttpByteTransport",
+        "SourceAcquirer",
+        "SourceArchiveAcquirer",
+        "SourceBatch",
+        "SourceCache"
+      ],
+      "remaining": [
+        "Corrupt raw bytes retention core covered; complete legacy work recipe binding/seed counts/default help/plan policy belong root+Publication and must be independently bound.",
+        "Exact original file:// fixture permission transport and clean path composition pending root adapter.",
+        "Publication deliverables allowlist is another owner; no acquisition parity claim for policy.",
+        "Raw source/archive/hash/CRC/exact range semantics are component-bound; original malicious unselected ZIP path is data-only and never extracted.",
+        "Strict/permissive cache identity and sidecar retention core covered; actual original extractor payload/parser fingerprint and end-to-end fresh DB validate/export/repeat/missing sealed report case remain root composition gap."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Root",
+      "category": "Sources",
+      "canonical_responsibility_key": "Root|Sources|73623b939aacd5108382b1f3d335de2a8665205553fa8ee2cf99f3eadfea0263",
+      "published_paths": [
+        "tools/rehydrate.py"
+      ],
+      "services": [
+        "Core/ArtifactPaths.cs",
+        "Core/ContentHash.cs",
+        "Core/HttpByteTransport.cs",
+        "Modules/Sources/Acquisition/HistoricalSourceCache.cs",
+        "Modules/Sources/Acquisition/MetadataArchiveReader.cs",
+        "Modules/Sources/Acquisition/SourceAcquirer.cs",
+        "Modules/Sources/Acquisition/SourceArchiveAcquirer.cs",
+        "Modules/Sources/Acquisition/SourceCache.cs"
+      ],
+      "remaining": [
+        "Explicit GenericRehydrate reproduces no-ETag range profile; CanonicalRestore keeps ETag/repository XML/version semantics. Never infer a profile from release or missing proof.",
+        "Explicit local file fixture adapter, full seed candidate choices/absent accounting and inventory/root binding composition remain pending.",
+        "New C# producer fingerprint and gzip bytes are distinct. Strict rejection/permissive derived receipt core covered; actual Java/SDK extractor to SourceCache wiring and historical environment doctor equivalence remain pending.",
+        "No legacy checked_subprocess or source execution port; caller uses native monolith services.",
+        "Publication owns sole load_recipe and typed projection. Root owns plan/doctor/seed/fetch/extract/build/validate/export CLI composition."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
       "owner": "Sources",
-      "functions": [
-        "permission_reference.parse",
-        "HTML attribute/entity compatibility"
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|0b2b455a6cc22e82574b9a788a864e21ca516d5997b9302079ce1aa1a0de070d",
+      "published_paths": [
+        "tools/source_facts/test_native_abi_facts.py"
       ],
-      "remaining": "Original four test methods per canonical/release file verified; complete parser/profile/corpus duties remain separate."
+      "services": [
+        "Planned NativeAbiFacts/NativeDescriptorFacts producers over strict source JSON and language-aware lexical input"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
     },
     {
+      "derived_from_inventory": true,
       "owner": "Sources",
-      "functions": [
-        "Original AIDL member external/unknown test",
-        "test_parsers.test_aidl_structured"
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|10961df02f1737e28b717c90a4d9ec152308ea9f3b14f1ce55659be12e6499d1",
+      "published_paths": [
+        "remediation/catalog/tooling/sdk_availability_evidence.py",
+        "tools/source_facts/sdk_availability_evidence.py"
       ],
-      "remaining": "Three original enriched AIDL-member methods per file are normally verified; exact P.h plus new_syntax/then-good compound fixture remains open. Seven parser-family method compositions now pass the same17 native cases and468 mock checks through existing consumers, including exact indented AIDL input. The old unsupported constant wrapper is explicitly retired and not counted as satisfied; final constant inventory and unknown wire state remain asserted. The separate low-level structured-body retained-status expectation remains open. No second parser or compatibility API was added."
+      "services": [
+        "Planned SDK lifecycle evidence projection over shared SdkApiXml"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
     },
     {
-      "owner": "Catalog/Sources",
-      "functions": [
-        "SDK annotation malformed member issue persistence",
-        "metadata aggregate attachment"
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|194514644686213599fc77326e4f9cd2c17141b761173b8297e92032337a44ed",
+      "published_paths": [
+        "tools/source_facts/hidl_source_constraint.py"
       ],
-      "remaining": "Pure ZIP/target facts and clean import cases do not automatically establish per-member SQL raw issue or full aggregate caller parity."
+      "services": [
+        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
     },
     {
-      "owner": "Each domain owner",
-      "functions": [
-        "Exact remaining lexical anchors and owner-supplied methods per198entry"
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|1ed4e0dfca74b9e501527f059034c51a74e966d12bb7ca67fb85169030f082df",
+      "published_paths": [
+        "remediation/catalog/tooling/callback_source_facts.py",
+        "tools/source_facts/callback_source_facts.py"
       ],
-      "remaining": "Close through exact inputs/assertions/effects and current callers, or reviewed narrow execution retirement with retained outputs. Native test counts alone do not close a file."
+      "services": [
+        "One SourceFactProducer implements approved callback/functional/applicability interfaces; shared LegacyAsciiIdentity canonical profile"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|2ef373957f134774af8ad5a2c7a59edcdad6e59faf86eab098280b092d676ee8",
+      "published_paths": [
+        "tools/source_facts/native_literal_audit.py"
+      ],
+      "services": [
+        "Planned pinned source selector inventory and lexical candidate audit"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|34f12ce86aaab927f4ec4ce2a4f0ca6a215ff66be3852167619e2a4cfda0ee3a",
+      "published_paths": [
+        "tools/source_facts/permission_reference_evidence.py"
+      ],
+      "services": [
+        "Planned manifest/permission source fact producers and scoped alias resolver; Catalog supplies read-only snapshot DTOs"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|35af3b887b030e400231320eee167976f64679d684f647ba5c3cec9f48b5e841",
+      "published_paths": [
+        "tools/source_facts/apex_manifest_facts.py"
+      ],
+      "services": [
+        "Planned ApexSourceFacts using same static Soong literal service"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|38ee75b78d6b8f56ddf047841e41a5498d84be04d617773f218dc0957d3e5520",
+      "published_paths": [
+        "remediation/catalog/tooling/functional_source_facts.py",
+        "tools/source_facts/functional_source_facts.py"
+      ],
+      "services": [
+        "One SourceFactProducer implements approved callback/functional/applicability interfaces; shared LegacyAsciiIdentity canonical profile"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|3e971257215d1340e292efa8c1be4226869bcb8fedc41a928cd9fe587655d27e",
+      "published_paths": [
+        "tools/source_facts/interface_metadata_inventory.py"
+      ],
+      "services": [
+        "Planned pinned source selector inventory and lexical candidate audit"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|445fb893b49c636f3800991dab707cc10a94331171df43d186741b3eab979eaf",
+      "published_paths": [
+        "tools/source_facts/test_interface_module_linkage.py"
+      ],
+      "services": [
+        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|4b59b7da00e9b81d765ce1967126e6df3f1f5ebd9d73186f5bde92a2f868fc1f",
+      "published_paths": [
+        "tools/source_facts/test_aidl_frozen_hash.py"
+      ],
+      "services": [
+        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|4e69d730fe117f6204d6a41b447739758185624092bbff3b6348bc866e790909",
+      "published_paths": [
+        "tools/source_facts/apex_metadata_inventory.py"
+      ],
+      "services": [
+        "Planned pinned source selector inventory and lexical candidate audit"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|51abec7fc9f4c2125af3165247f0f56eb07de8e170c98d98893f3d01beea987e",
+      "published_paths": [
+        "tools/source_facts/test_hidl_source_constraint.py"
+      ],
+      "services": [
+        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|553ff42832e97b66ab7997baeb73acf2a3b5141eb1f42197590e6c6d8ef4ae2d",
+      "published_paths": [
+        "tools/source_facts/test_interface_applicability_evidence.py"
+      ],
+      "services": [
+        "One SourceFactProducer implements approved callback/functional/applicability interfaces; shared LegacyAsciiIdentity canonical profile"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|579105f2ce5719c94772ae80486d177ed8c30d14dc2f178bc20ee79e10f0aef8",
+      "published_paths": [
+        "tools/source_facts/interface_module_linkage.py"
+      ],
+      "services": [
+        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|59c4b756d90b922fd32d7fbab7cb72256e58fc5a3ffb6d4fd0d2d5e383e221d9",
+      "published_paths": [
+        "tools/source_facts/interface_hash_facts.py"
+      ],
+      "services": [
+        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|5fc2a107f842c482a8ffb51b98008352feed61e9206280254a2ee40d07da131e",
+      "published_paths": [
+        "tools/source_facts/test_apex_metadata_inventory.py"
+      ],
+      "services": [
+        "Planned pinned source selector inventory and lexical candidate audit"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
+      "published_paths": [
+        "tools/source_facts/test_interface_module_facts.py"
+      ],
+      "services": [
+        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|6678adf0d5cb2dee55206f2262fe629058909f472eb558399a0997a89ac666d6",
+      "published_paths": [
+        "rehydration/producers/release-011/tooling/permission_reference.py",
+        "remediation/catalog/tooling/permission_reference.py"
+      ],
+      "services": [
+        "Planned manifest/permission source fact producers and scoped alias resolver; Catalog supplies read-only snapshot DTOs"
+      ],
+      "remaining": [
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|676c3fbbfe3e740f7aadd3bcac251655bc9d37de5ac2a5ce77a9a9632db0dc90",
+      "published_paths": [
+        "tools/source_facts/interface_module_facts.py"
+      ],
+      "services": [
+        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|6f261e6fcc8eb8b4c32930c4afe3a4b2e755ae66b70234be5ca799233386a167",
+      "published_paths": [
+        "remediation/catalog/tooling/interface_applicability_evidence.py",
+        "tools/source_facts/interface_applicability_evidence.py"
+      ],
+      "services": [
+        "One SourceFactProducer implements approved callback/functional/applicability interfaces; shared LegacyAsciiIdentity canonical profile"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|76683d117cbf5b3883abcffd03ba18e172d1bae03ab0f0e593e80d3f579461e8",
+      "published_paths": [
+        "rehydration/producers/release-011/tooling/annotation_link.py",
+        "remediation/catalog/tooling/annotation_link.py"
+      ],
+      "services": [
+        "Planned exact versioned annotation target linker delegates encoding to Java IJvmSourceLinker"
+      ],
+      "remaining": [
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|7691f507b0d942d36d1f2daa1d8378938d0647b87c8b640334759a6e9f54b27e",
+      "published_paths": [
+        "tools/source_facts/test_scoped_permission_alias.py"
+      ],
+      "services": [
+        "Planned manifest/permission source fact producers and scoped alias resolver; Catalog supplies read-only snapshot DTOs"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|7aac07fd9046f54e782726c3dbb3272e7145fd311d3fdd0237fb763adf3d4302",
+      "published_paths": [
+        "tools/source_facts/native_descriptor_facts.py"
+      ],
+      "services": [
+        "Planned NativeAbiFacts/NativeDescriptorFacts producers over strict source JSON and language-aware lexical input"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|95a9243b2daf7fb5baed4c723cbe0b0388ca6374a84ca4004408c4a3a2e98604",
+      "published_paths": [
+        "tools/source_facts/test_permission_reference_evidence.py"
+      ],
+      "services": [
+        "Planned manifest/permission source fact producers and scoped alias resolver; Catalog supplies read-only snapshot DTOs"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|a7b1975aaf7a65a7b5a15f68c00f09a8c827bb68dcd309b1594496dbd408deb2",
+      "published_paths": [
+        "rehydration/producers/release-011/tooling/hidl_source.py",
+        "remediation/catalog/tooling/hidl_source.py"
+      ],
+      "services": [
+        "HidlSourceExtractor planned over shared lexical primitives"
+      ],
+      "remaining": [
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|a9d5b7356062e74ecd3cc0b3a5c0f82f441f70c268248d4353a69b45dbf8e63a",
+      "published_paths": [
+        "tools/source_facts/test_native_descriptor_facts.py"
+      ],
+      "services": [
+        "Planned NativeAbiFacts/NativeDescriptorFacts producers over strict source JSON and language-aware lexical input"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|ada967b1b4d39281a5d012a1ea85e1eb2d74e2385d4db7cc0b749413c3ae0ecb",
+      "published_paths": [
+        "tools/source_facts/test_manifest_source.py"
+      ],
+      "services": [
+        "Planned manifest/permission source fact producers and scoped alias resolver; Catalog supplies read-only snapshot DTOs"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|adcfffb5573affd5227e67b0acb497272fad0527a1eb9192eb3938d11cc28cba",
+      "published_paths": [
+        "tools/source_facts/manifest_source.py"
+      ],
+      "services": [
+        "Planned manifest/permission source fact producers and scoped alias resolver; Catalog supplies read-only snapshot DTOs"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|b28fb6a1556b161c48de0fb0f990528c66bb23d227b08cb06540ecd13e7fb6c8",
+      "published_paths": [
+        "rehydration/producers/release-011/tooling/sdk_api_index.py",
+        "remediation/catalog/tooling/sdk_api_index.py"
+      ],
+      "services": [
+        "SdkApiIndexExtractor + shared SdkApiXml/JvmDescriptor/SdkXmlVersion internals"
+      ],
+      "remaining": [
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|b3beb718222a5b4533f7649a6e6fb8bada7fb7b19b8587d4560855c7b151b5d1",
+      "published_paths": [
+        "tools/source_facts/test_apex_manifest_facts.py"
+      ],
+      "services": [
+        "Planned ApexSourceFacts using same static Soong literal service"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|b44e13be6ba9604f7da8344c11c4b196e5d44d764bcf2cd61c5a452bc1da8f42",
+      "published_paths": [
+        "tools/source_facts/scoped_permission_alias.py"
+      ],
+      "services": [
+        "Planned manifest/permission source fact producers and scoped alias resolver; Catalog supplies read-only snapshot DTOs"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|ba19399427fbc7c09ed1f6d2f19e1cd68e4093d91fe37584c62537f73283559d",
+      "published_paths": [
+        "tools/source_facts/aidl_frozen_hash.py"
+      ],
+      "services": [
+        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|c76b5898ebe89f81c6c9478d16d203a567cf7f71609ff66b39e6bcb79a0bf156",
+      "published_paths": [
+        "tools/source_facts/test_native_literal_audit.py"
+      ],
+      "services": [
+        "Planned pinned source selector inventory and lexical candidate audit"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|d017b0b03a9f4b6872720ba733dc046f9649e457800b5bfdbca8f9547767caee",
+      "published_paths": [
+        "tools/source_facts/native_abi_facts.py"
+      ],
+      "services": [
+        "Planned NativeAbiFacts/NativeDescriptorFacts producers over strict source JSON and language-aware lexical input"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|d45a952b237eda29c199c2b6da82ca0edf3756c2bf14bf8ca2514657ea30ca70",
+      "published_paths": [
+        "rehydration/producers/release-011/tooling/parsers.py",
+        "remediation/catalog/tooling/parsers.py"
+      ],
+      "services": [
+        "SourceSyntax + SignatureSourceExtractor + AidlSourceExtractor; planned permission expression service"
+      ],
+      "remaining": [
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|dc7c0d698d4ff811dbd8cd604316e8ab3ac03974daeafde7e71da26a0dfaa01d",
+      "published_paths": [
+        "tools/source_facts/aidl_source_constraint.py"
+      ],
+      "services": [
+        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|e8977f3942fd961b74b7b9dbde4a05b6d8afdfb425b4eea184a65d0a4dc95bc1",
+      "published_paths": [
+        "tools/source_facts/test_aidl_source_constraint.py"
+      ],
+      "services": [
+        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|f1d474251783a040bd45349387fa464ed62f564c8352e8bcd50c966325befee1",
+      "published_paths": [
+        "tools/source_facts/test_interface_metadata_inventory.py"
+      ],
+      "services": [
+        "Planned pinned source selector inventory and lexical candidate audit"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|f270d1e8c6bd5396412678f148f1789c2f8329dc3d7705dd68377a805ba8b1c9",
+      "published_paths": [
+        "tools/source_facts/test_interface_hash_facts.py"
+      ],
+      "services": [
+        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
+      ],
+      "remaining": [
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|f6710bbe511cd69aa5d5775d7f176489a8f632e127cf3a457b052824b03b7060",
+      "published_paths": [
+        "rehydration/producers/release-011/tooling/foundation_extract.py",
+        "remediation/catalog/tooling/foundation_extract.py"
+      ],
+      "services": [
+        "SourceSyntax + SignatureSourceExtractor + AidlSourceExtractor; planned permission expression service"
+      ],
+      "remaining": [
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|f9c4c0a90dd693a0dbe5c91da84cf9a6cb4d3c874e13c179ebbeccac577ac177",
+      "published_paths": [
+        "rehydration/producers/release-011/tooling/aidl_members.py",
+        "remediation/catalog/tooling/aidl_members.py"
+      ],
+      "services": [
+        "SourceSyntax + AidlSourceExtractor"
+      ],
+      "remaining": [
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Sources",
+      "canonical_responsibility_key": "Sources|Sources|fcf991a4340a9fee9675b6be9bcdca7f1b890647a4733d84372088dd934994c9",
+      "published_paths": [
+        "rehydration/producers/release-011/tooling/aidl_lex.py",
+        "remediation/catalog/tooling/aidl_lex.py"
+      ],
+      "services": [
+        "SourceSyntax + AidlSourceExtractor"
+      ],
+      "remaining": [
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
+    },
+    {
+      "derived_from_inventory": true,
+      "owner": "Sources",
+      "category": "Validate",
+      "canonical_responsibility_key": "Sources|Validate|d70110d5e3c24df2ce7a0c52bed2c3cdb1f25e3d6d72bb7629680392402e20ed",
+      "published_paths": [
+        "rehydration/producers/release-011/tooling/validate_catalog.py",
+        "remediation/catalog/tooling/validate_catalog.py"
+      ],
+      "services": [
+        "Catalog-owned planned CatalogValidator"
+      ],
+      "remaining": [
+        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
+        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+      ]
     }
   ],
   "rules": [

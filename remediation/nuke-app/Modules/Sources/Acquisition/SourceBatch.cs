@@ -8,7 +8,8 @@ namespace AndroidMcp.BuildTool.Modules.Sources.Acquisition;
 
 /// <summary>Acquire Publication's selected physical pins, retaining all logical audit rows.</summary>
 public sealed class SourceBatch(IByteTransport transport,IArtifactStore store,IArtifactStore bundle,
-    IArtifactLeaseProvider leases,ICanonicalJson canonical):ISourceBatch,ISourceBatchReader,ISourceBatchSeeder
+    IArtifactLeaseProvider leases,ICanonicalJson canonical,double? fetchDelaySeconds=null,
+    ITransportDelay? postDownloadDelay=null):ISourceBatch,ISourceBatchReader,ISourceBatchSeeder
 {
     public Task<SourceBatchResult> RunAsync(SourceBatchRequest request,CancellationToken cancellationToken=default)
         =>RunCoreAsync(request,false,null,cancellationToken);
@@ -16,7 +17,9 @@ public sealed class SourceBatch(IByteTransport transport,IArtifactStore store,IA
         =>RunCoreAsync(request.Acquisition,true,request.RequiredManifest,cancellationToken);
     private async Task<SourceBatchResult> RunCoreAsync(SourceBatchRequest request,bool resumeOnly,StoredArtifact? requiredManifest,CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
         Validate(request);
+        var pause=PostDownloadPause(request.Projection.Profile);
         if(resumeOnly&&(requiredManifest is null||requiredManifest.RelativePath!=request.ReceiptPath))Fail("BATCH_RECEIPT_PIN");
         var projection=request.Projection;
         var identity=canonical.Hash(JsonSerializer.SerializeToElement(request));
@@ -113,6 +116,8 @@ public sealed class SourceBatch(IByteTransport transport,IArtifactStore store,IA
         {
             var acquired=await new SourceAcquirer(transport,recording).AcquireAsync(item.Pin,cancellationToken);
             Add(outputs,acquired.Artifact);sources.Add(new(item.PhysicalSourceIndex,acquired));
+            if(acquired.Status=="downloaded"&&pause>TimeSpan.Zero)
+                await WaitAfterDownload(pause,cancellationToken);
         }
         var imported=new List<SourceBatchHistoricalCache>();
         foreach(var item in historical)
@@ -127,6 +132,28 @@ public sealed class SourceBatch(IByteTransport transport,IArtifactStore store,IA
         await VerifyOutputs(outputs,cancellationToken);
         var manifest=await store.WriteAsync(new(request.ReceiptPath,canonical.Serialize(JsonSerializer.SerializeToElement(result)),"application/json"),cancellationToken);
         return new(result,manifest,false);
+    }
+
+    private TimeSpan PostDownloadPause(AcquisitionCompatibilityProfile profile)
+    {
+        var seconds=fetchDelaySeconds??(profile==AcquisitionCompatibilityProfile.GenericRehydrate?1d:0d);
+        if(!double.IsFinite(seconds)||seconds<0)Fail("BATCH_DELAY");
+        try{return TimeSpan.FromSeconds(seconds);}
+        catch(ArgumentException){throw new TransportException("BATCH_DELAY","Fetch delay exceeds the native duration range.");}
+        catch(OverflowException){throw new TransportException("BATCH_DELAY","Fetch delay exceeds the native duration range.");}
+    }
+    private async Task WaitAfterDownload(TimeSpan duration,CancellationToken cancellationToken)
+    {
+        if(postDownloadDelay is not null){await postDownloadDelay.DelayAsync(duration,cancellationToken);return;}
+        // Task.Delay has a per-call platform timer bound. Preserve a longer
+        // admitted duration through cancellable chunks rather than truncation.
+        var maximum=TimeSpan.FromMilliseconds(uint.MaxValue-1d);
+        while(duration>TimeSpan.Zero)
+        {
+            var step=duration>maximum?maximum:duration;
+            await Task.Delay(step,cancellationToken);
+            duration-=step;
+        }
     }
 
     public async Task<SourceSeedResult> SeedOnlyAsync(SourceBatchSeedRequest request,CancellationToken cancellationToken=default)

@@ -21,7 +21,7 @@ public sealed class OperationRegistry
             new("validate-locked-recipe",[]),new("project-seed-candidates",["validate-locked-recipe"]),
             new("seed-available-sources",["project-seed-candidates"]),new("seal-seed-result",["seed-available-sources"]));
         Add(Category.Sources,Operation.Fetch,["project-root","source-manifest","recipe-lock","output-root","bundle-root"],
-            ["generation","release","limit","acquisition-profile","cache-policy"],OperationExecutor.SourcesFetch,
+            ["generation","release","limit","acquisition-profile","cache-policy","fetch-delay-seconds"],OperationExecutor.SourcesFetch,
             new("validate-locked-recipe",[]),new("preflight-selected-sources",["validate-locked-recipe"]),
             new("acquire-selected-sources",["preflight-selected-sources"]),new("seal-acquisition",["acquire-selected-sources"]));
         Add(Category.Sources,Operation.Inventory,["project-root","source-manifest","recipe-lock","acquisition-root","acquisition-manifest","acquisition-manifest-sha256","acquisition-manifest-length","output-root"],

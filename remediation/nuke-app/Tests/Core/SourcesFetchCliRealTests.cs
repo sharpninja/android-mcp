@@ -4,7 +4,7 @@ using AndroidMcp.BuildTool.Publication;
 using Xunit;
 namespace AndroidMcp.BuildTool.Tests.Core;
 
-public sealed class NativeSourcesFetchCliProbe(RehydrationPlanRequest? fixtureRequest=null):ISourcesFetchCliProbe
+public sealed class NativeSourcesFetchCliProbe(RehydrationPlanRequest? fixtureRequest=null,double? fetchDelaySeconds=null):ISourcesFetchCliProbe
 {
     public async Task<SourcesFetchCliObservation> RunAsync()
     {
@@ -23,6 +23,7 @@ public sealed class NativeSourcesFetchCliProbe(RehydrationPlanRequest? fixtureRe
         Assert.Equal("dotnet",Path.GetFileNameWithoutExtension(host));
         var args=SourcesFetchCliCases.Arguments(runtime,input,bundle,output).ToList();
         args[args.IndexOf("--acquisition-profile")+1]=fixture.Profile.ToString();
+        if(fetchDelaySeconds is not null)args.AddRange(["--fetch-delay-seconds",fetchDelaySeconds.Value.ToString(System.Globalization.CultureInfo.InvariantCulture)]);
         args[1]=typeof(Build).Assembly.Location;
         args[args.IndexOf("--dotnet-host")+1]=host;
         args.InsertRange(1,["--runtimeconfig",Path.Combine(AppContext.BaseDirectory,"AndroidMcp.Build.Tests.runtimeconfig.json"),

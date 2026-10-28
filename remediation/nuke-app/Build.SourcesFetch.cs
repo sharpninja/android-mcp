@@ -37,7 +37,7 @@ public sealed partial class Build
         var destination=new FileArtifactStore(output,bytes=>ContentHash.Sha256(bytes.Span));
         var bundle=new FileArtifactStore(bundled,bytes=>ContentHash.Sha256(bytes.Span));
         return (input,output,new RehydrationPlanner(canonical),new SourceBatch(HttpByteTransport.Create(),destination,bundle,
-            new FileArtifactLeaseProvider(Path.Combine(output,".leases")),canonical));
+            new FileArtifactLeaseProvider(Path.Combine(output,".leases")),canonical,FetchDelaySeconds));
     }
 
     private static string InputRelative(string root,string requested)

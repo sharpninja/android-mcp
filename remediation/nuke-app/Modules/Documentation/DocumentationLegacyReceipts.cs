@@ -27,6 +27,8 @@ public sealed class DocumentationLegacyReceipts(ICanonicalJson canonical,IStrict
     ];
     private readonly IDesignStagePlanner stages=new DesignStagePlanner();
     private static Route For(DesignStage stage)=>Routes.Single(route=>route.Stage==stage);
+    internal static (string Path,string Media) Publication(DesignStage stage)
+    {var route=For(stage);return(route.SourcePath,route.Media);}
     private static ArchitectureAssetException Unvalidated()=>new("LEGACY_RECEIPT_UNVALIDATED","Unsuccessful existing authority cannot publish a success receipt");
 
     public Artifact Module(ModuleValidationResult result)

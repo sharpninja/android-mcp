@@ -42,6 +42,8 @@ public sealed partial class Build : NukeBuild
     public AcquisitionCompatibilityProfile? AcquisitionProfile { get; set; }
     [Parameter("Historical cache handling; default preserves alias metadata without claiming import")]
     public SourceBatchCachePolicy? CachePolicy { get; set; }
+    [Parameter("Pause after each newly fetched source; Generic defaults to 1s, Canonical to 0s; reused sources never pause")]
+    public double? FetchDelaySeconds { get; set; }
     [Parameter("Canonical project input or catalog-contract directory")]
     public string? ProjectRoot { get; set; }
     [Parameter("Project-root-relative caller-pinned typed workflow request")]
@@ -139,6 +141,7 @@ public sealed partial class Build : NukeBuild
         Add("acquisition-manifest-length",AcquisitionManifestLength?.ToString(System.Globalization.CultureInfo.InvariantCulture));
         Add("limit",Limit?.ToString(System.Globalization.CultureInfo.InvariantCulture));
         Add("acquisition-profile",AcquisitionProfile?.ToString());Add("cache-policy",CachePolicy?.ToString());
+        Add("fetch-delay-seconds",FetchDelaySeconds?.ToString(System.Globalization.CultureInfo.InvariantCulture));
         Add("output-root",OutputRoot); Add("snapshot",Snapshot);
         Add("stage-root",StageRoot);Add("extraction-profile",ExtractionProfile);Add("work-root",WorkRoot);
         Add("docker-identity",DockerIdentity);Add("renderer-user",RendererUser);Add("tool-access",ToolAccess?.ToString());

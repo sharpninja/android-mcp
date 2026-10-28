@@ -1,0 +1,71 @@
+{
+  "localTimestamp": "2026-10-28T15:36:51",
+  "scope": "Successful existing renderer-validation receipt integration in the existing architecture composer, opt-in only.",
+  "requirements": [
+    "FR-BUILD-005",
+    "TR-BUILD-TOOL-005",
+    "TEST-BUILD-005"
+  ],
+  "mockBeforeProduction": {
+    "gatePassed": 252,
+    "class": "ArchitectureLegacyReceiptMockTests",
+    "count": 21,
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T1437598670372-152979ebe92944e99f8a4ecaccb2f5a3/tests.trx"
+  },
+  "focusedGate": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T1448396253884-eccd0a777e3e4bdca5d332f493904b90/tests.trx",
+    "sha256": "3a34b61e093a3472e0e6bf02c4c5a8e9936ee751eecbc3d40a2521e12c5c88f8",
+    "total": 1016,
+    "passed": 1016,
+    "failed": 0,
+    "notExecuted": 0,
+    "exactClassCounts": {
+      "ArchitectureLegacyReceiptMockTests": 21,
+      "ArchitectureLegacyReceiptRealTests": 12
+    }
+  },
+  "fullGate": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T1530238651985-a53179df0e9d4478bdd4c56ab7b6ba4b/tests.trx",
+    "sha256": "9e9bd02efbfdde7d86e9c8a9040090074645f7d482828b6e87cd010e8ed7ce4f",
+    "total": 65117,
+    "passed": 65117,
+    "failed": 0,
+    "notExecuted": 0,
+    "exactClassCounts": {
+      "CatalogMetaSchemaConcurrencyRealTests": 1,
+      "SourceBatchPacingRealTests": 16,
+      "CatalogMetadataLeafRealTests": 19,
+      "ArchitectureLegacyReceiptRealTests": 12,
+      "SourcesFetchPacingCliRealTests": 1
+    }
+  },
+  "sourcePins": [
+    {
+      "path": "remediation/nuke-app/Modules/Documentation/ArchitectureProjectionComposer.cs",
+      "sha256": "8173b4478918baaf2b283064e22c67736e06e9cdf110277e925fa008d01585f2"
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Documentation/DocumentationLegacyReceipts.cs",
+      "sha256": "0d063212634f7b25d224bb17b29d5ef162f5cfc2918a266070ed88b32be4023d"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Documentation/ArchitectureLegacyReceiptMockTests.cs",
+      "sha256": "6f04ee21e413da13ae8c9336e7e63185b8f119af2e7744bdb35f790c9164fb7a"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Documentation/ArchitectureLegacyReceiptRealTests.cs",
+      "sha256": "d5ffccda687a0055ba026c065e6b9824025154b0234f9883c1727bce43d38f64"
+    }
+  ],
+  "behavior": [
+    "One formatter route table owns the validation path/media contract.",
+    "Receipt is emitted after successful validation and never on cancellation, failure or omitted validation.",
+    "Existing default outputs and input bytes remain unchanged; optional injection uses the same composer/runtime."
+  ],
+  "limits": [
+    "Controlled renderer transport, not a fresh renderer CLI proof.",
+    "Actual caller opt-in and remaining module/model/UI/document/package receipts remain separate open responsibilities.",
+    "No whole file closure, Python execution, HV or acceptance claim."
+  ],
+  "acceptedComplete": false
+}

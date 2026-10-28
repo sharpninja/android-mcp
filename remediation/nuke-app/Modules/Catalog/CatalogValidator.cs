@@ -44,7 +44,7 @@ public sealed class CatalogValidator(string catalogRoot,ICanonicalJson canonical
         foreach(var path in Directory.EnumerateFiles(contracts,"*.schema.json"))
         {
             var bytes=File.ReadAllBytes(path);_=canonical.Serialize(bytes);using var document=JsonDocument.Parse(bytes);
-            Check(MetaSchemas.Draft202012.Evaluate(document.RootElement,new(){OutputFormat=OutputFormat.Flag}).IsValid,"Invalid JSON schema "+Path.GetFileName(path));
+            Check(CatalogSourceMetadata.IsValidSchema(document.RootElement),"Invalid JSON schema "+Path.GetFileName(path));
             _=JsonSchema.FromText(Encoding.UTF8.GetString(bytes));
         }
         var entry=File.ReadAllBytes(Path.Combine(contracts,"Entry.schema.json"));var permission=File.ReadAllBytes(Path.Combine(contracts,"PermissionExpression.schema.json"));

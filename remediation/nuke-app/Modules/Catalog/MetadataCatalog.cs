@@ -195,6 +195,6 @@ public sealed partial class MetadataCatalog
     public void ContinuePage(MetadataCursor cursor,string reader)
     { lock(sync) if(cursor!=new MetadataCursor(reader,Generation)) throw new CatalogException(410,"Reader or generation scoped cursor expired"); }
 
-    [GeneratedRegex("^\"meta1:[0-9]+:(?:callback-descriptor|functional-group):[a-f0-9]{64}:(?:local|[a-f0-9]{64}):[1-9][0-9]*:(?:active|suppressed|deleted|conflict):[a-f0-9]{64}\"$",RegexOptions.CultureInvariant)]
+    [GeneratedRegex("^\"meta1:[0-9]+:(?:callback-descriptor|functional-group):[a-f0-9]{64}:(?:local|[a-f0-9]{64}):[1-9][0-9]*:(?:active|suppressed|deleted|conflict):[a-f0-9]{64}\"\\z",RegexOptions.CultureInvariant)]
     private static partial Regex StrongMetadataTag();
 }

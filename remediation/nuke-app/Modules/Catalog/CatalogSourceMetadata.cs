@@ -20,6 +20,7 @@ public sealed class CatalogSourceMetadata
     private readonly ICallbackSourceFacts? callbacks;
     private readonly IFunctionalTaxonomySourceFacts? taxonomy;
     private readonly Dictionary<string,JsonSchema> validators=new(StringComparer.Ordinal);
+    private static readonly object MetaSchemaEvaluation=new();
     public CatalogSourceMetadata(string schemaPath,ICanonicalJson canonical,ICallbackSourceFacts? callbacks=null,IFunctionalTaxonomySourceFacts? taxonomy=null)
     {schema=JsonNode.Parse(File.ReadAllText(schemaPath))!.AsObject();this.canonical=canonical;this.callbacks=callbacks;this.taxonomy=taxonomy;}
     private static string S(JsonNode? node)=>node?.GetValue<string>() ?? "";
@@ -28,10 +29,15 @@ public sealed class CatalogSourceMetadata
     private static IEnumerable<JsonObject> Objects(JsonNode? value)=>(value as JsonArray ?? new()).Select(item=>item!.AsObject());
     private static void Reject(bool condition,string message){if(condition)throw new FormatException(message);}
     public string Digest(JsonNode value)=>canonical.Hash(JsonSerializer.SerializeToElement(value));
+    public static bool IsValidSchema(JsonElement document)
+    {
+        lock(MetaSchemaEvaluation)
+            return MetaSchemas.Draft202012.Evaluate(document,new(){OutputFormat=OutputFormat.Flag}).IsValid;
+    }
     public JsonObject Validate(JsonObject value,string root)
     {
         if(!validators.TryGetValue(root,out var validator))
-        {var selected=schema.DeepClone().AsObject();selected["$ref"]="#/$defs/Meta"+root;validator=JsonSchema.FromText(selected.ToJsonString());validators.Add(root,validator);}
+        {var selected=schema.DeepClone().AsObject();selected["$ref"]="#/$defs/Meta"+root;Reject(!IsValidSchema(JsonSerializer.SerializeToElement(selected)),"Invalid SourceContractMetadata schema");validator=JsonSchema.FromText(selected.ToJsonString());validators.Add(root,validator);}
         Reject(!validator.Evaluate(JsonSerializer.SerializeToElement(value),new(){OutputFormat=OutputFormat.Flag,RequireFormatValidation=true}).IsValid,"Invalid "+root);
         if(root=="EndpointMethod")
         {

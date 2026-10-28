@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "1.0.0",
+  "utcTimestamp": "2026-10-28T19:40:52.7061043Z",
+  "scope": "Normal replacement of the exact original module-graph test execution only; no producer/tooling/corpus or independent acceptance claim.",
+  "originalMethods": [
+    {
+      "method": "test_reproduces_cyclic_old_crosswalk",
+      "native": "MOD-ORIGINAL-CYCLE",
+      "assertion": "Same two classes and cyclic dependency model; non-success maps to MODULE_CYCLE, with original cycle ownership preserved."
+    },
+    {
+      "method": "test_forbidden_concrete_edge_rejected",
+      "native": "MOD-ORIGINAL-FORBIDDEN",
+      "assertion": "Same Repository/OwnerAuthenticationService model and edge; forbidden dependency remains an error."
+    },
+    {
+      "method": "test_domain_port_invariant_rejects_platform_interface",
+      "native": "MOD-ORIGINAL-DOMAIN-PORT",
+      "assertion": "Same LoopbackHost interface and bridge.android owner; domain-port invariant produces the platform-interface error."
+    },
+    {
+      "method": "test_entire_current_class_graph_is_owned_and_acyclic",
+      "native": "MOD-ORIGINAL-FULL-GRAPH plus CurrentLayoutModelValidationRealTests.ActualCurrentCanonicalSourcesPassTheExistingFullModelPreflight",
+      "assertion": "Independent original graph fixture is validated. Actual current canonical sources also pass the same module validator with 96 classes and no module issues, followed by unchanged-source verification."
+    }
+  ],
+  "proof": {
+    "trx": "publication/android-mcp-git/remediation/nuke-app/artifacts/tests/20261028T1430297401701-4c6547e273f04b13a963ea563993bde3/tests.trx",
+    "sha256": "4b6a5c52f97aad19b41b07c90bccb1fb26ec227457bb97600a1eb973d2b2984c",
+    "exactClassCounts": {
+      "ModuleGraphRealTests": 10,
+      "CurrentLayoutModelValidationRealTests": 2,
+      "NativeProducerLifecycleRealTests": 1
+    },
+    "total": 64998,
+    "passed": 64998,
+    "failed": 0,
+    "skipped": 0,
+    "scope": "Clean copied checkpoint008 full suite and exact unchanged component source pins, including historical/current README isolation; no HV."
+  },
+  "nativeSourcePins": [
+    {
+      "path": "remediation/nuke-app/Modules/Documentation/ModuleGraphValidator.cs",
+      "sha256": "fc8d209a102e09ce05381f4cd83285977237f5718d2ec23508c0e2fe6fce0026"
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Documentation/DocumentationModelPreflight.cs",
+      "sha256": "cde80f369315cb613eb56f2771062681a4a257b5171024b850c1d668325a8a19"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Documentation/ModuleGraphMockTests.cs",
+      "sha256": "fb230be7a5d4265a9cf3931db724df4c6cb9fd579e1dc2d05e9d6e46614d045d"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Documentation/ModuleGraphRealTests.cs",
+      "sha256": "bd10f5888f88582a148554b5a55ca2b02fa287b0940d91e69cd1f06d460debfb"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Documentation/CurrentLayoutModelValidationRealTests.cs",
+      "sha256": "013370564ed4c1413b1ad1e8f05f18b0341d2b345b93346692f92ca796327de8"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Documentation/DocumentationProjectionMockTests.cs",
+      "sha256": "bd16be3e2e3c6b033a6c8a7688543a655aaee02935ec5a5a0cab9a34376375c7"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Documentation/DocumentationSelectedProjectSourceMockTests.cs",
+      "sha256": "8fa55ead8e577cf83198660c3b6495692418f8f28b72e89151f34f7f586bc9bb"
+    }
+  ],
+  "entries": [
+    {
+      "legacyPath": "remediation/test_design_module_graph.py",
+      "legacySha256": "09903f374e64cfe7d99318b9765eb969c2f6a685075cebe11f85567b3c7541da",
+      "owner": "Documentation",
+      "category": "Design",
+      "operation": "Architecture",
+      "normal_verified": true,
+      "normal_verified_methods": [],
+      "reuseExistingMethodClaims": [
+        "test_reproduces_cyclic_old_crosswalk",
+        "test_forbidden_concrete_edge_rejected",
+        "test_domain_port_invariant_rejects_platform_interface",
+        "test_entire_current_class_graph_is_owned_and_acyclic"
+      ],
+      "nativeService": "ModuleGraphValidator",
+      "nativeTest": "AndroidMcp.BuildTool.Tests.Documentation.ModuleGraphRealTests and CurrentLayoutModelValidationRealTests",
+      "pending_methods": [],
+      "normal_verification_scope": "All four methods were fully read independently and their existing explicit owner bindings were rechecked; their previously recorded method claims remain the sole detailed mapping, so this file-level closure does not duplicate or inflate method counts.",
+      "frameworkResponsibilities": "Python unittest/subprocess/tempfile and NODE_BIN prerequisite are replaced by the existing monolith test project, controlled native validator calls and Root normal test admission; no Python or custom Node execution is required.",
+      "frozenProfileNote": "Only this exact original four-method test-file execution is normally verified. Generic validator CLI/package receipt compatibility, full documentation tooling, other historical versions, corpus claims and HV remain separate.",
+      "decommissionable_from_pr": true,
+      "decommissionable_scope": "Original module-graph test execution only; local originals remain retained. No physical deletion, complete producer closure or readiness claim.",
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false
+    }
+  ],
+  "normalVerifiedTestFiles": 1,
+  "normalVerifiedOriginalMethods": 4,
+  "additionalMethodScopes": 0,
+  "frameworkSourceAtProof": {
+    "path": "remediation/nuke-app/Build.cs",
+    "sha256": "82b75311060f493f0e409845a7ce5e038ce02cbbb4472f8dd895a021efc1029e"
+  },
+  "requireUnchangedNativePins": true
+}

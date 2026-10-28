@@ -1,30 +1,30 @@
 {
   "schemaVersion": "1.0.0",
-  "at": "2026-10-28T13:31:05",
+  "at": "2026-10-28T14:46:47",
   "authoritative": false,
   "projectionOnly": true,
   "derivedFrom": {
     "path": "remediation/nuke-planning/source/legacy-port-disposition-inventory.json",
-    "sha256": "40e5e43a01a49a94f67c71a3d0f39c01050ff32102a3f058ab2fb55501850bab",
+    "sha256": "569e75df96291444688c160262d482dae24763a6e2a5f8aff65ac5e60ef12ecf",
     "totalNormalizedPaths": 1464,
     "additionalLocalPathsRetained": 1266
   },
   "identityManifest": {
     "path": "remediation/nuke-planning/source/legacy-python-tracked-manifest.json",
-    "sha256": "5191f7d07fa383f857f8c46cea8dc4c85dfbb438a1ae23bcd7e264d85bc8e704",
+    "sha256": "bd2c5e19d2ec9867e3f2460f98a389cf9d13030163aa5921df187417f0dee546",
     "publishedPythonCount": 198,
-    "headAtIdentityRead": "d6da36efa693d456b318ef82d68d198ede4f8ec7"
+    "headAtIdentityRead": "5763ea84bb89a61c206a4aee9c144f17c9850ee8"
   },
   "totals": {
     "entries": 198,
     "unmappedPrimaryOwners": 0,
-    "normalVerified": 22,
+    "normalVerified": 23,
     "executionRetired": 0,
     "normalVerifiedMethodScopes": 202,
     "acceptedComplete": 0,
     "scopeExclusions": 0,
     "safeToDelete": 0,
-    "decommissionableFromPr": 22
+    "decommissionableFromPr": 23
   },
   "rules": [
     "This is a generated published-only projection of one authoritative union inventory, not a second maintained inventory.",
@@ -7233,8 +7233,7 @@
       "owner": "Sources",
       "category": "Sources",
       "operations": [
-        "Extract",
-        "pending-explicit-registry-binding"
+        "Extract"
       ],
       "services": [
         "IPermissionReferenceSourceFacts",
@@ -12442,25 +12441,30 @@
       "owner": "Documentation",
       "category": "Design",
       "operations": [
-        "pending-explicit-registry-binding"
+        "Architecture"
       ],
       "services": [
         "ModuleGraphValidator"
       ],
-      "migration_status": "partial-explicit-method-allocation",
+      "migration_status": "normal-native-original-test-methods-verified",
       "native_tests_or_pending": [
+        "AndroidMcp.BuildTool.Tests.Documentation.ModuleGraphRealTests and CurrentLayoutModelValidationRealTests",
         "remediation/nuke-app/Tests/Documentation/ModuleGraphRealTests.cs"
       ],
-      "additional_responsibilities": [],
-      "remaining": [],
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
+      "remaining": [
+        "Only this exact original four-method test-file execution is normally verified. Generic validator CLI/package receipt compatibility, full documentation tooling, other historical versions, corpus claims and HV remain separate."
+      ],
       "artifact_role": "published-legacy-port-baseline",
       "primary_code_path": "remediation/test_design_module_graph.py",
       "byte_identity_group": "09903f374e64cfe7d99318b9765eb969c2f6a685075cebe11f85567b3c7541da",
       "byte_identical_path_count": 3,
       "same_bytes_imply_profile_or_caller_parity": false,
       "standalone_nuke_target_required": false,
-      "normal_verified": false,
-      "normal_verification_status": "partial-explicit-normal-method-verification",
+      "normal_verified": true,
+      "normal_verification_status": "normal-original-test-methods-verified",
       "normal_verified_methods": [
         {
           "method": "test_reproduces_cyclic_old_crosswalk",
@@ -12531,7 +12535,7 @@
           "scope": "Owner-explicit same-original method fixture claim; caller/helper/file closure remains separate."
         }
       ],
-      "pending_methods": "<module-body-and-required-callers>",
+      "pending_methods": null,
       "pending_method_list_basis": "Exact owner-supplied function/method anchors when available; module/caller closure is explicit. Lexical proposal anchors are not an AST or exhaustive branch inventory.",
       "execution_retired": false,
       "retention_normal_verified": false,
@@ -12540,9 +12544,9 @@
       "generic_behavior_retired": false,
       "retirement_decision": null,
       "hv_acceptance": "Deferred by user until Ready; not used as a prerequisite to record normal implementation verification.",
-      "decommissionable_from_pr": false,
+      "decommissionable_from_pr": true,
       "decommissionable_scope": [
-        null
+        "Original module-graph test execution only; local originals remain retained. No physical deletion, complete producer closure or readiness claim."
       ],
       "decommissionable_means_physical_delete": false,
       "evidence_refs": [
@@ -12580,6 +12584,13 @@
           "role": "method-allocation",
           "source_sha256": "09903f374e64cfe7d99318b9765eb969c2f6a685075cebe11f85567b3c7541da",
           "method": "test_entire_current_class_graph_is_owned_and_acyclic"
+        },
+        {
+          "evidence": "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json",
+          "owner": "Documentation",
+          "role": "explicit-source-normal-verification",
+          "source_sha256": "09903f374e64cfe7d99318b9765eb969c2f6a685075cebe11f85567b3c7541da",
+          "method": null
         }
       ],
       "accepted_complete": false,
