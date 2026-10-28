@@ -1,0 +1,390 @@
+[
+  {
+    "path": "remediation/catalog/tests/test_contract_models.py",
+    "sha256": "95b7bc59f9528d849030cd56cfd23915433931876b8eb24714307aa756c833e5",
+    "cases": [
+      "test_cas_tombstones_history_and_cursor",
+      "test_import_both_collision_orders_and_rebase",
+      "test_removed_base_without_overlay_is_absent",
+      "test_rejected_registry_does_not_mutate_selected_view",
+      "test_binding_rules_dominate_all_aliases",
+      "test_generated_alias_identity_and_default_deny",
+      "test_bridge_ddl_integrity_and_closed_enums"
+    ],
+    "executed": false,
+    "scope": "source inventory only, each assertion must be allocated before port"
+  },
+  {
+    "path": "remediation/catalog/tests/test_device_resolution.py",
+    "sha256": "9f968f5d88b10641cde92fbef258e51c663546c1e92ce4f41de16216dbdffcef",
+    "cases": [
+      "test_major_minor_and_removed_apply_to_bindings_and_types",
+      "test_minor_unknown_does_not_become_zero",
+      "test_extension_alternative_is_not_android_minor",
+      "test_modules_and_oem_builds_are_independent_axes",
+      "test_interface_version_hash_and_denied_probe",
+      "test_authoritative_absence_differs_from_unreachable",
+      "test_type_dependencies_and_missing_schema_are_consistent",
+      "test_recursive_types_resolve_as_one_consistent_graph",
+      "test_available_variant_does_not_hide_ambiguous_unknown_variant",
+      "test_dependency_schema_mismatch_does_not_select_a_codec",
+      "test_unknown_lifecycle_is_retained_with_reason",
+      "test_atomic_publication_epoch_invalidation_and_cross_target",
+      "test_availability_is_not_a_permission_grant",
+      "test_bootstrap_etag_refresh_and_precondition_order",
+      "test_status_is_bounded_header_and_etag_scope_is_distinct",
+      "test_epoch_exhaustion_does_not_mutate_catalog_pins"
+    ],
+    "executed": false,
+    "scope": "source inventory only, each assertion must be allocated before port"
+  },
+  {
+    "path": "remediation/catalog/tests/test_device_view_storage.py",
+    "sha256": "0be3313508241b304ea14e1a32d9a935091970dd8c660a1f13a9d0fa91418915",
+    "cases": [
+      "test_complete_atomic_activation_and_type_projection",
+      "test_invalidation_preserves_old_snapshot_and_records_reason",
+      "test_cross_target_valid_hash_cannot_mutate_active_pointer",
+      "test_sql_guards_reject_deletion_stale_cas_and_sealed_mutation",
+      "test_refresh_cas_does_not_activate_old_epoch_facts",
+      "test_wire_contract_evidence_is_stored_separately_from_existence",
+      "test_partial_inventory_cannot_replace_complete_catalog_view",
+      "test_entry_json_cannot_override_normalized_availability"
+    ],
+    "executed": false,
+    "scope": "source inventory only, each assertion must be allocated before port"
+  },
+  {
+    "path": "remediation/catalog/tests/test_effective_device_inventory.py",
+    "sha256": "565785beb3fe91e339aa6c3d55c72c18dafc86fb22693ff028ccaf4cf45244b5",
+    "cases": [
+      "test_suppression_retains_existence_but_denies_known_dispatch",
+      "test_local_addition_is_visible_and_version_unknown",
+      "test_structured_field_override_changes_transitive_binding_hash",
+      "test_matching_allow_succeeds_but_changed_document_pin_denies",
+      "test_suppressed_type_denies_an_otherwise_allowed_binding"
+    ],
+    "executed": false,
+    "scope": "source inventory only, each assertion must be allocated before port"
+  },
+  {
+    "path": "remediation/catalog/tests/test_source_metadata_crud.py",
+    "sha256": "34aa4c6f90d2bfb99c29bc46a84b36eb2e377fc5cd226baef16ec2f3b29a25ee",
+    "cases": [
+      "test_owner_and_creation_preconditions",
+      "test_put_cas_and_reader_cursor_invalidation",
+      "test_cursor_cannot_transfer_to_another_reader",
+      "test_same_reader_can_retry_current_cursor_without_consuming_it",
+      "test_meta_json_literal_unicode_and_numeric_vectors",
+      "test_delete_is_tombstone_and_idempotent_with_fresh_cas",
+      "test_imported_base_is_immutable_and_local_suppression_does_not_grant",
+      "test_new_import_conflicts_with_overlay_and_requires_explicit_rebase",
+      "test_failed_schema_validation_rolls_back_without_generation_change",
+      "test_lifecycle_pair_is_an_atomic_group_unit",
+      "test_unknown_dependency_rejected_and_does_not_create_partial_group",
+      "test_history_and_selected_head_cannot_be_deleted_or_rewritten",
+      "test_json_null_schema_cannot_pass_sql_check",
+      "test_unknown_catalog_reference_cannot_be_saved_as_effective_group",
+      "test_exact_trusted_contract_pin_is_required_for_group_membership",
+      "test_descriptor_uses_trusted_type_pin_and_explicit_unsupported_materialization",
+      "test_unknown_descriptor_can_preserve_unknown_materialization",
+      "test_public_representation_matches_local_openapi_component",
+      "test_metadata_openapi_has_only_resolvable_local_references"
+    ],
+    "executed": false,
+    "scope": "source inventory only, each assertion must be allocated before port"
+  },
+  {
+    "path": "remediation/catalog/tests/test_source_metadata_contract.py",
+    "sha256": "2b28b2567020a46dfeae40996f15c1bb41418fae6a50f77bfe82d2fe0d6e4b8a",
+    "cases": [
+      "test_generated_schema_is_available",
+      "test_all_unclassified_entries_remain_unknown_and_searchable",
+      "test_named_listener_is_candidate_never_registrable",
+      "test_producer_dto_retains_selector_and_ordered_hash_candidates",
+      "test_source_metadata_cannot_claim_runtime_or_client_authority",
+      "test_entry_identity_mismatch_rejected_before_attach",
+      "test_attach_preserves_inputs_and_uses_one_canonical_extension",
+      "test_aggregate_metadata_does_not_borrow_oneway_from_another_version",
+      "test_duplicate_source_variant_context_cannot_be_flattened_into_one_entry",
+      "test_unknown_fields_are_rejected_in_known_contract",
+      "test_native_evidence_identity_is_not_a_binding_id",
+      "test_materialization_does_not_auto_subclass_abstract_types",
+      "test_unknown_hidl_source_constraint_is_retained_without_positive_clause",
+      "test_null_source_parameter_direction_means_unresolved_not_input",
+      "test_reply_mode_cannot_invent_synchronous_from_missing_owner_flag",
+      "test_computed_native_descriptor_keeps_unresolved_expression",
+      "test_immutable_builder_occurrences_attach_before_effective_record_hash"
+    ],
+    "executed": false,
+    "scope": "source inventory only, each assertion must be allocated before port"
+  },
+  {
+    "path": "remediation/catalog/tests/test_postfreeze12_wire_evidence.py",
+    "sha256": "67de30565b887bfdbf40ab25a1b9e2118524c5508a99fbdc5b26728ddb6a9373",
+    "cases": [
+      "test_unknown_proof_can_be_verified_then_revoked_without_rewriting_identity",
+      "test_stale_revision_or_invalid_verified_codec_cannot_change_selection"
+    ],
+    "executed": false,
+    "scope": "source inventory only, each assertion must be allocated before port"
+  },
+  {
+    "path": "remediation/catalog/tests/test_permission_reference.py",
+    "sha256": "7e5a7af183bbe5ea915c77fdf9d87ad8658f5d69bf6bdaff7bd64b77087dd6d7",
+    "cases": [
+      "test_literals_and_major_minor_facts_not_guessed",
+      "test_missing_value_and_deprecated_are_not_permission_absence_or_removal",
+      "test_duplicate_names_remain_evidence_and_are_flagged",
+      "test_script_text_cannot_create_a_documented_field"
+    ],
+    "executed": false,
+    "scope": "source inventory only, each assertion must be allocated before port"
+  },
+  {
+    "path": "remediation/catalog/tests/test_permission_reference_import.py",
+    "sha256": "e9f56cb3f5f7f984b2eca7eb19557f76c1f73af4df22c4975eb585ce23dcfd3e",
+    "cases": [
+      "test_documented_constants_are_symbols_not_manifest_definitions"
+    ],
+    "executed": false,
+    "scope": "source inventory only, each assertion must be allocated before port"
+  },
+  {
+    "path": "remediation/catalog/tests/test_remediation.py",
+    "sha256": "e04129213f87be4c19ef30774835f8ff2a07b1ae2bb860bbbcb9ea8c4ef816c4",
+    "cases": [
+      "test_all_natural_primary_keys_are_not_null",
+      "test_registry_state_round_trip",
+      "test_operation_specific_preconditions",
+      "test_registry_switch_selects_immutable_entry_variant",
+      "test_conflict_resolution_extension_schema",
+      "test_permission_root_vocabulary",
+      "test_offline_copy_migration",
+      "test_symbolic_read_and_header_do_not_leak_owner",
+      "test_repeated_aidl_statement_locators_are_distinct"
+    ],
+    "executed": false,
+    "scope": "source inventory only, each assertion must be allocated before port"
+  },
+  {
+    "path": "remediation/catalog/tests/test_round2.py",
+    "sha256": "95e6957ad9e4d951588eed55b43393a6ebb5cdaf173993157e83df6d57925765",
+    "cases": [
+      "test_source_metadata_and_generation_round_trip",
+      "test_missing_inventory_metadata_fails_closed",
+      "test_corrected_source_fact_gets_new_occurrence_not_new_binding",
+      "test_package_and_type_have_distinct_identity_namespaces",
+      "test_failed_header_does_not_pop_package",
+      "test_legacy_extractor_has_no_executable_run",
+      "test_dispatch_schema_is_independent_of_provenance",
+      "test_bridge_config_matches_named_design_records",
+      "test_scoped_idempotency_storage",
+      "test_external_annotations_scope_mapping_and_parse_error",
+      "test_positive_raw_grant_never_overrides_known_binding",
+      "test_overlay_revision_identity_and_registry_state_constraints",
+      "test_minor_schema_and_declaration_variants",
+      "test_permission_export_and_optimized_validation"
+    ],
+    "executed": false,
+    "scope": "source inventory only, each assertion must be allocated before port"
+  },
+  {
+    "path": "remediation/catalog/tests/test_round3.py",
+    "sha256": "25e615adadb6ee953ce17b1c4ec8db71133777fbf288b2506a937cd9192e980d",
+    "cases": [
+      "test_java_lang_annotation_target",
+      "test_parser_revision_creates_immutable_evidence_instance",
+      "test_permission_summary_matches_export_contract",
+      "test_positive_and_absent_permission_evidence_remain_visible",
+      "test_generated_and_generic_share_policy_and_known_raw_cannot_bypass",
+      "test_database_validation_without_exports",
+      "test_raw_constraints_have_one_authority",
+      "test_published_pointer_and_single_published_registry",
+      "test_overlay_commit_requires_same_revision_history",
+      "test_local_collision_cannot_publish_or_leak_discovery",
+      "test_native_availability_and_bounded_audit_retention",
+      "test_import_metadata_and_history_cursor_contract",
+      "test_migration_seeds_published_version_and_marks_legacy"
+    ],
+    "executed": false,
+    "scope": "source inventory only, each assertion must be allocated before port"
+  },
+  {
+    "path": "remediation/catalog/tests/test_round4.py",
+    "sha256": "e2869d4b2e4c1175eeb490c8792f5656346d0c765b4150660574b940e76ace5c",
+    "cases": [
+      "test_silent_signature_record_loss_blocks_publication",
+      "test_oracle_retains_mutation_justification",
+      "test_interface_shift_constant_does_not_consume_methods",
+      "test_generic_parcelable_retains_field",
+      "test_changed_missing_and_suppressed_import_bases_block_pointer",
+      "test_history_reason_has_append_only_storage_and_contract",
+      "test_locator_alignment_guard_survives_optimization",
+      "test_unknown_semantics_reader_quarantines_and_retains_raw"
+    ],
+    "executed": false,
+    "scope": "source inventory only, each assertion must be allocated before port"
+  },
+  {
+    "path": "remediation/catalog/tests/test_round5.py",
+    "sha256": "367176a7f938cf4678159d66a1ede0d3caf483bf27f91e1e5c030a69f7376543",
+    "cases": [
+      "test_unbalanced_interface_is_retained_as_failed_schema",
+      "test_index_target_mismatch_rejects_publication",
+      "test_copy_migration_rejects_deleted_local_collision",
+      "test_interface_failure_status_is_not_promoted",
+      "test_deleted_local_import_collision_blocks_pointer",
+      "test_future_platform_annotations_use_matching_index",
+      "test_sdk_type_presence_is_known_without_invented_type_kind",
+      "test_wrapper_alias_can_require_two_bindings",
+      "test_minor_kind_vocabulary_is_version_gated",
+      "test_record_components_and_compact_constructor_parameters",
+      "test_validator_closes_database_on_failure",
+      "test_restore_metadata_uses_explicit_platform"
+    ],
+    "executed": false,
+    "scope": "source inventory only, each assertion must be allocated before port"
+  },
+  {
+    "path": "remediation/catalog/tests/test_round7.py",
+    "sha256": "78793812aac2c602f56f46d6596af0a3b91be1746d584b3a45b9b8b37fd4c397",
+    "cases": [
+      "test_local_tombstone_is_not_discovered",
+      "test_deleted_local_cannot_hide_existing_import",
+      "test_overlay_origin_and_tombstone_state_are_consistent",
+      "test_history_operations_match_transitions",
+      "test_all_forward_declarations_keep_dotted_identity",
+      "test_top_level_lexing_ignores_quoted_decoys_and_retains_lines",
+      "test_cpp_header_braces_are_not_a_declaration_body",
+      "test_multiple_aidl_declarations_are_published",
+      "test_stale_parser_cache_rejects_publication",
+      "test_missing_index_for_annotations_is_reported_partial",
+      "test_unqualified_java_permission_literal_is_unknown"
+    ],
+    "executed": false,
+    "scope": "source inventory only, each assertion must be allocated before port"
+  },
+  {
+    "path": "remediation/catalog/tests/test_round8.py",
+    "sha256": "77e8320a25fe6408ee7f9cba9c70b2545c0932fae056a7b9830267c2af6cc9a4",
+    "cases": [
+      "test_reader_rejects_nonobject_or_missing_typed_operator",
+      "test_reader_rejects_corrupt_known_semantic_child",
+      "test_reader_quarantines_only_typed_future_operator_and_preserves_metadata",
+      "test_nested_aidl_types_and_following_methods_published",
+      "test_nested_structured_types_do_not_swallow_fields",
+      "test_aidl_merged_head_rejected_instead_of_fabricated_type",
+      "test_nested_oneway_does_not_mark_the_outer_interface",
+      "test_aidl_reconciliation_comments_are_not_statements",
+      "test_nested_aidl_unknown_statement_remains_visible",
+      "test_malformed_nested_aidl_keeps_full_source_and_reason",
+      "test_aidl_drop_mutant_cannot_publish",
+      "test_java_lang_subpackages_are_explicit_imports",
+      "test_java_nested_type_implicit_visibility",
+      "test_imported_overlay_current_base_required_on_write",
+      "test_copy_migration_admits_only_matching_imported_overlay_base"
+    ],
+    "executed": false,
+    "scope": "source inventory only, each assertion must be allocated before port"
+  },
+  {
+    "path": "remediation/catalog/tests/test_round9.py",
+    "sha256": "2cdf196b8e31b0a9b89b3b8e81339afde699f9c376d8ed85972ebcb4f715cba4",
+    "cases": [
+      "test_bracket_and_generic_parameter_name_boundaries",
+      "test_bracket_and_generic_field_name_boundaries_publish",
+      "test_identifier_type_still_needs_a_name_boundary"
+    ],
+    "executed": false,
+    "scope": "source inventory only, each assertion must be allocated before port"
+  },
+  {
+    "path": "remediation/catalog/tests/test_round9_review.py",
+    "sha256": "1bcf158c3fa0956e3a9eb08aa219033d4115ae734daf92910f3196d7f76ccc35",
+    "cases": [
+      "test_nested_types_do_not_replace_single_outer_interface_file_metadata",
+      "test_multiple_outer_types_still_have_explicit_multiple_metadata",
+      "test_raw_header_preserves_annotation_braces_and_cpp_header_literal",
+      "test_singleton_deletions_are_rejected",
+      "test_hash_shapes_are_checked_at_storage_boundary",
+      "test_all_overlay_states_have_cat1_projection",
+      "test_conflict_etag_uses_new_selected_base_and_missing_base_local_marker"
+    ],
+    "executed": false,
+    "scope": "source inventory only, each assertion must be allocated before port"
+  },
+  {
+    "path": "remediation/catalog/tests/test_round10.py",
+    "sha256": "8d9708bd98e312de63f97c9a21e9c7345c8af0bd04f55ebb820e5acb762958f7",
+    "cases": [
+      "test_annotations_require_an_explicit_platform_version",
+      "test_non_authoritative_positive_observations_are_unknown",
+      "test_malformed_interval_is_quarantined_without_hiding_other_rows",
+      "test_invalidation_reason_is_retained",
+      "test_facts_cannot_be_relabelled_with_a_new_epoch",
+      "test_device_paths_use_declared_scopes_and_response_sets",
+      "test_graph_digest_is_recomputed_at_publication"
+    ],
+    "executed": false,
+    "scope": "source inventory only, each assertion must be allocated before port"
+  },
+  {
+    "path": "remediation/catalog/tests/test_round11.py",
+    "sha256": "d8a367efac4145f51c7e05514b4f94abffea6943c77981ce256b40e766b31772",
+    "cases": [
+      "test_source_point_is_unknown_outside_proven_minor",
+      "test_inconsistent_since_sdks_is_unknown",
+      "test_lifecycle_text_does_not_change_declared_type_contract",
+      "test_type_reference_proof_text_is_not_semantic_shape",
+      "test_direction_nullable_and_hidl_outputs_affect_contract",
+      "test_missing_or_unknown_kind_rejects_without_fabricating_a_binding",
+      "test_interface_oneway_semantics_apply_to_all_methods",
+      "test_builder_propagates_interface_oneway_to_method_contract",
+      "test_builder_async_flags_are_scoped_and_ignore_quoted_or_nested_tokens",
+      "test_proven_supertype_change_affects_type_contract_and_graph",
+      "test_imported_aidl_type_and_noninvocable_fields",
+      "test_same_count_foreign_inventory_cannot_activate",
+      "test_formal_name_cannot_resolve_to_package_class",
+      "test_valid_hash_cannot_substitute_selected_contract",
+      "test_sql_inventory_digest_and_selected_contract_guards",
+      "test_verified_wire_evidence_cannot_be_empty_or_duplicate",
+      "test_abbreviated_java_lang_needs_declared_same_snapshot_type",
+      "test_malformed_legacy_header_quarantines_without_aborting_projection",
+      "test_type_root_does_not_acquire_an_implicit_self_dependency"
+    ],
+    "executed": false,
+    "scope": "source inventory only, each assertion must be allocated before port"
+  },
+  {
+    "path": "remediation/catalog/tests/test_round12.py",
+    "sha256": "ab95c5d571a9d1149667268037267ec031c09cc31676a272f8d4bb02059fd43b",
+    "cases": [
+      "test_inventory_root_is_not_a_legacy_snapshot_writer",
+      "test_only_one_documented_dv2_shape_matches_actual_etag",
+      "test_available_analysis_with_null_document_pin_cannot_publish",
+      "test_nonavailable_bindings_emit_no_null_schema_alias",
+      "test_sql_seal_cannot_accept_an_available_json_null_document_pin"
+    ],
+    "executed": false,
+    "scope": "source inventory only, each assertion must be allocated before port"
+  },
+  {
+    "path": "remediation/catalog/tests/test_postfreeze10.py",
+    "sha256": "2e1c5f56d6d03011c89b074d7fda663babd410fcb1b0bf4e7b039939a7e428be",
+    "cases": [
+      "test_local_overlay_identity_has_the_same_hash_shape_as_imported_entries"
+    ],
+    "executed": false,
+    "scope": "source inventory only, each assertion must be allocated before port"
+  },
+  {
+    "path": "remediation/catalog/tests/test_postfreeze11.py",
+    "sha256": "33e853b41dbf6fae70f90fb3ff699eab3110734375f2efa99dfa6a71aba387db",
+    "cases": [
+      "test_downstream_type_shape_changes_selected_binding_schema_hash"
+    ],
+    "executed": false,
+    "scope": "source inventory only, each assertion must be allocated before port"
+  }
+]

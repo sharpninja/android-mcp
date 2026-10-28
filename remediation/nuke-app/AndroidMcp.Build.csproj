@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>AndroidMcp.Build</AssemblyName>
+    <RootNamespace>AndroidMcp.BuildTool</RootNamespace>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Nuke.Common" Version="10.1.0" />
+    <Compile Remove="Tests/**/*.cs" />
+    <None Remove="Tests/**" />
+  </ItemGroup>
+</Project>

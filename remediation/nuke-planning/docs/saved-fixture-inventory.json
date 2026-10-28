@@ -1,0 +1,2819 @@
+{
+  "schemaVersion": "1.0.0",
+  "observedAtLocal": "2026-10-27T20:05:59",
+  "scope": "Static inspection of saved source and generated files only; no old Python or Node code executed; no C# parity or runtime pass claimed.",
+  "baselineFiles": [
+    {
+      "path": "remediation/design-c4/README.md",
+      "bytes": 6515,
+      "sha256": "6169f84191b95dd3843ca5b72e95a80a96aae7b08a5402c3fdd48d6ada68c2f5"
+    },
+    {
+      "path": "remediation/design-c4/build.gradle.kts",
+      "bytes": 18128,
+      "sha256": "877c30e3bf39f6254e8d9ca952e73fe68a04de60fa07a0a358e541616ac469d8"
+    },
+    {
+      "path": "remediation/design-c4/toolchain-lock.json",
+      "bytes": 1876,
+      "sha256": "2dc2418974ec245d87551d5ab56e7878c9e844e832e3c79b6e17065873e3e8bf"
+    },
+    {
+      "path": "remediation/design-c4/renderer-lock.json",
+      "bytes": 1211,
+      "sha256": "7a3835898cec12466a51f0aa28980cc2f41e1ca657b3cf8ce20b37436087e2b4"
+    },
+    {
+      "path": "remediation/design-c4/docs/Android MCP Bridge Design.md",
+      "bytes": 324206,
+      "sha256": "0e3bcfcc202ade99cc9e19c5b376b42b848971f28ea624f145ccac066b46a71b"
+    },
+    {
+      "path": "remediation/design-c4/docs/ui-blueprint.md",
+      "bytes": 319159,
+      "sha256": "9f164a4b14e1a7a8db5fa88eef1ee015b261335314e3b98903cf4f201fea6058"
+    },
+    {
+      "path": "remediation/design-c4/docs/ui-asset-manifest.json",
+      "bytes": 324639,
+      "sha256": "8d856426db5a61b15dfab6e9ffd950da5e738de06114408ccac0704904d5a44b"
+    },
+    {
+      "path": "remediation/design-c4/docs/ui-screens-and-storyboards.md",
+      "bytes": 120089,
+      "sha256": "fbddbe043639475b63c788cc33dc7d23167cec7c90f46c63b2256a155d236b18"
+    },
+    {
+      "path": "remediation/design-c4/docs/storyboards.html",
+      "bytes": 711502,
+      "sha256": "50c906a501c673f318c1c68b7ea2ebae399094655e2a355b0491b0f0f59de93f"
+    },
+    {
+      "path": "remediation/design-c4/storyboards/storyboard.md",
+      "bytes": 59513,
+      "sha256": "5d436f8e351b70b994ac2bbdfa3ad7c5fc3bab1bd89ca0ebc05c84823fe0fb30"
+    },
+    {
+      "path": "remediation/design-c4/architecture/workspace.dsl",
+      "bytes": 33765,
+      "sha256": "ee49fbdd60efac1c68356c5fa39ccb6c75609526fc580677405d61a0963d9281"
+    },
+    {
+      "path": "remediation/design-c4/architecture/code-diagrams.md",
+      "bytes": 42039,
+      "sha256": "3a75a05e90a60231e1851f6cd23f779c887b0d4c8713c75a1bf24854f073b837"
+    },
+    {
+      "path": "remediation/design-c4/architecture/module-contract.json",
+      "bytes": 9916,
+      "sha256": "8f675e7fe5313a62df6d1ece2f6bb2a44fb77ce844123d6e351b701bd609050b"
+    },
+    {
+      "path": "remediation/design-c4/architecture/native-identities.json",
+      "bytes": 9590,
+      "sha256": "4c603d499e96d8d64e0936068c2da9b57e89e866f5469f5d16e2d20b5f9a13ae"
+    },
+    {
+      "path": "remediation/design-c4/architecture/arc-upstream-facts.json",
+      "bytes": 4435,
+      "sha256": "98cb45cae08159d8478c49fc975a8f72e0768aaed62ea953c891fb618180184c"
+    },
+    {
+      "path": "remediation/design-c4/contracts/source-pins.json",
+      "bytes": 692,
+      "sha256": "29561ec9fa01b672dabd19e2f1e26c53c0efccf03d461d014319b451c4ce3b05"
+    },
+    {
+      "path": "remediation/design-c4/tooling/bootstrap.py",
+      "bytes": 3349,
+      "sha256": "92b77e3d2a09416a56f3f64beca23f3c2732e32ed777176fa9fadbd6bedc1ce1"
+    },
+    {
+      "path": "remediation/design-c4/tooling/render-ui.cjs",
+      "bytes": 14156,
+      "sha256": "b1d515c91b4ada4aabf4b11a6b2ac66519dfbde7b6296d68d8434ebb091fe6b8"
+    },
+    {
+      "path": "remediation/design-c4/tooling/validate-modules.cjs",
+      "bytes": 2649,
+      "sha256": "aec2dba1bb10212593331a01ef2aa3005a10c95c0894cce1a1109c6a11d239fd"
+    },
+    {
+      "path": "remediation/design-c4/tooling/validate-contracts.cjs",
+      "bytes": 6001,
+      "sha256": "30956b3f90ac52dd47f980a14cca495d98c1d3286e7b6e32a2bcac8a338e77b5"
+    },
+    {
+      "path": "remediation/design-c4/build/receipts/ui-projection.json",
+      "bytes": 6443,
+      "sha256": "66bf34c5a56947a709dc91a94cf802853d508fd2507b81ca33ed78861e57b320"
+    },
+    {
+      "path": "remediation/design-c4/build/receipts/docs-validation.txt",
+      "bytes": 93,
+      "sha256": "94a3317902d1900854e80bbad4d91b3375d0329575ddce6fd9f19945d74e0c25"
+    },
+    {
+      "path": "remediation/design-c4/build/receipts/module-graph.json",
+      "bytes": 646,
+      "sha256": "7445eb59d4342a447c6975e2211f09e01d0a7a8889fe584720acaa62f6bee5ce"
+    },
+    {
+      "path": "remediation/design-c4/build/receipts/model-contracts.json",
+      "bytes": 148,
+      "sha256": "21cef9e5e767a2025070c21d48bc98cf72845dc2237aa13d69ab430aa004e8db"
+    },
+    {
+      "path": "remediation/design-c4/build/receipts/storyboard-browser-validation-v7.json",
+      "bytes": 3073,
+      "sha256": "bb7b837ff173bcb1bc86c1bba6a76bf5ece68597ce0f9628d2a404192908dd61"
+    },
+    {
+      "path": "remediation/design-c4/build/receipts/reproducibility-003.json",
+      "bytes": 14891,
+      "sha256": "1340cc231b8fbbe3b1538ac2ee33eaa830edda8e1aa365ce5f34228cd32c61c2"
+    },
+    {
+      "path": "remediation/design-c4/build/receipts/gradle-package-040.completion.json",
+      "bytes": 416,
+      "sha256": "6408bebda81dbcea5f651024b7b884f0aba3e9a03990cc2241c27a2ae2e24da6"
+    },
+    {
+      "path": "remediation/design-c4/build/receipts/reproducibility-008.json",
+      "bytes": 74802,
+      "sha256": "f910f74fa3ca2757db82e7152f7841c8f72bd8b85e09d89f8343f5d0a948a72c"
+    },
+    {
+      "path": "remediation/design-c4/build/receipts/design024-inline-ui-browser.json",
+      "bytes": 60662,
+      "sha256": "34d2129f6a79fa40a00b598bd6ac02678881035a51d22b63730d86446f9daa65"
+    },
+    {
+      "path": "remediation/design-c4/build/receipts/design024-final-visual-inspection.json",
+      "bytes": 2386,
+      "sha256": "3f970dc3d0bda58ad0956e9a4534b917e3fa1177cfc7868b9ac378f496fdad4a"
+    },
+    {
+      "path": "remediation/design-c4/build/receipts/design024-final-architecture-browser.json",
+      "bytes": 9506,
+      "sha256": "74ef335286475eb7f411b393929a64d78e6a8d2ef77b981cc23549c5b46473e9"
+    }
+  ],
+  "counts": {
+    "screens": 11,
+    "controls": 88,
+    "states": 76,
+    "storyboards": 6,
+    "steps": 107,
+    "docsVectorSvgs": 221,
+    "htmlSectionElements": 108,
+    "legacyTestCases": 58
+  },
+  "screens": [
+    {
+      "screenId": "SCR01",
+      "controlIds": [
+        "SCR01.C01",
+        "SCR01.C02",
+        "SCR01.C03",
+        "SCR01.C04",
+        "SCR01.C05"
+      ],
+      "stateIds": [
+        "SCR01.S0",
+        "SCR01.S1",
+        "SCR01.S2",
+        "SCR01.S3",
+        "SCR01.S4",
+        "SCR01.S5",
+        "SCR01.S6",
+        "SCR01.S7"
+      ]
+    },
+    {
+      "screenId": "SCR02",
+      "controlIds": [
+        "SCR02.C01",
+        "SCR02.C02",
+        "SCR02.C03",
+        "SCR02.C04",
+        "SCR02.C05",
+        "SCR02.C06",
+        "SCR02.C07",
+        "SCR02.C08",
+        "SCR02.C09",
+        "SCR02.C10"
+      ],
+      "stateIds": [
+        "SCR02.S0",
+        "SCR02.S1",
+        "SCR02.S2",
+        "SCR02.S3",
+        "SCR02.S4"
+      ]
+    },
+    {
+      "screenId": "SCR03",
+      "controlIds": [
+        "SCR03.C01",
+        "SCR03.C02",
+        "SCR03.C03",
+        "SCR03.C04",
+        "SCR03.C05",
+        "SCR03.C06",
+        "SCR03.C07",
+        "SCR03.C08",
+        "SCR03.C09",
+        "SCR03.C10",
+        "SCR03.C11"
+      ],
+      "stateIds": [
+        "SCR03.S0",
+        "SCR03.S1",
+        "SCR03.S2",
+        "SCR03.S3",
+        "SCR03.S4",
+        "SCR03.S5",
+        "SCR03.S6",
+        "SCR03.S7",
+        "SCR03.S8",
+        "SCR03.S9"
+      ]
+    },
+    {
+      "screenId": "SCR04",
+      "controlIds": [
+        "SCR04.C01",
+        "SCR04.C02",
+        "SCR04.C03",
+        "SCR04.C04",
+        "SCR04.C05",
+        "SCR04.C06",
+        "SCR04.C07",
+        "SCR04.C08",
+        "SCR04.C09",
+        "SCR04.C10"
+      ],
+      "stateIds": [
+        "SCR04.S0",
+        "SCR04.S1",
+        "SCR04.S2",
+        "SCR04.S3",
+        "SCR04.S4"
+      ]
+    },
+    {
+      "screenId": "SCR05",
+      "controlIds": [
+        "SCR05.C01",
+        "SCR05.C02",
+        "SCR05.C03",
+        "SCR05.C04",
+        "SCR05.C05",
+        "SCR05.C06",
+        "SCR05.C07"
+      ],
+      "stateIds": [
+        "SCR05.S0",
+        "SCR05.S1",
+        "SCR05.S2",
+        "SCR05.S3",
+        "SCR05.S4",
+        "SCR05.S5"
+      ]
+    },
+    {
+      "screenId": "SCR06",
+      "controlIds": [
+        "SCR06.C01",
+        "SCR06.C02",
+        "SCR06.C03",
+        "SCR06.C04",
+        "SCR06.C05",
+        "SCR06.C06",
+        "SCR06.C07"
+      ],
+      "stateIds": [
+        "SCR06.S0",
+        "SCR06.S1",
+        "SCR06.S2",
+        "SCR06.S3",
+        "SCR06.S4",
+        "SCR06.S5"
+      ]
+    },
+    {
+      "screenId": "SCR07",
+      "controlIds": [
+        "SCR07.C01",
+        "SCR07.C02",
+        "SCR07.C03",
+        "SCR07.C04",
+        "SCR07.C05",
+        "SCR07.C06",
+        "SCR07.C07",
+        "SCR07.C08",
+        "SCR07.C09"
+      ],
+      "stateIds": [
+        "SCR07.S0",
+        "SCR07.S1",
+        "SCR07.S2",
+        "SCR07.S3",
+        "SCR07.S4",
+        "SCR07.S5",
+        "SCR07.S6"
+      ]
+    },
+    {
+      "screenId": "SCR08",
+      "controlIds": [
+        "SCR08.C01",
+        "SCR08.C02",
+        "SCR08.C03",
+        "SCR08.C04",
+        "SCR08.C05",
+        "SCR08.C06",
+        "SCR08.C07",
+        "SCR08.C08",
+        "SCR08.C09",
+        "SCR08.C10",
+        "SCR08.C11",
+        "SCR08.C12"
+      ],
+      "stateIds": [
+        "SCR08.S0",
+        "SCR08.S1",
+        "SCR08.S10",
+        "SCR08.S2",
+        "SCR08.S3",
+        "SCR08.S4",
+        "SCR08.S5",
+        "SCR08.S6",
+        "SCR08.S7",
+        "SCR08.S8",
+        "SCR08.S9"
+      ]
+    },
+    {
+      "screenId": "SCR09",
+      "controlIds": [
+        "SCR09.C01",
+        "SCR09.C02",
+        "SCR09.C03",
+        "SCR09.C04"
+      ],
+      "stateIds": [
+        "SCR09.S0",
+        "SCR09.S1",
+        "SCR09.S2",
+        "SCR09.S3",
+        "SCR09.S4",
+        "SCR09.S5"
+      ]
+    },
+    {
+      "screenId": "SCR10",
+      "controlIds": [
+        "SCR10.C01",
+        "SCR10.C02",
+        "SCR10.C03",
+        "SCR10.C04",
+        "SCR10.C05",
+        "SCR10.C06"
+      ],
+      "stateIds": [
+        "SCR10.S0",
+        "SCR10.S1",
+        "SCR10.S2",
+        "SCR10.S3",
+        "SCR10.S4"
+      ]
+    },
+    {
+      "screenId": "SCR11",
+      "controlIds": [
+        "SCR11.C01",
+        "SCR11.C02",
+        "SCR11.C03",
+        "SCR11.C04",
+        "SCR11.C05",
+        "SCR11.C06",
+        "SCR11.C07"
+      ],
+      "stateIds": [
+        "SCR11.S0",
+        "SCR11.S1",
+        "SCR11.S2",
+        "SCR11.S3",
+        "SCR11.S4",
+        "SCR11.S5",
+        "SCR11.S6"
+      ]
+    }
+  ],
+  "steps": [
+    {
+      "storyId": "STB01",
+      "stepId": "STB01-1",
+      "screenId": "SCR04",
+      "stateId": "SCR04.S0",
+      "controlId": "SCR04.C06",
+      "actor": "External MCP client",
+      "interaction": "external_event",
+      "branch": "main",
+      "nextSuccess": "STB01-2",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB01",
+      "stepId": "STB01-2",
+      "screenId": "SCR04",
+      "stateId": "SCR04.S0",
+      "controlId": "SCR04.C07",
+      "actor": "External MCP client",
+      "interaction": "external_event",
+      "branch": "main",
+      "nextSuccess": "STB01-8",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB01",
+      "stepId": "STB01-3",
+      "screenId": "SCR02",
+      "stateId": "SCR02.S2",
+      "controlId": "SCR02.C05",
+      "actor": "External MCP client",
+      "interaction": "external_event",
+      "branch": "deny-rule alternative",
+      "nextSuccess": "END_WITH_RECORDED_ALTERNATIVE",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB01",
+      "stepId": "STB01-4",
+      "screenId": "SCR01",
+      "stateId": "SCR01.S4",
+      "controlId": "SCR01.C04",
+      "actor": "External MCP client",
+      "interaction": "external_event",
+      "branch": "Ask-rule alternative",
+      "nextSuccess": "END_WITH_RECORDED_ALTERNATIVE",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB01",
+      "stepId": "STB01-5",
+      "screenId": "SCR09",
+      "stateId": "SCR09.S0",
+      "controlId": "SCR09.C01",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "Ask approved",
+      "nextSuccess": "STB01-8",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB01",
+      "stepId": "STB01-6",
+      "screenId": "SCR09",
+      "stateId": "SCR09.S1",
+      "controlId": "SCR09.C02",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "Ask expires",
+      "nextSuccess": "END_WITH_RECORDED_ALTERNATIVE",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB01",
+      "stepId": "STB01-7",
+      "screenId": "SCR09",
+      "stateId": "SCR09.S0",
+      "controlId": "SCR09.C02",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "Ask denied",
+      "nextSuccess": "END_WITH_RECORDED_ALTERNATIVE",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB01",
+      "stepId": "STB01-8",
+      "screenId": "SCR05",
+      "stateId": "SCR05.S0",
+      "controlId": "SCR05.C06",
+      "actor": "External MCP client",
+      "interaction": "external_event",
+      "branch": "main",
+      "nextSuccess": "STB01-9",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB01",
+      "stepId": "STB01-9",
+      "screenId": "SCR05",
+      "stateId": "SCR05.S0",
+      "controlId": "SCR05.C01",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB01-11",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB01",
+      "stepId": "STB01-10",
+      "screenId": "SCR05",
+      "stateId": "SCR05.S2",
+      "controlId": "SCR05.C06",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "cursor expired",
+      "nextSuccess": "END_WITH_RECORDED_ALTERNATIVE",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB01",
+      "stepId": "STB01-11",
+      "screenId": "SCR05",
+      "stateId": "SCR05.S0",
+      "controlId": "SCR05.C02",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB01-12",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB01",
+      "stepId": "STB01-12",
+      "screenId": "SCR09",
+      "stateId": "SCR09.S0",
+      "controlId": "SCR09.C01",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB01-13",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB01",
+      "stepId": "STB01-13",
+      "screenId": "SCR05",
+      "stateId": "SCR05.S4",
+      "controlId": "SCR05.C06",
+      "actor": "External MCP client",
+      "interaction": "external_event",
+      "branch": "main",
+      "nextSuccess": "END",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB01",
+      "stepId": "STB01-14",
+      "screenId": "SCR05",
+      "stateId": "SCR05.S3",
+      "controlId": "SCR05.C07",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "cleanup unknown",
+      "nextSuccess": "END_WITH_RECORDED_ALTERNATIVE",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB01",
+      "stepId": "STB01-15",
+      "screenId": "SCR05",
+      "stateId": "SCR05.S5",
+      "controlId": "SCR05.C01",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "unsafe retry rejected",
+      "nextSuccess": "END_WITH_RECORDED_ALTERNATIVE",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB02",
+      "stepId": "STB02-1",
+      "screenId": "SCR07",
+      "stateId": "SCR07.S0",
+      "controlId": "SCR07.C09",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB02-2",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB02",
+      "stepId": "STB02-2",
+      "screenId": "SCR09",
+      "stateId": "SCR09.S0",
+      "controlId": "SCR09.C01",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB02-3",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB02",
+      "stepId": "STB02-3",
+      "screenId": "SCR07",
+      "stateId": "SCR07.S0",
+      "controlId": "SCR07.C05",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB02-4",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB02",
+      "stepId": "STB02-4",
+      "screenId": "SCR07",
+      "stateId": "SCR07.S0",
+      "controlId": "SCR07.C01",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB02-5",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB02",
+      "stepId": "STB02-5",
+      "screenId": "SCR07",
+      "stateId": "SCR07.S5",
+      "controlId": "SCR07.C08",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB02-6",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB02",
+      "stepId": "STB02-6",
+      "screenId": "SCR07",
+      "stateId": "SCR07.S4",
+      "controlId": "SCR07.C06",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB02-7",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB02",
+      "stepId": "STB02-7",
+      "screenId": "SCR07",
+      "stateId": "SCR07.S4",
+      "controlId": "SCR07.C04",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB02-8",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB02",
+      "stepId": "STB02-8",
+      "screenId": "SCR07",
+      "stateId": "SCR07.S4",
+      "controlId": "SCR07.C07",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB02-13",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB02",
+      "stepId": "STB02-9",
+      "screenId": "SCR07",
+      "stateId": "SCR07.S1",
+      "controlId": "SCR07.C08",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "wrong credential",
+      "nextSuccess": "END_WITH_RECORDED_ALTERNATIVE",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB02",
+      "stepId": "STB02-10",
+      "screenId": "SCR07",
+      "stateId": "SCR07.S2",
+      "controlId": "SCR07.C08",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "unsupported wire",
+      "nextSuccess": "END_WITH_RECORDED_ALTERNATIVE",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB02",
+      "stepId": "STB02-11",
+      "screenId": "SCR07",
+      "stateId": "SCR07.S3",
+      "controlId": "SCR07.C08",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "protected root",
+      "nextSuccess": "END_WITH_RECORDED_ALTERNATIVE",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB02",
+      "stepId": "STB02-12",
+      "screenId": "SCR07",
+      "stateId": "SCR07.S6",
+      "controlId": "SCR07.C08",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "input denied",
+      "nextSuccess": "END_WITH_RECORDED_ALTERNATIVE",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB02",
+      "stepId": "STB02-13",
+      "screenId": "SCR07",
+      "stateId": "SCR07.S4",
+      "controlId": "SCR07.C02",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB02-14",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB02",
+      "stepId": "STB02-14",
+      "screenId": "SCR07",
+      "stateId": "SCR07.S0",
+      "controlId": "SCR07.C08",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "END",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB03",
+      "stepId": "STB03-1",
+      "screenId": "SCR08",
+      "stateId": "SCR08.S0",
+      "controlId": "SCR08.C05",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB03-3",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB03",
+      "stepId": "STB03-2",
+      "screenId": "SCR08",
+      "stateId": "SCR08.S0",
+      "controlId": "SCR08.C04",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "cancel before save",
+      "nextSuccess": "END_WITH_RECORDED_ALTERNATIVE",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB03",
+      "stepId": "STB03-3",
+      "screenId": "SCR08",
+      "stateId": "SCR08.S0",
+      "controlId": "SCR08.C01",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB03-4",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB03",
+      "stepId": "STB03-4",
+      "screenId": "SCR09",
+      "stateId": "SCR09.S0",
+      "controlId": "SCR09.C01",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB03-5",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB03",
+      "stepId": "STB03-5",
+      "screenId": "SCR01",
+      "stateId": "SCR01.S3",
+      "controlId": "SCR01.C01",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB03-6",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB03",
+      "stepId": "STB03-6",
+      "screenId": "SCR01",
+      "stateId": "SCR01.S1",
+      "controlId": "SCR01.C04",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB03-7",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB03",
+      "stepId": "STB03-7",
+      "screenId": "SCR01",
+      "stateId": "SCR01.S0",
+      "controlId": "SCR01.C04",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB03-8",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB03",
+      "stepId": "STB03-8",
+      "screenId": "SCR08",
+      "stateId": "SCR08.S0",
+      "controlId": "SCR08.C06",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB03-9",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB03",
+      "stepId": "STB03-9",
+      "screenId": "SCR08",
+      "stateId": "SCR08.S7",
+      "controlId": "SCR08.C11",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB03-10",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB03",
+      "stepId": "STB03-10",
+      "screenId": "SCR08",
+      "stateId": "SCR08.S8",
+      "controlId": "SCR08.C11",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB03-11",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB03",
+      "stepId": "STB03-11",
+      "screenId": "SCR08",
+      "stateId": "SCR08.S9",
+      "controlId": "SCR08.C11",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB03-12",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB03",
+      "stepId": "STB03-12",
+      "screenId": "SCR01",
+      "stateId": "SCR01.S0",
+      "controlId": "SCR01.C04",
+      "actor": "External MCP client",
+      "interaction": "external_event",
+      "branch": "main",
+      "nextSuccess": "STB03-16",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB03",
+      "stepId": "STB03-13",
+      "screenId": "SCR08",
+      "stateId": "SCR08.S10",
+      "controlId": "SCR08.C11",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "ADB auth failure",
+      "nextSuccess": "END_WITH_RECORDED_ALTERNATIVE",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB03",
+      "stepId": "STB03-14",
+      "screenId": "SCR10",
+      "stateId": "SCR10.S0",
+      "controlId": "SCR10.C05",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "start failed",
+      "nextSuccess": "END_WITH_RECORDED_ALTERNATIVE",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB03",
+      "stepId": "STB03-15",
+      "screenId": "SCR10",
+      "stateId": "SCR10.S4",
+      "controlId": "SCR10.C06",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "safe recovery",
+      "nextSuccess": "STB03-16",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB03",
+      "stepId": "STB03-16",
+      "screenId": "SCR01",
+      "stateId": "SCR01.S0",
+      "controlId": "SCR01.C01",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB03-17",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB03",
+      "stepId": "STB03-17",
+      "screenId": "SCR01",
+      "stateId": "SCR01.S5",
+      "controlId": "SCR01.C04",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "END",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB03",
+      "stepId": "STB03-18",
+      "screenId": "SCR08",
+      "stateId": "SCR08.S1",
+      "controlId": "SCR08.C03",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "pre-unlock",
+      "nextSuccess": "END_WITH_RECORDED_ALTERNATIVE",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB04",
+      "stepId": "STB04-1",
+      "screenId": "SCR02",
+      "stateId": "SCR02.S1",
+      "controlId": "SCR02.C04",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB04-2",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB04",
+      "stepId": "STB04-2",
+      "screenId": "SCR11",
+      "stateId": "SCR11.S0",
+      "controlId": "SCR11.C04",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB04-3",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB04",
+      "stepId": "STB04-3",
+      "screenId": "SCR11",
+      "stateId": "SCR11.S0",
+      "controlId": "SCR11.C01",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB04-4",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB04",
+      "stepId": "STB04-4",
+      "screenId": "SCR11",
+      "stateId": "SCR11.S4",
+      "controlId": "SCR11.C05",
+      "actor": "External MCP client",
+      "interaction": "external_event",
+      "branch": "main",
+      "nextSuccess": "STB04-5",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB04",
+      "stepId": "STB04-5",
+      "screenId": "SCR11",
+      "stateId": "SCR11.S4",
+      "controlId": "SCR11.C06",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB04-6",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB04",
+      "stepId": "STB04-6",
+      "screenId": "SCR09",
+      "stateId": "SCR09.S0",
+      "controlId": "SCR09.C01",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB04-7",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB04",
+      "stepId": "STB04-7",
+      "screenId": "SCR11",
+      "stateId": "SCR11.S5",
+      "controlId": "SCR11.C03",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB04-8",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB04",
+      "stepId": "STB04-8",
+      "screenId": "SCR02",
+      "stateId": "SCR02.S0",
+      "controlId": "SCR02.C06",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB04-9",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB04",
+      "stepId": "STB04-9",
+      "screenId": "SCR02",
+      "stateId": "SCR02.S0",
+      "controlId": "SCR02.C01",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB04-10",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB04",
+      "stepId": "STB04-10",
+      "screenId": "SCR09",
+      "stateId": "SCR09.S0",
+      "controlId": "SCR09.C01",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB04-11",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB04",
+      "stepId": "STB04-11",
+      "screenId": "SCR02",
+      "stateId": "SCR02.S0",
+      "controlId": "SCR02.C08",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB04-12",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB04",
+      "stepId": "STB04-12",
+      "screenId": "SCR02",
+      "stateId": "SCR02.S0",
+      "controlId": "SCR02.C09",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB04-13",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB04",
+      "stepId": "STB04-13",
+      "screenId": "SCR02",
+      "stateId": "SCR02.S0",
+      "controlId": "SCR02.C02",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB04-14",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB04",
+      "stepId": "STB04-14",
+      "screenId": "SCR09",
+      "stateId": "SCR09.S0",
+      "controlId": "SCR09.C01",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB04-15",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB04",
+      "stepId": "STB04-15",
+      "screenId": "SCR02",
+      "stateId": "SCR02.S4",
+      "controlId": "SCR02.C08",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "END",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB04",
+      "stepId": "STB04-16",
+      "screenId": "SCR11",
+      "stateId": "SCR11.S1",
+      "controlId": "SCR11.C01",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "attempt expired",
+      "nextSuccess": "END_WITH_RECORDED_ALTERNATIVE",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB04",
+      "stepId": "STB04-17",
+      "screenId": "SCR11",
+      "stateId": "SCR11.S2",
+      "controlId": "SCR11.C03",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "proof rejected",
+      "nextSuccess": "END_WITH_RECORDED_ALTERNATIVE",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB04",
+      "stepId": "STB04-18",
+      "screenId": "SCR09",
+      "stateId": "SCR09.S4",
+      "controlId": "SCR09.C02",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "auth unavailable",
+      "nextSuccess": "END_WITH_RECORDED_ALTERNATIVE",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB04",
+      "stepId": "STB04-19",
+      "screenId": "SCR09",
+      "stateId": "SCR09.S2",
+      "controlId": "SCR09.C02",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "stale plan",
+      "nextSuccess": "END_WITH_RECORDED_ALTERNATIVE",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB04",
+      "stepId": "STB04-20",
+      "screenId": "SCR09",
+      "stateId": "SCR09.S5",
+      "controlId": "SCR09.C02",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "auth cancelled",
+      "nextSuccess": "END_WITH_RECORDED_ALTERNATIVE",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB04",
+      "stepId": "STB04-21",
+      "screenId": "SCR11",
+      "stateId": "SCR11.S6",
+      "controlId": "SCR11.C07",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "manual enrollment",
+      "nextSuccess": "END_WITH_RECORDED_ALTERNATIVE",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB05",
+      "stepId": "STB05-1",
+      "screenId": "SCR10",
+      "stateId": "SCR10.S1",
+      "controlId": "SCR10.C04",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB05-2",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB05",
+      "stepId": "STB05-2",
+      "screenId": "SCR03",
+      "stateId": "SCR03.S6",
+      "controlId": "SCR03.C06",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB05-4",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB05",
+      "stepId": "STB05-3",
+      "screenId": "SCR03",
+      "stateId": "SCR03.S5",
+      "controlId": "SCR03.C01",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "invalid import",
+      "nextSuccess": "END_WITH_RECORDED_ALTERNATIVE",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB05",
+      "stepId": "STB05-4",
+      "screenId": "SCR03",
+      "stateId": "SCR03.S7",
+      "controlId": "SCR03.C07",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB05-5",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB05",
+      "stepId": "STB05-5",
+      "screenId": "SCR03",
+      "stateId": "SCR03.S7",
+      "controlId": "SCR03.C09",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB05-6",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB05",
+      "stepId": "STB05-6",
+      "screenId": "SCR09",
+      "stateId": "SCR09.S0",
+      "controlId": "SCR09.C01",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB05-7",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB05",
+      "stepId": "STB05-7",
+      "screenId": "SCR03",
+      "stateId": "SCR03.S0",
+      "controlId": "SCR03.C01",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB05-8",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB05",
+      "stepId": "STB05-8",
+      "screenId": "SCR03",
+      "stateId": "SCR03.S0",
+      "controlId": "SCR03.C02",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB05-9",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB05",
+      "stepId": "STB05-9",
+      "screenId": "SCR03",
+      "stateId": "SCR03.S4",
+      "controlId": "SCR03.C07",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB05-10",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB05",
+      "stepId": "STB05-10",
+      "screenId": "SCR09",
+      "stateId": "SCR09.S0",
+      "controlId": "SCR09.C01",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB05-12",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB05",
+      "stepId": "STB05-11",
+      "screenId": "SCR03",
+      "stateId": "SCR03.S4",
+      "controlId": "SCR03.C08",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "cancel draft",
+      "nextSuccess": "END_WITH_RECORDED_ALTERNATIVE",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB05",
+      "stepId": "STB05-12",
+      "screenId": "SCR04",
+      "stateId": "SCR04.S1",
+      "controlId": "SCR04.C09",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB05-13",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB05",
+      "stepId": "STB05-13",
+      "screenId": "SCR04",
+      "stateId": "SCR04.S4",
+      "controlId": "SCR04.C02",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB05-14",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB05",
+      "stepId": "STB05-14",
+      "screenId": "SCR09",
+      "stateId": "SCR09.S0",
+      "controlId": "SCR09.C01",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB05-17",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB05",
+      "stepId": "STB05-15",
+      "screenId": "SCR04",
+      "stateId": "SCR04.S2",
+      "controlId": "SCR04.C09",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "budget exceeded",
+      "nextSuccess": "END_WITH_RECORDED_ALTERNATIVE",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB05",
+      "stepId": "STB05-16",
+      "screenId": "SCR04",
+      "stateId": "SCR04.S3",
+      "controlId": "SCR04.C10",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "CAS conflict",
+      "nextSuccess": "END_WITH_RECORDED_ALTERNATIVE",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB05",
+      "stepId": "STB05-17",
+      "screenId": "SCR03",
+      "stateId": "SCR03.S8",
+      "controlId": "SCR03.C10",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB05-18",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB05",
+      "stepId": "STB05-18",
+      "screenId": "SCR03",
+      "stateId": "SCR03.S4",
+      "controlId": "SCR03.C07",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB05-19",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB05",
+      "stepId": "STB05-19",
+      "screenId": "SCR06",
+      "stateId": "SCR06.S0",
+      "controlId": "SCR06.C04",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB05-20",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB05",
+      "stepId": "STB05-20",
+      "screenId": "SCR06",
+      "stateId": "SCR06.S0",
+      "controlId": "SCR06.C02",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB05-21",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB05",
+      "stepId": "STB05-21",
+      "screenId": "SCR09",
+      "stateId": "SCR09.S0",
+      "controlId": "SCR09.C01",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB05-22",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB05",
+      "stepId": "STB05-22",
+      "screenId": "SCR06",
+      "stateId": "SCR06.S4",
+      "controlId": "SCR06.C05",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB05-25",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB05",
+      "stepId": "STB05-23",
+      "screenId": "SCR06",
+      "stateId": "SCR06.S4",
+      "controlId": "SCR06.C07",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "cancel export",
+      "nextSuccess": "END_WITH_RECORDED_ALTERNATIVE",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB05",
+      "stepId": "STB05-24",
+      "screenId": "SCR06",
+      "stateId": "SCR06.S5",
+      "controlId": "SCR06.C01",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "export I/O failure",
+      "nextSuccess": "END_WITH_RECORDED_ALTERNATIVE",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB05",
+      "stepId": "STB05-25",
+      "screenId": "SCR06",
+      "stateId": "SCR06.S0",
+      "controlId": "SCR06.C06",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "END",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB05",
+      "stepId": "STB05-26",
+      "screenId": "SCR06",
+      "stateId": "SCR06.S3",
+      "controlId": "SCR06.C01",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "audit durability failure",
+      "nextSuccess": "END_WITH_RECORDED_ALTERNATIVE",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB05",
+      "stepId": "STB05-27",
+      "screenId": "SCR01",
+      "stateId": "SCR01.S6",
+      "controlId": "SCR01.C04",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "runtime error alternative",
+      "nextSuccess": "END_WITH_RECORDED_ALTERNATIVE",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB06",
+      "stepId": "STB06-1",
+      "screenId": "SCR08",
+      "stateId": "SCR08.S5",
+      "controlId": "SCR08.C07",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB06-2",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB06",
+      "stepId": "STB06-2",
+      "screenId": "SCR08",
+      "stateId": "SCR08.S0",
+      "controlId": "SCR08.C01",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB06-3",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB06",
+      "stepId": "STB06-3",
+      "screenId": "SCR09",
+      "stateId": "SCR09.S0",
+      "controlId": "SCR09.C01",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB06-4",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB06",
+      "stepId": "STB06-4",
+      "screenId": "SCR08",
+      "stateId": "SCR08.S6",
+      "controlId": "SCR08.C09",
+      "actor": "Compatible ARC client",
+      "interaction": "external_event",
+      "branch": "main",
+      "nextSuccess": "STB06-5",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB06",
+      "stepId": "STB06-5",
+      "screenId": "SCR08",
+      "stateId": "SCR08.S6",
+      "controlId": "SCR08.C09",
+      "actor": "Compatible ARC client",
+      "interaction": "external_event",
+      "branch": "main",
+      "nextSuccess": "STB06-7",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB06",
+      "stepId": "STB06-6",
+      "screenId": "SCR09",
+      "stateId": "SCR09.S3",
+      "controlId": "SCR09.C02",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "quiescence failed",
+      "nextSuccess": "END_WITH_RECORDED_ALTERNATIVE",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB06",
+      "stepId": "STB06-7",
+      "screenId": "SCR09",
+      "stateId": "SCR09.S0",
+      "controlId": "SCR09.C04",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB06-8",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB06",
+      "stepId": "STB06-8",
+      "screenId": "SCR09",
+      "stateId": "SCR09.S0",
+      "controlId": "SCR09.C02",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB06-9",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB06",
+      "stepId": "STB06-9",
+      "screenId": "SCR08",
+      "stateId": "SCR08.S6",
+      "controlId": "SCR08.C08",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB06-10",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB06",
+      "stepId": "STB06-10",
+      "screenId": "SCR09",
+      "stateId": "SCR09.S0",
+      "controlId": "SCR09.C01",
+      "actor": "Owner",
+      "interaction": "control",
+      "branch": "main",
+      "nextSuccess": "STB06-11",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB06",
+      "stepId": "STB06-11",
+      "screenId": "SCR08",
+      "stateId": "SCR08.S6",
+      "controlId": "SCR08.C09",
+      "actor": "Compatible ARC client",
+      "interaction": "external_event",
+      "branch": "main",
+      "nextSuccess": "END",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    },
+    {
+      "storyId": "STB06",
+      "stepId": "STB06-12",
+      "screenId": "SCR08",
+      "stateId": "SCR08.S5",
+      "controlId": "SCR08.C09",
+      "actor": "System/backend event",
+      "interaction": "external_event",
+      "branch": "listener disabled",
+      "nextSuccess": "END_WITH_RECORDED_ALTERNATIVE",
+      "nextError": "END_WITH_TYPED_ERROR",
+      "nextCancel": "END_WITH_RECORDED_DISPOSITION"
+    }
+  ],
+  "docsVectorFixtures": [
+    {
+      "path": "remediation/design-c4/docs/diagrams/arc-controller-classes.svg",
+      "sha256": "218eeb00d4482f1572e650790da0d64a93cefe0daa850e8ccc496de770c28e04"
+    },
+    {
+      "path": "remediation/design-c4/docs/diagrams/arc-target-classes.svg",
+      "sha256": "a75d7911a2eb911deeb377b09ff1addf031b1155de3f4ebc1b96a2b2bac48cf5"
+    },
+    {
+      "path": "remediation/design-c4/docs/diagrams/arc-ui-classes.svg",
+      "sha256": "f045e10fec80751d2ca0676db7697e798fa8ec332f6c74dbb0daa04c5c7cec64"
+    },
+    {
+      "path": "remediation/design-c4/docs/diagrams/server-adapters-classes.svg",
+      "sha256": "7030591d54264d532947a5aecba67eef165200b5d05a72d653aeb3f812d86c76"
+    },
+    {
+      "path": "remediation/design-c4/docs/diagrams/server-core-classes.svg",
+      "sha256": "83d3e464c2eca0d440edf9f50251fda7d80b98d6975c59a1e88f491a021362a7"
+    },
+    {
+      "path": "remediation/design-c4/docs/diagrams/server-execution-classes.svg",
+      "sha256": "138f47b86469680b8251bd428a59b2e20269f4ee4a5480308900325e26ba889f"
+    },
+    {
+      "path": "remediation/design-c4/docs/diagrams/structurizr-ArcComponents.svg",
+      "sha256": "277aa6ef8bf28731ccb5718e0edd493318d96729f4a8bc8eca6f8f28f1b5b79b"
+    },
+    {
+      "path": "remediation/design-c4/docs/diagrams/structurizr-ArcSession.svg",
+      "sha256": "38cc24283743e63e29ac9ba8270e49dbbde8ca92152207aed52d9913bfb9c677"
+    },
+    {
+      "path": "remediation/design-c4/docs/diagrams/structurizr-CallbackFlow.svg",
+      "sha256": "168590466bd2b2a391585f4931552e894f03fc94378278b4635fcd9e9067c6a9"
+    },
+    {
+      "path": "remediation/design-c4/docs/diagrams/structurizr-Containers.svg",
+      "sha256": "bb435792d5c603f151c442d17b0a0869db7ef315b2caf5febd25c09d953489d2"
+    },
+    {
+      "path": "remediation/design-c4/docs/diagrams/structurizr-Context.svg",
+      "sha256": "4e453bdaa339677e47bc9662abc7aa1e7f3523a60dc9539d719825bfd3f114e9"
+    },
+    {
+      "path": "remediation/design-c4/docs/diagrams/structurizr-CredentialRevocation.svg",
+      "sha256": "31635d81dbfb51f5f439cdab5d29e41823352de1e0c324a89ddc7619ecdb8bce"
+    },
+    {
+      "path": "remediation/design-c4/docs/diagrams/structurizr-Deployment.svg",
+      "sha256": "510113d44b482623efe967fd79eff2bca838b5f314a389c29ef3bbc3be51add0"
+    },
+    {
+      "path": "remediation/design-c4/docs/diagrams/structurizr-ExecutionComponents.svg",
+      "sha256": "1b916983dd9502a9943843a0aed52dafbcee9687057cda61a085d1ecc597dfb8"
+    },
+    {
+      "path": "remediation/design-c4/docs/diagrams/structurizr-GroupFlow.svg",
+      "sha256": "4169dfb2c8c628005ae7bb282aaa80ae659542202844b79c3fb62ae16f7660b1"
+    },
+    {
+      "path": "remediation/design-c4/docs/diagrams/structurizr-InvocationFlow.svg",
+      "sha256": "bfa846646d1f166dbe8ddf10e5461c5f798124b315dd49eea95f04801768b75a"
+    },
+    {
+      "path": "remediation/design-c4/docs/diagrams/structurizr-OwnerTransition.svg",
+      "sha256": "2ea3cb60d94bc6e9390148fda08b9a341d1f1ea8cc3cf337711ab1b08b06c4b3"
+    },
+    {
+      "path": "remediation/design-c4/docs/diagrams/structurizr-ServerComponents.svg",
+      "sha256": "a1ecd24c5e2ea361d4e4f48a66dec687ebaaa856c6680b7edee0ebc0cac8e3ab"
+    },
+    {
+      "path": "remediation/design-c4/docs/diagrams/structurizr-ServerCoreComponents.svg",
+      "sha256": "4ad39c20cfa57d8e2af0f8d1ece8e35a7fb816bb047585ea043d62757408e856"
+    },
+    {
+      "path": "remediation/design-c4/docs/diagrams/structurizr-Shutdown.svg",
+      "sha256": "64b2e1e8c69e7e381452aa7562f98712e59b89ba502670df5bb65af712e86719"
+    },
+    {
+      "path": "remediation/design-c4/docs/diagrams/structurizr-Startup.svg",
+      "sha256": "a3042d6126333a7446d114103f0408d662e777da0e7e6742ecb36947a521829c"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/SCR01.svg",
+      "sha256": "14a359c2f7b1d9a6730e39650b2e30f58342646bf66031b4a60ce2b463caafb2"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/SCR02.svg",
+      "sha256": "2c441cee3eee2843d5c96d040fef5451a71d2b40ac3ffc1b3fe15d85425b109d"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/SCR03.svg",
+      "sha256": "fe240627e3018a1699e6d38916424e6ba26f88e4fdee5e03329529edf73998e1"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/SCR04.svg",
+      "sha256": "8f5c73f8cd7d0e0b6063043f1402db06dfdd9d546a1cbf42d74a58be1f252d77"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/SCR05.svg",
+      "sha256": "21c72f24ae67d412e4267284e1312f8da39ed4807b198423821048a4f6cc89e7"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/SCR06.svg",
+      "sha256": "fd67fec6c9505b8958c39d864b58247806f0fa8c6d73fb20c47840f26174d626"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/SCR07.svg",
+      "sha256": "d86617df1b1734b832beb13d39cc28bc471bc077338846179226646cbb3097a7"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/SCR08.svg",
+      "sha256": "00254aff00700ee7a1dd0e009983d79dfddc58893bc07d8d825271e5c7a3c86c"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/SCR09.svg",
+      "sha256": "8ef21365e9ef3db6e7caecf44e29af1850d49a9b6103ced2a44d805a41253853"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/SCR10.svg",
+      "sha256": "56416c097013ae3c0ca59ebb7db869ace896a83a0da1fbe51d1c9d4a5ea935f9"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/SCR11.svg",
+      "sha256": "6f9c4eb85c71dfb7dcc21c2ffa30bc39b9cb74337e4c6ca46714d2c9227ad7fc"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR01.S0.svg",
+      "sha256": "d0c00db1f69ee7add6d148e450abd740eec957e6fd810c05d2fe38d24d3977fa"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR01.S1.svg",
+      "sha256": "c886033be6d7fc1a18ee841625e98ac1064eda0aa8eca0cf369b37ee92013091"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR01.S2.svg",
+      "sha256": "217c19bb766bddd477be9b53cad059b214f6bca35e1fe0bec70fe8d4979b10b1"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR01.S3.svg",
+      "sha256": "4ee8c7fa19c1d63a4e2e44076f689f152ba0393a2157e112dbd216790dad2243"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR01.S4.svg",
+      "sha256": "6c117b18128c8e43dbecb337ea1f209383334d30e49aaf48a778e0e74e071db6"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR01.S5.svg",
+      "sha256": "7bca8295d91c40e8d21472771268225423f80a11f3f3c7161da419f432bd7a8f"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR01.S6.svg",
+      "sha256": "dca2c1e7e4277718ecf17aa81df72b164f22d592425f7d956b12b777f86b46be"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR01.S7.svg",
+      "sha256": "1494ada09c3253e1e1e40782ed4a173b9150f1772e6105cfeedeafdf94ee41e4"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR02.S0.svg",
+      "sha256": "1774023d6bc1fdb7ea2e030e1df9bd4385ef7faa28f6cabe250ab1e3b45d9073"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR02.S1.svg",
+      "sha256": "2d9e61021d939ba0872c3c22b6f0cc27265ed6a4f766219a1ff0dbc7105d7ff9"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR02.S2.svg",
+      "sha256": "24fb8bf2213bdba114cacfb5c1cae49aee3e2cb555146632d5c880c805678adb"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR02.S3.svg",
+      "sha256": "599971f296b60185119b452b7005537db1bab731b9ef7f4bdf009d9aa7c395f0"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR02.S4.svg",
+      "sha256": "529c38f924a985edb176948fc171a41b9df3deffc8dd2381ed84424090f39a27"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR03.S0.svg",
+      "sha256": "5df495792e789e96e41893d4b54c6c4d873805938a0ac671c364ccec1043f27f"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR03.S1.svg",
+      "sha256": "f71fb832499e785eb97bc54143dc98ceda5b36809c1586903b5f34282104983f"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR03.S2.svg",
+      "sha256": "b632a71b50b0162e80bbc5621a18474e112c57a07e9ba3c50e886b3545b6f4c8"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR03.S3.svg",
+      "sha256": "3a81dc281b0c70d37ac34f72d4ac0c4be64fb53c55beebee55d4b4d790fa5ded"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR03.S4.svg",
+      "sha256": "3478873a7f0539496fd2ce7db0f088bccedaae79a1cb206c6162460718e864e9"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR03.S5.svg",
+      "sha256": "1128ab9a9d0aa0972b6bfde4e3ae53034a324ee2753072b2ee6e7513b04841a8"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR03.S6.svg",
+      "sha256": "2cf51f5af1fb27f0c875b13944e3b9522b93f740a9d2dc41b3ff58ae8524cf54"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR03.S7.svg",
+      "sha256": "98fb7a1edd5aae0ec95a6709c30afa5fd5d7e144460e4feb4a8d9f0942efe190"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR03.S8.svg",
+      "sha256": "0afda931eab11dcec4b8ea94a5acca301327ea074322605ee84e73fc6d84e53e"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR03.S9.svg",
+      "sha256": "439288efa93950689b9df23589c6a4a3eafec7d37d24da2db56492345b65dc03"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR04.S0.svg",
+      "sha256": "8c41b109a9d76a5c4d4d48fe770daf2a108fed7f7fe737a20f963cc51521ae62"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR04.S1.svg",
+      "sha256": "88641f62dde3b4b7606caf1f82e2d0237ccaa379f9d36e51817208cc67c63a21"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR04.S2.svg",
+      "sha256": "134e5c46e587446152823f3289807886b8060317ef340c8af21209bd4e1d8f27"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR04.S3.svg",
+      "sha256": "0badd634bf57835000d14d044badb8978d4130c4b52f5331c21c950a842ccafa"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR04.S4.svg",
+      "sha256": "86b7298ab21c6ce3eb759a1e11c3adcc4ff5258d6e19b88553a63a516011b9a0"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR05.S0.svg",
+      "sha256": "ecf7d60db4720ae34aa6adc74f3abeca880a16558cde8a562bda05f9a3a20ce6"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR05.S1.svg",
+      "sha256": "37e5eb7aa2578237c8a118adfd024049e8b1dae907a020637361aafdee47051a"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR05.S2.svg",
+      "sha256": "80eeb9aa267d33e816ce0599a5031905c511d88c6fa262bc6a04ff450363fe38"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR05.S3.svg",
+      "sha256": "2febb8019acc8eaba63991772d22557849096409580f28f56f44ceb31c01437e"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR05.S4.svg",
+      "sha256": "db7438b7dd19996f939b92ae1e25c2ce47fb44c808dfc4757475c1b52dfd744c"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR05.S5.svg",
+      "sha256": "779c13697a999457b9f2e1a058aa807527cef2f48e1426082a7df929b65d356d"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR06.S0.svg",
+      "sha256": "5f9e27f828cfa4cb63436e8f54fbc7bd23d4539e82b421297371e7dc0548f114"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR06.S1.svg",
+      "sha256": "020bb2a705c8e45d7ac2443dc26e643c291fb42278eb5375920d506ad845252e"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR06.S2.svg",
+      "sha256": "2731226829e5becc86c1f0ab51f7a0ae493a68576833bd0a15f4c56dd27f125b"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR06.S3.svg",
+      "sha256": "6e05f2752a563c4fbdcdf38d2e86d1d8bcb5a7ae0e918495df9396f30e6fa3de"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR06.S4.svg",
+      "sha256": "ad5793939ac4ccf29afef7b3a411eaa892ac71df16e70118e9bfcf277a50838f"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR06.S5.svg",
+      "sha256": "12d6fd371566c95bf3f0fe4a881293e1198956489dfb49583269782b5a4f46ca"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR07.S0.svg",
+      "sha256": "8dc8ae09345389b3d0b36c381e1c4639c18eab305a918ec2122434c5a89bcadc"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR07.S1.svg",
+      "sha256": "edaed54f820506b1451f27feb510b0ef269262b3bea9b54fc474cb46f58a5b5b"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR07.S2.svg",
+      "sha256": "9f87331e9f67a47328a79d3b5aa13ad9aa42a8244011a45924886682565ef5e3"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR07.S3.svg",
+      "sha256": "19aa7951bab1b3bd29d2143bd441874d120b484997cbfce04eba0f3bb8d32d0d"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR07.S4.svg",
+      "sha256": "f895457e70742d3e842b0e9ea5fcd0ed65d8b6e05c68e911db91db4ed7f78de6"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR07.S5.svg",
+      "sha256": "378b1587db8331265d203bea7f1680fad79742e75099661a6264dee24a46cc3d"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR07.S6.svg",
+      "sha256": "3ac71d8748943d88af259b13afe0a21b3e7e81c797e9e431d5447ea5741a5d8b"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR08.S0.svg",
+      "sha256": "d3dab87bf6374aaaf53b642e787b60cb78ed2b8288b986816a0a70f8fc7b76dc"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR08.S1.svg",
+      "sha256": "e55fcfc0b417009180ca42413a2fb0b91a17b59f176dd711aaea1b80bcbc95ab"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR08.S10.svg",
+      "sha256": "a90a4becc345662a1c8692fba8b56b9712215fa1f8099e636f6b01f44d54beaf"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR08.S2.svg",
+      "sha256": "278211c3168ada2916edb49966b0da3c02ddedf93c03027aa69d413885e062fa"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR08.S3.svg",
+      "sha256": "f1ae0b8698eda0b3884aa4cfa926a408050d0b675e20844ede88ddb1e69e0965"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR08.S4.svg",
+      "sha256": "1418de8fc9e1605fb784827b0ad0b4150800ab9bfc0052857e4baa3e7e8853a0"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR08.S5.svg",
+      "sha256": "b28d341dbdab81d72d7fa4f81ff2861030db39fe115e7e503f35cc9f1a903d0f"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR08.S6.svg",
+      "sha256": "39d85c2093167a7f80e84a7858b5bb37683d9b3b39a455c74611133379f18187"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR08.S7.svg",
+      "sha256": "58d823f09a206b2e613545bdcc078b53c7151f1441fc566e0811c07ab1587c93"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR08.S8.svg",
+      "sha256": "e414ef9b175c6b643ba6510c78f31a496891d32ce7555ba4c1fc41a3a4ea14d5"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR08.S9.svg",
+      "sha256": "2eea306f2f77ba748e2136ec8cf8e37d4dc96c84a32fadbe96bc700e7e670b9c"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR09.S0.svg",
+      "sha256": "c48b9c226a52895f528b546191725d1e4435ab96a83ea5104f98c03a54a0df2a"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR09.S1.svg",
+      "sha256": "2b0b12a126e5282299b0ec325548dff23dfa9f9f6585a8b2d2bea39c187dea05"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR09.S2.svg",
+      "sha256": "8610879a36f3f0ca6b017b1e6381f28316ef3deaa5571cceb2b286ac428161dd"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR09.S3.svg",
+      "sha256": "0cb393606a3a83f083561d3cad019334fabb4de073418970674045a761f22a18"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR09.S4.svg",
+      "sha256": "21d31ea6df9f941c2ac1f310ab4496efb597369e88a995924e540756051515c6"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR09.S5.svg",
+      "sha256": "35a070954a94afa57b38f91e26814d0b0514a15c9fcf1f07d200c91e1fc37aae"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR10.S0.svg",
+      "sha256": "89197f33df4d7306ed41e3b0324dafef17a9dd80edf4c6d378a0b1020014e533"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR10.S1.svg",
+      "sha256": "6474462438e8b1fcef5c48dc1f96f94bb58abb3ab28e24ae16d5396f2602262e"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR10.S2.svg",
+      "sha256": "cc6e1933639fe1dfddb08f485f3d172ba6dcc7bccdbeee522d6a5888da06c657"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR10.S3.svg",
+      "sha256": "a0e307883d1145829d74bc7f1fd7646b6ebcac8659d5a6f4a70c5f45bb427143"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR10.S4.svg",
+      "sha256": "087da4a1f2c5b0926ae8902ce65d29468b77025353dbedae09575cb0a58309e7"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR11.S0.svg",
+      "sha256": "0cb959dc4940c42f47883b9d6513f6c4f48e617a28641c4fc07661a22554a2f0"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR11.S1.svg",
+      "sha256": "e4f9f18f3f5bcf40903f3e7a8a3349477301d9b59a737e9daf426e1af9effcde"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR11.S2.svg",
+      "sha256": "5e9a0acb257c60ead9ed72b48cbd490f6b20a46284919f8136a537e0d82f9ad6"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR11.S3.svg",
+      "sha256": "b8667e1545394fb094cbd32778b6282514fd8f5b6d9754f0a04913006e2d1585"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR11.S4.svg",
+      "sha256": "8e20357212c71125d80327df710e089500e674cef7c5f1489394efa25cf0d947"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR11.S5.svg",
+      "sha256": "5f1168700a012fd1c0e862e0662bff3c6f9f7daa867bce86fc983b60fa81448a"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/states/SCR11.S6.svg",
+      "sha256": "37cecbf832b02569bb4a26ad8fd8f928d992b35211de9db762e481b196dd268a"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/STB01.svg",
+      "sha256": "2c2488eeb1941811a3f49d595c683e7385eb4c52165a0bea604024766877627e"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/STB02.svg",
+      "sha256": "470db298c8f973d2dac8b63e3ec4141af7400b658f55571695bcc20469b1df81"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/STB03.svg",
+      "sha256": "32293e67ae989dfdc43f132aab2bdf54fa8bca07b87c1606b2a78c26bf4c567a"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/STB04.svg",
+      "sha256": "2df729da6f31ef3e20cb34045dca52daa4b20c0a290082082d76d55deb106ad5"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/STB05.svg",
+      "sha256": "f4d6b00a5dc566088e9e6cd2d7311c61ef177e470208d2fc55ce28adcef5e77f"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/STB06.svg",
+      "sha256": "717dc768ec49b2ef1796508f4b628d2c9dcf8245f3d5676abfd6be519e2e3fcc"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB01-1.svg",
+      "sha256": "fbdcb5ccec4550a6c382b1b833d0568d40e72d406a5421abdddaa70e79016c76"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB01-10.svg",
+      "sha256": "2a2d81b02689099a7ff7bbcd35a29cc73e63d15abca591301fa132a4deeb3ccc"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB01-11.svg",
+      "sha256": "a4bfa5096b391b5b4ce73ec93e328970a18aba5c0e6e848b7b8219c1159e6020"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB01-12.svg",
+      "sha256": "920ac53b7ee7081ad9ffa5939a3bc49442f71b2f5ad4f4bf80720a4f41443da5"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB01-13.svg",
+      "sha256": "1f52a091be6b6f308dd2a5b680ac71d95888514ed51949eaca7c351c099b2b1e"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB01-14.svg",
+      "sha256": "4c00d967c9e1dd66ba1b2a787cc656855d4eac72be4ef5758840086f987013fe"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB01-15.svg",
+      "sha256": "33290e129aab0c52f76d20a2cb363036a8770e3ee8338ffc8b7ab78e93c1292e"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB01-2.svg",
+      "sha256": "7f058710936dafd77019db436d488031361caaf391c2c8bb3c523e28451d4c9f"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB01-3.svg",
+      "sha256": "096d52f8c522cdc098bb5805610fa03d6f90bdb500c297ca7375b832afd7c672"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB01-4.svg",
+      "sha256": "2075c7399f7c61f486541a8a46c928462a36973591e029eb9c30d1e4a2b9c3a7"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB01-5.svg",
+      "sha256": "920ac53b7ee7081ad9ffa5939a3bc49442f71b2f5ad4f4bf80720a4f41443da5"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB01-6.svg",
+      "sha256": "bd73b9d0a900a6b1f4fbc2865589bb170fb3bc10cf8264c433953adec6866fac"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB01-7.svg",
+      "sha256": "fbeda7650cfc4180cf607c02e7811e07586db22532acde75d8ffae50269bad92"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB01-8.svg",
+      "sha256": "3b15813c0ab4edcaee2b7bf3e996abaa66b16ff07e3a46d206ac68210d1032a4"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB01-9.svg",
+      "sha256": "121bbb44018ef72c5536b882eaf844057c8f5c8933fc35163464542115393e46"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB02-1.svg",
+      "sha256": "8563b9c7317fde8c4209cf8fe7362323c5421a76338d04e7e8c20a9377757e80"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB02-10.svg",
+      "sha256": "4855a9320427cb772c1a0fe0cc9690cd6a433fc3993d1b4611d30e3ea72c587b"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB02-11.svg",
+      "sha256": "0ab22c7898264d5cde87870975122589e064c6d2ebc0205e19d763398197f823"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB02-12.svg",
+      "sha256": "a0a84c7aceee2065976744bcef8a01d90dca925a7f50d0211c3831d653d7beed"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB02-13.svg",
+      "sha256": "241b378839ee274cfcffdb6dec46ca0fd263b562a7c6355e0c75aefd56d446e2"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB02-14.svg",
+      "sha256": "b2538c630a2ef3cdd963e474e4d6f29884e072f387d5c60e5cee1ec23e38b981"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB02-2.svg",
+      "sha256": "920ac53b7ee7081ad9ffa5939a3bc49442f71b2f5ad4f4bf80720a4f41443da5"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB02-3.svg",
+      "sha256": "daced389f77f181c184d9c0308ee97fc511a0583b15e9b8bf2355bd8ac02f4b5"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB02-4.svg",
+      "sha256": "c193d288e497b319cd0c6614a2c5414cc874d6d57a667cba196c650b66812efa"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB02-5.svg",
+      "sha256": "b049db1b498110c7bfdefe6cc3bd485dfd15a53af0d4d0670857e260b2290679"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB02-6.svg",
+      "sha256": "4d87c044d0bab85ff78ae0c46457a7e2ceadaf95fce90e148eea860ff3bde9c2"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB02-7.svg",
+      "sha256": "d0855f0355826176e1fc6ea0052fba71848b5e796f097a1216cac2dc3d3b54c9"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB02-8.svg",
+      "sha256": "72c455f26676c859fe80ed59bf9ca1355c614f438c50949640cbc4490c225389"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB02-9.svg",
+      "sha256": "78da9cfc5eaa5b5e383ab9550ee3c94d93b026290a41ec200a424ecf49173d88"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB03-1.svg",
+      "sha256": "8d9db63244296295d4de3e572c439a0e251bdace6ad3bfa1367e55cb8e255510"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB03-10.svg",
+      "sha256": "46777d46da8e6146abfc9cf39db23d622740c745a18b64659957987c417b1448"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB03-11.svg",
+      "sha256": "aa782c117905c7c0b419a56f01c602c8f487196b70e164dd522db991296761f9"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB03-12.svg",
+      "sha256": "5a1e0f85c5e8fee66e8ecf15605b3279fdf772246fe680e537377640ddd66534"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB03-13.svg",
+      "sha256": "3a9441b5959f06489c0602b771f33fb3269c8f1ed893a5d4a5f0470daa9db3e4"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB03-14.svg",
+      "sha256": "89b778cf13e171cc7748362d3fd63c85f21a160f939d2769aced19c0fe66a427"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB03-15.svg",
+      "sha256": "6c277d8a2e1152195d75984c78b0c30071292c0ea74476e6ebc0a60188d4586f"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB03-16.svg",
+      "sha256": "f4129249182cc7a12324cb87d48faa35fe29313dcc18e5483b9fcc143fb9c125"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB03-17.svg",
+      "sha256": "e7f7d89a224cd1e9a596d91f1f46b1499d89354acfe594bd820aed4bc525b0d1"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB03-18.svg",
+      "sha256": "0ab27353a982ad72421823d926b28abe5a0be6a6dc28773fae9ca518d3db1258"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB03-2.svg",
+      "sha256": "36934ff947c7eb40d189cfde6a37513b359b82b74dbaa78cf14d0cbbe21ba4b4"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB03-3.svg",
+      "sha256": "32ba654f331cf7938c0989f37ed0730bcea6207c6033d1e2e55017044cb0bd9c"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB03-4.svg",
+      "sha256": "920ac53b7ee7081ad9ffa5939a3bc49442f71b2f5ad4f4bf80720a4f41443da5"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB03-5.svg",
+      "sha256": "1a51a0b97567882448672d3db8ae1ff771d2a1bc048a6004c76759653a5178cf"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB03-6.svg",
+      "sha256": "e278e4f069d027516189d5d2c5b3ddfc67c1b5b7e1a6688d8ee3faf4951ba548"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB03-7.svg",
+      "sha256": "5a1e0f85c5e8fee66e8ecf15605b3279fdf772246fe680e537377640ddd66534"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB03-8.svg",
+      "sha256": "90b97ff6975e75bbc57a5a8ed5dcd9b99e81d441161f6510d690dcb921e80707"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB03-9.svg",
+      "sha256": "7e215697fd4d31c0884af5331749914156488ec0486e53e57ed124c0192b521b"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB04-1.svg",
+      "sha256": "4e5af809c0ca324d98b5f09c479f284132fea2cd4c3ced49e5c04dbf1d18eca6"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB04-10.svg",
+      "sha256": "920ac53b7ee7081ad9ffa5939a3bc49442f71b2f5ad4f4bf80720a4f41443da5"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB04-11.svg",
+      "sha256": "f7c128dac1ad1608d0e23c98f71d89257b3d77a0000d2e5152510f9148399906"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB04-12.svg",
+      "sha256": "67c8b9cf544b65c1118183b6926b967f8e266ff750ea181421dc68a4b44e15c5"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB04-13.svg",
+      "sha256": "99fd69072088cd2a3550d32e81785a002f58145a8d23257af0df7bd4bf902ccc"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB04-14.svg",
+      "sha256": "920ac53b7ee7081ad9ffa5939a3bc49442f71b2f5ad4f4bf80720a4f41443da5"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB04-15.svg",
+      "sha256": "1cf6f9d5becda27048f9aded53b6c1afa0e3a8651db9c0f036fed59813e4694b"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB04-16.svg",
+      "sha256": "5b62dfae756bc8afcce7f60b77254d2ea3374d41e73b791c6d6b8c6d6fa1c106"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB04-17.svg",
+      "sha256": "888f9d1399e51d6eced3f896bd59e0098e26311d52a6094c068bdec3c0fdda01"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB04-18.svg",
+      "sha256": "064637aeb5a53ee0fc45e83c639a4bf299b255e3c8bdd997bed9bc048fb3f331"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB04-19.svg",
+      "sha256": "86186965eef43491cc9ef3d64298c394dd4622395688264d03efff4420452e7a"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB04-2.svg",
+      "sha256": "34beb35c0c9684ebd342fb30859c1755729726efd73faba95881f32eb0974465"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB04-20.svg",
+      "sha256": "a8afb077fbf391adc83c674ce2778b39ae44a038892db42f4f0d2af324f55c3e"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB04-21.svg",
+      "sha256": "89fa3d2901a3ca8dd1871fcc6329034862dd585d6a8c7a22a48587ba287dc49f"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB04-3.svg",
+      "sha256": "babcf11b0c7514a987e730e59f9504896a1675686bc30d17b9c07c8adb2db91c"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB04-4.svg",
+      "sha256": "6273eb8b5a614a0f100b8797e0ab889b1556b49b4f7e9f1b59e9c1aee66e0024"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB04-5.svg",
+      "sha256": "e3f52ed826910e338da189bace336182713c01ed61d118f3f8d2321f57619045"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB04-6.svg",
+      "sha256": "920ac53b7ee7081ad9ffa5939a3bc49442f71b2f5ad4f4bf80720a4f41443da5"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB04-7.svg",
+      "sha256": "83b029e45f854b4830f7cc8add547d5e21bacf6cfde3f755035e8ebb0fabef03"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB04-8.svg",
+      "sha256": "cfcd735c0a1006433379e716797562c0304a4544005f5915a02c31bb049757e8"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB04-9.svg",
+      "sha256": "d1f573d8cec115d51d19f77ce14b50abb5bbc9d157b4216b66d684b759ad4cb8"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB05-1.svg",
+      "sha256": "a2cbc346a4eb80fe798794ae4f7e39d8dfac6fafa6c372e19f8db2976a2c3ba2"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB05-10.svg",
+      "sha256": "920ac53b7ee7081ad9ffa5939a3bc49442f71b2f5ad4f4bf80720a4f41443da5"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB05-11.svg",
+      "sha256": "623d5fcbf0ca7b16dfa745136a2a1a48d93145c596b99ed5e139577173650c01"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB05-12.svg",
+      "sha256": "61bf6a2a44a99ff7dab4e6a98dcf55bd30c4b5f0a8f662fabb3bcc23e6422ed1"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB05-13.svg",
+      "sha256": "5d733a0ac2cd71f684f9afb4fb24cf0bde984ab9367a040d6392eaede7cb3bee"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB05-14.svg",
+      "sha256": "920ac53b7ee7081ad9ffa5939a3bc49442f71b2f5ad4f4bf80720a4f41443da5"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB05-15.svg",
+      "sha256": "7e916500eb0e1a1fe54063c87c6fe70620400754f15ca40c3ab98d825cc31ff9"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB05-16.svg",
+      "sha256": "0663781db300dd70eb43cbc31a07f15050edabd972ba4379e148642d19a7ad1f"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB05-17.svg",
+      "sha256": "e9798ee64ba921d760a8e598166ca85f383c5c7a311e9b77c0ebe24aa0339de7"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB05-18.svg",
+      "sha256": "8d71778ad0e95d34b0955b4a46eac58fbd2cb9fb566ba0d955452882944e25e0"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB05-19.svg",
+      "sha256": "6d9d1b0a3812f43057355e574661ab8f21065aaeae09ff520990ed27b9115208"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB05-2.svg",
+      "sha256": "b4c359b3376b9ad0e7e2fbec3e6d9cbdfaea12ed9efac97b0263f3f0873d12ca"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB05-20.svg",
+      "sha256": "29461accfc1a40b2d18becdadd3079a507b20664e593b277c677f38e7f707fce"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB05-21.svg",
+      "sha256": "920ac53b7ee7081ad9ffa5939a3bc49442f71b2f5ad4f4bf80720a4f41443da5"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB05-22.svg",
+      "sha256": "37e9f981796dda1dd5b208ce114ded3fb74a5be5f807b350a9fe30c173cdc26b"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB05-23.svg",
+      "sha256": "d57e68fb9a4c51823ed6783279a6b478ed900ba048e06b1489cdf68ab02bba43"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB05-24.svg",
+      "sha256": "200305665dfc988e934e84a3e1d305f66f9cad678de742b41a576c9d89b97865"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB05-25.svg",
+      "sha256": "3bc5d453466b9501294679fafe256df73e9b67f50a1b6863526e0f6ae651b8e1"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB05-26.svg",
+      "sha256": "4c2bb713a0ae6a6db82cd3ae891cf33c65b9d009b1eb0c0731883b9478457b90"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB05-27.svg",
+      "sha256": "4ac4d788659fe0bf81add5d479c0611c3dad45873954f30d28c32eb78db3c2bc"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB05-3.svg",
+      "sha256": "7dbd2d5b9bb3d154826871f838b3e8a04907fc718907aa2213b79b494b0da97d"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB05-4.svg",
+      "sha256": "32d53c0846b35dff9e5902c47bd80c8a18d60129ed7d9999b75fabfa298bb9d0"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB05-5.svg",
+      "sha256": "fd16e04f49ee289cabd1d7c4ed3c4a86fd3ca17bb7aed0502281d98c88cbe3a0"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB05-6.svg",
+      "sha256": "920ac53b7ee7081ad9ffa5939a3bc49442f71b2f5ad4f4bf80720a4f41443da5"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB05-7.svg",
+      "sha256": "cd38dca4918200fc3ba8df45c4e57d5a7b6bf316c38fbc0796594463ef5685b1"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB05-8.svg",
+      "sha256": "d6d26dc7caf0c37a6314941fc1d296f2ebfee40f53830249f526bb6c956520fa"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB05-9.svg",
+      "sha256": "8d71778ad0e95d34b0955b4a46eac58fbd2cb9fb566ba0d955452882944e25e0"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB06-1.svg",
+      "sha256": "05ccbb61416a7449541dd42e6614dc99952de888d28e54311af21986c4b3a343"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB06-10.svg",
+      "sha256": "920ac53b7ee7081ad9ffa5939a3bc49442f71b2f5ad4f4bf80720a4f41443da5"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB06-11.svg",
+      "sha256": "a4fbea3a50e8c98a6f0333ae83322d94c81613563c3905752f5251aa62cb93f7"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB06-12.svg",
+      "sha256": "fe2ebc317399c141145d0e8b3bba4006745eb4c571e5252945b66912561644ac"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB06-2.svg",
+      "sha256": "32ba654f331cf7938c0989f37ed0730bcea6207c6033d1e2e55017044cb0bd9c"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB06-3.svg",
+      "sha256": "920ac53b7ee7081ad9ffa5939a3bc49442f71b2f5ad4f4bf80720a4f41443da5"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB06-4.svg",
+      "sha256": "a4fbea3a50e8c98a6f0333ae83322d94c81613563c3905752f5251aa62cb93f7"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB06-5.svg",
+      "sha256": "a4fbea3a50e8c98a6f0333ae83322d94c81613563c3905752f5251aa62cb93f7"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB06-6.svg",
+      "sha256": "51bc877b11d469ccbc96f73627dd0968f147802e7e2e5fe0a12b68670bc28684"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB06-7.svg",
+      "sha256": "0394f78ff29552041854703dc3cf1c9e0c3298df02bc09f2b2d29397b0f03f0d"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB06-8.svg",
+      "sha256": "fbeda7650cfc4180cf607c02e7811e07586db22532acde75d8ffae50269bad92"
+    },
+    {
+      "path": "remediation/design-c4/docs/screens/steps/STB06-9.svg",
+      "sha256": "905326338b027f39c1e284d13b3beb155a6f77c73c78c456d05203e385fb50d1"
+    }
+  ],
+  "legacyTestInventory": [
+    {
+      "path": "remediation/test_design_module_graph.py",
+      "sha256": "09903f374e64cfe7d99318b9765eb969c2f6a685075cebe11f85567b3c7541da",
+      "cases": [
+        "test_reproduces_cyclic_old_crosswalk",
+        "test_forbidden_concrete_edge_rejected",
+        "test_domain_port_invariant_rejects_platform_interface",
+        "test_entire_current_class_graph_is_owned_and_acyclic"
+      ]
+    },
+    {
+      "path": "remediation/test_design023_guardrails.py",
+      "sha256": "629f66fc32f5b2110d6b1d6b5e340a02a7d7abb40f06c519291d00614c8452ee",
+      "cases": [
+        "test_current_cross_artifact_model",
+        "test_missing_dispatch_edge_and_revoke_bypass_fail",
+        "test_placeholder_state_contract_and_missing_route_fail"
+      ]
+    },
+    {
+      "path": "remediation/test_design023_ui.py",
+      "sha256": "97e3672e88f191549b03f9b94decd730ea8830bfb1ff98295a357f25dea780bf",
+      "cases": [
+        "test_current_control_and_state_contracts_are_explicit",
+        "test_markdown_is_single_canonical_behavior_source",
+        "test_every_state_has_matching_vector_variant_and_exact_control_enablement",
+        "test_storyboard_images_match_named_state_and_branch_success_does_not_force_error",
+        "test_every_rendered_state_health_uses_closed_domains_and_integer_revision"
+      ]
+    },
+    {
+      "path": "remediation/test_design024_contract.py",
+      "sha256": "550488c894bd585bfeefa539bc81e6dad45c671f6bfd2d3ab4b7d3b52f16c18e",
+      "cases": [
+        "test_revocation_fanout_has_callback_and_lease_sinks",
+        "test_ask_is_exact_protected_owner_path",
+        "test_concrete_codec_proxy_and_client_factory",
+        "test_interfaces_are_domain_ports",
+        "test_component_paths_rendered",
+        "test_host_direct_route_and_ownership",
+        "test_explicit_close_resume_and_root_generations"
+      ]
+    },
+    {
+      "path": "remediation/test_design024_core_contract.py",
+      "sha256": "09e648d07d127ba5d58aabb0c108b80bcb24db2c46ba74218de7dfce46865d02",
+      "cases": [
+        "test_actual_controls_are_in_generated_design_table",
+        "test_delete_reason_and_metadata_etags",
+        "test_pinned_portable_metadata_contract",
+        "test_inbound_arc_counts_dispatch_and_lifecycle_uses_port",
+        "test_screen_result_schema_has_one_field_spelling",
+        "test_single_writer_credential_and_modifier_semantics",
+        "test_generic_example_uses_canonical_argument_names",
+        "test_pending_owner_state_is_paused_with_explicit_reason"
+      ]
+    },
+    {
+      "path": "remediation/test_factor_design_evidence.py",
+      "sha256": "12961101499ff4e7a81e0021112549578fa30c3b9ac2dbb359d8e82875813b5f",
+      "cases": [
+        "test_known_repetitions_roundtrip_and_unknown_asset_preserved",
+        "test_invalid_adjacent_uri_is_retained_without_decode_crash"
+      ]
+    },
+    {
+      "path": "remediation/tests_design018_contract.py",
+      "sha256": "6503118aaebba7c2418af7a5b4130771c8b02245000f30fdd5fc62e731df7c94",
+      "cases": [
+        "test_callback_state_machine_has_terminal_cleanup_semantics",
+        "test_inflight_distinguishes_admission_from_dispatch",
+        "test_direct_event_extension_has_negotiation_and_fallback",
+        "test_models_include_arc_and_owner_sequences",
+        "test_all_screen_definitions_include_status_chip"
+      ]
+    },
+    {
+      "path": "remediation/tests_design020_contract.py",
+      "sha256": "9577ce4eda3c646420caaf7156967dc4110e248112b1423674261f98128879ad",
+      "cases": [
+        "test_arc_authentication_is_explicitly_an_adapter_to_shared_registry",
+        "test_component_writes_converge_on_single_sqlite_coordinator",
+        "test_owner_log_read_and_export_have_both_model_and_code_path",
+        "test_unknown_callback_late_result_and_cancel_are_closed_in_contract",
+        "test_nonresumable_stage_expiry_has_one_policy",
+        "test_migration_precedes_live_schema",
+        "test_screen_tables_and_story_actions_resolve_to_declared_ids",
+        "test_self_adb_pairing_is_an_explicit_story_not_a_grant"
+      ]
+    },
+    {
+      "path": "remediation/tests_design022_contract.py",
+      "sha256": "d09c7b97c52e6f51153531f0b6471e26afeb55466bb9346a01746276b9bdd9d3",
+      "cases": [
+        "test_slides_contain_actual_vector_images_not_raw_markdown",
+        "test_slideshow_uses_standard_svg_images",
+        "test_error_status_fixture_uses_actual_closed_health_domains",
+        "test_controls_states_and_external_actors_have_explicit_contracts",
+        "test_arc_input_lifetime_matches_pinned_singleton_not_unary_socket",
+        "test_arc_backend_and_health_paths_exist_across_views",
+        "test_unknown_state_has_phase_specific_cleanup_exits"
+      ]
+    },
+    {
+      "path": "remediation/tests_design023_contract.py",
+      "sha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+      "cases": [
+        "test_version_rejection_matches_pinned_arc_source",
+        "test_contract_version_has_one_current_value",
+        "test_admin_scheme_is_issued_bearer_and_owner_proof_is_server_owned",
+        "test_import_stage_routes_define_sealed_hash_size_expiry",
+        "test_stage_lifetime_is_capacity_aware_and_configurable",
+        "test_standalone_docs_tasks_verify_pins",
+        "test_all_native_arc_identities_hash_exact_bytes_and_use_pinned_payloads",
+        "test_dispatch_permit_and_storage_ports_are_explicit_in_sources",
+        "test_watch_contract_is_finite_and_blob_quota_accounted"
+      ]
+    }
+  ],
+  "historicalReceiptLimits": [
+    "storyboard-browser-validation-v7.json describes 62 slides and 61 figures, not the current 108-slide/107-step baseline.",
+    "reproducibility-003.json records 39 generated files, not all current 221 docs SVGs.",
+    "Neither legacy receipt is evidence that any C# implementation passes."
+  ]
+}

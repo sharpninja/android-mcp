@@ -1,6 +1,6 @@
 # Android MCP bridge — lean design and offline tooling
 
-> **NUKE migration in progress:** see [progress and remaining work](MIGRATION-STATUS.md). Do not execute Python tooling or legacy commands. This branch is an incomplete tracking checkpoint; normal migration validation precedes ready-for-review, and HV follows in the PR.
+> **NUKE migration in progress:** see [progress and remaining work](MIGRATION-STATUS.md). Do not execute Python tooling or legacy commands. This branch includes an incomplete native NUKE checkpoint; normal migration validation precedes ready-for-review, and HV follows in the PR.
 
 All-Kotlin server/Jetpack Compose design, internal ARC compatibility-port specification, C4/Structurizr and class sources, editable SVG screens/storyboards, a self-contained Marp presentation, catalog contracts, extractors and offline tests. **No Android application or deployed bridge is implemented here.**
 
@@ -20,7 +20,7 @@ The last completed independent design verdict remains round 023: **88 accuracy /
 
 ## Migration checks
 
-The current workflow is tracking-only. Native NUKE build/test and rehydration commands will be published with their implementation and verification evidence. Older tooling instructions, including [REHYDRATE.md](REHYDRATE.md), are retained as migration references and must not be executed until their callers are replaced. See [MIGRATION-STATUS.md](MIGRATION-STATUS.md) for the removal and readiness gates.
+The current workflow runs a locked native .NET restore, C# host build and NUKE mock gate. See [NUKE usage](remediation/nuke-app/README.md). Mock success does not establish production parity; full rehydration and production commands remain pending. Older tooling instructions, including [REHYDRATE.md](REHYDRATE.md), are retained as migration references and must not be executed until their callers are replaced. See [MIGRATION-STATUS.md](MIGRATION-STATUS.md) for the removal and readiness gates.
 
 ## What changed in this forward cleanup
 

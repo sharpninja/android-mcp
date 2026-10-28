@@ -1,15 +1,28 @@
-name: Migration checkpoint (validation pending)
+name: NUKE migration checkpoint (parity pending)
 on: [push, pull_request]
 permissions:
   contents: read
 jobs:
-  checkpoint:
+  native-mock-checkpoint:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: pwsh
+        working-directory: remediation/nuke-app
     steps:
       - uses: actions/checkout@v4
-      - name: Record tracking-only checkpoint
-        shell: pwsh
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: remediation/nuke-app/global.json
+      - name: Locked native restore and host build
         run: |
-          if (-not (Test-Path MIGRATION-STATUS.md)) { throw 'Migration status is missing.' }
-          git log -1 --format='%H %s'
-          Write-Host 'Tracking only. Migration implementation, tests and production parity remain pending.'
+          $native = (Get-Command dotnet -CommandType Application).Source
+          & $native restore Tests/AndroidMcp.Build.Tests.csproj --configfile NuGet.Config --locked-mode
+          if ($LASTEXITCODE -ne 0) { throw 'Locked restore failed.' }
+          & $native build AndroidMcp.Build.csproj --no-restore
+          if ($LASTEXITCODE -ne 0) { throw 'Host build failed.' }
+      - name: Run shared NUKE mock gate (production parity pending)
+        run: |
+          $native = (Get-Command dotnet -CommandType Application).Source
+          & $native run --no-build --no-restore -- --target Validate --root (Get-Location).Path --operation MockGate --dotnet-host $native
+          if ($LASTEXITCODE -ne 0) { throw 'Mock gate failed.' }

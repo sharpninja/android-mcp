@@ -1,0 +1,65 @@
+{
+  "verifiedAtUtc": "2026-10-28T02:11:08.7044249Z",
+  "handoff": "nuke-migration-checkpoint-001",
+  "handoffManifestSha256": "a7ab9fd851d1900a2ea2091a71ac169d5d5d78b6289932e80dd0b35e39ae258b",
+  "handoffFileCount": 41,
+  "handoffBytes": 1087597,
+  "sdk": "10.0.403",
+  "lockedRestoreSucceeded": true,
+  "nativeHostBuildSucceeded": true,
+  "nativeNukeTarget": "Validate",
+  "operation": "MockGate",
+  "mock": {
+    "total": 8823,
+    "executed": 8823,
+    "passed": 8823,
+    "failed": 0,
+    "notExecuted": 0,
+    "pending": 0,
+    "categories": {
+      "Core": 45,
+      "Catalog": 146,
+      "Documentation": 5274,
+      "Sources": 3358
+    },
+    "trxSha256": "eb565bb156c3d9bfcb6a36f0ab1945a7099c308cea6a829971dac57ef52de2ff",
+    "trxLocalRelativePath": "remediation/nuke-app/artifacts/tests/mock/mock-gate.trx",
+    "startedUtc": "2026-10-28T02:09:31.6189640Z",
+    "finishedUtc": "2026-10-28T02:10:15.4709220Z"
+  },
+  "warnings": [
+    {
+      "version": "6.12.1",
+      "severity": "low",
+      "package": "NuGet.Packaging",
+      "code": "NU1901"
+    },
+    {
+      "version": "9.0.0",
+      "severity": "high",
+      "package": "System.Security.Cryptography.Xml",
+      "code": "NU1903"
+    }
+  ],
+  "dependencyWarningsResolved": false,
+  "productionParityProven": false,
+  "realGateExecuted": false,
+  "categoryRegistryImplemented": false,
+  "migrationComplete": false,
+  "pythonExecuted": false,
+  "hvExecuted": false,
+  "publicationAdaptations": [
+    "Native mock CI replacing tracking-only placeholder",
+    "Migration status and README updated for included scaffold",
+    "Explicit lean allowlist additions",
+    "Historical handoff receipt retained separately from this fresh gate"
+  ],
+  "remaining": [
+    "Typed shared production registry/planner",
+    "Production source, catalog and documentation parity",
+    "Remaining acquisition, parser, storage, resolver, render, package, rehydration, review and publication ports",
+    "All legacy per-file dispositions and caller/CI/docs migration",
+    "Dependency security remediation",
+    "Full normal validation before mark-ready; review and remediation only afterward"
+  ]
+}

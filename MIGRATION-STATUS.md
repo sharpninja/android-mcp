@@ -1,17 +1,17 @@
 # NUKE migration progress
 
-**INCOMPLETE — draft PR for progress tracking.** This checkpoint publishes status and disables legacy Python CI. It does not publish the in-progress NUKE implementation or claim production parity.
+**INCOMPLETE — draft PR for progress tracking.** This checkpoint includes the initial NUKE host, typed contracts, mock fixtures, initial native implementations and migration plans. It disables legacy Python CI and does not claim production parity.
 
 ## Required implementation
 
 Replace all project Python tooling with one NUKE Build C# monolith. Functional categories become targets; a typed operation parameter selects each task. Use one authoritative registry, contracts and shared implementation throughout. Keep Android server/UI code in Kotlin and Gradle as orchestration. Never execute legacy Python, directly or indirectly.
 
-C# scaffolding and mock gates exist in the working implementation, but they are not included in this status-only checkpoint. Mock assertions are not evidence of production parity. Future commits will carry coherent implementation increments and their verification evidence.
+The included host exposes Validate --operation MockGate. Native AIDL/signature extractors and a pure documentation projector are present with real test bindings, but this checkpoint runs the mock gate only; production behavior and full parity remain unverified. The category/operation enums and interfaces are scaffolding for the pending registry/planner. Mock assertions are not evidence of production parity.
 
 ## Progress checklist
 
 - [x] Create a branch checkpoint and progress-tracking draft PR.
-- [x] Replace Python CI execution with explicitly tracking-only checks.
+- [x] Remove Python CI execution; add locked native .NET build and NUKE mock checks.
 - [x] Preserve upstream main changes, including FUNDING.
 - [ ] Publish the shared NUKE category/operation registry and configuration.
 - [ ] Port acquisition, rehydration, source parsing and extraction.
@@ -29,4 +29,8 @@ C# scaffolding and mock gates exist in the working implementation, but they are 
 
 Legacy Python files remain tracked as dormant migration references. They are not approved execution paths. Existing Python commands in older documents and scripts are historical instructions pending replacement; do not run them. Removal requires a per-file replacement/retirement mapping, verified behavior and updated callers.
 
-The checkpoint workflow checks only the presence of this status document and records the commit. A green tracking check does not mean the migration, generation, application, tests or parity are complete. No new HV, acceptance score, 98/98 result or merge authorization is claimed. Full source datasets, caches, historical snapshots and large review archives remain outside the lean publication scope.
+The checkpoint workflow performs a native locked restore, C# host build and NUKE mock gate. A green mock gate does not mean production generation, application behavior, or migration parity is complete. No new HV, acceptance score, 98/98 result or merge authorization is claimed. Full source datasets, caches, historical snapshots and large review archives remain outside the lean publication scope.
+
+## Checkpoint evidence
+
+See [initial sealed handoff](validation/nuke-migration-checkpoint.json), [native publication verification](validation/nuke-publication-checkpoint.json), [NUKE usage](remediation/nuke-app/README.md), and the [source](remediation/nuke-planning/source/SOURCE-PARITY-PLAN.md), [catalog](remediation/nuke-planning/catalog/PARITY-PLAN.md) and [documentation](remediation/nuke-planning/docs/design-tooling-port.md) port plans. The sealed handoff receipt is historical; the publication receipt records the fresh gate. Transitive NuGet security warnings remain to be resolved before final migration readiness.
