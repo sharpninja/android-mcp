@@ -42,20 +42,6 @@ public sealed class FileArtifactStore : IArtifactStore
     }
     private string Resolve(string relativePath)
     {
-        if(string.IsNullOrWhiteSpace(relativePath) || relativePath.Contains('\\') || relativePath.Contains(':') || Path.IsPathRooted(relativePath))
-            throw new ArgumentException("Use a nonempty portable root-relative artifact path.",nameof(relativePath));
-        var parts=relativePath.Split('/');
-        if(parts.Any(x=>x is "" or "." or ".." || x.IndexOfAny(Path.GetInvalidFileNameChars())>=0))
-            throw new ArgumentException("Artifact path contains unsafe components.",nameof(relativePath));
-        var path=(string)root;
-        if((Directory.Exists(path)||File.Exists(path)) && (File.GetAttributes(path)&FileAttributes.ReparsePoint)!=0)
-            throw new ArgumentException("Artifact root cannot be a reparse point.",nameof(relativePath));
-        foreach(var part in parts)
-        {
-            path=Path.Combine(path,part);
-            if((Directory.Exists(path)||File.Exists(path)) && (File.GetAttributes(path)&FileAttributes.ReparsePoint)!=0)
-                throw new ArgumentException("Artifact paths cannot traverse reparse points.",nameof(relativePath));
-        }
-        return path;
+        return ArtifactPaths.Resolve(root,relativePath);
     }
 }

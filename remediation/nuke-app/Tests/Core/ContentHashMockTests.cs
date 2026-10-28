@@ -57,15 +57,9 @@ public sealed class ContentHashMockTests
     }
 }
 
-public sealed class NativeContentHashProvider:IContentHash
-{
-    public string Sha256(ReadOnlySpan<byte> bytes)=>ContentHash.Sha256(bytes);
-    public string AidlSha1Legacy(ReadOnlySpan<byte> bytes)=>ContentHash.AidlSha1Legacy(bytes);
-    public string GitBlobSha1Legacy(ReadOnlySpan<byte> payload)=>ContentHash.GitBlobSha1Legacy(payload);
-}
 [Trait("Gate","Real")]
 public sealed class ContentHashRealTests
 {
     [Theory,MemberData(nameof(ContentHashCases.All),MemberType=typeof(ContentHashCases))]
-    public void NativeHashesUseSameVectorsAndAssertions(ContentHashCase test)=>ContentHashCases.AssertCase(test,new NativeContentHashProvider());
+    public void NativeHashesUseSameVectorsAndAssertions(ContentHashCase test)=>ContentHashCases.AssertCase(test,new NativeContentHash());
 }

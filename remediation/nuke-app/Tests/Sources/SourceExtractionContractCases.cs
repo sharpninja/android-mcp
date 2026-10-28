@@ -277,7 +277,7 @@ public static class SourceExtractionContractCases
         Assert.Equal(originalBytes, document.Bytes.ToArray());
         Assert.Equal(test.Status, result.StructuralStatus);
         Assert.Equal(test.ExpectedRecords.Count, result.Records.Count);
-        for (var i = 0; i < test.ExpectedRecords.Count; i++) AssertNode(test.ExpectedRecords[i], result.Records[i], $"records[{i}]");
+        for (var i = 0; i < test.ExpectedRecords.Count; i++) AssertSubset(test.ExpectedRecords[i], result.Records[i], $"records[{i}]");
         Assert.Equal(test.IssueCodes.Order(StringComparer.Ordinal), result.Issues.Select(x => x.Code).Order(StringComparer.Ordinal));
         Assert.All(result.Issues, issue =>
         {
@@ -291,7 +291,7 @@ public static class SourceExtractionContractCases
         });
     }
 
-    private static void AssertNode(JsonNode? expected, JsonNode? actual, string path)
+    public static void AssertSubset(JsonNode? expected, JsonNode? actual, string path = "root")
     {
         if (expected is JsonObject expectedObject)
         {
@@ -299,13 +299,13 @@ public static class SourceExtractionContractCases
             foreach (var item in expectedObject)
             {
                 Assert.True(actualObject.ContainsKey(item.Key), $"Missing {path}.{item.Key}");
-                AssertNode(item.Value, actualObject[item.Key], path + "." + item.Key);
+                AssertSubset(item.Value, actualObject[item.Key], path + "." + item.Key);
             }
         }
         else if (expected is JsonArray expectedArray)
         {
             var actualArray = Assert.IsType<JsonArray>(actual); Assert.Equal(expectedArray.Count, actualArray.Count);
-            for (var i = 0; i < expectedArray.Count; i++) AssertNode(expectedArray[i], actualArray[i], path + $"[{i}]");
+            for (var i = 0; i < expectedArray.Count; i++) AssertSubset(expectedArray[i], actualArray[i], path + $"[{i}]");
         }
         else Assert.True(JsonNode.DeepEquals(expected, actual), $"Value differs at {path}: expected {expected}, actual {actual}");
     }

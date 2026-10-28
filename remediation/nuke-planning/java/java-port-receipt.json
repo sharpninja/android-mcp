@@ -1,0 +1,184 @@
+{
+  "timestamp": "2026-10-27T22:56:59",
+  "state": "scoped-linux-x64-native-fixture-evidence",
+  "requirements": [
+    "FR-BUILD-004",
+    "TR-BUILD-TOOL-004",
+    "TEST-BUILD-004"
+  ],
+  "sessionId": "Codex-20261028T025956Z-plugin-session",
+  "requestId": "req-20261028T025958Z-turn-cb9d",
+  "mockGates": {
+    "initial": "artifacts/tests/20261027T2211252831816-62da207a1ff44524abad84a6eb02bf9d/tests.trx",
+    "workflowAndLifetime": "artifacts/tests/20261027T2223135515272-a43f277846054c2d8d987d8b21fc057d/tests.trx",
+    "metadataAndOriginalInputs": "artifacts/tests/20261027T2250369273678-88afb3fab9ff492894c5371159eb17e6/tests.trx"
+  },
+  "realGate": {
+    "failed": 0,
+    "failures": [],
+    "total": 146,
+    "classes": [
+      {
+        "Name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaAstRealTests",
+        "Count": 13
+      },
+      {
+        "Name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHandleLifetimeMockTests",
+        "Count": 1
+      },
+      {
+        "Name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHandleLifetimeRealTests",
+        "Count": 1
+      },
+      {
+        "Name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests",
+        "Count": 83
+      },
+      {
+        "Name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaNativeBuilderRealTests",
+        "Count": 2
+      },
+      {
+        "Name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaNativeBuildMockTests",
+        "Count": 1
+      },
+      {
+        "Name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests",
+        "Count": 44
+      },
+      {
+        "Name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaWorkflowMockTests",
+        "Count": 1
+      }
+    ],
+    "passed": 146,
+    "sha256": "1beac69a106f9aa6a2199efe752342f2c8ef2f18ee4f410be6b860d322537302",
+    "notExecuted": 0,
+    "trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261027T2255148761509-864f2aace3274e0d8378d4565a3ef0c1/tests.trx"
+  },
+  "native": {
+    "runtimeTagObject": "695d1530e59804279d9c739335b73b882d9f1caf",
+    "runtimeCommit": "6e0618704ad758ba2ea5822faa80bcd36fbeba3d",
+    "manifestSha256": "e9fa6885c4d800dd1c74ef72f478f0b81885811f2b9fb84665d76dc18f3ff0c1",
+    "libraryBytes": 664048,
+    "library": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/java-native-002/native/linux-x64/libandroidmcp_java_parser.so",
+    "librarySha256": "058665f4d41f23e407e2920930ee92888404d726d450fbfd0b33730e484b7e0f",
+    "manifest": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/java-native-002/native-source-lock.json",
+    "grammarMetadata": [
+      {
+        "Attributes": {
+          "comment": "94703d5a6bed02b98e438d7cad1136c01a60ba2c"
+        },
+        "EntryType": "GlobalExtendedAttributes",
+        "Name": "pax_global_header"
+      }
+    ],
+    "compiler": {
+      "ExecutablePath": "/usr/bin/cc",
+      "Sha256": "8aac907d6fbf40394b424b5fa4a2ad1aa291dac7d3a0315c5b415c1f5ace1287",
+      "Version": "cc (GCC) 16.2.1 20260810"
+    },
+    "abi": 14,
+    "compilerRebuildEvidence": [
+      {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/java-native-002/validation/native-build-4fea78c750184b3d83fb265cf8ee966f/work/libandroidmcp_java_parser.so",
+        "sha256": "058665f4d41f23e407e2920930ee92888404d726d450fbfd0b33730e484b7e0f",
+        "length": 664048
+      },
+      {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/java-native-002/validation/native-build-4fea78c750184b3d83fb265cf8ee966f/receipts/stderr.bin",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "length": 0
+      },
+      {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/java-native-002/validation/native-build-4fea78c750184b3d83fb265cf8ee966f/receipts/stdout.bin",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "length": 0
+      },
+      {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/java-native-002/validation/native-build-4fea78c750184b3d83fb265cf8ee966f/native/linux-x64/libandroidmcp_java_parser.so",
+        "sha256": "058665f4d41f23e407e2920930ee92888404d726d450fbfd0b33730e484b7e0f",
+        "length": 664048
+      }
+    ],
+    "selectedSourceFiles": 51,
+    "runtimeMetadata": [
+      {
+        "Attributes": {
+          "comment": "6e0618704ad758ba2ea5822faa80bcd36fbeba3d"
+        },
+        "EntryType": "GlobalExtendedAttributes",
+        "Name": "pax_global_header"
+      }
+    ],
+    "grammarCommit": "94703d5a6bed02b98e438d7cad1136c01a60ba2c"
+  },
+  "files": [
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Sources/Java/JavaContracts.cs",
+      "sha256": "2605ead0d94748195bc56e59c69d63517c4703505d458e2ac0c0307f589f46c0"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Sources/Java/JavaNativeBuilder.cs",
+      "sha256": "71ec4880e8953dca7bac3b0f89b44763184259ec078a763257a072ea61723a7b"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Sources/Java/JavaNativeParser.cs",
+      "sha256": "e58cd6aa51e887acf9148a4d0f4b4f3f443da79bad54a893e434a91a3adc6fbf"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Sources/Java/JavaNativeWorkflow.cs",
+      "sha256": "69084340e089bd25dbd6798601c972d79695f3cf214200dfe4d72305f7ef5dfa"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Sources/Java/JavaSemanticServices.cs",
+      "sha256": "8caf7c9c9535ad63c738d301ffea9bd85aac74151371b06a4ed72148080eeae8"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Sources/Java/JavaSourceExtractor.cs",
+      "sha256": "7714eb4713e5ae1390a161cbd1560d2b4f1731af5192e71171733d5b7c46b394"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/Java/JavaAstRealTests.cs",
+      "sha256": "050cfe06b2872270974642a746c00ce18b86b99d0dba79c49f734eb76f0ce3b9"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/Java/JavaContractCases.cs",
+      "sha256": "dcefa28793dc37b4e54888d76e26de7851f6aedd8d7c65f61f217946626cc8b5"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/Java/JavaHandleLifetimeTests.cs",
+      "sha256": "6f3ff5b883543797c9930ae81888bafcf2e5903aeeabe8b57acf503178f167fb"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/Java/JavaMockGateTests.cs",
+      "sha256": "9dc101d56c521a3cbe991f33f9ab6db49de06b4850093d466a5f6cc04b578854"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/Java/JavaNativeBuildMockTests.cs",
+      "sha256": "ac7be314bd22534e55109ccd4dec39b0e91c1189e1fe9c8ba30438371591569d"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/Java/JavaSemanticCases.cs",
+      "sha256": "e7384733b5a6b9e9065e6647ee66b296675532df0760d8386343c6e722e617c4"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/Java/JavaSemanticRealTests.cs",
+      "sha256": "7851821b0acd3300e1a71d44b4ddf824eb7f6949bc5a629499b8be1fecdedc70"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/Java/JavaWorkflowMockTests.cs",
+      "sha256": "30a996531bbd9e3349eaf35b4dd20da8daa8c17d997d98b8473c5e79d29834b5"
+    }
+  ],
+  "limitations": [
+    "Windows unvalidated",
+    "Full source corpus unrun",
+    "No Android runtime readiness claim",
+    "No HV launched per parent gate",
+    "No requirement or TODO marked done"
+  ],
+  "accuracy": 99,
+  "completeness": 99,
+  "ratingScope": "Observed scoped fixture and first-RID evidence only"
+}

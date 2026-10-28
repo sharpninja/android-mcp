@@ -4,7 +4,7 @@
 
 All-Kotlin server/Jetpack Compose design, internal ARC compatibility-port specification, C4/Structurizr and class sources, editable SVG screens/storyboards, a self-contained Marp presentation, catalog contracts, extractors and offline tests. **No Android application or deployed bridge is implemented here.**
 
-Checkpoint002 passed the full currently implemented local C# suite: **16,800 tests, zero failed or skipped**. The source and copied publication gates both passed. The migration remains incomplete; only Validate/MockGate and Validate/Tests are executable category/operation adapters. See [current progress and remaining work](MIGRATION-STATUS.md) and [exact validation evidence](validation/nuke-publication-checkpoint.json).
+The latest copied native checkpoint and exact validation evidence are recorded in [current progress](MIGRATION-STATUS.md) and the [publication receipt](validation/nuke-publication-checkpoint.json). The migration remains incomplete; legacy commands stay dormant.
 
 Historical design evidence remains round023 (88 accuracy /81 completeness, NOT_ACCEPTED) and partial round024. No new HV is authorized before this migration PR is marked ready after completion and normal verification. Review and remediation happen in the PR afterward; no current acceptance is claimed.
 

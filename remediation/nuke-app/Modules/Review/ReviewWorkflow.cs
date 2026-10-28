@@ -17,6 +17,8 @@ public sealed class ReviewWorkflow(ReviewPrepareService prepare, ReviewLaunchSer
             "prepare" => await prepare.PrepareAsync(Need(input.Snapshot, "snapshot"), cancellationToken),
             "launch" => await launch.LaunchAsync(Need(input.Prepared, "prepared"), Need(input.Capability, "capability"),
                 Need(input.ArtifactRoot, "artifact-root"), Need(input.WorkingDirectory, "working-directory"), cancellationToken),
+            "recover" when input.Prepared is not null => await launch.ResumeAsync(input.Prepared, Need(input.Capability, "capability"),
+                Need(input.ArtifactRoot, "artifact-root"), Need(input.WorkingDirectory, "working-directory"), cancellationToken),
             "recover" => recover.Recover(Need(input.Recovery, "recovery")),
             "assess" => assess.Assess(Need(input.Response, "response"), Need(input.Terminal, "terminal"), Need(input.Marker, "marker")),
             _ => throw new ReviewException("UNKNOWN_OPERATION", operation)

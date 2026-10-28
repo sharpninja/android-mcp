@@ -1,38 +1,37 @@
 # NUKE migration progress
 
-**INCOMPLETE: checkpoint002, draft PR for progress tracking.** One C# NUKE app now includes the initial shared registry/planner, canonical JSON/hashing, immutable stores/process services, native reference components, and mock/real bindings. Normal validation is local-only. No GitHub Actions are configured or planned. Full legacy parity and production workflow completion remain pending.
+**INCOMPLETE: checkpoint003, draft PR for progress tracking.** One C# NUKE application hosts the tools. Validation is local-only; no GitHub Actions. Full legacy parity and end-to-end production workflow completion remain pending.
 
 ## Verified checkpoint
 
-The copied snapshot passed pinned .NET SDK 10.0.403 locked restore, host build and the full currently implemented local C# suite: **16,800 passed, zero failed or unexecuted**. See [publication receipt](validation/nuke-publication-checkpoint.json) for exact TRX identity, scope and warnings. The source-owner gate passed the same count before sealing. Publication preserved the sealed C# sources/tests after the post-copy gate.
+The copied snapshot passed locked restore with pinned .NET SDK 10.0.403, host/test builds with zero warnings/errors, and the full currently implemented C# suite: **24,517 passed, zero failed or skipped**. See [publication receipt](validation/nuke-publication-checkpoint.json) for exact scope, hashes and chronology. The prior four missing-fixture failures remain recorded there; the portable seven-row correction passed 48 focused cases before the full run, restoring all expected cases without changing assertions.
 
-The root registry has eight initial definitions across Sources, Catalog, Design, Validate, Review and Publish. Only Validate/MockGate and Validate/Tests currently have execution adapters. A valid plan for another operation does not mean it can execute.
+The authoritative registry currently contains 9 definitions. Its executable adapters are Validate/MockGate, Validate/Tests, Design/Assets, Sources/NativeParser. Planning another registered operation does not make it executable. Kotlin remains the Android server/UI language and Gradle remains orchestration.
 
-Native unit components cover source AIDL/signature and SDK XML, documentation projection/module checks, canonical JSON and reference catalog/policy behavior, shared runtime behavior, publication Check/Stage and pure rehydration planning, and review unit services with fake providers. Publication has 122 mock tests and 61 native cases (Check17, Stage20, Rehydration24). These counts prove the named cases, not complete old-producer parity or a deployed Android bridge.
+Native unit services now include the shared runtime, canonical JSON/hash profiles, source formats and acquisition/tool transport, catalog policy/resolution/SQLite/metadata, documentation preparation/package services, publication Check/Stage/rehydration planning/help, and review services tested with fake provider/audit collaborators. Unit bindings, CLI adapters and live workflows are distinct evidence levels. No Android application or deployed bridge is implemented here.
 
-## Remaining work
+## Remaining migration work
 
-- Complete registry/CLI adapters and shared runtime composition, including cooperating leases and provider integration.
-- Finish acquisition, remaining source formats and clean-path end-to-end rehydration.
-- Finish catalog/storage/resolution/metadata/wire integration and complete parity evidence.
-- Finish architecture rendering, browser QA, factoring, packaging and thin Gradle delegates.
-- Finish registry-derived help, full legacy per-file disposition and caller/documentation migration.
-- Resolve the known nonfatal xUnit1013 public-helper warning; maintain dependency audit visibility.
-- Verify lean allowlist enforcement and complete reproducibility/cross-environment evidence through native targets.
+- Complete registry/CLI dispatch and runtime composition for acquisition/batch rehydration, catalog production, publication and review.
+- Finish source HTML/Soong/hash production coverage and typed recipe-row projection without a second recipe parser.
+- Finish actual architecture renderer admission, browser runtime/visual QA, bootstrap, validators, packaging and thin Gradle caller migration.
+- Complete catalog generation/wire-proof producers, long-lived process runtime, ancestry hardening, full per-file disposition and clean-path end-to-end parity.
+- Complete native deliverable-policy adapter enforcement, reproducibility and cross-environment evidence.
 
-Strict DRY applies: one authoritative typed registry, contracts/configuration and shared services; functional categories are targets and typed operation parameters select tasks. Android server/UI remain Kotlin. Gradle remains orchestration. Never execute Python or custom Node, directly or indirectly.
+The [sealed component status](validation/nuke-migration-checkpoint.json) records the individual component scope. Current test counts establish only the named C# scope, not complete old-producer parity or acceptance.
 
 ## Legacy retention and review order
 
-Legacy Python stays dormant as a migration reference until each replacement or retirement has verified behavior and all callers are updated. Older documents and scripts are historical migration inputs; do not execute them. Full source corpora, caches, raw review streams, historical database copies and generated build outputs remain outside the lean publication tree.
+Legacy Python and custom Node files remain dormant migration references until each replacement or retirement and all callers have verified parity. Never execute them. Corpora, caches, raw reviewer streams, historical database copies, generated build trees and native binaries remain outside the lean tracked tree. Only six small editable pinned class-view goldens are retained as test inputs.
 
-Complete migration and normal local build/test/parity verification, then mark the draft PR ready. **Do not run HV before marking ready.** Review and remediation happen in the PR afterward. No 98/98, independent acceptance, final migration completion or merge authorization is claimed.
+Strict DRY applies: one authoritative typed registry, shared contracts, recipe parser and services; functional categories are NUKE targets and parameters select operations.
+
+Complete migration and normal local verification, then mark the draft PR ready. **Do not run HV before marking ready.** Review/remediation happen in the PR afterward. No 98/98, final migration completion or merge authorization is claimed.
 
 ## Navigation
 
-- [Sealed checkpoint scope](validation/nuke-migration-checkpoint.json)
-- [Latest local publication evidence](validation/nuke-publication-checkpoint.json)
-- [Native bootstrap usage](remediation/nuke-app/README.md) (initial checkpoint notes; latest gate/status are authoritative here and in the receipt)
+- [Current copied-gate receipt](validation/nuke-publication-checkpoint.json)
+- [Native bootstrap usage](remediation/nuke-app/README.md)
 - [Publication input mapping](remediation/nuke-planning/publication/INPUT-MAPPING.md)
 - [Source parity plan](remediation/nuke-planning/source/SOURCE-PARITY-PLAN.md)
 - [Catalog parity plan](remediation/nuke-planning/catalog/PARITY-PLAN.md)

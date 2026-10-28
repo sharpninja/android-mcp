@@ -40,7 +40,9 @@ public sealed class RehydrationPlanner(ICanonicalJson canonical):IRehydrationPla
             if(pin.GetProperty("source_rows").GetInt32()!=rows.Length || pin.GetProperty("producer_files").GetInt32()!=producerFiles.Length)
                 Fail("LOCK_COUNT_MISMATCH","");
             var unique=new Dictionary<string,(string Sha,long? Length)>(StringComparer.Ordinal);
+            var caches=new Dictionary<string,(string Sha,string Parser,string Source)>(StringComparer.Ordinal);
             var snapshots=new List<SnapshotRequirement>();
+            var archives=new List<ArchiveRequirement>();
             foreach(var row in rows)
             {
                 var logical=Text(row,"path");var local=Text(row,"local_path");Path(logical);Path(local);
@@ -52,14 +54,28 @@ public sealed class RehydrationPlanner(ICanonicalJson canonical):IRehydrationPla
                 unique[local]=(sha,length??(unique.TryGetValue(local,out old)?old.Length:null));
                 if(row.TryGetProperty("metadata_cache",out var cache) && cache.ValueKind!=JsonValueKind.Null)
                 {
-                    var cachePath=Text(cache,"path");Path(cachePath);Pin(Text(cache,"sha256"),cachePath);Pin(Text(cache,"parser_sha256"),cachePath);
+                    var cachePath=Text(cache,"path");Path(cachePath);
+                    var cacheSha=Text(cache,"sha256");var parserSha=Text(cache,"parser_sha256");Pin(cacheSha,cachePath);Pin(parserSha,cachePath);
                     var cacheSource=Text(cache,"source_sha256");Pin(cacheSource,cachePath);
                     if(cacheSource!=sha)Fail("CACHE_SOURCE_MISMATCH",cachePath);
+                    var identity=(cacheSha,parserSha,cacheSource);
+                    if(caches.TryGetValue(cachePath,out var previous) && previous!=identity)Fail("CONFLICTING_CACHE_ALIAS",cachePath);
+                    caches[cachePath]=identity;
                 }
                 var transport=row.TryGetProperty("transport",out var t) && t.ValueKind==JsonValueKind.Object ? t : default;
-                var url=transport.ValueKind==JsonValueKind.Object && transport.TryGetProperty("archive_url",out var archiveUrl) ? archiveUrl.GetString()??"" : Text(row,"url");
+                string? archiveMember=null,archivePin=null;
+                var url=Text(row,"url");
+                if(transport.ValueKind==JsonValueKind.Object && (transport.TryGetProperty("archive_url",out _) || transport.TryGetProperty("archive_member",out _) || transport.TryGetProperty("archive_sha256",out _)))
+                {
+                    var archiveUrl=Text(transport,"archive_url");archiveMember=Text(transport,"archive_member");
+                    if(string.IsNullOrWhiteSpace(archiveUrl) || string.IsNullOrWhiteSpace(archiveMember))Fail("INVALID_ARCHIVE_TRANSPORT",local);
+                    Path(archiveMember);url=archiveUrl;
+                    if(transport.TryGetProperty("archive_sha256",out var archiveHash) && archiveHash.ValueKind!=JsonValueKind.Null)
+                    {archivePin=archiveHash.GetString()??"";Pin(archivePin,local);}
+                }
                 if(!Uri.TryCreate(url,UriKind.Absolute,out var uri) || uri.UserInfo.Length>0 ||
                     (uri.Scheme!=Uri.UriSchemeHttps && !(request.AllowFileFixtures && uri.Scheme==Uri.UriSchemeFile)))Fail("UNSUPPORTED_TRANSPORT",local);
+                if(archiveMember is not null)archives.Add(new(logical,local,url,archiveMember,archivePin,sha));
                 if(transport.ValueKind==JsonValueKind.Object && transport.TryGetProperty("immutable_url",out var immutable) && immutable.ValueKind==JsonValueKind.False)
                 {
                     var bundle=transport.TryGetProperty("required_local_snapshot",out var bundlePath) && bundlePath.ValueKind!=JsonValueKind.Null ? bundlePath.GetString() : null;
@@ -67,6 +83,7 @@ public sealed class RehydrationPlanner(ICanonicalJson canonical):IRehydrationPla
                     snapshots.Add(new(logical,local,bundle,sha,length));
                 }
             }
+            foreach(var collision in unique.Keys.Intersect(caches.Keys,StringComparer.Ordinal).Order(StringComparer.Ordinal))Fail("PATH_ROLE_CONFLICT",collision);
             long known=0;foreach(var item in unique.Values)known=checked(known+(item.Length??0));
             var unknown=unique.Count(x=>x.Value.Length is null);
             var flow=new OperationKey[]{new(Category.Sources,Operation.Fetch),new(Category.Sources,Operation.Extract),new(Category.Catalog,Operation.Build),new(Category.Validate,Operation.Catalog),new(Category.Catalog,Operation.Export)};
@@ -76,12 +93,16 @@ public sealed class RehydrationPlanner(ICanonicalJson canonical):IRehydrationPla
                 source_rows=rows.Length,unique_source_paths=unique.Count,selected_paths=Math.Min(request.Limit??unique.Count,unique.Count),
                 known_source_bytes=known,unknown_size_paths=unknown,resume=request.Resume,
                 network=false,complete=false,historical_byte_identity_claimed=false,
-                required_snapshots=snapshots,operations=flow.Select(x=>new{category=x.Category.ToString(),operation=x.Operation.ToString()}),
+                required_snapshots=snapshots.Select(s=>new{source_path=s.SourcePath,local_path=s.LocalPath,bundle_path=s.BundlePath,sha256=s.Sha256,length=s.Length}),
+                archive_members=archives.Select(a=>new{source_path=a.SourcePath,local_path=a.LocalPath,url=a.Url,member=a.Member,archive_sha256=a.ArchiveSha256,member_sha256=a.MemberSha256,archive_verified=false}),
+                operations=flow.Select(x=>new{category=x.Category.ToString(),operation=x.Operation.ToString()}),
                 expected=Preserve(recipe,"expected"),environment=Preserve(recipe,"environment"),provenance=Preserve(recipe,"provenance"),limits=Preserve(recipe,"limits"),producer=producer.Clone()
             }));
+            var caveats=new List<string>{"Selected corpus only; expected counts are not observed validation.","Owner-supplied mutable snapshots and historical byte identity remain explicit limitations.","Legacy environment and producer pins are evidence; they do not authorize legacy execution.","Operation references are plans, not a claim that root execution adapters are ready."};
+            if(archives.Count>0)caveats.Add("Archive bytes are not verified by planning.");
+            if(archives.Any(a=>a.ArchiveSha256 is null))caveats.Add("Container SHA256 is unavailable for some members; member identity remains pinned.");
             return new(new(release!,digest,rows.Length,unique.Count,known,unknown,snapshots,flow,
-                new("rehydration-plan.json",manifest,"application/json"),false,false,false,
-                ["Selected corpus only; expected counts are not observed validation.","Owner-supplied mutable snapshots and historical byte identity remain explicit limitations.","Legacy environment and producer pins are evidence; they do not authorize legacy execution.","Operation references are plans, not a claim that root execution adapters are ready."]),[]);
+                new("rehydration-plan.json",manifest,"application/json"),false,false,false,caveats,archives),[]);
         }
         catch(PlanningFailure e){return new(null,[new(e.Code,e.Path)]);}
         catch(OverflowException){return new(null,[new("INVALID_LENGTH","")]);}

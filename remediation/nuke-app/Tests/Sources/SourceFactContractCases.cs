@@ -229,3 +229,36 @@ public static class SourceFactContractCases
         Assert.True(JsonNode.DeepEquals(before, after), "Fact production changed source input or type/proof context");
     }
 }
+
+public sealed record SourceFactProofCase(string Id, JsonObject Source, JsonObject Linkage, JsonArray? Hashes);
+
+public static class SourceFactProofFailureCases
+{
+    public static IEnumerable<object[]> Cases => new[] { "build", "aidl-hash", "hidl-hash" }.Select(x => new object[] { x });
+
+    public static SourceFactProofCase Create(string id)
+    {
+        var source = SourceFactContractCases.EvidenceSource(); var linkage = SourceFactContractCases.Linkage(); JsonArray? hashes = null;
+        switch (id)
+        {
+            case "build": linkage["build_evidence"]!["revision"] = "other"; break;
+            case "aidl-hash": linkage["published_hash_lines"]![0]!["source"]!["revision"] = "other"; break;
+            case "hidl-hash":
+                var hashSource = SourceFactContractCases.EvidenceSource("current.txt", new string('e', 64)); hashSource["revision"] = "other";
+                hashes = new(new JsonObject { ["source"] = hashSource, ["declared_identifier"] = "android.hardware.foo@1.0::IFoo", ["literal"] = new string('f', 64),
+                    ["format"] = "published-hidl-hash-hex64-and-identifier", ["line"] = 2 });
+                break;
+            default: throw new ArgumentException("Unknown proof mismatch fixture", nameof(id));
+        }
+        return new(id, source, linkage, hashes);
+    }
+
+    public static void AssertContract(SourceFactProofCase test, IInterfaceApplicabilitySourceFacts provider)
+    {
+        var before = new JsonObject { ["source"] = test.Source.DeepClone(), ["linkage"] = test.Linkage.DeepClone(), ["hashes"] = test.Hashes?.DeepClone() };
+        var error = Assert.Throws<ArgumentException>(() => { provider.Produce(test.Source, test.Linkage, test.Hashes); });
+        Assert.Contains("repository/revision", error.Message, StringComparison.Ordinal);
+        var after = new JsonObject { ["source"] = test.Source.DeepClone(), ["linkage"] = test.Linkage.DeepClone(), ["hashes"] = test.Hashes?.DeepClone() };
+        Assert.True(JsonNode.DeepEquals(before, after), "Proof failure changed immutable input/source context");
+    }
+}

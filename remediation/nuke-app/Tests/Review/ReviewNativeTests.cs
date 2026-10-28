@@ -80,8 +80,9 @@ public sealed class ReviewFixture
     public ReviewMemoryStore Store { get; } = new();
     public ReviewLease Leases { get; } = new();
     public ReviewReadySource Ready { get; } = new();
+    public ReviewFakePrerequisites Prerequisites { get; } = new();
     public ReviewFakeRunner Runner { get; } = new();
-    public ReviewAssessService Assessor { get; } = new();
+    public ReviewAssessService Assessor { get; } = new(Hash);
     public ReviewAudit Audit { get; } = new();
     public ReviewCapability Capability { get; }
     public ReviewLaunchService Launcher { get; }
@@ -91,8 +92,8 @@ public sealed class ReviewFixture
         Store.Values["capability.json"] = receipt;
         Capability = new(new("/approved/claude", "pinned-tool", "native-fixture"), ReviewLaunchService.Model,
             ReviewLaunchService.Effort, "capability.json", Hash(receipt));
-        Launcher = new(Store, Leases, new ReviewClock(), new CanonicalJson(Hash), Hash, Ready, Runner,
-            new ReviewCaptureReader(Runner), Assessor, Audit);
+        Launcher = new(Store, Leases, new ReviewClock(), new CanonicalJson(Hash), Hash, Ready, Prerequisites, Runner,
+            new ReviewCaptureReader(Runner), Assessor, new RequiredPluginReviewAudit(Audit, Store, new CanonicalJson(Hash)));
     }
     public async Task<PreparedReview> PrepareAsync(string mode)
     {
@@ -104,7 +105,15 @@ public sealed class ReviewFixture
             Store.Values[path] = bytes;
             evidence.Add(new(path, Hash(bytes), kind, project, "test-run", "fixture-host", "head", "NUKE Validate Tests"));
         }
-        Add("design.md", Encoding.UTF8.GetBytes(mode == "secret" ? "apiKey: real-secret-value" : "Complete design body"), mode == "scope-leak" ? "dataset" : "design");
+        var designBody = mode switch
+        {
+            "secret" => "apiKey: real-secret-value",
+            "json-credential" => JsonSerializer.Serialize(new { apiKey = "real-secret-value" }),
+            "bearer-credential" => "Authorization: Bearer real-private-credential",
+            "public-auth-schema" => JsonSerializer.Serialize(new { properties = new { apiKey = new { type = "string" } }, example = "Bearer <redacted>" }),
+            _ => "Complete design body"
+        };
+        Add(mode == "private-profile-path" ? "private/PROFILE-MERGED.md" : "design.md", Encoding.UTF8.GetBytes(designBody), mode == "scope-leak" ? "dataset" : "design");
         var failed = mode == "failed-trx" ? 1 : 0;
         var skipped = mode == "skipped-trx" ? 1 : 0;
         byte[] Trx() => Encoding.UTF8.GetBytes($"<TestRun><ResultSummary><Counters total='1' passed='{1 - failed - skipped}' failed='{failed}' notExecuted='{skipped}'/></ResultSummary><Results><UnitTestResult outcome='{(failed == 0 && skipped == 0 ? "Passed" : "Failed")}'/></Results></TestRun>");
@@ -112,9 +121,14 @@ public sealed class ReviewFixture
         Add("scope.trx", Trx(), "integration-trx", "Scope.Integration");
         Add("requirements.json", Json(new { head = "head", complete = mode != "requirements-open", requirementIds = new[] { "FR-BUILD-001", "TR-BUILD-TOOL-001", "TEST-BUILD-001" } }), "requirements");
         if (mode == "coverage-omission") evidence.Add(evidence[0]);
+        var req = evidence.Single(x => x.Kind == "requirements");
+        var stub = new StoredArtifact("trusted-fixture.json", "fixture", 0, "application/json");
+        Prerequisites.Value = new("head", ["Repo.Tests"], ["Scope.Integration"], ["FR-BUILD-001", "TR-BUILD-TOOL-001", "TEST-BUILD-001"],
+            stub, new(req.Path, req.Sha256, Store.Values[req.Path].Length, "application/json"), stub, stub);
+        Prerequisites.RejectRequirements = mode == "requirements-open";
         var snapshot = new ReviewSnapshot("fixture", "Codex-parent", "req-parent", "head", "https://github.com/owner/repo/pull/1",
             ["Repo.Tests"], ["Scope.Integration"], ["FR-BUILD-001", "TR-BUILD-TOOL-001", "TEST-BUILD-001"], evidence);
-        return await new ReviewPrepareService(Store, Leases, new ReviewClock(), new CanonicalJson(Hash), Hash, Ready).PrepareAsync(snapshot);
+        return await new ReviewPrepareService(Store, Leases, new ReviewClock(), new CanonicalJson(Hash), Hash, Ready, Prerequisites).PrepareAsync(snapshot);
     }
     public static byte[] Response(string text, string reason = "end_turn", bool error = false,
         string? terminalReason = null, int? apiStatus = null, string model = ReviewLaunchService.Model, string effort = ReviewLaunchService.Effort)
@@ -144,9 +158,11 @@ public sealed class ReviewFixture
 
 public sealed class ReviewMemoryStore : IArtifactStore
 {
+    public string? ThrowBeforePath { get; set; }
     public Dictionary<string, byte[]> Values { get; } = new(StringComparer.Ordinal);
     public Task<StoredArtifact> WriteAsync(Artifact artifact, CancellationToken cancellationToken = default)
     {
+        if (artifact.RelativePath == ThrowBeforePath) throw new IOException("Synthetic crash before immutable request intent.");
         var bytes = artifact.Bytes.ToArray();
         if (Values.TryGetValue(artifact.RelativePath, out var old) && !old.SequenceEqual(bytes))
             throw new IOException("Immutable artifact conflict");
@@ -167,10 +183,19 @@ public sealed class ReviewReadySource : IReviewReadinessSource
     public ReviewReadiness Value { get; set; } = null!;
     public Task<ReviewReadiness> ObserveAsync(string url, CancellationToken cancellationToken = default) => Task.FromResult(Value);
 }
+public sealed class ReviewFakePrerequisites : IReviewPrerequisiteSource
+{
+    public ReviewPrerequisites Value { get; set; } = null!;
+    public bool RejectRequirements { get; set; }
+    public Task<ReviewPrerequisites> ObserveAsync(ReviewSnapshot snapshot, CancellationToken cancellationToken = default)
+        => RejectRequirements ? throw new ReviewException("REQUIREMENTS_INCOMPLETE", "Independent requirements source rejected incomplete records.") : Task.FromResult(Value);
+}
 public sealed class ReviewFakeRunner : IProcessRunner
 {
     public bool ThrowOnCall { get; set; }
     public Queue<byte[]> Replies { get; } = new();
+    public Queue<byte[]> Diagnostics { get; } = new();
+    public Queue<int> ExitCodes { get; } = new();
     public List<ProcessRequest> Calls { get; } = [];
     public Dictionary<string, byte[]> Captures { get; } = [];
     public Task<ProcessResult> RunAsync(ProcessRequest request, CancellationToken cancellationToken = default)
@@ -179,18 +204,36 @@ public sealed class ReviewFakeRunner : IProcessRunner
         if (ThrowOnCall) throw new IOException("Synthetic uncertain capture failure");
         var path = request.ReceiptDirectory + "/stdout.bin";
         Captures[path] = Replies.Dequeue();
-        return Task.FromResult(new ProcessResult(0, path, request.ReceiptDirectory + "/stderr.bin", DateTimeOffset.UnixEpoch, DateTimeOffset.UnixEpoch, false));
+        var stderr = request.ReceiptDirectory + "/stderr.bin";
+        Captures[stderr] = Diagnostics.Count > 0 ? Diagnostics.Dequeue() : [];
+        return Task.FromResult(new ProcessResult(ExitCodes.Count > 0 ? ExitCodes.Dequeue() : 0, path, stderr, DateTimeOffset.UnixEpoch, DateTimeOffset.UnixEpoch, false));
     }
 }
 public sealed class ReviewCaptureReader(ReviewFakeRunner runner) : IProcessCaptureReader
 {
     public Task<ReadOnlyMemory<byte>> ReadAsync(ProcessResult result, bool standardError, CancellationToken cancellationToken = default)
-        => Task.FromResult<ReadOnlyMemory<byte>>(standardError ? [] : runner.Captures[result.StandardOutputPath]);
+        => Task.FromResult<ReadOnlyMemory<byte>>(runner.Captures[standardError ? result.StandardErrorPath : result.StandardOutputPath]);
 }
-public sealed class ReviewAudit : IReviewAudit
+public sealed class ReviewAudit : IReviewAuditTransport
 {
     public string? FullReport { get; private set; }
-    public Task RecordAsync(string parentSessionId, string parentRequestId, string runId, string fullVisibleVerdict,
+    public string? Fault { get; set; }
+    public Task<ReviewAuditBootstrapEvidence> ObserveBootstrapAsync(ReviewSnapshot snapshot, CancellationToken cancellationToken = default)
+    {
+        if (Fault == "no-bootstrap-config") throw new ReviewException("REVIEWER_AUDIT_UNAVAILABLE", "Synthetic missing official transport.");
+        return Task.FromResult(new ReviewAuditBootstrapEvidence(Fault == "wrong-head" ? "other-head" : snapshot.Head,
+            Fault == "wrong-agent" ? "Codex" : ReviewAuditPolicy.ReviewerAgent, ReviewLaunchService.Model, ReviewLaunchService.Effort,
+            ReviewAuditPolicy.PluginName, "fixture-version", new string('a', 64), "/approved/private-mcp.json", new string('b', 64),
+            ["mcp__mcpserver__sessionlog_submit"], true, true, Fault == "wrong-tool-policy"));
+    }
+    public Task<ReviewAuditCompletionEvidence> ReadReviewerOwnTurnAsync(ReviewSnapshot snapshot, string expectedFullVerdict,
         IReadOnlyList<StoredArtifact> receipts, CancellationToken cancellationToken = default)
-    { FullReport = fullVisibleVerdict; return Task.CompletedTask; }
+    {
+        FullReport = expectedFullVerdict;
+        return Task.FromResult(new ReviewAuditCompletionEvidence(snapshot.Head, snapshot.RunId,
+            Fault == "wrong-post-agent" ? "Codex" : ReviewAuditPolicy.ReviewerAgent, ReviewLaunchService.Model, ReviewLaunchService.Effort,
+            "Claude-20261028T000000Z-review", "req-20261028T000001Z-review", snapshot.ParentSessionId, snapshot.ParentRequestId,
+            Fault == "altered-verdict" ? expectedFullVerdict + " altered" : expectedFullVerdict,
+            ReviewAuditPolicy.CallIds(receipts), Fault != "unpersisted-own-turn"));
+    }
 }

@@ -1,0 +1,17 @@
+# Java source migration slice
+
+Scope: FR-BUILD-004, TR-BUILD-TOOL-004, TEST-BUILD-004, with shared execution and publication constraints FR-BUILD-001/003/007. Port retained `catalog/tooling/java_source.py`, `java_context.py`, and `jvm_source_link.py`; no corpus population or runtime-readiness claim.
+
+The visitor preserves package/import context, declaration order, nested source/binary identity, overloaded callables, field declarators, parameter annotations/varargs/arrays, receiver parameters, annotation qualification and source arguments, initializer ranges/excerpts, effective visibility, syntax issue byte/line locators, and unsupported rows. Method bodies, local types, anonymous classes, initializer implementation nodes do not become API declarations. Exact JVM matching requires proven owner/type mappings; unqualified names, wildcards, type variables, typed fields unsupported by the lifecycle index, void arrays/arguments, and malformed generic types remain unlinked. Java cache context binds by path plus content and producer hashes.
+
+The selected parser route is the previously locked native Tree-sitter route in `../source/JAVA-PARSER-INTEGRATION.md`. Source SHA256 and complete licenses must be pinned after official immutable source acquisition; no invented hashes. First RID linux-x64 only. C# owns extraction and the parser is loaded in-process from the exact hash-validated project asset. No generator, Python binding, Node tool, machine installation, system-library fallback, imported-source execution, or separate Java CLI.
+
+Live `git ls-remote` distinguishes the runtime annotated tag object `695d1530e59804279d9c739335b73b882d9f1caf` from peeled source commit `6e0618704ad758ba2ea5822faa80bcd36fbeba3d` for v0.25.2. The Java v0.23.5 direct tag remains commit `94703d5a6bed02b98e438d7cad1136c01a60ba2c`. Preserve both runtime identities and fetch source content by peeled commit; this corrects identity classification without changing the selected versions. `Java-Work.ps1 -Action Pins` is the reproducible read-only check.
+
+Order: (1) author contracts and original-assertion fixtures with independent correct mocks and omission/wrong-value/error/interaction controls; (2) coordinated root-owned NUKE mock gate with durable TRX and zero failed/skipped required cases; (3) implement source-context/linker/native builder/native visitor; (4) bind identical cases to production providers and run coordinated tests; (5) full applicable root-owned validation and incremental checkpoint. No HV before the parent PR-ready gate.
+
+Staged fixture files are outside the app during checkpoint002 freeze. They are copied, verified, and retained when the root releases the window. Source data remain read-only. Each native source/header/license, compiler identity, typed argv, full compiler output, package binary, ABI result, and fixture TRX requires a receipt; compilation is not source-corpus parity.
+
+The existing shared lexical helpers and Core content hash/canonical/process/artifact/clock contracts are reused. Annotation XML linkage remains owned by the source agent. Java emits qualified annotation metadata and import context, and no duplicate XML identity resolver is introduced.
+
+Outstanding gates: root-coordinated test window; shared native acquisition route; immutable source/hash/license receipt; native compiler/lifetime/UTF8/error cases; production binding; full validation. No stage or requirement is marked done by this document.

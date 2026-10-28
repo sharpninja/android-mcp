@@ -1,33 +1,35 @@
 {
-  "localTimestamp": "2026-10-27T22:00:15",
+  "localTimestamp": "2026-10-27T23:43:31",
   "migrationComplete": false,
   "productionParityProven": false,
   "appBuildSucceeded": true,
   "currentCSharpGate": {
-    "scope": "Full currently implemented C# suite, mocks plus real bindings; not complete legacy parity.",
-    "sha256": "5d84b173f1141fb69363f4e269a2cd8345a37028e7183c00ef01d974225f86a4",
-    "notExecuted": 0,
-    "localReceipt": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261027T2156343772581-0907606c86a84663b3edbe8bace0ef92/tests.trx",
-    "passed": 16800,
     "failed": 0,
-    "total": 16800
+    "notExecuted": 0,
+    "sha256": "4abb7928083c084949288c352ac7aa50de79657386c71da1e386bb935f84232c",
+    "scope": "Full currently implemented C# suite, mocks plus real bindings; not complete legacy parity.",
+    "total": 24517,
+    "passed": 24517,
+    "localReceipt": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261027T2342201749925-49a7950d19f444378c5225666a3d2cac/tests.trx"
   },
   "categoryRegistryImplemented": true,
   "executableCategoryOperations": [
     "Validate/MockGate",
-    "Validate/Tests"
+    "Validate/Tests",
+    "Design/Assets",
+    "Sources/NativeParser"
   ],
-  "plannedRegisteredOperations": 8,
-  "sourcePort": "Real AIDL/signature and SDK XML checked against same fixture assertions. Other source formats/acquisition remain pending.",
-  "documentationPort": "Real UI/deck projector and module graph validation checked. Asset CLI, renderer/browser/factoring/package ports pending.",
-  "catalogPort": "Real canonical JSON, identity/CRUD/CAS and policy checked. Resolver/profile increments and remaining storage/build/metadata/wire ports tracked separately.",
-  "sharedRuntime": "Shared content hashes, immutable artifact store and native process byte capture checked. Process provider integration and leases remain pending.",
-  "publicationPort": "Native allowlist checker checked; stage and rehydration code newly added with same-case real bindings, full gate determines current state.",
-  "reviewPort": "Native unit services with fake external provider/audit only. No live reviewer validation. Runtime composition, complete inventory and persisted crash recovery remain pending.",
+  "plannedRegisteredOperations": 9,
+  "sourcePort": "Native AIDL/signature, SDK XML, HIDL, manifests, permissions and source facts have same-case real bindings. Pinned Java parser was built and exercised through Sources/NativeParser. Acquisition and tool transport services are implemented; HTML/Soong/hash producers and batch orchestration remain pending.",
+  "documentationPort": "Design/Assets generated 222 artifacts including 217 SVGs. UI/deck, factoring, architecture preparation, renderer transport and package services have real-bound tests. Actual architecture renderer admission, browser runtime, bootstrap and complete validator/Gradle caller migration remain pending.",
+  "catalogPort": "Native JSON profiles, hashes, identity/CRUD/CAS, policy, resolver, SQLite DDL and metadata CRUD are in the full gate. Two canonical SQLite natural-key nullability defects were fixed. Catalog generation and wire-proof production adapters remain pending.",
+  "sharedRuntime": "Shared hashes, immutable store, lease, receipt verifier and process byte capture are included. Long-lived process sessions, browser/CDP runtime and ancestry hardening remain pending.",
+  "publicationPort": "Native allowlist checker, immutable staging bundle, rehydration planner with archive boundaries and authoritative operation help have same-case real bindings. CLI dispatch and typed source-row projection remain pending.",
+  "reviewPort": "Native prepare/launch/recover/assess services use fake external provider and audit collaborators in normal tests. Actual official reviewer-audit runtime composition remains pending; no HV has run during migration.",
   "legacyPythonStillTracked": true,
   "noPythonOrCustomNodeExecutedAfterCorrection": true,
   "independentAcceptance": false,
-  "knownNonfatalWarning": "xUnit1013 for ProfiledCanonicalJsonMockTests.AssertUndefinedProfileRejected public helper. Visibility correction remains pending; no advisory suppression.",
+  "knownNonfatalWarning": "Previous xUnit1013 helper visibility warning corrected. Current full-gate build output is the source for remaining warnings; no advisory suppression.",
   "noGitHubActions": true,
   "reviewWorkflow": "Draft PR now, mark ready after migration and normal verification. NO HV before ready. Review/remediation in PR, no merge authorization."
 }

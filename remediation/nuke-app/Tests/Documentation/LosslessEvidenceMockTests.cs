@@ -76,7 +76,7 @@ public static class LosslessContractCases
     public static void AssertContract(LosslessCase test,ILosslessEvidenceService provider)
     {
         var before=test.Input.Artifacts.Select(a=>DocumentationFixture.Hash(a.Bytes.Span)).ToArray();
-        if(test.ExpectedError.Length>0){Assert.Equal(test.ExpectedError,Assert.Throws<EvidenceIntegrityException>(()=>provider.Factor(test.Input)).Code);return;}
+        if(test.ExpectedError.Length>0){Assert.Equal(test.ExpectedError,Assert.Throws<EvidenceIntegrityException>(()=>provider.Factor(test.Input)).Code);Assert.Equal(before,test.Input.Artifacts.Select(a=>DocumentationFixture.Hash(a.Bytes.Span)).ToArray());return;}
         var result=provider.Factor(test.Input);var original=test.Input.Artifacts.Single(a=>a.RelativePath==test.Input.HtmlPath);
         Assert.Equal("storyboards.factored.html",result.ReviewHtml.RelativePath);Assert.Equal("reconstruction-map.json",result.ReconstructionMap.RelativePath);Assert.Equal("verification.json",result.Verification.RelativePath);
         Assert.Equal(Encoding.UTF8.GetBytes(test.ExpectedView),result.ReviewHtml.Bytes.ToArray());
@@ -107,10 +107,10 @@ public static class LosslessContractCases
     }
 }
 
-public sealed class ScriptedLosslessEvidence(FactoredEvidence? response,string error="",Artifact? restored=null) : ILosslessEvidenceService
+public sealed class ScriptedLosslessEvidence(FactoredEvidence? response,string error="",Artifact? restored=null,bool mutateFactorInput=false) : ILosslessEvidenceService
 {
     public FrozenEvidenceInput? Received{get;private set;}
-    public FactoredEvidence Factor(FrozenEvidenceInput input){Received=input;if(error.Length>0)throw new EvidenceIntegrityException(error,"Scripted original integrity failure");return response!;}
+    public FactoredEvidence Factor(FrozenEvidenceInput input){Received=input;if(mutateFactorInput){var array=(Artifact[])input.Artifacts;array[0]=array[0] with{Bytes=Encoding.UTF8.GetBytes("unexpected mutation")};}if(error.Length>0)throw new EvidenceIntegrityException(error,"Scripted original integrity failure");return response!;}
     public Artifact Reconstruct(FrozenEvidenceInput input,Artifact reviewHtml,Artifact reconstructionMap)=>restored??input.Artifacts.Single(a=>a.RelativePath==input.HtmlPath);
 }
 
@@ -124,6 +124,22 @@ public sealed class LosslessEvidenceMockTests
 
     [Theory,MemberData(nameof(LosslessContractCases.Cases),MemberType=typeof(LosslessContractCases))]
     public void WrongIntegrityOutcomeIsRejected(LosslessCase test){var wrong=test.ExpectedError.Length>0?new ScriptedLosslessEvidence(null,"WRONG_ERROR"):new ScriptedLosslessEvidence(null,"UNEXPECTED_ERROR");Assert.NotNull(Record.Exception(()=>LosslessContractCases.AssertContract(test,wrong)));}
+
+    [Theory,MemberData(nameof(LosslessContractCases.Cases),MemberType=typeof(LosslessContractCases))]
+    public void FactorInputMutationIsRejectedOnSuccessAndFailure(LosslessCase test)
+    {
+        var originals=test.Input.Artifacts.ToArray();
+        try{Assert.NotNull(Record.Exception(()=>LosslessContractCases.AssertContract(test,new ScriptedLosslessEvidence(test.ExpectedError.Length==0?LosslessContractCases.Correct(test):null,test.ExpectedError,mutateFactorInput:true))));}
+        finally{var array=(Artifact[])test.Input.Artifacts;for(var i=0;i<array.Length;i++)array[i]=originals[i];}
+    }
+
+    [Fact]
+    public void NoncanonicalFixtureDecodesToKnownBytesButFailsExactRfcSpelling()
+    {
+        var fixture=LosslessContractCases.Create().Single(c=>c.Id=="FACTOR-NONCANONICAL-PADDING");
+        var html=fixture.Input.Artifacts.Single(a=>a.RelativePath==fixture.Input.HtmlPath);var encoded=Encoding.UTF8.GetString(html.Bytes.Span)["data:image/svg+xml;base64,".Length..];
+        var decoded=Convert.FromBase64String(encoded);Assert.Equal(fixture.Input.Artifacts.Single(a=>a.RelativePath=="known.svg").Bytes.ToArray(),decoded);Assert.NotEqual(encoded,Convert.ToBase64String(decoded));
+    }
 
     [Fact]
     public void EveryMetadataAndByteAssertionRejectsItsOwnIncorrectResponse()

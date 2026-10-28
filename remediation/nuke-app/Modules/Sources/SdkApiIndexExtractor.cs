@@ -2,7 +2,6 @@ using System.Globalization;
 using System.Numerics;
 using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
-using System.Xml;
 using System.Xml.Linq;
 using AndroidMcp.BuildTool.Core;
 
@@ -185,27 +184,16 @@ internal static class SdkApiXml
 {
     internal static SdkXmlIndex Read(SourceDocument source)
     {
-        try
-        {
-            using var stream = new MemoryStream(source.Bytes.ToArray(), false);
-            using var reader = XmlReader.Create(stream, new XmlReaderSettings { DtdProcessing = DtdProcessing.Prohibit, XmlResolver = null });
-            var document = XDocument.Load(reader, LoadOptions.SetLineInfo | LoadOptions.PreserveWhitespace);
-            var root = document.Root;
-            if (root is null || root.Name != "api" || root.Attribute("version")?.Value != "4") throw new FormatException("Unsupported SDK API index format");
-            return new(root, root.Elements("sdk").Select(x => x.Attribute("id")?.Value).Where(x => x is not null).Select(x => x!).ToHashSet(StringComparer.Ordinal));
-        }
-        catch (XmlException error) { throw new FormatException("SDK XML parse failed: " + error.Message, error); }
+        var root = SourceXml.Load(source.Bytes);
+        if (root.Name != "api" || root.Attribute("version")?.Value != "4") throw new FormatException("Unsupported SDK API index format");
+        return new(root, root.Elements("sdk").Select(x => x.Attribute("id")?.Value).Where(x => x is not null).Select(x => x!).ToHashSet(StringComparer.Ordinal));
     }
 
-    internal static Dictionary<string, string> Attributes(XElement node) => node.Attributes().Where(x => !x.IsNamespaceDeclaration)
-        .ToDictionary(x => x.Name.ToString(), x => x.Value, StringComparer.Ordinal);
-    internal static JsonObject Json(IReadOnlyDictionary<string, string> attributes) => new(attributes.Select(x => new KeyValuePair<string, JsonNode?>(x.Key, JsonValue.Create(x.Value))));
-    internal static int Line(XElement node) => ((IXmlLineInfo)node).LineNumber;
+    internal static Dictionary<string, string> Attributes(XElement node) => SourceXml.Attributes(node);
+    internal static JsonObject Json(IReadOnlyDictionary<string, string> attributes) => SourceXml.Json(attributes);
+    internal static int Line(XElement node) => SourceXml.Line(node);
     internal static JsonArray Supertypes(XElement node) => new(node.Elements().Where(x => x.Name == "extends" || x.Name == "implements")
         .Select(x => { var row = Json(Attributes(x)); row["relation"] = x.Name.ToString(); return (JsonNode)row; }).ToArray());
 
-    internal static string EmptyFragment(XElement node) => "<" + node.Name + string.Concat(Attributes(node).Select(x => " " + x.Key + "=\"" + Escape(x.Value) + "\"")) + " />";
-    private static string Escape(string value) => value.Replace("&", "&amp;", StringComparison.Ordinal).Replace("<", "&lt;", StringComparison.Ordinal)
-        .Replace(">", "&gt;", StringComparison.Ordinal).Replace("\"", "&quot;", StringComparison.Ordinal).Replace("\t", "&#09;", StringComparison.Ordinal)
-        .Replace("\n", "&#10;", StringComparison.Ordinal).Replace("\r", "&#13;", StringComparison.Ordinal);
+    internal static string EmptyFragment(XElement node) => "<" + node.Name + string.Concat(Attributes(node).Select(x => " " + x.Key + "=\"" + SourceXmlFormatter.Escape(x.Value, true) + "\"")) + " />";
 }

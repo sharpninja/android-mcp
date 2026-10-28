@@ -2,12 +2,12 @@
 
 Accepted planning route: project-local Tree-sitter C runtime0.25.2 and checked-in generated tree-sitter-java0.23.5 C grammar, compiled into one native support library with the monolithic C# NUKE app. The first supported RID is linux-x64, matching the selected LAB environment. All extraction logic and orchestration stay in C#. Native support is loaded in process; it is not another CLI or service. No Python wheel/binding, Node grammar generator, Rust/Cargo build, global native installation, or system Tree-sitter dependency. No source checkout/archive/native asset was acquired into the workspace, built or installed for this planning task. `git ls-remote` read official tag metadata only; web tools read primary source text.
 
-Verified official immutable commit identifiers from `git ls-remote <official repo> refs/tags/<tag> refs/tags/<tag>^{}`:
+Official tag/source identifiers (runtime annotated-tag distinction corrected2026-10-27 after the Java helper's live peel receipt):
 
-- runtime: `https://github.com/tree-sitter/tree-sitter.git`, `v0.25.2`, commit `695d1530e59804279d9c739335b73b882d9f1caf`.
+- runtime: `https://github.com/tree-sitter/tree-sitter.git`, `v0.25.2`, annotated tag object `695d1530e59804279d9c739335b73b882d9f1caf`, peeled source commit `6e0618704ad758ba2ea5822faa80bcd36fbeba3d`. Use the peeled commit for raw source/archive acquisition; the tag object is not a source commit. The earlier version of this plan incorrectly called the tag object a commit.
 - Java: `https://github.com/tree-sitter/tree-sitter-java.git`, `v0.23.5`, commit `94703d5a6bed02b98e438d7cad1136c01a60ba2c`.
 
-These are Git object pins, not SHA-256 file/archive locks. Project-local acquisition must later pin SHA-256 of every selected source/header/license and final native binary. No unobserved source/archive SHA-256 is invented here. Preserve provenance distinguishing source commit, downloaded bytes and compiled artifact hash.
+These are Git object pins, not SHA-256 file/archive locks. Keep annotated tag object, peeled source commit, downloaded bytes and compiled artifact hash in separate provenance fields. Project-local acquisition must later pin SHA-256 of every selected source/header/license and final native binary. No unobserved source/archive SHA-256 is invented here.
 
 The versioned [runtime C header](https://raw.githubusercontent.com/tree-sitter/tree-sitter/v0.25.2/lib/include/tree_sitter/api.h) supports language ABI13 through15. The versioned [Java generated parser](https://raw.githubusercontent.com/tree-sitter/tree-sitter-java/v0.23.5/src/parser.c) declares ABI14 and zero external tokens; it provides the pre-generated grammar, so generation is unnecessary. The versioned [Java public header](https://raw.githubusercontent.com/tree-sitter/tree-sitter-java/v0.23.5/bindings/c/tree-sitter-java.h) declares `const TSLanguage *tree_sitter_java(void)`. This is a compatible declared ABI pairing, not a compiled-runtime validation result.
 

@@ -127,7 +127,7 @@ public sealed class CanonicalJsonMockTests
 [Trait("Gate","Real")]
 public sealed class CanonicalJsonRealTests
 {
-    public static ICanonicalJson Native()=>new CanonicalJson();
+    internal static ICanonicalJson Native()=>new CanonicalJson();
     [Theory,MemberData(nameof(CanonicalJsonCases.All),MemberType=typeof(CanonicalJsonCases))]
     public void NativeCanonicalizerUsesSameCasesAndAssertions(CanonicalJsonCase test,bool elementInput)=>
         CanonicalJsonCases.AssertCase(test,elementInput,Native());
@@ -207,7 +207,7 @@ public sealed class ScriptedProfiledCanonicalJson(ProfiledCanonicalCase expected
 [Trait("Gate","Mock")]
 public sealed class ProfiledCanonicalJsonMockTests
 {
-    public static void AssertUndefinedProfileRejected(IProfiledCanonicalJson provider)
+    internal static void AssertUndefinedProfileRejected(IProfiledCanonicalJson provider)
     {
         var profile=(JsonSerializationProfile)42;var raw=Encoding.UTF8.GetBytes(CanonicalJsonCases.Values[0].Raw);
         using var document=JsonDocument.Parse(raw);

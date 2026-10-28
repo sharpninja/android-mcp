@@ -94,21 +94,30 @@ internal static class SourceSyntax
 
     internal static IEnumerable<(string Raw, int Start)> Chunks(string text, char separator, bool genericAngles = false)
     {
-        var code = Mask(text, true); var stack = new Stack<char>(); var start = 0;
-        for (var i = 0; i < text.Length; i++)
+        foreach (var span in DelimiterSpans(text, 0, text.Length, separator, genericAngles))
+        {
+            var part = Trimmed(text, span.Start, span.End);
+            if (part.Raw.Length > 0) yield return part;
+        }
+    }
+
+    internal static IEnumerable<SourceSpan> DelimiterSpans(string text, int start, int end, char separator,
+        bool genericAngles = false, bool anglesAtTopLevel = false, string? masked = null)
+    {
+        var code = masked ?? Mask(text, true); var stack = new Stack<char>(); var begin = start; var angle = 0;
+        for (var i = start; i < end; i++)
         {
             var c = code[i];
-            if (c is '(' or '[' or '{' || genericAngles && c == '<') stack.Push(c);
-            else if (c is ')' or ']' or '}' || genericAngles && c == '>') { if (stack.Count > 0) stack.Pop(); }
-            else if (c == separator && stack.Count == 0)
+            if (c is '(' or '[' or '{' || genericAngles && !anglesAtTopLevel && c == '<') stack.Push(c);
+            else if (c is ')' or ']' or '}' || genericAngles && !anglesAtTopLevel && c == '>') { if (stack.Count > 0) stack.Pop(); }
+            else if (genericAngles && anglesAtTopLevel && stack.Count == 0 && c == '<') angle++;
+            else if (genericAngles && anglesAtTopLevel && stack.Count == 0 && c == '>') angle = Math.Max(0, angle - 1);
+            else if (c == separator && stack.Count == 0 && angle == 0)
             {
-                var part = Trimmed(text, start, i);
-                if (part.Raw.Length > 0) yield return part;
-                start = i + 1;
+                yield return new(begin, i); begin = i + 1;
             }
         }
-        var final = Trimmed(text, start, text.Length);
-        if (final.Raw.Length > 0) yield return final;
+        yield return new(begin, end);
     }
 
     private static (string Raw, int Start) Trimmed(string text, int start, int end)
@@ -243,5 +252,5 @@ internal static class SourceSyntax
 
     internal static int Line(string text, int position) => 1 + text.AsSpan(0, position).Count('\n');
     internal static int ByteOffset(string text, int position) => Encoding.UTF8.GetByteCount(text.AsSpan(0, position));
-    private static int CodePointOffset(string text, int position) => text[..position].EnumerateRunes().Count();
+    internal static int CodePointOffset(string text, int position) => text[..position].EnumerateRunes().Count();
 }

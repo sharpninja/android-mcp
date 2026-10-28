@@ -12,6 +12,19 @@ public interface IProcessRunner
 {
     Task<ProcessResult> RunAsync(ProcessRequest request, CancellationToken cancellationToken = default);
 }
+public interface IProcessSessionFactory
+{
+    Task<IProcessSession> StartAsync(ProcessRequest request, CancellationToken cancellationToken = default);
+}
+public interface IProcessSession : IAsyncDisposable
+{
+    int ProcessId { get; }
+    string StandardOutputPath { get; }
+    string StandardErrorPath { get; }
+    Task<ProcessResult> Completion { get; }
+    // Explicit owner cancellation/cleanup, never an elapsed-time watchdog.
+    Task StopAsync(CancellationToken cancellationToken = default);
+}
 public interface IProcessCaptureReader
 {
     Task<ReadOnlyMemory<byte>> ReadAsync(ProcessResult result, bool standardError,

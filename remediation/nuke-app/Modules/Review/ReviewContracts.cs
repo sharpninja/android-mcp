@@ -16,7 +16,7 @@ public sealed record ReviewReadiness(string Head, bool IsDraft, bool IsOpen,
 public interface IReviewReadinessSource
 { Task<ReviewReadiness> ObserveAsync(string pullRequestUrl, CancellationToken cancellationToken = default); }
 public sealed record PreparedReview(ReviewSnapshot Snapshot, string PromptPath, string PromptSha256,
-    string ManifestSha256, IReadOnlyList<StoredArtifact> Artifacts);
+    string ManifestSha256, IReadOnlyList<StoredArtifact> Artifacts, ReviewPrerequisites? Prerequisites = null);
 public sealed record ReviewCapability(ToolIdentity Tool, string Model, string Effort,
     string VerificationReceiptPath, string VerificationReceiptSha256);
 public sealed record ReviewTerminal(bool KnownTerminal, int ExitCode, bool Cancelled = false);
@@ -29,7 +29,8 @@ public sealed record ReviewRecoveryInput(bool Active, bool KnownTerminal, ReadOn
     int ExitCode, string Marker, IReadOnlyList<string> Coverage, string ExpectedHead, string ObservedHead);
 public interface IReviewAudit
 {
-    // Must persist the FULL visible verdict and read-back proof in the reviewer's dedicated MCP turn.
-    Task RecordAsync(string parentSessionId, string parentRequestId, string runId,
+    Task<ReviewAuditObservation<ReviewAuditBootstrapEvidence>> VerifyReadyAsync(ReviewSnapshot snapshot, CancellationToken cancellationToken = default);
+    // The FULL visible verdict must already be authored by the actual reviewer in its own MCP turn.
+    Task<ReviewAuditObservation<ReviewAuditCompletionEvidence>> RecordAsync(ReviewSnapshot snapshot,
         string fullVisibleVerdict, IReadOnlyList<StoredArtifact> receipts, CancellationToken cancellationToken = default);
 }

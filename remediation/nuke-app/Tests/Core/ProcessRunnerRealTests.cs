@@ -5,7 +5,7 @@ namespace AndroidMcp.BuildTool.Tests.Core;
 public sealed class ProcessRunnerRealTests
 {
     private static string Host=>Environment.ProcessPath!;
-    private static ProcessRequest Request(string root,int exit,string mode,IEnumerable<string> arguments,string? input=null)
+    internal static ProcessRequest Request(string root,int exit,string mode,IEnumerable<string> arguments,string? input=null)
     {
         var directory=AppContext.BaseDirectory;
         var argv=new List<string>{"exec","--runtimeconfig",Path.Combine(directory,"AndroidMcp.Build.Tests.runtimeconfig.json"),

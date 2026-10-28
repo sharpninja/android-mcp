@@ -31,3 +31,19 @@ public interface ILosslessEvidenceService
     FactoredEvidence Factor(FrozenEvidenceInput input);
     Artifact Reconstruct(FrozenEvidenceInput input,Artifact reviewHtml,Artifact reconstructionMap);
 }
+
+public static class DocumentationAssetPaths
+{
+    public const string Blueprint="docs/ui-blueprint.md";
+    public const string Design="docs/Android MCP Bridge Design.md";
+    public const string Manifest="generation-manifest.json";
+}
+public sealed record DocumentationGeneration(string GenerationId,IReadOnlyList<StoredArtifact> Inputs,IReadOnlyList<StoredArtifact> Outputs,StoredArtifact Manifest);
+public sealed class DocumentationAssetException(string code,string message,Exception? inner=null) : IOException(message,inner)
+{
+    public string Code { get; }=code;
+}
+public interface IDocumentationAssetOperation
+{
+    Task<DocumentationGeneration> GenerateAsync(string generationId,CancellationToken cancellationToken=default);
+}

@@ -1,0 +1,76 @@
+{
+  "timestamp": "2026-10-27T22:55:20",
+  "sessionId": "Codex-20261028T030809Z-plugin-session",
+  "requestId": "req-20261028T030843Z-turn-b629",
+  "parentSessionId": "Codex-20261028T005928Z-plugin-session",
+  "parentRequestId": "req-20261028T011209Z-turn-1f08",
+  "receipts": [
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261027T2221228755738-c153a7cab76e4e8bbff1a2e30e5e0c44/tests.trx",
+      "sha256": "1e567396e72fd663ce3c91c5d00a3f0e7590e292e6b0a2cb9527247540f30691",
+      "total": 90,
+      "passed": 90,
+      "failed": 0,
+      "skipped": 0,
+      "failures": []
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261027T2221365710217-84192db631934efda9fd3996afe0ed85/tests.trx",
+      "sha256": "6c98f7e9ceece014399b4ab7336d2e3f26c5daf1451f1fbc3dcecae121e9ddd8",
+      "total": 10,
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0,
+      "failures": []
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261027T2241567056728-ceb08131697c4cad9dd3e36db081b82d/tests.trx",
+      "sha256": "58143ea5d8f11ceabc9878cebea90817e9320c8f5eb55704b013ad3fb9697577",
+      "total": 140,
+      "passed": 140,
+      "failed": 0,
+      "skipped": 0,
+      "failures": []
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261027T2243377652309-99edb364d1bb4944bdf2f0e45dc64f77/tests.trx",
+      "sha256": "f54de5d780f7cc32556f2dc4823c2390a49a0692b1ca1effb875b7b6aa19fb51",
+      "total": 146,
+      "passed": 146,
+      "failed": 0,
+      "skipped": 0,
+      "failures": []
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261027T2244377166129-1ba975f04c2a43b28d3751430477748f/tests.trx",
+      "sha256": "37e12ac17d0215e458b81cf3fea9b9d662e4ec66972f820da56d8708774a7b37",
+      "total": 55,
+      "passed": 54,
+      "failed": 1,
+      "skipped": 0,
+      "failures": [
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.PaxHistoricalRealTests.SameExactGlobalPaxMetadataAssertions",
+          "outcome": "Failed",
+          "details": "Assert.Equal() Failure: Strings differ\n           ↓ (pos 0)\nExpected: \"pax_global_header\"\nActual:   \"/tmp/GlobalHead.1764254.1\"\n           ↑ (pos 0)   at AndroidMcp.BuildTool.Tests.Sources.Acquisition.PaxArchiveCases.AssertCase(INativeArchiveExtractor provider) in /home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/Acquisition/PaxArchiveContractTests.cs:line 24\n--- End of stack trace from previous location ---"
+        }
+      ]
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261027T2250369273678-88afb3fab9ff492894c5371159eb17e6/tests.trx",
+      "sha256": "84a5179396911321da72dde8d83f76d9b48b20a5976309cb69543186ed10c632",
+      "total": 4999,
+      "passed": 4999,
+      "failed": 0,
+      "skipped": 0,
+      "failures": []
+    }
+  ],
+  "notes": [
+    "Mock gate precedes corresponding production edits.",
+    "Initial own CS9174 ReadOnlyMemory expression corrected before successful gate.",
+    "The first PAX real fixture failed because TarWriter substitutes a process-specific global-header name; fixture header/checksum was corrected to the measured GitHub header and rerun successfully.",
+    "No full corpus or cross-platform parity claim."
+  ],
+  "hostileAcceptance": "pending parent PR review"
+}
