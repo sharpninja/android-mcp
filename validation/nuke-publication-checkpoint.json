@@ -1,66 +1,57 @@
 {
-  "verifiedAtUtc": "2026-10-28T02:11:08.7044249Z",
-  "handoff": "nuke-migration-checkpoint-001",
-  "handoffManifestSha256": "a7ab9fd851d1900a2ea2091a71ac169d5d5d78b6289932e80dd0b35e39ae258b",
-  "handoffFileCount": 41,
-  "handoffBytes": 1087597,
+  "checkpoint": "002",
+  "localTimestamp": "2026-10-27T22:10:26",
   "sdk": "10.0.403",
+  "handoffFiles": 112,
+  "handoffBytes": 2249564,
+  "manifestSha256": "c79da32ba5ae48399b63c30c98c2b4da942d27ba456199c76bdc2c68562fbbfb",
+  "guardAddendumSha256": "a88de2af6a327a00a982555668c65e099a4d3f67ded322c38a5cda6a632e68d8",
+  "sourcePriorAndPostcopyPinsVerified": true,
   "lockedRestoreSucceeded": true,
   "nativeHostBuildSucceeded": true,
   "nativeNukeTarget": "Validate",
-  "operation": "MockGate",
-  "mock": {
-    "total": 8823,
-    "executed": 8823,
-    "passed": 8823,
-    "failed": 0,
-    "notExecuted": 0,
-    "pending": 0,
-    "categories": {
-      "Core": 45,
-      "Catalog": 146,
-      "Documentation": 5274,
-      "Sources": 3358
-    },
-    "trxSha256": "eb565bb156c3d9bfcb6a36f0ab1945a7099c308cea6a829971dac57ef52de2ff",
-    "trxLocalRelativePath": "remediation/nuke-app/artifacts/tests/mock/mock-gate.trx",
-    "startedUtc": "2026-10-28T02:09:31.618964Z",
-    "finishedUtc": "2026-10-28T02:10:15.470922Z"
+  "operation": "Tests",
+  "scope": "Full currently implemented C# suite, mock and real bindings; not complete legacy parity",
+  "total": 16800,
+  "passed": 16800,
+  "failed": 0,
+  "notExecuted": 0,
+  "trxSha256": "bb62323d6d5095c38b5372133bf2c172579e6e99d6febaa85ca32d129dfa4b91",
+  "trxLocalRelativePath": "remediation/nuke-app/artifacts/tests/20261027T2206051912707-a34af52f6dcf4a6ea9a26167928491bc/tests.trx",
+  "sourceOwnerTrxSha256": "5d84b173f1141fb69363f4e269a2cd8345a37028e7183c00ef01d974225f86a4",
+  "publicationScope": {
+    "stageReal": 20,
+    "mock": 122,
+    "checkReal": 17,
+    "rehydrationPlanReal": 24,
+    "real": 61
   },
-  "warnings": [
-    {
-      "version": "6.12.1",
-      "severity": "low",
-      "package": "NuGet.Packaging",
-      "code": "NU1901"
-    },
-    {
-      "version": "9.0.0",
-      "severity": "high",
-      "package": "System.Security.Cryptography.Xml",
-      "code": "NU1903"
-    }
+  "warnings": {
+    "scope": "Public helper AssertUndefinedProfileRejected in ProfiledCanonicalJsonMockTests; owner correction pending after sealed snapshot",
+    "code": "xUnit1013"
+  },
+  "freshRestoreAdvisories": [],
+  "priorWarningPackagePins": {
+    "NuGet.Packaging": "6.12.5",
+    "NuGet.Frameworks": "7.9.0",
+    "System.Security.Cryptography.Xml": "9.0.18"
+  },
+  "executableOperations": [
+    "Validate/MockGate",
+    "Validate/Tests"
   ],
-  "dependencyWarningsResolved": false,
-  "productionParityProven": false,
-  "realGateExecuted": false,
-  "categoryRegistryImplemented": false,
   "migrationComplete": false,
+  "productionParityProven": false,
+  "independentAcceptance": false,
   "pythonExecuted": false,
+  "customNodeExecuted": false,
   "hvExecuted": false,
+  "githubActions": [],
+  "reviewOrder": "Complete migration and normal verification; mark ready; then review/remediate in PR; no merge authorization",
   "publicationAdaptations": [
-    "Local native locked restore, host build and shared NUKE mock gate",
-    "Migration status and README updated for included scaffold",
-    "Explicit lean allowlist additions",
-    "Historical handoff receipt retained separately from this fresh gate"
-  ],
-  "remaining": [
-    "Typed shared production registry/planner",
-    "Production source, catalog and documentation parity",
-    "Remaining acquisition, parser, storage, resolver, render, package, rehydration, review and publication ports",
-    "All legacy per-file dispositions and caller/local validation/docs migration",
-    "Dependency security remediation",
-    "Full normal validation before mark-ready; review and remediation only afterward"
-  ],
-  "validationExecution": "local-only; assistant-added GitHub Actions removed per user instruction; no Actions planned"
+    "Preserved publication README/.gitignore before native gate",
+    "Updated root progress/README and explicit allowlist only",
+    "No sealed C# source/test changes after postcopy gate",
+    "Only exact authorized missing validation-receipt guard applied"
+  ]
 }

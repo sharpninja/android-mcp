@@ -78,10 +78,37 @@
         "resolved": "1.1.9",
         "contentHash": "AfK5+ECWYTP7G3AAdnU8IfVj+QpGjrh9GC2mpdcJzCvtQ4pnerAGwHsxJ9D4/RnhDUz2DSzd951O/lQjQby2Sw=="
       },
+      "Humanizer.Core": {
+        "type": "Transitive",
+        "resolved": "2.14.1",
+        "contentHash": "lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw=="
+      },
       "JetBrains.Annotations": {
         "type": "Transitive",
         "resolved": "2025.2.2",
         "contentHash": "0X56ZRizuHdrnPpgXjWV7f2tQO1FlQg5O1967OGKnI/4ZRNOK642J8L7brM1nYvrxTTU5TP1yRyXLRLaXLPQ8A=="
+      },
+      "Json.More.Net": {
+        "type": "Transitive",
+        "resolved": "2.0.1.2",
+        "contentHash": "uF3QeiaXEfH92emz0/BWUiNtMSfxIIvgynuB0Bf1vF4s8eWTcZitBx9l+g/FDaJk5XxqBv9buQXizXKQcXFG1w=="
+      },
+      "JsonPointer.Net": {
+        "type": "Transitive",
+        "resolved": "5.0.0",
+        "contentHash": "fm4T5w20AY6C+p5/pJr0vrXRNGgtSfHl34I1LxC9zdPwS9S3j0GiR1Mz/CVPWKDXXGDpCt1APHpCq7kn5adCfA==",
+        "dependencies": {
+          "Humanizer.Core": "2.14.1",
+          "Json.More.Net": "2.0.1.2"
+        }
+      },
+      "JsonSchema.Net": {
+        "type": "Transitive",
+        "resolved": "7.2.3",
+        "contentHash": "O3KclMcPVFYTZsTeZBpwtKd/lYrNc3AFR+xi9j3Q4CfhDufOUx25TMMWJOcFRrqVklvKQ4Kl+0UhlNX1iDGoRw==",
+        "dependencies": {
+          "JsonPointer.Net": "5.0.0"
+        }
       },
       "matkoch.Microsoft.VisualStudio.SolutionPersistence": {
         "type": "Transitive",
@@ -155,6 +182,24 @@
         "type": "Transitive",
         "resolved": "18.7.0",
         "contentHash": "+wFfx9s7D9wegM0RziXMj2kvYDT4qcqXXtyjiQwSZOGQ2wwcOAJQcD6eQXk02jt0MvRNawtp8TJxTrV+wD8X1g=="
+      },
+      "Microsoft.Data.Sqlite": {
+        "type": "Transitive",
+        "resolved": "10.0.0",
+        "contentHash": "I/azQ5WjwoLvSlTyDydkhARPSjYJN8jkXRjR5D92OeyTLbTrQ1K93rgf6XU+HYWHZA6lBI9SUOfl69OqEHb4ow==",
+        "dependencies": {
+          "Microsoft.Data.Sqlite.Core": "10.0.0",
+          "SQLitePCLRaw.bundle_e_sqlite3": "2.1.11",
+          "SQLitePCLRaw.core": "2.1.11"
+        }
+      },
+      "Microsoft.Data.Sqlite.Core": {
+        "type": "Transitive",
+        "resolved": "10.0.0",
+        "contentHash": "wPKG/Ym6tSMCo06UOZXzVfeFGzawnOZrTba/R3PfK+RhNuNELZ9I7nFns4WGTtv2kKlrlmmErgJ+kgTXHaNdHg==",
+        "dependencies": {
+          "SQLitePCLRaw.core": "2.1.11"
+        }
       },
       "Microsoft.Extensions.DependencyInjection.Abstractions": {
         "type": "Transitive",
@@ -251,41 +296,41 @@
       },
       "NuGet.Common": {
         "type": "Transitive",
-        "resolved": "6.12.1",
-        "contentHash": "nk8nTdhQl4x2VaAQUvefI7DDYAuBDlE+OZZRffm50Qx5dUAEq8wkc5JIqrN2lTEohObHPI/SXyG2UFdMQkrdyg==",
+        "resolved": "6.12.5",
+        "contentHash": "ceynBLlidkZIfrLdujE3f9FDYTLjs884sRL0zrX3PgTbGGfrLxZGz8KciHsqEnSBqMwpimbxdNrDcorU+Zd9oA==",
         "dependencies": {
-          "NuGet.Frameworks": "6.12.1"
+          "NuGet.Frameworks": "6.12.5"
         }
       },
       "NuGet.Configuration": {
         "type": "Transitive",
-        "resolved": "6.12.1",
-        "contentHash": "IRwlY1379ZgJ0oEJvjD+lDuOhJ5S1fsU5n/bEC5/i0+N9bo2WIMDAdaQ/qIdyK/gMJ/YWS+++GSX6rN7luqEvg==",
+        "resolved": "6.12.5",
+        "contentHash": "6ZHtYcHdMrnWWfeiMBrZTtytnjmb9N7eh4S26peV6mBQF71Mv/7X0gyw0VW9ZfEkm31sVD736a7mKNHf7wee1Q==",
         "dependencies": {
-          "NuGet.Common": "6.12.1",
+          "NuGet.Common": "6.12.5",
           "System.Security.Cryptography.ProtectedData": "4.4.0"
         }
       },
       "NuGet.Frameworks": {
         "type": "Transitive",
-        "resolved": "6.12.1",
-        "contentHash": "kPaRD5RJC0ByUg+yGX6bDz5XHMI7OYmQwP8kbtef+vZ+csj/VDb5Bwas4ChxwhoAbI8lEvwP5/3aViQPpgNBow=="
+        "resolved": "7.9.0",
+        "contentHash": "w2adPmgUafmW9ON1MzDjuHmViN0vtiPV48Dz3OE6px8BiGSqrnWHOjwFEPOEPAZx20J1c7bxp90Hxo9l4xGWtw=="
       },
       "NuGet.Packaging": {
         "type": "Transitive",
-        "resolved": "6.12.1",
-        "contentHash": "6s5NO3VNX6fIx6GwuWZtIsal9W1xkelYd3Vg2KUAg1zGqnKC3wB5IZlombvVGVGcwyl/A+iDvpUwSvgeDoB3wA==",
+        "resolved": "6.12.5",
+        "contentHash": "jQ5SCP29VgDVxxyFS/Tkg3lIngPeKoVxHdY7xfZNOyIPousbck6SnnqAEt2kZGfvjxFiSePcsKYu99CI/nE/JQ==",
         "dependencies": {
           "Newtonsoft.Json": "13.0.3",
-          "NuGet.Configuration": "6.12.1",
-          "NuGet.Versioning": "6.12.1",
+          "NuGet.Configuration": "6.12.5",
+          "NuGet.Versioning": "6.12.5",
           "System.Security.Cryptography.Pkcs": "6.0.4"
         }
       },
       "NuGet.Versioning": {
         "type": "Transitive",
-        "resolved": "6.12.1",
-        "contentHash": "fJ6rFYANDnohFsdpaY79FvrJxI6murmoOxXz6nZlf819F48+IBKMnAIg3oIBRtZq5y498ObMtKnro5IitvizUg=="
+        "resolved": "6.12.5",
+        "contentHash": "9/Sniz+tzNAjcSziMmh62PIbF1mxaSC+P5Mdw1LgMleCbeaObjkkR/RUlduu6yCL3EfruACO/uknDJ5xCH3quQ=="
       },
       "Nuke.Build": {
         "type": "Transitive",
@@ -478,6 +523,41 @@
         "resolved": "1.4.2",
         "contentHash": "yjj+3zgz8zgXpiiC3ZdF/iyTBbz2fFvMxZFEBPUcwZjIvXOf37Ylm+K58hqMfIBt5JgU/Z2uoUS67JmTLe973A=="
       },
+      "SourceGear.sqlite3": {
+        "type": "Transitive",
+        "resolved": "3.50.4.2",
+        "contentHash": "eV9HwQ88WyoU+reGVxJz1SwME9NbYnl9h2LOY15j0LGdXN4JkTJDk8JRRg/yNgt00O3Cn5/qnska10FEZNoU5g=="
+      },
+      "SQLitePCLRaw.bundle_e_sqlite3": {
+        "type": "Transitive",
+        "resolved": "3.0.2",
+        "contentHash": "nzPPFpELY9U1scLvQpA1k1GIgR9ror83DCPmirT2/i5NCPdTBfhTDA6MZqFZonGDayye5mUQRQLOVyEiJNYr0g==",
+        "dependencies": {
+          "SQLitePCLRaw.config.e_sqlite3": "3.0.2",
+          "SourceGear.sqlite3": "3.50.4.2"
+        }
+      },
+      "SQLitePCLRaw.config.e_sqlite3": {
+        "type": "Transitive",
+        "resolved": "3.0.2",
+        "contentHash": "QPHR1Axs8YCCapb0TnmT7PxY9DX3sg4I4T9HOSKeFBiT5l482mjrOIxuyt+xOCwEQ2Enq5h0tgDOXMnJi+i0sw==",
+        "dependencies": {
+          "SQLitePCLRaw.provider.e_sqlite3": "3.0.2"
+        }
+      },
+      "SQLitePCLRaw.core": {
+        "type": "Transitive",
+        "resolved": "3.0.2",
+        "contentHash": "tnbRf0muOOSJK1RLCfyYK13jynFScgL4xMj7yC3oy8lrrGKXTKmOoWjfdV+cFfBRdppm4qST31hvp8ihgIgvMQ=="
+      },
+      "SQLitePCLRaw.provider.e_sqlite3": {
+        "type": "Transitive",
+        "resolved": "3.0.2",
+        "contentHash": "RQIliDp47mQxGYNcBB6W+ezHbegkImrSZVTuWjQCSTTl3pQ37Q3rALkkkdTAMEmcIz71PEOCqNZMp7lXCnVqEQ==",
+        "dependencies": {
+          "SQLitePCLRaw.core": "3.0.2"
+        }
+      },
       "System.ClientModel": {
         "type": "Transitive",
         "resolved": "1.8.0",
@@ -531,8 +611,8 @@
       },
       "System.Security.Cryptography.Pkcs": {
         "type": "Transitive",
-        "resolved": "9.0.6",
-        "contentHash": "Gny8p2mX0jc5rjh+PA4Gx5GG66sj2C+e+ro7+j/3IsKT/bmQ84tGRV+XKaG+5/CTCdwkSSKDWEQ1rJd0J5jE0Q=="
+        "resolved": "9.0.18",
+        "contentHash": "NKMKhUdLGNZryY9GXXTF5dXyP6S37EYXhiA2JYvwshJbd4DRq07IOS9it8Opi9atadvv5rlNkD76Mio+5Oo2aQ=="
       },
       "System.Security.Cryptography.ProtectedData": {
         "type": "Transitive",
@@ -541,10 +621,10 @@
       },
       "System.Security.Cryptography.Xml": {
         "type": "Transitive",
-        "resolved": "9.0.0",
-        "contentHash": "GQZn5wFd+pyOfwWaCbqxG7trQ5ox01oR8kYgWflgtux4HiUNihGEgG2TktRWyH+9bw7NoEju1D41H/upwQeFQw==",
+        "resolved": "9.0.18",
+        "contentHash": "UoE37brJoIJPMds6wqDaweVrORmdM3XDPGLRU01Mg6Koh3SjgogSfz4+zDsriaEluHMRCx/Qc7yeEw7F9QMcJA==",
         "dependencies": {
-          "System.Security.Cryptography.Pkcs": "9.0.0"
+          "System.Security.Cryptography.Pkcs": "9.0.18"
         }
       },
       "xunit.abstractions": {
@@ -595,7 +675,13 @@
       "androidmcp.build": {
         "type": "Project",
         "dependencies": {
-          "Nuke.Common": "[10.1.0, )"
+          "JsonSchema.Net": "[7.2.3, )",
+          "Microsoft.Data.Sqlite": "[10.0.0, )",
+          "NuGet.Frameworks": "[7.9.0, )",
+          "NuGet.Packaging": "[6.12.5, )",
+          "Nuke.Common": "[10.1.0, )",
+          "SQLitePCLRaw.bundle_e_sqlite3": "[3.0.2, )",
+          "System.Security.Cryptography.Xml": "[9.0.18, )"
         }
       }
     }

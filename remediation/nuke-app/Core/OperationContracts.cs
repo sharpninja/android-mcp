@@ -34,7 +34,8 @@ public enum StructuralParseStatus { Clean, Partial, Unsupported, Malformed }
 public sealed record ExtractionResult(
     IReadOnlyList<System.Text.Json.Nodes.JsonObject> Records,
     IReadOnlyList<SourceIssue> Issues,
-    StructuralParseStatus StructuralStatus);
+    StructuralParseStatus StructuralStatus,
+    System.Text.Json.Nodes.JsonObject? Metadata = null);
 public interface ISourceExtractor
 {
     string Kind { get; }

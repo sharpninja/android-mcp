@@ -1,36 +1,39 @@
 # NUKE migration progress
 
-**INCOMPLETE — draft PR for progress tracking.** This checkpoint includes the initial NUKE host, typed contracts, mock fixtures, initial native implementations and migration plans. Validation is local-only; no GitHub Actions are configured or planned. It does not claim production parity.
+**INCOMPLETE: checkpoint002, draft PR for progress tracking.** One C# NUKE app now includes the initial shared registry/planner, canonical JSON/hashing, immutable stores/process services, native reference components, and mock/real bindings. Normal validation is local-only. No GitHub Actions are configured or planned. Full legacy parity and production workflow completion remain pending.
 
-## Required implementation
+## Verified checkpoint
 
-Replace all project Python tooling with one NUKE Build C# monolith. Functional categories become targets; a typed operation parameter selects each task. Use one authoritative registry, contracts and shared implementation throughout. Keep Android server/UI code in Kotlin and Gradle as orchestration. Never execute legacy Python, directly or indirectly.
+The copied snapshot passed pinned .NET SDK 10.0.403 locked restore, host build and the full currently implemented local C# suite: **16,800 passed, zero failed or unexecuted**. See [publication receipt](validation/nuke-publication-checkpoint.json) for exact TRX identity, scope and warnings. The source-owner gate passed the same count before sealing. Publication preserved the sealed C# sources/tests after the post-copy gate.
 
-The included host exposes Validate --operation MockGate. Native AIDL/signature extractors and a pure documentation projector are present with real test bindings, but this checkpoint runs the mock gate only; production behavior and full parity remain unverified. The category/operation enums and interfaces are scaffolding for the pending registry/planner. Mock assertions are not evidence of production parity.
+The root registry has eight initial definitions across Sources, Catalog, Design, Validate, Review and Publish. Only Validate/MockGate and Validate/Tests currently have execution adapters. A valid plan for another operation does not mean it can execute.
 
-## Progress checklist
+Native unit components cover source AIDL/signature and SDK XML, documentation projection/module checks, canonical JSON and reference catalog/policy behavior, shared runtime behavior, publication Check/Stage and pure rehydration planning, and review unit services with fake providers. Publication has 122 mock tests and 61 native cases (Check17, Stage20, Rehydration24). These counts prove the named cases, not complete old-producer parity or a deployed Android bridge.
 
-- [x] Create a branch checkpoint and progress-tracking draft PR.
-- [x] Remove assistant-added GitHub Actions; retain local locked native .NET build and NUKE mock checks.
-- [x] Preserve upstream main changes, including FUNDING.
-- [ ] Publish the shared NUKE category/operation registry and configuration.
-- [ ] Port acquisition, rehydration, source parsing and extraction.
-- [ ] Port catalog, storage, permissions and resolution operations.
-- [ ] Port design generation, rendering, visual QA and packaging.
-- [ ] Port review/publication orchestration with the required review-order safeguard.
-- [ ] Map every legacy Python file to a verified replacement or justified retirement.
-- [ ] Update all callers, Gradle integration and local usage documentation. Do not add GitHub Actions.
-- [ ] Verify real C# behavior and parity with representative fixtures and native test receipts.
-- [ ] Validate the lean deliverable allowlist, reproducibility and cross-environment usage.
-- [ ] Complete migration and normal build/test/parity verification, then mark this PR ready for review.
-- [ ] Perform review and remediation in the PR after it is ready; do not run HV before marking ready.
+## Remaining work
 
-## Legacy retention and validation limits
+- Complete registry/CLI adapters and shared runtime composition, including cooperating leases and provider integration.
+- Finish acquisition, remaining source formats and clean-path end-to-end rehydration.
+- Finish catalog/storage/resolution/metadata/wire integration and complete parity evidence.
+- Finish architecture rendering, browser QA, factoring, packaging and thin Gradle delegates.
+- Finish registry-derived help, full legacy per-file disposition and caller/documentation migration.
+- Resolve the known nonfatal xUnit1013 public-helper warning; maintain dependency audit visibility.
+- Verify lean allowlist enforcement and complete reproducibility/cross-environment evidence through native targets.
 
-Legacy Python files remain tracked as dormant migration references. They are not approved execution paths. Existing Python commands in older documents and scripts are historical instructions pending replacement; do not run them. Removal requires a per-file replacement/retirement mapping, verified behavior and updated callers.
+Strict DRY applies: one authoritative typed registry, contracts/configuration and shared services; functional categories are targets and typed operation parameters select tasks. Android server/UI remain Kotlin. Gradle remains orchestration. Never execute Python or custom Node, directly or indirectly.
 
-Local verification performs a native locked restore, C# host build and NUKE mock gate. A green mock gate does not mean production generation, application behavior, or migration parity is complete. No new HV, acceptance score, 98/98 result or merge authorization is claimed. Full source datasets, caches, historical snapshots and large review archives remain outside the lean publication scope.
+## Legacy retention and review order
 
-## Checkpoint evidence
+Legacy Python stays dormant as a migration reference until each replacement or retirement has verified behavior and all callers are updated. Older documents and scripts are historical migration inputs; do not execute them. Full source corpora, caches, raw review streams, historical database copies and generated build outputs remain outside the lean publication tree.
 
-See [initial sealed handoff](validation/nuke-migration-checkpoint.json), [native publication verification](validation/nuke-publication-checkpoint.json), [NUKE usage](remediation/nuke-app/README.md), and the [source](remediation/nuke-planning/source/SOURCE-PARITY-PLAN.md), [catalog](remediation/nuke-planning/catalog/PARITY-PLAN.md) and [documentation](remediation/nuke-planning/docs/design-tooling-port.md) port plans. The sealed handoff receipt is historical; the publication receipt records the fresh gate. Transitive NuGet security warnings remain to be resolved before final migration readiness.
+Complete migration and normal local build/test/parity verification, then mark the draft PR ready. **Do not run HV before marking ready.** Review and remediation happen in the PR afterward. No 98/98, independent acceptance, final migration completion or merge authorization is claimed.
+
+## Navigation
+
+- [Sealed checkpoint scope](validation/nuke-migration-checkpoint.json)
+- [Latest local publication evidence](validation/nuke-publication-checkpoint.json)
+- [Native bootstrap usage](remediation/nuke-app/README.md) (initial checkpoint notes; latest gate/status are authoritative here and in the receipt)
+- [Publication input mapping](remediation/nuke-planning/publication/INPUT-MAPPING.md)
+- [Source parity plan](remediation/nuke-planning/source/SOURCE-PARITY-PLAN.md)
+- [Catalog parity plan](remediation/nuke-planning/catalog/PARITY-PLAN.md)
+- [Documentation port plan](remediation/nuke-planning/docs/design-tooling-port.md)

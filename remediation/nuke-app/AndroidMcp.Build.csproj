@@ -7,9 +7,18 @@
     <AssemblyName>AndroidMcp.Build</AssemblyName>
     <RootNamespace>AndroidMcp.BuildTool</RootNamespace>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <NukeTelemetryVersion>1</NukeTelemetryVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Nuke.Common" Version="10.1.0" />
+    <!-- Minimal compatible fixes for NU1902/NU1903 transitives; audit stays enabled. -->
+    <PackageReference Include="NuGet.Packaging" Version="6.12.5" />
+    <!-- Match the installed .NET 10.0.403 SDK project-evaluation ABI. -->
+    <PackageReference Include="NuGet.Frameworks" Version="7.9.0" />
+    <PackageReference Include="System.Security.Cryptography.Xml" Version="9.0.18" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.0" />
+    <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="3.0.2" />
+    <PackageReference Include="JsonSchema.Net" Version="7.2.3" />
     <Compile Remove="Tests/**/*.cs" />
     <None Remove="Tests/**" />
   </ItemGroup>

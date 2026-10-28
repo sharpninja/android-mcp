@@ -1,22 +1,33 @@
 {
-  "localTimestamp": "2026-10-27T20:54:02",
+  "localTimestamp": "2026-10-27T22:00:15",
   "migrationComplete": false,
   "productionParityProven": false,
   "appBuildSucceeded": true,
-  "knownMockGate": {
-    "scope": "Original first mock/fake-provider gate before real services; expanded/current sources not yet fully rerun.",
-    "trxSha256": "b602552cc38bfb035d036b0d0b9f2415808549295f70428241dae1be9d460e25",
-    "failed": 0,
+  "currentCSharpGate": {
+    "scope": "Full currently implemented C# suite, mocks plus real bindings; not complete legacy parity.",
+    "sha256": "5d84b173f1141fb69363f4e269a2cd8345a37028e7183c00ef01d974225f86a4",
     "notExecuted": 0,
-    "executed": 8706,
-    "passed": 8706
+    "localReceipt": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261027T2156343772581-0907606c86a84663b3edbe8bace0ef92/tests.trx",
+    "passed": 16800,
+    "failed": 0,
+    "total": 16800
   },
-  "categoryRegistryImplemented": false,
-  "sourcePort": "Real AIDL/signature implementations and real bindings added; unverified.",
-  "documentationPort": "Real pure projector and real bindings added; unverified. Twelve health overrides now canonical with preserved original fixture.",
-  "catalogPort": "Expanded mocks only; native production services pending.",
+  "categoryRegistryImplemented": true,
+  "executableCategoryOperations": [
+    "Validate/MockGate",
+    "Validate/Tests"
+  ],
+  "plannedRegisteredOperations": 8,
+  "sourcePort": "Real AIDL/signature and SDK XML checked against same fixture assertions. Other source formats/acquisition remain pending.",
+  "documentationPort": "Real UI/deck projector and module graph validation checked. Asset CLI, renderer/browser/factoring/package ports pending.",
+  "catalogPort": "Real canonical JSON, identity/CRUD/CAS and policy checked. Resolver/profile increments and remaining storage/build/metadata/wire ports tracked separately.",
+  "sharedRuntime": "Shared content hashes, immutable artifact store and native process byte capture checked. Process provider integration and leases remain pending.",
+  "publicationPort": "Native allowlist checker checked; stage and rehydration code newly added with same-case real bindings, full gate determines current state.",
+  "reviewPort": "Native unit services with fake external provider/audit only. No live reviewer validation. Runtime composition, complete inventory and persisted crash recovery remain pending.",
   "legacyPythonStillTracked": true,
   "noPythonOrCustomNodeExecutedAfterCorrection": true,
   "independentAcceptance": false,
-  "reviewWorkflow": "Draft PR now, completed migration reviewed in PR later; no Google API completeness scoring."
+  "knownNonfatalWarning": "xUnit1013 for ProfiledCanonicalJsonMockTests.AssertUndefinedProfileRejected public helper. Visibility correction remains pending; no advisory suppression.",
+  "noGitHubActions": true,
+  "reviewWorkflow": "Draft PR now, mark ready after migration and normal verification. NO HV before ready. Review/remediation in PR, no merge authorization."
 }

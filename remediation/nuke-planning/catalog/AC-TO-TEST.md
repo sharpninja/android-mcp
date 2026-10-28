@@ -27,3 +27,17 @@ The complete original inventory in `original-test-inventory.json` has23 files an
 - Metadata:19 `test_source_metadata_crud.py` methods and17 `test_source_metadata_contract.py` methods. Source producer heuristics and their classification/evidence fixtures must not be replaced by runtime authority. The owner capability comes from the trusted caller seam, not JSON.
 - Wire proof: both `test_postfreeze12_wire_evidence.py` methods, including unchanged immutable identity, verified-to-unsupported revocation, stale revision and malformed verified codec rollback. Current proof selection and semantic client grants remain independent.
 - Remaining regression file methods are allocated to source/catalog/registry owners by inspecting their assertions, not by filename or matching test counts.
+
+## Increment 2 mock allocation: resolver state and type graph
+
+`ResolverContractCases.cs` has27 scenarios and108 mock test instances. These port the pure resolver assertions for major/minor/removal, extension alternatives, independent module/OEM/build axes, reachable versus absent/denied/unreachable interfaces, compatible and ambiguous variants, missing/wrong/unavailable/unknown type dependencies, recursive components, and preserved unknown source lifecycle. Additional cases distinguish unverified device identity, nonexecutable inventory nodes, malformed source intervals and catalog exposure state from existence.
+
+Each row assertion includes exact reason vocabulary, selected contract, complete dependency list, pinned effective document, exposure state/revision, graph digest and closure3 schema identity. Golden byte/hash vectors are independent literal fixtures in `evidence/resolver-golden-hash-vectors.json`; no production resolver generated them. Header pins and complete ordered membership are asserted. Negative controls corrupt each header and row field individually and verify input mutation rejection.
+
+The OriginalTest labels identify relevant original assertions. They do not claim that resolver projection alone ports the complete storage or policy integration method. Atomic activation, invalidation, generation/epoch/scope CAS, bounded status and current-view ETags, SQL enforcement, effective inventory capture and known-route policy composition remain in their later increments. No production resolver exists before this mock gate.
+
+## Additional canonical identity compatibility gate
+
+Historical `callback_source_facts.py::registration_candidates` uses sorted compact JSON with ASCII escaping for candidate identity, while normal contract hashing uses literal UTF8. Root approved `JsonSerializationProfile` and additive `IProfiledCanonicalJson`. Profile mocks reuse the same canonical assertion seam for both profiles and literal legacy expectations, including supplementary surrogate pairs, scalar key sorting before escaping, no normalization, DEL, line separators and callback identity fields. Wrong profile routing, bytes, hashes, error codes, omitted exceptions and unknown enum values are rejected inside passing mock tests. Production gains one escaping branch only after that gate; no second formatter or hash implementation is authorized.
+
+All verification is local NUKE. No GitHub Actions are created. Hostile review is deferred until the migration PR is marked ready, per current operator direction.

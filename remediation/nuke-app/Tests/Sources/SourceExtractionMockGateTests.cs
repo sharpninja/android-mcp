@@ -20,10 +20,12 @@ public sealed record SourceMutation(int RecordIndex, string[] Path, string Opera
 
 public static class SourceMutationCases
 {
-    public static IEnumerable<object[]> Cases => SourceExtractionContractCases.All.SelectMany(test =>
+    public static IEnumerable<object[]> Cases => SourceExtractionContractCases.All.SelectMany(For);
+
+    public static IEnumerable<object[]> For(SourceExtractionCase test) =>
         test.ExpectedRecords.SelectMany((record, index) => Paths(record, [])
             .SelectMany(path => new[] { "omit", "wrong" }.Select(operation =>
-                new object[] { test.Id, new SourceMutation(index, path, operation) }))));
+                new object[] { test.Id, new SourceMutation(index, path, operation) })));
 
     private static IEnumerable<string[]> Paths(JsonNode? node, string[] prefix)
     {

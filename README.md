@@ -4,7 +4,9 @@
 
 All-Kotlin server/Jetpack Compose design, internal ARC compatibility-port specification, C4/Structurizr and class sources, editable SVG screens/storyboards, a self-contained Marp presentation, catalog contracts, extractors and offline tests. **No Android application or deployed bridge is implemented here.**
 
-The last completed independent design verdict remains round 023: **88 accuracy / 81 completeness, NOT_ACCEPTED**. Round 024 completed its core and architecture passes; provider credits blocked the UI pass before inference, so no unified round024 score exists. The current corrected candidate passes local tests, rendering and manual visual QA. Grok CLI rejected the requested `grok-4.7-high` model ID before inference. The user has since requested resuming with Claude Opus-5.5 at XHigh; the main task owns exact configuration verification and review launch. A new resolved model or 98/98 acceptance is not yet verified.
+Checkpoint002 passed the full currently implemented local C# suite: **16,800 tests, zero failed or skipped**. The source and copied publication gates both passed. The migration remains incomplete; only Validate/MockGate and Validate/Tests are executable category/operation adapters. See [current progress and remaining work](MIGRATION-STATUS.md) and [exact validation evidence](validation/nuke-publication-checkpoint.json).
+
+Historical design evidence remains round023 (88 accuracy /81 completeness, NOT_ACCEPTED) and partial round024. No new HV is authorized before this migration PR is marked ready after completion and normal verification. Review and remediation happen in the PR afterward; no current acceptance is claimed.
 
 - [Current design](<remediation/design-c4/docs/Android MCP Bridge Design.md>)
 - [Build the diagrams and offline deck](remediation/design-c4/README.md)
@@ -20,7 +22,7 @@ The last completed independent design verdict remains round 023: **88 accuracy /
 
 ## Migration checks
 
-Validation is local-only: run a locked native .NET restore, C# host build and NUKE mock gate. No GitHub Actions are configured or planned. See [NUKE usage](remediation/nuke-app/README.md). Mock success does not establish production parity; full rehydration and production commands remain pending. Older tooling instructions, including [REHYDRATE.md](REHYDRATE.md), are retained as migration references and must not be executed until their callers are replaced. See [MIGRATION-STATUS.md](MIGRATION-STATUS.md) for the removal and readiness gates.
+Validation is local-only: run a locked native .NET restore, C# host build and NUKE Validate/Tests gate (MockGate selects only the mocks). No GitHub Actions are configured or planned. See [NUKE usage](remediation/nuke-app/README.md). Mock success does not establish production parity; full rehydration and production commands remain pending. Older tooling instructions, including [REHYDRATE.md](REHYDRATE.md), are retained as migration references and must not be executed until their callers are replaced. See [MIGRATION-STATUS.md](MIGRATION-STATUS.md) for the removal and readiness gates.
 
 ## What changed in this forward cleanup
 

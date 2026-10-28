@@ -1,0 +1,75 @@
+{
+  "at": "2026-10-27T21:43:58",
+  "purpose": "Independent test fixture vectors only; no production source serializer",
+  "producer": "PowerShell ConvertTo-Json EscapeNonAscii over native ordered objects, exact ASCII key order pinned from source key contract",
+  "oldPythonExecuted": false,
+  "customNodeExecuted": false,
+  "vectors": [
+    {
+      "id": "registration",
+      "identity": {
+        "binding_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "parameter_index": 0,
+        "type_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "type_spelling": "a.Listener"
+      },
+      "canonical_legacy_ascii_json": "{\"binding_id\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"parameter_index\":0,\"type_id\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"type_spelling\":\"a.Listener\"}",
+      "sha256": "73165e818d12b3b3dea8204898228406c2cd295ff110463ea0b7c08215bf1fb3"
+    },
+    {
+      "id": "overload",
+      "identity": {
+        "binding_id": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "parameter_index": 0,
+        "type_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "type_spelling": "a.Listener"
+      },
+      "canonical_legacy_ascii_json": "{\"binding_id\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"parameter_index\":0,\"type_id\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"type_spelling\":\"a.Listener\"}",
+      "sha256": "54cd797c2e53467073cd0c8b89ab8dca89f7c3390ad8c4ff457519fcc480cc5d"
+    },
+    {
+      "id": "position",
+      "identity": {
+        "binding_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "parameter_index": 1,
+        "type_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "type_spelling": "a.Listener"
+      },
+      "canonical_legacy_ascii_json": "{\"binding_id\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"parameter_index\":1,\"type_id\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"type_spelling\":\"a.Listener\"}",
+      "sha256": "5093d4317b892ecd37397f9a1cf83327a969141c2f5fc0bbd62c47bbfdaac8c5"
+    },
+    {
+      "id": "unresolved",
+      "identity": {
+        "binding_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "parameter_index": 0,
+        "type_id": null,
+        "type_spelling": "Listener"
+      },
+      "canonical_legacy_ascii_json": "{\"binding_id\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"parameter_index\":0,\"type_id\":null,\"type_spelling\":\"Listener\"}",
+      "sha256": "627b379f4a083e102df73ac257e20b00d12f01388cbc51aa6f8c273738a4da48"
+    },
+    {
+      "id": "unicode",
+      "identity": {
+        "binding_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "parameter_index": 0,
+        "type_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "type_spelling": "a.Lístener😀"
+      },
+      "canonical_legacy_ascii_json": "{\"binding_id\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"parameter_index\":0,\"type_id\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"type_spelling\":\"a.L\\u00edstener\\ud83d\\ude00\"}",
+      "sha256": "bcd2dfda224c6c0b87137dfe21fac39419118bb1c390cb2895a858aa738341b8"
+    },
+    {
+      "id": "binder",
+      "identity": {
+        "binding_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "parameter_index": 0,
+        "type_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "type_spelling": "a.IEndpoint"
+      },
+      "canonical_legacy_ascii_json": "{\"binding_id\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"parameter_index\":0,\"type_id\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"type_spelling\":\"a.IEndpoint\"}",
+      "sha256": "395abf9c125205339a34e60631bb1e6f2ffa325349724e7dee4d0b6f8380f23a"
+    }
+  ]
+}
