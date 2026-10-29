@@ -1,30 +1,30 @@
 {
   "schemaVersion": "1.0.0",
-  "at": "2026-10-28T19:00:48",
+  "at": "2026-10-28T19:44:11",
   "authoritative": false,
   "projectionOnly": true,
   "derivedFrom": {
     "path": "remediation/nuke-planning/source/legacy-port-disposition-inventory.json",
-    "sha256": "f76b8eeace0dceaa07c65b98b0e2ae8544ca22da0cf7239277a3791293d12580",
+    "sha256": "1792ae3d31e908bc7a17a89b41dd2ec69e6f3891c461eb8bee0780c0de20e80f",
     "totalNormalizedPaths": 1464,
     "additionalLocalPathsRetained": 1266
   },
   "identityManifest": {
     "path": "remediation/nuke-planning/source/legacy-python-tracked-manifest.json",
-    "sha256": "50fa8b6ee76c8f5e539bd78be3d470df2299f491247f2f42066167119e7957ab",
+    "sha256": "aa258cbd7b4126457b165114a07ff5543c98278b7f9b3224cfce3d71cec58d7a",
     "publishedPythonCount": 198,
-    "headAtIdentityRead": "599997bbfdc2c979d8e499c2913795237b3607a4"
+    "headAtIdentityRead": "0e281a1f6f32efe48c5624aaadb5f78038117d76"
   },
   "totals": {
     "entries": 198,
     "unmappedPrimaryOwners": 0,
-    "normalVerified": 25,
+    "normalVerified": 26,
     "executionRetired": 0,
-    "normalVerifiedMethodScopes": 202,
+    "normalVerifiedMethodScopes": 206,
     "acceptedComplete": 0,
     "scopeExclusions": 0,
     "safeToDelete": 0,
-    "decommissionableFromPr": 25
+    "decommissionableFromPr": 26
   },
   "rules": [
     "This is a generated published-only projection of one authoritative union inventory, not a second maintained inventory.",
@@ -12694,19 +12694,22 @@
       "owner": "Documentation",
       "category": "Design",
       "operations": [
-        "pending-explicit-registry-binding"
+        "Assets"
       ],
       "services": [
         "DocumentationProjector"
       ],
-      "migration_status": "partial-explicit-method-allocation",
+      "migration_status": "normal-native-original-test-methods-verified",
       "native_tests_or_pending": [
-        "remediation/nuke-app/Tests/Documentation/DocumentationProjectionRealTests.cs"
+        "AndroidMcp.BuildTool.Tests.Documentation.LegacyUiOriginalMethodRealTests",
+        "remediation/nuke-app/Tests/Documentation/DocumentationProjectionRealTests.cs",
+        "remediation/nuke-app/Tests/Documentation/LegacyUiOriginalMethodRealTests.cs"
       ],
-      "additional_responsibilities": [],
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
       "remaining": [
-        "Documentation cross-artifact/source invariant validator and this original method full native binding remain pending in Documentation ownership.",
-        "No full-method parity claim from this projection binding; preserve the original method inputs, source invariants, errors and side effects in the authoritative reconciliation."
+        "Only this exact five-method UI test-file execution is normally verified. Other design test versions, generation/caller parity, catalog data and hostile review remain separate."
       ],
       "artifact_role": "published-legacy-port-baseline",
       "primary_code_path": "remediation/test_design023_ui.py",
@@ -12714,9 +12717,34 @@
       "byte_identical_path_count": 3,
       "same_bytes_imply_profile_or_caller_parity": false,
       "standalone_nuke_target_required": false,
-      "normal_verified": false,
-      "normal_verification_status": "partial-explicit-normal-method-verification",
+      "normal_verified": true,
+      "normal_verification_status": "normal-original-test-methods-verified",
       "normal_verified_methods": [
+        {
+          "method": "test_current_control_and_state_contracts_are_explicit",
+          "evidence": "remediation/nuke-planning/docs/documentation-parity-supplement.json",
+          "source_sha256": "97e3672e88f191549b03f9b94decd730ea8830bfb1ff98295a357f25dea780bf",
+          "bindings": [
+            {
+              "service": "DocumentationProjector",
+              "testFile": "remediation/nuke-app/Tests/Documentation/DocumentationProjectionRealTests.cs",
+              "testMethod": "SameAssertionsAndIndependentFixturesBindNativeProjector",
+              "caseId": "Exact UI/DECK assertion families named in mappingStatement",
+              "proof": "remediation/nuke-planning/docs/evidence/ui-deck-real-gate.trx",
+              "status": "saved-output-projection-assertions-real-pass"
+            },
+            {
+              "service": "DocumentationProjector",
+              "testFile": "remediation/nuke-app/Tests/Documentation/LegacyUiOriginalMethodRealTests.cs",
+              "testMethod": "SameExactOriginalFileMethodAssertionsBindNativeProjector",
+              "caseId": "test_current_control_and_state_contracts_are_explicit",
+              "proof": "remediation/nuke-app/artifacts/tests/20261028T1925584215879-aff03e2a4d184c76b637232a2f073785/tests.trx",
+              "status": "same-original-predicates-full-normal-suite-pass"
+            }
+          ],
+          "normal_verified": true,
+          "scope": "Owner-explicit same-original method fixture claim; caller/helper/file closure remains separate."
+        },
         {
           "method": "test_markdown_is_single_canonical_behavior_source",
           "evidence": "remediation/nuke-planning/docs/documentation-parity-supplement.json",
@@ -12732,18 +12760,96 @@
               "caseIds": [
                 "UI-MANIFEST"
               ]
+            },
+            {
+              "service": "DocumentationProjector",
+              "testFile": "remediation/nuke-app/Tests/Documentation/LegacyUiOriginalMethodRealTests.cs",
+              "testMethod": "SameExactOriginalFileMethodAssertionsBindNativeProjector",
+              "caseId": "test_markdown_is_single_canonical_behavior_source",
+              "proof": "remediation/nuke-app/artifacts/tests/20261028T1925584215879-aff03e2a4d184c76b637232a2f073785/tests.trx",
+              "status": "same-original-predicates-full-normal-suite-pass"
+            }
+          ],
+          "normal_verified": true,
+          "scope": "Owner-explicit same-original method fixture claim; caller/helper/file closure remains separate."
+        },
+        {
+          "method": "test_every_state_has_matching_vector_variant_and_exact_control_enablement",
+          "evidence": "remediation/nuke-planning/docs/documentation-parity-supplement.json",
+          "source_sha256": "97e3672e88f191549b03f9b94decd730ea8830bfb1ff98295a357f25dea780bf",
+          "bindings": [
+            {
+              "service": "DocumentationProjector",
+              "testFile": "remediation/nuke-app/Tests/Documentation/DocumentationProjectionRealTests.cs",
+              "testMethod": "SameAssertionsAndIndependentFixturesBindNativeProjector",
+              "caseId": "Exact UI/DECK assertion families named in mappingStatement",
+              "proof": "remediation/nuke-planning/docs/evidence/ui-deck-real-gate.trx",
+              "status": "saved-output-projection-assertions-real-pass"
+            },
+            {
+              "service": "DocumentationProjector",
+              "testFile": "remediation/nuke-app/Tests/Documentation/LegacyUiOriginalMethodRealTests.cs",
+              "testMethod": "SameExactOriginalFileMethodAssertionsBindNativeProjector",
+              "caseId": "test_every_state_has_matching_vector_variant_and_exact_control_enablement",
+              "proof": "remediation/nuke-app/artifacts/tests/20261028T1925584215879-aff03e2a4d184c76b637232a2f073785/tests.trx",
+              "status": "same-original-predicates-full-normal-suite-pass"
+            }
+          ],
+          "normal_verified": true,
+          "scope": "Owner-explicit same-original method fixture claim; caller/helper/file closure remains separate."
+        },
+        {
+          "method": "test_storyboard_images_match_named_state_and_branch_success_does_not_force_error",
+          "evidence": "remediation/nuke-planning/docs/documentation-parity-supplement.json",
+          "source_sha256": "97e3672e88f191549b03f9b94decd730ea8830bfb1ff98295a357f25dea780bf",
+          "bindings": [
+            {
+              "service": "DocumentationProjector",
+              "testFile": "remediation/nuke-app/Tests/Documentation/DocumentationProjectionRealTests.cs",
+              "testMethod": "SameAssertionsAndIndependentFixturesBindNativeProjector",
+              "caseId": "Exact UI/DECK assertion families named in mappingStatement",
+              "proof": "remediation/nuke-planning/docs/evidence/ui-deck-real-gate.trx",
+              "status": "saved-output-projection-assertions-real-pass"
+            },
+            {
+              "service": "DocumentationProjector",
+              "testFile": "remediation/nuke-app/Tests/Documentation/LegacyUiOriginalMethodRealTests.cs",
+              "testMethod": "SameExactOriginalFileMethodAssertionsBindNativeProjector",
+              "caseId": "test_storyboard_images_match_named_state_and_branch_success_does_not_force_error",
+              "proof": "remediation/nuke-app/artifacts/tests/20261028T1925584215879-aff03e2a4d184c76b637232a2f073785/tests.trx",
+              "status": "same-original-predicates-full-normal-suite-pass"
+            }
+          ],
+          "normal_verified": true,
+          "scope": "Owner-explicit same-original method fixture claim; caller/helper/file closure remains separate."
+        },
+        {
+          "method": "test_every_rendered_state_health_uses_closed_domains_and_integer_revision",
+          "evidence": "remediation/nuke-planning/docs/documentation-parity-supplement.json",
+          "source_sha256": "97e3672e88f191549b03f9b94decd730ea8830bfb1ff98295a357f25dea780bf",
+          "bindings": [
+            {
+              "service": "DocumentationProjector",
+              "testFile": "remediation/nuke-app/Tests/Documentation/DocumentationProjectionRealTests.cs",
+              "testMethod": "SameAssertionsAndIndependentFixturesBindNativeProjector",
+              "caseId": "Exact UI/DECK assertion families named in mappingStatement",
+              "proof": "remediation/nuke-planning/docs/evidence/ui-deck-real-gate.trx",
+              "status": "saved-output-projection-assertions-real-pass"
+            },
+            {
+              "service": "DocumentationProjector",
+              "testFile": "remediation/nuke-app/Tests/Documentation/LegacyUiOriginalMethodRealTests.cs",
+              "testMethod": "SameExactOriginalFileMethodAssertionsBindNativeProjector",
+              "caseId": "test_every_rendered_state_health_uses_closed_domains_and_integer_revision",
+              "proof": "remediation/nuke-app/artifacts/tests/20261028T1925584215879-aff03e2a4d184c76b637232a2f073785/tests.trx",
+              "status": "same-original-predicates-full-normal-suite-pass"
             }
           ],
           "normal_verified": true,
           "scope": "Owner-explicit same-original method fixture claim; caller/helper/file closure remains separate."
         }
       ],
-      "pending_methods": [
-        "test_current_control_and_state_contracts_are_explicit",
-        "test_every_rendered_state_health_uses_closed_domains_and_integer_revision",
-        "test_every_state_has_matching_vector_variant_and_exact_control_enablement",
-        "test_storyboard_images_match_named_state_and_branch_success_does_not_force_error"
-      ],
+      "pending_methods": null,
       "pending_method_list_basis": "Exact owner-supplied function/method anchors when available; module/caller closure is explicit. Lexical proposal anchors are not an AST or exhaustive branch inventory.",
       "execution_retired": false,
       "retention_normal_verified": false,
@@ -12752,9 +12858,9 @@
       "generic_behavior_retired": false,
       "retirement_decision": null,
       "hv_acceptance": "Deferred by user until Ready; not used as a prerequisite to record normal implementation verification.",
-      "decommissionable_from_pr": false,
+      "decommissionable_from_pr": true,
       "decommissionable_scope": [
-        null
+        "Original test_design023_ui.py execution only; retain local original bytes. No physical deletion or readiness claim."
       ],
       "decommissionable_means_physical_delete": false,
       "evidence_refs": [
@@ -12799,6 +12905,13 @@
           "role": "method-allocation",
           "source_sha256": "97e3672e88f191549b03f9b94decd730ea8830bfb1ff98295a357f25dea780bf",
           "method": "test_every_rendered_state_health_uses_closed_domains_and_integer_revision"
+        },
+        {
+          "evidence": "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json",
+          "owner": "Documentation",
+          "role": "explicit-source-normal-verification",
+          "source_sha256": "97e3672e88f191549b03f9b94decd730ea8830bfb1ff98295a357f25dea780bf",
+          "method": null
         }
       ],
       "accepted_complete": false,
