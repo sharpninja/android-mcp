@@ -22,6 +22,9 @@ public sealed class CatalogJavaSelectedCliRealTests
         var manifest=Environment.GetEnvironmentVariable("ANDROIDMCP_JAVA_NATIVE_MANIFEST")??throw new InvalidOperationException("Select the exact pinned Java native manifest for the registered Java caller case");
         manifest=Path.GetFullPath(manifest);test=test with{JavaManifest=manifest};
         var sourceCase=CatalogSourceIntegrationCases.All.Select(row=>(CatalogSourceIntegrationCase)row[0]).Single(row=>row.Call.Variant=="java-jvm-link");
+        // This category caller exercises raw extraction; trusted native cache
+        // consumption belongs to the separate original integration case.
+        sourceCase=sourceCase with{Call=sourceCase.Call with{TrustedCacheInput=false},Expected=sourceCase.Expected with{TrustedCacheHits=null,NativeProducerIdentityPinned=null,CacheConsumerAvoidedRawExtraction=null}};
         using var runtime=new SourcesRuntimeFactory(new JavaSourceRuntimeLoader()).Create(SourceExtractionProfile.CurrentCandidate,new SourceJavaAdmission(manifest));
         NativeCatalogBuildProvider? fixture=null;
         var probe=new NativeCatalogBuildCliProbe(execute=>fixture=NativeCatalogSourceIntegrationProvider.CreateProvider(sourceCase.Call,runtime.Dispatcher,execute),manifest);

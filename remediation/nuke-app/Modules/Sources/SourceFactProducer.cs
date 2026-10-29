@@ -56,7 +56,8 @@ public sealed class SourceFactProducer(IProfiledCanonicalJson canonical) : ICall
             var parameter = index < parameters.Count ? Object(parameters[index]) : new JsonObject();
             JsonObject? target = null;
             if (String(argument["resolved_binding_id"]) is { } typeId) resolvedTypes.TryGetValue(typeId, out target);
-            var classification = target is null ? null : TypeCandidate(target);
+            var hasTarget = target is { Count: > 0 };
+            var classification = hasTarget ? TypeCandidate(target!) : null;
             var spelled = Named(argument["text"]) || Named(parameter["name"]);
             if (!spelled && Boolean(classification?["is_candidate"]) != true) continue;
             var methodName = String(declaration["name"]) ?? "";
@@ -78,7 +79,7 @@ public sealed class SourceFactProducer(IProfiledCanonicalJson canonical) : ICall
                 ["owner"] = declaration["owner"]?.DeepClone(), ["language"] = extensions["language"]?.DeepClone(), ["parameter_name"] = parameter["name"]?.DeepClone(),
                 ["direction"] = Property(parameter, "direction", JsonValue.Create("unknown")),
                 ["parameter_annotations"] = parameter.ContainsKey("all_annotations") ? parameter["all_annotations"]?.DeepClone() : Property(parameter, "annotations", new JsonArray()),
-                ["role"] = role, ["confidence"] = target is not null ? "source-structure-plus-role-heuristic" : "name-heuristic-unresolved-type",
+                ["role"] = role, ["confidence"] = hasTarget ? "source-structure-plus-role-heuristic" : "name-heuristic-unresolved-type",
                 ["evidence_reasons"] = reasons, ["lifecycle_proven"] = false, ["registration_guaranteed"] = false, ["matching_unregistration_guaranteed"] = false,
                 ["permission"] = declaration["permission"]?.DeepClone(), ["provenance"] = Property(declaration, "provenance", new JsonArray()),
                 ["applicability"] = Property(extensions, "device_resolution_variants", new JsonArray()), ["unresolved"] = new JsonArray(CallbackUnknown)
@@ -90,9 +91,9 @@ public sealed class SourceFactProducer(IProfiledCanonicalJson canonical) : ICall
     public JsonArray PossiblePairs(JsonArray candidates)
     {
         var rows = Objects(candidates).ToArray(); var result = new JsonArray();
-        foreach (var registration in rows.Where(x => String(x["role"]) == "registration-candidate"))
-            foreach (var removal in rows.Where(x => String(x["role"]) == "unregistration-candidate"))
-                if (new[] { "owner", "language", "type_spelling", "type_id" }.All(key => JsonNode.DeepEquals(registration[key], removal[key])))
+        foreach (var registration in rows.Where(x => String(CopyRequired(x, "role")) == "registration-candidate"))
+            foreach (var removal in rows.Where(x => String(CopyRequired(x, "role")) == "unregistration-candidate"))
+                if (new[] { "owner", "language", "type_spelling", "type_id" }.All(key => JsonNode.DeepEquals(CopyRequired(registration, key), CopyRequired(removal, key))))
                     result.Add(new JsonObject
                     {
                         ["registration_candidate_id"] = CopyRequired(registration, "candidate_id"), ["unregistration_candidate_id"] = CopyRequired(removal, "candidate_id"),

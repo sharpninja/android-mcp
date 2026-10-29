@@ -63,7 +63,7 @@ public sealed class NativeFactsFixture
     {
         var metadata=new MetadataBuilder();metadata.AddModule(0,metadata.GetOrAddString("fixture.dll"),metadata.GetOrAddGuid(id),default,default);
         var image=new ManagedPEBuilder(new PEHeaderBuilder(imageCharacteristics:Characteristics.ExecutableImage|Characteristics.Dll),
-            new MetadataRootBuilder(metadata),new BlobBuilder());var blob=new BlobBuilder();image.Serialize(blob);return blob.ToArray();
+            new MetadataRootBuilder(metadata),new BlobBuilder(),deterministicIdProvider:_=>new BlobContentId(id,0));var blob=new BlobBuilder();image.Serialize(blob);return blob.ToArray();
     }
     public NativeFactsFixture(string name)
     {

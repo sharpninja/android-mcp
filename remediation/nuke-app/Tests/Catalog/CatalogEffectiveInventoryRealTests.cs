@@ -92,7 +92,10 @@ public sealed class NativeCatalogEffectiveInventoryProvider:ICatalogEffectiveInv
             {
                 var row=Row(snapshot,key);var schema=row.GetProperty("schema_hash").GetString()!;var targets=new HashSet<string>(["platform:local"],StringComparer.Ordinal);
                 var rule=new PolicyRule("allow",schema,targets,1);var entry=new PolicyRule("allow","tool",targets,1);
-                return CatalogViewPolicy.Evaluate([new(key,schema,"platform:local",1)],new(snapshot,new(null,false,0,1,"fixture")),new Dictionary<string,PolicyRule>{{key,rule}},entry,"tool",authority,pins.DocumentHashes,resolver,canonical);
+                // The original suppression test omits current_document_hashes.
+                // Matching-pin and suppressed-type cases explicitly supply it.
+                var hashes=call.Variant=="suppressed-binding" ? null : pins.DocumentHashes;
+                return CatalogViewPolicy.Evaluate([new(key,schema,"platform:local",1)],new(snapshot,new(null,false,0,1,"fixture")),new Dictionary<string,PolicyRule>{{key,rule}},entry,"tool",authority,hashes,resolver,canonical);
             }
             string? admission=null,noAuthority=null,changedAdmission=null;bool? schemaChanged=null,documentChanged=null,hashChanged=null;long? overlayDelta=null;string? dependencyState=null;
             if(call.Variant=="suppressed-binding") Overlay(method,"suppressed");

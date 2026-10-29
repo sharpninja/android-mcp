@@ -117,7 +117,11 @@ public sealed partial class MetadataCatalog
     }
     private void Append(string kind,string key,string body,string origin,string state,string? baseHash,string reason,SqliteTransaction transaction)
     {
-        if(string.IsNullOrWhiteSpace(reason)) throw new CatalogException(422,"Nonempty reason required");
+        // Preserve the original reason.strip() admission, including the four
+        // C0 separators not classified as whitespace by the ordinary BCL test.
+        // Accepted reason bytes remain untrimmed in the sole append path.
+        if(string.IsNullOrEmpty(reason)||reason.All(character=>char.IsWhiteSpace(character)||character is >= '\u001c' and <= '\u001f'))
+            throw new CatalogException(422,"Nonempty reason required");
         var old=Row(kind,key,transaction);var revision=(old?.Revision ?? 0)+1;
         using(var command=Command("INSERT INTO metadata_revisions VALUES($kind,$key,$revision,$origin,$state,$base,$hash,$body,$reason)",transaction,
             ("$kind",kind),("$key",key),("$revision",revision),("$origin",origin),("$state",state),("$base",baseHash),

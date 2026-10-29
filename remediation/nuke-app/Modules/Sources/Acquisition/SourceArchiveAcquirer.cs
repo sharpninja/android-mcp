@@ -4,14 +4,20 @@ using AndroidMcp.BuildTool.Core;
 
 namespace AndroidMcp.BuildTool.Modules.Sources.Acquisition;
 
-public sealed class SourceArchiveAcquirer(IByteTransport transport,IArtifactStore store)
+public sealed class SourceArchiveAcquirer(IByteTransport transport,IArtifactStore store,bool reuseArchives=false):IDisposable
 {
+    private readonly Dictionary<ArchiveIdentity,ZipArchive> archives=[];
+    private readonly Dictionary<ArchiveIdentity,MetadataArchiveEvidence> selectedMetadata=[];
+    private bool disposed;
     public async Task<ReadOnlyMemory<byte>> ReadMemberAsync(SourcePin source,CancellationToken cancellationToken=default)
     {
+        ObjectDisposedException.ThrowIf(disposed,this);cancellationToken.ThrowIfCancellationRequested();
         var pin=source.Archive??throw new ArgumentException("Source requires archive pin.");_=ArtifactPaths.Segments(pin.Member);
         if(pin.ArchiveSha256 is not null)
         {
             var path=pin.ArchiveLocalPath??"archives/"+pin.ArchiveSha256+".zip";_=ArtifactPaths.Segments(path);
+            var identity=Identity(source,pin);
+            if(reuseArchives&&archives.TryGetValue(identity,out var opened))return ReadMember(opened,pin.Member,cancellationToken);
             ReadOnlyMemory<byte> bytes;bool downloaded=false;
             try{bytes=await store.ReadAsync(path,cancellationToken);}
             catch(FileNotFoundException){bytes=await Download();downloaded=true;}
@@ -20,9 +26,10 @@ public sealed class SourceArchiveAcquirer(IByteTransport transport,IArtifactStor
             if(ContentHash.Sha256(bytes.Span)!=pin.ArchiveSha256||pin.ArchiveSha1 is not null&&ContentHash.AidlSha1Legacy(bytes.Span)!=pin.ArchiveSha1)throw new TransportException("ARCHIVE_HASH","Source archive hash differs; existing bytes retained.");
             if(pin.SizeBytes is not null&&bytes.Length!=pin.SizeBytes)throw new TransportException("ARCHIVE_SIZE","Source archive size differs.");
             if(downloaded)await store.WriteAsync(new(path,bytes,"application/zip"),cancellationToken);
-            using var stream=new MemoryStream(bytes.ToArray(),false);using var archive=new ZipArchive(stream,ZipArchiveMode.Read);
-            var matches=archive.Entries.Where(x=>x.FullName==pin.Member).ToArray();if(matches.Length!=1)throw new TransportException("ARCHIVE_MEMBER","Source archive member absent or ambiguous.");
-            return MetadataArchiveReader.ReadMember(matches[0],64*1024*1024);
+            var stream=new MemoryStream(bytes.ToArray(),false);ZipArchive archive;
+            try{archive=new ZipArchive(stream,ZipArchiveMode.Read);}catch{stream.Dispose();throw;}
+            if(reuseArchives){archives.Add(identity,archive);return ReadMember(archive,pin.Member,cancellationToken);}
+            using(archive)return ReadMember(archive,pin.Member,cancellationToken);
             async Task<ReadOnlyMemory<byte>> Download()=> (await transport.SendAsync(new(pin.Url,source.Revision,pin.ArchiveSha256,pin.SizeBytes,Retry:Policy(pin)),cancellationToken)).Bytes;
         }
         if(!MetadataArchiveReader.IsSelected(pin.Member))throw new TransportException("METADATA_SELECTION","Range acquisition is restricted to selected metadata members.");
@@ -31,10 +38,34 @@ public sealed class SourceArchiveAcquirer(IByteTransport transport,IArtifactStor
             if(string.IsNullOrWhiteSpace(pin.ETag))throw new TransportException("ETAG","Canonical metadata restore requires a pinned ETag.");
             var size=new SdkArchiveVersionValidator().ResolveSize(pin.RepositoryXml,pin.PlatformVersion??"",pin.PackagePath,pin.SizeBytes);pin=pin with{SizeBytes=size};
         }
-        var ranges=await HttpRangeSource.CreateAsync(transport,pin,source.Revision,source.Sha256,cancellationToken);
-        var metadata=new MetadataArchiveReader().Read(ranges);
+        // Validate each caller's canonical proof before allowing session reuse.
+        // Member SHA/size/Git pins are still checked by SourceAcquirer afterward.
+        var key=Identity(source,pin);
+        if(!reuseArchives||!selectedMetadata.TryGetValue(key,out var metadata))
+        {
+            var ranges=await HttpRangeSource.CreateAsync(transport,pin,source.Revision,source.Sha256,cancellationToken);
+            metadata=new MetadataArchiveReader().Read(ranges);
+            if(reuseArchives)selectedMetadata.Add(key,metadata);
+        }
         if(!metadata.Files.TryGetValue(pin.Member,out var member))throw new TransportException("ARCHIVE_MEMBER","Selected metadata member missing.");
-        return member;
+        return member.ToArray();
+    }
+    private static byte[] ReadMember(ZipArchive archive,string member,CancellationToken cancellationToken)
+    {
+        var matches=archive.Entries.Where(x=>x.FullName==member).ToArray();
+        if(matches.Length!=1)throw new TransportException("ARCHIVE_MEMBER","Source archive member absent or ambiguous.");
+        return MetadataArchiveReader.ReadMember(matches[0],64*1024*1024,cancellationToken:cancellationToken);
+    }
+    private static ArchiveIdentity Identity(SourcePin source,SourceArchivePin pin)=>new(pin.Url,source.Revision,
+        pin.ArchiveSha256,pin.ArchiveSha1,pin.SizeBytes,pin.ETag,pin.ArchiveLocalPath,pin.Compatibility,
+        ContentHash.Sha256(pin.RepositoryXml.Span),pin.PlatformVersion,pin.PackagePath);
+    private sealed record ArchiveIdentity(Uri Url,string Revision,string? Sha256,string? Sha1,long? Length,string? ETag,
+        string? LocalPath,AcquisitionCompatibilityProfile Profile,string RepositorySha256,string? Platform,string? Package);
+    public void Dispose()
+    {
+        if(disposed)return;disposed=true;
+        foreach(var archive in archives.Values)archive.Dispose();
+        archives.Clear();selectedMetadata.Clear();
     }
     internal static TransportRetryPolicy Policy(SourceArchivePin pin)=>pin.Compatibility==AcquisitionCompatibilityProfile.CanonicalRestore?TransportRetryPolicy.CanonicalRestore:TransportRetryPolicy.SingleAttempt;
 }

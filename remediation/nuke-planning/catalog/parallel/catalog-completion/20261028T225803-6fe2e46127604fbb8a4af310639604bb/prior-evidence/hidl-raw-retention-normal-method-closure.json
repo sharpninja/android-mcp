@@ -1,0 +1,112 @@
+{
+  "Timestamp": "2026-10-28T10:43:00",
+  "Scope": "Five exact original HIDL import and unnormalized retention method assertion scopes; normal verification only",
+  "Trx": "remediation/nuke-app/artifacts/tests/20261028T1039525534696-058391d8c0094673b9484f7706514b98/tests.trx",
+  "TrxSha256": "b2bb9a36cf00bf54d60771faff2e593423af6c39551e2c1ebb1caac8793a56a6",
+  "SuitePassed": 367,
+  "Failed": 0,
+  "Skipped": 0,
+  "NativeCases": 5,
+  "MockRows": 10,
+  "MockNegativeControls": 95,
+  "ExactMethods": [
+    {
+      "LegacyFile": "remediation/catalog/tests/test_hidl_import.py",
+      "LegacyFileSha256": "f2ed5252f0134c57e2f5d39354c9bad86b440aac1fe5d8c29f34b86e15c88691",
+      "Method": "test_structural_records_and_multi_results_survive_schema_gate",
+      "ExactLegacyMethodBody": " def test_structural_records_and_multi_results_survive_schema_gate(self):\n  with tempfile.TemporaryDirectory() as directory:\n   root=pathlib.Path(directory);inv=self.fixture(root,b'package hardware.test@2.7; interface IFoo { struct Point { int32_t x; }; get(Point[3]points) generates (bool ok, Point result); };');build_catalog.build(inv,root/'out')\n   with contextlib.closing(sqlite3.connect(root/'out/catalog.sqlite')) as db:\n    docs=[json.loads(r[0]) for r in db.execute(\"SELECT document_json FROM registry_entries WHERE json_extract(document_json,'$.extensions.language')='hidl'\")]\n    self.assertEqual(len(docs),5);method=next(d for d in docs if d['kind']=='method');self.assertEqual(len(method['extensions']['results']),2);self.assertEqual(method['permission']['op'],'unknown');self.assertEqual(method['codec_status'],'unknown')\n    self.assertIn('hardware.test@2.7::IFoo.Point',[d['canonical_signature'].removeprefix('hidl:') for d in docs]);self.assertTrue(all('unknown_reason' in v['availability'] for d in docs for v in d['extensions']['device_resolution_variants']))\n",
+      "NormalAssertionsClosed": true,
+      "HvAccepted": false
+    },
+    {
+      "LegacyFile": "remediation/catalog/tests/test_hidl_import.py",
+      "LegacyFileSha256": "f2ed5252f0134c57e2f5d39354c9bad86b440aac1fe5d8c29f34b86e15c88691",
+      "Method": "test_package_version_cannot_become_android_api_applicability",
+      "ExactLegacyMethodBody": " def test_package_version_cannot_become_android_api_applicability(self):\n  with tempfile.TemporaryDirectory() as directory:\n   root=pathlib.Path(directory);inv=self.fixture(root,b'package hardware.test@2.7; interface IFoo {};',platform_api_version='37.0')\n   with self.assertRaisesRegex(ValueError,'does not establish Android applicability'):build_catalog.build(inv,root/'out')\n   self.assertFalse((root/'out/catalog.sqlite').exists())\n",
+      "NormalAssertionsClosed": true,
+      "HvAccepted": false
+    },
+    {
+      "LegacyFile": "remediation/catalog/tests/test_hidl_import.py",
+      "LegacyFileSha256": "f2ed5252f0134c57e2f5d39354c9bad86b440aac1fe5d8c29f34b86e15c88691",
+      "Method": "test_invalid_utf8_retains_source_without_binding_inference",
+      "ExactLegacyMethodBody": " def test_invalid_utf8_retains_source_without_binding_inference(self):\n  with tempfile.TemporaryDirectory() as directory:\n   root=pathlib.Path(directory);raw=b'invalid\\xffHIDL';inv=self.fixture(root,raw);build_catalog.build(inv,root/'out')\n   with contextlib.closing(sqlite3.connect(root/'out/catalog.sqlite')) as db:\n    value=db.execute(\"SELECT raw FROM issues WHERE category='hidl-source'\").fetchone()[0];self.assertEqual(base64.b64decode(value),raw);self.assertEqual(db.execute(\"SELECT count(*) FROM registry_entries WHERE json_extract(document_json,'$.extensions.language')='hidl'\").fetchone()[0],0)\n",
+      "NormalAssertionsClosed": true,
+      "HvAccepted": false
+    },
+    {
+      "LegacyFile": "remediation/catalog/tests/test_unnormalized_source_retention.py",
+      "LegacyFileSha256": "9c8ed7ab045230ef917d082c851b20fa1f3d465ceb2e1167f9574a4fc361820c",
+      "Method": "test_hidl_source_retains_raw_bytes_and_declared_only_structure_without_wire_claims",
+      "ExactLegacyMethodBody": " def test_hidl_source_retains_raw_bytes_and_declared_only_structure_without_wire_claims(self):\n  raw=b'package a@1.0; interface IFoo { f(); };'\n  text,report=self.fixture(raw,'aosp-pinned-hidl-source-evidence')\n  self.assertEqual(text.encode(),raw);self.assertEqual(report['raw_source_encoding'],'utf-8');self.assertGreaterEqual(report['declarations'],2);self.assertFalse(report['normalizer_complete']);self.assertFalse(report['compiler_validation']);self.assertEqual(report['wire_resolution'],'unknown');self.assertEqual(report['android_availability'],'unknown')\n",
+      "NormalAssertionsClosed": true,
+      "HvAccepted": false
+    },
+    {
+      "LegacyFile": "remediation/catalog/tests/test_unnormalized_source_retention.py",
+      "LegacyFileSha256": "9c8ed7ab045230ef917d082c851b20fa1f3d465ceb2e1167f9574a4fc361820c",
+      "Method": "test_non_utf8_native_evidence_is_lossless",
+      "ExactLegacyMethodBody": " def test_non_utf8_native_evidence_is_lossless(self):\n  raw=b'raw\\xffbinder';text,report=self.fixture(raw,'aosp-native-binder-search-candidate-evidence')\n  self.assertEqual(report['raw_source_encoding'],'base64');self.assertEqual(base64.b64decode(text),raw)\n",
+      "NormalAssertionsClosed": true,
+      "HvAccepted": false
+    }
+  ],
+  "NativeFiles": [
+    {
+      "Path": "remediation/nuke-app/Modules/Catalog/CatalogBuild.cs",
+      "Sha256": "fa6c18caf7e117e686fad34d60e4eca9612c28998fc7dde205f582334abc759d"
+    },
+    {
+      "Path": "remediation/nuke-app/Tests/Catalog/CatalogHidlImportCases.cs",
+      "Sha256": "3f98b02248859045fbee4771daab752eae2416c5d9f3698f81d176d46c53cc53"
+    },
+    {
+      "Path": "remediation/nuke-app/Tests/Catalog/CatalogHidlImportRealTests.cs",
+      "Sha256": "628fe56403c97929b6794096df83554eff070fd99c613ef65c4d17fe30108a72"
+    }
+  ],
+  "NativeResults": [
+    {
+      "TestName": "AndroidMcp.BuildTool.Tests.Catalog.CatalogHidlImportRealTests.SameFiveOriginalSqlRawAndPublicReportAssertions(test: CatalogHidlImportCase { Id = RAW-RETAIN-01-public-flat-HIDL-report, LegacyMethod = test_hidl_source_retains_raw_bytes_and_declared_only_structure_without_wire_claims, Call = CatalogHidlImportCall { Variant = retained-hidl, Raw = System.Byte[], Scope = aosp-pinned-hidl-source-evidence, Path = raw-schema, PlatformVersion = , Sql = SELECT i.raw,p.document_json FROM issues i JOIN parse_reports p USING(source_id) WHERE i.category IN ('source-format-unknown','hidl-source') }, Expected = CatalogHidlImportReply { Outcome = ok, FinalDatabase = True, HidlEntries = , MethodResults = , PermissionOp = , CodecStatus = , ContainsPoint = , EveryAvailabilityUnknown = , QueriedIssueRows = 1, SqlRawText = package a@1.0; interface IFoo { f(); };, DecodedRawHex = , FlatRawEncoding = utf-8, AtLeastTwoDeclarations = True, FlatNormalizerComplete = False, FlatCompilerValidation = False, FlatWireResolution = unknown, FlatAndroidAvailability = unknown, ErrorContains = , OriginalInputsRetained = True } })",
+      "Outcome": "Passed"
+    },
+    {
+      "TestName": "AndroidMcp.BuildTool.Tests.Catalog.CatalogHidlImportRealTests.SameFiveOriginalSqlRawAndPublicReportAssertions(test: CatalogHidlImportCase { Id = RAW-RETAIN-02-native-bytes-lossless, LegacyMethod = test_non_utf8_native_evidence_is_lossless, Call = CatalogHidlImportCall { Variant = retained-native, Raw = System.Byte[], Scope = aosp-native-binder-search-candidate-evidence, Path = raw-schema, PlatformVersion = , Sql = SELECT i.raw,p.document_json FROM issues i JOIN parse_reports p USING(source_id) WHERE i.category IN ('source-format-unknown','hidl-source') }, Expected = CatalogHidlImportReply { Outcome = ok, FinalDatabase = True, HidlEntries = , MethodResults = , PermissionOp = , CodecStatus = , ContainsPoint = , EveryAvailabilityUnknown = , QueriedIssueRows = 1, SqlRawText = , DecodedRawHex = 726177ff62696e646572, FlatRawEncoding = base64, AtLeastTwoDeclarations = , FlatNormalizerComplete = , FlatCompilerValidation = , FlatWireResolution = , FlatAndroidAvailability = , ErrorContains = , OriginalInputsRetained = True } })",
+      "Outcome": "Passed"
+    },
+    {
+      "TestName": "AndroidMcp.BuildTool.Tests.Catalog.CatalogHidlImportRealTests.SameFiveOriginalSqlRawAndPublicReportAssertions(test: CatalogHidlImportCase { Id = HIDL-IMPORT-01-structure-results-through-schema, LegacyMethod = test_structural_records_and_multi_results_survive_schema_gate, Call = CatalogHidlImportCall { Variant = structural, Raw = System.Byte[], Scope = aosp-pinned-hidl-source-evidence, Path = IFoo.hal, PlatformVersion = , Sql = SELECT document_json FROM registry_entries WHERE json_extract(document_json,'$.extensions.language')='hidl' }, Expected = CatalogHidlImportReply { Outcome = ok, FinalDatabase = True, HidlEntries = 5, MethodResults = 2, PermissionOp = unknown, CodecStatus = unknown, ContainsPoint = True, EveryAvailabilityUnknown = True, QueriedIssueRows = , SqlRawText = , DecodedRawHex = , FlatRawEncoding = , AtLeastTwoDeclarations = , FlatNormalizerComplete = , FlatCompilerValidation = , FlatWireResolution = , FlatAndroidAvailability = , ErrorContains = , OriginalInputsRetained = True } })",
+      "Outcome": "Passed"
+    },
+    {
+      "TestName": "AndroidMcp.BuildTool.Tests.Catalog.CatalogHidlImportRealTests.SameFiveOriginalSqlRawAndPublicReportAssertions(test: CatalogHidlImportCase { Id = HIDL-IMPORT-02-package-is-not-Android-version, LegacyMethod = test_package_version_cannot_become_android_api_applicability, Call = CatalogHidlImportCall { Variant = platform-inference, Raw = System.Byte[], Scope = aosp-pinned-hidl-source-evidence, Path = IFoo.hal, PlatformVersion = 37.0, Sql =  }, Expected = CatalogHidlImportReply { Outcome = source-metadata, FinalDatabase = False, HidlEntries = , MethodResults = , PermissionOp = , CodecStatus = , ContainsPoint = , EveryAvailabilityUnknown = , QueriedIssueRows = , SqlRawText = , DecodedRawHex = , FlatRawEncoding = , AtLeastTwoDeclarations = , FlatNormalizerComplete = , FlatCompilerValidation = , FlatWireResolution = , FlatAndroidAvailability = , ErrorContains = does not establish Android applicability, OriginalInputsRetained = True } })",
+      "Outcome": "Passed"
+    },
+    {
+      "TestName": "AndroidMcp.BuildTool.Tests.Catalog.CatalogHidlImportRealTests.SameFiveOriginalSqlRawAndPublicReportAssertions(test: CatalogHidlImportCase { Id = HIDL-IMPORT-03-invalid-UTF8-no-bindings, LegacyMethod = test_invalid_utf8_retains_source_without_binding_inference, Call = CatalogHidlImportCall { Variant = invalid-hidl, Raw = System.Byte[], Scope = aosp-pinned-hidl-source-evidence, Path = IFoo.hal, PlatformVersion = , Sql = SELECT raw FROM issues WHERE category='hidl-source' }, Expected = CatalogHidlImportReply { Outcome = ok, FinalDatabase = True, HidlEntries = 0, MethodResults = , PermissionOp = , CodecStatus = , ContainsPoint = , EveryAvailabilityUnknown = , QueriedIssueRows = 1, SqlRawText = , DecodedRawHex = 696e76616c6964ff4849444c, FlatRawEncoding = , AtLeastTwoDeclarations = , FlatNormalizerComplete = , FlatCompilerValidation = , FlatWireResolution = , FlatAndroidAvailability = , ErrorContains = , OriginalInputsRetained = True } })",
+      "Outcome": "Passed"
+    }
+  ],
+  "MockGate": {
+    "Trx": "remediation/nuke-app/artifacts/tests/20261028T1027154788842-d032a247dcb3414893b947e1c5bccb40/tests.trx",
+    "Sha256": "6708fe9195fbcc3dbaa16ec9fda701ef2323cde2ac05aeeea24912d8dae2f57e",
+    "Passed": 628,
+    "OwnMockRows": 10,
+    "NegativeControls": 95,
+    "Failed": 0,
+    "Skipped": 0
+  },
+  "Compatibility": {
+    "Sql": [
+      "SELECT document_json FROM registry_entries WHERE json_extract(document_json,'$.extensions.language')='hidl'",
+      "SELECT raw FROM issues WHERE category='hidl-source'",
+      "SELECT i.raw,p.document_json FROM issues i JOIN parse_reports p USING(source_id) WHERE i.category IN ('source-format-unknown','hidl-source')"
+    ],
+    "Reports": "Original flat raw_source_encoding, declarations, normalizer_complete, compiler_validation, wire_resolution and android_availability assertions retained separately from nested Source metadata.",
+    "Bytes": "Exact original UTF8 HIDL text and nonUTF8 HIDL/native byte arrays compared after the original SQL queries and base64 decoding; no fabricated binding, compiler, wire or Android availability authority.",
+    "Guard": "HIDL package version cannot establish Android applicability; exact error substring and absent final catalog.sqlite retained.",
+    "Preserved": "Staged sources and prior Build retained, original fixture inputs hash checked; Source extractor, strict UTF8 decoder, schema, hash and Build engines reused."
+  },
+  "Remaining": "Malformed annotation archive per-member SQL/raw compatibility, aggregate source metadata callers/CRUD and remaining whole build caller assertions are separate pending scopes. No whole corpus parity or HV acceptance claim.",
+  "Mcp": "Own logging remains unavailable under the previously reported automatic approval denial; no retry or substitute store."
+}

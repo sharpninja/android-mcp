@@ -61,11 +61,16 @@ public sealed class JavaSourceExtractor(JavaNativeParser parser) : ISourceExtrac
             return new(records,issues,issues.Count==0?StructuralParseStatus.Clean:StructuralParseStatus.Malformed,metadata);
         }
         private void Exclude(string kind)=>excluded[kind]=excluded.GetValueOrDefault(kind)+1;
-        private void Issue(JavaNativeParser.Node node,string reason)
+        private void Issue(JavaNativeParser.Node node,string reason,bool retainExcerpt=true)
         {
-            var raw=string.Concat(Text(node).EnumerateRunes().Take(4096).Select(x=>x.ToString()));
             issues.Add(new("java-ast-error",reason,tree.Start(node),tree.End(node)));
-            issueDetails.Add(new(){["reason"]=reason,["line"]=tree.Line(node),["byte_range"]=Range(node),["raw_excerpt"]=raw,["source_bytes_retained"]=true});
+            var detail=new JsonObject{["reason"]=reason,["line"]=tree.Line(node),["byte_range"]=Range(node)};
+            if(retainExcerpt)
+            {
+                detail["raw_excerpt"]=string.Concat(Text(node).EnumerateRunes().Take(4096).Select(x=>x.ToString()));
+                detail["source_bytes_retained"]=true;
+            }
+            issueDetails.Add(detail);
         }
         private JsonArray Annotations(string value,JavaNativeParser.Node node)
         {
@@ -127,7 +132,7 @@ public sealed class JavaSourceExtractor(JavaNativeParser parser) : ISourceExtrac
         }
         private void Type(JavaNativeParser.Node node,string? outer,int depth,string? ownerKind=null)
         {
-            if(depth>128){Issue(node,"Nested type depth exceeds128");return;}
+            if(depth>128){Issue(node,"Nested type depth exceeds128",retainExcerpt:false);return;}
             var name=Text(tree.Field(node,"name"));var owner=outer is null?(package.Length>0?package+".":"")+name:outer+"."+name;var kind=TypeKinds[Kind(node)];
             binaryByOwner[owner]=outer is null?(package.Length>0?package.Replace('.','/')+"/":"")+name:binaryByOwner[outer]+"$"+name;
             records.Add(Row(node,kind,owner,name,canonical:owner,extra:new(){["owner_kind"]=ownerKind,["declaration_kind"]=Kind(node),["type_parameters"]=Text(tree.Field(node,"type_parameters")),

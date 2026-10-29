@@ -27,7 +27,8 @@ public sealed class SourcesRuntimeFactory : ISourcesRuntimeFactory
             new SoongSourceFacts(new GlobMatcher()), new ApexManifestSourceFacts(inspector), new NativeAbiSourceFacts(inspector),
             new PublishedInterfaceHashSourceFacts(), html)
         {
-            AidlInventory = new AidlLexicalInventorySourceFacts()
+            AidlInventory = new AidlLexicalInventorySourceFacts(),
+            NativeDescriptors = new NativeDescriptorSourceFacts()
         };
         // These are actual providers. Alias/profile decisions exist once in the
         // dispatcher. Pure concern services above do not become declarations.

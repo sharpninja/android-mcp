@@ -5,6 +5,7 @@ using AndroidMcp.BuildTool.Core;
 namespace AndroidMcp.BuildTool.Modules.Review;
 
 public sealed record ReviewEvidenceUnit(string Key, string File, string FullSha256, int Start, int End, string Text);
+public sealed record ReviewCoverageSignature(string? Key, int Start, int End, string BodySha256);
 
 /// <summary>One owner, write-ahead receipts, no assistant budgets and no retry of uncertain execution.</summary>
 public sealed class ReviewLaunchService(IArtifactStore store, IArtifactLeaseProvider leases,
@@ -266,6 +267,14 @@ public sealed class ReviewLaunchService(IArtifactStore store, IArtifactLeaseProv
             canonical.Hash(bytes) == canonical.Hash(JsonSerializer.SerializeToElement(observation.Evidence)),
             "REVIEWER_AUDIT_UNAVAILABLE", "Audit proof bytes differ from the observed bootstrap/read-back evidence.");
     }
+
+    /// <summary>Exact legacy coverage identity: a set of key, codepoint offsets and SHA256 of range UTF8.
+    /// File/full-file pins are deliberately outside this signature. Defaults retain len(text), not start+len(text).</summary>
+    public static ReviewCoverageSignature CoverageSignature(string text, string? key = null, int start = 0, int? end = null)
+        => new(key, start, end ?? text.EnumerateRunes().Count(), ContentHash.Sha256(ReviewPrepareService.Utf8.GetBytes(text)));
+
+    public static IReadOnlySet<ReviewCoverageSignature> CoverageSignature(IEnumerable<ReviewEvidenceUnit> units)
+        => units.Select(unit => CoverageSignature(unit.Text, unit.Key, unit.Start, unit.End)).ToHashSet();
 
     public static IReadOnlyList<IReadOnlyList<ReviewEvidenceUnit>> Partition(IReadOnlyList<ReviewEvidenceUnit> units)
     {

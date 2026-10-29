@@ -136,20 +136,43 @@ public sealed class ReleasePartsCodec(IStreamingArtifactReader reader,ICreateNew
             if(row.ValueKind!=JsonValueKind.Object||!row.TryGetProperty("name",out var name)||
                 name.ValueKind!=JsonValueKind.String||name.GetString()!=expected)
                 throw Fail("PART_PATH","Invalid/duplicate part path or order");
-            if(!row.TryGetProperty("bytes",out var size)||size.ValueKind!=JsonValueKind.Number||
-                !size.TryGetInt64(out var length)||length is <1 or >MaximumPartBytes)
+            if(!row.TryGetProperty("bytes",out var size)||!TryPartLength(size,out var length)||
+                length is <1 or >MaximumPartBytes)
                 throw Fail("PART_SIZE","Invalid part size");
             if(!row.TryGetProperty("sha256",out var hash)||hash.ValueKind!=JsonValueKind.String||!Pin(hash.GetString()))
                 throw Fail("PART_PIN","Invalid part hash");
             total=checked(total+length);rows.Add(new(expected,length,hash.GetString()!));
         }
-        if(!m.TryGetProperty("bytes",out var wholeSize)||wholeSize.ValueKind!=JsonValueKind.Number||
-            !wholeSize.TryGetInt64(out var wholeLength)||wholeLength!=total||
+        if(!m.TryGetProperty("bytes",out var wholeSize)||!WholeLengthEquals(wholeSize,total)||
             !m.TryGetProperty("sha256",out var wholeHash)||wholeHash.ValueKind!=JsonValueKind.String||!Pin(wholeHash.GetString()))
             throw Fail("WHOLE_PIN","Invalid whole-file identity");
         // Legacy reassembly ignores writer-only artifact_name and part_bytes.
-        return new(Format,"",wholeLength,wholeHash.GetString()!,0,rows.ToArray());
+        return new(Format,"",total,wholeHash.GetString()!,0,rows.ToArray());
     }
+
+    // Preserve the original isinstance(value,int) rule, including bool as an
+    // integer subtype. A float token is not an integer part size, even 1.0.
+    private static bool TryPartLength(JsonElement value,out long length)
+    {
+        length=0;
+        if(value.ValueKind==JsonValueKind.True){length=1;return true;}
+        if(value.ValueKind==JsonValueKind.False)return true;
+        return value.ValueKind==JsonValueKind.Number&&StrictJsonInspector.IsIntegerToken(value.GetRawText())
+            &&value.TryGetInt64(out length);
+    }
+
+    // The original whole-total check uses numeric equality, not isinstance.
+    // JSON floats use binary64; valid totals are at most1000*(2^31-1), below
+    // 2^41, hence their integer-to-double comparison is exact. Shared strict
+    // inspection remains responsible for rejecting nonfinite/ambiguous JSON.
+    private static bool WholeLengthEquals(JsonElement value,long total)=>value.ValueKind switch{
+        JsonValueKind.True=>total==1,
+        JsonValueKind.False=>total==0,
+        JsonValueKind.Number=>StrictJsonInspector.IsIntegerToken(value.GetRawText())
+            ?value.TryGetInt64(out var integer)&&integer==total
+            :value.TryGetDouble(out var number)&&double.IsFinite(number)&&number==total,
+        _=>false
+    };
 
     private async Task<IArtifactReadSession> OpenRegular(string path,string code,string message,CancellationToken token)
     {

@@ -1,0 +1,710 @@
+{
+  "at": "2026-10-28T23:11:08",
+  "state": "Helper whole-body normal proof with four producer-file proposals for Root full gate",
+  "files": [
+    {
+      "relativePath": "Modules/Sources/Java/JavaSemanticServices.cs",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Modules/Sources/Java/JavaSemanticServices.cs",
+      "immutableSource": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/helper-completion/handoff/files/Modules/Sources/Java/JavaSemanticServices.cs",
+      "sha256": "040c6b623cd97f823d0b8552cd6a3253b6220731eb9eda0c7d6a111727ab97f8",
+      "length": 4353,
+      "priorSource": "/home/sharpninja/github/2026-10-26/task-3/remediation/integration/nuke-migration-checkpoint-015/files/remediation/nuke-app/Modules/Sources/Java/JavaSemanticServices.cs",
+      "priorSha256": "dfe6f0514712e2f2c0b41fe59175f9981a04263126ea1bafe2ffa45bdb6dbb3d"
+    },
+    {
+      "relativePath": "Tests/Sources/Java/JavaHelperBodyCases.cs",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Tests/Sources/Java/JavaHelperBodyCases.cs",
+      "immutableSource": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/helper-completion/handoff/files/Tests/Sources/Java/JavaHelperBodyCases.cs",
+      "sha256": "755ecb3cb92bdec5b972b9991cbe2a5c93391f535f77b75843f3ef8b10bfbcc4",
+      "length": 8010,
+      "priorSource": null,
+      "priorSha256": null
+    },
+    {
+      "relativePath": "Tests/Sources/Java/JavaHelperBodyMockTests.cs",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Tests/Sources/Java/JavaHelperBodyMockTests.cs",
+      "immutableSource": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/helper-completion/handoff/files/Tests/Sources/Java/JavaHelperBodyMockTests.cs",
+      "sha256": "183cf9fc23ce3e8da962eda273d8b8b92667f4e16db91b331fe3544358cfa616",
+      "length": 2989,
+      "priorSource": null,
+      "priorSha256": null
+    },
+    {
+      "relativePath": "Tests/Sources/Java/JavaHelperBodyRealTests.cs",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Tests/Sources/Java/JavaHelperBodyRealTests.cs",
+      "immutableSource": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/helper-completion/handoff/files/Tests/Sources/Java/JavaHelperBodyRealTests.cs",
+      "sha256": "5ecbe16a24a8dc9551a4644f37608b106b0b9528b7b202f89d1cec1ee90e440e",
+      "length": 780,
+      "priorSource": null,
+      "priorSha256": null
+    }
+  ],
+  "functions": [
+    {
+      "function": "java_context.attach",
+      "native": "JavaFileContext.Attach",
+      "originalLine": 2,
+      "clauses": [
+        {
+          "clause": "Report map is constructed first, duplicate path uses last report",
+          "cases": [
+            "CTX-BODY-last-report-wins",
+            "CTX-BODY-last-report-rejects",
+            "CTX-BODY-report-key-before-empty-sources"
+          ]
+        },
+        {
+          "clause": "Non-Java rows skip cache access; empty inputs remain empty",
+          "cases": [
+            "CTX-BODY-nonjava-no-cache-access",
+            "CTX-BODY-empty"
+          ]
+        },
+        {
+          "clause": "Only cache/parser equality gates context, matching empty/null hashes accepted",
+          "cases": [
+            "CTX-BODY-empty-cache",
+            "CTX-BODY-empty-parser",
+            "CTX-BODY-null-hashes",
+            "CTX-BODY-empty-null-mismatch",
+            "CTX-cache",
+            "CTX-parser",
+            "CTX-missing"
+          ]
+        },
+        {
+          "clause": "Required lookup errors and short-circuit order remain observable",
+          "cases": [
+            "CTX-BODY-required-source-kind",
+            "CTX-BODY-required-cache-hash",
+            "CTX-BODY-required-report-parser",
+            "CTX-BODY-mismatch-short-circuit"
+          ]
+        },
+        {
+          "clause": "Null cache path is distinct from empty string",
+          "cases": [
+            "CTX-BODY-null-path",
+            "CTX-BODY-empty-path",
+            "CTX-BODY-null-path-not-empty"
+          ]
+        },
+        {
+          "clause": "Exactly six context fields, absent optionals null, exact static-resolution statement, overwrite existing context",
+          "cases": [
+            "CTX-BODY-six-fields-overwrite",
+            "CTX-BODY-missing-optionals",
+            "CTX-imports",
+            "ORIG-CONTEXT-IMPORTS-EXACT"
+          ]
+        },
+        {
+          "clause": "Earlier source mutations survive later failure; later sources untouched; reports unchanged",
+          "cases": [
+            "CTX-BODY-sequential-failure"
+          ]
+        }
+      ],
+      "actualCallerRole": "No runtime attach invocation in either original tooling tree; original tests invoke directly. build_catalog fingerprints this file and preattached context only. No attachment pipeline invented",
+      "remainingBody": [],
+      "remainingCaller": [],
+      "objectModel": "JSON value/state parity; C# owns cloned JsonNodes. Python custom objects/reference alias identity are not a native JSON wire contract"
+    },
+    {
+      "function": "jvm_source_link.encode",
+      "native": "JvmSourceLinker.Encode",
+      "originalLine": 6,
+      "clauses": [
+        {
+          "clause": "Primitive table, null/empty inputs, repeated arrays and varargs, void-array rejection",
+          "cases": [
+            "ENC-byte through ENC-void",
+            "ENC-null",
+            "ENC-empty",
+            "ENC-array",
+            "ENC-varargs",
+            "ENC-voidarray"
+          ]
+        },
+        {
+          "clause": "Balanced generic erasure, malformed positive/negative depth, known outer only",
+          "cases": [
+            "ENC-generic",
+            "ENC-nestedgeneric",
+            "ENC-unclosed",
+            "ENC-negative",
+            "ENC-unknownouter"
+          ]
+        },
+        {
+          "clause": "Only explicitly mapped nonfalsey binary names, no unqualified/wildcard/type-variable guesses",
+          "cases": [
+            "ENC-reference",
+            "ENC-nested",
+            "ENC-T",
+            "ENC-String",
+            "ENC-wildcard",
+            "ENC-partial",
+            "JVM-PRODUCER-01 through 04"
+          ]
+        },
+        {
+          "clause": "All three original strip points use one existing SourceText.Strip authority",
+          "cases": [
+            "JVM-BODY-strip-primitive",
+            "JVM-BODY-strip-arrays",
+            "JVM-BODY-strip-erased-outer",
+            "JVM-BODY-strip-before-empty-owner-lookup"
+          ]
+        }
+      ],
+      "actualCallerRole": "Source-owned SourceTypeFacts.XmlJvmKey delegates encoding via IAnnotationTargetSourceFacts. Exact original-method XML caller assertions run in the focused190 gate",
+      "remainingBody": [],
+      "remainingCaller": [
+        "Root integrated full gate must repeat callers after applying this snapshot and Catalog snapshot"
+      ]
+    },
+    {
+      "function": "jvm_source_link.key",
+      "native": "JvmSourceLinker.Key",
+      "originalLine": 25,
+      "clauses": [
+        {
+          "clause": "Declared binary owner must match owner map; supported type kinds return owner",
+          "cases": [
+            "KEY-owner-null",
+            "KEY-owner-mismatch",
+            "KEY-owner-unknown",
+            "KEY-class/interface/enum/annotation"
+          ]
+        },
+        {
+          "clause": "Fields/unsupported kinds never prove typed identity",
+          "cases": [
+            "KEY-field",
+            "KEY-unsupported"
+          ]
+        },
+        {
+          "clause": "Every argument/return resolves; void arguments reject; constructors use <init> and V",
+          "cases": [
+            "KEY-primitives",
+            "KEY-T",
+            "KEY-constructor",
+            "KEY-voidargument",
+            "KEY-unknownargument",
+            "JVM-PRODUCER-05/06"
+          ]
+        }
+      ],
+      "actualCallerRole": "CatalogBuild requires the exact selected platform owner map and membership in that platform SDK key map; SOURCE-IMPORT-02 and JavaSelectedCLI2 in Catalog owner private99 prove the current native cache route",
+      "remainingBody": [],
+      "remainingCaller": [
+        "Catalog private99 is independently hashed but is not yet the Root integrated full-gate proof"
+      ]
+    }
+  ],
+  "closureProposals": [
+    {
+      "publishedPath": "remediation/catalog/tooling/java_context.py",
+      "original": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tooling/java_context.py",
+      "sha256": "4276f8abb3c0040fd1c8b4e9da52a163eb35d2d7716319327a884c0ed83fc55d",
+      "length": 770,
+      "functions": "attach",
+      "normalClosureProposal": "Whole helper body and required caller-role contribution, pending Root integration/full gate",
+      "nativeService": "JavaFileContext.Attach",
+      "profile": "canonical helper body",
+      "frozenProfileDisposition": "Equal helper bytes are independently pinned; no historical Python package/cache identity or frozen producer execution is claimed",
+      "bodyRemaining": [],
+      "rootFullGateRequired": true,
+      "acceptedComplete": false,
+      "executionRetired": false,
+      "safeToDelete": false
+    },
+    {
+      "publishedPath": "remediation/catalog/tooling/jvm_source_link.py",
+      "original": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tooling/jvm_source_link.py",
+      "sha256": "6cc57fd9f4dcf7b8f432377ad486242583c02cb280d7ea7e383b7c41afb4f5cb",
+      "length": 1884,
+      "functions": [
+        "encode",
+        "key"
+      ],
+      "normalClosureProposal": "Whole helper body and required caller-role contribution, pending Root integration/full gate",
+      "nativeService": "JvmSourceLinker.Encode/Key",
+      "profile": "canonical helper body",
+      "frozenProfileDisposition": "Equal helper bytes are independently pinned; no historical Python package/cache identity or frozen producer execution is claimed",
+      "bodyRemaining": [],
+      "rootFullGateRequired": true,
+      "acceptedComplete": false,
+      "executionRetired": false,
+      "safeToDelete": false
+    },
+    {
+      "publishedPath": "rehydration/producers/release-011/tooling/java_context.py",
+      "original": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tooling/java_context.py",
+      "sha256": "4276f8abb3c0040fd1c8b4e9da52a163eb35d2d7716319327a884c0ed83fc55d",
+      "length": 770,
+      "functions": "attach",
+      "normalClosureProposal": "Whole helper body and required caller-role contribution, pending Root integration/full gate",
+      "nativeService": "JavaFileContext.Attach",
+      "profile": "release-011 frozen helper body",
+      "frozenProfileDisposition": "Equal helper bytes are independently pinned; no historical Python package/cache identity or frozen producer execution is claimed",
+      "bodyRemaining": [],
+      "rootFullGateRequired": true,
+      "acceptedComplete": false,
+      "executionRetired": false,
+      "safeToDelete": false
+    },
+    {
+      "publishedPath": "rehydration/producers/release-011/tooling/jvm_source_link.py",
+      "original": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tooling/jvm_source_link.py",
+      "sha256": "6cc57fd9f4dcf7b8f432377ad486242583c02cb280d7ea7e383b7c41afb4f5cb",
+      "length": 1884,
+      "functions": [
+        "encode",
+        "key"
+      ],
+      "normalClosureProposal": "Whole helper body and required caller-role contribution, pending Root integration/full gate",
+      "nativeService": "JvmSourceLinker.Encode/Key",
+      "profile": "release-011 frozen helper body",
+      "frozenProfileDisposition": "Equal helper bytes are independently pinned; no historical Python package/cache identity or frozen producer execution is claimed",
+      "bodyRemaining": [],
+      "rootFullGateRequired": true,
+      "acceptedComplete": false,
+      "executionRetired": false,
+      "safeToDelete": false
+    }
+  ],
+  "mock": {
+    "at": "2026-10-28T23:06:03",
+    "name": "mock-qualified",
+    "trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/artifacts/tests/20261028T2304541257277-56a1109be4bb40af8217c88de4c38f40/tests.trx",
+    "trxSha256": "7118e0a91c2796dbe7570901b93059dcea898fba1a7bed13a7a7d7897c1add5c",
+    "outcome": "Completed",
+    "passed": 42,
+    "failed": 0,
+    "notExecuted": 0,
+    "total": 42,
+    "failures": [],
+    "files": [
+      {
+        "relativePath": "Modules/Sources/Java/JavaSemanticServices.cs",
+        "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Modules/Sources/Java/JavaSemanticServices.cs",
+        "sha256": "dfe6f0514712e2f2c0b41fe59175f9981a04263126ea1bafe2ffa45bdb6dbb3d",
+        "length": 4026,
+        "retained": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/helper-completion/mock-qualified.files/Modules/Sources/Java/JavaSemanticServices.cs",
+        "priorSource": "/home/sharpninja/github/2026-10-26/task-3/remediation/integration/nuke-migration-checkpoint-015/files/remediation/nuke-app/Modules/Sources/Java/JavaSemanticServices.cs",
+        "priorSha256": "dfe6f0514712e2f2c0b41fe59175f9981a04263126ea1bafe2ffa45bdb6dbb3d"
+      },
+      {
+        "relativePath": "Tests/Sources/Java/JavaHelperBodyCases.cs",
+        "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Tests/Sources/Java/JavaHelperBodyCases.cs",
+        "sha256": "755ecb3cb92bdec5b972b9991cbe2a5c93391f535f77b75843f3ef8b10bfbcc4",
+        "length": 8010,
+        "retained": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/helper-completion/mock-qualified.files/Tests/Sources/Java/JavaHelperBodyCases.cs",
+        "priorSource": null,
+        "priorSha256": null
+      },
+      {
+        "relativePath": "Tests/Sources/Java/JavaHelperBodyMockTests.cs",
+        "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Tests/Sources/Java/JavaHelperBodyMockTests.cs",
+        "sha256": "183cf9fc23ce3e8da962eda273d8b8b92667f4e16db91b331fe3544358cfa616",
+        "length": 2989,
+        "retained": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/helper-completion/mock-qualified.files/Tests/Sources/Java/JavaHelperBodyMockTests.cs",
+        "priorSource": null,
+        "priorSha256": null
+      }
+    ],
+    "originalMethodsAdded": 0,
+    "hvRun": false,
+    "trackedDoneChanged": false,
+    "logging": "Incomplete after trusted-wrapper health Permission denied; no retry",
+    "warnings": [
+      "NU1900 vulnerability feed unavailable; audit retained"
+    ]
+  },
+  "real": {
+    "at": "2026-10-28T23:09:28",
+    "name": "real-qualified",
+    "trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/artifacts/tests/20261028T2307104852283-1c9acff7cc23414297cfb5b097248228/tests.trx",
+    "trxSha256": "af84394df2b112dee44bbddc42fdbe2e8f4e78a307552f92cbc779059647a83c",
+    "outcome": "Completed",
+    "passed": 190,
+    "failed": 0,
+    "notExecuted": 0,
+    "total": 190,
+    "failures": [],
+    "files": [
+      {
+        "relativePath": "Modules/Sources/Java/JavaSemanticServices.cs",
+        "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Modules/Sources/Java/JavaSemanticServices.cs",
+        "sha256": "040c6b623cd97f823d0b8552cd6a3253b6220731eb9eda0c7d6a111727ab97f8",
+        "length": 4353,
+        "retained": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/helper-completion/real-qualified.files/Modules/Sources/Java/JavaSemanticServices.cs",
+        "priorSource": "/home/sharpninja/github/2026-10-26/task-3/remediation/integration/nuke-migration-checkpoint-015/files/remediation/nuke-app/Modules/Sources/Java/JavaSemanticServices.cs",
+        "priorSha256": "dfe6f0514712e2f2c0b41fe59175f9981a04263126ea1bafe2ffa45bdb6dbb3d"
+      },
+      {
+        "relativePath": "Tests/Sources/Java/JavaHelperBodyCases.cs",
+        "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Tests/Sources/Java/JavaHelperBodyCases.cs",
+        "sha256": "755ecb3cb92bdec5b972b9991cbe2a5c93391f535f77b75843f3ef8b10bfbcc4",
+        "length": 8010,
+        "retained": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/helper-completion/real-qualified.files/Tests/Sources/Java/JavaHelperBodyCases.cs",
+        "priorSource": null,
+        "priorSha256": null
+      },
+      {
+        "relativePath": "Tests/Sources/Java/JavaHelperBodyMockTests.cs",
+        "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Tests/Sources/Java/JavaHelperBodyMockTests.cs",
+        "sha256": "183cf9fc23ce3e8da962eda273d8b8b92667f4e16db91b331fe3544358cfa616",
+        "length": 2989,
+        "retained": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/helper-completion/real-qualified.files/Tests/Sources/Java/JavaHelperBodyMockTests.cs",
+        "priorSource": null,
+        "priorSha256": null
+      },
+      {
+        "relativePath": "Tests/Sources/Java/JavaHelperBodyRealTests.cs",
+        "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Tests/Sources/Java/JavaHelperBodyRealTests.cs",
+        "sha256": "5ecbe16a24a8dc9551a4644f37608b106b0b9528b7b202f89d1cec1ee90e440e",
+        "length": 780,
+        "retained": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/helper-completion/real-qualified.files/Tests/Sources/Java/JavaHelperBodyRealTests.cs",
+        "priorSource": null,
+        "priorSha256": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests",
+        "total": 42,
+        "passed": 42,
+        "failed": 0
+      },
+      {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyRealTests",
+        "total": 23,
+        "passed": 23,
+        "failed": 0
+      },
+      {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests",
+        "total": 44,
+        "passed": 44,
+        "failed": 0
+      },
+      {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaOriginalLiteralAssertionRealTests",
+        "total": 6,
+        "passed": 6,
+        "failed": 0
+      },
+      {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests",
+        "total": 44,
+        "passed": 44,
+        "failed": 0
+      },
+      {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JvmProducerOwnerMappingMockTests",
+        "total": 12,
+        "passed": 12,
+        "failed": 0
+      },
+      {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JvmProducerOwnerMappingRealTests",
+        "total": 6,
+        "passed": 6,
+        "failed": 0
+      },
+      {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.SourceTypeFactsRealTests",
+        "total": 13,
+        "passed": 13,
+        "failed": 0
+      }
+    ],
+    "selectedTestNames": [
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.ContextCorrectAndNegativeMocksRetainCacheBinding(id: \"CTX-cache\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaOriginalLiteralAssertionRealTests.SameSixOriginalLiteralAssertionsBindExistingNativeCasesAndContexts(id: \"ORIG-JAVA-ENUM-SET\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JvmProducerOwnerMappingMockTests.PresentButEmptyOwnerDescriptorsCannotPassAsProvenIdentity(id: \"JVM-PRODUCER-03-array\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ContextProjectionErrorsOrderAndRetainedEffectsRejectWrongMocks(id: \"CTX-BODY-nonjava-no-cache-access\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"ENC-boolean\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ContextProjectionErrorsOrderAndRetainedEffectsRejectWrongMocks(id: \"CTX-BODY-null-hashes\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyRealTests.SameOriginalContextBodyBindsOneManagedAdapter(id: \"CTX-BODY-last-report-rejects\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"KEY-interface\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameCacheContextCasesBindToRealAdapter(id: \"CTX-nonjava\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"ENC-String\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"KEY-owner-null\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ContextProjectionErrorsOrderAndRetainedEffectsRejectWrongMocks(id: \"CTX-BODY-empty-path\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"KEY-owner-mismatch\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"ENC-negative\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"ENC-null\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JvmProducerOwnerMappingRealTests.SameOriginalFalseyOwnerCasesBindToExistingLinker(id: \"JVM-PRODUCER-02-null\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"ENC-generic\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"KEY-T\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JvmProducerOwnerMappingMockTests.OriginalFalseyOwnerLookupCasesPassCorrectExistingLinkerMocks(id: \"JVM-PRODUCER-06-parameter\")",
+      "AndroidMcp.BuildTool.Tests.Sources.SourceTypeFactsRealTests.NativeXmlKeysUseTheSameOriginalSpellingAssertions(id: \"XMLKEY-09\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ContextProjectionErrorsOrderAndRetainedEffectsRejectWrongMocks(id: \"CTX-BODY-empty-cache\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"ENC-byte\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyRealTests.SameOriginalContextBodyBindsOneManagedAdapter(id: \"CTX-BODY-empty-parser\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JvmProducerOwnerMappingMockTests.OriginalFalseyOwnerLookupCasesPassCorrectExistingLinkerMocks(id: \"JVM-PRODUCER-05-return\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyRealTests.SameOriginalContextBodyBindsOneManagedAdapter(id: \"CTX-BODY-empty\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyRealTests.SameOriginalContextBodyBindsOneManagedAdapter(id: \"CTX-BODY-null-path\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"ENC-double\")",
+      "AndroidMcp.BuildTool.Tests.Sources.SourceTypeFactsRealTests.NativeXmlKeysUseTheSameOriginalSpellingAssertions(id: \"XMLKEY-05\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyRealTests.SameOriginalStripBoundariesBindOneLinkerAndSharedSourceText(id: \"JVM-BODY-strip-arrays\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JvmProducerOwnerMappingRealTests.SameOriginalFalseyOwnerCasesBindToExistingLinker(id: \"JVM-PRODUCER-04-generic\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"ENC-boolean\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"ENC-unknownouter\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"ENC-empty\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ExactOriginalContextBodyAcceptsIndependentScriptedState(id: \"CTX-BODY-empty-parser\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"ENC-array\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"KEY-owner-mismatch\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"ENC-short\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaOriginalLiteralAssertionRealTests.SameSixOriginalLiteralAssertionsBindExistingNativeCasesAndContexts(id: \"ORIG-JAVA-OWNER\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"KEY-annotation\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"ENC-wildcard\")",
+      "AndroidMcp.BuildTool.Tests.Sources.SourceTypeFactsRealTests.NativeXmlKeysUseTheSameOriginalSpellingAssertions(id: \"XMLKEY-13\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"ENC-void\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ContextProjectionErrorsOrderAndRetainedEffectsRejectWrongMocks(id: \"CTX-BODY-required-source-kind\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"KEY-interface\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ExactOriginalContextBodyAcceptsIndependentScriptedState(id: \"CTX-BODY-empty-null-mismatch\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ContextProjectionErrorsOrderAndRetainedEffectsRejectWrongMocks(id: \"CTX-BODY-required-report-parser\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"KEY-unknownargument\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyRealTests.SameOriginalContextBodyBindsOneManagedAdapter(id: \"CTX-BODY-nonjava-no-cache-access\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ExactOriginalContextBodyAcceptsIndependentScriptedState(id: \"CTX-BODY-missing-optionals\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyRealTests.SameOriginalContextBodyBindsOneManagedAdapter(id: \"CTX-BODY-mismatch-short-circuit\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ContextProjectionErrorsOrderAndRetainedEffectsRejectWrongMocks(id: \"CTX-BODY-mismatch-short-circuit\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.OriginalStripBoundariesPassCorrectAndRejectWrongExistingLinkerMocks(id: \"JVM-BODY-strip-primitive\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"KEY-constructor\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"ENC-null\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"ENC-nestedgeneric\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ContextProjectionErrorsOrderAndRetainedEffectsRejectWrongMocks(id: \"CTX-BODY-null-path-not-empty\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ContextProjectionErrorsOrderAndRetainedEffectsRejectWrongMocks(id: \"CTX-BODY-missing-optionals\")",
+      "AndroidMcp.BuildTool.Tests.Sources.SourceTypeFactsRealTests.NativeXmlKeysUseTheSameOriginalSpellingAssertions(id: \"XMLKEY-10\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ExactOriginalContextBodyAcceptsIndependentScriptedState(id: \"CTX-BODY-required-report-parser\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyRealTests.SameOriginalContextBodyBindsOneManagedAdapter(id: \"CTX-BODY-report-key-before-empty-sources\")",
+      "AndroidMcp.BuildTool.Tests.Sources.SourceTypeFactsRealTests.NativeXmlKeysUseTheSameOriginalSpellingAssertions(id: \"XMLKEY-02\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaOriginalLiteralAssertionRealTests.SameSixOriginalLiteralAssertionsBindExistingNativeCasesAndContexts(id: \"ORIG-JAVA-FIELD-OWNERS\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"KEY-owner-unknown\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ExactOriginalContextBodyAcceptsIndependentScriptedState(id: \"CTX-BODY-null-hashes\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyRealTests.SameOriginalContextBodyBindsOneManagedAdapter(id: \"CTX-BODY-sequential-failure\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameCacheContextCasesBindToRealAdapter(id: \"CTX-missing\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ExactOriginalContextBodyAcceptsIndependentScriptedState(id: \"CTX-BODY-last-report-wins\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"ENC-T\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JvmProducerOwnerMappingMockTests.OriginalFalseyOwnerLookupCasesPassCorrectExistingLinkerMocks(id: \"JVM-PRODUCER-01-empty\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"ENC-T\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.OriginalStripBoundariesPassCorrectAndRejectWrongExistingLinkerMocks(id: \"JVM-BODY-strip-arrays\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"ENC-unclosed\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyRealTests.SameOriginalContextBodyBindsOneManagedAdapter(id: \"CTX-BODY-required-report-parser\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyRealTests.SameOriginalContextBodyBindsOneManagedAdapter(id: \"CTX-BODY-empty-null-mismatch\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"KEY-field\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JvmProducerOwnerMappingMockTests.PresentButEmptyOwnerDescriptorsCannotPassAsProvenIdentity(id: \"JVM-PRODUCER-06-parameter\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaOriginalLiteralAssertionRealTests.SameSixOriginalLiteralAssertionsBindExistingNativeCasesAndContexts(id: \"ORIG-JAVA-PARSE-POSITIVE\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"ENC-partial\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ContextProjectionErrorsOrderAndRetainedEffectsRejectWrongMocks(id: \"CTX-BODY-empty-null-mismatch\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyRealTests.SameOriginalContextBodyBindsOneManagedAdapter(id: \"CTX-BODY-required-source-kind\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ExactOriginalContextBodyAcceptsIndependentScriptedState(id: \"CTX-BODY-empty\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ExactOriginalContextBodyAcceptsIndependentScriptedState(id: \"CTX-BODY-null-path\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"ENC-negative\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"ENC-void\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"ENC-varargs\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JvmProducerOwnerMappingRealTests.SameOriginalFalseyOwnerCasesBindToExistingLinker(id: \"JVM-PRODUCER-05-return\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.OriginalStripBoundariesPassCorrectAndRejectWrongExistingLinkerMocks(id: \"JVM-BODY-strip-erased-outer\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaOriginalLiteralAssertionRealTests.SameSixOriginalLiteralAssertionsBindExistingNativeCasesAndContexts(id: \"ORIG-JAVA-PARSE-ZERO\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"ENC-byte\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"ENC-nested\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"ENC-String\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JvmProducerOwnerMappingRealTests.SameOriginalFalseyOwnerCasesBindToExistingLinker(id: \"JVM-PRODUCER-06-parameter\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"ENC-voidarray\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JvmProducerOwnerMappingMockTests.OriginalFalseyOwnerLookupCasesPassCorrectExistingLinkerMocks(id: \"JVM-PRODUCER-03-array\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"KEY-unsupported\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"KEY-unknownargument\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"KEY-constructor\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameCacheContextCasesBindToRealAdapter(id: \"CTX-parser\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"KEY-class\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyRealTests.SameOriginalContextBodyBindsOneManagedAdapter(id: \"CTX-BODY-six-fields-overwrite\")",
+      "AndroidMcp.BuildTool.Tests.Sources.SourceTypeFactsRealTests.NativeXmlKeysUseTheSameOriginalSpellingAssertions(id: \"XMLKEY-01\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ContextProjectionErrorsOrderAndRetainedEffectsRejectWrongMocks(id: \"CTX-BODY-sequential-failure\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ContextProjectionErrorsOrderAndRetainedEffectsRejectWrongMocks(id: \"CTX-BODY-empty-parser\")",
+      "AndroidMcp.BuildTool.Tests.Sources.SourceTypeFactsRealTests.NativeXmlKeysUseTheSameOriginalSpellingAssertions(id: \"XMLKEY-04\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"KEY-unsupported\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"KEY-annotation\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JvmProducerOwnerMappingRealTests.SameOriginalFalseyOwnerCasesBindToExistingLinker(id: \"JVM-PRODUCER-01-empty\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"ENC-float\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"KEY-owner-unknown\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"KEY-enum\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ExactOriginalContextBodyAcceptsIndependentScriptedState(id: \"CTX-BODY-sequential-failure\")",
+      "AndroidMcp.BuildTool.Tests.Sources.SourceTypeFactsRealTests.NativeXmlKeysUseTheSameOriginalSpellingAssertions(id: \"XMLKEY-08\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"ENC-generic\")",
+      "AndroidMcp.BuildTool.Tests.Sources.SourceTypeFactsRealTests.NativeXmlKeysUseTheSameOriginalSpellingAssertions(id: \"XMLKEY-07\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"ENC-reference\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JvmProducerOwnerMappingMockTests.PresentButEmptyOwnerDescriptorsCannotPassAsProvenIdentity(id: \"JVM-PRODUCER-02-null\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ExactOriginalContextBodyAcceptsIndependentScriptedState(id: \"CTX-BODY-last-report-rejects\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.ContextCorrectAndNegativeMocksRetainCacheBinding(id: \"CTX-imports\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"KEY-voidargument\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"ENC-unknownouter\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"ENC-int\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyRealTests.SameOriginalContextBodyBindsOneManagedAdapter(id: \"CTX-BODY-last-report-wins\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaOriginalLiteralAssertionRealTests.SameSixOriginalLiteralAssertionsBindExistingNativeCasesAndContexts(id: \"ORIG-CONTEXT-IMPORTS-EXACT\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"ENC-long\")",
+      "AndroidMcp.BuildTool.Tests.Sources.SourceTypeFactsRealTests.NativeXmlKeysUseTheSameOriginalSpellingAssertions(id: \"XMLKEY-11\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyRealTests.SameOriginalStripBoundariesBindOneLinkerAndSharedSourceText(id: \"JVM-BODY-strip-before-empty-owner-lookup\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ContextProjectionErrorsOrderAndRetainedEffectsRejectWrongMocks(id: \"CTX-BODY-last-report-wins\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyRealTests.SameOriginalContextBodyBindsOneManagedAdapter(id: \"CTX-BODY-required-cache-hash\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"KEY-enum\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ContextProjectionErrorsOrderAndRetainedEffectsRejectWrongMocks(id: \"CTX-BODY-report-key-before-empty-sources\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ExactOriginalContextBodyAcceptsIndependentScriptedState(id: \"CTX-BODY-required-cache-hash\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ExactOriginalContextBodyAcceptsIndependentScriptedState(id: \"CTX-BODY-six-fields-overwrite\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameCacheContextCasesBindToRealAdapter(id: \"CTX-cache\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ExactOriginalContextBodyAcceptsIndependentScriptedState(id: \"CTX-BODY-empty-path\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"ENC-char\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ExactOriginalContextBodyAcceptsIndependentScriptedState(id: \"CTX-BODY-null-path-not-empty\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.ContextCorrectAndNegativeMocksRetainCacheBinding(id: \"CTX-nonjava\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ContextProjectionErrorsOrderAndRetainedEffectsRejectWrongMocks(id: \"CTX-BODY-last-report-rejects\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"ENC-char\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyRealTests.SameOriginalStripBoundariesBindOneLinkerAndSharedSourceText(id: \"JVM-BODY-strip-erased-outer\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"ENC-empty\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ExactOriginalContextBodyAcceptsIndependentScriptedState(id: \"CTX-BODY-empty-cache\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JvmProducerOwnerMappingMockTests.PresentButEmptyOwnerDescriptorsCannotPassAsProvenIdentity(id: \"JVM-PRODUCER-01-empty\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JvmProducerOwnerMappingMockTests.OriginalFalseyOwnerLookupCasesPassCorrectExistingLinkerMocks(id: \"JVM-PRODUCER-02-null\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ContextProjectionErrorsOrderAndRetainedEffectsRejectWrongMocks(id: \"CTX-BODY-empty\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"ENC-float\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"ENC-double\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"ENC-nested\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyRealTests.SameOriginalContextBodyBindsOneManagedAdapter(id: \"CTX-BODY-empty-cache\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.ContextCorrectAndNegativeMocksRetainCacheBinding(id: \"CTX-missing\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.ContextCorrectAndNegativeMocksRetainCacheBinding(id: \"CTX-parser\")",
+      "AndroidMcp.BuildTool.Tests.Sources.SourceTypeFactsRealTests.NativeXmlKeysUseTheSameOriginalSpellingAssertions(id: \"XMLKEY-12\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"ENC-int\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"ENC-varargs\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"ENC-short\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.OriginalStripBoundariesPassCorrectAndRejectWrongExistingLinkerMocks(id: \"JVM-BODY-strip-before-empty-owner-lookup\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"KEY-class\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"ENC-partial\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"ENC-nestedgeneric\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JvmProducerOwnerMappingRealTests.SameOriginalFalseyOwnerCasesBindToExistingLinker(id: \"JVM-PRODUCER-03-array\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyRealTests.SameOriginalContextBodyBindsOneManagedAdapter(id: \"CTX-BODY-missing-optionals\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyRealTests.SameOriginalContextBodyBindsOneManagedAdapter(id: \"CTX-BODY-null-path-not-empty\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JvmProducerOwnerMappingMockTests.OriginalFalseyOwnerLookupCasesPassCorrectExistingLinkerMocks(id: \"JVM-PRODUCER-04-generic\")",
+      "AndroidMcp.BuildTool.Tests.Sources.SourceTypeFactsRealTests.NativeXmlKeysUseTheSameOriginalSpellingAssertions(id: \"XMLKEY-03\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"KEY-T\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"ENC-reference\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JvmProducerOwnerMappingMockTests.PresentButEmptyOwnerDescriptorsCannotPassAsProvenIdentity(id: \"JVM-PRODUCER-04-generic\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"KEY-voidargument\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ExactOriginalContextBodyAcceptsIndependentScriptedState(id: \"CTX-BODY-nonjava-no-cache-access\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ExactOriginalContextBodyAcceptsIndependentScriptedState(id: \"CTX-BODY-report-key-before-empty-sources\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"KEY-primitives\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"ENC-voidarray\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyRealTests.SameOriginalContextBodyBindsOneManagedAdapter(id: \"CTX-BODY-empty-path\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ExactOriginalContextBodyAcceptsIndependentScriptedState(id: \"CTX-BODY-required-source-kind\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"ENC-array\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"ENC-wildcard\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ContextProjectionErrorsOrderAndRetainedEffectsRejectWrongMocks(id: \"CTX-BODY-six-fields-overwrite\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"ENC-unclosed\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ExactOriginalContextBodyAcceptsIndependentScriptedState(id: \"CTX-BODY-mismatch-short-circuit\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ContextProjectionErrorsOrderAndRetainedEffectsRejectWrongMocks(id: \"CTX-BODY-null-path\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyRealTests.SameOriginalStripBoundariesBindOneLinkerAndSharedSourceText(id: \"JVM-BODY-strip-primitive\")",
+      "AndroidMcp.BuildTool.Tests.Sources.SourceTypeFactsRealTests.NativeXmlKeysUseTheSameOriginalSpellingAssertions(id: \"XMLKEY-06\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"ENC-long\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyRealTests.SameOriginalContextBodyBindsOneManagedAdapter(id: \"CTX-BODY-null-hashes\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests.ContextProjectionErrorsOrderAndRetainedEffectsRejectWrongMocks(id: \"CTX-BODY-required-cache-hash\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JvmProducerOwnerMappingMockTests.PresentButEmptyOwnerDescriptorsCannotPassAsProvenIdentity(id: \"JVM-PRODUCER-05-return\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameJvmCasesBindToRealLinker(id: \"KEY-owner-null\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"KEY-field\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests.JvmExpectedAndWrongMocksProveExactDescriptors(id: \"KEY-primitives\")",
+      "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests.SameCacheContextCasesBindToRealAdapter(id: \"CTX-imports\")"
+    ],
+    "originalMethodsAdded": 0,
+    "hvRun": false,
+    "trackedDoneChanged": false,
+    "logging": "Incomplete after trusted-wrapper health Permission denied; no retry",
+    "warnings": [
+      "NU1900 vulnerability feed unavailable; audit retained"
+    ]
+  },
+  "retainedInitialMockFailure": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/helper-completion/mock-control-error.json",
+  "chronology": [
+    "First mock40pass2fail: no-op incorrectly classified as wrong for empty/non-Java cases; original snapshot/TRX retained",
+    "Corrected only wrong-control classification; mock42 passed with original dfe6f051 helper bytes",
+    "Applied equality/required-key/path handling and reused SourceText.Strip; same cases bound to one managed implementation",
+    "Focused190 passed including retained39+6 JVM vectors and exact Source-owned XML caller assertions"
+  ],
+  "inputBoundaries": [
+    "Context sources/reports are JSON object rows; cache paths are strings or null and hash values use original string/null equality without added nonempty validation",
+    "JVM signatures and owner-map values use the existing nullable string interfaces; no Python custom-object runtime is introduced"
+  ],
+  "callerEvidence": {
+    "pins": [
+      {
+        "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/published-java-sourcefact-method-closure-007.json",
+        "sha256": "aa31cb158cdc1e884d52c7612cf0a68708a3a23b9da48ed0344971dca83c98f0",
+        "length": 66196
+      },
+      {
+        "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/source-normal-verification-supplement.json",
+        "sha256": "0f3709687c8a7544498217422d15b3da9866c78ac2132a81358caca7dce4bd4e",
+        "length": 121171
+      },
+      {
+        "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/catalog/evidence/catalog-file-verification-current.json",
+        "sha256": "b00ca07a20687afd98c478855d333d5f1b4157d67266295c96f6262c198f1332",
+        "length": 71158
+      },
+      {
+        "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/catalog/evidence/catalog-sources-cli-milestone-007.json",
+        "sha256": "00287ede137ac29551b44919bad53cab0e518cd97949df289d277ef34db2453f",
+        "length": 16873
+      },
+      {
+        "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Modules/Sources/SourceText.cs",
+        "sha256": "849c49c822af8c392b180d5edb4914f9461f90bca31ad61ce1a00f3bf8e0145d",
+        "length": 1747
+      },
+      {
+        "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Modules/Sources/SourceTypeFacts.cs",
+        "sha256": "53ada450d613e1e8eeb33e5cf4dfcbfea4115f9c7247ce328ac9db33f8e2a418",
+        "length": 9564
+      },
+      {
+        "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Tests/Sources/SourceTypeFactsContractCases.cs",
+        "sha256": "27caf96a551057406fd3425012fba2c9e6e3302d99415df589cbae2bce407b33",
+        "length": 5822
+      },
+      {
+        "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Tests/Sources/SourceTypeFactsRealTests.cs",
+        "sha256": "4447a2ed5a9903af7ca4e88ec9e6e9c8f9de15a671e5c6edc08a1b07ac48360e",
+        "length": 1413
+      }
+    ],
+    "catalogScope": "Owner private99, source import through trusted native cache plus explicit selected Java CLI2; Root integration still required",
+    "sourceXml": "Fresh focused190 exact existing SourceTypeFactsRealTests.NativeXmlKeysUseTheSameOriginalSpellingAssertions cases",
+    "catalogPrivateTrxSha256": "3dc30087253a908bbb78ba2792451553ec5efae06f2ae8fed8577bb1741e8113",
+    "catalogPrivateTrx": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/catalog/nuke-app/artifacts/tests/20261028T2249024806426-db6e212490b54f33bceb2b8d59591f74/tests.trx"
+  },
+  "stripReference": "https://raw.githubusercontent.com/python/cpython/v3.14.0/Objects/unicodetype_db.h#L6668",
+  "sharedStripModified": false,
+  "originalMethodsAdded": 0,
+  "priorDistinctOriginalMethods": 33,
+  "priorJavaMethods": 14,
+  "priorGenericFactMethods": 19,
+  "retirementsAdded": 0,
+  "globalInventoryChanged": false,
+  "priorBoundaryHandoff": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/handoff/manifest.json",
+  "priorBoundaryHandoffSha256": "2bdb00e40a76707b1278f26df21f7d41182c4571047a611df6acd346956f93fa",
+  "priorBoundaryHandoffChanged": false,
+  "exactMockCommand": "& remediation/parallel-work/java/Run-NukeNativeGate.ps1 -TestFilter 'FullyQualifiedName~JavaHelperBodyMockTests'",
+  "exactProductionCommand": "& remediation/parallel-work/java/Run-NukeNativeGate.ps1 -TestFilter 'FullyQualifiedName~JavaHelperBody|FullyQualifiedName~JavaSemanticRealTests|FullyQualifiedName~JvmProducerOwnerMapping|FullyQualifiedName~JvmExpectedAndWrongMocksProveExactDescriptors|FullyQualifiedName~ContextCorrectAndNegativeMocksRetainCacheBinding|FullyQualifiedName~JavaOriginalLiteralAssertionRealTests|FullyQualifiedName~NativeXmlKeysUseTheSameOriginalSpellingAssertions' -JavaNativeManifest /home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/java-native-002/native-source-lock.json",
+  "remaining": [
+    "Root integration of helper and current Catalog snapshots, then full normal gate",
+    "Frozen whole producer/cache identity and corpus parity are separate from pure helper closure",
+    "MCP memory/session logging incomplete after trusted-wrapper health denial; no retry",
+    "NU1900 feed unavailability reported with audit retained"
+  ],
+  "hvRun": false,
+  "trackedDoneChanged": false,
+  "acceptedComplete": false,
+  "accuracy": 99,
+  "completeness": 99,
+  "ratingScope": "Named helper body increment and closure proposals, not Root acceptance"
+}

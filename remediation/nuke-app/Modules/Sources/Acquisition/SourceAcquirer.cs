@@ -4,7 +4,7 @@ using AndroidMcp.BuildTool.Core;
 
 namespace AndroidMcp.BuildTool.Modules.Sources.Acquisition;
 
-public sealed class SourceAcquirer(IByteTransport transport,IArtifactStore store)
+public sealed class SourceAcquirer(IByteTransport transport,IArtifactStore store,SourceArchiveAcquirer? archiveSession=null)
 {
     public async Task<AcquiredSource> AcquireAsync(SourcePin pin,CancellationToken cancellationToken=default)
     {
@@ -18,7 +18,8 @@ public sealed class SourceAcquirer(IByteTransport transport,IArtifactStore store
         ReadOnlyMemory<byte> bytes;
         if(pin.Archive is not null)
         {
-            bytes=await new SourceArchiveAcquirer(transport,store).ReadMemberAsync(pin,cancellationToken);
+            using var local=archiveSession is null?new SourceArchiveAcquirer(transport,store):null;
+            bytes=await (archiveSession??local!).ReadMemberAsync(pin,cancellationToken);
         }
         else if(pin.RequiredLocalSnapshot is not null)
         {

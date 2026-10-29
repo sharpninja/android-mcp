@@ -5,18 +5,24 @@ namespace AndroidMcp.BuildTool.Sources.Java;
 
 public sealed class JavaFileContext : IJavaFileContext
 {
+    private static JsonNode? Required(JsonObject value,string name)=>value.TryGetPropertyValue(name,out var field)?field:throw new KeyNotFoundException(name);
     public void Attach(JsonArray sources, JsonArray reports)
     {
         var byCache = new Dictionary<string,JsonObject>(StringComparer.Ordinal);
-        foreach(var report in reports.OfType<JsonObject>()) byCache[report["cache_path"]!.GetValue<string>()] = report;
-        foreach(var source in sources.OfType<JsonObject>())
+        JsonObject? nullPathReport=null;
+        foreach(var item in reports)
         {
-            if(source["kind"]?.GetValue<string>() != "java-source") continue;
-            var cache=source["metadata_cache"]?.AsObject();
-            if(cache is null || string.IsNullOrEmpty(cache["sha256"]?.GetValue<string>()) || string.IsNullOrEmpty(cache["parser_sha256"]?.GetValue<string>()) ||
-                !byCache.TryGetValue(cache["path"]?.GetValue<string>() ?? "",out var report) ||
-                !JsonNode.DeepEquals(report["cache_sha256"],cache["sha256"]) || !JsonNode.DeepEquals(report["parser_sha256"],cache["parser_sha256"]))
-                throw new InvalidDataException("Java context cache mismatch " + source["path"]?.GetValue<string>());
+            var report=item!.AsObject();var path=Required(report,"cache_path")?.GetValue<string>();
+            if(path is null)nullPathReport=report;else byCache[path]=report;
+        }
+        foreach(var item in sources)
+        {
+            var source=item!.AsObject();if(Required(source,"kind")?.GetValue<string>() != "java-source") continue;
+            var cache=Required(source,"metadata_cache")!.AsObject();var path=Required(cache,"path")?.GetValue<string>();
+            var report=path is null?nullPathReport:byCache.GetValueOrDefault(path);
+            if(report is null || !JsonNode.DeepEquals(Required(report,"cache_sha256"),Required(cache,"sha256")) ||
+                !JsonNode.DeepEquals(Required(report,"parser_sha256"),Required(cache,"parser_sha256")))
+                throw new InvalidDataException("Java context cache mismatch " + Required(source,"path")?.GetValue<string>());
             var context=new JsonObject();
             foreach(var field in new[]{"package","imports","wildcard_imports","parser","parse_errors","excluded_implementation_nodes"}) context[field]=report[field]?.DeepClone();
             context["static_import_resolution"]="Static/type imports not separately classified; original source retained. No unresolved wildcard/type-variable identity inferred.";
@@ -32,8 +38,8 @@ public sealed class JvmSourceLinker : IJvmSourceLinker
     public string? Encode(string? value,string owner,IReadOnlyDictionary<string,string> owners)
     {
         if(string.IsNullOrEmpty(value))return null;
-        value=value.Replace("...","[]",StringComparison.Ordinal).Trim();var dimensions=0;
-        while(value.EndsWith("[]",StringComparison.Ordinal)){dimensions++;value=value[..^2].Trim();}
+        value=SourceText.Strip(value.Replace("...","[]",StringComparison.Ordinal));var dimensions=0;
+        while(value.EndsWith("[]",StringComparison.Ordinal)){dimensions++;value=SourceText.Strip(value[..^2]);}
         var prefix=new string('[',dimensions);
         if(Primitives.TryGetValue(value,out var primitive))return value=="void" && dimensions>0 ? null : prefix+primitive;
         var depth=0;var outer=new StringBuilder();
@@ -44,7 +50,7 @@ public sealed class JvmSourceLinker : IJvmSourceLinker
             else if(depth==0)outer.Append(item);
         }
         if(depth!=0)return null;
-        return owners.TryGetValue(outer.ToString().Trim(),out var binary) && !string.IsNullOrEmpty(binary) ? prefix+"L"+binary+";" : null;
+        return owners.TryGetValue(SourceText.Strip(outer.ToString()),out var binary) && !string.IsNullOrEmpty(binary) ? prefix+"L"+binary+";" : null;
     }
     public string? Key(JsonObject declaration,IReadOnlyDictionary<string,string> owners)
     {

@@ -1,0 +1,15 @@
+# Root-owned Build/registry integration delta
+
+`Build.SourcesSnapshot.cs.proposed` is a thin consumer of the existing source context and recipe reader. It is intentionally outside the compiled private application because Root owns Build and registry. Publication supplies IRehydrationSnapshotPlanner on the existing RehydrationPlanner.
+
+Add singular `Operation.Snapshot`, `OperationExecutor.SourcesSnapshot`, registry definition `Sources/Snapshot` and the matching dispatch branch. Required parameters: project-root, source-manifest, recipe-lock, output-root. Optional: generation, release, snapshot-mode, download, bundle-root, acquisition-profile. Do not admit `limit`: the old snapshot callers process their complete downloaded/first-Git selection, and the service rejects a hidden limit. Root owns CLI mock-first/native verification.
+
+Refactor the one existing `CreateSourceBatchContext` helper rather than duplicating it. Give it an optional `SnapshotCallerMode? snapshotMode=null`, add its already-created destination FileArtifactStore to the named return tuple as RawStore, and preserve existing Fetch/Seed behavior. Allow an absent BundleRoot only in snapshot mode. For absent bundle composition, use a read-only missing-bundle store whose ReadAsync throws FileNotFoundException and whose WriteAsync fails. It must never map an absent explicit bundle to an unrelated filesystem directory. Shared SourceBatch preflight then refuses any missing immutable snapshot without HTTP fallback.
+
+Compose Snapshot Fetch with `SnapshotFetchTransport(HttpByteTransport.Create())` and SourceBatch `fetchDelaySeconds=1`; compose Restore with the existing canonical transport and no extra post-source delay. Other callers retain their existing fetchDelaySeconds/profile configuration. No retry/status/body/range implementation moves out of HttpByteTransport.
+
+Context construction must perform no filesystem writes, HTTP calls or lease acquisition. Existing FileArtifactStore and FileArtifactLeaseProvider constructors are inert; the service calls its batch factory only for explicit download with missing groups. Apply the existing shared input/output/bundle path and symlink admission. Preserve the output root on failed admission or source verification.
+
+Restore dry-run returns0. Original Fetch dry-run returns1 even when missing count is0. The proposed Build method prints the detached result before using Nuke ControlFlow.Fail to preserve this exit behavior. If Root already has a shared operation-exit abstraction, use that single mechanism instead. Do not merely set Environment.ExitCode if Main subsequently returns Nuke's own zero exit code.
+
+Tests should invoke the actual singular registry CLI in paths containing spaces: default Restore no-network/no-new-output, Fetch dry-run1, first-downloaded/Git winner, corrupt Restore retention, existing Fetch bypass, explicit raw fixture download, mixed-transport Fetch rejection, and no final seal after transfer failure. Sources/Plan is not a replacement for these checks because Plan does not inspect retained existing blobs.

@@ -8,7 +8,8 @@ public sealed record CatalogHidlImportReply(string Outcome,bool FinalDatabase=tr
     string? PermissionOp=null,string? CodecStatus=null,bool? ContainsPoint=null,bool? EveryAvailabilityUnknown=null,
     int? QueriedIssueRows=null,string? SqlRawText=null,string? DecodedRawHex=null,string? FlatRawEncoding=null,
     bool? AtLeastTwoDeclarations=null,bool? FlatNormalizerComplete=null,bool? FlatCompilerValidation=null,
-    string? FlatWireResolution=null,string? FlatAndroidAvailability=null,string? ErrorContains=null,bool OriginalInputsRetained=true);
+    string? FlatWireResolution=null,string? FlatAndroidAvailability=null,string? ErrorContains=null,bool OriginalInputsRetained=true,
+    string? FixtureUrl=null,string? FixtureChannel=null,int FixtureSourceCount=4,bool ReleaseContextRetained=true);
 public sealed record CatalogHidlImportCase(string Id,string LegacyMethod,CatalogHidlImportCall Call,CatalogHidlImportReply Expected);
 public interface ICatalogHidlImportCaseProvider { Task<CatalogHidlImportReply> ImportAsync(CatalogHidlImportCall call); }
 public static class CatalogHidlImportCases
@@ -39,7 +40,9 @@ public static class CatalogHidlImportCases
         new CatalogHidlImportCase("RAW-RETAIN-02-native-bytes-lossless", "test_non_utf8_native_evidence_is_lossless",
             new("retained-native",[114,97,119,255,98,105,110,100,101,114],"aosp-native-binder-search-candidate-evidence","raw-schema",null,RetentionSql),
             new("ok",QueriedIssueRows:1,DecodedRawHex:"726177ff62696e646572",FlatRawEncoding:"base64"))
-    }.Select(test=>new object[]{test});
+    }.Select(test=>new object[]{test with{Expected=test.Expected with{
+        FixtureUrl="https://android.googlesource.com/mock/"+(test.Call.Path=="IFoo.hal"?"IFoo.aidl":"api.txt"),
+        FixtureChannel=test.Call.Path=="IFoo.hal"?"unknown":"stable"}}});
     public static async Task AssertCase(CatalogHidlImportCase test,ICatalogHidlImportCaseProvider provider)
     {
         var original=test.Call.Raw.ToArray();Assert.Equal(test.Expected,await provider.ImportAsync(test.Call));Assert.Equal(original,test.Call.Raw);
@@ -60,7 +63,8 @@ public sealed class ScriptedCatalogHidlImport(CatalogHidlImportCase test,int wro
             11=>value with{FlatRawEncoding="wrong"},12=>value with{AtLeastTwoDeclarations=Flip(value.AtLeastTwoDeclarations)},
             13=>value with{FlatNormalizerComplete=Flip(value.FlatNormalizerComplete)},14=>value with{FlatCompilerValidation=Flip(value.FlatCompilerValidation)},
             15=>value with{FlatWireResolution="proven"},16=>value with{FlatAndroidAvailability="available"},17=>value with{ErrorContains="wrong"},
-            18=>value with{OriginalInputsRetained=!value.OriginalInputsRetained},_=>value
+            18=>value with{OriginalInputsRetained=!value.OriginalInputsRetained},19=>value with{FixtureUrl="https://wrong/mock/IFoo.hal"},
+            20=>value with{FixtureChannel="wrong"},21=>value with{FixtureSourceCount=3},22=>value with{ReleaseContextRetained=false},_=>value
         });
     }
 }
@@ -73,5 +77,5 @@ public sealed class CatalogHidlImportMockTests
     public Task ExactOriginalSqlAndPublicReportAssertionsPass(CatalogHidlImportCase test)=>CatalogHidlImportCases.AssertCase(test,new ScriptedCatalogHidlImport(test));
     [Theory,MemberData(nameof(CatalogHidlImportCases.All),MemberType=typeof(CatalogHidlImportCases))]
     public async Task EverySqlReportRawEncodingIdentityAndInferenceMutationRejected(CatalogHidlImportCase test)
-    {for(var wrong=0;wrong<19;wrong++)Assert.NotNull(await Record.ExceptionAsync(()=>CatalogHidlImportCases.AssertCase(test,new ScriptedCatalogHidlImport(test,wrong))));}
+    {for(var wrong=0;wrong<23;wrong++)Assert.NotNull(await Record.ExceptionAsync(()=>CatalogHidlImportCases.AssertCase(test,new ScriptedCatalogHidlImport(test,wrong))));}
 }

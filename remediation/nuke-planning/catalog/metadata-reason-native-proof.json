@@ -1,0 +1,65 @@
+{
+  "localTimestamp": "2026-10-28T21:56:21",
+  "scope": "Original source_metadata_store.py:_append whitespace-only reason admission; not whole MetadataCatalog producer closure",
+  "sourceDelta": {
+    "path": "remediation/nuke-app/Modules/Catalog/MetadataCatalog.cs",
+    "priorSha256": "f25d8646f59d1799c52fac941a2f9cdf8cf13e23ef627e46773928eb655c1521",
+    "currentSha256": "d29176860feb266dd95da1992c863f12226e89839fc6571f7ee0b2fc5bdf5876",
+    "retainedPrior": "remediation/integration/nuke-migration-checkpoint-015/files/remediation/nuke-app/Modules/Catalog/MetadataCatalog.cs",
+    "exactTransformationVerified": true
+  },
+  "mock": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T2143472457327-30aed7fa4a6b423794dae7e7d98c88b8/tests.trx",
+    "sha256": "ff468e2762b294f579d4d5bb3a8b15e6f6e8e1cc93768b193f6c353ecad075a6",
+    "total": 107,
+    "ownPassed": 24,
+    "failed": 0,
+    "skipped": 0
+  },
+  "native": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T2151581680131-5cd2386b9c9e4f129af86ce9bbee6901/tests.trx",
+    "sha256": "d987725e3eb73d2e45679c9ac78675954a61894853d6f8d7134797d284edfb49",
+    "total": 205,
+    "ownPassed": 12,
+    "failed": 0,
+    "skipped": 0,
+    "exactClassCounts": {
+      "CatalogMetadataLeafRealTests": 19,
+      "MetadataReasonWhitespaceRealTests": 12,
+      "CatalogAggregateMetadataRealTests": 17,
+      "MetadataCrudRealTests": 13
+    }
+  },
+  "sourcePins": [
+    {
+      "path": "remediation/nuke-app/Tests/Catalog/MetadataReasonWhitespaceMockTests.cs",
+      "sha256": "7c683cbf758614d20581c2cb16ae3eddce55d562c809f2661278eb701545cb94"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Catalog/MetadataReasonWhitespaceRealTests.cs",
+      "sha256": "c507b86a9e468d008820a6148ecbbdd0f63054a318bbabcd7a2af26ca918cb96"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Catalog/MetadataCrudCases.cs",
+      "sha256": "319b7c509ed75813a86ac748b8e2fc8c18c5721c7ef852267abc32b101730a42"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Catalog/MetadataCrudRealTests.cs",
+      "sha256": "70e20eafd260e418da4a0257d9b4914e45693ccc71a115271132be0e8c648b17"
+    }
+  ],
+  "preserved": [
+    "Existing Create/Put/Delete/Import paths still converge on the sole Append authority.",
+    "Accepted reason text is stored untrimmed.",
+    "Rejected reasons leave no revision/resource or generation change.",
+    "Existing source assertions, database/schema/JSON/hash services and owner/CAS checks unchanged."
+  ],
+  "references": [
+    "https://raw.githubusercontent.com/python/cpython/v3.13.0/Objects/unicodetype_db.h",
+    "https://learn.microsoft.com/en-us/dotnet/api/system.char.iswhitespace"
+  ],
+  "fullCurrentSuitePending": true,
+  "wholeProducerClosed": false,
+  "hv": false,
+  "safeToDeleteOriginal": false
+}

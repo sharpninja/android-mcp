@@ -112,9 +112,13 @@ public sealed class SourceBatch(IByteTransport transport,IArtifactStore store,IA
             Add(outputs,await WriteMissing(copy,cancellationToken));
         var recording=new RecordingStore(store,outputs);
         var sources=new List<SourceBatchSource>();
+        // One operation-local archive session matches restore's once-per-version
+        // metadata/open-ZIP reuse without introducing a second acquisition engine.
+        using var archives=new SourceArchiveAcquirer(transport,recording,true);
+        var acquirer=new SourceAcquirer(transport,recording,archives);
         foreach(var item in selected)
         {
-            var acquired=await new SourceAcquirer(transport,recording).AcquireAsync(item.Pin,cancellationToken);
+            var acquired=await acquirer.AcquireAsync(item.Pin,cancellationToken);
             Add(outputs,acquired.Artifact);sources.Add(new(item.PhysicalSourceIndex,acquired));
             if(acquired.Status=="downloaded"&&pause>TimeSpan.Zero)
                 await WaitAfterDownload(pause,cancellationToken);

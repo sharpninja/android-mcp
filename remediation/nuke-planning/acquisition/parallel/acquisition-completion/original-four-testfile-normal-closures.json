@@ -1,0 +1,347 @@
+{
+  "schemaVersion": "1.0.0",
+  "at": "2026-10-28T23:55:24",
+  "owner": "Acquisition",
+  "proposalOnly": true,
+  "authoritative": false,
+  "pythonExecuted": false,
+  "nodeExecuted": false,
+  "hvAcceptance": "Deferred by user until Ready; normal test-file evidence only",
+  "rootProof": {
+    "path": "remediation/nuke-planning/review/integrated-parallel-016-normal-proof.json",
+    "sha256": "14f5323c11f38057968e4e28c0fa8d9a7702a9b92ec5bfb6e5b7e57bae49fc4f",
+    "bytes": 15307
+  },
+  "proof": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+    "sha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+    "globalCounters": {
+      "total": 67272,
+      "passed": 67272,
+      "failed": 0,
+      "skipped": 0
+    },
+    "ownNativeCounts": {
+      "LegacyAcquisitionRealTests": 7
+    },
+    "ownFailed": 0,
+    "ownSkipped": 0,
+    "exactNativeTests": [
+      {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.LegacyAcquisitionRealTests.SameOriginalFixturesAndAssertions(test: LegacyAcquisitionCase { Id = cached-source-zip, ErrorType = , ErrorCode = , Files = System.Collections.Generic.Dictionary`2[System.String,System.Byte[]] })",
+        "outcome": "Passed",
+        "testId": "54a1666b-18c8-c4d4-5c2d-97ea502b6a3b",
+        "executionId": "ed3f1688-b12d-4dc6-9fcd-0550daf659a9"
+      },
+      {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.LegacyAcquisitionRealTests.SameOriginalFixturesAndAssertions(test: LegacyAcquisitionCase { Id = snapshot-escape, ErrorType = ArgumentException, ErrorCode = , Files = System.Collections.Generic.Dictionary`2[System.String,System.Byte[]] })",
+        "outcome": "Passed",
+        "testId": "54a1666b-18c8-c4d4-5c2d-97ea502b6a3b",
+        "executionId": "0cbfbcb8-6df1-431b-9ca1-7f23e7dec44d"
+      },
+      {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.LegacyAcquisitionRealTests.SameOriginalFixturesAndAssertions(test: LegacyAcquisitionCase { Id = missing-snapshot-no-fallback, ErrorType = FileNotFoundException, ErrorCode = , Files = System.Collections.Generic.Dictionary`2[System.String,System.Byte[]] })",
+        "outcome": "Passed",
+        "testId": "54a1666b-18c8-c4d4-5c2d-97ea502b6a3b",
+        "executionId": "d9fbf709-4d7c-48a1-b6dc-a0f031d1e540"
+      },
+      {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.LegacyAcquisitionRealTests.SameOriginalFixturesAndAssertions(test: LegacyAcquisitionCase { Id = tampered-source-zip-retained, ErrorType = TransportException, ErrorCode = ARCHIVE_HASH, Files = System.Collections.Generic.Dictionary`2[System.String,System.Byte[]] })",
+        "outcome": "Passed",
+        "testId": "54a1666b-18c8-c4d4-5c2d-97ea502b6a3b",
+        "executionId": "1d934443-4524-416b-a483-288c3a0d5b24"
+      },
+      {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.LegacyAcquisitionRealTests.SameOriginalFixturesAndAssertions(test: LegacyAcquisitionCase { Id = changed-snapshot-retained, ErrorType = TransportException, ErrorCode = SOURCE_HASH, Files = System.Collections.Generic.Dictionary`2[System.String,System.Byte[]] })",
+        "outcome": "Passed",
+        "testId": "54a1666b-18c8-c4d4-5c2d-97ea502b6a3b",
+        "executionId": "d2aaeb46-db40-4510-a072-1b505eb80107"
+      },
+      {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.LegacyAcquisitionRealTests.SameOriginalFixturesAndAssertions(test: LegacyAcquisitionCase { Id = metadata-original-literals, ErrorType = , ErrorCode = , Files = System.Collections.Generic.Dictionary`2[System.String,System.Byte[]] })",
+        "outcome": "Passed",
+        "testId": "54a1666b-18c8-c4d4-5c2d-97ea502b6a3b",
+        "executionId": "0b4b79fb-144d-4cbc-a2aa-11b239c9c58f"
+      },
+      {
+        "name": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.LegacyAcquisitionRealTests.SameOriginalFixturesAndAssertions(test: LegacyAcquisitionCase { Id = exact-snapshot-no-network, ErrorType = , ErrorCode = , Files = System.Collections.Generic.Dictionary`2[System.String,System.Byte[]] })",
+        "outcome": "Passed",
+        "testId": "54a1666b-18c8-c4d4-5c2d-97ea502b6a3b",
+        "executionId": "2c7fa56e-9c9f-46ef-ba51-58ac2a5b8683"
+      }
+    ]
+  },
+  "nativeSourcePins": [
+    {
+      "path": "remediation/nuke-app/Tests/Sources/Acquisition/LegacyAcquisitionContractTests.cs",
+      "sha256": "dd5ab06ee9e89033584e040f6bb10c6d796d6e9c0090c4798db61124305fd60c",
+      "bytes": 5635
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/Acquisition/LegacyAcquisitionRealTests.cs",
+      "sha256": "d5a28a4762b65c286c92162e9a5339ebc9b897807144e8f2bef2a7c57376f5cf",
+      "bytes": 3903
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/Acquisition/ArchiveContractTests.cs",
+      "sha256": "ed1e10992047000068a426e3bf3c92c570c0dbec82c773d4e8b99419133c388e",
+      "bytes": 4132
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/Acquisition/AcquisitionRealTests.cs",
+      "sha256": "3d5033096241871d9adbc45346a3580331adbcd665dff50a20e1da88f215dbaa",
+      "bytes": 1764
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Sources/Acquisition/SourceAcquirer.cs",
+      "sha256": "ab106ec0036faef1c5c118bfe7e731cf0355adcd60f18aaf502950b460f2bdfc",
+      "bytes": 4117
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Sources/Acquisition/SourceArchiveAcquirer.cs",
+      "sha256": "0b99e87f00ac7a7f6b6cc364567e36cc225db5558513bb38492df8f695e51e35",
+      "bytes": 7934
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Sources/Acquisition/MetadataArchiveReader.cs",
+      "sha256": "af13b8786ebb92f42297922bb3224fd602d96c113f86df5e6aea75712967ad0e",
+      "bytes": 3976
+    },
+    {
+      "path": "remediation/nuke-app/Core/ContentHash.cs",
+      "sha256": "06b7f908c78d70c2c7295d84f1384b7be503c0faa96c7afb32a36b31f3fc31c6",
+      "bytes": 1105
+    },
+    {
+      "path": "remediation/nuke-app/Core/ArtifactPaths.cs",
+      "sha256": "2ae975707e053fb539041c465973b60c0f5c448bc318f5a5423ec0369e5ae334",
+      "bytes": 2130
+    }
+  ],
+  "entries": [
+    {
+      "legacyPath": "remediation/catalog/tests/test_bundled_http_snapshot.py",
+      "legacySha256": "4b008c2d46b2f5d26e95812cac5a0bd6f5ea56260388e3cd5276d813098e1e81",
+      "owner": "Acquisition",
+      "category": "Sources",
+      "operation": "Fetch",
+      "normal_verified": true,
+      "normal_verification_scope": "Complete original test-file inputs/assertions and fixture/helper responsibilities through SAME native legacy7 harness. No producer-file, CLI/corpus, byte-identity, removal or HV closure.",
+      "nativeService": "SourceAcquirer / SourceArchiveAcquirer / MetadataArchiveReader / ArtifactPaths",
+      "nativeTest": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.LegacyAcquisitionRealTests.SameOriginalFixturesAndAssertions",
+      "normal_verified_methods": [
+        {
+          "legacy_method": "fixture",
+          "native_case_ids": [
+            "exact-snapshot-no-network",
+            "missing-snapshot-no-fallback",
+            "changed-snapshot-retained",
+            "snapshot-escape"
+          ],
+          "assertion_equivalence": "Same exact old HTTP response bytes and independently fixed SHA256/Git-blob framing; setup dependency of all four original assertions.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_exact_snapshot_no_network",
+          "native_case_ids": [
+            "exact-snapshot-no-network"
+          ],
+          "assertion_equivalence": "Exact original bytes restored from reference.html; forbidden transport, no fallback or original modification.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_missing_snapshot_fails_without_mutable_url_fetch",
+          "native_case_ids": [
+            "missing-snapshot-no-fallback"
+          ],
+          "assertion_equivalence": "Missing immutable source raises FileNotFoundException through native store seam, zero network and zero writes.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_changed_bytes_rejected",
+          "native_case_ids": [
+            "changed-snapshot-retained"
+          ],
+          "assertion_equivalence": "Original new version bytes reject SOURCE_HASH, remain retained, and cause zero network/output writes.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_escape_rejected",
+          "native_case_ids": [
+            "snapshot-escape"
+          ],
+          "assertion_equivalence": "Original ../elsewhere snapshot path rejects ArgumentException through shared ArtifactPaths before reading/writing/network.",
+          "status": "normal-native-verified"
+        }
+      ],
+      "required_fixture_helper_responsibilities": [
+        "fixture exact bytes/hash/Git pin",
+        "NativeLegacyAcquisitionProbe setup and forbidden transport",
+        "original bytes retained",
+        "xUnit MemberData discovers every original literal case"
+      ],
+      "pending_methods": [],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false,
+      "decommissionable_from_pr": true,
+      "decommissionable_scope": "Only the original test-file role after Root merges this normal evidence; originals retained and production/CLI obligations remain separate.",
+      "frozenProfileNote": "Both published current and release011 original bodies were read separately. Matching hash does not establish caller parity; closure is limited to these exact original test assertions."
+    },
+    {
+      "legacyPath": "remediation/catalog/tests/test_sdk_zip_metadata.py",
+      "legacySha256": "1391e23478beb75566be938d06ab567322970cf2767127bbb698a60e2a0383d7",
+      "owner": "Acquisition",
+      "category": "Sources",
+      "operation": "Fetch",
+      "normal_verified": true,
+      "normal_verification_scope": "Complete original test-file inputs/assertions and fixture/helper responsibilities through SAME native legacy7 harness. No producer-file, CLI/corpus, byte-identity, removal or HV closure.",
+      "nativeService": "SourceAcquirer / SourceArchiveAcquirer / MetadataArchiveReader / ArtifactPaths",
+      "nativeTest": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.LegacyAcquisitionRealTests.SameOriginalFixturesAndAssertions",
+      "normal_verified_methods": [
+        {
+          "legacy_method": "test_only_selected_metadata_payload_is_read",
+          "native_case_ids": [
+            "metadata-original-literals"
+          ],
+          "assertion_equivalence": "Same XML version3, API37/Minor2 properties and UNSELECTED_BINARY x10000 payload; selected XML exact, android.jar absent, sum of actual range reads strictly below10000. Native additionally retains full entry inventory and selected properties bytes.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "get",
+          "native_case_ids": [
+            "metadata-original-literals"
+          ],
+          "assertion_equivalence": "Original nested range callback maps to FixtureRangeSource.Read: records each offset/count and returns the exact requested immutable byte slice; same aggregate bound assertion.",
+          "status": "normal-native-verified"
+        }
+      ],
+      "required_fixture_helper_responsibilities": [
+        "LegacyAcquisitionCases.Zip(true) retains original3entry payload literals",
+        "FixtureRangeSource offset/count/slice callback",
+        "complete selected member and range bound assertions",
+        "xUnit MemberData discovers metadata-original-literals"
+      ],
+      "pending_methods": [],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false,
+      "decommissionable_from_pr": true,
+      "decommissionable_scope": "Only the original test-file role after Root merges this normal evidence; originals retained and production/CLI obligations remain separate.",
+      "frozenProfileNote": "Both published current and release011 original bodies were read separately. Matching hash does not establish caller parity; closure is limited to these exact original test assertions."
+    },
+    {
+      "legacyPath": "rehydration/producers/release-011/tests/test_bundled_http_snapshot.py",
+      "legacySha256": "4b008c2d46b2f5d26e95812cac5a0bd6f5ea56260388e3cd5276d813098e1e81",
+      "owner": "Acquisition",
+      "category": "Sources",
+      "operation": "Fetch",
+      "normal_verified": true,
+      "normal_verification_scope": "Complete original test-file inputs/assertions and fixture/helper responsibilities through SAME native legacy7 harness. No producer-file, CLI/corpus, byte-identity, removal or HV closure.",
+      "nativeService": "SourceAcquirer / SourceArchiveAcquirer / MetadataArchiveReader / ArtifactPaths",
+      "nativeTest": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.LegacyAcquisitionRealTests.SameOriginalFixturesAndAssertions",
+      "normal_verified_methods": [
+        {
+          "legacy_method": "fixture",
+          "native_case_ids": [
+            "exact-snapshot-no-network",
+            "missing-snapshot-no-fallback",
+            "changed-snapshot-retained",
+            "snapshot-escape"
+          ],
+          "assertion_equivalence": "Same exact old HTTP response bytes and independently fixed SHA256/Git-blob framing; setup dependency of all four original assertions.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_exact_snapshot_no_network",
+          "native_case_ids": [
+            "exact-snapshot-no-network"
+          ],
+          "assertion_equivalence": "Exact original bytes restored from reference.html; forbidden transport, no fallback or original modification.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_missing_snapshot_fails_without_mutable_url_fetch",
+          "native_case_ids": [
+            "missing-snapshot-no-fallback"
+          ],
+          "assertion_equivalence": "Missing immutable source raises FileNotFoundException through native store seam, zero network and zero writes.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_changed_bytes_rejected",
+          "native_case_ids": [
+            "changed-snapshot-retained"
+          ],
+          "assertion_equivalence": "Original new version bytes reject SOURCE_HASH, remain retained, and cause zero network/output writes.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_escape_rejected",
+          "native_case_ids": [
+            "snapshot-escape"
+          ],
+          "assertion_equivalence": "Original ../elsewhere snapshot path rejects ArgumentException through shared ArtifactPaths before reading/writing/network.",
+          "status": "normal-native-verified"
+        }
+      ],
+      "required_fixture_helper_responsibilities": [
+        "fixture exact bytes/hash/Git pin",
+        "NativeLegacyAcquisitionProbe setup and forbidden transport",
+        "original bytes retained",
+        "xUnit MemberData discovers every original literal case"
+      ],
+      "pending_methods": [],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false,
+      "decommissionable_from_pr": true,
+      "decommissionable_scope": "Only the original test-file role after Root merges this normal evidence; originals retained and production/CLI obligations remain separate.",
+      "frozenProfileNote": "Both published current and release011 original bodies were read separately. Matching hash does not establish caller parity; closure is limited to these exact original test assertions."
+    },
+    {
+      "legacyPath": "rehydration/producers/release-011/tests/test_sdk_zip_metadata.py",
+      "legacySha256": "1391e23478beb75566be938d06ab567322970cf2767127bbb698a60e2a0383d7",
+      "owner": "Acquisition",
+      "category": "Sources",
+      "operation": "Fetch",
+      "normal_verified": true,
+      "normal_verification_scope": "Complete original test-file inputs/assertions and fixture/helper responsibilities through SAME native legacy7 harness. No producer-file, CLI/corpus, byte-identity, removal or HV closure.",
+      "nativeService": "SourceAcquirer / SourceArchiveAcquirer / MetadataArchiveReader / ArtifactPaths",
+      "nativeTest": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.LegacyAcquisitionRealTests.SameOriginalFixturesAndAssertions",
+      "normal_verified_methods": [
+        {
+          "legacy_method": "test_only_selected_metadata_payload_is_read",
+          "native_case_ids": [
+            "metadata-original-literals"
+          ],
+          "assertion_equivalence": "Same XML version3, API37/Minor2 properties and UNSELECTED_BINARY x10000 payload; selected XML exact, android.jar absent, sum of actual range reads strictly below10000. Native additionally retains full entry inventory and selected properties bytes.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "get",
+          "native_case_ids": [
+            "metadata-original-literals"
+          ],
+          "assertion_equivalence": "Original nested range callback maps to FixtureRangeSource.Read: records each offset/count and returns the exact requested immutable byte slice; same aggregate bound assertion.",
+          "status": "normal-native-verified"
+        }
+      ],
+      "required_fixture_helper_responsibilities": [
+        "LegacyAcquisitionCases.Zip(true) retains original3entry payload literals",
+        "FixtureRangeSource offset/count/slice callback",
+        "complete selected member and range bound assertions",
+        "xUnit MemberData discovers metadata-original-literals"
+      ],
+      "pending_methods": [],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false,
+      "decommissionable_from_pr": true,
+      "decommissionable_scope": "Only the original test-file role after Root merges this normal evidence; originals retained and production/CLI obligations remain separate.",
+      "frozenProfileNote": "Both published current and release011 original bodies were read separately. Matching hash does not establish caller parity; closure is limited to these exact original test assertions."
+    }
+  ],
+  "wholeProducerClosures": 0,
+  "originalsRetained": true
+}

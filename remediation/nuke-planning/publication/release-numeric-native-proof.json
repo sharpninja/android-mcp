@@ -1,0 +1,58 @@
+{
+  "localTimestamp": "2026-10-28T22:44:28",
+  "scope": "Original release manifest numeric comparison compatibility, not complete codec producer or upload",
+  "gates": [
+    {
+      "stage": "mock-before-numeric-correction",
+      "trx": "remediation/nuke-app/artifacts/tests/20261028T2143472457327-30aed7fa4a6b423794dae7e7d98c88b8/tests.trx",
+      "sha256": "ff468e2762b294f579d4d5bb3a8b15e6f6e8e1cc93768b193f6c353ecad075a6",
+      "total": 107,
+      "failed": 0,
+      "skipped": 0,
+      "classes": {
+        "ReleaseManifestNumericMockTests": 18
+      }
+    },
+    {
+      "stage": "same-numeric-cases-and-codec-regressions",
+      "trx": "remediation/nuke-app/artifacts/tests/20261028T2158387052610-719ad065732646b5bcf378e5c252a0df/tests.trx",
+      "sha256": "6a8bc5602886654e2a4c9dd79492f3c67551c8206c902a3938d91706a3a8d643",
+      "total": 122,
+      "failed": 0,
+      "skipped": 0,
+      "classes": {
+        "ReleaseCodecCliRealTests": 3,
+        "ReleaseCodecPlannerMockTests": 36,
+        "ReleaseManifestNumericRealTests": 9,
+        "ReleaseCodecMockTests": 24,
+        "ReleaseManifestNumericMockTests": 18,
+        "ReleaseCodecPlannerRealTests": 20,
+        "ReleaseCodecRealTests": 12
+      }
+    }
+  ],
+  "sourcePins": [
+    {
+      "path": "remediation/nuke-app/Modules/Publication/ReleasePartsCodec.cs",
+      "sha256": "cb95353ff5bb69436e897350eab4a9aad16496700b82d797fb5b28d49a04a372"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Publication/ReleaseManifestNumericRealTests.cs",
+      "sha256": "df87db3c672c687811df319fecae6fba1bba40d4362968cb2ca2bfa9cac059d5"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Publication/ReleaseManifestNumericMockTests.cs",
+      "sha256": "bea4fa78def9fda34923967bff9e561a1cd0d8dcf5af7a33848087d0b4c49b2c"
+    }
+  ],
+  "semantics": [
+    "Part true/false retain original one/zero equality; floating part identifiers remain rejected.",
+    "Whole-size boolean and admitted integral binary64 comparisons retain original behavior below the existing maximum size.",
+    "Existing StrictJsonInspector and codec authority remain shared; global JSON rules are unchanged.",
+    "Nine cases prove the exact dependency boundary; twelve original codec and three actual CLI cases separately retain regression proof."
+  ],
+  "fullCurrentSuitePending": true,
+  "wholeProducerClosed": false,
+  "safeToDeleteOriginal": false,
+  "hv": false
+}

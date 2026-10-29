@@ -1,0 +1,79 @@
+{
+  "at": "2026-10-28T23:13:56",
+  "workspace": "/home/sharpninja/github/2026-10-26/task-3",
+  "originalPath": "/home/sharpninja/github/2026-10-26/task-3/remediation/hv_invariants.py",
+  "originalSha256": "e5e8d3dded7a49a1aa3d2341dd2a6869c79cf09e11bd7ea54cd25c09631f0fd5",
+  "originalFunction": "coverage_signature",
+  "originalLines": [
+    69,
+    70,
+    71
+  ],
+  "originalBody": "def coverage_signature(units):\n    \"\"\"A one-file context split is still a partial range, even with the same key.\"\"\"\n    return {(u.get('key'),u.get('start',0),u.get('end',len(u['text'])),hashlib.sha256(u['text'].encode()).hexdigest()) for u in units}",
+  "nativeApi": "ReviewLaunchService.CoverageSignature",
+  "normalNativeFunctionVerified": true,
+  "scope": "One applicable reusable function. Canonical published_tracked=false. Published closure count increases by0. No whole-module/historical caller/live runtime closure.",
+  "normalMockCases": 16,
+  "expectedIndividualNegativeControls": 108,
+  "sameNativeCases": 16,
+  "additionalExistingLaunchSafetyCases": 12,
+  "mock": {
+    "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/review/nuke-app/artifacts/tests/20261028T2308553658598-7539ad219f8f4121926094803e7698bd/tests.trx",
+    "sha256": "56b253e3ab85f152177ea0ea380a1dd9496953b978efc6801092cbe133fc8619",
+    "bytes": 26392,
+    "total": 16,
+    "passed": 16,
+    "failed": 0,
+    "skipped": 0
+  },
+  "native": {
+    "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/review/nuke-app/artifacts/tests/20261028T2310380747658-2fbf407aa2c04bc6b31146e685a6412e/tests.trx",
+    "sha256": "a833b645c53a1628319552e2685bfcf01aad7e4749055441b257cc515188641c",
+    "bytes": 70962,
+    "total": 44,
+    "passed": 44,
+    "failed": 0,
+    "skipped": 0
+  },
+  "handoff": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/review/parallel/review-completion/coverage16-native-source/handoff.json",
+  "handoffSha256": "684b522be0c281841a970ef025c210e44702391a8e6e0566cddba195affdbf35",
+  "changes": [
+    {
+      "path": "Modules/Review/ReviewLaunch.cs",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/review/parallel/review-completion/coverage16-native-source/files/Modules/Review/ReviewLaunch.cs",
+      "canonicalTarget": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Review/ReviewLaunch.cs",
+      "priorSource": "/home/sharpninja/github/2026-10-26/task-3/remediation/integration/nuke-migration-checkpoint-015/files/remediation/nuke-app/Modules/Review/ReviewLaunch.cs",
+      "priorSha256": "6a6610827dd4ca8cb8f067f540531fe944b1b41fb3eae8a382c7bf441d3d1755",
+      "sha256": "0eb27b9092e3ddc1c9cbbaba2b162b72951eba57c6f5c584ebdd241e78514cba",
+      "size": 23756
+    },
+    {
+      "path": "Tests/Review/ReviewCoverageSignatureCases.cs",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/review/parallel/review-completion/coverage16-native-source/files/Tests/Review/ReviewCoverageSignatureCases.cs",
+      "canonicalTarget": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Review/ReviewCoverageSignatureCases.cs",
+      "priorSource": "/home/sharpninja/github/2026-10-26/task-3/remediation/integration/nuke-migration-checkpoint-015/files/remediation/nuke-app/Tests/Review/ReviewCoverageSignatureCases.cs",
+      "priorSha256": null,
+      "sha256": "85c5136a6941bc75c6410cb0eda2a597769174799ff0c40991d31b5ec77c5380",
+      "size": 6546
+    },
+    {
+      "path": "Tests/Review/ReviewCoverageSignatureNativeTests.cs",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/review/parallel/review-completion/coverage16-native-source/files/Tests/Review/ReviewCoverageSignatureNativeTests.cs",
+      "canonicalTarget": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Review/ReviewCoverageSignatureNativeTests.cs",
+      "priorSource": "/home/sharpninja/github/2026-10-26/task-3/remediation/integration/nuke-migration-checkpoint-015/files/remediation/nuke-app/Tests/Review/ReviewCoverageSignatureNativeTests.cs",
+      "priorSha256": null,
+      "sha256": "5c3736b5970a4db6b09e83381594319956d96d96f6331e0ba3daa0bf590f85d8",
+      "size": 1871
+    }
+  ],
+  "correctedPrepareCallerUnchanged": true,
+  "originalsRetained": true,
+  "pythonExecuted": false,
+  "providerOrHvExecuted": false,
+  "remaining": "Historical wrappers/collector layouts and structured finding ledger remain explicitly mapped, not completed. Root owns category/provenance binding; live exact model/effort/own-turn capability deferred until Ready.",
+  "functionMap": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/review/parallel/review-completion/REUSABLE-FUNCTION-MAP.md",
+  "authorityDependencies": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/review/parallel/review-completion/LIVE-AUTHORITY-DEPENDENCIES.md",
+  "safeToDelete": false,
+  "acceptedComplete": false,
+  "mcp": "Unavailable; no denied retry or audit substitution."
+}

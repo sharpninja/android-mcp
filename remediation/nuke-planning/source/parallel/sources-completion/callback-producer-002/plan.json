@@ -1,0 +1,131 @@
+{
+  "At": "2026-10-28T23:07:46",
+  "RequirementIds": [
+    "FR-BUILD-004",
+    "TEST-BUILD-004"
+  ],
+  "Owner": "Sources",
+  "Originals": [
+    {
+      "LegacyPath": "remediation/catalog/tooling/callback_source_facts.py",
+      "RetainedPath": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tooling/callback_source_facts.py",
+      "Sha256": "1ed4e0dfca74b9e501527f059034c51a74e966d12bb7ca67fb85169030f082df",
+      "Size": 5063,
+      "Functions": [
+        {
+          "Line": 4,
+          "Signature": "def named(value):return isinstance(value,str) and NAME.search(value) is not None"
+        },
+        {
+          "Line": 5,
+          "Signature": "def type_candidate(doc):"
+        },
+        {
+          "Line": 14,
+          "Signature": "def endpoint_method(doc,owner_doc=None):"
+        },
+        {
+          "Line": 26,
+          "Signature": "def registration_candidates(doc,resolved_types):"
+        },
+        {
+          "Line": 46,
+          "Signature": "def possible_pairs(rows):"
+        }
+      ]
+    },
+    {
+      "LegacyPath": "tools/source_facts/callback_source_facts.py",
+      "RetainedPath": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/callback_source_facts.py",
+      "Sha256": "1ed4e0dfca74b9e501527f059034c51a74e966d12bb7ca67fb85169030f082df",
+      "Size": 5063,
+      "Functions": [
+        {
+          "Line": 4,
+          "Signature": "def named(value):return isinstance(value,str) and NAME.search(value) is not None"
+        },
+        {
+          "Line": 5,
+          "Signature": "def type_candidate(doc):"
+        },
+        {
+          "Line": 14,
+          "Signature": "def endpoint_method(doc,owner_doc=None):"
+        },
+        {
+          "Line": 26,
+          "Signature": "def registration_candidates(doc,resolved_types):"
+        },
+        {
+          "Line": 46,
+          "Signature": "def possible_pairs(rows):"
+        }
+      ]
+    }
+  ],
+  "PriorProducer": {
+    "Sha256": "d450a5f54169393b1b4639a8efbd1caabc6e82edee860aab9eafce0631ba7ac9",
+    "Size": 16254,
+    "Snapshot": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/callback-producer-002/SourceFactProducer.before.cs.snapshot",
+    "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/sources/nuke-app/Modules/Sources/SourceFactProducer.cs"
+  },
+  "FunctionMap": [
+    {
+      "AlreadyProven": "FACT-CB01/03/04/17 name and non-name paths",
+      "Original": "named",
+      "Missing": "No new implementation required in selected clause scope",
+      "Native": "SourceFactProducer.Named"
+    },
+    {
+      "AlreadyProven": "FACT-CB01-04/17 candidate naming, annotation and Binder reason clauses",
+      "Original": "type_candidate",
+      "Missing": "No new implementation required in selected clause scope",
+      "Native": "SourceFactProducer.TypeCandidate"
+    },
+    {
+      "AlreadyProven": "FACT-CB05/07-10/21 Java unknown, AIDL tri-state/inherited precedence and HIDL bool clauses",
+      "Original": "endpoint_method",
+      "Missing": "No new implementation required in selected clause scope",
+      "Native": "SourceFactProducer.EndpointMethod"
+    },
+    {
+      "AlreadyProven": "FACT-CB06/11-17/20/22 full fields, original identities, LegacyAsciiIdentity profile and primitive skipping",
+      "Original": "registration_candidates",
+      "Missing": "Empty resolved-type dictionary is falsey for classification and confidence; retain exact identity key without inventing resolved structure",
+      "Tests": "CB-COMP01-04",
+      "Native": "SourceFactProducer.RegistrationCandidates"
+    },
+    {
+      "AlreadyProven": "FACT-CB18/19 matching candidates and owner isolation",
+      "Original": "possible_pairs",
+      "Missing": "Absent role and compared context keys must fail through existing CopyRequired, preserving lazy ordered comparison and explicit null values",
+      "Tests": "CB-COMP05-08 and eleven CB-ERR indexed-field cases",
+      "Native": "SourceFactProducer.PossiblePairs"
+    }
+  ],
+  "CallerMap": [
+    {
+      "Original": "tools/source_facts/test_callback_source_facts.py",
+      "Disposition": "Existing exact original test caller remains unchanged; rerun bounded regression",
+      "Native": "CallbackFunctionalOriginalRealTests and SourceFactRealTests"
+    },
+    {
+      "Original": "remediation/catalog/tooling/source_metadata_reference.py:produce_entry_metadata",
+      "Disposition": "Already injects the sole Source runtime callback/taxonomy concerns; Catalog owns aggregate/import caller fixtures",
+      "Native": "Modules/Catalog/CatalogSourceMetadata.cs:Produce"
+    },
+    {
+      "Original": "remediation/catalog/tests/test_source_metadata_contract.py endpoint_method direct import",
+      "Disposition": "Existing shared endpoint implementation retained; Catalog integration ownership unchanged",
+      "Native": "SourcesRuntimeConcerns.Callbacks.EndpointMethod"
+    }
+  ],
+  "UnchangedFunctionalHelper": "functional_source_facts.py taxonomy already has FACT-FN01-07 and exact six original method bindings. No taxonomy body or competing producer is added.",
+  "Gates": {
+    "NativeOnlyAfterGreenMock": true,
+    "NoFailedOrSkipped": true,
+    "NativeFilter": "FullyQualifiedName~CallbackProducerCompletion|FullyQualifiedName~SourceFactRealTests|FullyQualifiedName~CallbackFunctionalOriginalRealTests|FullyQualifiedName~SourcesRuntimeRealTests",
+    "MockFilter": "FullyQualifiedName~CallbackProducerCompletionMockTests"
+  },
+  "Boundaries": "One existing SourceFactProducer, existing CopyRequired, existing LegacyAsciiIdentity canonical/hash service, no new public contract, no registry/Core/Catalog write, descriptor001 remains sealed, originals retained."
+}

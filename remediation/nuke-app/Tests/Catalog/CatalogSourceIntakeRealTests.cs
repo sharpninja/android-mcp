@@ -48,30 +48,11 @@ public sealed class NativeCatalogSourceIntakeProvider:ICatalogSourceIntakeCasePr
             },
             IntakeFactory=async fixture=>
             {
-                var canonical=new CanonicalJson();var producer=NativeSourceCacheGenerationFixture.Producer(java);
-                var files=new JsonObject();foreach(var file in producer.ProducerFiles) files[file.Key]=file.Value;
-                var recipe=new JsonObject{["recipe_version"]=1,["release"]="native-catalog-intake-fixture",["inventory"]=fixture.Inventory.DeepClone(),["producer"]=new JsonObject{["path"]="native-fixture-producer",["files"]=files}};
-                var recipeBytes=canonical.Serialize(JsonSerializer.SerializeToElement(recipe));
-                var locked=new JsonObject{["recipe_file"]="recipe.json",["sha256"]=ContentHash.Sha256(recipeBytes),["source_rows"]=fixture.Inventory["sources"]!.AsArray().Count,["producer_files"]=producer.ProducerFiles.Count};
-                var planned=new RehydrationPlanner(canonical).Plan(new(new("recipe.json",recipeBytes,"application/json"),new("recipe.lock.json",canonical.Serialize(JsonSerializer.SerializeToElement(locked)),"application/json")));
-                Assert.True(planned.IsValid,JsonSerializer.Serialize(planned.Issues));var projection=planned.Plan!.SourceProjection!;
-                request=new(projection,SourceExtractionProfile.CurrentCandidate,producer,Java:java);
-                var generationStore=new FileArtifactStore(Path.Combine(fixture.Root,"source generation"),Hash);var leases=new FileArtifactLeaseProvider(Path.Combine(fixture.Root,"source generation locks"));
-                var producerRaw=new FileArtifactStore(Path.Combine(fixture.Root,"producer raw originals"),Hash);
-                foreach(var physical in projection.PhysicalSources)
-                {
-                    var source=projection.Rows.First(row=>row.PhysicalSourceIndex==physical.PhysicalSourceIndex);
-                    var originalPath=source.OriginalRow.GetProperty("path").GetString()!;
-                    await producerRaw.WriteAsync(new(physical.Pin.LocalPath,fixture.Originals[originalPath],"application/octet-stream"));
-                }
-                var cached=CachedRows(call.Variant);
-                if(cached.Count!=0)
-                {
-                    var prepared=await NativeSourceCacheGenerationFixture.CreateAsync(request,producerRaw,generationStore,leases,factory,cached,"prepared-native-input",
-                        indexMutation:call.Variant=="missing-raw-evidence" ? index=>index with{Rows=index.Rows.Select(row=>row.Kind=="sdk-api-index" ? row with{RawSourceBase64=null} : row).ToArray()} : null);
-                    request=prepared.Request;
-                    foreach(var row in cached) hitPaths.Add(projection.PhysicalSources.Single(physical=>physical.PhysicalSourceIndex==projection.Rows.Single(source=>source.RowIndex==row).PhysicalSourceIndex).Pin.LocalPath);
-                }
+                var canonical=new CanonicalJson();var cached=CachedRows(call.Variant);
+                var prepared=await NativeCatalogSourceCacheInput.CreateAsync(fixture,java,factory,cached,
+                    indexMutation:call.Variant=="missing-raw-evidence" ? index=>index with{Rows=index.Rows.Select(row=>row.Kind=="sdk-api-index" ? row with{RawSourceBase64=null} : row).ToArray()} : null);
+                request=prepared.Request;var projection=request.Projection;var generationStore=prepared.Generations;var leases=prepared.Leases;
+                foreach(var row in cached) hitPaths.Add(projection.PhysicalSources.Single(physical=>physical.PhysicalSourceIndex==projection.Rows.Single(source=>source.RowIndex==row).PhysicalSourceIndex).Pin.LocalPath);
                 if(call.Variant=="index-pin") request=request with{TrustedIndex=request.TrustedIndex! with{Sha256=new string('0',64)}};
                 if(call.Variant=="edited-row")
                 {

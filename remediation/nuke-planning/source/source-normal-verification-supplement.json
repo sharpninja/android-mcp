@@ -10,29 +10,43 @@
     "sha256": "a3021c2293cc8d81d9ef9b178a4ca7539b3a06af9d0557a1b8c4cc5b62abb2ea"
   },
   "proof": {
-    "trx": "remediation/nuke-app/artifacts/tests/20261028T0615091911800-8e2555d1e62940e3aaf3d6a89351fd1d/tests.trx",
-    "sha256": "b133979b555bcb9c5befb48a945b73d8795f476698302173ad658d5210e76e26",
-    "ownNativeCounts": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+    "sha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+    "total": 67272,
+    "passed": 67272,
+    "failed": 0,
+    "skipped": 0,
+    "exactClassCounts": {
+      "JavaProducerBoundaryMockTests": 16,
+      "CatalogSourceIntegrationRealTests": 4,
+      "CatalogSourceIntegrationMockTests": 8,
+      "NativeDescriptorRealTests": 29,
+      "PermissionReferenceRealTests": 13,
+      "JavaHelperBodyRealTests": 23,
       "SourceTypeFactsRealTests": 27,
+      "JavaHelperBodyMockTests": 42,
       "SdkAnnotationTargetRealTests": 14,
-      "PermissionReferenceRealTests": 13
+      "CatalogSourceIntakeMockTests": 18,
+      "CatalogJavaSelectedCliRealTests": 2,
+      "JavaProducerBoundaryRealTests": 8,
+      "CatalogSourceIntakeRealTests": 9,
+      "CatalogJavaSelectedCliMockTests": 4,
+      "LegacyAcquisitionRealTests": 7
     },
-    "ownFailed": 0,
-    "ownSkipped": 0,
-    "globalCounters": "<Counters total=\"54900\" executed=\"54900\" passed=\"54900\" failed=\"0\" error=\"0\" timeout=\"0\" aborted=\"0\" inconclusive=\"0\" passedButRunAborted=\"0\" notRunnable=\"0\" notExecuted=\"0\" disconnected=\"0\" warning=\"0\" completed=\"0\" inProgress=\"0\" pending=\"0\" xmlns=\"http://microsoft.com/schemas/VisualStudio/TeamTest/2010\" />"
+    "scope": "Current full016 normal verification; no HV or overall migration acceptance."
   },
   "nativeSourcePins": [
     {
       "path": "remediation/nuke-app/Build.cs",
-      "sha256": "2cd07fe7929382ef3dd5eb4f976507592d48515f34a5010b882c065f04f0ae3f"
+      "sha256": "a27ab5c1198719fd26eddce0ee8936411d934f0797248969400526e9dfb8c782"
     },
     {
       "path": "remediation/nuke-app/Modules/Sources/PermissionReferenceSourceFacts.cs",
-      "sha256": "ab38451ca55ded544a2ba93f6377b24a4404e09410a0563a72988b7556e84292"
+      "sha256": "35b7a96e69af87549aa3591ccbdccf8e40844a3c52aa08cbf4b848040710b806"
     },
     {
       "path": "remediation/nuke-app/Modules/Sources/SdkApiIndexExtractor.cs",
-      "sha256": "6940f01cadd5b8c0f03e3dfcdb1088876de06c38c767f7a939c646de6d7f2cf9"
+      "sha256": "52956ceb5f5b242d98f00fc1521ed9b630c609dcb1dbe92cc3ca13a46f2cc8a3"
     },
     {
       "path": "remediation/nuke-app/Modules/Sources/SourceTypeFacts.cs",
@@ -65,6 +79,203 @@
     {
       "path": "remediation/nuke-app/Tests/Sources/SourceTypeFactsRealTests.cs",
       "sha256": "4447a2ed5a9903af7ca4e88ec9e6e9c8f9de15a671e5c6edc08a1b07ac48360e"
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Sources/Java/JavaSemanticServices.cs",
+      "sha256": "040c6b623cd97f823d0b8552cd6a3253b6220731eb9eda0c7d6a111727ab97f8",
+      "bytes": 4353,
+      "priorSha256": "dfe6f0514712e2f2c0b41fe59175f9981a04263126ea1bafe2ffa45bdb6dbb3d",
+      "integratedSourcePin": true,
+      "qualified190SourcePin": false
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Sources/Java/JavaSourceExtractor.cs",
+      "sha256": "199bfee968e7f7defc394a697286412322ea3bf7c3bde91ddd91216c27a4c4db",
+      "bytes": 16193,
+      "priorSha256": "c2a9e05f4d8a8ee08a239be1fefd1e0a761f5d65ed5a51926feda7ed37a08310",
+      "integratedSourcePin": true,
+      "qualified190SourcePin": false
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Sources/Java/JavaSourceRuntimeLoader.cs",
+      "sha256": "fe281f70d7b5b053a218c723e44a3c626b746da3f62be3b23b5338fff9fb53fe",
+      "bytes": 6465,
+      "priorSha256": null,
+      "integratedSourcePin": false,
+      "qualified190SourcePin": false
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Sources/SourceText.cs",
+      "sha256": "849c49c822af8c392b180d5edb4914f9461f90bca31ad61ce1a00f3bf8e0145d",
+      "bytes": 1747,
+      "priorSha256": null,
+      "integratedSourcePin": false,
+      "qualified190SourcePin": true
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Sources/SourceSyntax.cs",
+      "sha256": "aa56fb2ba3ab82f821d60a2738e0a86021e95aee2b3b90e0b39033bd5829711f",
+      "bytes": 13770,
+      "priorSha256": null,
+      "integratedSourcePin": false,
+      "qualified190SourcePin": false
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Sources/SourcesRuntimeFactory.cs",
+      "sha256": "e03576a7a7ab9845aae32b5b8d562569a5f04cd7393a743a2ac501902f7668c7",
+      "bytes": 5878,
+      "priorSha256": null,
+      "integratedSourcePin": true,
+      "qualified190SourcePin": false
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Catalog/CatalogBuild.cs",
+      "sha256": "5f86d91ed306a6b2c8889cc548fabe0c5aac40fb53baf9b3fe114a7dc7cb0f81",
+      "bytes": 50132,
+      "priorSha256": null,
+      "integratedSourcePin": false,
+      "qualified190SourcePin": false
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/Java/JavaHelperBodyCases.cs",
+      "sha256": "755ecb3cb92bdec5b972b9991cbe2a5c93391f535f77b75843f3ef8b10bfbcc4",
+      "bytes": 8010,
+      "priorSha256": null,
+      "integratedSourcePin": true,
+      "qualified190SourcePin": false
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/Java/JavaHelperBodyMockTests.cs",
+      "sha256": "183cf9fc23ce3e8da962eda273d8b8b92667f4e16db91b331fe3544358cfa616",
+      "bytes": 2989,
+      "priorSha256": null,
+      "integratedSourcePin": true,
+      "qualified190SourcePin": false
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/Java/JavaHelperBodyRealTests.cs",
+      "sha256": "5ecbe16a24a8dc9551a4644f37608b106b0b9528b7b202f89d1cec1ee90e440e",
+      "bytes": 780,
+      "priorSha256": null,
+      "integratedSourcePin": true,
+      "qualified190SourcePin": false
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/Java/JavaSemanticCases.cs",
+      "sha256": "e7384733b5a6b9e9065e6647ee66b296675532df0760d8386343c6e722e617c4",
+      "bytes": 7181,
+      "priorSha256": null,
+      "integratedSourcePin": false,
+      "qualified190SourcePin": false
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/Java/JavaSemanticRealTests.cs",
+      "sha256": "7851821b0acd3300e1a71d44b4ddf824eb7f6949bc5a629499b8be1fecdedc70",
+      "bytes": 684,
+      "priorSha256": null,
+      "integratedSourcePin": false,
+      "qualified190SourcePin": false
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/Java/JvmProducerOwnerMappingCases.cs",
+      "sha256": "5fdd6002d65b85de74c7cd8cd184919c3538cfedf9a8e9a582b95b2e2f0d54f9",
+      "bytes": 1631,
+      "priorSha256": null,
+      "integratedSourcePin": false,
+      "qualified190SourcePin": false
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Catalog/CatalogSourceIntegrationRealTests.cs",
+      "sha256": "90c9ab31a765e704d03334d0ecf48b8492f8467694876f6c44fcae06bfc32238",
+      "bytes": 10330,
+      "priorSha256": null,
+      "integratedSourcePin": true,
+      "qualified190SourcePin": false
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Catalog/CatalogJavaSelectedCliRealTests.cs",
+      "sha256": "3ea8c1b7ca13c6c8770a2d42682f353e27ba05ca545b105956321f6606f5718e",
+      "bytes": 2479,
+      "priorSha256": null,
+      "integratedSourcePin": true,
+      "qualified190SourcePin": false
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Catalog/CatalogSourceIntakeRealTests.cs",
+      "sha256": "408ee399fddb02f575451e55b81413ef66340fcfd72877c8283009a90287d41d",
+      "bytes": 12431,
+      "priorSha256": null,
+      "integratedSourcePin": true,
+      "qualified190SourcePin": false
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Sources/NativeDescriptorContracts.cs",
+      "sha256": "e065b78d2356a28ffc4240eae4eddde733708337516cc6dd737af45c7bb094ec"
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Sources/NativeDescriptorSourceFacts.cs",
+      "sha256": "aa192f9a5feeb128131d4eaac6e6ff6abc849fc776564e44855b98491689b5b5"
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Sources/SourcesRuntimeContracts.cs",
+      "sha256": "a0d304901473a2811c6a95c93cddc6a05e2492917349c484f88a85789e328689"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/NativeDescriptorContractCases.cs",
+      "sha256": "6a72e58e369c252a12c83f670bc8ac011ec7de5344a868593c340a357fb2b1e3"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/NativeDescriptorMockTests.cs",
+      "sha256": "9ff808f90f6a5e1fb8d833279a28ebca0ab0e1d0d681dfc0888cc9a644d639a5"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/NativeDescriptorRealTests.cs",
+      "sha256": "cf8f8e2db9726eb43b16071b47d6d88ff81554ba635333736fda567b30d0c957"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/Acquisition/LegacyAcquisitionContractTests.cs",
+      "sha256": "dd5ab06ee9e89033584e040f6bb10c6d796d6e9c0090c4798db61124305fd60c",
+      "bytes": 5635
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/Acquisition/LegacyAcquisitionRealTests.cs",
+      "sha256": "d5a28a4762b65c286c92162e9a5339ebc9b897807144e8f2bef2a7c57376f5cf",
+      "bytes": 3903
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/Acquisition/ArchiveContractTests.cs",
+      "sha256": "ed1e10992047000068a426e3bf3c92c570c0dbec82c773d4e8b99419133c388e",
+      "bytes": 4132
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/Acquisition/AcquisitionRealTests.cs",
+      "sha256": "3d5033096241871d9adbc45346a3580331adbcd665dff50a20e1da88f215dbaa",
+      "bytes": 1764
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Sources/Acquisition/SourceAcquirer.cs",
+      "sha256": "ab106ec0036faef1c5c118bfe7e731cf0355adcd60f18aaf502950b460f2bdfc",
+      "bytes": 4117
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Sources/Acquisition/SourceArchiveAcquirer.cs",
+      "sha256": "0b99e87f00ac7a7f6b6cc364567e36cc225db5558513bb38492df8f695e51e35",
+      "bytes": 7934
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Sources/Acquisition/MetadataArchiveReader.cs",
+      "sha256": "af13b8786ebb92f42297922bb3224fd602d96c113f86df5e6aea75712967ad0e",
+      "bytes": 3976
+    },
+    {
+      "path": "remediation/nuke-app/Core/ContentHash.cs",
+      "sha256": "06b7f908c78d70c2c7295d84f1384b7be503c0faa96c7afb32a36b31f3fc31c6",
+      "bytes": 1105
+    },
+    {
+      "path": "remediation/nuke-app/Core/ArtifactPaths.cs",
+      "sha256": "2ae975707e053fb539041c465973b60c0f5c448bc318f5a5423ec0369e5ae334",
+      "bytes": 2130
     }
   ],
   "entries": [
@@ -1869,13 +2080,514 @@
           "retiredAssertionsCountedAsSatisfied": 0
         }
       ]
+    },
+    {
+      "legacyPath": "remediation/catalog/tooling/java_context.py",
+      "legacySha256": "4276f8abb3c0040fd1c8b4e9da52a163eb35d2d7716319327a884c0ed83fc55d",
+      "owner": "Java",
+      "category": "Sources",
+      "operation": "Extract",
+      "normal_verified": true,
+      "normal_verified_methods": [],
+      "reuseExistingMethodClaims": [],
+      "normal_verified_functions": "attach",
+      "nativeService": "JavaFileContext.Attach",
+      "nativeTest": "JavaHelperBodyRealTests.SameOriginalContextBodyBindsOneManagedAdapter (19 integrated rows); retained JavaSemanticRealTests context5 and ORIG-CONTEXT-IMPORTS-EXACT in focused190",
+      "pending_methods": [],
+      "pending_functions": [],
+      "normal_verification_scope": "Complete original helper function body over its JSON source/report value contract: last-report lookup, non-Java skip, equality-only empty/null hash handling, required-key and short-circuit errors, null/empty path distinction, exact6field projection/defaults/overwrite and statement, sequential effects. This is producer-helper body proof, not merely closure of its two original test methods.",
+      "frameworkResponsibilities": "Original modules have no I/O, subprocess, cache writer or CLI entry point. Python module loading/unittest mechanics are replaced by the existing C# monolith and xUnit; owned JsonNode clones preserve JSON values and retained report inputs. No Python runtime/custom-object interpreter is introduced.",
+      "requiredHelpers": [
+        "Required lookup preserves missing-key distinction and ordering",
+        "Native JSON node cloning, not historical Python object-alias identity"
+      ],
+      "callerResponsibilities": [
+        "No original tooling/runtime attach caller exists: original tests invoke it directly",
+        "build_catalog fingerprints helper code and preattached java_file_context; current Source/Catalog producer identity remains truthful C#",
+        "No new context-attachment pipeline or fake historical cache identity is invented"
+      ],
+      "frozenProfileNote": "Canonical and release011 source bodies were read and SHA-pinned independently. The same pure helpers replace both bodies. Frozen Python package/version/recipe/cache identities and whole frozen producer execution are not inferred from byte identity or current native caller proof.",
+      "decommissionable_from_pr": false,
+      "decommissionable_scope": "Proposal only: exact published producer-helper execution after Root integrates this evidence and corrected full016 passes. Local originals retained. No physical deletion, corpus/whole producer identity or readiness claim.",
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false,
+      "proposal_only": false,
+      "mergeAuthority": "Root after corrected full016",
+      "originalMethodReuseAuthority": {
+        "sha256": "aa31cb158cdc1e884d52c7612cf0a68708a3a23b9da48ed0344971dca83c98f0",
+        "path": "remediation/nuke-planning/java/published-java-sourcefact-method-closure-007.json",
+        "testFileSha256": "b410e5d69d6631ce811dda81d7064ced3f698b96454f0d1e9fbbe7c1ef3c3ad6",
+        "testFile": "remediation/catalog/tests/test_java_context.py"
+      },
+      "supportingOriginalTestMethods": [
+        "test_imports_retained_in_runtime_source_details",
+        "test_mismatched_context_rejected"
+      ],
+      "rootFullGateSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20"
+    },
+    {
+      "legacyPath": "remediation/catalog/tooling/jvm_source_link.py",
+      "legacySha256": "6cc57fd9f4dcf7b8f432377ad486242583c02cb280d7ea7e383b7c41afb4f5cb",
+      "owner": "Java",
+      "category": "Sources",
+      "operation": "Extract",
+      "normal_verified": true,
+      "normal_verified_methods": [],
+      "reuseExistingMethodClaims": [],
+      "normal_verified_functions": [
+        "encode",
+        "key"
+      ],
+      "nativeService": "JvmSourceLinker.Encode/Key",
+      "nativeTest": "JavaHelperBodyRealTests.SameOriginalStripBoundariesBindOneLinkerAndSharedSourceText (4 integrated rows); retained39+6JVM vectors in focused190; integrated Catalog Java callers",
+      "pending_methods": [],
+      "pending_functions": [],
+      "normal_verification_scope": "Complete supported nullable-string encode/key bodies and PRIMITIVES table, including original strip semantics at all3sites via shared SourceText.Strip, mapped owner/descriptor truthiness, arrays/varargs/generic erasure, unresolved/malformed rejection, type/member/constructor behavior. This is producer-helper body proof, not merely closure of the4original test methods.",
+      "frameworkResponsibilities": "Original modules have no I/O, subprocess, cache writer or CLI entry point. Python module loading/unittest mechanics are replaced by the existing C# monolith and xUnit; owned JsonNode clones preserve JSON values and retained report inputs. No Python runtime/custom-object interpreter is introduced.",
+      "requiredHelpers": [
+        "SourceText.Strip existing shared authority",
+        "One JvmSourceLinker shared by CatalogBuild and SourceTypeFacts"
+      ],
+      "callerResponsibilities": [
+        "Integrated1288 CatalogSourceIntegrationRealTests SOURCE-IMPORT-02 uses trusted native cache intake and SourcesRuntimeFactory",
+        "Integrated1288 CatalogJavaSelectedCliRealTests2 uses actual registered default/explicit-Java routes",
+        "CatalogBuild requires selected-platform owner and SDK-key membership; Source-owned SourceTypeFacts.XmlJvmKey uses shared Encode",
+        "XML caller13 and old39+6JVM vectors are not selected in1288; focused190 has exact matching source pins, and corrected Root full016 remains the acceptance gate"
+      ],
+      "frozenProfileNote": "Canonical and release011 source bodies were read and SHA-pinned independently. The same pure helpers replace both bodies. Frozen Python package/version/recipe/cache identities and whole frozen producer execution are not inferred from byte identity or current native caller proof.",
+      "decommissionable_from_pr": false,
+      "decommissionable_scope": "Proposal only: exact published producer-helper execution after Root integrates this evidence and corrected full016 passes. Local originals retained. No physical deletion, corpus/whole producer identity or readiness claim.",
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false,
+      "proposal_only": false,
+      "mergeAuthority": "Root after corrected full016",
+      "originalMethodReuseAuthority": {
+        "sha256": "aa31cb158cdc1e884d52c7612cf0a68708a3a23b9da48ed0344971dca83c98f0",
+        "path": "remediation/nuke-planning/java/published-java-sourcefact-method-closure-007.json",
+        "testFileSha256": "7cb00260092fa4b8d3e86b78a9921536a8169211b7f56332b876108899332041",
+        "testFile": "remediation/catalog/tests/test_jvm_source_link.py"
+      },
+      "supportingOriginalTestMethods": [
+        "test_exact_owner_primitives_and_known_reference_type",
+        "test_unresolved_type_variable_never_guessed",
+        "test_unqualified_java_lang_name_might_be_shadowed",
+        "test_untyped_index_field_cannot_prove_typed_jvm_identity"
+      ],
+      "rootFullGateSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20"
+    },
+    {
+      "legacyPath": "rehydration/producers/release-011/tooling/java_context.py",
+      "legacySha256": "4276f8abb3c0040fd1c8b4e9da52a163eb35d2d7716319327a884c0ed83fc55d",
+      "owner": "Java",
+      "category": "Sources",
+      "operation": "Extract",
+      "normal_verified": true,
+      "normal_verified_methods": [],
+      "reuseExistingMethodClaims": [],
+      "normal_verified_functions": "attach",
+      "nativeService": "JavaFileContext.Attach",
+      "nativeTest": "JavaHelperBodyRealTests.SameOriginalContextBodyBindsOneManagedAdapter (19 integrated rows); retained JavaSemanticRealTests context5 and ORIG-CONTEXT-IMPORTS-EXACT in focused190",
+      "pending_methods": [],
+      "pending_functions": [],
+      "normal_verification_scope": "Complete original helper function body over its JSON source/report value contract: last-report lookup, non-Java skip, equality-only empty/null hash handling, required-key and short-circuit errors, null/empty path distinction, exact6field projection/defaults/overwrite and statement, sequential effects. This is producer-helper body proof, not merely closure of its two original test methods.",
+      "frameworkResponsibilities": "Original modules have no I/O, subprocess, cache writer or CLI entry point. Python module loading/unittest mechanics are replaced by the existing C# monolith and xUnit; owned JsonNode clones preserve JSON values and retained report inputs. No Python runtime/custom-object interpreter is introduced.",
+      "requiredHelpers": [
+        "Required lookup preserves missing-key distinction and ordering",
+        "Native JSON node cloning, not historical Python object-alias identity"
+      ],
+      "callerResponsibilities": [
+        "No original tooling/runtime attach caller exists: original tests invoke it directly",
+        "build_catalog fingerprints helper code and preattached java_file_context; current Source/Catalog producer identity remains truthful C#",
+        "No new context-attachment pipeline or fake historical cache identity is invented"
+      ],
+      "frozenProfileNote": "Canonical and release011 source bodies were read and SHA-pinned independently. The same pure helpers replace both bodies. Frozen Python package/version/recipe/cache identities and whole frozen producer execution are not inferred from byte identity or current native caller proof.",
+      "decommissionable_from_pr": false,
+      "decommissionable_scope": "Proposal only: exact published producer-helper execution after Root integrates this evidence and corrected full016 passes. Local originals retained. No physical deletion, corpus/whole producer identity or readiness claim.",
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false,
+      "proposal_only": false,
+      "mergeAuthority": "Root after corrected full016",
+      "originalMethodReuseAuthority": {
+        "sha256": "aa31cb158cdc1e884d52c7612cf0a68708a3a23b9da48ed0344971dca83c98f0",
+        "path": "remediation/nuke-planning/java/published-java-sourcefact-method-closure-007.json",
+        "testFileSha256": "b410e5d69d6631ce811dda81d7064ced3f698b96454f0d1e9fbbe7c1ef3c3ad6",
+        "testFile": "rehydration/producers/release-011/tests/test_java_context.py"
+      },
+      "supportingOriginalTestMethods": [
+        "test_imports_retained_in_runtime_source_details",
+        "test_mismatched_context_rejected"
+      ],
+      "rootFullGateSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20"
+    },
+    {
+      "legacyPath": "rehydration/producers/release-011/tooling/jvm_source_link.py",
+      "legacySha256": "6cc57fd9f4dcf7b8f432377ad486242583c02cb280d7ea7e383b7c41afb4f5cb",
+      "owner": "Java",
+      "category": "Sources",
+      "operation": "Extract",
+      "normal_verified": true,
+      "normal_verified_methods": [],
+      "reuseExistingMethodClaims": [],
+      "normal_verified_functions": [
+        "encode",
+        "key"
+      ],
+      "nativeService": "JvmSourceLinker.Encode/Key",
+      "nativeTest": "JavaHelperBodyRealTests.SameOriginalStripBoundariesBindOneLinkerAndSharedSourceText (4 integrated rows); retained39+6JVM vectors in focused190; integrated Catalog Java callers",
+      "pending_methods": [],
+      "pending_functions": [],
+      "normal_verification_scope": "Complete supported nullable-string encode/key bodies and PRIMITIVES table, including original strip semantics at all3sites via shared SourceText.Strip, mapped owner/descriptor truthiness, arrays/varargs/generic erasure, unresolved/malformed rejection, type/member/constructor behavior. This is producer-helper body proof, not merely closure of the4original test methods.",
+      "frameworkResponsibilities": "Original modules have no I/O, subprocess, cache writer or CLI entry point. Python module loading/unittest mechanics are replaced by the existing C# monolith and xUnit; owned JsonNode clones preserve JSON values and retained report inputs. No Python runtime/custom-object interpreter is introduced.",
+      "requiredHelpers": [
+        "SourceText.Strip existing shared authority",
+        "One JvmSourceLinker shared by CatalogBuild and SourceTypeFacts"
+      ],
+      "callerResponsibilities": [
+        "Integrated1288 CatalogSourceIntegrationRealTests SOURCE-IMPORT-02 uses trusted native cache intake and SourcesRuntimeFactory",
+        "Integrated1288 CatalogJavaSelectedCliRealTests2 uses actual registered default/explicit-Java routes",
+        "CatalogBuild requires selected-platform owner and SDK-key membership; Source-owned SourceTypeFacts.XmlJvmKey uses shared Encode",
+        "XML caller13 and old39+6JVM vectors are not selected in1288; focused190 has exact matching source pins, and corrected Root full016 remains the acceptance gate"
+      ],
+      "frozenProfileNote": "Canonical and release011 source bodies were read and SHA-pinned independently. The same pure helpers replace both bodies. Frozen Python package/version/recipe/cache identities and whole frozen producer execution are not inferred from byte identity or current native caller proof.",
+      "decommissionable_from_pr": false,
+      "decommissionable_scope": "Proposal only: exact published producer-helper execution after Root integrates this evidence and corrected full016 passes. Local originals retained. No physical deletion, corpus/whole producer identity or readiness claim.",
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false,
+      "proposal_only": false,
+      "mergeAuthority": "Root after corrected full016",
+      "originalMethodReuseAuthority": {
+        "sha256": "aa31cb158cdc1e884d52c7612cf0a68708a3a23b9da48ed0344971dca83c98f0",
+        "path": "remediation/nuke-planning/java/published-java-sourcefact-method-closure-007.json",
+        "testFileSha256": "7cb00260092fa4b8d3e86b78a9921536a8169211b7f56332b876108899332041",
+        "testFile": "rehydration/producers/release-011/tests/test_jvm_source_link.py"
+      },
+      "supportingOriginalTestMethods": [
+        "test_exact_owner_primitives_and_known_reference_type",
+        "test_unresolved_type_variable_never_guessed",
+        "test_unqualified_java_lang_name_might_be_shadowed",
+        "test_untyped_index_field_cannot_prove_typed_jvm_identity"
+      ],
+      "rootFullGateSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20"
+    },
+    {
+      "legacyPath": "tools/source_facts/test_native_descriptor_facts.py",
+      "legacySha256": "a9d5b7356062e74ecd3cc0b3a5c0f82f441f70c268248d4353a69b45dbf8e63a",
+      "owner": "Sources",
+      "category": "Sources",
+      "operation": "Extract",
+      "normal_verified": true,
+      "normal_verified_methods": [
+        {
+          "legacy_method": "test_rust_macro_literal_and_symbol_are_source_facts",
+          "native_case_ids": [
+            "ND-01"
+          ],
+          "assertion_equivalence": "Same original test inputs/assertions through NativeDescriptorRealTests; independently discriminated mock gate and current full016."
+        },
+        {
+          "legacy_method": "test_rust_raw_string_descriptor",
+          "native_case_ids": [
+            "ND-02"
+          ],
+          "assertion_equivalence": "Same original test inputs/assertions through NativeDescriptorRealTests; independently discriminated mock gate and current full016."
+        },
+        {
+          "legacy_method": "test_mentions_in_comments_and_raw_strings_not_calls",
+          "native_case_ids": [
+            "ND-03"
+          ],
+          "assertion_equivalence": "Same original test inputs/assertions through NativeDescriptorRealTests; independently discriminated mock gate and current full016."
+        },
+        {
+          "legacy_method": "test_rust_nested_comments_and_raw_strings_not_calls",
+          "native_case_ids": [
+            "ND-04"
+          ],
+          "assertion_equivalence": "Same original test inputs/assertions through NativeDescriptorRealTests; independently discriminated mock gate and current full016."
+        },
+        {
+          "legacy_method": "test_ndk_symbol_argument_retained_unresolved",
+          "native_case_ids": [
+            "ND-05"
+          ],
+          "assertion_equivalence": "Same original test inputs/assertions through NativeDescriptorRealTests; independently discriminated mock gate and current full016."
+        },
+        {
+          "legacy_method": "test_cpp_macro_descriptor_and_nested_arguments",
+          "native_case_ids": [
+            "ND-06"
+          ],
+          "assertion_equivalence": "Same original test inputs/assertions through NativeDescriptorRealTests; independently discriminated mock gate and current full016."
+        },
+        {
+          "legacy_method": "test_macro_definition_not_an_invocation",
+          "native_case_ids": [
+            "ND-07a",
+            "ND-07b"
+          ],
+          "assertion_equivalence": "Same original test inputs/assertions through NativeDescriptorRealTests; independently discriminated mock gate and current full016."
+        },
+        {
+          "legacy_method": "test_unclosed_form_preserved_as_unknown",
+          "native_case_ids": [
+            "ND-08"
+          ],
+          "assertion_equivalence": "Same original test inputs/assertions through NativeDescriptorRealTests; independently discriminated mock gate and current full016."
+        }
+      ],
+      "pending_methods": [],
+      "nativeService": "NativeDescriptorSourceFacts.Parse",
+      "nativeTest": "NativeDescriptorRealTests.SameOriginalAndBoundaryCasesUseNativeProducer",
+      "normal_verification_scope": "Complete exact eight original test methods and nine original inputs only. Producer unrestricted-input domains remain partial.",
+      "frameworkResponsibilities": "C# xUnit/shared native producer replaces Python unittest/module imports; no original producer source executes.",
+      "decommissionable_from_pr": true,
+      "decommissionable_scope": "Only this exact original test execution; originals retained. No producer/corpus/HV completion.",
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false,
+      "proposal_only": false,
+      "rootFullGateSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20"
+    },
+    {
+      "legacyPath": "remediation/catalog/tests/test_bundled_http_snapshot.py",
+      "legacySha256": "4b008c2d46b2f5d26e95812cac5a0bd6f5ea56260388e3cd5276d813098e1e81",
+      "owner": "Acquisition",
+      "category": "Sources",
+      "operation": "Fetch",
+      "normal_verified": true,
+      "normal_verification_scope": "Complete original test-file inputs/assertions and fixture/helper responsibilities through SAME native legacy7 harness. No producer-file, CLI/corpus, byte-identity, removal or HV closure.",
+      "nativeService": "SourceAcquirer / SourceArchiveAcquirer / MetadataArchiveReader / ArtifactPaths",
+      "nativeTest": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.LegacyAcquisitionRealTests.SameOriginalFixturesAndAssertions",
+      "normal_verified_methods": [
+        {
+          "legacy_method": "fixture",
+          "native_case_ids": [
+            "exact-snapshot-no-network",
+            "missing-snapshot-no-fallback",
+            "changed-snapshot-retained",
+            "snapshot-escape"
+          ],
+          "assertion_equivalence": "Same exact old HTTP response bytes and independently fixed SHA256/Git-blob framing; setup dependency of all four original assertions.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_exact_snapshot_no_network",
+          "native_case_ids": [
+            "exact-snapshot-no-network"
+          ],
+          "assertion_equivalence": "Exact original bytes restored from reference.html; forbidden transport, no fallback or original modification.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_missing_snapshot_fails_without_mutable_url_fetch",
+          "native_case_ids": [
+            "missing-snapshot-no-fallback"
+          ],
+          "assertion_equivalence": "Missing immutable source raises FileNotFoundException through native store seam, zero network and zero writes.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_changed_bytes_rejected",
+          "native_case_ids": [
+            "changed-snapshot-retained"
+          ],
+          "assertion_equivalence": "Original new version bytes reject SOURCE_HASH, remain retained, and cause zero network/output writes.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_escape_rejected",
+          "native_case_ids": [
+            "snapshot-escape"
+          ],
+          "assertion_equivalence": "Original ../elsewhere snapshot path rejects ArgumentException through shared ArtifactPaths before reading/writing/network.",
+          "status": "normal-native-verified"
+        }
+      ],
+      "required_fixture_helper_responsibilities": [
+        "fixture exact bytes/hash/Git pin",
+        "NativeLegacyAcquisitionProbe setup and forbidden transport",
+        "original bytes retained",
+        "xUnit MemberData discovers every original literal case"
+      ],
+      "pending_methods": [],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false,
+      "decommissionable_from_pr": true,
+      "decommissionable_scope": "Only the original test-file role after Root merges this normal evidence; originals retained and production/CLI obligations remain separate.",
+      "frozenProfileNote": "Both published current and release011 original bodies were read separately. Matching hash does not establish caller parity; closure is limited to these exact original test assertions.",
+      "proposal_only": false,
+      "rootFullGateSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20"
+    },
+    {
+      "legacyPath": "remediation/catalog/tests/test_sdk_zip_metadata.py",
+      "legacySha256": "1391e23478beb75566be938d06ab567322970cf2767127bbb698a60e2a0383d7",
+      "owner": "Acquisition",
+      "category": "Sources",
+      "operation": "Fetch",
+      "normal_verified": true,
+      "normal_verification_scope": "Complete original test-file inputs/assertions and fixture/helper responsibilities through SAME native legacy7 harness. No producer-file, CLI/corpus, byte-identity, removal or HV closure.",
+      "nativeService": "SourceAcquirer / SourceArchiveAcquirer / MetadataArchiveReader / ArtifactPaths",
+      "nativeTest": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.LegacyAcquisitionRealTests.SameOriginalFixturesAndAssertions",
+      "normal_verified_methods": [
+        {
+          "legacy_method": "test_only_selected_metadata_payload_is_read",
+          "native_case_ids": [
+            "metadata-original-literals"
+          ],
+          "assertion_equivalence": "Same XML version3, API37/Minor2 properties and UNSELECTED_BINARY x10000 payload; selected XML exact, android.jar absent, sum of actual range reads strictly below10000. Native additionally retains full entry inventory and selected properties bytes.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "get",
+          "native_case_ids": [
+            "metadata-original-literals"
+          ],
+          "assertion_equivalence": "Original nested range callback maps to FixtureRangeSource.Read: records each offset/count and returns the exact requested immutable byte slice; same aggregate bound assertion.",
+          "status": "normal-native-verified"
+        }
+      ],
+      "required_fixture_helper_responsibilities": [
+        "LegacyAcquisitionCases.Zip(true) retains original3entry payload literals",
+        "FixtureRangeSource offset/count/slice callback",
+        "complete selected member and range bound assertions",
+        "xUnit MemberData discovers metadata-original-literals"
+      ],
+      "pending_methods": [],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false,
+      "decommissionable_from_pr": true,
+      "decommissionable_scope": "Only the original test-file role after Root merges this normal evidence; originals retained and production/CLI obligations remain separate.",
+      "frozenProfileNote": "Both published current and release011 original bodies were read separately. Matching hash does not establish caller parity; closure is limited to these exact original test assertions.",
+      "proposal_only": false,
+      "rootFullGateSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20"
+    },
+    {
+      "legacyPath": "rehydration/producers/release-011/tests/test_bundled_http_snapshot.py",
+      "legacySha256": "4b008c2d46b2f5d26e95812cac5a0bd6f5ea56260388e3cd5276d813098e1e81",
+      "owner": "Acquisition",
+      "category": "Sources",
+      "operation": "Fetch",
+      "normal_verified": true,
+      "normal_verification_scope": "Complete original test-file inputs/assertions and fixture/helper responsibilities through SAME native legacy7 harness. No producer-file, CLI/corpus, byte-identity, removal or HV closure.",
+      "nativeService": "SourceAcquirer / SourceArchiveAcquirer / MetadataArchiveReader / ArtifactPaths",
+      "nativeTest": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.LegacyAcquisitionRealTests.SameOriginalFixturesAndAssertions",
+      "normal_verified_methods": [
+        {
+          "legacy_method": "fixture",
+          "native_case_ids": [
+            "exact-snapshot-no-network",
+            "missing-snapshot-no-fallback",
+            "changed-snapshot-retained",
+            "snapshot-escape"
+          ],
+          "assertion_equivalence": "Same exact old HTTP response bytes and independently fixed SHA256/Git-blob framing; setup dependency of all four original assertions.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_exact_snapshot_no_network",
+          "native_case_ids": [
+            "exact-snapshot-no-network"
+          ],
+          "assertion_equivalence": "Exact original bytes restored from reference.html; forbidden transport, no fallback or original modification.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_missing_snapshot_fails_without_mutable_url_fetch",
+          "native_case_ids": [
+            "missing-snapshot-no-fallback"
+          ],
+          "assertion_equivalence": "Missing immutable source raises FileNotFoundException through native store seam, zero network and zero writes.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_changed_bytes_rejected",
+          "native_case_ids": [
+            "changed-snapshot-retained"
+          ],
+          "assertion_equivalence": "Original new version bytes reject SOURCE_HASH, remain retained, and cause zero network/output writes.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_escape_rejected",
+          "native_case_ids": [
+            "snapshot-escape"
+          ],
+          "assertion_equivalence": "Original ../elsewhere snapshot path rejects ArgumentException through shared ArtifactPaths before reading/writing/network.",
+          "status": "normal-native-verified"
+        }
+      ],
+      "required_fixture_helper_responsibilities": [
+        "fixture exact bytes/hash/Git pin",
+        "NativeLegacyAcquisitionProbe setup and forbidden transport",
+        "original bytes retained",
+        "xUnit MemberData discovers every original literal case"
+      ],
+      "pending_methods": [],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false,
+      "decommissionable_from_pr": true,
+      "decommissionable_scope": "Only the original test-file role after Root merges this normal evidence; originals retained and production/CLI obligations remain separate.",
+      "frozenProfileNote": "Both published current and release011 original bodies were read separately. Matching hash does not establish caller parity; closure is limited to these exact original test assertions.",
+      "proposal_only": false,
+      "rootFullGateSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20"
+    },
+    {
+      "legacyPath": "rehydration/producers/release-011/tests/test_sdk_zip_metadata.py",
+      "legacySha256": "1391e23478beb75566be938d06ab567322970cf2767127bbb698a60e2a0383d7",
+      "owner": "Acquisition",
+      "category": "Sources",
+      "operation": "Fetch",
+      "normal_verified": true,
+      "normal_verification_scope": "Complete original test-file inputs/assertions and fixture/helper responsibilities through SAME native legacy7 harness. No producer-file, CLI/corpus, byte-identity, removal or HV closure.",
+      "nativeService": "SourceAcquirer / SourceArchiveAcquirer / MetadataArchiveReader / ArtifactPaths",
+      "nativeTest": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.LegacyAcquisitionRealTests.SameOriginalFixturesAndAssertions",
+      "normal_verified_methods": [
+        {
+          "legacy_method": "test_only_selected_metadata_payload_is_read",
+          "native_case_ids": [
+            "metadata-original-literals"
+          ],
+          "assertion_equivalence": "Same XML version3, API37/Minor2 properties and UNSELECTED_BINARY x10000 payload; selected XML exact, android.jar absent, sum of actual range reads strictly below10000. Native additionally retains full entry inventory and selected properties bytes.",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "get",
+          "native_case_ids": [
+            "metadata-original-literals"
+          ],
+          "assertion_equivalence": "Original nested range callback maps to FixtureRangeSource.Read: records each offset/count and returns the exact requested immutable byte slice; same aggregate bound assertion.",
+          "status": "normal-native-verified"
+        }
+      ],
+      "required_fixture_helper_responsibilities": [
+        "LegacyAcquisitionCases.Zip(true) retains original3entry payload literals",
+        "FixtureRangeSource offset/count/slice callback",
+        "complete selected member and range bound assertions",
+        "xUnit MemberData discovers metadata-original-literals"
+      ],
+      "pending_methods": [],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false,
+      "decommissionable_from_pr": true,
+      "decommissionable_scope": "Only the original test-file role after Root merges this normal evidence; originals retained and production/CLI obligations remain separate.",
+      "frozenProfileNote": "Both published current and release011 original bodies were read separately. Matching hash does not establish caller parity; closure is limited to these exact original test assertions.",
+      "proposal_only": false,
+      "rootFullGateSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20"
     }
   ],
   "totals": {
     "paths": 14,
-    "normalVerifiedTestFiles": 14,
+    "normalVerifiedTestFiles": 19,
     "partialVerifiedTestFiles": 0,
-    "normalVerifiedOriginalTestMethods": 86,
+    "normalVerifiedOriginalTestMethods": 127,
     "decommissionableFromPr": 14,
     "acceptedComplete": 0,
     "safeToDelete": 0
@@ -2080,5 +2792,37 @@
         "sha256": "49f86e08da52a43f8f2d122a81dfac178a3f1704a434e47c4b391ac046d5c7dd"
       }
     ]
-  }
+  },
+  "requireUnchangedNativePins": true,
+  "closureAmendment016": {
+    "localTimestamp": "2026-10-29T00:10:38",
+    "addedJavaHelperFiles": 4,
+    "addedDescriptorTestFiles": 1,
+    "addedAcquisitionTestFiles": 4,
+    "producerWholeBodyImpliedByDescriptor": false,
+    "javaHelperSupportingTestsAreNotNewProducerTests": true,
+    "sourceProposalRetained": true,
+    "originalsRetained": true,
+    "currentSourcePinDeltas": [
+      {
+        "path": "remediation/nuke-app/Build.cs",
+        "previous": "2cd07fe7929382ef3dd5eb4f976507592d48515f34a5010b882c065f04f0ae3f",
+        "current": "a27ab5c1198719fd26eddce0ee8936411d934f0797248969400526e9dfb8c782",
+        "basis": "Exact inspected full016 source delta only; complete prior SourceTypeFacts27/SdkAnnotationTarget14/PermissionReference13 cases and added Java/context/Catalog caller classes pass. Prior receipt retained; no unrestricted producer-domain claim."
+      },
+      {
+        "path": "remediation/nuke-app/Modules/Sources/PermissionReferenceSourceFacts.cs",
+        "previous": "ab38451ca55ded544a2ba93f6377b24a4404e09410a0563a72988b7556e84292",
+        "current": "35b7a96e69af87549aa3591ccbdccf8e40844a3c52aa08cbf4b848040710b806",
+        "basis": "Exact inspected full016 source delta only; complete prior SourceTypeFacts27/SdkAnnotationTarget14/PermissionReference13 cases and added Java/context/Catalog caller classes pass. Prior receipt retained; no unrestricted producer-domain claim."
+      },
+      {
+        "path": "remediation/nuke-app/Modules/Sources/SdkApiIndexExtractor.cs",
+        "previous": "6940f01cadd5b8c0f03e3dfcdb1088876de06c38c767f7a939c646de6d7f2cf9",
+        "current": "52956ceb5f5b242d98f00fc1521ed9b630c609dcb1dbe92cc3ca13a46f2cc8a3",
+        "basis": "Exact inspected full016 source delta only; complete prior SourceTypeFacts27/SdkAnnotationTarget14/PermissionReference13 cases and added Java/context/Catalog caller classes pass. Prior receipt retained; no unrestricted producer-domain claim."
+      }
+    ]
+  },
+  "summaryCountBasis016": "Existing summary fields recount verified test-file path records and their explicit method/helper or same-file reuse bindings. Producer normal_verified_functions and supporting tests are not invented as new producer-test methods; sole inventory/projection derives published/unique counts."
 }

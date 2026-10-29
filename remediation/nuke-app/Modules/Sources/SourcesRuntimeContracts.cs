@@ -45,4 +45,5 @@ public sealed record SourcesRuntimeConcerns(
     // Additive capability: old positional construction/deconstruction is preserved.
     // A caller claiming matched AIDL reconciliation must require this concern.
     public IAidlLexicalInventorySourceFacts? AidlInventory { get; init; }
+    public INativeDescriptorSourceFacts? NativeDescriptors { get; init; }
 }
