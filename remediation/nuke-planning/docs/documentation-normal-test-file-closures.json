@@ -3,17 +3,19 @@
   "utcTimestamp": "2026-10-28T19:40:52.7061043Z",
   "scope": "Normal replacement of the exact original test-file executions listed in entries. No whole producer, corpus or independent acceptance claim.",
   "proof": {
-    "trx": "remediation/nuke-app/artifacts/tests/20261028T1925584215879-aff03e2a4d184c76b637232a2f073785/tests.trx",
-    "sha256": "8aff81c08a272bf773591657083b0a6ace11e8f2ae2f38bea1dec11edfc8800a",
-    "total": 65753,
-    "passed": 65753,
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T2103237817668-497872b395c04926831f85473db9d916/tests.trx",
+    "sha256": "1c9ab52506e76080e48c4db21ae852148e8f3651ce087237824357d5fe3dfcdb",
+    "total": 66003,
+    "passed": 66003,
     "failed": 0,
     "skipped": 0,
     "exactClassCounts": {
       "ModuleGraphRealTests": 10,
       "CurrentLayoutModelValidationRealTests": 2,
       "NativeProducerLifecycleRealTests": 1,
-      "LegacyUiOriginalMethodRealTests": 5
+      "LegacyUiOriginalMethodRealTests": 5,
+      "LegacyGuardOriginalMethodRealTests": 3,
+      "LegacyDesign018MethodRealTests": 5
     },
     "scope": "Current unfiltered full Root gate, complete original native method sets and known source-delta reconciliation. No HV or whole-producer claim."
   },
@@ -65,6 +67,26 @@
     {
       "path": "remediation/nuke-app/Modules/Documentation/DocumentationContracts.cs",
       "sha256": "c7f48cf649c6aa87062d039157871f0204d45e57c5ee93f0ce98c8efa660db84"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Documentation/LegacyGuardOriginalMethodMockTests.cs",
+      "sha256": "bcdd99fd2a46559347bd9853e635202dbbf7638e5abc246a380922aaad06eae6"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Documentation/LegacyGuardOriginalMethodRealTests.cs",
+      "sha256": "8ea09c2dc11b73342b3f227d3f17e624db1172d8c6bd51f037ded4f5fbaf4b18"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Documentation/LegacyDesign018MethodMockTests.cs",
+      "sha256": "00c1f6f7dcfc61a32aa533d580a169ba785e44017c19099471c394e5a8b1f719"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Documentation/LegacyDesign018MethodRealTests.cs",
+      "sha256": "91dab9f34a6986c175cccf191cf2b4396b5018d60b6aff6e999dfecc8dbbbd4f"
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Documentation/ModelContractValidator.cs",
+      "sha256": "e1cc89b3896c5a2fcb6190a961be8f461df61e36314c1fd1251a9f8ce8b079c1"
     }
   ],
   "entries": [
@@ -120,10 +142,62 @@
       "accepted_complete": false,
       "safe_to_delete": false,
       "execution_retired": false
+    },
+    {
+      "legacyPath": "remediation/test_design023_guardrails.py",
+      "legacySha256": "629f66fc32f5b2110d6b1d6b5e340a02a7d7abb40f06c519291d00614c8452ee",
+      "owner": "Documentation",
+      "category": "Design",
+      "operation": "Architecture",
+      "normal_verified": true,
+      "normal_verified_methods": [],
+      "reuseExistingMethodClaims": [
+        "test_current_cross_artifact_model",
+        "test_missing_dispatch_edge_and_revoke_bypass_fail",
+        "test_placeholder_state_contract_and_missing_route_fail"
+      ],
+      "nativeService": "ModelContractValidator",
+      "nativeTest": "LegacyGuardOriginalMethodRealTests",
+      "pending_methods": [],
+      "normal_verification_scope": "Complete exact original test-method predicates with the same mock-proved assertions; method claims are reused once from the authoritative supplement.",
+      "frameworkResponsibilities": "Existing native validator/shared file store and xUnit replace Python unittest, Node subprocess and temporary JSON fixture transport. Current canonical text is read where the original required it.",
+      "frozenProfileNote": "Only this exact original test-file execution is normally verified. Other source versions, broader caller/generator responsibilities, catalog population and HV remain separate.",
+      "decommissionable_from_pr": true,
+      "decommissionable_scope": "Original test-file execution only, with local source retention and no physical deletion, overall readiness or review acceptance claim.",
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false
+    },
+    {
+      "legacyPath": "remediation/tests_design018_contract.py",
+      "legacySha256": "6503118aaebba7c2418af7a5b4130771c8b02245000f30fdd5fc62e731df7c94",
+      "owner": "Documentation",
+      "category": "Design",
+      "operation": "Architecture",
+      "normal_verified": true,
+      "normal_verified_methods": [],
+      "reuseExistingMethodClaims": [
+        "test_callback_state_machine_has_terminal_cleanup_semantics",
+        "test_inflight_distinguishes_admission_from_dispatch",
+        "test_direct_event_extension_has_negotiation_and_fallback",
+        "test_models_include_arc_and_owner_sequences",
+        "test_all_screen_definitions_include_status_chip"
+      ],
+      "nativeService": "Current canonical documents and source-pinned screen/manifest observations",
+      "nativeTest": "LegacyDesign018MethodRealTests",
+      "pending_methods": [],
+      "normal_verification_scope": "Complete exact original test-method predicates with the same mock-proved assertions; method claims are reused once from the authoritative supplement.",
+      "frameworkResponsibilities": "Existing native validator/shared file store and xUnit replace Python unittest, Node subprocess and temporary JSON fixture transport. Current canonical text is read where the original required it.",
+      "frozenProfileNote": "Only this exact original test-file execution is normally verified. Other source versions, broader caller/generator responsibilities, catalog population and HV remain separate.",
+      "decommissionable_from_pr": true,
+      "decommissionable_scope": "Original test-file execution only, with local source retention and no physical deletion, overall readiness or review acceptance claim.",
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false
     }
   ],
-  "normalVerifiedTestFiles": 2,
-  "normalVerifiedOriginalMethods": 9,
+  "normalVerifiedTestFiles": 4,
+  "normalVerifiedOriginalMethods": 17,
   "additionalMethodScopes": 0,
   "frameworkSourceAtProof": {
     "path": "remediation/nuke-app/Build.cs",
@@ -131,8 +205,25 @@
   },
   "requireUnchangedNativePins": true,
   "currentProofReconciliation": {
-    "localTimestamp": "2026-10-28T19:41:20",
-    "reason": "Adds exact original UI file proof after the current full suite, preserving the prior module-graph closure and all original sources."
+    "localTimestamp": "2026-10-28T21:11:50",
+    "priorProof": {
+      "trx": "remediation/nuke-app/artifacts/tests/20261028T1925584215879-aff03e2a4d184c76b637232a2f073785/tests.trx",
+      "sha256": "8aff81c08a272bf773591657083b0a6ace11e8f2ae2f38bea1dec11edfc8800a",
+      "total": 65753,
+      "passed": 65753,
+      "failed": 0,
+      "skipped": 0,
+      "exactClassCounts": {
+        "ModuleGraphRealTests": 10,
+        "CurrentLayoutModelValidationRealTests": 2,
+        "NativeProducerLifecycleRealTests": 1,
+        "LegacyUiOriginalMethodRealTests": 5
+      },
+      "scope": "Current unfiltered full Root gate, complete original native method sets and known source-delta reconciliation. No HV or whole-producer claim."
+    },
+    "changedPins": [],
+    "reason": "Only the explicitly allowed native source deltas, if any, are refreshed. Original methods, test inputs/assertions and historical fixtures retained. The current unfiltered full gate verifies these current source pins; unrelated files are not inferred closed.",
+    "oldReceiptRetained": "/home/sharpninja/github/2026-10-26/task-3/remediation/retained/normal-closure-updates/documentation-normal-test-file-closures.json.94c782afee624896e1c82c2f9b84c78893e41dc3a9cb34227152b33a6a172bfb.json"
   },
   "originalMethodsAuthority": "remediation/nuke-planning/docs/documentation-parity-supplement.json, selected by each entry reuseExistingMethodClaims and exact original source identity"
 }

@@ -1,30 +1,30 @@
 {
   "schemaVersion": "1.0.0",
-  "at": "2026-10-28T19:44:11",
+  "at": "2026-10-28T21:13:00",
   "authoritative": false,
   "projectionOnly": true,
   "derivedFrom": {
     "path": "remediation/nuke-planning/source/legacy-port-disposition-inventory.json",
-    "sha256": "1792ae3d31e908bc7a17a89b41dd2ec69e6f3891c461eb8bee0780c0de20e80f",
+    "sha256": "feae7b77f2806eef3ab61f5bb9f5db6cc0643dd3409a3e5ab1f7eea9d90f543e",
     "totalNormalizedPaths": 1464,
     "additionalLocalPathsRetained": 1266
   },
   "identityManifest": {
     "path": "remediation/nuke-planning/source/legacy-python-tracked-manifest.json",
-    "sha256": "aa258cbd7b4126457b165114a07ff5543c98278b7f9b3224cfce3d71cec58d7a",
+    "sha256": "75162046ac041aeaaea6e99dc1d2e68362ee3a22f9e6402d37f180f898951166",
     "publishedPythonCount": 198,
-    "headAtIdentityRead": "0e281a1f6f32efe48c5624aaadb5f78038117d76"
+    "headAtIdentityRead": "976f1984ca53cc618033160a33e16d301dc503a2"
   },
   "totals": {
     "entries": 198,
     "unmappedPrimaryOwners": 0,
-    "normalVerified": 26,
+    "normalVerified": 30,
     "executionRetired": 0,
-    "normalVerifiedMethodScopes": 206,
+    "normalVerifiedMethodScopes": 215,
     "acceptedComplete": 0,
     "scopeExclusions": 0,
     "safeToDelete": 0,
-    "decommissionableFromPr": 26
+    "decommissionableFromPr": 30
   },
   "rules": [
     "This is a generated published-only projection of one authoritative union inventory, not a second maintained inventory.",
@@ -4147,16 +4147,19 @@
         "Export"
       ],
       "services": [
-        "Catalog-owned planned PermissionExporter"
+        "Catalog-owned planned PermissionExporter",
+        "PermissionExportOperation"
       ],
-      "migration_status": "partial-source-allocation",
+      "migration_status": "normal-native-original-test-methods-verified",
       "native_tests_or_pending": [
-        "Catalog owner fixtures/exports pending source-helper verification"
+        "Catalog owner fixtures/exports pending source-helper verification",
+        "PermissionExportRealTests and PermissionExportCliRealTests"
       ],
-      "additional_responsibilities": [],
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
       "remaining": [
-        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "This exact source SHA only. Stronger outside-release/strict-new preservation and typed C# error reporting are explicit migration differences. No catalog population or permission authority claim."
       ],
       "artifact_role": "published-legacy-port-baseline",
       "primary_code_path": "remediation/catalog/tooling/export_permissions.py",
@@ -4164,10 +4167,22 @@
       "byte_identical_path_count": 15,
       "same_bytes_imply_profile_or_caller_parity": false,
       "standalone_nuke_target_required": false,
-      "normal_verified": false,
-      "normal_verification_status": "native-or-caller-method-verification-pending",
-      "normal_verified_methods": [],
-      "pending_methods": "<module-body-and-required-callers>",
+      "normal_verified": true,
+      "normal_verification_status": "normal-original-test-methods-verified",
+      "normal_verified_methods": [
+        {
+          "method": "run",
+          "evidence": "remediation/nuke-planning/catalog/catalog-normal-test-file-closures.json",
+          "source_sha256": "0166a3ffc33a7a806f8610b4d481370a51152f90472555a25c145805383e3a92",
+          "bindings": [
+            "PermissionExportRealTests.SameAssertionsBindNativeSqliteSchemaAndImmutableStore",
+            "PermissionExportCliRealTests.RegisteredMonolithExportsIndependentFixtureFactsWithoutChangingSource"
+          ],
+          "normal_verified": true,
+          "scope": "The one original function: read-only SQL UNION and ordering, definitions/symbols/nulls, hashed IDs, original eight logic groups and three-sample limit, schema validation, three output files and incomplete unknown authority metadata. Independently mocked fixtures bind native SQLite and actual category CLI. Strict immutable store/output scope and new producer serialization are explicit approved migration semantics."
+        }
+      ],
+      "pending_methods": null,
       "pending_method_list_basis": "Exact owner-supplied function/method anchors when available; module/caller closure is explicit. Lexical proposal anchors are not an AST or exhaustive branch inventory.",
       "execution_retired": false,
       "retention_normal_verified": false,
@@ -4176,9 +4191,9 @@
       "generic_behavior_retired": false,
       "retirement_decision": null,
       "hv_acceptance": "Deferred by user until Ready; not used as a prerequisite to record normal implementation verification.",
-      "decommissionable_from_pr": false,
+      "decommissionable_from_pr": true,
       "decommissionable_scope": [
-        null
+        "This source SHA exporter execution only; local original retained. No physical deletion, Ready or HV acceptance."
       ],
       "decommissionable_means_physical_delete": false,
       "evidence_refs": [
@@ -4193,6 +4208,13 @@
           "evidence": "remediation/nuke-planning/source/legacy-disposition.jsonl",
           "owner": "Catalog",
           "role": "allocation",
+          "source_sha256": "0166a3ffc33a7a806f8610b4d481370a51152f90472555a25c145805383e3a92",
+          "method": null
+        },
+        {
+          "evidence": "remediation/nuke-planning/catalog/catalog-normal-test-file-closures.json",
+          "owner": "Catalog",
+          "role": "explicit-source-normal-verification",
           "source_sha256": "0166a3ffc33a7a806f8610b4d481370a51152f90472555a25c145805383e3a92",
           "method": null
         }
@@ -11039,15 +11061,19 @@
         "Export"
       ],
       "services": [
-        "Catalog-owned planned PermissionExporter"
+        "Catalog-owned planned PermissionExporter",
+        "PermissionExportOperation"
       ],
-      "migration_status": "partial-source-allocation",
+      "migration_status": "normal-native-original-test-methods-verified",
       "native_tests_or_pending": [
-        "Catalog owner fixtures/exports pending source-helper verification"
+        "Catalog owner fixtures/exports pending source-helper verification",
+        "PermissionExportRealTests and PermissionExportCliRealTests"
       ],
-      "additional_responsibilities": [],
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
       "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "This exact source SHA only. Stronger outside-release/strict-new preservation and typed C# error reporting are explicit migration differences. No catalog population or permission authority claim."
       ],
       "artifact_role": "published-legacy-port-baseline",
       "primary_code_path": "remediation/catalog/tooling/export_permissions.py",
@@ -11055,10 +11081,22 @@
       "byte_identical_path_count": 15,
       "same_bytes_imply_profile_or_caller_parity": false,
       "standalone_nuke_target_required": false,
-      "normal_verified": false,
-      "normal_verification_status": "native-or-caller-method-verification-pending",
-      "normal_verified_methods": [],
-      "pending_methods": "<module-body-and-required-callers>",
+      "normal_verified": true,
+      "normal_verification_status": "normal-original-test-methods-verified",
+      "normal_verified_methods": [
+        {
+          "method": "run",
+          "evidence": "remediation/nuke-planning/catalog/catalog-normal-test-file-closures.json",
+          "source_sha256": "0166a3ffc33a7a806f8610b4d481370a51152f90472555a25c145805383e3a92",
+          "bindings": [
+            "PermissionExportRealTests.SameAssertionsBindNativeSqliteSchemaAndImmutableStore",
+            "PermissionExportCliRealTests.RegisteredMonolithExportsIndependentFixtureFactsWithoutChangingSource"
+          ],
+          "normal_verified": true,
+          "scope": "The one original function: read-only SQL UNION and ordering, definitions/symbols/nulls, hashed IDs, original eight logic groups and three-sample limit, schema validation, three output files and incomplete unknown authority metadata. Independently mocked fixtures bind native SQLite and actual category CLI. Strict immutable store/output scope and new producer serialization are explicit approved migration semantics."
+        }
+      ],
+      "pending_methods": null,
       "pending_method_list_basis": "Exact owner-supplied function/method anchors when available; module/caller closure is explicit. Lexical proposal anchors are not an AST or exhaustive branch inventory.",
       "execution_retired": false,
       "retention_normal_verified": false,
@@ -11067,9 +11105,9 @@
       "generic_behavior_retired": false,
       "retirement_decision": null,
       "hv_acceptance": "Deferred by user until Ready; not used as a prerequisite to record normal implementation verification.",
-      "decommissionable_from_pr": false,
+      "decommissionable_from_pr": true,
       "decommissionable_scope": [
-        null
+        "This source SHA exporter execution only; local original retained. No physical deletion, Ready or HV acceptance."
       ],
       "decommissionable_means_physical_delete": false,
       "evidence_refs": [
@@ -11084,6 +11122,13 @@
           "evidence": "remediation/nuke-planning/source/legacy-disposition.jsonl",
           "owner": "Catalog",
           "role": "allocation",
+          "source_sha256": "0166a3ffc33a7a806f8610b4d481370a51152f90472555a25c145805383e3a92",
+          "method": null
+        },
+        {
+          "evidence": "remediation/nuke-planning/catalog/catalog-normal-test-file-closures.json",
+          "owner": "Catalog",
+          "role": "explicit-source-normal-verification",
           "source_sha256": "0166a3ffc33a7a806f8610b4d481370a51152f90472555a25c145805383e3a92",
           "method": null
         }
@@ -12618,14 +12663,21 @@
       "owner": "Documentation",
       "category": "Design",
       "operations": [
-        "pending-explicit-registry-binding"
+        "Architecture"
       ],
-      "services": [],
-      "migration_status": "partial-explicit-method-allocation",
-      "native_tests_or_pending": [],
-      "additional_responsibilities": [],
+      "services": [
+        "ModelContractValidator"
+      ],
+      "migration_status": "normal-native-original-test-methods-verified",
+      "native_tests_or_pending": [
+        "LegacyGuardOriginalMethodRealTests",
+        "remediation/nuke-app/Tests/Documentation/LegacyGuardOriginalMethodRealTests.cs"
+      ],
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
       "remaining": [
-        "Documentation cross-artifact/source invariant validator and this original method full native binding remain pending in Documentation ownership."
+        "Only this exact original test-file execution is normally verified. Other source versions, broader caller/generator responsibilities, catalog population and HV remain separate."
       ],
       "artifact_role": "published-legacy-port-baseline",
       "primary_code_path": "remediation/test_design023_guardrails.py",
@@ -12633,14 +12685,62 @@
       "byte_identical_path_count": 5,
       "same_bytes_imply_profile_or_caller_parity": false,
       "standalone_nuke_target_required": false,
-      "normal_verified": false,
-      "normal_verification_status": "native-or-caller-method-verification-pending",
-      "normal_verified_methods": [],
-      "pending_methods": [
-        "test_current_cross_artifact_model",
-        "test_missing_dispatch_edge_and_revoke_bypass_fail",
-        "test_placeholder_state_contract_and_missing_route_fail"
+      "normal_verified": true,
+      "normal_verification_status": "normal-original-test-methods-verified",
+      "normal_verified_methods": [
+        {
+          "method": "test_current_cross_artifact_model",
+          "evidence": "remediation/nuke-planning/docs/documentation-parity-supplement.json",
+          "source_sha256": "629f66fc32f5b2110d6b1d6b5e340a02a7d7abb40f06c519291d00614c8452ee",
+          "bindings": [
+            {
+              "service": "ModelContractValidator",
+              "testFile": "remediation/nuke-app/Tests/Documentation/LegacyGuardOriginalMethodRealTests.cs",
+              "testMethod": "SameOriginalScenariosBindExistingNativeValidator",
+              "caseId": "test_current_cross_artifact_model",
+              "proof": "remediation/nuke-app/artifacts/tests/20261028T2103237817668-497872b395c04926831f85473db9d916/tests.trx",
+              "status": "same-original-predicates-current-full-normal-suite-pass"
+            }
+          ],
+          "normal_verified": true,
+          "scope": "Owner-explicit same-original method fixture claim; caller/helper/file closure remains separate."
+        },
+        {
+          "method": "test_missing_dispatch_edge_and_revoke_bypass_fail",
+          "evidence": "remediation/nuke-planning/docs/documentation-parity-supplement.json",
+          "source_sha256": "629f66fc32f5b2110d6b1d6b5e340a02a7d7abb40f06c519291d00614c8452ee",
+          "bindings": [
+            {
+              "service": "ModelContractValidator",
+              "testFile": "remediation/nuke-app/Tests/Documentation/LegacyGuardOriginalMethodRealTests.cs",
+              "testMethod": "SameOriginalScenariosBindExistingNativeValidator",
+              "caseId": "test_missing_dispatch_edge_and_revoke_bypass_fail",
+              "proof": "remediation/nuke-app/artifacts/tests/20261028T2103237817668-497872b395c04926831f85473db9d916/tests.trx",
+              "status": "same-original-predicates-current-full-normal-suite-pass"
+            }
+          ],
+          "normal_verified": true,
+          "scope": "Owner-explicit same-original method fixture claim; caller/helper/file closure remains separate."
+        },
+        {
+          "method": "test_placeholder_state_contract_and_missing_route_fail",
+          "evidence": "remediation/nuke-planning/docs/documentation-parity-supplement.json",
+          "source_sha256": "629f66fc32f5b2110d6b1d6b5e340a02a7d7abb40f06c519291d00614c8452ee",
+          "bindings": [
+            {
+              "service": "ModelContractValidator",
+              "testFile": "remediation/nuke-app/Tests/Documentation/LegacyGuardOriginalMethodRealTests.cs",
+              "testMethod": "SameOriginalScenariosBindExistingNativeValidator",
+              "caseId": "test_placeholder_state_contract_and_missing_route_fail",
+              "proof": "remediation/nuke-app/artifacts/tests/20261028T2103237817668-497872b395c04926831f85473db9d916/tests.trx",
+              "status": "same-original-predicates-current-full-normal-suite-pass"
+            }
+          ],
+          "normal_verified": true,
+          "scope": "Owner-explicit same-original method fixture claim; caller/helper/file closure remains separate."
+        }
       ],
+      "pending_methods": null,
       "pending_method_list_basis": "Exact owner-supplied function/method anchors when available; module/caller closure is explicit. Lexical proposal anchors are not an AST or exhaustive branch inventory.",
       "execution_retired": false,
       "retention_normal_verified": false,
@@ -12649,9 +12749,9 @@
       "generic_behavior_retired": false,
       "retirement_decision": null,
       "hv_acceptance": "Deferred by user until Ready; not used as a prerequisite to record normal implementation verification.",
-      "decommissionable_from_pr": false,
+      "decommissionable_from_pr": true,
       "decommissionable_scope": [
-        null
+        "Original test-file execution only, with local source retention and no physical deletion, overall readiness or review acceptance claim."
       ],
       "decommissionable_means_physical_delete": false,
       "evidence_refs": [
@@ -12682,6 +12782,13 @@
           "role": "method-allocation",
           "source_sha256": "629f66fc32f5b2110d6b1d6b5e340a02a7d7abb40f06c519291d00614c8452ee",
           "method": "test_placeholder_state_contract_and_missing_route_fail"
+        },
+        {
+          "evidence": "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json",
+          "owner": "Documentation",
+          "role": "explicit-source-normal-verification",
+          "source_sha256": "629f66fc32f5b2110d6b1d6b5e340a02a7d7abb40f06c519291d00614c8452ee",
+          "method": null
         }
       ],
       "accepted_complete": false,
@@ -13195,19 +13302,23 @@
       "owner": "Documentation",
       "category": "Design",
       "operations": [
-        "pending-explicit-registry-binding"
+        "Architecture"
       ],
       "services": [
+        "Current canonical documents and source-pinned screen/manifest observations",
         "DocumentationProjector"
       ],
-      "migration_status": "partial-explicit-method-allocation",
+      "migration_status": "normal-native-original-test-methods-verified",
       "native_tests_or_pending": [
-        "remediation/nuke-app/Tests/Documentation/DocumentationProjectionRealTests.cs"
+        "LegacyDesign018MethodRealTests",
+        "remediation/nuke-app/Tests/Documentation/DocumentationProjectionRealTests.cs",
+        "remediation/nuke-app/Tests/Documentation/LegacyDesign018MethodRealTests.cs"
       ],
-      "additional_responsibilities": [],
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
       "remaining": [
-        "Documentation cross-artifact/source invariant validator and this original method full native binding remain pending in Documentation ownership.",
-        "Native C4 SVG generation/runtime validation remains pending; pure extraction/normalization and recording-process transport are only primitives."
+        "Only this exact original test-file execution is normally verified. Other source versions, broader caller/generator responsibilities, catalog population and HV remain separate."
       ],
       "artifact_role": "published-legacy-port-baseline",
       "primary_code_path": "remediation/tests_design018_contract.py",
@@ -13215,9 +13326,77 @@
       "byte_identical_path_count": 5,
       "same_bytes_imply_profile_or_caller_parity": false,
       "standalone_nuke_target_required": false,
-      "normal_verified": false,
-      "normal_verification_status": "partial-explicit-normal-method-verification",
+      "normal_verified": true,
+      "normal_verification_status": "normal-original-test-methods-verified",
       "normal_verified_methods": [
+        {
+          "method": "test_callback_state_machine_has_terminal_cleanup_semantics",
+          "evidence": "remediation/nuke-planning/docs/documentation-parity-supplement.json",
+          "source_sha256": "6503118aaebba7c2418af7a5b4130771c8b02245000f30fdd5fc62e731df7c94",
+          "bindings": [
+            {
+              "service": "Current canonical documents and source-pinned screen/manifest observations",
+              "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign018MethodRealTests.cs",
+              "testMethod": "SameOriginalPredicatesReadCurrentCanonicalSources",
+              "caseId": "test_callback_state_machine_has_terminal_cleanup_semantics",
+              "proof": "remediation/nuke-app/artifacts/tests/20261028T2103237817668-497872b395c04926831f85473db9d916/tests.trx",
+              "status": "same-original-predicates-current-full-normal-suite-pass"
+            }
+          ],
+          "normal_verified": true,
+          "scope": "Owner-explicit same-original method fixture claim; caller/helper/file closure remains separate."
+        },
+        {
+          "method": "test_inflight_distinguishes_admission_from_dispatch",
+          "evidence": "remediation/nuke-planning/docs/documentation-parity-supplement.json",
+          "source_sha256": "6503118aaebba7c2418af7a5b4130771c8b02245000f30fdd5fc62e731df7c94",
+          "bindings": [
+            {
+              "service": "Current canonical documents and source-pinned screen/manifest observations",
+              "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign018MethodRealTests.cs",
+              "testMethod": "SameOriginalPredicatesReadCurrentCanonicalSources",
+              "caseId": "test_inflight_distinguishes_admission_from_dispatch",
+              "proof": "remediation/nuke-app/artifacts/tests/20261028T2103237817668-497872b395c04926831f85473db9d916/tests.trx",
+              "status": "same-original-predicates-current-full-normal-suite-pass"
+            }
+          ],
+          "normal_verified": true,
+          "scope": "Owner-explicit same-original method fixture claim; caller/helper/file closure remains separate."
+        },
+        {
+          "method": "test_direct_event_extension_has_negotiation_and_fallback",
+          "evidence": "remediation/nuke-planning/docs/documentation-parity-supplement.json",
+          "source_sha256": "6503118aaebba7c2418af7a5b4130771c8b02245000f30fdd5fc62e731df7c94",
+          "bindings": [
+            {
+              "service": "Current canonical documents and source-pinned screen/manifest observations",
+              "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign018MethodRealTests.cs",
+              "testMethod": "SameOriginalPredicatesReadCurrentCanonicalSources",
+              "caseId": "test_direct_event_extension_has_negotiation_and_fallback",
+              "proof": "remediation/nuke-app/artifacts/tests/20261028T2103237817668-497872b395c04926831f85473db9d916/tests.trx",
+              "status": "same-original-predicates-current-full-normal-suite-pass"
+            }
+          ],
+          "normal_verified": true,
+          "scope": "Owner-explicit same-original method fixture claim; caller/helper/file closure remains separate."
+        },
+        {
+          "method": "test_models_include_arc_and_owner_sequences",
+          "evidence": "remediation/nuke-planning/docs/documentation-parity-supplement.json",
+          "source_sha256": "6503118aaebba7c2418af7a5b4130771c8b02245000f30fdd5fc62e731df7c94",
+          "bindings": [
+            {
+              "service": "Current canonical documents and source-pinned screen/manifest observations",
+              "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign018MethodRealTests.cs",
+              "testMethod": "SameOriginalPredicatesReadCurrentCanonicalSources",
+              "caseId": "test_models_include_arc_and_owner_sequences",
+              "proof": "remediation/nuke-app/artifacts/tests/20261028T2103237817668-497872b395c04926831f85473db9d916/tests.trx",
+              "status": "same-original-predicates-current-full-normal-suite-pass"
+            }
+          ],
+          "normal_verified": true,
+          "scope": "Owner-explicit same-original method fixture claim; caller/helper/file closure remains separate."
+        },
         {
           "method": "test_all_screen_definitions_include_status_chip",
           "evidence": "remediation/nuke-planning/docs/documentation-parity-supplement.json",
@@ -13255,18 +13434,21 @@
                 "UI-COPY-SCR10",
                 "UI-COPY-SCR11"
               ]
+            },
+            {
+              "service": "Current canonical documents and source-pinned screen/manifest observations",
+              "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign018MethodRealTests.cs",
+              "testMethod": "SameOriginalPredicatesReadCurrentCanonicalSources",
+              "caseId": "test_all_screen_definitions_include_status_chip",
+              "proof": "remediation/nuke-app/artifacts/tests/20261028T2103237817668-497872b395c04926831f85473db9d916/tests.trx",
+              "status": "same-original-predicates-current-full-normal-suite-pass"
             }
           ],
           "normal_verified": true,
           "scope": "Owner-explicit same-original method fixture claim; caller/helper/file closure remains separate."
         }
       ],
-      "pending_methods": [
-        "test_callback_state_machine_has_terminal_cleanup_semantics",
-        "test_direct_event_extension_has_negotiation_and_fallback",
-        "test_inflight_distinguishes_admission_from_dispatch",
-        "test_models_include_arc_and_owner_sequences"
-      ],
+      "pending_methods": null,
       "pending_method_list_basis": "Exact owner-supplied function/method anchors when available; module/caller closure is explicit. Lexical proposal anchors are not an AST or exhaustive branch inventory.",
       "execution_retired": false,
       "retention_normal_verified": false,
@@ -13275,9 +13457,9 @@
       "generic_behavior_retired": false,
       "retirement_decision": null,
       "hv_acceptance": "Deferred by user until Ready; not used as a prerequisite to record normal implementation verification.",
-      "decommissionable_from_pr": false,
+      "decommissionable_from_pr": true,
       "decommissionable_scope": [
-        null
+        "Original test-file execution only, with local source retention and no physical deletion, overall readiness or review acceptance claim."
       ],
       "decommissionable_means_physical_delete": false,
       "evidence_refs": [
@@ -13322,6 +13504,13 @@
           "role": "method-allocation",
           "source_sha256": "6503118aaebba7c2418af7a5b4130771c8b02245000f30fdd5fc62e731df7c94",
           "method": "test_all_screen_definitions_include_status_chip"
+        },
+        {
+          "evidence": "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json",
+          "owner": "Documentation",
+          "role": "explicit-source-normal-verification",
+          "source_sha256": "6503118aaebba7c2418af7a5b4130771c8b02245000f30fdd5fc62e731df7c94",
+          "method": null
         }
       ],
       "accepted_complete": false,

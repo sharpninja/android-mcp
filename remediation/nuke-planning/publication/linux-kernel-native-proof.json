@@ -1,0 +1,56 @@
+{
+  "localTimestamp": "2026-10-28T20:02:56",
+  "trx": "remediation/nuke-app/artifacts/tests/20261028T2000464945300-52ca150df6a641fda415364277be9463/tests.trx",
+  "sha256": "3e07ca076bb9da3887d5b5311ee35e361b3c47fe26f3492b16851d0ef89d59b6",
+  "passed": 542,
+  "failed": 0,
+  "skipped": 0,
+  "buildWarnings": 0,
+  "exactClassCounts": {
+    "NativeArtifactCallsRealTests": 30,
+    "NativeArtifactKernelLinuxRealTests": 6,
+    "StreamingReaderRealTests": 18,
+    "StreamingReaderProviderRealTests": 2,
+    "LegacyGuardOriginalMethodMockTests": 11,
+    "LegacyDesign018MethodMockTests": 21
+  },
+  "sourcePins": [
+    {
+      "path": "remediation/nuke-app/Core/NativeArtifactCalls.cs",
+      "sha256": "d0e1983e9071c62650dd4c6a2b0b1d88b60d9818cc7f2b5c678e7a8f0e547b7b"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Core/NativeArtifactCallsRealTests.cs",
+      "sha256": "ab925633fba3f980a0caddfbe30f0c9be7bad964a2e5ba81d23c3de022cdefbf"
+    },
+    {
+      "path": "remediation/nuke-app/Core/NativeArtifactKernel.cs",
+      "sha256": "0551b35b38dc24db41f3eeeca469f1b54214cdd57ccea6d8d28eef7843e7ef69"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Core/NativeArtifactKernelLinuxRealTests.cs",
+      "sha256": "9b9fcdd741b6cc74f57822dd1e9df7758c9aeaed6d32d832f90fa7e55bd1dba8"
+    }
+  ],
+  "priorReaderProof": {
+    "path": "remediation/nuke-planning/publication/reader-native-chronology.json",
+    "sha256": "6d913b85abbf4050f6601de6569e23b08ad2dedd7648b9842dd52aa67805545f"
+  },
+  "actualLinuxProof": [
+    "Fixed statx size and field offsets.",
+    "Two retained equal-content/length/mtime files have distinct native IDs.",
+    "Read-only, nonblocking and close-on-exec descriptor flags.",
+    "No-follow symlink failure and distinct missing-file error.",
+    "No-writer FIFO rejected before a FileStream can be constructed; fixtures and handles retained/disposed as asserted.",
+    "The same FileArtifactStore reads retained regular bytes through explicit native kernel/identity/opener composition."
+  ],
+  "hostArchitecture": "X64",
+  "allFixturesRetained": true,
+  "windowsKernelImplemented": false,
+  "windowsRuntimeProven": false,
+  "actualPathReplacementProven": false,
+  "defaultReaderInstalled": false,
+  "codecRuntimeProven": false,
+  "fullCurrentSuitePending": true,
+  "hv": false
+}

@@ -1,23 +1,23 @@
 {
-  "at": "2026-10-28T19:44:27",
+  "at": "2026-10-28T21:13:02",
   "projection_only": true,
   "authoritative_inventory": {
     "path": "remediation/nuke-planning/source/legacy-port-disposition-inventory.json",
-    "sha256": "1792ae3d31e908bc7a17a89b41dd2ec69e6f3891c461eb8bee0780c0de20e80f"
+    "sha256": "feae7b77f2806eef3ab61f5bb9f5db6cc0643dd3409a3e5ab1f7eea9d90f543e"
   },
   "scope": "Published198only. Additional1266localhistoricalpaths are retained in the sole union and are not inflated into independent published port tasks.",
   "totals": {
     "published_paths": 198,
     "canonical_responsibility_groups": 134,
-    "normally_verified_files": 26,
-    "partially_verified_files": 12,
-    "files_without_normal_method_proof": 160,
-    "normal_method_bindings_by_file": 206,
-    "unique_method_bindings_by_group": 149,
+    "normally_verified_files": 30,
+    "partially_verified_files": 11,
+    "files_without_normal_method_proof": 157,
+    "normal_method_bindings_by_file": 215,
+    "unique_method_bindings_by_group": 157,
     "published_execution_retirements": 0,
-    "pr_eligible_paths": 26,
-    "normally_closed_groups": 16,
-    "open_canonical_groups": 118,
+    "pr_eligible_paths": 30,
+    "normally_closed_groups": 19,
+    "open_canonical_groups": 115,
     "safe_to_delete": 0,
     "hv_accepted": 0
   },
@@ -29,12 +29,12 @@
       ],
       "published_paths": 85,
       "canonical_responsibility_groups": 53,
-      "normal_file_proofs": 2,
-      "normal_method_bindings_by_file": 60,
-      "normally_closed_groups": 2,
-      "open_canonical_groups": 51,
+      "normal_file_proofs": 4,
+      "normal_method_bindings_by_file": 62,
+      "normally_closed_groups": 3,
+      "open_canonical_groups": 50,
       "published_execution_retirements": 0,
-      "pr_eligible_test_or_file_paths": 2
+      "pr_eligible_test_or_file_paths": 4
     },
     {
       "category": "Design",
@@ -43,12 +43,12 @@
       ],
       "published_paths": 10,
       "canonical_responsibility_groups": 10,
-      "normal_file_proofs": 2,
-      "normal_method_bindings_by_file": 13,
-      "normally_closed_groups": 2,
-      "open_canonical_groups": 8,
+      "normal_file_proofs": 4,
+      "normal_method_bindings_by_file": 20,
+      "normally_closed_groups": 4,
+      "open_canonical_groups": 6,
       "published_execution_retirements": 0,
-      "pr_eligible_test_or_file_paths": 2
+      "pr_eligible_test_or_file_paths": 4
     },
     {
       "category": "Publish",
@@ -307,14 +307,28 @@
         "release011"
       ],
       "services": [
-        "Catalog-owned planned PermissionExporter"
+        "Catalog-owned planned PermissionExporter",
+        "PermissionExportOperation"
       ],
-      "normally_verified_file_paths": [],
-      "normal_method_bindings": [],
-      "normally_closed_all_published_paths": false,
+      "normally_verified_file_paths": [
+        "rehydration/producers/release-011/tooling/export_permissions.py",
+        "remediation/catalog/tooling/export_permissions.py"
+      ],
+      "normal_method_bindings": [
+        {
+          "method": "run",
+          "source_sha256": "0166a3ffc33a7a806f8610b4d481370a51152f90472555a25c145805383e3a92",
+          "evidence": [
+            "remediation/nuke-planning/catalog/catalog-normal-test-file-closures.json"
+          ],
+          "scope": [
+            "The one original function: read-only SQL UNION and ordering, definitions/symbols/nulls, hashed IDs, original eight logic groups and three-sample limit, schema validation, three output files and incomplete unknown authority metadata. Independently mocked fixtures bind native SQLite and actual category CLI. Strict immutable store/output scope and new producer serialization are explicit approved migration semantics."
+          ]
+        }
+      ],
+      "normally_closed_all_published_paths": true,
       "remaining_caller_and_profile_duties": [
-        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "This exact source SHA only. Stronger outside-release/strict-new preservation and typed C# error reporting are explicit migration differences. No catalog population or permission authority claim."
       ]
     },
     {
@@ -2582,12 +2596,47 @@
       "profiles": [
         "canonical-or-explicit-owner-profile"
       ],
-      "services": [],
-      "normally_verified_file_paths": [],
-      "normal_method_bindings": [],
-      "normally_closed_all_published_paths": false,
+      "services": [
+        "ModelContractValidator"
+      ],
+      "normally_verified_file_paths": [
+        "remediation/test_design023_guardrails.py"
+      ],
+      "normal_method_bindings": [
+        {
+          "method": "test_current_cross_artifact_model",
+          "source_sha256": "629f66fc32f5b2110d6b1d6b5e340a02a7d7abb40f06c519291d00614c8452ee",
+          "evidence": [
+            "remediation/nuke-planning/docs/documentation-parity-supplement.json"
+          ],
+          "scope": [
+            "Owner-explicit same-original method fixture claim; caller/helper/file closure remains separate."
+          ]
+        },
+        {
+          "method": "test_missing_dispatch_edge_and_revoke_bypass_fail",
+          "source_sha256": "629f66fc32f5b2110d6b1d6b5e340a02a7d7abb40f06c519291d00614c8452ee",
+          "evidence": [
+            "remediation/nuke-planning/docs/documentation-parity-supplement.json"
+          ],
+          "scope": [
+            "Owner-explicit same-original method fixture claim; caller/helper/file closure remains separate."
+          ]
+        },
+        {
+          "method": "test_placeholder_state_contract_and_missing_route_fail",
+          "source_sha256": "629f66fc32f5b2110d6b1d6b5e340a02a7d7abb40f06c519291d00614c8452ee",
+          "evidence": [
+            "remediation/nuke-planning/docs/documentation-parity-supplement.json"
+          ],
+          "scope": [
+            "Owner-explicit same-original method fixture claim; caller/helper/file closure remains separate."
+          ]
+        }
+      ],
+      "normally_closed_all_published_paths": true,
       "remaining_caller_and_profile_duties": [
-        "Documentation cross-artifact/source invariant validator and this original method full native binding remain pending in Documentation ownership."
+        "Only this exact original test-file execution is normally verified. Other source versions, broader caller/generator responsibilities, catalog population and HV remain separate."
       ]
     },
     {
@@ -2602,9 +2651,12 @@
         "canonical-or-explicit-owner-profile"
       ],
       "services": [
+        "Current canonical documents and source-pinned screen/manifest observations",
         "DocumentationProjector"
       ],
-      "normally_verified_file_paths": [],
+      "normally_verified_file_paths": [
+        "remediation/tests_design018_contract.py"
+      ],
       "normal_method_bindings": [
         {
           "method": "test_all_screen_definitions_include_status_chip",
@@ -2615,12 +2667,51 @@
           "scope": [
             "Owner-explicit same-original method fixture claim; caller/helper/file closure remains separate."
           ]
+        },
+        {
+          "method": "test_callback_state_machine_has_terminal_cleanup_semantics",
+          "source_sha256": "6503118aaebba7c2418af7a5b4130771c8b02245000f30fdd5fc62e731df7c94",
+          "evidence": [
+            "remediation/nuke-planning/docs/documentation-parity-supplement.json"
+          ],
+          "scope": [
+            "Owner-explicit same-original method fixture claim; caller/helper/file closure remains separate."
+          ]
+        },
+        {
+          "method": "test_direct_event_extension_has_negotiation_and_fallback",
+          "source_sha256": "6503118aaebba7c2418af7a5b4130771c8b02245000f30fdd5fc62e731df7c94",
+          "evidence": [
+            "remediation/nuke-planning/docs/documentation-parity-supplement.json"
+          ],
+          "scope": [
+            "Owner-explicit same-original method fixture claim; caller/helper/file closure remains separate."
+          ]
+        },
+        {
+          "method": "test_inflight_distinguishes_admission_from_dispatch",
+          "source_sha256": "6503118aaebba7c2418af7a5b4130771c8b02245000f30fdd5fc62e731df7c94",
+          "evidence": [
+            "remediation/nuke-planning/docs/documentation-parity-supplement.json"
+          ],
+          "scope": [
+            "Owner-explicit same-original method fixture claim; caller/helper/file closure remains separate."
+          ]
+        },
+        {
+          "method": "test_models_include_arc_and_owner_sequences",
+          "source_sha256": "6503118aaebba7c2418af7a5b4130771c8b02245000f30fdd5fc62e731df7c94",
+          "evidence": [
+            "remediation/nuke-planning/docs/documentation-parity-supplement.json"
+          ],
+          "scope": [
+            "Owner-explicit same-original method fixture claim; caller/helper/file closure remains separate."
+          ]
         }
       ],
-      "normally_closed_all_published_paths": false,
+      "normally_closed_all_published_paths": true,
       "remaining_caller_and_profile_duties": [
-        "Documentation cross-artifact/source invariant validator and this original method full native binding remain pending in Documentation ownership.",
-        "Native C4 SVG generation/runtime validation remains pending; pure extraction/normalization and recording-process transport are only primitives."
+        "Only this exact original test-file execution is normally verified. Other source versions, broader caller/generator responsibilities, catalog population and HV remain separate."
       ]
     },
     {
@@ -11653,12 +11744,27 @@
       "primary_code_path": "remediation/catalog/tooling/export_permissions.py",
       "explicit_profiles": "release011",
       "services": [
-        "Catalog-owned planned PermissionExporter"
+        "Catalog-owned planned PermissionExporter",
+        "PermissionExportOperation"
       ],
-      "additional_responsibilities": [],
-      "normal_file_verified": false,
-      "normal_verified_methods": [],
-      "decommissionable_from_pr": false,
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
+      "normal_file_verified": true,
+      "normal_verified_methods": [
+        {
+          "method": "run",
+          "evidence": "remediation/nuke-planning/catalog/catalog-normal-test-file-closures.json",
+          "source_sha256": "0166a3ffc33a7a806f8610b4d481370a51152f90472555a25c145805383e3a92",
+          "bindings": [
+            "PermissionExportRealTests.SameAssertionsBindNativeSqliteSchemaAndImmutableStore",
+            "PermissionExportCliRealTests.RegisteredMonolithExportsIndependentFixtureFactsWithoutChangingSource"
+          ],
+          "normal_verified": true,
+          "scope": "The one original function: read-only SQL UNION and ordering, definitions/symbols/nulls, hashed IDs, original eight logic groups and three-sample limit, schema validation, three output files and incomplete unknown authority metadata. Independently mocked fixtures bind native SQLite and actual category CLI. Strict immutable store/output scope and new producer serialization are explicit approved migration semantics."
+        }
+      ],
+      "decommissionable_from_pr": true,
       "execution_retired": false,
       "retirement_decision": null,
       "original_retained_verified": true,
@@ -11669,20 +11775,14 @@
           "indent": 0
         }
       ],
-      "pending_function_anchors": [
-        {
-          "name": "run",
-          "line": 4,
-          "indent": 0
-        }
-      ],
-      "pending_owner_method_list": "<module-body-and-required-callers>",
+      "pending_function_anchors": [],
+      "pending_owner_method_list": null,
       "remaining": [
-        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "This exact source SHA only. Stronger outside-release/strict-new preservation and typed C# error reporting are explicit migration differences. No catalog population or permission authority claim."
       ],
       "bounded_service_test_evidence": [
-        "Catalog owner fixtures/exports pending source-helper verification"
+        "Catalog owner fixtures/exports pending source-helper verification",
+        "PermissionExportRealTests and PermissionExportCliRealTests"
       ],
       "anchor_limit": "Lexical source-text anchors, not Python execution/AST or automatic proof each nested helper is an independent required feature. Same bytes share one implementation authority, but profile/caller obligations are retained.",
       "safe_to_delete": false,
@@ -21010,12 +21110,27 @@
       "primary_code_path": "remediation/catalog/tooling/export_permissions.py",
       "explicit_profiles": "canonical-or-explicit-owner-profile",
       "services": [
-        "Catalog-owned planned PermissionExporter"
+        "Catalog-owned planned PermissionExporter",
+        "PermissionExportOperation"
       ],
-      "additional_responsibilities": [],
-      "normal_file_verified": false,
-      "normal_verified_methods": [],
-      "decommissionable_from_pr": false,
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
+      "normal_file_verified": true,
+      "normal_verified_methods": [
+        {
+          "method": "run",
+          "evidence": "remediation/nuke-planning/catalog/catalog-normal-test-file-closures.json",
+          "source_sha256": "0166a3ffc33a7a806f8610b4d481370a51152f90472555a25c145805383e3a92",
+          "bindings": [
+            "PermissionExportRealTests.SameAssertionsBindNativeSqliteSchemaAndImmutableStore",
+            "PermissionExportCliRealTests.RegisteredMonolithExportsIndependentFixtureFactsWithoutChangingSource"
+          ],
+          "normal_verified": true,
+          "scope": "The one original function: read-only SQL UNION and ordering, definitions/symbols/nulls, hashed IDs, original eight logic groups and three-sample limit, schema validation, three output files and incomplete unknown authority metadata. Independently mocked fixtures bind native SQLite and actual category CLI. Strict immutable store/output scope and new producer serialization are explicit approved migration semantics."
+        }
+      ],
+      "decommissionable_from_pr": true,
       "execution_retired": false,
       "retirement_decision": null,
       "original_retained_verified": true,
@@ -21026,19 +21141,14 @@
           "indent": 0
         }
       ],
-      "pending_function_anchors": [
-        {
-          "name": "run",
-          "line": 4,
-          "indent": 0
-        }
-      ],
-      "pending_owner_method_list": "<module-body-and-required-callers>",
+      "pending_function_anchors": [],
+      "pending_owner_method_list": null,
       "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "This exact source SHA only. Stronger outside-release/strict-new preservation and typed C# error reporting are explicit migration differences. No catalog population or permission authority claim."
       ],
       "bounded_service_test_evidence": [
-        "Catalog owner fixtures/exports pending source-helper verification"
+        "Catalog owner fixtures/exports pending source-helper verification",
+        "PermissionExportRealTests and PermissionExportCliRealTests"
       ],
       "anchor_limit": "Lexical source-text anchors, not Python execution/AST or automatic proof each nested helper is an independent required feature. Same bytes share one implementation authority, but profile/caller obligations are retained.",
       "safe_to_delete": false,
@@ -23237,16 +23347,72 @@
       "owner": "Documentation",
       "category": "Design",
       "operations": [
-        "pending-explicit-registry-binding"
+        "Architecture"
       ],
       "canonical_responsibility_key": "Documentation|Design|629f66fc32f5b2110d6b1d6b5e340a02a7d7abb40f06c519291d00614c8452ee",
       "primary_code_path": "remediation/test_design023_guardrails.py",
       "explicit_profiles": "canonical-or-explicit-owner-profile",
-      "services": [],
-      "additional_responsibilities": [],
-      "normal_file_verified": false,
-      "normal_verified_methods": [],
-      "decommissionable_from_pr": false,
+      "services": [
+        "ModelContractValidator"
+      ],
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
+      "normal_file_verified": true,
+      "normal_verified_methods": [
+        {
+          "method": "test_current_cross_artifact_model",
+          "evidence": "remediation/nuke-planning/docs/documentation-parity-supplement.json",
+          "source_sha256": "629f66fc32f5b2110d6b1d6b5e340a02a7d7abb40f06c519291d00614c8452ee",
+          "bindings": [
+            {
+              "service": "ModelContractValidator",
+              "testFile": "remediation/nuke-app/Tests/Documentation/LegacyGuardOriginalMethodRealTests.cs",
+              "testMethod": "SameOriginalScenariosBindExistingNativeValidator",
+              "caseId": "test_current_cross_artifact_model",
+              "proof": "remediation/nuke-app/artifacts/tests/20261028T2103237817668-497872b395c04926831f85473db9d916/tests.trx",
+              "status": "same-original-predicates-current-full-normal-suite-pass"
+            }
+          ],
+          "normal_verified": true,
+          "scope": "Owner-explicit same-original method fixture claim; caller/helper/file closure remains separate."
+        },
+        {
+          "method": "test_missing_dispatch_edge_and_revoke_bypass_fail",
+          "evidence": "remediation/nuke-planning/docs/documentation-parity-supplement.json",
+          "source_sha256": "629f66fc32f5b2110d6b1d6b5e340a02a7d7abb40f06c519291d00614c8452ee",
+          "bindings": [
+            {
+              "service": "ModelContractValidator",
+              "testFile": "remediation/nuke-app/Tests/Documentation/LegacyGuardOriginalMethodRealTests.cs",
+              "testMethod": "SameOriginalScenariosBindExistingNativeValidator",
+              "caseId": "test_missing_dispatch_edge_and_revoke_bypass_fail",
+              "proof": "remediation/nuke-app/artifacts/tests/20261028T2103237817668-497872b395c04926831f85473db9d916/tests.trx",
+              "status": "same-original-predicates-current-full-normal-suite-pass"
+            }
+          ],
+          "normal_verified": true,
+          "scope": "Owner-explicit same-original method fixture claim; caller/helper/file closure remains separate."
+        },
+        {
+          "method": "test_placeholder_state_contract_and_missing_route_fail",
+          "evidence": "remediation/nuke-planning/docs/documentation-parity-supplement.json",
+          "source_sha256": "629f66fc32f5b2110d6b1d6b5e340a02a7d7abb40f06c519291d00614c8452ee",
+          "bindings": [
+            {
+              "service": "ModelContractValidator",
+              "testFile": "remediation/nuke-app/Tests/Documentation/LegacyGuardOriginalMethodRealTests.cs",
+              "testMethod": "SameOriginalScenariosBindExistingNativeValidator",
+              "caseId": "test_placeholder_state_contract_and_missing_route_fail",
+              "proof": "remediation/nuke-app/artifacts/tests/20261028T2103237817668-497872b395c04926831f85473db9d916/tests.trx",
+              "status": "same-original-predicates-current-full-normal-suite-pass"
+            }
+          ],
+          "normal_verified": true,
+          "scope": "Owner-explicit same-original method fixture claim; caller/helper/file closure remains separate."
+        }
+      ],
+      "decommissionable_from_pr": true,
       "execution_retired": false,
       "retirement_decision": null,
       "original_retained_verified": true,
@@ -23277,42 +23443,15 @@
           "indent": 1
         }
       ],
-      "pending_function_anchors": [
-        {
-          "name": "fixture",
-          "line": 6,
-          "indent": 1
-        },
-        {
-          "name": "run_guard",
-          "line": 8,
-          "indent": 1
-        },
-        {
-          "name": "test_current_cross_artifact_model",
-          "line": 12,
-          "indent": 1
-        },
-        {
-          "name": "test_missing_dispatch_edge_and_revoke_bypass_fail",
-          "line": 14,
-          "indent": 1
-        },
-        {
-          "name": "test_placeholder_state_contract_and_missing_route_fail",
-          "line": 16,
-          "indent": 1
-        }
-      ],
-      "pending_owner_method_list": [
-        "test_current_cross_artifact_model",
-        "test_missing_dispatch_edge_and_revoke_bypass_fail",
-        "test_placeholder_state_contract_and_missing_route_fail"
-      ],
+      "pending_function_anchors": [],
+      "pending_owner_method_list": null,
       "remaining": [
-        "Documentation cross-artifact/source invariant validator and this original method full native binding remain pending in Documentation ownership."
+        "Only this exact original test-file execution is normally verified. Other source versions, broader caller/generator responsibilities, catalog population and HV remain separate."
       ],
-      "bounded_service_test_evidence": [],
+      "bounded_service_test_evidence": [
+        "LegacyGuardOriginalMethodRealTests",
+        "remediation/nuke-app/Tests/Documentation/LegacyGuardOriginalMethodRealTests.cs"
+      ],
       "anchor_limit": "Lexical source-text anchors, not Python execution/AST or automatic proof each nested helper is an independent required feature. Same bytes share one implementation authority, but profile/caller obligations are retained.",
       "safe_to_delete": false,
       "accepted_complete": false,
@@ -23813,17 +23952,88 @@
       "owner": "Documentation",
       "category": "Design",
       "operations": [
-        "pending-explicit-registry-binding"
+        "Architecture"
       ],
       "canonical_responsibility_key": "Documentation|Design|6503118aaebba7c2418af7a5b4130771c8b02245000f30fdd5fc62e731df7c94",
       "primary_code_path": "remediation/tests_design018_contract.py",
       "explicit_profiles": "canonical-or-explicit-owner-profile",
       "services": [
+        "Current canonical documents and source-pinned screen/manifest observations",
         "DocumentationProjector"
       ],
-      "additional_responsibilities": [],
-      "normal_file_verified": false,
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
+      "normal_file_verified": true,
       "normal_verified_methods": [
+        {
+          "method": "test_callback_state_machine_has_terminal_cleanup_semantics",
+          "evidence": "remediation/nuke-planning/docs/documentation-parity-supplement.json",
+          "source_sha256": "6503118aaebba7c2418af7a5b4130771c8b02245000f30fdd5fc62e731df7c94",
+          "bindings": [
+            {
+              "service": "Current canonical documents and source-pinned screen/manifest observations",
+              "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign018MethodRealTests.cs",
+              "testMethod": "SameOriginalPredicatesReadCurrentCanonicalSources",
+              "caseId": "test_callback_state_machine_has_terminal_cleanup_semantics",
+              "proof": "remediation/nuke-app/artifacts/tests/20261028T2103237817668-497872b395c04926831f85473db9d916/tests.trx",
+              "status": "same-original-predicates-current-full-normal-suite-pass"
+            }
+          ],
+          "normal_verified": true,
+          "scope": "Owner-explicit same-original method fixture claim; caller/helper/file closure remains separate."
+        },
+        {
+          "method": "test_inflight_distinguishes_admission_from_dispatch",
+          "evidence": "remediation/nuke-planning/docs/documentation-parity-supplement.json",
+          "source_sha256": "6503118aaebba7c2418af7a5b4130771c8b02245000f30fdd5fc62e731df7c94",
+          "bindings": [
+            {
+              "service": "Current canonical documents and source-pinned screen/manifest observations",
+              "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign018MethodRealTests.cs",
+              "testMethod": "SameOriginalPredicatesReadCurrentCanonicalSources",
+              "caseId": "test_inflight_distinguishes_admission_from_dispatch",
+              "proof": "remediation/nuke-app/artifacts/tests/20261028T2103237817668-497872b395c04926831f85473db9d916/tests.trx",
+              "status": "same-original-predicates-current-full-normal-suite-pass"
+            }
+          ],
+          "normal_verified": true,
+          "scope": "Owner-explicit same-original method fixture claim; caller/helper/file closure remains separate."
+        },
+        {
+          "method": "test_direct_event_extension_has_negotiation_and_fallback",
+          "evidence": "remediation/nuke-planning/docs/documentation-parity-supplement.json",
+          "source_sha256": "6503118aaebba7c2418af7a5b4130771c8b02245000f30fdd5fc62e731df7c94",
+          "bindings": [
+            {
+              "service": "Current canonical documents and source-pinned screen/manifest observations",
+              "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign018MethodRealTests.cs",
+              "testMethod": "SameOriginalPredicatesReadCurrentCanonicalSources",
+              "caseId": "test_direct_event_extension_has_negotiation_and_fallback",
+              "proof": "remediation/nuke-app/artifacts/tests/20261028T2103237817668-497872b395c04926831f85473db9d916/tests.trx",
+              "status": "same-original-predicates-current-full-normal-suite-pass"
+            }
+          ],
+          "normal_verified": true,
+          "scope": "Owner-explicit same-original method fixture claim; caller/helper/file closure remains separate."
+        },
+        {
+          "method": "test_models_include_arc_and_owner_sequences",
+          "evidence": "remediation/nuke-planning/docs/documentation-parity-supplement.json",
+          "source_sha256": "6503118aaebba7c2418af7a5b4130771c8b02245000f30fdd5fc62e731df7c94",
+          "bindings": [
+            {
+              "service": "Current canonical documents and source-pinned screen/manifest observations",
+              "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign018MethodRealTests.cs",
+              "testMethod": "SameOriginalPredicatesReadCurrentCanonicalSources",
+              "caseId": "test_models_include_arc_and_owner_sequences",
+              "proof": "remediation/nuke-app/artifacts/tests/20261028T2103237817668-497872b395c04926831f85473db9d916/tests.trx",
+              "status": "same-original-predicates-current-full-normal-suite-pass"
+            }
+          ],
+          "normal_verified": true,
+          "scope": "Owner-explicit same-original method fixture claim; caller/helper/file closure remains separate."
+        },
         {
           "method": "test_all_screen_definitions_include_status_chip",
           "evidence": "remediation/nuke-planning/docs/documentation-parity-supplement.json",
@@ -23861,13 +24071,21 @@
                 "UI-COPY-SCR10",
                 "UI-COPY-SCR11"
               ]
+            },
+            {
+              "service": "Current canonical documents and source-pinned screen/manifest observations",
+              "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign018MethodRealTests.cs",
+              "testMethod": "SameOriginalPredicatesReadCurrentCanonicalSources",
+              "caseId": "test_all_screen_definitions_include_status_chip",
+              "proof": "remediation/nuke-app/artifacts/tests/20261028T2103237817668-497872b395c04926831f85473db9d916/tests.trx",
+              "status": "same-original-predicates-current-full-normal-suite-pass"
             }
           ],
           "normal_verified": true,
           "scope": "Owner-explicit same-original method fixture claim; caller/helper/file closure remains separate."
         }
       ],
-      "decommissionable_from_pr": false,
+      "decommissionable_from_pr": true,
       "execution_retired": false,
       "retirement_decision": null,
       "original_retained_verified": true,
@@ -23903,45 +24121,15 @@
           "indent": 4
         }
       ],
-      "pending_function_anchors": [
-        {
-          "name": "setUp",
-          "line": 12,
-          "indent": 4
-        },
-        {
-          "name": "test_callback_state_machine_has_terminal_cleanup_semantics",
-          "line": 17,
-          "indent": 4
-        },
-        {
-          "name": "test_inflight_distinguishes_admission_from_dispatch",
-          "line": 23,
-          "indent": 4
-        },
-        {
-          "name": "test_direct_event_extension_has_negotiation_and_fallback",
-          "line": 28,
-          "indent": 4
-        },
-        {
-          "name": "test_models_include_arc_and_owner_sequences",
-          "line": 32,
-          "indent": 4
-        }
-      ],
-      "pending_owner_method_list": [
-        "test_callback_state_machine_has_terminal_cleanup_semantics",
-        "test_direct_event_extension_has_negotiation_and_fallback",
-        "test_inflight_distinguishes_admission_from_dispatch",
-        "test_models_include_arc_and_owner_sequences"
-      ],
+      "pending_function_anchors": [],
+      "pending_owner_method_list": null,
       "remaining": [
-        "Documentation cross-artifact/source invariant validator and this original method full native binding remain pending in Documentation ownership.",
-        "Native C4 SVG generation/runtime validation remains pending; pure extraction/normalization and recording-process transport are only primitives."
+        "Only this exact original test-file execution is normally verified. Other source versions, broader caller/generator responsibilities, catalog population and HV remain separate."
       ],
       "bounded_service_test_evidence": [
-        "remediation/nuke-app/Tests/Documentation/DocumentationProjectionRealTests.cs"
+        "LegacyDesign018MethodRealTests",
+        "remediation/nuke-app/Tests/Documentation/DocumentationProjectionRealTests.cs",
+        "remediation/nuke-app/Tests/Documentation/LegacyDesign018MethodRealTests.cs"
       ],
       "anchor_limit": "Lexical source-text anchors, not Python execution/AST or automatic proof each nested helper is an independent required feature. Same bytes share one implementation authority, but profile/caller obligations are retained.",
       "safe_to_delete": false,
@@ -28606,23 +28794,6 @@
       "derived_from_inventory": true,
       "owner": "Catalog",
       "category": "Catalog",
-      "canonical_responsibility_key": "Catalog|Catalog|0166a3ffc33a7a806f8610b4d481370a51152f90472555a25c145805383e3a92",
-      "published_paths": [
-        "rehydration/producers/release-011/tooling/export_permissions.py",
-        "remediation/catalog/tooling/export_permissions.py"
-      ],
-      "services": [
-        "Catalog-owned planned PermissionExporter"
-      ],
-      "remaining": [
-        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
-      ]
-    },
-    {
-      "derived_from_inventory": true,
-      "owner": "Catalog",
-      "category": "Catalog",
       "canonical_responsibility_key": "Catalog|Catalog|08e88e08a55ddb44a7a61f9992ad078a189ce1d00763af4f4ff8ad652f9fbd83",
       "published_paths": [
         "rehydration/producers/release-011/tests/test_unnormalized_source_retention.py"
@@ -29771,35 +29942,6 @@
       ],
       "services": [
         "ModuleGraphValidator"
-      ],
-      "remaining": [
-        "Documentation cross-artifact/source invariant validator and this original method full native binding remain pending in Documentation ownership.",
-        "Native C4 SVG generation/runtime validation remains pending; pure extraction/normalization and recording-process transport are only primitives."
-      ]
-    },
-    {
-      "derived_from_inventory": true,
-      "owner": "Documentation",
-      "category": "Design",
-      "canonical_responsibility_key": "Documentation|Design|629f66fc32f5b2110d6b1d6b5e340a02a7d7abb40f06c519291d00614c8452ee",
-      "published_paths": [
-        "remediation/test_design023_guardrails.py"
-      ],
-      "services": [],
-      "remaining": [
-        "Documentation cross-artifact/source invariant validator and this original method full native binding remain pending in Documentation ownership."
-      ]
-    },
-    {
-      "derived_from_inventory": true,
-      "owner": "Documentation",
-      "category": "Design",
-      "canonical_responsibility_key": "Documentation|Design|6503118aaebba7c2418af7a5b4130771c8b02245000f30fdd5fc62e731df7c94",
-      "published_paths": [
-        "remediation/tests_design018_contract.py"
-      ],
-      "services": [
-        "DocumentationProjector"
       ],
       "remaining": [
         "Documentation cross-artifact/source invariant validator and this original method full native binding remain pending in Documentation ownership.",

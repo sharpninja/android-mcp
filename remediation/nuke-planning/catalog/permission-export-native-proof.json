@@ -1,0 +1,139 @@
+{
+  "localTimestamp": "2026-10-28T21:03:06",
+  "operation": "Catalog/Export",
+  "gates": [
+    {
+      "stage": "mock-before-service",
+      "trx": "remediation/nuke-app/artifacts/tests/20261028T2030306892248-db1df2a315864b5cb24f9c449759ec5a/tests.trx",
+      "sha256": "f18e45ad91d9ed4a2e9cf58bf016055a547263623bf8130146e479de180949e9",
+      "total": 62,
+      "failed": 0,
+      "skipped": 0,
+      "classes": {
+        "PermissionExportMockTests": 32
+      }
+    },
+    {
+      "stage": "same-case-native-service",
+      "trx": "remediation/nuke-app/artifacts/tests/20261028T2036383729429-e1f6c5f94af24099a974fd217aebe2ed/tests.trx",
+      "sha256": "5174e5f1a2c33faf2d42ddb715489a01778023282230c071ed3fefa973d75c73",
+      "total": 85,
+      "failed": 0,
+      "skipped": 0,
+      "classes": {
+        "PermissionExportRealTests": 16,
+        "PermissionExportMockTests": 32
+      }
+    },
+    {
+      "stage": "mock-before-registry-dispatch",
+      "trx": "remediation/nuke-app/artifacts/tests/20261028T2041052316237-db2059562bcb469e825d9a2efa6f707b/tests.trx",
+      "sha256": "1b7eb34129164d2fa9fe90228d8b0b209c3ad3ca97ed1c5ef1fbb46c6552f92c",
+      "total": 34,
+      "failed": 0,
+      "skipped": 0,
+      "classes": {
+        "PermissionExportRealTests": 16,
+        "PermissionExportPlannerMockTests": 18
+      }
+    },
+    {
+      "stage": "native-registry-dispatch",
+      "trx": "remediation/nuke-app/artifacts/tests/20261028T2042317643643-b2e75a36bdd74921986c2cd47c868c8a/tests.trx",
+      "sha256": "336f3fa8de228e016da2bf315f4aad90b9b00944f5c20f34267001aaadf75d40",
+      "total": 187,
+      "failed": 0,
+      "skipped": 0,
+      "classes": {
+        "PermissionExportPlannerRealTests": 10,
+        "PermissionExportRealTests": 16
+      }
+    },
+    {
+      "stage": "actual-monolith-cli",
+      "trx": "remediation/nuke-app/artifacts/tests/20261028T2053316782544-249fd8a1ba6c4375910098720b6031d0/tests.trx",
+      "sha256": "265094aab99d0b5522d4a25d50cf27b9af63adc2b1f07ebc27489a89ccad15df",
+      "total": 91,
+      "failed": 0,
+      "skipped": 0,
+      "classes": {
+        "PermissionExportCliRealTests": 3,
+        "ReleaseCodecRealTests": 12,
+        "PermissionExportRealTests": 16
+      }
+    }
+  ],
+  "currentSourcePins": [
+    {
+      "path": "remediation/nuke-app/Modules/Catalog/PermissionExportContracts.cs",
+      "sha256": "276c88fe424e184627a73bcf1822de107bcc510742194d06e863eb91d6bd9af6"
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Catalog/PermissionExportOperation.cs",
+      "sha256": "7827cf5403665a56d9f278eabf602aac77687fce99b6a83a44675af4b541e8b9"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Catalog/PermissionExportMockTests.cs",
+      "sha256": "3951b55973f3a511dc06e5ffbafee0ac9435b63b11e280e95ff7526bb698f069"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Catalog/PermissionExportRealTests.cs",
+      "sha256": "f014188af019915af0f13c94a62faeaa561b733f074ca09b45eb73e3893bbadc"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Catalog/PermissionExportCliRealTests.cs",
+      "sha256": "4923d60a86dbf29948ebdd2c8468864caa60bb2c2f72cd49c72aeb8d4fc21b59"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Core/PermissionExportPlannerMockTests.cs",
+      "sha256": "48c82568ec861c2f35ea90d6e5f6f6daeb07948b4722f7b114511ef95d75b32b"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Core/PermissionExportPlannerRealTests.cs",
+      "sha256": "bebe811198502e494786d10204258d75a3b926f2c0ac9319519baccd34095999"
+    },
+    {
+      "path": "remediation/nuke-app/Build.CatalogPermissionExport.cs",
+      "sha256": "1f514d883714e70546f9636d379d6f4e887953f32789d050ebaeeb47522294eb"
+    },
+    {
+      "path": "remediation/nuke-app/Core/OperationRegistry.cs",
+      "sha256": "a6bd76d36288a46931ac6e2083fdba26f62802b0a4a3177ac0a6d3a7c8c131e7"
+    },
+    {
+      "path": "remediation/nuke-app/Build.cs",
+      "sha256": "a27ab5c1198719fd26eddce0ee8936411d934f0797248969400526e9dfb8c782"
+    }
+  ],
+  "original": {
+    "path": "remediation/catalog/tooling/export_permissions.py",
+    "sha256": "0166a3ffc33a7a806f8610b4d481370a51152f90472555a25c145805383e3a92",
+    "method": "run"
+  },
+  "actualCliScenarios": [
+    "union",
+    "unicode",
+    "samples"
+  ],
+  "readonlyOpeningObservedInNativeCases": true,
+  "sourceDatabaseHashRetainedInCli": true,
+  "semantics": [
+    "The shared read-only SQLite authority supplies the original UNION, ordering, definitions, symbols, nulls and eight bounded expression groups.",
+    "Independent SQL fixture facts, schema-valid unknown authority, not-inferred MCP grants, complete=false and all three file hashes are asserted.",
+    "Output is a separate empty directory outside the whole sealed release, with shared strict streaming writes and retained partial failures.",
+    "No historical C# versus Python JSON-byte identity is claimed. No Python or custom Node source executes."
+  ],
+  "fullCurrentSuitePending": false,
+  "completeOriginalFileClosure": true,
+  "hostileAccepted": false,
+  "safeToDeleteOriginal": false,
+  "fullGate": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T2103237817668-497872b395c04926831f85473db9d916/tests.trx",
+    "sha256": "1c9ab52506e76080e48c4db21ae852148e8f3651ce087237824357d5fe3dfcdb",
+    "total": 66003,
+    "passed": 66003,
+    "failed": 0,
+    "skipped": 0,
+    "buildWarnings": 0
+  }
+}

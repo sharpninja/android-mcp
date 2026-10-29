@@ -1,6 +1,6 @@
 namespace AndroidMcp.BuildTool.Core;
 
-public enum OperationExecutor { Pending, MockTests, Tests, DocumentationAssets, NativeParser, SourcesFetch, PublicationCheck, SourcesPlan, Architecture, CatalogBuild, BrowserQa, SourcesInventory, SdkReferenceCopy, SourcesExtract, CatalogBuildFromSources, SourcesSeed, GradleCompatibility, GradleProjection, CatalogValidation }
+public enum OperationExecutor { Pending, MockTests, Tests, DocumentationAssets, NativeParser, SourcesFetch, PublicationCheck, SourcesPlan, Architecture, CatalogBuild, BrowserQa, SourcesInventory, SdkReferenceCopy, SourcesExtract, CatalogBuildFromSources, SourcesSeed, GradleCompatibility, GradleProjection, CatalogValidation, CatalogPermissionExport, ReleaseSplit, ReleaseReassemble }
 public sealed record OperationDefinition(OperationKey Key, string Description,
     IReadOnlyList<string> RequiredParameters, IReadOnlyList<string> OptionalParameters,
     IReadOnlyList<PlannedStep> Steps, OperationExecutor Executor=OperationExecutor.Pending);
@@ -43,6 +43,8 @@ public sealed class OperationRegistry
             new("verify-source-inventory",["admit-locked-recipe"]),new("capture-runtime-identity",["verify-source-inventory"]),
             new("project-effective-inventory",["capture-runtime-identity"]),new("build-catalog",["project-effective-inventory"]),
             new("seal-catalog",["build-catalog"]));
+        Add(Category.Catalog,Operation.Export,["project-root","source-catalog","output-root"],[],OperationExecutor.CatalogPermissionExport,
+            new("admit-readonly-export",[]),new("export-permissions",["admit-readonly-export"]),new("emit-coverage",["export-permissions"]));
         Add(Category.Design,Operation.Assets,["project-root","output-root"],["generation"],OperationExecutor.DocumentationAssets,
             new("validate-design-inputs",[]),new("project-ui",["validate-design-inputs"]));
         Add(Category.Design,Operation.GradleProjection,["output-root"],["generation"],OperationExecutor.GradleProjection,
@@ -64,6 +66,10 @@ public sealed class OperationRegistry
         Add(Category.Validate,Operation.Toolchain,[],["toolchain-check","project-root","pipeline-request","pipeline-request-sha256","pipeline-request-length"],OperationExecutor.SdkReferenceCopy,new PlannedStep("verify-toolchain",[]));
         Add(Category.Review,Operation.Prepare,["snapshot"],[],OperationExecutor.Pending,new("verify-review-evidence",[]),new("prepare-review",[]));
         Add(Category.Publish,Operation.Check,["git-checkout","git-identity","receipt-root"],["policy-relative-path"],OperationExecutor.PublicationCheck,new PlannedStep("check-deliverables",[]));
+        Add(Category.Publish,Operation.Split,["project-root","source-artifact","generation","artifact-sha256"],["part-bytes"],OperationExecutor.ReleaseSplit,
+            new("admit-release-input",[]),new("split-parts",["admit-release-input"]),new("seal-parts-manifest",["split-parts"]));
+        Add(Category.Publish,Operation.Reassemble,["project-root","parts-manifest","generation","destination-artifact","manifest-sha256"],[],OperationExecutor.ReleaseReassemble,
+            new("admit-parts-manifest",[]),new("verify-parts",["admit-parts-manifest"]),new("reassemble-artifact",["verify-parts"]),new("seal-reassembly-receipt",["reassemble-artifact"]));
         Add(Category.Validate,Operation.MockGate,[],["test-filter"],OperationExecutor.MockTests,new PlannedStep("mock-tests",[]));
         Add(Category.Validate,Operation.Tests,[],["test-filter","java-native-manifest"],OperationExecutor.Tests,new PlannedStep("all-tests",[]));
         Definitions = definitions.AsReadOnly();

@@ -1,0 +1,130 @@
+{
+  "localTimestamp": "2026-10-28T21:03:06",
+  "scope": "Existing offline release-parts codec and NUKE category callers, not upload or whole-producer acceptance",
+  "gates": [
+    {
+      "stage": "mock-before-codec",
+      "trx": "remediation/nuke-app/artifacts/tests/20261028T2014248645751-9e037c4152b543498cdb14b63ce43e8c/tests.trx",
+      "sha256": "16a6caf477664d3f398ea53d74f571efb5283696d4bef200e83474beacd8a9cd",
+      "total": 70,
+      "failed": 0,
+      "skipped": 0,
+      "classes": {
+        "ReleaseCodecMockTests": 24
+      }
+    },
+    {
+      "stage": "same-original-eight-and-corrected-four-native",
+      "trx": "remediation/nuke-app/artifacts/tests/20261028T2048043982909-a6221e2c6fe848518e8c03de02e12ef3/tests.trx",
+      "sha256": "8f706140b26b20d13b4d05ffef8655e5a35f237fe36d70223a0ac62e9b89543e",
+      "total": 58,
+      "failed": 0,
+      "skipped": 0,
+      "classes": {
+        "ReleaseCodecRealTests": 12
+      }
+    },
+    {
+      "stage": "mock-before-caller-registry",
+      "trx": "remediation/nuke-app/artifacts/tests/20261028T2058168826740-5131a4a152504b17a7ea2e36d3e38d5e/tests.trx",
+      "sha256": "0895b212eeb9054ecbdf7b9534238d0ebade5a9195126ba23ea9f537b94ed3ac",
+      "total": 36,
+      "failed": 0,
+      "skipped": 0,
+      "classes": {
+        "ReleaseCodecPlannerMockTests": 36
+      }
+    },
+    {
+      "stage": "native-caller-registry",
+      "trx": "remediation/nuke-app/artifacts/tests/20261028T2059384164450-c289a646f4674db29856b5d1c35ceb14/tests.trx",
+      "sha256": "c6209b7d26dea10bb3e8f0bd84b1ac25d2035e923c55732ebd088a9bd2c79d3a",
+      "total": 147,
+      "failed": 0,
+      "skipped": 0,
+      "classes": {
+        "ReleaseCodecRealTests": 12,
+        "ReleaseCodecPlannerRealTests": 20
+      }
+    },
+    {
+      "stage": "actual-split-and-reassemble-monolith-callers",
+      "trx": "remediation/nuke-app/artifacts/tests/20261028T2100354963263-aec74c840eec48699500fb2f060bb884/tests.trx",
+      "sha256": "979fabb2fe1d6cb586105bd5fb628898d66c16e1c69edfbf1a83e8e900ba49fe",
+      "total": 62,
+      "failed": 0,
+      "skipped": 0,
+      "classes": {
+        "ReleaseCodecCliRealTests": 3
+      }
+    }
+  ],
+  "sourcePins": [
+    {
+      "path": "remediation/nuke-app/Modules/Publication/ReleasePartsContracts.cs",
+      "sha256": "0751fb5fe0f796e505df9449d66e13e6293b77ae4054202e9dfa5a6301152fdf"
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Publication/ReleasePartsCodec.cs",
+      "sha256": "483585796bb5bff1df972e729c56bb25bea746b3660579cf3eef24b3c9b29742"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Publication/ReleasePartsContractCases.cs",
+      "sha256": "b974839634ffb56d61b229dff1e5a7744c60aab4f7aee54c494a9a8ecaa99990"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Publication/ReleaseCodecMockTests.cs",
+      "sha256": "d6394fda3753b068e80c872cf58193ab8ea8af911425e109b2ba43513bf96d13"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Publication/ReleaseCodecRealTests.cs",
+      "sha256": "687736b5dae9b61d361b34ca8cd11aae49a7a573cebb15f3b6624221bd3fb41f"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Publication/ReleaseCodecCliRealTests.cs",
+      "sha256": "b53c65c40574f56794fd2f0ae81b3597fa118499c675ae42d7d4cfa9a388fb14"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Core/ReleaseCodecPlannerMockTests.cs",
+      "sha256": "221e3c90c55199ff6c423f811a722e8efb537b9f6323706fa81bc9ed8f1b81d1"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Core/ReleaseCodecPlannerRealTests.cs",
+      "sha256": "51449cc6ef83fddd53900f10a48d46be5def0877facced08e140af8c6e83c206"
+    },
+    {
+      "path": "remediation/nuke-app/Build.ReleaseParts.cs",
+      "sha256": "268dafe76c53ca5e9d32846a9040059e240a263f22fdf6172d31a46b290749cb"
+    },
+    {
+      "path": "remediation/nuke-app/Core/OperationContracts.cs",
+      "sha256": "27ff28db818e43ac9fb91d9f4f30f953eb69fa543c194f07746fcd1ef4376361"
+    },
+    {
+      "path": "remediation/nuke-app/Core/OperationRegistry.cs",
+      "sha256": "a6bd76d36288a46931ac6e2083fdba26f62802b0a4a3177ac0a6d3a7c8c131e7"
+    },
+    {
+      "path": "remediation/nuke-app/Build.cs",
+      "sha256": "a27ab5c1198719fd26eddce0ee8936411d934f0797248969400526e9dfb8c782"
+    }
+  ],
+  "nativeHandoffSha256": "430c7f881a05544472960b5da8277ec24aada519fcc7960ad847140e69feb40e",
+  "actualCli": [
+    "Original payload split/reassemble with exact per-part and final hashes.",
+    "Empty artifact roundtrip.",
+    "Existing destination rejected and retained.",
+    "Wrong trusted whole pin prevents manifest commit."
+  ],
+  "nativePlatform": "Actual Linux kernel/identity/opener/store; Windows concrete kernel unsupported",
+  "changedRetentionSemantics": "No move/delete. Retained uncommitted copies, split manifest last and reassembly success marker last. File existence alone is not commit.",
+  "remaining": [
+    "Complete malformed/numeric manifest compatibility and error precedence.",
+    "Additional limit, mutation, cancellation and exceptional producer branches.",
+    "Whole original producer accounting and current full-suite closure."
+  ],
+  "fullCurrentSuitePending": true,
+  "fullOriginalProducerParity": false,
+  "hostileAccepted": false,
+  "safeToDeleteOriginal": false
+}

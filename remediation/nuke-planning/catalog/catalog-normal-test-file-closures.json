@@ -1,12 +1,12 @@
 {
   "schemaVersion": "1.0.0",
   "localTimestamp": "2026-10-28T15:40:23",
-  "scope": "Normal closure of two complete original metadata test executions. Not whole producer/corpus/acceptance parity.",
+  "scope": "Normal exact original file execution closures, with producer/profile differences stated per entry. No whole migration or HV acceptance.",
   "proof": {
-    "trx": "remediation/nuke-app/artifacts/tests/20261028T1925584215879-aff03e2a4d184c76b637232a2f073785/tests.trx",
-    "sha256": "8aff81c08a272bf773591657083b0a6ace11e8f2ae2f38bea1dec11edfc8800a",
-    "total": 65753,
-    "passed": 65753,
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T2103237817668-497872b395c04926831f85473db9d916/tests.trx",
+    "sha256": "1c9ab52506e76080e48c4db21ae852148e8f3651ce087237824357d5fe3dfcdb",
+    "total": 66003,
+    "passed": 66003,
     "failed": 0,
     "skipped": 0,
     "exactClassCounts": {
@@ -14,7 +14,11 @@
       "CatalogAggregateMetadataRealTests": 17,
       "MetadataCrudRealTests": 13,
       "CatalogMetadataLeafRealTests": 19,
-      "CatalogMetadataObligationRealTests": 11
+      "CatalogMetadataObligationRealTests": 11,
+      "PermissionExportRealTests": 16,
+      "PermissionExportMockTests": 32,
+      "PermissionExportPlannerRealTests": 10,
+      "PermissionExportCliRealTests": 3
     },
     "scope": "Current unfiltered full Root gate, complete original native method sets and known source-delta reconciliation. No HV or whole-producer claim."
   },
@@ -78,6 +82,46 @@
     {
       "path": "remediation/nuke-app/Tests/Core/CanonicalJsonMockTests.cs",
       "sha256": "32d652308493ae59fee21e6ea79110844d62900b4bf94e0873f0960308a73104"
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Catalog/PermissionExportContracts.cs",
+      "sha256": "276c88fe424e184627a73bcf1822de107bcc510742194d06e863eb91d6bd9af6"
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Catalog/PermissionExportOperation.cs",
+      "sha256": "7827cf5403665a56d9f278eabf602aac77687fce99b6a83a44675af4b541e8b9"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Catalog/PermissionExportMockTests.cs",
+      "sha256": "3951b55973f3a511dc06e5ffbafee0ac9435b63b11e280e95ff7526bb698f069"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Catalog/PermissionExportRealTests.cs",
+      "sha256": "f014188af019915af0f13c94a62faeaa561b733f074ca09b45eb73e3893bbadc"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Catalog/PermissionExportCliRealTests.cs",
+      "sha256": "4923d60a86dbf29948ebdd2c8468864caa60bb2c2f72cd49c72aeb8d4fc21b59"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Core/PermissionExportPlannerMockTests.cs",
+      "sha256": "48c82568ec861c2f35ea90d6e5f6f6daeb07948b4722f7b114511ef95d75b32b"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Core/PermissionExportPlannerRealTests.cs",
+      "sha256": "bebe811198502e494786d10204258d75a3b926f2c0ac9319519baccd34095999"
+    },
+    {
+      "path": "remediation/nuke-app/Build.CatalogPermissionExport.cs",
+      "sha256": "1f514d883714e70546f9636d379d6f4e887953f32789d050ebaeeb47522294eb"
+    },
+    {
+      "path": "remediation/nuke-app/Core/OperationRegistry.cs",
+      "sha256": "a6bd76d36288a46931ac6e2083fdba26f62802b0a4a3177ac0a6d3a7c8c131e7"
+    },
+    {
+      "path": "remediation/nuke-app/Build.cs",
+      "sha256": "a27ab5c1198719fd26eddce0ee8936411d934f0797248969400526e9dfb8c782"
     }
   ],
   "requireUnchangedNativePins": true,
@@ -161,6 +205,64 @@
       "accepted_complete": false,
       "safe_to_delete": false,
       "execution_retired": false
+    },
+    {
+      "legacyPath": "remediation/catalog/tooling/export_permissions.py",
+      "legacySha256": "0166a3ffc33a7a806f8610b4d481370a51152f90472555a25c145805383e3a92",
+      "owner": "Catalog",
+      "category": "Catalog",
+      "operation": "Export",
+      "normal_verified": true,
+      "normal_verified_methods": [
+        {
+          "legacy_method": "run",
+          "native_case_ids": [
+            "PermissionExportRealTests.SameAssertionsBindNativeSqliteSchemaAndImmutableStore",
+            "PermissionExportCliRealTests.RegisteredMonolithExportsIndependentFixtureFactsWithoutChangingSource"
+          ],
+          "assertion_equivalence": "The one original function: read-only SQL UNION and ordering, definitions/symbols/nulls, hashed IDs, original eight logic groups and three-sample limit, schema validation, three output files and incomplete unknown authority metadata. Independently mocked fixtures bind native SQLite and actual category CLI. Strict immutable store/output scope and new producer serialization are explicit approved migration semantics."
+        }
+      ],
+      "pending_methods": [],
+      "nativeService": "PermissionExportOperation",
+      "nativeTest": "PermissionExportRealTests and PermissionExportCliRealTests",
+      "normal_verification_scope": "Original one-function exporter plus __main__ caller execution; shared C# store/schema/SQLite and category CLI replace Python framework mechanics. No historical serialized-byte identity.",
+      "frameworkResponsibilities": "sqlite3 readonly connection, pathlib, json, jsonschema, hashlib and sys.argv are replaced by existing CatalogDatabase, ArtifactPaths, CanonicalJson, pinned Json.Schema, shared content hash and the category operation registry.",
+      "frozenProfileNote": "This exact source SHA only. Stronger outside-release/strict-new preservation and typed C# error reporting are explicit migration differences. No catalog population or permission authority claim.",
+      "decommissionable_from_pr": true,
+      "decommissionable_scope": "This source SHA exporter execution only; local original retained. No physical deletion, Ready or HV acceptance.",
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false
+    },
+    {
+      "legacyPath": "rehydration/producers/release-011/tooling/export_permissions.py",
+      "legacySha256": "0166a3ffc33a7a806f8610b4d481370a51152f90472555a25c145805383e3a92",
+      "owner": "Catalog",
+      "category": "Catalog",
+      "operation": "Export",
+      "normal_verified": true,
+      "normal_verified_methods": [
+        {
+          "legacy_method": "run",
+          "native_case_ids": [
+            "PermissionExportRealTests.SameAssertionsBindNativeSqliteSchemaAndImmutableStore",
+            "PermissionExportCliRealTests.RegisteredMonolithExportsIndependentFixtureFactsWithoutChangingSource"
+          ],
+          "assertion_equivalence": "The one original function: read-only SQL UNION and ordering, definitions/symbols/nulls, hashed IDs, original eight logic groups and three-sample limit, schema validation, three output files and incomplete unknown authority metadata. Independently mocked fixtures bind native SQLite and actual category CLI. Strict immutable store/output scope and new producer serialization are explicit approved migration semantics."
+        }
+      ],
+      "pending_methods": [],
+      "nativeService": "PermissionExportOperation",
+      "nativeTest": "PermissionExportRealTests and PermissionExportCliRealTests",
+      "normal_verification_scope": "Original one-function exporter plus __main__ caller execution; shared C# store/schema/SQLite and category CLI replace Python framework mechanics. No historical serialized-byte identity.",
+      "frameworkResponsibilities": "sqlite3 readonly connection, pathlib, json, jsonschema, hashlib and sys.argv are replaced by existing CatalogDatabase, ArtifactPaths, CanonicalJson, pinned Json.Schema, shared content hash and the category operation registry.",
+      "frozenProfileNote": "This exact source SHA only. Stronger outside-release/strict-new preservation and typed C# error reporting are explicit migration differences. No catalog population or permission authority claim.",
+      "decommissionable_from_pr": true,
+      "decommissionable_scope": "This source SHA exporter execution only; local original retained. No physical deletion, Ready or HV acceptance.",
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false
     }
   ],
   "normalVerifiedTestFiles": 2,
@@ -178,12 +280,12 @@
   ],
   "reconciliation": "Exact all-method sets and literal bodies checked. Existing native providers were read: aggregate occurrences use actual builder and SQLite; CRUD uses native schema/storage constraints; descriptor/OpenAPI and exact metadata canonical vector use current real services. No additional user feature or infrastructure.",
   "currentProofReconciliation": {
-    "localTimestamp": "2026-10-28T19:39:41",
+    "localTimestamp": "2026-10-28T21:11:52",
     "priorProof": {
-      "trx": "remediation/nuke-app/artifacts/tests/20261028T1851258686627-002d95c301da41469bfb380ae22ee850/tests.trx",
-      "sha256": "250ce25f1fe3614767ff716a43756e40dfa628f6cd601f41018d8ef059623f59",
-      "total": 65628,
-      "passed": 65628,
+      "trx": "remediation/nuke-app/artifacts/tests/20261028T1925584215879-aff03e2a4d184c76b637232a2f073785/tests.trx",
+      "sha256": "8aff81c08a272bf773591657083b0a6ace11e8f2ae2f38bea1dec11edfc8800a",
+      "total": 65753,
+      "passed": 65753,
       "failed": 0,
       "skipped": 0,
       "exactClassCounts": {
@@ -197,6 +299,6 @@
     },
     "changedPins": [],
     "reason": "Only the explicitly allowed native source deltas, if any, are refreshed. Original methods, test inputs/assertions and historical fixtures retained. The current unfiltered full gate verifies these current source pins; unrelated files are not inferred closed.",
-    "oldReceiptRetained": "/home/sharpninja/github/2026-10-26/task-3/remediation/retained/normal-closure-updates/catalog-normal-test-file-closures.json.5a7cd40cf0caeff4048f202066a5f512437a5715697915498810187ff6e44127.json"
+    "oldReceiptRetained": "/home/sharpninja/github/2026-10-26/task-3/remediation/retained/normal-closure-updates/catalog-normal-test-file-closures.json.4aed0e06de461ebb7da73ac12a5ca94eee2e15f9babde5e3b46668b1060556a0.json"
   }
 }

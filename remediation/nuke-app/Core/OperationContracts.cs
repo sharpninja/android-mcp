@@ -8,7 +8,7 @@ public enum Operation
     Architecture, Assets, Storyboards, Factor, Reconstruct, Manifest, Package,
     All, GradleCompatibility, Toolchain, Contracts, Catalog, Design, Tests,
     MockGate, Reproducibility, Deliverables, Prepare, Launch, Recover, Assess,
-    Check, Stage, Sync, BrowserQa, BuildFromSources, GradleProjection
+    Check, Stage, Sync, BrowserQa, BuildFromSources, GradleProjection, Split, Reassemble
 }
 
 public sealed record OperationKey(Category Category, Operation Operation);

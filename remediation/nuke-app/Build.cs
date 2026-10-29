@@ -22,6 +22,20 @@ public sealed partial class Build : NukeBuild
 
     [Parameter("Source manifest for Catalog/Build")]
     public string? SourceManifest { get; set; }
+    [Parameter("Selected sealed catalog release directory for read-only permission export")]
+    public string? SourceCatalog { get; set; }
+    [Parameter("Project-root-relative sealed file to split without modifying its bytes")]
+    public string? SourceArtifact { get; set; }
+    [Parameter("Explicit trusted SHA256 of the sealed artifact")]
+    public string? ArtifactSha256 { get; set; }
+    [Parameter("Optional split part size; typed codec default applies when omitted")]
+    public long? PartBytes { get; set; }
+    [Parameter("Project-root-relative release parts manifest")]
+    public string? PartsManifest { get; set; }
+    [Parameter("Explicit trusted SHA256 of the release parts manifest")]
+    public string? ManifestSha256 { get; set; }
+    [Parameter("Project-root-relative new artifact path; existing output is rejected")]
+    public string? DestinationArtifact { get; set; }
     [Parameter("Locked recipe identity file, resolved relative to --project-root")]
     public string? RecipeLock { get; set; }
     [Parameter("Explicit immutable source bundle directory")]
@@ -132,6 +146,10 @@ public sealed partial class Build : NukeBuild
         var parameters=new Dictionary<string,string>(StringComparer.Ordinal);
         void Add(string key,string? value) { if(value is not null) parameters.Add(key,value); }
         Add("source-manifest",SourceManifest); Add("project-root",ProjectRoot);
+        Add("source-catalog",SourceCatalog);
+        Add("source-artifact",SourceArtifact);Add("artifact-sha256",ArtifactSha256);
+        Add("part-bytes",PartBytes?.ToString(System.Globalization.CultureInfo.InvariantCulture));
+        Add("parts-manifest",PartsManifest);Add("manifest-sha256",ManifestSha256);Add("destination-artifact",DestinationArtifact);
         Add("pipeline-request",PipelineRequest);Add("pipeline-request-sha256",PipelineRequestSha256);
         Add("pipeline-request-length",PipelineRequestLength?.ToString(System.Globalization.CultureInfo.InvariantCulture));
         Add("toolchain-check",ToolchainCheck?.ToString());
@@ -169,6 +187,8 @@ public sealed partial class Build : NukeBuild
             case OperationExecutor.SourcesFetch: FetchSources().GetAwaiter().GetResult();break;
             case OperationExecutor.SourcesSeed: SeedSources().GetAwaiter().GetResult();break;
             case OperationExecutor.PublicationCheck: CheckPublication().GetAwaiter().GetResult();break;
+            case OperationExecutor.ReleaseSplit: SplitReleaseArtifact().GetAwaiter().GetResult();break;
+            case OperationExecutor.ReleaseReassemble: ReassembleReleaseArtifact().GetAwaiter().GetResult();break;
             case OperationExecutor.SourcesPlan: PlanSources().GetAwaiter().GetResult();break;
             case OperationExecutor.Architecture: GenerateArchitecture().GetAwaiter().GetResult();break;
             case OperationExecutor.GradleCompatibility: GenerateGradleCompatibility().GetAwaiter().GetResult();break;
@@ -176,6 +196,7 @@ public sealed partial class Build : NukeBuild
             case OperationExecutor.CatalogBuild: BuildCatalog().GetAwaiter().GetResult();break;
             case OperationExecutor.CatalogBuildFromSources: BuildCatalogFromSources().GetAwaiter().GetResult();break;
             case OperationExecutor.CatalogValidation: ValidateCatalog().GetAwaiter().GetResult();break;
+            case OperationExecutor.CatalogPermissionExport: ExportCatalogPermissions().GetAwaiter().GetResult();break;
             case OperationExecutor.BrowserQa: RunBrowserQa().GetAwaiter().GetResult();break;
             case OperationExecutor.SourcesInventory: InventorySources().GetAwaiter().GetResult();break;
             case OperationExecutor.SourcesExtract: ExtractSources().GetAwaiter().GetResult();break;
