@@ -2022,10 +2022,254 @@
       "rootFullGateUpgradeRequired": false,
       "proposal_only": false,
       "rootFullGateSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20"
+    },
+    {
+      "legacyPath": "remediation/catalog/tests/test_build.py",
+      "legacySha256": "e9ce2b6dbb35b6e7689c6df830a9af8e82dde1091f9eae67c4e3ff767d8896a0",
+      "owner": "Catalog",
+      "category": "Catalog",
+      "operation": "Build",
+      "nativeService": "CatalogBuild and existing CatalogDevicePipeline providers",
+      "nativeTest": "Existing original method maps plus CatalogOriginalAssertionGapRealTests",
+      "reuseExistingMethodClaims": [
+        "test_import_integrity_schema_overlay_and_immutability"
+      ],
+      "pending_methods": [],
+      "methodProof": [
+        {
+          "method": "test_import_integrity_schema_overlay_and_immutability",
+          "originalBodySha256": "25361b180b3da503c5e21ffc45b38958cf0da2f5a3dd0b9365f9cad25a45007f",
+          "originalAssertionLines": [
+            "   r=pathlib.Path(td);inv=self.fixture(r);v=b.build(inv,r/'out');self.assertEqual(v['integrity_check'],'ok');self.assertEqual(v['foreign_key_check'],[]);self.assertEqual(v['counts']['permission_definitions'],1)",
+            "   self.assertTrue(any(d['permission'].get('name')=='android.permission.CAMERA' for d in docs));self.assertEqual(json.loads((r/'out/catalog.json').read_text())['entries'],docs)",
+            "   with self.assertRaises(sqlite3.IntegrityError):db.execute('UPDATE bindings SET name=\"changed\" WHERE binding_id=?',(bid,))",
+            "   self.assertEqual(db.execute('SELECT count(*) FROM runtime_catalog').fetchone()[0],count-1)",
+            "   db.execute('UPDATE overlays SET state=\"active\",revision=2,document_json=? WHERE entry_id=?',(json.dumps({'fixture':'override'}),bid));self.assertEqual(json.loads(db.execute('SELECT document_json FROM runtime_catalog WHERE entry_id=?',(bid,)).fetchone()[0]),{'fixture':'override'})",
+            "   with self.assertRaises(sqlite3.IntegrityError):db.execute('INSERT INTO occurrences VALUES (?,?,?)',('missing','missing',1))",
+            "   self.assertEqual(before,{p.name:p.read_bytes() for p in (r/'out').iterdir() if p.is_file()})"
+          ],
+          "nativeBindings": [
+            "BUILD-01",
+            "FULL-VAL-01"
+          ],
+          "pendingOriginalAssertion": null,
+          "scope": "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit"
+        },
+        {
+          "method": "test_hash_failure_does_not_publish",
+          "originalBodySha256": "60a571724811f8e047c8aed190a5ad2bf8c7529b97ee9316ff0e6a238f46ea62",
+          "originalAssertionLines": [
+            "   with self.assertRaisesRegex(ValueError,'SHA256 mismatch'):b.build(inv,r/'out')",
+            "   self.assertFalse((r/'out/catalog.sqlite').exists())",
+            "   self.assertFalse(json.loads((r/'out/validation-failure.json').read_text())['published'])"
+          ],
+          "nativeBindings": [
+            "CatalogOriginalTamperRealTests"
+          ],
+          "pendingOriginalAssertion": null,
+          "scope": "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit"
+        },
+        {
+          "method": "test_one_identity_two_immutable_occurrences",
+          "originalBodySha256": "8504ced74ebb2020fae5885f7a012ff48b704fb37be7ffe799cbc47155b71014",
+          "originalAssertionLines": [
+            "   db=sqlite3.connect(r/'out/catalog.sqlite');self.addCleanup(db.close);rows=db.execute(\"SELECT b.binding_id,count(*) FROM bindings b JOIN occurrences o USING(binding_id) WHERE b.signature='java:a.A#go(int)' GROUP BY b.binding_id\").fetchall();self.assertEqual(len(rows),1);self.assertEqual(rows[0][1],2)"
+          ],
+          "nativeBindings": [
+            "BUILD-05",
+            "CatalogOriginalAssertionGapRealTests.SameOriginalGroupedIdentitySqlHasExactlyOneBindingAndTwoOccurrences"
+          ],
+          "pendingOriginalAssertion": null,
+          "scope": "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit"
+        },
+        {
+          "method": "test_invalid_ast_cannot_publish",
+          "originalBodySha256": "ffde3c4fa2c2f87b565d441dc67193e8ef419c900608a1e552753d5a5e28cea3",
+          "originalAssertionLines": [
+            "   with self.assertRaises(ValueError):b.build(inv,r/'out')",
+            "   self.assertFalse((r/'out/catalog.sqlite').exists())"
+          ],
+          "nativeBindings": [
+            "BUILD-04"
+          ],
+          "pendingOriginalAssertion": null,
+          "scope": "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit"
+        }
+      ],
+      "normal_file_verified": true,
+      "rootFull019Pending": false,
+      "conditionalEligibility": "Exact full019 proof now bound; Root alone decides authority merge; native error/cache carriers retained",
+      "frameworkResponsibilities": "unittest/tempfile/Python exceptions adapt to shared native test providers; source SHA identity stays truthful C# producer identity",
+      "decommissionable_scope": "Current published original test-file responsibilities only; no production file, frozen schema execution, global corpus or HV claim",
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "normal_verified_methods": [
+        {
+          "legacy_method": "test_hash_failure_does_not_publish",
+          "native_case_ids": [
+            "CatalogOriginalTamperRealTests"
+          ],
+          "assertion_equivalence": "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_one_identity_two_immutable_occurrences",
+          "native_case_ids": [
+            "BUILD-05",
+            "CatalogOriginalAssertionGapRealTests.SameOriginalGroupedIdentitySqlHasExactlyOneBindingAndTwoOccurrences"
+          ],
+          "assertion_equivalence": "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit",
+          "status": "normal-native-verified"
+        },
+        {
+          "legacy_method": "test_invalid_ast_cannot_publish",
+          "native_case_ids": [
+            "BUILD-04"
+          ],
+          "assertion_equivalence": "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit",
+          "status": "normal-native-verified"
+        }
+      ],
+      "normal_verified": true,
+      "decommissionable_from_pr": false,
+      "execution_retired": false,
+      "proposal_only": false,
+      "rootFullGateSha256": "bac5431d1b4d53022b3a6b644a30e77203c53a16a4ec0f9a6997f040a4f854fb",
+      "frozenProfileNote": "unittest/tempfile/Python exceptions adapt to shared native test providers; source SHA identity stays truthful C# producer identity Current original test file only; frozen profiles and whole producer/corpus/HV remain separate."
+    },
+    {
+      "legacyPath": "remediation/catalog/tests/test_device_catalog_pipeline.py",
+      "legacySha256": "50e4504e81443dacdf605cb850ca7be1f8ff92b7eb1ca54ee369328eb2cec1b5",
+      "owner": "Catalog",
+      "category": "Catalog",
+      "operation": "Build",
+      "nativeService": "CatalogBuild and existing CatalogDevicePipeline providers",
+      "nativeTest": "Existing original method maps plus CatalogOriginalAssertionGapRealTests",
+      "reuseExistingMethodClaims": [
+        "test_index_retains_past_and_future_and_container_lifecycle",
+        "test_real_build_exports_inventory_and_resolves_before_atomic_storage",
+        "test_generated_aliases_pin_the_selected_device_schema_and_shared_policy",
+        "test_full_index_build_applies_history_extensions_and_container_constraints",
+        "test_aidl_type_reference_proof_and_contract_digest_are_shared",
+        "test_independent_validator_rejects_inventory_export_mutation",
+        "test_loader_rejects_missing_projection_without_synthesizing_rows"
+      ],
+      "pending_methods": [],
+      "methodProof": [
+        {
+          "method": "test_index_retains_past_and_future_and_container_lifecycle",
+          "originalBodySha256": "eb5eada4d2e6bacbdd5ca43261723c577a855e101316fb6331f02271cfdf013f",
+          "originalAssertionLines": [
+            "        self.assertIn('a/Old',rows);self.assertIn('a/Future#f()V',rows)",
+            "        self.assertEqual(rows['a/Future#f()V']['extras']['container_api_lifecycle']['since'],'38')",
+            "        self.assertEqual(rows['a/Backport']['extras']['sdk_extensions'],[{'sdk_id':'30','minimum_version':'4'},{'sdk_id':'0','minimum_version':'34'}])"
+          ],
+          "nativeBindings": [
+            "PIPE-01",
+            "CatalogOriginalAssertionGapRealTests.SameOriginalCompleteSdkExtensionObjectsUseTheExistingSingleExtraction"
+          ],
+          "pendingOriginalAssertion": null,
+          "scope": "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit"
+        },
+        {
+          "method": "test_real_build_exports_inventory_and_resolves_before_atomic_storage",
+          "originalBodySha256": "a392f7bb1d3040456c3b565cebef871f3a83d7e59f3293387fad8f19cefc87c1",
+          "originalAssertionLines": [
+            "            self.assertEqual(len(raw),count)",
+            "            self.assertEqual(snapshot['inventory_count'],len(raw))",
+            "            member=hashlib.sha256(b'java:a.A#go(int)').hexdigest();self.assertEqual(next(r for r in snapshot['entries'] if r['entry_id']==member)['state'],'unknown')",
+            "            self.assertEqual(store.read()['snapshot'],snapshot);store.invalidate('device-build-change');self.assertTrue(store.read()['stale'])"
+          ],
+          "nativeBindings": [
+            "PIPE-02"
+          ],
+          "pendingOriginalAssertion": null,
+          "scope": "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit"
+        },
+        {
+          "method": "test_generated_aliases_pin_the_selected_device_schema_and_shared_policy",
+          "originalBodySha256": "7a25c375256c40af197ae0e0fca9306378515586fcc5860b3c86998309e35973",
+          "originalAssertionLines": [
+            "            self.assertEqual(row['state'],'available');self.assertEqual(alias['schema_hash'],row['schema_hash']);self.assertEqual(alias['type_graph_digest'],row['graph_digest'])",
+            "            self.assertEqual(policy_reference.resolve_fixture_route('generated',req,mapping,schemas,{}),policy_reference.resolve_fixture_route('generic',req,mapping,schemas,{}));status['stale']=True",
+            "            with self.assertRaisesRegex(ValueError,'Fresh active'):dispatch_manifest.generate(docs,status)"
+          ],
+          "nativeBindings": [
+            "PIPE-03"
+          ],
+          "pendingOriginalAssertion": null,
+          "scope": "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit"
+        },
+        {
+          "method": "test_full_index_build_applies_history_extensions_and_container_constraints",
+          "originalBodySha256": "1e69bac62eda3511d27f9b42f7b1aa7a9deea51a869f802d9d5391f705894792",
+          "originalAssertionLines": [
+            "            self.assertEqual(rows(35,0,{})[old]['state'],'available');self.assertEqual(rows(36,0,{})[old]['state'],'unavailable')",
+            "            self.assertEqual(rows(37,2,{})[future]['state'],'unavailable');self.assertEqual(rows(38,0,{})[future]['state'],'available')",
+            "            self.assertEqual(rows(33,0,{'30':4})[backport]['state'],'available');self.assertEqual(rows(33,0,{'30':3})[backport]['state'],'unavailable');self.assertEqual(rows(33,0,{})[backport]['state'],'unknown')"
+          ],
+          "nativeBindings": [
+            "PIPE-04"
+          ],
+          "pendingOriginalAssertion": null,
+          "scope": "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit"
+        },
+        {
+          "method": "test_aidl_type_reference_proof_and_contract_digest_are_shared",
+          "originalBodySha256": "35e85349eab595180be6f7846ecd36a7dfbdc11674db9c5012efa5f594da9286",
+          "originalAssertionLines": [
+            "            self.assertEqual(method['arguments'][0]['resolved_binding_id'],target);self.assertEqual(method['arguments'][0]['status'],'resolved')",
+            "            variant=inventory[method['entry_id']]['variants'][0];self.assertEqual(variant['schema_hash'],dispatch_manifest.contract_digest(method));self.assertIn(target,{v['entry_id'] for v in variant['dependencies']})"
+          ],
+          "nativeBindings": [
+            "PIPE-05"
+          ],
+          "pendingOriginalAssertion": null,
+          "scope": "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit"
+        },
+        {
+          "method": "test_independent_validator_rejects_inventory_export_mutation",
+          "originalBodySha256": "0da7b5ecfa1e731cacb1423fabf67f69d34b4a85d67566c0e58bc0415d6004d8",
+          "originalAssertionLines": [
+            "            with self.assertRaisesRegex(ValueError,'Inventory stream/manifest'):validate_catalog.run(root/'out',inv,root/'invalid-export.json')"
+          ],
+          "nativeBindings": [
+            "PIPE-06"
+          ],
+          "pendingOriginalAssertion": null,
+          "scope": "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit"
+        },
+        {
+          "method": "test_loader_rejects_missing_projection_without_synthesizing_rows",
+          "originalBodySha256": "e8134c512d00ad0328e0fab3f7bf731d2730a01a7e3bc69980c3aecefdcbe69a",
+          "originalAssertionLines": [
+            "            with self.assertRaisesRegex(ValueError,'Incomplete registry inventory'):list(catalog_projection.load_inventory(db,registry))"
+          ],
+          "nativeBindings": [
+            "PIPE-07"
+          ],
+          "pendingOriginalAssertion": null,
+          "scope": "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit"
+        }
+      ],
+      "normal_file_verified": true,
+      "rootFull019Pending": false,
+      "conditionalEligibility": "Exact full019 proof now bound; Root alone decides authority merge; native error/cache carriers retained",
+      "frameworkResponsibilities": "unittest/tempfile/Python exceptions adapt to shared native test providers; source SHA identity stays truthful C# producer identity",
+      "decommissionable_scope": "Current published original test-file responsibilities only; no production file, frozen schema execution, global corpus or HV claim",
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "normal_verified_methods": [],
+      "normal_verified": true,
+      "decommissionable_from_pr": false,
+      "execution_retired": false,
+      "proposal_only": false,
+      "rootFullGateSha256": "bac5431d1b4d53022b3a6b644a30e77203c53a16a4ec0f9a6997f040a4f854fb",
+      "frozenProfileNote": "unittest/tempfile/Python exceptions adapt to shared native test providers; source SHA identity stays truthful C# producer identity Current original test file only; frozen profiles and whole producer/corpus/HV remain separate."
     }
   ],
-  "normalVerifiedTestFiles": 10,
-  "normalVerifiedOriginalMethods": 64,
+  "normalVerifiedTestFiles": 12,
+  "normalVerifiedOriginalMethods": 75.0,
   "additionalMethodScopes": 0,
   "sourceMethodReceipts": [
     {
@@ -2074,5 +2318,162 @@
     "reason": "Only the explicitly allowed native source deltas, if any, are refreshed. Original methods, test inputs/assertions and historical fixtures retained. The current unfiltered full gate verifies these current source pins; unrelated files are not inferred closed.",
     "oldReceiptRetained": "/home/sharpninja/github/2026-10-26/task-3/remediation/retained/normal-closure-updates/catalog-normal-test-file-closures.json.f04879eb57c8800a757fb59c61913d517cfa34c99bb3a24b4362d0d7db92e884.json"
   },
-  "summaryCountBasis016": "Existing summary fields recount verified test-file path records and their explicit method/helper or same-file reuse bindings. Producer normal_verified_functions and supporting tests are not invented as new producer-test methods; sole inventory/projection derives published/unique counts."
+  "summaryCountBasis016": "Existing summary fields recount verified test-file path records and their explicit method/helper or same-file reuse bindings. Producer normal_verified_functions and supporting tests are not invented as new producer-test methods; sole inventory/projection derives published/unique counts.",
+  "closureAmendment019": {
+    "at": "2026-10-29T05:14:04",
+    "priorSha256": "1ad192bf655e9906803364246e2a6b713b9e587cad4fbc5eec5cf062d0b3f7c4",
+    "currentOriginalBuild": 4,
+    "newlyNormalBuild": 3,
+    "reusedBuild": 1,
+    "reusedPipeline": 7,
+    "frozenCatalogPromoted": false,
+    "sourceProposal": "7c2ce3e21d06f9b7cf541b1433732fb6f78a5fea53b3d276f48092d667b07b34",
+    "normalProof": {
+      "trx": "remediation/nuke-app/artifacts/tests/20261029T0434514569300-827fa58e11b743c99dfd3d6831834c69/tests.trx",
+      "sha256": "bac5431d1b4d53022b3a6b644a30e77203c53a16a4ec0f9a6997f040a4f854fb",
+      "total": 71952,
+      "passed": 71952,
+      "failed": 0,
+      "skipped": 0,
+      "buildWarnings": 0,
+      "exactClassCounts": {
+        "AndroidMcp.BuildTool.Tests.Sources.SourceExtractionMockGateTests": 3358,
+        "AndroidMcp.BuildTool.Tests.Sources.Java.JavaCommentMetadataMockTests": 8,
+        "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerIdentityMockTests": 30,
+        "AndroidMcp.BuildTool.Tests.Sources.SourceTypeFactsRealTests": 27,
+        "AndroidMcp.BuildTool.Tests.Sources.SourceExtractionRealTests": 24,
+        "AndroidMcp.BuildTool.Tests.Catalog.CatalogSourceIntegrationMockTests": 8,
+        "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerDeclarationRealTests": 4,
+        "AndroidMcp.BuildTool.Tests.Sources.Java.JavaCommentMetadataRealTests": 4,
+        "AndroidMcp.BuildTool.Tests.Sources.SourceTypeFactsMockGateTests": 49,
+        "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerBoundaryRealTests": 8,
+        "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerCompletionMockTests": 18,
+        "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerCompletionRealTests": 9,
+        "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerIdentityRealTests": 15,
+        "AndroidMcp.BuildTool.Tests.Sources.Java.JavaOriginalLiteralAssertionMockTests": 12,
+        "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerBoundaryMockTests": 16,
+        "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerTypeTextRealTests": 1,
+        "AndroidMcp.BuildTool.Tests.Sources.Java.JavaWordPolicyMockTests": 6,
+        "AndroidMcp.BuildTool.Tests.Sources.Java.JavaAstRealTests": 13,
+        "AndroidMcp.BuildTool.Tests.Catalog.CatalogSourceIntegrationRealTests": 4,
+        "AndroidMcp.BuildTool.Tests.Sources.Java.JavaAnnotationOffsetMockTests": 4,
+        "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerDeclarationMockTests": 8,
+        "AndroidMcp.BuildTool.Tests.Catalog.CatalogJavaSelectedCliMockTests": 6,
+        "AndroidMcp.BuildTool.Tests.Sources.Java.JavaAnnotationFailureMockTests": 2,
+        "AndroidMcp.BuildTool.Tests.Sources.Java.JavaOriginalLiteralAssertionRealTests": 6,
+        "AndroidMcp.BuildTool.Tests.Sources.Java.JavaAnnotationOffsetRealTests": 2,
+        "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerTypeTextMockTests": 2,
+        "AndroidMcp.BuildTool.Tests.Sources.Java.JavaWordPolicyRealTests": 3,
+        "AndroidMcp.BuildTool.Tests.Sources.Java.JavaAnnotationFailureRealTests": 1,
+        "AndroidMcp.BuildTool.Tests.Catalog.CatalogJavaSelectedCliRealTests": 2,
+        "AndroidMcp.BuildTool.Tests.Sources.NativeDescriptorRealTests": 29,
+        "AndroidMcp.BuildTool.Tests.Sources.PermissionReferenceRealTests": 13,
+        "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyRealTests": 23,
+        "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHelperBodyMockTests": 42,
+        "AndroidMcp.BuildTool.Tests.Sources.SdkAnnotationTargetRealTests": 14,
+        "AndroidMcp.BuildTool.Tests.Catalog.CatalogSourceIntakeMockTests": 18,
+        "AndroidMcp.BuildTool.Tests.Catalog.CatalogSourceIntakeRealTests": 9,
+        "AndroidMcp.BuildTool.Tests.Sources.Acquisition.LegacyAcquisitionRealTests": 7,
+        "AndroidMcp.BuildTool.Tests.Core.LegacyJsonValueEqualityRealTests": 33,
+        "AndroidMcp.BuildTool.Tests.Sources.NativeDescriptorMockTests": 513,
+        "AndroidMcp.BuildTool.Tests.Sources.SourceProducerDomainMockTests": 151,
+        "AndroidMcp.BuildTool.Tests.Core.LegacyJsonValueEqualityMockTests": 33,
+        "AndroidMcp.BuildTool.Tests.Sources.NativeDescriptorValueRealTests": 46,
+        "AndroidMcp.BuildTool.Tests.Sources.SourceProducerSpellingMockTests": 72,
+        "AndroidMcp.BuildTool.Tests.Sources.SourceProducerValueMockTests": 69,
+        "AndroidMcp.BuildTool.Tests.Sources.SourceProducerSpellingRealTests": 72,
+        "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests": 38,
+        "AndroidMcp.BuildTool.Tests.Sources.NativeDescriptorValueMockTests": 46,
+        "AndroidMcp.BuildTool.Tests.Sources.SourceProducerDomainRealTests": 153,
+        "AndroidMcp.BuildTool.Tests.Sources.NativeDescriptorSpellingMockTests": 10,
+        "AndroidMcp.BuildTool.Tests.Sources.SourceProducerValueRealTests": 71,
+        "AndroidMcp.BuildTool.Tests.Sources.SourceProducerEffectMockTests": 4,
+        "AndroidMcp.BuildTool.Tests.Sources.NativeDescriptorSpellingRealTests": 10,
+        "AndroidMcp.BuildTool.Tests.Sources.SourceUnicodeBoundaryDiagnosticTests": 2,
+        "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalRealTests": 19,
+        "AndroidMcp.BuildTool.Tests.Sources.SourceProducerEffectRealTests": 4,
+        "AndroidMcp.BuildTool.Tests.Sources.NativeAbiCompletionMockTests": 34,
+        "AndroidMcp.BuildTool.Tests.Core.RepositoryDocumentationPlannerRealTests": 4,
+        "AndroidMcp.BuildTool.Tests.Sources.NativeAbiCompletionRealTests": 36,
+        "AndroidMcp.BuildTool.Tests.Sources.NativeAbiMockGateTests": 1404,
+        "AndroidMcp.BuildTool.Tests.Core.RepositoryDocumentationPlannerMockTests": 8,
+        "AndroidMcp.BuildTool.Tests.Sources.NativeAbiRealTests": 18,
+        "AndroidMcp.BuildTool.Tests.Documentation.ModuleGraphRealTests": 10,
+        "AndroidMcp.BuildTool.Tests.Documentation.CurrentLayoutModelValidationRealTests": 2,
+        "AndroidMcp.BuildTool.Tests.Core.NativeProducerLifecycleRealTests": 1,
+        "AndroidMcp.BuildTool.Tests.Documentation.LegacyUiOriginalMethodRealTests": 5,
+        "AndroidMcp.BuildTool.Tests.Documentation.LegacyGuardOriginalMethodRealTests": 3,
+        "AndroidMcp.BuildTool.Tests.Documentation.LegacyDesign018MethodRealTests": 5,
+        "AndroidMcp.BuildTool.Tests.Documentation.LegacyCore024MethodRealTests": 8,
+        "AndroidMcp.BuildTool.Tests.Documentation.LegacyDesign020MethodRealTests": 8,
+        "AndroidMcp.BuildTool.Tests.Documentation.LegacyDesign024MethodRealTests": 7,
+        "AndroidMcp.BuildTool.Tests.Documentation.LegacyDesign022MethodRealTests": 7,
+        "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapCompletionMockTests": 77,
+        "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapLifecycleRealTests": 7,
+        "AndroidMcp.BuildTool.Tests.Documentation.DocumentationHttpTransportMockTests": 324,
+        "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapReportMockTests": 56,
+        "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapCliRealTests": 9,
+        "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapCliMockTests": 168,
+        "AndroidMcp.BuildTool.Tests.Documentation.Validation.RepositoryDocumentationMockTests": 68,
+        "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapHookMockTests": 22,
+        "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapCompletionRealTests": 7,
+        "AndroidMcp.BuildTool.Tests.Documentation.Validation.RepositoryGitMetadataRealTests": 31,
+        "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapHookRealTests": 12,
+        "AndroidMcp.BuildTool.Tests.Documentation.Validation.RepositoryDocumentationRealTests": 29,
+        "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapAdmissionMockTests": 53,
+        "AndroidMcp.BuildTool.Tests.Documentation.DocumentationHttpTransportRealTests": 36,
+        "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapFileEffectsMockTests": 21,
+        "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapFileEffectsRealTests": 12,
+        "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapReportRealTests": 12,
+        "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapCarryMockTests": 35,
+        "AndroidMcp.BuildTool.Tests.Documentation.Validation.RepositoryGitMetadataMockTests": 53,
+        "AndroidMcp.BuildTool.Tests.Documentation.DocumentationToolBootstrapRealTests": 7,
+        "AndroidMcp.BuildTool.Tests.Documentation.DocumentationToolBootstrapMockTests": 32,
+        "AndroidMcp.BuildTool.Tests.Documentation.Validation.RepositoryDocumentationTreeRealTests": 5,
+        "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapLifecycleMockTests": 40,
+        "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapAdmissionRealTests": 22,
+        "AndroidMcp.BuildTool.Tests.Documentation.Validation.RepositoryDocumentationTreeMockTests": 13,
+        "AndroidMcp.BuildTool.Tests.Documentation.Validation.RepositoryDocumentationCallerMockTests": 18,
+        "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapCarryRealTests": 5,
+        "AndroidMcp.BuildTool.Tests.Documentation.Validation.RepositoryDocumentationCallerRealTests": 4,
+        "AndroidMcp.BuildTool.Tests.Core.CanonicalJsonRealTests": 64,
+        "AndroidMcp.BuildTool.Tests.Catalog.CatalogAggregateMetadataRealTests": 17,
+        "AndroidMcp.BuildTool.Tests.Catalog.MetadataCrudRealTests": 13,
+        "AndroidMcp.BuildTool.Tests.Catalog.CatalogMetadataLeafRealTests": 19,
+        "AndroidMcp.BuildTool.Tests.Catalog.CatalogMetadataObligationRealTests": 11,
+        "AndroidMcp.BuildTool.Tests.Catalog.PermissionExportRealTests": 16,
+        "AndroidMcp.BuildTool.Tests.Catalog.PermissionExportMockTests": 32,
+        "AndroidMcp.BuildTool.Tests.Core.PermissionExportPlannerRealTests": 10,
+        "AndroidMcp.BuildTool.Tests.Catalog.PermissionExportCliRealTests": 3,
+        "AndroidMcp.BuildTool.Tests.Catalog.CatalogHidlImportRealTests": 5,
+        "AndroidMcp.BuildTool.Tests.Catalog.CatalogHidlImportMockTests": 10,
+        "AndroidMcp.BuildTool.Tests.Catalog.CatalogEffectiveInventoryRealTests": 12,
+        "AndroidMcp.BuildTool.Tests.Catalog.CatalogEffectiveInventoryMockTests": 24,
+        "AndroidMcp.BuildTool.Tests.Catalog.CatalogIntakeHistoricalAuditRealTests": 1,
+        "AndroidMcp.BuildTool.Tests.Catalog.CatalogIntakeHistoricalAuditMockTests": 2,
+        "AndroidMcp.BuildTool.Tests.Catalog.CatalogPublishedRetentionRealTests": 2,
+        "AndroidMcp.BuildTool.Tests.Catalog.CatalogPublishedRetentionMockTests": 4,
+        "AndroidMcp.BuildTool.Tests.Catalog.CatalogBuildRealTests": 7,
+        "AndroidMcp.BuildTool.Tests.Catalog.CatalogDevicePipelineRealTests": 7,
+        "AndroidMcp.BuildTool.Tests.Catalog.CatalogOriginalTamperRealTests": 1,
+        "AndroidMcp.BuildTool.Tests.Catalog.CatalogFullValidationRealTests": 6,
+        "AndroidMcp.BuildTool.Tests.Catalog.CatalogOriginalAssertionGapRealTests": 2,
+        "AndroidMcp.BuildTool.Tests.Catalog.CatalogOriginalAssertionGapMockTests": 4,
+        "AndroidMcp.BuildTool.Tests.Documentation.LegacyDesign023MethodMockTests": 118,
+        "AndroidMcp.BuildTool.Tests.Documentation.LegacyDesign023MethodRealTests": 9,
+        "AndroidMcp.BuildTool.Tests.Catalog.CatalogValidationCliRealTests": 17,
+        "AndroidMcp.BuildTool.Tests.Sources.PublishedHashMainMockTests": 125,
+        "AndroidMcp.BuildTool.Tests.Sources.PublishedHashMainRealTests": 62,
+        "AndroidMcp.BuildTool.Tests.Sources.PublishedHashMainPlannerMockTests": 2,
+        "AndroidMcp.BuildTool.Tests.Sources.PublishedHashMainPlannerRealTests": 2,
+        "AndroidMcp.BuildTool.Tests.Sources.PublishedHashMainCliMockTests": 2,
+        "AndroidMcp.BuildTool.Tests.Sources.PublishedHashMainCliRealTests": 1,
+        "AndroidMcp.BuildTool.Tests.Sources.PublishedHashMainConcurrencyMockTests": 2,
+        "AndroidMcp.BuildTool.Tests.Sources.PublishedHashMainConcurrencyRealTests": 1,
+        "AndroidMcp.BuildTool.Tests.Sources.PublishedHashMainTaskBoundaryMockTests": 4,
+        "AndroidMcp.BuildTool.Tests.Sources.PublishedHashMainTaskBoundaryRealTests": 2
+      },
+      "scope": "Exact original normal/project-contract scopes at Root019; explicit native/fixture/caller boundaries retained. No unqualified Python, frozen Catalog, whole-repo/HV or deletion claim."
+    }
+  }
 }

@@ -1,0 +1,54 @@
+{
+  "At": "2026-10-29T05:16:14",
+  "Stage": "Original-derived fixture correction, not implementation change",
+  "Trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/interface-module-main-027/mock-correction-003.trx",
+  "Sha256": "d4a3afd9bc6348a325130b148197f88be38816075a0508af7a7ae2137da22d5e",
+  "Passed": 172,
+  "Failed": 0,
+  "Skipped": 0,
+  "MainFiniteCases": 83,
+  "Files": [
+    {
+      "Path": "Modules/Sources/InterfaceModuleWorkflowContracts.cs",
+      "Sha256": "d46ff8c46069d7ec1f2d0e94d8ffe44b17478b9b1924e5037ba1438a02215958",
+      "Size": 938
+    },
+    {
+      "Path": "Tests/Sources/InterfaceModuleMainContractCases.cs",
+      "Sha256": "5fb264a832e9c461d4d39caa8c599c5ff0739f90e86b98e027895189ea1ea819",
+      "Size": 27924
+    },
+    {
+      "Path": "Tests/Sources/InterfaceModuleMainMockTests.cs",
+      "Sha256": "f0992d1c33661ecc22944eb65000d50baaa22d39cdf2b83e6d674eb3e826eed8",
+      "Size": 6721
+    },
+    {
+      "Path": "Tests/Sources/InterfaceModuleCallerContractCases.cs",
+      "Sha256": "10bc84074ed2c86dd4bb8c83083c4ea285ec119c6be37ed4ae7e40bd85975b25",
+      "Size": 8620
+    }
+  ],
+  "HeldProduction": {
+    "Path": "Modules/Sources/InterfaceModuleWorkflow.cs",
+    "Retained": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/interface-module-main-027/native-fixture-002/Modules/Sources/InterfaceModuleWorkflow.cs.snapshot",
+    "Sha256": "b72199a08bbc8dfa4ea59c65c4db34913e7231751967dcf2faf998a40df9fa3c",
+    "Size": 13292
+  },
+  "ProductionUnchanged": true,
+  "OnlyFixtureChange": "Two literal projections: absent srcs -> null, numeric srcs ->7. Linkage remains unresolved for both. Original literal returns its value before selector list admission; values were incorrectly assigned by fixture builder.",
+  "OriginalBasis": "publication/android-mcp-git/tools/source_facts/interface_module_facts.py literal(node,name), source hash676c3fbbfe3e740f7aadd3bcac251655bc9d37de5ac2a5ce77a9a9632db0dc90",
+  "PriorFailure": {
+    "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/interface-module-main-027/native-fixture-002.trx",
+    "Sha256": "284e7e8d324e60bbb301ee557ad039b86fbef3c456233d8dba2d1f6eaa0c9960",
+    "Passed": 84,
+    "Failed": 2,
+    "Skipped": 0
+  },
+  "PriorMockGate": "mock-supplement-gate.json",
+  "NoProductionOrHostEditsDuringRemock": true,
+  "CanonicalEdited": false,
+  "AuthorityEdited": false,
+  "NoHvAcceptance": true,
+  "AcceptedComplete": false
+}

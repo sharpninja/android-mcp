@@ -10,19 +10,21 @@ namespace AndroidMcp.BuildTool.Tests.Catalog;
 
 public sealed class NativeCatalogDevicePipelineProvider:ICatalogDevicePipelineCaseProvider
 {
+    internal Action<JsonArray>? SourceIndexExtensionsObserved {get;init;}
     private static string S(JsonNode? value)=>value!.GetValue<string>();
     private static string B(bool value)=>value?"true":"false";
     private static JsonElement Element(JsonNode value)=>JsonSerializer.SerializeToElement(value);
     private static string FileHash(string path){using var stream=File.OpenRead(path);return ContentHash.Sha256(stream);}
     private static string Id(string signature)=>ContentHash.Sha256(Encoding.UTF8.GetBytes(signature));
     public Task<CatalogDevicePipelineReply> RunAsync(CatalogDevicePipelineCall call)=>Task.FromResult(Run(call));
-    private static CatalogDevicePipelineReply Run(CatalogDevicePipelineCall call)
+    private CatalogDevicePipelineReply Run(CatalogDevicePipelineCall call)
     {
         var facts=new Dictionary<string,string>(StringComparer.Ordinal);
         if(call.Variant=="source-index")
         {
             var parsed=new SdkApiIndexExtractor().Extract(new("api.xml",Encoding.UTF8.GetBytes(CatalogDevicePipelineCases.HistoryXml),new("fixture",new string('1',40),"fixture-recipe","37.2")));
             var records=parsed.Records.ToDictionary(row=>S(row["canonical"]),StringComparer.Ordinal);
+            SourceIndexExtensionsObserved?.Invoke((JsonArray)records["a/Backport"]["extras"]!["sdk_extensions"]!.DeepClone());
             facts["retains.a/Old"]=B(records.ContainsKey("a/Old"));facts["retains.a/Future#f()V"]=B(records.ContainsKey("a/Future#f()V"));
             facts["future.member.container.since"]=S(records["a/Future#f()V"]["extras"]!["container_api_lifecycle"]!["since"]);
             facts["backport.extensions"]=string.Join(',',records["a/Backport"]["extras"]!["sdk_extensions"]!.AsArray().Select(value=>S(value!["sdk_id"])+":"+S(value["minimum_version"])));

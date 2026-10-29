@@ -1,0 +1,2777 @@
+{
+  "kind": "UnitGateSummary",
+  "fullOriginal": {
+    "bytes": 6410106,
+    "retainedLocally": true,
+    "localPath": "remediation/nuke-planning/acquisition/parallel/acquisition-completion/20261029T0517532675572-PlatformApplicableMissingJavaManifest.json",
+    "sha256": "5dcdf36c9540750a3a5c8009b043fab63e58da5c0adf6a2c43bb65bdb47d48e8",
+    "tracked": false
+  },
+  "hvReceipt": false,
+  "hvAcceptance": false,
+  "sourceCheckpoint019Integration": false,
+  "at": "2026-10-29T05:17:53",
+  "counts": {
+    "total": 25533,
+    "executed": 25533,
+    "passed": 25455,
+    "failed": 78,
+    "notExecuted": 0
+  },
+  "trx": {
+    "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/artifacts/tests/20261029T0509337135827-32f8b037c2c5473c8ba7aa61f62bb2a0/tests.trx",
+    "sha256": "c09f635958236c384a2d5e6932cdddee5eee97d77ea3a15551cae692e1439b7e",
+    "bytes": 24947389
+  },
+  "command": "pwsh -NoProfile -NonInteractive -File remediation/parallel-work/acquisition/Run-NukeNativeGate.ps1 -TestFilter 'FullyQualifiedName~AndroidMcp.BuildTool.Tests.Sources|FullyQualifiedName~AndroidMcp.BuildTool.Tests.Publication.Rehydration|FullyQualifiedName~AndroidMcp.BuildTool.Tests.Core.Sources'",
+  "commandArguments": [
+    "-NoProfile",
+    "-NonInteractive",
+    "-File",
+    "remediation/parallel-work/acquisition/Run-NukeNativeGate.ps1",
+    "-TestFilter",
+    "FullyQualifiedName~AndroidMcp.BuildTool.Tests.Sources|FullyQualifiedName~AndroidMcp.BuildTool.Tests.Publication.Rehydration|FullyQualifiedName~AndroidMcp.BuildTool.Tests.Core.Sources"
+  ],
+  "scopes": [
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesExtractCliMockTests",
+      "total": 2,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesExtractCliRealTests",
+      "total": 1,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesExtractWorkflowMockTests",
+      "total": 45,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 45
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesExtractWorkflowRealTests",
+      "total": 18,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 18
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesExtractWorkflowWireMockTests",
+      "total": 5,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesFetchAliasCliMockTests",
+      "total": 2,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesFetchAliasCliRealTests",
+      "total": 1,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesFetchCliMockTests",
+      "total": 2,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesFetchCliRealTests",
+      "total": 1,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesFetchCountCliMockTests",
+      "total": 2,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesFetchCountCliRealTests",
+      "total": 1,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesFetchInvocationMockTests",
+      "total": 17,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 17
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesFetchInvocationRealTests",
+      "total": 8,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 8
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesFetchOperationMockTests",
+      "total": 16,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 16
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesFetchOperationRealTests",
+      "total": 5,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesFetchPacingCliMockTests",
+      "total": 5,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesFetchPacingCliRealTests",
+      "total": 1,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesFetchPacingPlannerMockTests",
+      "total": 8,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 8
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesFetchPacingPlannerRealTests",
+      "total": 4,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesFetchPlannerMockTests",
+      "total": 8,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 8
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesFetchPlannerRealTests",
+      "total": 4,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesInventoryCliMockTests",
+      "total": 2,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesInventoryCliRealTests",
+      "total": 1,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesInventoryPlannerMockTests",
+      "total": 10,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesInventoryPlannerRealTests",
+      "total": 5,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesPlanCliMockTests",
+      "total": 2,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesPlanCliRealTests",
+      "total": 1,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesPlanMockTests",
+      "total": 18,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 18
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesPlanPlannerMockTests",
+      "total": 8,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 8
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesPlanRealTests",
+      "total": 9,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 9
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesSeedCliMockTests",
+      "total": 2,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesSeedCliRealTests",
+      "total": 1,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesSeedOperationMockTests",
+      "total": 34,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 34
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesSeedOperationRealTests",
+      "total": 15,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 15
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesSeedPlannerMockTests",
+      "total": 14,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 14
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesSeedPlannerRealTests",
+      "total": 7,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 7
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesSnapshotCliMockTests",
+      "total": 48,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 48
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesSnapshotCliRealTests",
+      "total": 24,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 24
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesSnapshotPlannerMockTests",
+      "total": 44,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 44
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Core.SourcesSnapshotPlannerRealTests",
+      "total": 22,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 22
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Publication.RehydrationBoundaryMockTests",
+      "total": 32,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 32
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Publication.RehydrationBoundaryRealTests",
+      "total": 16,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 16
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Publication.RehydrationMetadataReferenceMockTests",
+      "total": 48,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 48
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Publication.RehydrationMetadataReferenceRealTests",
+      "total": 24,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 24
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Publication.RehydrationMockTests",
+      "total": 48,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 48
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Publication.RehydrationPlatformFactsMockTests",
+      "total": 50,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 50
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Publication.RehydrationPlatformFactsRealTests",
+      "total": 25,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 25
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Publication.RehydrationProjectionMockTests",
+      "total": 24,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 24
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Publication.RehydrationProjectionRealTests",
+      "total": 12,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 12
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Publication.RehydrationRealTests",
+      "total": 24,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 24
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Publication.RehydrationSeedMockTests",
+      "total": 24,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 24
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Publication.RehydrationSeedRealTests",
+      "total": 12,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 12
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Publication.RehydrationSnapshotMockTests",
+      "total": 34,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 34
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Publication.RehydrationSnapshotRealTests",
+      "total": 17,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 17
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.AcquisitionMockTests",
+      "total": 12,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 12
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.AcquisitionRealTests",
+      "total": 6,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.ArchiveAcquisitionMockTests",
+      "total": 8,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 8
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.ArchiveBatchReuseMockTests",
+      "total": 28,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 28
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.ArchiveBatchReuseRealTests",
+      "total": 14,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 14
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.ArchiveMockTests",
+      "total": 12,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 12
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.ArchiveRealTests",
+      "total": 2,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.ArchiveSafetyMockTests",
+      "total": 8,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 8
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.CacheReuseMockTests",
+      "total": 10,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.CacheSdkRealTests",
+      "total": 14,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 14
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.CacheWireMockTests",
+      "total": 5,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.ExtendedAcquisitionRealTests",
+      "total": 21,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 21
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.HistoricalCacheMockTests",
+      "total": 12,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 12
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.LegacyAcquisitionMockTests",
+      "total": 14,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 14
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.LegacyAcquisitionRealTests",
+      "total": 7,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 7
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.MetadataCallerMockTests",
+      "total": 24,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 24
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.MetadataCallerRealTests",
+      "total": 12,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 12
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.MetadataPlatformCallerMockTests",
+      "total": 26,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 26
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.MetadataPlatformCallerRealTests",
+      "total": 13,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 13
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.MetadataProofMockTests",
+      "total": 66,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 66
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.MetadataProofRealTests",
+      "total": 33,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 33
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.NativeArchiveMockTests",
+      "total": 7,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 7
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.PaxArchiveMockTests",
+      "total": 7,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 7
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.PaxHistoricalRealTests",
+      "total": 10,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.PaxOverrideMockTests",
+      "total": 6,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.RehydrationAliasPrecedenceMockTests",
+      "total": 44,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 44
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.RehydrationAliasPrecedenceRealTests",
+      "total": 22,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 22
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.RetryMockTests",
+      "total": 4,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SdkLegacyPlatformFactsMockTests",
+      "total": 66,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 66
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SdkLegacyPlatformFactsRealTests",
+      "total": 33,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 33
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SdkLegacyPlatformMockTests",
+      "total": 58,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 58
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SdkLegacyPlatformRealTests",
+      "total": 29,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 29
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SdkMetadataBoundaryMockTests",
+      "total": 140,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 140
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SdkMetadataBoundaryRealTests",
+      "total": 70,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 70
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SdkPackageChoiceMockTests",
+      "total": 24,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 24
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SdkPackageChoiceRealTests",
+      "total": 12,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 12
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SdkVersionMockTests",
+      "total": 16,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 16
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SealedCacheMockTests",
+      "total": 82,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 82
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SealedCacheRealTests",
+      "total": 41,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 41
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SnapshotWireMockTests",
+      "total": 124,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 124
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SnapshotWireRealTests",
+      "total": 62,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 62
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SourceBatchMockTests",
+      "total": 64,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 64
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SourceBatchPacingMockTests",
+      "total": 32,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 32
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SourceBatchPacingRealTests",
+      "total": 16,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 16
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SourceBatchRealTests",
+      "total": 32,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 32
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SourceBatchResumeMockTests",
+      "total": 24,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 24
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SourceBatchResumeRealTests",
+      "total": 12,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 12
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SourceCacheMockTests",
+      "total": 13,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 13
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SourceSeedMockTests",
+      "total": 52,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 52
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SourceSeedRealTests",
+      "total": 26,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 26
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SourcesInventoryMockTests",
+      "total": 38,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 38
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SourcesInventoryReaderMockTests",
+      "total": 50,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 50
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SourcesInventoryReaderRealTests",
+      "total": 25,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 25
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SourcesInventoryRealTests",
+      "total": 19,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 19
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SourceSnapshotMockTests",
+      "total": 56,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 56
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SourceSnapshotRealTests",
+      "total": 28,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 28
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SourceTransportCompositionMockTests",
+      "total": 18,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 18
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SourceTransportCompositionRealTests",
+      "total": 9,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 9
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.ToolArtifactMockTests",
+      "total": 48,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 48
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.ToolArtifactRealTests",
+      "total": 41,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 41
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.ToolProofMockTests",
+      "total": 4,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.ToolTransferMockTests",
+      "total": 30,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 30
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeMockTests",
+      "total": 61,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 61
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.AidlInventoryRuntimeRealTests",
+      "total": 7,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 7
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryMockTests",
+      "total": 80,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 80
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.AidlLexicalInventoryRealTests",
+      "total": 12,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 12
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.AidlSchemaMockGateTests",
+      "total": 732,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 732
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.AidlSchemaRealTests",
+      "total": 13,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 13
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.ApexManifestMockGateTests",
+      "total": 536,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 536
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.ApexManifestRealTests",
+      "total": 23,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 23
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalMockTests",
+      "total": 38,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 38
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.CallbackFunctionalOriginalRealTests",
+      "total": 19,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 19
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.HidlMockGateTests",
+      "total": 3658,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 3658
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.HidlRealTests",
+      "total": 29,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 29
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaAstRealTests",
+      "total": 13,
+      "outcomes": [
+        {
+          "outcome": "Failed",
+          "count": 13
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHandleLifetimeMockTests",
+      "total": 1,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHandleLifetimeRealTests",
+      "total": 1,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests",
+      "total": 83,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 83
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaNativeBuilderRealTests",
+      "total": 2,
+      "outcomes": [
+        {
+          "outcome": "Failed",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaNativeBuildMockTests",
+      "total": 1,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaOriginalLiteralAssertionMockTests",
+      "total": 12,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 12
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaOriginalLiteralAssertionRealTests",
+      "total": 6,
+      "outcomes": [
+        {
+          "outcome": "Failed",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerDeclarationMockTests",
+      "total": 8,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 8
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerDeclarationRealTests",
+      "total": 4,
+      "outcomes": [
+        {
+          "outcome": "Failed",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerIdentityMockTests",
+      "total": 30,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 30
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerIdentityRealTests",
+      "total": 15,
+      "outcomes": [
+        {
+          "outcome": "Failed",
+          "count": 15
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerTypeTextMockTests",
+      "total": 2,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerTypeTextRealTests",
+      "total": 1,
+      "outcomes": [
+        {
+          "outcome": "Failed",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionMockTests",
+      "total": 37,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 37
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests",
+      "total": 37,
+      "outcomes": [
+        {
+          "outcome": "Failed",
+          "count": 37
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests",
+      "total": 44,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 44
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaWorkflowMockTests",
+      "total": 1,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Java.JvmProducerOwnerMappingMockTests",
+      "total": 12,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 12
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.Java.JvmProducerOwnerMappingRealTests",
+      "total": 6,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.ManifestMockGateTests",
+      "total": 384,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 384
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.ManifestRealTests",
+      "total": 22,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 22
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.NativeAbiMockGateTests",
+      "total": 1404,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 1404
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.NativeAbiRealTests",
+      "total": 18,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 18
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.ParserOriginalMockTests",
+      "total": 468,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 468
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.ParserOriginalRealTests",
+      "total": 17,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 17
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.ParserRemainingMockTests",
+      "total": 249,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 249
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.ParserRemainingRealTests",
+      "total": 3,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.PermissionExpressionMockGateTests",
+      "total": 246,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 246
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.PermissionExpressionRealTests",
+      "total": 25,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 25
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.PermissionReferenceAttributeMockTests",
+      "total": 18,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 18
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.PermissionReferenceAttributeRealTests",
+      "total": 4,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.PermissionReferenceMockGateTests",
+      "total": 456,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 456
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.PermissionReferenceRealTests",
+      "total": 13,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 13
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.PublishedInterfaceHashMockGateTests",
+      "total": 262,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 262
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.PublishedInterfaceHashRealTests",
+      "total": 12,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 12
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SdkAnnotationArchiveMockTests",
+      "total": 521,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 521
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SdkAnnotationArchiveRealTests",
+      "total": 11,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 11
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SdkAnnotationTargetMockTests",
+      "total": 323,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 323
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SdkAnnotationTargetRealTests",
+      "total": 14,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 14
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SdkAvailabilityMockGateTests",
+      "total": 359,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 359
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SdkAvailabilityRealTests",
+      "total": 13,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 13
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SdkLegacyMetadataMockTests",
+      "total": 89,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 89
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SdkLegacyMetadataRealTests",
+      "total": 3,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SdkXmlMockGateTests",
+      "total": 2589,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 2589
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SdkXmlRealTests",
+      "total": 30,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 30
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SoongMockGateTests",
+      "total": 758,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 758
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SoongRealTests",
+      "total": 38,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 38
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourceBinaryDispatcherMockTests",
+      "total": 296,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 296
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourceBinaryDispatcherRealTests",
+      "total": 12,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 12
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourceDispatcherMockGateTests",
+      "total": 1627,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 1627
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourceDispatcherRealTests",
+      "total": 59,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 59
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourceExtractionMockGateTests",
+      "total": 3358,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 3358
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourceExtractionRealTests",
+      "total": 24,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 24
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourceExtractReadMockTests",
+      "total": 603,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 603
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourceExtractReadRealTests",
+      "total": 45,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 45
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourceExtractRoundTripMockTests",
+      "total": 76,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 76
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourceExtractRoundTripRealTests",
+      "total": 4,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourceExtractSelectionMockTests",
+      "total": 48,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 48
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourceExtractSelectionRealTests",
+      "total": 6,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourceExtractWriteMockTests",
+      "total": 692,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 692
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourceExtractWriteRealTests",
+      "total": 16,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 16
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourceFactMockGateTests",
+      "total": 1392,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 1392
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourceFactRealTests",
+      "total": 36,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 36
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourceHtmlMockGateTests",
+      "total": 176,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 176
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourceHtmlProfileMockTests",
+      "total": 38,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 38
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourceHtmlProfileRealTests",
+      "total": 14,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 14
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourceHtmlRealTests",
+      "total": 49,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 49
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourceProducerIdentityMockTests",
+      "total": 66,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 66
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourceProducerIdentityRealTests",
+      "total": 12,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 12
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourceProfileResolutionMockTests",
+      "total": 29,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 29
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourceProfileResolutionRealTests",
+      "total": 8,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 8
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourceRuntimeArchiveMockTests",
+      "total": 120,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 120
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourceRuntimeArchiveRealTests",
+      "total": 8,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 8
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourcesRuntimeMockGateTests",
+      "total": 40,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 40
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourcesRuntimePreflightMockTests",
+      "total": 4,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourcesRuntimeRealTests",
+      "total": 15,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 15
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourceTypeFactsMockGateTests",
+      "total": 49,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 49
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourceTypeFactsRealTests",
+      "total": 27,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 27
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourceXmlMockGateTests",
+      "total": 38,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 38
+        }
+      ]
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Sources.SourceXmlRealTests",
+      "total": 19,
+      "outcomes": [
+        {
+          "outcome": "Passed",
+          "count": 19
+        }
+      ]
+    }
+  ],
+  "failedCases": [
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"root-array\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"invalid-json\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"exports-duplicate\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaAstRealTests.IdenticalAstCasesBindToPinnedNativeProductionVisitor(id: \"JAVA-11\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaAstRealTests.IdenticalAstCasesBindToPinnedNativeProductionVisitor(id: \"JAVA-01\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"exports-missing\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerIdentityRealTests.IdenticalIdentityAndCallerPinCasesBindToTheSoleNativeLoader(id: \"pin-replaced-length\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaOriginalLiteralAssertionRealTests.SameSixOriginalLiteralAssertionsBindExistingNativeCasesAndContexts(id: \"ORIG-JAVA-PARSE-ZERO\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerIdentityRealTests.IdenticalIdentityAndCallerPinCasesBindToTheSoleNativeLoader(id: \"identity-unicode\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerIdentityRealTests.IdenticalIdentityAndCallerPinCasesBindToTheSoleNativeLoader(id: \"pin-short\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaOriginalLiteralAssertionRealTests.SameSixOriginalLiteralAssertionsBindExistingNativeCasesAndContexts(id: \"ORIG-CONTEXT-IMPORTS-EXACT\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"path-parent\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"invalid-utf8\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaAstRealTests.IdenticalAstCasesBindToPinnedNativeProductionVisitor(id: \"JAVA-04\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerIdentityRealTests.IdenticalIdentityAndCallerPinCasesBindToTheSoleNativeLoader(id: \"identity-relative\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaNativeBuilderRealTests.IdenticalNativeBuildContractBindsToActualPinnedCompilerAndSources",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"path-backslash\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaOriginalLiteralAssertionRealTests.SameSixOriginalLiteralAssertionsBindExistingNativeCasesAndContexts(id: \"ORIG-JAVA-FIELD-OWNERS\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaAstRealTests.IdenticalAstCasesBindToPinnedNativeProductionVisitor(id: \"JAVA-13\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"pin-missing\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"schema\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaAstRealTests.IdenticalAstCasesBindToPinnedNativeProductionVisitor(id: \"JAVA-02\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"path-absolute\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"bad-native-image\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"manifest-link\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerIdentityRealTests.IdenticalIdentityAndCallerPinCasesBindToTheSoleNativeLoader(id: \"identity-unpinned\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerIdentityRealTests.IdenticalIdentityAndCallerPinCasesBindToTheSoleNativeLoader(id: \"pin-zero-length\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"hash-short\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"relative-admission\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerIdentityRealTests.IdenticalIdentityAndCallerPinCasesBindToTheSoleNativeLoader(id: \"identity-pinned\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"unicode-asset-path\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"nonfinite-hidden\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerIdentityRealTests.IdenticalIdentityAndCallerPinCasesBindToTheSoleNativeLoader(id: \"pin-hash-only\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaAstRealTests.IdenticalAstCasesBindToPinnedNativeProductionVisitor(id: \"JAVA-03\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaAstRealTests.IdenticalAstCasesBindToPinnedNativeProductionVisitor(id: \"JAVA-09\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"hash-uppercase\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"extra-metadata\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"runtime-commit\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"unicode-hidden\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"runtime-version\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"exports-absent\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"duplicate-hidden\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"valid\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerDeclarationRealTests.SameOriginalProducerDeclarationClausesBindExistingVisitor(id: \"JAVA-PRODUCER-interface\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"library-missing\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaAstRealTests.IdenticalAstCasesBindToPinnedNativeProductionVisitor(id: \"JAVA-08\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaOriginalLiteralAssertionRealTests.SameSixOriginalLiteralAssertionsBindExistingNativeCasesAndContexts(id: \"ORIG-JAVA-OWNER\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerIdentityRealTests.IdenticalIdentityAndCallerPinCasesBindToTheSoleNativeLoader(id: \"identity-extra-metadata\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerDeclarationRealTests.SameOriginalProducerDeclarationClausesBindExistingVisitor(id: \"JAVA-PRODUCER-annotation\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerDeclarationRealTests.SameOriginalProducerDeclarationClausesBindExistingVisitor(id: \"JAVA-PRODUCER-class\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"hash\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"length\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerIdentityRealTests.IdenticalIdentityAndCallerPinCasesBindToTheSoleNativeLoader(id: \"pin-length-only\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"exports-reordered\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerDeclarationRealTests.SameOriginalProducerDeclarationClausesBindExistingVisitor(id: \"JAVA-PRODUCER-record\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerIdentityRealTests.IdenticalIdentityAndCallerPinCasesBindToTheSoleNativeLoader(id: \"pin-length-mismatch\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"library-link\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerIdentityRealTests.IdenticalIdentityAndCallerPinCasesBindToTheSoleNativeLoader(id: \"pin-replaced-same-length\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaAstRealTests.IdenticalAstCasesBindToPinnedNativeProductionVisitor(id: \"JAVA-06\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaAstRealTests.IdenticalAstCasesBindToPinnedNativeProductionVisitor(id: \"JAVA-12\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"abi\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"artifact-missing\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"manifest-missing\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"grammar-version\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaAstRealTests.IdenticalAstCasesBindToPinnedNativeProductionVisitor(id: \"JAVA-10\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaAstRealTests.IdenticalAstCasesBindToPinnedNativeProductionVisitor(id: \"JAVA-05\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"rid\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"grammar-commit\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaOriginalLiteralAssertionRealTests.SameSixOriginalLiteralAssertionsBindExistingNativeCasesAndContexts(id: \"ORIG-JAVA-ENUM-SET\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerIdentityRealTests.IdenticalIdentityAndCallerPinCasesBindToTheSoleNativeLoader(id: \"pin-negative-length\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaOriginalLiteralAssertionRealTests.SameSixOriginalLiteralAssertionsBindExistingNativeCasesAndContexts(id: \"ORIG-JAVA-PARSE-POSITIVE\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"runtime-tag\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests.IdenticalAdmissionAndLifetimeCasesBindToLocalNativeLoader(id: \"exports-extra\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerIdentityRealTests.IdenticalIdentityAndCallerPinCasesBindToTheSoleNativeLoader(id: \"pin-hash-mismatch\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaNativeBuilderRealTests.FreshNativeGenerationReceiptSatisfiesIdenticalWorkflowOutputAssertions",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerIdentityRealTests.IdenticalIdentityAndCallerPinCasesBindToTheSoleNativeLoader(id: \"pin-uppercase\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaAstRealTests.IdenticalAstCasesBindToPinnedNativeProductionVisitor(id: \"JAVA-07\")",
+      "outcome": "Failed"
+    },
+    {
+      "name": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaProducerTypeTextRealTests.SameExplicitJavaLangSubpackageImportBindsExistingVisitor",
+      "outcome": "Failed"
+    }
+  ],
+  "inputPins": [
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Sources/Acquisition/ArchiveBatchReuseContractTests.cs",
+      "sha256": "361ee6b2b3d1c8e8b958ac264d168933afb2f1cf9741bcfe517c34f8b99a5f5b",
+      "bytes": 5732
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Sources/Acquisition/ArchiveBatchReuseRealTests.cs",
+      "sha256": "e4a968ca1f551adec6ae609c8b34d96093f0871117fc0024b9bd6dbc4ee9d068",
+      "bytes": 7009
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Sources/Acquisition/CacheSdkRealTests.cs",
+      "sha256": "64e4ec875067539ebc037cfdf3f58f96aa41b2005b8f1f2d2df202aaa3527c8e",
+      "bytes": 2832
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Sources/Acquisition/MetadataCallerContractTests.cs",
+      "sha256": "47c82eedd4333de5d7eecdbac5d0c87051642de917ce98b2dfd1f8c4395b12e9",
+      "bytes": 6007
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Sources/Acquisition/MetadataCallerRealTests.cs",
+      "sha256": "923363bf2fed59562b9736ec32b6333835d0a0bb0f245b193ebea9effc9df485",
+      "bytes": 10442
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Sources/Acquisition/MetadataPlatformCallerContractTests.cs",
+      "sha256": "570eadfa565853866575d73b4e259530653c7d090b85147aa43ff1f24354b3ef",
+      "bytes": 4644
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Sources/Acquisition/MetadataPlatformCallerNativeAdapter.cs",
+      "sha256": "93d0c86738a7040606a632b242e0b96a4559df8fe7213d00f70bf0698c833f52",
+      "bytes": 596
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Sources/Acquisition/MetadataPlatformCallerRealTests.cs",
+      "sha256": "66fdefa75d2df8a1bcd433b581c182e391563b0986a5f3ed0f4b5a71c157c501",
+      "bytes": 455
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Sources/Acquisition/MetadataProofContractTests.cs",
+      "sha256": "eb9a9aefc9c31821ec5bd8703fbeff84e7210c421f3b4bc9b44d1d4be7277e50",
+      "bytes": 7268
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Sources/Acquisition/MetadataProofRealTests.cs",
+      "sha256": "d044ed9e08f215530f758b05431f436cd3c81e3ff47ddd9f637f351b33a02e48",
+      "bytes": 7084
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Sources/Acquisition/SdkLegacyPlatformContractTests.cs",
+      "sha256": "71cbb4d1ddb4d95890bb1f0569eecabcd4de0c602f44dac16e4fcfe35727fc3b",
+      "bytes": 4000
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Sources/Acquisition/SdkLegacyPlatformFactsContractTests.cs",
+      "sha256": "a9b1ba9085028af584fcb775bf3b67ca44908b687afc6c630b5b427cc4057a76",
+      "bytes": 1930
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Sources/Acquisition/SdkLegacyPlatformFactsRealTests.cs",
+      "sha256": "e27d9c456e751076e04fe85f873e568315b1998f38f668a88b848d7fa09c64ca",
+      "bytes": 1457
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Sources/Acquisition/SdkLegacyPlatformRealTests.cs",
+      "sha256": "f0fc0d7ff7b8da3b412f854e7732f778d63fc554b00504e5e789a5a2817383b7",
+      "bytes": 2135
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Sources/Acquisition/SdkMetadataBoundaryContractTests.cs",
+      "sha256": "b5124d223e31b8a7d42d6fb3917f1cd8285af91739a401edf2ef439a3dc129e3",
+      "bytes": 11074
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Sources/Acquisition/SdkMetadataBoundaryRealTests.cs",
+      "sha256": "3840f6b40ea70ad2567d9e82c5c6a00fc214a7c38f1bde4fa0fa6ba05aaf7baf",
+      "bytes": 7174
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Sources/Acquisition/SdkPackageChoiceContractTests.cs",
+      "sha256": "bef35fc647099c122ce8cb3a1fbf6d11a71e894c58bdc72b6e2fcf40c13df593",
+      "bytes": 3310
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Sources/Acquisition/SdkPackageChoiceRealTests.cs",
+      "sha256": "6ca138bc071ddca4f21947f9357d17a0bd22ee27b650638b82cecc6f296acaba",
+      "bytes": 1061
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Sources/Acquisition/SdkVersionContractTests.cs",
+      "sha256": "01cc44f13e4e8ba8ff25aa57e38a46c5e8c281a98ff94640737a7b4f1f411441",
+      "bytes": 3230
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Sources/Acquisition/SnapshotWireContractTests.cs",
+      "sha256": "3546771764cf8457299a442aa105dcfb05e2d7e49f84a21aff33133033615c5b",
+      "bytes": 5113
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Sources/Acquisition/SnapshotWireRealTests.cs",
+      "sha256": "5a65086b9b04b6e7e62335460522f0cfbcc526c29f74952e052bd76bce3ebf38",
+      "bytes": 1184
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Sources/Acquisition/SourceSnapshotContractTests.cs",
+      "sha256": "94aeea94518a4af975011bf8dc3bc2b8c66fc925939fe56e52b446c02b229864",
+      "bytes": 9087
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Sources/Acquisition/SourceSnapshotRealTests.cs",
+      "sha256": "bbf3f09cc295d87f0f96be3af65f41bd09eabbed5f49095840c568b13d873e9f",
+      "bytes": 8500
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Sources/Acquisition/SourceTransportCompositionContractTests.cs",
+      "sha256": "3dd4955857543a7187bd3894a87353ae085ea454992c708d5db8f06dd82f463f",
+      "bytes": 3090
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Sources/Acquisition/SourceTransportCompositionRealTests.cs",
+      "sha256": "6f0b0c20d85308382399749e33640686d072f175ad7eed17c1f26538ec111337",
+      "bytes": 2709
+    }
+  ],
+  "productionPins": [
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Modules/Sources/Acquisition/AcquisitionContracts.cs",
+      "sha256": "eda103cef62e9ad47c2f821764adc7adf6a4164e2680e12b79fb611651d87770",
+      "bytes": 2065
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Modules/Sources/Acquisition/SourceArchiveAcquirer.cs",
+      "sha256": "0b99e87f00ac7a7f6b6cc364567e36cc225db5558513bb38492df8f695e51e35",
+      "bytes": 7934
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Modules/Sources/Acquisition/SourceAcquirer.cs",
+      "sha256": "a63ec5f8951ad0e6194291b84d041f489a8f997816ade8cdef45932dbe36f125",
+      "bytes": 6176
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Modules/Sources/Acquisition/SourceBatch.cs",
+      "sha256": "1e75aad72f9c01caddf6b12f7200d2b6c1ac98d0b72be43a1efae2b0a0626104",
+      "bytes": 29020
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Modules/Sources/Acquisition/SourceSnapshotContracts.cs",
+      "sha256": "b3d93c0735b6c5f86412d473a44ef5c19d1887a1c64f1b281f08c452e01fc736",
+      "bytes": 1077
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Modules/Sources/Acquisition/SourcesSnapshotOperation.cs",
+      "sha256": "ec296f7069734d2260b4f7abc2709d5b4a393ce483753822114d8c58f15fa421",
+      "bytes": 6518
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Modules/Sources/Acquisition/SnapshotFetchTransport.cs",
+      "sha256": "316bfd5075147cdf88537ede2212ade43f6578ec24c7359d03f2c55720c7bc00",
+      "bytes": 1095
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Modules/Sources/Acquisition/SdkVersionContracts.cs",
+      "sha256": "c2cc81e7c85e7528525856e636adc6aaa7a7dae2c5c00bb1d7ce47f84721f1ef",
+      "bytes": 638
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Modules/Sources/Acquisition/SdkArchiveVersionValidator.cs",
+      "sha256": "71bc1ae6ae225848adba99460ca63a61b7db6b37a4e8edb88207522317788229",
+      "bytes": 2557
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Modules/Sources/Acquisition/SnapshotMetadataProofReader.cs",
+      "sha256": "425a8f1dc5709c7e9213116c96e4ac0e4d7acc43c6c020182a28d6429b812580",
+      "bytes": 4418
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Modules/Sources/Acquisition/SnapshotMetadataProofContracts.cs",
+      "sha256": "7da231d271de39c0c4718658db4abb4f422c86735b9bca39991f3ecb1961982e",
+      "bytes": 904
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Modules/Sources/Acquisition/MetadataArchiveReader.cs",
+      "sha256": "d246e18ef28a1757fd8e1a91bedd7c55c67b2baf2ca3d3cc852d475ae3dc777b",
+      "bytes": 4194
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Modules/Sources/Acquisition/SdkLegacyPlatformValue.cs",
+      "sha256": "7c290d7c86b27e2d4f374d8e3328d071b1b5bc57bba267c3480e0169de418526",
+      "bytes": 2131
+    }
+  ],
+  "publicationSnapshotPins": [
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Modules/Publication/RehydrationSnapshotContracts.cs",
+      "sha256": "d79b84f006f37d6b2f5e42f8124f468db8d6ebc9b32646d2e686c644082a5d8a",
+      "bytes": 1492
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Modules/Publication/RehydrationPlanner.cs",
+      "sha256": "2f2a14c66354520071692f53b26fa28e1959daa30d07f10ae91d827b152ac6e2",
+      "bytes": 25842
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Modules/Publication/RehydrationCanonicalMetadataReference.cs",
+      "sha256": "3b4842acef8c6ca29cabeb66d8766314d14e10b11bcd1795352c30570489cf6f",
+      "bytes": 1402
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Publication/RehydrationSnapshotMockTests.cs",
+      "sha256": "451862ac9cd539bd45ed6e7260b4c9a574b7d5aaaa730ad2025c364d39a04976",
+      "bytes": 15706
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Publication/RehydrationSnapshotRealTests.cs",
+      "sha256": "da3d6c3591dd55788f90af32fe19cc75169d9d53eee5d2a2d4771e54112c9822",
+      "bytes": 2104
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Publication/RehydrationMetadataReferenceMockTests.cs",
+      "sha256": "8b6daa53ec96bd5c7042b67fa6d0054932a985c0d61474bdabfeb1f478a1facd",
+      "bytes": 14301
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Publication/RehydrationMetadataReferenceRealTests.cs",
+      "sha256": "958f5a6a476b1ce9a4f595282c7d660bd59419084313592ee53fef59663d83d9",
+      "bytes": 2153
+    }
+  ],
+  "snapshotCliPins": [
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Build.cs",
+      "sha256": "79f62e4d667280a0e322fd691265283a44b8c5b5f2c5ba1a64c9a2d8e9f2638a",
+      "bytes": 17582
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Build.SourcesFetch.cs",
+      "sha256": "096688d9cabf6a70908280ab22a7b68e3c47a0f6054bf2e92663e8cecbe45573",
+      "bytes": 4079
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Build.SourcesInputs.cs",
+      "sha256": "de978cbc2591fb8fd6c3f16d630267050770a9d55c82994ade335cca082064f8",
+      "bytes": 996
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Build.SourcesSnapshot.cs",
+      "sha256": "8addb7cad9d2331a53d7d3411a13a9a62fa0e3e4f370a7a2443a23a77eace928",
+      "bytes": 3048
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Core/OperationContracts.cs",
+      "sha256": "b3b56ddfca4261a4d42239a289ae663a3198c1cb014fd30ade6bf1082c0ce90f",
+      "bytes": 2216
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Core/OperationRegistry.cs",
+      "sha256": "c00bffe13b4eaba7024f2e934f459a241cfe14ac544a8cbc67e5ba1e3e6ecece",
+      "bytes": 12014
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Modules/Publication/OperationHelpBuilder.cs",
+      "sha256": "91292a13ca429d856adf53a96b932af5c39f49aeb66e379ee1e0b628c4954a55",
+      "bytes": 7642
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Core/SourcesSnapshotPlannerMockTests.cs",
+      "sha256": "753f8c9f4533d16ff2fad46198255c91ff7d5d91ac248d977d2304176dd71eae",
+      "bytes": 3804
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Core/SourcesSnapshotPlannerRealTests.cs",
+      "sha256": "65e7d6d56150d9903b1412b6046a6baa0b7966a70717c7d4efe3d479b34d090e",
+      "bytes": 437
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Core/SourcesSnapshotCliContractTests.cs",
+      "sha256": "69a8dfbac452454a637cc20bedd80a5e988ff21161d5af1f2659cc72fc1eac9d",
+      "bytes": 17594
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Core/SourcesSnapshotCliRealTests.cs",
+      "sha256": "570899cb92f4b29f0f503c8576da5bb5e01ba050096fc8cd267b70c2eccfce60",
+      "bytes": 5830
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Publication/OperationHelpGroupMockTests.cs",
+      "sha256": "1da6f5743ff9f2fa21fbc3f6d87e5df7d09578964cd8ad62616bef7083295d83",
+      "bytes": 4326
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Publication/OperationHelpGroupRealTests.cs",
+      "sha256": "42286dd3d0cf7a3d9bb93920c26e9d5453c5821ce833391cda2b22cf18eadddb",
+      "bytes": 465
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Sources/Acquisition/SourceSnapshotRealTests.cs",
+      "sha256": "bbf3f09cc295d87f0f96be3af65f41bd09eabbed5f49095840c568b13d873e9f",
+      "bytes": 8500
+    }
+  ],
+  "publicationPlatformFactPins": [
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Modules/Publication/RehydrationLegacyPlatformFacts.cs",
+      "sha256": "cea416d42f60c0d75a3e89412beb5a272bd966beea772b714309979fc18c93e7",
+      "bytes": 599
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Modules/Publication/RehydrationCanonicalMetadataReference.cs",
+      "sha256": "3b4842acef8c6ca29cabeb66d8766314d14e10b11bcd1795352c30570489cf6f",
+      "bytes": 1402
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Publication/RehydrationPlatformFactsMockTests.cs",
+      "sha256": "6be45b7c83cc06ed58db43a9e66cdaf98ea4af5ce922d3f86a4c3b867772dfe1",
+      "bytes": 13389
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Publication/RehydrationPlatformFactsRealTests.cs",
+      "sha256": "815bbec4eac083014fc15d6e8518afa155ab80ec264751a09e0de42cc1f91184",
+      "bytes": 2120
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app/Tests/Publication/RehydrationMetadataReferenceMockTests.cs",
+      "sha256": "8b6daa53ec96bd5c7042b67fa6d0054932a985c0d61474bdabfeb1f478a1facd",
+      "bytes": 14301
+    }
+  ],
+  "chronology": {
+    "firstRun": "20261029T0517532675572-PlatformApplicableMissingJavaManifest.summary.json",
+    "cause": "First broad private run omitted the Java manifest argument; 78 constructor failures. Same filter/tests/production reran after the pinned existing manifest/binary prerequisite was supplied. No download or lock mutation.",
+    "notCurrent019Evidence": true,
+    "correctedRun": "20261029T0521306337282-PlatformApplicableFinal.summary.json"
+  }
+}

@@ -1,23 +1,23 @@
 {
-  "at": "2026-10-29T04:04:25",
+  "at": "2026-10-29T05:20:49",
   "projection_only": true,
   "authoritative_inventory": {
     "path": "remediation/nuke-planning/source/legacy-port-disposition-inventory.json",
-    "sha256": "a5355ceabe866e8e8e8b7d79a9fcccca4e637283922f1d01ae5c6003f3c545bd"
+    "sha256": "1f90a55b662c54f5934a1a7e0503a0e3ae33f64dcbd580b8d70e5218a4663c7e"
   },
   "scope": "Published 198 only. Additional 1278 local historical paths are retained in the sole union and are not inflated into independent published port tasks.",
   "totals": {
     "published_paths": 198,
     "canonical_responsibility_groups": 134,
-    "normally_verified_files": 60,
-    "partially_verified_files": 4,
-    "files_without_normal_method_proof": 134,
-    "normal_method_bindings_by_file": 285,
-    "unique_method_bindings_by_group": 208,
+    "normally_verified_files": 67,
+    "partially_verified_files": 2,
+    "files_without_normal_method_proof": 129,
+    "normal_method_bindings_by_file": 301,
+    "unique_method_bindings_by_group": 224,
     "published_execution_retirements": 0,
     "pr_eligible_paths": 47,
-    "normally_closed_groups": 39,
-    "open_canonical_groups": 95,
+    "normally_closed_groups": 44,
+    "open_canonical_groups": 90,
     "safe_to_delete": 0,
     "hv_accepted": 0
   },
@@ -29,8 +29,8 @@
       ],
       "published_paths": 85,
       "canonical_responsibility_groups": 53,
-      "normal_file_proofs": 12,
-      "normal_method_bindings_by_file": 76,
+      "normal_file_proofs": 14,
+      "normal_method_bindings_by_file": 79,
       "normally_closed_groups": 8,
       "open_canonical_groups": 45,
       "published_execution_retirements": 0,
@@ -43,10 +43,10 @@
       ],
       "published_paths": 10,
       "canonical_responsibility_groups": 10,
-      "normal_file_proofs": 8,
-      "normal_method_bindings_by_file": 47,
-      "normally_closed_groups": 8,
-      "open_canonical_groups": 2,
+      "normal_file_proofs": 10,
+      "normal_method_bindings_by_file": 56,
+      "normally_closed_groups": 10,
+      "open_canonical_groups": 0,
       "published_execution_retirements": 0,
       "pr_eligible_test_or_file_paths": 8
     },
@@ -74,10 +74,10 @@
       ],
       "published_paths": 99,
       "canonical_responsibility_groups": 68,
-      "normal_file_proofs": 40,
-      "normal_method_bindings_by_file": 162,
-      "normally_closed_groups": 23,
-      "open_canonical_groups": 45,
+      "normal_file_proofs": 42,
+      "normal_method_bindings_by_file": 166,
+      "normally_closed_groups": 25,
+      "open_canonical_groups": 43,
       "published_execution_retirements": 0,
       "pr_eligible_test_or_file_paths": 27
     },
@@ -89,10 +89,10 @@
       ],
       "published_paths": 3,
       "canonical_responsibility_groups": 2,
-      "normal_file_proofs": 0,
+      "normal_file_proofs": 1,
       "normal_method_bindings_by_file": 0,
-      "normally_closed_groups": 0,
-      "open_canonical_groups": 2,
+      "normally_closed_groups": 1,
+      "open_canonical_groups": 1,
       "published_execution_retirements": 0,
       "pr_eligible_test_or_file_paths": 0
     }
@@ -1354,6 +1354,7 @@
         "release011"
       ],
       "services": [
+        "CatalogBuild and existing CatalogDevicePipeline providers",
         "CatalogBuild/sealed registry publication integration pending",
         "CatalogDatabase",
         "CatalogReference",
@@ -1375,7 +1376,9 @@
         "remediation/nuke-app/Modules/Catalog/CatalogViewPolicy.cs",
         "scoped CatalogProjection/EffectiveInventory/DispatchManifest pending"
       ],
-      "normally_verified_file_paths": [],
+      "normally_verified_file_paths": [
+        "remediation/catalog/tests/test_device_catalog_pipeline.py"
+      ],
       "normal_method_bindings": [
         {
           "method": "test_aidl_type_reference_proof_and_contract_digest_are_shared",
@@ -1450,18 +1453,10 @@
       ],
       "normally_closed_all_published_paths": false,
       "remaining_caller_and_profile_duties": [
-        "Actual typed CLI chain requires explicit row normalization and runtime proof",
-        "All historical byte/profile equivalence and complete migration/HV acceptance remain pending",
-        "All seven original assertion scopes normal-verified. Explicit synthetic verified-unused SDK cache differs from historical cache payload carrier; full historical byte/profile parity, known raw route caller, whole validator and typed CLI migration acceptance not inferred.",
-        "current profile partially native-bound; see native-parity-supplement.json for bounded receipts",
-        "Exact owner assertion-method closure only. Current/historical caller/profile and fullfile proof remain separate.",
         "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
-        "Full validate_catalog.run reconciliation/reporting remains pending beyond inventory validator",
-        "Known raw route canonicalization and other original contract-model callers are separate pending scopes",
-        "MCP audit denied and not retried",
         "pending exact method/profile assertion binding; current bounded native services do not prove this complete method",
         "release-011 exact profile parity pending; no inference from basename or equal SHA256",
-        "The SDK historical cache fixture is explicitly synthetic verified-unused evidence with native raw re-extraction. It is not decoded, assigned an old producer identity or used as historical byte-parity proof."
+        "unittest/tempfile/Python exceptions adapt to shared native test providers; source SHA identity stays truthful C# producer identity Current original test file only; frozen profiles and whole producer/corpus/HV remain separate."
       ]
     },
     {
@@ -2315,6 +2310,7 @@
       ],
       "services": [
         "Build.Catalog.cs",
+        "CatalogBuild and existing CatalogDevicePipeline providers",
         "CatalogBuild/sealed registry publication integration pending",
         "CatalogDatabase",
         "CatalogReference",
@@ -2326,8 +2322,20 @@
         "remediation/nuke-app/Modules/Catalog/CatalogValidator.cs",
         "scoped CatalogProjection/EffectiveInventory/DispatchManifest pending"
       ],
-      "normally_verified_file_paths": [],
+      "normally_verified_file_paths": [
+        "remediation/catalog/tests/test_build.py"
+      ],
       "normal_method_bindings": [
+        {
+          "method": "test_hash_failure_does_not_publish",
+          "source_sha256": "e9ce2b6dbb35b6e7689c6df830a9af8e82dde1091f9eae67c4e3ff767d8896a0",
+          "evidence": [
+            "remediation/nuke-planning/catalog/catalog-normal-test-file-closures.json"
+          ],
+          "scope": [
+            "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit"
+          ]
+        },
         {
           "method": "test_import_integrity_schema_overlay_and_immutability",
           "source_sha256": "e9ce2b6dbb35b6e7689c6df830a9af8e82dde1091f9eae67c4e3ff767d8896a0",
@@ -2337,17 +2345,34 @@
           "scope": [
             "Owner-explicit original assertion scenario; caller/fixture setup deltas and full-file remainder retained in evidence."
           ]
+        },
+        {
+          "method": "test_invalid_ast_cannot_publish",
+          "source_sha256": "e9ce2b6dbb35b6e7689c6df830a9af8e82dde1091f9eae67c4e3ff767d8896a0",
+          "evidence": [
+            "remediation/nuke-planning/catalog/catalog-normal-test-file-closures.json"
+          ],
+          "scope": [
+            "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit"
+          ]
+        },
+        {
+          "method": "test_one_identity_two_immutable_occurrences",
+          "source_sha256": "e9ce2b6dbb35b6e7689c6df830a9af8e82dde1091f9eae67c4e3ff767d8896a0",
+          "evidence": [
+            "remediation/nuke-planning/catalog/catalog-normal-test-file-closures.json"
+          ],
+          "scope": [
+            "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit"
+          ]
         }
       ],
       "normally_closed_all_published_paths": false,
       "remaining_caller_and_profile_duties": [
-        "current profile partially native-bound; see native-parity-supplement.json for bounded receipts",
-        "Exact owner assertion-method closure only. Current/historical caller/profile and fullfile proof remain separate.",
         "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
-        "Original overlay suppression/restore/history and independent validator nonmutation remain pending. Exact original raw-tampered-file case is now native-verified, independently of the retained declared-SHA mutation case. Cursor4/Build7/CLI7/Source4/cache2/stream4 all pass in full005. No full historical producer or representative SDK scalability claim.",
         "pending exact method/profile assertion binding; current bounded native services do not prove this complete method",
         "release-011 exact profile parity pending; no inference from basename or equal SHA256",
-        "Whole-path registered CLI activation, positive matched AIDL consumer, all unlisted report/error/count/omission branches, historical/profile-specific callers. Exact list in validate-catalog-operation-proposal.md; no full function/module/corpus closure inferred."
+        "unittest/tempfile/Python exceptions adapt to shared native test providers; source SHA identity stays truthful C# producer identity Current original test file only; frozen profiles and whole producer/corpus/HV remain separate."
       ]
     },
     {
@@ -2983,14 +3008,17 @@
       "services": [
         "DocumentationRendererProfileReader",
         "DocumentationToolBootstrap",
+        "Existing sole transport/acquirer/tool bootstrap/workspace effects/immutable completion and Design composition",
         "ToolArtifactAcquirer",
         "ToolZipExtractor"
       ],
-      "normally_verified_file_paths": [],
+      "normally_verified_file_paths": [
+        "remediation/design-c4/tooling/bootstrap.py"
+      ],
       "normal_method_bindings": [],
-      "normally_closed_all_published_paths": false,
+      "normally_closed_all_published_paths": true,
       "remaining_caller_and_profile_duties": [
-        "Old profile15/bootstrap7 plus new redirect profile12/bootstrap3 native cases passed; Architecture002 composed native bootstrap and admitted exact observed Gradle published-checksum redirect before network-disabled rendering; existing cache bytes are not a new binary-download claim; Gradlecaller/wrapperproperties retirement remains pending; Node/Marp acquisition retired by approved stack change"
+        "Original published and retained evidence copies independently SHA-pinned. Retained copies are evidence, not extra independent production responsibilities. Normal producer closure does not mint original test-method claims."
       ]
     },
     {
@@ -3278,13 +3306,107 @@
       "profiles": [
         "canonical-or-explicit-owner-profile"
       ],
-      "services": [],
-      "normally_verified_file_paths": [],
-      "normal_method_bindings": [],
-      "normally_closed_all_published_paths": false,
+      "services": [
+        "Literal original cross-artifact assertions over shared FileArtifactStore/ContentHash; existing alias caller proof is separate"
+      ],
+      "normally_verified_file_paths": [
+        "remediation/tests_design023_contract.py"
+      ],
+      "normal_method_bindings": [
+        {
+          "method": "test_admin_scheme_is_issued_bearer_and_owner_proof_is_server_owned",
+          "source_sha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+          "evidence": [
+            "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json"
+          ],
+          "scope": [
+            "Exact original predicate and Root-approved current-artifact versus retained Gradle syntax boundary in the complete owner map."
+          ]
+        },
+        {
+          "method": "test_all_native_arc_identities_hash_exact_bytes_and_use_pinned_payloads",
+          "source_sha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+          "evidence": [
+            "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json"
+          ],
+          "scope": [
+            "Exact original predicate and Root-approved current-artifact versus retained Gradle syntax boundary in the complete owner map."
+          ]
+        },
+        {
+          "method": "test_contract_version_has_one_current_value",
+          "source_sha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+          "evidence": [
+            "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json"
+          ],
+          "scope": [
+            "Exact original predicate and Root-approved current-artifact versus retained Gradle syntax boundary in the complete owner map."
+          ]
+        },
+        {
+          "method": "test_dispatch_permit_and_storage_ports_are_explicit_in_sources",
+          "source_sha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+          "evidence": [
+            "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json"
+          ],
+          "scope": [
+            "Exact original predicate and Root-approved current-artifact versus retained Gradle syntax boundary in the complete owner map."
+          ]
+        },
+        {
+          "method": "test_import_stage_routes_define_sealed_hash_size_expiry",
+          "source_sha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+          "evidence": [
+            "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json"
+          ],
+          "scope": [
+            "Exact original predicate and Root-approved current-artifact versus retained Gradle syntax boundary in the complete owner map."
+          ]
+        },
+        {
+          "method": "test_stage_lifetime_is_capacity_aware_and_configurable",
+          "source_sha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+          "evidence": [
+            "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json"
+          ],
+          "scope": [
+            "Exact original predicate and Root-approved current-artifact versus retained Gradle syntax boundary in the complete owner map."
+          ]
+        },
+        {
+          "method": "test_standalone_docs_tasks_verify_pins",
+          "source_sha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+          "evidence": [
+            "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json"
+          ],
+          "scope": [
+            "Exact original predicate and Root-approved current-artifact versus retained Gradle syntax boundary in the complete owner map."
+          ]
+        },
+        {
+          "method": "test_version_rejection_matches_pinned_arc_source",
+          "source_sha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+          "evidence": [
+            "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json"
+          ],
+          "scope": [
+            "Exact original predicate and Root-approved current-artifact versus retained Gradle syntax boundary in the complete owner map."
+          ]
+        },
+        {
+          "method": "test_watch_contract_is_finite_and_blob_quota_accounted",
+          "source_sha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+          "evidence": [
+            "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json"
+          ],
+          "scope": [
+            "Exact original predicate and Root-approved current-artifact versus retained Gradle syntax boundary in the complete owner map."
+          ]
+        }
+      ],
+      "normally_closed_all_published_paths": true,
       "remaining_caller_and_profile_duties": [
-        "Documentation cross-artifact/source invariant validator and this original method full native binding remain pending in Documentation ownership.",
-        "Gradle thin delegate/caller equivalence and toolchain category integration remain pending; native locks/bootstrap/acquirer service proof is narrower."
+        "Eight current source methods plus one original retained Gradle syntax method. Do not claim the old val syntax executes against the current thin projection. Current aliases have separate004/005/006 actual compiled proofs and prior exported offline Gradle evidence."
       ]
     },
     {
@@ -3299,14 +3421,17 @@
         "canonical-or-explicit-owner-profile"
       ],
       "services": [
+        "Existing whole-root tree/store/checker/HTML/resolver and registered Validate/Design caller",
         "HTML Assets.handle_starttag parser pending",
         "Repository documentation validator pending"
       ],
-      "normally_verified_file_paths": [],
+      "normally_verified_file_paths": [
+        "tools/check_documentation.py"
+      ],
       "normal_method_bindings": [],
-      "normally_closed_all_published_paths": false,
+      "normally_closed_all_published_paths": true,
       "remaining_caller_and_profile_duties": [
-        "Exact check() committed checksums, all repository markdown percent-decoded local links excluding .git, all SVG XML parse and full HTML remote-asset syntax remain unbound. main() CLI/root/JSON/exit pending."
+        "Original published and retained evidence copies independently SHA-pinned. Retained copies are evidence, not extra independent production responsibilities. Normal producer closure does not mint original test-method claims."
       ]
     },
     {
@@ -4338,13 +4463,16 @@
         "canonical-or-explicit-owner-profile"
       ],
       "services": [
-        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
+        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only",
+        "PublishedInterfaceHashSourceFacts + PublishedInterfaceHashWorkflow.RunAsync"
       ],
-      "normally_verified_file_paths": [],
+      "normally_verified_file_paths": [
+        "tools/source_facts/interface_hash_facts.py"
+      ],
       "normal_method_bindings": [],
-      "normally_closed_all_published_paths": false,
+      "normally_closed_all_published_paths": true,
       "remaining_caller_and_profile_duties": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "[\"Existing native safe portable root-relative paths and strict JSON duplicate/nonfinite/Unicode admission replace original pathlib/json.loads permissiveness. Preserve reached original admitted-domain errors/effects; no unrestricted interpreter equivalence.\",\"Use shared LegacyAsciiIdentity compact canonical bytes rather than reproducing json.dumps default spaces and report indent2. Same original field values/order of array evidence and JSONL newline boundaries; no historical byte identity. No new serializer.\",\"Native assembly identity, native_producer/historical_python_identity metadata, offset timestamp and final index.json are explicit native generation additions; do not pretend they are original Python code or frozen report bytes.\",\"Existing destination directories, including empty/unrelated directories, must fail after successful input processing. Use existing tree absence observation under shared cooperating lease. This does not claim atomic mkdir equivalence against arbitrary noncooperating hostile directory creation between observation/write; that capability is absent from the reused services and is not invented.\",\"Shared generation admission/rechecks add immutable pin enforcement before/after writes; failure keeps uncommitted files and no final commit. Original has no final recheck. Preserve actual source evidence, do not silently drop failed/changed inputs.\",\"Only four existing SourceFactProducer helper access modifiers and Root-owned CLI/planner binding may need existing-file edits. No factory/Core service/registry schema framework or SourceSyntax changes by Sources.\"]"
       ]
     },
     {
@@ -5440,13 +5568,57 @@
         "canonical-or-explicit-owner-profile"
       ],
       "services": [
-        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
+        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only",
+        "PublishedInterfaceHashSourceFacts + PublishedInterfaceHashWorkflow.RunAsync"
       ],
-      "normally_verified_file_paths": [],
-      "normal_method_bindings": [],
-      "normally_closed_all_published_paths": false,
+      "normally_verified_file_paths": [
+        "tools/source_facts/test_interface_hash_facts.py"
+      ],
+      "normal_method_bindings": [
+        {
+          "method": "test_aidl_hash_lines_kept_in_order_no_compiled_hash_assumption",
+          "source_sha256": "f270d1e8c6bd5396412678f148f1789c2f8329dc3d7705dd68377a805ba8b1c9",
+          "evidence": [
+            "remediation/nuke-planning/source/source-normal-verification-supplement.json"
+          ],
+          "scope": [
+            "HASH-01 exact comment/a40/b40/newline input and complete ordered facts, compiled_runtime_hash_proven=false, empty unknown_lines. Exact original assertion body also retained in013 SAME-native assertion cases."
+          ]
+        },
+        {
+          "method": "test_hidl_duplicate_identifier_hashes_are_not_collapsed",
+          "source_sha256": "f270d1e8c6bd5396412678f148f1789c2f8329dc3d7705dd68377a805ba8b1c9",
+          "evidence": [
+            "remediation/nuke-planning/source/source-normal-verification-supplement.json"
+          ],
+          "scope": [
+            "HASH-06 exact a64/b64 compatibility-comment input, two fact rows and first declared_identifier retained, android_applicability_proven=false. Exact original assertion body retained in013."
+          ]
+        },
+        {
+          "method": "test_hidl_unknown_format_remains_evidence",
+          "source_sha256": "f270d1e8c6bd5396412678f148f1789c2f8329dc3d7705dd68377a805ba8b1c9",
+          "evidence": [
+            "remediation/nuke-planning/source/source-normal-verification-supplement.json"
+          ],
+          "scope": [
+            "HASH-07 exact opaque declaration newline input and raw unknown evidence, exact original assertion retained in013."
+          ]
+        },
+        {
+          "method": "test_unknown_aidl_hash_line_retained",
+          "source_sha256": "f270d1e8c6bd5396412678f148f1789c2f8329dc3d7705dd68377a805ba8b1c9",
+          "evidence": [
+            "remediation/nuke-planning/source/source-normal-verification-supplement.json"
+          ],
+          "scope": [
+            "HASH-02 exact not-frozen newline input and unknown_lines[0].raw; full diagnostic line/raw output plus exact original assertion in013."
+          ]
+        }
+      ],
+      "normally_closed_all_published_paths": true,
       "remaining_caller_and_profile_duties": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "[\"Existing native safe portable root-relative paths and strict JSON duplicate/nonfinite/Unicode admission replace original pathlib/json.loads permissiveness. Preserve reached original admitted-domain errors/effects; no unrestricted interpreter equivalence.\",\"Use shared LegacyAsciiIdentity compact canonical bytes rather than reproducing json.dumps default spaces and report indent2. Same original field values/order of array evidence and JSONL newline boundaries; no historical byte identity. No new serializer.\",\"Native assembly identity, native_producer/historical_python_identity metadata, offset timestamp and final index.json are explicit native generation additions; do not pretend they are original Python code or frozen report bytes.\",\"Existing destination directories, including empty/unrelated directories, must fail after successful input processing. Use existing tree absence observation under shared cooperating lease. This does not claim atomic mkdir equivalence against arbitrary noncooperating hostile directory creation between observation/write; that capability is absent from the reused services and is not invented.\",\"Shared generation admission/rechecks add immutable pin enforcement before/after writes; failure keeps uncommitted files and no final commit. Original has no final recheck. Preserve actual source evidence, do not silently drop failed/changed inputs.\",\"Only four existing SourceFactProducer helper access modifiers and Root-owned CLI/planner binding may need existing-file edits. No factory/Core service/registry schema framework or SourceSyntax changes by Sources.\"]"
       ]
     },
     {
@@ -14638,13 +14810,14 @@
       "owner": "Catalog",
       "category": "Catalog",
       "operations": [
-        "pending-method-specific-registry-binding"
+        "Build"
       ],
       "canonical_responsibility_key": "Catalog|Catalog|e9ce2b6dbb35b6e7689c6df830a9af8e82dde1091f9eae67c4e3ff767d8896a0",
       "primary_code_path": "remediation/catalog/tests/test_build.py",
       "explicit_profiles": "canonical-or-explicit-owner-profile",
       "services": [
         "Build.Catalog.cs",
+        "CatalogBuild and existing CatalogDevicePipeline providers",
         "CatalogBuild/sealed registry publication integration pending",
         "CatalogDatabase",
         "CatalogReference",
@@ -14658,12 +14831,53 @@
       ],
       "additional_responsibilities": [
         "Acquisition: fixture archives/source retrieval where called",
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate.",
         "Catalog supplied current normal assertion/method evidence separately from whole-file closure and HV acceptance.",
         "Java: Java extraction and source parser parity",
         "Sources: source extraction, formal/header/type evidence, annotation linking"
       ],
-      "normal_file_verified": false,
+      "normal_file_verified": true,
       "normal_verified_methods": [
+        {
+          "method": "test_hash_failure_does_not_publish",
+          "evidence": "remediation/nuke-planning/catalog/catalog-normal-test-file-closures.json",
+          "source_sha256": "e9ce2b6dbb35b6e7689c6df830a9af8e82dde1091f9eae67c4e3ff767d8896a0",
+          "bindings": [
+            "CatalogOriginalTamperRealTests"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_one_identity_two_immutable_occurrences",
+          "evidence": "remediation/nuke-planning/catalog/catalog-normal-test-file-closures.json",
+          "source_sha256": "e9ce2b6dbb35b6e7689c6df830a9af8e82dde1091f9eae67c4e3ff767d8896a0",
+          "bindings": [
+            "BUILD-05",
+            "CatalogOriginalAssertionGapRealTests.SameOriginalGroupedIdentitySqlHasExactlyOneBindingAndTwoOccurrences"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_invalid_ast_cannot_publish",
+          "evidence": "remediation/nuke-planning/catalog/catalog-normal-test-file-closures.json",
+          "source_sha256": "e9ce2b6dbb35b6e7689c6df830a9af8e82dde1091f9eae67c4e3ff767d8896a0",
+          "bindings": [
+            "BUILD-04"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
         {
           "method": "test_import_integrity_schema_overlay_and_immutability",
           "evidence": "remediation/nuke-planning/catalog/evidence/full-validation-normal-method-proof.json",
@@ -14706,45 +14920,17 @@
           "indent": 1
         }
       ],
-      "pending_function_anchors": [
-        {
-          "name": "fixture",
-          "line": 8,
-          "indent": 1
-        },
-        {
-          "name": "test_hash_failure_does_not_publish",
-          "line": 48,
-          "indent": 1
-        },
-        {
-          "name": "test_one_identity_two_immutable_occurrences",
-          "line": 54,
-          "indent": 1
-        },
-        {
-          "name": "test_invalid_ast_cannot_publish",
-          "line": 58,
-          "indent": 1
-        }
-      ],
-      "pending_owner_method_list": [
-        "test_hash_failure_does_not_publish",
-        "test_invalid_ast_cannot_publish",
-        "test_one_identity_two_immutable_occurrences"
-      ],
+      "pending_function_anchors": [],
+      "pending_owner_method_list": null,
       "remaining": [
-        "current profile partially native-bound; see native-parity-supplement.json for bounded receipts",
-        "Exact owner assertion-method closure only. Current/historical caller/profile and fullfile proof remain separate.",
-        "Original overlay suppression/restore/history and independent validator nonmutation remain pending. Exact original raw-tampered-file case is now native-verified, independently of the retained declared-SHA mutation case. Cursor4/Build7/CLI7/Source4/cache2/stream4 all pass in full005. No full historical producer or representative SDK scalability claim.",
-        "pending exact method/profile assertion binding; current bounded native services do not prove this complete method",
-        "Whole-path registered CLI activation, positive matched AIDL consumer, all unlisted report/error/count/omission branches, historical/profile-specific callers. Exact list in validate-catalog-operation-proposal.md; no full function/module/corpus closure inferred."
+        "unittest/tempfile/Python exceptions adapt to shared native test providers; source SHA identity stays truthful C# producer identity Current original test file only; frozen profiles and whole producer/corpus/HV remain separate."
       ],
       "bounded_service_test_evidence": [
         "CatalogBuildCacheRealTests:2",
         "CatalogBuildCliRealTests:7",
         "CatalogBuildRealTests:7",
         "CatalogPersistentBuildRealTests:4",
+        "Existing original method maps plus CatalogOriginalAssertionGapRealTests",
         "remediation/nuke-app/Tests/Catalog/CatalogFullValidationCases.cs",
         "remediation/nuke-app/Tests/Catalog/CatalogFullValidationRealTests.cs"
       ],
@@ -15043,12 +15229,13 @@
       "owner": "Catalog",
       "category": "Catalog",
       "operations": [
-        "pending-method-specific-registry-binding"
+        "Build"
       ],
       "canonical_responsibility_key": "Catalog|Catalog|50e4504e81443dacdf605cb850ca7be1f8ff92b7eb1ca54ee369328eb2cec1b5",
       "primary_code_path": "remediation/catalog/tests/test_device_catalog_pipeline.py",
       "explicit_profiles": "canonical-or-explicit-owner-profile",
       "services": [
+        "CatalogBuild and existing CatalogDevicePipeline providers",
         "CatalogBuild/sealed registry publication integration pending",
         "CatalogDatabase",
         "CatalogReference",
@@ -15072,11 +15259,12 @@
       ],
       "additional_responsibilities": [
         "Acquisition: fixture archives/source retrieval where called",
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate.",
         "Catalog supplied current normal assertion/method evidence separately from whole-file closure and HV acceptance.",
         "Java: Java extraction and source parser parity",
         "Sources: source extraction, formal/header/type evidence, annotation linking"
       ],
-      "normal_file_verified": false,
+      "normal_file_verified": true,
       "normal_verified_methods": [
         {
           "method": "test_index_retains_past_and_future_and_container_lifecycle",
@@ -15195,27 +15383,13 @@
           "indent": 4
         }
       ],
-      "pending_function_anchors": [
-        {
-          "name": "rows",
-          "line": 51,
-          "indent": 12
-        }
-      ],
-      "pending_owner_method_list": "<module-body-and-required-callers>",
+      "pending_function_anchors": [],
+      "pending_owner_method_list": null,
       "remaining": [
-        "Actual typed CLI chain requires explicit row normalization and runtime proof",
-        "All historical byte/profile equivalence and complete migration/HV acceptance remain pending",
-        "All seven original assertion scopes normal-verified. Explicit synthetic verified-unused SDK cache differs from historical cache payload carrier; full historical byte/profile parity, known raw route caller, whole validator and typed CLI migration acceptance not inferred.",
-        "current profile partially native-bound; see native-parity-supplement.json for bounded receipts",
-        "Exact owner assertion-method closure only. Current/historical caller/profile and fullfile proof remain separate.",
-        "Full validate_catalog.run reconciliation/reporting remains pending beyond inventory validator",
-        "Known raw route canonicalization and other original contract-model callers are separate pending scopes",
-        "MCP audit denied and not retried",
-        "pending exact method/profile assertion binding; current bounded native services do not prove this complete method",
-        "The SDK historical cache fixture is explicitly synthetic verified-unused evidence with native raw re-extraction. It is not decoded, assigned an old producer identity or used as historical byte-parity proof."
+        "unittest/tempfile/Python exceptions adapt to shared native test providers; source SHA identity stays truthful C# producer identity Current original test file only; frozen profiles and whole producer/corpus/HV remain separate."
       ],
       "bounded_service_test_evidence": [
+        "Existing original method maps plus CatalogOriginalAssertionGapRealTests",
         "remediation/nuke-app/Tests/Catalog/CatalogDevicePipelineCases.cs",
         "remediation/nuke-app/Tests/Catalog/CatalogDevicePipelineRealTests.cs",
         "Tests/Catalog/CatalogDevicePipelineCases.cs:14mocks74controls",
@@ -24308,7 +24482,7 @@
       "owner": "Documentation",
       "category": "Design",
       "operations": [
-        "pending-explicit-registry-binding"
+        "GradleCompatibility"
       ],
       "canonical_responsibility_key": "Documentation|Design|92b77e3d2a09416a56f3f64beca23f3c2732e32ed777176fa9fadbd6bedc1ce1",
       "primary_code_path": "remediation/design-c4/tooling/bootstrap.py",
@@ -24316,11 +24490,14 @@
       "services": [
         "DocumentationRendererProfileReader",
         "DocumentationToolBootstrap",
+        "Existing sole transport/acquirer/tool bootstrap/workspace effects/immutable completion and Design composition",
         "ToolArtifactAcquirer",
         "ToolZipExtractor"
       ],
-      "additional_responsibilities": [],
-      "normal_file_verified": false,
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
+      "normal_file_verified": true,
       "normal_verified_methods": [],
       "decommissionable_from_pr": false,
       "execution_retired": false,
@@ -24338,23 +24515,14 @@
           "indent": 0
         }
       ],
-      "pending_function_anchors": [
-        {
-          "name": "get",
-          "line": 4,
-          "indent": 0
-        },
-        {
-          "name": "save",
-          "line": 7,
-          "indent": 0
-        }
-      ],
-      "pending_owner_method_list": "<module-body-and-required-callers>",
+      "pending_function_anchors": [],
+      "pending_owner_method_list": null,
       "remaining": [
-        "Old profile15/bootstrap7 plus new redirect profile12/bootstrap3 native cases passed; Architecture002 composed native bootstrap and admitted exact observed Gradle published-checksum redirect before network-disabled rendering; existing cache bytes are not a new binary-download claim; Gradlecaller/wrapperproperties retirement remains pending; Node/Marp acquisition retired by approved stack change"
+        "Original published and retained evidence copies independently SHA-pinned. Retained copies are evidence, not extra independent production responsibilities. Normal producer closure does not mint original test-method claims."
       ],
-      "bounded_service_test_evidence": [],
+      "bounded_service_test_evidence": [
+        "006 chronological mock-first gates, SAME native profile/runtime/factory/ZIP assertions and9 actual compiled alias cases; Root full018 must bind exact source pins"
+      ],
       "anchor_limit": "Lexical source-text anchors, not Python execution/AST or automatic proof each nested helper is an independent required feature. Same bytes share one implementation authority, but profile/caller obligations are retained.",
       "safe_to_delete": false,
       "accepted_complete": false,
@@ -25932,15 +26100,137 @@
       "owner": "Documentation",
       "category": "Design",
       "operations": [
-        "pending-explicit-registry-binding"
+        "GradleCompatibility"
       ],
       "canonical_responsibility_key": "Documentation|Design|fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
       "primary_code_path": "remediation/tests_design023_contract.py",
       "explicit_profiles": "canonical-or-explicit-owner-profile",
-      "services": [],
-      "additional_responsibilities": [],
-      "normal_file_verified": false,
-      "normal_verified_methods": [],
+      "services": [
+        "Literal original cross-artifact assertions over shared FileArtifactStore/ContentHash; existing alias caller proof is separate"
+      ],
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
+      "normal_file_verified": true,
+      "normal_verified_methods": [
+        {
+          "method": "test_version_rejection_matches_pinned_arc_source",
+          "evidence": "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json",
+          "source_sha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+          "bindings": [
+            "AndroidMcp.BuildTool.Tests.Documentation.LegacyDesign023MethodRealTests.SameNineOriginalPredicatesBindNativeStoresWithRetainedGradleSyntaxInput(method: \"test_version_rejection_matches_pinned_arc_source\")"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original predicate and Root-approved current-artifact versus retained Gradle syntax boundary in the complete owner map.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_contract_version_has_one_current_value",
+          "evidence": "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json",
+          "source_sha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+          "bindings": [
+            "AndroidMcp.BuildTool.Tests.Documentation.LegacyDesign023MethodRealTests.SameNineOriginalPredicatesBindNativeStoresWithRetainedGradleSyntaxInput(method: \"test_contract_version_has_one_current_value\")"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original predicate and Root-approved current-artifact versus retained Gradle syntax boundary in the complete owner map.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_admin_scheme_is_issued_bearer_and_owner_proof_is_server_owned",
+          "evidence": "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json",
+          "source_sha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+          "bindings": [
+            "AndroidMcp.BuildTool.Tests.Documentation.LegacyDesign023MethodRealTests.SameNineOriginalPredicatesBindNativeStoresWithRetainedGradleSyntaxInput(method: \"test_admin_scheme_is_issued_bearer_and_owner_proof\"···)"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original predicate and Root-approved current-artifact versus retained Gradle syntax boundary in the complete owner map.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_import_stage_routes_define_sealed_hash_size_expiry",
+          "evidence": "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json",
+          "source_sha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+          "bindings": [
+            "AndroidMcp.BuildTool.Tests.Documentation.LegacyDesign023MethodRealTests.SameNineOriginalPredicatesBindNativeStoresWithRetainedGradleSyntaxInput(method: \"test_import_stage_routes_define_sealed_hash_size_e\"···)"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original predicate and Root-approved current-artifact versus retained Gradle syntax boundary in the complete owner map.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_stage_lifetime_is_capacity_aware_and_configurable",
+          "evidence": "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json",
+          "source_sha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+          "bindings": [
+            "AndroidMcp.BuildTool.Tests.Documentation.LegacyDesign023MethodRealTests.SameNineOriginalPredicatesBindNativeStoresWithRetainedGradleSyntaxInput(method: \"test_stage_lifetime_is_capacity_aware_and_configur\"···)"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original predicate and Root-approved current-artifact versus retained Gradle syntax boundary in the complete owner map.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_standalone_docs_tasks_verify_pins",
+          "evidence": "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json",
+          "source_sha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+          "bindings": [
+            "AndroidMcp.BuildTool.Tests.Documentation.LegacyDesign023MethodRealTests.SameNineOriginalPredicatesBindNativeStoresWithRetainedGradleSyntaxInput(method: \"test_standalone_docs_tasks_verify_pins\")"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original predicate and Root-approved current-artifact versus retained Gradle syntax boundary in the complete owner map.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_all_native_arc_identities_hash_exact_bytes_and_use_pinned_payloads",
+          "evidence": "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json",
+          "source_sha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+          "bindings": [
+            "AndroidMcp.BuildTool.Tests.Documentation.LegacyDesign023MethodRealTests.SameNineOriginalPredicatesBindNativeStoresWithRetainedGradleSyntaxInput(method: \"test_all_native_arc_identities_hash_exact_bytes_an\"···)"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original predicate and Root-approved current-artifact versus retained Gradle syntax boundary in the complete owner map.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_dispatch_permit_and_storage_ports_are_explicit_in_sources",
+          "evidence": "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json",
+          "source_sha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+          "bindings": [
+            "AndroidMcp.BuildTool.Tests.Documentation.LegacyDesign023MethodRealTests.SameNineOriginalPredicatesBindNativeStoresWithRetainedGradleSyntaxInput(method: \"test_dispatch_permit_and_storage_ports_are_explici\"···)"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original predicate and Root-approved current-artifact versus retained Gradle syntax boundary in the complete owner map.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_watch_contract_is_finite_and_blob_quota_accounted",
+          "evidence": "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json",
+          "source_sha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+          "bindings": [
+            "AndroidMcp.BuildTool.Tests.Documentation.LegacyDesign023MethodRealTests.SameNineOriginalPredicatesBindNativeStoresWithRetainedGradleSyntaxInput(method: \"test_watch_contract_is_finite_and_blob_quota_accou\"···)"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original predicate and Root-approved current-artifact versus retained Gradle syntax boundary in the complete owner map.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        }
+      ],
       "decommissionable_from_pr": false,
       "execution_retired": false,
       "retirement_decision": null,
@@ -25997,74 +26287,14 @@
           "indent": 1
         }
       ],
-      "pending_function_anchors": [
-        {
-          "name": "setUp",
-          "line": 6,
-          "indent": 1
-        },
-        {
-          "name": "test_version_rejection_matches_pinned_arc_source",
-          "line": 9,
-          "indent": 1
-        },
-        {
-          "name": "test_contract_version_has_one_current_value",
-          "line": 14,
-          "indent": 1
-        },
-        {
-          "name": "test_admin_scheme_is_issued_bearer_and_owner_proof_is_server_owned",
-          "line": 19,
-          "indent": 1
-        },
-        {
-          "name": "test_import_stage_routes_define_sealed_hash_size_expiry",
-          "line": 29,
-          "indent": 1
-        },
-        {
-          "name": "test_stage_lifetime_is_capacity_aware_and_configurable",
-          "line": 37,
-          "indent": 1
-        },
-        {
-          "name": "test_standalone_docs_tasks_verify_pins",
-          "line": 42,
-          "indent": 1
-        },
-        {
-          "name": "test_all_native_arc_identities_hash_exact_bytes_and_use_pinned_payloads",
-          "line": 49,
-          "indent": 1
-        },
-        {
-          "name": "test_dispatch_permit_and_storage_ports_are_explicit_in_sources",
-          "line": 63,
-          "indent": 1
-        },
-        {
-          "name": "test_watch_contract_is_finite_and_blob_quota_accounted",
-          "line": 71,
-          "indent": 1
-        }
-      ],
-      "pending_owner_method_list": [
-        "test_admin_scheme_is_issued_bearer_and_owner_proof_is_server_owned",
-        "test_all_native_arc_identities_hash_exact_bytes_and_use_pinned_payloads",
-        "test_contract_version_has_one_current_value",
-        "test_dispatch_permit_and_storage_ports_are_explicit_in_sources",
-        "test_import_stage_routes_define_sealed_hash_size_expiry",
-        "test_stage_lifetime_is_capacity_aware_and_configurable",
-        "test_standalone_docs_tasks_verify_pins",
-        "test_version_rejection_matches_pinned_arc_source",
-        "test_watch_contract_is_finite_and_blob_quota_accounted"
-      ],
+      "pending_function_anchors": [],
+      "pending_owner_method_list": null,
       "remaining": [
-        "Documentation cross-artifact/source invariant validator and this original method full native binding remain pending in Documentation ownership.",
-        "Gradle thin delegate/caller equivalence and toolchain category integration remain pending; native locks/bootstrap/acquirer service proof is narrower."
+        "Eight current source methods plus one original retained Gradle syntax method. Do not claim the old val syntax executes against the current thin projection. Current aliases have separate004/005/006 actual compiled proofs and prior exported offline Gradle evidence."
       ],
-      "bounded_service_test_evidence": [],
+      "bounded_service_test_evidence": [
+        "AndroidMcp.BuildTool.Tests.Documentation.LegacyDesign023MethodRealTests"
+      ],
       "anchor_limit": "Lexical source-text anchors, not Python execution/AST or automatic proof each nested helper is an independent required feature. Same bytes share one implementation authority, but profile/caller obligations are retained.",
       "safe_to_delete": false,
       "accepted_complete": false,
@@ -26135,19 +26365,22 @@
       "owner": "Documentation",
       "category": "Validate",
       "operations": [
+        "Design",
         "Design (proposed; not yet registered)"
       ],
       "canonical_responsibility_key": "Documentation|Validate|4abd62deef22df29c323832ecfd094df9f27162bc9023fd913cb0954ceb417d3",
       "primary_code_path": "tools/check_documentation.py",
       "explicit_profiles": "canonical-or-explicit-owner-profile",
       "services": [
+        "Existing whole-root tree/store/checker/HTML/resolver and registered Validate/Design caller",
         "HTML Assets.handle_starttag parser pending",
         "Repository documentation validator pending"
       ],
       "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate.",
         "Docs owner read both actual published validator files and supplied explicit responsibility at2026-10-28T00:19:16; independently read same full text here."
       ],
-      "normal_file_verified": false,
+      "normal_file_verified": true,
       "normal_verified_methods": [],
       "decommissionable_from_pr": false,
       "execution_retired": false,
@@ -26170,28 +26403,13 @@
           "indent": 0
         }
       ],
-      "pending_function_anchors": [
-        {
-          "name": "check",
-          "line": 13,
-          "indent": 0
-        },
-        {
-          "name": "handle_starttag",
-          "line": 34,
-          "indent": 8
-        },
-        {
-          "name": "main",
-          "line": 43,
-          "indent": 0
-        }
-      ],
-      "pending_owner_method_list": "<module-body-and-required-callers>",
+      "pending_function_anchors": [],
+      "pending_owner_method_list": null,
       "remaining": [
-        "Exact check() committed checksums, all repository markdown percent-decoded local links excluding .git, all SVG XML parse and full HTML remote-asset syntax remain unbound. main() CLI/root/JSON/exit pending."
+        "Original published and retained evidence copies independently SHA-pinned. Retained copies are evidence, not extra independent production responsibilities. Normal producer closure does not mint original test-method claims."
       ],
       "bounded_service_test_evidence": [
+        "003/004/005 exact repository/tree/parser/caller/metadata mock-first/native assertions and actual Root018 GOOD/multiple-errors command proof; Root full018 must bind exact source pins",
         "UI-COPY17/DECK-LOCAL projection assertions only; full check() method pending"
       ],
       "anchor_limit": "Lexical source-text anchors, not Python execution/AST or automatic proof each nested helper is an independent required feature. Same bytes share one implementation authority, but profile/caller obligations are retained.",
@@ -27002,10 +27220,13 @@
       "primary_code_path": "tools/source_facts/interface_hash_facts.py",
       "explicit_profiles": "canonical-or-explicit-owner-profile",
       "services": [
-        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
+        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only",
+        "PublishedInterfaceHashSourceFacts + PublishedInterfaceHashWorkflow.RunAsync"
       ],
-      "additional_responsibilities": [],
-      "normal_file_verified": false,
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
+      "normal_file_verified": true,
       "normal_verified_methods": [],
       "decommissionable_from_pr": false,
       "execution_retired": false,
@@ -27028,28 +27249,13 @@
           "indent": 0
         }
       ],
-      "pending_function_anchors": [
-        {
-          "name": "aidl_hashes",
-          "line": 5,
-          "indent": 0
-        },
-        {
-          "name": "hidl_hashes",
-          "line": 13,
-          "indent": 0
-        },
-        {
-          "name": "main",
-          "line": 22,
-          "indent": 0
-        }
-      ],
-      "pending_owner_method_list": "<module-body-and-required-callers>",
+      "pending_function_anchors": [],
+      "pending_owner_method_list": null,
       "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "[\"Existing native safe portable root-relative paths and strict JSON duplicate/nonfinite/Unicode admission replace original pathlib/json.loads permissiveness. Preserve reached original admitted-domain errors/effects; no unrestricted interpreter equivalence.\",\"Use shared LegacyAsciiIdentity compact canonical bytes rather than reproducing json.dumps default spaces and report indent2. Same original field values/order of array evidence and JSONL newline boundaries; no historical byte identity. No new serializer.\",\"Native assembly identity, native_producer/historical_python_identity metadata, offset timestamp and final index.json are explicit native generation additions; do not pretend they are original Python code or frozen report bytes.\",\"Existing destination directories, including empty/unrelated directories, must fail after successful input processing. Use existing tree absence observation under shared cooperating lease. This does not claim atomic mkdir equivalence against arbitrary noncooperating hostile directory creation between observation/write; that capability is absent from the reused services and is not invented.\",\"Shared generation admission/rechecks add immutable pin enforcement before/after writes; failure keeps uncommitted files and no final commit. Original has no final recheck. Preserve actual source evidence, do not silently drop failed/changed inputs.\",\"Only four existing SourceFactProducer helper access modifiers and Root-owned CLI/planner binding may need existing-file edits. No factory/Core service/registry schema framework or SourceSyntax changes by Sources.\"]"
       ],
       "bounded_service_test_evidence": [
+        "Exact Source023 parser/original assertion plus Root026 MAIN/caller classes",
         "S-AC021/S-AC022 full membership/revision/hash-selection/version-domain mock/real gates pending"
       ],
       "anchor_limit": "Lexical source-text anchors, not Python execution/AST or automatic proof each nested helper is an independent required feature. Same bytes share one implementation authority, but profile/caller obligations are retained.",
@@ -28866,11 +29072,67 @@
       "primary_code_path": "tools/source_facts/test_interface_hash_facts.py",
       "explicit_profiles": "canonical-or-explicit-owner-profile",
       "services": [
-        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
+        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only",
+        "PublishedInterfaceHashSourceFacts + PublishedInterfaceHashWorkflow.RunAsync"
       ],
-      "additional_responsibilities": [],
-      "normal_file_verified": false,
-      "normal_verified_methods": [],
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
+      "normal_file_verified": true,
+      "normal_verified_methods": [
+        {
+          "method": "test_aidl_hash_lines_kept_in_order_no_compiled_hash_assumption",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "f270d1e8c6bd5396412678f148f1789c2f8329dc3d7705dd68377a805ba8b1c9",
+          "bindings": [
+            "HASH-01"
+          ],
+          "normal_verified": true,
+          "scope": "HASH-01 exact comment/a40/b40/newline input and complete ordered facts, compiled_runtime_hash_proven=false, empty unknown_lines. Exact original assertion body also retained in013 SAME-native assertion cases.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_unknown_aidl_hash_line_retained",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "f270d1e8c6bd5396412678f148f1789c2f8329dc3d7705dd68377a805ba8b1c9",
+          "bindings": [
+            "HASH-02"
+          ],
+          "normal_verified": true,
+          "scope": "HASH-02 exact not-frozen newline input and unknown_lines[0].raw; full diagnostic line/raw output plus exact original assertion in013.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_hidl_duplicate_identifier_hashes_are_not_collapsed",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "f270d1e8c6bd5396412678f148f1789c2f8329dc3d7705dd68377a805ba8b1c9",
+          "bindings": [
+            "HASH-06"
+          ],
+          "normal_verified": true,
+          "scope": "HASH-06 exact a64/b64 compatibility-comment input, two fact rows and first declared_identifier retained, android_applicability_proven=false. Exact original assertion body retained in013.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_hidl_unknown_format_remains_evidence",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "f270d1e8c6bd5396412678f148f1789c2f8329dc3d7705dd68377a805ba8b1c9",
+          "bindings": [
+            "HASH-07"
+          ],
+          "normal_verified": true,
+          "scope": "HASH-07 exact opaque declaration newline input and raw unknown evidence, exact original assertion retained in013.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        }
+      ],
       "decommissionable_from_pr": false,
       "execution_retired": false,
       "retirement_decision": null,
@@ -28897,33 +29159,13 @@
           "indent": 1
         }
       ],
-      "pending_function_anchors": [
-        {
-          "name": "test_aidl_hash_lines_kept_in_order_no_compiled_hash_assumption",
-          "line": 4,
-          "indent": 1
-        },
-        {
-          "name": "test_unknown_aidl_hash_line_retained",
-          "line": 7,
-          "indent": 1
-        },
-        {
-          "name": "test_hidl_duplicate_identifier_hashes_are_not_collapsed",
-          "line": 9,
-          "indent": 1
-        },
-        {
-          "name": "test_hidl_unknown_format_remains_evidence",
-          "line": 12,
-          "indent": 1
-        }
-      ],
-      "pending_owner_method_list": "<module-body-and-required-callers>",
+      "pending_function_anchors": [],
+      "pending_owner_method_list": null,
       "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "[\"Existing native safe portable root-relative paths and strict JSON duplicate/nonfinite/Unicode admission replace original pathlib/json.loads permissiveness. Preserve reached original admitted-domain errors/effects; no unrestricted interpreter equivalence.\",\"Use shared LegacyAsciiIdentity compact canonical bytes rather than reproducing json.dumps default spaces and report indent2. Same original field values/order of array evidence and JSONL newline boundaries; no historical byte identity. No new serializer.\",\"Native assembly identity, native_producer/historical_python_identity metadata, offset timestamp and final index.json are explicit native generation additions; do not pretend they are original Python code or frozen report bytes.\",\"Existing destination directories, including empty/unrelated directories, must fail after successful input processing. Use existing tree absence observation under shared cooperating lease. This does not claim atomic mkdir equivalence against arbitrary noncooperating hostile directory creation between observation/write; that capability is absent from the reused services and is not invented.\",\"Shared generation admission/rechecks add immutable pin enforcement before/after writes; failure keeps uncommitted files and no final commit. Original has no final recheck. Preserve actual source evidence, do not silently drop failed/changed inputs.\",\"Only four existing SourceFactProducer helper access modifiers and Root-owned CLI/planner binding may need existing-file edits. No factory/Core service/registry schema framework or SourceSyntax changes by Sources.\"]"
       ],
       "bounded_service_test_evidence": [
+        "Exact Source023 parser/original assertion plus Root026 MAIN/caller classes",
         "S-AC021/S-AC022 full membership/revision/hash-selection/version-domain mock/real gates pending"
       ],
       "anchor_limit": "Lexical source-text anchors, not Python execution/AST or automatic proof each nested helper is an independent required feature. Same bytes share one implementation authority, but profile/caller obligations are retained.",
@@ -30661,6 +30903,7 @@
         "remediation/catalog/tests/test_device_catalog_pipeline.py"
       ],
       "services": [
+        "CatalogBuild and existing CatalogDevicePipeline providers",
         "CatalogBuild/sealed registry publication integration pending",
         "CatalogDatabase",
         "CatalogReference",
@@ -30683,18 +30926,10 @@
         "scoped CatalogProjection/EffectiveInventory/DispatchManifest pending"
       ],
       "remaining": [
-        "Actual typed CLI chain requires explicit row normalization and runtime proof",
-        "All historical byte/profile equivalence and complete migration/HV acceptance remain pending",
-        "All seven original assertion scopes normal-verified. Explicit synthetic verified-unused SDK cache differs from historical cache payload carrier; full historical byte/profile parity, known raw route caller, whole validator and typed CLI migration acceptance not inferred.",
-        "current profile partially native-bound; see native-parity-supplement.json for bounded receipts",
-        "Exact owner assertion-method closure only. Current/historical caller/profile and fullfile proof remain separate.",
         "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
-        "Full validate_catalog.run reconciliation/reporting remains pending beyond inventory validator",
-        "Known raw route canonicalization and other original contract-model callers are separate pending scopes",
-        "MCP audit denied and not retried",
         "pending exact method/profile assertion binding; current bounded native services do not prove this complete method",
         "release-011 exact profile parity pending; no inference from basename or equal SHA256",
-        "The SDK historical cache fixture is explicitly synthetic verified-unused evidence with native raw re-extraction. It is not decoded, assigned an old producer identity or used as historical byte-parity proof."
+        "unittest/tempfile/Python exceptions adapt to shared native test providers; source SHA identity stays truthful C# producer identity Current original test file only; frozen profiles and whole producer/corpus/HV remain separate."
       ]
     },
     {
@@ -31227,6 +31462,7 @@
       ],
       "services": [
         "Build.Catalog.cs",
+        "CatalogBuild and existing CatalogDevicePipeline providers",
         "CatalogBuild/sealed registry publication integration pending",
         "CatalogDatabase",
         "CatalogReference",
@@ -31239,13 +31475,10 @@
         "scoped CatalogProjection/EffectiveInventory/DispatchManifest pending"
       ],
       "remaining": [
-        "current profile partially native-bound; see native-parity-supplement.json for bounded receipts",
-        "Exact owner assertion-method closure only. Current/historical caller/profile and fullfile proof remain separate.",
         "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
-        "Original overlay suppression/restore/history and independent validator nonmutation remain pending. Exact original raw-tampered-file case is now native-verified, independently of the retained declared-SHA mutation case. Cursor4/Build7/CLI7/Source4/cache2/stream4 all pass in full005. No full historical producer or representative SDK scalability claim.",
         "pending exact method/profile assertion binding; current bounded native services do not prove this complete method",
         "release-011 exact profile parity pending; no inference from basename or equal SHA256",
-        "Whole-path registered CLI activation, positive matched AIDL consumer, all unlisted report/error/count/omission branches, historical/profile-specific callers. Exact list in validate-catalog-operation-proposal.md; no full function/module/corpus closure inferred."
+        "unittest/tempfile/Python exceptions adapt to shared native test providers; source SHA identity stays truthful C# producer identity Current original test file only; frozen profiles and whole producer/corpus/HV remain separate."
       ]
     },
     {
@@ -31366,54 +31599,6 @@
         "pending exact method/profile assertion binding; current bounded native services do not prove this complete method",
         "release-011 exact profile parity pending; no inference from basename or equal SHA256",
         "Whole-file assertion-by-assertion publication/overlay/idempotency parity remains pending."
-      ]
-    },
-    {
-      "derived_from_inventory": true,
-      "owner": "Documentation",
-      "category": "Design",
-      "canonical_responsibility_key": "Documentation|Design|92b77e3d2a09416a56f3f64beca23f3c2732e32ed777176fa9fadbd6bedc1ce1",
-      "published_paths": [
-        "remediation/design-c4/tooling/bootstrap.py"
-      ],
-      "services": [
-        "DocumentationRendererProfileReader",
-        "DocumentationToolBootstrap",
-        "ToolArtifactAcquirer",
-        "ToolZipExtractor"
-      ],
-      "remaining": [
-        "Old profile15/bootstrap7 plus new redirect profile12/bootstrap3 native cases passed; Architecture002 composed native bootstrap and admitted exact observed Gradle published-checksum redirect before network-disabled rendering; existing cache bytes are not a new binary-download claim; Gradlecaller/wrapperproperties retirement remains pending; Node/Marp acquisition retired by approved stack change"
-      ]
-    },
-    {
-      "derived_from_inventory": true,
-      "owner": "Documentation",
-      "category": "Design",
-      "canonical_responsibility_key": "Documentation|Design|fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
-      "published_paths": [
-        "remediation/tests_design023_contract.py"
-      ],
-      "services": [],
-      "remaining": [
-        "Documentation cross-artifact/source invariant validator and this original method full native binding remain pending in Documentation ownership.",
-        "Gradle thin delegate/caller equivalence and toolchain category integration remain pending; native locks/bootstrap/acquirer service proof is narrower."
-      ]
-    },
-    {
-      "derived_from_inventory": true,
-      "owner": "Documentation",
-      "category": "Validate",
-      "canonical_responsibility_key": "Documentation|Validate|4abd62deef22df29c323832ecfd094df9f27162bc9023fd913cb0954ceb417d3",
-      "published_paths": [
-        "tools/check_documentation.py"
-      ],
-      "services": [
-        "HTML Assets.handle_starttag parser pending",
-        "Repository documentation validator pending"
-      ],
-      "remaining": [
-        "Exact check() committed checksums, all repository markdown percent-decoded local links excluding .git, all SVG XML parse and full HTML remote-asset syntax remain unbound. main() CLI/root/JSON/exit pending."
       ]
     },
     {
@@ -31654,21 +31839,6 @@
       "canonical_responsibility_key": "Sources|Sources|579105f2ce5719c94772ae80486d177ed8c30d14dc2f178bc20ee79e10f0aef8",
       "published_paths": [
         "tools/source_facts/interface_module_linkage.py"
-      ],
-      "services": [
-        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
-      ],
-      "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
-      ]
-    },
-    {
-      "derived_from_inventory": true,
-      "owner": "Sources",
-      "category": "Sources",
-      "canonical_responsibility_key": "Sources|Sources|59c4b756d90b922fd32d7fbab7cb72256e58fc5a3ffb6d4fd0d2d5e383e221d9",
-      "published_paths": [
-        "tools/source_facts/interface_hash_facts.py"
       ],
       "services": [
         "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
@@ -31983,21 +32153,6 @@
       ],
       "services": [
         "Planned pinned source selector inventory and lexical candidate audit"
-      ],
-      "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
-      ]
-    },
-    {
-      "derived_from_inventory": true,
-      "owner": "Sources",
-      "category": "Sources",
-      "canonical_responsibility_key": "Sources|Sources|f270d1e8c6bd5396412678f148f1789c2f8329dc3d7705dd68377a805ba8b1c9",
-      "published_paths": [
-        "tools/source_facts/test_interface_hash_facts.py"
-      ],
-      "services": [
-        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
       ],
       "remaining": [
         "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."

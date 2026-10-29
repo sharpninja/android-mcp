@@ -5,6 +5,7 @@ using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
 using AndroidMcp.BuildTool.Documentation;
 using AndroidMcp.BuildTool.Sources.Java;
+using AndroidMcp.BuildTool.Sources;
 using AndroidMcp.BuildTool.Modules.Sources.Acquisition;
 
 namespace AndroidMcp.BuildTool;
@@ -62,6 +63,8 @@ public sealed partial class Build : NukeBuild
     public string? ProjectRoot { get; set; }
     [Parameter("Project-root-relative caller-pinned typed workflow request")]
     public string? PipelineRequest { get; set; }
+    [Parameter("Sources/Extract task: Declarations (default) or InterfaceHashes")]
+    public SourceExtractTask? ExtractTask { get; set; }
     [Parameter("Explicit trusted SHA256 of the workflow request")]
     public string? PipelineRequestSha256 { get; set; }
     [Parameter("Explicit trusted workflow request byte length")]
@@ -151,6 +154,7 @@ public sealed partial class Build : NukeBuild
         Add("part-bytes",PartBytes?.ToString(System.Globalization.CultureInfo.InvariantCulture));
         Add("parts-manifest",PartsManifest);Add("manifest-sha256",ManifestSha256);Add("destination-artifact",DestinationArtifact);
         Add("pipeline-request",PipelineRequest);Add("pipeline-request-sha256",PipelineRequestSha256);
+        Add("extract-task",ExtractTask?.ToString());
         Add("pipeline-request-length",PipelineRequestLength?.ToString(System.Globalization.CultureInfo.InvariantCulture));
         Add("toolchain-check",ToolchainCheck?.ToString());
         Add("recipe-lock",RecipeLock);Add("bundle-root",BundleRoot);Add("release",Release);

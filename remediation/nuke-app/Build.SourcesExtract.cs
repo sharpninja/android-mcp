@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Nuke.Common;
 using AndroidMcp.BuildTool.Core;
 using AndroidMcp.BuildTool.Execution;
 using AndroidMcp.BuildTool.Modules.Sources.Acquisition;
@@ -12,13 +13,16 @@ public sealed partial class Build
 {
     private async Task ExtractSources()
     {
+        if(ExtractTask is{} task?!Enum.IsDefined(task):EnvironmentInfo.HasArgument("extract-task"))throw new ArgumentException("Unknown source extraction task");
         var project=Path.GetFullPath(ProjectRoot!);
         _=ArtifactPaths.Resolve(project,".sources-extract-admission");
         var canonical=new CanonicalJson();
         var inputs=new PinnedArtifactReader(new FileArtifactStore(project,bytes=>ContentHash.Sha256(bytes.Span)));
         var outerPin=new StoredArtifact(InputRelative(project,PipelineRequest!),PipelineRequestSha256!,
             PipelineRequestLength??throw new InvalidOperationException("Explicit workflow request length required."),"application/json");
-        var wire=JsonSerializer.Deserialize<SourcesExtractWorkflowFile>(canonical.Serialize(await inputs.ReadAsync(outerPin)))
+        var admitted=canonical.Serialize(await inputs.ReadAsync(outerPin));
+        if(ExtractTask==SourceExtractTask.InterfaceHashes){await ExtractPublishedHashes(project,canonical,admitted);return;}
+        var wire=JsonSerializer.Deserialize<SourcesExtractWorkflowFile>(admitted)
             ??throw new InvalidOperationException("Source extraction workflow request is required.");
         var recipe=await new SourceWorkflowInputsReader(inputs).ReadAsync(wire.Sources);
         var inventoryRoot=AdmitWorkflowRoot(project,wire.Stores.InventoryRoot);

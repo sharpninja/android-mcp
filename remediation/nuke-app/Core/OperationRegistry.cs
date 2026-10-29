@@ -37,9 +37,9 @@ public sealed class OperationRegistry
             ["release","limit","acquisition-profile"],OperationExecutor.SourcesInventory,
             new("validate-source-plan",[]),new("admit-acquisition-receipt",["validate-source-plan"]),
             new("verify-acquisition-readonly",["admit-acquisition-receipt"]),new("seal-source-inventory",["verify-acquisition-readonly"]));
-        Add(Category.Sources,Operation.Extract,["project-root","pipeline-request","pipeline-request-sha256","pipeline-request-length"],[],OperationExecutor.SourcesExtract,
-            new("admit-pinned-workflow",[]),new("admit-locked-recipe",["admit-pinned-workflow"]),
-            new("verify-source-inventory",["admit-locked-recipe"]),new("capture-runtime-identity",["verify-source-inventory"]),
+        Add(Category.Sources,Operation.Extract,["project-root","pipeline-request","pipeline-request-sha256","pipeline-request-length"],["extract-task"],OperationExecutor.SourcesExtract,
+            new("admit-pinned-workflow",[]),new("admit-task-inputs",["admit-pinned-workflow"]),
+            new("verify-task-source-pins",["admit-task-inputs"]),new("capture-runtime-identity",["verify-task-source-pins"]),
             new("extract-source-generation",["capture-runtime-identity"]),new("seal-extraction",["extract-source-generation"]));
         Add(Category.Sources,Operation.NativeParser,["compiler-identity","output-root"],["project-root","cache-root","receipt-root"],OperationExecutor.NativeParser,
             new("verify-compiler-identity",[]),new("acquire-native-sources",["verify-compiler-identity"]),

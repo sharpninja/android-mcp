@@ -11,7 +11,7 @@ Chronology and normal evidence:
 - Corrected17 mock fixtures passed after reconnect, including136 expected individual wrong-field rejections, before production reader source was created. Frozen source: mock17-source/handoff.json. TRX run20261028T2243045529141-23bc01b8d47c4ece9a3af9396f78c3b3:17 passed,0 failed/skipped.
 - SAME17 native bindings plus17 mocks passed in run20261028T2247260413879-3d83596ce351477f993af11aee89b415:34 passed,0 failed/skipped.
 - After the final absolute-workspace admission check and comment correction, namespace regression run20261028T2250188779529-d422e0380fc84f0aa19521fbf44eb7fd passed20977,0 failed/skipped. The Review.Staging namespace includes Core controls, so this exceeded strictly owned classes. It will not be repeated or described as a repository-wide/full gate.
-- caller17-gate-ledger.json retains all four exact TRX paths/hash/length/counters/results. NU1900 feed-unavailable warnings were retained; no vulnerable-dependency conclusion or zero-warning claim is made.
+- caller17-gate-ledger.summary.json retains all four exact TRX paths/hash/length/counters and class-scope counts. NU1900 feed-unavailable warnings were retained; no vulnerable-dependency conclusion or zero-warning claim is made.
 
 Root-approved separate proposal: Build.Review.cs.proposed and ROOT-INTEGRATION.md. It is uncompiled, outside the runnable handoff, and requires a nonoptional trusted prerequisite-source factory invoked after the live readiness guard. Hashes/labels do not establish producer authority. Unavailable native/official-plugin authority must fail closed. Root owns integrated CLI/full-suite evidence and registry activation.
 
@@ -22,3 +22,5 @@ Root separately requested copying only its PE mock fixture into private Tests/Co
 Live MCP remains incomplete: one profile file was reloaded in full on resume; Global/Workspace memories were unavailable after the documented wrapper's health Permission denied. No denied MCP append/complete/effective-requirements action was retried or bypassed. There is no verified session/request ID for this implementing agent. Local receipts do not substitute for persisted MCP logging.
 
 HV remains deferred until Ready. The requested future model is Claude Opus-5.5 XHigh; no probe/substitution occurred. No assistant review time/turn/word/findings/global-output cap, Google API surface analysis, Python/Node/Bash execution, Actions, Git writes, publishing, Move or delete was introduced.
+
+Publication note: these compact unit summaries retain scope, counts, TRX/full-original hashes, warnings and failure/correction chronology. Full case ledgers remain local at their exact ignored paths and in prior Git history; they are not HV receipts. See validation/nuke-publication-lean-unit-ledgers.json for the exact omissions. No test or runtime input is removed.

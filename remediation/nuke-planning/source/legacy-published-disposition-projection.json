@@ -1,26 +1,26 @@
 {
   "schemaVersion": "1.0.0",
-  "at": "2026-10-29T04:04:23",
+  "at": "2026-10-29T05:20:47",
   "authoritative": false,
   "projectionOnly": true,
   "derivedFrom": {
     "path": "remediation/nuke-planning/source/legacy-port-disposition-inventory.json",
-    "sha256": "a5355ceabe866e8e8e8b7d79a9fcccca4e637283922f1d01ae5c6003f3c545bd",
+    "sha256": "1f90a55b662c54f5934a1a7e0503a0e3ae33f64dcbd580b8d70e5218a4663c7e",
     "totalNormalizedPaths": 1476,
     "additionalLocalPathsRetained": 1278
   },
   "identityManifest": {
     "path": "remediation/nuke-planning/source/legacy-python-tracked-manifest.json",
-    "sha256": "0cdc47de24c221988f30ca70d921282028b028b6068f3754ca47aaf62b83cfc0",
+    "sha256": "87cb9b8ae45f84125e5cb0f42b1b6f2aa3a187525bfbb3142684b683f76c9399",
     "publishedPythonCount": 198,
-    "headAtIdentityRead": "a17004e0fd42ecae44ef3b1c22bd7a1a15755b5a"
+    "headAtIdentityRead": "895e769299f1d2b5469121020553df42da7ed5ee"
   },
   "totals": {
     "entries": 198,
     "unmappedPrimaryOwners": 0,
-    "normalVerified": 60,
+    "normalVerified": 67,
     "executionRetired": 0,
-    "normalVerifiedMethodScopes": 285,
+    "normalVerifiedMethodScopes": 301,
     "acceptedComplete": 0,
     "scopeExclusions": 0,
     "safeToDelete": 0,
@@ -6444,10 +6444,11 @@
       "owner": "Catalog",
       "category": "Catalog",
       "operations": [
-        "pending-method-specific-registry-binding"
+        "Build"
       ],
       "services": [
         "Build.Catalog.cs",
+        "CatalogBuild and existing CatalogDevicePipeline providers",
         "CatalogBuild/sealed registry publication integration pending",
         "CatalogDatabase",
         "CatalogReference",
@@ -6459,27 +6460,25 @@
         "remediation/nuke-app/Modules/Catalog/CatalogValidator.cs",
         "scoped CatalogProjection/EffectiveInventory/DispatchManifest pending"
       ],
-      "migration_status": "explicit-caller-allocation-pending-native-method-parity",
+      "migration_status": "normal-native-original-test-methods-verified",
       "native_tests_or_pending": [
         "CatalogBuildCacheRealTests:2",
         "CatalogBuildCliRealTests:7",
         "CatalogBuildRealTests:7",
         "CatalogPersistentBuildRealTests:4",
+        "Existing original method maps plus CatalogOriginalAssertionGapRealTests",
         "remediation/nuke-app/Tests/Catalog/CatalogFullValidationCases.cs",
         "remediation/nuke-app/Tests/Catalog/CatalogFullValidationRealTests.cs"
       ],
       "additional_responsibilities": [
         "Acquisition: fixture archives/source retrieval where called",
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate.",
         "Catalog supplied current normal assertion/method evidence separately from whole-file closure and HV acceptance.",
         "Java: Java extraction and source parser parity",
         "Sources: source extraction, formal/header/type evidence, annotation linking"
       ],
       "remaining": [
-        "current profile partially native-bound; see native-parity-supplement.json for bounded receipts",
-        "Exact owner assertion-method closure only. Current/historical caller/profile and fullfile proof remain separate.",
-        "Original overlay suppression/restore/history and independent validator nonmutation remain pending. Exact original raw-tampered-file case is now native-verified, independently of the retained declared-SHA mutation case. Cursor4/Build7/CLI7/Source4/cache2/stream4 all pass in full005. No full historical producer or representative SDK scalability claim.",
-        "pending exact method/profile assertion binding; current bounded native services do not prove this complete method",
-        "Whole-path registered CLI activation, positive matched AIDL consumer, all unlisted report/error/count/omission branches, historical/profile-specific callers. Exact list in validate-catalog-operation-proposal.md; no full function/module/corpus closure inferred."
+        "unittest/tempfile/Python exceptions adapt to shared native test providers; source SHA identity stays truthful C# producer identity Current original test file only; frozen profiles and whole producer/corpus/HV remain separate."
       ],
       "artifact_role": "published-legacy-port-baseline",
       "primary_code_path": "remediation/catalog/tests/test_build.py",
@@ -6487,9 +6486,49 @@
       "byte_identical_path_count": 10,
       "same_bytes_imply_profile_or_caller_parity": false,
       "standalone_nuke_target_required": false,
-      "normal_verified": false,
-      "normal_verification_status": "partial-explicit-normal-method-verification",
+      "normal_verified": true,
+      "normal_verification_status": "normal-original-test-methods-verified",
       "normal_verified_methods": [
+        {
+          "method": "test_hash_failure_does_not_publish",
+          "evidence": "remediation/nuke-planning/catalog/catalog-normal-test-file-closures.json",
+          "source_sha256": "e9ce2b6dbb35b6e7689c6df830a9af8e82dde1091f9eae67c4e3ff767d8896a0",
+          "bindings": [
+            "CatalogOriginalTamperRealTests"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_one_identity_two_immutable_occurrences",
+          "evidence": "remediation/nuke-planning/catalog/catalog-normal-test-file-closures.json",
+          "source_sha256": "e9ce2b6dbb35b6e7689c6df830a9af8e82dde1091f9eae67c4e3ff767d8896a0",
+          "bindings": [
+            "BUILD-05",
+            "CatalogOriginalAssertionGapRealTests.SameOriginalGroupedIdentitySqlHasExactlyOneBindingAndTwoOccurrences"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_invalid_ast_cannot_publish",
+          "evidence": "remediation/nuke-planning/catalog/catalog-normal-test-file-closures.json",
+          "source_sha256": "e9ce2b6dbb35b6e7689c6df830a9af8e82dde1091f9eae67c4e3ff767d8896a0",
+          "bindings": [
+            "BUILD-04"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
         {
           "method": "test_import_integrity_schema_overlay_and_immutability",
           "evidence": "remediation/nuke-planning/catalog/evidence/full-validation-normal-method-proof.json",
@@ -6502,11 +6541,7 @@
         }
       ],
       "normal_verified_functions": [],
-      "pending_methods": [
-        "test_hash_failure_does_not_publish",
-        "test_invalid_ast_cannot_publish",
-        "test_one_identity_two_immutable_occurrences"
-      ],
+      "pending_methods": null,
       "pending_method_list_basis": "Exact owner-supplied function/method anchors when available; module/caller closure is explicit. Lexical proposal anchors are not an AST or exhaustive branch inventory.",
       "execution_retired": false,
       "retention_normal_verified": false,
@@ -6517,7 +6552,7 @@
       "hv_acceptance": "Deferred by user until Ready; not used as a prerequisite to record normal implementation verification.",
       "decommissionable_from_pr": false,
       "decommissionable_scope": [
-        null
+        "Current published original test-file responsibilities only; no production file, frozen schema execution, global corpus or HV claim"
       ],
       "decommissionable_means_physical_delete": false,
       "evidence_refs": [
@@ -6532,6 +6567,13 @@
           "evidence": "remediation/nuke-planning/catalog/evidence/full-validation-normal-method-proof.json",
           "owner": "Catalog",
           "role": "explicit-catalog-normal-method-scope",
+          "source_sha256": "e9ce2b6dbb35b6e7689c6df830a9af8e82dde1091f9eae67c4e3ff767d8896a0",
+          "method": null
+        },
+        {
+          "evidence": "remediation/nuke-planning/catalog/catalog-normal-test-file-closures.json",
+          "owner": "Catalog",
+          "role": "explicit-source-normal-verification",
           "source_sha256": "e9ce2b6dbb35b6e7689c6df830a9af8e82dde1091f9eae67c4e3ff767d8896a0",
           "method": null
         },
@@ -6806,9 +6848,10 @@
       "owner": "Catalog",
       "category": "Catalog",
       "operations": [
-        "pending-method-specific-registry-binding"
+        "Build"
       ],
       "services": [
+        "CatalogBuild and existing CatalogDevicePipeline providers",
         "CatalogBuild/sealed registry publication integration pending",
         "CatalogDatabase",
         "CatalogReference",
@@ -6830,8 +6873,9 @@
         "remediation/nuke-app/Modules/Catalog/CatalogViewPolicy.cs",
         "scoped CatalogProjection/EffectiveInventory/DispatchManifest pending"
       ],
-      "migration_status": "explicit-caller-allocation-pending-native-method-parity",
+      "migration_status": "normal-native-original-test-methods-verified",
       "native_tests_or_pending": [
+        "Existing original method maps plus CatalogOriginalAssertionGapRealTests",
         "remediation/nuke-app/Tests/Catalog/CatalogDevicePipelineCases.cs",
         "remediation/nuke-app/Tests/Catalog/CatalogDevicePipelineRealTests.cs",
         "Tests/Catalog/CatalogDevicePipelineCases.cs:14mocks74controls",
@@ -6839,21 +6883,13 @@
       ],
       "additional_responsibilities": [
         "Acquisition: fixture archives/source retrieval where called",
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate.",
         "Catalog supplied current normal assertion/method evidence separately from whole-file closure and HV acceptance.",
         "Java: Java extraction and source parser parity",
         "Sources: source extraction, formal/header/type evidence, annotation linking"
       ],
       "remaining": [
-        "Actual typed CLI chain requires explicit row normalization and runtime proof",
-        "All historical byte/profile equivalence and complete migration/HV acceptance remain pending",
-        "All seven original assertion scopes normal-verified. Explicit synthetic verified-unused SDK cache differs from historical cache payload carrier; full historical byte/profile parity, known raw route caller, whole validator and typed CLI migration acceptance not inferred.",
-        "current profile partially native-bound; see native-parity-supplement.json for bounded receipts",
-        "Exact owner assertion-method closure only. Current/historical caller/profile and fullfile proof remain separate.",
-        "Full validate_catalog.run reconciliation/reporting remains pending beyond inventory validator",
-        "Known raw route canonicalization and other original contract-model callers are separate pending scopes",
-        "MCP audit denied and not retried",
-        "pending exact method/profile assertion binding; current bounded native services do not prove this complete method",
-        "The SDK historical cache fixture is explicitly synthetic verified-unused evidence with native raw re-extraction. It is not decoded, assigned an old producer identity or used as historical byte-parity proof."
+        "unittest/tempfile/Python exceptions adapt to shared native test providers; source SHA identity stays truthful C# producer identity Current original test file only; frozen profiles and whole producer/corpus/HV remain separate."
       ],
       "artifact_role": "published-legacy-port-baseline",
       "primary_code_path": "remediation/catalog/tests/test_device_catalog_pipeline.py",
@@ -6861,8 +6897,8 @@
       "byte_identical_path_count": 7,
       "same_bytes_imply_profile_or_caller_parity": false,
       "standalone_nuke_target_required": false,
-      "normal_verified": false,
-      "normal_verification_status": "partial-explicit-normal-method-verification",
+      "normal_verified": true,
+      "normal_verification_status": "normal-original-test-methods-verified",
       "normal_verified_methods": [
         {
           "method": "test_index_retains_past_and_future_and_container_lifecycle",
@@ -6936,7 +6972,7 @@
         }
       ],
       "normal_verified_functions": [],
-      "pending_methods": "<module-body-and-required-callers>",
+      "pending_methods": null,
       "pending_method_list_basis": "Exact owner-supplied function/method anchors when available; module/caller closure is explicit. Lexical proposal anchors are not an AST or exhaustive branch inventory.",
       "execution_retired": false,
       "retention_normal_verified": false,
@@ -6947,7 +6983,7 @@
       "hv_acceptance": "Deferred by user until Ready; not used as a prerequisite to record normal implementation verification.",
       "decommissionable_from_pr": false,
       "decommissionable_scope": [
-        null
+        "Current published original test-file responsibilities only; no production file, frozen schema execution, global corpus or HV claim"
       ],
       "decommissionable_means_physical_delete": false,
       "evidence_refs": [
@@ -6962,6 +6998,13 @@
           "evidence": "remediation/nuke-planning/catalog/evidence/device-pipeline-normal-method-closure.json",
           "owner": "Catalog",
           "role": "explicit-catalog-normal-method-scope",
+          "source_sha256": "50e4504e81443dacdf605cb850ca7be1f8ff92b7eb1ca54ee369328eb2cec1b5",
+          "method": null
+        },
+        {
+          "evidence": "remediation/nuke-planning/catalog/catalog-normal-test-file-closures.json",
+          "owner": "Catalog",
+          "role": "explicit-source-normal-verification",
           "source_sha256": "50e4504e81443dacdf605cb850ca7be1f8ff92b7eb1ca54ee369328eb2cec1b5",
           "method": null
         },
@@ -13891,19 +13934,24 @@
       "owner": "Documentation",
       "category": "Design",
       "operations": [
-        "pending-explicit-registry-binding"
+        "GradleCompatibility"
       ],
       "services": [
         "DocumentationRendererProfileReader",
         "DocumentationToolBootstrap",
+        "Existing sole transport/acquirer/tool bootstrap/workspace effects/immutable completion and Design composition",
         "ToolArtifactAcquirer",
         "ToolZipExtractor"
       ],
-      "migration_status": "partial-explicit-method-allocation",
-      "native_tests_or_pending": [],
-      "additional_responsibilities": [],
+      "migration_status": "normal-native-original-test-methods-verified",
+      "native_tests_or_pending": [
+        "006 chronological mock-first gates, SAME native profile/runtime/factory/ZIP assertions and9 actual compiled alias cases; Root full018 must bind exact source pins"
+      ],
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
       "remaining": [
-        "Old profile15/bootstrap7 plus new redirect profile12/bootstrap3 native cases passed; Architecture002 composed native bootstrap and admitted exact observed Gradle published-checksum redirect before network-disabled rendering; existing cache bytes are not a new binary-download claim; Gradlecaller/wrapperproperties retirement remains pending; Node/Marp acquisition retired by approved stack change"
+        "Original published and retained evidence copies independently SHA-pinned. Retained copies are evidence, not extra independent production responsibilities. Normal producer closure does not mint original test-method claims."
       ],
       "artifact_role": "published-legacy-port-baseline",
       "primary_code_path": "remediation/design-c4/tooling/bootstrap.py",
@@ -13911,11 +13959,22 @@
       "byte_identical_path_count": 9,
       "same_bytes_imply_profile_or_caller_parity": false,
       "standalone_nuke_target_required": false,
-      "normal_verified": false,
-      "normal_verification_status": "native-or-caller-method-verification-pending",
+      "normal_verified": true,
+      "normal_verification_status": "normal-original-test-methods-verified",
       "normal_verified_methods": [],
-      "normal_verified_functions": [],
-      "pending_methods": "<module-body-and-required-callers>",
+      "normal_verified_functions": [
+        {
+          "source_sha256": "92b77e3d2a09416a56f3f64beca23f3c2732e32ed777176fa9fadbd6bedc1ce1",
+          "evidence": "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json",
+          "mapping": "get"
+        },
+        {
+          "source_sha256": "92b77e3d2a09416a56f3f64beca23f3c2732e32ed777176fa9fadbd6bedc1ce1",
+          "evidence": "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json",
+          "mapping": "save"
+        }
+      ],
+      "pending_methods": null,
       "pending_method_list_basis": "Exact owner-supplied function/method anchors when available; module/caller closure is explicit. Lexical proposal anchors are not an AST or exhaustive branch inventory.",
       "execution_retired": false,
       "retention_normal_verified": false,
@@ -13926,7 +13985,7 @@
       "hv_acceptance": "Deferred by user until Ready; not used as a prerequisite to record normal implementation verification.",
       "decommissionable_from_pr": false,
       "decommissionable_scope": [
-        null
+        "Root may merge normal producer replacement eligibility only after full018/source-pin gate and preserving recorded boundaries. Originals retained; no physical deletion or HV acceptance."
       ],
       "decommissionable_means_physical_delete": false,
       "evidence_refs": [
@@ -13934,6 +13993,13 @@
           "evidence": "remediation/nuke-planning/docs/documentation-parity-supplement.json",
           "owner": "Documentation",
           "role": "allocation",
+          "source_sha256": "92b77e3d2a09416a56f3f64beca23f3c2732e32ed777176fa9fadbd6bedc1ce1",
+          "method": null
+        },
+        {
+          "evidence": "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json",
+          "owner": "Documentation",
+          "role": "explicit-source-normal-verification",
           "source_sha256": "92b77e3d2a09416a56f3f64beca23f3c2732e32ed777176fa9fadbd6bedc1ce1",
           "method": null
         }
@@ -15769,15 +15835,20 @@
       "owner": "Documentation",
       "category": "Design",
       "operations": [
-        "pending-explicit-registry-binding"
+        "GradleCompatibility"
       ],
-      "services": [],
-      "migration_status": "partial-explicit-method-allocation",
-      "native_tests_or_pending": [],
-      "additional_responsibilities": [],
+      "services": [
+        "Literal original cross-artifact assertions over shared FileArtifactStore/ContentHash; existing alias caller proof is separate"
+      ],
+      "migration_status": "normal-native-original-test-methods-verified",
+      "native_tests_or_pending": [
+        "AndroidMcp.BuildTool.Tests.Documentation.LegacyDesign023MethodRealTests"
+      ],
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
       "remaining": [
-        "Documentation cross-artifact/source invariant validator and this original method full native binding remain pending in Documentation ownership.",
-        "Gradle thin delegate/caller equivalence and toolchain category integration remain pending; native locks/bootstrap/acquirer service proof is narrower."
+        "Eight current source methods plus one original retained Gradle syntax method. Do not claim the old val syntax executes against the current thin projection. Current aliases have separate004/005/006 actual compiled proofs and prior exported offline Gradle evidence."
       ],
       "artifact_role": "published-legacy-port-baseline",
       "primary_code_path": "remediation/tests_design023_contract.py",
@@ -15785,21 +15856,129 @@
       "byte_identical_path_count": 4,
       "same_bytes_imply_profile_or_caller_parity": false,
       "standalone_nuke_target_required": false,
-      "normal_verified": false,
-      "normal_verification_status": "native-or-caller-method-verification-pending",
-      "normal_verified_methods": [],
-      "normal_verified_functions": [],
-      "pending_methods": [
-        "test_admin_scheme_is_issued_bearer_and_owner_proof_is_server_owned",
-        "test_all_native_arc_identities_hash_exact_bytes_and_use_pinned_payloads",
-        "test_contract_version_has_one_current_value",
-        "test_dispatch_permit_and_storage_ports_are_explicit_in_sources",
-        "test_import_stage_routes_define_sealed_hash_size_expiry",
-        "test_stage_lifetime_is_capacity_aware_and_configurable",
-        "test_standalone_docs_tasks_verify_pins",
-        "test_version_rejection_matches_pinned_arc_source",
-        "test_watch_contract_is_finite_and_blob_quota_accounted"
+      "normal_verified": true,
+      "normal_verification_status": "normal-original-test-methods-verified",
+      "normal_verified_methods": [
+        {
+          "method": "test_version_rejection_matches_pinned_arc_source",
+          "evidence": "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json",
+          "source_sha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+          "bindings": [
+            "AndroidMcp.BuildTool.Tests.Documentation.LegacyDesign023MethodRealTests.SameNineOriginalPredicatesBindNativeStoresWithRetainedGradleSyntaxInput(method: \"test_version_rejection_matches_pinned_arc_source\")"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original predicate and Root-approved current-artifact versus retained Gradle syntax boundary in the complete owner map.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_contract_version_has_one_current_value",
+          "evidence": "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json",
+          "source_sha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+          "bindings": [
+            "AndroidMcp.BuildTool.Tests.Documentation.LegacyDesign023MethodRealTests.SameNineOriginalPredicatesBindNativeStoresWithRetainedGradleSyntaxInput(method: \"test_contract_version_has_one_current_value\")"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original predicate and Root-approved current-artifact versus retained Gradle syntax boundary in the complete owner map.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_admin_scheme_is_issued_bearer_and_owner_proof_is_server_owned",
+          "evidence": "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json",
+          "source_sha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+          "bindings": [
+            "AndroidMcp.BuildTool.Tests.Documentation.LegacyDesign023MethodRealTests.SameNineOriginalPredicatesBindNativeStoresWithRetainedGradleSyntaxInput(method: \"test_admin_scheme_is_issued_bearer_and_owner_proof\"···)"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original predicate and Root-approved current-artifact versus retained Gradle syntax boundary in the complete owner map.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_import_stage_routes_define_sealed_hash_size_expiry",
+          "evidence": "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json",
+          "source_sha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+          "bindings": [
+            "AndroidMcp.BuildTool.Tests.Documentation.LegacyDesign023MethodRealTests.SameNineOriginalPredicatesBindNativeStoresWithRetainedGradleSyntaxInput(method: \"test_import_stage_routes_define_sealed_hash_size_e\"···)"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original predicate and Root-approved current-artifact versus retained Gradle syntax boundary in the complete owner map.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_stage_lifetime_is_capacity_aware_and_configurable",
+          "evidence": "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json",
+          "source_sha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+          "bindings": [
+            "AndroidMcp.BuildTool.Tests.Documentation.LegacyDesign023MethodRealTests.SameNineOriginalPredicatesBindNativeStoresWithRetainedGradleSyntaxInput(method: \"test_stage_lifetime_is_capacity_aware_and_configur\"···)"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original predicate and Root-approved current-artifact versus retained Gradle syntax boundary in the complete owner map.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_standalone_docs_tasks_verify_pins",
+          "evidence": "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json",
+          "source_sha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+          "bindings": [
+            "AndroidMcp.BuildTool.Tests.Documentation.LegacyDesign023MethodRealTests.SameNineOriginalPredicatesBindNativeStoresWithRetainedGradleSyntaxInput(method: \"test_standalone_docs_tasks_verify_pins\")"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original predicate and Root-approved current-artifact versus retained Gradle syntax boundary in the complete owner map.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_all_native_arc_identities_hash_exact_bytes_and_use_pinned_payloads",
+          "evidence": "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json",
+          "source_sha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+          "bindings": [
+            "AndroidMcp.BuildTool.Tests.Documentation.LegacyDesign023MethodRealTests.SameNineOriginalPredicatesBindNativeStoresWithRetainedGradleSyntaxInput(method: \"test_all_native_arc_identities_hash_exact_bytes_an\"···)"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original predicate and Root-approved current-artifact versus retained Gradle syntax boundary in the complete owner map.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_dispatch_permit_and_storage_ports_are_explicit_in_sources",
+          "evidence": "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json",
+          "source_sha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+          "bindings": [
+            "AndroidMcp.BuildTool.Tests.Documentation.LegacyDesign023MethodRealTests.SameNineOriginalPredicatesBindNativeStoresWithRetainedGradleSyntaxInput(method: \"test_dispatch_permit_and_storage_ports_are_explici\"···)"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original predicate and Root-approved current-artifact versus retained Gradle syntax boundary in the complete owner map.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_watch_contract_is_finite_and_blob_quota_accounted",
+          "evidence": "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json",
+          "source_sha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+          "bindings": [
+            "AndroidMcp.BuildTool.Tests.Documentation.LegacyDesign023MethodRealTests.SameNineOriginalPredicatesBindNativeStoresWithRetainedGradleSyntaxInput(method: \"test_watch_contract_is_finite_and_blob_quota_accou\"···)"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original predicate and Root-approved current-artifact versus retained Gradle syntax boundary in the complete owner map.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        }
       ],
+      "normal_verified_functions": [],
+      "pending_methods": null,
       "pending_method_list_basis": "Exact owner-supplied function/method anchors when available; module/caller closure is explicit. Lexical proposal anchors are not an AST or exhaustive branch inventory.",
       "execution_retired": false,
       "retention_normal_verified": false,
@@ -15810,7 +15989,7 @@
       "hv_acceptance": "Deferred by user until Ready; not used as a prerequisite to record normal implementation verification.",
       "decommissionable_from_pr": false,
       "decommissionable_scope": [
-        null
+        "Root may merge NORMAL replacement of this exact nine-method test-file execution after accounting review; originals retained. No producer/corpus/HV/deletion claim."
       ],
       "decommissionable_means_physical_delete": false,
       "evidence_refs": [
@@ -15883,6 +16062,13 @@
           "role": "method-allocation",
           "source_sha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
           "method": "test_watch_contract_is_finite_and_blob_quota_accounted"
+        },
+        {
+          "evidence": "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json",
+          "owner": "Documentation",
+          "role": "explicit-source-normal-verification",
+          "source_sha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+          "method": null
         }
       ],
       "accepted_complete": false,
@@ -15945,21 +16131,25 @@
       "owner": "Documentation",
       "category": "Validate",
       "operations": [
+        "Design",
         "Design (proposed; not yet registered)"
       ],
       "services": [
+        "Existing whole-root tree/store/checker/HTML/resolver and registered Validate/Design caller",
         "HTML Assets.handle_starttag parser pending",
         "Repository documentation validator pending"
       ],
-      "migration_status": "pending-full-documentation-validator",
+      "migration_status": "normal-native-original-test-methods-verified",
       "native_tests_or_pending": [
+        "003/004/005 exact repository/tree/parser/caller/metadata mock-first/native assertions and actual Root018 GOOD/multiple-errors command proof; Root full018 must bind exact source pins",
         "UI-COPY17/DECK-LOCAL projection assertions only; full check() method pending"
       ],
       "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate.",
         "Docs owner read both actual published validator files and supplied explicit responsibility at2026-10-28T00:19:16; independently read same full text here."
       ],
       "remaining": [
-        "Exact check() committed checksums, all repository markdown percent-decoded local links excluding .git, all SVG XML parse and full HTML remote-asset syntax remain unbound. main() CLI/root/JSON/exit pending."
+        "Original published and retained evidence copies independently SHA-pinned. Retained copies are evidence, not extra independent production responsibilities. Normal producer closure does not mint original test-method claims."
       ],
       "artifact_role": "published-legacy-port-baseline",
       "primary_code_path": "tools/check_documentation.py",
@@ -15967,11 +16157,27 @@
       "byte_identical_path_count": 3,
       "same_bytes_imply_profile_or_caller_parity": false,
       "standalone_nuke_target_required": false,
-      "normal_verified": false,
-      "normal_verification_status": "native-or-caller-method-verification-pending",
+      "normal_verified": true,
+      "normal_verification_status": "normal-original-test-methods-verified",
       "normal_verified_methods": [],
-      "normal_verified_functions": [],
-      "pending_methods": "<module-body-and-required-callers>",
+      "normal_verified_functions": [
+        {
+          "source_sha256": "4abd62deef22df29c323832ecfd094df9f27162bc9023fd913cb0954ceb417d3",
+          "evidence": "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json",
+          "mapping": "check"
+        },
+        {
+          "source_sha256": "4abd62deef22df29c323832ecfd094df9f27162bc9023fd913cb0954ceb417d3",
+          "evidence": "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json",
+          "mapping": "handle_starttag"
+        },
+        {
+          "source_sha256": "4abd62deef22df29c323832ecfd094df9f27162bc9023fd913cb0954ceb417d3",
+          "evidence": "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json",
+          "mapping": "main"
+        }
+      ],
+      "pending_methods": null,
       "pending_method_list_basis": "Exact owner-supplied function/method anchors when available; module/caller closure is explicit. Lexical proposal anchors are not an AST or exhaustive branch inventory.",
       "execution_retired": false,
       "retention_normal_verified": false,
@@ -15982,10 +16188,18 @@
       "hv_acceptance": "Deferred by user until Ready; not used as a prerequisite to record normal implementation verification.",
       "decommissionable_from_pr": false,
       "decommissionable_scope": [
-        null
+        "Root may merge normal producer replacement eligibility only after full018/source-pin gate and preserving recorded boundaries. Originals retained; no physical deletion or HV acceptance."
       ],
       "decommissionable_means_physical_delete": false,
-      "evidence_refs": [],
+      "evidence_refs": [
+        {
+          "evidence": "remediation/nuke-planning/docs/documentation-normal-test-file-closures.json",
+          "owner": "Documentation",
+          "role": "explicit-source-normal-verification",
+          "source_sha256": "4abd62deef22df29c323832ecfd094df9f27162bc9023fd913cb0954ceb417d3",
+          "method": null
+        }
+      ],
       "accepted_complete": false,
       "scope_exclusion_authorized": false,
       "safe_to_delete": false
@@ -16645,15 +16859,19 @@
         "Extract"
       ],
       "services": [
-        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
+        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only",
+        "PublishedInterfaceHashSourceFacts + PublishedInterfaceHashWorkflow.RunAsync"
       ],
-      "migration_status": "partial-source-allocation",
+      "migration_status": "normal-native-original-test-methods-verified",
       "native_tests_or_pending": [
+        "Exact Source023 parser/original assertion plus Root026 MAIN/caller classes",
         "S-AC021/S-AC022 full membership/revision/hash-selection/version-domain mock/real gates pending"
       ],
-      "additional_responsibilities": [],
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
       "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "[\"Existing native safe portable root-relative paths and strict JSON duplicate/nonfinite/Unicode admission replace original pathlib/json.loads permissiveness. Preserve reached original admitted-domain errors/effects; no unrestricted interpreter equivalence.\",\"Use shared LegacyAsciiIdentity compact canonical bytes rather than reproducing json.dumps default spaces and report indent2. Same original field values/order of array evidence and JSONL newline boundaries; no historical byte identity. No new serializer.\",\"Native assembly identity, native_producer/historical_python_identity metadata, offset timestamp and final index.json are explicit native generation additions; do not pretend they are original Python code or frozen report bytes.\",\"Existing destination directories, including empty/unrelated directories, must fail after successful input processing. Use existing tree absence observation under shared cooperating lease. This does not claim atomic mkdir equivalence against arbitrary noncooperating hostile directory creation between observation/write; that capability is absent from the reused services and is not invented.\",\"Shared generation admission/rechecks add immutable pin enforcement before/after writes; failure keeps uncommitted files and no final commit. Original has no final recheck. Preserve actual source evidence, do not silently drop failed/changed inputs.\",\"Only four existing SourceFactProducer helper access modifiers and Root-owned CLI/planner binding may need existing-file edits. No factory/Core service/registry schema framework or SourceSyntax changes by Sources.\"]"
       ],
       "artifact_role": "published-legacy-port-baseline",
       "primary_code_path": "tools/source_facts/interface_hash_facts.py",
@@ -16661,11 +16879,39 @@
       "byte_identical_path_count": 1,
       "same_bytes_imply_profile_or_caller_parity": false,
       "standalone_nuke_target_required": false,
-      "normal_verified": false,
-      "normal_verification_status": "native-or-caller-method-verification-pending",
+      "normal_verified": true,
+      "normal_verification_status": "normal-original-test-methods-verified",
       "normal_verified_methods": [],
-      "normal_verified_functions": [],
-      "pending_methods": "<module-body-and-required-callers>",
+      "normal_verified_functions": [
+        {
+          "source_sha256": "59c4b756d90b922fd32d7fbab7cb72256e58fc5a3ffb6d4fd0d2d5e383e221d9",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": {
+            "Native": "PublishedInterfaceHashSourceFacts.AidlHashes",
+            "Evidence": "Unchanged13/14 parser handoff, original4 assertion bodies, lexical/raw-line full-output cases, current/release concerns; final016 full receipt includes these prior test names.",
+            "Original": "aidl_hashes"
+          }
+        },
+        {
+          "source_sha256": "59c4b756d90b922fd32d7fbab7cb72256e58fc5a3ffb6d4fd0d2d5e383e221d9",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": {
+            "Native": "PublishedInterfaceHashSourceFacts.HidlHashes",
+            "Evidence": "Unchanged13/14 scalar lexical correction, SAME33 full-output Unicode/digit/whitespace cases, original test assertions and conservative fields; all prior tests retained in final016 full.",
+            "Original": "hidl_hashes"
+          }
+        },
+        {
+          "source_sha256": "59c4b756d90b922fd32d7fbab7cb72256e58fc5a3ffb6d4fd0d2d5e383e221d9",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": {
+            "Native": "PublishedInterfaceHashWorkflow.RunAsync",
+            "Evidence": "Exact original loop/admission/selection/identity/scope/counter/output/error/effect clauses map below; primary62 finite cases, complete report/fact bytes, ordered reads/parses/writes, pin changes, cancellation, partials and originals. Cooperating lease mock/native018. Numeric task admission mock/native019. Shared dependencies are actual native temp-tree bindings.",
+            "Original": "main"
+          }
+        }
+      ],
+      "pending_methods": null,
       "pending_method_list_basis": "Exact owner-supplied function/method anchors when available; module/caller closure is explicit. Lexical proposal anchors are not an AST or exhaustive branch inventory.",
       "execution_retired": false,
       "retention_normal_verified": false,
@@ -16691,6 +16937,13 @@
           "evidence": "remediation/nuke-planning/source/legacy-disposition.jsonl",
           "owner": "Sources",
           "role": "allocation",
+          "source_sha256": "59c4b756d90b922fd32d7fbab7cb72256e58fc5a3ffb6d4fd0d2d5e383e221d9",
+          "method": null
+        },
+        {
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "owner": "Sources",
+          "role": "explicit-source-normal-verification",
           "source_sha256": "59c4b756d90b922fd32d7fbab7cb72256e58fc5a3ffb6d4fd0d2d5e383e221d9",
           "method": null
         }
@@ -18212,15 +18465,19 @@
         "Extract"
       ],
       "services": [
-        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
+        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only",
+        "PublishedInterfaceHashSourceFacts + PublishedInterfaceHashWorkflow.RunAsync"
       ],
-      "migration_status": "partial-source-allocation",
+      "migration_status": "normal-native-original-test-methods-verified",
       "native_tests_or_pending": [
+        "Exact Source023 parser/original assertion plus Root026 MAIN/caller classes",
         "S-AC021/S-AC022 full membership/revision/hash-selection/version-domain mock/real gates pending"
       ],
-      "additional_responsibilities": [],
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
       "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "[\"Existing native safe portable root-relative paths and strict JSON duplicate/nonfinite/Unicode admission replace original pathlib/json.loads permissiveness. Preserve reached original admitted-domain errors/effects; no unrestricted interpreter equivalence.\",\"Use shared LegacyAsciiIdentity compact canonical bytes rather than reproducing json.dumps default spaces and report indent2. Same original field values/order of array evidence and JSONL newline boundaries; no historical byte identity. No new serializer.\",\"Native assembly identity, native_producer/historical_python_identity metadata, offset timestamp and final index.json are explicit native generation additions; do not pretend they are original Python code or frozen report bytes.\",\"Existing destination directories, including empty/unrelated directories, must fail after successful input processing. Use existing tree absence observation under shared cooperating lease. This does not claim atomic mkdir equivalence against arbitrary noncooperating hostile directory creation between observation/write; that capability is absent from the reused services and is not invented.\",\"Shared generation admission/rechecks add immutable pin enforcement before/after writes; failure keeps uncommitted files and no final commit. Original has no final recheck. Preserve actual source evidence, do not silently drop failed/changed inputs.\",\"Only four existing SourceFactProducer helper access modifiers and Root-owned CLI/planner binding may need existing-file edits. No factory/Core service/registry schema framework or SourceSyntax changes by Sources.\"]"
       ],
       "artifact_role": "published-legacy-port-baseline",
       "primary_code_path": "tools/source_facts/test_interface_hash_facts.py",
@@ -18228,11 +18485,64 @@
       "byte_identical_path_count": 1,
       "same_bytes_imply_profile_or_caller_parity": false,
       "standalone_nuke_target_required": false,
-      "normal_verified": false,
-      "normal_verification_status": "native-or-caller-method-verification-pending",
-      "normal_verified_methods": [],
+      "normal_verified": true,
+      "normal_verification_status": "normal-original-test-methods-verified",
+      "normal_verified_methods": [
+        {
+          "method": "test_aidl_hash_lines_kept_in_order_no_compiled_hash_assumption",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "f270d1e8c6bd5396412678f148f1789c2f8329dc3d7705dd68377a805ba8b1c9",
+          "bindings": [
+            "HASH-01"
+          ],
+          "normal_verified": true,
+          "scope": "HASH-01 exact comment/a40/b40/newline input and complete ordered facts, compiled_runtime_hash_proven=false, empty unknown_lines. Exact original assertion body also retained in013 SAME-native assertion cases.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_unknown_aidl_hash_line_retained",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "f270d1e8c6bd5396412678f148f1789c2f8329dc3d7705dd68377a805ba8b1c9",
+          "bindings": [
+            "HASH-02"
+          ],
+          "normal_verified": true,
+          "scope": "HASH-02 exact not-frozen newline input and unknown_lines[0].raw; full diagnostic line/raw output plus exact original assertion in013.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_hidl_duplicate_identifier_hashes_are_not_collapsed",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "f270d1e8c6bd5396412678f148f1789c2f8329dc3d7705dd68377a805ba8b1c9",
+          "bindings": [
+            "HASH-06"
+          ],
+          "normal_verified": true,
+          "scope": "HASH-06 exact a64/b64 compatibility-comment input, two fact rows and first declared_identifier retained, android_applicability_proven=false. Exact original assertion body retained in013.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_hidl_unknown_format_remains_evidence",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "f270d1e8c6bd5396412678f148f1789c2f8329dc3d7705dd68377a805ba8b1c9",
+          "bindings": [
+            "HASH-07"
+          ],
+          "normal_verified": true,
+          "scope": "HASH-07 exact opaque declaration newline input and raw unknown evidence, exact original assertion retained in013.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        }
+      ],
       "normal_verified_functions": [],
-      "pending_methods": "<module-body-and-required-callers>",
+      "pending_methods": null,
       "pending_method_list_basis": "Exact owner-supplied function/method anchors when available; module/caller closure is explicit. Lexical proposal anchors are not an AST or exhaustive branch inventory.",
       "execution_retired": false,
       "retention_normal_verified": false,
@@ -18258,6 +18568,13 @@
           "evidence": "remediation/nuke-planning/source/legacy-disposition.jsonl",
           "owner": "Sources",
           "role": "allocation",
+          "source_sha256": "f270d1e8c6bd5396412678f148f1789c2f8329dc3d7705dd68377a805ba8b1c9",
+          "method": null
+        },
+        {
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "owner": "Sources",
+          "role": "explicit-source-normal-verification",
           "source_sha256": "f270d1e8c6bd5396412678f148f1789c2f8329dc3d7705dd68377a805ba8b1c9",
           "method": null
         }

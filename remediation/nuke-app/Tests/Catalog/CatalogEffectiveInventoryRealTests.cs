@@ -33,9 +33,9 @@ public sealed class NativeCatalogEffectiveInventoryProvider:ICatalogEffectiveInv
         string Scalar(string sql,params (string Name,object? Value)[] args){using var query=database.Command(sql,null,args);return (string)query.ExecuteScalar()!;}
         JsonObject Doc(string signature)=>JsonNode.Parse(Scalar("SELECT document_json FROM effective_entries WHERE json_extract(document_json,'$.canonical_signature')=$signature",("$signature",signature)))!.AsObject();
         string Text(JsonNode value)=>Encoding.UTF8.GetString(canonical.Serialize(JsonSerializer.SerializeToElement(value)));
-        string ImportedRows(SqliteTransaction? active=null)
+        string ImportedRows(SqliteTransaction? active=null,string table="registry_inventory")
         {
-            using var query=database.Command("SELECT entry_id,document_json,record_sha256 FROM registry_inventory ORDER BY registry_id,entry_id",active);using var rows=query.ExecuteReader();var values=new List<string>();
+            using var query=database.Command("SELECT entry_id,document_json,record_sha256 FROM "+table+" ORDER BY registry_id,entry_id",active);using var rows=query.ExecuteReader();var values=new List<string>();
             while(rows.Read()) values.Add(rows.GetString(0)+"\n"+rows.GetString(1)+"\n"+rows.GetString(2));return string.Join("\n",values);
         }
         string LocalRows(string table)
@@ -119,6 +119,77 @@ public sealed class NativeCatalogEffectiveInventoryProvider:ICatalogEffectiveInv
                 // Matching-pin and suppressed-type cases explicitly supply it.
                 var hashes=call.Variant=="suppressed-binding" ? null : pins.DocumentHashes;
                 return CatalogViewPolicy.Evaluate([new(key,schema,"platform:local",1)],new(snapshot,new(null,false,0,1,"fixture")),new Dictionary<string,PolicyRule>{{key,rule}},entry,"tool",authority,hashes,resolver,canonical);
+            }
+            if(call.Variant.StartsWith("structured-",StringComparison.Ordinal))
+            {
+                var variant=call.Variant["structured-".Length..];var parent=Doc("aidl:a.I.P");var field=Doc("aidl:a.I.P#x");
+                var parentId=parent["entry_id"]!.GetValue<string>();var fieldId=field["entry_id"]!.GetValue<string>();
+                var parentBefore=(JsonObject)parent.DeepClone();var fieldBefore=(JsonObject)field.DeepClone();
+                var hasParent=variant is "parent-field" or "parent-only";var hasField=variant!="parent-only";
+                if(hasParent)parent["extensions"]!["annotations"]=new JsonArray(new JsonObject{["name"]=CatalogStructuredOverlayCases.ParentAnnotation,["arguments"]=""});
+                if(hasField)
+                {
+                    field["return_type"]!["text"]=variant=="constant-only" ? "int" : "long";
+                    field["extensions"]!["constant_raw"]=variant=="constant-only" ? CatalogStructuredOverlayCases.Constant : null;
+                }
+                // Expectations are authored from retained input documents before
+                // capture. The counterfactual drops the local parent's wire
+                // annotation (or the field-only change), so equality cannot
+                // accidentally accept the imported-parent fallback.
+                var expectedParent=(JsonObject)parent.DeepClone();var counterfactual=(JsonObject)parentBefore.DeepClone();
+                if(hasField)
+                {
+                    var expectedField=expectedParent["extensions"]!["declared_type_shape"]!["fields"]!.AsArray().OfType<JsonObject>().Single(value=>value["name"]!.GetValue<string>()=="x");
+                    expectedField["type"]=field["return_type"]!.DeepClone();expectedField["constant"]=field["extensions"]!["constant_raw"]?.DeepClone();
+                    if(hasParent)
+                    {
+                        var wrongField=counterfactual["extensions"]!["declared_type_shape"]!["fields"]!.AsArray().OfType<JsonObject>().Single(value=>value["name"]!.GetValue<string>()=="x");
+                        wrongField["type"]=field["return_type"]!.DeepClone();wrongField["constant"]=field["extensions"]!["constant_raw"]?.DeepClone();
+                    }
+                }
+                var contracts=new CatalogContracts(canonical);string Contract(JsonObject document)=>contracts.Digest(JsonSerializer.SerializeToElement(document));
+                var expectedParentHash=Contract(expectedParent);var wrongParentHash=Contract(counterfactual);Assert.NotEqual(expectedParentHash,wrongParentHash);
+                var expectedFieldHash=Contract(hasField ? field : fieldBefore);
+                var expectedParentDocument=hasParent ? ContentHash.Sha256(Encoding.UTF8.GetBytes(Text(parent))) : before.DocumentHashes[parentId];
+                var expectedFieldDocument=hasField ? ContentHash.Sha256(Encoding.UTF8.GetBytes(Text(field))) : before.DocumentHashes[fieldId];
+                var historicalId=ContentHash.Sha256(Encoding.UTF8.GetBytes(CatalogStructuredOverlayCases.HistoricalSignature));
+                if(variant=="historical-parent")Execute("INSERT INTO bindings SELECT $id,$signature,package,owner,kind,name,return_type,arguments_json,raw_signature,codec_status FROM bindings WHERE binding_id=$parent",
+                    ("$id",historicalId),("$signature",CatalogStructuredOverlayCases.HistoricalSignature),("$parent",parentId));
+                if(hasParent)Overlay(parent);if(hasField)Overlay(field);
+                var overlays=LocalRows("overlays");var history=LocalRows("entry_history");var importedEntries=ImportedRows(table:"registry_entries");
+                captured=inventory.Capture();var resolved=Resolve(captured);
+                JsonElement Item(CatalogInventoryCapture value,string id)=>value.Inventory.Single(row=>row.GetProperty("entry_id").GetString()==id);
+                var parentItem=Item(captured,parentId);var fieldItem=Item(captured,fieldId);var methodItem=Item(captured,key);var methodBefore=Item(before,key);
+                var parents=parentItem.GetProperty("variants").EnumerateArray().ToArray();var fields=fieldItem.GetProperty("variants").EnumerateArray().ToArray();
+                var expectedDependencies=methodBefore.GetProperty("variants").EnumerateArray().Select(value=>
+                {
+                    var dependencies=JsonNode.Parse(value.GetProperty("dependencies").GetRawText())!.AsArray();
+                    Assert.Contains(dependencies.OfType<JsonObject>(),dependency=>dependency["entry_id"]!.GetValue<string>()==parentId);
+                    foreach(var dependency in dependencies.OfType<JsonObject>().Where(value=>value["entry_id"]!.GetValue<string>()==parentId))dependency["schema_hash"]=expectedParentHash;
+                    return Text(dependencies);
+                }).ToArray();
+                var ids=captured.Inventory.Select(value=>value.GetProperty("entry_id").GetString()!).ToArray();
+                var bytes=Encoding.UTF8.GetBytes(string.Concat(captured.Inventory.OrderBy(value=>value.GetProperty("entry_id").GetString(),StringComparer.Ordinal).Select(value=>Encoding.UTF8.GetString(canonical.Serialize(value))+"\n")));
+                var historicalPresent=Scalar("SELECT CAST(count(*) AS TEXT) FROM bindings WHERE binding_id=$id",("$id",historicalId))=="1";
+                var historicalHasEntry=Scalar("SELECT CAST(count(*) AS TEXT) FROM registry_entries WHERE entry_id=$id",("$id",historicalId))!="0";
+                var observation=new CatalogStructuredOverlayObservation(
+                    parents.Length==Item(before,parentId).GetProperty("variants").GetArrayLength() && parents.All(value=>value.GetProperty("schema_hash").GetString()==expectedParentHash),
+                    parents.All(value=>value.GetProperty("schema_hash").GetString()!=wrongParentHash),
+                    fields.Length==Item(before,fieldId).GetProperty("variants").GetArrayLength() && fields.All(value=>value.GetProperty("schema_hash").GetString()==expectedFieldHash),
+                    parentItem.GetProperty("catalog_document_sha256").GetString()==expectedParentDocument && captured.DocumentHashes[parentId]==expectedParentDocument,
+                    fieldItem.GetProperty("catalog_document_sha256").GetString()==expectedFieldDocument && captured.DocumentHashes[fieldId]==expectedFieldDocument,
+                    parentItem.GetProperty("catalog_state").GetString()=="active" && parentItem.GetProperty("catalog_revision").GetInt64()==(hasParent ? 1 : 0),
+                    fieldItem.GetProperty("catalog_state").GetString()=="active" && fieldItem.GetProperty("catalog_revision").GetInt64()==(hasField ? 1 : 0),
+                    expectedDependencies.SequenceEqual(methodItem.GetProperty("variants").EnumerateArray().Select(value=>Text(JsonNode.Parse(value.GetProperty("dependencies").GetRawText())!)),StringComparer.Ordinal),
+                    parents.All(value=>value.GetProperty("dependencies").GetArrayLength()==0),
+                    historicalPresent==(variant=="historical-parent") && !historicalHasEntry && !ids.Contains(historicalId,StringComparer.Ordinal),
+                    overlays==LocalRows("overlays") && history==LocalRows("entry_history"),importedEntries==ImportedRows(table:"registry_entries"),ImportedRows()==baseline,
+                    captured.Inventory.Count==before.Inventory.Count && before.Inventory.All(value=>ids.Contains(value.GetProperty("entry_id").GetString()!,StringComparer.Ordinal)),
+                    captured.RegistryId==before.RegistryId && captured.CatalogGeneration==before.CatalogGeneration && captured.BaseInventoryCount==before.BaseInventoryCount,
+                    captured.OverlayGeneration-before.OverlayGeneration,captured.InventorySha256==ContentHash.Sha256(bytes),ids.SequenceEqual(ids.Order(StringComparer.Ordinal)),
+                    Row(resolved,key).GetProperty("state").GetString()!,Admit(resolved,captured,true),Admit(resolved,captured,false)=="os-unavailable");
+                using(var check=database.Connection.BeginTransaction(deferred:true))check.Rollback();
+                return new("ok",ImportedInventoryUnchanged:ImportedRows()==baseline,InputsRetained:built.OriginalInputsRetained && FileHash(original)==originalHash,Structured:observation);
             }
             string? admission=null,noAuthority=null,changedAdmission=null;bool? schemaChanged=null,documentChanged=null,hashChanged=null;long? overlayDelta=null;string? dependencyState=null;
             if(call.Variant=="suppressed-binding") Overlay(method,"suppressed");

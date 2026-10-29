@@ -8,8 +8,8 @@ public static class SourceExtractPlannerCases
     private static readonly (string Key,string Value)[] Required =
     [("project-root","inputs"),("pipeline-request","extract-workflow.json"),
         ("pipeline-request-sha256",new string('a',64)),("pipeline-request-length","1234")];
-    private static readonly string[] Steps = ["admit-pinned-workflow","admit-locked-recipe","verify-source-inventory","capture-runtime-identity","extract-source-generation","seal-extraction"];
-    private static readonly string[] Edges = ["admit-locked-recipe<-admit-pinned-workflow","verify-source-inventory<-admit-locked-recipe","capture-runtime-identity<-verify-source-inventory","extract-source-generation<-capture-runtime-identity","seal-extraction<-extract-source-generation"];
+    private static readonly string[] Steps = ["admit-pinned-workflow","admit-task-inputs","verify-task-source-pins","capture-runtime-identity","extract-source-generation","seal-extraction"];
+    private static readonly string[] Edges = ["admit-task-inputs<-admit-pinned-workflow","verify-task-source-pins<-admit-task-inputs","capture-runtime-identity<-verify-task-source-pins","extract-source-generation<-capture-runtime-identity","seal-extraction<-extract-source-generation"];
     public static IEnumerable<object[]> Cases => new[]
     {
         new PlannerCase("EXTRACT-PLAN-01",PlannerContractCases.Request("Sources","Extract",Required),new(Category.Sources,Operation.Extract),Steps,[],Edges),

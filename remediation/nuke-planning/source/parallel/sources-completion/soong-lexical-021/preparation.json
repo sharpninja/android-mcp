@@ -1,0 +1,41 @@
+{
+  "At": "2026-10-29T04:21:49",
+  "Owner": "Sources",
+  "Originals": [
+    {
+      "Path": "tools/source_facts/interface_module_facts.py",
+      "Sha256": "676c3fbbfe3e740f7aadd3bcac251655bc9d37de5ac2a5ce77a9a9632db0dc90",
+      "Size": 7130
+    },
+    {
+      "Path": "tools/source_facts/test_interface_module_facts.py",
+      "Sha256": "622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
+      "Size": 2426
+    },
+    {
+      "Path": "tools/source_facts/apex_manifest_facts.py",
+      "Sha256": "35af3b887b030e400231320eee167976f64679d684f647ba5c3cec9f48b5e841",
+      "Size": 2627
+    },
+    {
+      "Path": "tools/source_facts/test_apex_manifest_facts.py",
+      "Sha256": "b3beb718222a5b4533f7649a6e6fb8bada7fb7b19b8587d4560855c7b151b5d1",
+      "Size": 2446
+    }
+  ],
+  "PriorProduction": {
+    "Path": "Modules/Sources/SoongSourceFacts.cs",
+    "Size": 9220,
+    "Sha256": "08f7fb6f8532e86f51a9a732552f58e445fc1bb7379119169eb78242d76476ff"
+  },
+  "RequirementIds": [
+    "FR-BUILD-004",
+    "TR-BUILD-004",
+    "TEST-BUILD-004"
+  ],
+  "AuthoritySha256": "f8a890be035a1b9e1f9c674df056b3dbf8c27cdf1fc211ef3ceb3dd2363662e7",
+  "Approval": "Root approved demonstrated narrow Soong scalar lexical correction, shared OriginalWord925b, existing number/parser/JSON authority; no Core/factory/API/SourceSyntax changes. Before introducing decimal conversion search shared source-number services.",
+  "NumberReuse": "Search all native Core/Modules: only Soong currently converts Unicode source decimal tokens, via CharUnicodeInfo.GetDecimalDigitValue(char), followed by BigInteger and existing JSON. Extend that same conversion with scalar/string overload; no new converter or formatter. Core numeric services cover admitted ASCII JSON numbers; HTML numeric reference syntax is ASCII; HIDL classifies Nd without conversion.",
+  "MockCases": "48 independent full-module/property/raw/status/literal-projection cases across Interfaces/Apex families; three discriminators per case; SAME native cases plus original module/literal/glob/path and APEX JSON regressions.",
+  "Limits": "Retain strict native JSON/Unicode decoding. Unpaired escaped surrogate literal-return equivalence, arbitrary CPython object APIs and interpreter-wide int digit limits are not claimed. interface_module_facts.main inventory/output caller remains separately partial, not inferred closed by lexical proof."
+}

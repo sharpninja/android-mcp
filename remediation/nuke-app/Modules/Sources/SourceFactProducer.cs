@@ -235,9 +235,9 @@ public sealed class SourceFactProducer(IProfiledCanonicalJson canonical, ILegacy
         return true;
     }
     private static JsonNode? DefaultValue(JsonObject value, string key, JsonNode fallback) => value.ContainsKey(key) ? value[key] : fallback;
-    private static JsonObject StrictObject(JsonNode? value) => value as JsonObject ?? throw new ArgumentException("Expected source fact object");
+    internal static JsonObject StrictObject(JsonNode? value) => value as JsonObject ?? throw new ArgumentException("Expected source fact object");
     private static string RequiredString(JsonNode? value) => String(value) ?? throw new ArgumentException("Expected source fact string");
-    private static IEnumerable<JsonNode?> Iterable(JsonNode? value) => value switch
+    internal static IEnumerable<JsonNode?> Iterable(JsonNode? value) => value switch
     {
         JsonArray array => array,
         JsonObject map => map.Select(pair => (JsonNode?)JsonValue.Create(pair.Key)),
@@ -256,7 +256,7 @@ public sealed class SourceFactProducer(IProfiledCanonicalJson canonical, ILegacy
         JsonValue scalar when scalar.TryGetValue<string>(out var text) => JsonValue.Create(text.EnumerateRunes().ElementAt(index).ToString()),
         _ => throw new ArgumentException("Expected source fact index")
     };
-    private static bool ContainsImport(JsonNode? value, string name) => value switch
+    internal static bool ContainsImport(JsonNode? value, string name) => value switch
     {
         JsonArray array => array.Any(item => String(item) == name), JsonObject map => map.ContainsKey(name),
         JsonValue scalar when scalar.TryGetValue<string>(out var text) => text.Contains(name, StringComparison.Ordinal),
@@ -268,5 +268,5 @@ public sealed class SourceFactProducer(IProfiledCanonicalJson canonical, ILegacy
     private static JsonArray Array(JsonNode? value) => value is null ? new() : value as JsonArray ?? throw new ArgumentException("Expected source fact array");
     private static IEnumerable<JsonObject> Objects(JsonNode? value) => Array(value).Select(x => x as JsonObject ?? throw new ArgumentException("Expected source fact object row"));
     private static JsonNode? Property(JsonObject value, string key, JsonNode? fallback) => value.ContainsKey(key) ? value[key]?.DeepClone() : fallback?.DeepClone();
-    private static JsonNode? CopyRequired(JsonObject value, string key) => value.ContainsKey(key) ? value[key]?.DeepClone() : throw new ArgumentException("Required source fact field: " + key);
+    internal static JsonNode? CopyRequired(JsonObject value, string key) => value.ContainsKey(key) ? value[key]?.DeepClone() : throw new ArgumentException("Required source fact field: " + key);
 }
