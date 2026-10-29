@@ -1,0 +1,396 @@
+{
+  "timestamp": "2026-10-28T05:35:01",
+  "scope": "Sources/Inventory actual CLI and method closure",
+  "gate": {
+    "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261028T0525424051889-83f33516e5b744eaa2d37f7c18714134/tests.trx",
+    "sha256": "24ee008739415978a813f6ecf5eec6a8625b69ecab55535d7ad971b9f4a6160c",
+    "total": 255,
+    "passed": 255,
+    "failed": 0,
+    "skipped": 0,
+    "nativeCliCases": 1,
+    "plannerNativeCases": 5
+  },
+  "fixtureRoot": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces",
+  "summary": {
+    "Manifest": {
+      "RelativePath": "sources/inventory.json",
+      "Sha256": "5a09fdea0070da7f97919e1083e087f49ca7ad9d81c49f14326a36d7b3a0d3c8",
+      "Length": 5181,
+      "MediaType": "application/json"
+    },
+    "RecipeSha256": "0455e3c413ef27503cbcd7c2859da9eb54adb8d681943bb69ace1e64f64e3a21",
+    "SourceRows": 2,
+    "VerifiedPhysicalSources": 2,
+    "UnselectedPhysicalSources": 0,
+    "RawComplete": true,
+    "ExtractionComplete": false,
+    "HistoricalByteIdentityClaimed": false,
+    "AcquisitionManifest": {
+      "RelativePath": "sources/acquisition.json",
+      "Sha256": "138faa5148679c86e912fc912f1deb028bf060bc71283456e23b83ef00c23fdb",
+      "Length": 4149,
+      "MediaType": "application/json"
+    },
+    "OutputRoot": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/inventory output"
+  },
+  "captureRefusals": {
+    "process-inventory-3": {
+      "freshOutput": false,
+      "callerPin": true
+    },
+    "process-inventory-2": {
+      "freshOutput": true,
+      "callerPin": false
+    }
+  },
+  "methodClosures": [
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Sources/Acquisition/SourcesInventoryContracts.cs",
+      "sha256": "3e8192ccfed7316b223f38d28e919c7b6a6f8f731dbda0f1f2ecf5d2c852fb85",
+      "methods": [
+        "SourcesInventoryRequest",
+        "ISourcesInventoryOperation.RunAsync",
+        "SourcesInventoryReceipt"
+      ],
+      "responsibility": "Typed existing recipe request, caller manifest pin, raw selected/not-selected report with exact acquisition/projection retained; no second row model.",
+      "status": "native-and-current-cli-bound-within-described-scope"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Sources/Acquisition/SourcesInventoryOperation.cs",
+      "sha256": "c128ef4dff8dd6c65b7b64d14095d4ba5e5847f0b41077021b067732a8bce07b",
+      "methods": [
+        "RunAsync"
+      ],
+      "responsibility": "Planner exactly once, trusted acquisition bytes before metadata parse, only resume-reader call, original rows/status/provenance and false extraction/historical claims, one canonical artifact.",
+      "status": "native-and-current-cli-bound-within-described-scope"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Sources/Acquisition/SourceBatchResumeContracts.cs",
+      "sha256": "38c66caeb95f8e27053630a2d9ec2253ef0b623e518fbaff943f233a4795d0e2",
+      "methods": [
+        "ISourceBatchReader.ResumeOnlyAsync",
+        "SourceBatchResumeRequest"
+      ],
+      "responsibility": "Explicit read mode pin; old acquisition request serialization unchanged.",
+      "status": "native-and-current-cli-bound-within-described-scope"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Sources/Acquisition/SourceBatch.cs",
+      "sha256": "9c1d9ae3b8bcf450f582a8038f705ed89a6e331a3d0aa7541d741995bfb2c694",
+      "methods": [
+        "ResumeOnlyAsync",
+        "RunCoreAsync",
+        "VerifyReceiptShape",
+        "VerifyOutputs"
+      ],
+      "responsibility": "Own-read SHA/length pin and missing receipt refusal before acquisition. Same original sealed/output/source verifier; zero HTTP/write race fixtures and original32case regression.",
+      "status": "native-and-current-cli-bound-within-described-scope"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Build.SourcesInventory.cs",
+      "sha256": "cc8c4bb8622c942b2e295cbd723dc50549f08f2682eb18027b1d2961a2209040",
+      "methods": [
+        "InventorySources"
+      ],
+      "responsibility": "Accepted8required/3optional binding, separate/fresh output, shared typed input reader, caller receipt path/hash/length, runtime-root leases; actualsuccess and two refusals.",
+      "status": "native-and-current-cli-bound-within-described-scope"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Build.SourcesInputs.cs",
+      "sha256": "de978cbc2591fb8fd6c3f16d630267050770a9d55c82994ade335cca082064f8",
+      "methods": [
+        "ReadSourcesRecipe"
+      ],
+      "responsibility": "Shared Fetch/Plan/Inventory project-root-relative recipe and lock artifact admission; lock recipe_file preserves nested path.",
+      "status": "native-and-current-cli-bound-within-described-scope"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Build.SourcesFetch.cs",
+      "sha256": "83c2d7582191f70160e17da199498e27490529f01174cc60dba3c58b07aab37f",
+      "methods": [
+        "InputRelative",
+        "FetchSources"
+      ],
+      "responsibility": "Shared relative path admission and reused exact existing required-snapshot fixture; acquisition remains sole raw materializer.",
+      "status": "native-and-current-cli-bound-within-described-scope"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Core/OperationRegistry.cs",
+      "sha256": "17010afa7c3e204792cfc6a3bbad49daff9d50f4763bf24794dd3b9e60a8b3a0",
+      "methods": [
+        "OperationRegistry"
+      ],
+      "responsibility": "Root-owned sole Sources/Inventory category/operation,8required3optional vocabulary and planned steps;10mock+5native planner proof.",
+      "status": "native-and-current-cli-bound-within-described-scope"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Build.cs",
+      "sha256": "2cd07fe7929382ef3dd5eb4f976507592d48515f34a5010b882c065f04f0ae3f",
+      "methods": [
+        "Values",
+        "Dispatch"
+      ],
+      "responsibility": "Root-owned4public acquisition properties/registry validation and SourcesInventory executor dispatch.",
+      "status": "native-and-current-cli-bound-within-described-scope"
+    }
+  ],
+  "copies": [
+    {
+      "relativePath": "locked inputs/rehydration/fixture.json",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/locked inputs/rehydration/fixture.json",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/locked inputs/rehydration/fixture.json",
+      "sha256": "0455e3c413ef27503cbcd7c2859da9eb54adb8d681943bb69ace1e64f64e3a21",
+      "length": 1005
+    },
+    {
+      "relativePath": "locked inputs/rehydration/fixture.lock.json",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/locked inputs/rehydration/fixture.lock.json",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/locked inputs/rehydration/fixture.lock.json",
+      "sha256": "8020ac3ad9a75a406a4bd4319b0775276d94cd82902373e321e835e89a603d83",
+      "length": 153
+    },
+    {
+      "relativePath": "owner bundle/snapshots/a.txt",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/owner bundle/snapshots/a.txt",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/owner bundle/snapshots/a.txt",
+      "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "length": 3
+    },
+    {
+      "relativePath": "owner bundle/snapshots/api.txt",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/owner bundle/snapshots/api.txt",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/owner bundle/snapshots/api.txt",
+      "sha256": "cb8379ac2098aa165029e3938a51da0bcecfc008fd6795f401178647f96c5b34",
+      "length": 3
+    },
+    {
+      "relativePath": "raw outputs/.leases/2a92eb688918327b0d86d9695480210310ce17e100b7becfc7cc098fb9c2de21.lock",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/raw outputs/.leases/2a92eb688918327b0d86d9695480210310ce17e100b7becfc7cc098fb9c2de21.lock",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/raw outputs/.leases/2a92eb688918327b0d86d9695480210310ce17e100b7becfc7cc098fb9c2de21.lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    {
+      "relativePath": "raw outputs/snapshots/a.txt",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/raw outputs/snapshots/a.txt",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/raw outputs/snapshots/a.txt",
+      "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "length": 3
+    },
+    {
+      "relativePath": "raw outputs/snapshots/api.txt",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/raw outputs/snapshots/api.txt",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/raw outputs/snapshots/api.txt",
+      "sha256": "cb8379ac2098aa165029e3938a51da0bcecfc008fd6795f401178647f96c5b34",
+      "length": 3
+    },
+    {
+      "relativePath": "raw outputs/blobs/a",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/raw outputs/blobs/a",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/raw outputs/blobs/a",
+      "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "length": 3
+    },
+    {
+      "relativePath": "raw outputs/blobs/b",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/raw outputs/blobs/b",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/raw outputs/blobs/b",
+      "sha256": "cb8379ac2098aa165029e3938a51da0bcecfc008fd6795f401178647f96c5b34",
+      "length": 3
+    },
+    {
+      "relativePath": "raw outputs/sources/acquisition.json",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/raw outputs/sources/acquisition.json",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/raw outputs/sources/acquisition.json",
+      "sha256": "138faa5148679c86e912fc912f1deb028bf060bc71283456e23b83ef00c23fdb",
+      "length": 4149
+    },
+    {
+      "relativePath": "inventory output/sources/inventory.json",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/inventory output/sources/inventory.json",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/inventory output/sources/inventory.json",
+      "sha256": "5a09fdea0070da7f97919e1083e087f49ca7ad9d81c49f14326a36d7b3a0d3c8",
+      "length": 5181
+    },
+    {
+      "relativePath": "process-1/stderr.bin",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/process-1/stderr.bin",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/process-1/stderr.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    {
+      "relativePath": "process-1/stdout.bin",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/process-1/stdout.bin",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/process-1/stdout.bin",
+      "sha256": "d4da712db7532978cf09ec2e28a2b6570d86f1911aa8a09b15f789d40ef8b153",
+      "length": 2122
+    },
+    {
+      "relativePath": "process-2/stderr.bin",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/process-2/stderr.bin",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/process-2/stderr.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    {
+      "relativePath": "process-2/stdout.bin",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/process-2/stdout.bin",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/process-2/stdout.bin",
+      "sha256": "e3440db1a5b7b5831620576f7b375341ca538af4d79d2d51aa2ff564c752cadc",
+      "length": 2121
+    },
+    {
+      "relativePath": "process-inventory-1/stderr.bin",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/process-inventory-1/stderr.bin",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/process-inventory-1/stderr.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    {
+      "relativePath": "process-inventory-1/stdout.bin",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/process-inventory-1/stdout.bin",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/process-inventory-1/stdout.bin",
+      "sha256": "06facc625913c40a4654b342b38025e08e8218176cde963125450d33dbd9f690",
+      "length": 2341
+    },
+    {
+      "relativePath": "process-inventory-2/stderr.bin",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/process-inventory-2/stderr.bin",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/process-inventory-2/stderr.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    {
+      "relativePath": "process-inventory-2/stdout.bin",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/process-inventory-2/stdout.bin",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/process-inventory-2/stdout.bin",
+      "sha256": "77cfc7d589f0e0876aa14960e5d0534a6727fd03cb41748978e03e54fd633255",
+      "length": 2856
+    },
+    {
+      "relativePath": "process-inventory-3/stderr.bin",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/process-inventory-3/stderr.bin",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/process-inventory-3/stderr.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    {
+      "relativePath": "process-inventory-3/stdout.bin",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/process-inventory-3/stdout.bin",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/process-inventory-3/stdout.bin",
+      "sha256": "a5ae1457896f59f86afea82f53143ccf00f9dd9cd442ab805cf49700ec59ed4d",
+      "length": 3079
+    },
+    {
+      "relativePath": "isolated nuke runtime/.nuke/build.schema.json",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/isolated nuke runtime/.nuke/build.schema.json",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/isolated nuke runtime/.nuke/build.schema.json",
+      "sha256": "dd442050472e6a2e5e8dfbf92427794d51bec2fb1b9e996f64acb5815fc62910",
+      "length": 10788
+    },
+    {
+      "relativePath": "isolated nuke runtime/.nuke/parameters.json",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/isolated nuke runtime/.nuke/parameters.json",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/isolated nuke runtime/.nuke/parameters.json",
+      "sha256": "350a88dc9a193d4283df18bd69605fa5f55bccaff68035f712d3741a012345a1",
+      "length": 39
+    },
+    {
+      "relativePath": "isolated nuke runtime/.nuke/temp/build-attempt.log",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/isolated nuke runtime/.nuke/temp/build-attempt.log",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/isolated nuke runtime/.nuke/temp/build-attempt.log",
+      "sha256": "5925e305da9a67dd521c9e9001183a73d4a80f9f20f6e20e02e4f38b3c0f8e73",
+      "length": 41
+    },
+    {
+      "relativePath": "isolated nuke runtime/.nuke/temp/build.2026-10-28_05-26-02.log",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/isolated nuke runtime/.nuke/temp/build.2026-10-28_05-26-02.log",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/isolated nuke runtime/.nuke/temp/build.2026-10-28_05-26-02.log",
+      "sha256": "ca591b637245a6c37c83d1d1c478c3b7cdd45e865bf50148442d07496a11ab85",
+      "length": 1535
+    },
+    {
+      "relativePath": "isolated nuke runtime/.nuke/temp/build.2026-10-28_05-26-04.log",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/isolated nuke runtime/.nuke/temp/build.2026-10-28_05-26-04.log",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/isolated nuke runtime/.nuke/temp/build.2026-10-28_05-26-04.log",
+      "sha256": "ca591b637245a6c37c83d1d1c478c3b7cdd45e865bf50148442d07496a11ab85",
+      "length": 1535
+    },
+    {
+      "relativePath": "isolated nuke runtime/.nuke/temp/build.log",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/isolated nuke runtime/.nuke/temp/build.log",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/isolated nuke runtime/.nuke/temp/build.log",
+      "sha256": "c3febc0d91dd46ce78052c342cc9941d34ad7e6692bbf8e9f6f83195cd5682e3",
+      "length": 1850
+    },
+    {
+      "relativePath": "isolated inventory runtime/.nuke/build.schema.json",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/isolated inventory runtime/.nuke/build.schema.json",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/isolated inventory runtime/.nuke/build.schema.json",
+      "sha256": "dd442050472e6a2e5e8dfbf92427794d51bec2fb1b9e996f64acb5815fc62910",
+      "length": 10788
+    },
+    {
+      "relativePath": "isolated inventory runtime/.nuke/parameters.json",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/isolated inventory runtime/.nuke/parameters.json",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/isolated inventory runtime/.nuke/parameters.json",
+      "sha256": "350a88dc9a193d4283df18bd69605fa5f55bccaff68035f712d3741a012345a1",
+      "length": 39
+    },
+    {
+      "relativePath": "isolated inventory runtime/.nuke/temp/build-attempt.log",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/isolated inventory runtime/.nuke/temp/build-attempt.log",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/isolated inventory runtime/.nuke/temp/build-attempt.log",
+      "sha256": "3db7e573165bef777f9231c367547522dbd2935506d63438f276b5141be5b015",
+      "length": 33
+    },
+    {
+      "relativePath": "isolated inventory runtime/.nuke/temp/build.2026-10-28_05-26-05.log",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/isolated inventory runtime/.nuke/temp/build.2026-10-28_05-26-05.log",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/isolated inventory runtime/.nuke/temp/build.2026-10-28_05-26-05.log",
+      "sha256": "ca591b637245a6c37c83d1d1c478c3b7cdd45e865bf50148442d07496a11ab85",
+      "length": 1535
+    },
+    {
+      "relativePath": "isolated inventory runtime/.nuke/temp/build.2026-10-28_05-26-07.log",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/isolated inventory runtime/.nuke/temp/build.2026-10-28_05-26-07.log",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/isolated inventory runtime/.nuke/temp/build.2026-10-28_05-26-07.log",
+      "sha256": "48a743a1e6bae050107ad45a7a44048a67f9e31633a35f7f86a45ad7d12efe5b",
+      "length": 2322
+    },
+    {
+      "relativePath": "isolated inventory runtime/.nuke/temp/build.2026-10-28_05-26-09.log",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/isolated inventory runtime/.nuke/temp/build.2026-10-28_05-26-09.log",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/isolated inventory runtime/.nuke/temp/build.2026-10-28_05-26-09.log",
+      "sha256": "c9ea67b90561d977c5c4d0919916cfacc27ae8d08f736df0865cda05a79f469b",
+      "length": 2600
+    },
+    {
+      "relativePath": "isolated inventory runtime/.nuke/temp/build.log",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/isolated inventory runtime/.nuke/temp/build.log",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/isolated inventory runtime/.nuke/temp/build.log",
+      "sha256": "64146f7ad3399d6a6ba557ba6335f6cf5fa443a41a35d3ffeb664ce63efaa04e",
+      "length": 2870
+    },
+    {
+      "relativePath": "isolated inventory runtime/.nuke/source-inventory-leases/2a92eb688918327b0d86d9695480210310ce17e100b7becfc7cc098fb9c2de21.lock",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T0525216566807-fd740a3000ab4bfa8cceb7f12312caef/android-mcp-sources-fetch/f0d1a50d21d64fe782f980e81ddb9656/fixture with spaces/isolated inventory runtime/.nuke/source-inventory-leases/2a92eb688918327b0d86d9695480210310ce17e100b7becfc7cc098fb9c2de21.lock",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence/isolated inventory runtime/.nuke/source-inventory-leases/2a92eb688918327b0d86d9695480210310ce17e100b7becfc7cc098fb9c2de21.lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    }
+  ],
+  "invocationEvidence": "Passed SAME native assertion proves first exit0, nonempty-output nonzero, wrong-pin nonzero; captures independently retain both refusal messages. No separate OS argv/exit receipt is invented.",
+  "legacyCallerResponsibilities": {
+    "load_inventory_save_inventory": "Recipe binding is native RehydrationPlanner+SourceBatch request identity and pinned immutable receipts, then an inventory/provenance report. Old mutable inventory.json filename/byte serialization is not a native identity claim.",
+    "seed": "Pending next typed SeedOnly contracts/mocks: ordered local_path then required_local_snapshot candidates, exact verification, imported/reused/absent counters and originals retained. Inventory is not that seed caller.",
+    "producer_path_doctor": "Historical Python/code/Expat/package pins remain data. Native toolchain/producer admission belongs to Validate/Toolchain and the SourceExtract producer contract; no Python environment is relabeled or executed.",
+    "canonical_status_selection": "Canonical downloaded-status/Git-blob grouping is distinct from generic physical-path projection; current inventory retains original status as data, no claim to that missing selector.",
+    "extraction_cache": "SourceExtract owner composes one factory/dispatcher and sealed SourceCache SPI plus native index. Inventory raw completeness does not imply declaration/cache/database completeness.",
+    "historical_duplicates": "Frozen producer/recipe/checkpoint copies are retained historical data/reference; retired from native execution authority. No deletion/safeDelete or basename-derived parity claim."
+  },
+  "auditStatus": "Prior own completion remains denied; no new turn, audit retry or indirect logging. Ordinary local evidence only.",
+  "acceptance": "Whole migration and hostile acceptance remain parent-owned and pending."
+}

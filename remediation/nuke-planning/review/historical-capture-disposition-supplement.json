@@ -1,0 +1,1527 @@
+{
+  "local_timestamp": "2026-10-28T04:40:01",
+  "scope": "Exact 20 historical review capture procedures only; no Google API or dataset analysis",
+  "authoritative_inventory": {
+    "path": "remediation/nuke-planning/source/legacy-port-disposition-inventory.json",
+    "sha256": "a3021c2293cc8d81d9ef9b178a4ca7539b3a06af9d0557a1b8c4cc5b62abb2ea"
+  },
+  "source_count": 20,
+  "protocol_family_count": 2,
+  "protocol_family_counts": {
+    "one-turn-json-report": 18,
+    "uncapped-terminal-marker": 2
+  },
+  "body_delta_check": "All 18 first-family bodies and both second-family bodies are identical after excluding only their directory/label assignment line",
+  "test_bindings": [
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Review.ReviewNativeTests",
+      "path": "remediation/nuke-app/Tests/Review/ReviewNativeTests.cs",
+      "sha256": "45257c33c91a33db33752d2466413163f97c84a954a62d7a4f9656c496033bf4"
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Review.ReviewSafetyNativeTests",
+      "path": "remediation/nuke-app/Tests/Review/ReviewSafetyNativeTests.cs",
+      "sha256": "53dfd230c9e2b0c9db1f2ba5d81e1f11dfd3abb06deb516dfdf50f22ab99a533"
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Review.ReviewRecoveryNativeTests",
+      "path": "remediation/nuke-app/Tests/Review/ReviewRecoveryNativeTests.cs",
+      "sha256": "dfe6b055b725908f7547e991ab544ce3426a619a958075f6ea4181147cd5f14f"
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Review.ReviewPrivacyNativeTests",
+      "path": "remediation/nuke-app/Tests/Review/ReviewPrivacyNativeTests.cs",
+      "sha256": "fdebd6a48b0e5a6e47e2710c03d055f976c48b835dd73583e7959a782daa6513"
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Review.ReviewFinalFragmentNativeTests",
+      "path": "remediation/nuke-app/Tests/Review/ReviewFinalFragmentNativeTests.cs",
+      "sha256": "8e734592cb43c7beab45138d810b97a7358b59e4c51e045c2946ae7249fcdf26"
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Review.ReviewVerdictNativeTests",
+      "path": "remediation/nuke-app/Tests/Review/ReviewVerdictNativeTests.cs",
+      "sha256": "4fa43d71c936fdf6439464efd7e43f3321b10f5fbd0cdff9847c03485ab28196"
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Review.Staging.ReviewOfficialTransportNativeTests",
+      "path": "remediation/nuke-app/Tests/Review/ReviewOfficialTransportNativeTests.cs",
+      "sha256": "31d4ec61e8e5152e63b1a45612fa69f7806ca1657a96318550eb1a9bfe4dd6d6"
+    },
+    {
+      "class": "AndroidMcp.BuildTool.Tests.Review.Staging.ReviewCumulativeAuditNativeTests",
+      "path": "remediation/nuke-app/Tests/Review/ReviewCumulativeAuditNativeTests.cs",
+      "sha256": "d8441a3613d003f7d1af4aa60b2f3d716fb3de6c9f6f1420bc98b8e752d9c971"
+    }
+  ],
+  "no_live_parity_claim": true,
+  "no_requirement_completion": true,
+  "records": [
+    {
+      "legacy_path": "remediation/reviews/round-016/packet-01/capture.py",
+      "sha256": "a96748a427fbaf37fcaab854289a529a69a01c2358ff201fd898e5976f5f2ab1",
+      "owner": "Review",
+      "source_read": "full-body-read-only",
+      "legacy_executed": false,
+      "original_retained": true,
+      "role": "Historical per-packet native CLI request, process, visible stream and report capture procedure",
+      "protocol_family": "one-turn-json-report",
+      "output_artifacts": [
+        "request.jsonl",
+        "process.json",
+        "stderr.txt",
+        "response.visible.jsonl",
+        "review-report.txt",
+        "completion.json",
+        "review-report.json"
+      ],
+      "unique_body_delta": "Directory and packet/pass label only within this verified protocol family",
+      "preserved_responsibilities": [
+        "Prompt and input-manifest hashes in request receipt",
+        "CLI invocation/version and runtime model observations",
+        "Exclusive new stderr and visible-stream artifacts",
+        "Incremental visible report accumulation",
+        "Hidden thinking blocks excluded from public stream",
+        "Terminal process/response/report provenance retained"
+      ],
+      "family_specific_responsibilities": "JSON report extraction and explicit report_complete property",
+      "superseded_or_strengthened_rules": [
+        "Python subprocess becomes the shared native IProcessRunner with pinned tool identity",
+        "Hardcoded Fable 5.1/max becomes explicitly required Opus 5.5/xhigh with actual runtime metadata",
+        "Empty MCP config becomes scoped official reviewer-own MCP audit capability",
+        "Permission flags and ad hoc shell/process wrappers are not copied",
+        "UTC naming becomes the current local sortable naming contract",
+        "Malformed public raw lines become hash/length metadata with private originals retained",
+        "Requested effort is not actual effort proof",
+        "One assistant turn cap is forbidden",
+        "First decoded JSON fragment cannot override the final complete verdict"
+      ],
+      "category_operations": [
+        "Review/Prepare",
+        "Review/Launch",
+        "Review/Recover",
+        "Review/Assess"
+      ],
+      "native_service_candidates": [
+        "ReviewPrepareService",
+        "ReviewLaunchService",
+        "ReviewRecoverService",
+        "ReviewAssessService",
+        "OfficialPluginReviewAuditTransport",
+        "IProcessRunner",
+        "IProcessCaptureReader"
+      ],
+      "test_case_candidates": [
+        "ReviewCases: complete, automatic-output-continuation, model-mismatch, effort-mismatch, active, uncertain, split-json, partial-json",
+        "ReviewSafetyCases: tampered-frozen-evidence, missing-model, missing-effort, duplicate-launch, hidden-excluded, malformed-stream",
+        "ReviewRecoveryCases: terminal-continuation, completed-adoption, uncertain-prefix, context-resume",
+        "ReviewPrivacyCases: malformed-hidden-fragment, nested-hidden-delta",
+        "ReviewFinalFragmentCases: progress-before-verdict, split-json-after-progress, latest-disagree-dominates, cut-off-after-agree"
+      ],
+      "parity": "Pending source-assertion equivalence; shared successor services are not 20 independently proven ports",
+      "remaining_unique_assertions": [
+        "Exact historical request/process/completion artifact fields and write-new collision behavior need explicit source-level assertion mapping",
+        "Incremental event flush/crash provenance needs exact source-to-native lifecycle coverage",
+        "Historical terminal report_complete/sentinel distinctions need explicit current-rule disposition",
+        "Actual official purpose/runtime binding and reviewer-own persisted audit remain open",
+        "Current-source fresh-host full normal gate and later post-Ready HV remain required"
+      ],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "retirement_waiver": false
+    },
+    {
+      "legacy_path": "remediation/reviews/round-016/packet-02/capture.py",
+      "sha256": "ff229ad4fbcc74e1ef1439f90acb532806e1cb53f4463a43dd361519cfb6924d",
+      "owner": "Review",
+      "source_read": "full-body-read-only",
+      "legacy_executed": false,
+      "original_retained": true,
+      "role": "Historical per-packet native CLI request, process, visible stream and report capture procedure",
+      "protocol_family": "one-turn-json-report",
+      "output_artifacts": [
+        "request.jsonl",
+        "process.json",
+        "stderr.txt",
+        "response.visible.jsonl",
+        "review-report.txt",
+        "completion.json",
+        "review-report.json"
+      ],
+      "unique_body_delta": "Directory and packet/pass label only within this verified protocol family",
+      "preserved_responsibilities": [
+        "Prompt and input-manifest hashes in request receipt",
+        "CLI invocation/version and runtime model observations",
+        "Exclusive new stderr and visible-stream artifacts",
+        "Incremental visible report accumulation",
+        "Hidden thinking blocks excluded from public stream",
+        "Terminal process/response/report provenance retained"
+      ],
+      "family_specific_responsibilities": "JSON report extraction and explicit report_complete property",
+      "superseded_or_strengthened_rules": [
+        "Python subprocess becomes the shared native IProcessRunner with pinned tool identity",
+        "Hardcoded Fable 5.1/max becomes explicitly required Opus 5.5/xhigh with actual runtime metadata",
+        "Empty MCP config becomes scoped official reviewer-own MCP audit capability",
+        "Permission flags and ad hoc shell/process wrappers are not copied",
+        "UTC naming becomes the current local sortable naming contract",
+        "Malformed public raw lines become hash/length metadata with private originals retained",
+        "Requested effort is not actual effort proof",
+        "One assistant turn cap is forbidden",
+        "First decoded JSON fragment cannot override the final complete verdict"
+      ],
+      "category_operations": [
+        "Review/Prepare",
+        "Review/Launch",
+        "Review/Recover",
+        "Review/Assess"
+      ],
+      "native_service_candidates": [
+        "ReviewPrepareService",
+        "ReviewLaunchService",
+        "ReviewRecoverService",
+        "ReviewAssessService",
+        "OfficialPluginReviewAuditTransport",
+        "IProcessRunner",
+        "IProcessCaptureReader"
+      ],
+      "test_case_candidates": [
+        "ReviewCases: complete, automatic-output-continuation, model-mismatch, effort-mismatch, active, uncertain, split-json, partial-json",
+        "ReviewSafetyCases: tampered-frozen-evidence, missing-model, missing-effort, duplicate-launch, hidden-excluded, malformed-stream",
+        "ReviewRecoveryCases: terminal-continuation, completed-adoption, uncertain-prefix, context-resume",
+        "ReviewPrivacyCases: malformed-hidden-fragment, nested-hidden-delta",
+        "ReviewFinalFragmentCases: progress-before-verdict, split-json-after-progress, latest-disagree-dominates, cut-off-after-agree"
+      ],
+      "parity": "Pending source-assertion equivalence; shared successor services are not 20 independently proven ports",
+      "remaining_unique_assertions": [
+        "Exact historical request/process/completion artifact fields and write-new collision behavior need explicit source-level assertion mapping",
+        "Incremental event flush/crash provenance needs exact source-to-native lifecycle coverage",
+        "Historical terminal report_complete/sentinel distinctions need explicit current-rule disposition",
+        "Actual official purpose/runtime binding and reviewer-own persisted audit remain open",
+        "Current-source fresh-host full normal gate and later post-Ready HV remain required"
+      ],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "retirement_waiver": false
+    },
+    {
+      "legacy_path": "remediation/reviews/round-016/packet-03/capture.py",
+      "sha256": "e5b552bff3ab827c9ab94f08b5833d636104dd56e6defa2d5513b47331202eb6",
+      "owner": "Review",
+      "source_read": "full-body-read-only",
+      "legacy_executed": false,
+      "original_retained": true,
+      "role": "Historical per-packet native CLI request, process, visible stream and report capture procedure",
+      "protocol_family": "one-turn-json-report",
+      "output_artifacts": [
+        "request.jsonl",
+        "process.json",
+        "stderr.txt",
+        "response.visible.jsonl",
+        "review-report.txt",
+        "completion.json",
+        "review-report.json"
+      ],
+      "unique_body_delta": "Directory and packet/pass label only within this verified protocol family",
+      "preserved_responsibilities": [
+        "Prompt and input-manifest hashes in request receipt",
+        "CLI invocation/version and runtime model observations",
+        "Exclusive new stderr and visible-stream artifacts",
+        "Incremental visible report accumulation",
+        "Hidden thinking blocks excluded from public stream",
+        "Terminal process/response/report provenance retained"
+      ],
+      "family_specific_responsibilities": "JSON report extraction and explicit report_complete property",
+      "superseded_or_strengthened_rules": [
+        "Python subprocess becomes the shared native IProcessRunner with pinned tool identity",
+        "Hardcoded Fable 5.1/max becomes explicitly required Opus 5.5/xhigh with actual runtime metadata",
+        "Empty MCP config becomes scoped official reviewer-own MCP audit capability",
+        "Permission flags and ad hoc shell/process wrappers are not copied",
+        "UTC naming becomes the current local sortable naming contract",
+        "Malformed public raw lines become hash/length metadata with private originals retained",
+        "Requested effort is not actual effort proof",
+        "One assistant turn cap is forbidden",
+        "First decoded JSON fragment cannot override the final complete verdict"
+      ],
+      "category_operations": [
+        "Review/Prepare",
+        "Review/Launch",
+        "Review/Recover",
+        "Review/Assess"
+      ],
+      "native_service_candidates": [
+        "ReviewPrepareService",
+        "ReviewLaunchService",
+        "ReviewRecoverService",
+        "ReviewAssessService",
+        "OfficialPluginReviewAuditTransport",
+        "IProcessRunner",
+        "IProcessCaptureReader"
+      ],
+      "test_case_candidates": [
+        "ReviewCases: complete, automatic-output-continuation, model-mismatch, effort-mismatch, active, uncertain, split-json, partial-json",
+        "ReviewSafetyCases: tampered-frozen-evidence, missing-model, missing-effort, duplicate-launch, hidden-excluded, malformed-stream",
+        "ReviewRecoveryCases: terminal-continuation, completed-adoption, uncertain-prefix, context-resume",
+        "ReviewPrivacyCases: malformed-hidden-fragment, nested-hidden-delta",
+        "ReviewFinalFragmentCases: progress-before-verdict, split-json-after-progress, latest-disagree-dominates, cut-off-after-agree"
+      ],
+      "parity": "Pending source-assertion equivalence; shared successor services are not 20 independently proven ports",
+      "remaining_unique_assertions": [
+        "Exact historical request/process/completion artifact fields and write-new collision behavior need explicit source-level assertion mapping",
+        "Incremental event flush/crash provenance needs exact source-to-native lifecycle coverage",
+        "Historical terminal report_complete/sentinel distinctions need explicit current-rule disposition",
+        "Actual official purpose/runtime binding and reviewer-own persisted audit remain open",
+        "Current-source fresh-host full normal gate and later post-Ready HV remain required"
+      ],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "retirement_waiver": false
+    },
+    {
+      "legacy_path": "remediation/reviews/round-016/packet-04/capture.py",
+      "sha256": "eeb0819166b20ac767c7f2c75c7d34522d2e8eee75f85df06c0d0a7b233f0606",
+      "owner": "Review",
+      "source_read": "full-body-read-only",
+      "legacy_executed": false,
+      "original_retained": true,
+      "role": "Historical per-packet native CLI request, process, visible stream and report capture procedure",
+      "protocol_family": "one-turn-json-report",
+      "output_artifacts": [
+        "request.jsonl",
+        "process.json",
+        "stderr.txt",
+        "response.visible.jsonl",
+        "review-report.txt",
+        "completion.json",
+        "review-report.json"
+      ],
+      "unique_body_delta": "Directory and packet/pass label only within this verified protocol family",
+      "preserved_responsibilities": [
+        "Prompt and input-manifest hashes in request receipt",
+        "CLI invocation/version and runtime model observations",
+        "Exclusive new stderr and visible-stream artifacts",
+        "Incremental visible report accumulation",
+        "Hidden thinking blocks excluded from public stream",
+        "Terminal process/response/report provenance retained"
+      ],
+      "family_specific_responsibilities": "JSON report extraction and explicit report_complete property",
+      "superseded_or_strengthened_rules": [
+        "Python subprocess becomes the shared native IProcessRunner with pinned tool identity",
+        "Hardcoded Fable 5.1/max becomes explicitly required Opus 5.5/xhigh with actual runtime metadata",
+        "Empty MCP config becomes scoped official reviewer-own MCP audit capability",
+        "Permission flags and ad hoc shell/process wrappers are not copied",
+        "UTC naming becomes the current local sortable naming contract",
+        "Malformed public raw lines become hash/length metadata with private originals retained",
+        "Requested effort is not actual effort proof",
+        "One assistant turn cap is forbidden",
+        "First decoded JSON fragment cannot override the final complete verdict"
+      ],
+      "category_operations": [
+        "Review/Prepare",
+        "Review/Launch",
+        "Review/Recover",
+        "Review/Assess"
+      ],
+      "native_service_candidates": [
+        "ReviewPrepareService",
+        "ReviewLaunchService",
+        "ReviewRecoverService",
+        "ReviewAssessService",
+        "OfficialPluginReviewAuditTransport",
+        "IProcessRunner",
+        "IProcessCaptureReader"
+      ],
+      "test_case_candidates": [
+        "ReviewCases: complete, automatic-output-continuation, model-mismatch, effort-mismatch, active, uncertain, split-json, partial-json",
+        "ReviewSafetyCases: tampered-frozen-evidence, missing-model, missing-effort, duplicate-launch, hidden-excluded, malformed-stream",
+        "ReviewRecoveryCases: terminal-continuation, completed-adoption, uncertain-prefix, context-resume",
+        "ReviewPrivacyCases: malformed-hidden-fragment, nested-hidden-delta",
+        "ReviewFinalFragmentCases: progress-before-verdict, split-json-after-progress, latest-disagree-dominates, cut-off-after-agree"
+      ],
+      "parity": "Pending source-assertion equivalence; shared successor services are not 20 independently proven ports",
+      "remaining_unique_assertions": [
+        "Exact historical request/process/completion artifact fields and write-new collision behavior need explicit source-level assertion mapping",
+        "Incremental event flush/crash provenance needs exact source-to-native lifecycle coverage",
+        "Historical terminal report_complete/sentinel distinctions need explicit current-rule disposition",
+        "Actual official purpose/runtime binding and reviewer-own persisted audit remain open",
+        "Current-source fresh-host full normal gate and later post-Ready HV remain required"
+      ],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "retirement_waiver": false
+    },
+    {
+      "legacy_path": "remediation/reviews/round-017/packet-01/capture.py",
+      "sha256": "9b1607ffd6fb5f906db902c8b027ae836543c9be22d4a386d02877d06e220071",
+      "owner": "Review",
+      "source_read": "full-body-read-only",
+      "legacy_executed": false,
+      "original_retained": true,
+      "role": "Historical per-packet native CLI request, process, visible stream and report capture procedure",
+      "protocol_family": "one-turn-json-report",
+      "output_artifacts": [
+        "request.jsonl",
+        "process.json",
+        "stderr.txt",
+        "response.visible.jsonl",
+        "review-report.txt",
+        "completion.json",
+        "review-report.json"
+      ],
+      "unique_body_delta": "Directory and packet/pass label only within this verified protocol family",
+      "preserved_responsibilities": [
+        "Prompt and input-manifest hashes in request receipt",
+        "CLI invocation/version and runtime model observations",
+        "Exclusive new stderr and visible-stream artifacts",
+        "Incremental visible report accumulation",
+        "Hidden thinking blocks excluded from public stream",
+        "Terminal process/response/report provenance retained"
+      ],
+      "family_specific_responsibilities": "JSON report extraction and explicit report_complete property",
+      "superseded_or_strengthened_rules": [
+        "Python subprocess becomes the shared native IProcessRunner with pinned tool identity",
+        "Hardcoded Fable 5.1/max becomes explicitly required Opus 5.5/xhigh with actual runtime metadata",
+        "Empty MCP config becomes scoped official reviewer-own MCP audit capability",
+        "Permission flags and ad hoc shell/process wrappers are not copied",
+        "UTC naming becomes the current local sortable naming contract",
+        "Malformed public raw lines become hash/length metadata with private originals retained",
+        "Requested effort is not actual effort proof",
+        "One assistant turn cap is forbidden",
+        "First decoded JSON fragment cannot override the final complete verdict"
+      ],
+      "category_operations": [
+        "Review/Prepare",
+        "Review/Launch",
+        "Review/Recover",
+        "Review/Assess"
+      ],
+      "native_service_candidates": [
+        "ReviewPrepareService",
+        "ReviewLaunchService",
+        "ReviewRecoverService",
+        "ReviewAssessService",
+        "OfficialPluginReviewAuditTransport",
+        "IProcessRunner",
+        "IProcessCaptureReader"
+      ],
+      "test_case_candidates": [
+        "ReviewCases: complete, automatic-output-continuation, model-mismatch, effort-mismatch, active, uncertain, split-json, partial-json",
+        "ReviewSafetyCases: tampered-frozen-evidence, missing-model, missing-effort, duplicate-launch, hidden-excluded, malformed-stream",
+        "ReviewRecoveryCases: terminal-continuation, completed-adoption, uncertain-prefix, context-resume",
+        "ReviewPrivacyCases: malformed-hidden-fragment, nested-hidden-delta",
+        "ReviewFinalFragmentCases: progress-before-verdict, split-json-after-progress, latest-disagree-dominates, cut-off-after-agree"
+      ],
+      "parity": "Pending source-assertion equivalence; shared successor services are not 20 independently proven ports",
+      "remaining_unique_assertions": [
+        "Exact historical request/process/completion artifact fields and write-new collision behavior need explicit source-level assertion mapping",
+        "Incremental event flush/crash provenance needs exact source-to-native lifecycle coverage",
+        "Historical terminal report_complete/sentinel distinctions need explicit current-rule disposition",
+        "Actual official purpose/runtime binding and reviewer-own persisted audit remain open",
+        "Current-source fresh-host full normal gate and later post-Ready HV remain required"
+      ],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "retirement_waiver": false
+    },
+    {
+      "legacy_path": "remediation/reviews/round-017/packet-02/capture.py",
+      "sha256": "801e2d36f82ddf6ac0245568350ef5dae7353ba5e96a047dace58158094c9591",
+      "owner": "Review",
+      "source_read": "full-body-read-only",
+      "legacy_executed": false,
+      "original_retained": true,
+      "role": "Historical per-packet native CLI request, process, visible stream and report capture procedure",
+      "protocol_family": "one-turn-json-report",
+      "output_artifacts": [
+        "request.jsonl",
+        "process.json",
+        "stderr.txt",
+        "response.visible.jsonl",
+        "review-report.txt",
+        "completion.json",
+        "review-report.json"
+      ],
+      "unique_body_delta": "Directory and packet/pass label only within this verified protocol family",
+      "preserved_responsibilities": [
+        "Prompt and input-manifest hashes in request receipt",
+        "CLI invocation/version and runtime model observations",
+        "Exclusive new stderr and visible-stream artifacts",
+        "Incremental visible report accumulation",
+        "Hidden thinking blocks excluded from public stream",
+        "Terminal process/response/report provenance retained"
+      ],
+      "family_specific_responsibilities": "JSON report extraction and explicit report_complete property",
+      "superseded_or_strengthened_rules": [
+        "Python subprocess becomes the shared native IProcessRunner with pinned tool identity",
+        "Hardcoded Fable 5.1/max becomes explicitly required Opus 5.5/xhigh with actual runtime metadata",
+        "Empty MCP config becomes scoped official reviewer-own MCP audit capability",
+        "Permission flags and ad hoc shell/process wrappers are not copied",
+        "UTC naming becomes the current local sortable naming contract",
+        "Malformed public raw lines become hash/length metadata with private originals retained",
+        "Requested effort is not actual effort proof",
+        "One assistant turn cap is forbidden",
+        "First decoded JSON fragment cannot override the final complete verdict"
+      ],
+      "category_operations": [
+        "Review/Prepare",
+        "Review/Launch",
+        "Review/Recover",
+        "Review/Assess"
+      ],
+      "native_service_candidates": [
+        "ReviewPrepareService",
+        "ReviewLaunchService",
+        "ReviewRecoverService",
+        "ReviewAssessService",
+        "OfficialPluginReviewAuditTransport",
+        "IProcessRunner",
+        "IProcessCaptureReader"
+      ],
+      "test_case_candidates": [
+        "ReviewCases: complete, automatic-output-continuation, model-mismatch, effort-mismatch, active, uncertain, split-json, partial-json",
+        "ReviewSafetyCases: tampered-frozen-evidence, missing-model, missing-effort, duplicate-launch, hidden-excluded, malformed-stream",
+        "ReviewRecoveryCases: terminal-continuation, completed-adoption, uncertain-prefix, context-resume",
+        "ReviewPrivacyCases: malformed-hidden-fragment, nested-hidden-delta",
+        "ReviewFinalFragmentCases: progress-before-verdict, split-json-after-progress, latest-disagree-dominates, cut-off-after-agree"
+      ],
+      "parity": "Pending source-assertion equivalence; shared successor services are not 20 independently proven ports",
+      "remaining_unique_assertions": [
+        "Exact historical request/process/completion artifact fields and write-new collision behavior need explicit source-level assertion mapping",
+        "Incremental event flush/crash provenance needs exact source-to-native lifecycle coverage",
+        "Historical terminal report_complete/sentinel distinctions need explicit current-rule disposition",
+        "Actual official purpose/runtime binding and reviewer-own persisted audit remain open",
+        "Current-source fresh-host full normal gate and later post-Ready HV remain required"
+      ],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "retirement_waiver": false
+    },
+    {
+      "legacy_path": "remediation/reviews/round-018/core-section-01/capture.py",
+      "sha256": "556ed433d145212bca72bd90ea2093b407a4890cdbba2589cdbe3a3c751722cb",
+      "owner": "Review",
+      "source_read": "full-body-read-only",
+      "legacy_executed": false,
+      "original_retained": true,
+      "role": "Historical per-packet native CLI request, process, visible stream and report capture procedure",
+      "protocol_family": "one-turn-json-report",
+      "output_artifacts": [
+        "request.jsonl",
+        "process.json",
+        "stderr.txt",
+        "response.visible.jsonl",
+        "review-report.txt",
+        "completion.json",
+        "review-report.json"
+      ],
+      "unique_body_delta": "Directory and packet/pass label only within this verified protocol family",
+      "preserved_responsibilities": [
+        "Prompt and input-manifest hashes in request receipt",
+        "CLI invocation/version and runtime model observations",
+        "Exclusive new stderr and visible-stream artifacts",
+        "Incremental visible report accumulation",
+        "Hidden thinking blocks excluded from public stream",
+        "Terminal process/response/report provenance retained"
+      ],
+      "family_specific_responsibilities": "JSON report extraction and explicit report_complete property",
+      "superseded_or_strengthened_rules": [
+        "Python subprocess becomes the shared native IProcessRunner with pinned tool identity",
+        "Hardcoded Fable 5.1/max becomes explicitly required Opus 5.5/xhigh with actual runtime metadata",
+        "Empty MCP config becomes scoped official reviewer-own MCP audit capability",
+        "Permission flags and ad hoc shell/process wrappers are not copied",
+        "UTC naming becomes the current local sortable naming contract",
+        "Malformed public raw lines become hash/length metadata with private originals retained",
+        "Requested effort is not actual effort proof",
+        "One assistant turn cap is forbidden",
+        "First decoded JSON fragment cannot override the final complete verdict"
+      ],
+      "category_operations": [
+        "Review/Prepare",
+        "Review/Launch",
+        "Review/Recover",
+        "Review/Assess"
+      ],
+      "native_service_candidates": [
+        "ReviewPrepareService",
+        "ReviewLaunchService",
+        "ReviewRecoverService",
+        "ReviewAssessService",
+        "OfficialPluginReviewAuditTransport",
+        "IProcessRunner",
+        "IProcessCaptureReader"
+      ],
+      "test_case_candidates": [
+        "ReviewCases: complete, automatic-output-continuation, model-mismatch, effort-mismatch, active, uncertain, split-json, partial-json",
+        "ReviewSafetyCases: tampered-frozen-evidence, missing-model, missing-effort, duplicate-launch, hidden-excluded, malformed-stream",
+        "ReviewRecoveryCases: terminal-continuation, completed-adoption, uncertain-prefix, context-resume",
+        "ReviewPrivacyCases: malformed-hidden-fragment, nested-hidden-delta",
+        "ReviewFinalFragmentCases: progress-before-verdict, split-json-after-progress, latest-disagree-dominates, cut-off-after-agree"
+      ],
+      "parity": "Pending source-assertion equivalence; shared successor services are not 20 independently proven ports",
+      "remaining_unique_assertions": [
+        "Exact historical request/process/completion artifact fields and write-new collision behavior need explicit source-level assertion mapping",
+        "Incremental event flush/crash provenance needs exact source-to-native lifecycle coverage",
+        "Historical terminal report_complete/sentinel distinctions need explicit current-rule disposition",
+        "Actual official purpose/runtime binding and reviewer-own persisted audit remain open",
+        "Current-source fresh-host full normal gate and later post-Ready HV remain required"
+      ],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "retirement_waiver": false
+    },
+    {
+      "legacy_path": "remediation/reviews/round-018/core-section-02/capture.py",
+      "sha256": "4e404749a58ba1d195308893b2c7d4d1a331ae311693d59229bf1bb58095571d",
+      "owner": "Review",
+      "source_read": "full-body-read-only",
+      "legacy_executed": false,
+      "original_retained": true,
+      "role": "Historical per-packet native CLI request, process, visible stream and report capture procedure",
+      "protocol_family": "one-turn-json-report",
+      "output_artifacts": [
+        "request.jsonl",
+        "process.json",
+        "stderr.txt",
+        "response.visible.jsonl",
+        "review-report.txt",
+        "completion.json",
+        "review-report.json"
+      ],
+      "unique_body_delta": "Directory and packet/pass label only within this verified protocol family",
+      "preserved_responsibilities": [
+        "Prompt and input-manifest hashes in request receipt",
+        "CLI invocation/version and runtime model observations",
+        "Exclusive new stderr and visible-stream artifacts",
+        "Incremental visible report accumulation",
+        "Hidden thinking blocks excluded from public stream",
+        "Terminal process/response/report provenance retained"
+      ],
+      "family_specific_responsibilities": "JSON report extraction and explicit report_complete property",
+      "superseded_or_strengthened_rules": [
+        "Python subprocess becomes the shared native IProcessRunner with pinned tool identity",
+        "Hardcoded Fable 5.1/max becomes explicitly required Opus 5.5/xhigh with actual runtime metadata",
+        "Empty MCP config becomes scoped official reviewer-own MCP audit capability",
+        "Permission flags and ad hoc shell/process wrappers are not copied",
+        "UTC naming becomes the current local sortable naming contract",
+        "Malformed public raw lines become hash/length metadata with private originals retained",
+        "Requested effort is not actual effort proof",
+        "One assistant turn cap is forbidden",
+        "First decoded JSON fragment cannot override the final complete verdict"
+      ],
+      "category_operations": [
+        "Review/Prepare",
+        "Review/Launch",
+        "Review/Recover",
+        "Review/Assess"
+      ],
+      "native_service_candidates": [
+        "ReviewPrepareService",
+        "ReviewLaunchService",
+        "ReviewRecoverService",
+        "ReviewAssessService",
+        "OfficialPluginReviewAuditTransport",
+        "IProcessRunner",
+        "IProcessCaptureReader"
+      ],
+      "test_case_candidates": [
+        "ReviewCases: complete, automatic-output-continuation, model-mismatch, effort-mismatch, active, uncertain, split-json, partial-json",
+        "ReviewSafetyCases: tampered-frozen-evidence, missing-model, missing-effort, duplicate-launch, hidden-excluded, malformed-stream",
+        "ReviewRecoveryCases: terminal-continuation, completed-adoption, uncertain-prefix, context-resume",
+        "ReviewPrivacyCases: malformed-hidden-fragment, nested-hidden-delta",
+        "ReviewFinalFragmentCases: progress-before-verdict, split-json-after-progress, latest-disagree-dominates, cut-off-after-agree"
+      ],
+      "parity": "Pending source-assertion equivalence; shared successor services are not 20 independently proven ports",
+      "remaining_unique_assertions": [
+        "Exact historical request/process/completion artifact fields and write-new collision behavior need explicit source-level assertion mapping",
+        "Incremental event flush/crash provenance needs exact source-to-native lifecycle coverage",
+        "Historical terminal report_complete/sentinel distinctions need explicit current-rule disposition",
+        "Actual official purpose/runtime binding and reviewer-own persisted audit remain open",
+        "Current-source fresh-host full normal gate and later post-Ready HV remain required"
+      ],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "retirement_waiver": false
+    },
+    {
+      "legacy_path": "remediation/reviews/round-018/core-section-03/capture.py",
+      "sha256": "cebde90bd1adb8518bd7a4c9e2851b639561dc61220bb6916ad6415bfef841b0",
+      "owner": "Review",
+      "source_read": "full-body-read-only",
+      "legacy_executed": false,
+      "original_retained": true,
+      "role": "Historical per-packet native CLI request, process, visible stream and report capture procedure",
+      "protocol_family": "one-turn-json-report",
+      "output_artifacts": [
+        "request.jsonl",
+        "process.json",
+        "stderr.txt",
+        "response.visible.jsonl",
+        "review-report.txt",
+        "completion.json",
+        "review-report.json"
+      ],
+      "unique_body_delta": "Directory and packet/pass label only within this verified protocol family",
+      "preserved_responsibilities": [
+        "Prompt and input-manifest hashes in request receipt",
+        "CLI invocation/version and runtime model observations",
+        "Exclusive new stderr and visible-stream artifacts",
+        "Incremental visible report accumulation",
+        "Hidden thinking blocks excluded from public stream",
+        "Terminal process/response/report provenance retained"
+      ],
+      "family_specific_responsibilities": "JSON report extraction and explicit report_complete property",
+      "superseded_or_strengthened_rules": [
+        "Python subprocess becomes the shared native IProcessRunner with pinned tool identity",
+        "Hardcoded Fable 5.1/max becomes explicitly required Opus 5.5/xhigh with actual runtime metadata",
+        "Empty MCP config becomes scoped official reviewer-own MCP audit capability",
+        "Permission flags and ad hoc shell/process wrappers are not copied",
+        "UTC naming becomes the current local sortable naming contract",
+        "Malformed public raw lines become hash/length metadata with private originals retained",
+        "Requested effort is not actual effort proof",
+        "One assistant turn cap is forbidden",
+        "First decoded JSON fragment cannot override the final complete verdict"
+      ],
+      "category_operations": [
+        "Review/Prepare",
+        "Review/Launch",
+        "Review/Recover",
+        "Review/Assess"
+      ],
+      "native_service_candidates": [
+        "ReviewPrepareService",
+        "ReviewLaunchService",
+        "ReviewRecoverService",
+        "ReviewAssessService",
+        "OfficialPluginReviewAuditTransport",
+        "IProcessRunner",
+        "IProcessCaptureReader"
+      ],
+      "test_case_candidates": [
+        "ReviewCases: complete, automatic-output-continuation, model-mismatch, effort-mismatch, active, uncertain, split-json, partial-json",
+        "ReviewSafetyCases: tampered-frozen-evidence, missing-model, missing-effort, duplicate-launch, hidden-excluded, malformed-stream",
+        "ReviewRecoveryCases: terminal-continuation, completed-adoption, uncertain-prefix, context-resume",
+        "ReviewPrivacyCases: malformed-hidden-fragment, nested-hidden-delta",
+        "ReviewFinalFragmentCases: progress-before-verdict, split-json-after-progress, latest-disagree-dominates, cut-off-after-agree"
+      ],
+      "parity": "Pending source-assertion equivalence; shared successor services are not 20 independently proven ports",
+      "remaining_unique_assertions": [
+        "Exact historical request/process/completion artifact fields and write-new collision behavior need explicit source-level assertion mapping",
+        "Incremental event flush/crash provenance needs exact source-to-native lifecycle coverage",
+        "Historical terminal report_complete/sentinel distinctions need explicit current-rule disposition",
+        "Actual official purpose/runtime binding and reviewer-own persisted audit remain open",
+        "Current-source fresh-host full normal gate and later post-Ready HV remain required"
+      ],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "retirement_waiver": false
+    },
+    {
+      "legacy_path": "remediation/reviews/round-018/core-section-04/capture.py",
+      "sha256": "fd950c310855e53f6a1f7f61de3924cba189a1affdaa50e5067ecb1c89a94878",
+      "owner": "Review",
+      "source_read": "full-body-read-only",
+      "legacy_executed": false,
+      "original_retained": true,
+      "role": "Historical per-packet native CLI request, process, visible stream and report capture procedure",
+      "protocol_family": "one-turn-json-report",
+      "output_artifacts": [
+        "request.jsonl",
+        "process.json",
+        "stderr.txt",
+        "response.visible.jsonl",
+        "review-report.txt",
+        "completion.json",
+        "review-report.json"
+      ],
+      "unique_body_delta": "Directory and packet/pass label only within this verified protocol family",
+      "preserved_responsibilities": [
+        "Prompt and input-manifest hashes in request receipt",
+        "CLI invocation/version and runtime model observations",
+        "Exclusive new stderr and visible-stream artifacts",
+        "Incremental visible report accumulation",
+        "Hidden thinking blocks excluded from public stream",
+        "Terminal process/response/report provenance retained"
+      ],
+      "family_specific_responsibilities": "JSON report extraction and explicit report_complete property",
+      "superseded_or_strengthened_rules": [
+        "Python subprocess becomes the shared native IProcessRunner with pinned tool identity",
+        "Hardcoded Fable 5.1/max becomes explicitly required Opus 5.5/xhigh with actual runtime metadata",
+        "Empty MCP config becomes scoped official reviewer-own MCP audit capability",
+        "Permission flags and ad hoc shell/process wrappers are not copied",
+        "UTC naming becomes the current local sortable naming contract",
+        "Malformed public raw lines become hash/length metadata with private originals retained",
+        "Requested effort is not actual effort proof",
+        "One assistant turn cap is forbidden",
+        "First decoded JSON fragment cannot override the final complete verdict"
+      ],
+      "category_operations": [
+        "Review/Prepare",
+        "Review/Launch",
+        "Review/Recover",
+        "Review/Assess"
+      ],
+      "native_service_candidates": [
+        "ReviewPrepareService",
+        "ReviewLaunchService",
+        "ReviewRecoverService",
+        "ReviewAssessService",
+        "OfficialPluginReviewAuditTransport",
+        "IProcessRunner",
+        "IProcessCaptureReader"
+      ],
+      "test_case_candidates": [
+        "ReviewCases: complete, automatic-output-continuation, model-mismatch, effort-mismatch, active, uncertain, split-json, partial-json",
+        "ReviewSafetyCases: tampered-frozen-evidence, missing-model, missing-effort, duplicate-launch, hidden-excluded, malformed-stream",
+        "ReviewRecoveryCases: terminal-continuation, completed-adoption, uncertain-prefix, context-resume",
+        "ReviewPrivacyCases: malformed-hidden-fragment, nested-hidden-delta",
+        "ReviewFinalFragmentCases: progress-before-verdict, split-json-after-progress, latest-disagree-dominates, cut-off-after-agree"
+      ],
+      "parity": "Pending source-assertion equivalence; shared successor services are not 20 independently proven ports",
+      "remaining_unique_assertions": [
+        "Exact historical request/process/completion artifact fields and write-new collision behavior need explicit source-level assertion mapping",
+        "Incremental event flush/crash provenance needs exact source-to-native lifecycle coverage",
+        "Historical terminal report_complete/sentinel distinctions need explicit current-rule disposition",
+        "Actual official purpose/runtime binding and reviewer-own persisted audit remain open",
+        "Current-source fresh-host full normal gate and later post-Ready HV remain required"
+      ],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "retirement_waiver": false
+    },
+    {
+      "legacy_path": "remediation/reviews/round-018/core-section-05/capture.py",
+      "sha256": "4a81ac01dca89e338acdda25c98ea7581b24535b5d6ed0eb9311497c2eec7643",
+      "owner": "Review",
+      "source_read": "full-body-read-only",
+      "legacy_executed": false,
+      "original_retained": true,
+      "role": "Historical per-packet native CLI request, process, visible stream and report capture procedure",
+      "protocol_family": "one-turn-json-report",
+      "output_artifacts": [
+        "request.jsonl",
+        "process.json",
+        "stderr.txt",
+        "response.visible.jsonl",
+        "review-report.txt",
+        "completion.json",
+        "review-report.json"
+      ],
+      "unique_body_delta": "Directory and packet/pass label only within this verified protocol family",
+      "preserved_responsibilities": [
+        "Prompt and input-manifest hashes in request receipt",
+        "CLI invocation/version and runtime model observations",
+        "Exclusive new stderr and visible-stream artifacts",
+        "Incremental visible report accumulation",
+        "Hidden thinking blocks excluded from public stream",
+        "Terminal process/response/report provenance retained"
+      ],
+      "family_specific_responsibilities": "JSON report extraction and explicit report_complete property",
+      "superseded_or_strengthened_rules": [
+        "Python subprocess becomes the shared native IProcessRunner with pinned tool identity",
+        "Hardcoded Fable 5.1/max becomes explicitly required Opus 5.5/xhigh with actual runtime metadata",
+        "Empty MCP config becomes scoped official reviewer-own MCP audit capability",
+        "Permission flags and ad hoc shell/process wrappers are not copied",
+        "UTC naming becomes the current local sortable naming contract",
+        "Malformed public raw lines become hash/length metadata with private originals retained",
+        "Requested effort is not actual effort proof",
+        "One assistant turn cap is forbidden",
+        "First decoded JSON fragment cannot override the final complete verdict"
+      ],
+      "category_operations": [
+        "Review/Prepare",
+        "Review/Launch",
+        "Review/Recover",
+        "Review/Assess"
+      ],
+      "native_service_candidates": [
+        "ReviewPrepareService",
+        "ReviewLaunchService",
+        "ReviewRecoverService",
+        "ReviewAssessService",
+        "OfficialPluginReviewAuditTransport",
+        "IProcessRunner",
+        "IProcessCaptureReader"
+      ],
+      "test_case_candidates": [
+        "ReviewCases: complete, automatic-output-continuation, model-mismatch, effort-mismatch, active, uncertain, split-json, partial-json",
+        "ReviewSafetyCases: tampered-frozen-evidence, missing-model, missing-effort, duplicate-launch, hidden-excluded, malformed-stream",
+        "ReviewRecoveryCases: terminal-continuation, completed-adoption, uncertain-prefix, context-resume",
+        "ReviewPrivacyCases: malformed-hidden-fragment, nested-hidden-delta",
+        "ReviewFinalFragmentCases: progress-before-verdict, split-json-after-progress, latest-disagree-dominates, cut-off-after-agree"
+      ],
+      "parity": "Pending source-assertion equivalence; shared successor services are not 20 independently proven ports",
+      "remaining_unique_assertions": [
+        "Exact historical request/process/completion artifact fields and write-new collision behavior need explicit source-level assertion mapping",
+        "Incremental event flush/crash provenance needs exact source-to-native lifecycle coverage",
+        "Historical terminal report_complete/sentinel distinctions need explicit current-rule disposition",
+        "Actual official purpose/runtime binding and reviewer-own persisted audit remain open",
+        "Current-source fresh-host full normal gate and later post-Ready HV remain required"
+      ],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "retirement_waiver": false
+    },
+    {
+      "legacy_path": "remediation/reviews/round-018/core-section-06/capture.py",
+      "sha256": "c132dadba024099fff64c166de345f387e5e542feced5cdcb656bcdb22c5a13d",
+      "owner": "Review",
+      "source_read": "full-body-read-only",
+      "legacy_executed": false,
+      "original_retained": true,
+      "role": "Historical per-packet native CLI request, process, visible stream and report capture procedure",
+      "protocol_family": "one-turn-json-report",
+      "output_artifacts": [
+        "request.jsonl",
+        "process.json",
+        "stderr.txt",
+        "response.visible.jsonl",
+        "review-report.txt",
+        "completion.json",
+        "review-report.json"
+      ],
+      "unique_body_delta": "Directory and packet/pass label only within this verified protocol family",
+      "preserved_responsibilities": [
+        "Prompt and input-manifest hashes in request receipt",
+        "CLI invocation/version and runtime model observations",
+        "Exclusive new stderr and visible-stream artifacts",
+        "Incremental visible report accumulation",
+        "Hidden thinking blocks excluded from public stream",
+        "Terminal process/response/report provenance retained"
+      ],
+      "family_specific_responsibilities": "JSON report extraction and explicit report_complete property",
+      "superseded_or_strengthened_rules": [
+        "Python subprocess becomes the shared native IProcessRunner with pinned tool identity",
+        "Hardcoded Fable 5.1/max becomes explicitly required Opus 5.5/xhigh with actual runtime metadata",
+        "Empty MCP config becomes scoped official reviewer-own MCP audit capability",
+        "Permission flags and ad hoc shell/process wrappers are not copied",
+        "UTC naming becomes the current local sortable naming contract",
+        "Malformed public raw lines become hash/length metadata with private originals retained",
+        "Requested effort is not actual effort proof",
+        "One assistant turn cap is forbidden",
+        "First decoded JSON fragment cannot override the final complete verdict"
+      ],
+      "category_operations": [
+        "Review/Prepare",
+        "Review/Launch",
+        "Review/Recover",
+        "Review/Assess"
+      ],
+      "native_service_candidates": [
+        "ReviewPrepareService",
+        "ReviewLaunchService",
+        "ReviewRecoverService",
+        "ReviewAssessService",
+        "OfficialPluginReviewAuditTransport",
+        "IProcessRunner",
+        "IProcessCaptureReader"
+      ],
+      "test_case_candidates": [
+        "ReviewCases: complete, automatic-output-continuation, model-mismatch, effort-mismatch, active, uncertain, split-json, partial-json",
+        "ReviewSafetyCases: tampered-frozen-evidence, missing-model, missing-effort, duplicate-launch, hidden-excluded, malformed-stream",
+        "ReviewRecoveryCases: terminal-continuation, completed-adoption, uncertain-prefix, context-resume",
+        "ReviewPrivacyCases: malformed-hidden-fragment, nested-hidden-delta",
+        "ReviewFinalFragmentCases: progress-before-verdict, split-json-after-progress, latest-disagree-dominates, cut-off-after-agree"
+      ],
+      "parity": "Pending source-assertion equivalence; shared successor services are not 20 independently proven ports",
+      "remaining_unique_assertions": [
+        "Exact historical request/process/completion artifact fields and write-new collision behavior need explicit source-level assertion mapping",
+        "Incremental event flush/crash provenance needs exact source-to-native lifecycle coverage",
+        "Historical terminal report_complete/sentinel distinctions need explicit current-rule disposition",
+        "Actual official purpose/runtime binding and reviewer-own persisted audit remain open",
+        "Current-source fresh-host full normal gate and later post-Ready HV remain required"
+      ],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "retirement_waiver": false
+    },
+    {
+      "legacy_path": "remediation/reviews/round-018/core-section-07/capture.py",
+      "sha256": "271256d9277b045d5a0803ef33ebaa2dc80e084146b619f50a7796eec565a462",
+      "owner": "Review",
+      "source_read": "full-body-read-only",
+      "legacy_executed": false,
+      "original_retained": true,
+      "role": "Historical per-packet native CLI request, process, visible stream and report capture procedure",
+      "protocol_family": "one-turn-json-report",
+      "output_artifacts": [
+        "request.jsonl",
+        "process.json",
+        "stderr.txt",
+        "response.visible.jsonl",
+        "review-report.txt",
+        "completion.json",
+        "review-report.json"
+      ],
+      "unique_body_delta": "Directory and packet/pass label only within this verified protocol family",
+      "preserved_responsibilities": [
+        "Prompt and input-manifest hashes in request receipt",
+        "CLI invocation/version and runtime model observations",
+        "Exclusive new stderr and visible-stream artifacts",
+        "Incremental visible report accumulation",
+        "Hidden thinking blocks excluded from public stream",
+        "Terminal process/response/report provenance retained"
+      ],
+      "family_specific_responsibilities": "JSON report extraction and explicit report_complete property",
+      "superseded_or_strengthened_rules": [
+        "Python subprocess becomes the shared native IProcessRunner with pinned tool identity",
+        "Hardcoded Fable 5.1/max becomes explicitly required Opus 5.5/xhigh with actual runtime metadata",
+        "Empty MCP config becomes scoped official reviewer-own MCP audit capability",
+        "Permission flags and ad hoc shell/process wrappers are not copied",
+        "UTC naming becomes the current local sortable naming contract",
+        "Malformed public raw lines become hash/length metadata with private originals retained",
+        "Requested effort is not actual effort proof",
+        "One assistant turn cap is forbidden",
+        "First decoded JSON fragment cannot override the final complete verdict"
+      ],
+      "category_operations": [
+        "Review/Prepare",
+        "Review/Launch",
+        "Review/Recover",
+        "Review/Assess"
+      ],
+      "native_service_candidates": [
+        "ReviewPrepareService",
+        "ReviewLaunchService",
+        "ReviewRecoverService",
+        "ReviewAssessService",
+        "OfficialPluginReviewAuditTransport",
+        "IProcessRunner",
+        "IProcessCaptureReader"
+      ],
+      "test_case_candidates": [
+        "ReviewCases: complete, automatic-output-continuation, model-mismatch, effort-mismatch, active, uncertain, split-json, partial-json",
+        "ReviewSafetyCases: tampered-frozen-evidence, missing-model, missing-effort, duplicate-launch, hidden-excluded, malformed-stream",
+        "ReviewRecoveryCases: terminal-continuation, completed-adoption, uncertain-prefix, context-resume",
+        "ReviewPrivacyCases: malformed-hidden-fragment, nested-hidden-delta",
+        "ReviewFinalFragmentCases: progress-before-verdict, split-json-after-progress, latest-disagree-dominates, cut-off-after-agree"
+      ],
+      "parity": "Pending source-assertion equivalence; shared successor services are not 20 independently proven ports",
+      "remaining_unique_assertions": [
+        "Exact historical request/process/completion artifact fields and write-new collision behavior need explicit source-level assertion mapping",
+        "Incremental event flush/crash provenance needs exact source-to-native lifecycle coverage",
+        "Historical terminal report_complete/sentinel distinctions need explicit current-rule disposition",
+        "Actual official purpose/runtime binding and reviewer-own persisted audit remain open",
+        "Current-source fresh-host full normal gate and later post-Ready HV remain required"
+      ],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "retirement_waiver": false
+    },
+    {
+      "legacy_path": "remediation/reviews/round-018/pass-01/capture.py",
+      "sha256": "ebd748f299899c64e4533eba563030a9aaeb9a60d8b7d2068a4f6ae3712f0f5d",
+      "owner": "Review",
+      "source_read": "full-body-read-only",
+      "legacy_executed": false,
+      "original_retained": true,
+      "role": "Historical per-packet native CLI request, process, visible stream and report capture procedure",
+      "protocol_family": "one-turn-json-report",
+      "output_artifacts": [
+        "request.jsonl",
+        "process.json",
+        "stderr.txt",
+        "response.visible.jsonl",
+        "review-report.txt",
+        "completion.json",
+        "review-report.json"
+      ],
+      "unique_body_delta": "Directory and packet/pass label only within this verified protocol family",
+      "preserved_responsibilities": [
+        "Prompt and input-manifest hashes in request receipt",
+        "CLI invocation/version and runtime model observations",
+        "Exclusive new stderr and visible-stream artifacts",
+        "Incremental visible report accumulation",
+        "Hidden thinking blocks excluded from public stream",
+        "Terminal process/response/report provenance retained"
+      ],
+      "family_specific_responsibilities": "JSON report extraction and explicit report_complete property",
+      "superseded_or_strengthened_rules": [
+        "Python subprocess becomes the shared native IProcessRunner with pinned tool identity",
+        "Hardcoded Fable 5.1/max becomes explicitly required Opus 5.5/xhigh with actual runtime metadata",
+        "Empty MCP config becomes scoped official reviewer-own MCP audit capability",
+        "Permission flags and ad hoc shell/process wrappers are not copied",
+        "UTC naming becomes the current local sortable naming contract",
+        "Malformed public raw lines become hash/length metadata with private originals retained",
+        "Requested effort is not actual effort proof",
+        "One assistant turn cap is forbidden",
+        "First decoded JSON fragment cannot override the final complete verdict"
+      ],
+      "category_operations": [
+        "Review/Prepare",
+        "Review/Launch",
+        "Review/Recover",
+        "Review/Assess"
+      ],
+      "native_service_candidates": [
+        "ReviewPrepareService",
+        "ReviewLaunchService",
+        "ReviewRecoverService",
+        "ReviewAssessService",
+        "OfficialPluginReviewAuditTransport",
+        "IProcessRunner",
+        "IProcessCaptureReader"
+      ],
+      "test_case_candidates": [
+        "ReviewCases: complete, automatic-output-continuation, model-mismatch, effort-mismatch, active, uncertain, split-json, partial-json",
+        "ReviewSafetyCases: tampered-frozen-evidence, missing-model, missing-effort, duplicate-launch, hidden-excluded, malformed-stream",
+        "ReviewRecoveryCases: terminal-continuation, completed-adoption, uncertain-prefix, context-resume",
+        "ReviewPrivacyCases: malformed-hidden-fragment, nested-hidden-delta",
+        "ReviewFinalFragmentCases: progress-before-verdict, split-json-after-progress, latest-disagree-dominates, cut-off-after-agree"
+      ],
+      "parity": "Pending source-assertion equivalence; shared successor services are not 20 independently proven ports",
+      "remaining_unique_assertions": [
+        "Exact historical request/process/completion artifact fields and write-new collision behavior need explicit source-level assertion mapping",
+        "Incremental event flush/crash provenance needs exact source-to-native lifecycle coverage",
+        "Historical terminal report_complete/sentinel distinctions need explicit current-rule disposition",
+        "Actual official purpose/runtime binding and reviewer-own persisted audit remain open",
+        "Current-source fresh-host full normal gate and later post-Ready HV remain required"
+      ],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "retirement_waiver": false
+    },
+    {
+      "legacy_path": "remediation/reviews/round-018/pass-02/capture.py",
+      "sha256": "d0849e2fcf186f90bc4efb8483afe66f8e3b35548524b75327a49ccba0757c12",
+      "owner": "Review",
+      "source_read": "full-body-read-only",
+      "legacy_executed": false,
+      "original_retained": true,
+      "role": "Historical per-packet native CLI request, process, visible stream and report capture procedure",
+      "protocol_family": "one-turn-json-report",
+      "output_artifacts": [
+        "request.jsonl",
+        "process.json",
+        "stderr.txt",
+        "response.visible.jsonl",
+        "review-report.txt",
+        "completion.json",
+        "review-report.json"
+      ],
+      "unique_body_delta": "Directory and packet/pass label only within this verified protocol family",
+      "preserved_responsibilities": [
+        "Prompt and input-manifest hashes in request receipt",
+        "CLI invocation/version and runtime model observations",
+        "Exclusive new stderr and visible-stream artifacts",
+        "Incremental visible report accumulation",
+        "Hidden thinking blocks excluded from public stream",
+        "Terminal process/response/report provenance retained"
+      ],
+      "family_specific_responsibilities": "JSON report extraction and explicit report_complete property",
+      "superseded_or_strengthened_rules": [
+        "Python subprocess becomes the shared native IProcessRunner with pinned tool identity",
+        "Hardcoded Fable 5.1/max becomes explicitly required Opus 5.5/xhigh with actual runtime metadata",
+        "Empty MCP config becomes scoped official reviewer-own MCP audit capability",
+        "Permission flags and ad hoc shell/process wrappers are not copied",
+        "UTC naming becomes the current local sortable naming contract",
+        "Malformed public raw lines become hash/length metadata with private originals retained",
+        "Requested effort is not actual effort proof",
+        "One assistant turn cap is forbidden",
+        "First decoded JSON fragment cannot override the final complete verdict"
+      ],
+      "category_operations": [
+        "Review/Prepare",
+        "Review/Launch",
+        "Review/Recover",
+        "Review/Assess"
+      ],
+      "native_service_candidates": [
+        "ReviewPrepareService",
+        "ReviewLaunchService",
+        "ReviewRecoverService",
+        "ReviewAssessService",
+        "OfficialPluginReviewAuditTransport",
+        "IProcessRunner",
+        "IProcessCaptureReader"
+      ],
+      "test_case_candidates": [
+        "ReviewCases: complete, automatic-output-continuation, model-mismatch, effort-mismatch, active, uncertain, split-json, partial-json",
+        "ReviewSafetyCases: tampered-frozen-evidence, missing-model, missing-effort, duplicate-launch, hidden-excluded, malformed-stream",
+        "ReviewRecoveryCases: terminal-continuation, completed-adoption, uncertain-prefix, context-resume",
+        "ReviewPrivacyCases: malformed-hidden-fragment, nested-hidden-delta",
+        "ReviewFinalFragmentCases: progress-before-verdict, split-json-after-progress, latest-disagree-dominates, cut-off-after-agree"
+      ],
+      "parity": "Pending source-assertion equivalence; shared successor services are not 20 independently proven ports",
+      "remaining_unique_assertions": [
+        "Exact historical request/process/completion artifact fields and write-new collision behavior need explicit source-level assertion mapping",
+        "Incremental event flush/crash provenance needs exact source-to-native lifecycle coverage",
+        "Historical terminal report_complete/sentinel distinctions need explicit current-rule disposition",
+        "Actual official purpose/runtime binding and reviewer-own persisted audit remain open",
+        "Current-source fresh-host full normal gate and later post-Ready HV remain required"
+      ],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "retirement_waiver": false
+    },
+    {
+      "legacy_path": "remediation/reviews/round-018/pass-03/capture.py",
+      "sha256": "f2aa3cb42bc000ae699db418194c106b6ad1cefcf656560b3b9436ed4893cc28",
+      "owner": "Review",
+      "source_read": "full-body-read-only",
+      "legacy_executed": false,
+      "original_retained": true,
+      "role": "Historical per-packet native CLI request, process, visible stream and report capture procedure",
+      "protocol_family": "one-turn-json-report",
+      "output_artifacts": [
+        "request.jsonl",
+        "process.json",
+        "stderr.txt",
+        "response.visible.jsonl",
+        "review-report.txt",
+        "completion.json",
+        "review-report.json"
+      ],
+      "unique_body_delta": "Directory and packet/pass label only within this verified protocol family",
+      "preserved_responsibilities": [
+        "Prompt and input-manifest hashes in request receipt",
+        "CLI invocation/version and runtime model observations",
+        "Exclusive new stderr and visible-stream artifacts",
+        "Incremental visible report accumulation",
+        "Hidden thinking blocks excluded from public stream",
+        "Terminal process/response/report provenance retained"
+      ],
+      "family_specific_responsibilities": "JSON report extraction and explicit report_complete property",
+      "superseded_or_strengthened_rules": [
+        "Python subprocess becomes the shared native IProcessRunner with pinned tool identity",
+        "Hardcoded Fable 5.1/max becomes explicitly required Opus 5.5/xhigh with actual runtime metadata",
+        "Empty MCP config becomes scoped official reviewer-own MCP audit capability",
+        "Permission flags and ad hoc shell/process wrappers are not copied",
+        "UTC naming becomes the current local sortable naming contract",
+        "Malformed public raw lines become hash/length metadata with private originals retained",
+        "Requested effort is not actual effort proof",
+        "One assistant turn cap is forbidden",
+        "First decoded JSON fragment cannot override the final complete verdict"
+      ],
+      "category_operations": [
+        "Review/Prepare",
+        "Review/Launch",
+        "Review/Recover",
+        "Review/Assess"
+      ],
+      "native_service_candidates": [
+        "ReviewPrepareService",
+        "ReviewLaunchService",
+        "ReviewRecoverService",
+        "ReviewAssessService",
+        "OfficialPluginReviewAuditTransport",
+        "IProcessRunner",
+        "IProcessCaptureReader"
+      ],
+      "test_case_candidates": [
+        "ReviewCases: complete, automatic-output-continuation, model-mismatch, effort-mismatch, active, uncertain, split-json, partial-json",
+        "ReviewSafetyCases: tampered-frozen-evidence, missing-model, missing-effort, duplicate-launch, hidden-excluded, malformed-stream",
+        "ReviewRecoveryCases: terminal-continuation, completed-adoption, uncertain-prefix, context-resume",
+        "ReviewPrivacyCases: malformed-hidden-fragment, nested-hidden-delta",
+        "ReviewFinalFragmentCases: progress-before-verdict, split-json-after-progress, latest-disagree-dominates, cut-off-after-agree"
+      ],
+      "parity": "Pending source-assertion equivalence; shared successor services are not 20 independently proven ports",
+      "remaining_unique_assertions": [
+        "Exact historical request/process/completion artifact fields and write-new collision behavior need explicit source-level assertion mapping",
+        "Incremental event flush/crash provenance needs exact source-to-native lifecycle coverage",
+        "Historical terminal report_complete/sentinel distinctions need explicit current-rule disposition",
+        "Actual official purpose/runtime binding and reviewer-own persisted audit remain open",
+        "Current-source fresh-host full normal gate and later post-Ready HV remain required"
+      ],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "retirement_waiver": false
+    },
+    {
+      "legacy_path": "remediation/reviews/round-018/pass-04/capture.py",
+      "sha256": "ec928c5e7efe5c5e25eb673dce15659370208902c36b809a016f66845037171d",
+      "owner": "Review",
+      "source_read": "full-body-read-only",
+      "legacy_executed": false,
+      "original_retained": true,
+      "role": "Historical per-packet native CLI request, process, visible stream and report capture procedure",
+      "protocol_family": "one-turn-json-report",
+      "output_artifacts": [
+        "request.jsonl",
+        "process.json",
+        "stderr.txt",
+        "response.visible.jsonl",
+        "review-report.txt",
+        "completion.json",
+        "review-report.json"
+      ],
+      "unique_body_delta": "Directory and packet/pass label only within this verified protocol family",
+      "preserved_responsibilities": [
+        "Prompt and input-manifest hashes in request receipt",
+        "CLI invocation/version and runtime model observations",
+        "Exclusive new stderr and visible-stream artifacts",
+        "Incremental visible report accumulation",
+        "Hidden thinking blocks excluded from public stream",
+        "Terminal process/response/report provenance retained"
+      ],
+      "family_specific_responsibilities": "JSON report extraction and explicit report_complete property",
+      "superseded_or_strengthened_rules": [
+        "Python subprocess becomes the shared native IProcessRunner with pinned tool identity",
+        "Hardcoded Fable 5.1/max becomes explicitly required Opus 5.5/xhigh with actual runtime metadata",
+        "Empty MCP config becomes scoped official reviewer-own MCP audit capability",
+        "Permission flags and ad hoc shell/process wrappers are not copied",
+        "UTC naming becomes the current local sortable naming contract",
+        "Malformed public raw lines become hash/length metadata with private originals retained",
+        "Requested effort is not actual effort proof",
+        "One assistant turn cap is forbidden",
+        "First decoded JSON fragment cannot override the final complete verdict"
+      ],
+      "category_operations": [
+        "Review/Prepare",
+        "Review/Launch",
+        "Review/Recover",
+        "Review/Assess"
+      ],
+      "native_service_candidates": [
+        "ReviewPrepareService",
+        "ReviewLaunchService",
+        "ReviewRecoverService",
+        "ReviewAssessService",
+        "OfficialPluginReviewAuditTransport",
+        "IProcessRunner",
+        "IProcessCaptureReader"
+      ],
+      "test_case_candidates": [
+        "ReviewCases: complete, automatic-output-continuation, model-mismatch, effort-mismatch, active, uncertain, split-json, partial-json",
+        "ReviewSafetyCases: tampered-frozen-evidence, missing-model, missing-effort, duplicate-launch, hidden-excluded, malformed-stream",
+        "ReviewRecoveryCases: terminal-continuation, completed-adoption, uncertain-prefix, context-resume",
+        "ReviewPrivacyCases: malformed-hidden-fragment, nested-hidden-delta",
+        "ReviewFinalFragmentCases: progress-before-verdict, split-json-after-progress, latest-disagree-dominates, cut-off-after-agree"
+      ],
+      "parity": "Pending source-assertion equivalence; shared successor services are not 20 independently proven ports",
+      "remaining_unique_assertions": [
+        "Exact historical request/process/completion artifact fields and write-new collision behavior need explicit source-level assertion mapping",
+        "Incremental event flush/crash provenance needs exact source-to-native lifecycle coverage",
+        "Historical terminal report_complete/sentinel distinctions need explicit current-rule disposition",
+        "Actual official purpose/runtime binding and reviewer-own persisted audit remain open",
+        "Current-source fresh-host full normal gate and later post-Ready HV remain required"
+      ],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "retirement_waiver": false
+    },
+    {
+      "legacy_path": "remediation/reviews/round-018/pass-05/capture.py",
+      "sha256": "0db665599fdafd43d2c6cc00a82bceba4b7798fac07febf61b746f5e4f76a2c6",
+      "owner": "Review",
+      "source_read": "full-body-read-only",
+      "legacy_executed": false,
+      "original_retained": true,
+      "role": "Historical per-packet native CLI request, process, visible stream and report capture procedure",
+      "protocol_family": "one-turn-json-report",
+      "output_artifacts": [
+        "request.jsonl",
+        "process.json",
+        "stderr.txt",
+        "response.visible.jsonl",
+        "review-report.txt",
+        "completion.json",
+        "review-report.json"
+      ],
+      "unique_body_delta": "Directory and packet/pass label only within this verified protocol family",
+      "preserved_responsibilities": [
+        "Prompt and input-manifest hashes in request receipt",
+        "CLI invocation/version and runtime model observations",
+        "Exclusive new stderr and visible-stream artifacts",
+        "Incremental visible report accumulation",
+        "Hidden thinking blocks excluded from public stream",
+        "Terminal process/response/report provenance retained"
+      ],
+      "family_specific_responsibilities": "JSON report extraction and explicit report_complete property",
+      "superseded_or_strengthened_rules": [
+        "Python subprocess becomes the shared native IProcessRunner with pinned tool identity",
+        "Hardcoded Fable 5.1/max becomes explicitly required Opus 5.5/xhigh with actual runtime metadata",
+        "Empty MCP config becomes scoped official reviewer-own MCP audit capability",
+        "Permission flags and ad hoc shell/process wrappers are not copied",
+        "UTC naming becomes the current local sortable naming contract",
+        "Malformed public raw lines become hash/length metadata with private originals retained",
+        "Requested effort is not actual effort proof",
+        "One assistant turn cap is forbidden",
+        "First decoded JSON fragment cannot override the final complete verdict"
+      ],
+      "category_operations": [
+        "Review/Prepare",
+        "Review/Launch",
+        "Review/Recover",
+        "Review/Assess"
+      ],
+      "native_service_candidates": [
+        "ReviewPrepareService",
+        "ReviewLaunchService",
+        "ReviewRecoverService",
+        "ReviewAssessService",
+        "OfficialPluginReviewAuditTransport",
+        "IProcessRunner",
+        "IProcessCaptureReader"
+      ],
+      "test_case_candidates": [
+        "ReviewCases: complete, automatic-output-continuation, model-mismatch, effort-mismatch, active, uncertain, split-json, partial-json",
+        "ReviewSafetyCases: tampered-frozen-evidence, missing-model, missing-effort, duplicate-launch, hidden-excluded, malformed-stream",
+        "ReviewRecoveryCases: terminal-continuation, completed-adoption, uncertain-prefix, context-resume",
+        "ReviewPrivacyCases: malformed-hidden-fragment, nested-hidden-delta",
+        "ReviewFinalFragmentCases: progress-before-verdict, split-json-after-progress, latest-disagree-dominates, cut-off-after-agree"
+      ],
+      "parity": "Pending source-assertion equivalence; shared successor services are not 20 independently proven ports",
+      "remaining_unique_assertions": [
+        "Exact historical request/process/completion artifact fields and write-new collision behavior need explicit source-level assertion mapping",
+        "Incremental event flush/crash provenance needs exact source-to-native lifecycle coverage",
+        "Historical terminal report_complete/sentinel distinctions need explicit current-rule disposition",
+        "Actual official purpose/runtime binding and reviewer-own persisted audit remain open",
+        "Current-source fresh-host full normal gate and later post-Ready HV remain required"
+      ],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "retirement_waiver": false
+    },
+    {
+      "legacy_path": "remediation/reviews/round-022/pass-01/capture.py",
+      "sha256": "3acb79e21456e8b86410ddfa22c67142d50942e8e1025617a7f9e3e2f474b854",
+      "owner": "Review",
+      "source_read": "full-body-read-only",
+      "legacy_executed": false,
+      "original_retained": true,
+      "role": "Historical per-packet native CLI request, process, visible stream and report capture procedure",
+      "protocol_family": "uncapped-terminal-marker",
+      "output_artifacts": [
+        "request.jsonl",
+        "process.json",
+        "stderr.txt",
+        "response.visible.jsonl",
+        "review-report.txt",
+        "completion.json"
+      ],
+      "unique_body_delta": "Directory and packet/pass label only within this verified protocol family",
+      "preserved_responsibilities": [
+        "Prompt and input-manifest hashes in request receipt",
+        "CLI invocation/version and runtime model observations",
+        "Exclusive new stderr and visible-stream artifacts",
+        "Incremental visible report accumulation",
+        "Hidden thinking blocks excluded from public stream",
+        "Terminal process/response/report provenance retained"
+      ],
+      "family_specific_responsibilities": [
+        "No assistant elapsed/prompt/word/turn/aggregate limits",
+        "Provider stop reason and terminal per-pass marker must agree with process success",
+        "Provider output limits are not review completion"
+      ],
+      "superseded_or_strengthened_rules": [
+        "Python subprocess becomes the shared native IProcessRunner with pinned tool identity",
+        "Hardcoded Fable 5.1/max becomes explicitly required Opus 5.5/xhigh with actual runtime metadata",
+        "Empty MCP config becomes scoped official reviewer-own MCP audit capability",
+        "Permission flags and ad hoc shell/process wrappers are not copied",
+        "UTC naming becomes the current local sortable naming contract",
+        "Malformed public raw lines become hash/length metadata with private originals retained",
+        "Requested effort is not actual effort proof",
+        "128000 output environment override is historical, not a current completion cap or required token setting",
+        "Terminal marker alone does not prove scores, holistic coverage or own persisted reviewer audit"
+      ],
+      "category_operations": [
+        "Review/Prepare",
+        "Review/Launch",
+        "Review/Recover",
+        "Review/Assess"
+      ],
+      "native_service_candidates": [
+        "ReviewPrepareService",
+        "ReviewLaunchService",
+        "ReviewRecoverService",
+        "ReviewAssessService",
+        "OfficialPluginReviewAuditTransport",
+        "IProcessRunner",
+        "IProcessCaptureReader"
+      ],
+      "test_case_candidates": [
+        "ReviewCases: complete, automatic-output-continuation, model-mismatch, effort-mismatch, active, uncertain, split-json, partial-json",
+        "ReviewSafetyCases: tampered-frozen-evidence, missing-model, missing-effort, duplicate-launch, hidden-excluded, malformed-stream",
+        "ReviewRecoveryCases: terminal-continuation, completed-adoption, uncertain-prefix, context-resume",
+        "ReviewPrivacyCases: malformed-hidden-fragment, nested-hidden-delta",
+        "ReviewFinalFragmentCases: progress-before-verdict, split-json-after-progress, latest-disagree-dominates, cut-off-after-agree"
+      ],
+      "parity": "Pending source-assertion equivalence; shared successor services are not 20 independently proven ports",
+      "remaining_unique_assertions": [
+        "Exact historical request/process/completion artifact fields and write-new collision behavior need explicit source-level assertion mapping",
+        "Incremental event flush/crash provenance needs exact source-to-native lifecycle coverage",
+        "Historical terminal report_complete/sentinel distinctions need explicit current-rule disposition",
+        "Actual official purpose/runtime binding and reviewer-own persisted audit remain open",
+        "Current-source fresh-host full normal gate and later post-Ready HV remain required"
+      ],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "retirement_waiver": false
+    },
+    {
+      "legacy_path": "remediation/reviews/round-022/pass-02/capture.py",
+      "sha256": "85e37a8c9beab48cc89fb22b544e3cd074879c360576e99537033631901dd010",
+      "owner": "Review",
+      "source_read": "full-body-read-only",
+      "legacy_executed": false,
+      "original_retained": true,
+      "role": "Historical per-packet native CLI request, process, visible stream and report capture procedure",
+      "protocol_family": "uncapped-terminal-marker",
+      "output_artifacts": [
+        "request.jsonl",
+        "process.json",
+        "stderr.txt",
+        "response.visible.jsonl",
+        "review-report.txt",
+        "completion.json"
+      ],
+      "unique_body_delta": "Directory and packet/pass label only within this verified protocol family",
+      "preserved_responsibilities": [
+        "Prompt and input-manifest hashes in request receipt",
+        "CLI invocation/version and runtime model observations",
+        "Exclusive new stderr and visible-stream artifacts",
+        "Incremental visible report accumulation",
+        "Hidden thinking blocks excluded from public stream",
+        "Terminal process/response/report provenance retained"
+      ],
+      "family_specific_responsibilities": [
+        "No assistant elapsed/prompt/word/turn/aggregate limits",
+        "Provider stop reason and terminal per-pass marker must agree with process success",
+        "Provider output limits are not review completion"
+      ],
+      "superseded_or_strengthened_rules": [
+        "Python subprocess becomes the shared native IProcessRunner with pinned tool identity",
+        "Hardcoded Fable 5.1/max becomes explicitly required Opus 5.5/xhigh with actual runtime metadata",
+        "Empty MCP config becomes scoped official reviewer-own MCP audit capability",
+        "Permission flags and ad hoc shell/process wrappers are not copied",
+        "UTC naming becomes the current local sortable naming contract",
+        "Malformed public raw lines become hash/length metadata with private originals retained",
+        "Requested effort is not actual effort proof",
+        "128000 output environment override is historical, not a current completion cap or required token setting",
+        "Terminal marker alone does not prove scores, holistic coverage or own persisted reviewer audit"
+      ],
+      "category_operations": [
+        "Review/Prepare",
+        "Review/Launch",
+        "Review/Recover",
+        "Review/Assess"
+      ],
+      "native_service_candidates": [
+        "ReviewPrepareService",
+        "ReviewLaunchService",
+        "ReviewRecoverService",
+        "ReviewAssessService",
+        "OfficialPluginReviewAuditTransport",
+        "IProcessRunner",
+        "IProcessCaptureReader"
+      ],
+      "test_case_candidates": [
+        "ReviewCases: complete, automatic-output-continuation, model-mismatch, effort-mismatch, active, uncertain, split-json, partial-json",
+        "ReviewSafetyCases: tampered-frozen-evidence, missing-model, missing-effort, duplicate-launch, hidden-excluded, malformed-stream",
+        "ReviewRecoveryCases: terminal-continuation, completed-adoption, uncertain-prefix, context-resume",
+        "ReviewPrivacyCases: malformed-hidden-fragment, nested-hidden-delta",
+        "ReviewFinalFragmentCases: progress-before-verdict, split-json-after-progress, latest-disagree-dominates, cut-off-after-agree"
+      ],
+      "parity": "Pending source-assertion equivalence; shared successor services are not 20 independently proven ports",
+      "remaining_unique_assertions": [
+        "Exact historical request/process/completion artifact fields and write-new collision behavior need explicit source-level assertion mapping",
+        "Incremental event flush/crash provenance needs exact source-to-native lifecycle coverage",
+        "Historical terminal report_complete/sentinel distinctions need explicit current-rule disposition",
+        "Actual official purpose/runtime binding and reviewer-own persisted audit remain open",
+        "Current-source fresh-host full normal gate and later post-Ready HV remain required"
+      ],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "retirement_waiver": false
+    }
+  ]
+}

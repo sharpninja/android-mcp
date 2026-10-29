@@ -1,0 +1,56 @@
+{
+  "localTimestamp": "2026-10-28T19:01:36",
+  "sourcePackageRun": "portable-package-003",
+  "nativePayloadPackageProof": "remediation/nuke-planning/docs/evidence/portable-build-source-package-cli-proof.json",
+  "packageProofSha256": "a0d4586f0e326013e736810acf7c099f00b932761bb27022ee1724974556546e",
+  "exportedBootstrap": {
+    "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/portable-package-003/exported-bootstrap-proof.json",
+    "sha256": "16d8683456726302dd8f5ceb89d9cfbe7ba6d3c888b2a6613be409af49e6b49b",
+    "payloadFiles": 290,
+    "steps": [
+      {
+        "stdoutSha256": "4ce94ebc602f57969c713ee77c7517b8929ba3ef30c5583a45bd9b103c69d11e",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "name": "locked-restore",
+        "exitCode": 0
+      },
+      {
+        "stdoutSha256": "6ebf21ef16fbe9f6690d4057be469c633e60d6c15386941158d709bad891fcb9",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "name": "bootstrap-build",
+        "exitCode": 0
+      },
+      {
+        "stdoutSha256": "cee8629dc7901f6b4957e255c7922716daf65749aa650b8381e6d1fea85814d7",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "name": "nuke-help",
+        "exitCode": 0
+      }
+    ]
+  },
+  "fourFileGate": {
+    "trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261028T1810162371709-29b8226784f449a99348770ff57bcc15/tests.trx",
+    "sha256": "59d834a0dcef09eefa97bd0ec6f8e7aeca79f2aa364f0416ba6ed9d5fccd31bf",
+    "passed": 327,
+    "failed": 0,
+    "skipped": 0,
+    "exactClassCounts": {
+      "NativeArtifactIdentityRealTests": 29,
+      "NativeArtifactIdentityMockTests": 58,
+      "ArtifactReadOpenerMockTests": 40
+    }
+  },
+  "scope": "Exported native C# host locked restore/bootstrap/help. Four-file identity mapper uses controlled syscall outcomes; opener is mock-only. No actual Windows/Linux syscall or completed codec claim.",
+  "priorPackageFailure": {
+    "path": "remediation/nuke-app/artifacts/portable-package-001",
+    "code": "INPUT_SCOPE_VIOLATION",
+    "reason": "Caller receipt layout corrected to existing artifacts/tests/<run>; evaluator admission unchanged."
+  },
+  "fullMigrationComplete": false,
+  "hv": false,
+  "remaining": [
+    "Complete Gradle/wrapper support export and clean caller invocation",
+    "Legacy method/caller closures",
+    "Native opener, bounded reader and release-part codec"
+  ]
+}

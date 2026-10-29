@@ -1,0 +1,146 @@
+{
+  "observedAtLocal": "2026-10-27T20:45:30",
+  "beforeSha256": "9f164a4b14e1a7a8db5fa88eef1ee015b261335314e3b98903cf4f201fea6058",
+  "afterSha256": "6ad50f1553266fe377583fbb6df218fc1694da6e894b78922561cf36cd387dd7",
+  "preservedOriginal": "remediation/nuke-planning/docs/ui-blueprint.pre-health-migration.md",
+  "oldRendererSha256": "b1d515c91b4ada4aabf4b11a6b2ac66519dfbde7b6296d68d8434ebb091fe6b8",
+  "states": [
+    {
+      "stateId": "SCR01.S1",
+      "health": {
+        "service": "Starting",
+        "mcp": "binding",
+        "device_view": "resolving"
+      },
+      "oldSourceText": "if(state==='SCR01.S1')Object.assign(h,{service:'Starting',mcp:'binding',device_view:'resolving'});",
+      "pinnedStateSvgSha256": "c886033be6d7fc1a18ee841625e98ac1064eda0aa8eca0cf369b37ee92013091"
+    },
+    {
+      "stateId": "SCR01.S3",
+      "health": {
+        "service": "Stopped",
+        "desired_state": "stopped",
+        "mcp": "absent",
+        "arc_listener": "disabled"
+      },
+      "oldSourceText": "if(state==='SCR01.S3'||state==='SCR10.S3')Object.assign(h,{service:'Stopped',desired_state:'stopped',mcp:'absent',arc_listener:'disabled'});",
+      "pinnedStateSvgSha256": "4ee8c7fa19c1d63a4e2e44076f689f152ba0393a2157e112dbd216790dad2243"
+    },
+    {
+      "stateId": "SCR01.S5",
+      "health": {
+        "service": "Stopping",
+        "desired_state": "stopped",
+        "mcp": "absent",
+        "arc_listener": "disabled"
+      },
+      "oldSourceText": "if(state==='SCR01.S5')Object.assign(h,{service:'Stopping',desired_state:'stopped',mcp:'absent',arc_listener:'disabled'});",
+      "pinnedStateSvgSha256": "7bca8295d91c40e8d21472771268225423f80a11f3f3c7161da419f432bd7a8f"
+    },
+    {
+      "stateId": "SCR03.S6",
+      "health": {
+        "catalog": "absent",
+        "device_view": "absent"
+      },
+      "oldSourceText": "if(state==='SCR03.S6')Object.assign(h,{catalog:'absent',device_view:'absent'});",
+      "pinnedStateSvgSha256": "2cf51f5af1fb27f0c875b13944e3b9522b93f740a9d2dc41b3ff58ae8524cf54"
+    },
+    {
+      "stateId": "SCR08.S1",
+      "health": {
+        "service": "WaitingForUnlock",
+        "mcp": "absent",
+        "adb": "locked",
+        "device_view": "absent",
+        "catalog": "absent"
+      },
+      "oldSourceText": "if(state==='SCR08.S1')Object.assign(h,{service:'WaitingForUnlock',mcp:'absent',adb:'locked',device_view:'absent',catalog:'absent'});",
+      "pinnedStateSvgSha256": "e55fcfc0b417009180ca42413a2fb0b91a17b59f176dd711aaea1b80bcbc95ab"
+    },
+    {
+      "stateId": "SCR08.S2",
+      "health": {
+        "service": "Error",
+        "mcp": "error"
+      },
+      "oldSourceText": "if(state==='SCR08.S2')Object.assign(h,{service:'Error',mcp:'error'});",
+      "pinnedStateSvgSha256": "278211c3168ada2916edb49966b0da3c02ddedf93c03027aa69d413885e062fa"
+    },
+    {
+      "stateId": "SCR08.S6",
+      "health": {
+        "arc_listener": "ready"
+      },
+      "oldSourceText": "if(state==='SCR08.S6')h.arc_listener='ready';",
+      "pinnedStateSvgSha256": "39d85c2093167a7f80e84a7858b5bb37683d9b3b39a455c74611133379f18187"
+    },
+    {
+      "stateId": "SCR08.S7",
+      "health": {
+        "adb": "unpaired"
+      },
+      "oldSourceText": "if(state==='SCR08.S7')h.adb='unpaired';if(state==='SCR08.S8')h.adb='connecting';if(state==='SCR08.S9')h.adb='connected';if(state==='SCR08.S10')h.adb='unpaired';",
+      "pinnedStateSvgSha256": "58d823f09a206b2e613545bdcc078b53c7151f1441fc566e0811c07ab1587c93"
+    },
+    {
+      "stateId": "SCR08.S8",
+      "health": {
+        "adb": "connecting"
+      },
+      "oldSourceText": "if(state==='SCR08.S7')h.adb='unpaired';if(state==='SCR08.S8')h.adb='connecting';if(state==='SCR08.S9')h.adb='connected';if(state==='SCR08.S10')h.adb='unpaired';",
+      "pinnedStateSvgSha256": "e414ef9b175c6b643ba6510c78f31a496891d32ce7555ba4c1fc41a3a4ea14d5"
+    },
+    {
+      "stateId": "SCR08.S9",
+      "health": {
+        "adb": "connected"
+      },
+      "oldSourceText": "if(state==='SCR08.S7')h.adb='unpaired';if(state==='SCR08.S8')h.adb='connecting';if(state==='SCR08.S9')h.adb='connected';if(state==='SCR08.S10')h.adb='unpaired';",
+      "pinnedStateSvgSha256": "2eea306f2f77ba748e2136ec8cf8e37d4dc96c84a32fadbe96bc700e7e670b9c"
+    },
+    {
+      "stateId": "SCR08.S10",
+      "health": {
+        "adb": "unpaired"
+      },
+      "oldSourceText": "if(state==='SCR08.S7')h.adb='unpaired';if(state==='SCR08.S8')h.adb='connecting';if(state==='SCR08.S9')h.adb='connected';if(state==='SCR08.S10')h.adb='unpaired';",
+      "pinnedStateSvgSha256": "a90a4becc345662a1c8692fba8b56b9712215fa1f8099e636f6b01f44d54beaf"
+    },
+    {
+      "stateId": "SCR10.S3",
+      "health": {
+        "service": "Stopped",
+        "desired_state": "stopped",
+        "mcp": "absent",
+        "arc_listener": "disabled"
+      },
+      "oldSourceText": "if(state==='SCR01.S3'||state==='SCR10.S3')Object.assign(h,{service:'Stopped',desired_state:'stopped',mcp:'absent',arc_listener:'disabled'});",
+      "pinnedStateSvgSha256": "a0e307883d1145829d74bc7f1fd7646b6ebcac8659d5a6f4a70c5f45bb427143"
+    }
+  ],
+  "onlyTwelveHealthDataLinesAdded": true,
+  "allOtherFieldsAndTextUnchanged": true,
+  "schemaVersionUnchanged": "2.0.0",
+  "observedStateValuesMatchPinnedOriginalSvgAndOldSource": true,
+  "mockGate": {
+    "trx": "remediation/nuke-planning/catalog/evidence/entry-mock-gate.trx",
+    "sha256": "b602552cc38bfb035d036b0d0b9f2415808549295f70428241dae1be9d460e25",
+    "executed": 8706,
+    "passed": 8706,
+    "failed": 0,
+    "notExecuted": 0,
+    "rootAcknowledged": true
+  },
+  "preProductionSourceHashes": [
+    {
+      "path": "remediation/nuke-app/Modules/Documentation/DocumentationContracts.cs",
+      "sha256": "b7c0b46d4e598cc1feef71f0a91cbc4a0903bed8fbe2b38764e262ef97da08f1"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Documentation/DocumentationProjectionMockTests.cs",
+      "sha256": "677ff8024976af60395c2fe604d9c0f762fd61257d57629380e7161931818070"
+    }
+  ],
+  "productionProjectorWritten": false
+}

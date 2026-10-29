@@ -1,0 +1,43 @@
+# Documentation caller increment004
+
+This private delta follows immutable documentation-callers003 and documentation-completion002. It changes twelve source files: two module-owned composition helpers, eight new test files, one existing test's output location, and one separately guarded Build.GradleCompatibility.cs proposal. It changes no canonical app source, registry, Core capability, publication source, category vocabulary, renderer graph, or file disposition authority. Both Source-owned Core pins remain exact.
+
+## Original Design023 methods
+
+All nine methods in remediation/tests_design023_contract.py are bound to one C# assertion body per original method. Correct independent mocks and a negative control for each original predicate passed before native binding. The original ImportStage content dictionary popitem effect is retained: remove the last insertion before comparing its media type, including on assertion failure. Optional security and the original method8/missing-method payload exemptions are not strengthened.
+
+Eight methods read current canonical design/catalog/identity/code/DSL source bytes through the existing FileArtifactStore. The standalone Gradle declaration method reads the independently retained, hash-pinned original build.gradle.kts fixture because the current canonical file is the approved generated delegate. This is a historical input distinction, not a claim that the generated delegate contains the original val declarations. Existing Core planner and real monolith caller cases independently prove current alias selection behavior. The nine-method result is not a Kotlin runtime, protocol interoperability or Android implementation proof.
+
+## Existing caller changes
+
+For every selected Tools stage, the private GradleCompatibility caller captures gradle/wrapper/gradle-wrapper.properties as configuration, alongside its existing projection and lock inputs. It binds DocumentationBootstrapFileEffects with the sole Source-owned NativeArtifactWorkspace, existing property validator, and captured bytes. Known Gradle bin entries, extra files and directories receive OR0111; gradlew receives exact0755 before property validation. Bad existing properties short-circuit before PlantUML and before either generation commits.
+
+DocumentationConfigurationRecipe extracts the exact existing caller configuration binding. It preserves inner input scope, pins existing and configuration inputs, excludes configuration from generated output, retains the existing precommit hook, and retains both policy collision errors. ArtifactGenerationRuntime remains the only source-read, pin-admission, source-recheck, output and commit engine. Native tests corrupt only retained isolated test copies before admission or materialization and prove INPUT_PIN_MISMATCH or INPUT_CHANGED with no commit; post-materialization output remains retained uncommitted.
+
+RepositoryDocumentationCaller implements the original checker's main print/exit boundary using the existing bound checker and System.Text.Json. It prints the five original result fields as indented JSON with a trailing newline and returns0/1 from the errors list. Read/malformed-input failures propagate with no success JSON. Root parsing, selected-root admission, registry and executor dispatch remain Root-owned.
+
+## Actual CLI proof and limits
+
+The SAME nine cases invoke the current private compiled monolith through native dotnet exec: verifyToolchain, generateUiAssets and renderStoryboards, each with GOOD, BAD-PROPERTIES and MISSING-PROPERTIES input. Fixture tool archive/wrapper/JAR bytes are small, validly pinned input data and are never executed. Their real acquisition is offline through the existing ToolArtifactAcquirer, including the retained published-checksum proof format and real ZIP extraction. Successful cases also perform the existing pinned Docker image file/Java/font admission. They do not claim a new original tool binary execution, cold download or all-alias renderer proof.
+
+The probes preserve CLI arguments, stdout/stderr and invocation receipts. They assert physical Linux modes, unchanged tool/source bytes, configuration input set and wrapper property hash/size/media in the committed generation, required UI outputs, failure diagnostics and absent commits. Existing native exported Gradle/portable-package and renderer receipts remain separate prior evidence.
+
+## Explicit missing-properties gap
+
+Current immutable input admission reads a missing properties file before tool effects. Original bootstrap.py reads it after wrapper acquisition and chmod. This difference is explicit and is not whole-bootstrap parity. GOOD and BAD-PROPERTIES cases preserve the ordered original file effects. MISSING-PROPERTIES proves the current early-admission behavior only.
+
+The existing Runtime freezes recipe.Sources and admitted identities before Prepare/materialization; it has no late-input capture API. DocumentationSourceCollection permits absence only for actual CanonicalContractOptional inputs. That role does not semantically fit wrapper properties and was not reused.
+
+Proposed behavior, not implemented: if missing initially and still missing after wrapper chmod, retain completed effects and raise the original FileNotFound/DirectoryNotFound failure before PlantUML/commit. If created before that boundary, capture and validate those bytes, continue, then reject hash/size drift before commit through existing VerifyBeforeCommitAsync and PinnedArtifactReader. Initially present files retain today's input pin. A typed late-read boundary and a decision about the late-created source's identity in the already-frozen Runtime manifest are required before a production contract. No alternate observation engine was added.
+
+## Root integration and closure
+
+Import the ten new module/test files under absent guards and the existing alias regression test under its exact prior guard. Apply the separately staged minimal Build partial proposal only after comparing its exact prior SHA and reconciling Root's current partial; do not overwrite unrelated Root edits. Source prerequisites and003 are separate guarded imports and remain immutable. Run the integrated affected/full gate and actual Root dispatch before changing authoritative file/function dispositions.
+
+The first broader affected regression run passed1726 tests, but inspection found an existing DesignGradleAliasCliRealTests fixture root hardcoded to the canonical app artifacts directory. Including that existing class caused fixture writes outside the authorized private gate scope. No canonical source changed. Those fixtures are retained, not deleted or moved. The private test now uses the gate's existing task-local Path.GetTempPath, and the same affected gate reruns after that correction. The earlier TRX remains in the chronology with this explicit scope exception.
+
+The public full-repository checker route awaits Root's Validate/Design registry/executor integration. Bootstrap transport User-Agent/60-second timeout and legacy receipt/printed-summary compatibility remain outside this increment, as do the missing-properties ordering gap, unsupported host/symlink/outside-root forms already declared in003, broader renderer/package/all-alias runtime, and any original file not explicitly bound here. No original is deleted. No HV or provider review was run. MCP session logging remains unavailable after the earlier health permission failure; no denied-route retry was attempted.
+
+An additional checker scope gap is identified but unchanged: the shared tree retains the .git entry but intentionally omits its descendants. The current snapshot-only Exists predicate can report a Markdown target such as .git/config missing even when present; original Path.exists accepts it without reading its content. The .git directory itself is covered. A semantically applicable existing metadata-only observation boundary or explicit admission is still required for descendant targets. This does not authorize reading .git contents or altering Source's no-descent contract.
+
+The staging dry-run caught an audit allowlist bug before staging mutation: a member-name pipeline projection under WhatIf produced no paths, so rg unexpectedly scanned the working directory. The tool emitted only the indicator-file count, no matched lines or values. That broad content scan violated the requested read scope. It was not repeated or inspected further. The corrected audit explicitly projects dictionary keys and rejects empty, count-mismatched, out-of-workspace or non-file allowlists before rg. The final allowlisted audit and sealed-file verification are separate recorded checks. No secret mutation or denied MCP retry occurred.

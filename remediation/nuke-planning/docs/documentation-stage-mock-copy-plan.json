@@ -1,0 +1,66 @@
+{
+  "observedAtLocal": "2026-10-28T10:22:56",
+  "status": "Prepared only; copying and test execution await a fresh parent grant after the publication window release",
+  "checkpointBaseline": "007 remote draft PR #1 at d6da36efa693d456b318ef82d68d198ede4f8ec7, as reported by parent",
+  "files": [
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/docs/staging/DocumentationManifestContracts.cs.pending",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Documentation/DocumentationManifestContracts.cs",
+      "sourceSha256": "0b8e5268e8d10d7d8cd0acdd3a2099e422ddd6498804af735aa683918c6ab50b",
+      "sourceLength": 1209,
+      "expectedPriorSha256": null,
+      "requiresAbsentDestination": true
+    },
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/docs/staging/DocumentationManifestMockTests.cs.pending",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Documentation/DocumentationManifestMockTests.cs",
+      "sourceSha256": "b4c6fcff09e3bff1edb740c96ffaba0622546c62265860054cd20d5275b50c83",
+      "sourceLength": 9916,
+      "expectedPriorSha256": null,
+      "requiresAbsentDestination": true
+    },
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/docs/staging/DocumentationPrebuiltPackageMockTests.cs.pending",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Documentation/DocumentationPrebuiltPackageMockTests.cs",
+      "sourceSha256": "bcb57400ff395b1d6bc7800d27a5d931c55d9b9a4a57831118f670ec56eb451b",
+      "sourceLength": 6924,
+      "expectedPriorSha256": null,
+      "requiresAbsentDestination": true
+    },
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/docs/staging/DesignCompositionContracts.documentation-stages.cs.pending",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Documentation/DesignCompositionContracts.cs",
+      "sourceSha256": "506d601fee048ff34c4b946eb0c127fecbdafcff06a9feca8aa97885f6258aef",
+      "sourceLength": 1347,
+      "expectedPriorSha256": "f9e4082a76bae8be7fc8a23747ba47b52f602cac1f3be56b9f520f2f2806eb6d",
+      "requiresAbsentDestination": false,
+      "retainPriorAt": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/docs/staging/DesignCompositionContracts.before-documentation-stages.cs.pending",
+      "allowedDifference": "Append only optional DesignDocumentationStageOptions? DocumentationStages=null to the existing DesignArchitectureRequest constructor"
+    },
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/docs/staging/DesignDocumentationStageMockTests.cs.pending",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Documentation/DesignDocumentationStageMockTests.cs",
+      "sourceSha256": "c2a2a47c65b30b2322dc1f8fa656077f13166d7f1d9bac18c17740b1f6ed2be4",
+      "sourceLength": 26652,
+      "expectedPriorSha256": null,
+      "requiresAbsentDestination": true
+    }
+  ],
+  "plannedDiscovery": [
+    { "class": "DocumentationManifestMockTests", "staticExecutions": 62 },
+    { "class": "DocumentationPrebuiltPackageMockTests", "staticExecutions": 46 },
+    { "class": "DesignDocumentationStageMockTests", "staticExecutions": 42 }
+  ],
+  "staticTotal": 150,
+  "compiled": false,
+  "executed": false,
+  "proof": "Pending discovery and execution; static enumeration is not evidence of a passing gate",
+  "preservation": [
+    "No production manifest algorithm, package overload, or factory conjunction implementation included",
+    "Existing package and full-architecture assertions remain unchanged",
+    "One existing selected-source authority, validator, receipt checker, and stage graph",
+    "Only declared render-skin support may coalesce after exact shared receipt identity validation; captured source retained",
+    "Generated design Markdown remains the sole permitted byte-changing source replacement",
+    "No app, canonical, golden, or publication copy has occurred"
+  ]
+}

@@ -1,0 +1,221 @@
+{
+  "at": "2026-10-28T10:00:33",
+  "evidenceIncrement": "Working next increment after immutable007 candidate",
+  "decision": "Retire only the unsupported-constant wrapper produced by the old low-level aidl intermediate boundary. Preserve the final enriched constant field inventory through the one existing parser; no compatibility projection is currently required by migrated consumers.",
+  "authority": "Parent instructed retirement of obsolete intermediate shape when migrated callers all consume enriched records, with exact caller evidence and retained records.",
+  "originalExpectation": {
+    "paths": [
+      "remediation/catalog/tests/test_parsers.py",
+      "rehydration/producers/release-011/tests/test_parsers.py"
+    ],
+    "method": "test_aidl",
+    "assertion": "members[2].kind == unsupported",
+    "rawConstant": "const int C=3;",
+    "status": "Intentionally superseded intermediate assertion, not silently satisfied."
+  },
+  "callerAnalysis": [
+    {
+      "callers": "Both retained build_catalog.py production branches",
+      "behavior": "aidl_all returns declarations, every declaration is passed through enrich_aidl before aidl_schemas/member storage; no unsupported constant wrapper is published when field enrichment succeeds."
+    },
+    {
+      "callers": "Both retained aidl_members.enrich implementations",
+      "behavior": "Only parsable unsupported const members are replaced with field metadata. Failed field parsing remains unsupported; ordinary unknown statements are not promoted."
+    },
+    {
+      "callers": "AIDL members and round4/round5 test callers",
+      "behavior": "Explicitly consume enriched records and require constant metadata or preserved failure state."
+    },
+    {
+      "callers": "Round7/round8 and remediation direct parser tests",
+      "behavior": "Exercise declarations, nested scope and repeated physical lines without requiring the unsupported constant wrapper. Their entire original methods remain separately allocated."
+    },
+    {
+      "callers": "Migrated SourcesRuntimeFactory, dispatcher, Source reader and CatalogBuild",
+      "behavior": "One AidlSourceExtractor emits enriched source rows and raw aidl_schema metadata. Catalog consumes those rows or the same admitted native generation, without a low-level parser API or duplicate parser."
+    }
+  ],
+  "preserved": [
+    "Final constant name/type/raw value and ordinal remain field metadata; no constant value is executed.",
+    "Raw complete AIDL source remains retained in aidl_schema.raw_schema and original local files.",
+    "wire_tag and generated transaction/codecs remain unknown; enriched metadata is not wire authority.",
+    "Unparsed constant syntax remains unsupported with raw evidence."
+  ],
+  "nativeContextProof": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T0932272149996-f28fbdb36475416095271304765987df/tests.trx",
+    "sha256": "4e63adacdd42b76a81d5c0a7ab45dc13d749a69eac3d2c9175fef3be73163583",
+    "group": "SourceExtractionRealTests",
+    "passed": 24,
+    "case": "AIDL-01 enriched C field metadata plus AIDL-10 exact constant-only member fixture"
+  },
+  "normalMethodClosed": false,
+  "wholeFileClosed": false,
+  "fileExecutionRetired": false,
+  "remaining": [
+    "The complete original test_aidl fixture and assertion composition must still be bound or explicitly reconciled before closing that method.",
+    "The original triple-quoted source has leading indentation absent from current AIDL-01; this receipt does not call those input bytes identical.",
+    "Other low-level parser helper assertions, structured-body intermediate status and direct member/annotations/without_comments APIs remain separately pending."
+  ],
+  "sourcePins": [
+    {
+      "path": "remediation/catalog/tooling/parsers.py",
+      "sha256": "d45a952b237eda29c199c2b6da82ca0edf3756c2bf14bf8ca2514657ea30ca70"
+    },
+    {
+      "path": "remediation/catalog/tooling/aidl_members.py",
+      "sha256": "f9c4c0a90dd693a0dbe5c91da84cf9a6cb4d3c874e13c179ebbeccac577ac177"
+    },
+    {
+      "path": "remediation/catalog/tooling/build_catalog.py",
+      "sha256": "35a2e0c775920224db2c75d2713ff4264ff1f4f99186867c406f771d80e93d35"
+    },
+    {
+      "path": "remediation/catalog/tests/test_parsers.py",
+      "sha256": "d27384a2c3dd8d6eced29756e234a04040a658c1f0ee5257c6b1232431d2747d"
+    },
+    {
+      "path": "remediation/catalog/tests/test_aidl_members.py",
+      "sha256": "31139a1bcb61b3f0818e7123b7e713c38930946c6e2bfb79e079b363546d3b4c"
+    },
+    {
+      "path": "remediation/catalog/tests/test_round4.py",
+      "sha256": "e2869d4b2e4c1175eeb490c8792f5656346d0c765b4150660574b940e76ace5c"
+    },
+    {
+      "path": "remediation/catalog/tests/test_round5.py",
+      "sha256": "367176a7f938cf4678159d66a1ede0d3caf483bf27f91e1e5c030a69f7376543"
+    },
+    {
+      "path": "remediation/catalog/tests/test_round7.py",
+      "sha256": "78793812aac2c602f56f46d6596af0a3b91be1746d584b3a45b9b8b37fd4c397"
+    },
+    {
+      "path": "remediation/catalog/tests/test_round8.py",
+      "sha256": "77e8320a25fe6408ee7f9cba9c70b2545c0932fae056a7b9830267c2af6cc9a4"
+    },
+    {
+      "path": "remediation/catalog/tests/test_remediation.py",
+      "sha256": "e04129213f87be4c19ef30774835f8ff2a07b1ae2bb860bbbcb9ea8c4ef816c4"
+    },
+    {
+      "path": "rehydration/producers/release-011/tooling/parsers.py",
+      "sha256": "d45a952b237eda29c199c2b6da82ca0edf3756c2bf14bf8ca2514657ea30ca70"
+    },
+    {
+      "path": "rehydration/producers/release-011/tooling/aidl_members.py",
+      "sha256": "f9c4c0a90dd693a0dbe5c91da84cf9a6cb4d3c874e13c179ebbeccac577ac177"
+    },
+    {
+      "path": "rehydration/producers/release-011/tooling/build_catalog.py",
+      "sha256": "5194078b1dc21a95044e3c82d6d8d77616a39979bdcc1ac94e0db81bf4c59170"
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_parsers.py",
+      "sha256": "d27384a2c3dd8d6eced29756e234a04040a658c1f0ee5257c6b1232431d2747d"
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_aidl_members.py",
+      "sha256": "31139a1bcb61b3f0818e7123b7e713c38930946c6e2bfb79e079b363546d3b4c"
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_round4.py",
+      "sha256": "e2869d4b2e4c1175eeb490c8792f5656346d0c765b4150660574b940e76ace5c"
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_round5.py",
+      "sha256": "367176a7f938cf4678159d66a1ede0d3caf483bf27f91e1e5c030a69f7376543"
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_round7.py",
+      "sha256": "78793812aac2c602f56f46d6596af0a3b91be1746d584b3a45b9b8b37fd4c397"
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_round8.py",
+      "sha256": "77e8320a25fe6408ee7f9cba9c70b2545c0932fae056a7b9830267c2af6cc9a4"
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_remediation.py",
+      "sha256": "e04129213f87be4c19ef30774835f8ff2a07b1ae2bb860bbbcb9ea8c4ef816c4"
+    }
+  ],
+  "nativePins": [
+    {
+      "path": "remediation/nuke-app/Modules/Sources/AidlSourceExtractor.cs",
+      "sha256": "cdc2a9b5e9e1048936cf817bb4df89746f6c8351c127ca682cb929a801b242b6"
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Sources/SourcesRuntimeFactory.cs",
+      "sha256": "cad5570c2b3251d54449138075ed2ff0f0370a848431ad092573432dcc8d9239"
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Sources/SourcesExtractionDispatcher.cs",
+      "sha256": "d58856b564bcfddbaf545584cf5c9ea3957ee2277a93be7550c0f17af545113d"
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Sources/SourcesExtractService.cs",
+      "sha256": "f7f734f5de2cacf25c69c811df1afb93aa9eec933d4e70b577ae7d0d517eafbc"
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Catalog/CatalogBuild.cs",
+      "sha256": "06b6666c1ae5cbe3b285561bf39320ab7c4551bbf5bdac3f05b4084d2da3f9fe"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/SourceExtractionContractCases.cs",
+      "sha256": "f41db12dcc56fa4ddc16b5f8e576f18946689adb7c6875b9071ca80a506a24e2"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/SourceExtractionRealTests.cs",
+      "sha256": "a2bf01503957fd3059daba069dc3b3792f425d5b330f8a7cdcdc163a79717ad5"
+    }
+  ],
+  "directStaticCallerCount": 40,
+  "directStaticCallerInventory": [
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tests/test_aidl_members.py:3:from parsers import aidl",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tests/test_aidl_members.py:6: def parse(self,text):return enrich(text,aidl(text))",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tests/test_round8.py:54:        declarations={d['descriptor']:d for d in parsers.aidl_all('package a; interface I { oneway interface Inner { void f(); } void g(); }')}",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tests/test_round7.py:21:  document=parsers.aidl_all('package a; parcelable Outer.Inner; parcelable Other cpp_header \"o.h\";')",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tests/test_round7.py:25:  document=parsers.aidl_all(text);self.assertEqual([d['descriptor'] for d in document],['a.First','a.Outer.Inner','a.Second']);self.assertEqual([d['declaration_line'] for d in document],[2,3,4]);self.assertEqual(document[2]['members'][0]['line'],4)",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tests/test_round7.py:27:  declaration=parsers.aidl_all('package a; parcelable P cpp_header \"x{y}.h\";')[0];self.assertEqual(declaration['parse_status'],'declaration-only');self.assertEqual(declaration['members'],[])",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tests/test_round5.py:30:   self.assertEqual(aidl_members.enrich(text,parsers.aidl(text))['parse_status'],status)",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tooling/parsers.py:154:def aidl(text,parent_descriptor=None):",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tooling/parsers.py:186:   chars[ca:cb]=code[ca:cb];child=aidl(''.join(chars),descriptor)",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tooling/parsers.py:205:def aidl_all(text):",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tooling/parsers.py:209: if not spans:return [aidl(text)]",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tooling/parsers.py:216:  chars[start:end]=text[start:end];one=aidl(''.join(chars));raw=text[start:end]",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tests/test_round4.py:19:  result=aidl_members.enrich('package a; interface I { const int F=1 << 2; void first(); void second(); }',parsers.aidl('package a; interface I { const int F=1 << 2; void first(); void second(); }'))",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tests/test_round4.py:22:  text='package a; parcelable P<T> { T value; }';result=aidl_members.enrich(text,parsers.aidl(text));self.assertEqual([r['name'] for r in result['members']],['value'])",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tests/test_remediation.py:94:        d=parsers.aidl('package a; interface I {\\n void x();\\n void x();\\n}')",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tooling/parsers.py:154:def aidl(text,parent_descriptor=None):",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tooling/parsers.py:186:   chars[ca:cb]=code[ca:cb];child=aidl(''.join(chars),descriptor)",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tooling/parsers.py:205:def aidl_all(text):",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tooling/parsers.py:209: if not spans:return [aidl(text)]",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tooling/parsers.py:216:  chars[start:end]=text[start:end];one=aidl(''.join(chars));raw=text[start:end]",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tooling/build_catalog.py:6:from parsers import signature,aidl,aidl_all,permission,unknown,sha,split_top,typ",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tooling/build_catalog.py:156:    parsed=aidl_all(text);declarations=[]",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tooling/build_catalog.py:162:     declarations.append(enrich_aidl(fragment,item))",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tests/test_parsers.py:33:  d=p.aidl(text);self.assertEqual(d['descriptor'],'a.IFoo');self.assertTrue(d['oneway']);self.assertEqual(len(d['members']),3);self.assertEqual(d['members'][0]['extras']['declared_method_id'],7);self.assertIsNone(d['members'][0]['extras']['wire_transaction_code']);self.assertEqual(d['members'][0]['parameters'][1]['direction'],'out');self.assertEqual(d['members'][2]['kind'],'unsupported');self.assertEqual(p.permission(d['annotations'],aidl=True)['name'],'android.permission.X')",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tests/test_parsers.py:41:  d=p.aidl('package a; @JavaDerive(toString=true) parcelable P { int n; }');self.assertEqual(d['descriptor'],'a.P');self.assertIn('retained',d['parse_status'])",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tests/test_parsers.py:33:  d=p.aidl(text);self.assertEqual(d['descriptor'],'a.IFoo');self.assertTrue(d['oneway']);self.assertEqual(len(d['members']),3);self.assertEqual(d['members'][0]['extras']['declared_method_id'],7);self.assertIsNone(d['members'][0]['extras']['wire_transaction_code']);self.assertEqual(d['members'][0]['parameters'][1]['direction'],'out');self.assertEqual(d['members'][2]['kind'],'unsupported');self.assertEqual(p.permission(d['annotations'],aidl=True)['name'],'android.permission.X')",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tests/test_parsers.py:41:  d=p.aidl('package a; @JavaDerive(toString=true) parcelable P { int n; }');self.assertEqual(d['descriptor'],'a.P');self.assertIn('retained',d['parse_status'])",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tooling/build_catalog.py:6:from parsers import signature,aidl,aidl_all,permission,unknown,sha,split_top,typ",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tooling/build_catalog.py:156:    parsed=aidl_all(text);declarations=[]",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tooling/build_catalog.py:162:     declarations.append(enrich_aidl(fragment,item))",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tests/test_round8.py:54:        declarations={d['descriptor']:d for d in parsers.aidl_all('package a; interface I { oneway interface Inner { void f(); } void g(); }')}",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tests/test_aidl_members.py:3:from parsers import aidl",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tests/test_aidl_members.py:6: def parse(self,text):return enrich(text,aidl(text))",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tests/test_round7.py:21:  document=parsers.aidl_all('package a; parcelable Outer.Inner; parcelable Other cpp_header \"o.h\";')",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tests/test_round7.py:25:  document=parsers.aidl_all(text);self.assertEqual([d['descriptor'] for d in document],['a.First','a.Outer.Inner','a.Second']);self.assertEqual([d['declaration_line'] for d in document],[2,3,4]);self.assertEqual(document[2]['members'][0]['line'],4)",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tests/test_round7.py:27:  declaration=parsers.aidl_all('package a; parcelable P cpp_header \"x{y}.h\";')[0];self.assertEqual(declaration['parse_status'],'declaration-only');self.assertEqual(declaration['members'],[])",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tests/test_round5.py:30:   self.assertEqual(aidl_members.enrich(text,parsers.aidl(text))['parse_status'],status)",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tests/test_remediation.py:94:        d=parsers.aidl('package a; interface I {\\n void x();\\n void x();\\n}')",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tests/test_round4.py:19:  result=aidl_members.enrich('package a; interface I { const int F=1 << 2; void first(); void second(); }',parsers.aidl('package a; interface I { const int F=1 << 2; void first(); void second(); }'))",
+    "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tests/test_round4.py:22:  text='package a; parcelable P<T> { T value; }';result=aidl_members.enrich(text,parsers.aidl(text));self.assertEqual([r['name'] for r in result['members']],['value'])"
+  ],
+  "callerInventoryLimit": "Static direct-call and import sites over retained published Python, checked with source reads. Not a dynamic Python execution/callgraph proof.",
+  "originalRetained": true,
+  "appChanged": false,
+  "pythonExecuted": false,
+  "nodeExecuted": false,
+  "hvAccepted": false,
+  "safeToDelete": false
+}

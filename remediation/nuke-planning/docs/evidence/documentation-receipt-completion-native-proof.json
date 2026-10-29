@@ -1,0 +1,71 @@
+{
+  "localTimestamp": "2026-10-28T15:48:08",
+  "scope": "Existing documentation completion factory opt-in for three prerequisite receipts, successful BeforeManifest receipt, and package aliases from the sole route table.",
+  "requirements": [
+    "FR-BUILD-005",
+    "TR-BUILD-TOOL-005",
+    "TEST-BUILD-005"
+  ],
+  "initialMockFailure": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T1544007735426-587e690e8a644804a1c8837c994dc36b/tests.trx",
+    "sha256": "e4cdc319e0f10d1ded290d5a079e4c200fb6c5e3077ccb5ea03e8456588d713c",
+    "passed": 83,
+    "failed": 11,
+    "cause": "Staged opt-in fixture supplied text/plain historical UI carrier. Existing formatter identity guard rejected it.",
+    "correction": "New opt-in fixture uses the existing independently proven LegacyReceiptCases.NativeUiInput. Defaults, expected legacy receipts, guard and historical fixtures unchanged."
+  },
+  "mockBeforeProduction": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T1545147746800-7aed0e32634a45fbbd2f7ae3fc998518/tests.trx",
+    "sha256": "36efeb98eb51869a10cab206e8eae3723ac0405f24466965fe4d1ca9993bb83e",
+    "passed": 94,
+    "failed": 0,
+    "skipped": 0,
+    "buildWarnings": 0,
+    "exactClassCounts": {
+      "DesignLegacyReceiptStageMockTests": 28
+    }
+  },
+  "nativeAffectedGate": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T1546195296846-f24432b0c119409ea8e46ae998255f08/tests.trx",
+    "sha256": "4c06e231403be033a1d056a6b84e0b40e7d9995105c4e3298e9fafaf6b1d1854",
+    "passed": 612,
+    "failed": 0,
+    "skipped": 0,
+    "buildWarnings": 0,
+    "exactClassCounts": {
+      "DesignLegacyReceiptStageRealTests": 16,
+      "DesignLegacyReceiptStageMockTests": 28
+    }
+  },
+  "sources": [
+    {
+      "path": "remediation/nuke-app/Modules/Documentation/DesignCompositionRecipeFactory.cs",
+      "sha256": "64a57c7ebc0397290f0ac67a9ac1a969125e23f9cfca9b9f9a8e89b6c44ef7cf"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Documentation/DesignDocumentationStageMockTests.cs",
+      "sha256": "9c45a86ba1a6554203509ef6eeeb33f1c752e11c2bfa094349eda82837a32418"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Documentation/DesignLegacyReceiptStageMockTests.cs",
+      "sha256": "8d4985831d746f3103c199174e782ce93f92637d16360435094ce21824512c0c"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Documentation/DesignLegacyReceiptStageRealTests.cs",
+      "sha256": "afc52160b9e502da45b1e9e1cd18385f98d9d5a3e625eb85c4238021c8210c07"
+    }
+  ],
+  "behavior": [
+    "Default constructor preserves existing publication union.",
+    "BeforeManifest validation observes prerequisite and renderer-phase receipts; docs success receipt is appended only after successful validation.",
+    "Alias package uses exact same source receipt bytes/media; checksum and package cover one completed union.",
+    "Unvalidated authorities, absent renderer-phase proof, conflicting ownership, failed rendering, source changes and cancellation retain the same failure and input-preservation assertions."
+  ],
+  "limits": [
+    "Same sixteen cases use controlled existing service seams, not a newly executed renderer or package CLI.",
+    "Actual CLI opt-in, standalone stage receipts and remaining portable build-source payload are open.",
+    "Full suite after this later increment is pending; immutable009 retains its earlier full65117 evidence.",
+    "No Python, custom Node, Actions, HV, publication checkout writes or acceptance claim."
+  ],
+  "completeMigration": false
+}

@@ -1,0 +1,106 @@
+{
+  "at": "2026-10-29T02:35:07",
+  "phase": "Native",
+  "summary": {
+    "localTimestamp": "2026-10-29T02:35:07",
+    "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/catalog/nuke-app/artifacts/tests/20261029T0231514348569-bff5cbd559c34d8e8693c766b398a18a/tests.trx",
+    "sha256": "38542995722aade4a917c48638fb5ba3164e126e53f254532a90c9e76deb776d",
+    "total": 93,
+    "passed": 93,
+    "failed": 0,
+    "notExecuted": 0,
+    "classes": [
+      {
+        "name": "AndroidMcp.BuildTool.Tests.Catalog.CatalogCaptureAdmissionMockTests",
+        "total": 4,
+        "passed": 4,
+        "failed": 0
+      },
+      {
+        "name": "AndroidMcp.BuildTool.Tests.Catalog.CatalogCaptureAdmissionRealTests",
+        "total": 2,
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "name": "AndroidMcp.BuildTool.Tests.Catalog.CatalogEffectiveInventoryMockTests",
+        "total": 24,
+        "passed": 24,
+        "failed": 0
+      },
+      {
+        "name": "AndroidMcp.BuildTool.Tests.Catalog.CatalogEffectiveInventoryRealTests",
+        "total": 12,
+        "passed": 12,
+        "failed": 0
+      },
+      {
+        "name": "AndroidMcp.BuildTool.Tests.Catalog.CatalogLocalOwnerMockTests",
+        "total": 6,
+        "passed": 6,
+        "failed": 0
+      },
+      {
+        "name": "AndroidMcp.BuildTool.Tests.Catalog.CatalogLocalOwnerRealTests",
+        "total": 3,
+        "passed": 3,
+        "failed": 0
+      },
+      {
+        "name": "AndroidMcp.BuildTool.Tests.Catalog.CatalogTombstoneMockTests",
+        "total": 28,
+        "passed": 28,
+        "failed": 0
+      },
+      {
+        "name": "AndroidMcp.BuildTool.Tests.Catalog.CatalogTombstoneRealTests",
+        "total": 14,
+        "passed": 14,
+        "failed": 0
+      }
+    ],
+    "failures": []
+  },
+  "classes": {
+    "CatalogEffectiveInventoryMockTests": 24,
+    "CatalogCaptureAdmissionMockTests": 4,
+    "CatalogCaptureAdmissionRealTests": 2,
+    "CatalogLocalOwnerMockTests": 6,
+    "CatalogEffectiveInventoryRealTests": 12,
+    "CatalogLocalOwnerRealTests": 3,
+    "CatalogTombstoneMockTests": 28,
+    "CatalogTombstoneRealTests": 14
+  },
+  "caseSha256": "63d27167206e6c5b515f99e2935c8ac352b7bdb2402a9f133154cc0ba478b167",
+  "cases": 2,
+  "negativeControls": 34,
+  "files": [
+    {
+      "path": "Tests/Catalog/CatalogEffectiveInventoryRealTests.cs",
+      "sha256": "fa8444aced7c49239917aff7879da926b49aa7a5b7439882a8ebbbb62f61b4eb",
+      "length": 22138
+    },
+    {
+      "path": "Tests/Catalog/CatalogCaptureAdmissionCases.cs",
+      "sha256": "63d27167206e6c5b515f99e2935c8ac352b7bdb2402a9f133154cc0ba478b167",
+      "length": 1417
+    },
+    {
+      "path": "Tests/Catalog/CatalogCaptureAdmissionRealTests.cs",
+      "sha256": "09044a7a3550458c5fbebdbe9db577f55a856c960f727afeb0f93d5c2db390da",
+      "length": 552
+    }
+  ],
+  "priorAdapterSha256": "3103907d698ce9f64286570ed57662a58eaf18d5f80c93a9507721530c940dc5",
+  "productionCapture": {
+    "path": "Modules/Catalog/CatalogInventory.cs",
+    "changed": false,
+    "sha256": "e6cd4f4941d84793c8df67e7a051a28def2ea8e6bf135c1533d71807dd5154e2"
+  },
+  "originalSourceSha256": "f41b89a59ee27996419ca6f7f7bdcde12a6e1ce98f40defa6a25a3f87d341b05",
+  "scope": "Original active Entry validation and document-vs-overlay-key disjunction independently discriminated. Missing required permission keeps identity valid; row-key case keeps canonical signature SHA equal SQL key while document.entry_id alone differs. Original signature-only mismatch case unchanged. Errors roll back, imported data/input bytes retained, no partial capture.",
+  "newOriginalMethodClaims": 0,
+  "canonicalWrites": false,
+  "globalLedgerWrites": false,
+  "acceptedComplete": false
+}

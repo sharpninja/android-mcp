@@ -1,0 +1,236 @@
+{
+  "At": "2026-10-28T23:10:27",
+  "Owner": "Sources",
+  "RequirementIds": [
+    "FR-BUILD-004",
+    "TEST-BUILD-004"
+  ],
+  "ChangedFiles": [
+    {
+      "RelativePath": "Modules/Sources/SourceFactProducer.cs",
+      "Source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/sources/nuke-app/Modules/Sources/SourceFactProducer.cs",
+      "Handoff": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/callback-producer-002/files/Modules/Sources/SourceFactProducer.cs",
+      "Sha256": "e84a765b4aecb89381abc7a3fdb8c712ab7af2ae090ad52745744a6069cc351f",
+      "Size": 16351,
+      "PriorSha256": "d450a5f54169393b1b4639a8efbd1caabc6e82edee860aab9eafce0631ba7ac9"
+    },
+    {
+      "RelativePath": "Tests/Sources/CallbackProducerCompletionContractCases.cs",
+      "Source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/sources/nuke-app/Tests/Sources/CallbackProducerCompletionContractCases.cs",
+      "Handoff": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/callback-producer-002/files/Tests/Sources/CallbackProducerCompletionContractCases.cs",
+      "Sha256": "21193ce95c96c08bf18a868c8bd152550c4080d075c0164faf6b86d37dad5a3e",
+      "Size": 4956,
+      "PriorSha256": null
+    },
+    {
+      "RelativePath": "Tests/Sources/CallbackProducerCompletionMockTests.cs",
+      "Source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/sources/nuke-app/Tests/Sources/CallbackProducerCompletionMockTests.cs",
+      "Handoff": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/callback-producer-002/files/Tests/Sources/CallbackProducerCompletionMockTests.cs",
+      "Sha256": "5a9ef10cd7bd8d492ff62afc65fe2af07f5ba09920231f349b8cafaaaff5110d",
+      "Size": 5518,
+      "PriorSha256": null
+    },
+    {
+      "RelativePath": "Tests/Sources/CallbackProducerCompletionRealTests.cs",
+      "Source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/sources/nuke-app/Tests/Sources/CallbackProducerCompletionRealTests.cs",
+      "Handoff": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/callback-producer-002/files/Tests/Sources/CallbackProducerCompletionRealTests.cs",
+      "Sha256": "501d5ca62b537e130ab25bae5debc43fa0193437144b81a1bb44a1b70e6bb5f4",
+      "Size": 1929,
+      "PriorSha256": null
+    }
+  ],
+  "Originals": [
+    {
+      "LegacyPath": "remediation/catalog/tooling/callback_source_facts.py",
+      "RetainedPath": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tooling/callback_source_facts.py",
+      "Sha256": "1ed4e0dfca74b9e501527f059034c51a74e966d12bb7ca67fb85169030f082df",
+      "Size": 5063,
+      "Functions": [
+        {
+          "Line": 4,
+          "Signature": "def named(value):return isinstance(value,str) and NAME.search(value) is not None"
+        },
+        {
+          "Line": 5,
+          "Signature": "def type_candidate(doc):"
+        },
+        {
+          "Line": 14,
+          "Signature": "def endpoint_method(doc,owner_doc=None):"
+        },
+        {
+          "Line": 26,
+          "Signature": "def registration_candidates(doc,resolved_types):"
+        },
+        {
+          "Line": 46,
+          "Signature": "def possible_pairs(rows):"
+        }
+      ]
+    },
+    {
+      "LegacyPath": "tools/source_facts/callback_source_facts.py",
+      "RetainedPath": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/callback_source_facts.py",
+      "Sha256": "1ed4e0dfca74b9e501527f059034c51a74e966d12bb7ca67fb85169030f082df",
+      "Size": 5063,
+      "Functions": [
+        {
+          "Line": 4,
+          "Signature": "def named(value):return isinstance(value,str) and NAME.search(value) is not None"
+        },
+        {
+          "Line": 5,
+          "Signature": "def type_candidate(doc):"
+        },
+        {
+          "Line": 14,
+          "Signature": "def endpoint_method(doc,owner_doc=None):"
+        },
+        {
+          "Line": 26,
+          "Signature": "def registration_candidates(doc,resolved_types):"
+        },
+        {
+          "Line": 46,
+          "Signature": "def possible_pairs(rows):"
+        }
+      ]
+    }
+  ],
+  "FunctionMap": [
+    {
+      "AlreadyProven": "FACT-CB01/03/04/17 name and non-name paths",
+      "Original": "named",
+      "Missing": "No new implementation required in selected clause scope",
+      "Native": "SourceFactProducer.Named"
+    },
+    {
+      "AlreadyProven": "FACT-CB01-04/17 candidate naming, annotation and Binder reason clauses",
+      "Original": "type_candidate",
+      "Missing": "No new implementation required in selected clause scope",
+      "Native": "SourceFactProducer.TypeCandidate"
+    },
+    {
+      "AlreadyProven": "FACT-CB05/07-10/21 Java unknown, AIDL tri-state/inherited precedence and HIDL bool clauses",
+      "Original": "endpoint_method",
+      "Missing": "No new implementation required in selected clause scope",
+      "Native": "SourceFactProducer.EndpointMethod"
+    },
+    {
+      "AlreadyProven": "FACT-CB06/11-17/20/22 full fields, original identities, LegacyAsciiIdentity profile and primitive skipping",
+      "Original": "registration_candidates",
+      "Missing": "Empty resolved-type dictionary is falsey for classification and confidence; retain exact identity key without inventing resolved structure",
+      "Tests": "CB-COMP01-04",
+      "Native": "SourceFactProducer.RegistrationCandidates"
+    },
+    {
+      "AlreadyProven": "FACT-CB18/19 matching candidates and owner isolation",
+      "Original": "possible_pairs",
+      "Missing": "Absent role and compared context keys must fail through existing CopyRequired, preserving lazy ordered comparison and explicit null values",
+      "Tests": "CB-COMP05-08 and eleven CB-ERR indexed-field cases",
+      "Native": "SourceFactProducer.PossiblePairs"
+    }
+  ],
+  "CallerMap": [
+    {
+      "Original": "tools/source_facts/test_callback_source_facts.py",
+      "Disposition": "Existing exact original test caller remains unchanged; rerun bounded regression",
+      "Native": "CallbackFunctionalOriginalRealTests and SourceFactRealTests"
+    },
+    {
+      "Original": "remediation/catalog/tooling/source_metadata_reference.py:produce_entry_metadata",
+      "Disposition": "Already injects the sole Source runtime callback/taxonomy concerns; Catalog owns aggregate/import caller fixtures",
+      "Native": "Modules/Catalog/CatalogSourceMetadata.cs:Produce"
+    },
+    {
+      "Original": "remediation/catalog/tests/test_source_metadata_contract.py endpoint_method direct import",
+      "Disposition": "Existing shared endpoint implementation retained; Catalog integration ownership unchanged",
+      "Native": "SourcesRuntimeConcerns.Callbacks.EndpointMethod"
+    }
+  ],
+  "Mock": {
+    "At": "2026-10-28T23:08:20",
+    "Stage": "callback-producer-mock",
+    "Trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/sources/nuke-app/artifacts/tests/20261028T2306522849084-7f96bd434f1d47a393c6c6e515eafcc9/tests.trx",
+    "TrxSha256": "431a047b4695ab71632a25e253451a9658aac7b04fcaeb5ae0fe3ff19c3157ae",
+    "Total": 193,
+    "Passed": 193,
+    "Failed": 0,
+    "Skipped": 0,
+    "Files": [
+      {
+        "Path": "Modules/Sources/SourceFactProducer.cs",
+        "Sha256": "d450a5f54169393b1b4639a8efbd1caabc6e82edee860aab9eafce0631ba7ac9",
+        "Size": 16254
+      },
+      {
+        "Path": "Tests/Sources/CallbackProducerCompletionContractCases.cs",
+        "Sha256": "21193ce95c96c08bf18a868c8bd152550c4080d075c0164faf6b86d37dad5a3e",
+        "Size": 4956
+      },
+      {
+        "Path": "Tests/Sources/CallbackProducerCompletionMockTests.cs",
+        "Sha256": "5a9ef10cd7bd8d492ff62afc65fe2af07f5ba09920231f349b8cafaaaff5110d",
+        "Size": 5518
+      }
+    ]
+  },
+  "Native": {
+    "At": "2026-10-28T23:10:25",
+    "Stage": "callback-producer-native",
+    "Trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/sources/nuke-app/artifacts/tests/20261028T2308386674659-2a0c354a49fd4d169b4601c13b5860d8/tests.trx",
+    "TrxSha256": "18d166aa0d9039e6f055164da8fe65e5271b7e1265d0f358a65937e6849bee2f",
+    "Total": 284,
+    "Passed": 284,
+    "Failed": 0,
+    "Skipped": 0,
+    "Files": [
+      {
+        "Path": "Modules/Sources/SourceFactProducer.cs",
+        "Sha256": "e84a765b4aecb89381abc7a3fdb8c712ab7af2ae090ad52745744a6069cc351f",
+        "Size": 16351
+      },
+      {
+        "Path": "Tests/Sources/CallbackProducerCompletionContractCases.cs",
+        "Sha256": "21193ce95c96c08bf18a868c8bd152550c4080d075c0164faf6b86d37dad5a3e",
+        "Size": 4956
+      },
+      {
+        "Path": "Tests/Sources/CallbackProducerCompletionMockTests.cs",
+        "Sha256": "5a9ef10cd7bd8d492ff62afc65fe2af07f5ba09920231f349b8cafaaaff5110d",
+        "Size": 5518
+      },
+      {
+        "Path": "Tests/Sources/CallbackProducerCompletionRealTests.cs",
+        "Sha256": "501d5ca62b537e130ab25bae5debc43fa0193437144b81a1bb44a1b70e6bb5f4",
+        "Size": 1929
+      }
+    ]
+  },
+  "ValidationCommands": {
+    "NativeOnlyAfterGreenMock": true,
+    "NoFailedOrSkipped": true,
+    "NativeFilter": "FullyQualifiedName~CallbackProducerCompletion|FullyQualifiedName~SourceFactRealTests|FullyQualifiedName~CallbackFunctionalOriginalRealTests|FullyQualifiedName~SourcesRuntimeRealTests",
+    "MockFilter": "FullyQualifiedName~CallbackProducerCompletionMockTests"
+  },
+  "Chronology": "193 green mock checks and pinned unchanged producer before production; SAME eight success and eleven failure cases bind to native SourceFactProducer and existing LegacyAsciiIdentity canonical service afterward.",
+  "NativeChanges": [
+    "registration_candidates falsey empty resolved target: one hasTarget decision controls classification and confidence; exact retained identity fields/profile remain unchanged.",
+    "possible_pairs original indexed role/context keys: reuse CopyRequired with the original ordered lazy comparisons; explicit null context remains allowed and unused keys remain unread."
+  ],
+  "NormallyVerifiedScope": "Two exact callback helper clauses, eight full-output/identity boundary cases, eleven original indexed-key errors, both runtime profiles, plus unchanged original callback/functional and source-fact regression bindings. The other three callback helper bodies remain unchanged and use their existing direct native bindings.",
+  "Remaining": [
+    "Catalog owner still owns full aggregate/import caller closure and may consume CB-COMP01 empty-target fixture through its existing injected Source concern.",
+    "No new CLI/registry activation is included; original helper module has no CLI/main or file/network effects.",
+    "No whole malformed-DTO input-domain or full corpus closure is claimed by these bounded cases.",
+    "Root import/full gate and authoritative inventory changes remain pending.",
+    "Denied MCP memory/session access remains unavailable; no retry. HV remains deferred until Ready."
+  ],
+  "SourceProfiles": "Both published bodies were read separately. No frozen-release profile was inferred from identical hashes. Existing runtime factory composes the same pure concern for RELEASE011 and current-candidate; source/context/cache profiles and Python identities are not relabeled.",
+  "Descriptor001Sealed": true,
+  "CanonicalAppMutated": false,
+  "CanonicalInventoryMutated": false,
+  "OriginalsRetained": true,
+  "SafeToDelete": false,
+  "PythonExecuted": false
+}

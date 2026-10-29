@@ -1,0 +1,100 @@
+{
+  "At": "2026-10-29T02:22:15",
+  "ProjectionOnly": true,
+  "Scope": "Smallest standalone helper JSON case list required by existing published project callers or documented interfaces. No arbitrary Python-object or unused callable emulation.",
+  "Inventory": {
+    "PublishedPythonFilesQueried": 198,
+    "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/legacy-port-disposition-inventory.json",
+    "Sha256": "77c0e98fefe310f830f436b255ff129eedb47d99e42741d97f2fad667435ec7f"
+  },
+  "Query": {
+    "StandaloneImportsOrCalls": [],
+    "References": [
+      {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_native_descriptor_facts.py",
+        "Line": 2,
+        "Text": "from native_descriptor_facts import parse"
+      }
+    ],
+    "Literal": "native_descriptor_facts",
+    "Files": "Only authoritative published-tracked Python locations under publication/android-mcp-git; marker/private directories excluded"
+  },
+  "Documentation": {
+    "Terms": [
+      "native_descriptor_facts",
+      "NativeDescriptor",
+      "native-descriptor"
+    ],
+    "Roots": [
+      "publication/android-mcp-git/docs",
+      "publication/android-mcp-git/remediation/catalog/contracts",
+      "publication/android-mcp-git/README.md"
+    ],
+    "References": null,
+    "FilesQueried": 18
+  },
+  "NativePublicContracts": [
+    {
+      "Path": "remediation/nuke-app/Modules/Sources/NativeDescriptorContracts.cs",
+      "Sha256": "e065b78d2356a28ffc4240eae4eddde733708337516cc6dd737af45c7bb094ec",
+      "Content": "using System.Text.Json.Nodes;\n\nnamespace AndroidMcp.BuildTool.Sources;\n\n// Declared source token evidence only. This service does not infer compiled\n// endpoints, preprocessor conditions, transactions or runtime registration.\npublic interface INativeDescriptorSourceFacts\n{\n    JsonObject Parse(string text, string language);\n}\n"
+    },
+    {
+      "Path": "remediation/nuke-app/Modules/Sources/NativeDescriptorValueContracts.cs",
+      "Sha256": "53c7ed77dbc908301e69395786180aaba088f8ec56930438e18f4e31f56e395d",
+      "Content": "using System.Text.Json.Nodes;\n\nnamespace AndroidMcp.BuildTool.Sources;\n\n// JSON boundary for original parse inputs. String callers keep their existing\n// service contract; accepted empty JSON containers must not be silently lost.\npublic interface INativeDescriptorValueSourceFacts\n{\n    JsonObject ParseValue(JsonNode? text, JsonNode? language);\n}\n"
+    }
+  ],
+  "OriginalPins": [
+    {
+      "Sha256": "7aac07fd9046f54e782726c3dbb3272e7145fd311d3fdd0237fb763adf3d4302",
+      "Path": "tools/source_facts/native_descriptor_facts.py"
+    },
+    {
+      "Sha256": "a9d5b7356062e74ecd3cc0b3a5c0f82f441f70c268248d4353a69b45dbf8e63a",
+      "Path": "tools/source_facts/test_native_descriptor_facts.py"
+    }
+  ],
+  "RequiredStandaloneJsonCases": [],
+  "RequiredStandaloneJsonCaseCount": 0,
+  "ActualCallPathResponsibilities": [
+    {
+      "Helper": "lex",
+      "ExistingProof": "Original eight parse tests, ND03/04/13/14/15/16/17/20/21/22 and ParseValue empty-domain cases.",
+      "OriginalCaller": "parse after cpp/rust language guard",
+      "ReachableInputs": "Source text string, plus len-zero compatibility for accepted empty JSON containers through ParseValue"
+    },
+    {
+      "Helper": "mask",
+      "ExistingProof": "ND03/04/06/12/13 and descriptor spelling cases.",
+      "OriginalCaller": "parse twice using lex-produced spans",
+      "ReachableInputs": "Spans from the sole lexer; literal/comment projections, retained newline positions"
+    },
+    {
+      "Helper": "balanced",
+      "ExistingProof": "ND01/06/08/19 and Unicode Rust identifier spelling cases.",
+      "OriginalCaller": "parse opening delimiter from regex match and Rust bracket from matched prefix",
+      "ReachableInputs": "Nonnegative generated delimiter indices in masked source; negative caller indices are not present in this call graph"
+    },
+    {
+      "Helper": "literal",
+      "ExistingProof": "ND02/09/10/12/18/20/21, spelling cases and explicit Unicode-boundary addendum.",
+      "OriginalCaller": "parse only when extracted expression is not null",
+      "ReachableInputs": "Source-expression strings with guarded cpp/rust language; raw, ordinary, empty/computed/unresolved expression branches"
+    }
+  ],
+  "UnusedSurfaceExamples": [
+    "Standalone lex with an unguarded foreign language",
+    "Standalone mask with arbitrary caller span layouts and slicing bounds",
+    "Standalone balanced with negative or non-delimiter start indices",
+    "Standalone literal with nonstring raw values or an unguarded language"
+  ],
+  "Distinction": "Those examples are Python-callable surface possibilities, not observed importer/test/CLI/documented C# responsibilities. The parse dependencies remain actual implementation responsibilities and keep their existing proof/boundaries. No missing standalone producer responsibility was identified by this bounded audit.",
+  "RoleDecision": "Root must explicitly classify the unused standalone surface versus parse-internal dependencies. This receipt does not silently mark unrestricted helper equivalence, change the authority, or waive a future concrete caller.",
+  "Limit": "Static declared-source and documented-interface audit only; no claim that arbitrary dynamic Python reflection or future callers are impossible. Such hypothetical APIs are not expanded into this migration without an actual contract.",
+  "AuthorityEdited": false,
+  "SourceCodeEdited": false,
+  "PythonExecuted": false,
+  "HvAcceptance": false,
+  "SafeToDelete": false
+}

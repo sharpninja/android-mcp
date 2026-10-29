@@ -1,0 +1,218 @@
+{
+  "At": "2026-10-29T05:58:22",
+  "Owner": "Sources",
+  "RequirementIds": [
+    "FR-BUILD-004",
+    "TR-BUILD-004",
+    "TEST-BUILD-004"
+  ],
+  "Originals": [
+    {
+      "Path": "tools/source_facts/apex_manifest_facts.py",
+      "Sha256": "35af3b887b030e400231320eee167976f64679d684f647ba5c3cec9f48b5e841",
+      "Size": 2627
+    },
+    {
+      "Path": "tools/source_facts/test_apex_manifest_facts.py",
+      "Sha256": "b3beb718222a5b4533f7649a6e6fb8bada7fb7b19b8587d4560855c7b151b5d1",
+      "Size": 2446
+    },
+    {
+      "Path": "tools/source_facts/interface_module_facts.py",
+      "Sha256": "676c3fbbfe3e740f7aadd3bcac251655bc9d37de5ac2a5ce77a9a9632db0dc90",
+      "Size": 7130
+    }
+  ],
+  "ChangedFiles": [
+    {
+      "RelativePath": "Tests/Sources/ApexBuildLinkCompletionContractCases.cs",
+      "Handoff": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/apex-build-link-029/files/Tests/Sources/ApexBuildLinkCompletionContractCases.cs",
+      "Sha256": "e2707a8a20eb32a79065bec12878dcf1af6cd7fe8a90feb232fd300474674510",
+      "Size": 4111,
+      "RequireAbsent": true
+    },
+    {
+      "RelativePath": "Tests/Sources/ApexBuildLinkCompletionMockTests.cs",
+      "Handoff": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/apex-build-link-029/files/Tests/Sources/ApexBuildLinkCompletionMockTests.cs",
+      "Sha256": "46a574349a780e367c1ae466df005ef8d5ca9447d1bf995189a686dd5cf34804",
+      "Size": 3478,
+      "RequireAbsent": true
+    },
+    {
+      "RelativePath": "Tests/Sources/ApexBuildLinkCompletionRealTests.cs",
+      "Handoff": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/apex-build-link-029/files/Tests/Sources/ApexBuildLinkCompletionRealTests.cs",
+      "Sha256": "e6f542fd172bef6be15bc2e158601c26a3fd52a36b382c141b940771d4351e08",
+      "Size": 1529,
+      "RequireAbsent": true
+    }
+  ],
+  "UnchangedProductionAndExistingFixturePins": [
+    {
+      "Path": "Modules/Sources/SoongSourceFacts.cs",
+      "Sha256": "6e35b8aff66cb8e52ea90db56a9ab9981fc453d08f571a4d357159b5eb0a55fa",
+      "Size": 10504
+    },
+    {
+      "Path": "Modules/Sources/ApexManifestSourceFacts.cs",
+      "Sha256": "acdb8c48d4ce81ee1fd77b0f4de7ff093df12a1f0f54edf2f6a847dde8a25d4b",
+      "Size": 3638
+    },
+    {
+      "Path": "Modules/Sources/SourceText.cs",
+      "Sha256": "925b87aa5a90b0f63ed8273072e79b431a908a301a86c6b03a132ac0ba87b580",
+      "Size": 2169
+    },
+    {
+      "Path": "Modules/Sources/SourcesRuntimeFactory.cs",
+      "Sha256": "e03576a7a7ab9845aae32b5b8d562569a5f04cd7393a743a2ac501902f7668c7",
+      "Size": 5878
+    },
+    {
+      "Path": "Core/GlobMatcher.cs",
+      "Sha256": "d025a1b9e077eee19a031e7c4b87c13b2f5bd979ec0f934cee1e6bae1b0a527c",
+      "Size": 7134
+    },
+    {
+      "Path": "Tests/Sources/ApexManifestContractCases.cs",
+      "Sha256": "621bf44c9474088c440fcbda61f2dae7a41c9bbc3ad0660fb3a717086ed4fe75",
+      "Size": 5443
+    }
+  ],
+  "Proofs": [
+    {
+      "Stage": "mock",
+      "Trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/apex-build-link-029/mock-gate.trx",
+      "Sha256": "84ffcc30942ee69d90e6abad605ced52f2f60fe25c0b5809b09257b7c587820f",
+      "Passed": 33,
+      "Failed": 0,
+      "Skipped": 0
+    },
+    {
+      "Stage": "native",
+      "Trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/apex-build-link-029/native-gate.trx",
+      "Sha256": "cece0ba0e7718f8aefe8af3a6bb276333b10f491a0a92d406597454ff763e94c",
+      "Passed": 1501,
+      "Failed": 0,
+      "Skipped": 0
+    },
+    {
+      "Stage": "full",
+      "Trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/apex-build-link-029/full-gate.trx",
+      "Sha256": "6571416fe1f5e91577416bcbd6c782055417dc189f6a6b0c85ebecb46c62a0f7",
+      "Passed": 27187,
+      "Failed": 0,
+      "Skipped": 0
+    }
+  ],
+  "Logs": [
+    {
+      "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/apex-build-link-029/mock-gate.log",
+      "Sha256": "92113f6e04a42ae2eca8a3efc81c175cb37d7f085bf6ca0124f0915f9c841b47"
+    },
+    {
+      "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/apex-build-link-029/native-gate.log",
+      "Sha256": "1a93d58725185ada86e6ccb28c9b66faec4fff1e9b8f0bc7faf3c97283399ede"
+    },
+    {
+      "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/apex-build-link-029/full-gate.log",
+      "Sha256": "becdec155b499472483e4d218071d87daa4175cdb50669742d9826406c44dc13"
+    }
+  ],
+  "ExactNewResults": {
+    "ApexBuildLinkCompletionMockTests": 33,
+    "Total": 50,
+    "ApexBuildLinkCompletionRealTests": 17
+  },
+  "PriorFull": {
+    "Final": 27187,
+    "Sha256": "b8f62324cc6127bc42e34bc342451a38dd18d952738c34d9657a5ec7693d2044",
+    "Included": 27137,
+    "Missing": 0,
+    "Trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/sources/nuke-app/artifacts/tests/20261029T0522111450972-56cd28786c294705a09ea0e9476f3612/tests.trx"
+  },
+  "FunctionMap": [
+    {
+      "Native": "ApexManifestSourceFacts.Manifest + StrictJsonInspector + SourceText.MaskBuildComments",
+      "Original": "apex_manifest_facts.manifest and local pairs",
+      "Proof": "Existing23 full-output JSON cases retain every9-original test assertion, nested duplicate postorder, version0/max63/string/bool/float/null/unknown, raw/comment/diagnostic/conservative fields. SAME23 assertions now direct/current/release runtime concerns; mock correct and invented normalization rejected."
+    },
+    {
+      "Native": "SoongSourceFacts.Modules(Apex)",
+      "Original": "apex_manifest_facts.build_modules",
+      "Proof": "ExistingSOONG08/10-12 original inputs,021scalar/raw cases and newAPEX-LINK01/02 complete prebuilt_apex/apex_set outputs finish exact four original kinds. Every16new case uses full module/property/literal/line/raw/installedfalse comparison, direct/current/release. No build file execution."
+    },
+    {
+      "Native": "SoongSourceFacts.ExplicitManifestPath + existing GlobMatcher.NormalizePosixPath",
+      "Original": "apex_manifest_facts.explicit_manifest_path",
+      "Proof": "ExistingPATH01-06 exact original defaults/explicit/expression/filegroup/escape tests plus new16 compositional build->path cases: JSON boolean/integer/list/object unresolved, emptystring parent/root, absolute/parent/filegroup refusal, dot/slash normalization and internalcolon retained as source path. Original module result unchanged after projection."
+    }
+  ],
+  "OriginalTestMethods": [
+    {
+      "Method": "test_source_comments_retained_with_version_placeholder_unknown",
+      "Proof": "APEX-01 exact input, zero normalized string, raw source, comment receipt and unknown applicability; full object equality."
+    },
+    {
+      "Method": "test_comment_markers_inside_strings_are_not_removed",
+      "Proof": "APEX-02 exact url:// string and null comment normalization."
+    },
+    {
+      "Method": "test_source_version_not_turned_into_installed_range",
+      "Proof": "APEX-03 exact input and all conservative unknown/false fields, no inferred modules."
+    },
+    {
+      "Method": "test_proto_json_string_version_retained",
+      "Proof": "APEX-04 exact max63 decimal string normalized unchanged."
+    },
+    {
+      "Method": "test_bad_versions_unknown_without_discarding_raw",
+      "Proof": "APEX-05/06/07/08 preserve original json.dumps input spelling for true/-1/build placeholder/2**63, original raw value and null normalized code."
+    },
+    {
+      "Method": "test_duplicate_name_is_not_silently_selected",
+      "Proof": "APEX-09 exact duplicate input ambiguous status plus ordered duplicate/raw/applicability."
+    },
+    {
+      "Method": "test_malformed_json_preserved",
+      "Proof": "APEX-10 exact unfinished input raw retained; native reason present/nonblank, no CPython diagnostic-byte claim."
+    },
+    {
+      "Method": "test_literal_build_manifest_link_not_defaults_inference",
+      "Proof": "SOONG-08 exact three-module input and PATH-01/02 explicit-only null/dir-bar results; PATH-03 additionally permits the explicit defaults link without inheritance."
+    },
+    {
+      "Method": "test_manifest_variables_and_filegroups_unresolved",
+      "Proof": "SOONG-10/11/12 and PATH-04/05/06 exact three original values; unresolved variable, filegroup and parent escape remain null."
+    }
+  ],
+  "CallerAudit": {
+    "PublishedScope": 198,
+    "ProductionImporters": "No published production importer of apex_manifest_facts found; original own-test imports are preserved. No main/CLI exists in the original file.",
+    "NativeBinding": "Existing typed Soong/Apex concerns, both supported profiles, not a new extractor/schema/CLI.",
+    "Path": "source-pure-function-caller-map-022.json"
+  },
+  "Chronology": "Bounded concrete022 kind/path proof gaps identified. New16independent complete generated-module/path cases and23existing manifest assertions ran mock33 with all production and old fixtures unchanged. SAME native17 rows (16composite cases+one23-case manifest loop), each direct/current/release, plus old regressions1501 passed. Final applicable full passed with every27137prior name included and exactly50new results. No production fix or shared parser/service change was needed.",
+  "Boundary": "Strict native JSON/Unicode/numeric diagnostics retained; no arbitrary Python object/pathlib/interpreter or historical-byte equivalence. Pure Posix link paths are source facts, not artifact IO paths or installed identity.",
+  "ExplicitNativeLimits": [
+    "Existing strict finite JSON/Unicode admission and native nonblank syntax diagnostics remain, no CPython NaN/Infinity/lone-surrogate/int-limit or exact interpreter diagnostic formatting equivalence.",
+    "Public typed JSON/C# source-fact contract is preserved; malformed arbitrary Python-object APIs and unrestricted pathlib/interpreter equivalence are not claimed.",
+    "No installed APEX identity/version/product/default inference, corpus completeness or Android authority.",
+    "Path results are lexical source facts, not filesystem acquisition or ArtifactPaths admission grants."
+  ],
+  "NormalRecommendation": "After Root guarded import of3test files and canonical full proof, recommend NORMAL project-contract closure for tools/source_facts/apex_manifest_facts.py all3functions plus local pairs, and tools/source_facts/test_apex_manifest_facts.py all9original methods. No CLI/main is invented; no old test-count-only equivalence claim. This closes the two explicit029 kind proof gaps recorded022, under retained native JSON/Unicode/diagnostic/path boundaries.",
+  "Remaining": [
+    "Root alone binds canonical source/full proof and updates authoritative dispositions.",
+    "Soong actual main is separately implemented027/queued020; SDK lifecycle run is separate approved plan031, not covered by APEX proof.",
+    "manifest_source.parse secure XML/fallback-root/typed-return differences remain separately qualified022 role decisions, not waived here.",
+    "NU1900 unavailable feed warning retained; no network/provider action.",
+    "Live memory/logging unavailable after prior denial; no retry/persistence claim. No HV/PR Ready/whole-repo acceptance or deletion."
+  ],
+  "ProductionEdited": false,
+  "CanonicalEdited": false,
+  "AuthorityEdited": false,
+  "PythonExecuted": false,
+  "NoHvAcceptance": true,
+  "AcceptedComplete": false,
+  "OriginalsRetained": true,
+  "SafeToDelete": false
+}

@@ -1,0 +1,54 @@
+{
+  "At": "2026-10-29T04:49:23",
+  "Stage": "Independent mock contract, awaiting Root production review",
+  "Plan": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/interface-module-main-caller-plan-024.json",
+  "PlanSha256": "8d5193e2bd83b9571b6f6093f54ffffe9386d12439158273f634cc844e4a2104",
+  "ChangedFiles": [
+    {
+      "RelativePath": "Core/ArtifactDirectoryContracts.cs",
+      "Handoff": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/artifact-directory-025/files/Core/ArtifactDirectoryContracts.cs",
+      "Sha256": "003696d0858f6b531d9388ef6bf4b87dc5152da7caad19817f7ba16002bae71c",
+      "Size": 546,
+      "RequireAbsent": true
+    },
+    {
+      "RelativePath": "Tests/Core/ArtifactDirectoryContractCases.cs",
+      "Handoff": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/artifact-directory-025/files/Tests/Core/ArtifactDirectoryContractCases.cs",
+      "Sha256": "9b32e6aead0014958ea8f0a9660d98b9554d199f991fc85c0f63a7f6ceb15b11",
+      "Size": 5340,
+      "RequireAbsent": true
+    },
+    {
+      "RelativePath": "Tests/Core/ArtifactDirectoryMockTests.cs",
+      "Handoff": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/artifact-directory-025/files/Tests/Core/ArtifactDirectoryMockTests.cs",
+      "Sha256": "9ecccab4b4ad2a347fb40261b6a6876b6d397c02422138bc8b0ccc1de394750b",
+      "Size": 3793,
+      "RequireAbsent": true
+    }
+  ],
+  "Trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/artifact-directory-025/mock-gate.trx",
+  "Sha256": "439f78f444508dcfba98d348448f47de52d05522063b5cfaf14fe949854bca17",
+  "Passed": 44,
+  "Failed": 0,
+  "Skipped": 0,
+  "FiniteCases": 22,
+  "Assertions": "Each case runs correct fake then expected negative controls for missing/additional directory, file mutation, link mutation, wrong/swallowed error, hash invocation and successful retry. SAME contract intended for native store binding.",
+  "PriorStore": {
+    "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/sources/nuke-app/Core/FileArtifactStore.cs",
+    "Sha256": "e8779cdf8521fb211018f7cbe3db4a523058204a3692533b1c5fb0798513eb6a",
+    "Size": 13735
+  },
+  "StoreImplementationUnchanged": true,
+  "NoFileStoreImplementationYet": true,
+  "NoCanonicalOrAuthorityWrites": true,
+  "NoCoreExistingMethodEdits": true,
+  "NoPython": true,
+  "NoHvAcceptance": true,
+  "AcceptedComplete": false,
+  "SafeToDelete": false,
+  "Log": {
+    "Sha256": "1707fb50fb6696731d90a22878706927f6ca123fa4090d6f424aa99292eeb41f",
+    "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/artifact-directory-025/mock-gate.log"
+  },
+  "Remaining": "Root reviews exact contract/mock gate before additive FileArtifactStore interface/member only. Then SAME native temp-tree cases, all existing store/stream/strict/read regressions and full required verification. Main and host production await plan acknowledgment."
+}

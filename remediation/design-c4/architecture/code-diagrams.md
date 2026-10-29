@@ -11,6 +11,11 @@ skinparam defaultFontName DejaVu Sans
 skinparam classAttributeIconSize 0
 skinparam shadowing false
 skinparam backgroundColor white
+<style>
+title {
+  Margin 0 0 96 0
+}
+</style>
 title Kotlin server core — proposed ownership and contracts (UML class notation)
 interface BackendAdapter <<reference: server-execution-classes>>
 class AdbConnectionManager <<reference: server-execution-classes>>
@@ -771,7 +776,7 @@ end note
 
 ## Code view mapping and editing
 
-| Proposed class/interface | C4 component/system | Gradle project (single owner) |
+| Proposed class/interface | C4 component/system | Proposed Kotlin module (single owner) |
 | --- | --- | --- |
 | AdbConnectionManager | bridge.app.adb | bridge.android |
 | AdbPhoneBackend | bridge.app.adb | bridge.android |
@@ -873,7 +878,7 @@ end note
 The machine-readable [module contract](module-contract.json) owns this mapping.
 Dashed dependencies and composition references denote imports to that owner;
 interface/value ports live in bridge.domain. Runtime composition is performed only
-by bridge.android. The Gradle validation checks every drawn class and dependency
+by bridge.android. The native shared ModuleGraphValidator checks every drawn class and dependency
 against the permitted acyclic graph, including reference stubs. Concrete adapters
 are injected through domain ports; a reverse Flow of values is not a source import.
 

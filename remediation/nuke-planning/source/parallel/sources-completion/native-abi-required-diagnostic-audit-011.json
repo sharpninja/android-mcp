@@ -1,0 +1,242 @@
+{
+  "At": "2026-10-29T02:31:09",
+  "ProjectionOnly": true,
+  "Handoff007": {
+    "Path": "native-abi-007/handoff.json",
+    "Sha256": "0fd2a45ff4f38721895cd7d17ef9a5c81edc8510d496462f1a8e2089f7fd3252"
+  },
+  "Audit": {
+    "PublicDocuments": 177,
+    "PublishedPythonFiles": 198,
+    "References": [
+      {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_native_abi_facts.py",
+        "Line": 2,
+        "Text": "from native_abi_facts import parse"
+      }
+    ],
+    "InventorySha256": "77c0e98fefe310f830f436b255ff129eedb47d99e42741d97f2fad667435ec7f",
+    "DocumentReferences": [
+      {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/nuke-planning/source/SOURCE-PARITY-PLAN.md",
+        "Line": 61,
+        "Text": "- Native: `native_abi_facts.py`, `native_descriptor_facts.py`, `native_literal_audit.py`. ABI JSON retains all collections/unknown fields/ordinals/local linker keys; duplicate keys/nonfinite JSON unsupported; duplicate type identities or cycles cannot select one. Function-pointer chains provide callback candidates only. Descriptor lexer recognizes C++ IMPLEMENT_META_INTERFACE, IMPLEMENT_HYBRID_META_INTERFACE, IMPLEMENT_META_NESTED_INTERFACE, AIBinder_Class_define and Rust declare_binder_interface token families; nested Rust comments, C++ continued comments/raw strings, Rust raw strings and macro definitions must not produce false calls. Computed descriptor expressions/unclosed syntax remain unresolved. No compilation/preprocessing, endpoint registration, transaction schema, lifecycle, permission-free or installed-version conclusion."
+      },
+      {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/nuke-planning/source/AC-FIXTURE-MATRIX.md",
+        "Line": 35,
+        "Text": "- S-AC024 / NativeAbi_LosslessKeysAndStructuralCandidates: all7 `test_native_abi_facts.py` cases plus cycles/nonobject records. Correct batch preserves complete metadata, unknown collections and function-pointer reference chain. Controls: duplicate JSON key/nonfinite accepted, duplicate type identity selected, mangled overloads collapsed by display name, missing/cyclic reference infinite loop, callback role implies lifecycle/registration/permission-free/wire support. Assert distinct source-scoped keys and conservative facts."
+      }
+    ],
+    "NativeContract": {
+      "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/sources/nuke-app/Modules/Sources/NativeAbiContracts.cs",
+      "Sha256": "a7714f4475341bb1acfa3423681dc280a2cc8d0f508d243a5fd17819ff4d1723",
+      "Content": "using System.Text.Json.Nodes;\n\nnamespace AndroidMcp.BuildTool.Sources;\n\npublic interface INativeAbiSourceFacts { JsonObject Parse(string text); }\n"
+    }
+  },
+  "RequiredOriginalDiagnosticInputs": [
+    {
+      "NativeProof": "ORIG-ABI-05; SAME native passed. Four additional independent full-output duplicate diagnostics include exact Duplicate JSON key functions reason/raw/wire false.",
+      "Method": "test_duplicate_json_keys_preserved_as_unsupported_source",
+      "Assertions": [
+        "status == unsupported-json"
+      ],
+      "Input": "{\"functions\":[],\"functions\":[{}]}"
+    },
+    {
+      "NativeProof": "ORIG-ABI-06 and ABI-06; SAME native passed with raw preserved and wire false; ABI-06 also requires a present nonblank reason.",
+      "Method": "test_nonfinite_json_is_not_a_valid_interchange_number",
+      "Assertions": [
+        "status == unsupported-json"
+      ],
+      "Input": "{\"functions\":[NaN]}"
+    }
+  ],
+  "RequiredExistingDiagnosticDifferencesStillMissing": [],
+  "RequiredExistingDiagnosticDifferenceCount": 0,
+  "ObservableBoundaries": [
+    {
+      "RequiredByExistingAssertion": "Original asserts status only; replacement full-output contract requires present nonblank reason, not Python text.",
+      "Native": "status unsupported-json; reason Input is not one valid JSON value; raw unchanged; wire_or_runtime_proven false",
+      "EvidenceKind": "Exact original constant handler and native StrictJsonInspector source-derived reason strings, with existing native status/raw/wire/nonblank assertions. No new exact-reason execution claim.",
+      "Original": "status unsupported-json; reason Non-finite JSON token NaN; raw unchanged; wire_or_runtime_proven false",
+      "Difference": "reason text only",
+      "Input": "{\"functions\":[NaN]}"
+    },
+    {
+      "Status": "Explicit native diagnostics boundary, not an unspecified implementation backlog.",
+      "RequiredByExistingAssertion": false,
+      "Difference": "Python JSONDecodeError wording versus shared native InvalidJson diagnostic; no existing caller/assertion requires exact Python reason identity.",
+      "Input": "Malformed JSON such as {\"functions\":["
+    },
+    {
+      "Status": "Outside native finite JSON admission, explicit boundary for Root role disposition. No silent equivalence.",
+      "RequiredByExistingAssertion": false,
+      "Difference": "Original json.loads may retain overflow infinity and return parsed metadata; native strict finite-binary64 admission returns unsupported-json. This is an admission/output difference, not just reason wording.",
+      "Input": "{\"future\":1e400}"
+    },
+    {
+      "Status": "Outside native Unicode admission, explicit boundary for Root role disposition. No decoder/admission change.",
+      "RequiredByExistingAssertion": false,
+      "Difference": "Original json.loads retains a lone-surrogate string; existing native Unicode-scalar admission rejects it as unsupported-json. This is an admission/output difference.",
+      "Input": "{\"future\":\"\\ud800\"}"
+    },
+    {
+      "Status": "Implemented and proved007, no remaining implementation gap.",
+      "RequiredByExistingAssertion": "New five SAME mock/native reached-error contracts prove the C# operation boundary; original test file has no such exception-class assertion.",
+      "Difference": "Reached original AttributeError becomes explicit native ArgumentException Expected ABI nonobject-record bucket array; no silent opaque data discard.",
+      "Input": "{\"functions:nonobject-records\":null,\"functions\":[null]} and corresponding number/bool/string/object earlier buckets"
+    }
+  ],
+  "FunctionProof": [
+    {
+      "Original": "parse.pairs",
+      "Limit": "Generic malformed JSON error wording and all mixed-fatal diagnostic precedence remain the shared native boundary, not arbitrary Python JSONDecodeError equivalence.",
+      "Native": "Existing StrictJsonInspector plus NativeAbiSourceFacts duplicate diagnostic mapping",
+      "Proof": "ABI-05 and four exact ABI-DUPLICATE-DIAGNOSTIC cases including decoded aliases, empty name and nested-before-parent ordering."
+    },
+    {
+      "Original": "parse.constant",
+      "Limit": "Native syntax diagnostics differ from original Non-finite JSON token text. Decimal/exponent overflow to infinity is rejected by native finite-number admission while original json.loads may retain infinity. No equivalence for that outside-admission domain.",
+      "Native": "Existing strict JSON admission, unchanged",
+      "Proof": "Original ORIG-ABI-06 status assertion plus existing ABI-06 fixture."
+    },
+    {
+      "Original": "parse root/record inventory",
+      "Limit": "Original uncaught AttributeError at nonarray bucket append is represented by the explicit C# ArgumentException operation diagnostic. No silent opaque-root reset.",
+      "Native": "NativeAbiSourceFacts.Parse",
+      "Proof": "All13 collection families across existing18 goldens; raw unknown/nonobject root fields, null/nonstr keys and names, original root order, new earlier/later bucket collision outcomes, codepoint duplicate sorting."
+    },
+    {
+      "Original": "parse.refs",
+      "Limit": "No source-to-runtime/wire/schema inference or corpus completeness claim.",
+      "Native": "NativeAbiSourceFacts.References",
+      "Proof": "Existing ABI01/02/03/13/17/18 and new raw parameter/nonstr reference recursion cases; explicit paths/status/counts with metadata fully retained."
+    },
+    {
+      "Original": "parse.function_target",
+      "Limit": "Structural callback candidates only, no lifecycle, registration, permission, wire or installed-version authority.",
+      "Native": "NativeAbiSourceFacts.FunctionTarget",
+      "Proof": "Existing direct/indirect target walk, pointer/qualified/lvalue/rvalue chains, missing/duplicate/cycle stops, new nonlist/nondict parameter admission guards and exact callback metadata."
+    },
+    {
+      "Original": "test_native_abi_facts.py fixture and seven test methods",
+      "Limit": "Exact original assertions and independently authored default json.dumps ASCII fixture spelling; stronger full-output tests are separate and do not replace these original assertion bodies.",
+      "Native": "NativeAbiOriginalContractCases + SAME native NativeAbiCompletionRealTests",
+      "Proof": [
+        {
+          "Case": "ORIG-ABI-01",
+          "Assertions": "Exactly one callback, parameter_index0, lifecycle false and wire/runtime false.",
+          "Method": "test_pointer_to_function_parameter_is_structural_callback_candidate"
+        },
+        {
+          "Case": "ORIG-ABI-02",
+          "Assertions": "Original fixture with pointer referenced_type MISSING; unresolved reference count exactly1.",
+          "Method": "test_missing_type_reference_is_retained"
+        },
+        {
+          "Case": "ORIG-ABI-03",
+          "Assertions": "Original fixture appended record_types CB collision; CB appears in duplicate keys and callback candidates empty.",
+          "Method": "test_duplicate_type_identity_not_silently_selected"
+        },
+        {
+          "Case": "ORIG-ABI-04",
+          "Assertions": "Exact future_collection raw input, opaque7 object list retained.",
+          "Method": "test_unknown_root_collection_preserved"
+        },
+        {
+          "Case": "ORIG-ABI-05",
+          "Assertions": "Exact duplicate functions raw input returns unsupported-json status.",
+          "Method": "test_duplicate_json_keys_preserved_as_unsupported_source"
+        },
+        {
+          "Case": "ORIG-ABI-06",
+          "Assertions": "Exact functions NaN raw input returns unsupported-json status.",
+          "Method": "test_nonfinite_json_is_not_a_valid_interchange_number"
+        },
+        {
+          "Case": "ORIG-ABI-07",
+          "Assertions": "Exactly two records, original set of local keys f_int/f_string despite identical display_name.",
+          "Method": "test_mangled_overloads_not_collapsed_by_display_name"
+        }
+      ]
+    }
+  ],
+  "ExactOriginalTestMethods": {
+    "Path": "tools/source_facts/test_native_abi_facts.py",
+    "Recommendation": "All seven exact original test-method and fixture responsibilities now bind normally under replacing xUnit harness; Root authority decides path state after guarded import/full gate.",
+    "WholeProducerFileClosed": false,
+    "Methods": [
+      {
+        "Case": "ORIG-ABI-01",
+        "Assertions": "Exactly one callback, parameter_index0, lifecycle false and wire/runtime false.",
+        "Method": "test_pointer_to_function_parameter_is_structural_callback_candidate"
+      },
+      {
+        "Case": "ORIG-ABI-02",
+        "Assertions": "Original fixture with pointer referenced_type MISSING; unresolved reference count exactly1.",
+        "Method": "test_missing_type_reference_is_retained"
+      },
+      {
+        "Case": "ORIG-ABI-03",
+        "Assertions": "Original fixture appended record_types CB collision; CB appears in duplicate keys and callback candidates empty.",
+        "Method": "test_duplicate_type_identity_not_silently_selected"
+      },
+      {
+        "Case": "ORIG-ABI-04",
+        "Assertions": "Exact future_collection raw input, opaque7 object list retained.",
+        "Method": "test_unknown_root_collection_preserved"
+      },
+      {
+        "Case": "ORIG-ABI-05",
+        "Assertions": "Exact duplicate functions raw input returns unsupported-json status.",
+        "Method": "test_duplicate_json_keys_preserved_as_unsupported_source"
+      },
+      {
+        "Case": "ORIG-ABI-06",
+        "Assertions": "Exact functions NaN raw input returns unsupported-json status.",
+        "Method": "test_nonfinite_json_is_not_a_valid_interchange_number"
+      },
+      {
+        "Case": "ORIG-ABI-07",
+        "Assertions": "Exactly two records, original set of local keys f_int/f_string despite identical display_name.",
+        "Method": "test_mangled_overloads_not_collapsed_by_display_name"
+      }
+    ],
+    "Sha256": "0b2b455a6cc22e82574b9a788a864e21ca516d5997b9302079ce1aa1a0de070d"
+  },
+  "NativeProofs": [
+    {
+      "Stage": "native-abi-mock-007",
+      "OriginalTrx": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/sources/nuke-app/artifacts/tests/20261029T0208443624673-2216d7d38ca84433badc74d27c4fa206/tests.trx",
+      "Trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/native-abi-007/native-abi-mock-007.trx",
+      "Sha256": "adfe93723f26460b7895aea338f54c747722539237b6b866ba32a34093a0fd5c",
+      "Passed": 34,
+      "Failed": 0,
+      "Skipped": 0
+    },
+    {
+      "Stage": "native-abi-native-007",
+      "OriginalTrx": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/sources/nuke-app/artifacts/tests/20261029T0211088372230-9e44efe3ddc549fd951502dedb132ddf/tests.trx",
+      "Trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/native-abi-007/native-abi-native-007.trx",
+      "Sha256": "2f9cd015d8e4c470f62adfe73a6dfbde2ac6938eaf08be58a5dfbfa9e3bd07d9",
+      "Passed": 1492,
+      "Failed": 0,
+      "Skipped": 0
+    },
+    {
+      "Stage": "native-abi-full-007",
+      "OriginalTrx": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/sources/nuke-app/artifacts/tests/20261029T0215166646144-1b52e06df0714e09be8264d026675598/tests.trx",
+      "Trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/native-abi-007/native-abi-full-007.trx",
+      "Sha256": "ac28993c5046350feb0ef1ab4c3a5d344b51d98a10b19a3a3aa034e7d7da006f",
+      "Passed": 24303,
+      "Failed": 0,
+      "Skipped": 0
+    }
+  ],
+  "Recommendation": "No required existing caller/assertion diagnostic mismatch remains identified. Root may classify project-contract closure under explicit strict-native finite/Unicode and C# error boundaries after guarded007 import/full proof. Unrestricted Python JSON/error/admission equivalence remains unclaimed.",
+  "AuthorityEdited": false,
+  "CanonicalEdited": false,
+  "NoHvAcceptance": true,
+  "NoDeletion": true
+}

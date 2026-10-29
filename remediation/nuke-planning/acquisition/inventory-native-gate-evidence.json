@@ -1,0 +1,172 @@
+{
+  "timestamp": "2026-10-28T04:36:11",
+  "scope": "source-inventory-and-read-only-acquisition-resume",
+  "parentSessionId": "Codex-20261028T005928Z-plugin-session",
+  "parentRequestId": "req-20261028T011209Z-turn-1f08",
+  "auditStatus": "Own prior req-20261028T064409Z-turn-2b30 completion remains denied. No new turn or indirect logging. Ordinary local test evidence only.",
+  "receipts": [
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261028T0401129267199-d0e96d1c6c41412ba4543722782701ff/tests.trx",
+      "sha256": "7b3771e9a67cead4456fffe9979fb97fc92ee8df2317c4907392fea5159bc929",
+      "total": 1743,
+      "passed": 1743,
+      "failed": 0,
+      "other": 0,
+      "ownedClasses": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SourceBatchResumeMockTests",
+          "total": 24,
+          "passed": 24,
+          "failed": 0
+        }
+      ],
+      "failures": []
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261028T0407098868588-becf69ae3604402a9b7cee75dc62ce88/tests.trx",
+      "sha256": "607c791dbd9d07fdc43225923ec8329589ad800a9f33c7339198dc62f38e2f77",
+      "total": 64,
+      "passed": 64,
+      "failed": 0,
+      "other": 0,
+      "ownedClasses": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SourceBatchRealTests",
+          "total": 32,
+          "passed": 32,
+          "failed": 0
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SourceBatchResumeRealTests",
+          "total": 12,
+          "passed": 12,
+          "failed": 0
+        }
+      ],
+      "failures": []
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261028T0410206496163-994afdc94dcb4b5eaaf4384f1e089e42/tests.trx",
+      "sha256": "26296d2d49758fdede3ca41a1f0f8686f1e9c728dd86d99f00f80a085b46cc63",
+      "total": 85,
+      "passed": 84,
+      "failed": 1,
+      "other": 0,
+      "ownedClasses": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SourcesInventoryMockTests",
+          "total": 38,
+          "passed": 38,
+          "failed": 0
+        }
+      ],
+      "failures": [
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Review.Staging.TestGateAdmissionNativeTests.SameInputsAndStructuredAssertionsBindToNativePureEvaluators(kind: \"trx\", name: \"missing-trx\")",
+          "outcome": "Failed",
+          "details": "Assert.Equal() Failure: Collections differ\n                        ↓ (pos 260)\nExpected: [···, 58, 34, 77, 73, 83, ···]\nActual:   [···, 58, 34, 73, 78, 86, ···]\n                        ↑ (pos 260)   at AndroidMcp.BuildTool.Tests.Review.Staging.TestGateAdmissionCases.AssertContract(String kind, String name, JsonNode actual) in /home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Core/TestGateAdmissionMockTests.cs:line 147\n   at AndroidMcp.BuildTool.Tests.Review.Staging.TestGateAdmissionNativeTests.SameInputsAndStructuredAssertionsBindToNativePureEvaluators(String kind, String name) in /home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Core/TestGateAdmissionNativeTests.cs:line 28\n   at InvokeStub_TestGateAdmissionNativeTests.SameInputsAndStructuredAssertionsBindToNativePureEvaluators(Object, Span`1)\n   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)"
+        }
+      ]
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261028T0424232640492-03ffd5ef8730442b87e2f3ec3703fa2f/tests.trx",
+      "sha256": "851aa1c3e536950e5b6dd876de1f960d47482c8844cc0a0e37bbebb7e52f2d6e",
+      "total": 2208,
+      "passed": 2202,
+      "failed": 6,
+      "other": 0,
+      "ownedClasses": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SourcesInventoryMockTests",
+          "total": 38,
+          "passed": 38,
+          "failed": 0
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SourcesInventoryRealTests",
+          "total": 19,
+          "passed": 19,
+          "failed": 0
+        }
+      ],
+      "failures": [
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Documentation.Browser.BrowserQaCliRealTests.CurrentMonolithCliUsesSameSevenQaCasesAndAssertions(id: \"QA-external\")",
+          "outcome": "Failed",
+          "details": "Assert.Equal() Failure: Values differ\nExpected: 1\nActual:   255   at AndroidMcp.BuildTool.Tests.Documentation.Browser.BrowserQaCliCases.AssertContract(BrowserQaCase test, IBrowserQaCliProbe probe, BrowserQaCliInvocation call, IArtifactStore output) in /home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Documentation/Browser/BrowserQaCliCases.cs:line 54\n   at AndroidMcp.BuildTool.Tests.Documentation.Browser.BrowserQaCliRealTests.CurrentMonolithCliUsesSameSevenQaCasesAndAssertions(String id) in /home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Documentation/Browser/BrowserQaCliRealTests.cs:line 53\n--- End of stack trace from previous location ---"
+        },
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Documentation.Browser.BrowserQaCliRealTests.CurrentMonolithCliUsesSameSevenQaCasesAndAssertions(id: \"QA-svg\")",
+          "outcome": "Failed",
+          "details": "Assert.Equal() Failure: Values differ\nExpected: 1\nActual:   255   at AndroidMcp.BuildTool.Tests.Documentation.Browser.BrowserQaCliCases.AssertContract(BrowserQaCase test, IBrowserQaCliProbe probe, BrowserQaCliInvocation call, IArtifactStore output) in /home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Documentation/Browser/BrowserQaCliCases.cs:line 54\n   at AndroidMcp.BuildTool.Tests.Documentation.Browser.BrowserQaCliRealTests.CurrentMonolithCliUsesSameSevenQaCasesAndAssertions(String id) in /home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Documentation/Browser/BrowserQaCliRealTests.cs:line 53\n--- End of stack trace from previous location ---"
+        },
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Documentation.Browser.BrowserQaCliRealTests.CurrentMonolithCliUsesSameSevenQaCasesAndAssertions(id: \"QA-navigation\")",
+          "outcome": "Failed",
+          "details": "Assert.Equal() Failure: Values differ\nExpected: 1\nActual:   255   at AndroidMcp.BuildTool.Tests.Documentation.Browser.BrowserQaCliCases.AssertContract(BrowserQaCase test, IBrowserQaCliProbe probe, BrowserQaCliInvocation call, IArtifactStore output) in /home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Documentation/Browser/BrowserQaCliCases.cs:line 54\n   at AndroidMcp.BuildTool.Tests.Documentation.Browser.BrowserQaCliRealTests.CurrentMonolithCliUsesSameSevenQaCasesAndAssertions(String id) in /home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Documentation/Browser/BrowserQaCliRealTests.cs:line 53\n--- End of stack trace from previous location ---"
+        },
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Documentation.Browser.BrowserQaCliRealTests.CurrentMonolithCliUsesSameSevenQaCasesAndAssertions(id: \"QA-fonts\")",
+          "outcome": "Failed",
+          "details": "Assert.Equal() Failure: Values differ\nExpected: 1\nActual:   255   at AndroidMcp.BuildTool.Tests.Documentation.Browser.BrowserQaCliCases.AssertContract(BrowserQaCase test, IBrowserQaCliProbe probe, BrowserQaCliInvocation call, IArtifactStore output) in /home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Documentation/Browser/BrowserQaCliCases.cs:line 54\n   at AndroidMcp.BuildTool.Tests.Documentation.Browser.BrowserQaCliRealTests.CurrentMonolithCliUsesSameSevenQaCasesAndAssertions(String id) in /home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Documentation/Browser/BrowserQaCliRealTests.cs:line 53\n--- End of stack trace from previous location ---"
+        },
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Documentation.Browser.BrowserQaCliRealTests.CurrentMonolithCliUsesSameSevenQaCasesAndAssertions(id: \"QA-image\")",
+          "outcome": "Failed",
+          "details": "Assert.Equal() Failure: Values differ\nExpected: 1\nActual:   255   at AndroidMcp.BuildTool.Tests.Documentation.Browser.BrowserQaCliCases.AssertContract(BrowserQaCase test, IBrowserQaCliProbe probe, BrowserQaCliInvocation call, IArtifactStore output) in /home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Documentation/Browser/BrowserQaCliCases.cs:line 54\n   at AndroidMcp.BuildTool.Tests.Documentation.Browser.BrowserQaCliRealTests.CurrentMonolithCliUsesSameSevenQaCasesAndAssertions(String id) in /home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Documentation/Browser/BrowserQaCliRealTests.cs:line 53\n--- End of stack trace from previous location ---"
+        },
+        {
+          "name": "AndroidMcp.BuildTool.Tests.Documentation.Browser.BrowserQaCliRealTests.CurrentMonolithCliUsesSameSevenQaCasesAndAssertions(id: \"QA-overflow\")",
+          "outcome": "Failed",
+          "details": "Assert.Equal() Failure: Values differ\nExpected: 1\nActual:   255   at AndroidMcp.BuildTool.Tests.Documentation.Browser.BrowserQaCliCases.AssertContract(BrowserQaCase test, IBrowserQaCliProbe probe, BrowserQaCliInvocation call, IArtifactStore output) in /home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Documentation/Browser/BrowserQaCliCases.cs:line 54\n   at AndroidMcp.BuildTool.Tests.Documentation.Browser.BrowserQaCliRealTests.CurrentMonolithCliUsesSameSevenQaCasesAndAssertions(String id) in /home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Documentation/Browser/BrowserQaCliRealTests.cs:line 53\n--- End of stack trace from previous location ---"
+        }
+      ]
+    }
+  ],
+  "appFilePins": [
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Sources/Acquisition/SourceBatchContracts.cs",
+      "sha256": "c16a335369d729a54243012ed038a47b766f37cf825262ff054a3a169dc490ae"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Sources/Acquisition/SourceBatchResumeContracts.cs",
+      "sha256": "38c66caeb95f8e27053630a2d9ec2253ef0b623e518fbaff943f233a4795d0e2"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Sources/Acquisition/SourceBatch.cs",
+      "sha256": "9c1d9ae3b8bcf450f582a8038f705ed89a6e331a3d0aa7541d741995bfb2c694"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Sources/Acquisition/SourcesInventoryContracts.cs",
+      "sha256": "3e8192ccfed7316b223f38d28e919c7b6a6f8f731dbda0f1f2ecf5d2c852fb85"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Sources/Acquisition/SourcesInventoryOperation.cs",
+      "sha256": "c128ef4dff8dd6c65b7b64d14095d4ba5e5847f0b41077021b067732a8bce07b"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/Acquisition/SourceBatchResumeContractTests.cs",
+      "sha256": "70334ef0766be82bc624834c8ee7fde90e9eca187d12a29075faf0e2d9be758c"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/Acquisition/SourceBatchResumeRealTests.cs",
+      "sha256": "19eff34f59110fa3ec33c0b5638f1efa5d5cb8278f943d8b028205a766d7ed24"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/Acquisition/SourcesInventoryContractTests.cs",
+      "sha256": "bb5cca49ad3d4baac23845143da838a4a0a54eeada989b5d5e681241f60d6fce"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/Acquisition/SourcesInventoryRealTests.cs",
+      "sha256": "3288b0a30e6d1476c27ace89ec92de9fc65f377a8edb05ed1dd92e59f5c4610d"
+    }
+  ],
+  "notes": [
+    "Resume-only24mocks preceded native12 and original32case regression. Old SourceBatchRequest serialization unchanged.",
+    "Inventory38mocks preceded native service implementation. Mixed85gate contains one foreign missing-trx failure, retained in full; root expressly authorized own scoped proof.",
+    "One RehydrationPlanner and one SourceBatch resume-validation engine. Inventory never invokes acquisition; missing/replaced trusted manifest fails before HTTP/write.",
+    "SourceExtract owns cache generation composition. Inventory retains raw provenance/status and never claims extraction or historical byte identity.",
+    "Seed caller counts/candidate ordering, canonical status selection, native Validate/Toolchain and CLI integration remain separately tracked; see SOURCES-INVENTORY-PLAN.md."
+  ],
+  "hostileAcceptance": "pending parent whole-goal acceptance"
+}

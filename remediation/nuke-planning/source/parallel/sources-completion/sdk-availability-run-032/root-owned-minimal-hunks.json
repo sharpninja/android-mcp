@@ -1,0 +1,50 @@
+{
+  "At": "2026-10-29T06:11:45",
+  "RootOwnership": "Root pins canonical files and applies unique-anchor hunks only; private prior hashes do not authorize wholesale canonical replacement",
+  "Hunks": [
+    {
+      "Path": "Modules/Sources/PublishedInterfaceHashWorkflowContracts.cs",
+      "Before": "public enum SourceExtractTask { Declarations, InterfaceHashes, InterfaceModules }",
+      "After": "public enum SourceExtractTask { Declarations, InterfaceHashes, InterfaceModules, SdkAvailability }"
+    },
+    {
+      "Path": "Build.cs",
+      "Before": "Sources/Extract task: Declarations (default), InterfaceHashes or InterfaceModules",
+      "After": "Sources/Extract task: Declarations (default), InterfaceHashes, InterfaceModules or SdkAvailability"
+    },
+    {
+      "Path": "Build.SourcesExtract.cs",
+      "Before": "        if(ExtractTask==SourceExtractTask.InterfaceModules){await ExtractInterfaceModules(project,canonical,admitted);return;}",
+      "After": "        if(ExtractTask==SourceExtractTask.InterfaceModules){await ExtractInterfaceModules(project,canonical,admitted);return;}\n        if(ExtractTask==SourceExtractTask.SdkAvailability){await ExtractSdkAvailability(project,canonical,admitted);return;}"
+    }
+  ],
+  "Priors": [
+    {
+      "Path": "Modules/Sources/PublishedInterfaceHashWorkflowContracts.cs",
+      "PrivatePriorSha256": "8c63ffa21a85297b89c413018b505d48cc78bca0d2b89440bdcad487822ffa7b",
+      "PrivatePriorSize": 1014,
+      "PrivateAfterSha256": "b021ad9735c491088cd465d60173417fcaf01ce956f051c9fd1d277436b684a3",
+      "PrivateAfterSize": 1031,
+      "ExactOneHunkReplayVerified": true
+    },
+    {
+      "Path": "Build.cs",
+      "PrivatePriorSha256": "2f2d68588054926978c1dc7509415760e8e3c49e74e0784b8a6e7e81e1d1c2c7",
+      "PrivatePriorSize": 17634,
+      "PrivateAfterSha256": "577adcde20d67a57684d3f99f2a9dc7681c85d9ab7491dfba97b48181f83fd22",
+      "PrivateAfterSize": 17651,
+      "ExactOneHunkReplayVerified": true
+    },
+    {
+      "Path": "Build.SourcesExtract.cs",
+      "PrivatePriorSha256": "870b28b19e58be443a9e6fb539ac6a823bb5a99701d7504de473084ba5ef328c",
+      "PrivatePriorSize": 3914,
+      "PrivateAfterSha256": "a8afd68d08e9c6804d3c440a288220a1190afe4923950f18acb5a79f4850ff81",
+      "PrivateAfterSize": 4039,
+      "ExactOneHunkReplayVerified": true
+    }
+  ],
+  "MockReceipt": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/sdk-availability-run-032/mock-gate.json",
+  "MockSha256": "71dffe930374e7266d61eb1719e22e572857de9ee08aaa52419659c5bf2ffc0f",
+  "CanonicalEdited": false
+}

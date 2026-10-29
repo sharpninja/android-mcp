@@ -1,0 +1,224 @@
+{
+  "at": "2026-10-28T22:48:08",
+  "mode": "Callers",
+  "workspace": "/home/sharpninja/github/2026-10-26/task-3",
+  "privateApplication": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/acquisition/nuke-app",
+  "parentTask": "01a17378-6017-7574-b58d-f42e9bd57039",
+  "sessionLogging": "incomplete: denied live route not retried",
+  "hvRun": false,
+  "wholeMigrationComplete": false,
+  "scope": "Current published rehydration documentation, exact generic rehydration CLI/test, existing PowerShell callers and Gradle facade. Producer source citations are retained separately from executable invocations.",
+  "files": [
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/REHYDRATE.md",
+      "sha256": "031e6fd428557f9ad4db257e1683d643fa0b4ad5ae6e8f4a86e75530f50e33ff",
+      "bytes": 8608
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/README.md",
+      "sha256": "cd4cba7a87786b68d0982a5a11e2e661f8717447b6b2fafdf056f28a2f81c506",
+      "bytes": 4232
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/MIGRATION-STATUS.md",
+      "sha256": "30b7044c0d7c4d5f70838bf57d3a9a3867f40a9ad40a2bafa1af3cce157797a2",
+      "bytes": 7985
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/rehydrate.py",
+      "sha256": "73623b939aacd5108382b1f3d335de2a8665205553fa8ee2cf99f3eadfea0263",
+      "bytes": 23815
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/tests/test_rehydrate.py",
+      "sha256": "2acc1913674998f90ae2148fcd6934a63116e1406e231790b7ce350ce6cf7910",
+      "bytes": 9988
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/design-c4/build.gradle.kts",
+      "sha256": "27fd8e364d815c471f79101c2707bf11e7e492359dbaf56b9c8a7aa097fb08a8",
+      "bytes": 2902
+    }
+  ],
+  "missingFiles": [],
+  "publishedPowerShellRehydratorExists": false,
+  "references": [
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/REHYDRATE.md",
+      "line": 15,
+      "classification": "historical-reference-or-policy",
+      "text": "Use Python 3.14, Expat 2.8.4 and the exact packages in the producer requirements. Python minor, native Expat, tree-sitter libraries and producer file bytes participate in cache identity; mismatches fail rather than relabel old caches. Basic `plan`, `fetch` and `--help` use the standard library; extraction/build require the pinned packages."
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/REHYDRATE.md",
+      "line": 20,
+      "classification": "documented-executable-command",
+      "text": "python3.14 -m venv .venv"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/REHYDRATE.md",
+      "line": 24,
+      "classification": "documented-executable-command",
+      "text": "python -m pip install -r rehydration/producers/release-011/requirements-extraction.txt"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/REHYDRATE.md",
+      "line": 25,
+      "classification": "documented-executable-command",
+      "text": "python tools/rehydrate.py --help"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/REHYDRATE.md",
+      "line": 26,
+      "classification": "documented-executable-command",
+      "text": "python tools/rehydrate.py plan --workspace ../android-mcp-data"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/REHYDRATE.md",
+      "line": 27,
+      "classification": "documented-executable-command",
+      "text": "python tools/rehydrate.py doctor --workspace ../android-mcp-data"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/REHYDRATE.md",
+      "line": 35,
+      "classification": "documented-executable-command",
+      "text": "python tools/rehydrate.py seed --from-dir ../owner-snapshot-bundle --workspace ../android-mcp-data"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/REHYDRATE.md",
+      "line": 45,
+      "classification": "documented-executable-command",
+      "text": "python tools/rehydrate.py fetch --workspace ../android-mcp-data"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/REHYDRATE.md",
+      "line": 46,
+      "classification": "documented-executable-command",
+      "text": "python tools/rehydrate.py extract --workspace ../android-mcp-data --strict-cache-bytes"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/REHYDRATE.md",
+      "line": 47,
+      "classification": "documented-executable-command",
+      "text": "python tools/rehydrate.py build --workspace ../android-mcp-data"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/REHYDRATE.md",
+      "line": 48,
+      "classification": "documented-executable-command",
+      "text": "python tools/rehydrate.py validate --workspace ../android-mcp-data"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/REHYDRATE.md",
+      "line": 49,
+      "classification": "documented-executable-command",
+      "text": "python tools/rehydrate.py export --workspace ../android-mcp-data"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/README.md",
+      "line": 3,
+      "classification": "historical-reference-or-policy",
+      "text": "> **NUKE migration in progress:** see [progress and remaining work](MIGRATION-STATUS.md). Do not execute Python tooling or legacy commands. This branch includes an incomplete native NUKE checkpoint; normal migration validation precedes ready-for-review, and HV follows in the PR."
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/README.md",
+      "line": 33,
+      "classification": "historical-reference-or-policy",
+      "text": "Native NUKE `Publish/Check` checks every tracked path, including accidental files force-added past `.gitignore`; see the [admitted Git identity and local usage](remediation/nuke-app/README.md). The retained Python checker is a dormant parity reference. Existing broad checkpoint commits remain in history; this cleanup is a normal forward commit, not a history rewrite or a claim that older Git objects were erased."
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/MIGRATION-STATUS.md",
+      "line": 25,
+      "classification": "historical-reference-or-policy",
+      "text": "Seven previously omitted historical Markdown paths remain untracked, with local originals and byte-identical .md.fixture carriers preserved. Corpora, raw streams, private MCP state, runtime distributions, generated binaries/caches and historical databases stay outside this lean tree. Dormant legacy sources remain references; never execute Python or custom Node. Current recipes/provenance and source licenses remain retained."
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/rehydrate.py",
+      "line": 237,
+      "classification": "historical-reference-or-policy",
+      "text": "        errors.append(f\"Producer cache identity requires Python {'.'.join(map(str, wanted))}\")"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/rehydrate.py",
+      "line": 281,
+      "classification": "dynamic-producer-call",
+      "text": "    fingerprint = importlib.import_module(\"cache_fingerprint\")"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/rehydrate.py",
+      "line": 314,
+      "classification": "dynamic-producer-call",
+      "text": "            result = importlib.import_module(\"java_source\").parse(raw.read_bytes(), source[\"path\"])"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/rehydrate.py",
+      "line": 316,
+      "classification": "dynamic-producer-call",
+      "text": "            result = importlib.import_module(\"sdk_api_index\").parse(raw.read_bytes(), target=source[\"platform_api_version\"])"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/rehydrate.py",
+      "line": 350,
+      "classification": "executable-process-caller",
+      "text": "def checked_subprocess(arguments):"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/rehydrate.py",
+      "line": 351,
+      "classification": "executable-process-caller",
+      "text": "    subprocess.run([sys.executable, *map(str, arguments)], check=True, env=dict(os.environ, PYTHONDONTWRITEBYTECODE=\"1\"))"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/rehydrate.py",
+      "line": 384,
+      "classification": "executable-process-caller",
+      "text": "        checked_subprocess([producer / \"tooling/build_catalog.py\", inventory_path(workspace), output])"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/rehydrate.py",
+      "line": 386,
+      "classification": "executable-process-caller",
+      "text": "        checked_subprocess([producer / \"tooling/validate_catalog.py\", output, inventory_path(workspace), output.parent / (output.name + \".validation.json\")])"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/rehydrate.py",
+      "line": 391,
+      "classification": "executable-process-caller",
+      "text": "        checked_subprocess([producer / \"tooling/export_permissions.py\", output, destination])"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/rehydrate.py",
+      "line": 473,
+      "classification": "executable-module-entrypoint",
+      "text": "if __name__ == \"__main__\":"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/tests/test_rehydrate.py",
+      "line": 91,
+      "classification": "executable-process-caller",
+      "text": "        result=subprocess.run([sys.executable,str(TOOLS/'rehydrate.py'),'--help'],capture_output=True,text=True)"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/tests/test_rehydrate.py",
+      "line": 156,
+      "classification": "executable-process-caller",
+      "text": "            result=subprocess.run([sys.executable,str(TOOLS/'rehydrate.py'),command,'--recipe',str(path),'--workspace',str(work),'--allow-file','--delay','0'],capture_output=True,text=True)"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/tests/test_rehydrate.py",
+      "line": 163,
+      "classification": "executable-process-caller",
+      "text": "        result=subprocess.run([sys.executable,str(TOOLS/'rehydrate.py'),'validate','--recipe',str(path),'--workspace',str(work)],capture_output=True,text=True)"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/tests/test_rehydrate.py",
+      "line": 167,
+      "classification": "executable-module-entrypoint",
+      "text": "if __name__=='__main__': unittest.main()"
+    }
+  ],
+  "executableReferences": 24,
+  "retirementEstablished": false,
+  "gradlesWithPython": []
+}

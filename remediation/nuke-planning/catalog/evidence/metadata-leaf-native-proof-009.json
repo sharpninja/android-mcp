@@ -1,0 +1,86 @@
+{
+  "localTimestamp": "2026-10-28T15:36:51",
+  "scope": "Shared draft-2020-12 metadata-schema admission, exact strong-tag anchoring and same original leaf assertions.",
+  "requirements": [
+    "FR-BUILD-004",
+    "TR-BUILD-TOOL-004",
+    "TEST-BUILD-004"
+  ],
+  "mockBeforeProduction": {
+    "trxSha256": "92ead08e5a31a2c55781c635114d07a35ee4995232138508f3a77bd1db0f6013",
+    "gatePassed": 508,
+    "class": "CatalogMetadataLeafMockTests",
+    "count": 38
+  },
+  "initialBroad": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T1455440406336-5477e76046fe4859903e89c789c34380/tests.trx",
+    "sha256": "271f5e95fa0b71f5399252c5f5005cddf6fcdf0218f221542a1a972a6fe5850b",
+    "passed": 4787,
+    "failed": 1,
+    "finding": "LEAF-01 malformed schema rejected inconsistently under broad concurrency; isolated native 19 passed and was not treated as broad acceptance."
+  },
+  "correctedBroad": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T1504104505697-95274d034998416bb1a7f0204ed563f0/tests.trx",
+    "sha256": "83d4304d4ce7541ee7e01c22ba3970c42ab85009c54247fb8e100a036f2ddec2",
+    "total": 4788,
+    "passed": 4788,
+    "failed": 0,
+    "notExecuted": 0,
+    "exactClassCounts": {
+      "CatalogMetadataLeafMockTests": 38,
+      "CatalogMetadataLeafRealTests": 19
+    }
+  },
+  "fullGate": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T1530238651985-a53179df0e9d4478bdd4c56ab7b6ba4b/tests.trx",
+    "sha256": "9e9bd02efbfdde7d86e9c8a9040090074645f7d482828b6e87cd010e8ed7ce4f",
+    "total": 65117,
+    "passed": 65117,
+    "failed": 0,
+    "notExecuted": 0,
+    "exactClassCounts": {
+      "CatalogMetaSchemaConcurrencyRealTests": 1,
+      "SourceBatchPacingRealTests": 16,
+      "CatalogMetadataLeafRealTests": 19,
+      "ArchitectureLegacyReceiptRealTests": 12,
+      "SourcesFetchPacingCliRealTests": 1
+    }
+  },
+  "sourcePins": [
+    {
+      "path": "remediation/nuke-app/Modules/Catalog/CatalogSourceMetadata.cs",
+      "sha256": "179975fdc2e8054a8edcac47e4571221ad36990b2d1b9ac7b99f74e1a8e93cad"
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Catalog/CatalogValidator.cs",
+      "sha256": "81aa2c70c4662927bfdc3d90e6ca9d99d5c2f58996b7de1c94b5912099664311"
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Catalog/MetadataCatalog.cs",
+      "sha256": "f25d8646f59d1799c52fac941a2f9cdf8cf13e23ef627e46773928eb655c1521"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Catalog/CatalogMetadataLeafClosureCases.cs",
+      "sha256": "7d3327258908961e2558344d97786425fda4a2a064bc47b0714aa7baed6fb9b9"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Catalog/CatalogMetadataLeafClosureRealTests.cs",
+      "sha256": "80ee0f14d3ab7398ca5721824a130f15f9f73231103b98fdec9493376aafe54d"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Catalog/CatalogMetaSchemaConcurrencyRealTests.cs",
+      "sha256": "ad6d4da662096ef390e6482d134bee35047362386b5316924c8246717ee11692"
+    }
+  ],
+  "behavior": [
+    "One shared meta-schema evaluation entry point, serializing use of the existing pinned library singleton.",
+    "No upstream library defect attribution or dependency upgrade; broad and explicit concurrent regression results are the evidence.",
+    "The existing strong-tag expression uses exact end-of-input matching, preserving original fullmatch behavior.",
+    "Same nineteen native cases retain schema, identity, candidate, occurrence and CRUD preservation assertions."
+  ],
+  "limits": [
+    "No global corpus, complete producer/file or historical byte-identity claim.",
+    "No test omission, assertion weakening, Python execution or HV acceptance."
+  ],
+  "acceptedComplete": false
+}

@@ -1,0 +1,60 @@
+{
+  "At": "2026-10-29T05:22:49",
+  "OriginalProposal": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/interface-module-main-027/root-owned-minimal-hunks.json",
+  "OriginalProposalSha256": "41af47812da727014e83be7e67de5ec192505c907343270ffa36081c25628ffe",
+  "Correction": "Original proposal Priors fields serialized null because Select-Object was applied to OrderedDictionary records. Original three Before/After hunks are intact and correct. This append-only addendum supplies the exact prior/source/size guards and verifies private replay; original proposal retained byte-identical.",
+  "Priors": [
+    {
+      "Path": "Modules/Sources/PublishedInterfaceHashWorkflowContracts.cs",
+      "PrivatePriorSha256": "c3f8a36272143256d772f5edc7bad1dd1cc96ce997481f4c0965ec146fa0516d",
+      "PrivatePriorSize": 996,
+      "RetainedPrivatePrior": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/interface-module-main-027/prior/Modules/Sources/PublishedInterfaceHashWorkflowContracts.cs.snapshot",
+      "PrivateAfterSha256": "8c63ffa21a85297b89c413018b505d48cc78bca0d2b89440bdcad487822ffa7b",
+      "PrivateAfterSize": 1014,
+      "ExactSingleHunkReplayVerified": true,
+      "CanonicalWholeFileReplacementForbidden": true
+    },
+    {
+      "Path": "Build.cs",
+      "PrivatePriorSha256": "350f557d63129d18ac0443baaefb38589de7425c108e0115a551bf83fc793588",
+      "PrivatePriorSize": 17616,
+      "RetainedPrivatePrior": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/interface-module-main-027/prior/Build.cs.snapshot",
+      "PrivateAfterSha256": "2f2d68588054926978c1dc7509415760e8e3c49e74e0784b8a6e7e81e1d1c2c7",
+      "PrivateAfterSize": 17634,
+      "ExactSingleHunkReplayVerified": true,
+      "CanonicalWholeFileReplacementForbidden": true
+    },
+    {
+      "Path": "Build.SourcesExtract.cs",
+      "PrivatePriorSha256": "8f8fd7eb49fbda56e8b77c646a3297bc096e18a2261d4e88d54baf59277f06c6",
+      "PrivatePriorSize": 3787,
+      "RetainedPrivatePrior": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/interface-module-main-027/prior/Build.SourcesExtract.cs.snapshot",
+      "PrivateAfterSha256": "870b28b19e58be443a9e6fb539ac6a823bb5a99701d7504de473084ba5ef328c",
+      "PrivateAfterSize": 3914,
+      "ExactSingleHunkReplayVerified": true,
+      "CanonicalWholeFileReplacementForbidden": true
+    }
+  ],
+  "Hunks": [
+    {
+      "Path": "Modules/Sources/PublishedInterfaceHashWorkflowContracts.cs",
+      "Before": "public enum SourceExtractTask { Declarations, InterfaceHashes }",
+      "After": "public enum SourceExtractTask { Declarations, InterfaceHashes, InterfaceModules }"
+    },
+    {
+      "Path": "Build.cs",
+      "Before": "Sources/Extract task: Declarations (default) or InterfaceHashes",
+      "After": "Sources/Extract task: Declarations (default), InterfaceHashes or InterfaceModules"
+    },
+    {
+      "Path": "Build.SourcesExtract.cs",
+      "Before": "        if(ExtractTask==SourceExtractTask.InterfaceHashes){await ExtractPublishedHashes(project,canonical,admitted);return;}",
+      "After": "        if(ExtractTask==SourceExtractTask.InterfaceHashes){await ExtractPublishedHashes(project,canonical,admitted);return;}\n        if(ExtractTask==SourceExtractTask.InterfaceModules){await ExtractInterfaceModules(project,canonical,admitted);return;}"
+    }
+  ],
+  "RootOwnership": "Canonical shared files may contain newer unrelated Root work. Root pins its own current files and applies only these unique Before/After hunks; never require/replace wholesale private copies. Private priors establish the measured minimal delta, not canonical replacement authority.",
+  "ApplicationSourceChangedByAddendum": false,
+  "CanonicalEdited": false,
+  "AuthorityEdited": false,
+  "NoHvAcceptance": true
+}

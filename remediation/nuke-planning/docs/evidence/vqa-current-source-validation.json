@@ -1,0 +1,30 @@
+{
+  "status": "Reviewed presentation changes applied; actual current-source model validation passed",
+  "appliedReceipt": "evidence/vqa-layout-canonical-promotion-applied.json",
+  "appliedReceiptSha256": "a97e43309b8cbddd4730ceee08ea9dc163d6f15237e499840ef0b7ec8e588943",
+  "visualReceipt": "evidence/vqa-title-margin-native-001-visual-inspection.json",
+  "visualReceiptSha256": "05e597905634eedf8135a3574b0d53a851e408f91aff300857a49389337ae703",
+  "actualRenderedGenerationManifest": "remediation/nuke-app/artifacts/vqa-title-margin-native-001/architecture/generation-manifest.json",
+  "actualRenderedGenerationManifestSha256": "5adc7240b3b63c2b8e0f7ef5501f0e467e33e0c18243f9d23d9368b3a7016c2d",
+  "matchedCurrentCanonicalRenderInputs": [
+    { "path": "architecture/workspace.dsl", "sha256": "f7a14cc8b830407c9db981e1b33d5232e99cc7b545a70b3171c297f710b2e815", "length": 34659 },
+    { "path": "architecture/code-diagrams.md", "sha256": "6cca957a2f0da5b09d76d4c82a0c6817e59c22f09705314169b98dd330d215a1", "length": 42109 },
+    { "path": "architecture/module-contract.json", "sha256": "8f675e7fe5313a62df6d1ece2f6bb2a44fb77ce844123d6e351b701bd609050b", "length": 9916 },
+    { "path": "architecture/render-skin.puml", "sha256": "89952885ec79918d05ffd40ce67c0a5af20c1336951e73ca5aeadd3cfb78631c", "length": 96 },
+    { "path": "toolchain-lock.json", "sha256": "94dbb4754728e970ec1ff37f358f987b76e5eb1e8a456a2b14e003bfc218751e", "length": 2001 },
+    { "path": "renderer-lock.json", "sha256": "7a3835898cec12466a51f0aa28980cc2f41e1ca657b3cf8ce20b37436087e2b4", "length": 1211 }
+  ],
+  "normalValidation": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T1157227170014-afdadfa28def499d83e628684361de5c/tests.trx",
+    "sha256": "342108b0e6880ef611b6d084de8769705068325ddc38ec54629721bcae47b38d",
+    "executed": 15705,
+    "passed": 15705,
+    "failed": 0,
+    "skipped": 0,
+    "currentCanonicalFacts": 2,
+    "currentCanonicalFactClass": "CurrentLayoutModelValidationRealTests",
+    "scope": "Exact four-source before/after delta; current native 12-required/3-optional source collection, existing full model/module/UI preflight, unchanged-source recheck; affected historical assertions also retained"
+  },
+  "preserved": "Historical source pins, virtual artifact names, original SVG/PUML/deck bytes and assertions were not rewritten. Their passing tests remain historical parity evidence, separate from the two actual current-source facts.",
+  "limitations": "Direct visual findings cover only the two inspected diagrams. No all-diagram or hostile acceptance claim. No additional render was executed by this worker; the actual rendered six input identities and 27 copied outputs match current canonical data. Parent owns the next full suite and checkpoint."
+}

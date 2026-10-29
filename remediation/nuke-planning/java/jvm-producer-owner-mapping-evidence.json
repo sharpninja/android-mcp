@@ -1,0 +1,51 @@
+{
+  "responsibility": "Original JVM source producer falsey owner-map lookup",
+  "scope": "Six bounded owner mapping branches in the existing linker; no whole producer, profile, corpus or caller closure",
+  "originalSources": [
+    {
+      "path": "publication/android-mcp-git/remediation/catalog/tooling/jvm_source_link.py",
+      "sha256": "6cc57fd9f4dcf7b8f432377ad486242583c02cb280d7ea7e383b7c41afb4f5cb"
+    },
+    {
+      "path": "publication/android-mcp-git/rehydration/producers/release-011/tooling/jvm_source_link.py",
+      "sha256": "6cc57fd9f4dcf7b8f432377ad486242583c02cb280d7ea7e383b7c41afb4f5cb"
+    }
+  ],
+  "originalRule": "candidate=owners.get(value); return '['*dims+'L'+candidate+';' if candidate else None",
+  "admissionFinding": "Source owner confirmed there is no shared caller-admission proof that every mapped owner is nonempty. Existing SourceTypeFacts delegates to the same linker and must retain null/unknown.",
+  "cases": ["JVM-PRODUCER-01-empty", "JVM-PRODUCER-02-null", "JVM-PRODUCER-03-array", "JVM-PRODUCER-04-generic", "JVM-PRODUCER-05-return", "JVM-PRODUCER-06-parameter"],
+  "mock": {
+    "status": "passed",
+    "rows": 12,
+    "wrongDescriptorControlIterations": 24,
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T1119464829550-f87fa78677c448b0a23882e9b84720b6/tests.trx",
+    "sha256": "979573fda52e024df5c57a910cf85dea601bf069c75ef5d197f2f98239398fae",
+    "wholeGate": "62 passed, zero failed or skipped; Root reported zero build warnings",
+    "independentlyVerified": "TRX hash and all twelve matching result rows"
+  },
+  "production": {
+    "path": "remediation/nuke-app/Modules/Sources/Java/JavaSemanticServices.cs",
+    "priorSha256": "8caf7c9c9535ad63c738d301ffea9bd85aac74151371b06a4ed72148080eeae8",
+    "sha256": "dfe6f0514712e2f2c0b41fe59175f9981a04263126ea1bafe2ffa45bdb6dbb3d",
+    "change": "Existing TryGetValue condition additionally requires !string.IsNullOrEmpty(binary). Whitespace remains accepted as in the original Python truthiness rule.",
+    "copyReceipt": "remediation/nuke-planning/java/jvm-producer-owner-native-copy-20261028T112354.json",
+    "copyReceiptSha256": "ba0cb9e439a05ab96d2b25ca45f2b23baf45152600426f0a986cc498993d23c0",
+    "retainedPrior": "remediation/nuke-planning/java/JavaSemanticServices.before-owner-guard.cs.retained"
+  },
+  "native": {
+    "status": "passed Root-coordinated gate",
+    "rows": 6,
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T1125115312785-28d05369fba04ec7a19469f3c6fdfc17/tests.trx",
+    "trxSha256": "262ec3a160532d760325e05ead23f98303e499066d3a38ca59f849f4abff712f",
+    "wholeGate": "200 passed, zero failed or skipped; Root reported zero build warnings",
+    "independentlyVerified": "TRX hash, six real rows, twelve mock rows and existing 39 JVM plus five context regression rows all passed",
+    "testPath": "remediation/nuke-app/Tests/Sources/Java/JvmProducerOwnerMappingRealTests.cs",
+    "testSha256": "4ee71388f0ca703a813d5539b8ce897de6de544c8ad9ab91ac3871bb0bceea59",
+    "provider": "Existing JvmSourceLinker; same JvmProducerOwnerMappingCases.AssertContract and immutable input assertions",
+    "regression": "Existing JavaSemanticRealTests: 39 JVM and five context rows"
+  },
+  "noNewParserOrRuntime": true,
+  "noOwnBuildOrProcessExecution": true,
+  "wholeProducerComplete": false,
+  "hvPerformed": false
+}

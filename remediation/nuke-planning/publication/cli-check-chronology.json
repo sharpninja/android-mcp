@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "observedAtLocal": "2026-10-28T01:55:35",
+  "scope": "Actual read-only Publish/Check CLI against the authorized lean publication checkout",
+  "wholeMigrationComplete": false,
+  "independentAcceptance": false,
+  "executableCliPathsVerified": 6,
+  "diagnosis": {
+    "classification": "CPU-bound duplicate per-pair regex construction; not an await deadlock",
+    "launcherPid": 2155585,
+    "actualApphostPid": 2155649,
+    "policyAllowPatterns": 392,
+    "policyDenyPatterns": 22,
+    "trackedFiles": 849,
+    "maximumPairChecks": 351486,
+    "correction": "PID2155585 was the waiting dotnet launcher; PID2155649 was the CPU-bound apphost."
+  },
+  "attempt001": {
+    "status": "Stopped by owning root; not completed or accepted",
+    "ownerReportedStopLocal": "2026-10-28T01:29:34",
+    "ownerReportedAppCpuSeconds": 651,
+    "capturesLocalRelativeDirectory": "nuke-app/artifacts/cli-git-check-001",
+    "stdoutBytes": 47479,
+    "stderrBytes": 0,
+    "rawCapturesRetained": true
+  },
+  "fix": {
+    "publicationCheckerSha256": "406a7ccd1e1dc126177e3d4b23b2e52c6666a97f946d16c078d4c81113a4b193",
+    "privatePublicationRegexEngineRemoved": true,
+    "matcher": "Core.GlobMatcher",
+    "profile": "GlobMatchingProfile.PublicationFilename",
+    "optimizationOwner": "Shared Core only",
+    "scaleProof": "Pinned 392 allow/22 deny policy with 849 controlled unique SVG paths; 56883 explicit same-instance delegated calls; no timing threshold",
+    "oldChecker17AndAdapterFilesystem35AssertionsUnchanged": true
+  },
+  "proof": {
+    "reuseMockTotal": 6,
+    "reuseMockPassed": 6,
+    "reuseMockTrxSha256": "ace70b89a72bd8602524ab214c53f8eeb28a15a811032b91a58af86332e95fba",
+    "regressionTotal": 99,
+    "regressionPassed": 99,
+    "regressionFailed": 0,
+    "regressionSkipped": 0,
+    "regressionTrxLocalRelativePath": "nuke-app/artifacts/tests/20261028T0150335721717-3fc92722fe864876b2a773a2e9c4016a/tests.trx",
+    "regressionTrxSha256": "af3174e0c08f6cc2903c4423e009f5f7d8c2edc5cef67be7e5e2d7a5b7146336",
+    "scope": "Core literal/glob semantics plus matcher3 and old checker17/Git24/workspace11; not the whole migration suite"
+  },
+  "attempt002": {
+    "status": "Completed",
+    "ownerReportedNukeExitCode": 0,
+    "ownerReportedNukeTargetDuration": "under 1 second (observation, not a test limit)",
+    "summaryEvidence": "Root terminal CLI output supplied in parent delegation; Git capture count/hash independently verified here",
+    "trackedFiles": 849,
+    "trackedBytes": 17149521,
+    "issues": 0,
+    "policySha256": "4ab12829cc0702514981787cdf9cd34b0b2a3b90dc4eb60eac4e286f19eca4a1",
+    "trackedPathsSha256": "eb45bf9bab557bf194e8f59d23aedffd0a8beefb2210da83145580757adf49b9",
+    "git": {
+      "executable": "/usr/bin/git",
+      "sha256": "93473c28694fd72bd889364107cd2770514de59780885a6a4aafca4d602e30ad",
+      "version": "git version 2.55.0",
+      "startedAt": "2026-10-28T01:51:34.8867398-05:00",
+      "endedAt": "2026-10-28T01:51:34.8965172-05:00",
+      "exitCode": 0,
+      "cancelled": false
+    },
+    "capturesLocalRelativeDirectory": "nuke-app/artifacts/cli-git-check-002",
+    "stdoutBytes": 47479,
+    "stderrBytes": 0
+  },
+  "remainingGate": "The complete application suite is not yet green: nine Browser JSON-node ownership failures have a separate owner; root full checkpoint004 gate remains required.",
+  "boundaries": {
+    "gitIndexOrRepositoryWritesByService": false,
+    "pythonExecuted": false,
+    "customNodeExecuted": false,
+    "githubActionsAdded": false,
+    "hvRun": false,
+    "rawStreamsOrMachineIdentityDescriptorForUpload": false,
+    "mainOrReadyOrMergeChange": false
+  }
+}

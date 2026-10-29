@@ -1,0 +1,124 @@
+{
+  "localTimestamp": "2026-10-28T23:56:48",
+  "files": [
+    {
+      "path": "remediation/test_design024_core_contract.py",
+      "sourceSha256": "09e648d07d127ba5d58aabb0c108b80bcb24db2c46ba74218de7dfce46865d02",
+      "methods": [
+        "test_actual_controls_are_in_generated_design_table",
+        "test_delete_reason_and_metadata_etags",
+        "test_pinned_portable_metadata_contract",
+        "test_inbound_arc_counts_dispatch_and_lifecycle_uses_port",
+        "test_screen_result_schema_has_one_field_spelling",
+        "test_single_writer_credential_and_modifier_semantics",
+        "test_generic_example_uses_canonical_argument_names",
+        "test_pending_owner_state_is_paused_with_explicit_reason"
+      ],
+      "nativeClass": "LegacyCore024MethodRealTests",
+      "nativeMethod": "SameOriginalEightMethodsReadCurrentCanonicalFiles",
+      "service": "Current canonical design/code/API/schema/source-pin/screen inputs through the shared store",
+      "mockClass": "LegacyCore024MethodMockTests",
+      "mockCount": 33
+    },
+    {
+      "path": "remediation/tests_design020_contract.py",
+      "sourceSha256": "9577ce4eda3c646420caaf7156967dc4110e248112b1423674261f98128879ad",
+      "methods": [
+        "test_arc_authentication_is_explicitly_an_adapter_to_shared_registry",
+        "test_component_writes_converge_on_single_sqlite_coordinator",
+        "test_owner_log_read_and_export_have_both_model_and_code_path",
+        "test_unknown_callback_late_result_and_cancel_are_closed_in_contract",
+        "test_nonresumable_stage_expiry_has_one_policy",
+        "test_migration_precedes_live_schema",
+        "test_screen_tables_and_story_actions_resolve_to_declared_ids",
+        "test_self_adb_pairing_is_an_explicit_story_not_a_grant"
+      ],
+      "nativeClass": "LegacyDesign020MethodRealTests",
+      "nativeMethod": "SameOriginalEightMethodsReadCurrentCanonicalFiles",
+      "service": "Current canonical design/code/C4/UI-manifest inputs through the shared store",
+      "mockClass": "LegacyDesign020MethodMockTests",
+      "mockCount": 33
+    }
+  ],
+  "sourcePins": [
+    {
+      "path": "remediation/nuke-app/Tests/Documentation/LegacyCore024MethodMockTests.cs",
+      "sha256": "00f567de6367b8ba58e7b192d8fffe84681881de15248eb1273cafd1e4547747"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Documentation/LegacyCore024MethodRealTests.cs",
+      "sha256": "493ab6f313380fb7fcf2698a176196c66431c1ba77ab773f85841c2fa36b3120"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Documentation/LegacyDesign020MethodMockTests.cs",
+      "sha256": "9579327a022ba08aba08c897a3290b083376110963ebbcb666168ad07548c7dc"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Documentation/LegacyDesign020MethodRealTests.cs",
+      "sha256": "cd11b90993d317842929dd3f03d47d813ba47c4505e1935311e2ace950aed29c"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Documentation/DocumentationProjectionMockTests.cs",
+      "sha256": "bd16be3e2e3c6b033a6c8a7688543a655aaee02935ec5a5a0cab9a34376375c7"
+    }
+  ],
+  "mock": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T2143472457327-30aed7fa4a6b423794dae7e7d98c88b8/tests.trx",
+    "sha256": "ff468e2762b294f579d4d5bb3a8b15e6f6e8e1cc93768b193f6c353ecad075a6",
+    "aggregatePassed": 107,
+    "ownPassedAcrossSelectedClasses": 66,
+    "selectedClasses": {
+      "LegacyCore024MethodMockTests": 33,
+      "LegacyDesign020MethodMockTests": 33
+    }
+  },
+  "native": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T2151581680131-5cd2386b9c9e4f129af86ce9bbee6901/tests.trx",
+    "sha256": "d987725e3eb73d2e45679c9ac78675954a61894853d6f8d7134797d284edfb49",
+    "aggregatePassed": 205,
+    "ownPassed": 16,
+    "modelRegressions": 0,
+    "currentModelChecks": 0,
+    "linuxRuntimeChecks": 0
+  },
+  "completeFileNormalClosure": true,
+  "awaitingCurrentFullGate": false,
+  "hv": false,
+  "safeToDeleteOriginal": false,
+  "semantics": [
+    "All sixteen exact original methods bind current canonical files, including portable metadata pins, API bodies/ETags, lifecycle/code paths, protected owner health, literal example keys, callback outcomes, single writer and UI navigation membership.",
+    "Independent minimal observations and per-predicate wrong controls prove the assertions. The original Python membership semantics include object keys and list items; string membership and ignored mapping values are retained by the assertion port, not introduced as artifact-schema admission.",
+    "No design text, schema, generated output or original expected predicate was relaxed. Native reads reuse FileArtifactStore and the existing XML/JSON engines; unittest and Node/Python subprocess mechanics do not execute."
+  ],
+  "additionalMock": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T2150281015158-58db0ca67eeb4b49b71da53ded5455ef/tests.trx",
+    "sha256": "b62b72a73a15ffe3dd327e05fbfca02eede42baebb9e457d9cb9c12d69507378",
+    "aggregatePassed": 69,
+    "class": "LegacyDesign020MethodMockTests",
+    "ownPassed": 33
+  },
+  "priorNativeFailure": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T2146385859179-e53d6d37c5a54536a6f110d7f4ea5c6d/tests.trx",
+    "sha256": "4b65fed3d2b93e0f2c134098bf08ca07e0323223e03a739dc2e5308754104bde",
+    "passed": 191,
+    "failed": 1,
+    "cause": "The assertion port incorrectly required a JsonArray for state membership. Original Python membership accepts mapping keys, matching the actual manifest. Corrected mock and unchanged native binding reran; no production design was changed."
+  },
+  "priorCompileFailure": {
+    "code": "CS9273",
+    "path": "Tests/Documentation/LegacyCore024MethodMockTests.cs",
+    "line": 83,
+    "retainedOriginalSha256": "d6287fba94003a40a4a4ad4a005a120be5b297d18d86de2a3c5bca41b334fd0f",
+    "correction": "Local variable field renamed propertyName for C#14; cases and expected values unchanged.",
+    "trxCreated": false,
+    "capture": "Session tool output, no fabricated local compiler log."
+  },
+  "fullGate": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+    "sha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+    "passed": 67272,
+    "failed": 0,
+    "skipped": 0,
+    "buildWarnings": 0
+  }
+}

@@ -1,0 +1,257 @@
+{
+  "at": "2026-10-28T03:35:58",
+  "scope": "Normal Java fixture/contract parity evidence separated from HV acceptance",
+  "requirements": [
+    "FR-BUILD-004",
+    "TR-BUILD-TOOL-004",
+    "TEST-BUILD-004"
+  ],
+  "gate": {
+    "classes": [
+      {
+        "count": 13,
+        "class": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaAstRealTests",
+        "evidenceKind": "production-bound"
+      },
+      {
+        "count": 1,
+        "class": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHandleLifetimeMockTests",
+        "evidenceKind": "mock-and-negative-controls"
+      },
+      {
+        "count": 1,
+        "class": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaHandleLifetimeRealTests",
+        "evidenceKind": "production-bound"
+      },
+      {
+        "count": 83,
+        "class": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaMockGateTests",
+        "evidenceKind": "mock-and-negative-controls"
+      },
+      {
+        "count": 2,
+        "class": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaNativeBuilderRealTests",
+        "evidenceKind": "production-bound"
+      },
+      {
+        "count": 1,
+        "class": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaNativeBuildMockTests",
+        "evidenceKind": "mock-and-negative-controls"
+      },
+      {
+        "count": 37,
+        "class": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionMockTests",
+        "evidenceKind": "mock-and-negative-controls"
+      },
+      {
+        "count": 37,
+        "class": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaRuntimeAdmissionRealTests",
+        "evidenceKind": "production-bound"
+      },
+      {
+        "count": 44,
+        "class": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaSemanticRealTests",
+        "evidenceKind": "production-bound"
+      },
+      {
+        "count": 1,
+        "class": "AndroidMcp.BuildTool.Tests.Sources.Java.JavaWorkflowMockTests",
+        "evidenceKind": "mock-and-negative-controls"
+      }
+    ],
+    "mockAndControls": 123,
+    "sha256": "03e8b39c7193ce6d3e337616100dc83143ec3e75ed0879cd743f66738e425e9a",
+    "javaSelected": 220,
+    "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261028T0322143932886-e0de7a5dbb3543ce87660c21ce21c5c4/tests.trx",
+    "skipped": 0,
+    "failed": 0,
+    "productionBound": 97
+  },
+  "prior146": {
+    "mockAndControls": 86,
+    "productionBound": 60,
+    "note": "146was a mixed test-family total, never146native tests"
+  },
+  "perFile": [
+    {
+      "hvAcceptance": "PENDING: no HV verdict for this file",
+      "acceptedComplete": false,
+      "role": "Shared contract declarations",
+      "normalEvidence": "Contract consumers bind these interfaces; no separate native execution count is attributed to declarations.",
+      "normalStatus": "bounded-normal-contract-evidence",
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Sources/Java/JavaContracts.cs",
+      "testReferences": [
+        "JavaMockGateTests",
+        "JavaNativeBuildMockTests",
+        "JavaWorkflowMockTests",
+        "JavaSemanticRealTests",
+        "JavaNativeBuilderRealTests"
+      ],
+      "sha256": "2605ead0d94748195bc56e59c69d63517c4703505d458e2ac0c0307f589f46c0"
+    },
+    {
+      "hvAcceptance": "PENDING: no HV verdict for this file",
+      "acceptedComplete": false,
+      "role": "Legacy java_source.parse AST visitor",
+      "normalEvidence": "13production AST cases preserve8 original functions, exact inputs/paths and100repetitions for the large-line fixture, plus5additional boundaries.",
+      "normalStatus": "bounded-normal-contract-evidence",
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Sources/Java/JavaSourceExtractor.cs",
+      "testReferences": [
+        "JavaAstRealTests",
+        "JavaMockGateTests"
+      ],
+      "sha256": "7714eb4713e5ae1390a161cbd1560d2b4f1731af5192e71171733d5b7c46b394"
+    },
+    {
+      "hvAcceptance": "PENDING: no HV verdict for this file",
+      "acceptedComplete": false,
+      "role": "Pinned in-process AST runtime bridge",
+      "normalEvidence": "AST cases use the selected compiled parser. Handle test exercises actual C# SafeHandle factory using synthetic pointers/callbacks, not an independent native allocation count.",
+      "normalStatus": "bounded-normal-contract-evidence",
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Sources/Java/JavaNativeParser.cs",
+      "testReferences": [
+        "JavaAstRealTests",
+        "JavaHandleLifetimeRealTests",
+        "JavaRuntimeAdmissionRealTests"
+      ],
+      "sha256": "e58cd6aa51e887acf9148a4d0f4b4f3f443da79bad54a893e434a91a3adc6fbf"
+    },
+    {
+      "hvAcceptance": "PENDING: no HV verdict for this file",
+      "acceptedComplete": false,
+      "role": "Legacy java_context.attach and jvm_source_link.encode/key",
+      "normalEvidence": "44managed production cases:5context including2original,39JVM including4original. These are not native runtime tests.",
+      "normalStatus": "bounded-normal-contract-evidence",
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Sources/Java/JavaSemanticServices.cs",
+      "testReferences": [
+        "JavaSemanticRealTests",
+        "JavaMockGateTests"
+      ],
+      "sha256": "8caf7c9c9535ad63c738d301ffea9bd85aac74151371b06a4ed72148080eeae8"
+    },
+    {
+      "hvAcceptance": "PENDING: no HV verdict for this file",
+      "acceptedComplete": false,
+      "role": "Native build support",
+      "normalEvidence": "One actual pinned compiler rebuild and one existing successful CLI generation receipt validation. Do not label both as fresh builds.",
+      "normalStatus": "bounded-normal-contract-evidence",
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Sources/Java/JavaNativeBuilder.cs",
+      "testReferences": [
+        "JavaNativeBuildMockTests",
+        "JavaNativeBuilderRealTests"
+      ],
+      "sha256": "71ec4880e8953dca7bac3b0f89b44763184259ec078a763257a072ea61723a7b"
+    },
+    {
+      "hvAcceptance": "PENDING: no HV verdict for this file",
+      "acceptedComplete": false,
+      "role": "Pinned acquisition/build orchestration support",
+      "normalEvidence": "Current tests replay the retained NativeParser002 receipt; prior actual CLI generation is separate evidence. No new live fetch was inferred from this gate.",
+      "normalStatus": "bounded-normal-contract-evidence",
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Sources/Java/JavaNativeWorkflow.cs",
+      "testReferences": [
+        "JavaWorkflowMockTests",
+        "JavaNativeBuilderRealTests.FreshNativeGenerationReceiptSatisfiesIdenticalWorkflowOutputAssertions"
+      ],
+      "sha256": "b9d36634891c70bd44b87d5e34ec9d5c817831bc605e978788bd8690071faef4"
+    },
+    {
+      "hvAcceptance": "PENDING: no HV verdict for this file",
+      "acceptedComplete": false,
+      "role": "New local native manifest admission adapter",
+      "normalEvidence": "37production-bound cases comprise5accepted admissions with actual parser extraction and32rejections. This is not37successful native loads.",
+      "normalStatus": "bounded-normal-contract-evidence",
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Sources/Java/JavaSourceRuntimeLoader.cs",
+      "testReferences": [
+        "JavaRuntimeAdmissionMockTests",
+        "JavaRuntimeAdmissionRealTests"
+      ],
+      "sha256": "606608238ee8480818359aa2c386bfc8ea578ffad98e7ff683da99cfa5e3a503"
+    }
+  ],
+  "legacyProducers": [
+    {
+      "hvAcceptance": "PENDING",
+      "sha256": "ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
+      "originalFunctionTests": 8,
+      "nativeBinding": "JavaSourceExtractor.Extract -> JavaNativeParser.WithTree",
+      "normalScope": "Original fixture assertions, not whole-profile CLI/corpus equivalence",
+      "legacyPath": "remediation/catalog/tooling/java_source.py",
+      "acceptedComplete": false,
+      "safeToDelete": false
+    },
+    {
+      "hvAcceptance": "PENDING",
+      "sha256": "4276f8abb3c0040fd1c8b4e9da52a163eb35d2d7716319327a884c0ed83fc55d",
+      "originalFunctionTests": 2,
+      "nativeBinding": "JavaFileContext.Attach",
+      "normalScope": "Original fixture assertions, not whole-profile CLI/corpus equivalence",
+      "legacyPath": "remediation/catalog/tooling/java_context.py",
+      "acceptedComplete": false,
+      "safeToDelete": false
+    },
+    {
+      "hvAcceptance": "PENDING",
+      "sha256": "6cc57fd9f4dcf7b8f432377ad486242583c02cb280d7ea7e383b7c41afb4f5cb",
+      "originalFunctionTests": 4,
+      "nativeBinding": "JvmSourceLinker.Encode/Key",
+      "normalScope": "Original fixture assertions, not whole-profile CLI/corpus equivalence",
+      "legacyPath": "remediation/catalog/tooling/jvm_source_link.py",
+      "acceptedComplete": false,
+      "safeToDelete": false
+    },
+    {
+      "hvAcceptance": "PENDING",
+      "sha256": "ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
+      "originalFunctionTests": 8,
+      "nativeBinding": "JavaSourceExtractor.Extract -> JavaNativeParser.WithTree",
+      "normalScope": "Original fixture assertions, not whole-profile CLI/corpus equivalence",
+      "legacyPath": "rehydration/producers/release-011/tooling/java_source.py",
+      "acceptedComplete": false,
+      "safeToDelete": false
+    },
+    {
+      "hvAcceptance": "PENDING",
+      "sha256": "4276f8abb3c0040fd1c8b4e9da52a163eb35d2d7716319327a884c0ed83fc55d",
+      "originalFunctionTests": 2,
+      "nativeBinding": "JavaFileContext.Attach",
+      "normalScope": "Original fixture assertions, not whole-profile CLI/corpus equivalence",
+      "legacyPath": "rehydration/producers/release-011/tooling/java_context.py",
+      "acceptedComplete": false,
+      "safeToDelete": false
+    },
+    {
+      "hvAcceptance": "PENDING",
+      "sha256": "6cc57fd9f4dcf7b8f432377ad486242583c02cb280d7ea7e383b7c41afb4f5cb",
+      "originalFunctionTests": 4,
+      "nativeBinding": "JvmSourceLinker.Encode/Key",
+      "normalScope": "Original fixture assertions, not whole-profile CLI/corpus equivalence",
+      "legacyPath": "rehydration/producers/release-011/tooling/jvm_source_link.py",
+      "acceptedComplete": false,
+      "safeToDelete": false
+    }
+  ],
+  "originalTestBindings": {
+    "sha256": "68e787aa1c7faecdcc2618045b513ba44e582a83e5c3bfca436e995ff4cceef8",
+    "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/java-binding-supplement.json"
+  },
+  "nativeGeneration": {
+    "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/java-native-002/native-source-lock.json",
+    "sha256": "e9fa6885c4d800dd1c74ef72f478f0b81885811f2b9fb84665d76dc18f3ff0c1",
+    "generation": "Actual prior NativeParser002, plus actual independent compiler rebuild proof"
+  },
+  "normalVsAcceptance": {
+    "androidRuntime": "No claim",
+    "hv": "Not run; parent explicitly deferred until Ready",
+    "corpus": "Unrun",
+    "normal": "Selected source/module contracts passed normal tests",
+    "windows": "Unvalidated",
+    "catalogCli": "Root composition/binding proof pending at this receipt",
+    "xmlJvmErasure": "Java encoder contribution only; XML composition proof is source-owner scope",
+    "requirementStatus": "No completed or satisfied state claimed"
+  },
+  "acceptedComplete": false,
+  "safeToDelete": false,
+  "accuracy": 99,
+  "accuracyScope": "Selected TRX class partition, current file hashes and bounded fixture bindings"
+}

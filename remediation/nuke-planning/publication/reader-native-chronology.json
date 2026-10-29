@@ -1,0 +1,48 @@
+{
+  "localTimestamp": "2026-10-28T19:28:21",
+  "mock": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T1917069312441-b0b7c662f69743bc9d6c696e4f8632ce/tests.trx",
+    "sha256": "28c3dd2c225b600368cbe9dbc8cfdf6c94035b14d46a7dca58f1a9a198fabfc1",
+    "aggregatePassed": 100,
+    "ownPassed": 64
+  },
+  "native": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T1924509258587-692898602810474a8ecb4c7422f646d4/tests.trx",
+    "sha256": "2e5f50cef79c935afd995903cf2e2dfadf88273f0b069ac0bef081ef6bdf7a77",
+    "aggregatePassed": 474,
+    "readerPassed": 18,
+    "unconfiguredProviderPassed": 2,
+    "failed": 0,
+    "skipped": 0
+  },
+  "classCounts": {
+    "NativeArtifactCallsMockTests": 60,
+    "StreamingReaderProviderMockTests": 4,
+    "StreamingReaderRealTests": 18,
+    "StreamingReaderProviderRealTests": 2
+  },
+  "sourcePins": [
+    {
+      "path": "remediation/nuke-app/Core/FileArtifactStore.cs",
+      "sha256": "e8779cdf8521fb211018f7cbe3db4a523058204a3692533b1c5fb0798513eb6a",
+      "previousSha256": "7c60a44420953aa9b2815d1964b48f877714d6df0bf1a34f2be26730f13624be"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Core/StreamingReaderRealTests.cs",
+      "sha256": "b306efc9420b0f0da2d8433a1ff4dedc474d06fe3f1630097298dd56e130d94f",
+      "previousSha256": null
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Core/StreamingReaderProviderRealTests.cs",
+      "sha256": "cbc93ca4f58c64cb038ec6e5c2ac2d0bb264e534a2e73366838b3e7e5713c893",
+      "previousSha256": null
+    }
+  ],
+  "scope": "Shared FileArtifactStore reader using real retained paths/streams and controlled identity/open fixtures. Existing byte/stream/strict-new contracts included. Kernel mocks are raw ABI-call expectations only.",
+  "actualNativeSyscalls": false,
+  "actualFifoProof": false,
+  "windowsRuntimeProof": false,
+  "codecRuntimeProof": false,
+  "migrationComplete": false,
+  "hv": false
+}

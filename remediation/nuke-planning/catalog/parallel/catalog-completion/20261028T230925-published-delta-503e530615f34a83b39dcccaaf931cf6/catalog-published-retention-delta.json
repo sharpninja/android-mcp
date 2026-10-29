@@ -1,0 +1,180 @@
+{
+  "timestamp": "2026-10-28T23:09:25",
+  "scope": "Exact frozen release011 raw-retention test file and fixture, as a versioned delta to the immutable local99 handoff",
+  "priorHandoff": {
+    "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/catalog/parallel/catalog-completion/20261028T225803-6fe2e46127604fbb8a4af310639604bb/catalog-completion.json",
+    "sha256": "e1b8dfa95d3b8f4ac4d6332721f2e7d6f41c53cda21916198a7298aa86f1aa12",
+    "length": 58753
+  },
+  "changes": [
+    {
+      "relativePath": "Tests/Catalog/CatalogHidlImportRealTests.cs",
+      "source": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/catalog/nuke-app/Tests/Catalog/CatalogHidlImportRealTests.cs",
+        "sha256": "e28e2fefd9f34418ff212039c0d6ffc382bc576ea3ef993b3708235e54ed8712",
+        "length": 7671
+      },
+      "prior": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/catalog/parallel/catalog-completion/20261028T225803-6fe2e46127604fbb8a4af310639604bb/files/Tests/Catalog/CatalogHidlImportRealTests.cs",
+        "sha256": "85813e53cbd2a8d4d722ec730ca8fdf0f61ec5f7236ece386064abe7aa1a36ce",
+        "length": 7044
+      },
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Catalog/CatalogHidlImportRealTests.cs",
+      "handoffRelative": "files/Tests/Catalog/CatalogHidlImportRealTests.cs",
+      "checkpoint015Prior": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/integration/nuke-migration-checkpoint-015/files/remediation/nuke-app/Tests/Catalog/CatalogHidlImportRealTests.cs",
+        "sha256": "628fe56403c97929b6794096df83554eff070fd99c613ef65c4d17fe30108a72",
+        "length": 5784
+      }
+    },
+    {
+      "relativePath": "Tests/Catalog/CatalogPublishedRetentionCases.cs",
+      "source": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/catalog/nuke-app/Tests/Catalog/CatalogPublishedRetentionCases.cs",
+        "sha256": "f3d0566517d99380f839115e88a1af220c4a4a847ca53ed0f0a1dc13dab28d35",
+        "length": 4254
+      },
+      "prior": null,
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Catalog/CatalogPublishedRetentionCases.cs",
+      "handoffRelative": "files/Tests/Catalog/CatalogPublishedRetentionCases.cs",
+      "checkpoint015Prior": null
+    },
+    {
+      "relativePath": "Tests/Catalog/CatalogPublishedRetentionRealTests.cs",
+      "source": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/catalog/nuke-app/Tests/Catalog/CatalogPublishedRetentionRealTests.cs",
+        "sha256": "0a5a6fe3874ed28305ad0f848e7e75698013e974348cbbfa32757b9f2ddcd0d2",
+        "length": 1521
+      },
+      "prior": null,
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Catalog/CatalogPublishedRetentionRealTests.cs",
+      "handoffRelative": "files/Tests/Catalog/CatalogPublishedRetentionRealTests.cs",
+      "checkpoint015Prior": null
+    }
+  ],
+  "mock": {
+    "file": {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/catalog/nuke-app/artifacts/tests/20261028T2305435313755-1fbdee78ee7746c8a69680186a830b78/tests.trx",
+      "sha256": "c6d91523bdd17e97f0aa3ff56579d58f730a81fd40a4204027be07a0be47c7f0",
+      "length": 9533
+    },
+    "passed": 4,
+    "failed": 0,
+    "skipped": 0,
+    "negativeControls": 26,
+    "caseSource": {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/catalog/nuke-app/Tests/Catalog/CatalogPublishedRetentionCases.cs",
+      "sha256": "f3d0566517d99380f839115e88a1af220c4a4a847ca53ed0f0a1dc13dab28d35",
+      "length": 4254
+    }
+  },
+  "native": {
+    "file": {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/catalog/nuke-app/artifacts/tests/20261028T2306437067977-550acb8c47c54e7ebfa97ca10734fcbe/tests.trx",
+      "sha256": "42492a028787acdc77a7f5fc7b180824d72fd16df7195d761dc1fc879b93d2f6",
+      "length": 176632
+    },
+    "passed": 105,
+    "failed": 0,
+    "skipped": 0,
+    "prior99ClassCountsPreserved": true,
+    "publishedNativeCases": 2,
+    "publishedMockRows": 4
+  },
+  "sourceDeltaRationale": "Published08e88 differs from local9c8ed in helper/caller, source URL/channel/context and exact declaration assertion. Version1 deliberately left published path pending. After separate green mock4/24controls, the same native HIDL fixture provider gained only the explicit published variant, actual parse-report observation and source-context observation; original99 tests rerun unchanged. No parser, Catalog production module, registry or source engine changed.",
+  "sourcePinImpact": {
+    "path": "remediation/nuke-app/Tests/Catalog/CatalogHidlImportRealTests.cs",
+    "priorSha256": "85813e53cbd2a8d4d722ec730ca8fdf0f61ec5f7236ece386064abe7aa1a36ce",
+    "currentSha256": "e28e2fefd9f34418ff212039c0d6ffc382bc576ea3ef993b3708235e54ed8712",
+    "specificPriorProof": {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/catalog/parallel/catalog-completion/20261028T225803-6fe2e46127604fbb8a4af310639604bb/catalog-completion.json",
+      "sha256": "e1b8dfa95d3b8f4ac4d6332721f2e7d6f41c53cda21916198a7298aa86f1aa12",
+      "length": 58753
+    },
+    "reconciliation": "Apply version1 HIDL fixture correction first, then this exact source-hash delta; retain both prior proofs. Do not expand any global allowed-change waiver. Current full Root gate required."
+  },
+  "publishedRetentionClosure": {
+    "legacyPath": "rehydration/producers/release-011/tests/test_unnormalized_source_retention.py",
+    "legacySha256": "08e88e08a55ddb44a7a61f9992ad078a189ce1d00763af4f4ff8ad652f9fbd83",
+    "source": {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tests/test_unnormalized_source_retention.py",
+      "sha256": "08e88e08a55ddb44a7a61f9992ad078a189ce1d00763af4f4ff8ad652f9fbd83",
+      "length": 1635
+    },
+    "functions": [
+      {
+        "name": "fixture",
+        "originalBody": " def fixture(self,raw,scope):\n  with tempfile.TemporaryDirectory() as directory:\n   root=pathlib.Path(directory);helper=test_source_annotation_targets.SourceTargets();inv=helper.fixture(root);spec=json.loads(inv.read_text());helper.source(root,spec,'evidence','raw-schema',raw,scope=scope,api_level=None,channel='unknown',platform_api_version=None);inv.write_text(json.dumps(spec));build_catalog.build(inv,root/'out')\n   with contextlib.closing(sqlite3.connect(root/'out/catalog.sqlite')) as db:\n    rows=db.execute(\"SELECT i.raw,p.document_json FROM issues i JOIN parse_reports p USING(source_id) WHERE i.category IN ('source-format-unknown','hidl-source')\").fetchall()\n   self.assertEqual(len(rows),1);text,report=rows[0];return text,json.loads(report)\n",
+        "disposition": "Shared NativeCatalogHidlImportProvider deep-copies original first source, applies exact SourceTargets.source URL https://dl.google.com/fixture/raw-schema, unknown channel, nullable API/platform, raw SHA/blob/size and no source_release_context. Original SQL JOIN/category/one-row and raw byte boundary retained."
+      },
+      {
+        "name": "test_hidl_raw_schema_and_declared_structure_are_retained",
+        "originalBody": " def test_hidl_raw_schema_and_declared_structure_are_retained(self):\n  raw=b'package a@1.0; interface IFoo { f(); };'\n  text,report=self.fixture(raw,'aosp-pinned-hidl-source-evidence')\n  self.assertEqual(text.encode(),raw);self.assertEqual(report['raw_source_encoding'],'utf-8');self.assertEqual(report['declarations'],3);self.assertFalse(report['compiler_validation'])\n",
+        "disposition": "PUBLISHED-RAW-01: exact original HIDL bytes, SQL raw UTF8 roundtrip, encoding utf-8, exact declarations3 and compiler_validationfalse."
+      },
+      {
+        "name": "test_non_utf8_native_evidence_is_lossless",
+        "originalBody": " def test_non_utf8_native_evidence_is_lossless(self):\n  raw=b'raw\\xffbinder';text,report=self.fixture(raw,'aosp-native-binder-search-candidate-evidence')\n  self.assertEqual(report['raw_source_encoding'],'base64');self.assertEqual(base64.b64decode(text),raw)\n",
+        "disposition": "PUBLISHED-RAW-02: exact original raw ff binder bytes, encoding base64 and lossless decoded hex726177ff62696e646572."
+      }
+    ],
+    "nativeClass": "CatalogPublishedRetentionRealTests",
+    "normalFixtureAndMethodsVerified": true,
+    "proposedNormalVerified": true,
+    "pendingOriginalMethods": [],
+    "methodDenominator": 2,
+    "helperAlias": "SourceTargets.fixture aliases BuildTests.fixture",
+    "externalHelperSource": {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tests/test_source_annotation_targets.py",
+      "sha256": "3f7618620e38b72f0937b9b48d1224ba5c96247c6b94a57c0bb8c0890ecf8245",
+      "length": 2898
+    },
+    "externalHelperBody": " def source(self,r,spec,kind,name,data,**extra):\n  if 'metadata_cache' in extra:extra['metadata_cache'].setdefault('parser_sha256',cache_fingerprint.current(kind))\n  (r/name).write_bytes(data);s=dict(spec['sources'][0],kind=kind,path=name,local_path=name,url='https://dl.google.com/fixture/'+name,sha256=hashlib.sha256(data).hexdigest(),git_blob=hashlib.sha1(b'blob '+str(len(data)).encode()+b'\\0'+data).hexdigest(),size_bytes=len(data));s.update(extra);spec['sources'].append(s);return s\n",
+    "baseFixtureSource": {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tests/test_build.py",
+      "sha256": "e9ce2b6dbb35b6e7689c6df830a9af8e82dde1091f9eae67c4e3ff767d8896a0",
+      "length": 6131
+    },
+    "frameworkResponsibilities": "Original unittest discovery and temporary files are replaced by xUnit through native NUKE Validate/Tests and retained fixtures. Shared CatalogBuild/SQLite/UTF8/base64 services execute the exact frozen SQL and public report assertions. External helper files are provenance only and are not claimed closed.",
+    "globalClosurePendingRootGate": true,
+    "accepted_complete": false,
+    "execution_retired": false,
+    "safe_to_delete": false,
+    "originalsRetained": true
+  },
+  "counts": "Version1 local14 original methods and three source-identical published file proposals are unchanged. This delta adds verification of the distinct published retention source SHA and its two original methods. Local historical and published denominators stay separate; Root owns global counts.",
+  "earlierIntermediateGates": {
+    "mock": {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/catalog/nuke-app/artifacts/tests/20261028T2258582581500-be1edbd2fefa4644babb7d9764a1f0a5/tests.trx",
+      "sha256": "a503b304bdf69b4925e8f1c643dd45b431ca2b1b3f405973f0ac25a7018040b9",
+      "length": 9445
+    },
+    "native": {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/catalog/nuke-app/artifacts/tests/20261028T2300307023739-a1c81408f8d74d19bcd6699aea09e3a6/tests.trx",
+      "sha256": "78dc76cfe8f1a4fe5ad96080b9732727195e663c533d20ce3dcbf277c16798f7",
+      "length": 176500
+    },
+    "initialCaseSourceSha256": "dd6b8f243298c87c90900dd5cb77de81bd8868224d62f52a71b83b8316006cd2",
+    "disposition": "Passing24-control/105-case intermediate retained. Final audit additionally exposed the fixture one-row count in reply/mutations, proved26 controls before binding that observed field, then reexecuted105 cases."
+  },
+  "chronology": [
+    "Version1 immutable snapshot and local99 gate retained unchanged",
+    "Frozen source-SHA check found distinct published helper and exact3 assertion",
+    "Published case fixtures/expected responses and24 negative controls passed mock4 before native adapter extension",
+    "Only then the shared native HIDL provider and published real adapter were extended and105 passed",
+    "Final audit exposed original SQL one-row assertion as explicit reply field; mock4 with26 controls passed before native query-count field binding",
+    "Final same105 focused lane reexecutes prior99 plus published4mock/2native with every assertion unchanged from final mock gate"
+  ],
+  "unresolved": [
+    "Root must guard/copy version1 and this exact delta, run its unfiltered full gate, then apply source-SHA-matched global closure proposals",
+    "MCP persistence remains denied and unretried; profile live-memory load incomplete",
+    "NuGet vulnerability data unavailable (NU1900); no vulnerability claim",
+    "HV deferred by instruction; no accepted-complete, Ready or deletion claim"
+  ],
+  "canonicalAppEdited": false,
+  "productionModulesChanged": false,
+  "pythonExecuted": false,
+  "gitWrites": false,
+  "published": false,
+  "hvRun": false
+}

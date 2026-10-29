@@ -1,0 +1,55 @@
+{
+  "observedAt": "2026-10-28T11:33:41",
+  "scope": "Three finite mock-first AIDL inputs for two remaining original method compositions; no app copy",
+  "files": [
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/ParserRemainingContractCases.cs.template",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/ParserRemainingContractCases.cs",
+      "sha256": "497a705929d1265a6f102251d6e925a41e40ff6df5823c6326cb749e0e31f90a",
+      "expectedPrior": "absent",
+      "syntaxErrors": 0
+    },
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/ParserRemainingMockTests.cs.template",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/ParserRemainingMockTests.cs",
+      "sha256": "3e0513b3b0ee44a4e695bfcdc1020ca949d02924b387faf52a7f101d45804844",
+      "expectedPrior": "absent",
+      "syntaxErrors": 0
+    }
+  ],
+  "methodMappings": [
+    {
+      "originalMethod": "test_aidl_structured",
+      "cases": ["PARSER-STRUCTURED-STATUS"],
+      "input": "package a; @JavaDerive(toString=true) parcelable P { int n; }",
+      "assertions": "Preserve descriptor a.P, annotation and final n field metadata, complete raw schema and unknown wire/codec facts.",
+      "retiredAssertion": "Old low-level parse_status contains retained is explicitly retired, never counted as satisfied.",
+      "decision": "remediation/nuke-planning/source/aidl-structured-status-decision.json",
+      "decisionSha256": "cc98f3a70710fe685523be35419c36ba1648b552bfe633948ab545925922d47b"
+    },
+    {
+      "originalMethod": "test_external_parcelable_and_unknown_nested_schema_stay_visible",
+      "cases": ["AIDL-MEMBER-EXTERNAL-PH", "AIDL-MEMBER-PARTIAL-GOOD"],
+      "inputs": ["package a; parcelable P cpp_header \"P.h\";", "package a; parcelable P { new_syntax; int good; }"],
+      "assertions": "External declaration has no members; unknown syntax remains unsupported, following good field is retained, partial status and unknown wire facts remain visible."
+    }
+  ],
+  "originalFiles": [
+    "remediation/catalog/tests/test_parsers.py",
+    "rehydration/producers/release-011/tests/test_parsers.py",
+    "remediation/catalog/tests/test_aidl_members.py",
+    "rehydration/producers/release-011/tests/test_aidl_members.py"
+  ],
+  "releaseRequirements": ["Root declares the current app/.NET window released", "Fresh exact two-file mock-only copy grant"],
+  "copyGuards": "Recheck full source hashes and both destination absences, preview, copy only these files, verify postcopy hashes, retain templates, freeze and ACK.",
+  "declaredCorrectCases": 3,
+  "discoveryCount": null,
+  "mockGate": "not run",
+  "nativeBindings": "not authored before green mocks",
+  "productionChanged": false,
+  "appCopied": false,
+  "buildRun": false,
+  "normalClosureAdded": 0,
+  "hvRequiredBeforeReady": false,
+  "safeToDeleteLocalOriginals": false
+}

@@ -1,0 +1,109 @@
+{
+  "at": "2026-10-29T00:58:47",
+  "phase": "Mock",
+  "scope": "Direct original capture containing-owner branch with zero, two and one type candidates; same existing native capture/resolve/policy callers.",
+  "originals": [
+    {
+      "path": "remediation/catalog/tooling/effective_device_inventory.py",
+      "sha256": "f41b89a59ee27996419ca6f7f7bdcde12a6e1ce98f40defa6a25a3f87d341b05",
+      "length": 5959
+    },
+    {
+      "path": "publication/android-mcp-git/rehydration/producers/release-011/tooling/effective_device_inventory.py",
+      "sha256": "f41b89a59ee27996419ca6f7f7bdcde12a6e1ce98f40defa6a25a3f87d341b05",
+      "length": 5959
+    }
+  ],
+  "sourceFunction": "capture",
+  "sourceBranchLines": [
+    51,
+    52,
+    53,
+    54,
+    55,
+    60,
+    61,
+    65,
+    73,
+    74
+  ],
+  "implementationUnchanged": {
+    "path": "Modules/Catalog/CatalogInventory.cs",
+    "sha256": "e6cd4f4941d84793c8df67e7a051a28def2ea8e6bf135c1533d71807dd5154e2"
+  },
+  "cases": [
+    {
+      "id": "owner-absent",
+      "owner": "a.Missing",
+      "typeCandidates": 0,
+      "dependencies": 0,
+      "extraReason": "Containing local type is absent or ambiguous"
+    },
+    {
+      "id": "owner-ambiguous",
+      "owner": "a.I",
+      "typeCandidates": 2,
+      "fixture": "Add real SDK signature class a.I to original three-source build; AIDL interface a.I remains separate identity",
+      "dependencies": 0,
+      "extraReason": "Containing local type is absent or ambiguous"
+    },
+    {
+      "id": "owner-unique",
+      "owner": "a.I",
+      "typeCandidates": 1,
+      "dependencies": 1,
+      "dependencyId": "ccb3fe9fb454c63daf45ce6282838a11209916ea73e8fecd01b7e2ecb92173ff",
+      "extraReason": null
+    }
+  ],
+  "expected": "All local rows retain binding/one contract variant, active state/revision/pins and unknown version applicability; absent/ambiguous append exact reason without inferred owner dependency. Unique control has exact AIDL owner dependency. Resolve remains unknown, schema/contract/graph absent, policy deny, imported membership unchanged, capture transaction closed and no overlay/history/generation writes.",
+  "mockCorrectCases": 3,
+  "mockNegativeControls": 99,
+  "files": [
+    {
+      "path": "Tests/Catalog/CatalogEffectiveInventoryCases.cs",
+      "sha256": "b4434cfed6650f98f0c742a025a9d52e84d9329ae2c6cd6325c7e5954f2cc8a1",
+      "length": 6311,
+      "canonicalPrior": "d078d194a9dc530264d89b261f623a5ee6a7e6524749220439dae735a7256126"
+    },
+    {
+      "path": "Tests/Catalog/CatalogLocalOwnerCases.cs",
+      "sha256": "a3a2392f34432a41f28e7618ec4c1a460fe4a48b3dcaae1c147db7685d3d5a27",
+      "length": 3820,
+      "canonicalPrior": null
+    },
+    {
+      "path": "Tests/Catalog/CatalogEffectiveInventoryRealTests.cs",
+      "sha256": "93dc11d392dd54801d515687f8050f092a6b3d10b0bdb4900868b0c482adf164",
+      "length": 16945,
+      "canonicalPrior": "4edaa1ae8e47cd4b8cbfd993b6bd41911ab247b00ab233d70700a42f36e8d282"
+    }
+  ],
+  "summary": {
+    "localTimestamp": "2026-10-29T00:58:47",
+    "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/catalog/nuke-app/artifacts/tests/20261029T0057236236788-c67d2f532a834bf2bd82ed1be0d5c734/tests.trx",
+    "sha256": "5eca72b4b3431c7202e3bb42c531b8aa05f3ecdd5da9a41e4f416e3436017f43",
+    "total": 6,
+    "passed": 6,
+    "failed": 0,
+    "notExecuted": 0,
+    "classes": [
+      {
+        "name": "AndroidMcp.BuildTool.Tests.Catalog.CatalogLocalOwnerMockTests",
+        "total": 6,
+        "passed": 6,
+        "failed": 0
+      }
+    ],
+    "failures": []
+  },
+  "classes": {
+    "CatalogLocalOwnerMockTests": 6
+  },
+  "newOriginalMethodClaims": 0,
+  "normalLedgerWrites": false,
+  "canonicalWrites": false,
+  "producerWholeFileClosed": false,
+  "acceptedComplete": false,
+  "safeToDelete": false
+}

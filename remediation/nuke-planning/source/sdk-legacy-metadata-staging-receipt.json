@@ -1,0 +1,51 @@
+{
+  "at": "2026-10-28T08:43:01",
+  "scope": "SDK index outer metadata from exact three original lifecycle, unknown field and single malformed-method fixtures.",
+  "mockProof": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T0834074359019-74851fe2a0734e35bab02fe67864d4ec/tests.trx",
+    "sha256": "6590208809574b2be65a005a0fca935128a3057689980c6484fac8918d9b1f37",
+    "class": "SdkLegacyMetadataMockTests",
+    "passed": 89,
+    "failed": 0,
+    "skipped": 0,
+    "globalCounters": "<Counters total=\"1171\" executed=\"1171\" passed=\"1171\" failed=\"0\" error=\"0\" timeout=\"0\" aborted=\"0\" inconclusive=\"0\" passedButRunAborted=\"0\" notRunnable=\"0\" notExecuted=\"0\" disconnected=\"0\" warning=\"0\" completed=\"0\" inProgress=\"0\" pending=\"0\" xmlns=\"http://microsoft.com/schemas/VisualStudio/TeamTest/2010\" />"
+  },
+  "sourcePins": [
+    {
+      "path": "remediation/nuke-app/Tests/Sources/SdkLegacyMetadataContractCases.cs",
+      "sha256": "f799c1e33341d73b4fa0ba32d655d5aaf7e8d733c8169603f55a44a87d222ecd"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/SdkLegacyMetadataMockTests.cs",
+      "sha256": "b0056c75d727c2cd90f85f3fd664998bf0a4949c9cede8c4e02755476897d7a5"
+    },
+    {
+      "path": "remediation/nuke-planning/source/SdkApiIndexExtractor.cs.production.template",
+      "sha256": "52956ceb5f5b242d98f00fc1521ed9b630c609dcb1dbe92cc3ca13a46f2cc8a3"
+    },
+    {
+      "path": "remediation/nuke-planning/source/SdkLegacyMetadataRealTests.cs.production.template",
+      "sha256": "91cf638f120e0b46802d0b18ca7af30e4df5478d8b6a6064e76cb8574ec260e6"
+    }
+  ],
+  "cases": [
+    "SDK-01",
+    "SDK-02",
+    "SDK-LEGACY-BROKEN"
+  ],
+  "nativeStatus": "Staged only; same three frozen case assertions require coordinated Root native gate and old SDK/availability regressions.",
+  "descriptionDelta": {
+    "field": "line_locator_semantics",
+    "legacy": "physical XML line from Expat parser",
+    "native": "physical XML line from .NET XmlReader",
+    "reason": "Truthful native parser description; no claim all historical metadata bytes/strings are unchanged."
+  },
+  "preservation": [
+    "Existing declaration construction, physical XML line numbers, lifecycle/current selection and Core SourceIssue list remain unchanged.",
+    "Outer metadata retains excluded lifecycle diagnostics, original owner/name/error objects, full record kind counts, target API and format version.",
+    "Historical/future declarations are counted and retained rather than omitted."
+  ],
+  "normalVerified": false,
+  "acceptedComplete": false,
+  "safeToDelete": false
+}

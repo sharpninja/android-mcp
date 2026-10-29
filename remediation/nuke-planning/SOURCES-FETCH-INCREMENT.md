@@ -1,0 +1,11 @@
+# Sources/Fetch CLI integration
+
+The existing recipe planner and source batch are the sole authorities. This increment composes them into one NUKE category operation, without a second recipe parser, transport, schema validator or acquisition loop.
+
+SourcesFetchOperationMockTests (16 checks) and SourcesFetchPlannerMockTests (8 checks) passed in the 549-case gate before the execution adapter/registry binding. The immutable TRX is `../nuke-app/artifacts/tests/20261028T0047366853112-ac0d0a73a57a4c16af68b0b7d4c04ad5/tests.trx`, SHA256 `949b8e0f2955b091eb711360e6be850a733e8c5392d2b2e09e5cd2df57ca32fb`.
+
+The CLI requires project-root, source-manifest, recipe-lock, output-root and bundle-root. Manifest and lock paths resolve against project-root and retain their complete relative names, including the path required by the lock's recipe_file. Output is separate from canonical input/bundle roots. Optional parameters are generation, release, limit, acquisition-profile and cache-policy. Defaults preserve canonical acquisition and cache-alias metadata; generic acquisition and historical import require explicit selection. The currently exposed CLI resumes matching sealed acquisitions; the reusable recipe request supports explicit Resume=false, with legacy caller flags still tracked for later reconciliation.
+
+The facade validates exactly once, rejects an invalid plan or missing typed projection before acquisition, and forwards the original projection, generation, receipt path, cache policy and cancellation token to ISourceBatch. It returns the batch result unchanged. File access and hashing use the existing shared authorities. SourceBatch's Complete means raw selected/all physical-source acquisition only. It does not claim extraction, catalog generation, historical gzip identity or migration completion.
+
+Exit verification requires the same five facade cases, four planner cases, two CLI mock contracts, then an actual compiled CLI lane using a test-owned project and two immutable bundled snapshots. Its intentionally invalid HTTPS URLs must never be needed. Repeat the identical request to prove sealed resume and hash preservation. No production corpus retrieval, Python, custom Node, GitHub Actions or HV is part of this increment.

@@ -1,0 +1,30 @@
+{
+  "At": "2026-10-29T04:50:19",
+  "State": "Exact PRIVATE additive hunk proposal only, awaiting Root review; no FileArtifactStore implementation applied",
+  "Path": "Core/FileArtifactStore.cs",
+  "Prior": {
+    "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/sources/nuke-app/Core/FileArtifactStore.cs",
+    "Sha256": "e8779cdf8521fb211018f7cbe3db4a523058204a3692533b1c5fb0798513eb6a",
+    "Size": 13735
+  },
+  "MockReceipt": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/artifact-directory-025/mock-gate.json",
+  "MockSha256": "ac7bf75dc864869882232b64ba9b7af06d9ce3d233b6d39c671c855f0ec79bfe",
+  "Hunks": [
+    {
+      "Before": "public sealed class FileArtifactStore : ICreateNewStreamingArtifactStore, IStreamingArtifactReader",
+      "After": "public sealed class FileArtifactStore : ICreateNewStreamingArtifactStore, IStreamingArtifactReader, ICreateNewArtifactDirectory"
+    },
+    {
+      "Before": "    public Task<StoredArtifact> WriteAsync(Artifact artifact, CancellationToken cancellationToken = default) =>",
+      "After": "    public Task CreateNewDirectoryAsync(string relativePath, CancellationToken cancellationToken = default)\n    {\n        var path = Resolve(relativePath);\n        cancellationToken.ThrowIfCancellationRequested();\n        var exists = true;\n        try { _ = File.GetAttributes(path); }\n        catch (FileNotFoundException) { exists = false; }\n        catch (DirectoryNotFoundException) { exists = false; }\n        if (exists) throw AlreadyExists(relativePath);\n        // Absence plus creation is protected by the caller's cooperating\n        // generation lease; it is not a hostile atomic-mkdir guarantee.\n        Directory.CreateDirectory(path);\n        _ = Resolve(relativePath);\n        return Task.CompletedTask;\n    }\n\n    public Task<StoredArtifact> WriteAsync(Artifact artifact, CancellationToken cancellationToken = default) =>"
+    }
+  ],
+  "Preserve": "All existing constructors, byte/stream hash/write/read/open/session/Resolve bodies remain exact. No new store or hash primitive. New contract already mock-proven, but no native implementation proof yet.",
+  "Domain": "Caller holds same existing generation lease, portable/reparse authority Resolve unchanged. Existing targets refused. Missing parents+exact target created, retained on later failure/retry. No deletion, rename or hostile/noncooperating atomic-mkdir guarantee.",
+  "RequiredNative": "Bind SAME22 cases to native temp trees, then all existing artifact store/stream/read/strict/path/generation regressions plus full applicable suite. Root owns guarded canonical import.",
+  "CanonicalEdited": false,
+  "AuthorityEdited": false,
+  "ProductionApplied": false,
+  "NoHvAcceptance": true,
+  "AcceptedComplete": false
+}

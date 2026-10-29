@@ -1,0 +1,79 @@
+{
+  "localTimestamp": "2026-10-28T16:59:30",
+  "scope": "Actual standalone narrow and captured model CLI receipt publication. No full portable build payload or migration acceptance claim.",
+  "runs": [
+    {
+      "run": "documentation-standalone-narrow-cli-001",
+      "aliases": [
+        "validateModuleGraph",
+        "generateUiAssets",
+        "renderStoryboards"
+      ],
+      "terminal": {
+        "state": "terminal",
+        "exitCode": 0,
+        "localStarted": "2026-10-28T16:57:46",
+        "localFinished": "2026-10-28T16:58:05",
+        "stdoutSha256": "572a1300b8e29b14d26f8a3d3d25c6d1871a60c952f546ca4aa92c60fc296339",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "generationManifestPresent": true
+      },
+      "manifestSha256": "fb37ffc8fc0ae414e15d6903e7f86a8fac8759b2b773e9a5d3f488b44922c3b1",
+      "inputsVerified": 8,
+      "outputsVerified": 224,
+      "receipts": [
+        {
+          "path": "build/receipts/module-graph.json",
+          "sha256": "bc15b594c8b48282e5ecd751562fa6602d4d0d68fd0a023028d652d9ee4d4ba8",
+          "size_bytes": 566,
+          "media_type": "application/json"
+        },
+        {
+          "path": "build/receipts/ui-projection.json",
+          "sha256": "bc324e8643254b70b6863bbad8aa2ff8f737f0acfad77d9bb178426838b17575",
+          "size_bytes": 5492,
+          "media_type": "application/json"
+        }
+      ],
+      "hashesMatchCheckedCanonicalReceipts": true
+    },
+    {
+      "run": "documentation-standalone-model-cli-001",
+      "aliases": [
+        "validateModelContracts"
+      ],
+      "terminal": {
+        "state": "terminal",
+        "exitCode": 0,
+        "localStarted": "2026-10-28T16:58:05",
+        "localFinished": "2026-10-28T16:58:32",
+        "stdoutSha256": "46bf14d4506bb5c9d9dab6c17fe62f24bbfd877ee729b6ca66b5d29e2c82256c",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "generationManifestPresent": true
+      },
+      "manifestSha256": "8a8503266a415b6b2044c9cfae71d789cfdb7f1b6ac1f9281a70865fa4d25314",
+      "inputsVerified": 14,
+      "outputsVerified": 225,
+      "receipts": [
+        {
+          "path": "build/receipts/model-contracts.json",
+          "sha256": "435a607a20839e1b814239c75c4607c74ea00eeb5823ceaaaad0101cdf5dcfb4",
+          "size_bytes": 131,
+          "media_type": "application/json"
+        },
+        {
+          "path": "build/receipts/ui-projection.json",
+          "sha256": "bc324e8643254b70b6863bbad8aa2ff8f737f0acfad77d9bb178426838b17575",
+          "size_bytes": 5492,
+          "media_type": "application/json"
+        }
+      ],
+      "hashesMatchCheckedCanonicalReceipts": true
+    }
+  ],
+  "auditorCorrection": "Initial postcheck incorrectly excluded all validation/*, including the existing required captured-model validation/model-sources.json receipt. Corrected to require exactly that observation for model-only, none for narrow, and reject any other validation route. Runtime, expected fixtures and validator unchanged.",
+  "python": false,
+  "node": false,
+  "hv": false,
+  "publicationWrites": false
+}

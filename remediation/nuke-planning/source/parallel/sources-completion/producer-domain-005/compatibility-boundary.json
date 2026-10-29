@@ -1,0 +1,12 @@
+{
+  "RootDecisionAt": "2026-10-29T00:38:30",
+  "Boundary": "JSON/C# responsibilities from exact original callers, with original tests and reachable JSON/string/current/release domains retained. Arbitrary non-JSON Python tuple/bytes/custom-object standalone callable behavior with no original caller does not require a Python object model.",
+  "UnicodeDisposition": "Pending Root decision on exact diagnostic evidence; no whole-file equivalence claimed.",
+  "UnicodeObservation": "For both exact quoted escaped ud800/dc00 literals: direct existing decoder throws JsonException; shared inspector marks decoded inner literal INVALID_UNICODE fatal. Outer source text is admitted and preserved. Taxonomy returns null literal/symbol; descriptor returns null descriptor_literal, computed-or-unresolved-argument status, no lexical issue. No replacement character, new decoder or admission change. Diagnostic stdout is in pinned157/full TRX.",
+  "OriginalCallerEvidence": "Both original helper copies and source_metadata_reference.py read as text. produce_entry_metadata invokes callback/taxonomy, validate_metadata enforces metadata schema afterward. attach_occurrences obtains occurrence via json.loads(raw). Descriptor parse and pairing found only in original test importers. No arbitrary Python-object caller found.",
+  "SharedAdmissionEvidence": [
+    "Core/StrictJsonInspector.cs UnicodeIssue / IsUnicodeScalarString",
+    "Tests/Core/StrictJsonInspectionMockTests.cs INSPECT-23/24/25",
+    "Tests/Core/CanonicalJsonMockTests.cs JSON-28-unpaired-surrogate"
+  ]
+}

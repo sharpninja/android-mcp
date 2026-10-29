@@ -1,0 +1,54 @@
+{
+  "status": "Cached genuine projector input verified against unchanged expected receipts",
+  "failedMetadataBindingAttempt": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T1328354805488-fb8ef073570f4973abd061cd0ba98b7a/tests.trx",
+    "sha256": "c81cd0accff10f779814e47432d1f64f1274cfb6d83bc1dd8f7a90881d18fecc",
+    "wholeBatchPassed": 594,
+    "wholeBatchFailed": 13,
+    "documentationFailures": 12,
+    "independentSdkFailure": 1,
+    "cause": "The attempted adapter assigned a retained current producer identity to bytes from a different historical fixture generation. Shared receipt equality rejected it."
+  },
+  "distinctGenerations": [
+    {
+      "kind": "Original historical fixture",
+      "sha256": "8d856426db5a61b15dfab6e9ffd950da5e738de06114408ccac0704904d5a44b",
+      "length": 324639
+    },
+    {
+      "kind": "Historical health-migrated carrier actually borrowed by the attempted adapter",
+      "sha256": "ce7da0e2db51689f677bcc1594bfa177f25b815d119d8869d6ea321d78d77c2f",
+      "length": 325579
+    },
+    {
+      "kind": "Retained current native producer artifact; not a historical carrier identity",
+      "sha256": "0b5e4c78b1ad0a358e03f1a5bb69b414ee89a43448a0a949f24b601bccecd9b8",
+      "length": 326157
+    }
+  ],
+  "appliedTestSourceSha256": "8844cdd27731b1205cd4523a47201401a9267c43875c4583a0962379e757430c",
+  "retainedPriorTestSourceSha256": "f75ed177d06a99b4925b74fb557a9afeba752e59765924baaa333dfae5334d04",
+  "inputAuthority": "One cached Artifact from existing independently proven DocumentationProjector.Project(DocumentationFixture.Current.Input). Blueprint/design inputs are identity-checked before and after projection. The actual returned JSON Artifact receives an observed identity; each test gets a byte clone checked against that identity. No preassigned cross-generation SHA or metadata stamping is used.",
+  "expectationAuthority": "Original pinned legacy receipt counts, fields and every state/step path remain independent expected data; they are not generated from the receipt formatter or refreshed from the new input.",
+  "unchanged": [
+    "Production receipt formatter and media/path guard",
+    "Historical fixture loader and carriers",
+    "All original expected receipt and SVG/deck/PUML bytes",
+    "Wrong media/path rejection cases"
+  ],
+  "unusedPriorMetadataFixture": "fixtures/native-ui-manifest-identity.json is retained as current-generation provenance only; NativeUiInput no longer references it",
+  "expectedDiscovery": {
+    "mock": 389,
+    "native": 56
+  },
+  "limits": "Receipt formatting has focused native and mock proof. Full checkpoint suite remains separate; future receipt caller coupling remains outside the app for checkpoint 008.",
+  "verifiedGate": {
+    "path": "remediation/nuke-app/artifacts/tests/20261028T1345550952624-dcbf515b6983459d9e26f9ff63420c1e/tests.trx",
+    "sha256": "694e4fa8f4da033818849997768a3a354a93c985d395f1eff1b9553667bbc171",
+    "allPassed": 470,
+    "documentationMockPassed": 389,
+    "documentationNativePassed": 56,
+    "failed": 0,
+    "skipped": 0
+  }
+}

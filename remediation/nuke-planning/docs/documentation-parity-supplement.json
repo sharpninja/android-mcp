@@ -1,0 +1,1518 @@
+{
+  "schemaVersion": "1.0.0",
+  "observedAtLocal": "2026-10-28T07:35:05",
+  "authority": "Documentation owner explicit binding supplement; authoritative full legacy inventory remains Source owner",
+  "scope": "No basename/hash inference of parity. No scope exclusion by historical/retired label. Real service/recording IO/live runtime distinctions retained.",
+  "methodCount": 58,
+  "entrypoints": [
+    {
+      "path": "remediation/design-c4/tooling/render-ui.cjs",
+      "services": [
+        "DocumentationProjector",
+        "DocumentationAssetOperation"
+      ],
+      "proof": [
+        "ui-deck-real-gate.trx",
+        "assets-operation-real-gate.trx",
+        "assets-cli-generation.json"
+      ],
+      "status": "Native UI projection/assets and paired browser verification exist in later receipts. All original method-specific predicates and cutover obligations remain individually tracked; no blanket closure.",
+      "sourceSha256": "b1d515c91b4ada4aabf4b11a6b2ac66519dfbde7b6296d68d8434ebb091fe6b8"
+    },
+    {
+      "path": "remediation/design-c4/tooling/validate-modules.cjs",
+      "services": [
+        "ModuleGraphValidator"
+      ],
+      "proof": [
+        "module-graph-real-gate.trx"
+      ],
+      "status": "Native module service plus actual standalone module/UI and full canonical documentation callers are verified in the current evidence. This does not automatically close other original files or all package/cutover responsibilities.",
+      "sourceSha256": "aec2dba1bb10212593331a01ef2aa3005a10c95c0894cce1a1109c6a11d239fd"
+    },
+    {
+      "path": "remediation/design-c4/tooling/validate-contracts.cjs",
+      "services": [
+        "DocumentationModelReader",
+        "ModelContractValidator",
+        "ModuleGraphValidator declared-class metadata"
+      ],
+      "proof": [
+        "remediation/nuke-planning/docs/evidence/model-contract-real-gate.trx",
+        "remediation/nuke-planning/docs/model-contract-clause-map.md"
+      ],
+      "status": "Original CJS clause allocation has native service proof, and the current canonical full and standalone captured-model callers now produce the validated model receipt. Older Python-specific invariant gaps and complete per-method reconciliation remain open; no HV acceptance.",
+      "sourceSha256": "30956b3f90ac52dd47f980a14cca495d98c1d3286e7b6e32a2bcac8a338e77b5"
+    },
+    {
+      "path": "remediation/design-c4/tooling/bootstrap.py",
+      "services": [
+        "DocumentationRendererProfileReader",
+        "DocumentationToolBootstrap",
+        "ToolArtifactAcquirer",
+        "ToolZipExtractor"
+      ],
+      "proof": [
+        "remediation/nuke-planning/docs/evidence/checkpoint003-documentation-real-gate.trx",
+        "remediation/nuke-planning/docs/evidence/renderer-redirect-native-gate.trx",
+        "remediation/nuke-planning/docs/evidence/architecture-native-002-inspection.json",
+        "remediation/nuke-planning/docs/evidence/toolchain-lock-redirect-migration.json"
+      ],
+      "status": "Old profile15/bootstrap7 plus new redirect profile12/bootstrap3 native cases passed; Architecture002 composed native bootstrap and admitted exact observed Gradle published-checksum redirect before network-disabled rendering; existing cache bytes are not a new binary-download claim; Gradlecaller/wrapperproperties retirement remains pending; Node/Marp acquisition retired by approved stack change",
+      "sourceSha256": "92b77e3d2a09416a56f3f64beca23f3c2732e32ed777176fa9fadbd6bedc1ce1"
+    },
+    {
+      "path": "remediation/factor_design_evidence.py",
+      "services": [
+        "LosslessEvidenceService"
+      ],
+      "proof": [
+        "lossless-real-gate.trx"
+      ],
+      "status": "21realalgorithmcases; operationalCLI/filesystemcompositionpending",
+      "sourceSha256": "1d797710bcb0e2a9e987269d681739901a4816924e8d290e3aba37d9c5beb916"
+    }
+  ],
+  "methods": [
+    {
+      "path": "remediation/test_design_module_graph.py",
+      "sourceSha256": "09903f374e64cfe7d99318b9765eb969c2f6a685075cebe11f85567b3c7541da",
+      "method": "test_reproduces_cyclic_old_crosswalk",
+      "mappingStatement": "MOD. Preserve the two-module bindings/application cycle fixture, rejected result and `Module cycle` diagnostic.",
+      "bindings": [
+        {
+          "service": "ModuleGraphValidator",
+          "testFile": "remediation/nuke-app/Tests/Documentation/ModuleGraphRealTests.cs",
+          "testMethod": "SameOriginalAndBoundaryCasesBindNativeValidator",
+          "caseId": "MOD-ORIGINAL-CYCLE",
+          "proof": "remediation/nuke-planning/docs/evidence/module-graph-real-gate.trx",
+          "status": "same-original-and-boundary-service-cases-real-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true
+    },
+    {
+      "path": "remediation/test_design_module_graph.py",
+      "sourceSha256": "09903f374e64cfe7d99318b9765eb969c2f6a685075cebe11f85567b3c7541da",
+      "method": "test_forbidden_concrete_edge_rejected",
+      "mappingStatement": "MOD. Preserve storage-to-concrete-application edge, rejected result and `Forbidden dependency` diagnostic.",
+      "bindings": [
+        {
+          "service": "ModuleGraphValidator",
+          "testFile": "remediation/nuke-app/Tests/Documentation/ModuleGraphRealTests.cs",
+          "testMethod": "SameOriginalAndBoundaryCasesBindNativeValidator",
+          "caseId": "MOD-ORIGINAL-FORBIDDEN",
+          "proof": "remediation/nuke-planning/docs/evidence/module-graph-real-gate.trx",
+          "status": "same-original-and-boundary-service-cases-real-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true
+    },
+    {
+      "path": "remediation/test_design_module_graph.py",
+      "sourceSha256": "09903f374e64cfe7d99318b9765eb969c2f6a685075cebe11f85567b3c7541da",
+      "method": "test_domain_port_invariant_rejects_platform_interface",
+      "mappingStatement": "MOD. Preserve platform-owned interface fixture and `Interface port outside bridge.domain` diagnostic.",
+      "bindings": [
+        {
+          "service": "ModuleGraphValidator",
+          "testFile": "remediation/nuke-app/Tests/Documentation/ModuleGraphRealTests.cs",
+          "testMethod": "SameOriginalAndBoundaryCasesBindNativeValidator",
+          "caseId": "MOD-ORIGINAL-DOMAIN-PORT",
+          "proof": "remediation/nuke-planning/docs/evidence/module-graph-real-gate.trx",
+          "status": "same-original-and-boundary-service-cases-real-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true
+    },
+    {
+      "path": "remediation/test_design_module_graph.py",
+      "sourceSha256": "09903f374e64cfe7d99318b9765eb969c2f6a685075cebe11f85567b3c7541da",
+      "method": "test_entire_current_class_graph_is_owned_and_acyclic",
+      "mappingStatement": "MOD. Run the complete pinned class graph and owner map, not a synthetic subset.",
+      "bindings": [
+        {
+          "service": "ModuleGraphValidator",
+          "testFile": "remediation/nuke-app/Tests/Documentation/ModuleGraphRealTests.cs",
+          "testMethod": "SameOriginalAndBoundaryCasesBindNativeValidator",
+          "caseId": "MOD-ORIGINAL-FULL-GRAPH",
+          "proof": "remediation/nuke-planning/docs/evidence/module-graph-real-gate.trx",
+          "status": "same-original-and-boundary-service-cases-real-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true
+    },
+    {
+      "path": "remediation/test_design023_guardrails.py",
+      "sourceSha256": "629f66fc32f5b2110d6b1d6b5e340a02a7d7abb40f06c519291d00614c8452ee",
+      "method": "test_current_cross_artifact_model",
+      "mappingStatement": "INV. Preserve the complete valid code/DSL/design/API/blueprint/module input bundle.",
+      "bindings": [
+        {
+          "service": "ModelContractValidator",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyGuardOriginalMethodRealTests.cs",
+          "testMethod": "SameOriginalScenariosBindExistingNativeValidator",
+          "caseId": "test_current_cross_artifact_model",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2103237817668-497872b395c04926831f85473db9d916/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T21:11:59",
+        "proofSha256": "1c9ab52506e76080e48c4db21ae852148e8f3651ce087237824357d5fe3dfcdb",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/test_design023_guardrails.py",
+      "sourceSha256": "629f66fc32f5b2110d6b1d6b5e340a02a7d7abb40f06c519291d00614c8452ee",
+      "method": "test_missing_dispatch_edge_and_revoke_bypass_fail",
+      "mappingStatement": "INV. Preserve both simultaneous mutations and both required diagnostic classes.",
+      "bindings": [
+        {
+          "service": "ModelContractValidator",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyGuardOriginalMethodRealTests.cs",
+          "testMethod": "SameOriginalScenariosBindExistingNativeValidator",
+          "caseId": "test_missing_dispatch_edge_and_revoke_bypass_fail",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2103237817668-497872b395c04926831f85473db9d916/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T21:11:59",
+        "proofSha256": "1c9ab52506e76080e48c4db21ae852148e8f3651ce087237824357d5fe3dfcdb",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/test_design023_guardrails.py",
+      "sourceSha256": "629f66fc32f5b2110d6b1d6b5e340a02a7d7abb40f06c519291d00614c8452ee",
+      "method": "test_placeholder_state_contract_and_missing_route_fail",
+      "mappingStatement": "INV. Preserve placeholder action, repeated generic state effect/recovery and removed sealed-stage route together; report every original failure.",
+      "bindings": [
+        {
+          "service": "ModelContractValidator",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyGuardOriginalMethodRealTests.cs",
+          "testMethod": "SameOriginalScenariosBindExistingNativeValidator",
+          "caseId": "test_placeholder_state_contract_and_missing_route_fail",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2103237817668-497872b395c04926831f85473db9d916/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T21:11:59",
+        "proofSha256": "1c9ab52506e76080e48c4db21ae852148e8f3651ce087237824357d5fe3dfcdb",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/test_design023_ui.py",
+      "sourceSha256": "97e3672e88f191549b03f9b94decd730ea8830bfb1ff98295a357f25dea780bf",
+      "method": "test_current_control_and_state_contracts_are_explicit",
+      "mappingStatement": "UI `UI-REFERENCE-*`/`UI-MANIFEST`; INV explicit non-placeholder fields, remote-press false and state effect/recovery rules.",
+      "bindings": [
+        {
+          "service": "DocumentationProjector",
+          "testFile": "remediation/nuke-app/Tests/Documentation/DocumentationProjectionRealTests.cs",
+          "testMethod": "SameAssertionsAndIndependentFixturesBindNativeProjector",
+          "caseId": "Exact UI/DECK assertion families named in mappingStatement",
+          "proof": "remediation/nuke-planning/docs/evidence/ui-deck-real-gate.trx",
+          "status": "saved-output-projection-assertions-real-pass"
+        },
+        {
+          "service": "DocumentationProjector",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyUiOriginalMethodRealTests.cs",
+          "testMethod": "SameExactOriginalFileMethodAssertionsBindNativeProjector",
+          "caseId": "test_current_control_and_state_contracts_are_explicit",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T1925584215879-aff03e2a4d184c76b637232a2f073785/tests.trx",
+          "status": "same-original-predicates-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T19:41:17",
+        "reason": "The exact original method predicates were separately ported, proved with discriminating mocks, then bound to the existing native projector. The same predicates include ignored-field, stopped/running, branch, health-domain and Python boolean/integer boundaries.",
+        "proofSha256": "8aff81c08a272bf773591657083b0a6ace11e8f2ae2f38bea1dec11edfc8800a",
+        "hostileReviewAccepted": false,
+        "scope": "Original test method and framework execution only. No whole producer, corpus or independent acceptance claim."
+      }
+    },
+    {
+      "path": "remediation/test_design023_ui.py",
+      "sourceSha256": "97e3672e88f191549b03f9b94decd730ea8830bfb1ff98295a357f25dea780bf",
+      "method": "test_markdown_is_single_canonical_behavior_source",
+      "mappingStatement": "UI `UI-MANIFEST`, with the twelve authorized health-only additions represented in the independent fixture manifest.",
+      "bindings": [
+        {
+          "service": "DocumentationProjector",
+          "testFile": "remediation/nuke-app/Tests/Documentation/DocumentationProjectionRealTests.cs",
+          "testMethod": "SameAssertionsAndIndependentFixturesBindNativeProjector",
+          "caseId": "UI-MANIFEST",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T0615091911800-8e2555d1e62940e3aaf3d6a89351fd1d/tests.trx",
+          "status": "same-original-predicates-real-pass",
+          "caseIds": [
+            "UI-MANIFEST"
+          ]
+        },
+        {
+          "service": "DocumentationProjector",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyUiOriginalMethodRealTests.cs",
+          "testMethod": "SameExactOriginalFileMethodAssertionsBindNativeProjector",
+          "caseId": "test_markdown_is_single_canonical_behavior_source",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T1925584215879-aff03e2a4d184c76b637232a2f073785/tests.trx",
+          "status": "same-original-predicates-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T19:41:17",
+        "reason": "The exact original method predicates were separately ported, proved with discriminating mocks, then bound to the existing native projector. The same predicates include ignored-field, stopped/running, branch, health-domain and Python boolean/integer boundaries.",
+        "proofSha256": "8aff81c08a272bf773591657083b0a6ace11e8f2ae2f38bea1dec11edfc8800a",
+        "hostileReviewAccepted": false,
+        "scope": "Original test method and framework execution only. No whole producer, corpus or independent acceptance claim."
+      }
+    },
+    {
+      "path": "remediation/test_design023_ui.py",
+      "sourceSha256": "97e3672e88f191549b03f9b94decd730ea8830bfb1ff98295a357f25dea780bf",
+      "method": "test_every_state_has_matching_vector_variant_and_exact_control_enablement",
+      "mappingStatement": "UI `UI-STATE-ID-*`, `UI-ENABLEMENT-*`, `UI-HEALTH-*`, including Stopped not Running.",
+      "bindings": [
+        {
+          "service": "DocumentationProjector",
+          "testFile": "remediation/nuke-app/Tests/Documentation/DocumentationProjectionRealTests.cs",
+          "testMethod": "SameAssertionsAndIndependentFixturesBindNativeProjector",
+          "caseId": "Exact UI/DECK assertion families named in mappingStatement",
+          "proof": "remediation/nuke-planning/docs/evidence/ui-deck-real-gate.trx",
+          "status": "saved-output-projection-assertions-real-pass"
+        },
+        {
+          "service": "DocumentationProjector",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyUiOriginalMethodRealTests.cs",
+          "testMethod": "SameExactOriginalFileMethodAssertionsBindNativeProjector",
+          "caseId": "test_every_state_has_matching_vector_variant_and_exact_control_enablement",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T1925584215879-aff03e2a4d184c76b637232a2f073785/tests.trx",
+          "status": "same-original-predicates-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T19:41:17",
+        "reason": "The exact original method predicates were separately ported, proved with discriminating mocks, then bound to the existing native projector. The same predicates include ignored-field, stopped/running, branch, health-domain and Python boolean/integer boundaries.",
+        "proofSha256": "8aff81c08a272bf773591657083b0a6ace11e8f2ae2f38bea1dec11edfc8800a",
+        "hostileReviewAccepted": false,
+        "scope": "Original test method and framework execution only. No whole producer, corpus or independent acceptance claim."
+      }
+    },
+    {
+      "path": "remediation/test_design023_ui.py",
+      "sourceSha256": "97e3672e88f191549b03f9b94decd730ea8830bfb1ff98295a357f25dea780bf",
+      "method": "test_storyboard_images_match_named_state_and_branch_success_does_not_force_error",
+      "mappingStatement": "UI `UI-STEP-*`/`DECK-EMBEDDED-*`; INV main-success branch and all error-branch destinations.",
+      "bindings": [
+        {
+          "service": "DocumentationProjector",
+          "testFile": "remediation/nuke-app/Tests/Documentation/DocumentationProjectionRealTests.cs",
+          "testMethod": "SameAssertionsAndIndependentFixturesBindNativeProjector",
+          "caseId": "Exact UI/DECK assertion families named in mappingStatement",
+          "proof": "remediation/nuke-planning/docs/evidence/ui-deck-real-gate.trx",
+          "status": "saved-output-projection-assertions-real-pass"
+        },
+        {
+          "service": "DocumentationProjector",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyUiOriginalMethodRealTests.cs",
+          "testMethod": "SameExactOriginalFileMethodAssertionsBindNativeProjector",
+          "caseId": "test_storyboard_images_match_named_state_and_branch_success_does_not_force_error",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T1925584215879-aff03e2a4d184c76b637232a2f073785/tests.trx",
+          "status": "same-original-predicates-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T19:41:17",
+        "reason": "The exact original method predicates were separately ported, proved with discriminating mocks, then bound to the existing native projector. The same predicates include ignored-field, stopped/running, branch, health-domain and Python boolean/integer boundaries.",
+        "proofSha256": "8aff81c08a272bf773591657083b0a6ace11e8f2ae2f38bea1dec11edfc8800a",
+        "hostileReviewAccepted": false,
+        "scope": "Original test method and framework execution only. No whole producer, corpus or independent acceptance claim."
+      }
+    },
+    {
+      "path": "remediation/test_design023_ui.py",
+      "sourceSha256": "97e3672e88f191549b03f9b94decd730ea8830bfb1ff98295a357f25dea780bf",
+      "method": "test_every_rendered_state_health_uses_closed_domains_and_integer_revision",
+      "mappingStatement": "UI `UI-HEALTH-*` exact independently pinned JSON for every state; INV closed-domain/integer source validation.",
+      "bindings": [
+        {
+          "service": "DocumentationProjector",
+          "testFile": "remediation/nuke-app/Tests/Documentation/DocumentationProjectionRealTests.cs",
+          "testMethod": "SameAssertionsAndIndependentFixturesBindNativeProjector",
+          "caseId": "Exact UI/DECK assertion families named in mappingStatement",
+          "proof": "remediation/nuke-planning/docs/evidence/ui-deck-real-gate.trx",
+          "status": "saved-output-projection-assertions-real-pass"
+        },
+        {
+          "service": "DocumentationProjector",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyUiOriginalMethodRealTests.cs",
+          "testMethod": "SameExactOriginalFileMethodAssertionsBindNativeProjector",
+          "caseId": "test_every_rendered_state_health_uses_closed_domains_and_integer_revision",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T1925584215879-aff03e2a4d184c76b637232a2f073785/tests.trx",
+          "status": "same-original-predicates-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T19:41:17",
+        "reason": "The exact original method predicates were separately ported, proved with discriminating mocks, then bound to the existing native projector. The same predicates include ignored-field, stopped/running, branch, health-domain and Python boolean/integer boundaries.",
+        "proofSha256": "8aff81c08a272bf773591657083b0a6ace11e8f2ae2f38bea1dec11edfc8800a",
+        "hostileReviewAccepted": false,
+        "scope": "Original test method and framework execution only. No whole producer, corpus or independent acceptance claim."
+      }
+    },
+    {
+      "path": "remediation/test_design024_contract.py",
+      "sourceSha256": "550488c894bd585bfeefa539bc81e6dad45c671f6bfd2d3ab4b7d3b52f16c18e",
+      "method": "test_revocation_fanout_has_callback_and_lease_sinks",
+      "mappingStatement": "INV callback and lease sink implementations plus root fanout ownership.",
+      "bindings": [
+        {
+          "service": "Current canonical architecture DSL, code Markdown and module contracts",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign024MethodRealTests.cs",
+          "testMethod": "SameSevenOriginalPredicatesReadCurrentCanonicalSources",
+          "caseId": "test_revocation_fanout_has_callback_and_lease_sinks",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T23:57:16",
+        "proofSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/test_design024_contract.py",
+      "sourceSha256": "550488c894bd585bfeefa539bc81e6dad45c671f6bfd2d3ab4b7d3b52f16c18e",
+      "method": "test_ask_is_exact_protected_owner_path",
+      "mappingStatement": "INV exact Ask consent and three named challenge/consent methods.",
+      "bindings": [
+        {
+          "service": "Current canonical architecture DSL, code Markdown and module contracts",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign024MethodRealTests.cs",
+          "testMethod": "SameSevenOriginalPredicatesReadCurrentCanonicalSources",
+          "caseId": "test_ask_is_exact_protected_owner_path",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T23:57:16",
+        "proofSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/test_design024_contract.py",
+      "sourceSha256": "550488c894bd585bfeefa539bc81e6dad45c671f6bfd2d3ab4b7d3b52f16c18e",
+      "method": "test_concrete_codec_proxy_and_client_factory",
+      "mappingStatement": "INV all three concrete port implementations, owners, factory dependency and codec composition.",
+      "bindings": [
+        {
+          "service": "Current canonical architecture DSL, code Markdown and module contracts",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign024MethodRealTests.cs",
+          "testMethod": "SameSevenOriginalPredicatesReadCurrentCanonicalSources",
+          "caseId": "test_concrete_codec_proxy_and_client_factory",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T23:57:16",
+        "proofSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/test_design024_contract.py",
+      "sourceSha256": "550488c894bd585bfeefa539bc81e6dad45c671f6bfd2d3ab4b7d3b52f16c18e",
+      "method": "test_interfaces_are_domain_ports",
+      "mappingStatement": "MOD every declared interface belongs to `bridge.domain`.",
+      "bindings": [
+        {
+          "service": "ModuleGraphValidator",
+          "testFile": "remediation/nuke-app/Tests/Documentation/ModuleGraphRealTests.cs",
+          "testMethod": "SameOriginalAndBoundaryCasesBindNativeValidator",
+          "caseId": "MOD-ORIGINAL-FULL-GRAPH",
+          "proof": "remediation/nuke-planning/docs/evidence/module-graph-real-gate.trx",
+          "status": "same-original-and-boundary-service-cases-real-pass"
+        },
+        {
+          "service": "Current canonical architecture DSL, code Markdown and module contracts",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign024MethodRealTests.cs",
+          "testMethod": "SameSevenOriginalPredicatesReadCurrentCanonicalSources",
+          "caseId": "test_interfaces_are_domain_ports",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T23:57:16",
+        "proofSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/test_design024_contract.py",
+      "sourceSha256": "550488c894bd585bfeefa539bc81e6dad45c671f6bfd2d3ab4b7d3b52f16c18e",
+      "method": "test_component_paths_rendered",
+      "mappingStatement": "INV execution view includes ARC controller and every storage-to-callback/transport/device path; ARCH renders those views.",
+      "bindings": [
+        {
+          "service": "Current canonical architecture DSL, code Markdown and module contracts",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign024MethodRealTests.cs",
+          "testMethod": "SameSevenOriginalPredicatesReadCurrentCanonicalSources",
+          "caseId": "test_component_paths_rendered",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T23:57:16",
+        "proofSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/test_design024_contract.py",
+      "sourceSha256": "550488c894bd585bfeefa539bc81e6dad45c671f6bfd2d3ab4b7d3b52f16c18e",
+      "method": "test_host_direct_route_and_ownership",
+      "mappingStatement": "INV direct-event route and root credential-service ownership.",
+      "bindings": [
+        {
+          "service": "Current canonical architecture DSL, code Markdown and module contracts",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign024MethodRealTests.cs",
+          "testMethod": "SameSevenOriginalPredicatesReadCurrentCanonicalSources",
+          "caseId": "test_host_direct_route_and_ownership",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T23:57:16",
+        "proofSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/test_design024_contract.py",
+      "sourceSha256": "550488c894bd585bfeefa539bc81e6dad45c671f6bfd2d3ab4b7d3b52f16c18e",
+      "method": "test_explicit_close_resume_and_root_generations",
+      "mappingStatement": "INV shutdown/resume text, selected root methods and never-reused boot-epoch node IDs.",
+      "bindings": [
+        {
+          "service": "Current canonical architecture DSL, code Markdown and module contracts",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign024MethodRealTests.cs",
+          "testMethod": "SameSevenOriginalPredicatesReadCurrentCanonicalSources",
+          "caseId": "test_explicit_close_resume_and_root_generations",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T23:57:16",
+        "proofSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/test_design024_core_contract.py",
+      "sourceSha256": "09e648d07d127ba5d58aabb0c108b80bcb24db2c46ba74218de7dfce46865d02",
+      "method": "test_actual_controls_are_in_generated_design_table",
+      "mappingStatement": "UI `UI-NAVIGATION-*`; INV rejects stale `all 62 slides` claim.",
+      "bindings": [
+        {
+          "service": "DocumentationProjector",
+          "testFile": "remediation/nuke-app/Tests/Documentation/DocumentationProjectionRealTests.cs",
+          "testMethod": "SameAssertionsAndIndependentFixturesBindNativeProjector",
+          "caseId": "Exact UI/DECK assertion families named in mappingStatement",
+          "proof": "remediation/nuke-planning/docs/evidence/ui-deck-real-gate.trx",
+          "status": "saved-output-projection-assertions-real-pass"
+        },
+        {
+          "service": "Current canonical design/code/API/schema/source-pin/screen inputs through the shared store",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyCore024MethodRealTests.cs",
+          "testMethod": "SameOriginalEightMethodsReadCurrentCanonicalFiles",
+          "caseId": "test_actual_controls_are_in_generated_design_table",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T23:56:52",
+        "proofSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/test_design024_core_contract.py",
+      "sourceSha256": "09e648d07d127ba5d58aabb0c108b80bcb24db2c46ba74218de7dfce46865d02",
+      "method": "test_delete_reason_and_metadata_etags",
+      "mappingStatement": "INV required deletion body/reason and both metadata ETag descriptions.",
+      "bindings": [
+        {
+          "service": "Current canonical design/code/API/schema/source-pin/screen inputs through the shared store",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyCore024MethodRealTests.cs",
+          "testMethod": "SameOriginalEightMethodsReadCurrentCanonicalFiles",
+          "caseId": "test_delete_reason_and_metadata_etags",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T23:56:52",
+        "proofSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/test_design024_core_contract.py",
+      "sourceSha256": "09e648d07d127ba5d58aabb0c108b80bcb24db2c46ba74218de7dfce46865d02",
+      "method": "test_pinned_portable_metadata_contract",
+      "mappingStatement": "INV copied metadata bytes and original canonical metadata pin, preserving both checks.",
+      "bindings": [
+        {
+          "service": "Current canonical design/code/API/schema/source-pin/screen inputs through the shared store",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyCore024MethodRealTests.cs",
+          "testMethod": "SameOriginalEightMethodsReadCurrentCanonicalFiles",
+          "caseId": "test_pinned_portable_metadata_contract",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T23:56:52",
+        "proofSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/test_design024_core_contract.py",
+      "sourceSha256": "09e648d07d127ba5d58aabb0c108b80bcb24db2c46ba74218de7dfce46865d02",
+      "method": "test_inbound_arc_counts_dispatch_and_lifecycle_uses_port",
+      "mappingStatement": "INV inbound dispatch accounting, lifecycle port implementation and session-command dependency.",
+      "bindings": [
+        {
+          "service": "Current canonical design/code/API/schema/source-pin/screen inputs through the shared store",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyCore024MethodRealTests.cs",
+          "testMethod": "SameOriginalEightMethodsReadCurrentCanonicalFiles",
+          "caseId": "test_inbound_arc_counts_dispatch_and_lifecycle_uses_port",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T23:56:52",
+        "proofSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/test_design024_core_contract.py",
+      "sourceSha256": "09e648d07d127ba5d58aabb0c108b80bcb24db2c46ba74218de7dfce46865d02",
+      "method": "test_screen_result_schema_has_one_field_spelling",
+      "mappingStatement": "INV all four required result fields and forbidden alternate spelling text.",
+      "bindings": [
+        {
+          "service": "Current canonical design/code/API/schema/source-pin/screen inputs through the shared store",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyCore024MethodRealTests.cs",
+          "testMethod": "SameOriginalEightMethodsReadCurrentCanonicalFiles",
+          "caseId": "test_screen_result_schema_has_one_field_spelling",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T23:56:52",
+        "proofSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/test_design024_core_contract.py",
+      "sourceSha256": "09e648d07d127ba5d58aabb0c108b80bcb24db2c46ba74218de7dfce46865d02",
+      "method": "test_single_writer_credential_and_modifier_semantics",
+      "mappingStatement": "INV serialized credential writer dependency and ARC v1 absent modifier field contract.",
+      "bindings": [
+        {
+          "service": "Current canonical design/code/API/schema/source-pin/screen inputs through the shared store",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyCore024MethodRealTests.cs",
+          "testMethod": "SameOriginalEightMethodsReadCurrentCanonicalFiles",
+          "caseId": "test_single_writer_credential_and_modifier_semantics",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T23:56:52",
+        "proofSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/test_design024_core_contract.py",
+      "sourceSha256": "09e648d07d127ba5d58aabb0c108b80bcb24db2c46ba74218de7dfce46865d02",
+      "method": "test_generic_example_uses_canonical_argument_names",
+      "mappingStatement": "INV parse the actual JSON-RPC example, `binding.invoke`, exact four argument keys and non-executable placeholder warning.",
+      "bindings": [
+        {
+          "service": "Current canonical design/code/API/schema/source-pin/screen inputs through the shared store",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyCore024MethodRealTests.cs",
+          "testMethod": "SameOriginalEightMethodsReadCurrentCanonicalFiles",
+          "caseId": "test_generic_example_uses_canonical_argument_names",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T23:56:52",
+        "proofSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/test_design024_core_contract.py",
+      "sourceSha256": "09e648d07d127ba5d58aabb0c108b80bcb24db2c46ba74218de7dfce46865d02",
+      "method": "test_pending_owner_state_is_paused_with_explicit_reason",
+      "mappingStatement": "UI `UI-HEALTH-SCR09.S0` exact Paused/OWNER_CHALLENGE expectation.",
+      "bindings": [
+        {
+          "service": "DocumentationProjector",
+          "testFile": "remediation/nuke-app/Tests/Documentation/DocumentationProjectionRealTests.cs",
+          "testMethod": "SameAssertionsAndIndependentFixturesBindNativeProjector",
+          "caseId": "UI-HEALTH-SCR09.S0",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T0615091911800-8e2555d1e62940e3aaf3d6a89351fd1d/tests.trx",
+          "status": "same-original-predicates-real-pass",
+          "caseIds": [
+            "UI-HEALTH-SCR09.S0"
+          ]
+        },
+        {
+          "service": "Current canonical design/code/API/schema/source-pin/screen inputs through the shared store",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyCore024MethodRealTests.cs",
+          "testMethod": "SameOriginalEightMethodsReadCurrentCanonicalFiles",
+          "caseId": "test_pending_owner_state_is_paused_with_explicit_reason",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T23:56:52",
+        "proofSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/test_factor_design_evidence.py",
+      "sourceSha256": "12961101499ff4e7a81e0021112549578fa30c3b9ac2dbb359d8e82875813b5f",
+      "method": "test_known_repetitions_roundtrip_and_unknown_asset_preserved",
+      "mappingStatement": "FACTOR. Preserve UTF-8 bytes, two known references, unknown literal, unchanged originals, exact reconstruction and rejection after SVG mutation.",
+      "bindings": [
+        {
+          "service": "LosslessEvidenceService",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LosslessEvidenceRealTests.cs",
+          "testMethod": "SameFactorCasesAndAssertionsBindNativeService / SameReconstructionCasesAndAssertionsBindNativeService",
+          "caseId": "FACTOR-ORIGINAL-UTF8-REPEATED-UNKNOWN plus changed-asset reconstruction rejection",
+          "proof": "remediation/nuke-planning/docs/evidence/lossless-real-gate.trx",
+          "status": "real-in-memory-algorithm-pass"
+        }
+      ],
+      "pending": [
+        "Operational CLI/filesystem factoring and reconstruction binding remains unimplemented; do not infer those side effects from pure algorithm tests."
+      ],
+      "fullMethodMigrationClaim": false
+    },
+    {
+      "path": "remediation/test_factor_design_evidence.py",
+      "sourceSha256": "12961101499ff4e7a81e0021112549578fa30c3b9ac2dbb359d8e82875813b5f",
+      "method": "test_invalid_adjacent_uri_is_retained_without_decode_crash",
+      "mappingStatement": "FACTOR. Preserve adjacent invalid URI input, unchanged view/reconstruction and retained-literal evidence.",
+      "bindings": [
+        {
+          "service": "LosslessEvidenceService",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LosslessEvidenceRealTests.cs",
+          "testMethod": "SameFactorCasesAndAssertionsBindNativeService / SameReconstructionCasesAndAssertionsBindNativeService",
+          "caseId": "FACTOR-ORIGINAL-ADJACENT",
+          "proof": "remediation/nuke-planning/docs/evidence/lossless-real-gate.trx",
+          "status": "real-in-memory-algorithm-pass"
+        }
+      ],
+      "pending": [
+        "Operational CLI/filesystem factoring and reconstruction binding remains unimplemented; do not infer those side effects from pure algorithm tests."
+      ],
+      "fullMethodMigrationClaim": false
+    },
+    {
+      "path": "remediation/tests_design018_contract.py",
+      "sourceSha256": "6503118aaebba7c2418af7a5b4130771c8b02245000f30fdd5fc62e731df7c94",
+      "method": "test_callback_state_machine_has_terminal_cleanup_semantics",
+      "mappingStatement": "INV all three terminal triggers, cleanup disposition and endpoint-death callback method.",
+      "bindings": [
+        {
+          "service": "Current canonical documents and source-pinned screen/manifest observations",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign018MethodRealTests.cs",
+          "testMethod": "SameOriginalPredicatesReadCurrentCanonicalSources",
+          "caseId": "test_callback_state_machine_has_terminal_cleanup_semantics",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2103237817668-497872b395c04926831f85473db9d916/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T21:11:59",
+        "proofSha256": "1c9ab52506e76080e48c4db21ae852148e8f3651ce087237824357d5fe3dfcdb",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/tests_design018_contract.py",
+      "sourceSha256": "6503118aaebba7c2418af7a5b4130771c8b02245000f30fdd5fc62e731df7c94",
+      "method": "test_inflight_distinguishes_admission_from_dispatch",
+      "mappingStatement": "INV both phases and rejection of the superseded revalidation sentence.",
+      "bindings": [
+        {
+          "service": "Current canonical documents and source-pinned screen/manifest observations",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign018MethodRealTests.cs",
+          "testMethod": "SameOriginalPredicatesReadCurrentCanonicalSources",
+          "caseId": "test_inflight_distinguishes_admission_from_dispatch",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2103237817668-497872b395c04926831f85473db9d916/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T21:11:59",
+        "proofSha256": "1c9ab52506e76080e48c4db21ae852148e8f3651ce087237824357d5fe3dfcdb",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/tests_design018_contract.py",
+      "sourceSha256": "6503118aaebba7c2418af7a5b4130771c8b02245000f30fdd5fc62e731df7c94",
+      "method": "test_direct_event_extension_has_negotiation_and_fallback",
+      "mappingStatement": "INV capability name, route template and negotiator declaration.",
+      "bindings": [
+        {
+          "service": "Current canonical documents and source-pinned screen/manifest observations",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign018MethodRealTests.cs",
+          "testMethod": "SameOriginalPredicatesReadCurrentCanonicalSources",
+          "caseId": "test_direct_event_extension_has_negotiation_and_fallback",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2103237817668-497872b395c04926831f85473db9d916/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T21:11:59",
+        "proofSha256": "1c9ab52506e76080e48c4db21ae852148e8f3651ce087237824357d5fe3dfcdb",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/tests_design018_contract.py",
+      "sourceSha256": "6503118aaebba7c2418af7a5b4130771c8b02245000f30fdd5fc62e731df7c94",
+      "method": "test_models_include_arc_and_owner_sequences",
+      "mappingStatement": "INV both named dynamic views; ARCH outputs them.",
+      "bindings": [
+        {
+          "service": "Current canonical documents and source-pinned screen/manifest observations",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign018MethodRealTests.cs",
+          "testMethod": "SameOriginalPredicatesReadCurrentCanonicalSources",
+          "caseId": "test_models_include_arc_and_owner_sequences",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2103237817668-497872b395c04926831f85473db9d916/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T21:11:59",
+        "proofSha256": "1c9ab52506e76080e48c4db21ae852148e8f3651ce087237824357d5fe3dfcdb",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/tests_design018_contract.py",
+      "sourceSha256": "6503118aaebba7c2418af7a5b4130771c8b02245000f30fdd5fc62e731df7c94",
+      "method": "test_all_screen_definitions_include_status_chip",
+      "mappingStatement": "UI `UI-STATUS-*` and full manifest expectation.",
+      "bindings": [
+        {
+          "service": "DocumentationProjector",
+          "testFile": "remediation/nuke-app/Tests/Documentation/DocumentationProjectionRealTests.cs",
+          "testMethod": "SameAssertionsAndIndependentFixturesBindNativeProjector",
+          "caseId": "UI-MANIFEST, UI-STATUS-SCR01, UI-STATUS-SCR02, UI-STATUS-SCR03, UI-STATUS-SCR04, UI-STATUS-SCR05, UI-STATUS-SCR06, UI-STATUS-SCR07, UI-STATUS-SCR08, UI-STATUS-SCR09, UI-STATUS-SCR10, UI-STATUS-SCR11, UI-COPY-SCR01, UI-COPY-SCR02, UI-COPY-SCR03, UI-COPY-SCR04, UI-COPY-SCR05, UI-COPY-SCR06, UI-COPY-SCR07, UI-COPY-SCR08, UI-COPY-SCR09, UI-COPY-SCR10, UI-COPY-SCR11",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T0615091911800-8e2555d1e62940e3aaf3d6a89351fd1d/tests.trx",
+          "status": "same-original-predicates-real-pass",
+          "caseIds": [
+            "UI-MANIFEST",
+            "UI-STATUS-SCR01",
+            "UI-STATUS-SCR02",
+            "UI-STATUS-SCR03",
+            "UI-STATUS-SCR04",
+            "UI-STATUS-SCR05",
+            "UI-STATUS-SCR06",
+            "UI-STATUS-SCR07",
+            "UI-STATUS-SCR08",
+            "UI-STATUS-SCR09",
+            "UI-STATUS-SCR10",
+            "UI-STATUS-SCR11",
+            "UI-COPY-SCR01",
+            "UI-COPY-SCR02",
+            "UI-COPY-SCR03",
+            "UI-COPY-SCR04",
+            "UI-COPY-SCR05",
+            "UI-COPY-SCR06",
+            "UI-COPY-SCR07",
+            "UI-COPY-SCR08",
+            "UI-COPY-SCR09",
+            "UI-COPY-SCR10",
+            "UI-COPY-SCR11"
+          ]
+        },
+        {
+          "service": "Current canonical documents and source-pinned screen/manifest observations",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign018MethodRealTests.cs",
+          "testMethod": "SameOriginalPredicatesReadCurrentCanonicalSources",
+          "caseId": "test_all_screen_definitions_include_status_chip",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2103237817668-497872b395c04926831f85473db9d916/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T21:11:59",
+        "proofSha256": "1c9ab52506e76080e48c4db21ae852148e8f3651ce087237824357d5fe3dfcdb",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/tests_design020_contract.py",
+      "sourceSha256": "9577ce4eda3c646420caaf7156967dc4110e248112b1423674261f98128879ad",
+      "method": "test_arc_authentication_is_explicitly_an_adapter_to_shared_registry",
+      "mappingStatement": "INV both class and C4 authentication edges.",
+      "bindings": [
+        {
+          "service": "Current canonical design/code/C4/UI-manifest inputs through the shared store",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign020MethodRealTests.cs",
+          "testMethod": "SameOriginalEightMethodsReadCurrentCanonicalFiles",
+          "caseId": "test_arc_authentication_is_explicitly_an_adapter_to_shared_registry",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T23:56:52",
+        "proofSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/tests_design020_contract.py",
+      "sourceSha256": "9577ce4eda3c646420caaf7156967dc4110e248112b1423674261f98128879ad",
+      "method": "test_component_writes_converge_on_single_sqlite_coordinator",
+      "mappingStatement": "INV exact singleton storage writer set, not merely existence of a storage edge.",
+      "bindings": [
+        {
+          "service": "Current canonical design/code/C4/UI-manifest inputs through the shared store",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign020MethodRealTests.cs",
+          "testMethod": "SameOriginalEightMethodsReadCurrentCanonicalFiles",
+          "caseId": "test_component_writes_converge_on_single_sqlite_coordinator",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T23:56:52",
+        "proofSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/tests_design020_contract.py",
+      "sourceSha256": "9577ce4eda3c646420caaf7156967dc4110e248112b1423674261f98128879ad",
+      "method": "test_owner_log_read_and_export_have_both_model_and_code_path",
+      "mappingStatement": "INV model edge plus both export/query method tokens.",
+      "bindings": [
+        {
+          "service": "Current canonical design/code/C4/UI-manifest inputs through the shared store",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign020MethodRealTests.cs",
+          "testMethod": "SameOriginalEightMethodsReadCurrentCanonicalFiles",
+          "caseId": "test_owner_log_read_and_export_have_both_model_and_code_path",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T23:56:52",
+        "proofSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/tests_design020_contract.py",
+      "sourceSha256": "9577ce4eda3c646420caaf7156967dc4110e248112b1423674261f98128879ad",
+      "method": "test_unknown_callback_late_result_and_cancel_are_closed_in_contract",
+      "mappingStatement": "INV all five late-result/callback/cancel statements.",
+      "bindings": [
+        {
+          "service": "Current canonical design/code/C4/UI-manifest inputs through the shared store",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign020MethodRealTests.cs",
+          "testMethod": "SameOriginalEightMethodsReadCurrentCanonicalFiles",
+          "caseId": "test_unknown_callback_late_result_and_cancel_are_closed_in_contract",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T23:56:52",
+        "proofSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/tests_design020_contract.py",
+      "sourceSha256": "9577ce4eda3c646420caaf7156967dc4110e248112b1423674261f98128879ad",
+      "method": "test_nonresumable_stage_expiry_has_one_policy",
+      "mappingStatement": "INV required no-resume policy and forbidden old resumable text.",
+      "bindings": [
+        {
+          "service": "Current canonical design/code/C4/UI-manifest inputs through the shared store",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign020MethodRealTests.cs",
+          "testMethod": "SameOriginalEightMethodsReadCurrentCanonicalFiles",
+          "caseId": "test_nonresumable_stage_expiry_has_one_policy",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T23:56:52",
+        "proofSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/tests_design020_contract.py",
+      "sourceSha256": "9577ce4eda3c646420caaf7156967dc4110e248112b1423674261f98128879ad",
+      "method": "test_migration_precedes_live_schema",
+      "mappingStatement": "INV required migration ordering and forbidden compatibility-label sentence.",
+      "bindings": [
+        {
+          "service": "Current canonical design/code/C4/UI-manifest inputs through the shared store",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign020MethodRealTests.cs",
+          "testMethod": "SameOriginalEightMethodsReadCurrentCanonicalFiles",
+          "caseId": "test_migration_precedes_live_schema",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T23:56:52",
+        "proofSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/tests_design020_contract.py",
+      "sourceSha256": "9577ce4eda3c646420caaf7156967dc4110e248112b1423674261f98128879ad",
+      "method": "test_screen_tables_and_story_actions_resolve_to_declared_ids",
+      "mappingStatement": "UI navigation/step IDs; INV all screen and storyboard navigation links and declared source references.",
+      "bindings": [
+        {
+          "service": "DocumentationProjector",
+          "testFile": "remediation/nuke-app/Tests/Documentation/DocumentationProjectionRealTests.cs",
+          "testMethod": "SameAssertionsAndIndependentFixturesBindNativeProjector",
+          "caseId": "Exact UI/DECK assertion families named in mappingStatement",
+          "proof": "remediation/nuke-planning/docs/evidence/ui-deck-real-gate.trx",
+          "status": "saved-output-projection-assertions-real-pass"
+        },
+        {
+          "service": "Current canonical design/code/C4/UI-manifest inputs through the shared store",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign020MethodRealTests.cs",
+          "testMethod": "SameOriginalEightMethodsReadCurrentCanonicalFiles",
+          "caseId": "test_screen_tables_and_story_actions_resolve_to_declared_ids",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T23:56:52",
+        "proofSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/tests_design020_contract.py",
+      "sourceSha256": "9577ce4eda3c646420caaf7156967dc4110e248112b1423674261f98128879ad",
+      "method": "test_self_adb_pairing_is_an_explicit_story_not_a_grant",
+      "mappingStatement": "INV STB06 presence, explicit `does not grant` boundary and protected SCR09 step.",
+      "bindings": [
+        {
+          "service": "Current canonical design/code/C4/UI-manifest inputs through the shared store",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign020MethodRealTests.cs",
+          "testMethod": "SameOriginalEightMethodsReadCurrentCanonicalFiles",
+          "caseId": "test_self_adb_pairing_is_an_explicit_story_not_a_grant",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T23:56:52",
+        "proofSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/tests_design022_contract.py",
+      "sourceSha256": "d09c7b97c52e6f51153531f0b6471e26afeb55466bb9346a01746276b9bdd9d3",
+      "method": "test_slides_contain_actual_vector_images_not_raw_markdown",
+      "mappingStatement": "UI `DECK-NO-RAW-MARKDOWN`, `DECK-IMAGE-COUNT`, `DECK-EMBEDDED-*`, `UI-STEP-*`.",
+      "bindings": [
+        {
+          "service": "DocumentationProjector",
+          "testFile": "remediation/nuke-app/Tests/Documentation/DocumentationProjectionRealTests.cs",
+          "testMethod": "SameAssertionsAndIndependentFixturesBindNativeProjector",
+          "caseId": "Exact UI/DECK assertion families named in mappingStatement",
+          "proof": "remediation/nuke-planning/docs/evidence/ui-deck-real-gate.trx",
+          "status": "saved-output-projection-assertions-real-pass"
+        },
+        {
+          "service": "Current canonical design/C4 plus native generated screens/storyboard and independently proved HTML observation adapter",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign022MethodRealTests.cs",
+          "testMethod": "SameSevenOriginalPredicatesReadCurrentSourcesAndNativeGeneratedOutput",
+          "caseId": "test_slides_contain_actual_vector_images_not_raw_markdown",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T23:57:16",
+        "proofSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/tests_design022_contract.py",
+      "sourceSha256": "d09c7b97c52e6f51153531f0b6471e26afeb55466bb9346a01746276b9bdd9d3",
+      "method": "test_slideshow_uses_standard_svg_images",
+      "mappingStatement": "UI `DECK-STANDARD-IMAGES` exact 107 ordinary image references.",
+      "bindings": [
+        {
+          "service": "DocumentationProjector",
+          "testFile": "remediation/nuke-app/Tests/Documentation/DocumentationProjectionRealTests.cs",
+          "testMethod": "SameAssertionsAndIndependentFixturesBindNativeProjector",
+          "caseId": "DECK-STANDARD-IMAGES",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T0615091911800-8e2555d1e62940e3aaf3d6a89351fd1d/tests.trx",
+          "status": "same-original-predicates-real-pass",
+          "caseIds": [
+            "DECK-STANDARD-IMAGES"
+          ]
+        },
+        {
+          "service": "Current canonical design/C4 plus native generated screens/storyboard and independently proved HTML observation adapter",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign022MethodRealTests.cs",
+          "testMethod": "SameSevenOriginalPredicatesReadCurrentSourcesAndNativeGeneratedOutput",
+          "caseId": "test_slideshow_uses_standard_svg_images",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T23:57:16",
+        "proofSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/tests_design022_contract.py",
+      "sourceSha256": "d09c7b97c52e6f51153531f0b6471e26afeb55466bb9346a01746276b9bdd9d3",
+      "method": "test_error_status_fixture_uses_actual_closed_health_domains",
+      "mappingStatement": "UI SCR10 overview/state exact health; INV source example closed facets and modeled desired-state field.",
+      "bindings": [
+        {
+          "service": "DocumentationProjector",
+          "testFile": "remediation/nuke-app/Tests/Documentation/DocumentationProjectionRealTests.cs",
+          "testMethod": "SameAssertionsAndIndependentFixturesBindNativeProjector",
+          "caseId": "Exact UI/DECK assertion families named in mappingStatement",
+          "proof": "remediation/nuke-planning/docs/evidence/ui-deck-real-gate.trx",
+          "status": "saved-output-projection-assertions-real-pass"
+        },
+        {
+          "service": "Current canonical design/C4 plus native generated screens/storyboard and independently proved HTML observation adapter",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign022MethodRealTests.cs",
+          "testMethod": "SameSevenOriginalPredicatesReadCurrentSourcesAndNativeGeneratedOutput",
+          "caseId": "test_error_status_fixture_uses_actual_closed_health_domains",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T23:57:16",
+        "proofSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/tests_design022_contract.py",
+      "sourceSha256": "d09c7b97c52e6f51153531f0b6471e26afeb55466bb9346a01746276b9bdd9d3",
+      "method": "test_controls_states_and_external_actors_have_explicit_contracts",
+      "mappingStatement": "UI control identities/enablement and ordered fields; INV exact control_specs set, external actor, action labels, error/cancel strings and two protected disabled controls.",
+      "bindings": [
+        {
+          "service": "DocumentationProjector",
+          "testFile": "remediation/nuke-app/Tests/Documentation/DocumentationProjectionRealTests.cs",
+          "testMethod": "SameAssertionsAndIndependentFixturesBindNativeProjector",
+          "caseId": "Exact UI/DECK assertion families named in mappingStatement",
+          "proof": "remediation/nuke-planning/docs/evidence/ui-deck-real-gate.trx",
+          "status": "saved-output-projection-assertions-real-pass"
+        },
+        {
+          "service": "Current canonical design/C4 plus native generated screens/storyboard and independently proved HTML observation adapter",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign022MethodRealTests.cs",
+          "testMethod": "SameSevenOriginalPredicatesReadCurrentSourcesAndNativeGeneratedOutput",
+          "caseId": "test_controls_states_and_external_actors_have_explicit_contracts",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T23:57:16",
+        "proofSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/tests_design022_contract.py",
+      "sourceSha256": "d09c7b97c52e6f51153531f0b6471e26afeb55466bb9346a01746276b9bdd9d3",
+      "method": "test_arc_input_lifetime_matches_pinned_singleton_not_unary_socket",
+      "mappingStatement": "INV cross-request press/move/release, singleton composition, forbidden unary-socket ownership and forbidden stale-target wording.",
+      "bindings": [
+        {
+          "service": "Current canonical design/C4 plus native generated screens/storyboard and independently proved HTML observation adapter",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign022MethodRealTests.cs",
+          "testMethod": "SameSevenOriginalPredicatesReadCurrentSourcesAndNativeGeneratedOutput",
+          "caseId": "test_arc_input_lifetime_matches_pinned_singleton_not_unary_socket",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T23:57:16",
+        "proofSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/tests_design022_contract.py",
+      "sourceSha256": "d09c7b97c52e6f51153531f0b6471e26afeb55466bb9346a01746276b9bdd9d3",
+      "method": "test_arc_backend_and_health_paths_exist_across_views",
+      "mappingStatement": "INV adapter inheritance, model controller edge, arcListener field and SCR08.C07 control.",
+      "bindings": [
+        {
+          "service": "Current canonical design/C4 plus native generated screens/storyboard and independently proved HTML observation adapter",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign022MethodRealTests.cs",
+          "testMethod": "SameSevenOriginalPredicatesReadCurrentSourcesAndNativeGeneratedOutput",
+          "caseId": "test_arc_backend_and_health_paths_exist_across_views",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T23:57:16",
+        "proofSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/tests_design022_contract.py",
+      "sourceSha256": "d09c7b97c52e6f51153531f0b6471e26afeb55466bb9346a01746276b9bdd9d3",
+      "method": "test_unknown_state_has_phase_specific_cleanup_exits",
+      "mappingStatement": "INV both cleanup outcomes, Reserved state and forbidden old principal-kind CHECK wording.",
+      "bindings": [
+        {
+          "service": "Current canonical design/C4 plus native generated screens/storyboard and independently proved HTML observation adapter",
+          "testFile": "remediation/nuke-app/Tests/Documentation/LegacyDesign022MethodRealTests.cs",
+          "testMethod": "SameSevenOriginalPredicatesReadCurrentSourcesAndNativeGeneratedOutput",
+          "caseId": "test_unknown_state_has_phase_specific_cleanup_exits",
+          "proof": "remediation/nuke-app/artifacts/tests/20261028T2323484680275-8fbd219082eb4f6daf9267e02c62303d/tests.trx",
+          "status": "same-original-predicates-current-full-normal-suite-pass"
+        }
+      ],
+      "pending": [],
+      "fullMethodMigrationClaim": true,
+      "exactPredicateReview": {
+        "observedAtLocal": "2026-10-28T23:57:16",
+        "proofSha256": "7a41ad3d26b5d3a3c5f14ae01c0c441088ce08b82ff78dfe520bbbafdc283e20",
+        "hostileReviewAccepted": false,
+        "scope": "This exact original test-method execution only, with preserved source identity and independently mocked assertions."
+      }
+    },
+    {
+      "path": "remediation/tests_design023_contract.py",
+      "sourceSha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+      "method": "test_version_rejection_matches_pinned_arc_source",
+      "mappingStatement": "INV pinned numeric/name mismatch status, required UNSUPPORTED5 sentence and forbidden ERROR sentence.",
+      "bindings": [],
+      "pending": [
+        "Documentation cross-artifact/source invariant validator and this original method full native binding remain pending in Documentation ownership."
+      ],
+      "fullMethodMigrationClaim": false
+    },
+    {
+      "path": "remediation/tests_design023_contract.py",
+      "sourceSha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+      "method": "test_contract_version_has_one_current_value",
+      "mappingStatement": "INV actual API version, Markdown version heading and forbidden stale version sentence.",
+      "bindings": [],
+      "pending": [
+        "Documentation cross-artifact/source invariant validator and this original method full native binding remain pending in Documentation ownership."
+      ],
+      "fullMethodMigrationClaim": false
+    },
+    {
+      "path": "remediation/tests_design023_contract.py",
+      "sourceSha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+      "method": "test_admin_scheme_is_issued_bearer_and_owner_proof_is_server_owned",
+      "mappingStatement": "INV HTTP bearer scheme, empty OAuth-style scopes, exact mutation authorization extension and 403 response over every operation.",
+      "bindings": [],
+      "pending": [
+        "Documentation cross-artifact/source invariant validator and this original method full native binding remain pending in Documentation ownership."
+      ],
+      "fullMethodMigrationClaim": false
+    },
+    {
+      "path": "remediation/tests_design023_contract.py",
+      "sourceSha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+      "method": "test_import_stage_routes_define_sealed_hash_size_expiry",
+      "mappingStatement": "INV exact get/post method set, five stage properties, octet-stream upload and owner extension.",
+      "bindings": [],
+      "pending": [
+        "Documentation cross-artifact/source invariant validator and this original method full native binding remain pending in Documentation ownership."
+      ],
+      "fullMethodMigrationClaim": false
+    },
+    {
+      "path": "remediation/tests_design023_contract.py",
+      "sourceSha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+      "method": "test_stage_lifetime_is_capacity_aware_and_configurable",
+      "mappingStatement": "INV both forbidden fixed-lifetime sentences plus configurable TTL and insufficient-lifetime reason.",
+      "bindings": [],
+      "pending": [
+        "Documentation cross-artifact/source invariant validator and this original method full native binding remain pending in Documentation ownership."
+      ],
+      "fullMethodMigrationClaim": false
+    },
+    {
+      "path": "remediation/tests_design023_contract.py",
+      "sourceSha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+      "method": "test_standalone_docs_tasks_verify_pins",
+      "mappingStatement": "TOOL/registry. Preserve independently invoked generator preflight and architecture receipt contract; update original Gradle source-shape assertion to registry/delegate equivalence, not a copied Gradle graph.",
+      "bindings": [],
+      "pending": [
+        "Gradle thin delegate/caller equivalence and toolchain category integration remain pending; native locks/bootstrap/acquirer service proof is narrower."
+      ],
+      "fullMethodMigrationClaim": false
+    },
+    {
+      "path": "remediation/tests_design023_contract.py",
+      "sourceSha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+      "method": "test_all_native_arc_identities_hash_exact_bytes_and_use_pinned_payloads",
+      "mappingStatement": "INV protocol pin, exact ARC method/operation sets, SHA256 of every canonical UTF-8 signature, uniqueness and pinned request/result type membership.",
+      "bindings": [],
+      "pending": [
+        "Documentation cross-artifact/source invariant validator and this original method full native binding remain pending in Documentation ownership."
+      ],
+      "fullMethodMigrationClaim": false
+    },
+    {
+      "path": "remediation/tests_design023_contract.py",
+      "sourceSha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+      "method": "test_dispatch_permit_and_storage_ports_are_explicit_in_sources",
+      "mappingStatement": "INV required planner/gate and repository/verifier edges, forbidden concrete service edge, dispatch barrier and invalidation wording.",
+      "bindings": [],
+      "pending": [
+        "Documentation cross-artifact/source invariant validator and this original method full native binding remain pending in Documentation ownership."
+      ],
+      "fullMethodMigrationClaim": false
+    },
+    {
+      "path": "remediation/tests_design023_contract.py",
+      "sourceSha256": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
+      "method": "test_watch_contract_is_finite_and_blob_quota_accounted",
+      "mappingStatement": "INV all four finite/quota/seal/cancel protocol statements.",
+      "bindings": [],
+      "pending": [
+        "Documentation cross-artifact/source invariant validator and this original method full native binding remain pending in Documentation ownership."
+      ],
+      "fullMethodMigrationClaim": false
+    }
+  ],
+  "additionalNativePrimitives": [
+    "ArchitectureAssetPreparation11real",
+    "DocumentationRendererProfileReader15real",
+    "ArchitectureRendererTransport12realwithrecordingprocessIO(noactualrender)",
+    "DocumentationPackageBuilder4real",
+    "ArtifactReceiptVerifier10real"
+  ],
+  "browserOwner": "/root/nuke_java_port",
+  "remaining": [
+    "Complete exact original58method/caller reconciliation; inspect each pending predicate rather than inferring from a shared module name.",
+    "Complete Gradle/wrapper support export and clean exported alias proof; native C# host source package/bootstrap already has bounded proof.",
+    "Reusable review evidence codec filesystem/operation composition; pure21-case algorithm proof alone is narrower."
+  ],
+  "latestLocalFullTrx": "remediation/nuke-planning/docs/evidence/checkpoint003-documentation-real-gate.trx",
+  "publicationFailureRetained": "remediation/nuke-planning/docs/evidence/checkpoint003-publication-fixture-failure.trx",
+  "portableFixtureFix": "remediation/nuke-planning/docs/evidence/checkpoint003-portable-fixture-seven-row-delta.json",
+  "currentRuntimeVerification": {
+    "localTimestamp": "2026-10-28T18:29:44",
+    "evidence": [
+      {
+        "path": "remediation/nuke-planning/docs/evidence/canonical-documentation-cli-native-proof.json",
+        "sha256": "d1289318edd296becdae8f3e7212a73a5a61e50769ef0c1085d99453fff9ee07"
+      },
+      {
+        "path": "remediation/nuke-planning/docs/evidence/standalone-documentation-cli-native-proof.json",
+        "sha256": "5a206471a277e755f015891911c7cef35653bd812c7b625cdee63b03eab5c2fe"
+      },
+      {
+        "path": "remediation/nuke-planning/docs/evidence/portable-build-source-package-cli-proof.json",
+        "sha256": "a507f77fdfcc5907d823403ba9183142e0cb4bbc554a1e5e3d770de621665e6f"
+      },
+      {
+        "path": "remediation/nuke-planning/docs/evidence/portable-host-runtime-proof.json",
+        "sha256": "57260f7c8e66cccde07134aff787ca68e3801e93f01e4dda42808568f04e7623"
+      },
+      {
+        "path": "remediation/nuke-planning/review/full012-normal-gate.json",
+        "sha256": "1523a364c7b587576e165db5b4c354bc074e6af537d6440f37176809268cc1c9"
+      }
+    ],
+    "scope": "Later actual caller/runtime proofs, separated from original per-method parity. No method or file closure flags are changed by this reconciliation.",
+    "fullCurrentSuite": 65580,
+    "failed": 0,
+    "skipped": 0,
+    "hv": false
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "at": "2026-10-29T00:24:13",
+  "scope": "Direct inactive local tombstone branch proof only; no new original test-method claim or whole producer closure.",
+  "original": {
+    "local": "/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/tooling/effective_device_inventory.py",
+    "frozen": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tooling/effective_device_inventory.py",
+    "sha256": "f41b89a59ee27996419ca6f7f7bdcde12a6e1ce98f40defa6a25a3f87d341b05",
+    "function": "capture",
+    "branchLines": [
+      22,
+      29,
+      30,
+      33,
+      63,
+      64
+    ]
+  },
+  "native": {
+    "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/catalog/nuke-app/Modules/Catalog/CatalogInventory.cs",
+    "sha256": "9ebef86c1c1da585afbf6138bad8f144e85925bb43ff32749075b176a5f7e022",
+    "method": "Capture",
+    "implementationAlreadyExists": true,
+    "productionEditsPlanned": false
+  },
+  "cases": [
+    {
+      "id": "tombstone-deleted",
+      "state": "deleted",
+      "importedBinding": false,
+      "revision": 1,
+      "document": "Same inherited original local addition Entry based on aidl:a.I#take(P), renamed aidl:a.I#added(int) with primitive int argument.",
+      "entry_id": "6580d74e4f77c4959a4dec983a787e029d6c5614ec5e2852b230668b08f27efd",
+      "expectedEntityKind": "other",
+      "expectedVariants": 0,
+      "expectedPins": "Exact state, revision1 and canonical stored document SHA in capture/document map/resolved row.",
+      "expectedResolution": "unknown; NON_EXECUTABLE_INVENTORY_NODE; null schema/contract/graph; empty dependencies.",
+      "expectedEffects": "One visible local node; base membership and imported entities unchanged; capture makes no overlay/history/generation writes; read transaction closes; original database/source bytes retained."
+    },
+    {
+      "id": "tombstone-deleted-opaque",
+      "state": "deleted",
+      "importedBinding": false,
+      "revision": 1,
+      "document": "Valid JSON object that is not an Entry; inactive branch must not validate or infer its shape.",
+      "entry_id": "6580d74e4f77c4959a4dec983a787e029d6c5614ec5e2852b230668b08f27efd",
+      "expectedEntityKind": "other",
+      "expectedVariants": 0,
+      "expectedPins": "Exact state, revision1 and canonical stored document SHA in capture/document map/resolved row.",
+      "expectedResolution": "unknown; NON_EXECUTABLE_INVENTORY_NODE; null schema/contract/graph; empty dependencies.",
+      "expectedEffects": "One visible local node; base membership and imported entities unchanged; capture makes no overlay/history/generation writes; read transaction closes; original database/source bytes retained."
+    },
+    {
+      "id": "tombstone-conflict",
+      "state": "conflict",
+      "importedBinding": false,
+      "revision": 1,
+      "document": "Same inherited original local addition Entry based on aidl:a.I#take(P), renamed aidl:a.I#added(int) with primitive int argument.",
+      "entry_id": "6580d74e4f77c4959a4dec983a787e029d6c5614ec5e2852b230668b08f27efd",
+      "expectedEntityKind": "other",
+      "expectedVariants": 0,
+      "expectedPins": "Exact state, revision1 and canonical stored document SHA in capture/document map/resolved row.",
+      "expectedResolution": "unknown; NON_EXECUTABLE_INVENTORY_NODE; null schema/contract/graph; empty dependencies.",
+      "expectedEffects": "One visible local node; base membership and imported entities unchanged; capture makes no overlay/history/generation writes; read transaction closes; original database/source bytes retained."
+    },
+    {
+      "id": "tombstone-conflict-opaque",
+      "state": "conflict",
+      "importedBinding": false,
+      "revision": 1,
+      "document": "Valid JSON object that is not an Entry; inactive branch must not validate or infer its shape.",
+      "entry_id": "6580d74e4f77c4959a4dec983a787e029d6c5614ec5e2852b230668b08f27efd",
+      "expectedEntityKind": "other",
+      "expectedVariants": 0,
+      "expectedPins": "Exact state, revision1 and canonical stored document SHA in capture/document map/resolved row.",
+      "expectedResolution": "unknown; NON_EXECUTABLE_INVENTORY_NODE; null schema/contract/graph; empty dependencies.",
+      "expectedEffects": "One visible local node; base membership and imported entities unchanged; capture makes no overlay/history/generation writes; read transaction closes; original database/source bytes retained."
+    }
+  ],
+  "mockGate": {
+    "class": "CatalogTombstoneMockTests",
+    "correctCases": 4,
+    "negativeControlHarnessCases": 4,
+    "controlsPerCase": 35,
+    "totalNegativeControls": 140,
+    "nativeAdapterNotYetChanged": true
+  },
+  "beforeAdapterPins": [
+    {
+      "path": "Tests/Catalog/CatalogEffectiveInventoryCases.cs",
+      "sha256": "2d909a09468a10a15a2b782d6257fbf3fb6a4c66b9f60251eda8381caa4280b8",
+      "length": 6265
+    },
+    {
+      "path": "Tests/Catalog/CatalogTombstoneCases.cs",
+      "sha256": "3279e727e1f80f1dada8d89be7c5ff10b006f5622e58a6add10f01fa1c99893d",
+      "length": 4013
+    },
+    {
+      "path": "Tests/Catalog/CatalogEffectiveInventoryRealTests.cs",
+      "sha256": "4edaa1ae8e47cd4b8cbfd993b6bd41911ab247b00ab233d70700a42f36e8d282",
+      "length": 12788
+    },
+    {
+      "path": "Modules/Catalog/CatalogInventory.cs",
+      "sha256": "9ebef86c1c1da585afbf6138bad8f144e85925bb43ff32749075b176a5f7e022",
+      "length": 11397
+    }
+  ],
+  "acceptedComplete": false,
+  "safeToDelete": false,
+  "canonicalWrites": false
+}

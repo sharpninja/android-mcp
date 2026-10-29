@@ -1,0 +1,63 @@
+{
+  "at": "2026-10-29T06:18:33",
+  "scope": "Root-owned unique minimal integration hunks for Sources/Fingerprint",
+  "files": [
+    {
+      "relativePath": "Core/OperationContracts.cs",
+      "expectedPriorSha256": "b3b56ddfca4261a4d42239a289ae663a3198c1cb014fd30ade6bf1082c0ce90f",
+      "expectedPriorBytes": 2216,
+      "hunks": [
+        {
+          "before": "GradleProjection, Split, Reassemble, Snapshot",
+          "after": "GradleProjection, Split, Reassemble, Snapshot, Fingerprint"
+        }
+      ],
+      "requiredAnchorOccurrences": 1,
+      "reviewOnlyAfter": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/parallel/acquisition-completion/fingerprint/root-proposal/review-only-after/Core/OperationContracts.cs",
+      "expectedAfterSha256": "b3e48e506979ba3c200ce68ca113c6b444a53e507d84ed2ff034e589044e1203",
+      "expectedAfterBytes": 2229,
+      "wholesaleCopyAllowed": false
+    },
+    {
+      "relativePath": "Core/OperationRegistry.cs",
+      "expectedPriorSha256": "d243a5396c69dfbcbf14a0c497cb643d4c965ee9a81b27b8976fabf6fb660d7e",
+      "expectedPriorBytes": 12911,
+      "hunks": [
+        {
+          "before": "SourcesSnapshot, ReviewReceiptAudit, CatalogMigration }",
+          "after": "SourcesSnapshot, ReviewReceiptAudit, CatalogMigration, SourcesFingerprint }"
+        },
+        {
+          "before": "        Add(Category.Sources,Operation.Plan,",
+          "after": "        Add(Category.Sources,Operation.Fingerprint,[\"project-root\",\"pipeline-request\",\"pipeline-request-sha256\",\"pipeline-request-length\"],[],OperationExecutor.SourcesFingerprint,\n            new PlannedStep(\"observe-current-source-fingerprint\",[]));\n        Add(Category.Sources,Operation.Plan,"
+        }
+      ],
+      "requiredAnchorOccurrences": 1,
+      "reviewOnlyAfter": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/parallel/acquisition-completion/fingerprint/root-proposal/review-only-after/Core/OperationRegistry.cs",
+      "expectedAfterSha256": "1fde13200be4b11d70b6b8043b0497bcf842c58331d4e7ca92d3371cb6001bd5",
+      "expectedAfterBytes": 13182,
+      "wholesaleCopyAllowed": false
+    },
+    {
+      "relativePath": "Build.cs",
+      "expectedPriorSha256": "8013956d82b0ca109fc866cd0d4c3a701b80f61639ecedc3c723312326913575",
+      "expectedPriorBytes": 18176,
+      "hunks": [
+        {
+          "before": "            case OperationExecutor.SourcesExtract: ExtractSources().GetAwaiter().GetResult();break;",
+          "after": "            case OperationExecutor.SourcesExtract: ExtractSources().GetAwaiter().GetResult();break;\n            case OperationExecutor.SourcesFingerprint: FingerprintSources().GetAwaiter().GetResult();break;"
+        }
+      ],
+      "requiredAnchorOccurrences": 1,
+      "reviewOnlyAfter": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/acquisition/parallel/acquisition-completion/fingerprint/root-proposal/review-only-after/Build.cs",
+      "expectedAfterSha256": "78888adf3587ca4ef6c48157146c8f7a219321dc84fd6a81f9dee9012a0997c3",
+      "expectedAfterBytes": 18284,
+      "wholesaleCopyAllowed": false
+    }
+  ],
+  "canonicalChanged": false,
+  "newParameters": [],
+  "kindVocabulary": "ISourcesCacheRuntime.CacheProducerKinds from actual registered runtime",
+  "hunksOnly": true,
+  "privateSharedFilesAreNotRootReplacements": true
+}

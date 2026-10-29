@@ -1,0 +1,351 @@
+{
+  "at": "2026-10-29T04:49:56",
+  "scope": "Two conditional normal test-file closure recommendations: four Build methods and seven Pipeline methods; not a second ledger",
+  "entries": [
+    {
+      "legacyPath": "remediation/catalog/tests/test_build.py",
+      "legacySha256": "e9ce2b6dbb35b6e7689c6df830a9af8e82dde1091f9eae67c4e3ff767d8896a0",
+      "owner": "Catalog",
+      "category": "Catalog",
+      "operation": "Build",
+      "nativeService": "CatalogBuild and existing CatalogDevicePipeline providers",
+      "nativeTest": "Existing original method maps plus CatalogOriginalAssertionGapRealTests",
+      "reuseExistingMethodClaims": [
+        "test_import_integrity_schema_overlay_and_immutability",
+        "test_hash_failure_does_not_publish",
+        "test_one_identity_two_immutable_occurrences",
+        "test_invalid_ast_cannot_publish"
+      ],
+      "pending_methods": [],
+      "methodProof": [
+        {
+          "method": "test_import_integrity_schema_overlay_and_immutability",
+          "originalBodySha256": "25361b180b3da503c5e21ffc45b38958cf0da2f5a3dd0b9365f9cad25a45007f",
+          "originalAssertionLines": [
+            "   r=pathlib.Path(td);inv=self.fixture(r);v=b.build(inv,r/'out');self.assertEqual(v['integrity_check'],'ok');self.assertEqual(v['foreign_key_check'],[]);self.assertEqual(v['counts']['permission_definitions'],1)",
+            "   self.assertTrue(any(d['permission'].get('name')=='android.permission.CAMERA' for d in docs));self.assertEqual(json.loads((r/'out/catalog.json').read_text())['entries'],docs)",
+            "   with self.assertRaises(sqlite3.IntegrityError):db.execute('UPDATE bindings SET name=\"changed\" WHERE binding_id=?',(bid,))",
+            "   self.assertEqual(db.execute('SELECT count(*) FROM runtime_catalog').fetchone()[0],count-1)",
+            "   db.execute('UPDATE overlays SET state=\"active\",revision=2,document_json=? WHERE entry_id=?',(json.dumps({'fixture':'override'}),bid));self.assertEqual(json.loads(db.execute('SELECT document_json FROM runtime_catalog WHERE entry_id=?',(bid,)).fetchone()[0]),{'fixture':'override'})",
+            "   with self.assertRaises(sqlite3.IntegrityError):db.execute('INSERT INTO occurrences VALUES (?,?,?)',('missing','missing',1))",
+            "   self.assertEqual(before,{p.name:p.read_bytes() for p in (r/'out').iterdir() if p.is_file()})"
+          ],
+          "nativeBindings": [
+            "BUILD-01",
+            "FULL-VAL-01"
+          ],
+          "pendingOriginalAssertion": null,
+          "scope": "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit"
+        },
+        {
+          "method": "test_hash_failure_does_not_publish",
+          "originalBodySha256": "60a571724811f8e047c8aed190a5ad2bf8c7529b97ee9316ff0e6a238f46ea62",
+          "originalAssertionLines": [
+            "   with self.assertRaisesRegex(ValueError,'SHA256 mismatch'):b.build(inv,r/'out')",
+            "   self.assertFalse((r/'out/catalog.sqlite').exists())",
+            "   self.assertFalse(json.loads((r/'out/validation-failure.json').read_text())['published'])"
+          ],
+          "nativeBindings": [
+            "CatalogOriginalTamperRealTests"
+          ],
+          "pendingOriginalAssertion": null,
+          "scope": "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit"
+        },
+        {
+          "method": "test_one_identity_two_immutable_occurrences",
+          "originalBodySha256": "8504ced74ebb2020fae5885f7a012ff48b704fb37be7ffe799cbc47155b71014",
+          "originalAssertionLines": [
+            "   db=sqlite3.connect(r/'out/catalog.sqlite');self.addCleanup(db.close);rows=db.execute(\"SELECT b.binding_id,count(*) FROM bindings b JOIN occurrences o USING(binding_id) WHERE b.signature='java:a.A#go(int)' GROUP BY b.binding_id\").fetchall();self.assertEqual(len(rows),1);self.assertEqual(rows[0][1],2)"
+          ],
+          "nativeBindings": [
+            "BUILD-05",
+            "CatalogOriginalAssertionGapRealTests.SameOriginalGroupedIdentitySqlHasExactlyOneBindingAndTwoOccurrences"
+          ],
+          "pendingOriginalAssertion": null,
+          "scope": "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit"
+        },
+        {
+          "method": "test_invalid_ast_cannot_publish",
+          "originalBodySha256": "ffde3c4fa2c2f87b565d441dc67193e8ef419c900608a1e552753d5a5e28cea3",
+          "originalAssertionLines": [
+            "   with self.assertRaises(ValueError):b.build(inv,r/'out')",
+            "   self.assertFalse((r/'out/catalog.sqlite').exists())"
+          ],
+          "nativeBindings": [
+            "BUILD-04"
+          ],
+          "pendingOriginalAssertion": null,
+          "scope": "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit"
+        }
+      ],
+      "normal_file_verified": true,
+      "rootFull019Pending": false,
+      "conditionalEligibility": "Exact full019 proof now bound; Root alone decides authority merge; native error/cache carriers retained",
+      "frameworkResponsibilities": "unittest/tempfile/Python exceptions adapt to shared native test providers; source SHA identity stays truthful C# producer identity",
+      "decommissionable_scope": "Current published original test-file responsibilities only; no production file, frozen schema execution, global corpus or HV claim",
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "normal_verified_methods": [
+        "test_import_integrity_schema_overlay_and_immutability",
+        "test_hash_failure_does_not_publish",
+        "test_one_identity_two_immutable_occurrences",
+        "test_invalid_ast_cannot_publish"
+      ]
+    },
+    {
+      "legacyPath": "remediation/catalog/tests/test_device_catalog_pipeline.py",
+      "legacySha256": "50e4504e81443dacdf605cb850ca7be1f8ff92b7eb1ca54ee369328eb2cec1b5",
+      "owner": "Catalog",
+      "category": "Catalog",
+      "operation": "Build",
+      "nativeService": "CatalogBuild and existing CatalogDevicePipeline providers",
+      "nativeTest": "Existing original method maps plus CatalogOriginalAssertionGapRealTests",
+      "reuseExistingMethodClaims": [
+        "test_index_retains_past_and_future_and_container_lifecycle",
+        "test_real_build_exports_inventory_and_resolves_before_atomic_storage",
+        "test_generated_aliases_pin_the_selected_device_schema_and_shared_policy",
+        "test_full_index_build_applies_history_extensions_and_container_constraints",
+        "test_aidl_type_reference_proof_and_contract_digest_are_shared",
+        "test_independent_validator_rejects_inventory_export_mutation",
+        "test_loader_rejects_missing_projection_without_synthesizing_rows"
+      ],
+      "pending_methods": [],
+      "methodProof": [
+        {
+          "method": "test_index_retains_past_and_future_and_container_lifecycle",
+          "originalBodySha256": "eb5eada4d2e6bacbdd5ca43261723c577a855e101316fb6331f02271cfdf013f",
+          "originalAssertionLines": [
+            "        self.assertIn('a/Old',rows);self.assertIn('a/Future#f()V',rows)",
+            "        self.assertEqual(rows['a/Future#f()V']['extras']['container_api_lifecycle']['since'],'38')",
+            "        self.assertEqual(rows['a/Backport']['extras']['sdk_extensions'],[{'sdk_id':'30','minimum_version':'4'},{'sdk_id':'0','minimum_version':'34'}])"
+          ],
+          "nativeBindings": [
+            "PIPE-01",
+            "CatalogOriginalAssertionGapRealTests.SameOriginalCompleteSdkExtensionObjectsUseTheExistingSingleExtraction"
+          ],
+          "pendingOriginalAssertion": null,
+          "scope": "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit"
+        },
+        {
+          "method": "test_real_build_exports_inventory_and_resolves_before_atomic_storage",
+          "originalBodySha256": "a392f7bb1d3040456c3b565cebef871f3a83d7e59f3293387fad8f19cefc87c1",
+          "originalAssertionLines": [
+            "            self.assertEqual(len(raw),count)",
+            "            self.assertEqual(snapshot['inventory_count'],len(raw))",
+            "            member=hashlib.sha256(b'java:a.A#go(int)').hexdigest();self.assertEqual(next(r for r in snapshot['entries'] if r['entry_id']==member)['state'],'unknown')",
+            "            self.assertEqual(store.read()['snapshot'],snapshot);store.invalidate('device-build-change');self.assertTrue(store.read()['stale'])"
+          ],
+          "nativeBindings": [
+            "PIPE-02"
+          ],
+          "pendingOriginalAssertion": null,
+          "scope": "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit"
+        },
+        {
+          "method": "test_generated_aliases_pin_the_selected_device_schema_and_shared_policy",
+          "originalBodySha256": "7a25c375256c40af197ae0e0fca9306378515586fcc5860b3c86998309e35973",
+          "originalAssertionLines": [
+            "            self.assertEqual(row['state'],'available');self.assertEqual(alias['schema_hash'],row['schema_hash']);self.assertEqual(alias['type_graph_digest'],row['graph_digest'])",
+            "            self.assertEqual(policy_reference.resolve_fixture_route('generated',req,mapping,schemas,{}),policy_reference.resolve_fixture_route('generic',req,mapping,schemas,{}));status['stale']=True",
+            "            with self.assertRaisesRegex(ValueError,'Fresh active'):dispatch_manifest.generate(docs,status)"
+          ],
+          "nativeBindings": [
+            "PIPE-03"
+          ],
+          "pendingOriginalAssertion": null,
+          "scope": "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit"
+        },
+        {
+          "method": "test_full_index_build_applies_history_extensions_and_container_constraints",
+          "originalBodySha256": "1e69bac62eda3511d27f9b42f7b1aa7a9deea51a869f802d9d5391f705894792",
+          "originalAssertionLines": [
+            "            self.assertEqual(rows(35,0,{})[old]['state'],'available');self.assertEqual(rows(36,0,{})[old]['state'],'unavailable')",
+            "            self.assertEqual(rows(37,2,{})[future]['state'],'unavailable');self.assertEqual(rows(38,0,{})[future]['state'],'available')",
+            "            self.assertEqual(rows(33,0,{'30':4})[backport]['state'],'available');self.assertEqual(rows(33,0,{'30':3})[backport]['state'],'unavailable');self.assertEqual(rows(33,0,{})[backport]['state'],'unknown')"
+          ],
+          "nativeBindings": [
+            "PIPE-04"
+          ],
+          "pendingOriginalAssertion": null,
+          "scope": "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit"
+        },
+        {
+          "method": "test_aidl_type_reference_proof_and_contract_digest_are_shared",
+          "originalBodySha256": "35e85349eab595180be6f7846ecd36a7dfbdc11674db9c5012efa5f594da9286",
+          "originalAssertionLines": [
+            "            self.assertEqual(method['arguments'][0]['resolved_binding_id'],target);self.assertEqual(method['arguments'][0]['status'],'resolved')",
+            "            variant=inventory[method['entry_id']]['variants'][0];self.assertEqual(variant['schema_hash'],dispatch_manifest.contract_digest(method));self.assertIn(target,{v['entry_id'] for v in variant['dependencies']})"
+          ],
+          "nativeBindings": [
+            "PIPE-05"
+          ],
+          "pendingOriginalAssertion": null,
+          "scope": "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit"
+        },
+        {
+          "method": "test_independent_validator_rejects_inventory_export_mutation",
+          "originalBodySha256": "0da7b5ecfa1e731cacb1423fabf67f69d34b4a85d67566c0e58bc0415d6004d8",
+          "originalAssertionLines": [
+            "            with self.assertRaisesRegex(ValueError,'Inventory stream/manifest'):validate_catalog.run(root/'out',inv,root/'invalid-export.json')"
+          ],
+          "nativeBindings": [
+            "PIPE-06"
+          ],
+          "pendingOriginalAssertion": null,
+          "scope": "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit"
+        },
+        {
+          "method": "test_loader_rejects_missing_projection_without_synthesizing_rows",
+          "originalBodySha256": "e8134c512d00ad0328e0fab3f7bf731d2730a01a7e3bc69980c3aecefdcbe69a",
+          "originalAssertionLines": [
+            "            with self.assertRaisesRegex(ValueError,'Incomplete registry inventory'):list(catalog_projection.load_inventory(db,registry))"
+          ],
+          "nativeBindings": [
+            "PIPE-07"
+          ],
+          "pendingOriginalAssertion": null,
+          "scope": "Exact original method assertions bound to full019/source pins; native error/identity/cache carriers explicit"
+        }
+      ],
+      "normal_file_verified": true,
+      "rootFull019Pending": false,
+      "conditionalEligibility": "Exact full019 proof now bound; Root alone decides authority merge; native error/cache carriers retained",
+      "frameworkResponsibilities": "unittest/tempfile/Python exceptions adapt to shared native test providers; source SHA identity stays truthful C# producer identity",
+      "decommissionable_scope": "Current published original test-file responsibilities only; no production file, frozen schema execution, global corpus or HV claim",
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "normal_verified_methods": [
+        "test_index_retains_past_and_future_and_container_lifecycle",
+        "test_real_build_exports_inventory_and_resolves_before_atomic_storage",
+        "test_generated_aliases_pin_the_selected_device_schema_and_shared_policy",
+        "test_full_index_build_applies_history_extensions_and_container_constraints",
+        "test_aidl_type_reference_proof_and_contract_digest_are_shared",
+        "test_independent_validator_rejects_inventory_export_mutation",
+        "test_loader_rejects_missing_projection_without_synthesizing_rows"
+      ]
+    }
+  ],
+  "sourcePins": [
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Catalog/CatalogBuild.cs",
+      "sha256": "6bf04e5c427d162dd672f22230548f52848cf0dc57b98bcb717818cd59eaf7f2",
+      "bytes": 54359
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Catalog/CatalogBuildCases.cs",
+      "sha256": "8c628154d5259fc135824501b248ab26fc6b145139e264f0c08f732b2110abd8",
+      "bytes": 6076
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Catalog/CatalogBuildRealTests.cs",
+      "sha256": "0332f496a570e87686b761dd4f019ce93742b25905a1f7bd079e670befdc8ff4",
+      "bytes": 14256
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Catalog/CatalogDevicePipelineCases.cs",
+      "sha256": "3dbdc240cda2137cc731c8a360ca907a3480933dd5f54a9f5cfb3f214c7c7864",
+      "bytes": 6848
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Catalog/CatalogDevicePipelineRealTests.cs",
+      "sha256": "c00e142239e62c6f2936a2339b6d0e881a76453dd322eb4086d69a04b22296e5",
+      "bytes": 13967
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Catalog/CatalogOriginalTamperCases.cs",
+      "sha256": "041c0bba49b0a2f3f106e31a2cda2cc794c7bdfb491179ffe6ae53787f1745db",
+      "bytes": 2069
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Catalog/CatalogOriginalTamperRealTests.cs",
+      "sha256": "57e9a7cdb9be91f7b77a917d7c18c6f1dddfd36d69db3e54626c6449d45b758f",
+      "bytes": 1908
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Catalog/CatalogFullValidationCases.cs",
+      "sha256": "23bbd43219b72a2f5bee1a29f052e76e5955678f008e80219faff000c740540c",
+      "bytes": 7593
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Catalog/CatalogFullValidationRealTests.cs",
+      "sha256": "e1457dc105bcd7b6a94a0c2c956a291e49ef4d2199dd479f4494f8aa94fa741f",
+      "bytes": 10159
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Catalog/CatalogOriginalAssertionGapCases.cs",
+      "sha256": "94df0bc2e41d0baf26e680fe1a25802c83fe8e82a991c7766465c9f894313d45",
+      "bytes": 2466
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Catalog/CatalogOriginalAssertionGapMockTests.cs",
+      "sha256": "f702a7fdaf5ce4a289b656ca54a56d6382a874cdf86568998cc2bf4f39c36917",
+      "bytes": 3415
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Catalog/CatalogOriginalAssertionGapRealTests.cs",
+      "sha256": "9e48840285711ac4da2cddd7e0720bc328cd5243dd3df6f71d055b846ce86461",
+      "bytes": 1564
+    }
+  ],
+  "sourceAudit": {
+    "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/catalog-original-test-audit/four-partial-test-methods-001.proposed.json",
+    "sha256": "8293dfad3688ca4331b8ee6ef3ee81a6e1f7942a0e87c140bdcfa38d0c508eb6",
+    "bytes": 230625
+  },
+  "assertionGapHandoff": {
+    "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/catalog-original-test-audit/assertion-gap/root-canonical-test-import-001.json",
+    "sha256": "70aed8576f9f4f7dfe9908a2c299fe292728b11af9f7ca029659bbb44e597817",
+    "bytes": 6456
+  },
+  "originalMethods": 11,
+  "newOriginalMethodClaims": 0,
+  "requiredClassCounts": {
+    "CatalogBuildRealTests": 7,
+    "CatalogDevicePipelineRealTests": 7,
+    "CatalogOriginalTamperRealTests": 1,
+    "CatalogFullValidationRealTests": 6,
+    "CatalogOriginalAssertionGapRealTests": 2,
+    "CatalogOriginalAssertionGapMockTests": 4
+  },
+  "carrierDecisions": [
+    "Original ValueError/SHA256 mismatch maps to native source-sha-mismatch typed rejection, with exact raw tamper and no final publication assertions retained",
+    "Python ValueError invalid permission AST maps to typed invalid-permission-ast domain failure with exact allOf={} fixture",
+    "PIPE04 synthetic verified-unused historical cache plus raw extraction is a previously qualified native carrier; no old Python cache-byte or producer identity claim",
+    "Frozen source-identical test copies are excluded from these two records; retained historical artifacts do not establish execution against their sibling old schemas/DDL"
+  ],
+  "rootAffected019Reported": {
+    "passed": 4554,
+    "failed": 0,
+    "skipped": 0,
+    "source": "Trusted Root message2026-10-29T04:34:31; persisted receipt binding pending"
+  },
+  "rootFull019Required": false,
+  "rootFullReceipt": {
+    "trx": {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261029T0434514569300-827fa58e11b743c99dfd3d6831834c69/tests.trx",
+      "sha256": "bac5431d1b4d53022b3a6b644a30e77203c53a16a4ec0f9a6997f040a4f854fb",
+      "bytes": 89433479
+    },
+    "passed": 71952,
+    "failed": 0,
+    "skipped": 0,
+    "exactClassCounts": {
+      "AndroidMcp.BuildTool.Tests.Catalog.CatalogBuildRealTests": 7,
+      "AndroidMcp.BuildTool.Tests.Catalog.CatalogDevicePipelineRealTests": 7,
+      "AndroidMcp.BuildTool.Tests.Catalog.CatalogOriginalTamperRealTests": 1,
+      "AndroidMcp.BuildTool.Tests.Catalog.CatalogFullValidationRealTests": 6,
+      "AndroidMcp.BuildTool.Tests.Catalog.CatalogOriginalAssertionGapRealTests": 2,
+      "AndroidMcp.BuildTool.Tests.Catalog.CatalogOriginalAssertionGapMockTests": 4
+    }
+  },
+  "authorityChanged": false,
+  "canonicalChanged": false,
+  "accepted_complete": false,
+  "hv": false,
+  "safe_to_delete": false,
+  "priorConditionalProposal": {
+    "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/catalog-original-test-audit/build4-pipeline7-normal-019.proposed.json",
+    "sha256": "338d6517fa04e759457e938f1a1340b214afe601af4180f7019d811c13cd645c",
+    "bytes": 18694
+  }
+}

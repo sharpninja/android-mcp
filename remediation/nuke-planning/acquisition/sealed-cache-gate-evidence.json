@@ -1,0 +1,98 @@
+{
+  "timestamp": "2026-10-28T03:45:51",
+  "scope": "native-sealed-source-cache-admission",
+  "parentSessionId": "Codex-20261028T005928Z-plugin-session",
+  "parentRequestId": "req-20261028T011209Z-turn-1f08",
+  "auditStatus": "Prior turn req-20261028T064409Z-turn-2b30 completion remains denied. This local test evidence is not a session-log replacement. No audit mutation or retry.",
+  "receipts": [
+    {
+      "phase": "mock-before-native",
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261028T0322143932886-e0de7a5dbb3543ce87660c21ce21c5c4/tests.trx",
+      "sha256": "03e8b39c7193ce6d3e337616100dc83143ec3e75ed0879cd743f66738e425e9a",
+      "total": 1153,
+      "passed": 1153,
+      "failed": 0,
+      "other": 0,
+      "cacheClasses": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SealedCacheMockTests",
+          "total": 82,
+          "passed": 82,
+          "failures": []
+        }
+      ],
+      "failures": []
+    },
+    {
+      "phase": "same-native-and-legacy-regression",
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261028T0339181125474-87de0d007b3e4f76b83af2bdf8fbee31/tests.trx",
+      "sha256": "24e0e05f1b6e50b00be98a3bba942f637cdc9d76de0720cd907ca50aaf030c5f",
+      "total": 275,
+      "passed": 275,
+      "failed": 0,
+      "other": 0,
+      "cacheClasses": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.CacheSdkRealTests",
+          "total": 14,
+          "passed": 14,
+          "failures": []
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SealedCacheMockTests",
+          "total": 82,
+          "passed": 82,
+          "failures": []
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SealedCacheRealTests",
+          "total": 41,
+          "passed": 41,
+          "failures": []
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Sources.Acquisition.SourceCacheMockTests",
+          "total": 13,
+          "passed": 13,
+          "failures": []
+        }
+      ],
+      "failures": []
+    }
+  ],
+  "appFilePins": [
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Sources/Acquisition/CacheContracts.cs",
+      "sha256": "2d5625b1891fc79ac4cb7df1bb435c61760558a1f1682da79142734a983ef6fc"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Sources/Acquisition/SealedCacheContracts.cs",
+      "sha256": "d3f9d098ace42e0d202311c74e0bb20cb5fea833a30361dcb0d956cf2ece8d26"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Sources/Acquisition/SourceCache.cs",
+      "sha256": "926ecc86eb0ed3017834f20e851d2162f3ab25b2f75e89178fe9b1c745d2002e"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/Acquisition/SealedCacheContractTests.cs",
+      "sha256": "8a949c64a9a45a13a3fc31d00f3d5dd4cb2e1962d0a9ae54119ed362a28f735f"
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/Acquisition/SealedCacheRealTests.cs",
+      "sha256": "1a0cd1743142a9028fe62bf450685160e1aef657637f82f67041f4ee6b66cae4"
+    }
+  ],
+  "responsibilities": {
+    "acquisition": "One SourceCache codec, producer fingerprint, bounded JSONL reader and publication engine. Exact sealed sidecar/gzip/count verification. Old Read/Write contracts preserved.",
+    "sources": "One SourceExtract facade owns trusted prior-index admission, extraction factory dispatch on miss, one native publication and fresh generation-index seal. No second cache decoder.",
+    "root": "Operation registration, CLI parameter binding, exclusive NUKE gates and final whole-goal acceptance.",
+    "trustAnchor": "Root accepts caller-pinned prior-index StoredArtifact SHA256 and length. Verify exact index bytes before parsing its cache seals. Hashing an editable index itself never establishes trust.",
+    "historical": "Historical Python caches remain verified-unused unless a separately compatible admission is proven; native generation never relabels them."
+  },
+  "dependency": "Native storage SPI now proven. SourceExtract facade contracts/mocks and same native caller proof remain the next integration increment.",
+  "scopeLimits": [
+    "No native SourceExtract operation caller claimed by this receipt.",
+    "No network, package installation, broad corpus regeneration or new codec.",
+    "Parent owns full applicable regression and hostile acceptance; this receipt does not mark the migration goal complete."
+  ]
+}

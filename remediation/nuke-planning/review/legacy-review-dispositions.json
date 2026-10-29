@@ -1,0 +1,689 @@
+{
+  "localTimestamp": "2026-10-27T21:41:35",
+  "scope": "Design and NUKE impacts only; no Google API surface or dataset analysis",
+  "sourceCount": 40,
+  "sources": [
+    {
+      "legacy": "remediation/hv_invariants.py",
+      "legacySha256": "e5e8d3dded7a49a1aa3d2341dd2a6869c79cf09e11bd7ea54cd25c09631f0fd5",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "ReviewAssessService + ReviewPrepareService + ReviewLaunchService.Partition",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/hv_runtime.py",
+      "legacySha256": "937c43f4f0bee5cfbb9b3be7f822d7cc87c9dfcde714da6c9115b352550a7e20",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "ReviewLaunchService + shared IProcessRunner/IProcessCaptureReader",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/hv_runtime_opus.py",
+      "legacySha256": "75ae82d461722b3dbc5f92ad6f2156dd47cd632697f76d7fccc9c4198900a220",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "ReviewLaunchService + shared IProcessRunner/IProcessCaptureReader",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/hv_supervisor.py",
+      "legacySha256": "5f3668a23ea14f80a190e044df13fb72121cbcf424ae70e120f1b63b6f87d05b",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "ReviewLaunchService terminal-only automatic continuation and unified context synthesis",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/recover_design022.py",
+      "legacySha256": "2bb150773f214808b78bb20b9bcecb35c539d8fc47daa0f4d48ec09bae61b1d4",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "ReviewRecoverService and ReviewLaunchService.Partition; historical payloads retained as data",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/recover_design023_factored.py",
+      "legacySha256": "8b8048fc5e23e5b4327c45abd36e555fa4224d9bb4a5e3688e08662070518748",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "ReviewRecoverService and ReviewLaunchService.Partition; historical payloads retained as data",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/audit_factored023_runtime.py",
+      "legacySha256": "5c72d823090a6ac812c4ea65f90f060a8c133aeed73f71a27e88012394d795b5",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "ReviewPrepareService immutable hashes/coverage + ReviewAssessService actual metadata + shared process capture",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/audit_review023_active.py",
+      "legacySha256": "c180528f98c259d2f4bd6d84430565013c2342fae344c36a020d247717bfc3f0",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "ReviewPrepareService immutable hashes/coverage + ReviewAssessService actual metadata + shared process capture",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/audit_review023_payload.py",
+      "legacySha256": "b37f089d4df304764579a629cc54a81fdaef699085b5f1c867d6daee0aed82ea",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "ReviewPrepareService immutable hashes/coverage + ReviewAssessService actual metadata + shared process capture",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/audit_review_environment.py",
+      "legacySha256": "5679fefbcab9d3710548ba3980df7dd93ef2850b02e641836c626860a39bef39",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "ReviewPrepareService immutable hashes/coverage + ReviewAssessService actual metadata + shared process capture",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/review_design025.py",
+      "legacySha256": "aada20abe127fd6ffdbb32a8f36705f57a20b12e1e349a1a003cfc03031a63d9",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "ReviewWorkflow Prepare/Launch/Recover/Assess with data-driven immutable snapshots; historical numbered edits retained only",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/review_design024.py",
+      "legacySha256": "4cb75138e5db1a4fa5f210c9f61f855ae88a9aedab49a2038ecea2c7364958e3",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "ReviewWorkflow Prepare/Launch/Recover/Assess with data-driven immutable snapshots; historical numbered edits retained only",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/review_design_unbounded.py",
+      "legacySha256": "150498f1c807be5af2df7812d190a0a727baecf6fedf841179fb0f1229d31c46",
+      "disposition": "retained-history-execution-retired",
+      "nativeTarget": "Retired bounded/superseded launcher; no executable compatibility path",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/review_incremental_design020.py",
+      "legacySha256": "c1b2b3b3874aca1182454b64b54803c363b146c7203a039f13030528608ec169",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "ReviewWorkflow Prepare/Launch/Recover/Assess with data-driven immutable snapshots; historical numbered edits retained only",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/review_corrected_design019.py",
+      "legacySha256": "660224b14d201553a07f01baba605778628ecffcfdb6beb93b3634310fe6c2bb",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "ReviewWorkflow Prepare/Launch/Recover/Assess with data-driven immutable snapshots; historical numbered edits retained only",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/review_design_round.py",
+      "legacySha256": "c397e00869482379dc1875557f2ccc32e980445cb332296f1c69207dce84a8d8",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "ReviewWorkflow Prepare/Launch/Recover/Assess with data-driven immutable snapshots; historical numbered edits retained only",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/review_round.py",
+      "legacySha256": "c407b8d24df8f039f1a9583df4d81e948bce15c2d2d3339bad921b50a61735d8",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "ReviewWorkflow Prepare/Launch/Recover/Assess with data-driven immutable snapshots; historical numbered edits retained only",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/review_combined_round.py",
+      "legacySha256": "ad5d2c6076c2ee7133bb7826a73aa86d990b09faab2cd89e5ce552cae24db7bd",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "ReviewWorkflow Prepare/Launch/Recover/Assess with data-driven immutable snapshots; historical numbered edits retained only",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/recover_combined_chunks.py",
+      "legacySha256": "16989ea6f0064a4e3ed230be185cc5f6b1602407baf67af9935386385255e28a",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "ReviewRecoverService and ReviewLaunchService.Partition; historical payloads retained as data",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/recover_combined_readonly.py",
+      "legacySha256": "dc9448df935a0cbe2f59a7254ac53430a9748d0f7e1d97e5a751263b402351c1",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "ReviewRecoverService and ReviewLaunchService.Partition; historical payloads retained as data",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/recover_design018_sections.py",
+      "legacySha256": "7bb1b1710e361b08af3412429ea85c59dda405539a829e8ca92ac2c925e27598",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "ReviewRecoverService and ReviewLaunchService.Partition; historical payloads retained as data",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/recover_round9_json.py",
+      "legacySha256": "e02a7e7b9ba86a2c56b76e78591fd9c7ce9f8b96cf5530cf7f3fa3f1d1c9b38f",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "ReviewRecoverService and ReviewLaunchService.Partition; historical payloads retained as data",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/synthesize_design018_recovered.py",
+      "legacySha256": "e62e8721a6a05a77ed4337c529c788ab20312cba1342a6fe90193d3a871dea1d",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "ReviewRecoverService and ReviewLaunchService.Partition; historical payloads retained as data",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/audit_recovered_design018.py",
+      "legacySha256": "f5793714e98e7b231ae3fd297a2856e491142a6948c98acfd3222698a4b00209",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "ReviewPrepareService immutable hashes/coverage + ReviewAssessService actual metadata + shared process capture",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/audit_bounded_design_review.py",
+      "legacySha256": "11ec9a085124dbb3f065da8abbf824d2e7f41441603ef9df878baece1c7639a8",
+      "disposition": "retained-history-execution-retired",
+      "nativeTarget": "Retired bounded/superseded launcher; no executable compatibility path",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/review_current_design_bounded.py",
+      "legacySha256": "91934cbffd6c6c78be99698268f6636f80b3c3863c44ca1933da6357dc336941",
+      "disposition": "retained-history-execution-retired",
+      "nativeTarget": "Retired bounded/superseded launcher; no executable compatibility path",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/create_design_reviewer.py",
+      "legacySha256": "a1a628ab1879d5f050025a1bdbb9d8a7af1306426e506c4c8f387f10babf6003",
+      "disposition": "retained-history-execution-retired",
+      "nativeTarget": "Retired bounded/superseded launcher; no executable compatibility path",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/configure_review12.py",
+      "legacySha256": "f9b0e0cfc0921c4d3c896aaa0c26a9c7573d9fdb22360f1c12b214500bfd7429",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "ReviewWorkflow Prepare/Launch/Recover/Assess with data-driven immutable snapshots; historical numbered edits retained only",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/configure_combined_review.py",
+      "legacySha256": "c5eaf5743b326d2214f275ca029378a25885227a8a4fbaf295521cb7849f6e65",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "ReviewWorkflow Prepare/Launch/Recover/Assess with data-driven immutable snapshots; historical numbered edits retained only",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/fix_design_review9.py",
+      "legacySha256": "2fff5edbb8b89bd1980e6f8c9429a084a073170b8bcb6d5f309fa8ff64dd8d2a",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "ReviewWorkflow Prepare/Launch/Recover/Assess with data-driven immutable snapshots; historical numbered edits retained only",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/inspect_review9_report.py",
+      "legacySha256": "9d2e6d60a650aae5d1ce079aa98a2fc437d9591601049a39bd02a4d5c8d7123f",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "ReviewWorkflow Prepare/Launch/Recover/Assess with data-driven immutable snapshots; historical numbered edits retained only",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/track_review.py",
+      "legacySha256": "2161c5e964a3a4c9626c4b07f4b598a208e8a1baf8c4fe5b68b069f676b8db89",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "IReviewAudit required-plugin adapter plus immutable result/blocker receipts",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/record_review_scope_blocker.py",
+      "legacySha256": "71e8b44297ad7cd5401d1e2edcb9e3b1ca3564af32027de721b4ecc32e6ff775",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "IReviewAudit required-plugin adapter plus immutable result/blocker receipts",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/record_current_review_status.py",
+      "legacySha256": "4d5161c4c23aac17dcbfd7421cb5b824fd9a694dac634551d3be1488709fd535",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "IReviewAudit required-plugin adapter plus immutable result/blocker receipts",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/reconcile_review023.py",
+      "legacySha256": "7a2f0a05db43c1f6275990282edccdf382406ce7fd93e6e98052a34b0b572e10",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "IReviewAudit required-plugin adapter plus immutable result/blocker receipts",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/test_hv_invariants.py",
+      "legacySha256": "e41ac64f34f2fb4b2b9a467794453e865d3d3a3e53747f9b9de0fe25fae0d5b6",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "ReviewMockGate + ReviewNativeTests + ReviewSafetyMockGate and native safety bindings",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/test_hv_opus_profile.py",
+      "legacySha256": "fa745c2af79c9d91ef974e5213cc95301a658ae0ebf847aca2341c119d8cd06e",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "ReviewMockGate + ReviewNativeTests + ReviewSafetyMockGate and native safety bindings",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/test_hv_supervisor_integration.py",
+      "legacySha256": "7918d76b3e976db18a116b4c409b6f43a57a35f44f9e9dbb47f31da5f0d8d9cc",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "ReviewMockGate + ReviewNativeTests + ReviewSafetyMockGate and native safety bindings",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/factor_design_evidence.py",
+      "legacySha256": "1d797710bcb0e2a9e987269d681739901a4816924e8d290e3aba37d9c5beb916",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "Design Factor/Reconstruct module (owned by Documentation migration, no duplicate Review implementation)",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    },
+    {
+      "legacy": "remediation/test_factor_design_evidence.py",
+      "legacySha256": "12961101499ff4e7a81e0021112549578fa30c3b9ac2dbb359d8e82875813b5f",
+      "disposition": "retained-source-native-successor",
+      "nativeTarget": "Design Factor/Reconstruct module (owned by Documentation migration, no duplicate Review implementation)",
+      "legacyExecuted": false,
+      "originalRetained": true,
+      "requirements": [
+        "FR-BUILD-001",
+        "FR-BUILD-002",
+        "FR-BUILD-003",
+        "FR-BUILD-004",
+        "FR-BUILD-005",
+        "FR-BUILD-006",
+        "FR-BUILD-007"
+      ]
+    }
+  ],
+  "providerCalls": 0,
+  "noRequirementMarkedComplete": true
+}

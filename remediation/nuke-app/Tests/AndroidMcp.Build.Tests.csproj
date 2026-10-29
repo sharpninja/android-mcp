@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <IsTestProject>true</IsTestProject>
+    <IsPackable>false</IsPackable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <NukeTelemetryVersion>1</NukeTelemetryVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Compiled scope is SDK-derived and participates in the source manifest. -->
+    <AssemblyMetadata Include="AndroidMcp.TestGate.WorkspaceRoot"
+                      Value="$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)/..'))" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.7.0" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5" PrivateAssets="all" />
+    <ProjectReference Include="../AndroidMcp.Build.csproj" />
+    <EmbeddedResource Include="Publication/Fixtures/publication-policy-checkpoint003.json" LogicalName="PublicationScalePolicy.json" />
+  </ItemGroup>
+</Project>

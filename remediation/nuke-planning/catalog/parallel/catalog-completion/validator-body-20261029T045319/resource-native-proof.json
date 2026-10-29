@@ -1,0 +1,76 @@
+{
+  "at": "2026-10-29T05:47:33",
+  "phase": "Native",
+  "gate": {
+    "localTimestamp": "2026-10-29T05:47:33",
+    "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/catalog/nuke-app/artifacts/tests/20261029T0545464704790-1df18b7fabc648d28dae3c42b0bfe9d0/tests.trx",
+    "sha256": "eb954520b35a0dbcfba081b6064eb35f90e9fe3c4ffdf570b71d1042fc2d565b",
+    "total": 7,
+    "passed": 7,
+    "failed": 0,
+    "notExecuted": 0,
+    "classes": [
+      {
+        "name": "AndroidMcp.BuildTool.Tests.Catalog.CatalogValidatorBodyFixtureDiagnosticTests",
+        "total": 1,
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "name": "AndroidMcp.BuildTool.Tests.Catalog.CatalogValidatorResourceMockTests",
+        "total": 4,
+        "passed": 4,
+        "failed": 0
+      },
+      {
+        "name": "AndroidMcp.BuildTool.Tests.Catalog.CatalogValidatorResourceRealTests",
+        "total": 2,
+        "passed": 2,
+        "failed": 0
+      }
+    ],
+    "failures": []
+  },
+  "classes": {
+    "CatalogValidatorBodyFixtureDiagnosticTests": 1,
+    "CatalogValidatorResourceRealTests": 2,
+    "CatalogValidatorResourceMockTests": 4
+  },
+  "caseSha256": "2c06f03c7be0a3147ac17f55130b4cbd2f5e5654bbf73363359e35ab43c062c4",
+  "files": [
+    {
+      "path": "Tests/Catalog/CatalogValidatorResourceCases.cs",
+      "sha256": "2c06f03c7be0a3147ac17f55130b4cbd2f5e5654bbf73363359e35ab43c062c4",
+      "length": 2441
+    },
+    {
+      "path": "Tests/Catalog/CatalogValidatorBodyRealTests.cs",
+      "sha256": "36ad792f0d526f5e1f73bfda92400233b643d0932e169905d0fd9ea71e5c5c15",
+      "length": 20379
+    },
+    {
+      "path": "Tests/Catalog/CatalogValidatorResourceRealTests.cs",
+      "sha256": "92d3b43e93b5588b493f646fab81e78cb21818b6ea6f850e552eac5f8e69220c",
+      "length": 2918
+    }
+  ],
+  "cases": 2,
+  "negativeControls": 16,
+  "originalCallers": [
+    {
+      "path": "remediation/catalog/tests/test_round5.py",
+      "sha256": "367176a7f938cf4678159d66a1ede0d3caf483bf27f91e1e5c030a69f7376543",
+      "method": "Round5.test_validator_closes_database_on_failure"
+    },
+    {
+      "path": "publication/android-mcp-git/rehydration/producers/release-011/tests/test_round5.py",
+      "sha256": "367176a7f938cf4678159d66a1ede0d3caf483bf27f91e1e5c030a69f7376543",
+      "method": "Round5.test_validator_closes_database_on_failure"
+    }
+  ],
+  "scope": "Original literal fixture failure and close assertion. Existing lexical fault seam after real readonly SQLite open; Linux process-owned fd/fdinfo witness proves open+readonly at fault and closed afterward. Explicit native boundary adaptation from original mocked execute, no new product API/database engine.",
+  "canonicalWrites": false,
+  "accountingWrites": false,
+  "acceptedComplete": false,
+  "safeToDelete": false
+}

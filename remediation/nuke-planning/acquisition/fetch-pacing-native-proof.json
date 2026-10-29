@@ -1,0 +1,127 @@
+{
+  "utcTimestamp": "2026-10-28T19:56:49.9387949Z",
+  "scope": "Existing generic fetch post-materialization delay and category caller only",
+  "legacy": {
+    "path": "tools/rehydrate.py",
+    "sha256": "73623b939aacd5108382b1f3d335de2a8665205553fa8ee2cf99f3eadfea0263",
+    "functions": [
+      "main fetch delay argument and loop"
+    ],
+    "executed": false
+  },
+  "mockBeforeProduction": {
+    "batchAndPlannerTrxSha256": "e3baa8b82ac335b78723029f9a53176a8173656a4dba47ede95cf85b78d4dce9",
+    "batchMocks": 32,
+    "plannerMocks": 8,
+    "globalForeignDocumentationFailures": 1,
+    "laterGreenFocusedSha256": "9901c3ff3cda496178f1aded9726ede0ebb87e4111a30037c46748765bb05246",
+    "laterGreenTotal": 1136
+  },
+  "initialNativeGate": {
+    "path": "remediation/nuke-app/artifacts/tests/20261028T1437598670372-152979ebe92944e99f8a4ecaccb2f5a3/tests.trx",
+    "sha256": "2170be49d3be1c20528394cb595f2d686dd106c71e5f562cfffa97886a78c49f",
+    "passed": 252,
+    "failed": 0,
+    "uniqueBuildWarnings": 1,
+    "warning": "xUnit2031 fixed with the same Assert.Single predicate overload; assertions unchanged."
+  },
+  "currentGate": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T1440148026857-6778c26ebb2e41f6afc3cd4e980d5867/tests.trx",
+    "sha256": "a4b0785fbb9230bbab2cd96d0f278bcfeb4d5927665a2da4a9ef980fbe4e0ffc",
+    "passed": 266,
+    "failed": 0,
+    "skipped": 0,
+    "buildWarnings": 0,
+    "buildErrors": 0,
+    "exactOwnClasses": [
+      {
+        "class": "SourceBatchPacingMockTests",
+        "passed": 32
+      },
+      {
+        "class": "SourcesFetchPacingPlannerMockTests",
+        "passed": 8
+      },
+      {
+        "class": "SourcesFetchPacingCliMockTests",
+        "passed": 5
+      },
+      {
+        "class": "SourceBatchPacingRealTests",
+        "passed": 16
+      },
+      {
+        "class": "SourcesFetchPacingPlannerRealTests",
+        "passed": 4
+      },
+      {
+        "class": "SourcesFetchPacingCliRealTests",
+        "passed": 1
+      }
+    ]
+  },
+  "behavior": [
+    "Generic default one-second pause after each newly materialized source, including the final one; explicit zero/fractional values and Canonical zero additional default.",
+    "No post-download pause on reuse, empty selection or sealed replay; cancellation and delay/transport failure retain partial bytes without sealing success.",
+    "One existing SourceBatch loop and ITransportDelay seam; no duplicated acquisition engine or serialized request field.",
+    "Native --fetch-delay-seconds is Fetch-only. The same existing pinned monolith CLI probe ran Generic bundled aliases and two invocations with zero delay, preserving exact data/receipt hashes and inputs.",
+    "Large admitted native durations are split only at the BCL timer per-call bound; they are not truncated."
+  ],
+  "serializedBatchContract": {
+    "sha256": "c16a335369d729a54243012ed038a47b766f37cf825262ff054a3a169dc490ae",
+    "unchangedFromCheckpoint008": true
+  },
+  "sourcePins": [
+    {
+      "path": "remediation/nuke-app/Modules/Sources/Acquisition/SourceBatch.cs",
+      "sha256": "7bc61626a095ab468613b32d46725f4221e76373ff06d0734e5adda423c02ccf"
+    },
+    {
+      "path": "remediation/nuke-app/Core/OperationRegistry.cs",
+      "sha256": "3a50afaefb6832e5a0db6101c316b37e9ff56cb446bb33ff06022f9d32f24b8f"
+    },
+    {
+      "path": "remediation/nuke-app/Build.cs",
+      "sha256": "bdf171deac73ed0faa3f0442f15f4ffffac8bbb0001084b04e08be60d66489d7"
+    },
+    {
+      "path": "remediation/nuke-app/Build.SourcesFetch.cs",
+      "sha256": "15ef4b7316a31a2f16276273833c4402236931e0587f69e96b5177c3e48a9db8"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/Acquisition/SourceBatchPacingMockTests.cs",
+      "sha256": "843cc92c82e5386011cb3c75bdb1ed565cf8eeb003860eb8d3417c7482eb4ffb"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/Acquisition/SourceBatchPacingRealTests.cs",
+      "sha256": "b32f93105f9340a23d5f7e748a17c18608b4b9aeac536911b971b3c9355026b3"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Core/SourcesFetchPacingPlannerMockTests.cs",
+      "sha256": "0d317fc9283e34a800a6f4273a5adc6226415ab67d7d6c24fd72ae35bd27ceb4"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Core/SourcesFetchPacingPlannerRealTests.cs",
+      "sha256": "86f221dddde1b0480c42a2a63298402cf0cb79d701425668bd6e2494eee50766"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Core/SourcesFetchPacingCliMockTests.cs",
+      "sha256": "225fd5a3167963a841c244e4cc55d8538f2047cbe1374f5896bc9f75ae32c4a6"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Core/SourcesFetchPacingCliRealTests.cs",
+      "sha256": "2e63489b9337eae6d81d4c5c2aa89db4d0cc5fc13dd0d6d2cbc8f884cadf7a0e"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Core/SourcesFetchCliRealTests.cs",
+      "sha256": "644a8dcca955dcbdf0fef9cab0828e92cccf782ea8714bf3de4e1bfada4fa201"
+    }
+  ],
+  "limits": [
+    "The controlled delay proves ordering and token forwarding; no wall-clock precision or sleep-duration performance claim.",
+    "No whole tools/rehydrate.py closure: doctor/cache/export/historical/frontend responsibilities remain separately tracked.",
+    "No live upstream acquisition, Python/custom Node, Actions, device operation or HV.",
+    "Next full current suite and clean copied-checkout verification are separate checkpoint gates."
+  ],
+  "acceptedComplete": false
+}

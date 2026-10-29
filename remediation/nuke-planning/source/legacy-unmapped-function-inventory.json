@@ -1,0 +1,2719 @@
+{
+  "at": "2026-10-28T00:17:01",
+  "count": 66,
+  "interpretation": "Lexical text-only inventory. Method names/imports establish inspection targets, not behavioral equivalence or whole-file parity.",
+  "records": [
+    {
+      "path": "rehydration/producers/release-011/tests/test_aidl_members.py",
+      "sha256": "31139a1bcb61b3f0818e7123b7e713c38930946c6e2bfb79e079b363546d3b4c",
+      "lineCount": 20,
+      "methods": [
+        {
+          "name": "parse",
+          "line": 6
+        },
+        {
+          "name": "test_parcelable_fields_annotations_and_values",
+          "line": 7
+        },
+        {
+          "name": "test_enum_shifts_and_union_declaration_ordinals_not_tags",
+          "line": 10
+        },
+        {
+          "name": "test_external_parcelable_and_unknown_nested_schema_stay_visible",
+          "line": 13
+        },
+        {
+          "name": "test_interface_constant_is_metadata_and_repeated_lines_are_distinct",
+          "line": 16
+        }
+      ],
+      "imports": [
+        "import pathlib,sys,unittest",
+        "from parsers import aidl",
+        "from aidl_members import enrich"
+      ],
+      "source": null
+    },
+    {
+      "path": "tools/tests/test_rehydrate.py",
+      "sha256": "2acc1913674998f90ae2148fcd6934a63116e1406e231790b7ce350ce6cf7910",
+      "lineCount": 168,
+      "methods": [
+        {
+          "name": "setUp",
+          "line": 24
+        },
+        {
+          "name": "source",
+          "line": 29
+        },
+        {
+          "name": "test_fetch_resume_and_corrupt_input_is_preserved",
+          "line": 36
+        },
+        {
+          "name": "test_pins_and_explicit_file_permission",
+          "line": 48
+        },
+        {
+          "name": "test_archive_member_pin_and_archive_pin",
+          "line": 57
+        },
+        {
+          "name": "test_paths_symlinks_and_workspace_binding",
+          "line": 71
+        },
+        {
+          "name": "test_default_help_and_fixture_plan_have_no_side_effects",
+          "line": 82
+        },
+        {
+          "name": "test_allowlist_rejects_data_and_symlinks",
+          "line": 94
+        },
+        {
+          "name": "test_seed_imports_pinned_snapshot_without_changing_original",
+          "line": 102
+        },
+        {
+          "name": "test_range_reader_refuses_unbounded_server_response",
+          "line": 116
+        },
+        {
+          "name": "test_cache_regeneration_records_differences_and_resumes",
+          "line": 123
+        },
+        {
+          "name": "test_real_producer_end_to_end_in_clean_path",
+          "line": 140
+        }
+      ],
+      "imports": [
+        "import contextlib",
+        "import copy",
+        "import hashlib",
+        "import importlib.util",
+        "import io",
+        "import json",
+        "from pathlib import Path",
+        "import sqlite3",
+        "import subprocess",
+        "import sys",
+        "import tempfile",
+        "import unittest",
+        "from unittest.mock import patch",
+        "import zipfile",
+        "import rehydrate as r",
+        "import check_deliverables as policy",
+        "        import cache_fingerprint"
+      ],
+      "source": null
+    },
+    {
+      "path": "remediation/catalog/tests/test_aidl_members.py",
+      "sha256": "31139a1bcb61b3f0818e7123b7e713c38930946c6e2bfb79e079b363546d3b4c",
+      "lineCount": 20,
+      "methods": [
+        {
+          "name": "parse",
+          "line": 6
+        },
+        {
+          "name": "test_parcelable_fields_annotations_and_values",
+          "line": 7
+        },
+        {
+          "name": "test_enum_shifts_and_union_declaration_ordinals_not_tags",
+          "line": 10
+        },
+        {
+          "name": "test_external_parcelable_and_unknown_nested_schema_stay_visible",
+          "line": 13
+        },
+        {
+          "name": "test_interface_constant_is_metadata_and_repeated_lines_are_distinct",
+          "line": 16
+        }
+      ],
+      "imports": [
+        "import pathlib,sys,unittest",
+        "from parsers import aidl",
+        "from aidl_members import enrich"
+      ],
+      "source": null
+    },
+    {
+      "path": "remediation/catalog/tests/test_annotation_jvm_erasure.py",
+      "sha256": "4fca71f6c2342e826de0bd676a2eee2ac56285097174840d94d850a4d369ca65",
+      "lineCount": 21,
+      "methods": [
+        {
+          "name": "test_qualified_generic_outer_erasure_has_exact_descriptor",
+          "line": 6
+        },
+        {
+          "name": "test_type_variable_is_not_erased_to_object_by_guess",
+          "line": 9
+        },
+        {
+          "name": "test_unqualified_java_lang_alias_not_guessed",
+          "line": 11
+        },
+        {
+          "name": "test_parameterized_array_and_parameter_annotation_ordinal",
+          "line": 13
+        },
+        {
+          "name": "test_malformed_generics_and_void_parameters_rejected",
+          "line": 15
+        },
+        {
+          "name": "test_constructor_and_same_name_regular_method_differ",
+          "line": 17
+        },
+        {
+          "name": "test_nested_binary_owner_is_known_not_inferred",
+          "line": 19
+        }
+      ],
+      "imports": [
+        "import pathlib,sys,unittest",
+        "from annotation_link import xml_jvm_key"
+      ],
+      "source": null
+    },
+    {
+      "path": "remediation/catalog/tests/test_parsers.py",
+      "sha256": "d27384a2c3dd8d6eced29756e234a04040a658c1f0ee5257c6b1232431d2747d",
+      "lineCount": 43,
+      "methods": [
+        {
+          "name": "test_overloads_and_annotations",
+          "line": 5
+        },
+        {
+          "name": "test_permission_modes",
+          "line": 18
+        },
+        {
+          "name": "test_parameter_permission_not_callable",
+          "line": 24
+        },
+        {
+          "name": "test_aidl",
+          "line": 26
+        },
+        {
+          "name": "test_source_unknown_retained",
+          "line": 34
+        },
+        {
+          "name": "test_owner_reset_after_type",
+          "line": 36
+        },
+        {
+          "name": "test_comment_quoted",
+          "line": 39
+        },
+        {
+          "name": "test_aidl_structured",
+          "line": 40
+        }
+      ],
+      "imports": [
+        "import unittest,pathlib,sys,json",
+        "import parsers as p"
+      ],
+      "source": null
+    },
+    {
+      "path": "remediation/catalog/tests/test_jvm_source_link.py",
+      "sha256": "7cb00260092fa4b8d3e86b78a9921536a8169211b7f56332b876108899332041",
+      "lineCount": 17,
+      "methods": [
+        {
+          "name": "test_exact_owner_primitives_and_known_reference_type",
+          "line": 5
+        },
+        {
+          "name": "test_unresolved_type_variable_never_guessed",
+          "line": 9
+        },
+        {
+          "name": "test_unqualified_java_lang_name_might_be_shadowed",
+          "line": 12
+        },
+        {
+          "name": "test_untyped_index_field_cannot_prove_typed_jvm_identity",
+          "line": 14
+        }
+      ],
+      "imports": [
+        "import unittest,pathlib,sys",
+        "import jvm_source_link as link"
+      ],
+      "source": null
+    },
+    {
+      "path": "remediation/catalog/tests/test_java_source.py",
+      "sha256": "40a4c3aac9f8fbfd8e466c9ff7385eaeb4d5d0fbb7432f031fc567fc62086134",
+      "lineCount": 54,
+      "methods": [
+        {
+          "name": "setUp",
+          "line": 7
+        },
+        {
+          "name": "test_nested_overloads_fields_and_annotations",
+          "line": 8
+        },
+        {
+          "name": "test_method_body_local_types_not_public_surface",
+          "line": 25
+        },
+        {
+          "name": "test_interface_implicit_public_and_directions_unknown",
+          "line": 28
+        },
+        {
+          "name": "test_parse_error_retained",
+          "line": 32
+        },
+        {
+          "name": "test_enum_and_multiple_array_declarators",
+          "line": 34
+        },
+        {
+          "name": "test_repeated_large_line_numbers",
+          "line": 38
+        },
+        {
+          "name": "test_annotation_like_comment_is_not_metadata",
+          "line": 43
+        },
+        {
+          "name": "test_apostrophe_in_annotation_comment",
+          "line": 47
+        }
+      ],
+      "imports": [
+        "import unittest,pathlib,sys"
+      ],
+      "source": null
+    },
+    {
+      "path": "remediation/catalog/tests/test_java_context.py",
+      "sha256": "b410e5d69d6631ce811dda81d7064ced3f698b96454f0d1e9fbbe7c1ef3c3ad6",
+      "lineCount": 14,
+      "methods": [
+        {
+          "name": "test_imports_retained_in_runtime_source_details",
+          "line": 5
+        },
+        {
+          "name": "test_mismatched_context_rejected",
+          "line": 11
+        }
+      ],
+      "imports": [
+        "import unittest,pathlib,sys",
+        "import java_context"
+      ],
+      "source": null
+    },
+    {
+      "path": "remediation/catalog/tests/test_hidl_source.py",
+      "sha256": "d011447f8f98071eecd1d269de3472ac901fa4fce04b8231aa19bbd5b67a080a",
+      "lineCount": 47,
+      "methods": [
+        {
+          "name": "test_interface_nested_type_and_following_method",
+          "line": 5
+        },
+        {
+          "name": "test_shifts_dont_consume_enum_values_or_following_method",
+          "line": 9
+        },
+        {
+          "name": "test_nested_template_comma_separation",
+          "line": 12
+        },
+        {
+          "name": "test_annotations_with_braces_and_semicolon_string_are_not_bodies",
+          "line": 15
+        },
+        {
+          "name": "test_comments_and_line_offsets",
+          "line": 18
+        },
+        {
+          "name": "test_unknown_statement_and_missing_package_retained",
+          "line": 21
+        },
+        {
+          "name": "test_oneway_with_results_not_silently_accepted",
+          "line": 24
+        },
+        {
+          "name": "test_source_hidl_version_is_not_android_availability",
+          "line": 26
+        },
+        {
+          "name": "test_typedef_and_safe_union",
+          "line": 29
+        },
+        {
+          "name": "test_type_canonical_does_not_repeat_own_name",
+          "line": 32
+        },
+        {
+          "name": "test_line_of_method_after_leading_blank_lines",
+          "line": 35
+        },
+        {
+          "name": "test_missing_semicolon_and_nested_interface_retained_unknown",
+          "line": 38
+        },
+        {
+          "name": "test_interface_special_type_is_a_field_not_nested_declaration",
+          "line": 41
+        },
+        {
+          "name": "test_type_delimiter_can_touch_variable_name",
+          "line": 44
+        }
+      ],
+      "imports": [
+        "import unittest,pathlib,sys",
+        "from hidl_source import parse"
+      ],
+      "source": null
+    },
+    {
+      "path": "remediation/catalog/tests/test_hidl_import.py",
+      "sha256": "f2ed5252f0134c57e2f5d39354c9bad86b440aac1fe5d8c29f34b86e15c88691",
+      "lineCount": 24,
+      "methods": [
+        {
+          "name": "fixture",
+          "line": 5
+        },
+        {
+          "name": "test_structural_records_and_multi_results_survive_schema_gate",
+          "line": 7
+        },
+        {
+          "name": "test_package_version_cannot_become_android_api_applicability",
+          "line": 14
+        },
+        {
+          "name": "test_invalid_utf8_retains_source_without_binding_inference",
+          "line": 19
+        }
+      ],
+      "imports": [
+        "import unittest,pathlib,tempfile,sys,json,sqlite3,contextlib,base64",
+        "import build_catalog,test_build,hashlib,copy"
+      ],
+      "source": null
+    },
+    {
+      "path": "remediation/catalog/tests/test_device_catalog_pipeline.py",
+      "sha256": "50e4504e81443dacdf605cb850ca7be1f8ff92b7eb1ca54ee369328eb2cec1b5",
+      "lineCount": 79,
+      "methods": [
+        {
+          "name": "test_index_retains_past_and_future_and_container_lifecycle",
+          "line": 9
+        },
+        {
+          "name": "test_real_build_exports_inventory_and_resolves_before_atomic_storage",
+          "line": 15
+        },
+        {
+          "name": "test_generated_aliases_pin_the_selected_device_schema_and_shared_policy",
+          "line": 32
+        },
+        {
+          "name": "test_full_index_build_applies_history_extensions_and_container_constraints",
+          "line": 43
+        },
+        {
+          "name": "rows",
+          "line": 51
+        },
+        {
+          "name": "test_aidl_type_reference_proof_and_contract_digest_are_shared",
+          "line": 59
+        },
+        {
+          "name": "test_independent_validator_rejects_inventory_export_mutation",
+          "line": 67
+        },
+        {
+          "name": "test_loader_rejects_missing_projection_without_synthesizing_rows",
+          "line": 72
+        }
+      ],
+      "imports": [
+        "import copy,hashlib,json,pathlib,sqlite3,sys,tempfile,unittest,contextlib,gzip",
+        "import sdk_api_index,test_source_integration,build_catalog,device_resolution as dr,test_device_resolution as f",
+        "import device_view_storage",
+        "import cache_fingerprint",
+        "import catalog_projection,validate_catalog,effective_device_inventory",
+        "        import dispatch_manifest,policy_reference",
+        "        import test_round8,dispatch_manifest"
+      ],
+      "source": null
+    },
+    {
+      "path": "remediation/catalog/tests/test_bundled_http_snapshot.py",
+      "sha256": "4b008c2d46b2f5d26e95812cac5a0bd6f5ea56260388e3cd5276d813098e1e81",
+      "lineCount": 23,
+      "methods": [
+        {
+          "name": "fixture",
+          "line": 5
+        },
+        {
+          "name": "test_exact_snapshot_no_network",
+          "line": 8
+        },
+        {
+          "name": "test_missing_snapshot_fails_without_mutable_url_fetch",
+          "line": 11
+        },
+        {
+          "name": "test_changed_bytes_rejected",
+          "line": 15
+        },
+        {
+          "name": "test_escape_rejected",
+          "line": 19
+        }
+      ],
+      "imports": [
+        "import unittest,tempfile,pathlib,sys,hashlib",
+        "from restore_snapshot import restore_bundled_snapshot"
+      ],
+      "source": null
+    },
+    {
+      "path": "remediation/catalog/tests/test_build.py",
+      "sha256": "e9ce2b6dbb35b6e7689c6df830a9af8e82dde1091f9eae67c4e3ff767d8896a0",
+      "lineCount": 64,
+      "methods": [
+        {
+          "name": "fixture",
+          "line": 8
+        },
+        {
+          "name": "test_import_integrity_schema_overlay_and_immutability",
+          "line": 26
+        },
+        {
+          "name": "test_hash_failure_does_not_publish",
+          "line": 48
+        },
+        {
+          "name": "test_one_identity_two_immutable_occurrences",
+          "line": 54
+        },
+        {
+          "name": "test_invalid_ast_cannot_publish",
+          "line": 58
+        }
+      ],
+      "imports": [
+        "import unittest,pathlib,tempfile,json,hashlib,sqlite3,sys,zipfile",
+        "import build_catalog as b",
+        "import jsonschema",
+        "import validate_catalog"
+      ],
+      "source": null
+    },
+    {
+      "path": "remediation/catalog/tests/test_annotation_jvm_erasure_import.py",
+      "sha256": "c918750834a2b1f60d9d2a853ea8dcdfbb8109d5e2b193aaedf991b69ceb77db",
+      "lineCount": 31,
+      "methods": [
+        {
+          "name": "source",
+          "line": 6
+        },
+        {
+          "name": "check",
+          "line": 8
+        },
+        {
+          "name": "test_generic_outer_erasure_matches_exact_current_descriptor",
+          "line": 23
+        },
+        {
+          "name": "test_top_level_type_variable_not_guessed",
+          "line": 25
+        },
+        {
+          "name": "test_current_index_is_not_borrowed_for_other_platform",
+          "line": 27
+        },
+        {
+          "name": "test_regular_method_with_class_name_is_not_constructor",
+          "line": 29
+        }
+      ],
+      "imports": [
+        "import unittest,pathlib,tempfile,sys,json,gzip,sqlite3,contextlib,zipfile,hashlib",
+        "from xml.sax.saxutils import escape",
+        "import build_catalog,sdk_api_index,test_build,copy,cache_fingerprint"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_postfreeze11.py",
+      "sha256": "33e853b41dbf6fae70f90fb3ff699eab3110734375f2efa99dfa6a71aba387db",
+      "lineCount": 17,
+      "methods": [
+        {
+          "name": "test_downstream_type_shape_changes_selected_binding_schema_hash",
+          "line": 6
+        }
+      ],
+      "imports": [
+        "import json,pathlib,sys,tempfile,unittest",
+        "import build_catalog,test_round8,device_resolution as dr,test_device_resolution as f,policy_reference"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_postfreeze10.py",
+      "sha256": "2e1c5f56d6d03011c89b074d7fda663babd410fcb1b0bf4e7b039939a7e428be",
+      "lineCount": 11,
+      "methods": [
+        {
+          "name": "test_local_overlay_identity_has_the_same_hash_shape_as_imported_entries",
+          "line": 5
+        }
+      ],
+      "imports": [
+        "import pathlib,sqlite3,unittest"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_permission_reference_import.py",
+      "sha256": "e9f56cb3f5f7f984b2eca7eb19557f76c1f73af4df22c4975eb585ce23dcfd3e",
+      "lineCount": 16,
+      "methods": [
+        {
+          "name": "test_documented_constants_are_symbols_not_manifest_definitions",
+          "line": 5
+        }
+      ],
+      "imports": [
+        "import unittest,pathlib,sys,tempfile,json,sqlite3,contextlib",
+        "import build_catalog,test_build,copy,hashlib"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_permission_reference.py",
+      "sha256": "7e5a7af183bbe5ea915c77fdf9d87ad8658f5d69bf6bdaff7bd64b77087dd6d7",
+      "lineCount": 19,
+      "methods": [
+        {
+          "name": "field",
+          "line": 4
+        },
+        {
+          "name": "test_literals_and_major_minor_facts_not_guessed",
+          "line": 7
+        },
+        {
+          "name": "test_missing_value_and_deprecated_are_not_permission_absence_or_removal",
+          "line": 10
+        },
+        {
+          "name": "test_duplicate_names_remain_evidence_and_are_flagged",
+          "line": 13
+        },
+        {
+          "name": "test_script_text_cannot_create_a_documented_field",
+          "line": 16
+        }
+      ],
+      "imports": [
+        "import unittest,pathlib,sys",
+        "from permission_reference import parse"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_parsers.py",
+      "sha256": "d27384a2c3dd8d6eced29756e234a04040a658c1f0ee5257c6b1232431d2747d",
+      "lineCount": 43,
+      "methods": [
+        {
+          "name": "test_overloads_and_annotations",
+          "line": 5
+        },
+        {
+          "name": "test_permission_modes",
+          "line": 18
+        },
+        {
+          "name": "test_parameter_permission_not_callable",
+          "line": 24
+        },
+        {
+          "name": "test_aidl",
+          "line": 26
+        },
+        {
+          "name": "test_source_unknown_retained",
+          "line": 34
+        },
+        {
+          "name": "test_owner_reset_after_type",
+          "line": 36
+        },
+        {
+          "name": "test_comment_quoted",
+          "line": 39
+        },
+        {
+          "name": "test_aidl_structured",
+          "line": 40
+        }
+      ],
+      "imports": [
+        "import unittest,pathlib,sys,json",
+        "import parsers as p"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_jvm_source_link.py",
+      "sha256": "7cb00260092fa4b8d3e86b78a9921536a8169211b7f56332b876108899332041",
+      "lineCount": 17,
+      "methods": [
+        {
+          "name": "test_exact_owner_primitives_and_known_reference_type",
+          "line": 5
+        },
+        {
+          "name": "test_unresolved_type_variable_never_guessed",
+          "line": 9
+        },
+        {
+          "name": "test_unqualified_java_lang_name_might_be_shadowed",
+          "line": 12
+        },
+        {
+          "name": "test_untyped_index_field_cannot_prove_typed_jvm_identity",
+          "line": 14
+        }
+      ],
+      "imports": [
+        "import unittest,pathlib,sys",
+        "import jvm_source_link as link"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_java_source.py",
+      "sha256": "40a4c3aac9f8fbfd8e466c9ff7385eaeb4d5d0fbb7432f031fc567fc62086134",
+      "lineCount": 54,
+      "methods": [
+        {
+          "name": "setUp",
+          "line": 7
+        },
+        {
+          "name": "test_nested_overloads_fields_and_annotations",
+          "line": 8
+        },
+        {
+          "name": "test_method_body_local_types_not_public_surface",
+          "line": 25
+        },
+        {
+          "name": "test_interface_implicit_public_and_directions_unknown",
+          "line": 28
+        },
+        {
+          "name": "test_parse_error_retained",
+          "line": 32
+        },
+        {
+          "name": "test_enum_and_multiple_array_declarators",
+          "line": 34
+        },
+        {
+          "name": "test_repeated_large_line_numbers",
+          "line": 38
+        },
+        {
+          "name": "test_annotation_like_comment_is_not_metadata",
+          "line": 43
+        },
+        {
+          "name": "test_apostrophe_in_annotation_comment",
+          "line": 47
+        }
+      ],
+      "imports": [
+        "import unittest,pathlib,sys"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_java_context.py",
+      "sha256": "b410e5d69d6631ce811dda81d7064ced3f698b96454f0d1e9fbbe7c1ef3c3ad6",
+      "lineCount": 14,
+      "methods": [
+        {
+          "name": "test_imports_retained_in_runtime_source_details",
+          "line": 5
+        },
+        {
+          "name": "test_mismatched_context_rejected",
+          "line": 11
+        }
+      ],
+      "imports": [
+        "import unittest,pathlib,sys",
+        "import java_context"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_hidl_source.py",
+      "sha256": "d011447f8f98071eecd1d269de3472ac901fa4fce04b8231aa19bbd5b67a080a",
+      "lineCount": 47,
+      "methods": [
+        {
+          "name": "test_interface_nested_type_and_following_method",
+          "line": 5
+        },
+        {
+          "name": "test_shifts_dont_consume_enum_values_or_following_method",
+          "line": 9
+        },
+        {
+          "name": "test_nested_template_comma_separation",
+          "line": 12
+        },
+        {
+          "name": "test_annotations_with_braces_and_semicolon_string_are_not_bodies",
+          "line": 15
+        },
+        {
+          "name": "test_comments_and_line_offsets",
+          "line": 18
+        },
+        {
+          "name": "test_unknown_statement_and_missing_package_retained",
+          "line": 21
+        },
+        {
+          "name": "test_oneway_with_results_not_silently_accepted",
+          "line": 24
+        },
+        {
+          "name": "test_source_hidl_version_is_not_android_availability",
+          "line": 26
+        },
+        {
+          "name": "test_typedef_and_safe_union",
+          "line": 29
+        },
+        {
+          "name": "test_type_canonical_does_not_repeat_own_name",
+          "line": 32
+        },
+        {
+          "name": "test_line_of_method_after_leading_blank_lines",
+          "line": 35
+        },
+        {
+          "name": "test_missing_semicolon_and_nested_interface_retained_unknown",
+          "line": 38
+        },
+        {
+          "name": "test_interface_special_type_is_a_field_not_nested_declaration",
+          "line": 41
+        },
+        {
+          "name": "test_type_delimiter_can_touch_variable_name",
+          "line": 44
+        }
+      ],
+      "imports": [
+        "import unittest,pathlib,sys",
+        "from hidl_source import parse"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_hidl_import.py",
+      "sha256": "f2ed5252f0134c57e2f5d39354c9bad86b440aac1fe5d8c29f34b86e15c88691",
+      "lineCount": 24,
+      "methods": [
+        {
+          "name": "fixture",
+          "line": 5
+        },
+        {
+          "name": "test_structural_records_and_multi_results_survive_schema_gate",
+          "line": 7
+        },
+        {
+          "name": "test_package_version_cannot_become_android_api_applicability",
+          "line": 14
+        },
+        {
+          "name": "test_invalid_utf8_retains_source_without_binding_inference",
+          "line": 19
+        }
+      ],
+      "imports": [
+        "import unittest,pathlib,tempfile,sys,json,sqlite3,contextlib,base64",
+        "import build_catalog,test_build,hashlib,copy"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_effective_device_inventory.py",
+      "sha256": "565785beb3fe91e339aa6c3d55c72c18dafc86fb22693ff028ccaf4cf45244b5",
+      "lineCount": 32,
+      "methods": [
+        {
+          "name": "fixture",
+          "line": 6
+        },
+        {
+          "name": "doc",
+          "line": 8
+        },
+        {
+          "name": "overlay",
+          "line": 9
+        },
+        {
+          "name": "resolve",
+          "line": 11
+        },
+        {
+          "name": "test_suppression_retains_existence_but_denies_known_dispatch",
+          "line": 13
+        },
+        {
+          "name": "test_local_addition_is_visible_and_version_unknown",
+          "line": 17
+        },
+        {
+          "name": "test_structured_field_override_changes_transitive_binding_hash",
+          "line": 20
+        },
+        {
+          "name": "test_matching_allow_succeeds_but_changed_document_pin_denies",
+          "line": 23
+        },
+        {
+          "name": "test_suppressed_type_denies_an_otherwise_allowed_binding",
+          "line": 28
+        }
+      ],
+      "imports": [
+        "import copy,hashlib,json,pathlib,sqlite3,sys,tempfile,unittest",
+        "import build_catalog,test_round8,test_device_resolution as f,device_resolution as dr,effective_device_inventory as effective,policy_reference"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_device_view_storage.py",
+      "sha256": "0be3313508241b304ea14e1a32d9a935091970dd8c660a1f13a9d0fa91418915",
+      "lineCount": 54,
+      "methods": [
+        {
+          "name": "setUp",
+          "line": 8
+        },
+        {
+          "name": "snapshot",
+          "line": 14
+        },
+        {
+          "name": "test_complete_atomic_activation_and_type_projection",
+          "line": 16
+        },
+        {
+          "name": "test_invalidation_preserves_old_snapshot_and_records_reason",
+          "line": 21
+        },
+        {
+          "name": "test_cross_target_valid_hash_cannot_mutate_active_pointer",
+          "line": 26
+        },
+        {
+          "name": "test_sql_guards_reject_deletion_stale_cas_and_sealed_mutation",
+          "line": 30
+        },
+        {
+          "name": "test_refresh_cas_does_not_activate_old_epoch_facts",
+          "line": 35
+        },
+        {
+          "name": "test_wire_contract_evidence_is_stored_separately_from_existence",
+          "line": 39
+        },
+        {
+          "name": "test_partial_inventory_cannot_replace_complete_catalog_view",
+          "line": 43
+        },
+        {
+          "name": "test_entry_json_cannot_override_normalized_availability",
+          "line": 47
+        }
+      ],
+      "imports": [
+        "import copy,json,pathlib,sqlite3,sys,tempfile,unittest",
+        "import test_device_resolution as f,device_resolution as dr"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_device_resolution.py",
+      "sha256": "8b75ee9c4f9308f769ccf3bca5776f66ad5fe7a5c6f9906f7765f855055c866d",
+      "lineCount": 90,
+      "methods": [
+        {
+          "name": "h",
+          "line": 7
+        },
+        {
+          "name": "facts",
+          "line": 8
+        },
+        {
+          "name": "rule",
+          "line": 10
+        },
+        {
+          "name": "entity",
+          "line": 11
+        },
+        {
+          "name": "resolved",
+          "line": 13
+        },
+        {
+          "name": "setUp",
+          "line": 18
+        },
+        {
+          "name": "test_major_minor_and_removed_apply_to_bindings_and_types",
+          "line": 19
+        },
+        {
+          "name": "test_minor_unknown_does_not_become_zero",
+          "line": 22
+        },
+        {
+          "name": "test_extension_alternative_is_not_android_minor",
+          "line": 26
+        },
+        {
+          "name": "test_modules_and_oem_builds_are_independent_axes",
+          "line": 30
+        },
+        {
+          "name": "test_interface_version_hash_and_denied_probe",
+          "line": 33
+        },
+        {
+          "name": "test_authoritative_absence_differs_from_unreachable",
+          "line": 38
+        },
+        {
+          "name": "test_type_dependencies_and_missing_schema_are_consistent",
+          "line": 42
+        },
+        {
+          "name": "test_recursive_types_resolve_as_one_consistent_graph",
+          "line": 46
+        },
+        {
+          "name": "test_available_variant_does_not_hide_ambiguous_unknown_variant",
+          "line": 48
+        },
+        {
+          "name": "test_dependency_schema_mismatch_does_not_select_a_codec",
+          "line": 51
+        },
+        {
+          "name": "test_unknown_lifecycle_is_retained_with_reason",
+          "line": 53
+        },
+        {
+          "name": "test_atomic_publication_epoch_invalidation_and_cross_target",
+          "line": 55
+        },
+        {
+          "name": "test_availability_is_not_a_permission_grant",
+          "line": 64
+        },
+        {
+          "name": "test_bootstrap_etag_refresh_and_precondition_order",
+          "line": 70
+        },
+        {
+          "name": "test_status_is_bounded_header_and_etag_scope_is_distinct",
+          "line": 79
+        },
+        {
+          "name": "test_epoch_exhaustion_does_not_mutate_catalog_pins",
+          "line": 84
+        }
+      ],
+      "imports": [
+        "import copy,json,pathlib,sys,unittest",
+        "        import policy_reference"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_device_catalog_pipeline.py",
+      "sha256": "50e4504e81443dacdf605cb850ca7be1f8ff92b7eb1ca54ee369328eb2cec1b5",
+      "lineCount": 79,
+      "methods": [
+        {
+          "name": "test_index_retains_past_and_future_and_container_lifecycle",
+          "line": 9
+        },
+        {
+          "name": "test_real_build_exports_inventory_and_resolves_before_atomic_storage",
+          "line": 15
+        },
+        {
+          "name": "test_generated_aliases_pin_the_selected_device_schema_and_shared_policy",
+          "line": 32
+        },
+        {
+          "name": "test_full_index_build_applies_history_extensions_and_container_constraints",
+          "line": 43
+        },
+        {
+          "name": "rows",
+          "line": 51
+        },
+        {
+          "name": "test_aidl_type_reference_proof_and_contract_digest_are_shared",
+          "line": 59
+        },
+        {
+          "name": "test_independent_validator_rejects_inventory_export_mutation",
+          "line": 67
+        },
+        {
+          "name": "test_loader_rejects_missing_projection_without_synthesizing_rows",
+          "line": 72
+        }
+      ],
+      "imports": [
+        "import copy,hashlib,json,pathlib,sqlite3,sys,tempfile,unittest,contextlib,gzip",
+        "import sdk_api_index,test_source_integration,build_catalog,device_resolution as dr,test_device_resolution as f",
+        "import device_view_storage",
+        "import cache_fingerprint",
+        "import catalog_projection,validate_catalog,effective_device_inventory",
+        "        import dispatch_manifest,policy_reference",
+        "        import test_round8,dispatch_manifest"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_contract_models.py",
+      "sha256": "95b7bc59f9528d849030cd56cfd23915433931876b8eb24714307aa756c833e5",
+      "lineCount": 62,
+      "methods": [
+        {
+          "name": "error",
+          "line": 8
+        },
+        {
+          "name": "test_cas_tombstones_history_and_cursor",
+          "line": 11
+        },
+        {
+          "name": "test_import_both_collision_orders_and_rebase",
+          "line": 18
+        },
+        {
+          "name": "test_removed_base_without_overlay_is_absent",
+          "line": 26
+        },
+        {
+          "name": "test_rejected_registry_does_not_mutate_selected_view",
+          "line": 29
+        },
+        {
+          "name": "test_binding_rules_dominate_all_aliases",
+          "line": 33
+        },
+        {
+          "name": "test_generated_alias_identity_and_default_deny",
+          "line": 50
+        },
+        {
+          "name": "test_bridge_ddl_integrity_and_closed_enums",
+          "line": 54
+        }
+      ],
+      "imports": [
+        "import hashlib,itertools,json,pathlib,sqlite3,sys,unittest",
+        "from contract_reference import Catalog,Error,identity",
+        "from policy_reference import Rule,evaluate,resolve_fixture_route",
+        "from dispatch_manifest import generate",
+        "        import copy"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_bundled_http_snapshot.py",
+      "sha256": "4b008c2d46b2f5d26e95812cac5a0bd6f5ea56260388e3cd5276d813098e1e81",
+      "lineCount": 23,
+      "methods": [
+        {
+          "name": "fixture",
+          "line": 5
+        },
+        {
+          "name": "test_exact_snapshot_no_network",
+          "line": 8
+        },
+        {
+          "name": "test_missing_snapshot_fails_without_mutable_url_fetch",
+          "line": 11
+        },
+        {
+          "name": "test_changed_bytes_rejected",
+          "line": 15
+        },
+        {
+          "name": "test_escape_rejected",
+          "line": 19
+        }
+      ],
+      "imports": [
+        "import unittest,tempfile,pathlib,sys,hashlib",
+        "from restore_snapshot import restore_bundled_snapshot"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_build.py",
+      "sha256": "e9ce2b6dbb35b6e7689c6df830a9af8e82dde1091f9eae67c4e3ff767d8896a0",
+      "lineCount": 64,
+      "methods": [
+        {
+          "name": "fixture",
+          "line": 8
+        },
+        {
+          "name": "test_import_integrity_schema_overlay_and_immutability",
+          "line": 26
+        },
+        {
+          "name": "test_hash_failure_does_not_publish",
+          "line": 48
+        },
+        {
+          "name": "test_one_identity_two_immutable_occurrences",
+          "line": 54
+        },
+        {
+          "name": "test_invalid_ast_cannot_publish",
+          "line": 58
+        }
+      ],
+      "imports": [
+        "import unittest,pathlib,tempfile,json,hashlib,sqlite3,sys,zipfile",
+        "import build_catalog as b",
+        "import jsonschema",
+        "import validate_catalog"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_annotation_jvm_erasure_import.py",
+      "sha256": "c918750834a2b1f60d9d2a853ea8dcdfbb8109d5e2b193aaedf991b69ceb77db",
+      "lineCount": 31,
+      "methods": [
+        {
+          "name": "source",
+          "line": 6
+        },
+        {
+          "name": "check",
+          "line": 8
+        },
+        {
+          "name": "test_generic_outer_erasure_matches_exact_current_descriptor",
+          "line": 23
+        },
+        {
+          "name": "test_top_level_type_variable_not_guessed",
+          "line": 25
+        },
+        {
+          "name": "test_current_index_is_not_borrowed_for_other_platform",
+          "line": 27
+        },
+        {
+          "name": "test_regular_method_with_class_name_is_not_constructor",
+          "line": 29
+        }
+      ],
+      "imports": [
+        "import unittest,pathlib,tempfile,sys,json,gzip,sqlite3,contextlib,zipfile,hashlib",
+        "from xml.sax.saxutils import escape",
+        "import build_catalog,sdk_api_index,test_build,copy,cache_fingerprint"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_annotation_jvm_erasure.py",
+      "sha256": "4fca71f6c2342e826de0bd676a2eee2ac56285097174840d94d850a4d369ca65",
+      "lineCount": 21,
+      "methods": [
+        {
+          "name": "test_qualified_generic_outer_erasure_has_exact_descriptor",
+          "line": 6
+        },
+        {
+          "name": "test_type_variable_is_not_erased_to_object_by_guess",
+          "line": 9
+        },
+        {
+          "name": "test_unqualified_java_lang_alias_not_guessed",
+          "line": 11
+        },
+        {
+          "name": "test_parameterized_array_and_parameter_annotation_ordinal",
+          "line": 13
+        },
+        {
+          "name": "test_malformed_generics_and_void_parameters_rejected",
+          "line": 15
+        },
+        {
+          "name": "test_constructor_and_same_name_regular_method_differ",
+          "line": 17
+        },
+        {
+          "name": "test_nested_binary_owner_is_known_not_inferred",
+          "line": 19
+        }
+      ],
+      "imports": [
+        "import pathlib,sys,unittest",
+        "from annotation_link import xml_jvm_key"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_remediation.py",
+      "sha256": "e04129213f87be4c19ef30774835f8ff2a07b1ae2bb860bbbcb9ea8c4ef816c4",
+      "lineCount": 98,
+      "methods": [
+        {
+          "name": "database",
+          "line": 8
+        },
+        {
+          "name": "test_all_natural_primary_keys_are_not_null",
+          "line": 14
+        },
+        {
+          "name": "test_registry_state_round_trip",
+          "line": 22
+        },
+        {
+          "name": "test_operation_specific_preconditions",
+          "line": 31
+        },
+        {
+          "name": "test_registry_switch_selects_immutable_entry_variant",
+          "line": 41
+        },
+        {
+          "name": "test_conflict_resolution_extension_schema",
+          "line": 59
+        },
+        {
+          "name": "test_permission_root_vocabulary",
+          "line": 66
+        },
+        {
+          "name": "test_offline_copy_migration",
+          "line": 73
+        },
+        {
+          "name": "test_symbolic_read_and_header_do_not_leak_owner",
+          "line": 86
+        },
+        {
+          "name": "test_repeated_aidl_statement_locators_are_distinct",
+          "line": 93
+        }
+      ],
+      "imports": [
+        "import json, pathlib, sqlite3, sys, tempfile, unittest",
+        "import parsers",
+        "import jsonschema",
+        "        from migrate_v3 import migrate"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_restore_snapshot.py",
+      "sha256": "c065ca471f9b0ce23dfd5f562fad38de770cdaddd6d3108623c9a1c791c2ccd2",
+      "lineCount": 20,
+      "methods": [
+        {
+          "name": "test_source_zip_member_verified_without_network_or_install",
+          "line": 6
+        },
+        {
+          "name": "test_missing_source_default_is_dry_run",
+          "line": 15
+        }
+      ],
+      "imports": [
+        "import unittest,pathlib,sys,tempfile,hashlib,json,zipfile",
+        "from unittest.mock import patch",
+        "import restore_snapshot as restore"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_round11.py",
+      "sha256": "ceb10453ca116f7a4b7dd21def54b438314dd85dacb2a14f8d54c496d1c6a74c",
+      "lineCount": 91,
+      "methods": [
+        {
+          "name": "test_source_point_is_unknown_outside_proven_minor",
+          "line": 6
+        },
+        {
+          "name": "test_inconsistent_since_sdks_is_unknown",
+          "line": 11
+        },
+        {
+          "name": "test_lifecycle_text_does_not_change_declared_type_contract",
+          "line": 15
+        },
+        {
+          "name": "test_type_reference_proof_text_is_not_semantic_shape",
+          "line": 19
+        },
+        {
+          "name": "test_direction_nullable_and_hidl_outputs_affect_contract",
+          "line": 21
+        },
+        {
+          "name": "test_missing_or_unknown_kind_rejects_without_fabricating_a_binding",
+          "line": 26
+        },
+        {
+          "name": "test_interface_oneway_semantics_apply_to_all_methods",
+          "line": 32
+        },
+        {
+          "name": "test_proven_supertype_change_affects_type_contract_and_graph",
+          "line": 34
+        },
+        {
+          "name": "test_imported_aidl_type_and_noninvocable_fields",
+          "line": 40
+        },
+        {
+          "name": "test_same_count_foreign_inventory_cannot_activate",
+          "line": 50
+        },
+        {
+          "name": "test_formal_name_cannot_resolve_to_package_class",
+          "line": 55
+        },
+        {
+          "name": "test_valid_hash_cannot_substitute_selected_contract",
+          "line": 60
+        },
+        {
+          "name": "test_sql_inventory_digest_and_selected_contract_guards",
+          "line": 65
+        },
+        {
+          "name": "test_verified_wire_evidence_cannot_be_empty_or_duplicate",
+          "line": 74
+        },
+        {
+          "name": "test_abbreviated_java_lang_needs_declared_same_snapshot_type",
+          "line": 84
+        },
+        {
+          "name": "test_malformed_legacy_header_quarantines_without_aborting_projection",
+          "line": 87
+        }
+      ],
+      "imports": [
+        "import copy,hashlib,json,pathlib,sqlite3,sys,tempfile,unittest",
+        "import catalog_projection as cp,device_resolution as dr,dispatch_manifest,build_catalog,test_build,test_device_resolution as f",
+        "  import device_view_storage as storage"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_versioned_signature_annotations.py",
+      "sha256": "d680f33c50a29b063e4e5071545f5ed236806fdb797f905c901af66113e1a979",
+      "lineCount": 42,
+      "methods": [
+        {
+          "name": "fixture",
+          "line": 6
+        },
+        {
+          "name": "test_archive_resolution_counts_are_distinct_from_parse_status",
+          "line": 24
+        },
+        {
+          "name": "test_matching_snapshot_and_version_resolves_legacy_signature",
+          "line": 28
+        },
+        {
+          "name": "test_different_snapshot_is_not_used_as_fallback",
+          "line": 30
+        },
+        {
+          "name": "test_different_platform_is_not_used_as_fallback",
+          "line": 32
+        },
+        {
+          "name": "test_existing_index_blocks_signature_backfill_for_absent_target",
+          "line": 34
+        },
+        {
+          "name": "test_same_snapshot_formal_type_variable_remains_ambiguous",
+          "line": 36
+        },
+        {
+          "name": "test_same_snapshot_return_type_conflict_stays_unresolved",
+          "line": 38
+        }
+      ],
+      "imports": [
+        "import pathlib,sys,unittest,tempfile,json,sqlite3,hashlib,gzip",
+        "import build_catalog,sdk_api_index,test_source_annotation_targets"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_unnormalized_source_retention.py",
+      "sha256": "08e88e08a55ddb44a7a61f9992ad078a189ce1d00763af4f4ff8ad652f9fbd83",
+      "lineCount": 18,
+      "methods": [
+        {
+          "name": "fixture",
+          "line": 5
+        },
+        {
+          "name": "test_hidl_raw_schema_and_declared_structure_are_retained",
+          "line": 11
+        },
+        {
+          "name": "test_non_utf8_native_evidence_is_lossless",
+          "line": 15
+        }
+      ],
+      "imports": [
+        "import unittest,pathlib,sys,tempfile,json,sqlite3,base64,contextlib",
+        "import build_catalog,test_source_annotation_targets"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_structured_type_source_scopes.py",
+      "sha256": "94ffd5c2ca53933b513c5b48f8a84477a5b11161714c6ea2855fa6024529f331",
+      "lineCount": 31,
+      "methods": [
+        {
+          "name": "project",
+          "line": 6
+        },
+        {
+          "name": "test_versioned_source_fields_are_not_combined",
+          "line": 17
+        },
+        {
+          "name": "test_hidl_field_type_changes_semantic_digest",
+          "line": 19
+        },
+        {
+          "name": "test_serialized_field_order_changes_digest",
+          "line": 21
+        },
+        {
+          "name": "test_hidl_typedef_target_changes_digest",
+          "line": 23
+        },
+        {
+          "name": "test_hidl_enum_storage_type_changes_digest",
+          "line": 25
+        },
+        {
+          "name": "test_hidl_enum_expression_changes_digest",
+          "line": 27
+        },
+        {
+          "name": "test_raw_header_comments_and_proof_prose_do_not_change_digest",
+          "line": 29
+        }
+      ],
+      "imports": [
+        "import unittest,pathlib,sys,sqlite3,json,hashlib,contextlib,copy",
+        "from catalog_projection import Projection",
+        "from dispatch_manifest import contract_digest"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_source_integration.py",
+      "sha256": "2ba39bbd83c4ae3b647b97d064f7b1b4eb3725d4ab0460bec98969302eeca055",
+      "lineCount": 82,
+      "methods": [
+        {
+          "name": "test_structured_aidl_members_survive_publication",
+          "line": 9
+        },
+        {
+          "name": "test_cached_java_and_current_index_import_with_distinct_evidence",
+          "line": 26
+        },
+        {
+          "name": "test_cache_hash_failure_does_not_publish",
+          "line": 52
+        },
+        {
+          "name": "test_malformed_aidl_is_preserved_as_unknown",
+          "line": 66
+        }
+      ],
+      "imports": [
+        "import unittest,pathlib,tempfile,json,hashlib,sqlite3,sys,zipfile,gzip",
+        "import build_catalog as b",
+        "import cache_fingerprint",
+        "import test_build as base_module",
+        "        import java_source, sdk_api_index"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_source_annotation_targets.py",
+      "sha256": "3f7618620e38b72f0937b9b48d1224ba5c96247c6b94a57c0bb8c0890ecf8245",
+      "lineCount": 26,
+      "methods": [
+        {
+          "name": "source",
+          "line": 7
+        },
+        {
+          "name": "annotation",
+          "line": 10
+        },
+        {
+          "name": "test_shadowed_type_variable_does_not_match_java_lang_alias",
+          "line": 14
+        },
+        {
+          "name": "test_current_sdk_annotation_maps_to_exact_jvm_target",
+          "line": 18
+        }
+      ],
+      "imports": [
+        "import unittest,pathlib,tempfile,hashlib,json,gzip,zipfile,sqlite3,sys",
+        "import build_catalog as b,sdk_api_index,cache_fingerprint",
+        "import test_build as base_module"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_sealed_registry.py",
+      "sha256": "fa5929663be1144c542bd33b017497062bae5111c62d4469efb466fe466df50a",
+      "lineCount": 28,
+      "methods": [
+        {
+          "name": "test_memberships_are_staged_only_and_staged_inserts_succeed",
+          "line": 6
+        },
+        {
+          "name": "test_copy_migration_restores_retired_before_published",
+          "line": 14
+        },
+        {
+          "name": "test_no_appending_members_after_publication",
+          "line": 22
+        }
+      ],
+      "imports": [
+        "import pathlib,sqlite3,unittest,tempfile,sys",
+        "  import migrate_v3"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_sdk_zip_metadata.py",
+      "sha256": "1391e23478beb75566be938d06ab567322970cf2767127bbb698a60e2a0383d7",
+      "lineCount": 16,
+      "methods": [
+        {
+          "name": "test_only_selected_metadata_payload_is_read",
+          "line": 6
+        },
+        {
+          "name": "get",
+          "line": 11
+        }
+      ],
+      "imports": [
+        "import unittest,io,zipfile,pathlib,sys"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_sdk_api_index.py",
+      "sha256": "9bc1be4f88ad9311215ecf3e914acee0f583bcd00e7fe8d97559a9123b5c4f3b",
+      "lineCount": 20,
+      "methods": [
+        {
+          "name": "test_minor_lifecycle_and_removed_members",
+          "line": 5
+        },
+        {
+          "name": "test_field_type_and_type_kind_are_not_invented",
+          "line": 13
+        },
+        {
+          "name": "test_invalid_method_descriptor_retained_unknown",
+          "line": 17
+        }
+      ],
+      "imports": [
+        "import unittest,pathlib,sys",
+        "import sdk_api_index as api"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_round9_review.py",
+      "sha256": "1bcf158c3fa0956e3a9eb08aa219033d4115ae734daf92910f3196d7f76ccc35",
+      "lineCount": 67,
+      "methods": [
+        {
+          "name": "build",
+          "line": 8
+        },
+        {
+          "name": "test_nested_types_do_not_replace_single_outer_interface_file_metadata",
+          "line": 13
+        },
+        {
+          "name": "test_multiple_outer_types_still_have_explicit_multiple_metadata",
+          "line": 17
+        },
+        {
+          "name": "test_raw_header_preserves_annotation_braces_and_cpp_header_literal",
+          "line": 20
+        },
+        {
+          "name": "database",
+          "line": 25
+        },
+        {
+          "name": "publish",
+          "line": 27
+        },
+        {
+          "name": "test_singleton_deletions_are_rejected",
+          "line": 32
+        },
+        {
+          "name": "test_hash_shapes_are_checked_at_storage_boundary",
+          "line": 36
+        },
+        {
+          "name": "test_all_overlay_states_have_cat1_projection",
+          "line": 46
+        },
+        {
+          "name": "test_conflict_etag_uses_new_selected_base_and_missing_base_local_marker",
+          "line": 54
+        }
+      ],
+      "imports": [
+        "import contextlib,hashlib,json,pathlib,sqlite3,sys,tempfile,unittest",
+        "import build_catalog,test_round8"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_round9.py",
+      "sha256": "2cdf196b8e31b0a9b89b3b8e81339afde699f9c376d8ed85972ebcb4f715cba4",
+      "lineCount": 20,
+      "methods": [
+        {
+          "name": "test_bracket_and_generic_parameter_name_boundaries",
+          "line": 7
+        },
+        {
+          "name": "test_bracket_and_generic_field_name_boundaries_publish",
+          "line": 10
+        },
+        {
+          "name": "test_identifier_type_still_needs_a_name_boundary",
+          "line": 15
+        }
+      ],
+      "imports": [
+        "import pathlib,sys,tempfile,unittest,json",
+        "import parsers,build_catalog,test_round8"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_round8.py",
+      "sha256": "77e8320a25fe6408ee7f9cba9c70b2545c0932fae056a7b9830267c2af6cc9a4",
+      "lineCount": 120,
+      "methods": [
+        {
+          "name": "test_reader_rejects_nonobject_or_missing_typed_operator",
+          "line": 10
+        },
+        {
+          "name": "test_reader_rejects_corrupt_known_semantic_child",
+          "line": 15
+        },
+        {
+          "name": "test_reader_quarantines_only_typed_future_operator_and_preserves_metadata",
+          "line": 22
+        },
+        {
+          "name": "fixture",
+          "line": 32
+        },
+        {
+          "name": "test_nested_aidl_types_and_following_methods_published",
+          "line": 35
+        },
+        {
+          "name": "test_nested_structured_types_do_not_swallow_fields",
+          "line": 46
+        },
+        {
+          "name": "test_aidl_merged_head_rejected_instead_of_fabricated_type",
+          "line": 51
+        },
+        {
+          "name": "test_nested_oneway_does_not_mark_the_outer_interface",
+          "line": 53
+        },
+        {
+          "name": "test_aidl_reconciliation_comments_are_not_statements",
+          "line": 56
+        },
+        {
+          "name": "test_nested_aidl_unknown_statement_remains_visible",
+          "line": 66
+        },
+        {
+          "name": "test_malformed_nested_aidl_keeps_full_source_and_reason",
+          "line": 72
+        },
+        {
+          "name": "test_aidl_drop_mutant_cannot_publish",
+          "line": 80
+        },
+        {
+          "name": "drop",
+          "line": 82
+        },
+        {
+          "name": "test_java_lang_subpackages_are_explicit_imports",
+          "line": 90
+        },
+        {
+          "name": "test_java_nested_type_implicit_visibility",
+          "line": 93
+        },
+        {
+          "name": "test_imported_overlay_current_base_required_on_write",
+          "line": 98
+        },
+        {
+          "name": "test_copy_migration_admits_only_matching_imported_overlay_base",
+          "line": 105
+        }
+      ],
+      "imports": [
+        "import pathlib,sys,unittest,tempfile,json,hashlib,sqlite3,contextlib",
+        "import jsonschema,permission_reader",
+        "import parsers,java_source,build_catalog,test_build,migrate_v3,aidl_lex",
+        "from unittest import mock"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_round7.py",
+      "sha256": "78793812aac2c602f56f46d6596af0a3b91be1746d584b3a45b9b8b37fd4c397",
+      "lineCount": 48,
+      "methods": [
+        {
+          "name": "db",
+          "line": 5
+        },
+        {
+          "name": "test_local_tombstone_is_not_discovered",
+          "line": 7
+        },
+        {
+          "name": "test_deleted_local_cannot_hide_existing_import",
+          "line": 9
+        },
+        {
+          "name": "test_overlay_origin_and_tombstone_state_are_consistent",
+          "line": 12
+        },
+        {
+          "name": "test_history_operations_match_transitions",
+          "line": 17
+        },
+        {
+          "name": "test_all_forward_declarations_keep_dotted_identity",
+          "line": 20
+        },
+        {
+          "name": "test_top_level_lexing_ignores_quoted_decoys_and_retains_lines",
+          "line": 23
+        },
+        {
+          "name": "test_cpp_header_braces_are_not_a_declaration_body",
+          "line": 26
+        },
+        {
+          "name": "test_multiple_aidl_declarations_are_published",
+          "line": 28
+        },
+        {
+          "name": "test_stale_parser_cache_rejects_publication",
+          "line": 31
+        },
+        {
+          "name": "test_missing_index_for_annotations_is_reported_partial",
+          "line": 40
+        },
+        {
+          "name": "test_unqualified_java_permission_literal_is_unknown",
+          "line": 45
+        }
+      ],
+      "imports": [
+        "import pathlib,sys,unittest,tempfile,json,sqlite3,hashlib,gzip",
+        "import parsers,build_catalog,contract_reference,java_source,test_build,test_source_annotation_targets,sdk_api_index"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_round5.py",
+      "sha256": "367176a7f938cf4678159d66a1ede0d3caf483bf27f91e1e5c030a69f7376543",
+      "lineCount": 68,
+      "methods": [
+        {
+          "name": "test_unbalanced_interface_is_retained_as_failed_schema",
+          "line": 6
+        },
+        {
+          "name": "test_index_target_mismatch_rejects_publication",
+          "line": 11
+        },
+        {
+          "name": "test_copy_migration_rejects_deleted_local_collision",
+          "line": 20
+        },
+        {
+          "name": "test_interface_failure_status_is_not_promoted",
+          "line": 28
+        },
+        {
+          "name": "test_deleted_local_import_collision_blocks_pointer",
+          "line": 31
+        },
+        {
+          "name": "test_future_platform_annotations_use_matching_index",
+          "line": 34
+        },
+        {
+          "name": "test_sdk_type_presence_is_known_without_invented_type_kind",
+          "line": 42
+        },
+        {
+          "name": "test_wrapper_alias_can_require_two_bindings",
+          "line": 44
+        },
+        {
+          "name": "test_minor_kind_vocabulary_is_version_gated",
+          "line": 49
+        },
+        {
+          "name": "test_record_components_and_compact_constructor_parameters",
+          "line": 54
+        },
+        {
+          "name": "test_validator_closes_database_on_failure",
+          "line": 56
+        },
+        {
+          "name": "test_restore_metadata_uses_explicit_platform",
+          "line": 62
+        }
+      ],
+      "imports": [
+        "import pathlib,sys,unittest,tempfile,json,sqlite3,hashlib,gzip,types",
+        "from unittest import mock",
+        "import parsers,aidl_members,java_source,build_catalog,sdk_api_index,validate_catalog,jsonschema,test_build,test_source_annotation_targets,restore_snapshot",
+        "  import migrate_v3"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_round4.py",
+      "sha256": "e2869d4b2e4c1175eeb490c8792f5656346d0c765b4150660574b940e76ace5c",
+      "lineCount": 51,
+      "methods": [
+        {
+          "name": "test_silent_signature_record_loss_blocks_publication",
+          "line": 6
+        },
+        {
+          "name": "dropped",
+          "line": 10
+        },
+        {
+          "name": "test_oracle_retains_mutation_justification",
+          "line": 15
+        },
+        {
+          "name": "test_interface_shift_constant_does_not_consume_methods",
+          "line": 18
+        },
+        {
+          "name": "test_generic_parcelable_retains_field",
+          "line": 21
+        },
+        {
+          "name": "test_changed_missing_and_suppressed_import_bases_block_pointer",
+          "line": 23
+        },
+        {
+          "name": "test_history_reason_has_append_only_storage_and_contract",
+          "line": 37
+        },
+        {
+          "name": "test_locator_alignment_guard_survives_optimization",
+          "line": 41
+        },
+        {
+          "name": "test_unknown_semantics_reader_quarantines_and_retains_raw",
+          "line": 45
+        }
+      ],
+      "imports": [
+        "import unittest,pathlib,sys,sqlite3,json,types,importlib,subprocess",
+        "from unittest import mock",
+        "import aidl_members,parsers,sdk_api_index,jsonschema",
+        "  import tempfile,build_catalog,test_build",
+        "  from contract_reference import Catalog"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_round3.py",
+      "sha256": "25e615adadb6ee953ce17b1c4ec8db71133777fbf288b2506a937cd9192e980d",
+      "lineCount": 81,
+      "methods": [
+        {
+          "name": "db",
+          "line": 8
+        },
+        {
+          "name": "registry",
+          "line": 10
+        },
+        {
+          "name": "fixture",
+          "line": 11
+        },
+        {
+          "name": "test_java_lang_annotation_target",
+          "line": 12
+        },
+        {
+          "name": "test_parser_revision_creates_immutable_evidence_instance",
+          "line": 18
+        },
+        {
+          "name": "test_permission_summary_matches_export_contract",
+          "line": 25
+        },
+        {
+          "name": "test_positive_and_absent_permission_evidence_remain_visible",
+          "line": 29
+        },
+        {
+          "name": "test_generated_and_generic_share_policy_and_known_raw_cannot_bypass",
+          "line": 33
+        },
+        {
+          "name": "test_database_validation_without_exports",
+          "line": 40
+        },
+        {
+          "name": "test_raw_constraints_have_one_authority",
+          "line": 43
+        },
+        {
+          "name": "test_published_pointer_and_single_published_registry",
+          "line": 47
+        },
+        {
+          "name": "test_overlay_commit_requires_same_revision_history",
+          "line": 55
+        },
+        {
+          "name": "test_local_collision_cannot_publish_or_leak_discovery",
+          "line": 60
+        },
+        {
+          "name": "test_native_availability_and_bounded_audit_retention",
+          "line": 64
+        },
+        {
+          "name": "test_import_metadata_and_history_cursor_contract",
+          "line": 70
+        },
+        {
+          "name": "test_migration_seeds_published_version_and_marks_legacy",
+          "line": 73
+        }
+      ],
+      "imports": [
+        "import unittest,pathlib,sys,tempfile,json,sqlite3,hashlib,zipfile,shutil",
+        "import test_build,build_catalog,export_permissions,jsonschema,migrate_v3,validate_catalog",
+        "import policy_reference",
+        "from unittest import mock"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_round2.py",
+      "sha256": "95e6957ad9e4d951588eed55b43393a6ebb5cdaf173993157e83df6d57925765",
+      "lineCount": 122,
+      "methods": [
+        {
+          "name": "fixture",
+          "line": 7
+        },
+        {
+          "name": "test_source_metadata_and_generation_round_trip",
+          "line": 8
+        },
+        {
+          "name": "test_missing_inventory_metadata_fails_closed",
+          "line": 17
+        },
+        {
+          "name": "test_corrected_source_fact_gets_new_occurrence_not_new_binding",
+          "line": 22
+        },
+        {
+          "name": "test_package_and_type_have_distinct_identity_namespaces",
+          "line": 30
+        },
+        {
+          "name": "test_failed_header_does_not_pop_package",
+          "line": 37
+        },
+        {
+          "name": "test_legacy_extractor_has_no_executable_run",
+          "line": 40
+        },
+        {
+          "name": "test_dispatch_schema_is_independent_of_provenance",
+          "line": 41
+        },
+        {
+          "name": "test_bridge_config_matches_named_design_records",
+          "line": 45
+        },
+        {
+          "name": "test_scoped_idempotency_storage",
+          "line": 63
+        },
+        {
+          "name": "test_external_annotations_scope_mapping_and_parse_error",
+          "line": 67
+        },
+        {
+          "name": "test_positive_raw_grant_never_overrides_known_binding",
+          "line": 81
+        },
+        {
+          "name": "test_overlay_revision_identity_and_registry_state_constraints",
+          "line": 94
+        },
+        {
+          "name": "test_minor_schema_and_declaration_variants",
+          "line": 104
+        },
+        {
+          "name": "test_permission_export_and_optimized_validation",
+          "line": 111
+        }
+      ],
+      "imports": [
+        "import pathlib,sys,json,sqlite3,tempfile,unittest,hashlib,zipfile,copy,subprocess,xml.etree.ElementTree as ET",
+        "import build_catalog as b,parsers,dispatch_manifest,policy_reference,foundation_extract",
+        "import test_build",
+        "  import jsonschema",
+        "  import export_permissions"
+      ],
+      "source": null
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_round10.py",
+      "sha256": "eeab26910bc0068b6b2a9bfe01100ac1f80d0cd286235071c82bcc82e8b36597",
+      "lineCount": 42,
+      "methods": [
+        {
+          "name": "test_annotations_require_an_explicit_platform_version",
+          "line": 6
+        },
+        {
+          "name": "test_non_authoritative_positive_observations_are_unknown",
+          "line": 13
+        },
+        {
+          "name": "test_malformed_interval_is_quarantined_without_hiding_other_rows",
+          "line": 17
+        },
+        {
+          "name": "test_invalidation_reason_is_retained",
+          "line": 19
+        },
+        {
+          "name": "test_facts_cannot_be_relabelled_with_a_new_epoch",
+          "line": 21
+        },
+        {
+          "name": "test_device_paths_use_declared_scopes_and_response_sets",
+          "line": 24
+        },
+        {
+          "name": "test_graph_digest_is_recomputed_at_publication",
+          "line": 34
+        }
+      ],
+      "imports": [
+        "import copy,json,pathlib,sys,tempfile,unittest,zipfile,hashlib",
+        "import build_catalog,test_build,test_device_resolution as fixtures,device_resolution as dr"
+      ],
+      "source": null
+    },
+    {
+      "path": "remediation/catalog/tests/test_restore_snapshot.py",
+      "sha256": "c065ca471f9b0ce23dfd5f562fad38de770cdaddd6d3108623c9a1c791c2ccd2",
+      "lineCount": 20,
+      "methods": [
+        {
+          "name": "test_source_zip_member_verified_without_network_or_install",
+          "line": 6
+        },
+        {
+          "name": "test_missing_source_default_is_dry_run",
+          "line": 15
+        }
+      ],
+      "imports": [
+        "import unittest,pathlib,sys,tempfile,hashlib,json,zipfile",
+        "from unittest.mock import patch",
+        "import restore_snapshot as restore"
+      ],
+      "source": null
+    },
+    {
+      "path": "tools/check_deliverables.py",
+      "sha256": "6b575f941a427a815b5430a0b406f7020477f213f3032bfa46c178f9cfe08bc1",
+      "lineCount": 44,
+      "methods": [
+        {
+          "name": "violations",
+          "line": 9
+        },
+        {
+          "name": "main",
+          "line": 28
+        }
+      ],
+      "imports": [
+        "import argparse",
+        "import fnmatch",
+        "import json",
+        "from pathlib import Path",
+        "import subprocess"
+      ],
+      "source": null
+    },
+    {
+      "path": "tools/check_documentation.py",
+      "sha256": "4abd62deef22df29c323832ecfd094df9f27162bc9023fd913cb0954ceb417d3",
+      "lineCount": 51,
+      "methods": [
+        {
+          "name": "check",
+          "line": 13
+        },
+        {
+          "name": "handle_starttag",
+          "line": 34
+        },
+        {
+          "name": "main",
+          "line": 43
+        }
+      ],
+      "imports": [
+        "import argparse",
+        "import hashlib",
+        "from html.parser import HTMLParser",
+        "import json",
+        "from pathlib import Path",
+        "import re",
+        "import urllib.parse",
+        "import xml.etree.ElementTree as ET"
+      ],
+      "source": null
+    },
+    {
+      "path": "tools/rehydrate.py",
+      "sha256": "73623b939aacd5108382b1f3d335de2a8665205553fa8ee2cf99f3eadfea0263",
+      "lineCount": 479,
+      "methods": [
+        {
+          "name": "sha",
+          "line": 34
+        },
+        {
+          "name": "file_sha",
+          "line": 38
+        },
+        {
+          "name": "safe_path",
+          "line": 46
+        },
+        {
+          "name": "atomic_bytes",
+          "line": 57
+        },
+        {
+          "name": "atomic_json",
+          "line": 72
+        },
+        {
+          "name": "load_recipe",
+          "line": 76
+        },
+        {
+          "name": "verify_source",
+          "line": 96
+        },
+        {
+          "name": "open_url",
+          "line": 114
+        },
+        {
+          "name": "__init__",
+          "line": 124
+        },
+        {
+          "name": "seekable",
+          "line": 132
+        },
+        {
+          "name": "readable",
+          "line": 135
+        },
+        {
+          "name": "tell",
+          "line": 138
+        },
+        {
+          "name": "seek",
+          "line": 141
+        },
+        {
+          "name": "read",
+          "line": 147
+        },
+        {
+          "name": "archive_member",
+          "line": 165
+        },
+        {
+          "name": "acquire",
+          "line": 199
+        },
+        {
+          "name": "producer_path",
+          "line": 224
+        },
+        {
+          "name": "doctor",
+          "line": 232
+        },
+        {
+          "name": "inventory_path",
+          "line": 254
+        },
+        {
+          "name": "load_inventory",
+          "line": 258
+        },
+        {
+          "name": "recipe_digest",
+          "line": 268
+        },
+        {
+          "name": "save_inventory",
+          "line": 272
+        },
+        {
+          "name": "extract",
+          "line": 277
+        },
+        {
+          "name": "checked_subprocess",
+          "line": 350
+        },
+        {
+          "name": "run_stage",
+          "line": 354
+        },
+        {
+          "name": "main",
+          "line": 402
+        }
+      ],
+      "imports": [
+        "from __future__ import annotations",
+        "import argparse",
+        "import base64",
+        "import copy",
+        "import gzip",
+        "import hashlib",
+        "import importlib",
+        "import importlib.metadata",
+        "import io",
+        "import json",
+        "import os",
+        "from pathlib import Path",
+        "import re",
+        "import shutil",
+        "import subprocess",
+        "import sys",
+        "import tempfile",
+        "import time",
+        "import urllib.error",
+        "import urllib.parse",
+        "import urllib.request",
+        "import zipfile",
+        "        import pyexpat"
+      ],
+      "source": null
+    },
+    {
+      "path": "remediation/catalog/tests/test_unnormalized_source_retention.py",
+      "sha256": "9c8ed7ab045230ef917d082c851b20fa1f3d465ceb2e1167f9574a4fc361820c",
+      "lineCount": 18,
+      "methods": [
+        {
+          "name": "fixture",
+          "line": 5
+        },
+        {
+          "name": "test_hidl_source_retains_raw_bytes_and_declared_only_structure_without_wire_claims",
+          "line": 11
+        },
+        {
+          "name": "test_non_utf8_native_evidence_is_lossless",
+          "line": 15
+        }
+      ],
+      "imports": [
+        "import unittest,pathlib,sys,tempfile,json,sqlite3,base64,contextlib",
+        "import build_catalog,test_build,copy,hashlib"
+      ],
+      "source": null
+    },
+    {
+      "path": "remediation/catalog/tests/test_structured_type_source_scopes.py",
+      "sha256": "94ffd5c2ca53933b513c5b48f8a84477a5b11161714c6ea2855fa6024529f331",
+      "lineCount": 31,
+      "methods": [
+        {
+          "name": "project",
+          "line": 6
+        },
+        {
+          "name": "test_versioned_source_fields_are_not_combined",
+          "line": 17
+        },
+        {
+          "name": "test_hidl_field_type_changes_semantic_digest",
+          "line": 19
+        },
+        {
+          "name": "test_serialized_field_order_changes_digest",
+          "line": 21
+        },
+        {
+          "name": "test_hidl_typedef_target_changes_digest",
+          "line": 23
+        },
+        {
+          "name": "test_hidl_enum_storage_type_changes_digest",
+          "line": 25
+        },
+        {
+          "name": "test_hidl_enum_expression_changes_digest",
+          "line": 27
+        },
+        {
+          "name": "test_raw_header_comments_and_proof_prose_do_not_change_digest",
+          "line": 29
+        }
+      ],
+      "imports": [
+        "import unittest,pathlib,sys,sqlite3,json,hashlib,contextlib,copy",
+        "from catalog_projection import Projection",
+        "from dispatch_manifest import contract_digest"
+      ],
+      "source": null
+    },
+    {
+      "path": "remediation/catalog/tests/test_source_integration.py",
+      "sha256": "2ba39bbd83c4ae3b647b97d064f7b1b4eb3725d4ab0460bec98969302eeca055",
+      "lineCount": 82,
+      "methods": [
+        {
+          "name": "test_structured_aidl_members_survive_publication",
+          "line": 9
+        },
+        {
+          "name": "test_cached_java_and_current_index_import_with_distinct_evidence",
+          "line": 26
+        },
+        {
+          "name": "test_cache_hash_failure_does_not_publish",
+          "line": 52
+        },
+        {
+          "name": "test_malformed_aidl_is_preserved_as_unknown",
+          "line": 66
+        }
+      ],
+      "imports": [
+        "import unittest,pathlib,tempfile,json,hashlib,sqlite3,sys,zipfile,gzip",
+        "import build_catalog as b",
+        "import cache_fingerprint",
+        "import test_build as base_module",
+        "        import java_source, sdk_api_index"
+      ],
+      "source": null
+    },
+    {
+      "path": "remediation/catalog/tests/test_source_annotation_targets.py",
+      "sha256": "3f7618620e38b72f0937b9b48d1224ba5c96247c6b94a57c0bb8c0890ecf8245",
+      "lineCount": 26,
+      "methods": [
+        {
+          "name": "source",
+          "line": 7
+        },
+        {
+          "name": "annotation",
+          "line": 10
+        },
+        {
+          "name": "test_shadowed_type_variable_does_not_match_java_lang_alias",
+          "line": 14
+        },
+        {
+          "name": "test_current_sdk_annotation_maps_to_exact_jvm_target",
+          "line": 18
+        }
+      ],
+      "imports": [
+        "import unittest,pathlib,tempfile,hashlib,json,gzip,zipfile,sqlite3,sys",
+        "import build_catalog as b,sdk_api_index,cache_fingerprint",
+        "import test_build as base_module"
+      ],
+      "source": null
+    },
+    {
+      "path": "remediation/catalog/tests/test_sealed_registry.py",
+      "sha256": "fa5929663be1144c542bd33b017497062bae5111c62d4469efb466fe466df50a",
+      "lineCount": 28,
+      "methods": [
+        {
+          "name": "test_memberships_are_staged_only_and_staged_inserts_succeed",
+          "line": 6
+        },
+        {
+          "name": "test_copy_migration_restores_retired_before_published",
+          "line": 14
+        },
+        {
+          "name": "test_no_appending_members_after_publication",
+          "line": 22
+        }
+      ],
+      "imports": [
+        "import pathlib,sqlite3,unittest,tempfile,sys",
+        "  import migrate_v3"
+      ],
+      "source": null
+    },
+    {
+      "path": "remediation/catalog/tests/test_sdk_zip_metadata.py",
+      "sha256": "1391e23478beb75566be938d06ab567322970cf2767127bbb698a60e2a0383d7",
+      "lineCount": 16,
+      "methods": [
+        {
+          "name": "test_only_selected_metadata_payload_is_read",
+          "line": 6
+        },
+        {
+          "name": "get",
+          "line": 11
+        }
+      ],
+      "imports": [
+        "import unittest,io,zipfile,pathlib,sys"
+      ],
+      "source": null
+    },
+    {
+      "path": "remediation/catalog/tests/test_sdk_availability_evidence.py",
+      "sha256": "13e99e792ef4b982b10ff43c166e9a23ccc68e980a8d17488d7c03fd3068dea0",
+      "lineCount": 19,
+      "methods": [
+        {
+          "name": "test_member_keeps_own_and_owner_constraints_separate",
+          "line": 4
+        },
+        {
+          "name": "test_absence_remains_absent_and_future_history_not_filtered",
+          "line": 11
+        },
+        {
+          "name": "test_new_attributes_preserved",
+          "line": 16
+        }
+      ],
+      "imports": [
+        "import unittest",
+        "from sdk_availability_evidence import enumerate_evidence"
+      ],
+      "source": null
+    },
+    {
+      "path": "remediation/catalog/tests/test_sdk_api_index.py",
+      "sha256": "9bc1be4f88ad9311215ecf3e914acee0f583bcd00e7fe8d97559a9123b5c4f3b",
+      "lineCount": 20,
+      "methods": [
+        {
+          "name": "test_minor_lifecycle_and_removed_members",
+          "line": 5
+        },
+        {
+          "name": "test_field_type_and_type_kind_are_not_invented",
+          "line": 13
+        },
+        {
+          "name": "test_invalid_method_descriptor_retained_unknown",
+          "line": 17
+        }
+      ],
+      "imports": [
+        "import unittest,pathlib,sys",
+        "import sdk_api_index as api"
+      ],
+      "source": null
+    },
+    {
+      "path": "remediation/catalog/tests/test_versioned_signature_annotations.py",
+      "sha256": "d680f33c50a29b063e4e5071545f5ed236806fdb797f905c901af66113e1a979",
+      "lineCount": 42,
+      "methods": [
+        {
+          "name": "fixture",
+          "line": 6
+        },
+        {
+          "name": "test_archive_resolution_counts_are_distinct_from_parse_status",
+          "line": 24
+        },
+        {
+          "name": "test_matching_snapshot_and_version_resolves_legacy_signature",
+          "line": 28
+        },
+        {
+          "name": "test_different_snapshot_is_not_used_as_fallback",
+          "line": 30
+        },
+        {
+          "name": "test_different_platform_is_not_used_as_fallback",
+          "line": 32
+        },
+        {
+          "name": "test_existing_index_blocks_signature_backfill_for_absent_target",
+          "line": 34
+        },
+        {
+          "name": "test_same_snapshot_formal_type_variable_remains_ambiguous",
+          "line": 36
+        },
+        {
+          "name": "test_same_snapshot_return_type_conflict_stays_unresolved",
+          "line": 38
+        }
+      ],
+      "imports": [
+        "import pathlib,sys,unittest,tempfile,json,sqlite3,hashlib,gzip",
+        "import build_catalog,sdk_api_index,test_source_annotation_targets"
+      ],
+      "source": null
+    }
+  ]
+}

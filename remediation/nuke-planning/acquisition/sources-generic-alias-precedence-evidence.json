@@ -1,0 +1,157 @@
+{
+  "timestamp": "2026-10-28T12:59:19",
+  "scope": "Original generic rehydrate last-selection-row precedence only",
+  "legacy": {
+    "path": "publication/android-mcp-git/tools/rehydrate.py",
+    "sha256": "73623b939aacd5108382b1f3d335de2a8665205553fa8ee2cf99f3eadfea0263",
+    "clause": "main fetch lines454-458: list({s[\"local_path\"]: s for s in inventory[\"sources\"]}.values()), then physical limit and acquire selected row",
+    "sourceExecution": false
+  },
+  "gates": [
+    {
+      "path": "remediation/nuke-app/artifacts/tests/20261028T1238431673238-3257e28506064311ba9a9fce856212e0/tests.trx",
+      "sha256": "b6ea2309b76e2fb53d8007a5a10e0825ffae507fb709924c481cbf0d3f2a7e4f",
+      "class": "RehydrationAliasPrecedenceMockTests",
+      "discovered": 44,
+      "passed": 44,
+      "failed": 0,
+      "other": 0,
+      "aggregatePassed": 139,
+      "aggregateFailed": 0
+    },
+    {
+      "path": "remediation/nuke-app/artifacts/tests/20261028T1253040888097-f38ed5109a7a48e1b21f1ef547514d0e/tests.trx",
+      "sha256": "8849f70c65940822da8b841f691ad41cc6012f0e819bb2cdef20646e28c22e18",
+      "class": "RehydrationAliasPrecedenceRealTests",
+      "discovered": 22,
+      "passed": 22,
+      "failed": 0,
+      "other": 0,
+      "aggregatePassed": 504,
+      "aggregateFailed": 0
+    }
+  ],
+  "observed": {
+    "mockCorrectCases": 22,
+    "mockNegativeGroups": 22,
+    "nativeSameCases": 22,
+    "canonicalNativeCases": 11,
+    "genericNativeCases": 11,
+    "sourceSelectionVariants": [
+      "direct URL/revision/Gitiles",
+      "snapshot removal",
+      "replace earlier missing snapshot",
+      "missing last snapshot",
+      "complete archive descriptor",
+      "last optional size/Git removed"
+    ],
+    "conflictVariants": [
+      "SHA",
+      "size",
+      "Git",
+      "known size then missing middle then conflict",
+      "known Git then missing middle then conflict"
+    ],
+    "parser": "Existing Publication PlanCore, one recipe parse per invocation",
+    "generic": "Exact last-row operational SourcePin and only last-row operational snapshot/prerequisites; first physical insertion order retained",
+    "canonical": "Existing first-pin/first-known metadata/all-snapshot semantics retained, full canonicalized SourceBatchRequest identity compared against independent fixture",
+    "audit": "All logical OriginalRows, contexts, correlations, recipe hash and plan-wide snapshot/archive evidence retained",
+    "integrity": "All-row conflict evidence remains accumulated independently from operational selection"
+  },
+  "boundaries": {
+    "newParser": false,
+    "newProducer": false,
+    "externalDtoChanged": false,
+    "sourceBatchRequestSerializationChanged": false,
+    "oldReceiptsRewritten": false,
+    "networkAcquisition": false,
+    "ownDotnetInvocation": false,
+    "genericAliasActualCliCase": false,
+    "sealedIdentity": "Changed Generic projection uses existing request hash and requires fresh generation; this milestone does not claim an additional runtime old-receipt test",
+    "wholeLegacyFileParityClaimed": false
+  },
+  "remainingOriginalResponsibilities": [
+    {
+      "id": "GENERIC-CLI-ALIAS",
+      "legacy": "main454-458",
+      "status": "Native planner proven; actual alias-specific Sources/Fetch CLI fixture not yet run",
+      "next": "Optional typed fixture input to existing NativeSourcesFetchCliProbe, no second setup/engine/operation"
+    },
+    {
+      "id": "FETCH-PACING",
+      "legacy": "main410 and460-461",
+      "status": "Original default1s and explicit --delay after each newly materialized source remain unprojected in generic Fetch caller",
+      "next": "Existing Fetch/SourceBatch and IClock responsibility if retained; not a new operation"
+    },
+    {
+      "id": "HISTORICAL-CACHE-COMPATIBILITY",
+      "legacy": "doctor232-251, extract277-347",
+      "status": "Python producer/environment execution retired; native producer and sealed native cache proven; strict historical gzip regeneration/derived-sidecar behavior is not claimed",
+      "next": "Explicit compatibility disposition, never relabel historical Python cache as native"
+    },
+    {
+      "id": "LEGACY-FRONTEND-ADMISSION",
+      "legacy": "main404-419 and open_url114-119",
+      "status": "Native CLI uses explicit locked recipe/root roles and artifact-store bundles; legacy implicit release/workspace defaults and --allow-file spelling are not exposed",
+      "next": "Document native admission replacement or obtain explicit retained-parity decision; no silent fallback"
+    },
+    {
+      "id": "CATALOG-STAGE-CALLERS",
+      "legacy": "run_stage354-399",
+      "status": "Build/validate/export orchestration and result-file sealed reuse belong Root/Catalog, outside acquisition ownership",
+      "next": "Use existing typed Source/Catalog continuation evidence; do not duplicate orchestration"
+    }
+  ],
+  "files": [
+    {
+      "path": "publication/android-mcp-git/tools/rehydrate.py",
+      "sha256": "73623b939aacd5108382b1f3d335de2a8665205553fa8ee2cf99f3eadfea0263",
+      "length": 23815
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Publication/RehydrationPlanner.cs",
+      "sha256": "aff18c7e6d5cd6650739bee2e78a5f08537fcef4aa08b5849fe8c21ee9722937",
+      "length": 20983
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/Acquisition/RehydrationAliasPrecedenceContractTests.cs",
+      "sha256": "00ab18946206e4df9c529ee2b9fa86ffa6987014a2fb2dbdb3231b09ebb2d692",
+      "length": 17290
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/Acquisition/RehydrationAliasPrecedenceRealTests.cs",
+      "sha256": "68e30bbae070591ab3d9ca3a297750da1441765725cf6b335e74623d489d075d",
+      "length": 1834
+    },
+    {
+      "path": "remediation/nuke-planning/acquisition/RehydrationPlanner.BeforeAliasPrecedence.cs.pending",
+      "sha256": "d55e4bca6ce2a15416b5e0c740fa4d933523d0fd87db8e65ee65f86bb7d4e989",
+      "length": 20248
+    },
+    {
+      "path": "remediation/nuke-planning/acquisition/sources-seed-cli-live-evidence.json",
+      "sha256": "af35f377ac4aae8002f8b5dad470dd5aa1bf690a73c4d958109a599bf986e83c",
+      "length": 13572
+    },
+    {
+      "path": "remediation/nuke-planning/acquisition/sources-fetch-current-counts-live-evidence.json",
+      "sha256": "459105c31745a19d4dbaecde7a661c9f73603437f4a6d986064959757aa5dbb0",
+      "length": 8852
+    },
+    {
+      "path": "remediation/nuke-planning/acquisition/sources-extract-cli-live-evidence.json",
+      "sha256": "5f691c60094d0512efd140eac2c3be1ec60253a115403357f053ef3d47fb234c",
+      "length": 16271
+    },
+    {
+      "path": "remediation/nuke-planning/acquisition/sources-inventory-cli-live-evidence.json",
+      "sha256": "b52a492d004ae8ea1a110fdf42d3e860413249217ee6970cfd2818ccccdf0cbb",
+      "length": 31598
+    }
+  ],
+  "audit": {
+    "priorMcpCompletionDenialPreserved": true,
+    "durableMcpCompletionClaimed": false,
+    "rawPrivateLogsPublished": false
+  }
+}

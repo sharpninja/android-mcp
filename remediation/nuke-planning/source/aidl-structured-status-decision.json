@@ -1,0 +1,80 @@
+{
+  "at": "2026-10-28T11:32:06",
+  "scope": "Only the obsolete low-level unresolved-field structured-body status label",
+  "decision": "Retire the original contains(retained) intermediate parse_status assertion. Existing production callers already enrich structured declarations into field-metadata-parsed/partial before publication. Preserve descriptor, annotation, field inventory, raw schema and unknown wire/codec facts through the one existing parser.",
+  "callerEvidence": [
+    "Both retained parsers.py lines201 assign the placeholder only before structured member enrichment.",
+    "Both aidl_members.py line69 replace it with field-metadata-parsed or field-metadata-partial while retaining unknown imports/runtime type resolution/wire layouts/codecs.",
+    "Both build_catalog.py lines156-185 call aidl_all then enrich_aidl before storage and use the enriched status.",
+    "Current SourcesRuntimeFactory/dispatcher/CatalogBuild consume only enriched rows and aidl_schema metadata; no production module names the old placeholder."
+  ],
+  "priorFullCallerInventory": {
+    "path": "remediation/nuke-planning/source/aidl-intermediate-shape-decision.json",
+    "sha256": "7a62fbac2995ef103ad1da017371f44bbab6108ab947a56f4db3409f5519eaf3"
+  },
+  "sourcePins": [
+    {
+      "path": "remediation/catalog/tooling/parsers.py",
+      "sha256": "d45a952b237eda29c199c2b6da82ca0edf3756c2bf14bf8ca2514657ea30ca70"
+    },
+    {
+      "path": "remediation/catalog/tooling/aidl_members.py",
+      "sha256": "f9c4c0a90dd693a0dbe5c91da84cf9a6cb4d3c874e13c179ebbeccac577ac177"
+    },
+    {
+      "path": "remediation/catalog/tooling/build_catalog.py",
+      "sha256": "35a2e0c775920224db2c75d2713ff4264ff1f4f99186867c406f771d80e93d35"
+    },
+    {
+      "path": "remediation/catalog/tests/test_parsers.py",
+      "sha256": "d27384a2c3dd8d6eced29756e234a04040a658c1f0ee5257c6b1232431d2747d"
+    },
+    {
+      "path": "rehydration/producers/release-011/tooling/parsers.py",
+      "sha256": "d45a952b237eda29c199c2b6da82ca0edf3756c2bf14bf8ca2514657ea30ca70"
+    },
+    {
+      "path": "rehydration/producers/release-011/tooling/aidl_members.py",
+      "sha256": "f9c4c0a90dd693a0dbe5c91da84cf9a6cb4d3c874e13c179ebbeccac577ac177"
+    },
+    {
+      "path": "rehydration/producers/release-011/tooling/build_catalog.py",
+      "sha256": "5194078b1dc21a95044e3c82d6d8d77616a39979bdcc1ac94e0db81bf4c59170"
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_parsers.py",
+      "sha256": "d27384a2c3dd8d6eced29756e234a04040a658c1f0ee5257c6b1232431d2747d"
+    }
+  ],
+  "exactOriginalMethods": [
+    {
+      "path": "remediation/catalog/tests/test_parsers.py",
+      "method": "test_aidl_structured",
+      "body": " def test_aidl_structured(self):\n  d=p.aidl('package a; @JavaDerive(toString=true) parcelable P { int n; }');self.assertEqual(d['descriptor'],'a.P');self.assertIn('retained',d['parse_status'])\n"
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_parsers.py",
+      "method": "test_aidl_structured",
+      "body": " def test_aidl_structured(self):\n  d=p.aidl('package a; @JavaDerive(toString=true) parcelable P { int n; }');self.assertEqual(d['descriptor'],'a.P');self.assertIn('retained',d['parse_status'])\n"
+    }
+  ],
+  "oldAssertionSatisfied": false,
+  "oldAssertionRetired": true,
+  "newRequiredAssertions": [
+    "Exact original package a; @JavaDerive(toString=true) parcelable P { int n; } input.",
+    "Descriptor a.P, preserved JavaDerive annotation and final field n metadata.",
+    "Complete raw schema retained; codec_status and transaction wire_status unknown; field wire_tag null.",
+    "New metadata status field-metadata-parsed is structural source inventory, not compiler validation or runtime authority."
+  ],
+  "implementationPlan": "No new parser or compatibility API. Three finite staged mock cases cover this method and both exact external/unknown AIDL-member inputs. Mock/native proof required before any closure.",
+  "pendingMockGate": true,
+  "pendingNativeGate": true,
+  "normalMethodClosed": false,
+  "wholeFileClosed": false,
+  "fileExecutionRetired": false,
+  "appChanged": false,
+  "pythonExecuted": false,
+  "nodeExecuted": false,
+  "hvAccepted": false,
+  "safeToDelete": false
+}

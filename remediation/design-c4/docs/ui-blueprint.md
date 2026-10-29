@@ -140,6 +140,7 @@ and Android verification remain implementation release gates.
         },
         "SCR01.S1": {
           "label": "Starting: admission closed",
+          "health": { "service": "Starting", "mcp": "binding", "device_view": "resolving" },
           "effect": "Desired Running persisted; listener/device resolution not yet ready.",
           "recovery": "Wait for bounded start or use Stop; failure transitions Error.",
           "enabled_controls": [
@@ -180,6 +181,7 @@ and Android verification remain implementation release gates.
         },
         "SCR01.S3": {
           "label": "Stopped: no listener and no Running badge",
+          "health": { "service": "Stopped", "desired_state": "stopped", "mcp": "absent", "arc_listener": "disabled" },
           "effect": "Desired Stopped; no MCP/ARC socket owned by service.",
           "recovery": "Local Start requires eligible foreground intent; boot never overrides manual Stop.",
           "enabled_controls": [
@@ -220,6 +222,7 @@ and Android verification remain implementation release gates.
         },
         "SCR01.S5": {
           "label": "Stopping: admission closed and cleanup bounded",
+          "health": { "service": "Stopping", "desired_state": "stopped", "mcp": "absent", "arc_listener": "disabled" },
           "effect": "Close listeners/delivery; attempt verified cleanup before backend/store close.",
           "recovery": "After10s report stopped with unknown obligations where necessary; never fake cleanup success.",
           "enabled_controls": [
@@ -990,6 +993,7 @@ and Android verification remain implementation release gates.
         },
         "SCR03.S6": {
           "label": "No catalog: only safe staging available",
+          "health": { "catalog": "absent", "device_view": "absent" },
           "effect": "Admission closed; search/evidence/override actions have no active inventory.",
           "recovery": "Choose import document and independently verify hash/size before stage.",
           "enabled_controls": [
@@ -2585,6 +2589,7 @@ and Android verification remain implementation release gates.
         },
         "SCR08.S1": {
           "label": "Waiting for unlock",
+          "health": { "service": "WaitingForUnlock", "mcp": "absent", "adb": "locked", "device_view": "absent", "catalog": "absent" },
           "effect": "Credential-encrypted config/keys unavailable; minimal nonsecret boot flag only.",
           "recovery": "Unlock normally then eligible local Start; no secret migration to device-protected storage.",
           "enabled_controls": [
@@ -2610,6 +2615,7 @@ and Android verification remain implementation release gates.
         },
         "SCR08.S2": {
           "label": "Foreground start ineligible",
+          "health": { "service": "Error", "mcp": "error" },
           "effect": "Desired Running may be retained but listener is not ready; show Android reason.",
           "recovery": "Owner fixes prerequisite then explicit eligible foreground Start; no automatic settings change.",
           "enabled_controls": [
@@ -2712,6 +2718,7 @@ and Android verification remain implementation release gates.
         },
         "SCR08.S6": {
           "label": "Inbound ARC ready",
+          "health": { "arc_listener": "ready" },
           "effect": "Bound127.0.0.1 endpoint, ordinary root and authenticated controllers shown.",
           "recovery": "Review controllers or disable/rotate via fresh exact owner Save; never implies ADB connected.",
           "enabled_controls": [
@@ -2737,6 +2744,7 @@ and Android verification remain implementation release gates.
         },
         "SCR08.S7": {
           "label": "ADB pairing in progress",
+          "health": { "adb": "unpaired" },
           "effect": "Owner-enabled Wireless Debugging pairing endpoint and code are transient; connect port is separate.",
           "recovery": "Cancel pair or return to OS UI; split-screen/notification-assisted code retrieval is device-dependent.",
           "enabled_controls": [
@@ -2763,6 +2771,7 @@ and Android verification remain implementation release gates.
         },
         "SCR08.S8": {
           "label": "ADB connecting",
+          "health": { "adb": "connecting" },
           "effect": "Paired identity exists; discovered connect endpoint is being verified.",
           "recovery": "Timeout/key rejection returns disconnected; no device input is retried.",
           "enabled_controls": [
@@ -2789,6 +2798,7 @@ and Android verification remain implementation release gates.
         },
         "SCR08.S9": {
           "label": "ADB connected",
+          "health": { "adb": "connected" },
           "effect": "Paired endpoint/identity verified; metadata facts remain separately permission-qualified.",
           "recovery": "Inspect health or intentionally disconnect profile; no MCP rule changed.",
           "enabled_controls": [
@@ -2814,6 +2824,7 @@ and Android verification remain implementation release gates.
         },
         "SCR08.S10": {
           "label": "ADB key rejected",
+          "health": { "adb": "unpaired" },
           "effect": "TLS pairing identity not accepted; no fallback to unauthenticated5555.",
           "recovery": "Owner explicitly re-pairs after checking device/profile; old identity retained until confirmed replacement.",
           "enabled_controls": [
@@ -3241,6 +3252,7 @@ and Android verification remain implementation release gates.
         },
         "SCR10.S3": {
           "label": "Cancelled recovery: desired Stopped",
+          "health": { "service": "Stopped", "desired_state": "stopped", "mcp": "absent", "arc_listener": "disabled" },
           "effect": "No auto-restart or retry; previously committed config remains.",
           "recovery": "Return dashboard then explicitly Start when eligible.",
           "enabled_controls": [

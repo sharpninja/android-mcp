@@ -1,0 +1,415 @@
+{
+  "at": "2026-10-28T02:09:37",
+  "basis": "Read actual test bodies and independently map original assertions to native fixtures. Body equality checks bind those inspected requirements to each exact published path; hashes are identity evidence only.",
+  "entries": [
+    {
+      "legacy_path": "remediation/catalog/tests/test_annotation_jvm_erasure.py",
+      "sha256": "4fca71f6c2342e826de0bd676a2eee2ac56285097174840d94d850a4d369ca65",
+      "profile": "canonical",
+      "owner": "Sources (XML composition), Java (encoder contribution)",
+      "category": "Sources",
+      "operation": "Extract",
+      "source_body_inspected": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/build-snapshots/release011/catalog/tests/test_annotation_jvm_erasure.py",
+      "functions": [
+        {
+          "legacy_function": "test_qualified_generic_outer_erasure_has_exact_descriptor",
+          "native_case": "Sources-owned XML key fixture required",
+          "behavior": "XML signature composition and exact generic outer descriptor; Java Encode supplies conservative reference erasure only"
+        },
+        {
+          "legacy_function": "test_type_variable_is_not_erased_to_object_by_guess",
+          "native_case": "ENC-T/KEY-T contribution",
+          "behavior": "XML parameter and return T rejection needs XML composition binding"
+        },
+        {
+          "legacy_function": "test_unqualified_java_lang_alias_not_guessed",
+          "native_case": "ENC-String contribution",
+          "behavior": "XML String alias rejection needs XML composition binding"
+        },
+        {
+          "legacy_function": "test_parameterized_array_and_parameter_annotation_ordinal",
+          "native_case": "Sources-owned XML key fixture required",
+          "behavior": "XML trailing parameter ordinal0 parsing and generic array key composition"
+        },
+        {
+          "legacy_function": "test_malformed_generics_and_void_parameters_rejected",
+          "native_case": "ENC-unclosed/KEY-voidargument contribution",
+          "behavior": "XML malformed signature and void parameter rejection"
+        },
+        {
+          "legacy_function": "test_constructor_and_same_name_regular_method_differ",
+          "native_case": "KEY-constructor contribution",
+          "behavior": "XML constructor A() versus regular int A() composition"
+        },
+        {
+          "legacy_function": "test_nested_binary_owner_is_known_not_inferred",
+          "native_case": "ENC-nested contribution",
+          "behavior": "XML return type known a.A.Inner binary mapping composition"
+        }
+      ],
+      "services": [
+        "XML signature composition service pending Sources owner confirmation; no existing native XmlJvmKey found",
+        "JvmSourceLinker.Encode contribution"
+      ],
+      "native_test_binding": "Exact seven XML composition cases not asserted by Java suite; source owner confirmation required",
+      "state": "partial-contribution-only",
+      "remaining": [
+        "Release profile whole-catalog pipeline and CLI acceptance remain parent-owned",
+        "No full corpus or Android runtime readiness claim",
+        "No acceptance/HV complete state"
+      ],
+      "accepted_complete": false,
+      "safe_to_delete": false
+    },
+    {
+      "legacy_path": "remediation/catalog/tests/test_java_context.py",
+      "sha256": "b410e5d69d6631ce811dda81d7064ced3f698b96454f0d1e9fbbe7c1ef3c3ad6",
+      "profile": "canonical",
+      "owner": "Java",
+      "category": "Sources",
+      "operation": "Extract",
+      "source_body_inspected": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/catalog/tests/test_java_context.py",
+      "functions": [
+        {
+          "legacy_function": "test_imports_retained_in_runtime_source_details",
+          "native_case": "CTX-imports",
+          "behavior": "Exact single Java source/cache and report inputs, explicit import List and wildcard other retained"
+        },
+        {
+          "legacy_function": "test_mismatched_context_rejected",
+          "native_case": "CTX-cache",
+          "behavior": "Exact wrong cache SHA rejects with context cache mismatch"
+        }
+      ],
+      "services": "JavaFileContext.Attach",
+      "native_test_binding": "JavaSemanticRealTests.SameJvmCasesBindToRealLinker / SameCacheContextCasesBindToRealAdapter",
+      "state": "explicit-original-fixture-binding",
+      "remaining": [
+        "Release profile whole-catalog pipeline and CLI acceptance remain parent-owned",
+        "No full corpus or Android runtime readiness claim",
+        "No acceptance/HV complete state"
+      ],
+      "accepted_complete": false,
+      "safe_to_delete": false
+    },
+    {
+      "legacy_path": "remediation/catalog/tests/test_java_source.py",
+      "sha256": "40a4c3aac9f8fbfd8e466c9ff7385eaeb4d5d0fbb7432f031fc567fc62086134",
+      "profile": "canonical",
+      "owner": "Java",
+      "category": "Sources",
+      "operation": "Extract",
+      "source_body_inspected": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/catalog/tests/test_java_source.py",
+      "functions": [
+        {
+          "legacy_function": "test_nested_overloads_fields_and_annotations",
+          "native_case": "JAVA-01",
+          "behavior": "Exact Fixture.java input, nested owner, overloads, both field declarators, varargs, parameter annotation, qualified RequiresPermission, annotation declaration"
+        },
+        {
+          "legacy_function": "test_method_body_local_types_not_public_surface",
+          "native_case": "JAVA-02",
+          "behavior": "Exact C.java local class and its field excluded"
+        },
+        {
+          "legacy_function": "test_interface_implicit_public_and_directions_unknown",
+          "native_case": "JAVA-03",
+          "behavior": "Exact I.java effective public method and null parameter direction"
+        },
+        {
+          "legacy_function": "test_parse_error_retained",
+          "native_case": "JAVA-04",
+          "behavior": "Exact X.java invalid source retains structural issue and unsupported record"
+        },
+        {
+          "legacy_function": "test_enum_and_multiple_array_declarators",
+          "native_case": "JAVA-05",
+          "behavior": "Exact E.java RED/BLUE constants and a:int[], b:int"
+        },
+        {
+          "legacy_function": "test_repeated_large_line_numbers",
+          "native_case": "JAVA-06",
+          "behavior": "Exact Large.java input, 100 repeated native parses, field line303"
+        },
+        {
+          "legacy_function": "test_annotation_like_comment_is_not_metadata",
+          "native_case": "JAVA-07",
+          "behavior": "Exact Comments.java comment annotations excluded, field x retained"
+        },
+        {
+          "legacy_function": "test_apostrophe_in_annotation_comment",
+          "native_case": "JAVA-08",
+          "behavior": "Exact Bits.java apostrophe comment, one LongDef and raw arguments retaining 1,"
+        }
+      ],
+      "services": [
+        "JavaSourceExtractor.Extract",
+        "JavaNativeParser.WithTree (internal owned parser/tree)"
+      ],
+      "native_test_binding": "JavaAstRealTests.IdenticalAstCasesBindToPinnedNativeProductionVisitor",
+      "state": "explicit-original-fixture-binding",
+      "remaining": [
+        "Release profile whole-catalog pipeline and CLI acceptance remain parent-owned",
+        "No full corpus or Android runtime readiness claim",
+        "No acceptance/HV complete state"
+      ],
+      "accepted_complete": false,
+      "safe_to_delete": false
+    },
+    {
+      "legacy_path": "remediation/catalog/tests/test_jvm_source_link.py",
+      "sha256": "7cb00260092fa4b8d3e86b78a9921536a8169211b7f56332b876108899332041",
+      "profile": "canonical",
+      "owner": "Java",
+      "category": "Sources",
+      "operation": "Extract",
+      "source_body_inspected": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/catalog/tests/test_jvm_source_link.py",
+      "functions": [
+        {
+          "legacy_function": "test_exact_owner_primitives_and_known_reference_type",
+          "native_case": "KEY-primitives",
+          "behavior": "Exact two-owner map and record produce a/C#go([Ljava/lang/String;I)V"
+        },
+        {
+          "legacy_function": "test_unresolved_type_variable_never_guessed",
+          "native_case": "KEY-T",
+          "behavior": "Exact a.C-only owner map rejects unresolved return T"
+        },
+        {
+          "legacy_function": "test_unqualified_java_lang_name_might_be_shadowed",
+          "native_case": "ENC-String",
+          "behavior": "Exact java.lang.String-only map rejects String alias"
+        },
+        {
+          "legacy_function": "test_untyped_index_field_cannot_prove_typed_jvm_identity",
+          "native_case": "KEY-field",
+          "behavior": "Exact nested owner-only map and untyped field rejected"
+        }
+      ],
+      "services": [
+        "JvmSourceLinker.Key",
+        "JvmSourceLinker.Encode"
+      ],
+      "native_test_binding": "JavaSemanticRealTests.SameJvmCasesBindToRealLinker / SameCacheContextCasesBindToRealAdapter",
+      "state": "explicit-original-fixture-binding",
+      "remaining": [
+        "Release profile whole-catalog pipeline and CLI acceptance remain parent-owned",
+        "No full corpus or Android runtime readiness claim",
+        "No acceptance/HV complete state"
+      ],
+      "accepted_complete": false,
+      "safe_to_delete": false
+    },
+    {
+      "legacy_path": "rehydration/producers/release-011/tests/test_annotation_jvm_erasure.py",
+      "sha256": "4fca71f6c2342e826de0bd676a2eee2ac56285097174840d94d850a4d369ca65",
+      "profile": "release011-frozen",
+      "owner": "Sources (XML composition), Java (encoder contribution)",
+      "category": "Sources",
+      "operation": "Extract",
+      "source_body_inspected": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/build-snapshots/release011/catalog/tests/test_annotation_jvm_erasure.py",
+      "functions": [
+        {
+          "legacy_function": "test_qualified_generic_outer_erasure_has_exact_descriptor",
+          "native_case": "Sources-owned XML key fixture required",
+          "behavior": "XML signature composition and exact generic outer descriptor; Java Encode supplies conservative reference erasure only"
+        },
+        {
+          "legacy_function": "test_type_variable_is_not_erased_to_object_by_guess",
+          "native_case": "ENC-T/KEY-T contribution",
+          "behavior": "XML parameter and return T rejection needs XML composition binding"
+        },
+        {
+          "legacy_function": "test_unqualified_java_lang_alias_not_guessed",
+          "native_case": "ENC-String contribution",
+          "behavior": "XML String alias rejection needs XML composition binding"
+        },
+        {
+          "legacy_function": "test_parameterized_array_and_parameter_annotation_ordinal",
+          "native_case": "Sources-owned XML key fixture required",
+          "behavior": "XML trailing parameter ordinal0 parsing and generic array key composition"
+        },
+        {
+          "legacy_function": "test_malformed_generics_and_void_parameters_rejected",
+          "native_case": "ENC-unclosed/KEY-voidargument contribution",
+          "behavior": "XML malformed signature and void parameter rejection"
+        },
+        {
+          "legacy_function": "test_constructor_and_same_name_regular_method_differ",
+          "native_case": "KEY-constructor contribution",
+          "behavior": "XML constructor A() versus regular int A() composition"
+        },
+        {
+          "legacy_function": "test_nested_binary_owner_is_known_not_inferred",
+          "native_case": "ENC-nested contribution",
+          "behavior": "XML return type known a.A.Inner binary mapping composition"
+        }
+      ],
+      "services": [
+        "XML signature composition service pending Sources owner confirmation; no existing native XmlJvmKey found",
+        "JvmSourceLinker.Encode contribution"
+      ],
+      "native_test_binding": "Exact seven XML composition cases not asserted by Java suite; source owner confirmation required",
+      "state": "partial-contribution-only",
+      "remaining": [
+        "Release profile whole-catalog pipeline and CLI acceptance remain parent-owned",
+        "No full corpus or Android runtime readiness claim",
+        "No acceptance/HV complete state"
+      ],
+      "accepted_complete": false,
+      "safe_to_delete": false
+    },
+    {
+      "legacy_path": "rehydration/producers/release-011/tests/test_java_context.py",
+      "sha256": "b410e5d69d6631ce811dda81d7064ced3f698b96454f0d1e9fbbe7c1ef3c3ad6",
+      "profile": "release011-frozen",
+      "owner": "Java",
+      "category": "Sources",
+      "operation": "Extract",
+      "source_body_inspected": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/build-snapshots/release011/catalog/tests/test_java_context.py",
+      "functions": [
+        {
+          "legacy_function": "test_imports_retained_in_runtime_source_details",
+          "native_case": "CTX-imports",
+          "behavior": "Exact single Java source/cache and report inputs, explicit import List and wildcard other retained"
+        },
+        {
+          "legacy_function": "test_mismatched_context_rejected",
+          "native_case": "CTX-cache",
+          "behavior": "Exact wrong cache SHA rejects with context cache mismatch"
+        }
+      ],
+      "services": "JavaFileContext.Attach",
+      "native_test_binding": "JavaSemanticRealTests.SameJvmCasesBindToRealLinker / SameCacheContextCasesBindToRealAdapter",
+      "state": "explicit-original-fixture-binding",
+      "remaining": [
+        "Release profile whole-catalog pipeline and CLI acceptance remain parent-owned",
+        "No full corpus or Android runtime readiness claim",
+        "No acceptance/HV complete state"
+      ],
+      "accepted_complete": false,
+      "safe_to_delete": false
+    },
+    {
+      "legacy_path": "rehydration/producers/release-011/tests/test_java_source.py",
+      "sha256": "40a4c3aac9f8fbfd8e466c9ff7385eaeb4d5d0fbb7432f031fc567fc62086134",
+      "profile": "release011-frozen",
+      "owner": "Java",
+      "category": "Sources",
+      "operation": "Extract",
+      "source_body_inspected": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/build-snapshots/release011/catalog/tests/test_java_source.py",
+      "functions": [
+        {
+          "legacy_function": "test_nested_overloads_fields_and_annotations",
+          "native_case": "JAVA-01",
+          "behavior": "Exact Fixture.java input, nested owner, overloads, both field declarators, varargs, parameter annotation, qualified RequiresPermission, annotation declaration"
+        },
+        {
+          "legacy_function": "test_method_body_local_types_not_public_surface",
+          "native_case": "JAVA-02",
+          "behavior": "Exact C.java local class and its field excluded"
+        },
+        {
+          "legacy_function": "test_interface_implicit_public_and_directions_unknown",
+          "native_case": "JAVA-03",
+          "behavior": "Exact I.java effective public method and null parameter direction"
+        },
+        {
+          "legacy_function": "test_parse_error_retained",
+          "native_case": "JAVA-04",
+          "behavior": "Exact X.java invalid source retains structural issue and unsupported record"
+        },
+        {
+          "legacy_function": "test_enum_and_multiple_array_declarators",
+          "native_case": "JAVA-05",
+          "behavior": "Exact E.java RED/BLUE constants and a:int[], b:int"
+        },
+        {
+          "legacy_function": "test_repeated_large_line_numbers",
+          "native_case": "JAVA-06",
+          "behavior": "Exact Large.java input, 100 repeated native parses, field line303"
+        },
+        {
+          "legacy_function": "test_annotation_like_comment_is_not_metadata",
+          "native_case": "JAVA-07",
+          "behavior": "Exact Comments.java comment annotations excluded, field x retained"
+        },
+        {
+          "legacy_function": "test_apostrophe_in_annotation_comment",
+          "native_case": "JAVA-08",
+          "behavior": "Exact Bits.java apostrophe comment, one LongDef and raw arguments retaining 1,"
+        }
+      ],
+      "services": [
+        "JavaSourceExtractor.Extract",
+        "JavaNativeParser.WithTree (internal owned parser/tree)"
+      ],
+      "native_test_binding": "JavaAstRealTests.IdenticalAstCasesBindToPinnedNativeProductionVisitor",
+      "state": "explicit-original-fixture-binding",
+      "remaining": [
+        "Release profile whole-catalog pipeline and CLI acceptance remain parent-owned",
+        "No full corpus or Android runtime readiness claim",
+        "No acceptance/HV complete state"
+      ],
+      "accepted_complete": false,
+      "safe_to_delete": false
+    },
+    {
+      "legacy_path": "rehydration/producers/release-011/tests/test_jvm_source_link.py",
+      "sha256": "7cb00260092fa4b8d3e86b78a9921536a8169211b7f56332b876108899332041",
+      "profile": "release011-frozen",
+      "owner": "Java",
+      "category": "Sources",
+      "operation": "Extract",
+      "source_body_inspected": "/home/sharpninja/github/2026-10-26/task/android-catalog-20261026/build-snapshots/release011/catalog/tests/test_jvm_source_link.py",
+      "functions": [
+        {
+          "legacy_function": "test_exact_owner_primitives_and_known_reference_type",
+          "native_case": "KEY-primitives",
+          "behavior": "Exact two-owner map and record produce a/C#go([Ljava/lang/String;I)V"
+        },
+        {
+          "legacy_function": "test_unresolved_type_variable_never_guessed",
+          "native_case": "KEY-T",
+          "behavior": "Exact a.C-only owner map rejects unresolved return T"
+        },
+        {
+          "legacy_function": "test_unqualified_java_lang_name_might_be_shadowed",
+          "native_case": "ENC-String",
+          "behavior": "Exact java.lang.String-only map rejects String alias"
+        },
+        {
+          "legacy_function": "test_untyped_index_field_cannot_prove_typed_jvm_identity",
+          "native_case": "KEY-field",
+          "behavior": "Exact nested owner-only map and untyped field rejected"
+        }
+      ],
+      "services": [
+        "JvmSourceLinker.Key",
+        "JvmSourceLinker.Encode"
+      ],
+      "native_test_binding": "JavaSemanticRealTests.SameJvmCasesBindToRealLinker / SameCacheContextCasesBindToRealAdapter",
+      "state": "explicit-original-fixture-binding",
+      "remaining": [
+        "Release profile whole-catalog pipeline and CLI acceptance remain parent-owned",
+        "No full corpus or Android runtime readiness claim",
+        "No acceptance/HV complete state"
+      ],
+      "accepted_complete": false,
+      "safe_to_delete": false
+    }
+  ],
+  "native_evidence": {
+    "java_passed": 146,
+    "java_skipped": 0,
+    "java_total": 146,
+    "trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261027T2255148761509-864f2aace3274e0d8378d4565a3ef0c1/tests.trx",
+    "java_failed": 0,
+    "sha256": "1beac69a106f9aa6a2199efe752342f2c8ef2f18ee4f410be6b860d322537302"
+  },
+  "limitations": [
+    "Seven XML key cases require Sources owner confirmation; Java encoder cases do not prove their composition",
+    "No files removed or scope excluded",
+    "No requirement marked completed"
+  ]
+}

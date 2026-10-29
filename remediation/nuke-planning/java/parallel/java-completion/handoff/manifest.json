@@ -1,0 +1,650 @@
+{
+  "at": "2026-10-28T22:54:47",
+  "state": "Scoped Java producer responsibility ready for parent integration; no HV acceptance",
+  "exactGateCommands": {
+    "regression": "& remediation/parallel-work/java/Run-NukeNativeGate.ps1 -TestFilter 'FullyQualifiedName~JavaAstRealTests|FullyQualifiedName~JavaProducerDeclarationRealTests|FullyQualifiedName~JavaProducerTypeTextRealTests|FullyQualifiedName~JavaOriginalLiteralAssertionRealTests|FullyQualifiedName~JavaSemanticRealTests|FullyQualifiedName~JvmProducerOwnerMappingRealTests|FullyQualifiedName~JavaProducerBoundary' -JavaNativeManifest /home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/java-native-002/native-source-lock.json",
+    "native": "& remediation/parallel-work/java/Run-NukeNativeGate.ps1 -TestFilter 'FullyQualifiedName~JavaProducerBoundaryRealTests' -JavaNativeManifest /home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/java-native-002/native-source-lock.json",
+    "mock": "& remediation/parallel-work/java/Run-NukeNativeGate.ps1 -TestFilter 'FullyQualifiedName~JavaProducerBoundaryMockTests'"
+  },
+  "requirements": [
+    "FR-BUILD-004",
+    "TR-BUILD-TOOL-004",
+    "TEST-BUILD-004"
+  ],
+  "files": [
+    {
+      "relativePath": "Modules/Sources/Java/JavaSourceExtractor.cs",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Modules/Sources/Java/JavaSourceExtractor.cs",
+      "immutableSource": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/handoff/files/Modules/Sources/Java/JavaSourceExtractor.cs",
+      "sha256": "199bfee968e7f7defc394a697286412322ea3bf7c3bde91ddd91216c27a4c4db",
+      "length": 16193,
+      "priorSource": "/home/sharpninja/github/2026-10-26/task-3/remediation/integration/nuke-migration-checkpoint-015/files/remediation/nuke-app/Modules/Sources/Java/JavaSourceExtractor.cs",
+      "priorSha256": "c2a9e05f4d8a8ee08a239be1fefd1e0a761f5d65ed5a51926feda7ed37a08310",
+      "priorLength": 16030
+    },
+    {
+      "relativePath": "Tests/Sources/Java/JavaProducerBoundaryCases.cs",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Tests/Sources/Java/JavaProducerBoundaryCases.cs",
+      "immutableSource": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/handoff/files/Tests/Sources/Java/JavaProducerBoundaryCases.cs",
+      "sha256": "f5d025f8c5fdda3893864b29f03bbee9b928defec872c3cd3f90e8995fb49d30",
+      "length": 8238,
+      "priorSource": null,
+      "priorSha256": null,
+      "priorLength": null
+    },
+    {
+      "relativePath": "Tests/Sources/Java/JavaProducerBoundaryMockTests.cs",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Tests/Sources/Java/JavaProducerBoundaryMockTests.cs",
+      "immutableSource": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/handoff/files/Tests/Sources/Java/JavaProducerBoundaryMockTests.cs",
+      "sha256": "d0479dd668c9a6698995bc3ca6d9c306e3e628e3860aad7905ee912de70c50d6",
+      "length": 2110,
+      "priorSource": null,
+      "priorSha256": null,
+      "priorLength": null
+    },
+    {
+      "relativePath": "Tests/Sources/Java/JavaProducerBoundaryRealTests.cs",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Tests/Sources/Java/JavaProducerBoundaryRealTests.cs",
+      "immutableSource": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/handoff/files/Tests/Sources/Java/JavaProducerBoundaryRealTests.cs",
+      "sha256": "62b4ce219ed95931522e5b323c3fad80000177be5de8229a70a6a2ebd202c0d5",
+      "length": 608,
+      "priorSource": null,
+      "priorSha256": null,
+      "priorLength": null
+    }
+  ],
+  "receipts": [
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/checkpoint-copy-manifest.json",
+      "sha256": "1204ce5d065e9da5885e73bb50ff2b151538fc264d5a0a4bf1f71d6c9ee0f615",
+      "length": 475858
+    },
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/mock-gate.json",
+      "sha256": "a5a8cd44d93a445c225ccc554b191e90544426c63238c41b06e2aa705658538b",
+      "length": 1590
+    },
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/native-first-attempt.json",
+      "sha256": "f346d1ac2e5c336bd41e326d9df93c0fdfdf97ceb3b1fdc17e0b7b9cc9c59f4f",
+      "length": 2802
+    },
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/mock-corrected.json",
+      "sha256": "1e2093839c71b4bea2e562fcfd7f7b7e9e26927da2c46c8142a4d7bc67cf823f",
+      "length": 1612
+    },
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/depth-reapplication.json",
+      "sha256": "e5eb3b5150830e31dd42d887709e65ca45174a85fc0a95fd70362a96b0f8e957",
+      "length": 1426
+    },
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/native-gate.json",
+      "sha256": "a27d31a7785f04441686ac8be29082a0f68719bd557d7bafec284d30ded8c72e",
+      "length": 2626
+    },
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/regression-gate.json",
+      "sha256": "7ea57aa861668fdcf89b1d8569d98336fc1756f19c98b469f6b8520907469fd5",
+      "length": 2632
+    },
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/RESPONSIBILITY-RECONCILIATION.md",
+      "sha256": "e6a1ac2c95f90b564519ac4bddfdd9f72881f02331bf29e8868d51735a841bf8",
+      "length": 7993
+    },
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/JavaProducerBoundaryCases.cs.before-fixture-correction.retained",
+      "sha256": "72c920fa43b9a63908b0ed84e76ce39261092f94fa7ec5fbf1fea129585d0185",
+      "length": 8136
+    },
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/JavaSourceExtractor.cs.before-fixture-correction.retained",
+      "sha256": "199bfee968e7f7defc394a697286412322ea3bf7c3bde91ddd91216c27a4c4db",
+      "length": 16193
+    },
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/JavaSourceExtractor.checkpoint015.cs.retained",
+      "sha256": "c2a9e05f4d8a8ee08a239be1fefd1e0a761f5d65ed5a51926feda7ed37a08310",
+      "length": 16030
+    }
+  ],
+  "mock": {
+    "at": "2026-10-28T22:48:02",
+    "stage": "mock",
+    "testFrameworkOutcome": "Completed",
+    "passed": 16,
+    "failed": 0,
+    "total": 16,
+    "notExecuted": 0,
+    "failureNames": [],
+    "trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/artifacts/tests/20261028T2245516837804-9d4ecb5480c64ab2b92d19a99b48177f/tests.trx",
+    "trxSha256": "21cdebf11f5eecec8b0c46e5f3040a012a1ccd4efe07b5b671078f681e0ba173",
+    "files": [
+      {
+        "relativePath": "Tests/Sources/Java/JavaProducerBoundaryCases.cs",
+        "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Tests/Sources/Java/JavaProducerBoundaryCases.cs",
+        "sha256": "f5d025f8c5fdda3893864b29f03bbee9b928defec872c3cd3f90e8995fb49d30",
+        "length": 8238,
+        "priorSource": null,
+        "priorSha256": null
+      },
+      {
+        "relativePath": "Tests/Sources/Java/JavaProducerBoundaryMockTests.cs",
+        "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Tests/Sources/Java/JavaProducerBoundaryMockTests.cs",
+        "sha256": "d0479dd668c9a6698995bc3ca6d9c306e3e628e3860aad7905ee912de70c50d6",
+        "length": 2110,
+        "priorSource": null,
+        "priorSha256": null
+      }
+    ],
+    "hvRun": false,
+    "acceptedComplete": false,
+    "originalsRetained": true,
+    "productionChangedAtMockGate": false,
+    "logging": "Incomplete: MCP_UNTRUSTED health check Permission denied before Global query; Workspace not attempted; own session not opened",
+    "warnings": [
+      "NU1900: NuGet vulnerability feed unavailable; builds retain audit settings"
+    ]
+  },
+  "native": {
+    "at": "2026-10-28T22:51:22",
+    "stage": "native",
+    "testFrameworkOutcome": "Completed",
+    "passed": 8,
+    "failed": 0,
+    "total": 8,
+    "notExecuted": 0,
+    "failureNames": [],
+    "trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/artifacts/tests/20261028T2248565208182-772a076fdf2944779702d9e82479ed8e/tests.trx",
+    "trxSha256": "c4b238d1d3008cd1ea1981f1ec411f9fc7d48aa21c00c18fa54f7a7a1b8978ce",
+    "files": [
+      {
+        "relativePath": "Tests/Sources/Java/JavaProducerBoundaryCases.cs",
+        "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Tests/Sources/Java/JavaProducerBoundaryCases.cs",
+        "sha256": "f5d025f8c5fdda3893864b29f03bbee9b928defec872c3cd3f90e8995fb49d30",
+        "length": 8238,
+        "priorSource": null,
+        "priorSha256": null
+      },
+      {
+        "relativePath": "Tests/Sources/Java/JavaProducerBoundaryMockTests.cs",
+        "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Tests/Sources/Java/JavaProducerBoundaryMockTests.cs",
+        "sha256": "d0479dd668c9a6698995bc3ca6d9c306e3e628e3860aad7905ee912de70c50d6",
+        "length": 2110,
+        "priorSource": null,
+        "priorSha256": null
+      },
+      {
+        "relativePath": "Tests/Sources/Java/JavaProducerBoundaryRealTests.cs",
+        "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Tests/Sources/Java/JavaProducerBoundaryRealTests.cs",
+        "sha256": "62b4ce219ed95931522e5b323c3fad80000177be5de8229a70a6a2ebd202c0d5",
+        "length": 608,
+        "priorSource": null,
+        "priorSha256": null
+      },
+      {
+        "relativePath": "Modules/Sources/Java/JavaSourceExtractor.cs",
+        "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Modules/Sources/Java/JavaSourceExtractor.cs",
+        "sha256": "199bfee968e7f7defc394a697286412322ea3bf7c3bde91ddd91216c27a4c4db",
+        "length": 16193,
+        "priorSource": "/home/sharpninja/github/2026-10-26/task-3/remediation/integration/nuke-migration-checkpoint-015/files/remediation/nuke-app/Modules/Sources/Java/JavaSourceExtractor.cs",
+        "priorSha256": "c2a9e05f4d8a8ee08a239be1fefd1e0a761f5d65ed5a51926feda7ed37a08310"
+      }
+    ],
+    "hvRun": false,
+    "acceptedComplete": false,
+    "originalsRetained": true,
+    "productionChangedAtMockGate": false,
+    "logging": "Incomplete: MCP_UNTRUSTED health check Permission denied before Global query; Workspace not attempted; own session not opened",
+    "warnings": [
+      "NU1900: NuGet vulnerability feed unavailable; builds retain audit settings"
+    ]
+  },
+  "regression": {
+    "at": "2026-10-28T22:54:36",
+    "stage": "regression",
+    "testFrameworkOutcome": "Completed",
+    "passed": 98,
+    "failed": 0,
+    "total": 98,
+    "notExecuted": 0,
+    "failureNames": [],
+    "trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/artifacts/tests/20261028T2252440885755-cf00e4f242004f3c8f2da1dac12034ca/tests.trx",
+    "trxSha256": "41e7f7b0113798bfdb1a5f566294e51a614f430ec5269826f6f8f652f1a8b814",
+    "files": [
+      {
+        "relativePath": "Tests/Sources/Java/JavaProducerBoundaryCases.cs",
+        "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Tests/Sources/Java/JavaProducerBoundaryCases.cs",
+        "sha256": "f5d025f8c5fdda3893864b29f03bbee9b928defec872c3cd3f90e8995fb49d30",
+        "length": 8238,
+        "priorSource": null,
+        "priorSha256": null
+      },
+      {
+        "relativePath": "Tests/Sources/Java/JavaProducerBoundaryMockTests.cs",
+        "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Tests/Sources/Java/JavaProducerBoundaryMockTests.cs",
+        "sha256": "d0479dd668c9a6698995bc3ca6d9c306e3e628e3860aad7905ee912de70c50d6",
+        "length": 2110,
+        "priorSource": null,
+        "priorSha256": null
+      },
+      {
+        "relativePath": "Tests/Sources/Java/JavaProducerBoundaryRealTests.cs",
+        "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Tests/Sources/Java/JavaProducerBoundaryRealTests.cs",
+        "sha256": "62b4ce219ed95931522e5b323c3fad80000177be5de8229a70a6a2ebd202c0d5",
+        "length": 608,
+        "priorSource": null,
+        "priorSha256": null
+      },
+      {
+        "relativePath": "Modules/Sources/Java/JavaSourceExtractor.cs",
+        "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Modules/Sources/Java/JavaSourceExtractor.cs",
+        "sha256": "199bfee968e7f7defc394a697286412322ea3bf7c3bde91ddd91216c27a4c4db",
+        "length": 16193,
+        "priorSource": "/home/sharpninja/github/2026-10-26/task-3/remediation/integration/nuke-migration-checkpoint-015/files/remediation/nuke-app/Modules/Sources/Java/JavaSourceExtractor.cs",
+        "priorSha256": "c2a9e05f4d8a8ee08a239be1fefd1e0a761f5d65ed5a51926feda7ed37a08310"
+      }
+    ],
+    "hvRun": false,
+    "acceptedComplete": false,
+    "originalsRetained": true,
+    "productionChangedAtMockGate": false,
+    "logging": "Incomplete: MCP_UNTRUSTED health check Permission denied before Global query; Workspace not attempted; own session not opened",
+    "warnings": [
+      "NU1900: NuGet vulnerability feed unavailable; builds retain audit settings"
+    ]
+  },
+  "originalTestFiles": [
+    {
+      "original": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tests/test_java_context.py",
+      "sha256": "b410e5d69d6631ce811dda81d7064ced3f698b96454f0d1e9fbbe7c1ef3c3ad6",
+      "profile": "canonical",
+      "methods": [
+        {
+          "name": "test_imports_retained_in_runtime_source_details",
+          "originalLine": 5,
+          "existingCase": "CTX-imports",
+          "directLiteralClosure": true,
+          "behavior": "Exact single Java source/cache and report inputs, explicit import List and wildcard other retained",
+          "disposition": "Existing qualified original proof retained; no method-count delta"
+        },
+        {
+          "name": "test_mismatched_context_rejected",
+          "originalLine": 11,
+          "existingCase": "CTX-cache",
+          "directLiteralClosure": true,
+          "behavior": "Exact wrong cache SHA rejects with context cache mismatch",
+          "disposition": "Existing qualified original proof retained; no method-count delta"
+        }
+      ]
+    },
+    {
+      "original": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tests/test_java_source.py",
+      "sha256": "40a4c3aac9f8fbfd8e466c9ff7385eaeb4d5d0fbb7432f031fc567fc62086134",
+      "profile": "canonical",
+      "methods": [
+        {
+          "name": "test_nested_overloads_fields_and_annotations",
+          "originalLine": 8,
+          "existingCase": "JAVA-01",
+          "directLiteralClosure": true,
+          "behavior": "Exact Fixture.java input, nested owner, overloads, both field declarators, varargs, parameter annotation, qualified RequiresPermission, annotation declaration",
+          "disposition": "Existing qualified original proof retained; no method-count delta"
+        },
+        {
+          "name": "test_method_body_local_types_not_public_surface",
+          "originalLine": 25,
+          "existingCase": "JAVA-02",
+          "directLiteralClosure": true,
+          "behavior": "Exact C.java local class and its field excluded",
+          "disposition": "Existing qualified original proof retained; no method-count delta"
+        },
+        {
+          "name": "test_interface_implicit_public_and_directions_unknown",
+          "originalLine": 28,
+          "existingCase": "JAVA-03",
+          "directLiteralClosure": true,
+          "behavior": "Exact I.java effective public method and null parameter direction",
+          "disposition": "Existing qualified original proof retained; no method-count delta"
+        },
+        {
+          "name": "test_parse_error_retained",
+          "originalLine": 32,
+          "existingCase": "JAVA-04",
+          "directLiteralClosure": true,
+          "behavior": "Exact X.java invalid source retains structural issue and unsupported record",
+          "disposition": "Existing qualified original proof retained; no method-count delta"
+        },
+        {
+          "name": "test_enum_and_multiple_array_declarators",
+          "originalLine": 34,
+          "existingCase": "JAVA-05",
+          "directLiteralClosure": true,
+          "behavior": "Exact E.java RED/BLUE constants and a:int[], b:int",
+          "disposition": "Existing qualified original proof retained; no method-count delta"
+        },
+        {
+          "name": "test_repeated_large_line_numbers",
+          "originalLine": 38,
+          "existingCase": "JAVA-06",
+          "directLiteralClosure": true,
+          "behavior": "Exact Large.java input, 100 repeated native parses, field line303",
+          "disposition": "Existing qualified original proof retained; no method-count delta"
+        },
+        {
+          "name": "test_annotation_like_comment_is_not_metadata",
+          "originalLine": 43,
+          "existingCase": "JAVA-07",
+          "directLiteralClosure": true,
+          "behavior": "Exact Comments.java comment annotations excluded, field x retained",
+          "disposition": "Existing qualified original proof retained; no method-count delta"
+        },
+        {
+          "name": "test_apostrophe_in_annotation_comment",
+          "originalLine": 47,
+          "existingCase": "JAVA-08",
+          "directLiteralClosure": true,
+          "behavior": "Exact Bits.java apostrophe comment, one LongDef and raw arguments retaining 1,",
+          "disposition": "Existing qualified original proof retained; no method-count delta"
+        }
+      ]
+    },
+    {
+      "original": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tests/test_jvm_source_link.py",
+      "sha256": "7cb00260092fa4b8d3e86b78a9921536a8169211b7f56332b876108899332041",
+      "profile": "canonical",
+      "methods": [
+        {
+          "name": "test_exact_owner_primitives_and_known_reference_type",
+          "originalLine": 5,
+          "existingCase": "KEY-primitives",
+          "directLiteralClosure": true,
+          "behavior": "Exact two-owner map and record produce a/C#go([Ljava/lang/String;I)V",
+          "disposition": "Existing qualified original proof retained; no method-count delta"
+        },
+        {
+          "name": "test_unresolved_type_variable_never_guessed",
+          "originalLine": 9,
+          "existingCase": "KEY-T",
+          "directLiteralClosure": true,
+          "behavior": "Exact a.C-only owner map rejects unresolved return T",
+          "disposition": "Existing qualified original proof retained; no method-count delta"
+        },
+        {
+          "name": "test_unqualified_java_lang_name_might_be_shadowed",
+          "originalLine": 12,
+          "existingCase": "ENC-String",
+          "directLiteralClosure": true,
+          "behavior": "Exact java.lang.String-only map rejects String alias",
+          "disposition": "Existing qualified original proof retained; no method-count delta"
+        },
+        {
+          "name": "test_untyped_index_field_cannot_prove_typed_jvm_identity",
+          "originalLine": 14,
+          "existingCase": "KEY-field",
+          "directLiteralClosure": true,
+          "behavior": "Exact nested owner-only map and untyped field rejected",
+          "disposition": "Existing qualified original proof retained; no method-count delta"
+        }
+      ]
+    },
+    {
+      "original": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tests/test_java_context.py",
+      "sha256": "b410e5d69d6631ce811dda81d7064ced3f698b96454f0d1e9fbbe7c1ef3c3ad6",
+      "profile": "release011-frozen",
+      "methods": [
+        {
+          "name": "test_imports_retained_in_runtime_source_details",
+          "originalLine": 5,
+          "existingCase": "CTX-imports",
+          "directLiteralClosure": true,
+          "behavior": "Exact single Java source/cache and report inputs, explicit import List and wildcard other retained",
+          "disposition": "Existing qualified original proof retained; no method-count delta"
+        },
+        {
+          "name": "test_mismatched_context_rejected",
+          "originalLine": 11,
+          "existingCase": "CTX-cache",
+          "directLiteralClosure": true,
+          "behavior": "Exact wrong cache SHA rejects with context cache mismatch",
+          "disposition": "Existing qualified original proof retained; no method-count delta"
+        }
+      ]
+    },
+    {
+      "original": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tests/test_java_source.py",
+      "sha256": "40a4c3aac9f8fbfd8e466c9ff7385eaeb4d5d0fbb7432f031fc567fc62086134",
+      "profile": "release011-frozen",
+      "methods": [
+        {
+          "name": "test_nested_overloads_fields_and_annotations",
+          "originalLine": 8,
+          "existingCase": "JAVA-01",
+          "directLiteralClosure": true,
+          "behavior": "Exact Fixture.java input, nested owner, overloads, both field declarators, varargs, parameter annotation, qualified RequiresPermission, annotation declaration",
+          "disposition": "Existing qualified original proof retained; no method-count delta"
+        },
+        {
+          "name": "test_method_body_local_types_not_public_surface",
+          "originalLine": 25,
+          "existingCase": "JAVA-02",
+          "directLiteralClosure": true,
+          "behavior": "Exact C.java local class and its field excluded",
+          "disposition": "Existing qualified original proof retained; no method-count delta"
+        },
+        {
+          "name": "test_interface_implicit_public_and_directions_unknown",
+          "originalLine": 28,
+          "existingCase": "JAVA-03",
+          "directLiteralClosure": true,
+          "behavior": "Exact I.java effective public method and null parameter direction",
+          "disposition": "Existing qualified original proof retained; no method-count delta"
+        },
+        {
+          "name": "test_parse_error_retained",
+          "originalLine": 32,
+          "existingCase": "JAVA-04",
+          "directLiteralClosure": true,
+          "behavior": "Exact X.java invalid source retains structural issue and unsupported record",
+          "disposition": "Existing qualified original proof retained; no method-count delta"
+        },
+        {
+          "name": "test_enum_and_multiple_array_declarators",
+          "originalLine": 34,
+          "existingCase": "JAVA-05",
+          "directLiteralClosure": true,
+          "behavior": "Exact E.java RED/BLUE constants and a:int[], b:int",
+          "disposition": "Existing qualified original proof retained; no method-count delta"
+        },
+        {
+          "name": "test_repeated_large_line_numbers",
+          "originalLine": 38,
+          "existingCase": "JAVA-06",
+          "directLiteralClosure": true,
+          "behavior": "Exact Large.java input, 100 repeated native parses, field line303",
+          "disposition": "Existing qualified original proof retained; no method-count delta"
+        },
+        {
+          "name": "test_annotation_like_comment_is_not_metadata",
+          "originalLine": 43,
+          "existingCase": "JAVA-07",
+          "directLiteralClosure": true,
+          "behavior": "Exact Comments.java comment annotations excluded, field x retained",
+          "disposition": "Existing qualified original proof retained; no method-count delta"
+        },
+        {
+          "name": "test_apostrophe_in_annotation_comment",
+          "originalLine": 47,
+          "existingCase": "JAVA-08",
+          "directLiteralClosure": true,
+          "behavior": "Exact Bits.java apostrophe comment, one LongDef and raw arguments retaining 1,",
+          "disposition": "Existing qualified original proof retained; no method-count delta"
+        }
+      ]
+    },
+    {
+      "original": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tests/test_jvm_source_link.py",
+      "sha256": "7cb00260092fa4b8d3e86b78a9921536a8169211b7f56332b876108899332041",
+      "profile": "release011-frozen",
+      "methods": [
+        {
+          "name": "test_exact_owner_primitives_and_known_reference_type",
+          "originalLine": 5,
+          "existingCase": "KEY-primitives",
+          "directLiteralClosure": true,
+          "behavior": "Exact two-owner map and record produce a/C#go([Ljava/lang/String;I)V",
+          "disposition": "Existing qualified original proof retained; no method-count delta"
+        },
+        {
+          "name": "test_unresolved_type_variable_never_guessed",
+          "originalLine": 9,
+          "existingCase": "KEY-T",
+          "directLiteralClosure": true,
+          "behavior": "Exact a.C-only owner map rejects unresolved return T",
+          "disposition": "Existing qualified original proof retained; no method-count delta"
+        },
+        {
+          "name": "test_unqualified_java_lang_name_might_be_shadowed",
+          "originalLine": 12,
+          "existingCase": "ENC-String",
+          "directLiteralClosure": true,
+          "behavior": "Exact java.lang.String-only map rejects String alias",
+          "disposition": "Existing qualified original proof retained; no method-count delta"
+        },
+        {
+          "name": "test_untyped_index_field_cannot_prove_typed_jvm_identity",
+          "originalLine": 14,
+          "existingCase": "KEY-field",
+          "directLiteralClosure": true,
+          "behavior": "Exact nested owner-only map and untyped field rejected",
+          "disposition": "Existing qualified original proof retained; no method-count delta"
+        }
+      ]
+    }
+  ],
+  "originalProducers": [
+    {
+      "original": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tooling/java_source.py",
+      "sha256": "ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
+      "length": 10854,
+      "publicFunctions": [
+        "parse"
+      ],
+      "disposition": "Depth diagnostic and named boundary clauses proven; whole parse/corpus/profile remains open"
+    },
+    {
+      "original": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tooling/java_source.py",
+      "sha256": "ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
+      "length": 10854,
+      "publicFunctions": [
+        "parse"
+      ],
+      "disposition": "Depth diagnostic and named boundary clauses proven; whole parse/corpus/profile remains open"
+    },
+    {
+      "original": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tooling/java_context.py",
+      "sha256": "4276f8abb3c0040fd1c8b4e9da52a163eb35d2d7716319327a884c0ed83fc55d",
+      "length": 770,
+      "publicFunctions": [
+        "attach"
+      ],
+      "disposition": "Existing managed helper-body proof retained; no runtime attach caller invented"
+    },
+    {
+      "original": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tooling/java_context.py",
+      "sha256": "4276f8abb3c0040fd1c8b4e9da52a163eb35d2d7716319327a884c0ed83fc55d",
+      "length": 770,
+      "publicFunctions": [
+        "attach"
+      ],
+      "disposition": "Existing managed helper-body proof retained; no runtime attach caller invented"
+    },
+    {
+      "original": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tooling/jvm_source_link.py",
+      "sha256": "6cc57fd9f4dcf7b8f432377ad486242583c02cb280d7ea7e383b7c41afb4f5cb",
+      "length": 1884,
+      "publicFunctions": [
+        "encode",
+        "key"
+      ],
+      "disposition": "Existing full supported typed helper-body proof retained; Catalog/annotation callers are separate authorities"
+    },
+    {
+      "original": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tooling/jvm_source_link.py",
+      "sha256": "6cc57fd9f4dcf7b8f432377ad486242583c02cb280d7ea7e383b7c41afb4f5cb",
+      "length": 1884,
+      "publicFunctions": [
+        "encode",
+        "key"
+      ],
+      "disposition": "Existing full supported typed helper-body proof retained; Catalog/annotation callers are separate authorities"
+    },
+    {
+      "original": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tooling/cache_fingerprint.py",
+      "sha256": "fceef48aa6acbad07d5ab75e9aefa4e270c33f7ccca8bc1fb8a065144794f98d",
+      "length": 1037,
+      "publicFunctions": [
+        "current"
+      ],
+      "disposition": "Truthful C# identity transition owned by Source; historical Python fingerprint equivalence is not claimed"
+    },
+    {
+      "original": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tooling/cache_fingerprint.py",
+      "sha256": "fceef48aa6acbad07d5ab75e9aefa4e270c33f7ccca8bc1fb8a065144794f98d",
+      "length": 1037,
+      "publicFunctions": [
+        "current"
+      ],
+      "disposition": "Truthful C# identity transition owned by Source; historical Python fingerprint equivalence is not claimed"
+    }
+  ],
+  "originalUniqueJavaMethods": 14,
+  "publishedJavaMethodInstances": 28,
+  "newOriginalMethods": 0,
+  "priorLedgerUniqueMethods": 33,
+  "priorLedgerGenericFactsMethods": 19,
+  "priorLedger": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/published-java-sourcefact-method-closure-007.json",
+  "priorLedgerSha256": "aa31cb158cdc1e884d52c7612cf0a68708a3a23b9da48ed0344971dca83c98f0",
+  "sameCorrectedCases": true,
+  "nativeSourceLock": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/java-native-002/native-source-lock.json",
+  "nativeSourceLockSha256": "e9fa6885c4d800dd1c74ef72f478f0b81885811f2b9fb84665d76dc18f3ff0c1",
+  "originalCallerDisposition": [
+    "JavaFileContext.Attach is test-invoked; original build_catalog fingerprints preattached context",
+    "JvmSourceLinker.Key caller: CatalogBuild selected-platform SDK identity membership",
+    "JvmSourceLinker.Encode caller: SourceTypeFacts.XmlJvmKey; SQL observations remain Catalog-owned",
+    "JavaSourceExtractor caller: sole SourcesRuntimeFactory/JavaSourceRuntimeLoader plus existing Catalog registered selected-Java fixture",
+    "Cache producer current: SourceProducerIdentityBuilder evaluates C# assembly/runtime and selected Java identity; no historical Python impersonation"
+  ],
+  "chronology": [
+    "Initial eight-vector mock16 passed before production change",
+    "Depth-only production correction; first native8 yielded7pass1fail caused by independent Unicode fixture length error",
+    "Retained failed fixture/TRX and depth correction; restored checkpoint extractor",
+    "Corrected scalar generator and asserted intended scalar lengths; fresh mock16 passed",
+    "Reapplied byte-identical depth correction; same corrected native8 and focused regression passed"
+  ],
+  "completedNormalResponsibilities": [
+    "Depth128 accepted/depth129 rejected with original empty unsupported raw/hash and exact issue shape",
+    "Constant4096/4097 and raw-signature16384/16385 Unicode boundaries with complete initializer byte locators",
+    "Exact excluded static/block counts and no method-local or anonymous surface rows",
+    "Complete named annotation provenance and original versus qualified arguments"
+  ],
+  "blockers": [
+    "MCP trusted-wrapper health Permission denied: live memories and own session log incomplete; no retry",
+    "NU1900 vulnerability-feed unavailability remains reported; audit settings retained"
+  ],
+  "notClaimed": [
+    "Whole java_source.parse or full corpus/profile equivalence",
+    "Historical Python/cache identity equivalence",
+    "Windows or Android runtime readiness",
+    "Global inventory or retirement count changes",
+    "HV acceptance"
+  ],
+  "trackedDoneChanged": false,
+  "hvRun": false,
+  "acceptedComplete": false,
+  "accuracy": 99,
+  "completeness": 99,
+  "ratingScope": "Named boundary increment and immutable handoff only"
+}

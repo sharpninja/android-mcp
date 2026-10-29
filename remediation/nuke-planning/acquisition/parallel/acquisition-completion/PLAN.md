@@ -1,0 +1,11 @@
+# Acquisition completion increment
+
+Authorization: whole-repository C# NUKE migration, strict DRY, retained originals, continued implementation, parallel ownership as delegated by Root. No HV before Root marks the whole migration ready.
+
+The first increment closes `restore_snapshot.main` archive-session reuse using the existing SourceBatch, SourceAcquirer, SourceArchiveAcquirer and MetadataArchiveReader. It adds no recipe parser, archive parser, storage engine or executable Python fallback. A batch owns one disposable archive reader; all version/hash/profile/repository/platform pins participate in reuse identity. Every source still passes its own SHA256, size and Git verification. A failed source cannot publish a batch seal. Outside a batch the reader remains operation-local.
+
+FR-BUILD-004 / TEST-BUILD-004 acceptance cases: two selected metadata members share one read, two full ZIP members share one verified opened archive, incompatible ETag/revision/profile/archive hash cannot share, missing canonical ETag/platform/repository proof still fails before reuse, wrong member source hash fails, retained archive tampering fails, and cancellation does not publish a seal. Existing literal Java/XML/API37.2 fixtures and retained-byte assertions remain in use. Correct scripted providers and independent mutations must pass a native NUKE mock gate before production changes; the SAME case input and assertion harness binds to SourceBatch afterward. Focused acquisition regression runs through the existing native NUKE target. No complete-corpus claim or global inventory update occurs here.
+
+Caller inventory reconciles documented commands, Gradle delegates and Python entrypoints separately from historical citations. Thin Build/registry changes are handed to Root; publication helper files are read-only. Legacy producers remain retained. Default release discovery and command compatibility must be explicit in that facade; Python environment/fingerprint checks remain historical facts and cannot be asserted as C# identity equivalence.
+
+MCP add-profile: one complete profile file read. Live Global/Workspace memory and session loading incomplete because the parent reports the route denied; no raw marker, credential output or bypass was attempted. This is an audit blocker, not an empty-store claim.

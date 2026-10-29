@@ -1,0 +1,41 @@
+{
+  "At": "2026-10-29T05:19:15",
+  "RootOwnership": "Root applies unique-anchor hunks only to canonical, never wholesale private shared-file replacement",
+  "Hunks": [
+    {
+      "Path": "Modules/Sources/PublishedInterfaceHashWorkflowContracts.cs",
+      "Before": "public enum SourceExtractTask { Declarations, InterfaceHashes }",
+      "After": "public enum SourceExtractTask { Declarations, InterfaceHashes, InterfaceModules }"
+    },
+    {
+      "Path": "Build.cs",
+      "Before": "Sources/Extract task: Declarations (default) or InterfaceHashes",
+      "After": "Sources/Extract task: Declarations (default), InterfaceHashes or InterfaceModules"
+    },
+    {
+      "Path": "Build.SourcesExtract.cs",
+      "Before": "        if(ExtractTask==SourceExtractTask.InterfaceHashes){await ExtractPublishedHashes(project,canonical,admitted);return;}",
+      "After": "        if(ExtractTask==SourceExtractTask.InterfaceHashes){await ExtractPublishedHashes(project,canonical,admitted);return;}\n        if(ExtractTask==SourceExtractTask.InterfaceModules){await ExtractInterfaceModules(project,canonical,admitted);return;}"
+    }
+  ],
+  "Priors": [
+    {
+      "Path": null,
+      "PriorSha256": null,
+      "PriorSize": null
+    },
+    {
+      "Path": null,
+      "PriorSha256": null,
+      "PriorSize": null
+    },
+    {
+      "Path": null,
+      "PriorSha256": null,
+      "PriorSize": null
+    }
+  ],
+  "MockReceipt": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/interface-module-main-027/mock-correction-003-gate.json",
+  "MockSha256": "416004d071750823f3905233e750edb2fa4684a6001af05f1fb64fbcafb69fc0",
+  "CanonicalEdited": false
+}

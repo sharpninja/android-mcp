@@ -1,0 +1,79 @@
+{
+  "at": "2026-10-29T04:43:16",
+  "scope": "Proposed thin Root-owned Category.Catalog/Operation.Migrate binding; no Root files edited",
+  "breakingChange": false,
+  "requiredCliParameters": [
+    "project-root",
+    "pipeline-request",
+    "pipeline-request-sha256",
+    "pipeline-request-length"
+  ],
+  "requiredPinnedRequestFields": [
+    "CatalogRoot",
+    "SourceDatabase",
+    "DestinationDatabase"
+  ],
+  "transport": "Reuse existing pinned JSON workflow pattern: PinnedArtifactReader verifies request SHA/long length, CanonicalJson rejects ambiguous JSON, required nonblank fields and JsonUnmappedMemberHandling.Disallow; no optional defaults or duplicate path fields in CLI and request",
+  "pathAdmission": "AdmitWorkflowRoot(project, .), then required request CatalogRoot through AdmitWorkflowRoot; source/destination file parents through AdmitWorkflowRoot and filename through ArtifactPaths.Resolve. Service retains exact destination.staging rule, source readonly and create-new target/stage admission",
+  "inputIdentity": "Request pin admits selected roots/paths, consistent with existing CatalogValidationWorkflowReader. Migration service captures actual source SHA/long length and exact ordered target-script SHA/length list before writing stage. No historical Python identity or blanket old-schema profile inferred",
+  "sharedReaderComposition": "Root extracts ONE existing native artifact opener/store composition helper from Build.ReleaseParts.cs and uses it for ReleaseParts and Migrate; inject Func<string,IStreamingArtifactReader> into CatalogCopyMigration. No native opener fallback or duplicate setup inside migration service",
+  "minimalOwnership": {
+    "Root": [
+      "Core/OperationRegistry.cs executor + existing enum Category.Catalog/Operation.Migrate registration",
+      "Build.cs dispatch + existing parameter map",
+      "new thin Build.CatalogMigration.cs caller",
+      "one shared configured FileArtifactStore composition helper extracted from Build.ReleaseParts.cs"
+    ],
+    "MigrationOwner": [
+      "new Modules/Catalog/Migration request DTO/reader and tests only if Root delegates these after approval"
+    ],
+    "existingService": "CatalogCopyMigration.MigrateAsync(source,destination)"
+  },
+  "plannedSteps": [
+    "admit-pinned-migration-request",
+    "admit-roots-and-source",
+    "copy-migrate-v3",
+    "emit-migration-receipt"
+  ],
+  "output": "Emit JSON Operation=Migrate and existing CatalogMigrationResult Source/Destination/RetainedStage/TargetMigrations; report actual artifact receipts only. Source and stage remain retained, no delete/rename/overwrite or active registry switching outside copied DB",
+  "mockFirstTests": [
+    "Planner required four transport parameters, exact single Migrate route and step dependencies",
+    "Request pin SHA/length mismatch, malformed/duplicate/unknown JSON, missing catalog/source/destination path rejected before service",
+    "Caller passes exact admitted catalog/source/destination and configured reader factory, invokes service once, preserves thrown error and serializes truthful receipt",
+    "Native CLI subprocess same original version5/rebuilt=false fixture + source bytes retained, refused occupied final/stage and non-v2 source, explicit two-script frozen/three-script current target pins"
+  ],
+  "evidenceAnchors": [
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Build.CatalogValidation.cs",
+      "sha256": "699c7d953f9113078ef874ac19aa3726e175b9341f59f396a6527b61772a1ff9",
+      "bytes": 1710
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Catalog/CatalogValidationWorkflowReader.cs",
+      "sha256": "430504d58f2d3c7e9d7ff40420302afc4bebaf328f571b1f11da86066db286fa",
+      "bytes": 2034
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Catalog/CatalogValidationWorkflowContracts.cs",
+      "sha256": "c33f9141c94c48679744e80a1fc8a8d039da27b08258524b7ddec944655598db",
+      "bytes": 863
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Build.ReleaseParts.cs",
+      "sha256": "268dafe76c53ca5e9d32846a9040059e240a263f22fdf6172d31a46b290749cb",
+      "bytes": 1874
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Core/OperationRegistry.cs",
+      "sha256": "75f810bdfdf932e5ec87de98c54a96a22d51b16848e49635748216385946e9e5",
+      "bytes": 12486
+    }
+  ],
+  "sourceExpectedPinNotInvented": "No additional source-file pin field is proposed beyond original callable contract/current validation pattern. If Root requires caller-supplied source or target pins, add explicit before-stage guards and mock/native ACs in the owned service rather than a second whole-file verifier",
+  "approval": "Root owns acknowledgement, shared binding implementation, canonical import and full proof",
+  "canonicalWrites": false,
+  "authorityWrites": false,
+  "implementationClaimed": false,
+  "hv": false,
+  "safe_to_delete": false
+}

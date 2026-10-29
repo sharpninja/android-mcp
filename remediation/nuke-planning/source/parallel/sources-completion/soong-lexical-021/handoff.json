@@ -1,0 +1,169 @@
+{
+  "At": "2026-10-29T04:37:58",
+  "Owner": "Sources",
+  "RequirementIds": [
+    "FR-BUILD-004",
+    "TR-BUILD-004",
+    "TEST-BUILD-004"
+  ],
+  "Originals": [
+    {
+      "Path": "tools/source_facts/interface_module_facts.py",
+      "Sha256": "676c3fbbfe3e740f7aadd3bcac251655bc9d37de5ac2a5ce77a9a9632db0dc90",
+      "Size": 7130
+    },
+    {
+      "Path": "tools/source_facts/test_interface_module_facts.py",
+      "Sha256": "622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
+      "Size": 2426
+    },
+    {
+      "Path": "tools/source_facts/apex_manifest_facts.py",
+      "Sha256": "35af3b887b030e400231320eee167976f64679d684f647ba5c3cec9f48b5e841",
+      "Size": 2627
+    },
+    {
+      "Path": "tools/source_facts/test_apex_manifest_facts.py",
+      "Sha256": "b3beb718222a5b4533f7649a6e6fb8bada7fb7b19b8587d4560855c7b151b5d1",
+      "Size": 2446
+    }
+  ],
+  "ChangedFiles": [
+    {
+      "RelativePath": "Modules/Sources/SoongSourceFacts.cs",
+      "Handoff": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/soong-lexical-021/files/Modules/Sources/SoongSourceFacts.cs",
+      "Sha256": "6e35b8aff66cb8e52ea90db56a9ab9981fc453d08f571a4d357159b5eb0a55fa",
+      "Size": 10504,
+      "RequireAbsent": false,
+      "PriorSha256": "08f7fb6f8532e86f51a9a732552f58e445fc1bb7379119169eb78242d76476ff",
+      "PriorSize": 9220
+    },
+    {
+      "RelativePath": "Tests/Sources/SoongLexicalCompletionContractCases.cs",
+      "Handoff": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/soong-lexical-021/files/Tests/Sources/SoongLexicalCompletionContractCases.cs",
+      "Sha256": "3f1d2f2acc5f63fe03d2f64ce5fe65a45e83162db4d9b326222b4800f0b30f2b",
+      "Size": 3640,
+      "RequireAbsent": true,
+      "PriorSha256": null,
+      "PriorSize": null
+    },
+    {
+      "RelativePath": "Tests/Sources/SoongLexicalCompletionMockTests.cs",
+      "Handoff": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/soong-lexical-021/files/Tests/Sources/SoongLexicalCompletionMockTests.cs",
+      "Sha256": "48abcaae11c48ff9e43e34483b478a629897e416cbcfc325039e1e24478c8eb9",
+      "Size": 2335,
+      "RequireAbsent": true,
+      "PriorSha256": null,
+      "PriorSize": null
+    },
+    {
+      "RelativePath": "Tests/Sources/SoongLexicalCompletionRealTests.cs",
+      "Handoff": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/soong-lexical-021/files/Tests/Sources/SoongLexicalCompletionRealTests.cs",
+      "Sha256": "6f711f9e7f34af16cbb8bd889e3e63b8367dc6d1ca8870c63c843f0430d64c90",
+      "Size": 934,
+      "RequireAbsent": true,
+      "PriorSha256": null,
+      "PriorSize": null
+    }
+  ],
+  "Proofs": [
+    {
+      "Stage": "mock",
+      "Trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/soong-lexical-021/mock-gate.trx",
+      "Sha256": "87cb20ea43da8bd9821ce3ff21c30ba77a23be9f5a378ae56c3ac3089ef29061",
+      "Passed": 48,
+      "Failed": 0,
+      "Skipped": 0
+    },
+    {
+      "Stage": "native",
+      "Trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/soong-lexical-021/native-gate.trx",
+      "Sha256": "a9cc8c37ec2c038e8f9224f4e85a938d66df2c9bbc0fe82aa9ab8d81c7be1849",
+      "Passed": 1451,
+      "Failed": 0,
+      "Skipped": 0
+    },
+    {
+      "Stage": "full",
+      "Trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/soong-lexical-021/full-gate.trx",
+      "Sha256": "7a06dd2b637673b3355b3f9099736236112b3a47ac0c969a7e516bb8dfab2491",
+      "Passed": 24854,
+      "Failed": 0,
+      "Skipped": 0
+    }
+  ],
+  "Logs": [
+    {
+      "Path": "soong-lexical-mock-001.log",
+      "Sha256": "82e3e67cc4f9f4fcdc85790dee212a6c6c8cc1b4f2a4aa31ba8f4f40575830b4",
+      "Size": 6365
+    },
+    {
+      "Path": "soong-lexical-native-001.log",
+      "Sha256": "0bebcb5fba7b205a5ad1dcb6914ef5d0b359fedd3e0841fd09aca0d6674ab101",
+      "Size": 6372
+    },
+    {
+      "Path": "soong-lexical-full-001.log",
+      "Sha256": "bb566732e3041c22434c1ff4ef4ace699af68185c67ed67fa094b785519b33d7",
+      "Size": 6612
+    }
+  ],
+  "Scope": "One existing Soong extractor used by Interfaces/APEX families. Scalar tokenization replaces .NET default word/digit classes with original ASCII-first identifier plus existing SourceText.OriginalWord and Unicode Nd classification; existing decimal conversion now consumes scalars. Quoted token regex, value/parser/JSON/number authorities remain shared.",
+  "Chronology": "Independent48 full-output cases and three wrong-output controls each passed mock48 before production prior08f7 changed. SAME48 cases bind direct native plus current and frozen-release runtime concerns. Focused native1451 and final applicable full passed with all prior names retained. No assertion changes after mock.",
+  "PriorNames": {
+    "AdditionalMock": 48,
+    "CanonicalDiscoveryInference": false,
+    "Sha256": "5ce8a7ee6ea3de346665ed5444075d4eb22ee05325ee9ce3ea3330c1e5bf1904",
+    "Missing": 0,
+    "Final": 24854,
+    "Trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/sources/nuke-app/artifacts/tests/20261029T0358030407626-c11f57fa3df64f9f9529b0341f433c73/tests.trx",
+    "Included": 24758,
+    "AdditionalNative": 48
+  },
+  "FunctionMap": [
+    {
+      "Original": "interface_module_facts.mask_comments",
+      "Native": "SourceText.MaskBuildComments",
+      "Proof": "Existing Soong original full module fixtures and lexical comment/line/raw cases; no shared comment policy edits."
+    },
+    {
+      "Original": "interface_module_facts.tokens",
+      "Native": "SoongSourceFacts.Tokenize",
+      "Proof": "48 independent accepted/rejected word-tail, supplementary scalar, category, whitespace, numeric token and raw-output cases, both families."
+    },
+    {
+      "Original": "interface_module_facts.value",
+      "Native": "SoongSourceFacts.Value",
+      "Proof": "Same48 raw/property/kind/complete cases plus existing module/literal/expression regressions; scalar Nd conversion reuses existing implementation."
+    },
+    {
+      "Original": "apex_manifest_facts.build_modules",
+      "Native": "SoongSourceFacts.Modules(Apex)",
+      "Proof": "Same24 Apex lexical cases; all existing full Apex build-module and explicit-path assertions retained."
+    }
+  ],
+  "Guards": {
+    "Core003AllFiveUnchanged": true,
+    "SourceText925bUnchanged": true,
+    "NoNewParserOrFormatter": true,
+    "NoCoreOrFactoryOrApiChanges": true,
+    "NoSourceSyntaxChanges": true,
+    "FactoryE035Unchanged": true
+  },
+  "Boundaries": "Retain strict native JSON/Unicode decoding. Unpaired escaped surrogate literal-return equivalence, arbitrary CPython object APIs and interpreter-wide int digit limits are not claimed. interface_module_facts.main inventory/output caller remains separately partial, not inferred closed by lexical proof.",
+  "Remaining": [
+    "Root guarded import and canonical full verification required.",
+    "Separate interface_module_facts.main inventory and output workflow remains partial.",
+    "Strict native JSON and Unicode admission retained; no arbitrary Python object or unrestricted interpreter equivalence.",
+    "NU1900 vulnerability feed warnings retained, no network action added.",
+    "Live Global/Workspace memory and logging remain unavailable after prior denial; no retry or persistence claim.",
+    "No authority writes, deletion, HV acceptance, PR Ready or whole-repository acceptance."
+  ],
+  "CanonicalEdited": false,
+  "AuthorityEdited": false,
+  "NoPythonExecution": true,
+  "AcceptedComplete": false,
+  "OriginalsRetained": true,
+  "SafeToDelete": false
+}

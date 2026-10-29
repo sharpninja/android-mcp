@@ -1,0 +1,27 @@
+{
+  "at": "2026-10-28T02:26:24",
+  "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Documentation/Browser/BrowserQaFixtures.cs",
+  "priorSha256": "b9c988829f0616a348dd8bfcc08f40683045fc706b1e7c8a7500d12eb13a28e0",
+  "postSha256": "e91d3f048d567a59c31e70fda26345dea4b38454cc1a5544da92eb9b7c84cd6b",
+  "retained": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/browser/originals/BrowserQaFixtures.before-nowrap.cs",
+  "change": "Overflow-only fixture width300px and white-space:nowrap",
+  "assertionsChanged": false,
+  "productionGeometryChanged": false,
+  "evidence": "artifacts/browser-qa-tests/f38427dfb267456d80d115d0ec605100/output/browser-qa.json",
+  "observedTextRectangles": [
+    [
+      1500,
+      16,
+      1542.65625,
+      33
+    ],
+    [
+      1500,
+      34,
+      1557.765625,
+      51
+    ]
+  ],
+  "reason": "One wrapped text node produced two correct text rectangles; fixture now explicitly requests the intended one line.",
+  "execution": "Copy only, no .NET/application/browser launch"
+}

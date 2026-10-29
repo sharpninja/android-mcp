@@ -1,0 +1,43 @@
+# Reproducible native build-source payload
+
+This describes the existing portable-package duty. Current narrow aliases, the default twelve model inputs and eighteen generated-design inputs remain unchanged. The native C# host payload now has exact package and clean exported-bootstrap proof; the complete Gradle/support payload and overall migration remain open.
+
+The native authorities already exist: `ITestGateSdkEvaluator` reports evaluated host project inputs/imports, and `SdkEvaluatedTestGateNativeFacts.CaptureSourceAsync` reads and rechecks actual bytes, producing `TestGateSourceManifest` plus the native evaluation receipt. Use the exact admitted pair, verified through the existing store/receipt/strict JSON services. A caller-authored file list or its SHA cannot establish source completeness.
+
+Select the host project's evaluated input closure from that receipt. Correlate each item/import to its existing `TestGateHashedInput` identity; reject missing, conflicting or stale records. Select by exact evaluated project identity, not path suffix, basename or a directory/extension scan. The separate test project is not silently represented as runnable portable tests: its current fixture workspace layout requires a separate proven closure.
+
+Project admitted files under the native app source root to `build-tool/<root-relative path>`. Required examples are the actual `AndroidMcp.Build.csproj`, `packages.lock.json`, `global.json`, every evaluated C# source and local imported build configuration, and embedded resources such as `Modules/Sources/Data/entities.whatwg.json`. SDK/NuGet imports and resolved binary references outside that source root remain explicit pinned prerequisites; do not ship caches, SDK installations, generated binaries or an extra executable. Any other required external local source/import without an explicitly admitted portable route must fail with the precise missing prerequisite. Do not truncate the closure to an example class or a hand-maintained source list.
+
+The existing project locks and SDK version constrain restoration. A clean isolated `dotnet restore --locked-mode` and host build from the exported source are the required operational proof; successful compilation of the original workspace is not this proof. Root controls that execution window and any network authorization. No source payload is accepted merely because an archive contains `.cs` files.
+
+The implementation reuses the existing typed source collector/recipe protocol for package-only observations. A separate read-only native source store binds the exact admitted host source root, with routes derived from the admitted evaluation and hashed input identities. It grants no arbitrary prefix, `..` rebasing or general filesystem access. Both the child runtime and final package hook re-evaluate the fingerprint. The existing generic pinned `pipeline-request` parameter triple carries machine configuration, never a source file list.
+
+Add the observed source artifacts to the same declared published source/output union before the single manifest build. The existing manifest and prebuilt package authorities then cover exactly that set and the five fixed receipt aliases. Policy remains in the existing package authority. No second checksum loop, package writer or validation algorithm is needed.
+
+Finite acceptance must cover: complete local host closure; evaluated source/resource/import omission; forged project identity; unadmitted external source; unsafe/case-colliding route; duplicate conflicting pin; stale bytes at capture and before commit; dependency/SDK prerequisites retained without binary shipment; package-only admission; narrow/manifest-only sources unchanged; one manifest build and exact archive entries. Old package and default architecture expectations remain intact. The final clean exported-source restore/build proof is separate from these mock/native unit cases and from hostile acceptance.
+
+## Current boundary preparation after checkpoint 010
+
+The working caller now has actual manifest and package execution evidence and standalone prerequisite receipts. Its current package contains 278 checked archive entries, but is intentionally not claimed to be a complete native build-source payload.
+
+`staging/DocumentationBuildPayloadContracts.cs.pending` retains the initial historical proposal. The working native implementation and same-case tests were added after immutable checkpoint 011. The existing collector produces the snapshot inside the host composition, then shared receipt/strict JSON authorities bind the exact two artifacts before route projection. There is no second evaluator or caller source-list self-attestation.
+
+External import identities need explicit prerequisite scopes with relative paths; absolute machine paths are not portable restore commands. Local evaluated host inputs map under the one `build-tool/` publication namespace. Unsupported external local sources fail with the exact unresolved prerequisite. The implementation must not add general directory scanning, filename-based host selection or a second project graph. The current monolithic host has no project reference; any additional reference must have an explicit proven closure rather than an inferred file list.
+
+## Verified pure planner and next runtime binding
+
+The planner's 72 mock cases passed before implementation. The same 28 correct cases then passed against the native pure planner in a 100-case conjunction. Exact receipts are `evidence/portable-build-payload-mock-gate.json` and `evidence/portable-build-payload-native-gate.json`. This proves route/prerequisite projection over injected native records, not SDK execution or exported-source buildability.
+
+The runtime binding returns the existing `ArtifactGenerationPreparation` type through one `IDocumentationBuildPayloadPreparationFactory`. It captures the native snapshot with `ITestGateNativeFacts`, reads both correlated receipts through shared pinned readers, and passes them to the proven planner. It uses a nested instance of the SAME `ArtifactGenerationRuntime` with exact source specs, a read-only source binding and a work output binding. No new file discovery, general store, write loop or checksum implementation is added.
+
+The nested runtime publishes the admitted `build-tool/` sources plus `build-tool/prerequisites.json`, and its existing manifest is retained as `build-tool/source-generation.json`. Public prerequisite metadata uses scope-relative paths and pinned SDK files, with restore-generated hashes explicitly labeled as observations rather than cross-environment byte promises. The final documentation factory consumes these declared child outputs before the ONE final document checksum/package build. The child source manifest provides exact input lineage; its hash and all payload bytes are covered by that final manifest.
+
+The child runtime's existing precommit hook and the final preparation hook both re-evaluate the native source fingerprint. Thus a newly added compile item cannot evade known-file byte rechecks. The existing collector remains the source authority. Mock-first orchestration cases must verify both hooks, cancellation, source changes, failed reads/child generation, declared coverage and verbatim child manifest retention before production binding.
+
+## Actual native host package and bootstrap
+
+`evidence/portable-build-source-package-cli-proof.json` records the actual `portable-package-002` run: 22 inputs, 566 outputs, 564 checksums and 565 normalized archive entries. All source/output pins and archive bytes were independently checked, including 285 native-evaluated host input files and two child metadata artifacts. All five public validation receipt aliases and all 21 canonical architecture SVGs are retained.
+
+The run's retained `exported-bootstrap-proof.json` records copying only those 287 verified payload files into a fresh directory, locked restore, a fresh native bootstrap build with zero warnings/errors, then NUKE help from that exported host. All three commands exited zero. This is current Linux/installed-SDK proof, not a claim of Windows execution or a cold-network restore. The prior `portable-package-001` failed before rendering because its caller receipt path did not match the existing SDK child's `artifacts/tests/<run>` contract. The caller was corrected; the admission rule was retained.
+
+The package currently adds the native host source closure. Inclusion and clean invocation of the complete Gradle wrapper/support layer remain a separate existing packaging responsibility. Do not label the whole migration complete from this bounded proof.

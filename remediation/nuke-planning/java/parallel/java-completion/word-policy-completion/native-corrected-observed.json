@@ -1,0 +1,56 @@
+{
+  "at": "2026-10-29T01:15:11",
+  "scope": "Confirmed4 genuine native failures using exact test bytes retained in mock-corrected-qualified.sources. Only unchanged production files captured here; later fixture extends categories per Root request and is separately requalified",
+  "trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/artifacts/tests/20261029T0113429836233-a8e07e7f6b1845c0a4b2b09b2adbe454/tests.trx",
+  "trxSha256": "5ecc829a44fb66180c16acd5972a92bd28d198c34d5de268dfed4742a646c08c",
+  "outcome": "Failed",
+  "passed": 0,
+  "failed": 4,
+  "notExecuted": 0,
+  "total": 4,
+  "failures": [
+    "AndroidMcp.BuildTool.Tests.Sources.Java.JavaWordPolicyRealTests.SameOriginalUnicodeWordPolicyBindsPinnedNativeVisitor(id: \"JAVA-WORD-ANNOTATION-NAMES\")",
+    "AndroidMcp.BuildTool.Tests.Sources.Java.JavaWordPolicyRealTests.SameOriginalUnicodeWordPolicyBindsPinnedNativeVisitor(id: \"JAVA-WORD-TYPE-BOUNDARIES\")",
+    "AndroidMcp.BuildTool.Tests.Sources.Java.JavaAnnotationFailureRealTests.SameOriginalAnnotationFailurePropagatesFromPinnedNativeVisitor",
+    "AndroidMcp.BuildTool.Tests.Sources.Java.JavaWordPolicyRealTests.SameOriginalUnicodeWordPolicyBindsPinnedNativeVisitor(id: \"JAVA-WORD-ARGUMENT-BOUNDARIES\")"
+  ],
+  "files": [
+    {
+      "relativePath": "Modules/Sources/Java/JavaSourceExtractor.cs",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Modules/Sources/Java/JavaSourceExtractor.cs",
+      "sha256": "73f3063a77039fe973b1375d17973fb83d45d5c6dc9cc23138b3a624246e9948",
+      "length": 17416,
+      "retained": "remediation/nuke-planning/java/parallel/java-completion/word-policy-completion/native-corrected-observed.sources/Modules/Sources/Java/JavaSourceExtractor.cs",
+      "immutableSource": "remediation/nuke-planning/java/parallel/java-completion/word-policy-completion/native-corrected-observed.sources/Modules/Sources/Java/JavaSourceExtractor.cs",
+      "priorSource": "remediation/nuke-planning/java/parallel/java-completion/word-policy-completion/mock-corrected-qualified.sources/Modules/Sources/Java/JavaSourceExtractor.cs",
+      "priorSha256": "73f3063a77039fe973b1375d17973fb83d45d5c6dc9cc23138b3a624246e9948"
+    },
+    {
+      "relativePath": "Modules/Sources/SourceSyntax.cs",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Modules/Sources/SourceSyntax.cs",
+      "sha256": "ec272cf5e4a0c845f3f858d9b102a357481e1c72d95c1e45ee65394b7ace278b",
+      "length": 13883,
+      "retained": "remediation/nuke-planning/java/parallel/java-completion/word-policy-completion/native-corrected-observed.sources/Modules/Sources/SourceSyntax.cs",
+      "immutableSource": "remediation/nuke-planning/java/parallel/java-completion/word-policy-completion/native-corrected-observed.sources/Modules/Sources/SourceSyntax.cs",
+      "priorSource": "remediation/nuke-planning/java/parallel/java-completion/word-policy-completion/mock-corrected-qualified.sources/Modules/Sources/SourceSyntax.cs",
+      "priorSha256": "ec272cf5e4a0c845f3f858d9b102a357481e1c72d95c1e45ee65394b7ace278b"
+    }
+  ],
+  "sharedScanner": {
+    "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Modules/Sources/SourceSyntax.cs",
+    "modified": false,
+    "sha256": "ec272cf5e4a0c845f3f858d9b102a357481e1c72d95c1e45ee65394b7ace278b"
+  },
+  "references": [
+    {
+      "path": "remediation/nuke-planning/java/parallel/java-completion/word-policy-completion/mock-corrected-qualified.json",
+      "sha256": "493e023b7a2ed43e67113ce5319aac8968da005f73e51d04b674bb71105329e9",
+      "bytes": 8511
+    }
+  ],
+  "command": "Run-NukeNativeGate.ps1 -TestFilter FullyQualifiedName~JavaWordPolicyRealTests|FullyQualifiedName~JavaAnnotationFailureRealTests -JavaNativeManifest native002",
+  "originalMethodsAdded": 0,
+  "hvRun": false,
+  "trackedDoneChanged": false,
+  "logging": "Incomplete after trusted-wrapper health denial; no retry"
+}

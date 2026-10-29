@@ -1,0 +1,38 @@
+{
+  "At": "2026-10-29T03:31:28",
+  "Reason": "HM54 commit-write failure expected trace omitted final inventory/raw rechecks. Existing ArtifactGenerationRuntime explicitly rechecks inputs before manifests.Create/commit write; approved015 pre/post pin enforcement requires these reads even when commit write fails. Fix fixture from that existing source contract, not production output substitution. Product implementation stays unchanged during this test-only correction.",
+  "FailedTrx": "artifacts/tests/20261029T0328403150368-21750f7888194b5ca7be61db38ef5741/tests.trx",
+  "FailedSha256": "f755f703df01f6c5e2fa731eaa380c528bef2e50e364f6b01198f3c077821e2d",
+  "HeldProduction": [
+    {
+      "Path": "Build.cs",
+      "Sha256": "350f557d63129d18ac0443baaefb38589de7425c108e0115a551bf83fc793588",
+      "Size": 17616
+    },
+    {
+      "Path": "Build.SourcesExtract.cs",
+      "Sha256": "b7b64c59c08153c88c987546918d5b72bc5120d421b2611e538b82daa9bc1208",
+      "Size": 3606
+    },
+    {
+      "Path": "Build.PublishedHashes.cs",
+      "Sha256": "8f81144efa3d5ddca904571d7dcbebb17cda67b8d052349dec3ac28f897182cf",
+      "Size": 1748
+    },
+    {
+      "Path": "Core/OperationRegistry.cs",
+      "Sha256": "1dbb5759b3568401972663943522c2c41fcc0495c108ef11282450a292b137bf",
+      "Size": 10771
+    },
+    {
+      "Path": "Modules/Sources/SourceFactProducer.cs",
+      "Sha256": "a6bf25e44777ab6ca683298e7416a07a8fb2a071992f0014361e8cdbab5cb4be",
+      "Size": 21696
+    },
+    {
+      "Path": "Modules/Sources/PublishedInterfaceHashWorkflow.cs",
+      "Sha256": "9d120aff85b973ab8045488d8e6a410c2618b905988846c889b9ce4e8d364a54",
+      "Size": 9003
+    }
+  ]
+}

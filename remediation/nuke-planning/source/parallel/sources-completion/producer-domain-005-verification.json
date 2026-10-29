@@ -1,0 +1,64 @@
+{
+  "At": "2026-10-29T00:58:24",
+  "Handoff": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/producer-domain-005/handoff.json",
+  "HandoffSha256": "fa0d2fe5898e9555e118cb992d83585f2c34f04bab2ec077be7676482b20ee93",
+  "MechanicalVerification": {
+    "SourcesAndCopiesHashSizePairsVerified": 48,
+    "OriginalTestPinsVerified": 3,
+    "Unknown": 0,
+    "Failed": 0,
+    "CoreDependencyFilesVerified": 5,
+    "OriginalTestMethods": 27,
+    "GreenChronologicalTrxCopiesVerified": 7,
+    "OwnedSourceAndCopiedFiles": 24,
+    "OriginalSourcePinsVerified": 5
+  },
+  "OriginalAssertionPins": [
+    {
+      "Methods": 8,
+      "Size": 2059,
+      "Sha256": "a9d5b7356062e74ecd3cc0b3a5c0f82f441f70c268248d4353a69b45dbf8e63a",
+      "Path": "tools/source_facts/test_native_descriptor_facts.py"
+    },
+    {
+      "Methods": 13,
+      "Size": 4135,
+      "Sha256": "f834dbcd5aa546cc1a18b081367bd6cff8035d4ae86a4cf476395dfdca28a65a",
+      "Path": "tools/source_facts/test_callback_source_facts.py"
+    },
+    {
+      "Methods": 6,
+      "Size": 2124,
+      "Sha256": "b2d9eadf05f480bdd0a3dceef1b5ebab62095379cdb33d9593073782025c90f2",
+      "Path": "tools/source_facts/test_functional_source_facts.py"
+    }
+  ],
+  "CallerEvidence": [
+    {
+      "Path": "remediation/catalog/tooling/source_metadata_reference.py",
+      "Sha256": "44657411a0465736f5577a316ab62566d0b5919dcd849d9cabba8179fdd89fb4",
+      "Size": 11269,
+      "EvidenceKind": "Read-only source caller evidence; not a delegated Catalog closure claim"
+    },
+    {
+      "Path": "remediation/catalog/tooling/source_metadata_store.py",
+      "Sha256": "11ad7da214c182985b3903846d56df0ce2b012e3da7854454570077f040ee0e7",
+      "Size": 7860,
+      "EvidenceKind": "Read-only source caller evidence; not a delegated Catalog closure claim"
+    },
+    {
+      "Path": "remediation/catalog/tooling/build_catalog.py",
+      "Sha256": "35a2e0c775920224db2c75d2713ff4264ff1f4f99186867c406f771d80e93d35",
+      "Size": 37941,
+      "EvidenceKind": "Read-only source caller evidence; not a delegated Catalog closure claim"
+    }
+  ],
+  "FinalApplicableSuite": {
+    "Passed": 24095,
+    "Trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/producer-domain-005/sources-domain-full-005.trx",
+    "Skipped": 0,
+    "Failed": 0,
+    "Sha256": "a00b325d9df8fb5ee48c8f0b1027096bb111a6829504437174df2e22014aa738"
+  },
+  "Limitation": "Mechanical byte/assertion-source verification and normal test evidence only. Root Unicode boundary decision, canonical full import gate and Catalog caller closure remain explicit. No hostile AGREE or tracked done-state is asserted."
+}

@@ -1,0 +1,187 @@
+{
+  "schema": "sources-fetch-invocation-counts-milestone-v1",
+  "timestamp": "2026-10-28T12:12:14",
+  "scope": "Original generic fetch invocation counters projected on the existing verified native acquisition result; no broader generic profile parity claim",
+  "trx": {
+    "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/tests/20261028T1206275903368-14a93f886b16408c9653d51fbed89206/tests.trx",
+    "sha256": "29217532f2a476eb4c1d942cf94be81531d64f0db33878f95d63b5b8558b39e6",
+    "length": 113276
+  },
+  "run": {
+    "total": 89,
+    "passed": 89,
+    "failed": 0,
+    "skipped": 0
+  },
+  "nativeCase": "AndroidMcp.BuildTool.Tests.Core.SourcesFetchCountCliRealTests.SameFixtureCurrentPhysicalCountsAndImmutableReceiptAssertions",
+  "nativeOutcome": "Passed",
+  "priorMockGate": {
+    "path": "artifacts/tests/20261028T1139584011024-81142eceb3484b23959972066a00841f/tests.trx",
+    "sha256": "0d1f5fa755a37e8bf8da1f1104cb77e3557c62da2640f44a8ed024612409e1c6",
+    "ownMocks": 17
+  },
+  "nativeProjectionAndStdoutMockGate": {
+    "path": "artifacts/tests/20261028T1157227170014-afdadfa28def499d83e628684361de5c/tests.trx",
+    "sha256": "342108b0e6880ef611b6d084de8769705068325ddc38ec54629721bcae47b38d",
+    "nativeProjectionCases": 8,
+    "stdoutMocks": 2
+  },
+  "originalCaller": {
+    "path": "publication/android-mcp-git/tools/rehydrate.py",
+    "sha256": "73623b939aacd5108382b1f3d335de2a8665205553fa8ee2cf99f3eadfea0263",
+    "lines": "450-465",
+    "responsibility": "downloaded/reused counters apply to the current invocation over selected physical paths"
+  },
+  "first": {
+    "Manifest": {
+      "RelativePath": "sources/acquisition.json",
+      "Sha256": "138faa5148679c86e912fc912f1deb028bf060bc71283456e23b83ef00c23fdb",
+      "Length": 4149,
+      "MediaType": "application/json"
+    },
+    "Reused": false,
+    "GenerationId": "cli-bundle-generation",
+    "CurrentCounts": {
+      "Downloaded": 2,
+      "Reused": 0,
+      "SelectedPaths": 2,
+      "TotalPaths": 2,
+      "Complete": true
+    },
+    "TotalRows": 2,
+    "SelectedRows": 2,
+    "ProcessedRows": 2,
+    "TotalPhysicalSources": 2,
+    "SelectedPhysicalSources": 2,
+    "Complete": true,
+    "HistoricalByteIdentityClaimed": false,
+    "OutputRoot": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1206178326424-c20a95bcf9334edaa0d8a92e4c2607f5/android-mcp-sources-fetch/a3c846feea8240a19610cc7286932f2c/fixture with spaces/raw outputs"
+  },
+  "replay": {
+    "Manifest": {
+      "RelativePath": "sources/acquisition.json",
+      "Sha256": "138faa5148679c86e912fc912f1deb028bf060bc71283456e23b83ef00c23fdb",
+      "Length": 4149,
+      "MediaType": "application/json"
+    },
+    "Reused": true,
+    "GenerationId": "cli-bundle-generation",
+    "CurrentCounts": {
+      "Downloaded": 0,
+      "Reused": 2,
+      "SelectedPaths": 2,
+      "TotalPaths": 2,
+      "Complete": true
+    },
+    "TotalRows": 2,
+    "SelectedRows": 2,
+    "ProcessedRows": 2,
+    "TotalPhysicalSources": 2,
+    "SelectedPhysicalSources": 2,
+    "Complete": true,
+    "HistoricalByteIdentityClaimed": false,
+    "OutputRoot": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1206178326424-c20a95bcf9334edaa0d8a92e4c2607f5/android-mcp-sources-fetch/a3c846feea8240a19610cc7286932f2c/fixture with spaces/raw outputs"
+  },
+  "immutableAcquisitionManifest": {
+    "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1206178326424-c20a95bcf9334edaa0d8a92e4c2607f5/android-mcp-sources-fetch/a3c846feea8240a19610cc7286932f2c/fixture with spaces/raw outputs/sources/acquisition.json",
+    "sha256": "138faa5148679c86e912fc912f1deb028bf060bc71283456e23b83ef00c23fdb",
+    "length": 4149
+  },
+  "preservedOriginalStatuses": [
+    {
+      "physicalSourceIndex": 0,
+      "status": "downloaded",
+      "artifact": {
+        "Length": 3,
+        "MediaType": "application/octet-stream",
+        "RelativePath": "blobs/a",
+        "Sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+      }
+    },
+    {
+      "physicalSourceIndex": 1,
+      "status": "downloaded",
+      "artifact": {
+        "Length": 3,
+        "MediaType": "application/octet-stream",
+        "RelativePath": "blobs/b",
+        "Sha256": "cb8379ac2098aa165029e3938a51da0bcecfc008fd6795f401178647f96c5b34"
+      }
+    }
+  ],
+  "physicalAndLogicalScope": {
+    "totalLogicalRows": 2,
+    "selectedLogicalRows": 2,
+    "totalPhysicalSources": 2,
+    "selectedPhysicalSources": 2,
+    "aliasAndPartialCases": "The same eight native component cases distinguish three logical rows from two physical paths, partial/empty selection, mixed outcomes, full/partial sealed replay and unknown fresh status refusal"
+  },
+  "semantics": "A fresh result counts existing native downloaded/reused source outcomes. A verified sealed replay reports zero new materializations and all selected physical paths reused; original action history remains in the immutable receipt. Downloaded means newly materialized bytes, including an admitted bundle copy, not an asserted HTTP transfer.",
+  "privateProcessCaptures": [
+    {
+      "child": 1,
+      "stdout": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1206178326424-c20a95bcf9334edaa0d8a92e4c2607f5/android-mcp-sources-fetch/a3c846feea8240a19610cc7286932f2c/fixture with spaces/process-1/stdout.bin",
+        "sha256": "3cc66ddd8139d2c1faf482ab8e0cee72cedf1f996e485ab2522219fe7166ad03",
+        "length": 2215
+      },
+      "stderr": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1206178326424-c20a95bcf9334edaa0d8a92e4c2607f5/android-mcp-sources-fetch/a3c846feea8240a19610cc7286932f2c/fixture with spaces/process-1/stderr.bin",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "length": 0
+      }
+    },
+    {
+      "child": 2,
+      "stdout": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1206178326424-c20a95bcf9334edaa0d8a92e4c2607f5/android-mcp-sources-fetch/a3c846feea8240a19610cc7286932f2c/fixture with spaces/process-2/stdout.bin",
+        "sha256": "74a57efdd794a66cd4105275fd12a54c4e2d9d44be02bdf8840dc8ca2a684830",
+        "length": 2214
+      },
+      "stderr": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/artifacts/gate-temporaries/20261028T1206178326424-c20a95bcf9334edaa0d8a92e4c2607f5/android-mcp-sources-fetch/a3c846feea8240a19610cc7286932f2c/fixture with spaces/process-2/stderr.bin",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "length": 0
+      }
+    }
+  ],
+  "processOutcomes": "Both child exit codes equal zero by the same native TRX assertions; stdout/stderr captures alone are not independent OS exit-code records",
+  "retainedAssertions": [
+    "All original SourcesFetchCliCases byte/pin/argv/retention assertions rerun unchanged",
+    "The two invocation summaries contain all five CurrentCounts fields",
+    "Original acquisition receipt bytes and raw/snapshot output hashes are unchanged on replay",
+    "No new fixture preparation, transport, operation or parser"
+  ],
+  "codeBindings": [
+    {
+      "method": "SourcesFetchInvocationProjection.Project",
+      "pin": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Execution/SourcesFetchInvocationProjection.cs",
+        "sha256": "a92ecdc1088efd0339990aa838c20bc345f0b0281d93993e1ee287af124a5973",
+        "length": 1121
+      }
+    },
+    {
+      "method": "Build.FetchSources stdout only; shared factory retained",
+      "pin": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Build.SourcesFetch.cs",
+        "sha256": "6c40e6af21d7880648a6c05d33dfe6be598d8fcf190ec447aaa2242b8deec897",
+        "length": 2892
+      }
+    },
+    {
+      "method": "NativeSourcesFetchCountCliProbe.RunAsync wraps the original two-child probe",
+      "pin": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Core/SourcesFetchCountCliRealTests.cs",
+        "sha256": "7ad67d1ad06599799868e40a59c5a0acbce119d0133c149fc646bf6b5a1deea1",
+        "length": 1305
+      }
+    }
+  ],
+  "limitations": [
+    "No complete corpus or whole legacy acquisition parity claim",
+    "Generic last-alias fetch selection, post-download delay/file-fixture options and canonical status/Git-blob dry-run grouping remain separate responsibilities",
+    "No raw logs copied or published",
+    "MCP audit denial remains unchanged; ordinary local evidence does not replace session logging"
+  ]
+}

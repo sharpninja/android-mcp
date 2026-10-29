@@ -1,0 +1,55 @@
+{
+  "at": "2026-10-28T08:14:26",
+  "scope": "Physical source selection membership before logical cache-kind/cache-limit selection; exact six cases after48discriminatingmockchecks.",
+  "proof": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T0807462937869-49f58d09148e4743b7dd75c79cd239a2/tests.trx",
+    "sha256": "b8e65ac7e06bba89dd12737840329ce5a663e823b78f2b245c164673b4918b4b",
+    "groups": {
+      "SourceExtractSelectionRealTests": 6,
+      "SourceExtractSelectionMockTests": 48,
+      "SourceExtractWriteRealTests": 16,
+      "SourceExtractReadRealTests": 45,
+      "SourceExtractRoundTripRealTests": 4
+    },
+    "failed": 0,
+    "skipped": 0,
+    "globalCounters": "<Counters total=\"9142\" executed=\"9142\" passed=\"9142\" failed=\"0\" error=\"0\" timeout=\"0\" aborted=\"0\" inconclusive=\"0\" passedButRunAborted=\"0\" notRunnable=\"0\" notExecuted=\"0\" disconnected=\"0\" warning=\"0\" completed=\"0\" inProgress=\"0\" pending=\"0\" xmlns=\"http://microsoft.com/schemas/VisualStudio/TeamTest/2010\" />"
+  },
+  "mockGate": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T0750161413488-2b3c129b96824166912b55fd368b1d3c/tests.trx",
+    "sha256": "38677181637ea564a445bb9dc5dadde637da62de5798c9c2b64fde998b9d1fdb",
+    "ownPassed": 48
+  },
+  "sourcePins": [
+    {
+      "path": "remediation/nuke-app/Modules/Sources/SourcesExtractWriter.cs",
+      "sha256": "4737291b0cdc4e40d1cf062cf8aae2a31db4dbe7720471bb9aeeca92b2a643bb"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/SourceExtractSelectionContractCases.cs",
+      "sha256": "1ce2b952d1f25dce63b12878b37ce23ac0583dcd6961e056f501f8bfba9fc0d4"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/SourceExtractSelectionMockTests.cs",
+      "sha256": "42f609ef6513ce79c0aaacea53091b41a69611d6a4edb745a7fab7aa858d5598"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Sources/SourceExtractSelectionRealTests.cs",
+      "sha256": "5217186849fef5a6984f43ba181eff6d013678009d11e16fc6184794e689416e"
+    }
+  ],
+  "proven": [
+    "PhysicalSourceLimit0 produces no raw reads or cache publications even when retained raw files exist.",
+    "PhysicalSourceLimit1 selects only admitted physical identity; membership applies before logical cache Take.",
+    "Two logical aliases of one selected physical source remain two logical cache rows unless CacheSourceLimit caps them.",
+    "Original projection/OriginalRow/context are not rewritten. No unselected raw reads/publications/input-pin claims.",
+    "Old writer16/reader45/nativecache readback4 regressions pass."
+  ],
+  "normalVerified": true,
+  "acceptedComplete": false,
+  "safeToDelete": false,
+  "remaining": [
+    "Actual caller-pinned Sources/Extract CLI and full offline workflow/Catalog intake evidence remain separate.",
+    "Source private byte-pin helper consolidation and known original SDK summary/literal assertions remain explicitly open."
+  ]
+}

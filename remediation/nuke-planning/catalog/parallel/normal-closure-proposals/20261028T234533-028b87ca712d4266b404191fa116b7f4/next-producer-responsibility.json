@@ -1,0 +1,38 @@
+{
+  "scope": "One concrete producer verification responsibility, not a whole85-path allocation",
+  "legacyPath": "rehydration/producers/release-011/tooling/effective_device_inventory.py",
+  "source": {
+    "path": "publication/android-mcp-git/rehydration/producers/release-011/tooling/effective_device_inventory.py",
+    "sha256": "f41b89a59ee27996419ca6f7f7bdcde12a6e1ce98f40defa6a25a3f87d341b05",
+    "length": 5959
+  },
+  "function": "capture",
+  "body": "   if key not in items:\n    doc=changed.get(key)\n    # A deleted/conflicting local tombstone stays visible, without inventing shape.\n    items[key]=dict(entry_id=key,entity_kind=entity_kind(doc) if doc else 'other',variants=[])\n",
+  "nativeSource": {
+    "path": "remediation/nuke-app/Modules/Catalog/CatalogInventory.cs",
+    "sha256": "9ebef86c1c1da585afbf6138bad8f144e85925bb43ff32749075b176a5f7e022",
+    "length": 11397
+  },
+  "nativeBody": "                if(!items.ContainsKey(key)) items.Add(key,new JsonObject{[\"entry_id\"]=key,[\"entity_kind\"]=state==\"active\" ? contracts.EntityKind(Element(doc)) : \"other\",[\"variants\"]=new JsonArray()});",
+  "observed": "Native non-active local tombstone branch exists. Current direct capture providers are CatalogEffectiveInventoryRealTests and CatalogDevicePipelineRealTests; effective provider creates only an active local addition, and pipeline captures unchanged imported documents. No deleted/conflicting local tombstone capture case is present in these providers.",
+  "evidence": [
+    {
+      "path": "remediation/nuke-app/Tests/Catalog/CatalogEffectiveInventoryRealTests.cs",
+      "sha256": "4edaa1ae8e47cd4b8cbfd993b6bd41911ab247b00ab233d70700a42f36e8d282",
+      "length": 12788
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Catalog/CatalogDevicePipelineRealTests.cs",
+      "sha256": "be9367d7850ae644039b2e234cdfcba1ad1e7db7d2a704aabb859a4cc180b53a",
+      "length": 13773
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Catalog/CatalogEffectiveInventoryCases.cs",
+      "sha256": "d078d194a9dc530264d89b261f623a5ee6a7e6524749220439dae735a7256126",
+      "length": 6221
+    }
+  ],
+  "nextResponsibility": "Prove capture preserves an unimported local entry in deleted and conflict states as entity_kind other with variants empty, matching catalog state/revision/document hash and unchanged imported inventory. Resolve/capture must not invent shape or positive applicability. Preserve transaction closure and source DB bytes. This is a missing producer-branch proof, not an established implementation defect.",
+  "newTestsWritten": false,
+  "producerClosed": false
+}

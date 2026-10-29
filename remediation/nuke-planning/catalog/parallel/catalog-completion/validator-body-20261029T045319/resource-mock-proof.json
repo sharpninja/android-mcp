@@ -1,0 +1,57 @@
+{
+  "at": "2026-10-29T05:42:44",
+  "phase": "Mock",
+  "gate": {
+    "localTimestamp": "2026-10-29T05:42:44",
+    "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/catalog/nuke-app/artifacts/tests/20261029T0538155206789-8e83056b05914cc5864e22d013f61fbb/tests.trx",
+    "sha256": "68422a8c4c84f1e5bbcc4fd0ef4652dfe4e60685fedbf0d131db146a8adbca93",
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "notExecuted": 0,
+    "classes": [
+      {
+        "name": "AndroidMcp.BuildTool.Tests.Catalog.CatalogValidatorResourceMockTests",
+        "total": 4,
+        "passed": 4,
+        "failed": 0
+      }
+    ],
+    "failures": []
+  },
+  "classes": {
+    "CatalogValidatorResourceMockTests": 4
+  },
+  "caseSha256": "2c06f03c7be0a3147ac17f55130b4cbd2f5e5654bbf73363359e35ab43c062c4",
+  "files": [
+    {
+      "path": "Tests/Catalog/CatalogValidatorResourceCases.cs",
+      "sha256": "2c06f03c7be0a3147ac17f55130b4cbd2f5e5654bbf73363359e35ab43c062c4",
+      "length": 2441
+    },
+    {
+      "path": "Tests/Catalog/CatalogValidatorBodyRealTests.cs",
+      "sha256": "6491307eda6e5a29f59661da3699104668a58ead22d4f1f44193a5e4c8cd4b26",
+      "length": 19720
+    }
+  ],
+  "cases": 2,
+  "negativeControls": 16,
+  "originalCallers": [
+    {
+      "path": "remediation/catalog/tests/test_round5.py",
+      "sha256": "367176a7f938cf4678159d66a1ede0d3caf483bf27f91e1e5c030a69f7376543",
+      "method": "Round5.test_validator_closes_database_on_failure"
+    },
+    {
+      "path": "publication/android-mcp-git/rehydration/producers/release-011/tests/test_round5.py",
+      "sha256": "367176a7f938cf4678159d66a1ede0d3caf483bf27f91e1e5c030a69f7376543",
+      "method": "Round5.test_validator_closes_database_on_failure"
+    }
+  ],
+  "scope": "Original literal fixture failure and close assertion. Existing lexical fault seam after real readonly SQLite open; Linux process-owned fd/fdinfo witness proves open+readonly at fault and closed afterward. Explicit native boundary adaptation from original mocked execute, no new product API/database engine.",
+  "canonicalWrites": false,
+  "accountingWrites": false,
+  "acceptedComplete": false,
+  "safeToDelete": false
+}

@@ -1,0 +1,279 @@
+{
+  "at": "2026-10-28T10:14:18",
+  "scope": "Finite next-increment original parser-family mock slice, outside frozen app; no production changes.",
+  "sources": [
+    {
+      "path": "remediation/catalog/tests/test_parsers.py",
+      "sha256": "d27384a2c3dd8d6eced29756e234a04040a658c1f0ee5257c6b1232431d2747d",
+      "exactAidlInputSha256": "ebaa2b4cf3e6140cfbbe98b214783bacc0bf36622aafdf7544da30ad97e2f3c9",
+      "exactAidlInput": "package a; import b.B;\n @EnforcePermission(\"android.permission.X\") oneway interface IFoo {\n @RequiresNoPermission void ping(in B b, out int[] value) = 7;\n @PermissionManuallyEnforced oneway void send(in String s);\n const int C=3;\n }",
+      "methods": [
+        {
+          "method": "test_overloads_and_annotations",
+          "body": " def test_overloads_and_annotations(self):\n  text='''package a {\n public @interface Ann {\n method public abstract String value();\n }\n public class Outer.Inner<T> {\n ctor public Outer.Inner();\n method @RequiresPermission(\"example.permission.P\") public <T extends java.lang.Object> java.util.List<T> go(@Nullable java.util.Map<String,java.util.List<T>>, int);\n method public void go(int);\n field public static final String S = \"hello // no comment\";\n }\n }'''\n  rs=list(p.signature(text));self.assertFalse(any(r['kind']=='unsupported' for r in rs));self.assertEqual(rs[1]['kind'],'annotation');ms=[x for x in rs if x['name']=='go'];self.assertNotEqual(ms[0]['canonical'],ms[1]['canonical']);self.assertEqual(ms[0]['parameters'][0]['type'],'java.util.Map<String,java.util.List<T>>');self.assertEqual(ms[0]['return_type'],'java.util.List<T>');self.assertEqual(p.permission(ms[0]['annotations'])['name'],'example.permission.P')\n",
+          "cases": [
+            "PARSER-OVERLOADS"
+          ],
+          "status": "mock-first-staged-unrun"
+        },
+        {
+          "method": "test_permission_modes",
+          "body": " def test_permission_modes(self):\n  for text,op in [('@RequiresPermission(value=\"example.permission.X\")','permission'),('@RequiresPermission(allOf={\"example.permission.A\",\"example.permission.B\"})','all'),('@RequiresPermission(anyOf={\"example.permission.A\",\"example.permission.B\"},conditional=true)','conditional'),('@RequiresPermission.Read(@RequiresPermission(\"example.permission.X\"))','access'),('@PermissionManuallyEnforced','manual'),('@RequiresNoPermission','explicit-none'),('','unknown')]:self.assertEqual(p.permission(p.annotations(text)[1])['op'],op)\n  self.assertEqual(p.permission(p.annotations('@RequiresPermission(android.Manifest.permission.X)')[1],{'android.Manifest.permission.X':'android.permission.X'})['name'],'android.permission.X')\n  self.assertEqual(p.permission(p.annotations('@EnforcePermission(\"X\")')[1],aidl=True)['op'],'unknown')\n  self.assertEqual(p.permission(p.annotations('@RequiresPermission(\"carrier privileges\")')[1])['op'],'unknown')\n  self.assertEqual(p.permission(p.annotations('@RequiresPermission.Read')[1])['op'],'access')\n",
+          "cases": [
+            "MODE-VALUE",
+            "MODE-ALL",
+            "MODE-CONDITIONAL",
+            "MODE-READ",
+            "MODE-MANUAL",
+            "MODE-NONE",
+            "MODE-ABSENT",
+            "MODE-SYMBOL",
+            "MODE-AIDL-UNQUALIFIED",
+            "MODE-PREDICATE",
+            "MODE-BARE-READ"
+          ],
+          "status": "mock-first-staged-unrun"
+        },
+        {
+          "method": "test_parameter_permission_not_callable",
+          "body": " def test_parameter_permission_not_callable(self):\n  r=p.member('method public void x(@RequiresPermission(\"example.permission.P\") String);','a.A','a');self.assertEqual(p.permission(r['annotations'])['op'],'unknown');self.assertTrue(r['parameters'][0]['annotations'])\n",
+          "cases": [
+            "PARSER-PARAMETER"
+          ],
+          "status": "mock-first-staged-unrun"
+        },
+        {
+          "method": "test_aidl",
+          "body": " def test_aidl(self):\n  text='''package a; import b.B;\n @EnforcePermission(\"android.permission.X\") oneway interface IFoo {\n @RequiresNoPermission void ping(in B b, out int[] value) = 7;\n @PermissionManuallyEnforced oneway void send(in String s);\n const int C=3;\n }'''\n  d=p.aidl(text);self.assertEqual(d['descriptor'],'a.IFoo');self.assertTrue(d['oneway']);self.assertEqual(len(d['members']),3);self.assertEqual(d['members'][0]['extras']['declared_method_id'],7);self.assertIsNone(d['members'][0]['extras']['wire_transaction_code']);self.assertEqual(d['members'][0]['parameters'][1]['direction'],'out');self.assertEqual(d['members'][2]['kind'],'unsupported');self.assertEqual(p.permission(d['annotations'],aidl=True)['name'],'android.permission.X')\n",
+          "cases": [
+            "PARSER-AIDL"
+          ],
+          "status": "mock-first-staged-unrun-with-explicit-retired-intermediate-assertion"
+        },
+        {
+          "method": "test_source_unknown_retained",
+          "body": " def test_source_unknown_retained(self):\n  r=list(p.signature('package a {\\n strange new declaration;\\n}'));self.assertEqual(r[1]['kind'],'unsupported');self.assertEqual(r[1]['raw'],'strange new declaration;')\n",
+          "cases": [
+            "PARSER-UNKNOWN"
+          ],
+          "status": "mock-first-staged-unrun"
+        },
+        {
+          "method": "test_owner_reset_after_type",
+          "body": " def test_owner_reset_after_type(self):\n  rs=list(p.signature('package a {\\n public class A {\\n method public void x();\\n }\\n method public void orphan();\\n}'))\n  self.assertEqual(rs[-1]['kind'],'unsupported');self.assertIn('without owner',rs[-1]['extras']['parse_error'])\n",
+          "cases": [
+            "PARSER-OWNER"
+          ],
+          "status": "mock-first-staged-unrun"
+        },
+        {
+          "method": "test_comment_quoted",
+          "body": " def test_comment_quoted(self):self.assertIn('\"//x\"',p.without_comments('const String X=\"//x\"; // hi'))\n",
+          "cases": [
+            "PARSER-COMMENT"
+          ],
+          "status": "mock-first-staged-unrun"
+        },
+        {
+          "method": "test_aidl_structured",
+          "body": " def test_aidl_structured(self):\n  d=p.aidl('package a; @JavaDerive(toString=true) parcelable P { int n; }');self.assertEqual(d['descriptor'],'a.P');self.assertIn('retained',d['parse_status'])\nif __name__=='__main__':unittest.main()\n",
+          "cases": [],
+          "status": "pending-original-intermediate-status-reconciliation"
+        }
+      ]
+    },
+    {
+      "path": "rehydration/producers/release-011/tests/test_parsers.py",
+      "sha256": "d27384a2c3dd8d6eced29756e234a04040a658c1f0ee5257c6b1232431d2747d",
+      "exactAidlInputSha256": "ebaa2b4cf3e6140cfbbe98b214783bacc0bf36622aafdf7544da30ad97e2f3c9",
+      "exactAidlInput": "package a; import b.B;\n @EnforcePermission(\"android.permission.X\") oneway interface IFoo {\n @RequiresNoPermission void ping(in B b, out int[] value) = 7;\n @PermissionManuallyEnforced oneway void send(in String s);\n const int C=3;\n }",
+      "methods": [
+        {
+          "method": "test_overloads_and_annotations",
+          "body": " def test_overloads_and_annotations(self):\n  text='''package a {\n public @interface Ann {\n method public abstract String value();\n }\n public class Outer.Inner<T> {\n ctor public Outer.Inner();\n method @RequiresPermission(\"example.permission.P\") public <T extends java.lang.Object> java.util.List<T> go(@Nullable java.util.Map<String,java.util.List<T>>, int);\n method public void go(int);\n field public static final String S = \"hello // no comment\";\n }\n }'''\n  rs=list(p.signature(text));self.assertFalse(any(r['kind']=='unsupported' for r in rs));self.assertEqual(rs[1]['kind'],'annotation');ms=[x for x in rs if x['name']=='go'];self.assertNotEqual(ms[0]['canonical'],ms[1]['canonical']);self.assertEqual(ms[0]['parameters'][0]['type'],'java.util.Map<String,java.util.List<T>>');self.assertEqual(ms[0]['return_type'],'java.util.List<T>');self.assertEqual(p.permission(ms[0]['annotations'])['name'],'example.permission.P')\n",
+          "cases": [
+            "PARSER-OVERLOADS"
+          ],
+          "status": "mock-first-staged-unrun"
+        },
+        {
+          "method": "test_permission_modes",
+          "body": " def test_permission_modes(self):\n  for text,op in [('@RequiresPermission(value=\"example.permission.X\")','permission'),('@RequiresPermission(allOf={\"example.permission.A\",\"example.permission.B\"})','all'),('@RequiresPermission(anyOf={\"example.permission.A\",\"example.permission.B\"},conditional=true)','conditional'),('@RequiresPermission.Read(@RequiresPermission(\"example.permission.X\"))','access'),('@PermissionManuallyEnforced','manual'),('@RequiresNoPermission','explicit-none'),('','unknown')]:self.assertEqual(p.permission(p.annotations(text)[1])['op'],op)\n  self.assertEqual(p.permission(p.annotations('@RequiresPermission(android.Manifest.permission.X)')[1],{'android.Manifest.permission.X':'android.permission.X'})['name'],'android.permission.X')\n  self.assertEqual(p.permission(p.annotations('@EnforcePermission(\"X\")')[1],aidl=True)['op'],'unknown')\n  self.assertEqual(p.permission(p.annotations('@RequiresPermission(\"carrier privileges\")')[1])['op'],'unknown')\n  self.assertEqual(p.permission(p.annotations('@RequiresPermission.Read')[1])['op'],'access')\n",
+          "cases": [
+            "MODE-VALUE",
+            "MODE-ALL",
+            "MODE-CONDITIONAL",
+            "MODE-READ",
+            "MODE-MANUAL",
+            "MODE-NONE",
+            "MODE-ABSENT",
+            "MODE-SYMBOL",
+            "MODE-AIDL-UNQUALIFIED",
+            "MODE-PREDICATE",
+            "MODE-BARE-READ"
+          ],
+          "status": "mock-first-staged-unrun"
+        },
+        {
+          "method": "test_parameter_permission_not_callable",
+          "body": " def test_parameter_permission_not_callable(self):\n  r=p.member('method public void x(@RequiresPermission(\"example.permission.P\") String);','a.A','a');self.assertEqual(p.permission(r['annotations'])['op'],'unknown');self.assertTrue(r['parameters'][0]['annotations'])\n",
+          "cases": [
+            "PARSER-PARAMETER"
+          ],
+          "status": "mock-first-staged-unrun"
+        },
+        {
+          "method": "test_aidl",
+          "body": " def test_aidl(self):\n  text='''package a; import b.B;\n @EnforcePermission(\"android.permission.X\") oneway interface IFoo {\n @RequiresNoPermission void ping(in B b, out int[] value) = 7;\n @PermissionManuallyEnforced oneway void send(in String s);\n const int C=3;\n }'''\n  d=p.aidl(text);self.assertEqual(d['descriptor'],'a.IFoo');self.assertTrue(d['oneway']);self.assertEqual(len(d['members']),3);self.assertEqual(d['members'][0]['extras']['declared_method_id'],7);self.assertIsNone(d['members'][0]['extras']['wire_transaction_code']);self.assertEqual(d['members'][0]['parameters'][1]['direction'],'out');self.assertEqual(d['members'][2]['kind'],'unsupported');self.assertEqual(p.permission(d['annotations'],aidl=True)['name'],'android.permission.X')\n",
+          "cases": [
+            "PARSER-AIDL"
+          ],
+          "status": "mock-first-staged-unrun-with-explicit-retired-intermediate-assertion"
+        },
+        {
+          "method": "test_source_unknown_retained",
+          "body": " def test_source_unknown_retained(self):\n  r=list(p.signature('package a {\\n strange new declaration;\\n}'));self.assertEqual(r[1]['kind'],'unsupported');self.assertEqual(r[1]['raw'],'strange new declaration;')\n",
+          "cases": [
+            "PARSER-UNKNOWN"
+          ],
+          "status": "mock-first-staged-unrun"
+        },
+        {
+          "method": "test_owner_reset_after_type",
+          "body": " def test_owner_reset_after_type(self):\n  rs=list(p.signature('package a {\\n public class A {\\n method public void x();\\n }\\n method public void orphan();\\n}'))\n  self.assertEqual(rs[-1]['kind'],'unsupported');self.assertIn('without owner',rs[-1]['extras']['parse_error'])\n",
+          "cases": [
+            "PARSER-OWNER"
+          ],
+          "status": "mock-first-staged-unrun"
+        },
+        {
+          "method": "test_comment_quoted",
+          "body": " def test_comment_quoted(self):self.assertIn('\"//x\"',p.without_comments('const String X=\"//x\"; // hi'))\n",
+          "cases": [
+            "PARSER-COMMENT"
+          ],
+          "status": "mock-first-staged-unrun"
+        },
+        {
+          "method": "test_aidl_structured",
+          "body": " def test_aidl_structured(self):\n  d=p.aidl('package a; @JavaDerive(toString=true) parcelable P { int n; }');self.assertEqual(d['descriptor'],'a.P');self.assertIn('retained',d['parse_status'])\nif __name__=='__main__':unittest.main()\n",
+          "cases": [],
+          "status": "pending-original-intermediate-status-reconciliation"
+        }
+      ]
+    }
+  ],
+  "bindings": [
+    {
+      "method": "test_overloads_and_annotations",
+      "cases": [
+        "PARSER-OVERLOADS"
+      ],
+      "input": "Exact original signature text, including all indentation, through ISourceExtractor; permission annotation then interpreted by existing IPermissionExpressionSourceFacts.",
+      "status": "mock-first-staged-unrun"
+    },
+    {
+      "method": "test_permission_modes",
+      "cases": [
+        "MODE-VALUE",
+        "MODE-ALL",
+        "MODE-CONDITIONAL",
+        "MODE-READ",
+        "MODE-MANUAL",
+        "MODE-NONE",
+        "MODE-ABSENT",
+        "MODE-SYMBOL",
+        "MODE-AIDL-UNQUALIFIED",
+        "MODE-PREDICATE",
+        "MODE-BARE-READ"
+      ],
+      "input": "Eleven original annotation fragments preserved literally. Nine loop/additional modes and symbol mode are embedded in a normal signature callable; EnforcePermission is embedded in an AIDL declaration with aidl=true. Existing extractor annotations feed the actual permission seam; no new annotations helper API.",
+      "status": "mock-first-staged-unrun"
+    },
+    {
+      "method": "test_parameter_permission_not_callable",
+      "cases": [
+        "PARSER-PARAMETER"
+      ],
+      "input": "Exact original member fragment embedded in its normal package/type signature consumer; callable permission remains unknown while parameter annotation remains present.",
+      "status": "mock-first-staged-unrun"
+    },
+    {
+      "method": "test_aidl",
+      "cases": [
+        "PARSER-AIDL"
+      ],
+      "input": "Exact original indented whole AIDL input, with every nonretired original assertion and additional final constant/unknown wire checks.",
+      "status": "mock-first-staged-unrun-with-explicit-retired-intermediate-assertion"
+    },
+    {
+      "method": "test_source_unknown_retained",
+      "cases": [
+        "PARSER-UNKNOWN"
+      ],
+      "input": "Exact original signature input and final unsupported/raw assertion.",
+      "status": "mock-first-staged-unrun"
+    },
+    {
+      "method": "test_owner_reset_after_type",
+      "cases": [
+        "PARSER-OWNER"
+      ],
+      "input": "Exact original signature input, final unsupported and without-owner error assertion.",
+      "status": "mock-first-staged-unrun"
+    },
+    {
+      "method": "test_comment_quoted",
+      "cases": [
+        "PARSER-COMMENT"
+      ],
+      "input": "Exact original constant/comment fragment embedded unchanged in an AIDL interface constant consumer; quoted //x is retained in raw and value, with no direct new comment API.",
+      "status": "mock-first-staged-unrun"
+    },
+    {
+      "method": "test_aidl_structured",
+      "cases": [],
+      "input": "Pending separate explicit disposition for old low-level retained structured-body parse_status versus enriched native field metadata status.",
+      "status": "pending-original-intermediate-status-reconciliation"
+    }
+  ],
+  "declaredCorrectCases": 17,
+  "declaredPermissionCases": 14,
+  "declaredRawSchemaCases": 3,
+  "discoveryCount": null,
+  "semanticCompilation": "Pending coordinated Root gate",
+  "mockGate": "Not run",
+  "nativeBindings": "Not authored before mock proof",
+  "templates": [
+    {
+      "path": "remediation/nuke-planning/source/ParserOriginalContractCases.cs.template",
+      "sha256": "9ed2691c48ace645b83b3062b0bb904abc64135dd50a208e232c84a343c772bb"
+    },
+    {
+      "path": "remediation/nuke-planning/source/ParserOriginalMockTests.cs.template",
+      "sha256": "08faf934c6f02c4ac567405ee5810ec400ab7b89da8725fb07d06bbdb1310b27"
+    }
+  ],
+  "retiredAssertion": {
+    "method": "test_aidl",
+    "assertion": "members[2].kind == unsupported",
+    "decision": "remediation/nuke-planning/source/aidl-intermediate-shape-decision.json",
+    "decisionSha256": "7a62fbac2995ef103ad1da017371f44bbab6108ab947a56f4db3409f5519eaf3",
+    "treatment": "Separate explicit retirement; not counted as a satisfied old assertion. Final enriched constant inventory and unknown wire state are checked instead."
+  },
+  "controls": [
+    "Correct mocks assert received original bytes, immutable SourceContext/path and permission annotation/symbol/aidl arguments.",
+    "Each declared original source field has independent missing and wrong controls, preserving correct metadata so other faults cannot mask it.",
+    "Each asserted permission AST and raw-schema/unknown-codec property has independent missing and wrong controls.",
+    "Separate record loss/duplication, structural status, issue, byte mutation, wrong kind and exception controls.",
+    "Permission annotation/symbol mutation and invented grant authority are rejected.",
+    "Returning the retired unsupported constant shape is rejected by the final enriched inventory assertion."
+  ],
+  "pythonExecuted": false,
+  "nodeExecuted": false,
+  "appCopied": false,
+  "buildRun": false,
+  "normalVerified": false,
+  "acceptedComplete": false,
+  "safeToDelete": false
+}

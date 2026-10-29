@@ -1,0 +1,97 @@
+{
+  "localTimestamp": "2026-10-28T21:11:57",
+  "files": [
+    {
+      "path": "remediation/test_design023_guardrails.py",
+      "sourceSha256": "629f66fc32f5b2110d6b1d6b5e340a02a7d7abb40f06c519291d00614c8452ee",
+      "methods": [
+        "test_current_cross_artifact_model",
+        "test_missing_dispatch_edge_and_revoke_bypass_fail",
+        "test_placeholder_state_contract_and_missing_route_fail"
+      ],
+      "nativeClass": "LegacyGuardOriginalMethodRealTests",
+      "nativeMethod": "SameOriginalScenariosBindExistingNativeValidator",
+      "service": "ModelContractValidator",
+      "mockClass": "LegacyGuardOriginalMethodMockTests",
+      "mockCount": 11
+    },
+    {
+      "path": "remediation/tests_design018_contract.py",
+      "sourceSha256": "6503118aaebba7c2418af7a5b4130771c8b02245000f30fdd5fc62e731df7c94",
+      "methods": [
+        "test_callback_state_machine_has_terminal_cleanup_semantics",
+        "test_inflight_distinguishes_admission_from_dispatch",
+        "test_direct_event_extension_has_negotiation_and_fallback",
+        "test_models_include_arc_and_owner_sequences",
+        "test_all_screen_definitions_include_status_chip"
+      ],
+      "nativeClass": "LegacyDesign018MethodRealTests",
+      "nativeMethod": "SameOriginalPredicatesReadCurrentCanonicalSources",
+      "service": "Current canonical documents and source-pinned screen/manifest observations",
+      "mockClass": "LegacyDesign018MethodMockTests",
+      "mockCount": 21
+    }
+  ],
+  "sourcePins": [
+    {
+      "path": "remediation/nuke-app/Tests/Documentation/LegacyGuardOriginalMethodMockTests.cs",
+      "sha256": "bcdd99fd2a46559347bd9853e635202dbbf7638e5abc246a380922aaad06eae6"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Documentation/LegacyGuardOriginalMethodRealTests.cs",
+      "sha256": "8ea09c2dc11b73342b3f227d3f17e624db1172d8c6bd51f037ded4f5fbaf4b18"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Documentation/LegacyDesign018MethodMockTests.cs",
+      "sha256": "00c1f6f7dcfc61a32aa533d580a169ba785e44017c19099471c394e5a8b1f719"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Documentation/LegacyDesign018MethodRealTests.cs",
+      "sha256": "91dab9f34a6986c175cccf191cf2b4396b5018d60b6aff6e999dfecc8dbbbd4f"
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Documentation/ModelContractValidator.cs",
+      "sha256": "e1cc89b3896c5a2fcb6190a961be8f461df61e36314c1fd1251a9f8ce8b079c1"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Documentation/CurrentLayoutModelValidationRealTests.cs",
+      "sha256": "c04fff69099e8148e8011a2d8149890b1818ac40c8344f7176be7677b39a9237"
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Documentation/DocumentationProjectionMockTests.cs",
+      "sha256": "bd16be3e2e3c6b033a6c8a7688543a655aaee02935ec5a5a0cab9a34376375c7"
+    }
+  ],
+  "mock": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T2000464945300-52ca150df6a641fda415364277be9463/tests.trx",
+    "sha256": "3e07ca076bb9da3887d5b5311ee35e361b3c47fe26f3492b16851d0ef89d59b6",
+    "aggregatePassed": 542,
+    "ownPassed": 32
+  },
+  "native": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T2003076678642-9f5d4303446040bea48536d785df2c7e/tests.trx",
+    "sha256": "cf6240267713fed70793a4d7998a6f76d9c582b1c5d0f6801689acd759ed1527",
+    "aggregatePassed": 1217,
+    "ownPassed": 8,
+    "modelRegressions": 1169,
+    "currentModelChecks": 2,
+    "linuxRuntimeChecks": 6
+  },
+  "completeFileNormalClosure": true,
+  "awaitingCurrentFullGate": false,
+  "hv": false,
+  "safeToDeleteOriginal": false,
+  "semantics": [
+    "Exact original three guard scenarios and diagnostics bind the existing native validator, including the same dispatch/revoke and placeholder/state/missing-route input mutations.",
+    "The five design018 methods read current canonical text natively; independently pinned historical text supplies the discriminating mock oracle. Screen observations preserve the original nonrecursive SCR*.svg glob and its vacuous empty-glob boundary, with a nonempty manifest.",
+    "The Node subprocess, Python unittest and filesystem/JSON/XML mechanics are replaced by the existing monolith and xUnit/shared store. No original or custom Node source executes. No whole generator/corpus or HV claim follows."
+  ],
+  "fullGate": {
+    "trx": "remediation/nuke-app/artifacts/tests/20261028T2103237817668-497872b395c04926831f85473db9d916/tests.trx",
+    "sha256": "1c9ab52506e76080e48c4db21ae852148e8f3651ce087237824357d5fe3dfcdb",
+    "passed": 66003,
+    "failed": 0,
+    "skipped": 0,
+    "buildWarnings": 0
+  }
+}

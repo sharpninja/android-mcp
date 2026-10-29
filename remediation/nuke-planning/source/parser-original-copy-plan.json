@@ -1,0 +1,60 @@
+{
+  "observedAt": "2026-10-28T10:23:09",
+  "scope": "Exact two-file original-parser mock-first copy plan; no copy executed",
+  "checkpoint007RemoteCommit": "d6da36efa693d456b318ef82d68d198ede4f8ec7",
+  "releaseRequirements": [
+    "Publication owner releases the exclusive .NET window",
+    "Root issues a fresh exact two-file copy grant"
+  ],
+  "files": [
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/ParserOriginalContractCases.cs.template",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/ParserOriginalContractCases.cs",
+      "sha256": "9ed2691c48ace645b83b3062b0bb904abc64135dd50a208e232c84a343c772bb",
+      "expectedPrior": "absent",
+      "destinationAbsentAtObservation": true,
+      "syntaxErrors": 0
+    },
+    {
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/ParserOriginalMockTests.cs.template",
+      "destination": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Sources/ParserOriginalMockTests.cs",
+      "sha256": "08faf934c6f02c4ac567405ee5810ec400ab7b89da8725fb07d06bbdb1310b27",
+      "expectedPrior": "absent",
+      "destinationAbsentAtObservation": true,
+      "syntaxErrors": 0
+    }
+  ],
+  "guardProtocol": [
+    "Recheck both full source hashes and destination absence after the fresh grant",
+    "Analyze the existing guarded copy helper and preview both copies with WhatIf",
+    "Copy only these two files as one coherent mock-only increment",
+    "Verify each destination hash equals its approved source hash",
+    "Report exact copy receipts and freeze both files for Root's coordinated gate"
+  ],
+  "mockClass": "AndroidMcp.BuildTool.Tests.Sources.ParserOriginalMockTests",
+  "declaredCorrectCases": 17,
+  "declaredOriginalMethodsStagedPerFile": 7,
+  "discoveryCount": null,
+  "semanticCompilation": "pending",
+  "mockGate": "not run",
+  "nativeBindings": "not authored before green mock proof",
+  "mappingReceipt": {
+    "path": "remediation/nuke-planning/source/parser-original-mock-plan.json",
+    "sha256": "968220d70e30961770ac1b6a7d44258def7e88aec1951a440aff1c0c90d2a83f"
+  },
+  "retiredAssertion": "Only the obsolete low-level members[2].kind == unsupported constant wrapper. It is explicit and separate from satisfied assertions; final constant inventory, raw value and unknown wire status are required.",
+  "openOriginalMethod": "test_aidl_structured remains open until its separate low-level caller/status decision and assertion reconciliation",
+  "ledgerBaseline": {
+    "publishedPaths": 198,
+    "normalVerifiedTestFiles": 10,
+    "normalMethodScopes": 87,
+    "producerCompletionInferred": false
+  },
+  "appCopied": false,
+  "buildRun": false,
+  "pythonExecuted": false,
+  "nodeExecuted": false,
+  "normalVerified": false,
+  "hvAccepted": false,
+  "safeToDelete": false
+}

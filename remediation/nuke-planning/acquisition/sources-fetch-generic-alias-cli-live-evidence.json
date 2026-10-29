@@ -1,0 +1,254 @@
+{
+  "timestamp": "2026-10-28T13:36:24",
+  "scope": "Actual offline GenericRehydrate last-alias Sources/Fetch and sealed replay on the existing native probe",
+  "gate": {
+    "artifact": {
+      "path": "remediation/nuke-app/artifacts/tests/20261028T1328354805488-fb8ef073570f4973abd061cd0ba98b7a/tests.trx",
+      "sha256": "c81cd0accff10f779814e47432d1f64f1274cfb6d83bc1dd8f7a90881d18fecc",
+      "length": 989805
+    },
+    "scoped": [
+      {
+        "class": "SourcesFetchAliasCliRealTests",
+        "discovered": 1,
+        "passed": 1,
+        "failed": 0,
+        "other": 0
+      },
+      {
+        "class": "SourcesFetchCliRealTests",
+        "discovered": 1,
+        "passed": 1,
+        "failed": 0,
+        "other": 0
+      }
+    ],
+    "aggregatePassed": 594,
+    "aggregateFailed": 13,
+    "aggregateGreenClaimed": false,
+    "foreignFailedTests": [
+      "AndroidMcp.BuildTool.Tests.Documentation.DocumentationLegacyReceiptMockTests.EachStateAndStepSvgReceiptPathIsChecked",
+      "AndroidMcp.BuildTool.Tests.Documentation.DocumentationLegacyReceiptMockTests.CorrectFiveReceiptMocksPreserveTypedAuthorities",
+      "AndroidMcp.BuildTool.Tests.Documentation.DocumentationLegacyReceiptMockTests.ExactTextReceiptsRejectDifferentSuccessText(id: \"DOCS-VARIABLE\")",
+      "AndroidMcp.BuildTool.Tests.Documentation.DocumentationLegacyReceiptRealTests.SameTypedMetadataAndFailureCasesBindNativeReceipts",
+      "AndroidMcp.BuildTool.Tests.Documentation.DocumentationLegacyReceiptMockTests.EachReceiptPathMediaAndTerminatorFaultIsRejected",
+      "AndroidMcp.BuildTool.Tests.Documentation.DocumentationLegacyReceiptMockTests.ReceiptFormattingCannotMutateAdmittedProjection",
+      "AndroidMcp.BuildTool.Tests.Documentation.DocumentationLegacyReceiptMockTests.ExactTextReceiptsRejectDifferentSuccessText(id: \"ARCH-ORIGINAL\")",
+      "AndroidMcp.BuildTool.Tests.Documentation.DocumentationLegacyReceiptMockTests.ExactTextReceiptsRejectDifferentSuccessText(id: \"DOCS-ORIGINAL\")",
+      "AndroidMcp.BuildTool.Tests.Documentation.DocumentationLegacyReceiptMockTests.EveryWrongValidationOutcomeIsRejected",
+      "AndroidMcp.BuildTool.Tests.Documentation.DocumentationLegacyReceiptMockTests.EveryOriginalJsonFieldRejectsWrongMetadata",
+      "AndroidMcp.BuildTool.Tests.Documentation.DocumentationLegacyReceiptMockTests.NativeReceiptInputUsesTheRetainedProducerIdentityWithoutChangingHistoricalCarrier",
+      "AndroidMcp.BuildTool.Tests.Documentation.DocumentationLegacyReceiptMockTests.ExactTextReceiptsRejectDifferentSuccessText(id: \"ARCH-VARIABLE\")",
+      "AndroidMcp.BuildTool.Tests.Review.Staging.SdkGlobalConfigMappingNativeTests.Same_SDK_candidate_and_actual_editor_config_case_binds_to_native_projection"
+    ]
+  },
+  "fixture": {
+    "root": "remediation/nuke-app/artifacts/gate-temporaries/20261028T1328251495532-0d3158c5ae8c474789f655caa8247049/android-mcp-sources-fetch/a393b2c540b545309f0a95db5ecbaefc/fixture with spaces",
+    "originalSetup": "NativeSourcesFetchCliProbe, optional existing typed request input",
+    "newSetupOrRunner": false,
+    "children": [
+      {
+        "child": 1,
+        "operation": "Sources/Fetch",
+        "profile": "GenericRehydrate",
+        "manifest": {
+          "RelativePath": "sources/acquisition.json",
+          "Sha256": "4f0bf14792ab03f4e81fc23fd1acaceb2915420d20f20ec2714c5298920d96f5",
+          "Length": 4749,
+          "MediaType": "application/json"
+        },
+        "reused": false,
+        "currentCounts": {
+          "Downloaded": 2,
+          "Reused": 0,
+          "SelectedPaths": 2,
+          "TotalPaths": 2,
+          "Complete": true
+        },
+        "osExit": 0,
+        "exitEvidence": "SAME native probe asserts both ProcessResult exit codes; no separate exit-code artifact claimed"
+      },
+      {
+        "child": 2,
+        "operation": "Sources/Fetch",
+        "profile": "GenericRehydrate",
+        "manifest": {
+          "RelativePath": "sources/acquisition.json",
+          "Sha256": "4f0bf14792ab03f4e81fc23fd1acaceb2915420d20f20ec2714c5298920d96f5",
+          "Length": 4749,
+          "MediaType": "application/json"
+        },
+        "reused": true,
+        "currentCounts": {
+          "Downloaded": 0,
+          "Reused": 2,
+          "SelectedPaths": 2,
+          "TotalPaths": 2,
+          "Complete": true
+        },
+        "osExit": 0,
+        "exitEvidence": "SAME native probe asserts both ProcessResult exit codes; no separate exit-code artifact claimed"
+      }
+    ]
+  },
+  "observed": {
+    "logicalRows": 3,
+    "selectedLogicalRows": 3,
+    "physicalPaths": 2,
+    "selectedPhysicalPaths": 2,
+    "recipe": {
+      "path": "remediation/nuke-app/artifacts/gate-temporaries/20261028T1328251495532-0d3158c5ae8c474789f655caa8247049/android-mcp-sources-fetch/a393b2c540b545309f0a95db5ecbaefc/fixture with spaces/locked inputs/rehydration/fixture.json",
+      "sha256": "a58eda6bdd2f243c5ac1cb7df1eda10b20a90d52f8359e339b1ba6b6d3c0bd60",
+      "length": 1301
+    },
+    "manifest": {
+      "path": "remediation/nuke-app/artifacts/gate-temporaries/20261028T1328251495532-0d3158c5ae8c474789f655caa8247049/android-mcp-sources-fetch/a393b2c540b545309f0a95db5ecbaefc/fixture with spaces/raw outputs/sources/acquisition.json",
+      "sha256": "4f0bf14792ab03f4e81fc23fd1acaceb2915420d20f20ec2714c5298920d96f5",
+      "length": 4749
+    },
+    "sourceStatuses": [
+      "downloaded",
+      "downloaded"
+    ],
+    "firstPhysicalPin": {
+      "Archive": null,
+      "Compatibility": 1,
+      "Encoding": 0,
+      "GitBlob": null,
+      "LocalPath": "blobs/a",
+      "RequiredLocalSnapshot": "snapshots/a.txt",
+      "Revision": "last-alias",
+      "Sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "SizeBytes": 3,
+      "Url": "https://example.invalid/last-alias"
+    },
+    "operationalSnapshot": {
+      "BundlePath": "snapshots/a.txt",
+      "Length": 3,
+      "LocalPath": "blobs/a",
+      "Sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "SourcePath": "aliases/A.txt"
+    },
+    "firstAuditSnapshotStillNull": true,
+    "allOriginalRowsEqual": "SAME native case compares every canonical OriginalRow against the input recipe",
+    "replayReceiptBytesUnchanged": "SAME native case compares before/after receipt bytes",
+    "replayAllSixOutputPinsUnchanged": "SAME native case compares before/after all output pins",
+    "inputsAndBundleRetained": "SAME native probe hashes both before and after the two child invocations"
+  },
+  "originalInputs": [
+    {
+      "path": "remediation/nuke-app/artifacts/gate-temporaries/20261028T1328251495532-0d3158c5ae8c474789f655caa8247049/android-mcp-sources-fetch/a393b2c540b545309f0a95db5ecbaefc/fixture with spaces/locked inputs/rehydration/fixture.json",
+      "sha256": "a58eda6bdd2f243c5ac1cb7df1eda10b20a90d52f8359e339b1ba6b6d3c0bd60",
+      "length": 1301
+    },
+    {
+      "path": "remediation/nuke-app/artifacts/gate-temporaries/20261028T1328251495532-0d3158c5ae8c474789f655caa8247049/android-mcp-sources-fetch/a393b2c540b545309f0a95db5ecbaefc/fixture with spaces/locked inputs/rehydration/fixture.lock.json",
+      "sha256": "a00a03cb2aab47a5b9f6f25ca2d37c0ff4cc87c7eb972afd6daa944d49a7acc6",
+      "length": 153
+    }
+  ],
+  "originalBundle": [
+    {
+      "path": "remediation/nuke-app/artifacts/gate-temporaries/20261028T1328251495532-0d3158c5ae8c474789f655caa8247049/android-mcp-sources-fetch/a393b2c540b545309f0a95db5ecbaefc/fixture with spaces/owner bundle/snapshots/a.txt",
+      "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "length": 3
+    },
+    {
+      "path": "remediation/nuke-app/artifacts/gate-temporaries/20261028T1328251495532-0d3158c5ae8c474789f655caa8247049/android-mcp-sources-fetch/a393b2c540b545309f0a95db5ecbaefc/fixture with spaces/owner bundle/snapshots/api.txt",
+      "sha256": "cb8379ac2098aa165029e3938a51da0bcecfc008fd6795f401178647f96c5b34",
+      "length": 3
+    }
+  ],
+  "retainedOutputs": [
+    {
+      "path": "remediation/nuke-app/artifacts/gate-temporaries/20261028T1328251495532-0d3158c5ae8c474789f655caa8247049/android-mcp-sources-fetch/a393b2c540b545309f0a95db5ecbaefc/fixture with spaces/raw outputs/.leases/2a92eb688918327b0d86d9695480210310ce17e100b7becfc7cc098fb9c2de21.lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    {
+      "path": "remediation/nuke-app/artifacts/gate-temporaries/20261028T1328251495532-0d3158c5ae8c474789f655caa8247049/android-mcp-sources-fetch/a393b2c540b545309f0a95db5ecbaefc/fixture with spaces/raw outputs/blobs/a",
+      "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "length": 3
+    },
+    {
+      "path": "remediation/nuke-app/artifacts/gate-temporaries/20261028T1328251495532-0d3158c5ae8c474789f655caa8247049/android-mcp-sources-fetch/a393b2c540b545309f0a95db5ecbaefc/fixture with spaces/raw outputs/blobs/b",
+      "sha256": "cb8379ac2098aa165029e3938a51da0bcecfc008fd6795f401178647f96c5b34",
+      "length": 3
+    },
+    {
+      "path": "remediation/nuke-app/artifacts/gate-temporaries/20261028T1328251495532-0d3158c5ae8c474789f655caa8247049/android-mcp-sources-fetch/a393b2c540b545309f0a95db5ecbaefc/fixture with spaces/raw outputs/snapshots/a.txt",
+      "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "length": 3
+    },
+    {
+      "path": "remediation/nuke-app/artifacts/gate-temporaries/20261028T1328251495532-0d3158c5ae8c474789f655caa8247049/android-mcp-sources-fetch/a393b2c540b545309f0a95db5ecbaefc/fixture with spaces/raw outputs/snapshots/api.txt",
+      "sha256": "cb8379ac2098aa165029e3938a51da0bcecfc008fd6795f401178647f96c5b34",
+      "length": 3
+    },
+    {
+      "path": "remediation/nuke-app/artifacts/gate-temporaries/20261028T1328251495532-0d3158c5ae8c474789f655caa8247049/android-mcp-sources-fetch/a393b2c540b545309f0a95db5ecbaefc/fixture with spaces/raw outputs/sources/acquisition.json",
+      "sha256": "4f0bf14792ab03f4e81fc23fd1acaceb2915420d20f20ec2714c5298920d96f5",
+      "length": 4749
+    }
+  ],
+  "privateCaptureReferencesOnly": [
+    {
+      "path": "remediation/nuke-app/artifacts/gate-temporaries/20261028T1328251495532-0d3158c5ae8c474789f655caa8247049/android-mcp-sources-fetch/a393b2c540b545309f0a95db5ecbaefc/fixture with spaces/process-1/stdout.bin",
+      "sha256": "d668581b764fc0197bc68a46d515d92943175ccb9f016a7fb335e7919ce243b6",
+      "length": 2215
+    },
+    {
+      "path": "remediation/nuke-app/artifacts/gate-temporaries/20261028T1328251495532-0d3158c5ae8c474789f655caa8247049/android-mcp-sources-fetch/a393b2c540b545309f0a95db5ecbaefc/fixture with spaces/process-1/stderr.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    {
+      "path": "remediation/nuke-app/artifacts/gate-temporaries/20261028T1328251495532-0d3158c5ae8c474789f655caa8247049/android-mcp-sources-fetch/a393b2c540b545309f0a95db5ecbaefc/fixture with spaces/process-2/stdout.bin",
+      "sha256": "123fd0206d00fa588d880c95b3f23d0a767c5bbf0b4292582234fc7cffcf9ddc",
+      "length": 2214
+    },
+    {
+      "path": "remediation/nuke-app/artifacts/gate-temporaries/20261028T1328251495532-0d3158c5ae8c474789f655caa8247049/android-mcp-sources-fetch/a393b2c540b545309f0a95db5ecbaefc/fixture with spaces/process-2/stderr.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    }
+  ],
+  "sourceFiles": [
+    {
+      "path": "remediation/nuke-app/Tests/Core/SourcesFetchCliRealTests.cs",
+      "sha256": "608fee5d675e4d7f46c0ba961fb0347887f34e774940ea2533871c0b847e1313",
+      "length": 4278
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Core/SourcesFetchAliasCliContractTests.cs",
+      "sha256": "cc694024c4bd635959112385756da80d33e870f04c5715fef0b5c1d226494816",
+      "length": 12308
+    },
+    {
+      "path": "remediation/nuke-app/Tests/Core/SourcesFetchAliasCliRealTests.cs",
+      "sha256": "6b17bb741807971fc8f1bfd290c567183918fc6f965703e8c73835bb3d480cf0",
+      "length": 362
+    },
+    {
+      "path": "remediation/nuke-app/Modules/Publication/RehydrationPlanner.cs",
+      "sha256": "aff18c7e6d5cd6650739bee2e78a5f08537fcef4aa08b5849fe8c21ee9722937",
+      "length": 20983
+    }
+  ],
+  "legacy": {
+    "path": "publication/android-mcp-git/tools/rehydrate.py",
+    "sha256": "73623b939aacd5108382b1f3d335de2a8665205553fa8ee2cf99f3eadfea0263",
+    "clause": "main454-458, complete last row per local_path, first key insertion order, physical limit then acquisition"
+  },
+  "boundaries": {
+    "networkAcquisition": false,
+    "legacySourceExecuted": false,
+    "newParser": false,
+    "oldSealedReceiptsRelabeled": false,
+    "wholeRehydrateParityClaimed": false,
+    "rawLogsPublished": false,
+    "ownDotnetInvoked": false,
+    "pacingWorkFrozen": true,
+    "priorMcpCompletionDenialPreserved": true
+  }
+}
