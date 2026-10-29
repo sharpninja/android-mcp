@@ -68,8 +68,6 @@ public sealed partial class Build
             if(captured is null)
                 foreach(var descriptor in new DocumentationProjectSourceCatalog().DescribeProjectSources(selection).Where(item=>item.Kind is DocumentationProjectInputKind.ToolchainLock or DocumentationProjectInputKind.RendererLock))
                     configuration.Add(new(descriptor.Source.RelativePath,await source.ReadAsync(descriptor.Source.RelativePath),descriptor.Source.MediaType));
-            const string propertiesPath="gradle/wrapper/gradle-wrapper.properties";
-            wrapperProperties=new(propertiesPath,await source.ReadAsync(propertiesPath),"application/octet-stream");configuration.Add(wrapperProperties);
             var profile=rendererProfile=profiles.Read(Lock("toolchain-lock.json"),Lock("renderer-lock.json"));
             var jar=profile.Downloads.Single(pin=>pin.LocalPath==".tools/plantuml-"+profile.PlantUmlVersion+".jar");
             var docker=await ReadToolIdentity(DockerIdentity!,"Docker");
@@ -82,6 +80,27 @@ public sealed partial class Build
         ArtifactGenerationRuntime Runtime(string root,IArtifactStore destination)=>new(source,destination,new FileArtifactLeaseProvider(Path.Combine(root,".leases")),verifier,generationManifests,"design-assets/"+hashes.Sha256(Encoding.UTF8.GetBytes(root)));
         var clock=new SystemClock();var processes=new NativeProcessRunner(clock);var transport=new ArchitectureRendererTransport(processes);
         var preparation=new ArchitectureAssetPreparation();var generation=Generation??"gradle-compatibility";
+        var toolWorkspace=Has(DesignStage.Tools)?new NativeArtifactWorkspace(cache):null;
+        Artifact? bootstrapReceipt=null;
+        IDocumentationToolBootstrap bootstrap=new DocumentationToolBootstrap(new ToolArtifactAcquirer(HttpByteTransport.Create(HttpByteTransportProfile.DocumentationBootstrap,clock),toolStore,new FileArtifactLeaseProvider(Path.Combine(cache,".leases")),canonical),
+            toolWorkspace is null?null:new DocumentationBootstrapFileEffects(toolWorkspace,toolWorkspace,new DocumentationWrapperPropertiesValidator(),async token=>{
+                const string path="gradle/wrapper/gradle-wrapper.properties";
+                wrapperProperties=new(path,await source.ReadAsync(path,token),"application/octet-stream");return wrapperProperties;
+            }));
+        if(Has(DesignStage.Tools))
+        {
+            // Original bootstrap/read order precedes the immutable generation's
+            // source freeze. The normal manifest now owns the late-read pin.
+            var admitted=await bootstrap.AcquireAsync(rendererProfile!,ToolAccess!.Value,OfflineGradleChecksumProof);
+            configuration.Add(wrapperProperties??throw new ArchitectureAssetException("WRAPPER_PROPERTIES","Bootstrap did not capture the original properties input"));
+            var bootstrapRoot=ArtifactPaths.Resolve(work,"bootstrap");
+            var bootstrapStore=new FileArtifactStore(bootstrapRoot,bytes=>hashes.Sha256(bytes.Span));
+            var report=await new DocumentationBootstrapCompletion(Runtime(bootstrapRoot,bootstrapStore),new PinnedArtifactReader(bootstrapStore),
+                new DocumentationBootstrapReportProjector(clock,verifier),verifier).CompleteAsync(generation+"-bootstrap",rendererProfile!,admitted,wrapperProperties);
+            bootstrapReceipt=report.Receipt;
+            Console.Write(report.Summary);
+            bootstrap=new DocumentationAdmittedToolBootstrap(rendererProfile!,ToolAccess.Value,OfflineGradleChecksumProof,admitted,new PinnedArtifactReader(toolStore));
+        }
         ArtifactGenerationPreparation? buildPayload=null;
         if(Has(DesignStage.Package))
         {
@@ -121,14 +140,11 @@ public sealed partial class Build
         var legacyReceipts=new DocumentationLegacyReceipts(canonical,strict,verifier);
         var composer=new ArchitectureProjectionComposer(Runtime(work,workStore),workStore,verifier,preparation,transport,
             new NativeRendererImageAdmission(processes,new ProcessCaptureReader(receiptRoot),transport,hashes),generation+"-work",legacyReceipts);
-        var toolWorkspace=Has(DesignStage.Tools)?new NativeArtifactWorkspace(cache):null;
-        var bootstrap=new DocumentationToolBootstrap(new ToolArtifactAcquirer(HttpByteTransport.Create(clock),toolStore,new FileArtifactLeaseProvider(Path.Combine(cache,".leases")),canonical),
-            toolWorkspace is null?null:new DocumentationBootstrapFileEffects(toolWorkspace,toolWorkspace,new DocumentationWrapperPropertiesValidator(),wrapperProperties!));
         var modules=new ModuleGraphValidator();var projector=new DocumentationProjector(new DocumentationModelReader());
         var preflight=new DocumentationModelPreflight(new DocumentationModelReader(),projector,new ModelContractValidator(hashes),modules,strict);
         var manifests=new DocumentationManifestBuilder(verifier);var packages=new DocumentationPackageBuilder(new PublicationChecker(canonical),verifier,manifests);
         var html=new SourceHtmlDecoder();var documents=new GeneratedDesignValidator(new ArchitectureViewIndexReader(),new ArtifactReferenceResolver(html.Decode),strict,verifier,html);
-        var factory=new DesignCompositionRecipeFactory(profiles,modules,preparation,composer,bootstrap,packages,preflight,documents,manifests,sourcePlanner,verifier,projector,legacyReceipts,buildPayload);
+        var factory=new DesignCompositionRecipeFactory(profiles,modules,preparation,composer,bootstrap,packages,preflight,documents,manifests,sourcePlanner,verifier,projector,legacyReceipts,buildPayload,bootstrapReceipt);
         // No fictitious ToolIdentity is created for CodeExtract; its admitted
         // subset requires no renderer context and never dereferences this value.
         var request=new DesignArchitectureRequest(generation,context!,ToolAccess!.Value,OfflineGradleChecksumProof,

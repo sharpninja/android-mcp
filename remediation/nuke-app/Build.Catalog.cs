@@ -11,11 +11,15 @@ public sealed partial class Build
 {
     // Java remains an explicit selected-manifest admission. The shared loader
     // is bound after its mock and native gates; it never builds or fetches.
-    private Task BuildCatalog()=>BuildCatalog(new SourcesRuntimeFactory(new JavaSourceRuntimeLoader()));
+    private Task BuildCatalog()
+    {
+        var javaLoader=new JavaSourceRuntimeLoader();
+        return BuildCatalog(new SourcesRuntimeFactory(javaLoader),new SourceProducerIdentityBuilder(javaLoader:javaLoader));
+    }
 
     // Root binds the one authoritative Sources runtime factory. This overload
     // adds no extractor registrations, kind aliases, parser or Java fallback.
-    private async Task BuildCatalog(ISourcesRuntimeFactory sourcesFactory)
+    private async Task BuildCatalog(ISourcesRuntimeFactory sourcesFactory,ISourceProducerIdentityBuilder producerIdentity)
     {
         var project=Path.GetFullPath(ProjectRoot!);var output=Path.GetFullPath(OutputRoot!);var stage=Path.GetFullPath(StageRoot!);
         var manifest=Path.GetFullPath(SourceManifest!,project);var sourceRoot=Path.GetDirectoryName(manifest)!;
@@ -38,9 +42,11 @@ public sealed partial class Build
         var java=string.IsNullOrWhiteSpace(JavaNativeManifest) ? null : new SourceJavaAdmission(Path.GetFullPath(JavaNativeManifest,project));
         // Admission/ABI checks happen through the shared source factory before
         // CatalogBuild opens a stage or final artifact. Runtime owns disposal.
-        using var runtime=sourcesFactory.Create(profile,java);var concerns=runtime.Concerns;
+        var admitted=producerIdentity.Create(java);
+        using var runtime=sourcesFactory.Create(profile,admitted.JavaAdmission);var concerns=runtime.Concerns;
         var service=new CatalogBuild(project,runtime.Dispatcher,concerns.PermissionExpressions,concerns.AnnotationTargets,concerns.TypeHeaders,canonical,
-            sourceMetadata:new CatalogSourceMetadata(Path.Combine(project,"contracts/SourceContractMetadata.schema.json"),canonical,concerns.Callbacks,concerns.Taxonomy));
+            sourceMetadata:new CatalogSourceMetadata(Path.Combine(project,"contracts/SourceContractMetadata.schema.json"),canonical,concerns.Callbacks,concerns.Taxonomy),
+            sourceProfile:profile,nativeAdmission:admitted);
         var result=await service.BuildAsync(manifest,output,stage);
         Console.WriteLine(JsonSerializer.Serialize(new{result.RegistryId,result.ProducerFingerprint,result.Artifacts,Counts=result.Validation["counts"],Complete=false,OutputRoot=output}));
     }

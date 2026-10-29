@@ -21,23 +21,27 @@ public sealed partial class Build
             result.Receipt.HistoricalByteIdentityClaimed,OutputRoot=context.OutputRoot}));
     }
 
-    private (string InputRoot,string OutputRoot,RehydrationPlanner Planner,SourceBatch Batch) CreateSourceBatchContext()
+    private (string InputRoot,string OutputRoot,RehydrationPlanner Planner,SourceBatch Batch,FileArtifactStore RawStore) CreateSourceBatchContext(SnapshotCallerMode? snapshotMode=null)
     {
         var input=Path.TrimEndingDirectorySeparator(Path.GetFullPath(ProjectRoot!));
         var output=Path.TrimEndingDirectorySeparator(Path.GetFullPath(OutputRoot!));
-        var bundled=Path.TrimEndingDirectorySeparator(Path.GetFullPath(BundleRoot!));
+        var bundled=BundleRoot is null?null:Path.TrimEndingDirectorySeparator(Path.GetFullPath(BundleRoot));
+        if(snapshotMode is null&&bundled is null)throw new InvalidOperationException("An explicit immutable bundle root is required.");
         var comparison=OperatingSystem.IsWindows()?StringComparison.OrdinalIgnoreCase:StringComparison.Ordinal;
-        if(string.Equals(input,output,comparison)||string.Equals(bundled,output,comparison))
+        if(string.Equals(input,output,comparison)||bundled is not null&&string.Equals(bundled,output,comparison))
             throw new InvalidOperationException("Source acquisition requires an output root separate from the input and bundle roots.");
         // Shared path policy rejects reparse ancestors before any acquisition effects.
         _=ArtifactPaths.Resolve(input,".source-fetch-admission");
         _=ArtifactPaths.Resolve(output,".source-fetch-admission");
-        _=ArtifactPaths.Resolve(bundled,".source-fetch-admission");
+        if(bundled is not null)_=ArtifactPaths.Resolve(bundled,".source-fetch-admission");
         var canonical=new CanonicalJson();
         var destination=new FileArtifactStore(output,bytes=>ContentHash.Sha256(bytes.Span));
-        var bundle=new FileArtifactStore(bundled,bytes=>ContentHash.Sha256(bytes.Span));
-        return (input,output,new RehydrationPlanner(canonical),new SourceBatch(HttpByteTransport.Create(),destination,bundle,
-            new FileArtifactLeaseProvider(Path.Combine(output,".leases")),canonical,FetchDelaySeconds));
+        IArtifactStore bundle=bundled is null?new MissingSourceBundle():new FileArtifactStore(bundled,bytes=>ContentHash.Sha256(bytes.Span));
+        var transport=SnapshotFetchTransport.CreateForCaller(snapshotMode,profile=>profile==HttpByteTransportProfile.Default
+            ?HttpByteTransport.Create():HttpByteTransport.Create(profile));
+        var pause=snapshotMode is null?FetchDelaySeconds:snapshotMode==SnapshotCallerMode.Fetch?1d:0d;
+        return (input,output,new RehydrationPlanner(canonical),new SourceBatch(transport,destination,bundle,
+            new FileArtifactLeaseProvider(Path.Combine(output,".leases")),canonical,pause),destination);
     }
 
     private static string InputRelative(string root,string requested)
@@ -45,5 +49,12 @@ public sealed partial class Build
         var relative=Path.GetRelativePath(root,Path.GetFullPath(requested,root)).Replace(Path.DirectorySeparatorChar,'/');
         _=ArtifactPaths.Resolve(root,relative);
         return relative;
+    }
+    private sealed class MissingSourceBundle:IArtifactStore
+    {
+        public Task<ReadOnlyMemory<byte>> ReadAsync(string relativePath,CancellationToken cancellationToken=default)
+            =>Task.FromException<ReadOnlyMemory<byte>>(new FileNotFoundException("An explicit immutable bundle was not supplied."));
+        public Task<StoredArtifact> WriteAsync(Artifact artifact,CancellationToken cancellationToken=default)
+            =>Task.FromException<StoredArtifact>(new InvalidOperationException("An absent immutable bundle cannot be written."));
     }
 }

@@ -13,7 +13,11 @@ public sealed class NativeCatalogEffectiveInventoryProvider:ICatalogEffectiveInv
     public Task<CatalogEffectiveInventoryReply> CaptureAsync(CatalogEffectiveInventoryCall call)=>Task.FromResult(Capture(call));
     private static CatalogEffectiveInventoryReply Capture(CatalogEffectiveInventoryCall call)
     {
-        using var producer=new NativeCatalogBuildProvider{SourceValues=values=>values[2]=("aidl","IFoo.aidl",CatalogEffectiveInventoryCases.Aidl)};
+        using var producer=new NativeCatalogBuildProvider{SourceValues=values=>
+        {
+            values[2]=("aidl","IFoo.aidl",CatalogEffectiveInventoryCases.Aidl);
+            if(call.Variant=="owner-ambiguous")values[0]=(values[0].Kind,values[0].Path,values[0].Text+CatalogLocalOwnerCases.SecondOwnerSource);
+        }};
         var built=producer.Build(new("effective-capture-fixture"));Assert.Equal("ok",built.Outcome);
         var original=Path.Combine(producer.EvidenceRoot,"out/catalog.sqlite");var path=Path.Combine(producer.EvidenceRoot,"capture-fixture.sqlite");
         File.Copy(original,path);var originalHash=FileHash(original);Assert.Equal(originalHash,FileHash(path));
@@ -39,9 +43,15 @@ public sealed class NativeCatalogEffectiveInventoryProvider:ICatalogEffectiveInv
             using var query=database.Command("SELECT * FROM "+table+" ORDER BY entry_id,revision");using var rows=query.ExecuteReader();var values=new List<object?[]>();
             while(rows.Read()){var row=new object?[rows.FieldCount];for(var index=0;index<row.Length;index++)row[index]=rows.IsDBNull(index) ? null : rows.GetValue(index);values.Add(row);}return JsonSerializer.Serialize(values);
         }
-        void Overlay(JsonObject doc,string state="active",bool local=false,string? rawDocument=null)
+        string LocalAddition(JsonObject doc)
         {
-            var key=doc["entry_id"]!.GetValue<string>();var registry=Scalar("SELECT registry_id FROM active_registry");
+            doc["canonical_signature"]=CatalogTombstoneCases.Signature;doc["name"]="added";doc["origin"]="local";doc["overlay_revision"]=1;
+            var id=ContentHash.Sha256(Encoding.UTF8.GetBytes(doc["canonical_signature"]!.GetValue<string>()));doc["entry_id"]=id;
+            doc["arguments"]=new JsonArray(new JsonObject{["text"]="int",["status"]="primitive",["codec_status"]="unknown"});return id;
+        }
+        void Overlay(JsonObject doc,string state="active",bool local=false,string? rawDocument=null,string? rowKey=null)
+        {
+            var key=rowKey ?? doc["entry_id"]!.GetValue<string>();var registry=Scalar("SELECT registry_id FROM active_registry");
             var baseHash=local ? null : Scalar("SELECT record_sha256 FROM effective_entries WHERE entry_id=$id",("$id",key));
             var document=rawDocument ?? Text(doc);
             using var transaction=database.Connection.BeginTransaction();
@@ -74,11 +84,18 @@ public sealed class NativeCatalogEffectiveInventoryProvider:ICatalogEffectiveInv
             var local=Doc("aidl:a.I#take(P)");local["origin"]="local";local["overlay_revision"]=1;local["canonical_signature"]="aidl:a.I#added(int)";
             local["entry_id"]=ContentHash.Sha256(Encoding.UTF8.GetBytes("aidl:a.I#other(int)"));Overlay(local,local:true);
         }
+        if(call.Variant is "invalid-active-schema" or "overlay-row-key-mismatch")
+        {
+            var local=Doc("aidl:a.I#take(P)");var rowKey=LocalAddition(local);
+            if(call.Variant=="invalid-active-schema")local.Remove("permission");
+            else local["entry_id"]=new string('0',64); // SHA(signature)==SQL key; only document key guard rejects.
+            Overlay(local,local:true,rowKey:rowKey);
+        }
         var baseline=ImportedRows();SqliteTransaction? outer=null;CatalogInventoryCapture? captured=null;
         if(call.Variant=="caller-transaction") outer=database.Connection.BeginTransaction(deferred:true);
         try
         {
-            if(call.Variant is "missing-version" or "missing-projection" or "wrong-digest" or "wrong-identity" or "caller-transaction" or "invalid-overlay-identity" or "missing-structured-shape")
+            if(call.Variant is "missing-version" or "missing-projection" or "wrong-digest" or "wrong-identity" or "caller-transaction" or "invalid-overlay-identity" or "missing-structured-shape" or "invalid-active-schema" or "overlay-row-key-mismatch")
             {
                 try{captured=inventory.Capture();throw new InvalidOperationException("Expected checked capture failure");}
                 catch(Exception error) when(error is InvalidDataException or InvalidOperationException)
@@ -106,22 +123,45 @@ public sealed class NativeCatalogEffectiveInventoryProvider:ICatalogEffectiveInv
             string? admission=null,noAuthority=null,changedAdmission=null;bool? schemaChanged=null,documentChanged=null,hashChanged=null;long? overlayDelta=null;string? dependencyState=null;
             if(call.Variant=="suppressed-binding") Overlay(method,"suppressed");
             var tombstone=call.Variant.StartsWith("tombstone-",StringComparison.Ordinal);
-            if(call.Variant=="local-addition" || tombstone)
+            var localOwner=call.Variant.StartsWith("owner-",StringComparison.Ordinal);
+            if(call.Variant=="local-addition" || tombstone || localOwner)
             {
-                method["canonical_signature"]="aidl:a.I#added(int)";method["name"]="added";method["origin"]="local";method["overlay_revision"]=1;
-                key=ContentHash.Sha256(Encoding.UTF8.GetBytes(method["canonical_signature"]!.GetValue<string>()));method["entry_id"]=key;
-                method["arguments"]=new JsonArray(new JsonObject{["text"]="int",["status"]="primitive",["codec_status"]="unknown"});
+                key=LocalAddition(method);
+                if(call.Variant=="owner-absent")method["owner"]="a.Missing";
                 var state=tombstone ? call.Variant.Split('-')[1] : "active";
                 Overlay(method,state,local:true,rawDocument:tombstone ? CatalogTombstoneCases.Document(call).Raw : null);
             }
-            if(tombstone)
+            if(tombstone || localOwner)
             {
                 var overlays=LocalRows("overlays");var history=LocalRows("entry_history");
-                var expectedHash=CatalogTombstoneCases.Document(call).CanonicalHash ?? ContentHash.Sha256(Encoding.UTF8.GetBytes(Text(method)));
+                var expectedHash=(tombstone ? CatalogTombstoneCases.Document(call).CanonicalHash : null) ?? ContentHash.Sha256(Encoding.UTF8.GetBytes(Text(method)));
                 captured=inventory.Capture();var tombstoneSnapshot=Resolve(captured);var tombstoneRow=Row(tombstoneSnapshot,key);
                 var item=captured.Inventory.Single(row=>row.GetProperty("entry_id").GetString()==key);
                 var keys=captured.Inventory.Select(row=>row.GetProperty("entry_id").GetString()!).ToArray();
                 var digestBytes=Encoding.UTF8.GetBytes(string.Concat(captured.Inventory.OrderBy(row=>row.GetProperty("entry_id").GetString(),StringComparer.Ordinal).Select(row=>Encoding.UTF8.GetString(canonical.Serialize(row))+"\n")));
+                if(localOwner)
+                {
+                    var variant=item.GetProperty("variants").EnumerateArray().Single();var dependencies=variant.GetProperty("dependencies").EnumerateArray().ToArray();
+                    using var ownerQuery=database.Command("SELECT binding_id FROM bindings WHERE owner=$owner",null,("$owner",method["owner"]!.GetValue<string>()));
+                    using var ownerRows=ownerQuery.ExecuteReader();var owners=new HashSet<string>(StringComparer.Ordinal);
+                    while(ownerRows.Read()){var owner=ownerRows.GetString(0);if(captured.Inventory.Any(value=>value.GetProperty("entry_id").GetString()==owner && value.GetProperty("entity_kind").GetString()=="type"))owners.Add(owner);}
+                    var contracts=new CatalogContracts(canonical);var contract=contracts.Digest(JsonSerializer.SerializeToElement(method));
+                    var localHash=ContentHash.Sha256(Encoding.UTF8.GetBytes(Text(method)));
+                    var expectedOwnerHash=contracts.Digest(JsonSerializer.SerializeToElement(Doc("aidl:a.I")));
+                    var ownerObservation=new CatalogLocalOwnerObservation(item.GetProperty("entity_kind").GetString()!,item.GetProperty("variants").GetArrayLength(),variant.GetProperty("availability").GetProperty("unknown_reason").GetString()!,owners.Count,dependencies.Length,
+                        string.Join(";",dependencies.Select(value=>value.GetProperty("entry_id").GetString()).Order(StringComparer.Ordinal)),variant.GetProperty("schema_hash").GetString()==contract,
+                        dependencies.All(value=>value.GetProperty("schema_hash").GetString()==expectedOwnerHash),
+                        item.GetProperty("catalog_document_sha256").GetString()==localHash && captured.DocumentHashes.GetValueOrDefault(key)==localHash && tombstoneRow.GetProperty("catalog_document_sha256").GetString()==localHash && tombstoneRow.GetProperty("catalog_revision").GetInt64()==1 && tombstoneRow.GetProperty("catalog_state").GetString()=="active",
+                        tombstoneRow.GetProperty("schema_hash").ValueKind==JsonValueKind.Null,tombstoneRow.GetProperty("contract_hash").ValueKind==JsonValueKind.Null,tombstoneRow.GetProperty("graph_digest").ValueKind==JsonValueKind.Null,
+                        string.Join(";",tombstoneRow.GetProperty("reason_codes").EnumerateArray().Select(value=>value.GetString())),keys.SequenceEqual(keys.Order(StringComparer.Ordinal)),
+                        before.Inventory.All(row=>captured.Inventory.Any(value=>canonical.Serialize(value).AsSpan().SequenceEqual(canonical.Serialize(row)))),
+                        LocalRows("overlays")==overlays && LocalRows("entry_history")==history && captured.CatalogGeneration==before.CatalogGeneration && long.Parse(Scalar("SELECT CAST(overlay_generation AS TEXT) FROM catalog_view WHERE singleton=1"),System.Globalization.CultureInfo.InvariantCulture)==captured.OverlayGeneration);
+                    var targets=new HashSet<string>(["platform:local"],StringComparer.Ordinal);var allow=new PolicyRule("allow",contract,targets,1);var entryRule=new PolicyRule("allow","tool",targets,1);
+                    var decision=CatalogViewPolicy.Evaluate([new(key,contract,"platform:local",1)],new(tombstoneSnapshot,new(null,false,0,1,"fixture")),new Dictionary<string,PolicyRule>{{key,allow}},entryRule,"tool",true,captured.DocumentHashes,resolver,canonical);
+                    using(var check=database.Connection.BeginTransaction(deferred:true))check.Rollback();
+                    return new("ok",captured.Inventory.Count-captured.BaseInventoryCount,before.Inventory.All(row=>keys.Contains(row.GetProperty("entry_id").GetString()!,StringComparer.Ordinal)),tombstoneRow.GetProperty("state").GetString(),item.GetProperty("catalog_state").GetString(),Admission:decision,
+                        InventoryHashChanged:captured.InventorySha256!=before.InventorySha256,OverlayGenerationDelta:captured.OverlayGeneration-before.OverlayGeneration,ImportedInventoryUnchanged:ImportedRows()==baseline,InputsRetained:built.OriginalInputsRetained && FileHash(original)==originalHash,LocalOwner:ownerObservation);
+                }
                 var observation=new CatalogTombstoneObservation(item.GetProperty("entry_id").GetString()!,item.GetProperty("entity_kind").GetString()!,item.GetProperty("variants").GetArrayLength(),item.GetProperty("catalog_revision").GetInt64(),
                     string.Join(";",tombstoneRow.GetProperty("reason_codes").EnumerateArray().Select(reason=>reason.GetString())),
                     tombstoneRow.GetProperty("schema_hash").ValueKind==JsonValueKind.Null,tombstoneRow.GetProperty("contract_hash").ValueKind==JsonValueKind.Null,tombstoneRow.GetProperty("graph_digest").ValueKind==JsonValueKind.Null,tombstoneRow.GetProperty("dependencies").GetArrayLength(),

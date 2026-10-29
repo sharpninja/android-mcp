@@ -61,7 +61,7 @@ public sealed class SourcesRuntimeMockGateTests
             }
             var providers = SourcesRuntimeContractCases.Routes.GroupBy(x => x.Test.Kind, StringComparer.Ordinal).Select(group =>
             {
-                var fixture = group.First().Test;
+                var fixture = AidlProfileContractCases.ForProfile(group.First().Test, profile);
                 return (ISourceExtractor)new ScriptedSourceExtractor(fixture.Kind, _ => fixture.CorrectResult());
             }).ToList();
             providers.Add(new ScriptedSourceExtractor("permission-reference", document =>

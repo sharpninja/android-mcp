@@ -21,8 +21,13 @@ public sealed class CatalogSourceMetadata
     private readonly IFunctionalTaxonomySourceFacts? taxonomy;
     private readonly Dictionary<string,JsonSchema> validators=new(StringComparer.Ordinal);
     private static readonly object MetaSchemaEvaluation=new();
+    public StoredArtifact AdmittedSchemaPin {get;}
     public CatalogSourceMetadata(string schemaPath,ICanonicalJson canonical,ICallbackSourceFacts? callbacks=null,IFunctionalTaxonomySourceFacts? taxonomy=null)
-    {schema=JsonNode.Parse(File.ReadAllText(schemaPath))!.AsObject();this.canonical=canonical;this.callbacks=callbacks;this.taxonomy=taxonomy;}
+    {
+        var path=Path.GetFullPath(schemaPath);var admitted=CatalogDatabase.ReadContract(Path.GetDirectoryName(path)!,Path.GetFileName(path));
+        AdmittedSchemaPin=admitted.Pin with{RelativePath="contracts/SourceContractMetadata.schema.json"};
+        schema=JsonNode.Parse(admitted.Text)!.AsObject();this.canonical=canonical;this.callbacks=callbacks;this.taxonomy=taxonomy;
+    }
     private static string S(JsonNode? node)=>node?.GetValue<string>() ?? "";
     private static bool? B(JsonNode? node)=>node is JsonValue value && value.TryGetValue<bool>(out var flag)?flag:null;
     private static JsonArray Copy(JsonArray? value)=>(JsonArray?)value?.DeepClone() ?? new();

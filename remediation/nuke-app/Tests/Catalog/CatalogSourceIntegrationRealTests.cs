@@ -14,7 +14,7 @@ namespace AndroidMcp.BuildTool.Tests.Catalog;
 public sealed class NativeCatalogSourceIntegrationProvider:ICatalogSourceIntegrationCaseProvider
 {
     internal static NativeCatalogBuildProvider CreateProvider(CatalogSourceIntegrationCall call,ISourcesExtractionDispatcher dispatcher,
-        Func<CatalogBuildInvocation,Task<CatalogBuildException?>>? execution=null)
+        Func<CatalogBuildInvocation,Task<CatalogBuildException?>>? execution=null,SourceProducerIdentityAdmission? nativeAdmission=null)
     {
         var cached=call.Variant=="java-jvm-link" && call.TrustedCacheInput;
         if(cached && execution is not null)throw new InvalidOperationException("The raw Catalog CLI fixture must explicitly select its raw route.");
@@ -23,6 +23,7 @@ public sealed class NativeCatalogSourceIntegrationProvider:ICatalogSourceIntegra
         {
             SourceDispatcher=cached ? forbidden : dispatcher,
             Execution=execution,
+            NativeAdmission=nativeAdmission,
             SourceValues=values=>
             {
                 if(call.Variant=="structured-aidl") values[2]=("aidl","IFoo.aidl",CatalogSourceIntegrationCases.Structured);

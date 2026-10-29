@@ -27,4 +27,10 @@ public sealed class CatalogJavaSelectedCliMockTests
         foreach(var arguments in wrongArguments)
             Assert.NotNull(await Record.ExceptionAsync(()=>CatalogJavaSelectedCliCases.AssertCase(test,value with{Arguments=arguments})));
     }
+    [Theory,MemberData(nameof(Cases))]
+    public async Task SelectedAndDefaultCasesRejectWrongNativeProducerIdentity(string id)
+    {
+        var test=CatalogJavaSelectedCliCases.Get(id);var value=await Correct(test);
+        Assert.NotNull(await Record.ExceptionAsync(()=>CatalogJavaSelectedCliCases.AssertCase(test,value with{Build=value.Build with{SourceFingerprintNative=false}})));
+    }
 }

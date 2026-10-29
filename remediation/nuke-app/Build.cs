@@ -160,6 +160,7 @@ public sealed partial class Build : NukeBuild
         Add("limit",Limit?.ToString(System.Globalization.CultureInfo.InvariantCulture));
         Add("acquisition-profile",AcquisitionProfile?.ToString());Add("cache-policy",CachePolicy?.ToString());
         Add("fetch-delay-seconds",FetchDelaySeconds?.ToString(System.Globalization.CultureInfo.InvariantCulture));
+        Add("snapshot-mode",SnapshotMode?.ToString());Add("download",Download?"True":null);
         Add("output-root",OutputRoot); Add("snapshot",Snapshot);
         Add("stage-root",StageRoot);Add("extraction-profile",ExtractionProfile);Add("work-root",WorkRoot);
         Add("docker-identity",DockerIdentity);Add("renderer-user",RendererUser);Add("tool-access",ToolAccess?.ToString());
@@ -185,6 +186,7 @@ public sealed partial class Build : NukeBuild
             case OperationExecutor.DocumentationAssets: GenerateAssets().GetAwaiter().GetResult();break;
             case OperationExecutor.NativeParser: BuildNativeParser().GetAwaiter().GetResult();break;
             case OperationExecutor.SourcesFetch: FetchSources().GetAwaiter().GetResult();break;
+            case OperationExecutor.SourcesSnapshot: SnapshotSources().GetAwaiter().GetResult();break;
             case OperationExecutor.SourcesSeed: SeedSources().GetAwaiter().GetResult();break;
             case OperationExecutor.PublicationCheck: CheckPublication().GetAwaiter().GetResult();break;
             case OperationExecutor.ReleaseSplit: SplitReleaseArtifact().GetAwaiter().GetResult();break;
@@ -198,6 +200,7 @@ public sealed partial class Build : NukeBuild
             case OperationExecutor.CatalogValidation: ValidateCatalog().GetAwaiter().GetResult();break;
             case OperationExecutor.CatalogPermissionExport: ExportCatalogPermissions().GetAwaiter().GetResult();break;
             case OperationExecutor.RepositoryDocumentationCheck: ValidateRepositoryDocumentation().GetAwaiter().GetResult();break;
+            case OperationExecutor.ReviewReceiptAudit: AssessLocalReviewReceipts().GetAwaiter().GetResult();break;
             case OperationExecutor.BrowserQa: RunBrowserQa().GetAwaiter().GetResult();break;
             case OperationExecutor.SourcesInventory: InventorySources().GetAwaiter().GetResult();break;
             case OperationExecutor.SourcesExtract: ExtractSources().GetAwaiter().GetResult();break;

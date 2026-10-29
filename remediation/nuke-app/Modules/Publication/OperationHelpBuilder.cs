@@ -1,5 +1,6 @@
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Linq;
@@ -15,7 +16,7 @@ public sealed class OperationHelpBuilder(ICanonicalJson canonical):IOperationHel
         try
         {
             if(request.Definitions.Select(x=>x.Key).Distinct().Count()!=request.Definitions.Count)Fail("DUPLICATE_OPERATION");
-            var parameters=request.GlobalRequiredParameters.Concat(request.Definitions.SelectMany(x=>x.RequiredParameters.Concat(x.OptionalParameters)));
+            var parameters=request.GlobalRequiredParameters.Concat(request.Definitions.SelectMany(x=>x.RequiredParameters.Concat(x.OptionalParameters).Concat(x.DeclaredParameterGroups.SelectMany(group=>group))));
             if(parameters.Any(x=>!Regex.IsMatch(x,"\\A[a-z][a-z0-9-]*\\z",RegexOptions.CultureInvariant)))Fail("UNSAFE_PARAMETER_NAME");
             using var sdkDocument=JsonDocument.Parse(canonical.Serialize(request.SdkConfiguration.Bytes));
             var sdkObject=sdkDocument.RootElement.GetProperty("sdk");
@@ -39,11 +40,10 @@ public sealed class OperationHelpBuilder(ICanonicalJson canonical):IOperationHel
                 packages.Add(new(package.Name,resolved));
             }
             var operations=request.Definitions.OrderBy(x=>x.Key.Category.ToString(),StringComparer.Ordinal)
-                .ThenBy(x=>x.Key.Operation.ToString(),StringComparer.Ordinal).Select(x=>new
-                {
-                    category=x.Key.Category.ToString(),operation=x.Key.Operation.ToString(),description=x.Description,
-                    required=x.RequiredParameters.Order(StringComparer.Ordinal).ToArray(),optional=x.OptionalParameters.Order(StringComparer.Ordinal).ToArray()
-                }).ToArray();
+                .ThenBy(x=>x.Key.Operation.ToString(),StringComparer.Ordinal).Select(x=>new HelpOperation(
+                    x.Key.Category.ToString(),x.Key.Operation.ToString(),x.Description,
+                    x.RequiredParameters.Order(StringComparer.Ordinal).ToArray(),x.OptionalParameters.Order(StringComparer.Ordinal).ToArray(),
+                    x.DeclaredParameterGroups.Count==0?null:x.DeclaredParameterGroups.Select(group=>group.ToArray()).ToArray())).ToArray();
             var global=request.GlobalRequiredParameters.Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal).ToArray();
             const string network="No network for help, Check or pure rehydration planning. Restore/acquisition prerequisites are explicit.";
             const string disk="Output/cache/archive requirements need their own measured plan; no full-corpus estimate is asserted.";
@@ -73,6 +73,8 @@ public sealed class OperationHelpBuilder(ICanonicalJson canonical):IOperationHel
                 foreach(var parameter in operation.optional)
                     markdown.Append(" [--").Append(parameter).Append(" '<").Append(parameter).Append(">']");
                 markdown.Append("\n```\n");
+                foreach(var group in operation.all_or_none??[])
+                    markdown.Append("Supply together: ").Append(string.Join(", ",group.Select(parameter=>"--"+parameter))).Append(".\n");
             }
             return new(new("operation-help.json",json,"application/json"),new("operation-help.md",Encoding.UTF8.GetBytes(markdown.ToString()),"text/markdown"),[]);
         }
@@ -83,4 +85,6 @@ public sealed class OperationHelpBuilder(ICanonicalJson canonical):IOperationHel
     private static void Fail(string code)=>throw new HelpFailure(code);
     private sealed class HelpFailure(string code):Exception(code){public string Code { get; }=code;}
     private sealed record HelpPackage(string Name,string Version);
+    private sealed record HelpOperation(string category,string operation,string description,string[] required,string[] optional,
+        [property:JsonIgnore(Condition=JsonIgnoreCondition.WhenWritingNull)] string[][]? all_or_none);
 }

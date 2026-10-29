@@ -37,7 +37,7 @@ public sealed class NativeSourceSnapshotProbe:ISourceSnapshotProbe
             original.All(item=>store.Inner.Files[item.Key].Bytes.Span.SequenceEqual(item.Value)),result?.MissingPaths??[],transport.Urls,output,
             store.Inner.Files.ContainsKey("sources/snapshot.json"));
     }
-    private static RehydrationPlanRequest Recipe(SourceSnapshotCase test)
+    public static RehydrationPlanRequest Recipe(SourceSnapshotCase test)
     {
         JsonObject Row(string path,byte[] bytes,string url,string? status)
         {

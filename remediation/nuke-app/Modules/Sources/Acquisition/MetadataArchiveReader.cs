@@ -8,9 +8,10 @@ public sealed class MetadataArchiveReader:IMetadataArchiveReader
     private static readonly HashSet<string> SelectedLeaves=new(StringComparer.Ordinal)
     {"source.properties","sdk.properties","package.xml","api-versions.xml","api-versions-versioned.xml","annotations.zip","public.xml","attrs_manifest.xml","optional.json","AndroidManifest.xml"};
     public static bool IsSelected(string path)=>SelectedLeaves.Contains(path.Split('/')[^1]);
+    internal static Stream OpenRangeStream(IRangeSource source)=>new BoundedRangeStream(source);
     public MetadataArchiveEvidence Read(IRangeSource source)
     {
-        using var stream=new BoundedRangeStream(source);using var archive=new ZipArchive(stream,ZipArchiveMode.Read);
+        using var stream=OpenRangeStream(source);using var archive=new ZipArchive(stream,ZipArchiveMode.Read);
         var files=new Dictionary<string,byte[]>(StringComparer.Ordinal);var entries=new List<ArchiveEntryEvidence>();
         foreach(var entry in archive.Entries)
         {
@@ -41,13 +42,14 @@ public sealed class MetadataArchiveReader:IMetadataArchiveReader
         public override int Read(byte[] buffer,int offset,int count)=>Read(buffer.AsSpan(offset,count));
         public override int Read(Span<byte> buffer)
         {
+            if(position<0||position>Length)throw new TransportException("ZIP_SEEK","Metadata read starts outside archive.");
             var count=checked((int)Math.Min(buffer.Length,Length-position));if(count==0)return 0;
             if(count>8*1024*1024)throw new TransportException("RANGE_LIMIT","Metadata read exceeds8MiB.");
             var bytes=source.Read(position,count);if(bytes.Length!=count)throw new TransportException("BODY_LENGTH","Short metadata range.");
             bytes.CopyTo(buffer);position+=count;return count;
         }
         public override long Seek(long offset,SeekOrigin origin)
-        {var next=checked((origin switch{SeekOrigin.Begin=>0,SeekOrigin.Current=>position,SeekOrigin.End=>Length,_=>throw new ArgumentOutOfRangeException(nameof(origin))})+offset);if(next<0||next>Length)throw new TransportException("ZIP_SEEK","Metadata seek outside archive.");return position=next;}
+        {position=checked((origin switch{SeekOrigin.Begin=>0,SeekOrigin.Current=>position,SeekOrigin.End=>Length,_=>throw new ArgumentOutOfRangeException(nameof(origin))})+offset);if(position<0||position>Length)throw new TransportException("ZIP_SEEK","Metadata seek outside archive.");return position;}
         public override void Flush(){}public override void SetLength(long value)=>throw new NotSupportedException();public override void Write(byte[] buffer,int offset,int count)=>throw new NotSupportedException();
     }
 }

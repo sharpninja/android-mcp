@@ -1,9 +1,11 @@
 using Microsoft.Data.Sqlite;
 using AndroidMcp.BuildTool.Core;
+using System.Text;
 
 namespace AndroidMcp.BuildTool.Catalog;
 
 public enum CatalogSchemaProfile { Entry, Bridge, Metadata, Combined }
+internal sealed record CatalogContractSnapshot(StoredArtifact Pin,string Text);
 
 /// <summary>One retained canonical schema engine for private memory or file-backed staging databases.</summary>
 public sealed class CatalogDatabase:IDisposable
@@ -18,7 +20,13 @@ public sealed class CatalogDatabase:IDisposable
         CatalogSchemaProfile.Combined=>["schema.sql","bridge-config.sql","migrations/source_metadata_ddl.sql"],
         _=>throw new ArgumentOutOfRangeException(nameof(profile))
     };
-    private static string[] Scripts(string catalogRoot,CatalogSchemaProfile profile)=>SchemaFiles(profile).Select(path=>File.ReadAllText(Path.Combine(catalogRoot,path))).ToArray();
+    internal static CatalogContractSnapshot ReadContract(string root,string relative)
+    {
+        var bytes=File.ReadAllBytes(ArtifactPaths.Resolve(root,relative));
+        using var stream=new MemoryStream(bytes,false);using var reader=new StreamReader(stream,Encoding.UTF8,true);
+        return new(new(relative,ContentHash.Sha256(bytes),bytes.LongLength,relative.EndsWith(".json",StringComparison.Ordinal) ? "application/schema+json" : "text/plain"),reader.ReadToEnd());
+    }
+    private static string[] Scripts(string catalogRoot,CatalogSchemaProfile profile)=>SchemaFiles(profile).Select(path=>ReadContract(catalogRoot,path).Text).ToArray();
     public static CatalogDatabase CreateInMemory(string catalogRoot,CatalogSchemaProfile profile)=>Open(Scripts(catalogRoot,profile),":memory:",SqliteOpenMode.ReadWriteCreate);
     public static CatalogDatabase CreateFile(string catalogRoot,CatalogSchemaProfile profile,string databasePath)
     {

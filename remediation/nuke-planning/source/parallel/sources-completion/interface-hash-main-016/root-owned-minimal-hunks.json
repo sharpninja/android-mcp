@@ -1,0 +1,126 @@
+{
+  "At": "2026-10-29T04:00:27",
+  "RootOwnership": "Root alone applies/merges these unique-anchor hunks into its newer canonical files. Private registry/build priors predate canonical additions; NEVER replace those files wholesale. New Build.PublishedHashes.cs is a separate absent-guarded file.",
+  "Hunks": [
+    {
+      "Path": "Build.cs",
+      "Before": "using AndroidMcp.BuildTool.Sources.Java;",
+      "After": "using AndroidMcp.BuildTool.Sources.Java;\nusing AndroidMcp.BuildTool.Sources;",
+      "RequireUniqueBefore": true,
+      "Purpose": "Approved thin task binding/helper visibility/default planner label propagation only"
+    },
+    {
+      "Path": "Build.cs",
+      "Before": "    public string? PipelineRequest { get; set; }",
+      "After": "    public string? PipelineRequest { get; set; }\n    [Parameter(\"Sources/Extract task: Declarations (default) or InterfaceHashes\")]\n    public SourceExtractTask? ExtractTask { get; set; }",
+      "RequireUniqueBefore": true,
+      "Purpose": "Approved thin task binding/helper visibility/default planner label propagation only"
+    },
+    {
+      "Path": "Build.cs",
+      "Before": "        Add(\"pipeline-request\",PipelineRequest);Add(\"pipeline-request-sha256\",PipelineRequestSha256);",
+      "After": "        Add(\"pipeline-request\",PipelineRequest);Add(\"pipeline-request-sha256\",PipelineRequestSha256);\n        Add(\"extract-task\",ExtractTask?.ToString());",
+      "RequireUniqueBefore": true,
+      "Purpose": "Approved thin task binding/helper visibility/default planner label propagation only"
+    },
+    {
+      "Path": "Core/OperationRegistry.cs",
+      "Before": "        Add(Category.Sources,Operation.Extract,[\"project-root\",\"pipeline-request\",\"pipeline-request-sha256\",\"pipeline-request-length\"],[],OperationExecutor.SourcesExtract,\n            new(\"admit-pinned-workflow\",[]),new(\"admit-locked-recipe\",[\"admit-pinned-workflow\"]),\n            new(\"verify-source-inventory\",[\"admit-locked-recipe\"]),new(\"capture-runtime-identity\",[\"verify-source-inventory\"]),",
+      "After": "        Add(Category.Sources,Operation.Extract,[\"project-root\",\"pipeline-request\",\"pipeline-request-sha256\",\"pipeline-request-length\"],[\"extract-task\"],OperationExecutor.SourcesExtract,\n            new(\"admit-pinned-workflow\",[]),new(\"admit-task-inputs\",[\"admit-pinned-workflow\"]),\n            new(\"verify-task-source-pins\",[\"admit-task-inputs\"]),new(\"capture-runtime-identity\",[\"verify-task-source-pins\"]),",
+      "RequireUniqueBefore": true,
+      "Purpose": "Approved thin task binding/helper visibility/default planner label propagation only"
+    },
+    {
+      "Path": "Build.SourcesExtract.cs",
+      "Before": "using System.Text.Json;",
+      "After": "using System.Text.Json;\nusing Nuke.Common;",
+      "RequireUniqueBefore": true,
+      "Purpose": "Approved thin task binding/helper visibility/default planner label propagation only"
+    },
+    {
+      "Path": "Build.SourcesExtract.cs",
+      "Before": "    private async Task ExtractSources()\n    {",
+      "After": "    private async Task ExtractSources()\n    {\n        if(ExtractTask is{} task?!Enum.IsDefined(task):EnvironmentInfo.HasArgument(\"extract-task\"))throw new ArgumentException(\"Unknown source extraction task\");",
+      "RequireUniqueBefore": true,
+      "Purpose": "Approved thin task binding/helper visibility/default planner label propagation only"
+    },
+    {
+      "Path": "Build.SourcesExtract.cs",
+      "Before": "        var wire=JsonSerializer.Deserialize<SourcesExtractWorkflowFile>(canonical.Serialize(await inputs.ReadAsync(outerPin)))",
+      "After": "        var admitted=canonical.Serialize(await inputs.ReadAsync(outerPin));\n        if(ExtractTask==SourceExtractTask.InterfaceHashes){await ExtractPublishedHashes(project,canonical,admitted);return;}\n        var wire=JsonSerializer.Deserialize<SourcesExtractWorkflowFile>(admitted)",
+      "RequireUniqueBefore": true,
+      "Purpose": "Approved thin task binding/helper visibility/default planner label propagation only"
+    },
+    {
+      "Path": "Modules/Sources/SourceFactProducer.cs",
+      "Before": "    private static JsonObject StrictObject",
+      "After": "    internal static JsonObject StrictObject",
+      "RequireUniqueBefore": true,
+      "Purpose": "Approved thin task binding/helper visibility/default planner label propagation only"
+    },
+    {
+      "Path": "Modules/Sources/SourceFactProducer.cs",
+      "Before": "    private static IEnumerable<JsonNode?> Iterable",
+      "After": "    internal static IEnumerable<JsonNode?> Iterable",
+      "RequireUniqueBefore": true,
+      "Purpose": "Approved thin task binding/helper visibility/default planner label propagation only"
+    },
+    {
+      "Path": "Modules/Sources/SourceFactProducer.cs",
+      "Before": "    private static bool ContainsImport",
+      "After": "    internal static bool ContainsImport",
+      "RequireUniqueBefore": true,
+      "Purpose": "Approved thin task binding/helper visibility/default planner label propagation only"
+    },
+    {
+      "Path": "Modules/Sources/SourceFactProducer.cs",
+      "Before": "    private static JsonNode? CopyRequired",
+      "After": "    internal static JsonNode? CopyRequired",
+      "RequireUniqueBefore": true,
+      "Purpose": "Approved thin task binding/helper visibility/default planner label propagation only"
+    },
+    {
+      "Path": "Tests/Core/SourceExtractPlannerMockTests.cs",
+      "Before": "    private static readonly string[] Steps = [\"admit-pinned-workflow\",\"admit-locked-recipe\",\"verify-source-inventory\",\"capture-runtime-identity\",\"extract-source-generation\",\"seal-extraction\"];\n    private static readonly string[] Edges = [\"admit-locked-recipe<-admit-pinned-workflow\",\"verify-source-inventory<-admit-locked-recipe\",\"capture-runtime-identity<-verify-source-inventory\",\"extract-source-generation<-capture-runtime-identity\",\"seal-extraction<-extract-source-generation\"];",
+      "After": "    private static readonly string[] Steps = [\"admit-pinned-workflow\",\"admit-task-inputs\",\"verify-task-source-pins\",\"capture-runtime-identity\",\"extract-source-generation\",\"seal-extraction\"];\n    private static readonly string[] Edges = [\"admit-task-inputs<-admit-pinned-workflow\",\"verify-task-source-pins<-admit-task-inputs\",\"capture-runtime-identity<-verify-task-source-pins\",\"extract-source-generation<-capture-runtime-identity\",\"seal-extraction<-extract-source-generation\"];",
+      "RequireUniqueBefore": true,
+      "Purpose": "Approved thin task binding/helper visibility/default planner label propagation only"
+    }
+  ],
+  "PrivateExactReplay": [
+    {
+      "Path": "Build.cs",
+      "PrivatePriorSha256": "a27ab5c1198719fd26eddce0ee8936411d934f0797248969400526e9dfb8c782",
+      "PrivateAfterSha256": "350f557d63129d18ac0443baaefb38589de7425c108e0115a551bf83fc793588",
+      "DoNotReplaceCanonicalWholeFile": true
+    },
+    {
+      "Path": "Build.SourcesExtract.cs",
+      "PrivatePriorSha256": "6ae08a52311f3c588a15e9f54635929f40134759f1cdac87f7e0ce9593470e4b",
+      "PrivateAfterSha256": "8f8fd7eb49fbda56e8b77c646a3297bc096e18a2261d4e88d54baf59277f06c6",
+      "DoNotReplaceCanonicalWholeFile": true
+    },
+    {
+      "Path": "Core/OperationRegistry.cs",
+      "PrivatePriorSha256": "a6bd76d36288a46931ac6e2083fdba26f62802b0a4a3177ac0a6d3a7c8c131e7",
+      "PrivateAfterSha256": "1dbb5759b3568401972663943522c2c41fcc0495c108ef11282450a292b137bf",
+      "DoNotReplaceCanonicalWholeFile": true
+    },
+    {
+      "Path": "Modules/Sources/SourceFactProducer.cs",
+      "PrivatePriorSha256": "f5d5b83944184548bf080ffea6998548caee54f61301599e2bcaa3a7b5be1b71",
+      "PrivateAfterSha256": "a6bf25e44777ab6ca683298e7416a07a8fb2a071992f0014361e8cdbab5cb4be",
+      "DoNotReplaceCanonicalWholeFile": true
+    },
+    {
+      "Path": "Tests/Core/SourceExtractPlannerMockTests.cs",
+      "PrivatePriorSha256": "f1d79215c97e869930416c5f99ade284d297bf7de8a8ce2a37babc45d99b6df3",
+      "PrivateAfterSha256": "c4a111be49baf6ea8eb54714d5e73c3d38b3ebfc29430f9894c9cf3939278a25",
+      "DoNotReplaceCanonicalWholeFile": true
+    }
+  ],
+  "Scope": "Twelve minimal hunks across five existing files: Build task parameter/dispatch/import, common outer pinned read/task branch+enum/presence validation, one operation optional parameter/generic labels, four access modifiers with bodies unchanged, and only SourceExtract planner fixture labels.",
+  "CanonicalEdited": false,
+  "CoreServicesEdited": false,
+  "NoAuthorityWrite": true
+}

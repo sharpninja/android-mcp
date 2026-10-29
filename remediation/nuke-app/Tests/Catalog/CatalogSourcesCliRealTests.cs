@@ -4,6 +4,7 @@ using AndroidMcp.BuildTool.Catalog;
 using AndroidMcp.BuildTool.Core;
 using AndroidMcp.BuildTool.Modules.Sources.Acquisition;
 using AndroidMcp.BuildTool.Publication;
+using AndroidMcp.BuildTool.Sources;
 using AndroidMcp.BuildTool.Tests.Core;
 using Xunit;
 
@@ -81,7 +82,19 @@ public sealed class NativeCatalogSourcesCliProbe:ICatalogSourcesCliProbe
         var stageMatches=FileHash(stageDatabase)==FileHash(ArtifactPaths.Resolve(output,"catalog.sqlite"));
         var validation=JsonNode.Parse(File.ReadAllText(ArtifactPaths.Resolve(output,"validation.json")))!;
         var producerObserved=validation["native_producer"]!["id"]!.GetValue<string>()==CatalogBuild.ProducerId && !validation["native_producer"]!["historical_python_identity"]!.GetValue<bool>();
-        return new(success.Result.ExitCode,rejected.Result.ExitCode,summary,file,source.Workflow,source.ExtractIndex,pin,originalHash,dllHash,success.Arguments,
+        // The independent CLI expectation follows the approved v2 identity
+        // contract. It does not take its expected value from child output or
+        // call CatalogBuild's composition implementation.
+        var admittedNative=new SourceProducerIdentityBuilder().Create().Identity;
+        JsonObject ExpectedProducer()=>new(){["producer_id"]=admittedNative.ProducerId,["runtime_identity"]=admittedNative.RuntimeIdentity,
+            ["parser_identity"]=admittedNative.ParserIdentity,["context_identity"]=admittedNative.ContextIdentity,
+            ["producer_files"]=JsonSerializer.SerializeToNode(admittedNative.ProducerFiles)};
+        var contracts=new[]{"schema.sql","contracts/Entry.schema.json","contracts/PermissionExpression.schema.json","contracts/DeviceResolution.schema.json","contracts/SourceContractMetadata.schema.json"}
+            .Order(StringComparer.Ordinal).Select(relative=>(JsonNode)new JsonObject{["path"]=relative,["length"]=new FileInfo(Path.Combine(NativeSchemaProvider.Root(),relative)).Length,["sha256"]=FileHash(Path.Combine(NativeSchemaProvider.Root(),relative))}).ToArray();
+        var expectedIdentity=new JsonObject{["identity_format"]="csharp-catalog-producer-v2",["profile_id"]=SourceExtractionProfile.Resolve(file.ProfileId).Id,
+            ["native_producer"]=ExpectedProducer(),["source_producer"]=ExpectedProducer(),["contracts"]=new JsonArray(contracts)};
+        var expectedFingerprint=canonical.Hash(JsonSerializer.SerializeToElement(expectedIdentity));
+        return new(success.Result.ExitCode,rejected.Result.ExitCode,summary,file,source.Workflow,source.ExtractIndex,pin,originalHash,expectedFingerprint,success.Arguments,
             source.ProjectRoot,source.RuntimeRoot,true,artifactsVerified,agreement,audit,originalUnchanged,sourceContext,retained,producerObserved,deny,stageMatches,
             (rejected.Stdout+rejected.Stderr).Contains("ARTIFACT_PIN_HASH",StringComparison.Ordinal),!Directory.Exists(refused.OutputRoot)&&!Directory.Exists(refused.StageRoot),
             FileHash(host)==tool.Sha256 && FileHash(dll)==dllHash && success.Arguments[5]==dll);

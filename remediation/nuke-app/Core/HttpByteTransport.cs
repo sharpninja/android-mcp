@@ -6,10 +6,27 @@ using System.Text.RegularExpressions;
 namespace AndroidMcp.BuildTool.Core;
 
 /// <summary>The sole network byte boundary. No redirect, mutable fallback or auto decompression is configured.</summary>
-public sealed class HttpByteTransport(HttpClient client,IClock? clock=null,ITransportDelay? delay=null):IByteTransport
+public sealed class HttpByteTransport:IByteTransport
 {
+    private readonly HttpClient client;private readonly IClock? clock;private readonly ITransportDelay? delay;
+    private readonly HttpByteTransportProfile profile;private readonly TimeProvider timeProvider;
+    public HttpByteTransport(HttpClient client,IClock? clock=null,ITransportDelay? delay=null)
+        :this(client,clock,delay,HttpByteTransportProfile.Default,TimeProvider.System){}
+    public HttpByteTransport(HttpClient client,IClock? clock,ITransportDelay? delay,HttpByteTransportProfile profile,TimeProvider timeProvider)
+    {
+        if(!Enum.IsDefined(profile))throw new ArgumentOutOfRangeException(nameof(profile));
+        this.client=client??throw new ArgumentNullException(nameof(client));this.clock=clock;this.delay=delay;
+        this.profile=profile;this.timeProvider=timeProvider??throw new ArgumentNullException(nameof(timeProvider));
+    }
     public static HttpByteTransport Create(IClock? clock=null,ITransportDelay? delay=null)=>new(new HttpClient(new HttpClientHandler
     {AllowAutoRedirect=false,AutomaticDecompression=DecompressionMethods.None}),clock,delay);
+    public static HttpByteTransport Create(HttpByteTransportProfile profile,IClock? clock=null,ITransportDelay? delay=null,TimeProvider? timeProvider=null)
+    {
+        if(!Enum.IsDefined(profile))throw new ArgumentOutOfRangeException(nameof(profile));
+        var client=new HttpClient(new HttpClientHandler{AllowAutoRedirect=false,AutomaticDecompression=DecompressionMethods.None});
+        if(profile!=HttpByteTransportProfile.Default)client.Timeout=Timeout.InfiniteTimeSpan;
+        return new(client,clock,delay,profile,timeProvider??TimeProvider.System);
+    }
 
     public async Task<TransportResponse> SendAsync(PinnedRequest request,CancellationToken cancellationToken=default)
     {
@@ -21,9 +38,10 @@ public sealed class HttpByteTransport(HttpClient client,IClock? clock=null,ITran
             if(policy.MinimumDelay>TimeSpan.Zero)await Wait(policy.MinimumDelay,cancellationToken);
             using var message=new HttpRequestMessage(new HttpMethod(request.Method),request.Url);
             message.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("identity"));
+            if(profile==HttpByteTransportProfile.DocumentationBootstrap)message.Headers.UserAgent.ParseAdd("Android-MCP-local-documentation-build");
             if(request.Range is { } range)message.Headers.Range=new RangeHeaderValue(range.Offset,checked(range.Offset+range.Length-1));
             if(request.IfMatch is not null)message.Headers.TryAddWithoutValidation("If-Match",request.IfMatch);
-            using var response=await client.SendAsync(message,HttpCompletionOption.ResponseHeadersRead,cancellationToken);
+            using var response=await Blocking(token=>client.SendAsync(message,HttpCompletionOption.ResponseHeadersRead,token),cancellationToken);
             if(response.StatusCode==HttpStatusCode.TooManyRequests&&attempt+1<policy.Attempts)
             {
                 var pause=TimeSpan.FromSeconds(60*(attempt+1));
@@ -64,9 +82,9 @@ public sealed class HttpByteTransport(HttpClient client,IClock? clock=null,ITran
             }
             var declared=response.Content.Headers.ContentLength;
             if(declared>request.MaxBytes)throw new TransportException("BODY_LIMIT","Pinned response exceeds byte bound.");
-            await using var input=await response.Content.ReadAsStreamAsync(cancellationToken);
+            await using var input=await Blocking(token=>response.Content.ReadAsStreamAsync(token),cancellationToken);
             using var output=new MemoryStream();var buffer=new byte[64*1024];
-            while(true){var count=await input.ReadAsync(buffer,cancellationToken);if(count==0)break;if(output.Length+count>request.MaxBytes)throw new TransportException("BODY_LIMIT","Pinned response exceeds byte bound.");await output.WriteAsync(buffer.AsMemory(0,count),cancellationToken);}
+            while(true){var count=await Blocking(token=>input.ReadAsync(buffer.AsMemory(),token).AsTask(),cancellationToken);if(count==0)break;if(output.Length+count>request.MaxBytes)throw new TransportException("BODY_LIMIT","Pinned response exceeds byte bound.");await output.WriteAsync(buffer.AsMemory(0,count),cancellationToken);}
             var bytes=output.ToArray();
             if(declared is not null&&bytes.LongLength!=declared)throw new TransportException("BODY_LENGTH","Response differs from declared length.");
             if(request.ExpectedLength is not null&&bytes.LongLength!=request.ExpectedLength)throw new TransportException("BODY_LENGTH","Response differs from pinned length.");
@@ -75,6 +93,17 @@ public sealed class HttpByteTransport(HttpClient client,IClock? clock=null,ITran
             return new(url,status,bytes,tag,contentRange,encoding,declared,[request.Url]);
         }
         throw new TransportException("HTTP_STATUS","Pinned source retry exhausted.");
+    }
+    private async Task<T> Blocking<T>(Func<CancellationToken,Task<T>> operation,CancellationToken cancellationToken)
+    {
+        if(profile==HttpByteTransportProfile.Default)return await operation(cancellationToken);
+        cancellationToken.ThrowIfCancellationRequested();
+        var budget=TimeSpan.FromSeconds(profile==HttpByteTransportProfile.SourceSnapshotFetch?45:60);
+        using var timeout=new CancellationTokenSource(budget,timeProvider);
+        using var linked=CancellationTokenSource.CreateLinkedTokenSource(cancellationToken,timeout.Token);
+        try{return await operation(linked.Token);}
+        catch(OperationCanceledException)when(timeout.IsCancellationRequested&&!cancellationToken.IsCancellationRequested)
+        {throw new TransportException("TIMEOUT","Pinned source blocking operation exceeded its configured timeout.");}
     }
     private Task Wait(TimeSpan duration,CancellationToken cancellationToken)=>delay?.DelayAsync(duration,cancellationToken)??Task.Delay(duration,cancellationToken);
     private static void Validate(PinnedRequest request)

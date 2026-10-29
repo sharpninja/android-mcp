@@ -27,7 +27,12 @@ public sealed class NativeCatalogBuildProvider:ICatalogBuildCaseProvider
     internal ISourcesExtractionDispatcher? SourceDispatcher {get;init;}
     internal Action<CatalogImportObservation>? ImportObserver {get;init;}
     internal Func<CatalogIntakeFixture,Task<CatalogSourceIntake>>? IntakeFactory {get;init;}
-    private static string Root()=>NativeSchemaProvider.Root();
+    internal string? CatalogRootOverride {get;init;}
+    internal bool IncludeSourceMetadata {get;init;}=true;
+    internal SourceExtractionProfile? SourceProfile {get;init;}
+    internal ISourceProducerIdentityBuilder? ProducerIdentityBuilder {get;init;}
+    internal SourceProducerIdentityAdmission? NativeAdmission {get;init;}
+    private string Root()=>CatalogRootOverride ?? NativeSchemaProvider.Root();
     private static string Hash(byte[] bytes)=>ContentHash.Sha256(bytes);
     public CatalogBuildReply Build(CatalogBuildCall call)
     {
@@ -61,12 +66,12 @@ public sealed class NativeCatalogBuildProvider:ICatalogBuildCaseProvider
         var inventoryPath=Path.Combine(root,"inventory.json");var inventoryBytes=JsonSerializer.SerializeToUtf8Bytes(inventory);File.WriteAllBytes(inventoryPath,inventoryBytes);original.Add("inventory.json",inventoryBytes);
         if(call.Variant=="nonempty-output"){Directory.CreateDirectory(output);File.WriteAllText(Path.Combine(output,"prior.txt"),"immutable previous generation");}
         var canonical=new CanonicalJson();var facts=new SourceTypeFacts(new JvmSourceLinker(),canonical);
-        var dispatcher=SourceDispatcher ?? new SourcesExtractionDispatcher(new ISourceExtractor[]{new SignatureSourceExtractor(value=>ContentHash.Sha256(value.Span)),new ManifestSourceExtractor(),new AidlSourceExtractor(value=>ContentHash.Sha256(value.Span))},SourceExtractionProfile.CurrentCandidate);
+        var dispatcher=SourceDispatcher ?? new SourcesExtractionDispatcher(new ISourceExtractor[]{new SignatureSourceExtractor(value=>ContentHash.Sha256(value.Span)),new ManifestSourceExtractor(),new AidlSourceExtractor(value=>ContentHash.Sha256(value.Span))},SourceProfile ?? SourceExtractionProfile.CurrentCandidate);
         var intake=IntakeFactory?.Invoke(new(root,inventoryPath,output,stage,inventory,original)).GetAwaiter().GetResult();
         using var metadataRuntime=new SourcesRuntimeFactory().Create(SourceExtractionProfile.CurrentCandidate);
         var metadataConcerns=metadataRuntime.Concerns;
-        var metadata=new CatalogSourceMetadata(Path.Combine(Root(),"contracts/SourceContractMetadata.schema.json"),canonical,metadataConcerns.Callbacks,metadataConcerns.Taxonomy);
-        var service=new CatalogBuild(Root(),dispatcher,new PermissionExpressionSourceFacts(),facts,facts,canonical,outputStores:StoreFactory,stagingDatabases:StageFactory,observeImport:ImportObserver,sourceIntake:intake,sourceMetadata:metadata);
+        var metadata=IncludeSourceMetadata ? new CatalogSourceMetadata(Path.Combine(Root(),"contracts/SourceContractMetadata.schema.json"),canonical,metadataConcerns.Callbacks,metadataConcerns.Taxonomy) : null;
+        var service=new CatalogBuild(Root(),dispatcher,new PermissionExpressionSourceFacts(),facts,facts,canonical,outputStores:StoreFactory,stagingDatabases:StageFactory,observeImport:ImportObserver,sourceIntake:intake,sourceMetadata:metadata,sourceProfile:SourceProfile,producerIdentityBuilder:ProducerIdentityBuilder,nativeAdmission:NativeAdmission);
         CatalogBuildException? failure=null;
         try
         {
@@ -79,8 +84,14 @@ public sealed class NativeCatalogBuildProvider:ICatalogBuildCaseProvider
         if(failure is not null)
         {
             var unpublished=File.Exists(failurePath) && JsonNode.Parse(File.ReadAllText(failurePath))!["published"]!.GetValue<bool>()==false;
-            var native=CatalogBuild.ProducerId=="csharp-nuke-catalog-v1" && service.ProducerFingerprint==Hash(File.ReadAllBytes(typeof(CatalogBuild).Assembly.Location));
-            if(File.Exists(failurePath)) native &= JsonNode.Parse(File.ReadAllText(failurePath))!["native_producer"]!["id"]!.GetValue<string>()==CatalogBuild.ProducerId;
+            var observed=(service.AdmittedProducerInputs?.NativeProducer ?? new SourceProducerIdentityBuilder().Create().Identity).ProducerFiles.GetValueOrDefault("native/assembly");
+            var native=CatalogBuild.ProducerId=="csharp-nuke-catalog-v2" && observed==Hash(File.ReadAllBytes(typeof(CatalogBuild).Assembly.Location));
+            if(File.Exists(failurePath))
+            {
+                var saved=JsonNode.Parse(File.ReadAllText(failurePath))!["native_producer"]!;
+                native &= saved["id"]!.GetValue<string>()==CatalogBuild.ProducerId && saved["assembly_sha256"]!.GetValue<string>()==observed &&
+                    saved["processing_sha256"]!.GetValue<string>()==canonical.Hash(JsonSerializer.SerializeToElement(saved["identity"])) && !saved["historical_python_identity"]!.GetValue<bool>();
+            }
             var untouched=call.Variant=="nonempty-output" && Directory.EnumerateFileSystemEntries(output).Count()==1 && File.ReadAllText(Path.Combine(output,"prior.txt"))=="immutable previous generation";
             return new(failure.Code,final,unpublished,0,0,0,0,0,0,0,0,null,null,null,null,null,null,null,null,null,native,preserved,untouched);
         }
@@ -109,7 +120,8 @@ public sealed class NativeCatalogBuildProvider:ICatalogBuildCaseProvider
             (int)Scalar("SELECT count(*) FROM permission_definitions"),entries.Length,entities.Length,(int)Scalar("SELECT count(*) FROM occurrences o JOIN bindings b USING(binding_id) WHERE b.signature='java:a.A#go(int)'"),valid,foreign,
             entries.All(entry=>Schema(entrySchema,entry)),Documents("SELECT expression_json FROM permission_relations").All(value=>Schema(astSchema,JsonNode.Parse(value)!)),entities.All(entity=>Schema(inventorySchema,entity)),
             Hash(File.ReadAllBytes(Path.Combine(output,"device_inventory.jsonl")))==manifest["inventory_sha256"]!.GetValue<string>(),agree,immutable,deny,
-            validation["native_producer"]!["id"]!.GetValue<string>()=="csharp-nuke-catalog-v1" && validation["native_producer"]!["historical_python_identity"]!.GetValue<bool>()==false,preserved,false,
+            validation["native_producer"]!["id"]!.GetValue<string>()=="csharp-nuke-catalog-v2" && validation["native_producer"]!["assembly_sha256"]!.GetValue<string>()==Hash(File.ReadAllBytes(typeof(CatalogBuild).Assembly.Location)) &&
+            validation["native_producer"]!["processing_sha256"]!.GetValue<string>()==service.ProducerFingerprint && validation["native_producer"]!["historical_python_identity"]!.GetValue<bool>()==false,preserved,false,
             entries.Any(entry=>entry["permission"]?["name"]?.GetValue<string>()=="android.permission.CAMERA"));
     }
     public void Dispose() { }

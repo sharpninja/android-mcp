@@ -13,9 +13,10 @@ public sealed partial class Build
         var hashes=new NativeContentHash();
         var store=new FileArtifactStore(selectedRoot,bytes=>hashes.Sha256(bytes.Span));
         var html=new SourceHtmlDecoder();
+        var workspace=new NativeArtifactWorkspace(selectedRoot);
         var validator=new RepositoryDocumentationValidator(store,new ArtifactReferenceResolver(html.Decode),
-            new ArtifactReceiptVerifier(hashes),html);
-        var check=new RepositoryDocumentationCheck(new NativeArtifactWorkspace(selectedRoot),validator);
+            new ArtifactReceiptVerifier(hashes),html,workspace);
+        var check=new RepositoryDocumentationCheck(workspace,validator);
         var result=await check.CheckAsync();
         Console.WriteLine(JsonSerializer.Serialize(result,new JsonSerializerOptions{WriteIndented=true}));
         if(result.ExitCode!=0)throw new InvalidOperationException("Repository documentation validation reported errors.");

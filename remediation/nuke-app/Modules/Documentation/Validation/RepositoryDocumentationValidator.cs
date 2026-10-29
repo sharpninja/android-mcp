@@ -11,9 +11,17 @@ namespace AndroidMcp.BuildTool.Documentation.Validation;
 // Original repository checker rules over the complete admitted entry snapshot.
 // No enumeration, filesystem implementation, hash implementation or second HTML
 // parser lives here. Public root/JSON/exit caller binding remains outside.
-public sealed class RepositoryDocumentationValidator(IArtifactStore repository,IArtifactReferenceResolver references,
-    IArtifactReceiptVerifier receipts,ISourceHtmlDecoder html):IRepositoryDocumentationValidator
+public sealed class RepositoryDocumentationValidator:IRepositoryDocumentationValidator
 {
+    private readonly IArtifactStore repository;
+    private readonly IArtifactReferenceResolver references;
+    private readonly IArtifactReceiptVerifier receipts;
+    private readonly ISourceHtmlDecoder html;
+    private readonly IArtifactTreeReader? metadata;
+    public RepositoryDocumentationValidator(IArtifactStore repository,IArtifactReferenceResolver references,IArtifactReceiptVerifier receipts,ISourceHtmlDecoder html)
+        :this(repository,references,receipts,html,null){ }
+    public RepositoryDocumentationValidator(IArtifactStore repository,IArtifactReferenceResolver references,IArtifactReceiptVerifier receipts,ISourceHtmlDecoder html,IArtifactTreeReader? metadata)
+    {this.repository=repository;this.references=references;this.receipts=receipts;this.html=html;this.metadata=metadata;}
     private const string Design="remediation/design-c4/",Checksum=Design+"docs/checksums.sha256",Presentation=Design+"docs/storyboards.html";
     private static readonly Regex MarkdownLink=new(@"\]\(([^)]+)\)",RegexOptions.CultureInvariant);
     public async Task<RepositoryDocumentationCheckResult> CheckAsync(IReadOnlyList<PublicationFile> entries,CancellationToken cancellationToken=default)
@@ -24,12 +32,29 @@ public sealed class RepositoryDocumentationValidator(IArtifactStore repository,I
         async Task<ReadOnlyMemory<byte>> Read(string path)=>await repository.ReadAsync(path,cancellationToken);
         async Task<string> Text(string path)=>new UTF8Encoding(false,true).GetString((await Read(path)).Span).Replace("\r\n","\n",StringComparison.Ordinal).Replace('\r','\n');
         bool IsFile(string path)=>byPath.TryGetValue(path,out var item)&&item.Kind==PublicationFileKind.Regular;
-        bool Exists(string path)
+        async Task<bool> Exists(string path)
         {
             if(path.Length==0)return true; // The selected repository root exists.
-            if(!byPath.TryGetValue(path,out var item))return false;
-            if(item.Kind==PublicationFileKind.SymbolicLink)throw Scope("symbolic-link");
-            return item.Kind is PublicationFileKind.Regular or PublicationFileKind.Directory;
+            if(byPath.TryGetValue(path,out var item)){
+                if(item.Kind==PublicationFileKind.SymbolicLink)throw Scope("symbolic-link");
+                return item.Kind is PublicationFileKind.Regular or PublicationFileKind.Directory;
+            }
+            // Root enumeration deliberately never descends .git. Query only
+            // the referenced parent, with the SAME bound metadata authority.
+            var parts=path.Split('/');
+            if(metadata is null||!parts.Take(parts.Length-1).Contains(".git",StringComparer.Ordinal))return false;
+            if(!ArtifactPaths.IsRelative(path))throw Scope("metadata-path");
+            var parent=string.Join('/',parts.Take(parts.Length-1));IReadOnlyList<ArtifactTreeEntry> children;
+            try{children=await metadata.EnumerateAsync(parent,false,cancellationToken);}
+            catch(FileNotFoundException){return false;}
+            catch(DirectoryNotFoundException){return false;}
+            var seen=new HashSet<string>(StringComparer.Ordinal);
+            foreach(var child in children)
+                if(!ArtifactPaths.IsRelative(child.RelativePath)||Path.GetDirectoryName(child.RelativePath)?.Replace('\\','/')!=parent||!seen.Add(child.RelativePath))throw Scope("metadata-scope");
+            var match=children.SingleOrDefault(child=>child.RelativePath==path);
+            if(match is null)return false;
+            if(match.Kind is not(NativeArtifactKind.RegularFile or NativeArtifactKind.Directory)||match.Native is null||match.Native.Kind!=match.Kind||match.Native.Length!=match.Length)throw Scope("metadata-kind-or-identity");
+            return true;
         }
         using(var lines=new StringReader(await Text(Checksum)))while(lines.ReadLine() is {} line)
         {
@@ -49,7 +74,7 @@ public sealed class RepositoryDocumentationValidator(IArtifactStore repository,I
                 if(resolved.Disposition==ArtifactReferenceDisposition.Ignored)continue;
                 linkCount++;
                 if(resolved.Disposition!=ArtifactReferenceDisposition.Local||resolved.RootRelativePath is null)throw Scope(resolved.Reason??"reference");
-                if(!Exists(resolved.RootRelativePath))errors.Add("Missing link in "+entry.Path+": "+raw.Trim('<','>').Split('#')[0]);
+                if(!await Exists(resolved.RootRelativePath))errors.Add("Missing link in "+entry.Path+": "+raw.Trim('<','>').Split('#')[0]);
             }
         }
         var vectors=entries.Where(entry=>entry.Kind==PublicationFileKind.Regular&&entry.Path.StartsWith(Design+"docs/",StringComparison.Ordinal)&&entry.Path.EndsWith(".svg",StringComparison.Ordinal)).ToArray();

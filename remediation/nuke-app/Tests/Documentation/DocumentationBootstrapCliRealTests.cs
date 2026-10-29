@@ -68,6 +68,10 @@ public sealed class DocumentationBootstrapCliRealTests
         var output=Store(outputRoot);var tree=Directory.Exists(outputRoot)?await new NativeArtifactWorkspace(outputRoot).EnumerateAsync():[];
         var paths=tree.Where(entry=>entry.Kind==NativeArtifactKind.RegularFile&&!entry.RelativePath.StartsWith(".leases/",StringComparison.Ordinal)).Select(entry=>entry.RelativePath).Order(StringComparer.Ordinal).ToArray();
         Artifact? manifest=paths.Contains("generation-manifest.json",StringComparer.Ordinal)?new("generation-manifest.json",await output.ReadAsync("generation-manifest.json"),"application/json"):null;
-        return new(process.ExitCode,diagnostic,manifest,modes,sourceUnchanged,toolsUnchanged,File.Exists(process.StandardOutputPath)&&File.Exists(process.StandardErrorPath),args[0]=="exec"&&!args.Contains("build",StringComparer.Ordinal)&&!args.Contains("restore",StringComparer.Ordinal),paths,sources);
+        var bootstrapStore=Store(Path.Combine(root,"work","bootstrap"));
+        Artifact? receipt=paths.Contains("toolchain-bootstrap-receipt.json",StringComparer.Ordinal)?new("toolchain-bootstrap-receipt.json",await output.ReadAsync("toolchain-bootstrap-receipt.json"),"application/json"):null;
+        Artifact? child=receipt is null?null:new("generation-manifest.json",await bootstrapStore.ReadAsync("generation-manifest.json"),"application/json");
+        if(receipt is not null)Assert.Equal(receipt.Bytes.ToArray(),(await bootstrapStore.ReadAsync(receipt.RelativePath)).ToArray());
+        return new(process.ExitCode,diagnostic,manifest,modes,sourceUnchanged,toolsUnchanged,File.Exists(process.StandardOutputPath)&&File.Exists(process.StandardErrorPath),args[0]=="exec"&&!args.Contains("build",StringComparer.Ordinal)&&!args.Contains("restore",StringComparer.Ordinal),paths,sources,receipt,child);
     }
 }

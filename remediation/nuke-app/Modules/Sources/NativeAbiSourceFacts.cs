@@ -18,7 +18,12 @@ public sealed class NativeAbiSourceFacts(IStrictJsonInspector inspector) : INati
         StrictJsonInspection inspection;
         try { inspection = inspector.Inspect(new UTF8Encoding(false, true).GetBytes(text)); }
         catch (EncoderFallbackException) { return Unsupported(text, "Invalid Unicode in ABI JSON"); }
-        if (inspection.Diagnostics.Count > 0 || !inspection.Value.HasValue) return Unsupported(text, inspection.Diagnostics.FirstOrDefault()?.Message ?? "Invalid ABI JSON");
+        if (inspection.Diagnostics.Count > 0 || !inspection.Value.HasValue)
+        {
+            var first = inspection.Diagnostics.FirstOrDefault();
+            var reason = first?.Code == CanonicalJsonErrors.DuplicateProperty ? "Duplicate JSON key " + first.DecodedPropertyName : first?.Message ?? "Invalid ABI JSON";
+            return Unsupported(text, reason);
+        }
         if (inspection.Value.Value.ValueKind != JsonValueKind.Object) return Unsupported(text, "Expected ABI dump object");
         var root = JsonNode.Parse(inspection.Value.Value.GetRawText(), null, new JsonDocumentOptions { MaxDepth = int.MaxValue })!.AsObject();
         var records = new JsonArray(); var unknown = new JsonObject();
@@ -32,8 +37,9 @@ public sealed class NativeAbiSourceFacts(IStrictJsonInspector inspector) : INati
                 if (values[ordinal] is not JsonObject item)
                 {
                     var key = collection + ":nonobject-records";
-                    if (unknown[key] is not JsonArray) unknown[key] = new JsonArray();
-                    unknown[key]!.AsArray().Add(new JsonObject { ["ordinal"] = ordinal, ["raw"] = values[ordinal]?.DeepClone() }); continue;
+                    if (!unknown.ContainsKey(key)) unknown[key] = new JsonArray();
+                    if (unknown[key] is not JsonArray bucket) throw new ArgumentException("Expected ABI nonobject-record bucket array");
+                    bucket.Add(new JsonObject { ["ordinal"] = ordinal, ["raw"] = values[ordinal]?.DeepClone() }); continue;
                 }
                 var localKey = String(item["linker_set_key"]);
                 var displayName = item.ContainsKey("function_name") ? item["function_name"] : item["name"];

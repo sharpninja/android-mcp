@@ -12,7 +12,7 @@ public sealed class DesignCompositionRecipeFactory(IDocumentationRendererProfile
     IGeneratedDesignValidator? documents=null,IDocumentationManifestBuilder? manifests=null,
     IDocumentationModelSourcePlanner? documentationSources=null,IArtifactReceiptVerifier? artifactReceipts=null,
     IDocumentationProjector? uiProjector=null,DocumentationLegacyReceipts? legacyReceipts=null,
-    ArtifactGenerationPreparation? buildPayload=null):IDesignFullArchitectureRecipeFactory
+    ArtifactGenerationPreparation? buildPayload=null,Artifact? bootstrapReceipt=null):IDesignFullArchitectureRecipeFactory
 {
     private const string ChecksumPath="docs/checksums.sha256",ArchivePath="package/android-mcp-design-source.zip";
     private readonly IDesignStagePlanner stages=new DesignStagePlanner();
@@ -104,6 +104,7 @@ public sealed class DesignCompositionRecipeFactory(IDocumentationRendererProfile
                     throw new ArchitectureAssetException("DESIGN_OUTPUT_COLLISION","Receipt output ownership collides");
             }
             var prerequisiteReceipts=SelectedPrerequisiteReceipts(selection,model.Modules,model.Contracts,model.Ui.Artifacts);
+            if(bootstrapReceipt is not null&&selection.Stages.Contains(DesignStage.Tools))additionalReceipts=additionalReceipts.Append(bootstrapReceipt.RelativePath).ToArray();
             var payload=selection.Stages.Contains(DesignStage.Package)?buildPayload:null;
             if(payload is not null&&payload.VerifyBeforeCommitAsync is null)
                 throw new ArchitectureAssetException("BUILD_SOURCE_RECHECK_REQUIRED","Bind the child native-source recheck before package publication");
@@ -151,8 +152,9 @@ public sealed class DesignCompositionRecipeFactory(IDocumentationRendererProfile
     private IReadOnlyList<Artifact> SelectedPrerequisiteReceipts(DesignStagePlan selection,ModuleValidationResult? module,
         ModelContractValidationResult? model,IReadOnlyList<Artifact> ui)
     {
-        if(legacyReceipts is null)return [];
         var result=new List<Artifact>();
+        if(bootstrapReceipt is not null&&selection.Stages.Contains(DesignStage.Tools))result.Add(bootstrapReceipt);
+        if(legacyReceipts is null)return result;
         if(selection.Stages.Contains(DesignStage.ModuleGraph))
             result.Add(legacyReceipts.Module(module??throw new ArchitectureAssetException("LEGACY_RECEIPT_PENDING","Selected module authority is absent")));
         if(selection.Stages.Contains(DesignStage.ModelContracts))

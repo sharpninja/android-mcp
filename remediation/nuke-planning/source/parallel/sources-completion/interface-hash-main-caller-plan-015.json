@@ -1,0 +1,462 @@
+{
+  "At": "2026-10-29T03:07:14",
+  "State": "PLAN awaiting Root approval of exact thin binding and native boundary choices; no new product implementation or test execution authorized by this artifact alone.",
+  "RequirementIds": [
+    "FR-BUILD-004",
+    "TR-BUILD-004",
+    "TEST-BUILD-004",
+    "TEST-BUILD-003"
+  ],
+  "Original": {
+    "Sha256": "59c4b756d90b922fd32d7fbab7cb72256e58fc5a3ffb6d4fd0d2d5e383e221d9",
+    "Path": "publication/android-mcp-git/tools/source_facts/interface_hash_facts.py",
+    "PythonExecuted": false,
+    "MainAndScriptEntryReadAsText": true
+  },
+  "PriorParserDelta": {
+    "Handoff": "published-hash-013/handoff.json",
+    "CorrectionSha256": "9b5e6f100a9577d0117f3bc8b565f102c05e40dc3ef0958cfb6b9b9ee8d4a6c7",
+    "RequiredFullCorrection": "published-hash-013/full-scope-correction-014.json",
+    "NoChangesProposed": true,
+    "HandoffSha256": "7af0d61d2be731047812fe07b7627e3c71ccdf2f63e50e8baba2e9724545230c"
+  },
+  "ExistingExtractFit": {
+    "Decision": "Keep Sources/Extract operation and add one explicit task selector; do not force this original evidence workflow into the current declaration-cache request.",
+    "Evidence": "SourceExtractRequest requires RehydrationSourceProjection and native producer; SourcesExtractWriter selects only cache-producing source rows, while original main accepts even empty sources and has no recipe/lock/cache. RehydrationPlanner requires nonempty recipe_version1 inventory and extra producer/lock fields. Fabricating those would change the original contract."
+  },
+  "ProposedRootBinding": {
+    "Admission": "Reuse the existing common outer IPinnedArtifactReader + strict canonical read once in Build.SourcesExtract. Dispatch typed deserialization by task after pin admission. Default existing SourcesExtractWorkflowFile stays unchanged. New branch composes existing stores/runtime/clock/identity/generation services without SourceBatch/HTTP.",
+    "NoNewOperationExecutor": true,
+    "PlannerSteps": "Rename only Sources/Extract admit-locked-recipe to admit-task-inputs and verify-source-inventory to verify-task-source-pins, keeping dependency chain and existing remaining step IDs. Default task still performs locked recipe/inventory internally; no false locked-recipe step for hash task. Update only its existing SourceExtractPlannerCases plus additive task acceptance/unknown task rejection tests before Root production edits.",
+    "Enum": "SourceExtractTask: Declarations(default), InterfaceHashes",
+    "Command": "Existing native host run --target Sources --operation Extract --extract-task InterfaceHashes --project-root <original-root> --pipeline-request <request.json> --pipeline-request-sha256 <pin> --pipeline-request-length <bytes>",
+    "Operation": "Extract",
+    "RootFiles": [
+      "Build.cs: Parameter+Dispatch optional extract-task",
+      "Core/OperationRegistry.cs: Sources/Extract optional extract-task only",
+      "Build.SourcesExtract.cs: reuse admitted outer bytes, select typed task; Root may place composition in a thin partial Build file"
+    ],
+    "Parameter": "extract-task",
+    "Wire": "PublishedInterfaceHashWorkflowFile(StoredArtifact Inventory,string GenerationStoreRoot,string GenerationRoot,string? ProfileId=null), JsonUnmappedMemberHandling.Disallow. Both inventory and selected raw local_path files resolve against project-root, matching original main(root). No editable producer identity or pre-admitted result/projection accepted.",
+    "Category": "Sources",
+    "NoNewNukeTarget": true
+  },
+  "ProposedSourceService": {
+    "SourceFiles": [
+      "Modules/Sources/PublishedInterfaceHashWorkflowContracts.cs (new domain DTO/SPI)",
+      "Modules/Sources/PublishedInterfaceHashWorkflow.cs (one domain loop and thin existing generation recipe/manifest factory)",
+      "Modules/Sources/SourceFactProducer.cs (only four approved access modifiers, no behavior changes)"
+    ],
+    "HelperReuseProposal": "Root-approved visibility-only private-to-internal access for existing SourceFactProducer.Iterable, ContainsImport, StrictObject and CopyRequired, retaining existing bodies/names and005 proof; needed to preserve reached JSON membership/iteration/required-value behavior without a duplicate compatibility helper. No Core or SourceText changes. If Root prefers another existing seam, resolve before tests/implementation.",
+    "NoNewDiscovery": "No recursive source discovery or generic inventory/recipe parser. Inventory shape is the exact original sources object projection, not a new schema engine. Tree service is output destination metadata only.",
+    "Contract": "IPublishedInterfaceHashWorkflow.RunAsync(PublishedInterfaceHashWorkflowRequest request,CancellationToken); request carries pinned inventory, GenerationRoot, selected existing SourceExtractionProfile and observed SourceExtractProducerIdentity. Host supplies identity via existing builder, not wire input.",
+    "Steps": "Admit inventory; iterate exact logical rows lazily; read/check/decode/parse/project selected rows; capture unique physical input pins while retaining every logical row; shared generation runtime re-admits inventory/raw pins; under lease reject preexisting destination via existing metadata tree; materialize facts/report; shared runtime retains partials, rechecks inputs and commits index.json last.",
+    "Dependencies": [
+      "Input IArtifactStore bound to original project-root",
+      "Output IArtifactStore bound to separate admitted GenerationStoreRoot",
+      "Existing IPinnedArtifactReader for inventory admission",
+      "ISourcesRuntimeFactory.Concerns.PublishedHashes",
+      "IProfiledCanonicalJson LegacyAsciiIdentity",
+      "IContentHash/NativeContentHash",
+      "IClock/SystemClock",
+      "IArtifactTreeReader for output-parent metadata only",
+      "IArtifactLeaseProvider/FileArtifactLeaseProvider",
+      "ArtifactGenerationRuntime + ArtifactReceiptVerifier + domain manifest factory"
+    ]
+  },
+  "OriginalResponsibilityMap": [
+    {
+      "Id": "HASH-MAIN-01",
+      "Original": "Load root/outside-corpus-audit/source-inventory-batchinterface-metadata-v1-acquired002.json and require the sources member only when read.",
+      "Native": "Caller-pinned inventory artifact read through project-root FileArtifactStore/IPinnedArtifactReader, admitted by existing canonical strict JSON service. No acquisition, inventory discovery, inferred source root or synthetic rehydration recipe."
+    },
+    {
+      "Id": "HASH-MAIN-02",
+      "Original": "Visit logical sources in input order. Read selection_reasons first; exact AIDL reason wins over exact HIDL reason; skip all other rows before local_path/hash/identity access.",
+      "Native": "One domain loop, existing source-value membership/iteration helper reuse. Preserve list membership, object-key membership and string substring membership, explicit missing/null/noniterable errors and lazy field access."
+    },
+    {
+      "Id": "HASH-MAIN-03",
+      "Original": "Selected local_path is rooted at root; read bytes, assert SHA256 equality, decode strict UTF8, then invoke the selected existing pure parser.",
+      "Native": "ArtifactPaths + IArtifactStore + ContentHash/NativeContentHash + SourceText.DecodeUtf8 + runtime.Concerns.PublishedHashes. Source mismatch fails before decoder/parser; unselected source files never read."
+    },
+    {
+      "Id": "HASH-MAIN-04",
+      "Original": "After parsing, copy required repository/revision/path/sha256/retrieved_at values into source identity without string-normalizing their JSON values.",
+      "Native": "Deep-copy existing required JSON values. AIDL path must be string when the path-scope regex is reached; HIDL path is retained as raw context and need not pass AIDL path interpretation."
+    },
+    {
+      "Id": "HASH-MAIN-05",
+      "Original": "AIDL path scope uses (?:^|/)aidl_api/([^/]+)/([^/]+)/\\\\.hash$; retain module and frozen-dump-version strings, otherwise path_scope unknown. HIDL emits its fixed package-version scope note.",
+      "Native": "One private bounded path-scope regex in the workflow, using existing SourceSyntax regex construction if needed. No filesystem discovery, Android-version inference or profile engine."
+    },
+    {
+      "Id": "HASH-MAIN-06",
+      "Original": "Append every parsed fact in file/line order, including repeated logical rows/identifiers. Reports retain raw unknown lines and conservative false fields.",
+      "Native": "Clone exact pure-parser fact fields and attach only required source/scope. Physical source pin coalescing never deduplicates logical reports or fact rows."
+    },
+    {
+      "Id": "HASH-MAIN-07",
+      "Original": "Counter hash-facts key is added only when a fact exists. Each selected file always increments files and unknown-lines, including unknown-lines=0. Zero selected rows yields counts={} and files=[].",
+      "Native": "Preserve key absence versus explicit zero; selected empty input yields files=1, unknown-lines=0 and absent hash-facts key."
+    },
+    {
+      "Id": "HASH-MAIN-08",
+      "Original": "Finish input processing before destination.mkdir(exist_ok=False). Existing destination, including empty/unrelated-content directory, is rejected. Write facts.jsonl first and report.json next; retain failures/partials.",
+      "Native": "Existing output tree metadata checks destination absence under the generation lease; shared generation runtime writes retained facts/report artifacts and commits its extra index.json last. Output artifacts are immutable; no overwrite/delete/Move."
+    },
+    {
+      "Id": "HASH-MAIN-09",
+      "Original": "facts.jsonl uses sorted-key ASCII JSON records plus newline. report contains at/counts/files/code_sha256/runtime_observations=false/metadata_cannot_grant_os_or_client_authority=true/complete=false. stdout omits files.",
+      "Native": "Existing LegacyAsciiIdentity compact canonical JSON authority, one newline per fact, empty facts file when no facts, no trailing newline required on report. Preserve every original report value/flag and omit files from stdout; native provenance/commit pins are explicit native additions below."
+    },
+    {
+      "Id": "HASH-MAIN-10",
+      "Original": "__main__ calls main relative to script directory. Original main has no return value and uses the current process stdout.",
+      "Native": "Existing Sources/Extract with explicit InterfaceHashes task and caller-pinned workflow request. Root owns the thin NUKE binding. Typed result returns report/facts/commit pins and stdout summary; no separate NUKE target or script process."
+    }
+  ],
+  "PlannedOriginalAndNativeBoundaryCases": [
+    {
+      "Id": "HM01",
+      "Expected": "One fact/report, exact5-field source identity, module foo/version2, aidl:hash-facts1/files1/unknown-lines0; conservative flags.",
+      "Input": "One AIDL row, exact stable AIDL version hash reason, p/aidl_api/foo/2/.hash, one lowercase hex40 line."
+    },
+    {
+      "Id": "HM02",
+      "Expected": "Two ordered facts, one file report with exact raw unknown line; no identifier deduplication or Android applicability.",
+      "Input": "One HIDL row with two hashes for identical declared_identifier plus an opaque unknown line."
+    },
+    {
+      "Id": "HM03",
+      "Expected": "AIDL wins; no HIDL parser call.",
+      "Input": "Both reason phrases present, in either array order."
+    },
+    {
+      "Id": "HM04",
+      "Expected": "Skip without file read, parser call, required-field error or inferred count.",
+      "Input": "Unselected row missing local_path/hash/identity or pointing at a missing file."
+    },
+    {
+      "Id": "HM05",
+      "Expected": "Exact raw JSON identity retained; no blanket string normalization.",
+      "Input": "Selected metadata repository/revision/retrieved_at are JSON null/list/object/number/boolean values."
+    },
+    {
+      "Id": "HM06",
+      "Expected": "Exact captured strings retained without numeric/Android interpretation; nonmatch path_scope unknown.",
+      "Input": "AIDL path matches module and current/007/non-numeric dump-version literals; alternate path does not match."
+    },
+    {
+      "Id": "HM07",
+      "Expected": "Original empty iteration path: empty0-byte facts.jsonl, counts={}, files=[], conservative report.",
+      "Input": "sources=[], sources={}, sources=\"\" in separately admitted inventory objects."
+    },
+    {
+      "Id": "HM08",
+      "Expected": "files1/unknown-lines0 keys present, hash-facts absent, fact count0, raw report present.",
+      "Input": "Selected empty/comment-only source."
+    },
+    {
+      "Id": "HM09",
+      "Expected": "Both report/fact groups retained in original order; physical pin reuse never removes logical rows.",
+      "Input": "Two logical rows share same local_path and same SHA, but have different raw identity/scope context."
+    },
+    {
+      "Id": "HM10",
+      "Expected": "Existing original membership semantics and AIDL-first short circuit; empty reasons skip.",
+      "Input": "Reasons are equivalent array/map-key/string-substring representations, including empty arrays/maps/strings."
+    },
+    {
+      "Id": "HM11",
+      "Expected": "Explicit native required-field/iteration/object error at the reached stage; no output writes.",
+      "Input": "Inventory root missing sources or wrong scalar/row shape."
+    },
+    {
+      "Id": "HM12",
+      "Expected": "Reached original iteration/row failure represented by native operation error; no source/output reads after failure.",
+      "Input": "sources is null/number/boolean or a nonempty map/string whose iterated row is not an object."
+    },
+    {
+      "Id": "HM13",
+      "Expected": "Membership/required-field failure before local file read; later rows unvisited.",
+      "Input": "selection_reasons missing/null/number/boolean on a reached row."
+    },
+    {
+      "Id": "HM14",
+      "Expected": "No parser/identity/output artifacts; prior source files remain unchanged.",
+      "Input": "Selected raw source missing or unreadable."
+    },
+    {
+      "Id": "HM15",
+      "Expected": "Digest mismatch wins before UTF8 decoder/parser, no outputs.",
+      "Input": "Selected source digest mismatch and deliberately invalid UTF8 payload."
+    },
+    {
+      "Id": "HM16",
+      "Expected": "Decoder fails before pure parser, no outputs.",
+      "Input": "Digest-correct invalid UTF8."
+    },
+    {
+      "Id": "HM17",
+      "Expected": "Parser failure wins if thrown; otherwise missing required identity field fails after parsing, before outputs.",
+      "Input": "Missing identity field after selected parser call, including a fake parser failure in the same row."
+    },
+    {
+      "Id": "HM18",
+      "Expected": "HIDL preserves raw path context; AIDL fails only at reached path-scope interpretation.",
+      "Input": "HIDL identity path null/object versus AIDL identity path null/object."
+    },
+    {
+      "Id": "HM19",
+      "Expected": "Earlier reads/parse calls recorded, but destination/facts/report still absent because original loop completes before output.",
+      "Input": "Late selected-row failure after an earlier valid row."
+    },
+    {
+      "Id": "HM20",
+      "Expected": "Reject after required input processing; retain every byte, no replay success, no overwrite.",
+      "Input": "Output destination preexists as empty directory, unrelated-content directory, facts-only partial, report-only partial or complete generation."
+    },
+    {
+      "Id": "HM21",
+      "Expected": "Existing native portable path/store admission rejects before unsafe read/write; explicit native path boundary.",
+      "Input": "Unsafe local_path/generation/root alias or symlink traversal."
+    },
+    {
+      "Id": "HM22",
+      "Expected": "Shared input pin mismatch before output writes; no silent stale projection.",
+      "Input": "Selected source changes after domain snapshot but before generation admission."
+    },
+    {
+      "Id": "HM23",
+      "Expected": "Shared recheck fails, retained uncommitted outputs, no accepted index.json.",
+      "Input": "Selected source or inventory changes after facts/report writes, before commit."
+    },
+    {
+      "Id": "HM24",
+      "Expected": "Partial retained, report/commit absent, no success receipt.",
+      "Input": "facts.jsonl write failure/cancellation after partial bytes."
+    },
+    {
+      "Id": "HM25",
+      "Expected": "facts retained, report partial retained, commit absent.",
+      "Input": "report.json write failure/cancellation."
+    },
+    {
+      "Id": "HM26",
+      "Expected": "Facts/report retained, no accepted generation receipt; shared runtime diagnostics, no cleanup deletion.",
+      "Input": "index.json commit failure or incorrect returned stored receipt."
+    },
+    {
+      "Id": "HM27",
+      "Expected": "Existing shared lease serializes; later attempt rejects occupied destination, originals retained.",
+      "Input": "Cooperating concurrent attempts at the same generation."
+    },
+    {
+      "Id": "HM28",
+      "Expected": "Existing pinned/strict admission failure before inner domain or output effects.",
+      "Input": "Outer workflow/inventory request pin hash or length mismatch; malformed strict JSON."
+    },
+    {
+      "Id": "HM29",
+      "Expected": "No outputs and no historical Python fingerprint relabeling.",
+      "Input": "Native runtime/producer identity capture fails or returns mismatched loaded assembly identity."
+    },
+    {
+      "Id": "HM30",
+      "Expected": "Complete report fields retained, stdout omits files, native identity and facts/report/index pins explicit.",
+      "Input": "Controlled clock/native identity with report containing files and stdout projection."
+    },
+    {
+      "Id": "HM31",
+      "Expected": "Existing PublishedHashes concern reused; no new profile semantics or identity engine.",
+      "Input": "Current-candidate and release-011 profiles for the same finite admitted main fixtures."
+    },
+    {
+      "Id": "HM32",
+      "Expected": "Real temp-tree artifacts and exact stdout/exit effects for hash task; existing declaration pipeline/arguments still work. No Python, parser subprocess or network.",
+      "Input": "Compiled Sources/Extract invocation with InterfaceHashes and pinned native request, then unchanged default declaration-cache request."
+    }
+  ],
+  "OutputContract": {
+    "Console": "Original summary projection removes files; include explicit native generation/facts/report pins with the native identity. Console.WriteLine terminates the single canonical summary JSON with newline. Typed result returns same summary and stored artifact pins.",
+    "NativeIdentityProposal": "code_sha256 is the observed native assembly SHA256 from SourceProducerIdentityBuilder, never the original Python source hash; add native_producer equal to its existing complete identity and historical_python_identity=false to report/summary/commit so this substitution is explicit.",
+    "Timestamp": "IClock.Now.ToString(O) with explicit measured offset, one injectable report time. Original UTC isoformat historical bytes are not relabeled; existing native SystemClock is local DateTimeOffset.Now.",
+    "LegacyNamedArtifacts": [
+      "GenerationRoot/facts.jsonl",
+      "GenerationRoot/report.json"
+    ],
+    "NativeCommit": "GenerationRoot/index.json written last by existing generation engine",
+    "FactRows": "Exact source5-field JSON identity + exact scope + every original pure parser fact property, input-file/line order, repeated logical evidence retained.",
+    "ReportFields": [
+      "at",
+      "counts",
+      "files",
+      "code_sha256",
+      "runtime_observations=false",
+      "metadata_cannot_grant_os_or_client_authority=true",
+      "complete=false"
+    ]
+  },
+  "ExplicitApprovalChoices": [
+    "Existing native safe portable root-relative paths and strict JSON duplicate/nonfinite/Unicode admission replace original pathlib/json.loads permissiveness. Preserve reached original admitted-domain errors/effects; no unrestricted interpreter equivalence.",
+    "Use shared LegacyAsciiIdentity compact canonical bytes rather than reproducing json.dumps default spaces and report indent2. Same original field values/order of array evidence and JSONL newline boundaries; no historical byte identity. No new serializer.",
+    "Native assembly identity, native_producer/historical_python_identity metadata, offset timestamp and final index.json are explicit native generation additions; do not pretend they are original Python code or frozen report bytes.",
+    "Existing destination directories, including empty/unrelated directories, must fail after successful input processing. Use existing tree absence observation under shared cooperating lease. This does not claim atomic mkdir equivalence against arbitrary noncooperating hostile directory creation between observation/write; that capability is absent from the reused services and is not invented.",
+    "Shared generation admission/rechecks add immutable pin enforcement before/after writes; failure keeps uncommitted files and no final commit. Original has no final recheck. Preserve actual source evidence, do not silently drop failed/changed inputs.",
+    "Only four existing SourceFactProducer helper access modifiers and Root-owned CLI/planner binding may need existing-file edits. No factory/Core service/registry schema framework or SourceSyntax changes by Sources."
+  ],
+  "Bdpv4": {
+    "NoMockOrProductionGateClaim": true,
+    "Sequence": [
+      "Root reviews/approves this exact typed task/boundary plan",
+      "Write finite independent original-value/error/effect mocks and assertion negative controls, including Root planner/host mocks",
+      "Private NUKE mock gate green with production unchanged and exact source/assertion pins",
+      "Implement one Sources workflow, SAME native temp-tree cases, then Root-approved thin compiled caller",
+      "Private focused/native applicable full gate including prior case-name inclusion, immutable minimal handoff",
+      "Root canonical guarded integration/full proof and authority decision; Ready before postponed HV"
+    ]
+  },
+  "VerificationScope": "Exact original main responsibilities and the finite32 named acceptance groups, expanding each stated variant into independent admitted-domain cases. Existing parser013/014 and default SourceExtract/operation planner regressions required. No Google/API/corpus completeness analysis or live source acquisition.",
+  "CurrentCanonicalPins": [
+    {
+      "Path": "remediation/nuke-app/Build.cs",
+      "Sha256": "3f242bc564152a389257918d377eb065ae670699ce1d04de569f81ebefcc7e63",
+      "Size": 17713
+    },
+    {
+      "Path": "remediation/nuke-app/Build.SourcesExtract.cs",
+      "Sha256": "6ae08a52311f3c588a15e9f54635929f40134759f1cdac87f7e0ce9593470e4b",
+      "Size": 3450
+    },
+    {
+      "Path": "remediation/nuke-app/Build.WorkflowRoots.cs",
+      "Sha256": "8e4b0700a00328309967fa60f77bdc75fe01adb08aa22c5ac3b72ff3c343104f",
+      "Size": 362
+    },
+    {
+      "Path": "remediation/nuke-app/Core/OperationRegistry.cs",
+      "Sha256": "b31d9276887b31e7bfb51a640e381b1f0ddc3bc68799af657fd235fe96331836",
+      "Size": 12213
+    },
+    {
+      "Path": "remediation/nuke-app/Core/ArtifactGenerationRuntime.cs",
+      "Sha256": "f081875f67a867a6fd2968f4fb809427d0289b22aa65a46367a3902d83c96a9f",
+      "Size": 7456
+    },
+    {
+      "Path": "remediation/nuke-app/Core/ArtifactGenerationContracts.cs",
+      "Sha256": "609be3d064b8884112d99584b3f3528ec3bd688822a6fb27121abe61053aab8b",
+      "Size": 1217
+    },
+    {
+      "Path": "remediation/nuke-app/Core/ArtifactWorkspaceContracts.cs",
+      "Sha256": "cbbe571ae560029b402bace04d0321c58f85169a4b3a59e246853b182819d58a",
+      "Size": 1942
+    },
+    {
+      "Path": "remediation/nuke-app/Core/NativeArtifactWorkspace.cs",
+      "Sha256": "2cdd4ac4b2cde423e852b3eaa78f620f57fb7f7621947eaae57b9f7b4a6064e7",
+      "Size": 8889
+    },
+    {
+      "Path": "remediation/nuke-app/Core/FileArtifactStore.cs",
+      "Sha256": "e8779cdf8521fb211018f7cbe3db4a523058204a3692533b1c5fb0798513eb6a",
+      "Size": 13735
+    },
+    {
+      "Path": "remediation/nuke-app/Core/PinnedArtifactReader.cs",
+      "Sha256": "939f3ca6b3314c2f61756897ea21ee543069c452db645db947db46d2f5175a9f",
+      "Size": 987
+    },
+    {
+      "Path": "remediation/nuke-app/Core/ArtifactPaths.cs",
+      "Sha256": "2ae975707e053fb539041c465973b60c0f5c448bc318f5a5423ec0369e5ae334",
+      "Size": 2130
+    },
+    {
+      "Path": "remediation/nuke-app/Core/ContentHash.cs",
+      "Sha256": "06b7f908c78d70c2c7295d84f1384b7be503c0faa96c7afb32a36b31f3fc31c6",
+      "Size": 1105
+    },
+    {
+      "Path": "remediation/nuke-app/Core/NativeContentHash.cs",
+      "Sha256": "015bb18e50b57f7413b3dbbdc4af3ca9910a0d028d3c91988ef5d6181b00f00c",
+      "Size": 460
+    },
+    {
+      "Path": "remediation/nuke-app/Core/ArtifactReceiptVerifier.cs",
+      "Sha256": "e2a421628da226d13755295ac8f6fbae7190a414b7b9898a332377ae79a53aad",
+      "Size": 643
+    },
+    {
+      "Path": "remediation/nuke-app/Core/CanonicalJson.cs",
+      "Sha256": "05136e62d7dc96146e2fe8db0646db3b5dbcff6779cef21eacc756751bbba222",
+      "Size": 6797
+    },
+    {
+      "Path": "remediation/nuke-app/Core/CanonicalJsonContracts.cs",
+      "Sha256": "4ad52e4cb6e4b77230fea36e6286e9ca87d09e0e50812a6f88d28072d787277e",
+      "Size": 1515
+    },
+    {
+      "Path": "remediation/nuke-app/Core/ExecutionContracts.cs",
+      "Sha256": "c69f794bc26aa26331f78440ef43cd7e19fac514942025fa040433fd363bed4e",
+      "Size": 2963
+    },
+    {
+      "Path": "remediation/nuke-app/Core/NativeProcessRunner.cs",
+      "Sha256": "47437184e9a49ecc5341476b8ebf85d47cdf56a62eaef7b6960e09b6872a2b82",
+      "Size": 1468
+    },
+    {
+      "Path": "remediation/nuke-app/Modules/Execution/SourcesExtractWorkflowContracts.cs",
+      "Sha256": "58f93220de64db013ae7e6403cedcbda85963ed3f59ccf9fe5e4d7601907e1de",
+      "Size": 1587
+    },
+    {
+      "Path": "remediation/nuke-app/Modules/Execution/SourcesExtractWorkflowOperation.cs",
+      "Sha256": "e554bfc00d7fb92f7be1f7546464f7541132994956e11429ff13244eaae31a58",
+      "Size": 2364
+    },
+    {
+      "Path": "remediation/nuke-app/Modules/Sources/SourceExtractContracts.cs",
+      "Sha256": "c15b72243067562a1ccd973349eff276b38dca28050e99fc03f8d02e8e3c8f28",
+      "Size": 4939
+    },
+    {
+      "Path": "remediation/nuke-app/Modules/Sources/SourcesExtractWriter.cs",
+      "Sha256": "4737291b0cdc4e40d1cf062cf8aae2a31db4dbe7720471bb9aeeca92b2a643bb",
+      "Size": 9827
+    },
+    {
+      "Path": "remediation/nuke-app/Modules/Sources/SourceProducerIdentityBuilder.cs",
+      "Sha256": "8275220cab42f31f049bb9204c7d94e233950edb20cded2646a9c84b19b78a5e",
+      "Size": 3576
+    },
+    {
+      "Path": "remediation/nuke-app/Modules/Sources/SourcesRuntimeFactory.cs",
+      "Sha256": "e03576a7a7ab9845aae32b5b8d562569a5f04cd7393a743a2ac501902f7668c7",
+      "Size": 5878
+    },
+    {
+      "Path": "remediation/nuke-app/Modules/Sources/SourceFactProducer.cs",
+      "Sha256": "f5d5b83944184548bf080ffea6998548caee54f61301599e2bcaa3a7b5be1b71",
+      "Size": 21692
+    },
+    {
+      "Path": "remediation/nuke-app/Modules/Sources/SourceText.cs",
+      "Sha256": "925b87aa5a90b0f63ed8273072e79b431a908a301a86c6b03a132ac0ba87b580",
+      "Size": 2169
+    }
+  ],
+  "AuthorityEdited": false,
+  "CanonicalEdited": false,
+  "ProductCodeEdited": false,
+  "NoPythonExecution": true,
+  "NoRawMarkers": true,
+  "NoActionsOrNetwork": true,
+  "NoHvAcceptance": true,
+  "NoDeletion": true,
+  "Guidance": "Full local operator profile previously read; live Global/Workspace memory/session logging remains unavailable after prior denied validation. No retry/bypass or full-memory claim."
+}

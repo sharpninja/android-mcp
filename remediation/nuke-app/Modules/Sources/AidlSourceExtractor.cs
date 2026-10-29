@@ -20,9 +20,13 @@ public sealed class AidlSourceExtractor(Func<ReadOnlyMemory<byte>, string> conte
         internal StructuralParseStatus Status { get; set; } = StructuralParseStatus.Clean;
     }
 
-    public ExtractionResult Extract(SourceDocument source)
+    public ExtractionResult Extract(SourceDocument source) => Extract(source, SourceExtractionProfile.CurrentCandidate);
+
+    public ExtractionResult Extract(SourceDocument source, SourceExtractionProfile profile)
     {
         ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(profile);
+        var includeInterfaceOneway = profile != SourceExtractionProfile.RELEASE011;
         var text = new UTF8Encoding(false, true).GetString(source.Bytes.Span);
         var code = SourceSyntax.Mask(text, true);
         var package = SourceSyntax.Rx(@"\bpackage\s+([\w.]+)\s*;").Match(code).Groups[1].Value;
@@ -35,7 +39,7 @@ public sealed class AidlSourceExtractor(Func<ReadOnlyMemory<byte>, string> conte
         if (spans.Count == 0)
             return Unknown(source, text, package, imports, "No supported top-level AIDL declaration", false);
         var roots = new List<Declaration>();
-        foreach (var span in spans) roots.Add(Parse(source, text, span.Start, span.End, package, imports, null, 0));
+        foreach (var span in spans) roots.Add(Parse(source, text, span.Start, span.End, package, imports, null, 0, includeInterfaceOneway));
         var records = new List<JsonObject>(); var issues = new List<SourceIssue>(); var ordinal = 0; var declarations = new List<Declaration>();
         var status = StructuralParseStatus.Clean;
         foreach (var declaration in roots) Flatten(declaration);
@@ -59,7 +63,7 @@ public sealed class AidlSourceExtractor(Func<ReadOnlyMemory<byte>, string> conte
         }
     }
 
-    private Declaration Parse(SourceDocument source, string text, int start, int end, string package, string[] imports, string? parent, int depth)
+    private Declaration Parse(SourceDocument source, string text, int start, int end, string package, string[] imports, string? parent, int depth, bool includeInterfaceOneway)
     {
         var region = text[start..end]; var code = SourceSyntax.Mask(region, true);
         var matched = SourceSyntax.Rx(@"\b(interface|parcelable|union|enum)\s+([\w]+(?:\.[\w]+)*)").Match(code);
@@ -104,7 +108,7 @@ public sealed class AidlSourceExtractor(Func<ReadOnlyMemory<byte>, string> conte
         var body = SourceSyntax.Mask(region[(opening + 1)..closing], false);
         var nested = SourceSyntax.DeclarationSpans(body);
         foreach (var child in nested)
-            declaration.Children.Add(Parse(source, text, bodyStart + child.Start, bodyStart + child.End, package, imports, descriptor, depth + 1));
+            declaration.Children.Add(Parse(source, text, bodyStart + child.Start, bodyStart + child.End, package, imports, descriptor, depth + 1, includeInterfaceOneway));
         var remaining = SourceSyntax.MaskSpans(body, nested); var ordinal = 0; var unsupported = false;
         foreach (var chunk in SourceSyntax.Chunks(remaining, kind == "enum" ? ',' : ';'))
         {
@@ -131,7 +135,7 @@ public sealed class AidlSourceExtractor(Func<ReadOnlyMemory<byte>, string> conte
                     extras: new() { ["parse_error"] = error.Message, ["declared_ordinal"] = ordinal });
             }
             member["extras"]!["imports"] = SourceSyntax.Strings(imports);
-            member["extras"]!["interface_oneway"] = oneway;
+            if (includeInterfaceOneway) member["extras"]!["interface_oneway"] = oneway;
             member["extras"]!["interface_annotations"] = SourceSyntax.Annotations(topAnnotations.Annotations);
             declaration.Members.Add(member); ordinal++;
         }

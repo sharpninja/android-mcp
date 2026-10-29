@@ -5,9 +5,16 @@ namespace AndroidMcp.BuildTool.Documentation;
 
 // Only original bootstrap selection/order rules live here. All native mode
 // reads/writes, descriptor identity and optional byte pins remain in Core.
-public sealed class DocumentationBootstrapFileEffects(IArtifactTreeReader tree,IArtifactPermissionEditor permissions,
-    IDocumentationWrapperPropertiesValidator properties,Artifact capturedWrapperProperties):IDocumentationBootstrapFileEffects
+public sealed class DocumentationBootstrapFileEffects:IDocumentationBootstrapFileEffects
 {
+    private readonly IArtifactTreeReader tree;
+    private readonly IArtifactPermissionEditor permissions;
+    private readonly IDocumentationWrapperPropertiesValidator properties;
+    private readonly Func<CancellationToken,Task<Artifact>> readProperties;
+    public DocumentationBootstrapFileEffects(IArtifactTreeReader tree,IArtifactPermissionEditor permissions,IDocumentationWrapperPropertiesValidator properties,Artifact capturedWrapperProperties)
+        :this(tree,permissions,properties,_=>Task.FromResult(capturedWrapperProperties)){ }
+    public DocumentationBootstrapFileEffects(IArtifactTreeReader tree,IArtifactPermissionEditor permissions,IDocumentationWrapperPropertiesValidator properties,Func<CancellationToken,Task<Artifact>> readProperties)
+    {this.tree=tree;this.permissions=permissions;this.properties=properties;this.readProperties=readProperties;}
     public async Task GradleExtractedAsync(DocumentationRendererProfile profile,ToolArtifactReceipt gradle,CancellationToken cancellationToken=default)
     {
         cancellationToken.ThrowIfCancellationRequested();
@@ -32,7 +39,8 @@ public sealed class DocumentationBootstrapFileEffects(IArtifactTreeReader tree,I
         await permissions.ApplyAsync(new(new("gradlew",wrappers[0].Native!),ArtifactPermissionOperation.SetMode0755,
             new(pin.LocalPath,pin.Sha256,pin.SizeBytes!.Value,"application/octet-stream")),cancellationToken);
         cancellationToken.ThrowIfCancellationRequested();
-        properties.Validate(profile,capturedWrapperProperties);
+        var capturedWrapperProperties=await readProperties(cancellationToken);
+        cancellationToken.ThrowIfCancellationRequested();properties.Validate(profile,capturedWrapperProperties);
     }
     private static ArchitectureAssetException Files()=>new("BOOTSTRAP_FILES","Bootstrap file effects require the admitted original local file/directory scope");
 }

@@ -18,10 +18,11 @@ public sealed class DeviceResolver
     private readonly JsonObject schemaSource;
     private readonly Dictionary<string,JsonSchema> validators=new(StringComparer.Ordinal);
     private readonly object validatorSync=new();
-    public DeviceResolver(ICanonicalJson canonical,string schemaPath)
+    public DeviceResolver(ICanonicalJson canonical,string schemaPath):this(canonical,JsonNode.Parse(File.ReadAllText(schemaPath))!.AsObject()){}
+    internal DeviceResolver(ICanonicalJson canonical,JsonObject schema)
     {
         this.canonical=canonical;
-        schemaSource=JsonNode.Parse(File.ReadAllText(schemaPath))!.AsObject();
+        schemaSource=(JsonObject)schema.DeepClone();
     }
     private sealed record Decision(string State,string[] Reasons);
     private sealed record Dependency(string EntryId,string ContractHash);

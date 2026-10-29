@@ -1,23 +1,23 @@
 {
-  "at": "2026-10-29T02:20:01",
+  "at": "2026-10-29T04:04:25",
   "projection_only": true,
   "authoritative_inventory": {
     "path": "remediation/nuke-planning/source/legacy-port-disposition-inventory.json",
-    "sha256": "77c0e98fefe310f830f436b255ff129eedb47d99e42741d97f2fad667435ec7f"
+    "sha256": "a5355ceabe866e8e8e8b7d79a9fcccca4e637283922f1d01ae5c6003f3c545bd"
   },
   "scope": "Published 198 only. Additional 1278 local historical paths are retained in the sole union and are not inflated into independent published port tasks.",
   "totals": {
     "published_paths": 198,
     "canonical_responsibility_groups": 134,
-    "normally_verified_files": 53,
+    "normally_verified_files": 60,
     "partially_verified_files": 4,
-    "files_without_normal_method_proof": 141,
-    "normal_method_bindings_by_file": 278,
-    "unique_method_bindings_by_group": 201,
+    "files_without_normal_method_proof": 134,
+    "normal_method_bindings_by_file": 285,
+    "unique_method_bindings_by_group": 208,
     "published_execution_retirements": 0,
     "pr_eligible_paths": 47,
-    "normally_closed_groups": 34,
-    "open_canonical_groups": 100,
+    "normally_closed_groups": 39,
+    "open_canonical_groups": 95,
     "safe_to_delete": 0,
     "hv_accepted": 0
   },
@@ -74,10 +74,10 @@
       ],
       "published_paths": 99,
       "canonical_responsibility_groups": 68,
-      "normal_file_proofs": 33,
-      "normal_method_bindings_by_file": 155,
-      "normally_closed_groups": 18,
-      "open_canonical_groups": 50,
+      "normal_file_proofs": 40,
+      "normal_method_bindings_by_file": 162,
+      "normally_closed_groups": 23,
+      "open_canonical_groups": 45,
       "published_execution_retirements": 0,
       "pr_eligible_test_or_file_paths": 27
     },
@@ -3709,13 +3709,87 @@
         "canonical-or-explicit-owner-profile"
       ],
       "services": [
+        "NativeAbiSourceFacts.Parse",
         "Planned NativeAbiFacts/NativeDescriptorFacts producers over strict source JSON and language-aware lexical input"
       ],
-      "normally_verified_file_paths": [],
-      "normal_method_bindings": [],
-      "normally_closed_all_published_paths": false,
+      "normally_verified_file_paths": [
+        "tools/source_facts/test_native_abi_facts.py"
+      ],
+      "normal_method_bindings": [
+        {
+          "method": "test_duplicate_json_keys_preserved_as_unsupported_source",
+          "source_sha256": "0b2b455a6cc22e82574b9a788a864e21ca516d5997b9302079ce1aa1a0de070d",
+          "evidence": [
+            "remediation/nuke-planning/source/source-normal-verification-supplement.json"
+          ],
+          "scope": [
+            "Exact duplicate functions raw input returns unsupported-json status."
+          ]
+        },
+        {
+          "method": "test_duplicate_type_identity_not_silently_selected",
+          "source_sha256": "0b2b455a6cc22e82574b9a788a864e21ca516d5997b9302079ce1aa1a0de070d",
+          "evidence": [
+            "remediation/nuke-planning/source/source-normal-verification-supplement.json"
+          ],
+          "scope": [
+            "Original fixture appended record_types CB collision; CB appears in duplicate keys and callback candidates empty."
+          ]
+        },
+        {
+          "method": "test_mangled_overloads_not_collapsed_by_display_name",
+          "source_sha256": "0b2b455a6cc22e82574b9a788a864e21ca516d5997b9302079ce1aa1a0de070d",
+          "evidence": [
+            "remediation/nuke-planning/source/source-normal-verification-supplement.json"
+          ],
+          "scope": [
+            "Exactly two records, original set of local keys f_int/f_string despite identical display_name."
+          ]
+        },
+        {
+          "method": "test_missing_type_reference_is_retained",
+          "source_sha256": "0b2b455a6cc22e82574b9a788a864e21ca516d5997b9302079ce1aa1a0de070d",
+          "evidence": [
+            "remediation/nuke-planning/source/source-normal-verification-supplement.json"
+          ],
+          "scope": [
+            "Original fixture with pointer referenced_type MISSING; unresolved reference count exactly1."
+          ]
+        },
+        {
+          "method": "test_nonfinite_json_is_not_a_valid_interchange_number",
+          "source_sha256": "0b2b455a6cc22e82574b9a788a864e21ca516d5997b9302079ce1aa1a0de070d",
+          "evidence": [
+            "remediation/nuke-planning/source/source-normal-verification-supplement.json"
+          ],
+          "scope": [
+            "Exact functions NaN raw input returns unsupported-json status."
+          ]
+        },
+        {
+          "method": "test_pointer_to_function_parameter_is_structural_callback_candidate",
+          "source_sha256": "0b2b455a6cc22e82574b9a788a864e21ca516d5997b9302079ce1aa1a0de070d",
+          "evidence": [
+            "remediation/nuke-planning/source/source-normal-verification-supplement.json"
+          ],
+          "scope": [
+            "Exactly one callback, parameter_index0, lifecycle false and wire/runtime false."
+          ]
+        },
+        {
+          "method": "test_unknown_root_collection_preserved",
+          "source_sha256": "0b2b455a6cc22e82574b9a788a864e21ca516d5997b9302079ce1aa1a0de070d",
+          "evidence": [
+            "remediation/nuke-planning/source/source-normal-verification-supplement.json"
+          ],
+          "scope": [
+            "Exact future_collection raw input, opaque7 object list retained."
+          ]
+        }
+      ],
+      "normally_closed_all_published_paths": true,
       "remaining_caller_and_profile_duties": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "NORMAL project-contract verification for tools/source_facts/native_abi_facts.py under observed source/JSON/C# callers and explicit native diagnostic/admission boundary. No unrestricted CPython/library equivalence. Root instructed that unused exact interpreter diagnostic formatting is not a new project API. Original duplicate/NaN unsupported-json assertions remain required and passed; explicit duplicate decoded-key reason is independently stronger proof. Existing strict native JSON syntax/finite-binary64/Unicode-scalar admission and C# operation errors remain the replacing boundary. Pure parser only: original test module imports parse; supplied native_abi_evidence in source_metadata_reference is not a parser call. No original CLI/main/file/network effects or new runtime factory/concern activation is required."
       ]
     },
     {
@@ -3833,13 +3907,17 @@
         "canonical-or-explicit-owner-profile"
       ],
       "services": [
-        "One SourceFactProducer implements approved callback/functional/applicability interfaces; shared LegacyAsciiIdentity canonical profile"
+        "One SourceFactProducer implements approved callback/functional/applicability interfaces; shared LegacyAsciiIdentity canonical profile",
+        "SourceFactProducer callback typed/value entries and one RegistrationCandidatesCore"
       ],
-      "normally_verified_file_paths": [],
+      "normally_verified_file_paths": [
+        "remediation/catalog/tooling/callback_source_facts.py",
+        "tools/source_facts/callback_source_facts.py"
+      ],
       "normal_method_bindings": [],
-      "normally_closed_all_published_paths": false,
+      "normally_closed_all_published_paths": true,
       "remaining_caller_and_profile_duties": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "No frozen Python cache, producer identity or complete historical execution relabeling. Catalog aggregate/schema/validation/persistence duties remain separately owned."
       ]
     },
     {
@@ -3987,13 +4065,17 @@
         "canonical-or-explicit-owner-profile"
       ],
       "services": [
-        "One SourceFactProducer implements approved callback/functional/applicability interfaces; shared LegacyAsciiIdentity canonical profile"
+        "One SourceFactProducer implements approved callback/functional/applicability interfaces; shared LegacyAsciiIdentity canonical profile",
+        "SourceFactProducer.Taxonomy/TaxonomyValue"
       ],
-      "normally_verified_file_paths": [],
+      "normally_verified_file_paths": [
+        "remediation/catalog/tooling/functional_source_facts.py",
+        "tools/source_facts/functional_source_facts.py"
+      ],
       "normal_method_bindings": [],
-      "normally_closed_all_published_paths": false,
+      "normally_closed_all_published_paths": true,
       "remaining_caller_and_profile_duties": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "No frozen Python cache, producer identity or complete historical execution relabeling. Catalog aggregate/schema/validation/persistence duties remain separately owned."
       ]
     },
     {
@@ -4431,13 +4513,16 @@
         "canonical-or-explicit-owner-profile"
       ],
       "services": [
+        "NativeDescriptorSourceFacts.Parse/ParseValue with its existing Lex/Mask/Balanced/Literal call paths",
         "Planned NativeAbiFacts/NativeDescriptorFacts producers over strict source JSON and language-aware lexical input"
       ],
-      "normally_verified_file_paths": [],
+      "normally_verified_file_paths": [
+        "tools/source_facts/native_descriptor_facts.py"
+      ],
       "normal_method_bindings": [],
-      "normally_closed_all_published_paths": false,
+      "normally_closed_all_published_paths": true,
       "remaining_caller_and_profile_duties": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "No frozen Python cache, producer identity or complete historical execution relabeling. Catalog aggregate/schema/validation/persistence duties remain separately owned."
       ]
     },
     {
@@ -5133,13 +5218,16 @@
         "canonical-or-explicit-owner-profile"
       ],
       "services": [
+        "NativeAbiSourceFacts.Parse",
         "Planned NativeAbiFacts/NativeDescriptorFacts producers over strict source JSON and language-aware lexical input"
       ],
-      "normally_verified_file_paths": [],
+      "normally_verified_file_paths": [
+        "tools/source_facts/native_abi_facts.py"
+      ],
       "normal_method_bindings": [],
-      "normally_closed_all_published_paths": false,
+      "normally_closed_all_published_paths": true,
       "remaining_caller_and_profile_duties": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "NORMAL project-contract verification for tools/source_facts/native_abi_facts.py under observed source/JSON/C# callers and explicit native diagnostic/admission boundary. No unrestricted CPython/library equivalence. Root instructed that unused exact interpreter diagnostic formatting is not a new project API. Original duplicate/NaN unsupported-json assertions remain required and passed; explicit duplicate decoded-key reason is independently stronger proof. Existing strict native JSON syntax/finite-binary64/Unicode-scalar admission and C# operation errors remain the replacing boundary. Pure parser only: original test module imports parse; supplied native_abi_evidence in source_metadata_reference is not a parser call. No original CLI/main/file/network effects or new runtime factory/concern activation is required."
       ]
     },
     {
@@ -21342,10 +21430,13 @@
       "primary_code_path": "remediation/catalog/tooling/callback_source_facts.py",
       "explicit_profiles": "canonical-or-explicit-owner-profile",
       "services": [
-        "One SourceFactProducer implements approved callback/functional/applicability interfaces; shared LegacyAsciiIdentity canonical profile"
+        "One SourceFactProducer implements approved callback/functional/applicability interfaces; shared LegacyAsciiIdentity canonical profile",
+        "SourceFactProducer callback typed/value entries and one RegistrationCandidatesCore"
       ],
-      "additional_responsibilities": [],
-      "normal_file_verified": false,
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
+      "normal_file_verified": true,
       "normal_verified_methods": [],
       "decommissionable_from_pr": false,
       "execution_retired": false,
@@ -21378,38 +21469,13 @@
           "indent": 0
         }
       ],
-      "pending_function_anchors": [
-        {
-          "name": "named",
-          "line": 4,
-          "indent": 0
-        },
-        {
-          "name": "type_candidate",
-          "line": 5,
-          "indent": 0
-        },
-        {
-          "name": "endpoint_method",
-          "line": 14,
-          "indent": 0
-        },
-        {
-          "name": "registration_candidates",
-          "line": 26,
-          "indent": 0
-        },
-        {
-          "name": "possible_pairs",
-          "line": 46,
-          "indent": 0
-        }
-      ],
-      "pending_owner_method_list": "<module-body-and-required-callers>",
+      "pending_function_anchors": [],
+      "pending_owner_method_list": null,
       "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "No frozen Python cache, producer identity or complete historical execution relabeling. Catalog aggregate/schema/validation/persistence duties remain separately owned."
       ],
       "bounded_service_test_evidence": [
+        "Exact source class counts in unchanged full017; retained mock-before-native chronology and original method mappings in pinned Source recommendations",
         "Strengthened actual proof/key mocks passed before production;33output+3proof failure real cases passed in162test TRX1710c9c9002a753ab1263f0dc844ed66ee9f05b532c9c22143b1c4a9a259bba6; full corpus/integration pending"
       ],
       "anchor_limit": "Lexical source-text anchors, not Python execution/AST or automatic proof each nested helper is an independent required feature. Same bytes share one implementation authority, but profile/caller obligations are retained.",
@@ -22443,10 +22509,13 @@
       "primary_code_path": "remediation/catalog/tooling/functional_source_facts.py",
       "explicit_profiles": "canonical-or-explicit-owner-profile",
       "services": [
-        "One SourceFactProducer implements approved callback/functional/applicability interfaces; shared LegacyAsciiIdentity canonical profile"
+        "One SourceFactProducer implements approved callback/functional/applicability interfaces; shared LegacyAsciiIdentity canonical profile",
+        "SourceFactProducer.Taxonomy/TaxonomyValue"
       ],
-      "additional_responsibilities": [],
-      "normal_file_verified": false,
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
+      "normal_file_verified": true,
       "normal_verified_methods": [],
       "decommissionable_from_pr": false,
       "execution_retired": false,
@@ -22459,18 +22528,13 @@
           "indent": 0
         }
       ],
-      "pending_function_anchors": [
-        {
-          "name": "taxonomy",
-          "line": 3,
-          "indent": 0
-        }
-      ],
-      "pending_owner_method_list": "<module-body-and-required-callers>",
+      "pending_function_anchors": [],
+      "pending_owner_method_list": null,
       "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "No frozen Python cache, producer identity or complete historical execution relabeling. Catalog aggregate/schema/validation/persistence duties remain separately owned."
       ],
       "bounded_service_test_evidence": [
+        "Exact source class counts in unchanged full017; retained mock-before-native chronology and original method mappings in pinned Source recommendations",
         "Strengthened actual proof/key mocks passed before production;33output+3proof failure real cases passed in162test TRX1710c9c9002a753ab1263f0dc844ed66ee9f05b532c9c22143b1c4a9a259bba6; full corpus/integration pending"
       ],
       "anchor_limit": "Lexical source-text anchors, not Python execution/AST or automatic proof each nested helper is an independent required feature. Same bytes share one implementation authority, but profile/caller obligations are retained.",
@@ -26734,10 +26798,13 @@
       "primary_code_path": "remediation/catalog/tooling/callback_source_facts.py",
       "explicit_profiles": "canonical-or-explicit-owner-profile",
       "services": [
-        "One SourceFactProducer implements approved callback/functional/applicability interfaces; shared LegacyAsciiIdentity canonical profile"
+        "One SourceFactProducer implements approved callback/functional/applicability interfaces; shared LegacyAsciiIdentity canonical profile",
+        "SourceFactProducer callback typed/value entries and one RegistrationCandidatesCore"
       ],
-      "additional_responsibilities": [],
-      "normal_file_verified": false,
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
+      "normal_file_verified": true,
       "normal_verified_methods": [],
       "decommissionable_from_pr": false,
       "execution_retired": false,
@@ -26770,38 +26837,13 @@
           "indent": 0
         }
       ],
-      "pending_function_anchors": [
-        {
-          "name": "named",
-          "line": 4,
-          "indent": 0
-        },
-        {
-          "name": "type_candidate",
-          "line": 5,
-          "indent": 0
-        },
-        {
-          "name": "endpoint_method",
-          "line": 14,
-          "indent": 0
-        },
-        {
-          "name": "registration_candidates",
-          "line": 26,
-          "indent": 0
-        },
-        {
-          "name": "possible_pairs",
-          "line": 46,
-          "indent": 0
-        }
-      ],
-      "pending_owner_method_list": "<module-body-and-required-callers>",
+      "pending_function_anchors": [],
+      "pending_owner_method_list": null,
       "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "No frozen Python cache, producer identity or complete historical execution relabeling. Catalog aggregate/schema/validation/persistence duties remain separately owned."
       ],
       "bounded_service_test_evidence": [
+        "Exact source class counts in unchanged full017; retained mock-before-native chronology and original method mappings in pinned Source recommendations",
         "Strengthened actual proof/key mocks passed before production;33output+3proof failure real cases passed in162test TRX1710c9c9002a753ab1263f0dc844ed66ee9f05b532c9c22143b1c4a9a259bba6; full corpus/integration pending"
       ],
       "anchor_limit": "Lexical source-text anchors, not Python execution/AST or automatic proof each nested helper is an independent required feature. Same bytes share one implementation authority, but profile/caller obligations are retained.",
@@ -26821,10 +26863,13 @@
       "primary_code_path": "remediation/catalog/tooling/functional_source_facts.py",
       "explicit_profiles": "canonical-or-explicit-owner-profile",
       "services": [
-        "One SourceFactProducer implements approved callback/functional/applicability interfaces; shared LegacyAsciiIdentity canonical profile"
+        "One SourceFactProducer implements approved callback/functional/applicability interfaces; shared LegacyAsciiIdentity canonical profile",
+        "SourceFactProducer.Taxonomy/TaxonomyValue"
       ],
-      "additional_responsibilities": [],
-      "normal_file_verified": false,
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
+      "normal_file_verified": true,
       "normal_verified_methods": [],
       "decommissionable_from_pr": false,
       "execution_retired": false,
@@ -26837,18 +26882,13 @@
           "indent": 0
         }
       ],
-      "pending_function_anchors": [
-        {
-          "name": "taxonomy",
-          "line": 3,
-          "indent": 0
-        }
-      ],
-      "pending_owner_method_list": "<module-body-and-required-callers>",
+      "pending_function_anchors": [],
+      "pending_owner_method_list": null,
       "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "No frozen Python cache, producer identity or complete historical execution relabeling. Catalog aggregate/schema/validation/persistence duties remain separately owned."
       ],
       "bounded_service_test_evidence": [
+        "Exact source class counts in unchanged full017; retained mock-before-native chronology and original method mappings in pinned Source recommendations",
         "Strengthened actual proof/key mocks passed before production;33output+3proof failure real cases passed in162test TRX1710c9c9002a753ab1263f0dc844ed66ee9f05b532c9c22143b1c4a9a259bba6; full corpus/integration pending"
       ],
       "anchor_limit": "Lexical source-text anchors, not Python execution/AST or automatic proof each nested helper is an independent required feature. Same bytes share one implementation authority, but profile/caller obligations are retained.",
@@ -27317,10 +27357,13 @@
       "primary_code_path": "tools/source_facts/native_abi_facts.py",
       "explicit_profiles": "canonical-or-explicit-owner-profile",
       "services": [
+        "NativeAbiSourceFacts.Parse",
         "Planned NativeAbiFacts/NativeDescriptorFacts producers over strict source JSON and language-aware lexical input"
       ],
-      "additional_responsibilities": [],
-      "normal_file_verified": false,
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
+      "normal_file_verified": true,
       "normal_verified_methods": [],
       "decommissionable_from_pr": false,
       "execution_retired": false,
@@ -27353,38 +27396,13 @@
           "indent": 1
         }
       ],
-      "pending_function_anchors": [
-        {
-          "name": "parse",
-          "line": 7,
-          "indent": 0
-        },
-        {
-          "name": "pairs",
-          "line": 8,
-          "indent": 1
-        },
-        {
-          "name": "constant",
-          "line": 14,
-          "indent": 1
-        },
-        {
-          "name": "refs",
-          "line": 27,
-          "indent": 1
-        },
-        {
-          "name": "function_target",
-          "line": 36,
-          "indent": 1
-        }
-      ],
-      "pending_owner_method_list": "<module-body-and-required-callers>",
+      "pending_function_anchors": [],
+      "pending_owner_method_list": null,
       "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "NORMAL project-contract verification for tools/source_facts/native_abi_facts.py under observed source/JSON/C# callers and explicit native diagnostic/admission boundary. No unrestricted CPython/library equivalence. Root instructed that unused exact interpreter diagnostic formatting is not a new project API. Original duplicate/NaN unsupported-json assertions remain required and passed; explicit duplicate decoded-key reason is independently stronger proof. Existing strict native JSON syntax/finite-binary64/Unicode-scalar admission and C# operation errors remain the replacing boundary. Pure parser only: original test module imports parse; supplied native_abi_evidence in source_metadata_reference is not a parser call. No original CLI/main/file/network effects or new runtime factory/concern activation is required."
       ],
       "bounded_service_test_evidence": [
+        "AndroidMcp.BuildTool.Tests.Sources.NativeAbiCompletionRealTests",
         "S-AC024/S-AC025 false-positive/opaque metadata/reference-cycle controls pending"
       ],
       "anchor_limit": "Lexical source-text anchors, not Python execution/AST or automatic proof each nested helper is an independent required feature. Same bytes share one implementation authority, but profile/caller obligations are retained.",
@@ -27404,10 +27422,13 @@
       "primary_code_path": "tools/source_facts/native_descriptor_facts.py",
       "explicit_profiles": "canonical-or-explicit-owner-profile",
       "services": [
+        "NativeDescriptorSourceFacts.Parse/ParseValue with its existing Lex/Mask/Balanced/Literal call paths",
         "Planned NativeAbiFacts/NativeDescriptorFacts producers over strict source JSON and language-aware lexical input"
       ],
-      "additional_responsibilities": [],
-      "normal_file_verified": false,
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
+      "normal_file_verified": true,
       "normal_verified_methods": [],
       "decommissionable_from_pr": false,
       "execution_retired": false,
@@ -27440,38 +27461,13 @@
           "indent": 0
         }
       ],
-      "pending_function_anchors": [
-        {
-          "name": "lex",
-          "line": 4,
-          "indent": 0
-        },
-        {
-          "name": "mask",
-          "line": 41,
-          "indent": 0
-        },
-        {
-          "name": "balanced",
-          "line": 46,
-          "indent": 0
-        },
-        {
-          "name": "literal",
-          "line": 55,
-          "indent": 0
-        },
-        {
-          "name": "parse",
-          "line": 64,
-          "indent": 0
-        }
-      ],
-      "pending_owner_method_list": "<module-body-and-required-callers>",
+      "pending_function_anchors": [],
+      "pending_owner_method_list": null,
       "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "No frozen Python cache, producer identity or complete historical execution relabeling. Catalog aggregate/schema/validation/persistence duties remain separately owned."
       ],
       "bounded_service_test_evidence": [
+        "Exact source class counts in unchanged full017; retained mock-before-native chronology and original method mappings in pinned Source recommendations",
         "S-AC024/S-AC025 false-positive/opaque metadata/reference-cycle controls pending"
       ],
       "anchor_limit": "Lexical source-text anchors, not Python execution/AST or automatic proof each nested helper is an independent required feature. Same bytes share one implementation authority, but profile/caller obligations are retained.",
@@ -29345,11 +29341,106 @@
       "primary_code_path": "tools/source_facts/test_native_abi_facts.py",
       "explicit_profiles": "canonical-or-explicit-owner-profile",
       "services": [
+        "NativeAbiSourceFacts.Parse",
         "Planned NativeAbiFacts/NativeDescriptorFacts producers over strict source JSON and language-aware lexical input"
       ],
-      "additional_responsibilities": [],
-      "normal_file_verified": false,
-      "normal_verified_methods": [],
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
+      "normal_file_verified": true,
+      "normal_verified_methods": [
+        {
+          "method": "test_pointer_to_function_parameter_is_structural_callback_candidate",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "0b2b455a6cc22e82574b9a788a864e21ca516d5997b9302079ce1aa1a0de070d",
+          "bindings": [
+            "ORIG-ABI-01"
+          ],
+          "normal_verified": true,
+          "scope": "Exactly one callback, parameter_index0, lifecycle false and wire/runtime false.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_missing_type_reference_is_retained",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "0b2b455a6cc22e82574b9a788a864e21ca516d5997b9302079ce1aa1a0de070d",
+          "bindings": [
+            "ORIG-ABI-02"
+          ],
+          "normal_verified": true,
+          "scope": "Original fixture with pointer referenced_type MISSING; unresolved reference count exactly1.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_duplicate_type_identity_not_silently_selected",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "0b2b455a6cc22e82574b9a788a864e21ca516d5997b9302079ce1aa1a0de070d",
+          "bindings": [
+            "ORIG-ABI-03"
+          ],
+          "normal_verified": true,
+          "scope": "Original fixture appended record_types CB collision; CB appears in duplicate keys and callback candidates empty.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_unknown_root_collection_preserved",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "0b2b455a6cc22e82574b9a788a864e21ca516d5997b9302079ce1aa1a0de070d",
+          "bindings": [
+            "ORIG-ABI-04"
+          ],
+          "normal_verified": true,
+          "scope": "Exact future_collection raw input, opaque7 object list retained.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_duplicate_json_keys_preserved_as_unsupported_source",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "0b2b455a6cc22e82574b9a788a864e21ca516d5997b9302079ce1aa1a0de070d",
+          "bindings": [
+            "ORIG-ABI-05"
+          ],
+          "normal_verified": true,
+          "scope": "Exact duplicate functions raw input returns unsupported-json status.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_nonfinite_json_is_not_a_valid_interchange_number",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "0b2b455a6cc22e82574b9a788a864e21ca516d5997b9302079ce1aa1a0de070d",
+          "bindings": [
+            "ORIG-ABI-06"
+          ],
+          "normal_verified": true,
+          "scope": "Exact functions NaN raw input returns unsupported-json status.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_mangled_overloads_not_collapsed_by_display_name",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "0b2b455a6cc22e82574b9a788a864e21ca516d5997b9302079ce1aa1a0de070d",
+          "bindings": [
+            "ORIG-ABI-07"
+          ],
+          "normal_verified": true,
+          "scope": "Exactly two records, original set of local keys f_int/f_string despite identical display_name.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        }
+      ],
       "decommissionable_from_pr": false,
       "execution_retired": false,
       "retirement_decision": null,
@@ -29396,53 +29487,13 @@
           "indent": 1
         }
       ],
-      "pending_function_anchors": [
-        {
-          "name": "fixture",
-          "line": 4,
-          "indent": 1
-        },
-        {
-          "name": "test_pointer_to_function_parameter_is_structural_callback_candidate",
-          "line": 6,
-          "indent": 1
-        },
-        {
-          "name": "test_missing_type_reference_is_retained",
-          "line": 8,
-          "indent": 1
-        },
-        {
-          "name": "test_duplicate_type_identity_not_silently_selected",
-          "line": 10,
-          "indent": 1
-        },
-        {
-          "name": "test_unknown_root_collection_preserved",
-          "line": 12,
-          "indent": 1
-        },
-        {
-          "name": "test_duplicate_json_keys_preserved_as_unsupported_source",
-          "line": 14,
-          "indent": 1
-        },
-        {
-          "name": "test_nonfinite_json_is_not_a_valid_interchange_number",
-          "line": 16,
-          "indent": 1
-        },
-        {
-          "name": "test_mangled_overloads_not_collapsed_by_display_name",
-          "line": 18,
-          "indent": 1
-        }
-      ],
-      "pending_owner_method_list": "<module-body-and-required-callers>",
+      "pending_function_anchors": [],
+      "pending_owner_method_list": null,
       "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "NORMAL project-contract verification for tools/source_facts/native_abi_facts.py under observed source/JSON/C# callers and explicit native diagnostic/admission boundary. No unrestricted CPython/library equivalence. Root instructed that unused exact interpreter diagnostic formatting is not a new project API. Original duplicate/NaN unsupported-json assertions remain required and passed; explicit duplicate decoded-key reason is independently stronger proof. Existing strict native JSON syntax/finite-binary64/Unicode-scalar admission and C# operation errors remain the replacing boundary. Pure parser only: original test module imports parse; supplied native_abi_evidence in source_metadata_reference is not a parser call. No original CLI/main/file/network effects or new runtime factory/concern activation is required."
       ],
       "bounded_service_test_evidence": [
+        "AndroidMcp.BuildTool.Tests.Sources.NativeAbiCompletionRealTests",
         "S-AC024/S-AC025 false-positive/opaque metadata/reference-cycle controls pending"
       ],
       "anchor_limit": "Lexical source-text anchors, not Python execution/AST or automatic proof each nested helper is an independent required feature. Same bytes share one implementation authority, but profile/caller obligations are retained.",
@@ -31434,21 +31485,6 @@
       "derived_from_inventory": true,
       "owner": "Sources",
       "category": "Sources",
-      "canonical_responsibility_key": "Sources|Sources|0b2b455a6cc22e82574b9a788a864e21ca516d5997b9302079ce1aa1a0de070d",
-      "published_paths": [
-        "tools/source_facts/test_native_abi_facts.py"
-      ],
-      "services": [
-        "Planned NativeAbiFacts/NativeDescriptorFacts producers over strict source JSON and language-aware lexical input"
-      ],
-      "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
-      ]
-    },
-    {
-      "derived_from_inventory": true,
-      "owner": "Sources",
-      "category": "Sources",
       "canonical_responsibility_key": "Sources|Sources|10961df02f1737e28b717c90a4d9ec152308ea9f3b14f1ce55659be12e6499d1",
       "published_paths": [
         "remediation/catalog/tooling/sdk_availability_evidence.py",
@@ -31471,22 +31507,6 @@
       ],
       "services": [
         "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
-      ],
-      "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
-      ]
-    },
-    {
-      "derived_from_inventory": true,
-      "owner": "Sources",
-      "category": "Sources",
-      "canonical_responsibility_key": "Sources|Sources|1ed4e0dfca74b9e501527f059034c51a74e966d12bb7ca67fb85169030f082df",
-      "published_paths": [
-        "remediation/catalog/tooling/callback_source_facts.py",
-        "tools/source_facts/callback_source_facts.py"
-      ],
-      "services": [
-        "One SourceFactProducer implements approved callback/functional/applicability interfaces; shared LegacyAsciiIdentity canonical profile"
       ],
       "remaining": [
         "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
@@ -31532,22 +31552,6 @@
       ],
       "services": [
         "Planned ApexSourceFacts using same static Soong literal service"
-      ],
-      "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
-      ]
-    },
-    {
-      "derived_from_inventory": true,
-      "owner": "Sources",
-      "category": "Sources",
-      "canonical_responsibility_key": "Sources|Sources|38ee75b78d6b8f56ddf047841e41a5498d84be04d617773f218dc0957d3e5520",
-      "published_paths": [
-        "remediation/catalog/tooling/functional_source_facts.py",
-        "tools/source_facts/functional_source_facts.py"
-      ],
-      "services": [
-        "One SourceFactProducer implements approved callback/functional/applicability interfaces; shared LegacyAsciiIdentity canonical profile"
       ],
       "remaining": [
         "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
@@ -31787,21 +31791,6 @@
       "derived_from_inventory": true,
       "owner": "Sources",
       "category": "Sources",
-      "canonical_responsibility_key": "Sources|Sources|7aac07fd9046f54e782726c3dbb3272e7145fd311d3fdd0237fb763adf3d4302",
-      "published_paths": [
-        "tools/source_facts/native_descriptor_facts.py"
-      ],
-      "services": [
-        "Planned NativeAbiFacts/NativeDescriptorFacts producers over strict source JSON and language-aware lexical input"
-      ],
-      "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
-      ]
-    },
-    {
-      "derived_from_inventory": true,
-      "owner": "Sources",
-      "category": "Sources",
       "canonical_responsibility_key": "Sources|Sources|95a9243b2daf7fb5baed4c723cbe0b0388ca6374a84ca4004408c4a3a2e98604",
       "published_paths": [
         "tools/source_facts/test_permission_reference_evidence.py"
@@ -31932,21 +31921,6 @@
       ],
       "services": [
         "Planned pinned source selector inventory and lexical candidate audit"
-      ],
-      "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
-      ]
-    },
-    {
-      "derived_from_inventory": true,
-      "owner": "Sources",
-      "category": "Sources",
-      "canonical_responsibility_key": "Sources|Sources|d017b0b03a9f4b6872720ba733dc046f9649e457800b5bfdbca8f9547767caee",
-      "published_paths": [
-        "tools/source_facts/native_abi_facts.py"
-      ],
-      "services": [
-        "Planned NativeAbiFacts/NativeDescriptorFacts producers over strict source JSON and language-aware lexical input"
       ],
       "remaining": [
         "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."

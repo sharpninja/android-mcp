@@ -43,7 +43,7 @@ public static class SourcesRuntimeContractCases
         foreach (var route in Routes)
         {
             var provider = new ScriptedSourceExtractor(route.Test.Kind, document => runtime.Dispatcher.Extract(document, route.Requested, route.Scope));
-            SourceExtractionContractCases.AssertContract(route.Test, provider);
+            SourceExtractionContractCases.AssertContract(AidlProfileContractCases.ForProfile(route.Test, Profile(profile)), provider);
         }
         var reference = PermissionReferenceContractCases.All[0];
         var bytes = Encoding.UTF8.GetBytes(reference.Html);

@@ -12,10 +12,10 @@ namespace AndroidMcp.BuildTool.Tests.Catalog;
 public static class NativeCatalogSourceCacheInput
 {
     public static async Task<(SourceExtractGenerationRequest Request,FileArtifactStore Generations,FileArtifactLeaseProvider Leases)> CreateAsync(
-        CatalogIntakeFixture fixture,SourceJavaAdmission java,ISourcesRuntimeFactory factory,IReadOnlyList<int> cached,
-        Func<SourceExtractIndex,SourceExtractIndex>? indexMutation=null)
+        CatalogIntakeFixture fixture,SourceJavaAdmission? java,ISourcesRuntimeFactory factory,IReadOnlyList<int> cached,
+        Func<SourceExtractIndex,SourceExtractIndex>? indexMutation=null,SourceExtractionProfile? profile=null)
     {
-        var canonical=new CanonicalJson();var producer=NativeSourceCacheGenerationFixture.Producer(java);
+        var canonical=new CanonicalJson();var producer=java is null ? new SourceProducerIdentityBuilder().Create().Identity : NativeSourceCacheGenerationFixture.Producer(java);
         var files=new JsonObject();foreach(var file in producer.ProducerFiles)files[file.Key]=file.Value;
         var recipe=new JsonObject{["recipe_version"]=1,["release"]="native-catalog-intake-fixture",["inventory"]=fixture.Inventory.DeepClone(),
             ["producer"]=new JsonObject{["path"]="native-fixture-producer",["files"]=files}};
@@ -23,7 +23,7 @@ public static class NativeCatalogSourceCacheInput
         var locked=new JsonObject{["recipe_file"]="recipe.json",["sha256"]=ContentHash.Sha256(recipeBytes),["source_rows"]=fixture.Inventory["sources"]!.AsArray().Count,["producer_files"]=producer.ProducerFiles.Count};
         var planned=new RehydrationPlanner(canonical).Plan(new(new("recipe.json",recipeBytes,"application/json"),new("recipe.lock.json",canonical.Serialize(JsonSerializer.SerializeToElement(locked)),"application/json")));
         Assert.True(planned.IsValid,JsonSerializer.Serialize(planned.Issues));var projection=planned.Plan!.SourceProjection!;
-        var request=new SourceExtractGenerationRequest(projection,SourceExtractionProfile.CurrentCandidate,producer,Java:java);
+        var request=new SourceExtractGenerationRequest(projection,profile ?? SourceExtractionProfile.CurrentCandidate,producer,Java:java);
         var generations=new FileArtifactStore(Path.Combine(fixture.Root,"source generation"),Hash);
         var leases=new FileArtifactLeaseProvider(Path.Combine(fixture.Root,"source generation locks"));
         var raw=new FileArtifactStore(Path.Combine(fixture.Root,"producer raw originals"),Hash);

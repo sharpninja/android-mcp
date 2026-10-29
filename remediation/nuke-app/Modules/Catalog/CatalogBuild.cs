@@ -16,14 +16,46 @@ public sealed class CatalogBuildException(string code,string message,Exception? 
 { public string Code {get;}=code; }
 public sealed record CatalogBuildResult(string RegistryId,string ProducerFingerprint,IReadOnlyList<StoredArtifact> Artifacts,JsonObject Validation,string StagingDatabasePath,string RawSourceStagePath);
 public sealed record CatalogSourceIntake(ISourceExtractGenerationReader Reader,SourceExtractGenerationRequest Request);
+public sealed record CatalogProducerIdentityInputs(SourceExtractionProfile Profile,SourceExtractProducerIdentity NativeProducer,
+    IReadOnlyList<StoredArtifact> ContractPins,SourceExtractProducerIdentity? AdmittedSourceProducer=null);
 
 /// <summary>Offline native source-to-sealed-catalog generation. No runtime authority or device observations.</summary>
 public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher dispatcher,IPermissionExpressionSourceFacts permissions,
     IAnnotationTargetSourceFacts formals,IStructuralTypeHeaderSourceFacts headers,ICanonicalJson canonical,ISourceXmlFormatter? xmlFormatter=null,
-    Func<string,IStreamingArtifactStore>? outputStores=null,Func<string,CatalogDatabase>? stagingDatabases=null,IJvmSourceLinker? sourceJvm=null,Action<CatalogImportObservation>? observeImport=null,CatalogSourceIntake? sourceIntake=null,CatalogSourceMetadata? sourceMetadata=null)
+    Func<string,IStreamingArtifactStore>? outputStores=null,Func<string,CatalogDatabase>? stagingDatabases=null,IJvmSourceLinker? sourceJvm=null,Action<CatalogImportObservation>? observeImport=null,CatalogSourceIntake? sourceIntake=null,CatalogSourceMetadata? sourceMetadata=null,
+    SourceExtractionProfile? sourceProfile=null,ISourceProducerIdentityBuilder? producerIdentityBuilder=null,SourceProducerIdentityAdmission? nativeAdmission=null)
 {
-    public const string ProducerId="csharp-nuke-catalog-v1";
-    public string ProducerFingerprint {get;}=ContentHash.Sha256(File.ReadAllBytes(typeof(CatalogBuild).Assembly.Location));
+    public const string ProducerId="csharp-nuke-catalog-v2";
+    private ProducerAdmission? producerAdmission;
+    public string ProducerFingerprint=>(producerAdmission ?? AdmitProducer(sourceIntake)).Fingerprint;
+    public CatalogProducerIdentityInputs? AdmittedProducerInputs=>producerAdmission?.Inputs;
+    private sealed record ProducerAdmission(CatalogProducerIdentityInputs Inputs,JsonObject Identity,string Fingerprint,IReadOnlyDictionary<string,CatalogContractSnapshot> Contracts);
+    private ProducerAdmission AdmitProducer(CatalogSourceIntake? intake)
+    {
+        var selected=intake?.Request.Profile ?? sourceProfile ?? SourceExtractionProfile.CurrentCandidate;
+        if(intake is not null && sourceProfile is not null && sourceProfile.Id!=selected.Id)throw Failure("catalog-profile-mismatch","Explicit Catalog profile differs from admitted source profile");
+        SourceExtractProducerIdentity native;
+        if(nativeAdmission is not null)
+        {
+            var current=new SourceProducerIdentityBuilder().Create().Identity;native=nativeAdmission.Identity;
+            if(native.ProducerId!=current.ProducerId || native.RuntimeIdentity!=current.RuntimeIdentity || native.ContextIdentity!=current.ContextIdentity ||
+                native.ProducerFiles.GetValueOrDefault("native/assembly")!=current.ProducerFiles["native/assembly"] || native.ProducerFiles.GetValueOrDefault("native/context")!=current.ProducerFiles["native/context"] ||
+                native.ProducerFiles.GetValueOrDefault("native/parser")!=native.ParserIdentity)
+                throw Failure("catalog-producer-admission-mismatch","Selected native producer admission does not match the current loaded module/context");
+        }
+        else native=(producerIdentityBuilder ?? new SourceProducerIdentityBuilder()).Create().Identity;
+        var contracts=CatalogDatabase.SchemaFiles(CatalogSchemaProfile.Entry).Concat(new[]{"contracts/PermissionExpression.schema.json","contracts/Entry.schema.json","contracts/DeviceResolution.schema.json"})
+            .ToDictionary(path=>path,path=>CatalogDatabase.ReadContract(catalogRoot,path),StringComparer.Ordinal);
+        var pins=contracts.Values.Select(value=>value.Pin).ToList();if(sourceMetadata is not null)pins.Add(sourceMetadata.AdmittedSchemaPin);
+        var input=new CatalogProducerIdentityInputs(selected,native,
+            Array.AsReadOnly(pins.OrderBy(pin=>pin.RelativePath,StringComparer.Ordinal).ToArray()),intake?.Request.Producer);
+        JsonObject Producer(SourceExtractProducerIdentity value)=>new(){["producer_id"]=value.ProducerId,["runtime_identity"]=value.RuntimeIdentity,["parser_identity"]=value.ParserIdentity,["context_identity"]=value.ContextIdentity,
+            ["producer_files"]=new JsonObject(value.ProducerFiles.OrderBy(pair=>pair.Key,StringComparer.Ordinal).Select(pair=>new KeyValuePair<string,JsonNode?>(pair.Key,JsonValue.Create(pair.Value))))};
+        var identity=new JsonObject{["identity_format"]="csharp-catalog-producer-v2",["profile_id"]=selected.Id,["native_producer"]=Producer(input.NativeProducer),
+            ["source_producer"]=input.AdmittedSourceProducer is null ? null : Producer(input.AdmittedSourceProducer),
+            ["contracts"]=new JsonArray(input.ContractPins.Select(pin=>(JsonNode)new JsonObject{["path"]=pin.RelativePath,["length"]=pin.Length,["sha256"]=pin.Sha256}).ToArray())};
+        return new(input,identity,canonical.Hash(JsonSerializer.SerializeToElement(identity)),contracts);
+    }
     private readonly ISourceXmlFormatter xml=xmlFormatter ?? new SourceXmlFormatter();
     private readonly IJvmSourceLinker sourceJvm=sourceJvm ?? new JvmSourceLinker();
     private static string S(JsonNode? value)=>value?.GetValue<string>() ?? "";
@@ -47,6 +79,8 @@ public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher
     private async Task<CatalogBuildResult> BuildCoreAsync(string? inventoryPath,CatalogInventoryBridgeResult? bridge,string outputDirectory,string privateStageDirectory,CancellationToken cancellationToken)
     {
         var output=Path.GetFullPath(outputDirectory);var inventoryFull=inventoryPath is null ? null : Path.GetFullPath(inventoryPath);var intake=bridge?.SourceExtraction ?? sourceIntake;
+        if(intake is not null && sourceProfile is not null && sourceProfile.Id!=intake.Request.Profile.Id)throw Failure("catalog-profile-mismatch","Explicit Catalog profile differs from admitted source profile");
+        producerAdmission=AdmitProducer(intake);
         ISourceExtractGeneration? opened=null;byte[]? admittedBytes=null;JsonObject? admittedSpec=null;Dictionary<int,RehydrationSourceRow>? admittedRows=null;
         ExceptionDispatchInfo? deferredManifestError=null;
         async Task<JsonObject> ReadManifest()
@@ -90,7 +124,8 @@ public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher
         if(Directory.Exists(output) && Directory.EnumerateFileSystemEntries(output).Any()) throw Failure("nonempty-output","Output must be empty; preserve immutable earlier publication");
         var store=outputStores?.Invoke(output) ?? new FileArtifactStore(output,Sha);var artifacts=new List<StoredArtifact>();
         var producerFingerprint=ProducerFingerprint;
-        var producer=new JsonObject{["id"]=ProducerId,["assembly_sha256"]=producerFingerprint,["historical_python_identity"]=false};
+        var producer=new JsonObject{["id"]=ProducerId,["assembly_sha256"]=producerAdmission.Inputs.NativeProducer.ProducerFiles["native/assembly"],["processing_sha256"]=producerFingerprint,
+            ["identity"]=producerAdmission.Identity.DeepClone(),["historical_python_identity"]=false};
         try
         {
             var rawPath=ArtifactPaths.Resolve(privateStageDirectory,Guid.NewGuid().ToString("N")+"/source-records.sqlite");
@@ -130,7 +165,7 @@ public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher
                 }
                 var acquisition=new JsonObject();foreach(var key in new[]{"url","revision","sha256","retrieved_at","path","api_level","channel","kind","license","scope"}) acquisition[key]=source[key]?.DeepClone();
                 source["source_id"]=Hash(new JsonObject{["acquisition"]=acquisition,["processing_sha256"]=producerFingerprint});
-                source["x-source-identity-version"]=3;source["x-native-producer"]=producer.DeepClone();
+                source["x-source-identity-version"]=4;source["x-native-producer"]=producer.DeepClone();
                 long length;var hit=false;
                 if(generation is null)
                 {
@@ -151,7 +186,7 @@ public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher
                 inputs.Add(new(source,length,hit,generation is not null));
             }
             var stage=ArtifactPaths.Resolve(privateStageDirectory,Guid.NewGuid().ToString("N")+"/catalog.staging.sqlite");
-            using var db=stagingDatabases?.Invoke(stage) ?? CatalogDatabase.CreateFile(catalogRoot,CatalogSchemaProfile.Entry,stage);
+            using var db=stagingDatabases?.Invoke(stage) ?? CatalogDatabase.CreatePrivateFile(stage,CatalogDatabase.SchemaFiles(CatalogSchemaProfile.Entry).Select(path=>producerAdmission.Contracts[path].Text).ToArray());
             using var transaction=db.Connection.BeginTransaction(deferred:false);
             void Execute(string sql,params (string Name,object? Value)[] values){using var command=db.Command(sql,transaction,values);command.ExecuteNonQuery();}
             long Count(string table){using var command=db.Command("SELECT count(*) FROM "+table,transaction);return (long)command.ExecuteScalar()!;}
@@ -199,7 +234,7 @@ public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher
                 }
                 if(detected.Count>1) throw Failure("source-index-metadata","API index mixes target platform versions");
             }
-            var astSchema=JsonSchema.FromText(File.ReadAllText(Path.Combine(catalogRoot,"contracts/PermissionExpression.schema.json")));
+            var astSchema=JsonSchema.FromText(producerAdmission.Contracts["contracts/PermissionExpression.schema.json"].Text);
             void ValidatePermission(JsonObject value)
             {if(!astSchema.Evaluate(Element(value),new(){OutputFormat=OutputFormat.Flag}).IsValid) throw Failure("invalid-permission-ast","Permission schema rejected source declaration");}
             var reports=new JsonArray();var linkedPermissions=0;long declarationCount=0;
@@ -362,7 +397,7 @@ public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher
                 Execute("INSERT INTO registry_entries VALUES($registry,$id,$doc,$hash)",("$registry",registry),("$id",group.Key),("$doc",Text(document)),("$hash",Hash(document)));
                 Execute("INSERT INTO registry_inventory VALUES($registry,$id,$doc,$hash)",("$registry",registry),("$id",group.Key),("$doc",Text(entity)),("$hash",Hash(entity)));
             }
-            var entrySchema=JsonSchema.FromText(File.ReadAllText(Path.Combine(catalogRoot,"contracts/Entry.schema.json")));var resolver=new DeviceResolver(canonical,Path.Combine(catalogRoot,"contracts/DeviceResolution.schema.json"));
+            var entrySchema=JsonSchema.FromText(producerAdmission.Contracts["contracts/Entry.schema.json"].Text);var resolver=new DeviceResolver(canonical,JsonNode.Parse(producerAdmission.Contracts["contracts/DeviceResolution.schema.json"].Text)!.AsObject());
             IEnumerable<JsonObject> ValidationDocuments(string table)
             {using var command=db.Command("SELECT document_json FROM "+table+" ORDER BY entry_id",transaction);using var reader=command.ExecuteReader();while(reader.Read()) yield return JsonNode.Parse(reader.GetString(0))!.AsObject();}
             foreach(var entry in ValidationDocuments("registry_entries")) if(!entrySchema.Evaluate(Element(entry),new(){OutputFormat=OutputFormat.Flag}).IsValid) throw Failure("invalid-entry","Entry schema rejected "+S(entry["entry_id"]));
@@ -374,7 +409,7 @@ public sealed class CatalogBuild(string catalogRoot,ISourcesExtractionDispatcher
             var validation=new JsonObject{["integrity_check"]="ok",["foreign_key_check"]=new JsonArray(),["json_schema_failures"]=new JsonArray(),["counts"]=counts,["source_reports"]=reports,["proven_jvm_source_permission_links"]=linkedPermissions,["complete"]=false,["native_producer"]=producer.DeepClone()};
             foreach(var source in sources.Keys) Execute("INSERT INTO registry_sources VALUES($registry,$source)",("$registry",registry),("$source",source));
             Execute("UPDATE registries SET state='validated',validation_json=$doc WHERE registry_id=$id",("$doc",Text(validation)),("$id",registry));Execute("UPDATE registries SET state='published' WHERE registry_id=$id",("$id",registry));Execute("INSERT INTO active_registry(singleton,registry_id) VALUES(1,$id)",("$id",registry));
-            foreach(var pair in new Dictionary<string,string>{{"schema_version","1.2.0"},{"entry_contract_version","1.1.0"},{"device_resolution_contract_version","2.1.0"},{"source_set_hash",sourceSet},{"coverage",S(metadata["coverage"])},{"source_inventory_sha256",Sha(inventoryBytes)},{"authority","Metadata only; no OS capability or MCP client grant"},{"native_producer_id","csharp-nuke-catalog-v1"},{"native_producer_sha256",producerFingerprint}})
+            foreach(var pair in new Dictionary<string,string>{{"schema_version","1.2.0"},{"entry_contract_version","1.1.0"},{"device_resolution_contract_version","2.1.0"},{"source_set_hash",sourceSet},{"coverage",S(metadata["coverage"])},{"source_inventory_sha256",Sha(inventoryBytes)},{"authority","Metadata only; no OS capability or MCP client grant"},{"native_producer_id",ProducerId},{"native_producer_sha256",producerFingerprint}})
                 Execute("INSERT INTO catalog_meta VALUES($key,$value)",("$key",pair.Key),("$value",pair.Value));
             transaction.Commit();
             async Task<StoredArtifact> WriteStream(string name,Func<Stream,CancellationToken,Task> produce,string media="application/json")

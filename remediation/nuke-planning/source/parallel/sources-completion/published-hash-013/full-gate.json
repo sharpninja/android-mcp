@@ -1,0 +1,33 @@
+{
+  "At": "2026-10-29T02:44:34",
+  "Stage": "full",
+  "Trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/sources/nuke-app/artifacts/tests/20261029T0243110992491-98b5118c4e3c4948ae51d613a90b8412/tests.trx",
+  "Sha256": "f462515fde45f105df75d59396c566d5be38d38fd024df0cb2802ad7d2267650",
+  "Passed": 24338,
+  "Failed": 0,
+  "Skipped": 0,
+  "NewRequiredRows": 37,
+  "Files": [
+    {
+      "Path": "Modules/Sources/PublishedInterfaceHashSourceFacts.cs",
+      "Sha256": "0fefce2108514d6d0e74afdd5e49f1c1f46e2b0336d9638d54a77b721f2b8ce6",
+      "Size": 2789
+    },
+    {
+      "Path": "Tests/Sources/PublishedHashCompletionContractCases.cs",
+      "Sha256": "fba1bef8af2f549fbe18bc1bb6b99711cfc6d2fd3de920d9246bda790fdb963e",
+      "Size": 5220
+    },
+    {
+      "Path": "Tests/Sources/PublishedHashCompletionMockTests.cs",
+      "Sha256": "c21ae73eef4a58439639ce23ccfa82313caa5babfbc9916a62e5b02e2cea7bf6",
+      "Size": 2253
+    },
+    {
+      "Path": "Tests/Sources/PublishedHashCompletionRealTests.cs",
+      "Sha256": "60b236aa2471e1db1375467ebc316be7c6ec7a1c579fd23a664fb60aa8ed2066",
+      "Size": 1315
+    }
+  ],
+  "Command": "Run-NukeNativeGate.ps1 -TestFilter (FullyQualifiedName~AndroidMcp.BuildTool.Tests.Sources&FullyQualifiedName!~Acquisition&FullyQualifiedName!~Java)|FullyQualifiedName~LegacyJsonValueEquality"
+}

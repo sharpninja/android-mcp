@@ -6,7 +6,7 @@ public sealed record CatalogEffectiveInventoryCall(string Variant);
 public sealed record CatalogEffectiveInventoryReply(string Outcome,int? InventoryDelta=null,bool? BaseMembershipRetained=null,string? BindingState=null,string? CatalogState=null,
     string? Admission=null,string? NoAuthorityAdmission=null,string? ChangedDocumentAdmission=null,bool? SchemaChanged=null,bool? DocumentPinChanged=null,
     bool? InventoryHashChanged=null,long? OverlayGenerationDelta=null,string? DependencyCatalogState=null,bool ImportedInventoryUnchanged=true,
-    bool TransactionClosed=true,bool InputsRetained=true,bool NoPartialCapture=true,CatalogTombstoneObservation? Tombstone=null);
+    bool TransactionClosed=true,bool InputsRetained=true,bool NoPartialCapture=true,CatalogTombstoneObservation? Tombstone=null,CatalogLocalOwnerObservation? LocalOwner=null);
 public sealed record CatalogEffectiveInventoryCase(string Id,CatalogEffectiveInventoryCall Call,CatalogEffectiveInventoryReply Expected);
 public interface ICatalogEffectiveInventoryCaseProvider { Task<CatalogEffectiveInventoryReply> CaptureAsync(CatalogEffectiveInventoryCall call); }
 public static class CatalogEffectiveInventoryCases

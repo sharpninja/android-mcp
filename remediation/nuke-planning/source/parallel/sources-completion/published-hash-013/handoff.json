@@ -1,0 +1,215 @@
+{
+  "At": "2026-10-29T02:44:37",
+  "Owner": "Sources",
+  "RequirementIds": [
+    "FR-BUILD-004",
+    "TR-BUILD-004",
+    "TEST-BUILD-004"
+  ],
+  "Originals": [
+    {
+      "Path": "tools/source_facts/interface_hash_facts.py",
+      "Sha256": "59c4b756d90b922fd32d7fbab7cb72256e58fc5a3ffb6d4fd0d2d5e383e221d9",
+      "Size": 3663
+    },
+    {
+      "Path": "tools/source_facts/test_interface_hash_facts.py",
+      "Sha256": "f270d1e8c6bd5396412678f148f1789c2f8329dc3d7705dd68377a805ba8b1c9",
+      "Size": 1132
+    }
+  ],
+  "ChangedFiles": [
+    {
+      "RelativePath": "Modules/Sources/PublishedInterfaceHashSourceFacts.cs",
+      "Source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/sources/nuke-app/Modules/Sources/PublishedInterfaceHashSourceFacts.cs",
+      "Handoff": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/published-hash-013/files/Modules/Sources/PublishedInterfaceHashSourceFacts.cs",
+      "Sha256": "0fefce2108514d6d0e74afdd5e49f1c1f46e2b0336d9638d54a77b721f2b8ce6",
+      "Size": 2789,
+      "PriorSha256": "52993d204fb9dd1924d84ad9f9313c56d5616d43798871c4aaae46e5f2e2d831",
+      "PriorSize": 1982,
+      "RequireAbsent": false
+    },
+    {
+      "RelativePath": "Tests/Sources/PublishedHashCompletionContractCases.cs",
+      "Source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/sources/nuke-app/Tests/Sources/PublishedHashCompletionContractCases.cs",
+      "Handoff": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/published-hash-013/files/Tests/Sources/PublishedHashCompletionContractCases.cs",
+      "Sha256": "fba1bef8af2f549fbe18bc1bb6b99711cfc6d2fd3de920d9246bda790fdb963e",
+      "Size": 5220,
+      "PriorSha256": null,
+      "PriorSize": null,
+      "RequireAbsent": true
+    },
+    {
+      "RelativePath": "Tests/Sources/PublishedHashCompletionMockTests.cs",
+      "Source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/sources/nuke-app/Tests/Sources/PublishedHashCompletionMockTests.cs",
+      "Handoff": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/published-hash-013/files/Tests/Sources/PublishedHashCompletionMockTests.cs",
+      "Sha256": "c21ae73eef4a58439639ce23ccfa82313caa5babfbc9916a62e5b02e2cea7bf6",
+      "Size": 2253,
+      "PriorSha256": null,
+      "PriorSize": null,
+      "RequireAbsent": true
+    },
+    {
+      "RelativePath": "Tests/Sources/PublishedHashCompletionRealTests.cs",
+      "Source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/sources/nuke-app/Tests/Sources/PublishedHashCompletionRealTests.cs",
+      "Handoff": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/published-hash-013/files/Tests/Sources/PublishedHashCompletionRealTests.cs",
+      "Sha256": "60b236aa2471e1db1375467ebc316be7c6ec7a1c579fd23a664fb60aa8ed2066",
+      "Size": 1315,
+      "PriorSha256": null,
+      "PriorSize": null,
+      "RequireAbsent": true
+    }
+  ],
+  "Proofs": [
+    {
+      "Stage": "mock",
+      "OriginalTrx": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/sources/nuke-app/artifacts/tests/20261029T0240038259590-c0e12112ac4f438985f42e455f8a8baa/tests.trx",
+      "Trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/published-hash-013/mock.trx",
+      "Sha256": "cf0bc5a2cc4b2c4ff74eb7ca2a2dcb6e324a00d5cd482b3a639b8b1b04b310ba",
+      "Passed": 37,
+      "Failed": 0,
+      "Skipped": 0,
+      "Command": "Run-NukeNativeGate.ps1 -TestFilter FullyQualifiedName~PublishedHashCompletionMockTests"
+    },
+    {
+      "Stage": "native",
+      "OriginalTrx": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/sources/nuke-app/artifacts/tests/20261029T0241366632624-6aefa207799e423bbe65da929bcae4b1/tests.trx",
+      "Trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/published-hash-013/native.trx",
+      "Sha256": "e40127bc89278844ac618de8d238c705f01777d6bd4e3f6941e1685da0396dde",
+      "Passed": 348,
+      "Failed": 0,
+      "Skipped": 0,
+      "Command": "Run-NukeNativeGate.ps1 -TestFilter FullyQualifiedName~PublishedHash|FullyQualifiedName~PublishedInterfaceHash"
+    },
+    {
+      "Stage": "full",
+      "OriginalTrx": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/sources/nuke-app/artifacts/tests/20261029T0243110992491-98b5118c4e3c4948ae51d613a90b8412/tests.trx",
+      "Trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/published-hash-013/full.trx",
+      "Sha256": "f462515fde45f105df75d59396c566d5be38d38fd024df0cb2802ad7d2267650",
+      "Passed": 24338,
+      "Failed": 0,
+      "Skipped": 0,
+      "Command": "Run-NukeNativeGate.ps1 -TestFilter (FullyQualifiedName~AndroidMcp.BuildTool.Tests.Sources&FullyQualifiedName!~Acquisition&FullyQualifiedName!~Java)|FullyQualifiedName~LegacyJsonValueEquality"
+    }
+  ],
+  "Logs": [
+    {
+      "Path": "published-hash-completion-mock-001.log",
+      "Sha256": "20521af7266cc70c4f256d4fae1c6c8c2f4188bab44744276626fa2c654bbca9",
+      "Size": 11205
+    },
+    {
+      "Path": "published-hash-completion-mock-002.log",
+      "Sha256": "7afa617d04da08892a5e18cfc83275825e52ef8656717dd73aa07586476b75a8",
+      "Size": 6366
+    },
+    {
+      "Path": "published-hash-completion-native-001.log",
+      "Sha256": "743bb54bd9c9effca8f09faa18feabe9bca9478351e148d385e698a599b3f8fd",
+      "Size": 6390
+    },
+    {
+      "Path": "published-hash-completion-full-001.log",
+      "Sha256": "992e256898ac1147a8a60218e5b0de5d97f72a490af200370305f0c34137be7c",
+      "Size": 6468
+    }
+  ],
+  "FunctionMap": [
+    {
+      "Native": "PublishedInterfaceHashSourceFacts.AidlHashes / Parse(false)",
+      "Proof": "Existing HASH01/02/03/04/05/11/12 full outputs and exact original methods1/2; line splitting/strip shared authority unchanged.",
+      "Caller": "Original test module and module main branch selected from source selection_reasons; C# PublishedHashes concern current/release.",
+      "Original": "aidl_hashes"
+    },
+    {
+      "Native": "PublishedInterfaceHashSourceFacts.HidlHashes / Parse(true) / HidlFields",
+      "Proof": "Existing HASH06/07/08/09/10 plus SAME33 Unicode/whitespace/invalid segment/version complete-output cases and original methods3/4. Repeated identifiers, spelling/case, raw line and conservative fields retained.",
+      "Caller": "Original test module and module main branch; C# public string API and current/release PublishedHashes concern.",
+      "Original": "hidl_hashes"
+    },
+    {
+      "Native": "Not newly implemented or claimed by this pure-parser increment",
+      "Proof": "Original full function read as text and pinned, including inventory selection, digest assertion, path-scoped report/facts output, immutable destination and script entry point.",
+      "Status": "PARTIAL: exact concrete inventory/effect/output responsibilities require their existing artifact/workflow ownership map and proof, not unused helper emulation.",
+      "Caller": "Original CLI __main__ invokes main relative to script directory.",
+      "Original": "main"
+    }
+  ],
+  "OriginalFourMethods": [
+    {
+      "OriginalOrdinal": 1,
+      "Assertions": "Ordered two literal hashes, compiled_runtime_hash_proven false, unknown_lines empty.",
+      "Fixture": "HASH-01",
+      "Method": "test_aidl_hash_lines_kept_in_order_no_compiled_hash_assumption"
+    },
+    {
+      "OriginalOrdinal": 2,
+      "Assertions": "Exact not-frozen raw unknown line.",
+      "Fixture": "HASH-02",
+      "Method": "test_unknown_aidl_hash_line_retained"
+    },
+    {
+      "OriginalOrdinal": 3,
+      "Assertions": "Two facts retained, first exact declared_identifier, android_applicability_proven false.",
+      "Fixture": "HASH-06",
+      "Method": "test_hidl_duplicate_identifier_hashes_are_not_collapsed"
+    },
+    {
+      "OriginalOrdinal": 4,
+      "Assertions": "Exact opaque declaration raw unknown line.",
+      "Fixture": "HASH-07",
+      "Method": "test_hidl_unknown_format_remains_evidence"
+    }
+  ],
+  "OriginalTestClosureProposal": {
+    "Sha256": "f270d1e8c6bd5396412678f148f1789c2f8329dc3d7705dd68377a805ba8b1c9",
+    "Path": "tools/source_facts/test_interface_hash_facts.py",
+    "Recommendation": "NORMAL exact four original method responsibilities after Root guarded import/full verification; same native inputs/assertions plus stronger full outputs."
+  },
+  "CallerAudit": {
+    "InternalCalls": "main invokes aidl_hashes or hidl_hashes on UTF8-decoded SHA256-checked bytes; no standalone helper domain was invented.",
+    "InventorySha256": "77c0e98fefe310f830f436b255ff129eedb47d99e42741d97f2fad667435ec7f",
+    "References": [
+      {
+        "Path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/test_interface_hash_facts.py",
+        "Line": 2,
+        "Text": "from interface_hash_facts import aidl_hashes,hidl_hashes"
+      }
+    ],
+    "PublishedPythonFiles": 198
+  },
+  "Counts": {
+    "MockRows": 37,
+    "ExistingFullOutputGoldens": 12,
+    "AdmissionAndRawNegativeControls": 66,
+    "NewCompleteOutputCases": 33,
+    "NativeRuntimeProfiles": 2,
+    "OriginalTestMethods": 4,
+    "OriginalAssertionNegativeControls": 8
+  },
+  "SharedAuthority": {
+    "Sha256": "925b87aa5a90b0f63ed8273072e79b431a908a301a86c6b03a132ac0ba87b580",
+    "Changed": false,
+    "Path": "Modules/Sources/SourceText.cs",
+    "Use": "OriginalWord Rune predicate, Lines and Strip"
+  },
+  "Chronology": "Mock001 compilation failed for a missing Core namespace import in new real-test file. Log retained; fixed test import before green mock002. Mock37 then passed with prior production52993... unchanged; SAME cases/assertions and source pins retained through native/full. Production changed only after sealed green mock receipt.",
+  "NativeChange": "One existing HIDL hash service now validates original ASCII-start/Unicode-word name segments with shared OriginalWord, scalar Nd version digits and original whitespace separator. No general parser, schema, identity/profile, factory or registry addition.",
+  "Remaining": [
+    "Root guarded import and canonical full proof; no authority change here.",
+    "Whole interface_hash_facts.py remains partial for original main inventory/digest/path scope/output/report responsibilities.",
+    "No runtime hash/Android applicability, corpus completeness or unrestricted Python-object/library equivalence.",
+    "Live MCP Global/Workspace memory/session logging remains unavailable after prior denial; no retry/bypass.",
+    "NU1900 unavailable vulnerability-data feed warnings retained in gate logs. No new package/network action."
+  ],
+  "CoreEdited": false,
+  "SourceTextEdited": false,
+  "SourceSyntaxEdited": false,
+  "FactoryEdited": false,
+  "CanonicalEdited": false,
+  "AuthorityEdited": false,
+  "NoPythonExecution": true,
+  "NoHvAcceptance": true,
+  "OriginalsRetained": true,
+  "SafeToDelete": false
+}

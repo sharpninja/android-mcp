@@ -65,7 +65,11 @@ public sealed class SourcesExtractionDispatcher : ISourcesExtractionDispatcher
         if (extractor is null)
             return Unsupported(source, identity, text, "source-kind-unsupported", "No registered extractor for the declared source kind and scope");
         ExtractionResult parsed;
-        try { parsed = extractor.Extract(source with { Bytes = source.Bytes.ToArray() }); }
+        try
+        {
+            var input = source with { Bytes = source.Bytes.ToArray() };
+            parsed = extractor is AidlSourceExtractor aidl ? aidl.Extract(input, profile) : extractor.Extract(input);
+        }
         catch (Exception error) when (error is FormatException or ArgumentException or JsonException or XmlException or InvalidDataException)
         {
             // Infrastructure, cancellation, OOM and native-library faults escape.

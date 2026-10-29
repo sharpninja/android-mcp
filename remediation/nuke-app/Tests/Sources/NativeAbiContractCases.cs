@@ -21,9 +21,9 @@ public static class NativeAbiContractCases
         ["pointer_types"] = Array(new JsonObject { ["linker_set_key"] = "PTR_CB", ["referenced_type"] = "CB" }),
         ["functions"] = Array(new JsonObject { ["linker_set_key"] = "register_a", ["function_name"] = "register_a", ["return_type"] = "VOID", ["parameters"] = Array(new JsonObject { ["referenced_type"] = "PTR_CB" }) })
     };
-    private static JsonObject Record(string collection, int ordinal, JsonNode? key, JsonNode? name, JsonObject metadata) => new()
+    internal static JsonObject Record(string collection, int ordinal, JsonNode? key, JsonNode? name, JsonObject metadata) => new()
     { ["collection"] = collection, ["ordinal"] = ordinal, ["local_key"] = key?.DeepClone(), ["display_name"] = name?.DeepClone(), ["metadata"] = metadata.DeepClone() };
-    private static JsonObject Reference(JsonArray path, string target, string status = "resolved") => new() { ["path"] = path, ["target_local_key"] = target, ["status"] = status };
+    internal static JsonObject Reference(JsonArray path, string target, string status = "resolved") => new() { ["path"] = path, ["target_local_key"] = target, ["status"] = status };
     private static JsonArray BaseRecords(JsonObject root) => Array(
         Record("builtin_types", 0, "VOID", "void", root["builtin_types"]![0]!.AsObject()),
         Record("function_types", 0, "CB", null, root["function_types"]![0]!.AsObject()),
@@ -41,7 +41,7 @@ public static class NativeAbiContractCases
         ["signature"] = root["function_types"]![0]!.DeepClone(), ["role"] = "structural-function-pointer-parameter-candidate", ["lifecycle_proven"] = false,
         ["registration_proven"] = false, ["streaming_semantics"] = "unknown", ["direction"] = "unknown", ["permission_metadata"] = "unknown; absence is not permission-free"
     };
-    private static JsonObject Result(JsonArray? records = null, JsonArray? references = null, JsonObject? counts = null, JsonArray? duplicates = null, JsonObject? unknown = null, JsonArray? callbacks = null) => new()
+    internal static JsonObject Result(JsonArray? records = null, JsonArray? references = null, JsonObject? counts = null, JsonArray? duplicates = null, JsonObject? unknown = null, JsonArray? callbacks = null) => new()
     {
         ["status"] = "parsed-source-abi-json", ["records"] = records ?? new(), ["references"] = references ?? new(), ["reference_counts"] = counts ?? new(),
         ["duplicate_type_keys"] = duplicates ?? new(), ["unknown_root_fields"] = unknown ?? new(), ["callback_parameter_candidates"] = callbacks ?? new(),

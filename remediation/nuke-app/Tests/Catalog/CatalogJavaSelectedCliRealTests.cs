@@ -25,9 +25,16 @@ public sealed class CatalogJavaSelectedCliRealTests
         // This category caller exercises raw extraction; trusted native cache
         // consumption belongs to the separate original integration case.
         sourceCase=sourceCase with{Call=sourceCase.Call with{TrustedCacheInput=false},Expected=sourceCase.Expected with{TrustedCacheHits=null,NativeProducerIdentityPinned=null,CacheConsumerAvoidedRawExtraction=null}};
-        using var runtime=new SourcesRuntimeFactory(new JavaSourceRuntimeLoader()).Create(SourceExtractionProfile.CurrentCandidate,new SourceJavaAdmission(manifest));
+        // Independently admit the exact selected manifest for the parent
+        // expectation. No expected fingerprint is taken from child output.
+        var manifestBytes=File.ReadAllBytes(manifest);var manifestSha=ContentHash.Sha256(manifestBytes);
+        var loader=new JavaSourceRuntimeLoader();
+        var admitted=new SourceProducerIdentityBuilder(javaLoader:loader).Create(new SourceJavaAdmission(manifest,manifestSha,manifestBytes.Length));
+        Assert.Equal(manifestSha,admitted.Identity.ProducerFiles["native/java-manifest"]);
+        Assert.Equal(manifest,admitted.JavaAdmission!.ManifestPath);
+        using var runtime=new SourcesRuntimeFactory(loader).Create(SourceExtractionProfile.CurrentCandidate,admitted.JavaAdmission);
         NativeCatalogBuildProvider? fixture=null;
-        var probe=new NativeCatalogBuildCliProbe(execute=>fixture=NativeCatalogSourceIntegrationProvider.CreateProvider(sourceCase.Call,runtime.Dispatcher,execute),manifest);
+        var probe=new NativeCatalogBuildCliProbe(execute=>fixture=NativeCatalogSourceIntegrationProvider.CreateProvider(sourceCase.Call,runtime.Dispatcher,execute,nativeAdmission:admitted),manifest);
         var value=await probe.RunAsync(test.BuildCase);await CatalogJavaSelectedCliCases.AssertCase(test,value);Assert.NotNull(fixture);
         CatalogSourceIntegrationCases.AssertCase(sourceCase,new Observed(NativeCatalogSourceIntegrationProvider.Observe(sourceCase.Call,fixture,value.Build)));
     }
