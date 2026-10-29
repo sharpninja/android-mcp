@@ -61,14 +61,14 @@ public sealed partial class Build
             snapshot=await collector.CaptureAsync();captured=snapshot.Sources.Where(row=>row.Observation.Source.Role!=DocumentationInputRole.CanonicalContractOptional).Select(row=>row.Observation.Content!).ToArray();
         }
 
-        var profiles=new DocumentationRendererProfileReader();ArchitectureRendererContext? context=null;
+        var profiles=new DocumentationRendererProfileReader();ArchitectureRendererContext? context=null;DocumentationRendererProfile? rendererProfile=null;
         if(Has(DesignStage.Tools))
         {
             Artifact Lock(string path)=>captured?.Single(artifact=>artifact.RelativePath==path)??configuration.Single(artifact=>artifact.RelativePath==path);
             if(captured is null)
                 foreach(var descriptor in new DocumentationProjectSourceCatalog().DescribeProjectSources(selection).Where(item=>item.Kind is DocumentationProjectInputKind.ToolchainLock or DocumentationProjectInputKind.RendererLock))
                     configuration.Add(new(descriptor.Source.RelativePath,await source.ReadAsync(descriptor.Source.RelativePath),descriptor.Source.MediaType));
-            var profile=profiles.Read(Lock("toolchain-lock.json"),Lock("renderer-lock.json"));
+            var profile=rendererProfile=profiles.Read(Lock("toolchain-lock.json"),Lock("renderer-lock.json"));
             var jar=profile.Downloads.Single(pin=>pin.LocalPath==".tools/plantuml-"+profile.PlantUmlVersion+".jar");
             var docker=await ReadToolIdentity(DockerIdentity!,"Docker");
             context=new(docker,work,ArtifactPaths.Resolve(cache,jar.LocalPath),receiptRoot,RendererUser!);
@@ -100,6 +100,19 @@ public sealed partial class Build
             buildPayload=await new DocumentationBuildPayloadPreparationFactory(nativeRun,hostConfiguration.Native,hostConfiguration.PrerequisiteScopes,
                 native.Facts,new PinnedArtifactReader(buildSource),new PinnedArtifactReader(payloadStore),new DocumentationBuildPayloadPlanner(strict,verifier),canonical,
                 payloadRuntime,generation+"-build-source").PrepareAsync();
+            var support=new DocumentationPackageSupport(verifier);var supportArtifacts=new List<Artifact>();
+            var admittedProfile=rendererProfile??throw new InvalidOperationException("Package support requires the selected tools profile.");
+            foreach(var spec in support.Describe(admittedProfile))
+            {
+                var retained=configuration.SingleOrDefault(artifact=>artifact.RelativePath==spec.RelativePath);
+                if(retained is null)
+                {
+                    var bytes=spec.ExpectedIdentity is {} pin?await new PinnedArtifactReader(source).ReadAsync(pin):await source.ReadAsync(spec.RelativePath);
+                    retained=new(spec.RelativePath,bytes,spec.MediaType);configuration.Add(retained);
+                }
+                supportArtifacts.Add(retained);
+            }
+            buildPayload=support.Append(admittedProfile,buildPayload,supportArtifacts);
         }
         else if(PipelineRequest is not null||PipelineRequestSha256 is not null||PipelineRequestLength is not null)
             throw new InvalidOperationException("Native build host configuration is only consumed by the package selection.");
