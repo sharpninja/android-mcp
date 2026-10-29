@@ -2,7 +2,7 @@ using Nuke.Common.IO;
 namespace AndroidMcp.BuildTool.Core;
 
 /// <summary>Immutable generation store. Originals and failed partial writes are retained.</summary>
-public sealed class FileArtifactStore : ICreateNewStreamingArtifactStore, IStreamingArtifactReader
+public sealed class FileArtifactStore : ICreateNewStreamingArtifactStore, IStreamingArtifactReader, ICreateNewArtifactDirectory
 {
     private readonly AbsolutePath root;
     private readonly Func<ReadOnlyMemory<byte>, string> sha256;
@@ -20,6 +20,22 @@ public sealed class FileArtifactStore : ICreateNewStreamingArtifactStore, IStrea
         this.sha256 = sha256;
         this.streamSha256 = streamSha256 ?? ContentHash.Sha256;
         this.readOpener = readOpener;
+    }
+
+    public Task CreateNewDirectoryAsync(string relativePath, CancellationToken cancellationToken = default)
+    {
+        var path = Resolve(relativePath);
+        cancellationToken.ThrowIfCancellationRequested();
+        var exists = true;
+        try { _ = File.GetAttributes(path); }
+        catch (FileNotFoundException) { exists = false; }
+        catch (DirectoryNotFoundException) { exists = false; }
+        if (exists) throw AlreadyExists(relativePath);
+        // Absence plus creation is protected by the caller's cooperating
+        // generation lease; it is not a hostile atomic-mkdir guarantee.
+        Directory.CreateDirectory(path);
+        _ = Resolve(relativePath);
+        return Task.CompletedTask;
     }
 
     public Task<StoredArtifact> WriteAsync(Artifact artifact, CancellationToken cancellationToken = default) =>

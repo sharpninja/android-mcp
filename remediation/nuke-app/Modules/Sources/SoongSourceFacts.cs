@@ -3,6 +3,7 @@ using System.Numerics;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
+using System.Text;
 using AndroidMcp.BuildTool.Core;
 
 namespace AndroidMcp.BuildTool.Sources;
@@ -10,7 +11,7 @@ namespace AndroidMcp.BuildTool.Sources;
 public sealed class SoongSourceFacts(IGlobMatcher glob) : ISoongSourceFacts
 {
     private sealed record Token(string Raw, int Start, int End);
-    private static readonly Regex Tokens = new("\"(?:\\\\.|[^\"\\\\])*\"|[A-Za-z_]\\w*|\\d+|[^\\s]", RegexOptions.CultureInvariant);
+    private static readonly Regex QuotedToken = new(@"\G""(?:\\.|[^""\\])*""", RegexOptions.CultureInvariant);
     private static readonly HashSet<string> Interfaces = new(["aidl_interface", "hidl_interface"], StringComparer.Ordinal);
     private static readonly HashSet<string> Apex = new(["apex", "apex_defaults", "prebuilt_apex", "apex_set"], StringComparer.Ordinal);
     private static readonly string[] ApexProperties = ["name", "manifest", "defaults", "apex_name", "version", "min_sdk_version", "updatable", "package_name"];
@@ -18,7 +19,7 @@ public sealed class SoongSourceFacts(IGlobMatcher glob) : ISoongSourceFacts
     public JsonArray Modules(string text, SoongModuleFamily family)
     {
         var kinds = family switch { SoongModuleFamily.Interfaces => Interfaces, SoongModuleFamily.Apex => Apex, _ => throw new ArgumentOutOfRangeException(nameof(family)) };
-        var tokens = Tokens.Matches(SourceText.MaskBuildComments(text)).Select(x => new Token(x.Value, x.Index, x.Index + x.Length)).ToArray();
+        var tokens = Tokenize(text);
         var result = new JsonArray(); var index = 0;
         while (index < tokens.Length - 1)
         {
@@ -40,6 +41,29 @@ public sealed class SoongSourceFacts(IGlobMatcher glob) : ISoongSourceFacts
             result.Add(module); index = Math.Max(position, index + 1);
         }
         return result;
+    }
+
+    private static bool Decimal(Rune scalar) => Rune.GetUnicodeCategory(scalar) == UnicodeCategory.DecimalDigitNumber;
+    private static Token[] Tokenize(string text)
+    {
+        var masked = SourceText.MaskBuildComments(text); var result = new List<Token>();
+        for (var index = 0; index < masked.Length;)
+        {
+            var start = index; var scalar = Rune.GetRuneAt(masked, index);
+            if (SourceText.Strip(scalar.ToString()).Length == 0) { index += scalar.Utf16SequenceLength; continue; }
+            if (masked[index] == '"')
+            {
+                var quoted = QuotedToken.Match(masked, index);
+                if (quoted.Success) { index += quoted.Length; result.Add(new(quoted.Value, start, index)); continue; }
+            }
+            index += scalar.Utf16SequenceLength;
+            if (scalar.Value is >= 'A' and <= 'Z' or >= 'a' and <= 'z' or '_')
+                while (index < masked.Length && SourceText.OriginalWord(Rune.GetRuneAt(masked, index))) index += Rune.GetRuneAt(masked, index).Utf16SequenceLength;
+            else if (Decimal(scalar))
+                while (index < masked.Length && Decimal(Rune.GetRuneAt(masked, index))) index += Rune.GetRuneAt(masked, index).Utf16SequenceLength;
+            result.Add(new(masked[start..index], start, index));
+        }
+        return result.ToArray();
     }
 
     private static JsonObject Value(IReadOnlyList<Token> tokens, ref int index, string text, bool expression = true)
@@ -71,9 +95,9 @@ public sealed class SoongSourceFacts(IGlobMatcher glob) : ISoongSourceFacts
             index++;
         }
         else if (token is "true" or "false") { node = new JsonObject { ["kind"] = "literal", ["value"] = token == "true" }; index++; }
-        else if (token.All(char.IsDigit))
+        else if (token.EnumerateRunes().All(Decimal))
         {
-            var digits = string.Concat(token.Select(character => CharUnicodeInfo.GetDecimalDigitValue(character).ToString(CultureInfo.InvariantCulture)));
+            var digits = string.Concat(token.EnumerateRunes().Select(scalar => CharUnicodeInfo.GetDecimalDigitValue(scalar.ToString(), 0).ToString(CultureInfo.InvariantCulture)));
             var integer = BigInteger.Parse(digits, NumberStyles.None, CultureInfo.InvariantCulture);
             node = new JsonObject { ["kind"] = "literal", ["value"] = JsonNode.Parse(integer.ToString(CultureInfo.InvariantCulture)) }; index++;
         }

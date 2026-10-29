@@ -1,26 +1,26 @@
 {
   "schemaVersion": "1.0.0",
-  "at": "2026-10-29T05:20:47",
+  "at": "2026-10-29T06:14:35",
   "authoritative": false,
   "projectionOnly": true,
   "derivedFrom": {
     "path": "remediation/nuke-planning/source/legacy-port-disposition-inventory.json",
-    "sha256": "1f90a55b662c54f5934a1a7e0503a0e3ae33f64dcbd580b8d70e5218a4663c7e",
-    "totalNormalizedPaths": 1476,
-    "additionalLocalPathsRetained": 1278
+    "sha256": "ce1a6c922a1103b06338b365da948c66940977df62ec13060fc97f87304cfacf",
+    "totalNormalizedPaths": 1481,
+    "additionalLocalPathsRetained": 1283
   },
   "identityManifest": {
     "path": "remediation/nuke-planning/source/legacy-python-tracked-manifest.json",
-    "sha256": "87cb9b8ae45f84125e5cb0f42b1b6f2aa3a187525bfbb3142684b683f76c9399",
+    "sha256": "c4f4bb97f5e390f3d736efdb29fae1241ab3a09d217854a775873d546991a07d",
     "publishedPythonCount": 198,
-    "headAtIdentityRead": "895e769299f1d2b5469121020553df42da7ed5ee"
+    "headAtIdentityRead": "27a427cc871a9ff2fbd555b4af6b2af83f2bef5d"
   },
   "totals": {
     "entries": 198,
     "unmappedPrimaryOwners": 0,
-    "normalVerified": 67,
+    "normalVerified": 75,
     "executionRetired": 0,
-    "normalVerifiedMethodScopes": 301,
+    "normalVerifiedMethodScopes": 322,
     "acceptedComplete": 0,
     "scopeExclusions": 0,
     "safeToDelete": 0,
@@ -30,7 +30,7 @@
     "This is a generated published-only projection of one authoritative union inventory, not a second maintained inventory.",
     "All 198 published paths and hashes were independently rechecked read-only against the current checkout.",
     "Responsibility allocation and bounded native test evidence are not whole-file equivalence, migration acceptance or permission to delete originals.",
-    "Additional 1278 local paths and repeated historical snapshot details remain retained in the full local inventory; omission from lean projection is not a scope waiver."
+    "Additional 1283 local paths and repeated historical snapshot details remain retained in the full local inventory; omission from lean projection is not a scope waiver."
   ],
   "entries": [
     {
@@ -5490,16 +5490,19 @@
         "Migrate"
       ],
       "services": [
-        "Catalog-owned planned copy/verify/retain migration service"
+        "Catalog-owned planned copy/verify/retain migration service",
+        "CatalogCopyMigration.MigrateAsync + CatalogMigrationWorkflowReader + compiled Catalog/Migrate"
       ],
-      "migration_status": "partial-source-allocation",
+      "migration_status": "normal-native-original-test-methods-verified",
       "native_tests_or_pending": [
-        "Catalog owner migration gates required; originals retained"
+        "Catalog owner migration gates required; originals retained",
+        "CatalogMigrationRealTests + CatalogMigrationStreamingRealTests + CatalogMigrationWorkflowRealTests + CatalogMigrationPlannerRealTests"
       ],
-      "additional_responsibilities": [],
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
       "remaining": [
-        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "[{\"profile\":\"release-011\",\"root\":\"/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011\",\"orderedScripts\":[{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/migrations/001-initial.sql\",\"sha256\":\"d7c9796cb53a455a569fbfc214c5efa74129627ee944c17a5ab3c3aed9b739ee\",\"bytes\":11266},{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/migrations/002-evidence-and-publication.sql\",\"sha256\":\"fc58a9b62816797c90a966c9f7ebb9dbd66a7abdc69386e6869a7e82d2a1a0a3\",\"bytes\":10591}],\"historicalOutputByteIdentityClaimed\":false,\"targetSchemaExactSqliteMasterComparison\":true},{\"profile\":\"current\",\"root\":\"/home/sharpninja/github/2026-10-26/task-3/remediation/catalog\",\"orderedScripts\":[{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/migrations/001-initial.sql\",\"sha256\":\"d7c9796cb53a455a569fbfc214c5efa74129627ee944c17a5ab3c3aed9b739ee\",\"bytes\":11266},{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/migrations/002-evidence-and-publication.sql\",\"sha256\":\"fc58a9b62816797c90a966c9f7ebb9dbd66a7abdc69386e6869a7e82d2a1a0a3\",\"bytes\":10591},{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/migrations/source_metadata_ddl.sql\",\"sha256\":\"2b585541c4463fc6b6ae408a80a573b81b635adc4206f960d2b7d8284e79a655\",\"bytes\":3608}],\"historicalOutputByteIdentityClaimed\":false,\"targetSchemaExactSqliteMasterComparison\":true}] Streaming source/stage/hash/native identity, retained stage/source, explicit target scripts; SQL rows materialized; not general Python object/exception/serialization equivalence."
       ],
       "artifact_role": "published-legacy-port-baseline",
       "primary_code_path": "remediation/catalog/tooling/migrate_v3.py",
@@ -5507,11 +5510,50 @@
       "byte_identical_path_count": 12,
       "same_bytes_imply_profile_or_caller_parity": false,
       "standalone_nuke_target_required": false,
-      "normal_verified": false,
-      "normal_verification_status": "native-or-caller-method-verification-pending",
+      "normal_verified": true,
+      "normal_verification_status": "normal-original-test-methods-verified",
       "normal_verified_methods": [],
-      "normal_verified_functions": [],
-      "pending_methods": "<module-body-and-required-callers>",
+      "normal_verified_functions": [
+        {
+          "source_sha256": "e4eff83d352313b155c2b7b572df6f2e4f98f8fb2876e0eeaabb7fa39663de5e",
+          "evidence": "remediation/nuke-planning/catalog/catalog-normal-test-file-closures.json",
+          "mapping": {
+            "legacyPath": "remediation/catalog/tooling/migrate_v3.py",
+            "legacySha256": "e4eff83d352313b155c2b7b572df6f2e4f98f8fb2876e0eeaabb7fa39663de5e",
+            "originalNamedFunctions": [
+              "migrate"
+            ],
+            "nativeService": "AndroidMcp.BuildTool.Catalog.Migration.CatalogCopyMigration.MigrateAsync",
+            "functionBodyNormalPrivateVerified": true,
+            "nativeMethodCountsAddedToOriginals": 0,
+            "requiredCaller": "Original __main__ migrate(argv[1],argv[2]) maps to Root-owned future Catalog operation",
+            "rootCliPending": true,
+            "normal_file_verified": false,
+            "accepted_complete": false,
+            "safe_to_delete": false
+          }
+        },
+        {
+          "source_sha256": "e4eff83d352313b155c2b7b572df6f2e4f98f8fb2876e0eeaabb7fa39663de5e",
+          "evidence": "remediation/nuke-planning/catalog/catalog-normal-test-file-closures.json",
+          "mapping": {
+            "legacyPath": "rehydration/producers/release-011/tooling/migrate_v3.py",
+            "legacySha256": "e4eff83d352313b155c2b7b572df6f2e4f98f8fb2876e0eeaabb7fa39663de5e",
+            "originalNamedFunctions": [
+              "migrate"
+            ],
+            "nativeService": "AndroidMcp.BuildTool.Catalog.Migration.CatalogCopyMigration.MigrateAsync",
+            "functionBodyNormalPrivateVerified": true,
+            "nativeMethodCountsAddedToOriginals": 0,
+            "requiredCaller": "Original __main__ migrate(argv[1],argv[2]) maps to Root-owned future Catalog operation",
+            "rootCliPending": true,
+            "normal_file_verified": false,
+            "accepted_complete": false,
+            "safe_to_delete": false
+          }
+        }
+      ],
+      "pending_methods": null,
       "pending_method_list_basis": "Exact owner-supplied function/method anchors when available; module/caller closure is explicit. Lexical proposal anchors are not an AST or exhaustive branch inventory.",
       "execution_retired": false,
       "retention_normal_verified": false,
@@ -5537,6 +5579,13 @@
           "evidence": "remediation/nuke-planning/source/legacy-disposition.jsonl",
           "owner": "Catalog",
           "role": "allocation",
+          "source_sha256": "e4eff83d352313b155c2b7b572df6f2e4f98f8fb2876e0eeaabb7fa39663de5e",
+          "method": null
+        },
+        {
+          "evidence": "remediation/nuke-planning/catalog/catalog-normal-test-file-closures.json",
+          "owner": "Catalog",
+          "role": "explicit-source-normal-verification",
           "source_sha256": "e4eff83d352313b155c2b7b572df6f2e4f98f8fb2876e0eeaabb7fa39663de5e",
           "method": null
         }
@@ -13118,15 +13167,19 @@
         "Migrate"
       ],
       "services": [
-        "Catalog-owned planned copy/verify/retain migration service"
+        "Catalog-owned planned copy/verify/retain migration service",
+        "CatalogCopyMigration.MigrateAsync + CatalogMigrationWorkflowReader + compiled Catalog/Migrate"
       ],
-      "migration_status": "partial-source-allocation",
+      "migration_status": "normal-native-original-test-methods-verified",
       "native_tests_or_pending": [
-        "Catalog owner migration gates required; originals retained"
+        "Catalog owner migration gates required; originals retained",
+        "CatalogMigrationRealTests + CatalogMigrationStreamingRealTests + CatalogMigrationWorkflowRealTests + CatalogMigrationPlannerRealTests"
       ],
-      "additional_responsibilities": [],
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
       "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "[{\"profile\":\"release-011\",\"root\":\"/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011\",\"orderedScripts\":[{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/migrations/001-initial.sql\",\"sha256\":\"d7c9796cb53a455a569fbfc214c5efa74129627ee944c17a5ab3c3aed9b739ee\",\"bytes\":11266},{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/migrations/002-evidence-and-publication.sql\",\"sha256\":\"fc58a9b62816797c90a966c9f7ebb9dbd66a7abdc69386e6869a7e82d2a1a0a3\",\"bytes\":10591}],\"historicalOutputByteIdentityClaimed\":false,\"targetSchemaExactSqliteMasterComparison\":true},{\"profile\":\"current\",\"root\":\"/home/sharpninja/github/2026-10-26/task-3/remediation/catalog\",\"orderedScripts\":[{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/migrations/001-initial.sql\",\"sha256\":\"d7c9796cb53a455a569fbfc214c5efa74129627ee944c17a5ab3c3aed9b739ee\",\"bytes\":11266},{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/migrations/002-evidence-and-publication.sql\",\"sha256\":\"fc58a9b62816797c90a966c9f7ebb9dbd66a7abdc69386e6869a7e82d2a1a0a3\",\"bytes\":10591},{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/migrations/source_metadata_ddl.sql\",\"sha256\":\"2b585541c4463fc6b6ae408a80a573b81b635adc4206f960d2b7d8284e79a655\",\"bytes\":3608}],\"historicalOutputByteIdentityClaimed\":false,\"targetSchemaExactSqliteMasterComparison\":true}] Streaming source/stage/hash/native identity, retained stage/source, explicit target scripts; SQL rows materialized; not general Python object/exception/serialization equivalence."
       ],
       "artifact_role": "published-legacy-port-baseline",
       "primary_code_path": "remediation/catalog/tooling/migrate_v3.py",
@@ -13134,11 +13187,50 @@
       "byte_identical_path_count": 12,
       "same_bytes_imply_profile_or_caller_parity": false,
       "standalone_nuke_target_required": false,
-      "normal_verified": false,
-      "normal_verification_status": "native-or-caller-method-verification-pending",
+      "normal_verified": true,
+      "normal_verification_status": "normal-original-test-methods-verified",
       "normal_verified_methods": [],
-      "normal_verified_functions": [],
-      "pending_methods": "<module-body-and-required-callers>",
+      "normal_verified_functions": [
+        {
+          "source_sha256": "e4eff83d352313b155c2b7b572df6f2e4f98f8fb2876e0eeaabb7fa39663de5e",
+          "evidence": "remediation/nuke-planning/catalog/catalog-normal-test-file-closures.json",
+          "mapping": {
+            "legacyPath": "remediation/catalog/tooling/migrate_v3.py",
+            "legacySha256": "e4eff83d352313b155c2b7b572df6f2e4f98f8fb2876e0eeaabb7fa39663de5e",
+            "originalNamedFunctions": [
+              "migrate"
+            ],
+            "nativeService": "AndroidMcp.BuildTool.Catalog.Migration.CatalogCopyMigration.MigrateAsync",
+            "functionBodyNormalPrivateVerified": true,
+            "nativeMethodCountsAddedToOriginals": 0,
+            "requiredCaller": "Original __main__ migrate(argv[1],argv[2]) maps to Root-owned future Catalog operation",
+            "rootCliPending": true,
+            "normal_file_verified": false,
+            "accepted_complete": false,
+            "safe_to_delete": false
+          }
+        },
+        {
+          "source_sha256": "e4eff83d352313b155c2b7b572df6f2e4f98f8fb2876e0eeaabb7fa39663de5e",
+          "evidence": "remediation/nuke-planning/catalog/catalog-normal-test-file-closures.json",
+          "mapping": {
+            "legacyPath": "rehydration/producers/release-011/tooling/migrate_v3.py",
+            "legacySha256": "e4eff83d352313b155c2b7b572df6f2e4f98f8fb2876e0eeaabb7fa39663de5e",
+            "originalNamedFunctions": [
+              "migrate"
+            ],
+            "nativeService": "AndroidMcp.BuildTool.Catalog.Migration.CatalogCopyMigration.MigrateAsync",
+            "functionBodyNormalPrivateVerified": true,
+            "nativeMethodCountsAddedToOriginals": 0,
+            "requiredCaller": "Original __main__ migrate(argv[1],argv[2]) maps to Root-owned future Catalog operation",
+            "rootCliPending": true,
+            "normal_file_verified": false,
+            "accepted_complete": false,
+            "safe_to_delete": false
+          }
+        }
+      ],
+      "pending_methods": null,
       "pending_method_list_basis": "Exact owner-supplied function/method anchors when available; module/caller closure is explicit. Lexical proposal anchors are not an AST or exhaustive branch inventory.",
       "execution_retired": false,
       "retention_normal_verified": false,
@@ -13164,6 +13256,13 @@
           "evidence": "remediation/nuke-planning/source/legacy-disposition.jsonl",
           "owner": "Catalog",
           "role": "allocation",
+          "source_sha256": "e4eff83d352313b155c2b7b572df6f2e4f98f8fb2876e0eeaabb7fa39663de5e",
+          "method": null
+        },
+        {
+          "evidence": "remediation/nuke-planning/catalog/catalog-normal-test-file-closures.json",
+          "owner": "Catalog",
+          "role": "explicit-source-normal-verification",
           "source_sha256": "e4eff83d352313b155c2b7b572df6f2e4f98f8fb2876e0eeaabb7fa39663de5e",
           "method": null
         }
@@ -16364,27 +16463,50 @@
         "Extract"
       ],
       "services": [
+        "AidlSourceConstraints + HidlSourceConstraints + existing typed source contracts",
         "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
       ],
-      "migration_status": "partial-source-allocation",
+      "migration_status": "normal-native-original-test-methods-verified",
       "native_tests_or_pending": [
-        "S-AC021/S-AC022 full membership/revision/hash-selection/version-domain mock/real gates pending"
+        "S-AC021/S-AC022 full membership/revision/hash-selection/version-domain mock/real gates pending",
+        "SourceConstraintMockTests/SourceConstraintRealTests"
       ],
-      "additional_responsibilities": [],
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
       "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "[\"Public callable APIs over admitted loaded-JSON object/list/scalar trees. Missing evaluated required keys use native KeyNotFoundException with exact key; incompatible evaluated nested containers use ArgumentException. No unrestricted Python-object or mutable-alias API claim.\",\"No serialization bytes, filesystem effects, OS/device inspection, source-byte hashing, HTTP, parsing Soong/AIDL/HIDL text, version inference, runtime reachability, wire codec, platform range, installed APEX version or authority grant.\",\"Existing shared LegacyJsonValueEquality supplies complete JSON membership/dedup, bool/number equality and exact integer behavior; strict Boolean false unstable identity is retained separately.\",\"Existing SourceText.OriginalWord/Lines/Strip supply original Unicode word, physical splitlines and strip semantics. Full descriptor matching rejects suffix newline and preserves ASCII initial identifiers and HIDL Unicode decimal version digits.\",\"Complete outputs, conservative flags/nulls/limitations, exact original strings and object/array order are asserted. Inputs are unmodified and returned evidence cannot be changed by later admitted input mutation.\",\"Published own-test imports are the actual original callers. No main/CLI/category/generator/source-factory or metadata-reference-array responsibility is invented; InterfaceModules main is disjoint.\"]"
       ],
       "artifact_role": "published-legacy-port-baseline",
       "primary_code_path": "tools/source_facts/aidl_source_constraint.py",
       "byte_identity_group": "dc7c0d698d4ff811dbd8cd604316e8ab3ac03974daeafde7e71da26a0dfaa01d",
-      "byte_identical_path_count": 1,
+      "byte_identical_path_count": 2,
       "same_bytes_imply_profile_or_caller_parity": false,
       "standalone_nuke_target_required": false,
-      "normal_verified": false,
-      "normal_verification_status": "native-or-caller-method-verification-pending",
+      "normal_verified": true,
+      "normal_verification_status": "normal-original-test-methods-verified",
       "normal_verified_methods": [],
-      "normal_verified_functions": [],
-      "pending_methods": "<module-body-and-required-callers>",
+      "normal_verified_functions": [
+        {
+          "source_sha256": "dc7c0d698d4ff811dbd8cd604316e8ab3ac03974daeafde7e71da26a0dfaa01d",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": {
+            "original": "aidl_source_constraint.stable_module",
+            "native": "IAidlSourceConstraints.StableModule / AidlSourceConstraints.StableModule",
+            "behavior": "Original kind/complete early return, all unstable item selection, absent default, exact singleton literal Boolean false identity; numeric zero remains unstable"
+          }
+        },
+        {
+          "source_sha256": "dc7c0d698d4ff811dbd8cd604316e8ab3ac03974daeafde7e71da26a0dfaa01d",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": {
+            "original": "aidl_source_constraint.exact_constraint and local unknown",
+            "native": "IAidlSourceConstraints.ExactConstraint / AidlSourceConstraints.ExactConstraint; SourceConstraintValues.Unknown",
+            "behavior": "All ten original unknown branches in original acquisition/selection order; descriptor, full source identity membership, audit/link/module revision, physical last-line selection, exact conservative output and evidence"
+          }
+        }
+      ],
+      "pending_methods": null,
       "pending_method_list_basis": "Exact owner-supplied function/method anchors when available; module/caller closure is explicit. Lexical proposal anchors are not an AST or exhaustive branch inventory.",
       "execution_retired": false,
       "retention_normal_verified": false,
@@ -16410,6 +16532,13 @@
           "evidence": "remediation/nuke-planning/source/legacy-disposition.jsonl",
           "owner": "Sources",
           "role": "allocation",
+          "source_sha256": "dc7c0d698d4ff811dbd8cd604316e8ab3ac03974daeafde7e71da26a0dfaa01d",
+          "method": null
+        },
+        {
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "owner": "Sources",
+          "role": "explicit-source-normal-verification",
           "source_sha256": "dc7c0d698d4ff811dbd8cd604316e8ab3ac03974daeafde7e71da26a0dfaa01d",
           "method": null
         }
@@ -16733,27 +16862,41 @@
         "Extract"
       ],
       "services": [
+        "AidlSourceConstraints + HidlSourceConstraints + existing typed source contracts",
         "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
       ],
-      "migration_status": "partial-source-allocation",
+      "migration_status": "normal-native-original-test-methods-verified",
       "native_tests_or_pending": [
-        "S-AC021/S-AC022 full membership/revision/hash-selection/version-domain mock/real gates pending"
+        "S-AC021/S-AC022 full membership/revision/hash-selection/version-domain mock/real gates pending",
+        "SourceConstraintMockTests/SourceConstraintRealTests"
       ],
-      "additional_responsibilities": [],
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
       "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "[\"Public callable APIs over admitted loaded-JSON object/list/scalar trees. Missing evaluated required keys use native KeyNotFoundException with exact key; incompatible evaluated nested containers use ArgumentException. No unrestricted Python-object or mutable-alias API claim.\",\"No serialization bytes, filesystem effects, OS/device inspection, source-byte hashing, HTTP, parsing Soong/AIDL/HIDL text, version inference, runtime reachability, wire codec, platform range, installed APEX version or authority grant.\",\"Existing shared LegacyJsonValueEquality supplies complete JSON membership/dedup, bool/number equality and exact integer behavior; strict Boolean false unstable identity is retained separately.\",\"Existing SourceText.OriginalWord/Lines/Strip supply original Unicode word, physical splitlines and strip semantics. Full descriptor matching rejects suffix newline and preserves ASCII initial identifiers and HIDL Unicode decimal version digits.\",\"Complete outputs, conservative flags/nulls/limitations, exact original strings and object/array order are asserted. Inputs are unmodified and returned evidence cannot be changed by later admitted input mutation.\",\"Published own-test imports are the actual original callers. No main/CLI/category/generator/source-factory or metadata-reference-array responsibility is invented; InterfaceModules main is disjoint.\"]"
       ],
       "artifact_role": "published-legacy-port-baseline",
       "primary_code_path": "tools/source_facts/hidl_source_constraint.py",
       "byte_identity_group": "194514644686213599fc77326e4f9cd2c17141b761173b8297e92032337a44ed",
-      "byte_identical_path_count": 1,
+      "byte_identical_path_count": 2,
       "same_bytes_imply_profile_or_caller_parity": false,
       "standalone_nuke_target_required": false,
-      "normal_verified": false,
-      "normal_verification_status": "native-or-caller-method-verification-pending",
+      "normal_verified": true,
+      "normal_verification_status": "normal-original-test-methods-verified",
       "normal_verified_methods": [],
-      "normal_verified_functions": [],
-      "pending_methods": "<module-body-and-required-callers>",
+      "normal_verified_functions": [
+        {
+          "source_sha256": "194514644686213599fc77326e4f9cd2c17141b761173b8297e92032337a44ed",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": {
+            "original": "hidl_source_constraint.exact_constraint",
+            "native": "IHidlSourceConstraints.ExactConstraint / HidlSourceConstraints.ExactConstraint",
+            "behavior": "All four original unknown branches, every matching same-revision fact, first-seen full-object evidence deduplication, repeated ordered line values, exact conservative output"
+          }
+        }
+      ],
+      "pending_methods": null,
       "pending_method_list_basis": "Exact owner-supplied function/method anchors when available; module/caller closure is explicit. Lexical proposal anchors are not an AST or exhaustive branch inventory.",
       "execution_retired": false,
       "retention_normal_verified": false,
@@ -16779,6 +16922,13 @@
           "evidence": "remediation/nuke-planning/source/legacy-disposition.jsonl",
           "owner": "Sources",
           "role": "allocation",
+          "source_sha256": "194514644686213599fc77326e4f9cd2c17141b761173b8297e92032337a44ed",
+          "method": null
+        },
+        {
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "owner": "Sources",
+          "role": "explicit-source-normal-verification",
           "source_sha256": "194514644686213599fc77326e4f9cd2c17141b761173b8297e92032337a44ed",
           "method": null
         }
@@ -17024,15 +17174,19 @@
         "Extract"
       ],
       "services": [
-        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
+        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only",
+        "SoongSourceFacts + InterfaceModuleWorkflow.RunAsync + compiled Sources/Extract InterfaceModules"
       ],
-      "migration_status": "partial-source-allocation",
+      "migration_status": "normal-native-original-test-methods-verified",
       "native_tests_or_pending": [
+        "InterfaceModuleMainRealTests + InterfaceModuleCallerRealTests + InterfaceModulePlannerRealTests",
         "S-AC021/S-AC022 full membership/revision/hash-selection/version-domain mock/real gates pending"
       ],
-      "additional_responsibilities": [],
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
       "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "[\"Strict native admitted JSON/finite numbers/valid Unicode and portable ArtifactPaths; no arbitrary Python object/interpreter-wide API reproduction. Existing helper boundaries and021 scalar lexical fix retained.\",\"Compact shared LegacyAsciiIdentity rather than Python spaced JSON byte identity; observed native producer/assembly fingerprint rather than Python file SHA; explicit measured offset timestamp rather than historical UTC text. No historical-byte identity claim.\",\"Native immutable facts/report plus final index commit and pre/post pins are extra guarantees; original early-directory and partial retention effects are preserved, not waived.\",\"No cache/discovery/JSON/equality/number/path/IO/generation engine or separate NUKE target introduced.\",\"No canonical/authority writes or production edits authorized by plan artifact alone; Root acknowledgment/review remains required.\"]"
       ],
       "artifact_role": "published-legacy-port-baseline",
       "primary_code_path": "tools/source_facts/interface_module_facts.py",
@@ -17040,11 +17194,84 @@
       "byte_identical_path_count": 1,
       "same_bytes_imply_profile_or_caller_parity": false,
       "standalone_nuke_target_required": false,
-      "normal_verified": false,
-      "normal_verification_status": "native-or-caller-method-verification-pending",
+      "normal_verified": true,
+      "normal_verification_status": "normal-original-test-methods-verified",
       "normal_verified_methods": [],
-      "normal_verified_functions": [],
-      "pending_methods": "<module-body-and-required-callers>",
+      "normal_verified_functions": [
+        {
+          "source_sha256": "676c3fbbfe3e740f7aadd3bcac251655bc9d37de5ac2a5ce77a9a9632db0dc90",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": {
+            "Proof": "Existing unchanged shared authority, original Soong fixtures and021 comment/raw/scalar cases. Actual main caller uses same Soong service.",
+            "Native": "SourceText.MaskBuildComments",
+            "Original": "mask_comments"
+          }
+        },
+        {
+          "source_sha256": "676c3fbbfe3e740f7aadd3bcac251655bc9d37de5ac2a5ce77a9a9632db0dc90",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": {
+            "Proof": "021 original scalar word/Nd lexer SAME48 cases direct/current/release; actual inventory83 cases use this same service, no new lexer.",
+            "Native": "SoongSourceFacts.Tokenize",
+            "Original": "tokens"
+          }
+        },
+        {
+          "source_sha256": "676c3fbbfe3e740f7aadd3bcac251655bc9d37de5ac2a5ce77a9a9632db0dc90",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": {
+            "Proof": "Original Soong full trees, expressions/incomplete/duplicate values plus021; actual main complete facts byte assertions include nested all12 property values.",
+            "Native": "SoongSourceFacts.Value",
+            "Original": "value"
+          }
+        },
+        {
+          "source_sha256": "676c3fbbfe3e740f7aadd3bcac251655bc9d37de5ac2a5ce77a9a9632db0dc90",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": {
+            "Proof": "ExistingLIT01-13 and all9 original test mapping022. Actual main selector lists/scalars/absent/null/duplicates and all12 literal projections. Two fixture mistakes independently corrected from original body, production unchanged through re-mock.",
+            "Native": "SoongSourceFacts.Literal",
+            "Original": "literal"
+          }
+        },
+        {
+          "source_sha256": "676c3fbbfe3e740f7aadd3bcac251655bc9d37de5ac2a5ce77a9a9632db0dc90",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": {
+            "Proof": "Original exact Soong fixtures,021unicode, actual83main: AIDL/HIDL/adjacent modules/multiple files/repeated logical rows and zero module identity laziness.",
+            "Native": "SoongSourceFacts.Modules(Interfaces)",
+            "Original": "modules"
+          }
+        },
+        {
+          "source_sha256": "676c3fbbfe3e740f7aadd3bcac251655bc9d37de5ac2a5ce77a9a9632db0dc90",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": {
+            "Proof": "MATCH01-07 plus actual main: same-revision grouping with shared bool/number equality, lazy wrong declared path, unsafe selector before path admission, excludes absence/null/duplicates, sorted unique matches.",
+            "Native": "SoongSourceFacts.MatchSources + existing GlobMatcher",
+            "Original": "source_matches"
+          }
+        },
+        {
+          "source_sha256": "676c3fbbfe3e740f7aadd3bcac251655bc9d37de5ac2a5ce77a9a9632db0dc90",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": {
+            "Proof": "All12original clauses above:83same finite native temp trees, full facts/report bytes, exact input/read/parse/write/order/counters, retained early directory, failed retry, shared lease and dynamic precommit pin checks.",
+            "Native": "InterfaceModuleWorkflow.RunAsync",
+            "Original": "main"
+          }
+        },
+        {
+          "source_sha256": "676c3fbbfe3e740f7aadd3bcac251655bc9d37de5ac2a5ce77a9a9632db0dc90",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": {
+            "Proof": "Compiled six-invocation monolith: pinned two inventories, actual native producer/time, full report stdout, output/readback/index pins, wrong pin/replay/unknown task, raw error empty-directory retention and retry refusal; existingHash+Declarations compiled callers retained.",
+            "Native": "Existing Sources/Extract --extract-task InterfaceModules",
+            "Original": "script entry"
+          }
+        }
+      ],
+      "pending_methods": null,
       "pending_method_list_basis": "Exact owner-supplied function/method anchors when available; module/caller closure is explicit. Lexical proposal anchors are not an AST or exhaustive branch inventory.",
       "execution_retired": false,
       "retention_normal_verified": false,
@@ -17070,6 +17297,13 @@
           "evidence": "remediation/nuke-planning/source/legacy-disposition.jsonl",
           "owner": "Sources",
           "role": "allocation",
+          "source_sha256": "676c3fbbfe3e740f7aadd3bcac251655bc9d37de5ac2a5ce77a9a9632db0dc90",
+          "method": null
+        },
+        {
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "owner": "Sources",
+          "role": "explicit-source-normal-verification",
           "source_sha256": "676c3fbbfe3e740f7aadd3bcac251655bc9d37de5ac2a5ce77a9a9632db0dc90",
           "method": null
         }
@@ -17753,27 +17987,125 @@
         "Extract"
       ],
       "services": [
+        "AidlSourceConstraints + HidlSourceConstraints + existing typed source contracts",
         "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
       ],
-      "migration_status": "partial-source-allocation",
+      "migration_status": "normal-native-original-test-methods-verified",
       "native_tests_or_pending": [
-        "S-AC021/S-AC022 full membership/revision/hash-selection/version-domain mock/real gates pending"
+        "S-AC021/S-AC022 full membership/revision/hash-selection/version-domain mock/real gates pending",
+        "SourceConstraintMockTests/SourceConstraintRealTests"
       ],
-      "additional_responsibilities": [],
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
       "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "[\"Public callable APIs over admitted loaded-JSON object/list/scalar trees. Missing evaluated required keys use native KeyNotFoundException with exact key; incompatible evaluated nested containers use ArgumentException. No unrestricted Python-object or mutable-alias API claim.\",\"No serialization bytes, filesystem effects, OS/device inspection, source-byte hashing, HTTP, parsing Soong/AIDL/HIDL text, version inference, runtime reachability, wire codec, platform range, installed APEX version or authority grant.\",\"Existing shared LegacyJsonValueEquality supplies complete JSON membership/dedup, bool/number equality and exact integer behavior; strict Boolean false unstable identity is retained separately.\",\"Existing SourceText.OriginalWord/Lines/Strip supply original Unicode word, physical splitlines and strip semantics. Full descriptor matching rejects suffix newline and preserves ASCII initial identifiers and HIDL Unicode decimal version digits.\",\"Complete outputs, conservative flags/nulls/limitations, exact original strings and object/array order are asserted. Inputs are unmodified and returned evidence cannot be changed by later admitted input mutation.\",\"Published own-test imports are the actual original callers. No main/CLI/category/generator/source-factory or metadata-reference-array responsibility is invented; InterfaceModules main is disjoint.\"]"
       ],
       "artifact_role": "published-legacy-port-baseline",
       "primary_code_path": "tools/source_facts/test_aidl_source_constraint.py",
       "byte_identity_group": "e8977f3942fd961b74b7b9dbde4a05b6d8afdfb425b4eea184a65d0a4dc95bc1",
-      "byte_identical_path_count": 1,
+      "byte_identical_path_count": 2,
       "same_bytes_imply_profile_or_caller_parity": false,
       "standalone_nuke_target_required": false,
-      "normal_verified": false,
-      "normal_verification_status": "native-or-caller-method-verification-pending",
-      "normal_verified_methods": [],
+      "normal_verified": true,
+      "normal_verification_status": "normal-original-test-methods-verified",
+      "normal_verified_methods": [
+        {
+          "method": "test_exact_frozen_hash_forms_interface_only_predicate",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "e8977f3942fd961b74b7b9dbde4a05b6d8afdfb425b4eea184a65d0a4dc95bc1",
+          "bindings": [
+            "A-original"
+          ],
+          "normal_verified": true,
+          "scope": "Exact interface clause and runtime_observation false, strengthened to complete ordered output and copy/nonmutation checks",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_unstable_or_unresolved_build_flag_rejected",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "e8977f3942fd961b74b7b9dbde4a05b6d8afdfb425b4eea184a65d0a4dc95bc1",
+          "bindings": [
+            "A-unstable",
+            "A-unresolved"
+          ],
+          "normal_verified": true,
+          "scope": "Both original loop values produce the exact unknown-only object",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_backend_physical_last_line_must_match",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "e8977f3942fd961b74b7b9dbde4a05b6d8afdfb425b4eea184a65d0a4dc95bc1",
+          "bindings": [
+            "A-blank-tail"
+          ],
+          "normal_verified": true,
+          "scope": "Original extra physical newline rejects with exact backend-tail reason",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_other_source_bytes_not_borrowed",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "e8977f3942fd961b74b7b9dbde4a05b6d8afdfb425b4eea184a65d0a4dc95bc1",
+          "bindings": [
+            "A-other-bytes"
+          ],
+          "normal_verified": true,
+          "scope": "Original replacement source digest is absent from complete reconciled identity set",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_descriptor_override_remains_unknown",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "e8977f3942fd961b74b7b9dbde4a05b6d8afdfb425b4eea184a65d0a4dc95bc1",
+          "bindings": [
+            "A-override"
+          ],
+          "normal_verified": true,
+          "scope": "Original Descriptor annotation rejects before identity/audit checks",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_current_dump_does_not_borrow_frozen_version",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "e8977f3942fd961b74b7b9dbde4a05b6d8afdfb425b4eea184a65d0a4dc95bc1",
+          "bindings": [
+            "A-development"
+          ],
+          "normal_verified": true,
+          "scope": "Original development linkage remains unknown",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_stable_absent_default_differs_from_unknown_expression",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "e8977f3942fd961b74b7b9dbde4a05b6d8afdfb425b4eea184a65d0a4dc95bc1",
+          "bindings": [
+            "S-absent",
+            "S-incomplete"
+          ],
+          "normal_verified": true,
+          "scope": "Both original public stable_module calls, absent flag true and incomplete properties false",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        }
+      ],
       "normal_verified_functions": [],
-      "pending_methods": "<module-body-and-required-callers>",
+      "pending_methods": null,
       "pending_method_list_basis": "Exact owner-supplied function/method anchors when available; module/caller closure is explicit. Lexical proposal anchors are not an AST or exhaustive branch inventory.",
       "execution_retired": false,
       "retention_normal_verified": false,
@@ -17799,6 +18131,13 @@
           "evidence": "remediation/nuke-planning/source/legacy-disposition.jsonl",
           "owner": "Sources",
           "role": "allocation",
+          "source_sha256": "e8977f3942fd961b74b7b9dbde4a05b6d8afdfb425b4eea184a65d0a4dc95bc1",
+          "method": null
+        },
+        {
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "owner": "Sources",
+          "role": "explicit-source-normal-verification",
           "source_sha256": "e8977f3942fd961b74b7b9dbde4a05b6d8afdfb425b4eea184a65d0a4dc95bc1",
           "method": null
         }
@@ -18339,27 +18678,97 @@
         "Extract"
       ],
       "services": [
+        "AidlSourceConstraints + HidlSourceConstraints + existing typed source contracts",
         "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
       ],
-      "migration_status": "partial-source-allocation",
+      "migration_status": "normal-native-original-test-methods-verified",
       "native_tests_or_pending": [
-        "S-AC021/S-AC022 full membership/revision/hash-selection/version-domain mock/real gates pending"
+        "S-AC021/S-AC022 full membership/revision/hash-selection/version-domain mock/real gates pending",
+        "SourceConstraintMockTests/SourceConstraintRealTests"
       ],
-      "additional_responsibilities": [],
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
       "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "[\"Public callable APIs over admitted loaded-JSON object/list/scalar trees. Missing evaluated required keys use native KeyNotFoundException with exact key; incompatible evaluated nested containers use ArgumentException. No unrestricted Python-object or mutable-alias API claim.\",\"No serialization bytes, filesystem effects, OS/device inspection, source-byte hashing, HTTP, parsing Soong/AIDL/HIDL text, version inference, runtime reachability, wire codec, platform range, installed APEX version or authority grant.\",\"Existing shared LegacyJsonValueEquality supplies complete JSON membership/dedup, bool/number equality and exact integer behavior; strict Boolean false unstable identity is retained separately.\",\"Existing SourceText.OriginalWord/Lines/Strip supply original Unicode word, physical splitlines and strip semantics. Full descriptor matching rejects suffix newline and preserves ASCII initial identifiers and HIDL Unicode decimal version digits.\",\"Complete outputs, conservative flags/nulls/limitations, exact original strings and object/array order are asserted. Inputs are unmodified and returned evidence cannot be changed by later admitted input mutation.\",\"Published own-test imports are the actual original callers. No main/CLI/category/generator/source-factory or metadata-reference-array responsibility is invented; InterfaceModules main is disjoint.\"]"
       ],
       "artifact_role": "published-legacy-port-baseline",
       "primary_code_path": "tools/source_facts/test_hidl_source_constraint.py",
       "byte_identity_group": "51abec7fc9f4c2125af3165247f0f56eb07de8e170c98d98893f3d01beea987e",
-      "byte_identical_path_count": 1,
+      "byte_identical_path_count": 2,
       "same_bytes_imply_profile_or_caller_parity": false,
       "standalone_nuke_target_required": false,
-      "normal_verified": false,
-      "normal_verification_status": "native-or-caller-method-verification-pending",
-      "normal_verified_methods": [],
+      "normal_verified": true,
+      "normal_verification_status": "normal-original-test-methods-verified",
+      "normal_verified_methods": [
+        {
+          "method": "test_exact_published_identifier_and_source_hash_form_interface_clause",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "51abec7fc9f4c2125af3165247f0f56eb07de8e170c98d98893f3d01beea987e",
+          "bindings": [
+            "H-original"
+          ],
+          "normal_verified": true,
+          "scope": "Exact interface clause, two evidence identities and runtime_observation false, strengthened to complete ordered output",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_other_hash_cannot_describe_this_source_even_if_identifier_matches",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "51abec7fc9f4c2125af3165247f0f56eb07de8e170c98d98893f3d01beea987e",
+          "bindings": [
+            "H-other-hash"
+          ],
+          "normal_verified": true,
+          "scope": "Original other digest is not borrowed",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_other_repository_cannot_be_borrowed",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "51abec7fc9f4c2125af3165247f0f56eb07de8e170c98d98893f3d01beea987e",
+          "bindings": [
+            "H-other-repository"
+          ],
+          "normal_verified": true,
+          "scope": "Original other repository rejects",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_types_file_is_not_invented_as_an_interface",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "51abec7fc9f4c2125af3165247f0f56eb07de8e170c98d98893f3d01beea987e",
+          "bindings": [
+            "H-type"
+          ],
+          "normal_verified": true,
+          "scope": "Original type record remains unknown",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_another_declared_identifier_not_used",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "51abec7fc9f4c2125af3165247f0f56eb07de8e170c98d98893f3d01beea987e",
+          "bindings": [
+            "H-other-identifier"
+          ],
+          "normal_verified": true,
+          "scope": "Original IBar canonical identifier cannot borrow IFoo fact",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        }
+      ],
       "normal_verified_functions": [],
-      "pending_methods": "<module-body-and-required-callers>",
+      "pending_methods": null,
       "pending_method_list_basis": "Exact owner-supplied function/method anchors when available; module/caller closure is explicit. Lexical proposal anchors are not an AST or exhaustive branch inventory.",
       "execution_retired": false,
       "retention_normal_verified": false,
@@ -18385,6 +18794,13 @@
           "evidence": "remediation/nuke-planning/source/legacy-disposition.jsonl",
           "owner": "Sources",
           "role": "allocation",
+          "source_sha256": "51abec7fc9f4c2125af3165247f0f56eb07de8e170c98d98893f3d01beea987e",
+          "method": null
+        },
+        {
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "owner": "Sources",
+          "role": "explicit-source-normal-verification",
           "source_sha256": "51abec7fc9f4c2125af3165247f0f56eb07de8e170c98d98893f3d01beea987e",
           "method": null
         }
@@ -18655,15 +19071,19 @@
         "Extract"
       ],
       "services": [
-        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
+        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only",
+        "SoongSourceFacts + InterfaceModuleWorkflow.RunAsync + compiled Sources/Extract InterfaceModules"
       ],
-      "migration_status": "partial-source-allocation",
+      "migration_status": "normal-native-original-test-methods-verified",
       "native_tests_or_pending": [
+        "InterfaceModuleMainRealTests + InterfaceModuleCallerRealTests + InterfaceModulePlannerRealTests",
         "S-AC021/S-AC022 full membership/revision/hash-selection/version-domain mock/real gates pending"
       ],
-      "additional_responsibilities": [],
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
       "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "[\"Strict native admitted JSON/finite numbers/valid Unicode and portable ArtifactPaths; no arbitrary Python object/interpreter-wide API reproduction. Existing helper boundaries and021 scalar lexical fix retained.\",\"Compact shared LegacyAsciiIdentity rather than Python spaced JSON byte identity; observed native producer/assembly fingerprint rather than Python file SHA; explicit measured offset timestamp rather than historical UTC text. No historical-byte identity claim.\",\"Native immutable facts/report plus final index commit and pre/post pins are extra guarantees; original early-directory and partial retention effects are preserved, not waived.\",\"No cache/discovery/JSON/equality/number/path/IO/generation engine or separate NUKE target introduced.\",\"No canonical/authority writes or production edits authorized by plan artifact alone; Root acknowledgment/review remains required.\"]"
       ],
       "artifact_role": "published-legacy-port-baseline",
       "primary_code_path": "tools/source_facts/test_interface_module_facts.py",
@@ -18671,11 +19091,129 @@
       "byte_identical_path_count": 1,
       "same_bytes_imply_profile_or_caller_parity": false,
       "standalone_nuke_target_required": false,
-      "normal_verified": false,
-      "normal_verification_status": "native-or-caller-method-verification-pending",
-      "normal_verified_methods": [],
+      "normal_verified": true,
+      "normal_verification_status": "normal-original-test-methods-verified",
+      "normal_verified_methods": [
+        {
+          "method": "test_versions_imports_and_flags_are_literal_source_facts",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
+          "bindings": [
+            "Exact owner027 OriginalTestMethods and full-output MAIN83/caller packets"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original fixture/assertion identity, strict native JSON/Unicode/path/clock/lease boundaries and compiled main/effects; immutable owner027 includes fixture correction chronology.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_variables_and_concatenation_not_evaluated",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
+          "bindings": [
+            "Exact owner027 OriginalTestMethods and full-output MAIN83/caller packets"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original fixture/assertion identity, strict native JSON/Unicode/path/clock/lease boundaries and compiled main/effects; immutable owner027 includes fixture correction chronology.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_fake_module_in_string_or_comment_ignored",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
+          "bindings": [
+            "Exact owner027 OriginalTestMethods and full-output MAIN83/caller packets"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original fixture/assertion identity, strict native JSON/Unicode/path/clock/lease boundaries and compiled main/effects; immutable owner027 includes fixture correction chronology.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_duplicate_property_stays_unknown",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
+          "bindings": [
+            "Exact owner027 OriginalTestMethods and full-output MAIN83/caller packets"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original fixture/assertion identity, strict native JSON/Unicode/path/clock/lease boundaries and compiled main/effects; immutable owner027 includes fixture correction chronology.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_source_glob_is_repo_relative_and_exclusions_apply",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
+          "bindings": [
+            "Exact owner027 OriginalTestMethods and full-output MAIN83/caller packets"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original fixture/assertion identity, strict native JSON/Unicode/path/clock/lease boundaries and compiled main/effects; immutable owner027 includes fixture correction chronology.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_source_reference_and_parent_escape_not_followed",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
+          "bindings": [
+            "Exact owner027 OriginalTestMethods and full-output MAIN83/caller packets"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original fixture/assertion identity, strict native JSON/Unicode/path/clock/lease boundaries and compiled main/effects; immutable owner027 includes fixture correction chronology.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_unclosed_module_is_explicit_unknown",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
+          "bindings": [
+            "Exact owner027 OriginalTestMethods and full-output MAIN83/caller packets"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original fixture/assertion identity, strict native JSON/Unicode/path/clock/lease boundaries and compiled main/effects; immutable owner027 includes fixture correction chronology.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_adjacent_modules_are_not_one_expression",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
+          "bindings": [
+            "Exact owner027 OriginalTestMethods and full-output MAIN83/caller packets"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original fixture/assertion identity, strict native JSON/Unicode/path/clock/lease boundaries and compiled main/effects; immutable owner027 includes fixture correction chronology.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_missing_property_value_is_preserved",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
+          "bindings": [
+            "Exact owner027 OriginalTestMethods and full-output MAIN83/caller packets"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original fixture/assertion identity, strict native JSON/Unicode/path/clock/lease boundaries and compiled main/effects; immutable owner027 includes fixture correction chronology.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        }
+      ],
       "normal_verified_functions": [],
-      "pending_methods": "<module-body-and-required-callers>",
+      "pending_methods": null,
       "pending_method_list_basis": "Exact owner-supplied function/method anchors when available; module/caller closure is explicit. Lexical proposal anchors are not an AST or exhaustive branch inventory.",
       "execution_retired": false,
       "retention_normal_verified": false,
@@ -18701,6 +19239,13 @@
           "evidence": "remediation/nuke-planning/source/legacy-disposition.jsonl",
           "owner": "Sources",
           "role": "allocation",
+          "source_sha256": "622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
+          "method": null
+        },
+        {
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "owner": "Sources",
+          "role": "explicit-source-normal-verification",
           "source_sha256": "622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
           "method": null
         }

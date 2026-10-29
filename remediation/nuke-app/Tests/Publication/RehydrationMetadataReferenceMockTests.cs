@@ -27,7 +27,7 @@ public static class RehydrationMetadataReferenceCases
         new("META-ROW-NUMBER-OLD-REFUSAL","row-number",Error:"INVALID_RECIPE"),new("META-KIND-MISSING","kind-missing")
     }.Select(c=>new object[]{c});
 
-    public static RehydrationPlanRequest Request(MetadataReferenceProjectionCase c)=>RehydrationContractCases.Request(root=>{
+    public static RehydrationPlanRequest Request(MetadataReferenceProjectionCase c,Action<JsonObject>? additionalFixture=null)=>RehydrationContractCases.Request(root=>{
         JsonObject Row(int i)=>new(){["path"]=$"api/member{i}.xml",["local_path"]="blobs/shared",["sha256"]=Sha,["size_bytes"]=3,
             ["git_blob"]=Git,["url"]=$"https://example.invalid/member{i}",["revision"]=$"revision-{i}",["status"]="downloaded",
             ["platform_api_version"]=i==0?"37.2":"38.0",["transport"]=new JsonObject{
@@ -59,6 +59,7 @@ public static class RehydrationMetadataReferenceCases
             case "row-number":first["platform_api_version"]=7;t.Remove("platform_version");break;
         }
         root["inventory"]!["sources"]=new JsonArray(first,second);
+        additionalFixture?.Invoke(root);
     },gzip:c.GZip) with{Profile=c.Profile};
     public static RehydrationPlanResult Baseline(MetadataReferenceProjectionCase c)=>
         RehydrationContractCases.Correct(new(c.Id,Request(c),c.Error,Rows:2,Unique:1,KnownBytes:3,UnknownSizes:0));

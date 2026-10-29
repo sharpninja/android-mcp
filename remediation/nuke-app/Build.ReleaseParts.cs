@@ -9,9 +9,7 @@ public sealed partial class Build
     private (string Root,IReleasePartsCodec Codec) CreateReleasePartsContext()
     {
         var root=AdmitWorkflowRoot(Path.GetFullPath(ProjectRoot!),".");
-        var calls=new NativeArtifactCalls(new NativeArtifactKernel());
-        var opener=new ArtifactReadOpener(calls,new NativeArtifactIdentityReader(calls));
-        var store=new FileArtifactStore(root,bytes=>ContentHash.Sha256(bytes.Span),null,opener);
+        var store=CreateConfiguredArtifactStore(root);
         return (root,new ReleasePartsCodec(store,store,new PinnedArtifactReader(store),new StrictJsonInspector(),
             new CanonicalJson(),new FileArtifactLeaseProvider(Path.Combine(root,".release-codec-leases"))));
     }

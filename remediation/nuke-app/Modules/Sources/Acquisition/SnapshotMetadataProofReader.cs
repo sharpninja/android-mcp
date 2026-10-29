@@ -6,8 +6,9 @@ namespace AndroidMcp.BuildTool.Modules.Sources.Acquisition;
 // Input admission only. Pin IO, XML package/size rules, archives and HTTP stay
 // in their existing single authorities. One receipt field is interpreted here.
 public sealed class SnapshotMetadataProofReader(IPinnedArtifactReader inputs,IReadOnlyList<StoredArtifact> pins,
-    ISdkArchivePackageVersionValidator versions):ISnapshotMetadataProofReader
+    ISdkArchivePackageVersionValidator versions,SdkLegacyPlatformValue? platformValues=null):ISnapshotMetadataProofReader
 {
+    private readonly SdkLegacyPlatformValue legacyPlatforms=platformValues??new(new CanonicalJson());
     public const string RepositoryXmlPath="repository2-3.xml";
     private readonly Dictionary<StoredArtifact,ReadOnlyMemory<byte>> bytes=[];
     private readonly Dictionary<StoredArtifact,ReceiptTag> tags=[];
@@ -18,7 +19,7 @@ public sealed class SnapshotMetadataProofReader(IPinnedArtifactReader inputs,IRe
         if(source.Compatibility==AcquisitionCompatibilityProfile.GenericRehydrate)return new(source,null);
         if(!reference.ReceiptPathPresent||reference.ReceiptPathKind!=JsonValueKind.String||string.IsNullOrEmpty(reference.ReceiptPath))Fail("METADATA_REFERENCE");
         var receiptPin=Find(reference.ReceiptPath!);var tag=await Tag(receiptPin,cancellationToken);
-        var platform=reference.PlatformVersion;
+        var platform=reference.LegacyPlatformFacts is null?reference.PlatformVersion:legacyPlatforms.Resolve(reference.LegacyPlatformFacts);
         if(string.IsNullOrEmpty(platform))Fail("SDK_PLATFORM");
         var xmlPin=Find(RepositoryXmlPath);var xml=await Read(xmlPin,cancellationToken);
         var archive=source.Archive??throw new ArgumentException("Canonical metadata requires an archive pin.");

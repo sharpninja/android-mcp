@@ -1,6 +1,6 @@
 namespace AndroidMcp.BuildTool.Core;
 
-public enum OperationExecutor { Pending, MockTests, Tests, DocumentationAssets, NativeParser, SourcesFetch, PublicationCheck, SourcesPlan, Architecture, CatalogBuild, BrowserQa, SourcesInventory, SdkReferenceCopy, SourcesExtract, CatalogBuildFromSources, SourcesSeed, GradleCompatibility, GradleProjection, CatalogValidation, CatalogPermissionExport, ReleaseSplit, ReleaseReassemble, RepositoryDocumentationCheck, SourcesSnapshot, ReviewReceiptAudit }
+public enum OperationExecutor { Pending, MockTests, Tests, DocumentationAssets, NativeParser, SourcesFetch, PublicationCheck, SourcesPlan, Architecture, CatalogBuild, BrowserQa, SourcesInventory, SdkReferenceCopy, SourcesExtract, CatalogBuildFromSources, SourcesSeed, GradleCompatibility, GradleProjection, CatalogValidation, CatalogPermissionExport, ReleaseSplit, ReleaseReassemble, RepositoryDocumentationCheck, SourcesSnapshot, ReviewReceiptAudit, CatalogMigration }
 public sealed record OperationDefinition(OperationKey Key, string Description,
     IReadOnlyList<string> RequiredParameters, IReadOnlyList<string> OptionalParameters,
     IReadOnlyList<PlannedStep> Steps, OperationExecutor Executor=OperationExecutor.Pending,
@@ -52,6 +52,9 @@ public sealed class OperationRegistry
             new("verify-source-inventory",["admit-locked-recipe"]),new("capture-runtime-identity",["verify-source-inventory"]),
             new("project-effective-inventory",["capture-runtime-identity"]),new("build-catalog",["project-effective-inventory"]),
             new("seal-catalog",["build-catalog"]));
+        Add(Category.Catalog,Operation.Migrate,["project-root","pipeline-request","pipeline-request-sha256","pipeline-request-length"],[],OperationExecutor.CatalogMigration,
+            new("admit-pinned-migration-request",[]),new("admit-roots-and-source",["admit-pinned-migration-request"]),
+            new("copy-migrate-v3",["admit-roots-and-source"]),new("emit-migration-receipt",["copy-migrate-v3"]));
         Add(Category.Catalog,Operation.Export,["project-root","source-catalog","output-root"],[],OperationExecutor.CatalogPermissionExport,
             new("admit-readonly-export",[]),new("export-permissions",["admit-readonly-export"]),new("emit-coverage",["export-permissions"]));
         Add(Category.Design,Operation.Assets,["project-root","output-root"],["generation"],OperationExecutor.DocumentationAssets,

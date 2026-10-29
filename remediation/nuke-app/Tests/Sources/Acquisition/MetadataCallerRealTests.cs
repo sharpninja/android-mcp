@@ -8,7 +8,7 @@ using AndroidMcp.BuildTool.Tests.Core;
 using Xunit;
 namespace AndroidMcp.BuildTool.Tests.Sources.Acquisition;
 
-public sealed class NativeMetadataCallerProbe:IMetadataCallerProbe
+public sealed class NativeMetadataCallerProbe(MetadataPlatformCallerInput? platformInput=null,Action<string>? platformObserved=null):IMetadataCallerProbe
 {
     public async Task<MetadataCallerObservation> RunAsync(MetadataCallerCase test)
     {
@@ -25,7 +25,7 @@ public sealed class NativeMetadataCallerProbe:IMetadataCallerProbe
             pins.Add(new(MetadataProofCases.Receipt,test.Change=="hash"?new string('0',64):ContentHash.Sha256(receipt),receipt.Length,"application/json"));
             pins.Add(new(MetadataProofCases.Xml,ContentHash.Sha256(xml),xml.Length,"application/xml"));
         }
-        var inputs=new ObservedInputs(new PinnedArtifactReader(store));var versions=new ObservedVersions();
+        var inputs=new ObservedInputs(new PinnedArtifactReader(store));var versions=new ObservedVersions(platformObserved);
         var binder=new ObservedBinder(new SnapshotMetadataProofReader(inputs,pins,versions));var factories=0;
         ISourceBatch Batch(SnapshotCallerMode _){factories++;return new SourceBatch(transport,store,new MemoryAcquisitionStore(),new ScriptedLeaseProvider(),new CanonicalJson());}
         SourceSnapshotResult? result=null;string? error=null;
@@ -56,6 +56,13 @@ public sealed class NativeMetadataCallerProbe:IMetadataCallerProbe
                 if(c.Change=="declared-hash")transfer["archive_sha256"]=new string('d',64);
                 var row=new JsonObject{["path"]=member,["local_path"]=path,["status"]="downloaded",["url"]="https://example.test/member",["revision"]=new string('a',40),["sha256"]=c.Change=="member"&&path=="raw/properties"?new string('0',64):ContentHash.Sha256(bytes),["git_blob"]=ContentHash.GitBlobSha1Legacy(bytes),["size_bytes"]=bytes.Length,["platform_api_version"]="37.2",["transport"]=transfer};
                 if(c.Change=="platform-fallback"){row.Remove("platform_api_version");transfer["platform_api_version"]="37.2";}
+                if(platformInput is not null)
+                {
+                    row.Remove("platform_api_version");
+                    if(platformInput.Row is not null)row["platform_api_version"]=JsonNode.Parse(platformInput.Row);
+                    if(platformInput.LegacyTransport is not null)transfer["platform_api_version"]=JsonNode.Parse(platformInput.LegacyTransport);
+                    if(platformInput.NativeTransport is not null)transfer["platform_version"]=platformInput.NativeTransport;
+                }
                 return row;
             }
             var recipe=new JsonObject{["recipe_version"]=1,["release"]="metadata-fixture",["inventory"]=new JsonObject{["sources"]=new JsonArray(Row("raw/api.xml","data/api-versions.xml",LegacyAcquisitionCases.Xml),Row("raw/properties","source.properties",LegacyAcquisitionCases.Properties))},["producer"]=new JsonObject{["path"]="producer",["files"]=new JsonObject{["tool.cs"]=new string('c',64)}}};
@@ -77,11 +84,11 @@ public sealed class NativeMetadataCallerProbe:IMetadataCallerProbe
         public int Reads{get;private set;}
         public Task<ReadOnlyMemory<byte>> ReadAsync(StoredArtifact pin,CancellationToken token=default){Reads++;return inner.ReadAsync(pin,token);}
     }
-    private sealed class ObservedVersions:ISdkArchivePackageVersionValidator
+    private sealed class ObservedVersions(Action<string>? observe):ISdkArchivePackageVersionValidator
     {
         private readonly SdkArchiveVersionValidator inner=new();public int Calls{get;private set;}
         public long ResolveSize(ReadOnlyMemory<byte> xml,string platform,string? package=null,long? expected=null)=>inner.ResolveSize(xml,platform,package,expected);
-        public long ResolvePackageSize(ReadOnlyMemory<byte> xml,string platform,SdkArchivePackageChoice package,long? expected=null){Calls++;return inner.ResolvePackageSize(xml,platform,package,expected);}
+        public long ResolvePackageSize(ReadOnlyMemory<byte> xml,string platform,SdkArchivePackageChoice package,long? expected=null){Calls++;observe?.Invoke(platform);return inner.ResolvePackageSize(xml,platform,package,expected);}
     }
     private sealed class ObservedBinder(ISnapshotMetadataProofReader inner):ISnapshotMetadataProofReader
     {

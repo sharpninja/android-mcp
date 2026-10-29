@@ -4,7 +4,7 @@ using AndroidMcp.BuildTool.Core;
 
 namespace AndroidMcp.BuildTool.Sources;
 
-public enum SourceExtractTask { Declarations, InterfaceHashes }
+public enum SourceExtractTask { Declarations, InterfaceHashes, InterfaceModules }
 [JsonUnmappedMemberHandling(JsonUnmappedMemberHandling.Disallow)]
 public sealed record PublishedInterfaceHashWorkflowFile(StoredArtifact Inventory, string GenerationStoreRoot, string GenerationRoot, string? ProfileId = null);
 public sealed record PublishedInterfaceHashWorkflowRequest(StoredArtifact Inventory, string GenerationRoot,

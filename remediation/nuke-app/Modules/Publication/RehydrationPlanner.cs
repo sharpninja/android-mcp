@@ -148,17 +148,29 @@ public sealed class RehydrationPlanner(ICanonicalJson canonical):IRehydrationSee
                     {
                         var receiptPresent=transport.TryGetProperty("metadata_receipt",out var receiptValue);
                         var packagePresent=transport.TryGetProperty("package_path",out var packageValue);
-                        row.TryGetProperty("platform_api_version",out var rowPlatformValue);
+                        var rowPlatformPresent=row.TryGetProperty("platform_api_version",out var rowPlatformValue);
+                        var transportPlatformPresent=transport.TryGetProperty("platform_api_version",out var legacyPlatformValue);
                         var platform=rowPlatformValue.ValueKind==JsonValueKind.String?rowPlatformValue.GetString():null;
                         // Only the admitted nullable-string legacy domain is
                         // represented. Unsupported nonstrings stay unresolved;
                         // neither stringify nor substitute native platform_version.
                         if(string.IsNullOrEmpty(platform) && (rowPlatformValue.ValueKind is JsonValueKind.Undefined or JsonValueKind.Null or JsonValueKind.String) &&
-                            transport.TryGetProperty("platform_api_version",out var legacyPlatformValue) && legacyPlatformValue.ValueKind==JsonValueKind.String)
+                            transportPlatformPresent && legacyPlatformValue.ValueKind==JsonValueKind.String)
                             platform=legacyPlatformValue.GetString();
+                        // Preserve exact detached facts only for the type domain
+                        // not represented by the existing nullable-string view.
+                        // Acquisition alone interprets truth, precedence and text.
+                        var nonstringRow=rowPlatformValue.ValueKind is JsonValueKind.Number or JsonValueKind.True or JsonValueKind.False or JsonValueKind.Array or JsonValueKind.Object;
+                        var nullableOrEmptyRow=(rowPlatformValue.ValueKind is JsonValueKind.Undefined or JsonValueKind.Null) ||
+                            (rowPlatformValue.ValueKind==JsonValueKind.String && string.IsNullOrEmpty(rowPlatformValue.GetString()));
+                        RehydrationLegacyPlatformFacts? legacyFacts=null;
+                        if(nonstringRow || (nullableOrEmptyRow && transportPlatformPresent && legacyPlatformValue.ValueKind!=JsonValueKind.String))
+                            legacyFacts=new(
+                                new(rowPlatformPresent,rowPlatformValue.ValueKind,rowPlatformPresent?(JsonElement?)rowPlatformValue.Clone():null),
+                                new(transportPlatformPresent,legacyPlatformValue.ValueKind,transportPlatformPresent?(JsonElement?)legacyPlatformValue.Clone():null));
                         metadataReference=new(receiptPresent,receiptValue.ValueKind,
                             receiptValue.ValueKind==JsonValueKind.String?receiptValue.GetString():null,platform,
-                            packagePresent,packageValue.ValueKind,packageValue.ValueKind==JsonValueKind.String?packageValue.GetString():null);
+                            packagePresent,packageValue.ValueKind,packageValue.ValueKind==JsonValueKind.String?packageValue.GetString():null,legacyFacts);
                     }
                     snapshotRows.Add(new(rowIndex,status,sourcePin,rowSnapshots,
                         SourcePrerequisites(sourcePin,rowSnapshots,rowIndices,request.Profile),statusPresent,statusKind,metadataReference));

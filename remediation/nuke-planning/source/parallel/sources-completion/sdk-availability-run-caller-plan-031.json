@@ -1,0 +1,133 @@
+{
+  "At": "2026-10-29T05:53:47",
+  "Owner": "Sources",
+  "State": "PLAN awaiting Root acknowledgment before any new task/workflow/host production",
+  "Original": {
+    "Path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/tools/source_facts/sdk_availability_evidence.py",
+    "Sha256": "10961df02f1737e28b717c90a4d9ec152308ea9f3b14f1ce55659be12e6499d1",
+    "Size": 3089
+  },
+  "RequirementIds": [
+    "FR-BUILD-004",
+    "TR-BUILD-004",
+    "TEST-BUILD-004",
+    "TEST-BUILD-003"
+  ],
+  "MissingResponsibility": "sdk_availability_evidence.run(root) and script entry perform actual fixed-source read, immutable output lifecycle JSONL+manifest, file/source hashes and stdout. Existing Enumerate method and original3test proof do not implement these IO/caller effects.",
+  "ExistingService": {
+    "Path": "Modules/Sources/SdkAvailabilitySourceFacts.cs",
+    "Contract": "ISdkAvailabilitySourceFacts.Enumerate(ReadOnlyMemory<byte>) returns typed exact rows/sdk definitions; reuse unchanged. SourceXml shared secure reader/locator remains sole XML authority.",
+    "Pin": {
+      "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/sources/nuke-app/Modules/Sources/SdkAvailabilitySourceFacts.cs",
+      "Sha256": "253f3cb352cdd3e524a862c42b3f63f7d538f72173cf568eb7913f8c23b07ea5",
+      "Size": 2452
+    }
+  },
+  "TaskBinding": {
+    "Profile": "Original fixed-source run has no current/release profiles. Proposed no extra profile wire field or profile engine: existing XML service is unchanged, index identifies observed native producer/source pins. Root may select existing context identity composition.",
+    "Ownership": "Private unique-anchor proposals only; Root canonical/shared ownership retained.",
+    "Operation": "Extract",
+    "NoRegistryChanges": "extract-task already registered; existing six generic Source/Extract step IDs remain unchanged",
+    "Wire": "SdkAvailabilityWorkflowFile(StoredArtifact Source, string GenerationStoreRoot, string GenerationRoot), JsonUnmappedMemberHandling.Disallow",
+    "Category": "Sources",
+    "Task": "Append SdkAvailability to existing SourceExtractTask, preserve Declarations default/InterfaceHashes/InterfaceModules numeric values",
+    "Admission": "Existing outer pinned workflow reader and task dispatch. Source pin must name exact original sdk37.2/platform-metadata/android-37.2/data/api-versions.xml path under project-root; no alternative source path falsely labeled37.2, acquisition, discovery, recipe or editable producer identity.",
+    "RootFiles": [
+      "Build.SourcesExtract.cs thin dispatch",
+      "Build.cs task description only",
+      "Modules/Sources/PublishedInterfaceHashWorkflowContracts.cs enum member only",
+      "New thin Build.SdkAvailability.cs composition"
+    ]
+  },
+  "SourceContract": {
+    "Request": "Pinned Source, GenerationRoot and observed SourceExtractProducerIdentity",
+    "Result": "Full manifest JSON and facts/manifest/index StoredArtifact pins",
+    "NoFactoryChange": "Compose existing SdkAvailabilitySourceFacts directly at thin host, as already-implemented typed service; no new source extractor kind, concerns graph or dependency framework.",
+    "Files": [
+      "New Modules/Sources/SdkAvailabilityWorkflowContracts.cs",
+      "New Modules/Sources/SdkAvailabilityWorkflow.cs"
+    ]
+  },
+  "ExactOriginalClauses": [
+    {
+      "Id": "AVRUN01",
+      "Native": "Require exact source relative path, IPinnedArtifactReader admits caller SHA/length, retain bytes/digest; no target filtering or inferred file discovery.",
+      "Original": "run(root) always reads sdk37.2/platform-metadata/android-37.2/data/api-versions.xml bytes before output existence check; source SHA256 from those bytes."
+    },
+    {
+      "Id": "AVRUN02",
+      "Native": "Call existing ISdkAvailabilitySourceFacts before shared generation. Same known format/locator/native XML boundaries, no parser fork.",
+      "Original": "enumerate_evidence validates api/version4, exact ordered owner/member/source line/ordinal/raw attributes/supertypes/sdk definitions; unsupported/locator/XML errors occur before output exists/mkdir."
+    },
+    {
+      "Id": "AVRUN03",
+      "Native": "Existing ArtifactGenerationRuntime held cooperating lease; after initial parse and pin admission, materialization uses existing025 CreateNewDirectoryAsync before artifact writes. Root-selected fresh GenerationRoot may differ from historical fixed output topology. No delete, Move or rollback.",
+      "Original": "Existing startup-availability-evidence-v1 target (file or directory) refuses, including empty directory. mkdir then facts write; later failure retains empty directory/partials and retry refuses."
+    },
+    {
+      "Id": "AVRUN04",
+      "Native": "Clone existing typed rows and attach one exact digest; shared LegacyAsciiIdentity canonical serialization, no second JSON/number formatter.",
+      "Original": "api-lifecycle-facts.jsonl contains every row plus source_sha256, sorted compact ASCII JSON/newline, no filtering; empty rows yields empty facts file."
+    },
+    {
+      "Id": "AVRUN05",
+      "Native": "Keep all source metadata literals and counter absence/order semantics. Timestamp is approved-style measured local offset; native producer/assembly identity replaces Python file SHA with explicit provenance addition, no historical-byte identity claim.",
+      "Original": "manifest schema_version source-evidence-1, measured UTC timestamp, source path/hash/platform_api37.2/package_revision1/extension24, sdks and Counter(tag) with absent keys retained."
+    },
+    {
+      "Id": "AVRUN06",
+      "Native": "Compute immutable facts bytes via existing hash authority and verify actual stored receipts through existing generation runtime. Preserve original flags/limitations; observed native assembly hash replaces Python identity, explicit historical_python_identity=false.",
+      "Original": "facts_file records basename, actual byte count and SHA256; producer_sha256 hashes script; complete_source_index true, complete_global_catalog false, four exact limitations."
+    },
+    {
+      "Id": "AVRUN07",
+      "Native": "Shared generation plan writes api-lifecycle-facts.jsonl then manifest.json; final extra index.json commit records exact admitted input/output/native provenance pins. Console returns full manifest, no omitted fields.",
+      "Original": "Write manifest.json after facts file; print/return full manifest. Failure writing facts or manifest retains original bytes and partial output."
+    },
+    {
+      "Id": "AVRUN08",
+      "Native": "Pinned source is re-admitted/rechecked by existing ArtifactGenerationRuntime, with no new dynamic hook needed for one static source. Caller sets project-root, outer request pin, distinct output store and fresh generation; original retained on every failure.",
+      "Original": "Original has no before/after byte pin checks or commit index; script entry passes its parent directory."
+    }
+  ],
+  "SharedAuthorities": [
+    "IPinnedArtifactReader/FileArtifactStore/ArtifactPaths unchanged",
+    "SdkAvailabilitySourceFacts/SourceXml unchanged",
+    "ICreateNewArtifactDirectory025 and same existing generation lease",
+    "ArtifactGenerationRuntime/ArtifactReceiptVerifier/ArtifactGenerationManifestFactory unchanged",
+    "IProfiledCanonicalJson.LegacyAsciiIdentity/ContentHash/NativeContentHash unchanged",
+    "IClock/SystemClock/SourceProducerIdentityBuilder observed native identity"
+  ],
+  "MockFirstCases": [
+    "Exact original3 XML inputs and existing7positive/6failure lifecycle cases in actual run composition; sdks, owner/member constraints, unknown attributes, removed/future nodes never filtered.",
+    "One class/method/field source, multi-line locations/supertypes/sdk definitions, duplicate owner names/SDK records preserved, empty index facts0bytes and counts{}.",
+    "Fixed source path rejection, wrong caller source pin/length, missing source, invalid XML/version/locator error occur before directory creation; parse failure wins over preexisting output refusal.",
+    "Existing empty/nonempty target/file refuses after parse, fresh parents created under actual lease, facts-write/manifest-write/index-write failures and cancellation retain directory/partials and prevent final commit.",
+    "Source changes between initial parse/generation admission or before final commit reject; actual input/store receipts and file hash/length match manifest, every original flag/limitation/stdout field preserved.",
+    "Independent full-output/error/read/parse/directory/write/order mocks and expected negative controls before implementation; SAME native temp trees using unchanged services.",
+    "Planner/new-task/typed-wire mocks then compiled native monolith success, wrong request pin, replay/unknown task, source parse failure/fresh output, actual provenance/time/output readback; prior3tasks regressions remain."
+  ],
+  "Gates": [
+    "Stage independent DTO/SPI/cases/mocks first with current workflow/host/source priors unchanged. Green documented mock gate required before production.",
+    "After Root acknowledgment, implement one domain loop and thin existing task binding, SAME native cases plus compiled CLI, all existing availability/XML and applicable full Sources/store regressions.",
+    "Retain chronological failures before correction. Seal minimal new Source files and unique shared hunks with prior/source/size pins; Root guarded import and canonical full proof before authoritative NORMAL decision."
+  ],
+  "NativeBoundaries": [
+    "No arbitrary ElementTree/Expat/Python-object/interpreter diagnostic equivalence; existing secure XML DTD/Unicode/namespace admission remains explicit.",
+    "Measured local-offset timestamp and observed native assembly identity; shared compact ASCII serialization and extra final index commit/pre-post pins. No Python producer fingerprint/historical byte identity claim.",
+    "Cooperating lease only, not hostile atomic-mkdir/rename/ABA immunity. Original output retention and error precedence remain required.",
+    "No corpus/Android-device availability claim; complete_source_index refers to this exact admitted source only, original complete_global_catalog remains false."
+  ],
+  "CurrentManifestHelperRole": "Separate manifest_source.parse has no production importer in published198 audit022, only original own-test import. Existing native secure DTD refusal and fallback root-validation/typed permission-output differences remain explicit role decisions, not silently waived or implemented by this task.",
+  "ScopeExclusions": [
+    "No Source factory/Core/parser/store changes, new cache/discovery/schema/IO/generation engine, standalone NUKE target, source acquisition or target/device filtering.",
+    "No canonical or authority writes, Actions, Python, raw markers, HV or original deletion."
+  ],
+  "ApprovalNeeded": "Root acknowledge exact SdkAvailability task/wire/fixed-source admission/domain/effect/native-boundary plan before production. This proposal does not grant itself implementation authority.",
+  "CanonicalEdited": false,
+  "AuthorityEdited": false,
+  "PythonExecuted": false,
+  "NoHvAcceptance": true,
+  "AcceptedComplete": false,
+  "SafeToDelete": false
+}

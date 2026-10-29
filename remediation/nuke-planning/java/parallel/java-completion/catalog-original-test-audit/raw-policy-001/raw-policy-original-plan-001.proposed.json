@@ -1,0 +1,132 @@
+{
+  "at": "2026-10-29T06:11:13",
+  "scope": "Actual missing original raw policy/wire-route/entrypoint responsibilities; existing generic policy and route algebra reused",
+  "status": "Plan/mock packet only; await Root production acknowledgement",
+  "breakingChange": false,
+  "originalProducerPins": [
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tooling/policy_reference.py",
+      "sha256": "a2c3d3d4f1a5222a1281714af2bf99aeed871ad1f8b8b1b533dbd8d90f9b0b6c",
+      "bytes": 6580
+    },
+    {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tooling/policy_reference.py",
+      "sha256": "a2c3d3d4f1a5222a1281714af2bf99aeed871ad1f8b8b1b533dbd8d90f9b0b6c",
+      "bytes": 6580
+    }
+  ],
+  "existingNativePins": [
+    {
+      "relativePath": "Modules/Catalog/PolicyReference.cs",
+      "canonical": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Catalog/PolicyReference.cs",
+        "sha256": "32436365bfe5ee88aba09349c8d845dba733fcef8d1fd44026f2afb097cd876c",
+        "bytes": 1670
+      },
+      "private": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Modules/Catalog/PolicyReference.cs",
+        "sha256": "32436365bfe5ee88aba09349c8d845dba733fcef8d1fd44026f2afb097cd876c",
+        "bytes": 1670
+      }
+    },
+    {
+      "relativePath": "Modules/Catalog/CatalogCanonicalRoute.cs",
+      "canonical": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Catalog/CatalogCanonicalRoute.cs",
+        "sha256": "7f94331e697d1cd830862da3e5fb9c3f78d3f8b970249b0b777dcebb567a7e84",
+        "bytes": 1309
+      },
+      "private": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Modules/Catalog/CatalogCanonicalRoute.cs",
+        "sha256": "7f94331e697d1cd830862da3e5fb9c3f78d3f8b970249b0b777dcebb567a7e84",
+        "bytes": 1309
+      }
+    }
+  ],
+  "sharedEqualityPrerequisites": [
+    {
+      "relativePath": "Core/LegacyJsonValueEquality.cs",
+      "canonical": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Core/LegacyJsonValueEquality.cs",
+        "sha256": "9c12279b5f55ff7ef0b15e9114f8db29e026117e57817448636365b5f651c2bb",
+        "bytes": 2581
+      },
+      "privatePresent": false,
+      "requestedAction": "Root acknowledgement permits hash-guarded COPY of already-qualified Core prerequisite into private clone only; no Core modification or reimplementation"
+    },
+    {
+      "relativePath": "Core/LegacyJsonValueEqualityContracts.cs",
+      "canonical": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Core/LegacyJsonValueEqualityContracts.cs",
+        "sha256": "1acaf609103b51664db226a0fc07722cecc4b921ffc2bddac563895671353056",
+        "bytes": 319
+      },
+      "privatePresent": false,
+      "requestedAction": "Root acknowledgement permits hash-guarded COPY of already-qualified Core prerequisite into private clone only; no Core modification or reimplementation"
+    }
+  ],
+  "strictJsonPrerequisite": {
+    "canonical": {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Core/StrictJsonInspector.cs",
+      "sha256": "7294b552d40a9379b9a6a182f3f1dd03a21cf4629c8a2ff69490b90d791c2b59",
+      "bytes": 7384
+    },
+    "private": {
+      "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Core/StrictJsonInspector.cs",
+      "sha256": "7294b552d40a9379b9a6a182f3f1dd03a21cf4629c8a2ff69490b90d791c2b59",
+      "bytes": 7384
+    },
+    "alreadyIdentical": true
+  },
+  "originalFunctionAllocation": {
+    "resolve_fixture_route": "Existing generated/generic Resolve remains source-compatible; add explicit typed ResolveRaw over caller-supplied proven wire map and decoded observation; reuse ONE final binding/schema validation helper",
+    "evaluate": "Existing PolicyReference.Evaluate remains sole admission algebra; no extra evaluator or permission authority",
+    "evaluate_raw_fixture": "Implement whole missing known-versus-unknown raw fixture composition using existing Evaluate twice for known and once for unknown",
+    "policy_entrypoints": "Implement exact generated/generic binding.invoke, known raw binding.invoke+binder.transact, unknown raw binder.transact and unknown-route error",
+    "evaluate_view_fixture": "Existing CatalogViewPolicy remains outside this bounded increment; no whole policy file closure inferred"
+  },
+  "productionFiles": {
+    "modified": [
+      "Modules/Catalog/CatalogCanonicalRoute.cs",
+      "Modules/Catalog/PolicyReference.cs"
+    ],
+    "new": [
+      "Modules/Catalog/RawPolicyContracts.cs"
+    ],
+    "testOnlyNew": [
+      "Tests/Catalog/OriginalRoundAssertions/OriginalRawPolicyCases.cs",
+      "Tests/Catalog/OriginalRoundAssertions/OriginalRawPolicyMockTests.cs",
+      "Tests/Catalog/OriginalRoundAssertions/OriginalRawPolicyRealTests.cs"
+    ],
+    "forbidden": [
+      "Core modifications",
+      "registry/CLI",
+      "inferred codecs",
+      "runtime/OS actions",
+      "authority ledger"
+    ]
+  },
+  "nativeApi": "Add immutable request/grant records using existing PolicyRule; expose existing TryInteger internally, not a second integer validator. Caller supplies wire mappings keyed by descriptor and integral code plus binding/schema values. Request decoded flag is an explicit observation; never inferred. Preserve original missing flags default0 and binding_entry_schema default binding.invoke-v1. Existing generated/generic request/Resolve defaults stay unchanged",
+  "orderedClauses": [
+    "FIRST look up known wire mapping; do not move unknown raw integer validation ahead of known lookup. Shared LegacyJsonValueEquality preserves loaded scalar lookup equivalence such as true/1 and1.0/1 without another equality engine",
+    "Known raw requires decoded-and-validated observation and exact schema lookup. Missing mapping/direct ResolveRaw raises original unknown-raw diagnostic; failed decoding/schema resolution maps to deny in EvaluateRawFixture",
+    "Known path composes existing Evaluate(plan,bindingRules,bindingEntryRule,binding.invoke-v1,authority=true,emergency) AND Evaluate(plan,bindingRules,entryRule,entrySchema,authority=true,emergency); deny dominates, then real authority, then ask/admit. Raw grants never override known binding/entry denial",
+    "Unknown path lookup by(connection_id,descriptor), exact copied grant connection/descriptor/hash, allowed handle/display membership; shared loaded-scalar equality for display membership retains original numeric/boolean equality",
+    "Only unknown path validates code integer-not-bool in inclusive grant range; flags integer-not-bool/nonnegative and no outside-mask bits. Reuse existing TryInteger for project-native decoded integer values; out-of-range/unrepresentable values cannot enter bounded SQL code/mask domain",
+    "Unknown path uses raw:connection:descriptor as canonical fixture key and existing grant.rule through sole Evaluate; preserve entry rule/schema, authority and emergency semantics",
+    "Return candidate decisions only; no backend invocation, codec proof, permission widening, wire inference or new grant publication"
+  ],
+  "originalCallers": [
+    "test_round2.test_positive_raw_grant_never_overrides_known_binding: exact ask/allow/flags2/foreign-handle/display1/known-binding six decisions",
+    "test_round3.test_generated_and_generic_share_policy_and_known_raw_cannot_bypass: exact entrypoint tuples and deny on binding.invoke-v1 despite raw/binding allow"
+  ],
+  "mockPacket": "Whole original two caller sequences plus direct missing-function branches: known decode/schema/map failures, both entry policies, emergency/authority/ask precedence, absent/mismatched raw grant and each bound, missing flags0, bool/float unknown rejection versus known-key scalar equality, raw entrypoint errors. Correct mocks and every wrong decision/tuple/omission/input effect pass green before production",
+  "nativeProof": "SAME typed literal cases bind new shared services after mock gate and Root acknowledgement. Re-run existing Policy and canonical route/alias regressions; no native test output becomes expected input. Record exact original/current/frozen source pins and mock-before-production chronology",
+  "limits": "Typed offline fixture/project JSON scalar domain, not arbitrary Python object equivalence. Wire map contains only explicitly supplied identity observations. Current/frozen policy producer source is identical; their distinct callers and fixture carriers remain explicit. No new original function/test counts",
+  "executionRecovery": "Normal exec transport resumed after Root confirmation; one known-not-executed read-only inspection retried successfully via same normal route; no alternate transport",
+  "canonicalWrites": false,
+  "authorityWrites": false,
+  "newOriginalMethodClaims": 0,
+  "hv": false,
+  "safe_to_delete": false
+}

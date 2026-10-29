@@ -1,23 +1,23 @@
 {
-  "at": "2026-10-29T05:20:49",
+  "at": "2026-10-29T06:14:37",
   "projection_only": true,
   "authoritative_inventory": {
     "path": "remediation/nuke-planning/source/legacy-port-disposition-inventory.json",
-    "sha256": "1f90a55b662c54f5934a1a7e0503a0e3ae33f64dcbd580b8d70e5218a4663c7e"
+    "sha256": "ce1a6c922a1103b06338b365da948c66940977df62ec13060fc97f87304cfacf"
   },
-  "scope": "Published 198 only. Additional 1278 local historical paths are retained in the sole union and are not inflated into independent published port tasks.",
+  "scope": "Published 198 only. Additional 1283 local historical paths are retained in the sole union and are not inflated into independent published port tasks.",
   "totals": {
     "published_paths": 198,
     "canonical_responsibility_groups": 134,
-    "normally_verified_files": 67,
+    "normally_verified_files": 75,
     "partially_verified_files": 2,
-    "files_without_normal_method_proof": 129,
-    "normal_method_bindings_by_file": 301,
-    "unique_method_bindings_by_group": 224,
+    "files_without_normal_method_proof": 121,
+    "normal_method_bindings_by_file": 322,
+    "unique_method_bindings_by_group": 245,
     "published_execution_retirements": 0,
     "pr_eligible_paths": 47,
-    "normally_closed_groups": 44,
-    "open_canonical_groups": 90,
+    "normally_closed_groups": 51,
+    "open_canonical_groups": 83,
     "safe_to_delete": 0,
     "hv_accepted": 0
   },
@@ -29,10 +29,10 @@
       ],
       "published_paths": 85,
       "canonical_responsibility_groups": 53,
-      "normal_file_proofs": 14,
+      "normal_file_proofs": 16,
       "normal_method_bindings_by_file": 79,
-      "normally_closed_groups": 8,
-      "open_canonical_groups": 45,
+      "normally_closed_groups": 9,
+      "open_canonical_groups": 44,
       "published_execution_retirements": 0,
       "pr_eligible_test_or_file_paths": 12
     },
@@ -74,10 +74,10 @@
       ],
       "published_paths": 99,
       "canonical_responsibility_groups": 68,
-      "normal_file_proofs": 42,
-      "normal_method_bindings_by_file": 166,
-      "normally_closed_groups": 25,
-      "open_canonical_groups": 43,
+      "normal_file_proofs": 48,
+      "normal_method_bindings_by_file": 187,
+      "normally_closed_groups": 31,
+      "open_canonical_groups": 37,
       "published_execution_retirements": 0,
       "pr_eligible_test_or_file_paths": 27
     },
@@ -2285,14 +2285,17 @@
         "release011"
       ],
       "services": [
-        "Catalog-owned planned copy/verify/retain migration service"
+        "Catalog-owned planned copy/verify/retain migration service",
+        "CatalogCopyMigration.MigrateAsync + CatalogMigrationWorkflowReader + compiled Catalog/Migrate"
       ],
-      "normally_verified_file_paths": [],
+      "normally_verified_file_paths": [
+        "rehydration/producers/release-011/tooling/migrate_v3.py",
+        "remediation/catalog/tooling/migrate_v3.py"
+      ],
       "normal_method_bindings": [],
-      "normally_closed_all_published_paths": false,
+      "normally_closed_all_published_paths": true,
       "remaining_caller_and_profile_duties": [
-        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "[{\"profile\":\"release-011\",\"root\":\"/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011\",\"orderedScripts\":[{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/migrations/001-initial.sql\",\"sha256\":\"d7c9796cb53a455a569fbfc214c5efa74129627ee944c17a5ab3c3aed9b739ee\",\"bytes\":11266},{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/migrations/002-evidence-and-publication.sql\",\"sha256\":\"fc58a9b62816797c90a966c9f7ebb9dbd66a7abdc69386e6869a7e82d2a1a0a3\",\"bytes\":10591}],\"historicalOutputByteIdentityClaimed\":false,\"targetSchemaExactSqliteMasterComparison\":true},{\"profile\":\"current\",\"root\":\"/home/sharpninja/github/2026-10-26/task-3/remediation/catalog\",\"orderedScripts\":[{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/migrations/001-initial.sql\",\"sha256\":\"d7c9796cb53a455a569fbfc214c5efa74129627ee944c17a5ab3c3aed9b739ee\",\"bytes\":11266},{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/migrations/002-evidence-and-publication.sql\",\"sha256\":\"fc58a9b62816797c90a966c9f7ebb9dbd66a7abdc69386e6869a7e82d2a1a0a3\",\"bytes\":10591},{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/migrations/source_metadata_ddl.sql\",\"sha256\":\"2b585541c4463fc6b6ae408a80a573b81b635adc4206f960d2b7d8284e79a655\",\"bytes\":3608}],\"historicalOutputByteIdentityClaimed\":false,\"targetSchemaExactSqliteMasterComparison\":true}] Streaming source/stage/hash/native identity, retained stage/source, explicit target scripts; SQL rows materialized; not general Python object/exception/serialization equivalence."
       ]
     },
     {
@@ -4010,13 +4013,16 @@
         "canonical-or-explicit-owner-profile"
       ],
       "services": [
+        "AidlSourceConstraints + HidlSourceConstraints + existing typed source contracts",
         "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
       ],
-      "normally_verified_file_paths": [],
+      "normally_verified_file_paths": [
+        "tools/source_facts/hidl_source_constraint.py"
+      ],
       "normal_method_bindings": [],
-      "normally_closed_all_published_paths": false,
+      "normally_closed_all_published_paths": true,
       "remaining_caller_and_profile_duties": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "[\"Public callable APIs over admitted loaded-JSON object/list/scalar trees. Missing evaluated required keys use native KeyNotFoundException with exact key; incompatible evaluated nested containers use ArgumentException. No unrestricted Python-object or mutable-alias API claim.\",\"No serialization bytes, filesystem effects, OS/device inspection, source-byte hashing, HTTP, parsing Soong/AIDL/HIDL text, version inference, runtime reachability, wire codec, platform range, installed APEX version or authority grant.\",\"Existing shared LegacyJsonValueEquality supplies complete JSON membership/dedup, bool/number equality and exact integer behavior; strict Boolean false unstable identity is retained separately.\",\"Existing SourceText.OriginalWord/Lines/Strip supply original Unicode word, physical splitlines and strip semantics. Full descriptor matching rejects suffix newline and preserves ASCII initial identifiers and HIDL Unicode decimal version digits.\",\"Complete outputs, conservative flags/nulls/limitations, exact original strings and object/array order are asserted. Inputs are unmodified and returned evidence cannot be changed by later admitted input mutation.\",\"Published own-test imports are the actual original callers. No main/CLI/category/generator/source-factory or metadata-reference-array responsibility is invented; InterfaceModules main is disjoint.\"]"
       ]
     },
     {
@@ -4400,13 +4406,67 @@
         "canonical-or-explicit-owner-profile"
       ],
       "services": [
+        "AidlSourceConstraints + HidlSourceConstraints + existing typed source contracts",
         "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
       ],
-      "normally_verified_file_paths": [],
-      "normal_method_bindings": [],
-      "normally_closed_all_published_paths": false,
+      "normally_verified_file_paths": [
+        "tools/source_facts/test_hidl_source_constraint.py"
+      ],
+      "normal_method_bindings": [
+        {
+          "method": "test_another_declared_identifier_not_used",
+          "source_sha256": "51abec7fc9f4c2125af3165247f0f56eb07de8e170c98d98893f3d01beea987e",
+          "evidence": [
+            "remediation/nuke-planning/source/source-normal-verification-supplement.json"
+          ],
+          "scope": [
+            "Original IBar canonical identifier cannot borrow IFoo fact"
+          ]
+        },
+        {
+          "method": "test_exact_published_identifier_and_source_hash_form_interface_clause",
+          "source_sha256": "51abec7fc9f4c2125af3165247f0f56eb07de8e170c98d98893f3d01beea987e",
+          "evidence": [
+            "remediation/nuke-planning/source/source-normal-verification-supplement.json"
+          ],
+          "scope": [
+            "Exact interface clause, two evidence identities and runtime_observation false, strengthened to complete ordered output"
+          ]
+        },
+        {
+          "method": "test_other_hash_cannot_describe_this_source_even_if_identifier_matches",
+          "source_sha256": "51abec7fc9f4c2125af3165247f0f56eb07de8e170c98d98893f3d01beea987e",
+          "evidence": [
+            "remediation/nuke-planning/source/source-normal-verification-supplement.json"
+          ],
+          "scope": [
+            "Original other digest is not borrowed"
+          ]
+        },
+        {
+          "method": "test_other_repository_cannot_be_borrowed",
+          "source_sha256": "51abec7fc9f4c2125af3165247f0f56eb07de8e170c98d98893f3d01beea987e",
+          "evidence": [
+            "remediation/nuke-planning/source/source-normal-verification-supplement.json"
+          ],
+          "scope": [
+            "Original other repository rejects"
+          ]
+        },
+        {
+          "method": "test_types_file_is_not_invented_as_an_interface",
+          "source_sha256": "51abec7fc9f4c2125af3165247f0f56eb07de8e170c98d98893f3d01beea987e",
+          "evidence": [
+            "remediation/nuke-planning/source/source-normal-verification-supplement.json"
+          ],
+          "scope": [
+            "Original type record remains unknown"
+          ]
+        }
+      ],
+      "normally_closed_all_published_paths": true,
       "remaining_caller_and_profile_duties": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "[\"Public callable APIs over admitted loaded-JSON object/list/scalar trees. Missing evaluated required keys use native KeyNotFoundException with exact key; incompatible evaluated nested containers use ArgumentException. No unrestricted Python-object or mutable-alias API claim.\",\"No serialization bytes, filesystem effects, OS/device inspection, source-byte hashing, HTTP, parsing Soong/AIDL/HIDL text, version inference, runtime reachability, wire codec, platform range, installed APEX version or authority grant.\",\"Existing shared LegacyJsonValueEquality supplies complete JSON membership/dedup, bool/number equality and exact integer behavior; strict Boolean false unstable identity is retained separately.\",\"Existing SourceText.OriginalWord/Lines/Strip supply original Unicode word, physical splitlines and strip semantics. Full descriptor matching rejects suffix newline and preserves ASCII initial identifiers and HIDL Unicode decimal version digits.\",\"Complete outputs, conservative flags/nulls/limitations, exact original strings and object/array order are asserted. Inputs are unmodified and returned evidence cannot be changed by later admitted input mutation.\",\"Published own-test imports are the actual original callers. No main/CLI/category/generator/source-factory or metadata-reference-array responsibility is invented; InterfaceModules main is disjoint.\"]"
       ]
     },
     {
@@ -4508,13 +4568,107 @@
         "canonical-or-explicit-owner-profile"
       ],
       "services": [
-        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
+        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only",
+        "SoongSourceFacts + InterfaceModuleWorkflow.RunAsync + compiled Sources/Extract InterfaceModules"
       ],
-      "normally_verified_file_paths": [],
-      "normal_method_bindings": [],
-      "normally_closed_all_published_paths": false,
+      "normally_verified_file_paths": [
+        "tools/source_facts/test_interface_module_facts.py"
+      ],
+      "normal_method_bindings": [
+        {
+          "method": "test_adjacent_modules_are_not_one_expression",
+          "source_sha256": "622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
+          "evidence": [
+            "remediation/nuke-planning/source/source-normal-verification-supplement.json"
+          ],
+          "scope": [
+            "Exact original fixture/assertion identity, strict native JSON/Unicode/path/clock/lease boundaries and compiled main/effects; immutable owner027 includes fixture correction chronology."
+          ]
+        },
+        {
+          "method": "test_duplicate_property_stays_unknown",
+          "source_sha256": "622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
+          "evidence": [
+            "remediation/nuke-planning/source/source-normal-verification-supplement.json"
+          ],
+          "scope": [
+            "Exact original fixture/assertion identity, strict native JSON/Unicode/path/clock/lease boundaries and compiled main/effects; immutable owner027 includes fixture correction chronology."
+          ]
+        },
+        {
+          "method": "test_fake_module_in_string_or_comment_ignored",
+          "source_sha256": "622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
+          "evidence": [
+            "remediation/nuke-planning/source/source-normal-verification-supplement.json"
+          ],
+          "scope": [
+            "Exact original fixture/assertion identity, strict native JSON/Unicode/path/clock/lease boundaries and compiled main/effects; immutable owner027 includes fixture correction chronology."
+          ]
+        },
+        {
+          "method": "test_missing_property_value_is_preserved",
+          "source_sha256": "622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
+          "evidence": [
+            "remediation/nuke-planning/source/source-normal-verification-supplement.json"
+          ],
+          "scope": [
+            "Exact original fixture/assertion identity, strict native JSON/Unicode/path/clock/lease boundaries and compiled main/effects; immutable owner027 includes fixture correction chronology."
+          ]
+        },
+        {
+          "method": "test_source_glob_is_repo_relative_and_exclusions_apply",
+          "source_sha256": "622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
+          "evidence": [
+            "remediation/nuke-planning/source/source-normal-verification-supplement.json"
+          ],
+          "scope": [
+            "Exact original fixture/assertion identity, strict native JSON/Unicode/path/clock/lease boundaries and compiled main/effects; immutable owner027 includes fixture correction chronology."
+          ]
+        },
+        {
+          "method": "test_source_reference_and_parent_escape_not_followed",
+          "source_sha256": "622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
+          "evidence": [
+            "remediation/nuke-planning/source/source-normal-verification-supplement.json"
+          ],
+          "scope": [
+            "Exact original fixture/assertion identity, strict native JSON/Unicode/path/clock/lease boundaries and compiled main/effects; immutable owner027 includes fixture correction chronology."
+          ]
+        },
+        {
+          "method": "test_unclosed_module_is_explicit_unknown",
+          "source_sha256": "622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
+          "evidence": [
+            "remediation/nuke-planning/source/source-normal-verification-supplement.json"
+          ],
+          "scope": [
+            "Exact original fixture/assertion identity, strict native JSON/Unicode/path/clock/lease boundaries and compiled main/effects; immutable owner027 includes fixture correction chronology."
+          ]
+        },
+        {
+          "method": "test_variables_and_concatenation_not_evaluated",
+          "source_sha256": "622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
+          "evidence": [
+            "remediation/nuke-planning/source/source-normal-verification-supplement.json"
+          ],
+          "scope": [
+            "Exact original fixture/assertion identity, strict native JSON/Unicode/path/clock/lease boundaries and compiled main/effects; immutable owner027 includes fixture correction chronology."
+          ]
+        },
+        {
+          "method": "test_versions_imports_and_flags_are_literal_source_facts",
+          "source_sha256": "622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
+          "evidence": [
+            "remediation/nuke-planning/source/source-normal-verification-supplement.json"
+          ],
+          "scope": [
+            "Exact original fixture/assertion identity, strict native JSON/Unicode/path/clock/lease boundaries and compiled main/effects; immutable owner027 includes fixture correction chronology."
+          ]
+        }
+      ],
+      "normally_closed_all_published_paths": true,
       "remaining_caller_and_profile_duties": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "[\"Strict native admitted JSON/finite numbers/valid Unicode and portable ArtifactPaths; no arbitrary Python object/interpreter-wide API reproduction. Existing helper boundaries and021 scalar lexical fix retained.\",\"Compact shared LegacyAsciiIdentity rather than Python spaced JSON byte identity; observed native producer/assembly fingerprint rather than Python file SHA; explicit measured offset timestamp rather than historical UTC text. No historical-byte identity claim.\",\"Native immutable facts/report plus final index commit and pre/post pins are extra guarantees; original early-directory and partial retention effects are preserved, not waived.\",\"No cache/discovery/JSON/equality/number/path/IO/generation engine or separate NUKE target introduced.\",\"No canonical/authority writes or production edits authorized by plan artifact alone; Root acknowledgment/review remains required.\"]"
       ]
     },
     {
@@ -4553,13 +4707,16 @@
         "canonical-or-explicit-owner-profile"
       ],
       "services": [
-        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
+        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only",
+        "SoongSourceFacts + InterfaceModuleWorkflow.RunAsync + compiled Sources/Extract InterfaceModules"
       ],
-      "normally_verified_file_paths": [],
+      "normally_verified_file_paths": [
+        "tools/source_facts/interface_module_facts.py"
+      ],
       "normal_method_bindings": [],
-      "normally_closed_all_published_paths": false,
+      "normally_closed_all_published_paths": true,
       "remaining_caller_and_profile_duties": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "[\"Strict native admitted JSON/finite numbers/valid Unicode and portable ArtifactPaths; no arbitrary Python object/interpreter-wide API reproduction. Existing helper boundaries and021 scalar lexical fix retained.\",\"Compact shared LegacyAsciiIdentity rather than Python spaced JSON byte identity; observed native producer/assembly fingerprint rather than Python file SHA; explicit measured offset timestamp rather than historical UTC text. No historical-byte identity claim.\",\"Native immutable facts/report plus final index commit and pre/post pins are extra guarantees; original early-directory and partial retention effects are preserved, not waived.\",\"No cache/discovery/JSON/equality/number/path/IO/generation engine or separate NUKE target introduced.\",\"No canonical/authority writes or production edits authorized by plan artifact alone; Root acknowledgment/review remains required.\"]"
       ]
     },
     {
@@ -5505,13 +5662,16 @@
         "canonical-or-explicit-owner-profile"
       ],
       "services": [
+        "AidlSourceConstraints + HidlSourceConstraints + existing typed source contracts",
         "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
       ],
-      "normally_verified_file_paths": [],
+      "normally_verified_file_paths": [
+        "tools/source_facts/aidl_source_constraint.py"
+      ],
       "normal_method_bindings": [],
-      "normally_closed_all_published_paths": false,
+      "normally_closed_all_published_paths": true,
       "remaining_caller_and_profile_duties": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "[\"Public callable APIs over admitted loaded-JSON object/list/scalar trees. Missing evaluated required keys use native KeyNotFoundException with exact key; incompatible evaluated nested containers use ArgumentException. No unrestricted Python-object or mutable-alias API claim.\",\"No serialization bytes, filesystem effects, OS/device inspection, source-byte hashing, HTTP, parsing Soong/AIDL/HIDL text, version inference, runtime reachability, wire codec, platform range, installed APEX version or authority grant.\",\"Existing shared LegacyJsonValueEquality supplies complete JSON membership/dedup, bool/number equality and exact integer behavior; strict Boolean false unstable identity is retained separately.\",\"Existing SourceText.OriginalWord/Lines/Strip supply original Unicode word, physical splitlines and strip semantics. Full descriptor matching rejects suffix newline and preserves ASCII initial identifiers and HIDL Unicode decimal version digits.\",\"Complete outputs, conservative flags/nulls/limitations, exact original strings and object/array order are asserted. Inputs are unmodified and returned evidence cannot be changed by later admitted input mutation.\",\"Published own-test imports are the actual original callers. No main/CLI/category/generator/source-factory or metadata-reference-array responsibility is invented; InterfaceModules main is disjoint.\"]"
       ]
     },
     {
@@ -5526,13 +5686,87 @@
         "canonical-or-explicit-owner-profile"
       ],
       "services": [
+        "AidlSourceConstraints + HidlSourceConstraints + existing typed source contracts",
         "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
       ],
-      "normally_verified_file_paths": [],
-      "normal_method_bindings": [],
-      "normally_closed_all_published_paths": false,
+      "normally_verified_file_paths": [
+        "tools/source_facts/test_aidl_source_constraint.py"
+      ],
+      "normal_method_bindings": [
+        {
+          "method": "test_backend_physical_last_line_must_match",
+          "source_sha256": "e8977f3942fd961b74b7b9dbde4a05b6d8afdfb425b4eea184a65d0a4dc95bc1",
+          "evidence": [
+            "remediation/nuke-planning/source/source-normal-verification-supplement.json"
+          ],
+          "scope": [
+            "Original extra physical newline rejects with exact backend-tail reason"
+          ]
+        },
+        {
+          "method": "test_current_dump_does_not_borrow_frozen_version",
+          "source_sha256": "e8977f3942fd961b74b7b9dbde4a05b6d8afdfb425b4eea184a65d0a4dc95bc1",
+          "evidence": [
+            "remediation/nuke-planning/source/source-normal-verification-supplement.json"
+          ],
+          "scope": [
+            "Original development linkage remains unknown"
+          ]
+        },
+        {
+          "method": "test_descriptor_override_remains_unknown",
+          "source_sha256": "e8977f3942fd961b74b7b9dbde4a05b6d8afdfb425b4eea184a65d0a4dc95bc1",
+          "evidence": [
+            "remediation/nuke-planning/source/source-normal-verification-supplement.json"
+          ],
+          "scope": [
+            "Original Descriptor annotation rejects before identity/audit checks"
+          ]
+        },
+        {
+          "method": "test_exact_frozen_hash_forms_interface_only_predicate",
+          "source_sha256": "e8977f3942fd961b74b7b9dbde4a05b6d8afdfb425b4eea184a65d0a4dc95bc1",
+          "evidence": [
+            "remediation/nuke-planning/source/source-normal-verification-supplement.json"
+          ],
+          "scope": [
+            "Exact interface clause and runtime_observation false, strengthened to complete ordered output and copy/nonmutation checks"
+          ]
+        },
+        {
+          "method": "test_other_source_bytes_not_borrowed",
+          "source_sha256": "e8977f3942fd961b74b7b9dbde4a05b6d8afdfb425b4eea184a65d0a4dc95bc1",
+          "evidence": [
+            "remediation/nuke-planning/source/source-normal-verification-supplement.json"
+          ],
+          "scope": [
+            "Original replacement source digest is absent from complete reconciled identity set"
+          ]
+        },
+        {
+          "method": "test_stable_absent_default_differs_from_unknown_expression",
+          "source_sha256": "e8977f3942fd961b74b7b9dbde4a05b6d8afdfb425b4eea184a65d0a4dc95bc1",
+          "evidence": [
+            "remediation/nuke-planning/source/source-normal-verification-supplement.json"
+          ],
+          "scope": [
+            "Both original public stable_module calls, absent flag true and incomplete properties false"
+          ]
+        },
+        {
+          "method": "test_unstable_or_unresolved_build_flag_rejected",
+          "source_sha256": "e8977f3942fd961b74b7b9dbde4a05b6d8afdfb425b4eea184a65d0a4dc95bc1",
+          "evidence": [
+            "remediation/nuke-planning/source/source-normal-verification-supplement.json"
+          ],
+          "scope": [
+            "Both original loop values produce the exact unknown-only object"
+          ]
+        }
+      ],
+      "normally_closed_all_published_paths": true,
       "remaining_caller_and_profile_duties": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "[\"Public callable APIs over admitted loaded-JSON object/list/scalar trees. Missing evaluated required keys use native KeyNotFoundException with exact key; incompatible evaluated nested containers use ArgumentException. No unrestricted Python-object or mutable-alias API claim.\",\"No serialization bytes, filesystem effects, OS/device inspection, source-byte hashing, HTTP, parsing Soong/AIDL/HIDL text, version inference, runtime reachability, wire codec, platform range, installed APEX version or authority grant.\",\"Existing shared LegacyJsonValueEquality supplies complete JSON membership/dedup, bool/number equality and exact integer behavior; strict Boolean false unstable identity is retained separately.\",\"Existing SourceText.OriginalWord/Lines/Strip supply original Unicode word, physical splitlines and strip semantics. Full descriptor matching rejects suffix newline and preserves ASCII initial identifiers and HIDL Unicode decimal version digits.\",\"Complete outputs, conservative flags/nulls/limitations, exact original strings and object/array order are asserted. Inputs are unmodified and returned evidence cannot be changed by later admitted input mutation.\",\"Published own-test imports are the actual original callers. No main/CLI/category/generator/source-factory or metadata-reference-array responsibility is invented; InterfaceModules main is disjoint.\"]"
       ]
     },
     {
@@ -13500,10 +13734,13 @@
       "primary_code_path": "remediation/catalog/tooling/migrate_v3.py",
       "explicit_profiles": "release011",
       "services": [
-        "Catalog-owned planned copy/verify/retain migration service"
+        "Catalog-owned planned copy/verify/retain migration service",
+        "CatalogCopyMigration.MigrateAsync + CatalogMigrationWorkflowReader + compiled Catalog/Migrate"
       ],
-      "additional_responsibilities": [],
-      "normal_file_verified": false,
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
+      "normal_file_verified": true,
       "normal_verified_methods": [],
       "decommissionable_from_pr": false,
       "execution_retired": false,
@@ -13516,20 +13753,14 @@
           "indent": 0
         }
       ],
-      "pending_function_anchors": [
-        {
-          "name": "migrate",
-          "line": 5,
-          "indent": 0
-        }
-      ],
-      "pending_owner_method_list": "<module-body-and-required-callers>",
+      "pending_function_anchors": [],
+      "pending_owner_method_list": null,
       "remaining": [
-        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "[{\"profile\":\"release-011\",\"root\":\"/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011\",\"orderedScripts\":[{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/migrations/001-initial.sql\",\"sha256\":\"d7c9796cb53a455a569fbfc214c5efa74129627ee944c17a5ab3c3aed9b739ee\",\"bytes\":11266},{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/migrations/002-evidence-and-publication.sql\",\"sha256\":\"fc58a9b62816797c90a966c9f7ebb9dbd66a7abdc69386e6869a7e82d2a1a0a3\",\"bytes\":10591}],\"historicalOutputByteIdentityClaimed\":false,\"targetSchemaExactSqliteMasterComparison\":true},{\"profile\":\"current\",\"root\":\"/home/sharpninja/github/2026-10-26/task-3/remediation/catalog\",\"orderedScripts\":[{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/migrations/001-initial.sql\",\"sha256\":\"d7c9796cb53a455a569fbfc214c5efa74129627ee944c17a5ab3c3aed9b739ee\",\"bytes\":11266},{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/migrations/002-evidence-and-publication.sql\",\"sha256\":\"fc58a9b62816797c90a966c9f7ebb9dbd66a7abdc69386e6869a7e82d2a1a0a3\",\"bytes\":10591},{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/migrations/source_metadata_ddl.sql\",\"sha256\":\"2b585541c4463fc6b6ae408a80a573b81b635adc4206f960d2b7d8284e79a655\",\"bytes\":3608}],\"historicalOutputByteIdentityClaimed\":false,\"targetSchemaExactSqliteMasterComparison\":true}] Streaming source/stage/hash/native identity, retained stage/source, explicit target scripts; SQL rows materialized; not general Python object/exception/serialization equivalence."
       ],
       "bounded_service_test_evidence": [
-        "Catalog owner migration gates required; originals retained"
+        "Catalog owner migration gates required; originals retained",
+        "CatalogMigrationRealTests + CatalogMigrationStreamingRealTests + CatalogMigrationWorkflowRealTests + CatalogMigrationPlannerRealTests"
       ],
       "anchor_limit": "Lexical source-text anchors, not Python execution/AST or automatic proof each nested helper is an independent required feature. Same bytes share one implementation authority, but profile/caller obligations are retained.",
       "safe_to_delete": false,
@@ -23067,10 +23298,13 @@
       "primary_code_path": "remediation/catalog/tooling/migrate_v3.py",
       "explicit_profiles": "canonical-or-explicit-owner-profile",
       "services": [
-        "Catalog-owned planned copy/verify/retain migration service"
+        "Catalog-owned planned copy/verify/retain migration service",
+        "CatalogCopyMigration.MigrateAsync + CatalogMigrationWorkflowReader + compiled Catalog/Migrate"
       ],
-      "additional_responsibilities": [],
-      "normal_file_verified": false,
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
+      "normal_file_verified": true,
       "normal_verified_methods": [],
       "decommissionable_from_pr": false,
       "execution_retired": false,
@@ -23083,19 +23317,14 @@
           "indent": 0
         }
       ],
-      "pending_function_anchors": [
-        {
-          "name": "migrate",
-          "line": 5,
-          "indent": 0
-        }
-      ],
-      "pending_owner_method_list": "<module-body-and-required-callers>",
+      "pending_function_anchors": [],
+      "pending_owner_method_list": null,
       "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "[{\"profile\":\"release-011\",\"root\":\"/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011\",\"orderedScripts\":[{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/migrations/001-initial.sql\",\"sha256\":\"d7c9796cb53a455a569fbfc214c5efa74129627ee944c17a5ab3c3aed9b739ee\",\"bytes\":11266},{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/migrations/002-evidence-and-publication.sql\",\"sha256\":\"fc58a9b62816797c90a966c9f7ebb9dbd66a7abdc69386e6869a7e82d2a1a0a3\",\"bytes\":10591}],\"historicalOutputByteIdentityClaimed\":false,\"targetSchemaExactSqliteMasterComparison\":true},{\"profile\":\"current\",\"root\":\"/home/sharpninja/github/2026-10-26/task-3/remediation/catalog\",\"orderedScripts\":[{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/migrations/001-initial.sql\",\"sha256\":\"d7c9796cb53a455a569fbfc214c5efa74129627ee944c17a5ab3c3aed9b739ee\",\"bytes\":11266},{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/migrations/002-evidence-and-publication.sql\",\"sha256\":\"fc58a9b62816797c90a966c9f7ebb9dbd66a7abdc69386e6869a7e82d2a1a0a3\",\"bytes\":10591},{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/migrations/source_metadata_ddl.sql\",\"sha256\":\"2b585541c4463fc6b6ae408a80a573b81b635adc4206f960d2b7d8284e79a655\",\"bytes\":3608}],\"historicalOutputByteIdentityClaimed\":false,\"targetSchemaExactSqliteMasterComparison\":true}] Streaming source/stage/hash/native identity, retained stage/source, explicit target scripts; SQL rows materialized; not general Python object/exception/serialization equivalence."
       ],
       "bounded_service_test_evidence": [
-        "Catalog owner migration gates required; originals retained"
+        "Catalog owner migration gates required; originals retained",
+        "CatalogMigrationRealTests + CatalogMigrationStreamingRealTests + CatalogMigrationWorkflowRealTests + CatalogMigrationPlannerRealTests"
       ],
       "anchor_limit": "Lexical source-text anchors, not Python execution/AST or automatic proof each nested helper is an independent required feature. Same bytes share one implementation authority, but profile/caller obligations are retained.",
       "safe_to_delete": false,
@@ -26815,10 +27044,13 @@
       "primary_code_path": "tools/source_facts/aidl_source_constraint.py",
       "explicit_profiles": "canonical-or-explicit-owner-profile",
       "services": [
+        "AidlSourceConstraints + HidlSourceConstraints + existing typed source contracts",
         "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
       ],
-      "additional_responsibilities": [],
-      "normal_file_verified": false,
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
+      "normal_file_verified": true,
       "normal_verified_methods": [],
       "decommissionable_from_pr": false,
       "execution_retired": false,
@@ -26841,29 +27073,14 @@
           "indent": 1
         }
       ],
-      "pending_function_anchors": [
-        {
-          "name": "stable_module",
-          "line": 5,
-          "indent": 0
-        },
-        {
-          "name": "exact_constraint",
-          "line": 10,
-          "indent": 0
-        },
-        {
-          "name": "unknown",
-          "line": 11,
-          "indent": 1
-        }
-      ],
-      "pending_owner_method_list": "<module-body-and-required-callers>",
+      "pending_function_anchors": [],
+      "pending_owner_method_list": null,
       "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "[\"Public callable APIs over admitted loaded-JSON object/list/scalar trees. Missing evaluated required keys use native KeyNotFoundException with exact key; incompatible evaluated nested containers use ArgumentException. No unrestricted Python-object or mutable-alias API claim.\",\"No serialization bytes, filesystem effects, OS/device inspection, source-byte hashing, HTTP, parsing Soong/AIDL/HIDL text, version inference, runtime reachability, wire codec, platform range, installed APEX version or authority grant.\",\"Existing shared LegacyJsonValueEquality supplies complete JSON membership/dedup, bool/number equality and exact integer behavior; strict Boolean false unstable identity is retained separately.\",\"Existing SourceText.OriginalWord/Lines/Strip supply original Unicode word, physical splitlines and strip semantics. Full descriptor matching rejects suffix newline and preserves ASCII initial identifiers and HIDL Unicode decimal version digits.\",\"Complete outputs, conservative flags/nulls/limitations, exact original strings and object/array order are asserted. Inputs are unmodified and returned evidence cannot be changed by later admitted input mutation.\",\"Published own-test imports are the actual original callers. No main/CLI/category/generator/source-factory or metadata-reference-array responsibility is invented; InterfaceModules main is disjoint.\"]"
       ],
       "bounded_service_test_evidence": [
-        "S-AC021/S-AC022 full membership/revision/hash-selection/version-domain mock/real gates pending"
+        "S-AC021/S-AC022 full membership/revision/hash-selection/version-domain mock/real gates pending",
+        "SourceConstraintMockTests/SourceConstraintRealTests"
       ],
       "anchor_limit": "Lexical source-text anchors, not Python execution/AST or automatic proof each nested helper is an independent required feature. Same bytes share one implementation authority, but profile/caller obligations are retained.",
       "safe_to_delete": false,
@@ -27126,10 +27343,13 @@
       "primary_code_path": "tools/source_facts/hidl_source_constraint.py",
       "explicit_profiles": "canonical-or-explicit-owner-profile",
       "services": [
+        "AidlSourceConstraints + HidlSourceConstraints + existing typed source contracts",
         "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
       ],
-      "additional_responsibilities": [],
-      "normal_file_verified": false,
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
+      "normal_file_verified": true,
       "normal_verified_methods": [],
       "decommissionable_from_pr": false,
       "execution_retired": false,
@@ -27142,19 +27362,14 @@
           "indent": 0
         }
       ],
-      "pending_function_anchors": [
-        {
-          "name": "exact_constraint",
-          "line": 6,
-          "indent": 0
-        }
-      ],
-      "pending_owner_method_list": "<module-body-and-required-callers>",
+      "pending_function_anchors": [],
+      "pending_owner_method_list": null,
       "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "[\"Public callable APIs over admitted loaded-JSON object/list/scalar trees. Missing evaluated required keys use native KeyNotFoundException with exact key; incompatible evaluated nested containers use ArgumentException. No unrestricted Python-object or mutable-alias API claim.\",\"No serialization bytes, filesystem effects, OS/device inspection, source-byte hashing, HTTP, parsing Soong/AIDL/HIDL text, version inference, runtime reachability, wire codec, platform range, installed APEX version or authority grant.\",\"Existing shared LegacyJsonValueEquality supplies complete JSON membership/dedup, bool/number equality and exact integer behavior; strict Boolean false unstable identity is retained separately.\",\"Existing SourceText.OriginalWord/Lines/Strip supply original Unicode word, physical splitlines and strip semantics. Full descriptor matching rejects suffix newline and preserves ASCII initial identifiers and HIDL Unicode decimal version digits.\",\"Complete outputs, conservative flags/nulls/limitations, exact original strings and object/array order are asserted. Inputs are unmodified and returned evidence cannot be changed by later admitted input mutation.\",\"Published own-test imports are the actual original callers. No main/CLI/category/generator/source-factory or metadata-reference-array responsibility is invented; InterfaceModules main is disjoint.\"]"
       ],
       "bounded_service_test_evidence": [
-        "S-AC021/S-AC022 full membership/revision/hash-selection/version-domain mock/real gates pending"
+        "S-AC021/S-AC022 full membership/revision/hash-selection/version-domain mock/real gates pending",
+        "SourceConstraintMockTests/SourceConstraintRealTests"
       ],
       "anchor_limit": "Lexical source-text anchors, not Python execution/AST or automatic proof each nested helper is an independent required feature. Same bytes share one implementation authority, but profile/caller obligations are retained.",
       "safe_to_delete": false,
@@ -27332,10 +27547,13 @@
       "primary_code_path": "tools/source_facts/interface_module_facts.py",
       "explicit_profiles": "canonical-or-explicit-owner-profile",
       "services": [
-        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
+        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only",
+        "SoongSourceFacts + InterfaceModuleWorkflow.RunAsync + compiled Sources/Extract InterfaceModules"
       ],
-      "additional_responsibilities": [],
-      "normal_file_verified": false,
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
+      "normal_file_verified": true,
       "normal_verified_methods": [],
       "decommissionable_from_pr": false,
       "execution_retired": false,
@@ -27378,48 +27596,13 @@
           "indent": 0
         }
       ],
-      "pending_function_anchors": [
-        {
-          "name": "mask_comments",
-          "line": 5,
-          "indent": 0
-        },
-        {
-          "name": "tokens",
-          "line": 7,
-          "indent": 0
-        },
-        {
-          "name": "value",
-          "line": 8,
-          "indent": 0
-        },
-        {
-          "name": "literal",
-          "line": 41,
-          "indent": 0
-        },
-        {
-          "name": "modules",
-          "line": 53,
-          "indent": 0
-        },
-        {
-          "name": "source_matches",
-          "line": 59,
-          "indent": 0
-        },
-        {
-          "name": "main",
-          "line": 70,
-          "indent": 0
-        }
-      ],
-      "pending_owner_method_list": "<module-body-and-required-callers>",
+      "pending_function_anchors": [],
+      "pending_owner_method_list": null,
       "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "[\"Strict native admitted JSON/finite numbers/valid Unicode and portable ArtifactPaths; no arbitrary Python object/interpreter-wide API reproduction. Existing helper boundaries and021 scalar lexical fix retained.\",\"Compact shared LegacyAsciiIdentity rather than Python spaced JSON byte identity; observed native producer/assembly fingerprint rather than Python file SHA; explicit measured offset timestamp rather than historical UTC text. No historical-byte identity claim.\",\"Native immutable facts/report plus final index commit and pre/post pins are extra guarantees; original early-directory and partial retention effects are preserved, not waived.\",\"No cache/discovery/JSON/equality/number/path/IO/generation engine or separate NUKE target introduced.\",\"No canonical/authority writes or production edits authorized by plan artifact alone; Root acknowledgment/review remains required.\"]"
       ],
       "bounded_service_test_evidence": [
+        "InterfaceModuleMainRealTests + InterfaceModuleCallerRealTests + InterfaceModulePlannerRealTests",
         "S-AC021/S-AC022 full membership/revision/hash-selection/version-domain mock/real gates pending"
       ],
       "anchor_limit": "Lexical source-text anchors, not Python execution/AST or automatic proof each nested helper is an independent required feature. Same bytes share one implementation authority, but profile/caller obligations are retained.",
@@ -28098,11 +28281,108 @@
       "primary_code_path": "tools/source_facts/test_aidl_source_constraint.py",
       "explicit_profiles": "canonical-or-explicit-owner-profile",
       "services": [
+        "AidlSourceConstraints + HidlSourceConstraints + existing typed source contracts",
         "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
       ],
-      "additional_responsibilities": [],
-      "normal_file_verified": false,
-      "normal_verified_methods": [],
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
+      "normal_file_verified": true,
+      "normal_verified_methods": [
+        {
+          "method": "test_exact_frozen_hash_forms_interface_only_predicate",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "e8977f3942fd961b74b7b9dbde4a05b6d8afdfb425b4eea184a65d0a4dc95bc1",
+          "bindings": [
+            "A-original"
+          ],
+          "normal_verified": true,
+          "scope": "Exact interface clause and runtime_observation false, strengthened to complete ordered output and copy/nonmutation checks",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_unstable_or_unresolved_build_flag_rejected",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "e8977f3942fd961b74b7b9dbde4a05b6d8afdfb425b4eea184a65d0a4dc95bc1",
+          "bindings": [
+            "A-unstable",
+            "A-unresolved"
+          ],
+          "normal_verified": true,
+          "scope": "Both original loop values produce the exact unknown-only object",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_backend_physical_last_line_must_match",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "e8977f3942fd961b74b7b9dbde4a05b6d8afdfb425b4eea184a65d0a4dc95bc1",
+          "bindings": [
+            "A-blank-tail"
+          ],
+          "normal_verified": true,
+          "scope": "Original extra physical newline rejects with exact backend-tail reason",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_other_source_bytes_not_borrowed",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "e8977f3942fd961b74b7b9dbde4a05b6d8afdfb425b4eea184a65d0a4dc95bc1",
+          "bindings": [
+            "A-other-bytes"
+          ],
+          "normal_verified": true,
+          "scope": "Original replacement source digest is absent from complete reconciled identity set",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_descriptor_override_remains_unknown",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "e8977f3942fd961b74b7b9dbde4a05b6d8afdfb425b4eea184a65d0a4dc95bc1",
+          "bindings": [
+            "A-override"
+          ],
+          "normal_verified": true,
+          "scope": "Original Descriptor annotation rejects before identity/audit checks",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_current_dump_does_not_borrow_frozen_version",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "e8977f3942fd961b74b7b9dbde4a05b6d8afdfb425b4eea184a65d0a4dc95bc1",
+          "bindings": [
+            "A-development"
+          ],
+          "normal_verified": true,
+          "scope": "Original development linkage remains unknown",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_stable_absent_default_differs_from_unknown_expression",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "e8977f3942fd961b74b7b9dbde4a05b6d8afdfb425b4eea184a65d0a4dc95bc1",
+          "bindings": [
+            "S-absent",
+            "S-incomplete"
+          ],
+          "normal_verified": true,
+          "scope": "Both original public stable_module calls, absent flag true and incomplete properties false",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        }
+      ],
       "decommissionable_from_pr": false,
       "execution_retired": false,
       "retirement_decision": null,
@@ -28149,54 +28429,14 @@
           "indent": 1
         }
       ],
-      "pending_function_anchors": [
-        {
-          "name": "fixture",
-          "line": 4,
-          "indent": 1
-        },
-        {
-          "name": "test_exact_frozen_hash_forms_interface_only_predicate",
-          "line": 10,
-          "indent": 1
-        },
-        {
-          "name": "test_unstable_or_unresolved_build_flag_rejected",
-          "line": 12,
-          "indent": 1
-        },
-        {
-          "name": "test_backend_physical_last_line_must_match",
-          "line": 15,
-          "indent": 1
-        },
-        {
-          "name": "test_other_source_bytes_not_borrowed",
-          "line": 17,
-          "indent": 1
-        },
-        {
-          "name": "test_descriptor_override_remains_unknown",
-          "line": 19,
-          "indent": 1
-        },
-        {
-          "name": "test_current_dump_does_not_borrow_frozen_version",
-          "line": 21,
-          "indent": 1
-        },
-        {
-          "name": "test_stable_absent_default_differs_from_unknown_expression",
-          "line": 23,
-          "indent": 1
-        }
-      ],
-      "pending_owner_method_list": "<module-body-and-required-callers>",
+      "pending_function_anchors": [],
+      "pending_owner_method_list": null,
       "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "[\"Public callable APIs over admitted loaded-JSON object/list/scalar trees. Missing evaluated required keys use native KeyNotFoundException with exact key; incompatible evaluated nested containers use ArgumentException. No unrestricted Python-object or mutable-alias API claim.\",\"No serialization bytes, filesystem effects, OS/device inspection, source-byte hashing, HTTP, parsing Soong/AIDL/HIDL text, version inference, runtime reachability, wire codec, platform range, installed APEX version or authority grant.\",\"Existing shared LegacyJsonValueEquality supplies complete JSON membership/dedup, bool/number equality and exact integer behavior; strict Boolean false unstable identity is retained separately.\",\"Existing SourceText.OriginalWord/Lines/Strip supply original Unicode word, physical splitlines and strip semantics. Full descriptor matching rejects suffix newline and preserves ASCII initial identifiers and HIDL Unicode decimal version digits.\",\"Complete outputs, conservative flags/nulls/limitations, exact original strings and object/array order are asserted. Inputs are unmodified and returned evidence cannot be changed by later admitted input mutation.\",\"Published own-test imports are the actual original callers. No main/CLI/category/generator/source-factory or metadata-reference-array responsibility is invented; InterfaceModules main is disjoint.\"]"
       ],
       "bounded_service_test_evidence": [
-        "S-AC021/S-AC022 full membership/revision/hash-selection/version-domain mock/real gates pending"
+        "S-AC021/S-AC022 full membership/revision/hash-selection/version-domain mock/real gates pending",
+        "SourceConstraintMockTests/SourceConstraintRealTests"
       ],
       "anchor_limit": "Lexical source-text anchors, not Python execution/AST or automatic proof each nested helper is an independent required feature. Same bytes share one implementation authority, but profile/caller obligations are retained.",
       "safe_to_delete": false,
@@ -28848,11 +29088,80 @@
       "primary_code_path": "tools/source_facts/test_hidl_source_constraint.py",
       "explicit_profiles": "canonical-or-explicit-owner-profile",
       "services": [
+        "AidlSourceConstraints + HidlSourceConstraints + existing typed source contracts",
         "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
       ],
-      "additional_responsibilities": [],
-      "normal_file_verified": false,
-      "normal_verified_methods": [],
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
+      "normal_file_verified": true,
+      "normal_verified_methods": [
+        {
+          "method": "test_exact_published_identifier_and_source_hash_form_interface_clause",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "51abec7fc9f4c2125af3165247f0f56eb07de8e170c98d98893f3d01beea987e",
+          "bindings": [
+            "H-original"
+          ],
+          "normal_verified": true,
+          "scope": "Exact interface clause, two evidence identities and runtime_observation false, strengthened to complete ordered output",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_other_hash_cannot_describe_this_source_even_if_identifier_matches",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "51abec7fc9f4c2125af3165247f0f56eb07de8e170c98d98893f3d01beea987e",
+          "bindings": [
+            "H-other-hash"
+          ],
+          "normal_verified": true,
+          "scope": "Original other digest is not borrowed",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_other_repository_cannot_be_borrowed",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "51abec7fc9f4c2125af3165247f0f56eb07de8e170c98d98893f3d01beea987e",
+          "bindings": [
+            "H-other-repository"
+          ],
+          "normal_verified": true,
+          "scope": "Original other repository rejects",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_types_file_is_not_invented_as_an_interface",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "51abec7fc9f4c2125af3165247f0f56eb07de8e170c98d98893f3d01beea987e",
+          "bindings": [
+            "H-type"
+          ],
+          "normal_verified": true,
+          "scope": "Original type record remains unknown",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_another_declared_identifier_not_used",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "51abec7fc9f4c2125af3165247f0f56eb07de8e170c98d98893f3d01beea987e",
+          "bindings": [
+            "H-other-identifier"
+          ],
+          "normal_verified": true,
+          "scope": "Original IBar canonical identifier cannot borrow IFoo fact",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        }
+      ],
       "decommissionable_from_pr": false,
       "execution_retired": false,
       "retirement_decision": null,
@@ -28899,54 +29208,14 @@
           "indent": 1
         }
       ],
-      "pending_function_anchors": [
-        {
-          "name": "source",
-          "line": 5,
-          "indent": 1
-        },
-        {
-          "name": "fact",
-          "line": 6,
-          "indent": 1
-        },
-        {
-          "name": "record",
-          "line": 7,
-          "indent": 1
-        },
-        {
-          "name": "test_exact_published_identifier_and_source_hash_form_interface_clause",
-          "line": 8,
-          "indent": 1
-        },
-        {
-          "name": "test_other_hash_cannot_describe_this_source_even_if_identifier_matches",
-          "line": 12,
-          "indent": 1
-        },
-        {
-          "name": "test_other_repository_cannot_be_borrowed",
-          "line": 15,
-          "indent": 1
-        },
-        {
-          "name": "test_types_file_is_not_invented_as_an_interface",
-          "line": 18,
-          "indent": 1
-        },
-        {
-          "name": "test_another_declared_identifier_not_used",
-          "line": 21,
-          "indent": 1
-        }
-      ],
-      "pending_owner_method_list": "<module-body-and-required-callers>",
+      "pending_function_anchors": [],
+      "pending_owner_method_list": null,
       "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "[\"Public callable APIs over admitted loaded-JSON object/list/scalar trees. Missing evaluated required keys use native KeyNotFoundException with exact key; incompatible evaluated nested containers use ArgumentException. No unrestricted Python-object or mutable-alias API claim.\",\"No serialization bytes, filesystem effects, OS/device inspection, source-byte hashing, HTTP, parsing Soong/AIDL/HIDL text, version inference, runtime reachability, wire codec, platform range, installed APEX version or authority grant.\",\"Existing shared LegacyJsonValueEquality supplies complete JSON membership/dedup, bool/number equality and exact integer behavior; strict Boolean false unstable identity is retained separately.\",\"Existing SourceText.OriginalWord/Lines/Strip supply original Unicode word, physical splitlines and strip semantics. Full descriptor matching rejects suffix newline and preserves ASCII initial identifiers and HIDL Unicode decimal version digits.\",\"Complete outputs, conservative flags/nulls/limitations, exact original strings and object/array order are asserted. Inputs are unmodified and returned evidence cannot be changed by later admitted input mutation.\",\"Published own-test imports are the actual original callers. No main/CLI/category/generator/source-factory or metadata-reference-array responsibility is invented; InterfaceModules main is disjoint.\"]"
       ],
       "bounded_service_test_evidence": [
-        "S-AC021/S-AC022 full membership/revision/hash-selection/version-domain mock/real gates pending"
+        "S-AC021/S-AC022 full membership/revision/hash-selection/version-domain mock/real gates pending",
+        "SourceConstraintMockTests/SourceConstraintRealTests"
       ],
       "anchor_limit": "Lexical source-text anchors, not Python execution/AST or automatic proof each nested helper is an independent required feature. Same bytes share one implementation authority, but profile/caller obligations are retained.",
       "safe_to_delete": false,
@@ -29252,11 +29521,132 @@
       "primary_code_path": "tools/source_facts/test_interface_module_facts.py",
       "explicit_profiles": "canonical-or-explicit-owner-profile",
       "services": [
-        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
+        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only",
+        "SoongSourceFacts + InterfaceModuleWorkflow.RunAsync + compiled Sources/Extract InterfaceModules"
       ],
-      "additional_responsibilities": [],
-      "normal_file_verified": false,
-      "normal_verified_methods": [],
+      "additional_responsibilities": [
+        "All original test-method inputs and assertions verified normally under the replacing xUnit harness. This closes the allocated test-file method scope only; production helper/caller/corpus parity and HV remain separate."
+      ],
+      "normal_file_verified": true,
+      "normal_verified_methods": [
+        {
+          "method": "test_versions_imports_and_flags_are_literal_source_facts",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
+          "bindings": [
+            "Exact owner027 OriginalTestMethods and full-output MAIN83/caller packets"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original fixture/assertion identity, strict native JSON/Unicode/path/clock/lease boundaries and compiled main/effects; immutable owner027 includes fixture correction chronology.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_variables_and_concatenation_not_evaluated",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
+          "bindings": [
+            "Exact owner027 OriginalTestMethods and full-output MAIN83/caller packets"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original fixture/assertion identity, strict native JSON/Unicode/path/clock/lease boundaries and compiled main/effects; immutable owner027 includes fixture correction chronology.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_fake_module_in_string_or_comment_ignored",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
+          "bindings": [
+            "Exact owner027 OriginalTestMethods and full-output MAIN83/caller packets"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original fixture/assertion identity, strict native JSON/Unicode/path/clock/lease boundaries and compiled main/effects; immutable owner027 includes fixture correction chronology.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_duplicate_property_stays_unknown",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
+          "bindings": [
+            "Exact owner027 OriginalTestMethods and full-output MAIN83/caller packets"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original fixture/assertion identity, strict native JSON/Unicode/path/clock/lease boundaries and compiled main/effects; immutable owner027 includes fixture correction chronology.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_source_glob_is_repo_relative_and_exclusions_apply",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
+          "bindings": [
+            "Exact owner027 OriginalTestMethods and full-output MAIN83/caller packets"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original fixture/assertion identity, strict native JSON/Unicode/path/clock/lease boundaries and compiled main/effects; immutable owner027 includes fixture correction chronology.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_source_reference_and_parent_escape_not_followed",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
+          "bindings": [
+            "Exact owner027 OriginalTestMethods and full-output MAIN83/caller packets"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original fixture/assertion identity, strict native JSON/Unicode/path/clock/lease boundaries and compiled main/effects; immutable owner027 includes fixture correction chronology.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_unclosed_module_is_explicit_unknown",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
+          "bindings": [
+            "Exact owner027 OriginalTestMethods and full-output MAIN83/caller packets"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original fixture/assertion identity, strict native JSON/Unicode/path/clock/lease boundaries and compiled main/effects; immutable owner027 includes fixture correction chronology.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_adjacent_modules_are_not_one_expression",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
+          "bindings": [
+            "Exact owner027 OriginalTestMethods and full-output MAIN83/caller packets"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original fixture/assertion identity, strict native JSON/Unicode/path/clock/lease boundaries and compiled main/effects; immutable owner027 includes fixture correction chronology.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        },
+        {
+          "method": "test_missing_property_value_is_preserved",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "source_sha256": "622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
+          "bindings": [
+            "Exact owner027 OriginalTestMethods and full-output MAIN83/caller packets"
+          ],
+          "normal_verified": true,
+          "scope": "Exact original fixture/assertion identity, strict native JSON/Unicode/path/clock/lease boundaries and compiled main/effects; immutable owner027 includes fixture correction chronology.",
+          "logical_proof_key": null,
+          "source_method_mapping": null,
+          "native_class": null
+        }
+      ],
       "decommissionable_from_pr": false,
       "execution_retired": false,
       "retirement_decision": null,
@@ -29308,58 +29698,13 @@
           "indent": 1
         }
       ],
-      "pending_function_anchors": [
-        {
-          "name": "test_versions_imports_and_flags_are_literal_source_facts",
-          "line": 4,
-          "indent": 1
-        },
-        {
-          "name": "test_variables_and_concatenation_not_evaluated",
-          "line": 7,
-          "indent": 1
-        },
-        {
-          "name": "test_fake_module_in_string_or_comment_ignored",
-          "line": 10,
-          "indent": 1
-        },
-        {
-          "name": "test_duplicate_property_stays_unknown",
-          "line": 13,
-          "indent": 1
-        },
-        {
-          "name": "test_source_glob_is_repo_relative_and_exclusions_apply",
-          "line": 15,
-          "indent": 1
-        },
-        {
-          "name": "test_source_reference_and_parent_escape_not_followed",
-          "line": 17,
-          "indent": 1
-        },
-        {
-          "name": "test_unclosed_module_is_explicit_unknown",
-          "line": 20,
-          "indent": 1
-        },
-        {
-          "name": "test_adjacent_modules_are_not_one_expression",
-          "line": 22,
-          "indent": 1
-        },
-        {
-          "name": "test_missing_property_value_is_preserved",
-          "line": 25,
-          "indent": 1
-        }
-      ],
-      "pending_owner_method_list": "<module-body-and-required-callers>",
+      "pending_function_anchors": [],
+      "pending_owner_method_list": null,
       "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "[\"Strict native admitted JSON/finite numbers/valid Unicode and portable ArtifactPaths; no arbitrary Python object/interpreter-wide API reproduction. Existing helper boundaries and021 scalar lexical fix retained.\",\"Compact shared LegacyAsciiIdentity rather than Python spaced JSON byte identity; observed native producer/assembly fingerprint rather than Python file SHA; explicit measured offset timestamp rather than historical UTC text. No historical-byte identity claim.\",\"Native immutable facts/report plus final index commit and pre/post pins are extra guarantees; original early-directory and partial retention effects are preserved, not waived.\",\"No cache/discovery/JSON/equality/number/path/IO/generation engine or separate NUKE target introduced.\",\"No canonical/authority writes or production edits authorized by plan artifact alone; Root acknowledgment/review remains required.\"]"
       ],
       "bounded_service_test_evidence": [
+        "InterfaceModuleMainRealTests + InterfaceModuleCallerRealTests + InterfaceModulePlannerRealTests",
         "S-AC021/S-AC022 full membership/revision/hash-selection/version-domain mock/real gates pending"
       ],
       "anchor_limit": "Lexical source-text anchors, not Python execution/AST or automatic proof each nested helper is an independent required feature. Same bytes share one implementation authority, but profile/caller obligations are retained.",
@@ -31438,23 +31783,6 @@
       "derived_from_inventory": true,
       "owner": "Catalog",
       "category": "Catalog",
-      "canonical_responsibility_key": "Catalog|Catalog|e4eff83d352313b155c2b7b572df6f2e4f98f8fb2876e0eeaabb7fa39663de5e",
-      "published_paths": [
-        "rehydration/producers/release-011/tooling/migrate_v3.py",
-        "remediation/catalog/tooling/migrate_v3.py"
-      ],
-      "services": [
-        "Catalog-owned planned copy/verify/retain migration service"
-      ],
-      "remaining": [
-        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
-      ]
-    },
-    {
-      "derived_from_inventory": true,
-      "owner": "Catalog",
-      "category": "Catalog",
       "canonical_responsibility_key": "Catalog|Catalog|e9ce2b6dbb35b6e7689c6df830a9af8e82dde1091f9eae67c4e3ff767d8896a0",
       "published_paths": [
         "rehydration/producers/release-011/tests/test_build.py",
@@ -31686,21 +32014,6 @@
       "derived_from_inventory": true,
       "owner": "Sources",
       "category": "Sources",
-      "canonical_responsibility_key": "Sources|Sources|194514644686213599fc77326e4f9cd2c17141b761173b8297e92032337a44ed",
-      "published_paths": [
-        "tools/source_facts/hidl_source_constraint.py"
-      ],
-      "services": [
-        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
-      ],
-      "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
-      ]
-    },
-    {
-      "derived_from_inventory": true,
-      "owner": "Sources",
-      "category": "Sources",
       "canonical_responsibility_key": "Sources|Sources|2ef373957f134774af8ad5a2c7a59edcdad6e59faf86eab098280b092d676ee8",
       "published_paths": [
         "tools/source_facts/native_literal_audit.py"
@@ -31806,21 +32119,6 @@
       "derived_from_inventory": true,
       "owner": "Sources",
       "category": "Sources",
-      "canonical_responsibility_key": "Sources|Sources|51abec7fc9f4c2125af3165247f0f56eb07de8e170c98d98893f3d01beea987e",
-      "published_paths": [
-        "tools/source_facts/test_hidl_source_constraint.py"
-      ],
-      "services": [
-        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
-      ],
-      "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
-      ]
-    },
-    {
-      "derived_from_inventory": true,
-      "owner": "Sources",
-      "category": "Sources",
       "canonical_responsibility_key": "Sources|Sources|553ff42832e97b66ab7997baeb73acf2a3b5141eb1f42197590e6c6d8ef4ae2d",
       "published_paths": [
         "tools/source_facts/test_interface_applicability_evidence.py"
@@ -31866,21 +32164,6 @@
       "derived_from_inventory": true,
       "owner": "Sources",
       "category": "Sources",
-      "canonical_responsibility_key": "Sources|Sources|622cf28f002c3b264e3ddfb1575530428389873bf26f10007447a7270bdc1cbc",
-      "published_paths": [
-        "tools/source_facts/test_interface_module_facts.py"
-      ],
-      "services": [
-        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
-      ],
-      "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
-      ]
-    },
-    {
-      "derived_from_inventory": true,
-      "owner": "Sources",
-      "category": "Sources",
       "canonical_responsibility_key": "Sources|Sources|6678adf0d5cb2dee55206f2262fe629058909f472eb558399a0997a89ac666d6",
       "published_paths": [
         "rehydration/producers/release-011/tooling/permission_reference.py",
@@ -31891,21 +32174,6 @@
       ],
       "remaining": [
         "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
-      ]
-    },
-    {
-      "derived_from_inventory": true,
-      "owner": "Sources",
-      "category": "Sources",
-      "canonical_responsibility_key": "Sources|Sources|676c3fbbfe3e740f7aadd3bcac251655bc9d37de5ac2a5ce77a9a9632db0dc90",
-      "published_paths": [
-        "tools/source_facts/interface_module_facts.py"
-      ],
-      "services": [
-        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
-      ],
-      "remaining": [
         "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
       ]
     },
@@ -32110,36 +32378,6 @@
       ],
       "remaining": [
         "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
-      ]
-    },
-    {
-      "derived_from_inventory": true,
-      "owner": "Sources",
-      "category": "Sources",
-      "canonical_responsibility_key": "Sources|Sources|dc7c0d698d4ff811dbd8cd604316e8ab3ac03974daeafde7e71da26a0dfaa01d",
-      "published_paths": [
-        "tools/source_facts/aidl_source_constraint.py"
-      ],
-      "services": [
-        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
-      ],
-      "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
-      ]
-    },
-    {
-      "derived_from_inventory": true,
-      "owner": "Sources",
-      "category": "Sources",
-      "canonical_responsibility_key": "Sources|Sources|e8977f3942fd961b74b7b9dbde4a05b6d8afdfb425b4eea184a65d0a4dc95bc1",
-      "published_paths": [
-        "tools/source_facts/test_aidl_source_constraint.py"
-      ],
-      "services": [
-        "Planned shared Soong/interface/hash/constraint producers; ContentHash named legacy SHA1 service only"
-      ],
-      "remaining": [
         "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
       ]
     },

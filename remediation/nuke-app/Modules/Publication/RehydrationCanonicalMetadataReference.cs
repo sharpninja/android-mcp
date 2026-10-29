@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace AndroidMcp.BuildTool.Publication;
 
@@ -6,7 +7,9 @@ namespace AndroidMcp.BuildTool.Publication;
 // source acquisition, or change to existing Plan/PlanSeed serialization.
 public sealed record RehydrationCanonicalMetadataReference(
     bool ReceiptPathPresent,JsonValueKind ReceiptPathKind,string? ReceiptPath,
-    string? PlatformVersion,bool PackagePathPresent,JsonValueKind PackagePathKind,string? PackagePath);
+    string? PlatformVersion,bool PackagePathPresent,JsonValueKind PackagePathKind,string? PackagePath,
+    [property:JsonIgnore(Condition=JsonIgnoreCondition.WhenWritingNull)]
+    RehydrationLegacyPlatformFacts? LegacyPlatformFacts=null);
 
 // Append an optional `RehydrationCanonicalMetadataReference? MetadataReference=null`
 // to RehydrationSnapshotRow. Emit ONLY for exact
@@ -15,5 +18,6 @@ public sealed record RehydrationCanonicalMetadataReference(
 // PlatformVersion uses the original nonempty row.platform_api_version first,
 // then transport.platform_api_version. Do not substitute transport.platform_version.
 // Preserve package_path presence/kind: absent means default, null does not.
-// Existing admitted platform fields are nullable strings; do not broaden Plan
-// or PlanSeed acceptance/serialization as a side effect of this proposal.
+// Native platform_version can short-circuit row string admission. Optional
+// detached legacy facts retain that already admitted nonstring domain without
+// broadening Plan/Seed admission or changing their serialization/identity.

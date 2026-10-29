@@ -22,6 +22,7 @@ public sealed partial class Build
             PipelineRequestLength??throw new InvalidOperationException("Explicit workflow request length required."),"application/json");
         var admitted=canonical.Serialize(await inputs.ReadAsync(outerPin));
         if(ExtractTask==SourceExtractTask.InterfaceHashes){await ExtractPublishedHashes(project,canonical,admitted);return;}
+        if(ExtractTask==SourceExtractTask.InterfaceModules){await ExtractInterfaceModules(project,canonical,admitted);return;}
         var wire=JsonSerializer.Deserialize<SourcesExtractWorkflowFile>(admitted)
             ??throw new InvalidOperationException("Source extraction workflow request is required.");
         var recipe=await new SourceWorkflowInputsReader(inputs).ReadAsync(wire.Sources);

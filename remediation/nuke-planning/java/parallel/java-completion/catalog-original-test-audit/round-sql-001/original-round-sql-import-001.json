@@ -1,0 +1,440 @@
+{
+  "at": "2026-10-29T05:55:27",
+  "scope": "Three missing original Round2/3 assertion responsibilities, three NEW test-only files; no second SQL/IO engine and no production changes",
+  "files": [
+    {
+      "relativePath": "Tests/Catalog/OriginalRoundAssertions/OriginalRoundSqlCases.cs",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/catalog-original-test-audit/round-sql-001/original-round-sql-native-001.sources/Tests/Catalog/OriginalRoundAssertions/OriginalRoundSqlCases.cs",
+      "immutableSource": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/catalog-original-test-audit/round-sql-001/original-round-sql-native-001.sources/Tests/Catalog/OriginalRoundAssertions/OriginalRoundSqlCases.cs",
+      "sha256": "0c2e079debec01b3c6e7c449d4a21664e4b4a4023c7b8aa57926e0512d4339c2",
+      "length": 6121,
+      "canonicalTarget": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Catalog/OriginalRoundAssertions/OriginalRoundSqlCases.cs",
+      "expectedPreviousSha256": null,
+      "priorSha256": null,
+      "privateChronologicalPrior": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/catalog-original-test-audit/round-sql-001/original-round-sql-mock-001.sources/Tests/Catalog/OriginalRoundAssertions/OriginalRoundSqlCases.cs",
+        "sha256": "0c2e079debec01b3c6e7c449d4a21664e4b4a4023c7b8aa57926e0512d4339c2",
+        "bytes": 6121
+      }
+    },
+    {
+      "relativePath": "Tests/Catalog/OriginalRoundAssertions/OriginalRoundSqlMockTests.cs",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/catalog-original-test-audit/round-sql-001/original-round-sql-native-001.sources/Tests/Catalog/OriginalRoundAssertions/OriginalRoundSqlMockTests.cs",
+      "immutableSource": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/catalog-original-test-audit/round-sql-001/original-round-sql-native-001.sources/Tests/Catalog/OriginalRoundAssertions/OriginalRoundSqlMockTests.cs",
+      "sha256": "c5fa530bb93dccf4e7247615e7744aed168e44c183df53f29a5a1d38e9e80f7d",
+      "length": 3595,
+      "canonicalTarget": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Catalog/OriginalRoundAssertions/OriginalRoundSqlMockTests.cs",
+      "expectedPreviousSha256": null,
+      "priorSha256": null,
+      "privateChronologicalPrior": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/catalog-original-test-audit/round-sql-001/original-round-sql-mock-001.sources/Tests/Catalog/OriginalRoundAssertions/OriginalRoundSqlMockTests.cs",
+        "sha256": "c5fa530bb93dccf4e7247615e7744aed168e44c183df53f29a5a1d38e9e80f7d",
+        "bytes": 3595
+      }
+    },
+    {
+      "relativePath": "Tests/Catalog/OriginalRoundAssertions/OriginalRoundSqlRealTests.cs",
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/catalog-original-test-audit/round-sql-001/original-round-sql-native-001.sources/Tests/Catalog/OriginalRoundAssertions/OriginalRoundSqlRealTests.cs",
+      "immutableSource": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/catalog-original-test-audit/round-sql-001/original-round-sql-native-001.sources/Tests/Catalog/OriginalRoundAssertions/OriginalRoundSqlRealTests.cs",
+      "sha256": "b14c2383d096cec8a7dad6685f724395eafabf1b150b28cf1f25df98b4ebbcc9",
+      "length": 6460,
+      "canonicalTarget": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Catalog/OriginalRoundAssertions/OriginalRoundSqlRealTests.cs",
+      "expectedPreviousSha256": null,
+      "priorSha256": null,
+      "privateChronologicalPrior": null
+    }
+  ],
+  "entries": [
+    {
+      "legacyPath": "rehydration/producers/release-011/tests/test_round2.py",
+      "legacySha256": "95e6957ad9e4d951588eed55b43393a6ebb5cdaf173993157e83df6d57925765",
+      "owner": "Catalog",
+      "normal_file_verified": false,
+      "normal_verified_methods": [],
+      "candidateQualifiedMethods": [
+        "test_bridge_config_matches_named_design_records",
+        "test_scoped_idempotency_storage"
+      ],
+      "methodProof": [
+        {
+          "method": "test_bridge_config_matches_named_design_records",
+          "line": 45,
+          "originalBody": " def test_bridge_config_matches_named_design_records(self):\n  db=sqlite3.connect(':memory:');self.addCleanup(db.close);db.executescript((P/'bridge-config.sql').read_text())\n  tables={x[0] for x in db.execute(\"SELECT name FROM sqlite_master WHERE type='table'\")}\n  self.assertTrue({'resource_grants','bridge_config','client_logging_config','client_call_logs','logging_counters','target_app_profiles','client_raw_grants'}<=tables)\n  columns={x[1] for x in db.execute('PRAGMA table_info(client_call_logs)')};self.assertIn('payload_ciphertext',columns);self.assertNotIn('projection_json',columns)\n  cols={x[1] for x in db.execute('PRAGMA table_info(executions)')};self.assertTrue({'connection_profile_id','target_id','backend_kind','dispatch_time'}<=cols)\n  expected={\n   'resource_grants':'handle_id client_id exact_uri_ciphertext key_alias modes enabled revision created_at',\n   'bridge_config':'singleton_id row_version desired_state start_on_boot last_stop_reason fgs_type transport_profile loopback_address port_preference server_identity_key_alias retention_days audit_size_cap',\n   'client_logging_config':'client_id mode paused logging_revision retention_seconds byte_quota record_byte_cap diagnostic_expires_at diagnostic_boot_id redaction_profile_version updated_at',\n   'client_call_logs':'log_id client_id call_id tool_id backend_kind started_at finished_at decision_code outcome_code policy_revision logging_revision expires_at size_bytes payload_ciphertext key_alias',\n   'logging_counters':'client_id optional_dropped_count quota_dropped_count last_drop_at',\n   'connection_profiles':'profile_id backend_kind display_name enabled row_version device_serial_or_binding android_user_id endpoint_metadata_json peer_fingerprint verification_strength secret_ciphertext wrapping_key_alias paired_at revoked_at',\n   'target_app_profiles':'target_id connection_profile_id package_name signing_identity identity_verification_method runtime_protocol runtime_endpoint server_identity enabled row_version'}\n  for table,names in expected.items():self.assertTrue(set(names.split())<={r[1] for r in db.execute('PRAGMA table_info('+table+')')},table)\n  indexes=[r[0] for r in db.execute(\"SELECT sql FROM sqlite_master WHERE type='index' AND sql IS NOT NULL\")]\n  self.assertTrue(any('WHERE idempotency_key IS NOT NULL' in sql and 'UNIQUE' in sql for sql in indexes))\n  db.executescript((P/'schema.sql').read_text());self.assertEqual(db.execute('PRAGMA foreign_key_check').fetchall(),[])\n",
+          "originalBodySha256": "bfff333ad22125f44013bea340827be6a8c43d2e4690483a67ff591ec567b688",
+          "originalAssertionLines": [
+            "  self.assertTrue({'resource_grants','bridge_config','client_logging_config','client_call_logs','logging_counters','target_app_profiles','client_raw_grants'}<=tables)",
+            "  columns={x[1] for x in db.execute('PRAGMA table_info(client_call_logs)')};self.assertIn('payload_ciphertext',columns);self.assertNotIn('projection_json',columns)",
+            "  cols={x[1] for x in db.execute('PRAGMA table_info(executions)')};self.assertTrue({'connection_profile_id','target_id','backend_kind','dispatch_time'}<=cols)",
+            "  for table,names in expected.items():self.assertTrue(set(names.split())<={r[1] for r in db.execute('PRAGMA table_info('+table+')')},table)",
+            "  self.assertTrue(any('WHERE idempotency_key IS NOT NULL' in sql and 'UNIQUE' in sql for sql in indexes))",
+            "  db.executescript((P/'schema.sql').read_text());self.assertEqual(db.execute('PRAGMA foreign_key_check').fetchall(),[])"
+          ],
+          "nativeCaseFamily": "bridge-design",
+          "nativeTest": "OriginalRoundSqlRealTests.SameOriginalAssertionsExecuteCurrentAndFrozenPinnedSqlSeparately",
+          "privateNormalAssertionProof": true,
+          "rootIntegratedProofPending": true,
+          "newOriginalMethodClaims": 0
+        },
+        {
+          "method": "test_scoped_idempotency_storage",
+          "line": 63,
+          "originalBody": " def test_scoped_idempotency_storage(self):\n  db=sqlite3.connect(':memory:');self.addCleanup(db.close);db.executescript((P/'schema.sql').read_text())\n  for principal in ('alice','bob'):db.execute('INSERT INTO idempotency_records VALUES(?,?,?,?,?,?,?)',(principal,'create','same-key','a'*64,201,'{}','resource'))\n  self.assertEqual(db.execute('SELECT count(*) FROM idempotency_records').fetchone()[0],2)\n",
+          "originalBodySha256": "2bc51c0d1f130e46212cdbbf63a9dd8828fa6ee38dd2d681b413e63eff304d79",
+          "originalAssertionLines": [
+            "  self.assertEqual(db.execute('SELECT count(*) FROM idempotency_records').fetchone()[0],2)"
+          ],
+          "nativeCaseFamily": "principal-idempotency",
+          "nativeTest": "OriginalRoundSqlRealTests.SameOriginalAssertionsExecuteCurrentAndFrozenPinnedSqlSeparately",
+          "privateNormalAssertionProof": true,
+          "rootIntegratedProofPending": true,
+          "newOriginalMethodClaims": 0
+        }
+      ],
+      "profile": "release-011 actual frozen DDL/schema execution",
+      "remaining_methods": [
+        "test_source_metadata_and_generation_round_trip",
+        "test_missing_inventory_metadata_fails_closed",
+        "test_corrected_source_fact_gets_new_occurrence_not_new_binding",
+        "test_package_and_type_have_distinct_identity_namespaces",
+        "test_failed_header_does_not_pop_package",
+        "test_legacy_extractor_has_no_executable_run",
+        "test_dispatch_schema_is_independent_of_provenance",
+        "test_external_annotations_scope_mapping_and_parse_error",
+        "test_positive_raw_grant_never_overrides_known_binding",
+        "test_overlay_revision_identity_and_registry_state_constraints",
+        "test_minor_schema_and_declaration_variants",
+        "test_permission_export_and_optimized_validation"
+      ],
+      "scope": "Exact selected original TEST methods only. Other Round2/3 duties and previously proven methods remain in their existing authorities; no whole file/producer closure",
+      "accepted_complete": false,
+      "safe_to_delete": false
+    },
+    {
+      "legacyPath": "rehydration/producers/release-011/tests/test_round3.py",
+      "legacySha256": "25e615adadb6ee953ce17b1c4ec8db71133777fbf288b2506a937cd9192e980d",
+      "owner": "Catalog",
+      "normal_file_verified": false,
+      "normal_verified_methods": [],
+      "candidateQualifiedMethods": [
+        "test_raw_constraints_have_one_authority"
+      ],
+      "methodProof": [
+        {
+          "method": "test_raw_constraints_have_one_authority",
+          "line": 43,
+          "originalBody": " def test_raw_constraints_have_one_authority(self):\n  schema=json.loads((P/'contracts/RawGrant.schema.json').read_text());scope=dict(allowed_targets=['t'],allowed_handles=['aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123'],allowed_displays=[0],max_items=2);jsonschema.Draft202012Validator(schema).validate(scope)\n  db=sqlite3.connect(':memory:');self.addCleanup(db.close);db.executescript((P/'bridge-config.sql').read_text());db.execute(\"INSERT INTO clients VALUES('c','fixture','active',0,1,0,0,NULL)\");db.execute(\"INSERT INTO connection_profiles(profile_id,backend_kind,display_name,enabled,row_version,android_user_id,endpoint_metadata_json,verification_strength) VALUES('p','self_adb','fixture',0,1,0,'{}','fixture')\")\n  with self.assertRaises(sqlite3.IntegrityError):db.execute('INSERT INTO client_raw_grants VALUES(?,?,?,?,?,?,?,?,?,?)',('c','p','fixture.I',1,9,0,'a'*64,'ask',json.dumps(dict(scope,code_min=99)),1))\n",
+          "originalBodySha256": "07a35e6a4c110a06a280a8b8f7feca3b8157c88ac68e8efe3090b99d5bc4e88d",
+          "originalAssertionLines": [
+            "  with self.assertRaises(sqlite3.IntegrityError):db.execute('INSERT INTO client_raw_grants VALUES(?,?,?,?,?,?,?,?,?,?)',('c','p','fixture.I',1,9,0,'a'*64,'ask',json.dumps(dict(scope,code_min=99)),1))"
+          ],
+          "nativeCaseFamily": "raw-scope-authority",
+          "nativeTest": "OriginalRoundSqlRealTests.SameOriginalAssertionsExecuteCurrentAndFrozenPinnedSqlSeparately",
+          "privateNormalAssertionProof": true,
+          "rootIntegratedProofPending": true,
+          "newOriginalMethodClaims": 0
+        }
+      ],
+      "profile": "release-011 actual frozen DDL/schema execution",
+      "remaining_methods": [
+        "test_java_lang_annotation_target",
+        "test_parser_revision_creates_immutable_evidence_instance",
+        "test_permission_summary_matches_export_contract",
+        "test_positive_and_absent_permission_evidence_remain_visible",
+        "test_generated_and_generic_share_policy_and_known_raw_cannot_bypass",
+        "test_database_validation_without_exports",
+        "test_published_pointer_and_single_published_registry",
+        "test_overlay_commit_requires_same_revision_history",
+        "test_local_collision_cannot_publish_or_leak_discovery",
+        "test_native_availability_and_bounded_audit_retention",
+        "test_import_metadata_and_history_cursor_contract",
+        "test_migration_seeds_published_version_and_marks_legacy"
+      ],
+      "scope": "Exact selected original TEST methods only. Other Round2/3 duties and previously proven methods remain in their existing authorities; no whole file/producer closure",
+      "accepted_complete": false,
+      "safe_to_delete": false
+    },
+    {
+      "legacyPath": "remediation/catalog/tests/test_round2.py",
+      "legacySha256": "95e6957ad9e4d951588eed55b43393a6ebb5cdaf173993157e83df6d57925765",
+      "owner": "Catalog",
+      "normal_file_verified": false,
+      "normal_verified_methods": [],
+      "candidateQualifiedMethods": [
+        "test_bridge_config_matches_named_design_records",
+        "test_scoped_idempotency_storage"
+      ],
+      "methodProof": [
+        {
+          "method": "test_bridge_config_matches_named_design_records",
+          "line": 45,
+          "originalBody": " def test_bridge_config_matches_named_design_records(self):\n  db=sqlite3.connect(':memory:');self.addCleanup(db.close);db.executescript((P/'bridge-config.sql').read_text())\n  tables={x[0] for x in db.execute(\"SELECT name FROM sqlite_master WHERE type='table'\")}\n  self.assertTrue({'resource_grants','bridge_config','client_logging_config','client_call_logs','logging_counters','target_app_profiles','client_raw_grants'}<=tables)\n  columns={x[1] for x in db.execute('PRAGMA table_info(client_call_logs)')};self.assertIn('payload_ciphertext',columns);self.assertNotIn('projection_json',columns)\n  cols={x[1] for x in db.execute('PRAGMA table_info(executions)')};self.assertTrue({'connection_profile_id','target_id','backend_kind','dispatch_time'}<=cols)\n  expected={\n   'resource_grants':'handle_id client_id exact_uri_ciphertext key_alias modes enabled revision created_at',\n   'bridge_config':'singleton_id row_version desired_state start_on_boot last_stop_reason fgs_type transport_profile loopback_address port_preference server_identity_key_alias retention_days audit_size_cap',\n   'client_logging_config':'client_id mode paused logging_revision retention_seconds byte_quota record_byte_cap diagnostic_expires_at diagnostic_boot_id redaction_profile_version updated_at',\n   'client_call_logs':'log_id client_id call_id tool_id backend_kind started_at finished_at decision_code outcome_code policy_revision logging_revision expires_at size_bytes payload_ciphertext key_alias',\n   'logging_counters':'client_id optional_dropped_count quota_dropped_count last_drop_at',\n   'connection_profiles':'profile_id backend_kind display_name enabled row_version device_serial_or_binding android_user_id endpoint_metadata_json peer_fingerprint verification_strength secret_ciphertext wrapping_key_alias paired_at revoked_at',\n   'target_app_profiles':'target_id connection_profile_id package_name signing_identity identity_verification_method runtime_protocol runtime_endpoint server_identity enabled row_version'}\n  for table,names in expected.items():self.assertTrue(set(names.split())<={r[1] for r in db.execute('PRAGMA table_info('+table+')')},table)\n  indexes=[r[0] for r in db.execute(\"SELECT sql FROM sqlite_master WHERE type='index' AND sql IS NOT NULL\")]\n  self.assertTrue(any('WHERE idempotency_key IS NOT NULL' in sql and 'UNIQUE' in sql for sql in indexes))\n  db.executescript((P/'schema.sql').read_text());self.assertEqual(db.execute('PRAGMA foreign_key_check').fetchall(),[])\n",
+          "originalBodySha256": "bfff333ad22125f44013bea340827be6a8c43d2e4690483a67ff591ec567b688",
+          "originalAssertionLines": [
+            "  self.assertTrue({'resource_grants','bridge_config','client_logging_config','client_call_logs','logging_counters','target_app_profiles','client_raw_grants'}<=tables)",
+            "  columns={x[1] for x in db.execute('PRAGMA table_info(client_call_logs)')};self.assertIn('payload_ciphertext',columns);self.assertNotIn('projection_json',columns)",
+            "  cols={x[1] for x in db.execute('PRAGMA table_info(executions)')};self.assertTrue({'connection_profile_id','target_id','backend_kind','dispatch_time'}<=cols)",
+            "  for table,names in expected.items():self.assertTrue(set(names.split())<={r[1] for r in db.execute('PRAGMA table_info('+table+')')},table)",
+            "  self.assertTrue(any('WHERE idempotency_key IS NOT NULL' in sql and 'UNIQUE' in sql for sql in indexes))",
+            "  db.executescript((P/'schema.sql').read_text());self.assertEqual(db.execute('PRAGMA foreign_key_check').fetchall(),[])"
+          ],
+          "nativeCaseFamily": "bridge-design",
+          "nativeTest": "OriginalRoundSqlRealTests.SameOriginalAssertionsExecuteCurrentAndFrozenPinnedSqlSeparately",
+          "privateNormalAssertionProof": true,
+          "rootIntegratedProofPending": true,
+          "newOriginalMethodClaims": 0
+        },
+        {
+          "method": "test_scoped_idempotency_storage",
+          "line": 63,
+          "originalBody": " def test_scoped_idempotency_storage(self):\n  db=sqlite3.connect(':memory:');self.addCleanup(db.close);db.executescript((P/'schema.sql').read_text())\n  for principal in ('alice','bob'):db.execute('INSERT INTO idempotency_records VALUES(?,?,?,?,?,?,?)',(principal,'create','same-key','a'*64,201,'{}','resource'))\n  self.assertEqual(db.execute('SELECT count(*) FROM idempotency_records').fetchone()[0],2)\n",
+          "originalBodySha256": "2bc51c0d1f130e46212cdbbf63a9dd8828fa6ee38dd2d681b413e63eff304d79",
+          "originalAssertionLines": [
+            "  self.assertEqual(db.execute('SELECT count(*) FROM idempotency_records').fetchone()[0],2)"
+          ],
+          "nativeCaseFamily": "principal-idempotency",
+          "nativeTest": "OriginalRoundSqlRealTests.SameOriginalAssertionsExecuteCurrentAndFrozenPinnedSqlSeparately",
+          "privateNormalAssertionProof": true,
+          "rootIntegratedProofPending": true,
+          "newOriginalMethodClaims": 0
+        }
+      ],
+      "profile": "current actual current DDL/schema execution",
+      "remaining_methods": [
+        "test_source_metadata_and_generation_round_trip",
+        "test_missing_inventory_metadata_fails_closed",
+        "test_corrected_source_fact_gets_new_occurrence_not_new_binding",
+        "test_package_and_type_have_distinct_identity_namespaces",
+        "test_failed_header_does_not_pop_package",
+        "test_legacy_extractor_has_no_executable_run",
+        "test_dispatch_schema_is_independent_of_provenance",
+        "test_external_annotations_scope_mapping_and_parse_error",
+        "test_positive_raw_grant_never_overrides_known_binding",
+        "test_overlay_revision_identity_and_registry_state_constraints",
+        "test_minor_schema_and_declaration_variants",
+        "test_permission_export_and_optimized_validation"
+      ],
+      "scope": "Exact selected original TEST methods only. Other Round2/3 duties and previously proven methods remain in their existing authorities; no whole file/producer closure",
+      "accepted_complete": false,
+      "safe_to_delete": false
+    },
+    {
+      "legacyPath": "remediation/catalog/tests/test_round3.py",
+      "legacySha256": "25e615adadb6ee953ce17b1c4ec8db71133777fbf288b2506a937cd9192e980d",
+      "owner": "Catalog",
+      "normal_file_verified": false,
+      "normal_verified_methods": [],
+      "candidateQualifiedMethods": [
+        "test_raw_constraints_have_one_authority"
+      ],
+      "methodProof": [
+        {
+          "method": "test_raw_constraints_have_one_authority",
+          "line": 43,
+          "originalBody": " def test_raw_constraints_have_one_authority(self):\n  schema=json.loads((P/'contracts/RawGrant.schema.json').read_text());scope=dict(allowed_targets=['t'],allowed_handles=['aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123'],allowed_displays=[0],max_items=2);jsonschema.Draft202012Validator(schema).validate(scope)\n  db=sqlite3.connect(':memory:');self.addCleanup(db.close);db.executescript((P/'bridge-config.sql').read_text());db.execute(\"INSERT INTO clients VALUES('c','fixture','active',0,1,0,0,NULL)\");db.execute(\"INSERT INTO connection_profiles(profile_id,backend_kind,display_name,enabled,row_version,android_user_id,endpoint_metadata_json,verification_strength) VALUES('p','self_adb','fixture',0,1,0,'{}','fixture')\")\n  with self.assertRaises(sqlite3.IntegrityError):db.execute('INSERT INTO client_raw_grants VALUES(?,?,?,?,?,?,?,?,?,?)',('c','p','fixture.I',1,9,0,'a'*64,'ask',json.dumps(dict(scope,code_min=99)),1))\n",
+          "originalBodySha256": "07a35e6a4c110a06a280a8b8f7feca3b8157c88ac68e8efe3090b99d5bc4e88d",
+          "originalAssertionLines": [
+            "  with self.assertRaises(sqlite3.IntegrityError):db.execute('INSERT INTO client_raw_grants VALUES(?,?,?,?,?,?,?,?,?,?)',('c','p','fixture.I',1,9,0,'a'*64,'ask',json.dumps(dict(scope,code_min=99)),1))"
+          ],
+          "nativeCaseFamily": "raw-scope-authority",
+          "nativeTest": "OriginalRoundSqlRealTests.SameOriginalAssertionsExecuteCurrentAndFrozenPinnedSqlSeparately",
+          "privateNormalAssertionProof": true,
+          "rootIntegratedProofPending": true,
+          "newOriginalMethodClaims": 0
+        }
+      ],
+      "profile": "current actual current DDL/schema execution",
+      "remaining_methods": [
+        "test_java_lang_annotation_target",
+        "test_parser_revision_creates_immutable_evidence_instance",
+        "test_permission_summary_matches_export_contract",
+        "test_positive_and_absent_permission_evidence_remain_visible",
+        "test_generated_and_generic_share_policy_and_known_raw_cannot_bypass",
+        "test_database_validation_without_exports",
+        "test_published_pointer_and_single_published_registry",
+        "test_overlay_commit_requires_same_revision_history",
+        "test_local_collision_cannot_publish_or_leak_discovery",
+        "test_native_availability_and_bounded_audit_retention",
+        "test_import_metadata_and_history_cursor_contract",
+        "test_migration_seeds_published_version_and_marks_legacy"
+      ],
+      "scope": "Exact selected original TEST methods only. Other Round2/3 duties and previously proven methods remain in their existing authorities; no whole file/producer closure",
+      "accepted_complete": false,
+      "safe_to_delete": false
+    }
+  ],
+  "originalDistinctMethods": 3,
+  "originalProfileMethodInstances": 6,
+  "newOriginalMethodClaims": 0,
+  "mock": {
+    "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/catalog-original-test-audit/round-sql-001/original-round-sql-mock-001.json",
+    "sha256": "bb959393ef09207dc08123342ddf2a7e8eca23d3acda6e24f935dea9bafce5d0",
+    "bytes": 2879
+  },
+  "native": {
+    "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/catalog-original-test-audit/round-sql-001/original-round-sql-native-001.json",
+    "sha256": "fda1df9178b66f55c046ddd6604f8d751c3fea77d4ee18d226126e4a1c8001e8",
+    "bytes": 4252
+  },
+  "trx": {
+    "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/artifacts/tests/20261029T0551338619320-fe6ddeca05eb439d9f0c91857cf21393/tests.trx",
+    "sha256": "c414b4e7dade97f22a8e71e926cb3e82f9dee74651fcde642274cf9b4ab49ba1",
+    "passed": 18,
+    "failed": 0,
+    "skipped": 0,
+    "classes": {
+      "OriginalRoundSqlMockTests": 12,
+      "OriginalRoundSqlRealTests": 6
+    }
+  },
+  "originalAudit": {
+    "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/java/parallel/java-completion/catalog-original-test-audit/four-partial-test-methods-001.proposed.json",
+    "sha256": "8293dfad3688ca4331b8ee6ef3ee81a6e1f7942a0e87c140bdcfa38d0c508eb6",
+    "bytes": 230625
+  },
+  "explicitFixtureProfiles": [
+    {
+      "profile": "current",
+      "catalogRoot": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog",
+      "schemaSql": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/schema.sql",
+        "sha256": "1da92241bbfd56070d4ac68531766a6ec411e5fd7b6710613a98666daefbd4bc",
+        "bytes": 21857
+      },
+      "bridgeSql": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/bridge-config.sql",
+        "sha256": "fb05207e7d3e5d2943ba362f313a75b60317d1493a63e92286ca8b5ea36a5e1f",
+        "bytes": 38872
+      },
+      "rawGrantSchema": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/contracts/RawGrant.schema.json",
+        "sha256": "6ba3dcaeb4b05eae1025ce22e7c45d922b707d5e01e9d9dd428a3c703023a284",
+        "bytes": 981
+      },
+      "executed": "bridge-design: Bridge DDL then exact Entry DDL and FK check; principal-idempotency: Entry DDL; raw-scope-authority: Bridge DDL plus exact RawGrant JSON schema",
+      "frozenExecutionInferred": false
+    },
+    {
+      "profile": "release-011",
+      "catalogRoot": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011",
+      "schemaSql": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/schema.sql",
+        "sha256": "1da92241bbfd56070d4ac68531766a6ec411e5fd7b6710613a98666daefbd4bc",
+        "bytes": 21857
+      },
+      "bridgeSql": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/bridge-config.sql",
+        "sha256": "b98dcbf8e768a0484d3960408a3295c708349aa3794834f5fa787492ad646a38",
+        "bytes": 35071
+      },
+      "rawGrantSchema": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/contracts/RawGrant.schema.json",
+        "sha256": "6ba3dcaeb4b05eae1025ce22e7c45d922b707d5e01e9d9dd428a3c703023a284",
+        "bytes": 981
+      },
+      "executed": "bridge-design: Bridge DDL then exact Entry DDL and FK check; principal-idempotency: Entry DDL; raw-scope-authority: Bridge DDL plus exact RawGrant JSON schema",
+      "frozenExecutionInferred": false
+    }
+  ],
+  "sharedDependencies": [
+    {
+      "relativePath": "Modules/Catalog/CatalogDatabase.cs",
+      "private": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Modules/Catalog/CatalogDatabase.cs",
+        "sha256": "375a3be844b739e07bbfdb7203c7fc3976f6449f2c24406a7237654134eace3a",
+        "bytes": 3651
+      },
+      "canonical": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Modules/Catalog/CatalogDatabase.cs",
+        "sha256": "d9b18aafeaf81c5c0c7d8b817fa81aadba49cb31fad1b17fdc6097ee1cdc324f",
+        "bytes": 4219
+      },
+      "modified": false
+    },
+    {
+      "relativePath": "Core/ContentHash.cs",
+      "private": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Core/ContentHash.cs",
+        "sha256": "06b7f908c78d70c2c7295d84f1384b7be503c0faa96c7afb32a36b31f3fc31c6",
+        "bytes": 1105
+      },
+      "canonical": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Core/ContentHash.cs",
+        "sha256": "06b7f908c78d70c2c7295d84f1384b7be503c0faa96c7afb32a36b31f3fc31c6",
+        "bytes": 1105
+      },
+      "modified": false
+    },
+    {
+      "relativePath": "Core/FileArtifactStore.cs",
+      "private": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Core/FileArtifactStore.cs",
+        "sha256": "e8779cdf8521fb211018f7cbe3db4a523058204a3692533b1c5fb0798513eb6a",
+        "bytes": 13735
+      },
+      "canonical": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Core/FileArtifactStore.cs",
+        "sha256": "1c127b991ac4f4b587d9127c6df806bcd01110e1d3fdd27f1d906e926716047f",
+        "bytes": 14492
+      },
+      "modified": false
+    },
+    {
+      "relativePath": "Tests/Catalog/SqliteSchemaRealTests.cs",
+      "private": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Tests/Catalog/SqliteSchemaRealTests.cs",
+        "sha256": "51acc02bb0c7a50bb9cac36c090821b9c57860007672a9785ffc15e48972e08b",
+        "bytes": 2984
+      },
+      "canonical": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/Catalog/SqliteSchemaRealTests.cs",
+        "sha256": "51acc02bb0c7a50bb9cac36c090821b9c57860007672a9785ffc15e48972e08b",
+        "bytes": 2984
+      },
+      "modified": false
+    },
+    {
+      "relativePath": "AndroidMcp.Build.csproj",
+      "private": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/AndroidMcp.Build.csproj",
+        "sha256": "e4e13ba7d2ae3d804f428a98a182505c61cb4321da4ac62b974984bf2411afb3",
+        "bytes": 1539
+      },
+      "canonical": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/AndroidMcp.Build.csproj",
+        "sha256": "e4e13ba7d2ae3d804f428a98a182505c61cb4321da4ac62b974984bf2411afb3",
+        "bytes": 1539
+      },
+      "modified": false
+    },
+    {
+      "relativePath": "Tests/AndroidMcp.Build.Tests.csproj",
+      "private": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/java/nuke-app/Tests/AndroidMcp.Build.Tests.csproj",
+        "sha256": "b33448cb7c18db3e9cb3fbdf74205d791a0b35624f608c2ccdfa4677f3ade1ff",
+        "bytes": 1104
+      },
+      "canonical": {
+        "path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-app/Tests/AndroidMcp.Build.Tests.csproj",
+        "sha256": "b33448cb7c18db3e9cb3fbdf74205d791a0b35624f608c2ccdfa4677f3ade1ff",
+        "bytes": 1104
+      },
+      "modified": false
+    }
+  ],
+  "exactAssertions": [
+    "Original seven required table names, payload_ciphertext/projection_json distinction, executions columns and seven column subsets; UNIQUE plus WHERE idempotency_key IS NOT NULL, EntryDDL append then FK empty",
+    "Original alice/bob create/same-key/a*64/201/{}/resource seven-value tuples and exact count2",
+    "Original valid RawGrant scope targets[t], handleaaa940..., displays[0], max_items2 validates; exact c/p/fixture.I/1/9/0/a*64/ask/scope+code_min99/1 tuple rejects SQLite19"
+  ],
+  "independentControls": "Every required table/column omitted independently; missing UNIQUE or index predicate; unexpected projection_json or FK failure; wrong row cardinality; invalid schema/positive SQL precondition, accepted forbidden field, wrong error, mutated scope/input, and retained-input failures all rejected by mocks",
+  "strengthenedNativeDiscriminator": "Exact valid raw-grant tuple inserted in an independent transaction and rolled back, rowcount0 confirmed, then only constraints_json.code_min99 added before original rejection; prevents duplicate-key or unrelated FK failure from masquerading as authority proof",
+  "frameworkResponsibilities": "Python unittest/sqlite3/jsonschema mapped to shared CatalogDatabase, Microsoft.Data.Sqlite constraint19 and existing Json.Schema. Only SQL parameter names adapt; original values and assertions retained. Extra columns remain permitted by original subset assertions",
+  "warning": "NU1900 vulnerability feed unavailable retained",
+  "rootIntegratedFullGatePending": true,
+  "canonicalChanged": false,
+  "authorityChanged": false,
+  "productionChanged": false,
+  "hv": false,
+  "accepted_complete": false,
+  "safe_to_delete": false
+}

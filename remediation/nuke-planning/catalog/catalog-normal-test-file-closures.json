@@ -2266,6 +2266,424 @@
       "proposal_only": false,
       "rootFullGateSha256": "bac5431d1b4d53022b3a6b644a30e77203c53a16a4ec0f9a6997f040a4f854fb",
       "frozenProfileNote": "unittest/tempfile/Python exceptions adapt to shared native test providers; source SHA identity stays truthful C# producer identity Current original test file only; frozen profiles and whole producer/corpus/HV remain separate."
+    },
+    {
+      "legacyPath": "rehydration/producers/release-011/tooling/migrate_v3.py",
+      "legacySha256": "e4eff83d352313b155c2b7b572df6f2e4f98f8fb2876e0eeaabb7fa39663de5e",
+      "owner": "Catalog",
+      "category": "Catalog",
+      "operation": "Migrate",
+      "normal_verified": true,
+      "normal_verified_methods": [],
+      "normal_verified_functions": [
+        {
+          "legacyPath": "remediation/catalog/tooling/migrate_v3.py",
+          "legacySha256": "e4eff83d352313b155c2b7b572df6f2e4f98f8fb2876e0eeaabb7fa39663de5e",
+          "originalNamedFunctions": [
+            "migrate"
+          ],
+          "nativeService": "AndroidMcp.BuildTool.Catalog.Migration.CatalogCopyMigration.MigrateAsync",
+          "functionBodyNormalPrivateVerified": true,
+          "nativeMethodCountsAddedToOriginals": 0,
+          "requiredCaller": "Original __main__ migrate(argv[1],argv[2]) maps to Root-owned future Catalog operation",
+          "rootCliPending": true,
+          "normal_file_verified": false,
+          "accepted_complete": false,
+          "safe_to_delete": false
+        },
+        {
+          "legacyPath": "rehydration/producers/release-011/tooling/migrate_v3.py",
+          "legacySha256": "e4eff83d352313b155c2b7b572df6f2e4f98f8fb2876e0eeaabb7fa39663de5e",
+          "originalNamedFunctions": [
+            "migrate"
+          ],
+          "nativeService": "AndroidMcp.BuildTool.Catalog.Migration.CatalogCopyMigration.MigrateAsync",
+          "functionBodyNormalPrivateVerified": true,
+          "nativeMethodCountsAddedToOriginals": 0,
+          "requiredCaller": "Original __main__ migrate(argv[1],argv[2]) maps to Root-owned future Catalog operation",
+          "rootCliPending": true,
+          "normal_file_verified": false,
+          "accepted_complete": false,
+          "safe_to_delete": false
+        }
+      ],
+      "pending_methods": [],
+      "pending_functions": [],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false,
+      "decommissionable_from_pr": false,
+      "rootFullGateSha256": "0054a5054eed7ef3710e223c256951b330423aab48ec445ff206601d7149cfde",
+      "nativeService": "CatalogCopyMigration.MigrateAsync + CatalogMigrationWorkflowReader + compiled Catalog/Migrate",
+      "nativeTest": "CatalogMigrationRealTests + CatalogMigrationStreamingRealTests + CatalogMigrationWorkflowRealTests + CatalogMigrationPlannerRealTests",
+      "ownerHandoff": "remediation/nuke-planning/java/parallel/java-completion/catalog-original-test-audit/migration/root-canonical-migration-cli-import-003.json",
+      "ownerHandoffSha256": "46365c664c9ec8dc1275d23df3602cb1b688983fe6aeecad2cd48e6054f2297d",
+      "caller": [
+        {
+          "legacyPath": "remediation/catalog/tests/test_remediation.py",
+          "pin": {
+            "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tests/test_remediation.py",
+            "sha256": "e04129213f87be4c19ef30774835f8ff2a07b1ae2bb860bbbcb9ea8c4ef816c4",
+            "bytes": 7217
+          },
+          "originalMethod": "test_offline_copy_migration",
+          "sameNativeVariants": [
+            "offline-analyze"
+          ],
+          "retainedAssertions": "ANALYZE internal tables excluded; original bytes unchanged, state published, user_version3",
+          "profileDistinction": "Each native variant executes separately against exact frozen2 and current3 script lists; no current fixture substituted for frozen proof",
+          "originalMethodClaimAdded": 0
+        },
+        {
+          "legacyPath": "rehydration/producers/release-011/tests/test_remediation.py",
+          "pin": {
+            "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tests/test_remediation.py",
+            "sha256": "e04129213f87be4c19ef30774835f8ff2a07b1ae2bb860bbbcb9ea8c4ef816c4",
+            "bytes": 7217
+          },
+          "originalMethod": "test_offline_copy_migration",
+          "sameNativeVariants": [
+            "offline-analyze"
+          ],
+          "retainedAssertions": "ANALYZE internal tables excluded; original bytes unchanged, state published, user_version3",
+          "profileDistinction": "Each native variant executes separately against exact frozen2 and current3 script lists; no current fixture substituted for frozen proof",
+          "originalMethodClaimAdded": 0
+        },
+        {
+          "legacyPath": "remediation/catalog/tests/test_round3.py",
+          "pin": {
+            "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tests/test_round3.py",
+            "sha256": "25e615adadb6ee953ce17b1c4ec8db71133777fbf288b2506a937cd9192e980d",
+            "bytes": 12256
+          },
+          "originalMethod": "test_migration_seeds_published_version_and_marks_legacy",
+          "sameNativeVariants": [
+            "published-five"
+          ],
+          "retainedAssertions": "catalog_view registry_generation5 and rebuilt_with_corrected_extractor false",
+          "profileDistinction": "Each native variant executes separately against exact frozen2 and current3 script lists; no current fixture substituted for frozen proof",
+          "originalMethodClaimAdded": 0
+        },
+        {
+          "legacyPath": "rehydration/producers/release-011/tests/test_round3.py",
+          "pin": {
+            "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tests/test_round3.py",
+            "sha256": "25e615adadb6ee953ce17b1c4ec8db71133777fbf288b2506a937cd9192e980d",
+            "bytes": 12256
+          },
+          "originalMethod": "test_migration_seeds_published_version_and_marks_legacy",
+          "sameNativeVariants": [
+            "published-five"
+          ],
+          "retainedAssertions": "catalog_view registry_generation5 and rebuilt_with_corrected_extractor false",
+          "profileDistinction": "Each native variant executes separately against exact frozen2 and current3 script lists; no current fixture substituted for frozen proof",
+          "originalMethodClaimAdded": 0
+        },
+        {
+          "legacyPath": "remediation/catalog/tests/test_sealed_registry.py",
+          "pin": {
+            "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tests/test_sealed_registry.py",
+            "sha256": "fa5929663be1144c542bd33b017497062bae5111c62d4469efb466fe466df50a",
+            "bytes": 3535
+          },
+          "originalMethod": "test_copy_migration_restores_retired_before_published",
+          "sameNativeVariants": [
+            "retired-before-published"
+          ],
+          "retainedAssertions": "exact old retired/selected published states, selected active pointer, generation5",
+          "profileDistinction": "Each native variant executes separately against exact frozen2 and current3 script lists; no current fixture substituted for frozen proof",
+          "originalMethodClaimAdded": 0
+        },
+        {
+          "legacyPath": "rehydration/producers/release-011/tests/test_sealed_registry.py",
+          "pin": {
+            "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tests/test_sealed_registry.py",
+            "sha256": "fa5929663be1144c542bd33b017497062bae5111c62d4469efb466fe466df50a",
+            "bytes": 3535
+          },
+          "originalMethod": "test_copy_migration_restores_retired_before_published",
+          "sameNativeVariants": [
+            "retired-before-published"
+          ],
+          "retainedAssertions": "exact old retired/selected published states, selected active pointer, generation5",
+          "profileDistinction": "Each native variant executes separately against exact frozen2 and current3 script lists; no current fixture substituted for frozen proof",
+          "originalMethodClaimAdded": 0
+        },
+        {
+          "legacyPath": "remediation/catalog/tests/test_round5.py",
+          "pin": {
+            "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tests/test_round5.py",
+            "sha256": "367176a7f938cf4678159d66a1ede0d3caf483bf27f91e1e5c030a69f7376543",
+            "bytes": 9842
+          },
+          "originalMethod": "test_copy_migration_rejects_deleted_local_collision",
+          "sameNativeVariants": [
+            "deleted-local-collision"
+          ],
+          "retainedAssertions": "same deleted local overlay/history fixture rejects imported collision; no final DB, retained stage/source",
+          "profileDistinction": "Each native variant executes separately against exact frozen2 and current3 script lists; no current fixture substituted for frozen proof",
+          "originalMethodClaimAdded": 0
+        },
+        {
+          "legacyPath": "rehydration/producers/release-011/tests/test_round5.py",
+          "pin": {
+            "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tests/test_round5.py",
+            "sha256": "367176a7f938cf4678159d66a1ede0d3caf483bf27f91e1e5c030a69f7376543",
+            "bytes": 9842
+          },
+          "originalMethod": "test_copy_migration_rejects_deleted_local_collision",
+          "sameNativeVariants": [
+            "deleted-local-collision"
+          ],
+          "retainedAssertions": "same deleted local overlay/history fixture rejects imported collision; no final DB, retained stage/source",
+          "profileDistinction": "Each native variant executes separately against exact frozen2 and current3 script lists; no current fixture substituted for frozen proof",
+          "originalMethodClaimAdded": 0
+        },
+        {
+          "legacyPath": "remediation/catalog/tests/test_round8.py",
+          "pin": {
+            "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tests/test_round8.py",
+            "sha256": "77e8320a25fe6408ee7f9cba9c70b2545c0932fae056a7b9830267c2af6cc9a4",
+            "bytes": 12035
+          },
+          "originalMethod": "test_copy_migration_admits_only_matching_imported_overlay_base",
+          "sameNativeVariants": [
+            "matching-base",
+            "null-base",
+            "stale-base"
+          ],
+          "retainedAssertions": "exact matching suppressed/base tuple; null/stale base must match rejection; no final DB",
+          "profileDistinction": "Each native variant executes separately against exact frozen2 and current3 script lists; no current fixture substituted for frozen proof",
+          "originalMethodClaimAdded": 0
+        },
+        {
+          "legacyPath": "rehydration/producers/release-011/tests/test_round8.py",
+          "pin": {
+            "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tests/test_round8.py",
+            "sha256": "77e8320a25fe6408ee7f9cba9c70b2545c0932fae056a7b9830267c2af6cc9a4",
+            "bytes": 12035
+          },
+          "originalMethod": "test_copy_migration_admits_only_matching_imported_overlay_base",
+          "sameNativeVariants": [
+            "matching-base",
+            "null-base",
+            "stale-base"
+          ],
+          "retainedAssertions": "exact matching suppressed/base tuple; null/stale base must match rejection; no final DB",
+          "profileDistinction": "Each native variant executes separately against exact frozen2 and current3 script lists; no current fixture substituted for frozen proof",
+          "originalMethodClaimAdded": 0
+        }
+      ],
+      "frozenProfileNote": "[{\"profile\":\"release-011\",\"root\":\"/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011\",\"orderedScripts\":[{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/migrations/001-initial.sql\",\"sha256\":\"d7c9796cb53a455a569fbfc214c5efa74129627ee944c17a5ab3c3aed9b739ee\",\"bytes\":11266},{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/migrations/002-evidence-and-publication.sql\",\"sha256\":\"fc58a9b62816797c90a966c9f7ebb9dbd66a7abdc69386e6869a7e82d2a1a0a3\",\"bytes\":10591}],\"historicalOutputByteIdentityClaimed\":false,\"targetSchemaExactSqliteMasterComparison\":true},{\"profile\":\"current\",\"root\":\"/home/sharpninja/github/2026-10-26/task-3/remediation/catalog\",\"orderedScripts\":[{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/migrations/001-initial.sql\",\"sha256\":\"d7c9796cb53a455a569fbfc214c5efa74129627ee944c17a5ab3c3aed9b739ee\",\"bytes\":11266},{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/migrations/002-evidence-and-publication.sql\",\"sha256\":\"fc58a9b62816797c90a966c9f7ebb9dbd66a7abdc69386e6869a7e82d2a1a0a3\",\"bytes\":10591},{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/migrations/source_metadata_ddl.sql\",\"sha256\":\"2b585541c4463fc6b6ae408a80a573b81b635adc4206f960d2b7d8284e79a655\",\"bytes\":3608}],\"historicalOutputByteIdentityClaimed\":false,\"targetSchemaExactSqliteMasterComparison\":true}] Streaming source/stage/hash/native identity, retained stage/source, explicit target scripts; SQL rows materialized; not general Python object/exception/serialization equivalence."
+    },
+    {
+      "legacyPath": "remediation/catalog/tooling/migrate_v3.py",
+      "legacySha256": "e4eff83d352313b155c2b7b572df6f2e4f98f8fb2876e0eeaabb7fa39663de5e",
+      "owner": "Catalog",
+      "category": "Catalog",
+      "operation": "Migrate",
+      "normal_verified": true,
+      "normal_verified_methods": [],
+      "normal_verified_functions": [
+        {
+          "legacyPath": "remediation/catalog/tooling/migrate_v3.py",
+          "legacySha256": "e4eff83d352313b155c2b7b572df6f2e4f98f8fb2876e0eeaabb7fa39663de5e",
+          "originalNamedFunctions": [
+            "migrate"
+          ],
+          "nativeService": "AndroidMcp.BuildTool.Catalog.Migration.CatalogCopyMigration.MigrateAsync",
+          "functionBodyNormalPrivateVerified": true,
+          "nativeMethodCountsAddedToOriginals": 0,
+          "requiredCaller": "Original __main__ migrate(argv[1],argv[2]) maps to Root-owned future Catalog operation",
+          "rootCliPending": true,
+          "normal_file_verified": false,
+          "accepted_complete": false,
+          "safe_to_delete": false
+        },
+        {
+          "legacyPath": "rehydration/producers/release-011/tooling/migrate_v3.py",
+          "legacySha256": "e4eff83d352313b155c2b7b572df6f2e4f98f8fb2876e0eeaabb7fa39663de5e",
+          "originalNamedFunctions": [
+            "migrate"
+          ],
+          "nativeService": "AndroidMcp.BuildTool.Catalog.Migration.CatalogCopyMigration.MigrateAsync",
+          "functionBodyNormalPrivateVerified": true,
+          "nativeMethodCountsAddedToOriginals": 0,
+          "requiredCaller": "Original __main__ migrate(argv[1],argv[2]) maps to Root-owned future Catalog operation",
+          "rootCliPending": true,
+          "normal_file_verified": false,
+          "accepted_complete": false,
+          "safe_to_delete": false
+        }
+      ],
+      "pending_methods": [],
+      "pending_functions": [],
+      "accepted_complete": false,
+      "safe_to_delete": false,
+      "execution_retired": false,
+      "decommissionable_from_pr": false,
+      "rootFullGateSha256": "0054a5054eed7ef3710e223c256951b330423aab48ec445ff206601d7149cfde",
+      "nativeService": "CatalogCopyMigration.MigrateAsync + CatalogMigrationWorkflowReader + compiled Catalog/Migrate",
+      "nativeTest": "CatalogMigrationRealTests + CatalogMigrationStreamingRealTests + CatalogMigrationWorkflowRealTests + CatalogMigrationPlannerRealTests",
+      "ownerHandoff": "remediation/nuke-planning/java/parallel/java-completion/catalog-original-test-audit/migration/root-canonical-migration-cli-import-003.json",
+      "ownerHandoffSha256": "46365c664c9ec8dc1275d23df3602cb1b688983fe6aeecad2cd48e6054f2297d",
+      "caller": [
+        {
+          "legacyPath": "remediation/catalog/tests/test_remediation.py",
+          "pin": {
+            "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tests/test_remediation.py",
+            "sha256": "e04129213f87be4c19ef30774835f8ff2a07b1ae2bb860bbbcb9ea8c4ef816c4",
+            "bytes": 7217
+          },
+          "originalMethod": "test_offline_copy_migration",
+          "sameNativeVariants": [
+            "offline-analyze"
+          ],
+          "retainedAssertions": "ANALYZE internal tables excluded; original bytes unchanged, state published, user_version3",
+          "profileDistinction": "Each native variant executes separately against exact frozen2 and current3 script lists; no current fixture substituted for frozen proof",
+          "originalMethodClaimAdded": 0
+        },
+        {
+          "legacyPath": "rehydration/producers/release-011/tests/test_remediation.py",
+          "pin": {
+            "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tests/test_remediation.py",
+            "sha256": "e04129213f87be4c19ef30774835f8ff2a07b1ae2bb860bbbcb9ea8c4ef816c4",
+            "bytes": 7217
+          },
+          "originalMethod": "test_offline_copy_migration",
+          "sameNativeVariants": [
+            "offline-analyze"
+          ],
+          "retainedAssertions": "ANALYZE internal tables excluded; original bytes unchanged, state published, user_version3",
+          "profileDistinction": "Each native variant executes separately against exact frozen2 and current3 script lists; no current fixture substituted for frozen proof",
+          "originalMethodClaimAdded": 0
+        },
+        {
+          "legacyPath": "remediation/catalog/tests/test_round3.py",
+          "pin": {
+            "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tests/test_round3.py",
+            "sha256": "25e615adadb6ee953ce17b1c4ec8db71133777fbf288b2506a937cd9192e980d",
+            "bytes": 12256
+          },
+          "originalMethod": "test_migration_seeds_published_version_and_marks_legacy",
+          "sameNativeVariants": [
+            "published-five"
+          ],
+          "retainedAssertions": "catalog_view registry_generation5 and rebuilt_with_corrected_extractor false",
+          "profileDistinction": "Each native variant executes separately against exact frozen2 and current3 script lists; no current fixture substituted for frozen proof",
+          "originalMethodClaimAdded": 0
+        },
+        {
+          "legacyPath": "rehydration/producers/release-011/tests/test_round3.py",
+          "pin": {
+            "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tests/test_round3.py",
+            "sha256": "25e615adadb6ee953ce17b1c4ec8db71133777fbf288b2506a937cd9192e980d",
+            "bytes": 12256
+          },
+          "originalMethod": "test_migration_seeds_published_version_and_marks_legacy",
+          "sameNativeVariants": [
+            "published-five"
+          ],
+          "retainedAssertions": "catalog_view registry_generation5 and rebuilt_with_corrected_extractor false",
+          "profileDistinction": "Each native variant executes separately against exact frozen2 and current3 script lists; no current fixture substituted for frozen proof",
+          "originalMethodClaimAdded": 0
+        },
+        {
+          "legacyPath": "remediation/catalog/tests/test_sealed_registry.py",
+          "pin": {
+            "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tests/test_sealed_registry.py",
+            "sha256": "fa5929663be1144c542bd33b017497062bae5111c62d4469efb466fe466df50a",
+            "bytes": 3535
+          },
+          "originalMethod": "test_copy_migration_restores_retired_before_published",
+          "sameNativeVariants": [
+            "retired-before-published"
+          ],
+          "retainedAssertions": "exact old retired/selected published states, selected active pointer, generation5",
+          "profileDistinction": "Each native variant executes separately against exact frozen2 and current3 script lists; no current fixture substituted for frozen proof",
+          "originalMethodClaimAdded": 0
+        },
+        {
+          "legacyPath": "rehydration/producers/release-011/tests/test_sealed_registry.py",
+          "pin": {
+            "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tests/test_sealed_registry.py",
+            "sha256": "fa5929663be1144c542bd33b017497062bae5111c62d4469efb466fe466df50a",
+            "bytes": 3535
+          },
+          "originalMethod": "test_copy_migration_restores_retired_before_published",
+          "sameNativeVariants": [
+            "retired-before-published"
+          ],
+          "retainedAssertions": "exact old retired/selected published states, selected active pointer, generation5",
+          "profileDistinction": "Each native variant executes separately against exact frozen2 and current3 script lists; no current fixture substituted for frozen proof",
+          "originalMethodClaimAdded": 0
+        },
+        {
+          "legacyPath": "remediation/catalog/tests/test_round5.py",
+          "pin": {
+            "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tests/test_round5.py",
+            "sha256": "367176a7f938cf4678159d66a1ede0d3caf483bf27f91e1e5c030a69f7376543",
+            "bytes": 9842
+          },
+          "originalMethod": "test_copy_migration_rejects_deleted_local_collision",
+          "sameNativeVariants": [
+            "deleted-local-collision"
+          ],
+          "retainedAssertions": "same deleted local overlay/history fixture rejects imported collision; no final DB, retained stage/source",
+          "profileDistinction": "Each native variant executes separately against exact frozen2 and current3 script lists; no current fixture substituted for frozen proof",
+          "originalMethodClaimAdded": 0
+        },
+        {
+          "legacyPath": "rehydration/producers/release-011/tests/test_round5.py",
+          "pin": {
+            "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tests/test_round5.py",
+            "sha256": "367176a7f938cf4678159d66a1ede0d3caf483bf27f91e1e5c030a69f7376543",
+            "bytes": 9842
+          },
+          "originalMethod": "test_copy_migration_rejects_deleted_local_collision",
+          "sameNativeVariants": [
+            "deleted-local-collision"
+          ],
+          "retainedAssertions": "same deleted local overlay/history fixture rejects imported collision; no final DB, retained stage/source",
+          "profileDistinction": "Each native variant executes separately against exact frozen2 and current3 script lists; no current fixture substituted for frozen proof",
+          "originalMethodClaimAdded": 0
+        },
+        {
+          "legacyPath": "remediation/catalog/tests/test_round8.py",
+          "pin": {
+            "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/remediation/catalog/tests/test_round8.py",
+            "sha256": "77e8320a25fe6408ee7f9cba9c70b2545c0932fae056a7b9830267c2af6cc9a4",
+            "bytes": 12035
+          },
+          "originalMethod": "test_copy_migration_admits_only_matching_imported_overlay_base",
+          "sameNativeVariants": [
+            "matching-base",
+            "null-base",
+            "stale-base"
+          ],
+          "retainedAssertions": "exact matching suppressed/base tuple; null/stale base must match rejection; no final DB",
+          "profileDistinction": "Each native variant executes separately against exact frozen2 and current3 script lists; no current fixture substituted for frozen proof",
+          "originalMethodClaimAdded": 0
+        },
+        {
+          "legacyPath": "rehydration/producers/release-011/tests/test_round8.py",
+          "pin": {
+            "path": "/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/tests/test_round8.py",
+            "sha256": "77e8320a25fe6408ee7f9cba9c70b2545c0932fae056a7b9830267c2af6cc9a4",
+            "bytes": 12035
+          },
+          "originalMethod": "test_copy_migration_admits_only_matching_imported_overlay_base",
+          "sameNativeVariants": [
+            "matching-base",
+            "null-base",
+            "stale-base"
+          ],
+          "retainedAssertions": "exact matching suppressed/base tuple; null/stale base must match rejection; no final DB",
+          "profileDistinction": "Each native variant executes separately against exact frozen2 and current3 script lists; no current fixture substituted for frozen proof",
+          "originalMethodClaimAdded": 0
+        }
+      ],
+      "frozenProfileNote": "[{\"profile\":\"release-011\",\"root\":\"/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011\",\"orderedScripts\":[{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/migrations/001-initial.sql\",\"sha256\":\"d7c9796cb53a455a569fbfc214c5efa74129627ee944c17a5ab3c3aed9b739ee\",\"bytes\":11266},{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/publication/android-mcp-git/rehydration/producers/release-011/migrations/002-evidence-and-publication.sql\",\"sha256\":\"fc58a9b62816797c90a966c9f7ebb9dbd66a7abdc69386e6869a7e82d2a1a0a3\",\"bytes\":10591}],\"historicalOutputByteIdentityClaimed\":false,\"targetSchemaExactSqliteMasterComparison\":true},{\"profile\":\"current\",\"root\":\"/home/sharpninja/github/2026-10-26/task-3/remediation/catalog\",\"orderedScripts\":[{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/migrations/001-initial.sql\",\"sha256\":\"d7c9796cb53a455a569fbfc214c5efa74129627ee944c17a5ab3c3aed9b739ee\",\"bytes\":11266},{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/migrations/002-evidence-and-publication.sql\",\"sha256\":\"fc58a9b62816797c90a966c9f7ebb9dbd66a7abdc69386e6869a7e82d2a1a0a3\",\"bytes\":10591},{\"path\":\"/home/sharpninja/github/2026-10-26/task-3/remediation/catalog/migrations/source_metadata_ddl.sql\",\"sha256\":\"2b585541c4463fc6b6ae408a80a573b81b635adc4206f960d2b7d8284e79a655\",\"bytes\":3608}],\"historicalOutputByteIdentityClaimed\":false,\"targetSchemaExactSqliteMasterComparison\":true}] Streaming source/stage/hash/native identity, retained stage/source, explicit target scripts; SQL rows materialized; not general Python object/exception/serialization equivalence."
     }
   ],
   "normalVerifiedTestFiles": 12,

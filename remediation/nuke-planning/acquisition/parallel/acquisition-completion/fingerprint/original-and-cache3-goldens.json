@@ -1,0 +1,43 @@
+{
+  "at": "2026-10-29T05:54:53",
+  "originals": [
+    {
+      "legacyPath": "remediation/catalog/tooling/cache_fingerprint.py",
+      "sha256": "fceef48aa6acbad07d5ab75e9aefa4e270c33f7ccca8bc1fb8a065144794f98d",
+      "bytes": 1037,
+      "fullTextRead": true,
+      "lines": 16
+    },
+    {
+      "legacyPath": "rehydration/producers/release-011/tooling/cache_fingerprint.py",
+      "sha256": "fceef48aa6acbad07d5ab75e9aefa4e270c33f7ccca8bc1fb8a065144794f98d",
+      "bytes": 1037,
+      "fullTextRead": true,
+      "lines": 16
+    }
+  ],
+  "goldens": [
+    {
+      "kind": "sdk-api-index",
+      "canonicalJson": "{\"cache_contract\":3,\"code\":{\"producer.cs\":\"3333333333333333333333333333333333333333333333333333333333333333\"},\"kind\":\"sdk-api-index\",\"language\":\"csharp\",\"producer\":\"csharp-v1\",\"profile\":\"candidate\",\"runtime\":\"net10\"}",
+      "sha256": "f24f99bc77ef32bd226f77d32addc4dfcfefe3d7dfd2055ed1da46afc30b909e"
+    },
+    {
+      "kind": "java-source",
+      "canonicalJson": "{\"cache_contract\":3,\"code\":{\"producer.cs\":\"3333333333333333333333333333333333333333333333333333333333333333\"},\"kind\":\"java-source\",\"language\":\"csharp\",\"producer\":\"csharp-v1\",\"profile\":\"candidate\",\"runtime\":\"net10\"}",
+      "sha256": "408eb8e89980d8fb0eba6fdf679a91cee40d985aa3c21a380cada289737c64ab"
+    }
+  ],
+  "sourcePythonExecuted": false,
+  "historicalHashEqualityClaimed": false,
+  "originalObligations": [
+    "current(kind) returns64lowercase SHA256 over compact sorted contract2 JSON",
+    "java-source observes Python major/minor,tree-sitter/tree-sitter-java and four producer file hashes",
+    "sdk-api-index observes Python major/minor,Expat and two producer file hashes",
+    "Unknownkind raises before package/file identity work",
+    "lru_cache(maxsize2) keys bykind and freezes each admitted kind within process until eviction",
+    "module argv[1] print(current(kind)) emits returned hash and one newline"
+  ],
+  "nativeDisposition": "Existing contract3 and observed native producer identity remain sole authority; no Python2 counterfeit or second LRU/cache engine",
+  "sessionLogging": "incomplete: denied route not retried"
+}
