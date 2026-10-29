@@ -197,6 +197,7 @@ public sealed partial class Build : NukeBuild
             case OperationExecutor.CatalogBuildFromSources: BuildCatalogFromSources().GetAwaiter().GetResult();break;
             case OperationExecutor.CatalogValidation: ValidateCatalog().GetAwaiter().GetResult();break;
             case OperationExecutor.CatalogPermissionExport: ExportCatalogPermissions().GetAwaiter().GetResult();break;
+            case OperationExecutor.RepositoryDocumentationCheck: ValidateRepositoryDocumentation().GetAwaiter().GetResult();break;
             case OperationExecutor.BrowserQa: RunBrowserQa().GetAwaiter().GetResult();break;
             case OperationExecutor.SourcesInventory: InventorySources().GetAwaiter().GetResult();break;
             case OperationExecutor.SourcesExtract: ExtractSources().GetAwaiter().GetResult();break;

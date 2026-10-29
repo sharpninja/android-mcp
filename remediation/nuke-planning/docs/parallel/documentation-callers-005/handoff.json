@@ -1,0 +1,826 @@
+{
+  "localTimestamp": "2026-10-29T01:44:40",
+  "agent": "/root/documentation_completion",
+  "parent": "/root",
+  "scope": "Implemented approved .git metadata fallback and original late bootstrap read/capture/reuse behavior",
+  "changedFiles": [
+    {
+      "path": "Modules/Documentation/DocumentationBootstrapFileEffects.cs",
+      "sha256": "7219436aace9586fa2b1b93d0b72980b86a9deeb4322da6fddc3f660240b01da",
+      "size": 3624,
+      "priorSha256": "8287a2d70607e78745be1b66091b02d21e0e70a2cf16b1376987a0fae0e8fab8",
+      "priorSize": 2779,
+      "stagedPath": "files/remediation/nuke-app/Modules/Documentation/DocumentationBootstrapFileEffects.cs"
+    },
+    {
+      "path": "Modules/Documentation/DocumentationAdmittedToolBootstrap.cs",
+      "sha256": "c13ad56e896e55baeb4e3a0a0a297c7cb2e050d8e6074467d55366ebe5a74af9",
+      "size": 3764,
+      "priorSha256": null,
+      "priorSize": null,
+      "stagedPath": "files/remediation/nuke-app/Modules/Documentation/DocumentationAdmittedToolBootstrap.cs"
+    },
+    {
+      "path": "Modules/Documentation/Validation/RepositoryDocumentationValidator.cs",
+      "sha256": "c52b19c9c41e2aa725c4dc9c0eca07c8782b3be3ad89e4e66e2d3decd359a25f",
+      "size": 8054,
+      "priorSha256": "f9d1516c22e8f63799a9e52b6fbc986a571b51828a687dd0137b2c8d2a49a580",
+      "priorSize": 5964,
+      "stagedPath": "files/remediation/nuke-app/Modules/Documentation/Validation/RepositoryDocumentationValidator.cs"
+    },
+    {
+      "path": "Tests/Documentation/DocumentationBootstrapAdmissionMockTests.cs",
+      "sha256": "70d29cdac83a707e3bbdf041ea746528ecf363d2de8a71ef401fc0fd5e21c6bb",
+      "size": 12055,
+      "priorSha256": null,
+      "priorSize": null,
+      "stagedPath": "files/remediation/nuke-app/Tests/Documentation/DocumentationBootstrapAdmissionMockTests.cs"
+    },
+    {
+      "path": "Tests/Documentation/DocumentationBootstrapAdmissionRealTests.cs",
+      "sha256": "3c4128c053eedf14d978eb06945cc9c5356f65cd286a46d5a0acc395189afbe5",
+      "size": 1067,
+      "priorSha256": null,
+      "priorSize": null,
+      "stagedPath": "files/remediation/nuke-app/Tests/Documentation/DocumentationBootstrapAdmissionRealTests.cs"
+    },
+    {
+      "path": "Tests/Documentation/DocumentationBootstrapLifecycleMockTests.cs",
+      "sha256": "109f02d088f370a812a0db4085e5a78e013ecd23d69ca806b2d7900a345b938f",
+      "size": 4622,
+      "priorSha256": null,
+      "priorSize": null,
+      "stagedPath": "files/remediation/nuke-app/Tests/Documentation/DocumentationBootstrapLifecycleMockTests.cs"
+    },
+    {
+      "path": "Tests/Documentation/DocumentationBootstrapLifecycleRealTests.cs",
+      "sha256": "d1f342c02d641fec413e2db39d0e883d810d64ce0bb4fe8a6771a1bf72e65fe5",
+      "size": 8402,
+      "priorSha256": null,
+      "priorSize": null,
+      "stagedPath": "files/remediation/nuke-app/Tests/Documentation/DocumentationBootstrapLifecycleRealTests.cs"
+    },
+    {
+      "path": "Tests/Documentation/Validation/RepositoryGitMetadataMockTests.cs",
+      "sha256": "2f1d4a32f8b157eca44c90ecad8636debe03039ea9e137cae9f874da414286e2",
+      "size": 9322,
+      "priorSha256": null,
+      "priorSize": null,
+      "stagedPath": "files/remediation/nuke-app/Tests/Documentation/Validation/RepositoryGitMetadataMockTests.cs"
+    },
+    {
+      "path": "Tests/Documentation/Validation/RepositoryGitMetadataRealTests.cs",
+      "sha256": "c082cd225c52b1ab94bfa27df1eed9aefd9fb9f12aa98de42e97938c1907fe35",
+      "size": 7087,
+      "priorSha256": null,
+      "priorSize": null,
+      "stagedPath": "files/remediation/nuke-app/Tests/Documentation/Validation/RepositoryGitMetadataRealTests.cs"
+    },
+    {
+      "path": "Tests/Documentation/DocumentationBootstrapCliMockTests.cs",
+      "sha256": "66838d53b0f1b45f4d154c3d5628acc73ae829a16bde96f3a4bc90196d87bbc3",
+      "size": 8262,
+      "priorSha256": "e5d73f962c1e325f9ac98557520d0d93dc67734e5ab7ac1965def6ccd5d79eed",
+      "priorSize": 8246,
+      "stagedPath": "files/remediation/nuke-app/Tests/Documentation/DocumentationBootstrapCliMockTests.cs"
+    }
+  ],
+  "callerProposal": {
+    "path": "Build.GradleCompatibility.cs",
+    "sha256": "9726194e5ca8dfb5818d3e28bf57b6947ec7226ced0c8e4dc64f392ffc9d1e06",
+    "size": 14167,
+    "priorSha256": "da969a5cf8d2b86095ee398c6a2ce7a369c1f1ca477c383fcf550ee1cb3deb0a",
+    "priorSize": 13492,
+    "stagedPath": "caller-proposal/Build.GradleCompatibility.cs",
+    "priorPath": "prior/Build.GradleCompatibility.cs",
+    "diffPath": "caller-proposal/Build.GradleCompatibility.patch",
+    "rootReconciliationRequired": true
+  },
+  "prerequisites": [
+    {
+      "path": "Core/ArtifactWorkspaceContracts.cs",
+      "sha256": "cbbe571ae560029b402bace04d0321c58f85169a4b3a59e246853b182819d58a",
+      "size": 1942
+    },
+    {
+      "path": "Core/NativeArtifactWorkspace.cs",
+      "sha256": "2cdd4ac4b2cde423e852b3eaa78f620f57fb7f7621947eaae57b9f7b4a6064e7",
+      "size": 8889
+    }
+  ],
+  "chronologicalGates": [
+    {
+      "name": "metadata-mock53",
+      "id": "20261029T0110132272953-64abce17f54946a8bb0a888bff749791",
+      "sha256": "5a49ef20882bd2ef2d6f9d40a797263c930664bd0aa5f32ca130dbe40d99f7d3",
+      "size": 86293,
+      "passed": 53,
+      "failed": 0,
+      "skipped": 0,
+      "executedClasses": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.Validation.RepositoryGitMetadataMockTests",
+          "count": 53
+        }
+      ],
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/documentation/nuke-app/artifacts/tests/20261029T0110132272953-64abce17f54946a8bb0a888bff749791/tests.trx",
+      "stagedPath": "evidence/metadata-mock53.trx"
+    },
+    {
+      "name": "metadata-native-and-admission-mock233",
+      "id": "20261029T0116268854247-e88f89dd04a84fc2bb9b60d6a486756f",
+      "sha256": "d57409b3308c0a7062b481bee0c90aa866faeec4762cb45053b0528d369ecd8c",
+      "size": 381307,
+      "passed": 233,
+      "failed": 0,
+      "skipped": 0,
+      "executedClasses": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapAdmissionMockTests",
+          "count": 53
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.Validation.RepositoryDocumentationMockTests",
+          "count": 68
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.Validation.RepositoryDocumentationRealTests",
+          "count": 29
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.Validation.RepositoryGitMetadataMockTests",
+          "count": 53
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.Validation.RepositoryGitMetadataRealTests",
+          "count": 30
+        }
+      ],
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/documentation/nuke-app/artifacts/tests/20261029T0116268854247-e88f89dd04a84fc2bb9b60d6a486756f/tests.trx",
+      "stagedPath": "evidence/metadata-native-and-admission-mock233.trx"
+    },
+    {
+      "name": "bootstrap-caller-mock191",
+      "id": "20261029T0120347972435-9bc84d98c24743f1b31d45082d41039f",
+      "sha256": "789553cf52a2b6ac474f7db5d3d25bd5aed67acbba457a1b2b764ea1c0c9a670",
+      "size": 202574,
+      "passed": 191,
+      "failed": 0,
+      "skipped": 0,
+      "executedClasses": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapAdmissionMockTests",
+          "count": 53
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapCliMockTests",
+          "count": 138
+        }
+      ],
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/documentation/nuke-app/artifacts/tests/20261029T0120347972435-9bc84d98c24743f1b31d45082d41039f/tests.trx",
+      "stagedPath": "evidence/bootstrap-caller-mock191.trx"
+    },
+    {
+      "name": "same-native-and-alias410",
+      "id": "20261029T0122390397220-163fcb2b1e494432941ff49c13d2a376",
+      "sha256": "5edcaaf89d4d33481fc5d9f6ced7fc909952208c199d0136e5bd708d202fa975",
+      "size": 556713,
+      "passed": 410,
+      "failed": 0,
+      "skipped": 0,
+      "executedClasses": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapAdmissionMockTests",
+          "count": 53
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapAdmissionRealTests",
+          "count": 22
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapCliMockTests",
+          "count": 138
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapCliRealTests",
+          "count": 9
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapFileEffectsMockTests",
+          "count": 21
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapFileEffectsRealTests",
+          "count": 12
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapHookMockTests",
+          "count": 22
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapHookRealTests",
+          "count": 12
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationConfigurationRecipeMockTests",
+          "count": 32
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationConfigurationRecipeRealTests",
+          "count": 6
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.Validation.RepositoryGitMetadataMockTests",
+          "count": 53
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.Validation.RepositoryGitMetadataRealTests",
+          "count": 30
+        }
+      ],
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/documentation/nuke-app/artifacts/tests/20261029T0122390397220-163fcb2b1e494432941ff49c13d2a376/tests.trx",
+      "stagedPath": "evidence/same-native-and-alias410.trx"
+    },
+    {
+      "name": "lifecycle-mock40",
+      "id": "20261029T0125595626869-62714146f2f84e8687cbda18a3670446",
+      "sha256": "aa3685ef2028d1b3a595f7533528024c18999a3e74ee62b9595858d88a649072",
+      "size": 68550,
+      "passed": 40,
+      "failed": 0,
+      "skipped": 0,
+      "executedClasses": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapLifecycleMockTests",
+          "count": 40
+        }
+      ],
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/documentation/nuke-app/artifacts/tests/20261029T0125595626869-62714146f2f84e8687cbda18a3670446/tests.trx",
+      "stagedPath": "evidence/lifecycle-mock40.trx"
+    },
+    {
+      "name": "lifecycle-native122",
+      "id": "20261029T0129384893639-23f13b725eb747afaf909a8414c1c1a1",
+      "sha256": "5cbd25c681a237e632079688eb34c3f2674ad3afd869538f2da68f75f796804d",
+      "size": 201205,
+      "passed": 122,
+      "failed": 0,
+      "skipped": 0,
+      "executedClasses": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapAdmissionMockTests",
+          "count": 53
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapAdmissionRealTests",
+          "count": 22
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapLifecycleMockTests",
+          "count": 40
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapLifecycleRealTests",
+          "count": 7
+        }
+      ],
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/documentation/nuke-app/artifacts/tests/20261029T0129384893639-23f13b725eb747afaf909a8414c1c1a1/tests.trx",
+      "stagedPath": "evidence/lifecycle-native122.trx"
+    },
+    {
+      "name": "affected-final1932",
+      "id": "20261029T0133224607306-1b103aaac92e48cca481af70a32c6def",
+      "sha256": "f6c74f14b631e515f6013dff03673a97d09122bd7c221b0c1e8f8877a20f7465",
+      "size": 2843137,
+      "passed": 1932,
+      "failed": 0,
+      "skipped": 0,
+      "executedClasses": [
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DesignFullArchitectureRecipeMockTests",
+          "count": 15
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DesignFullArchitectureRecipeRealTests",
+          "count": 9
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DesignGradleAliasCliMockTests",
+          "count": 44
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DesignGradleAliasCliRealTests",
+          "count": 11
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DesignGradleCliPlanningMockTests",
+          "count": 49
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DesignGradleCliPlanningRealTests",
+          "count": 21
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DesignNarrowStageRecipeMockTests",
+          "count": 40
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DesignNarrowStageRecipeRealTests",
+          "count": 29
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapAdmissionMockTests",
+          "count": 53
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapAdmissionRealTests",
+          "count": 22
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapCliMockTests",
+          "count": 138
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapCliRealTests",
+          "count": 9
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapFileEffectsMockTests",
+          "count": 21
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapFileEffectsRealTests",
+          "count": 12
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapHookMockTests",
+          "count": 22
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapHookRealTests",
+          "count": 12
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapLifecycleMockTests",
+          "count": 40
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapLifecycleRealTests",
+          "count": 7
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationConfigurationRecipeMockTests",
+          "count": 32
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationConfigurationRecipeRealTests",
+          "count": 6
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationPackageSupportMockTests",
+          "count": 19
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationPackageSupportRealTests",
+          "count": 9
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationRuntimeMockTests",
+          "count": 8
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationRuntimeRealTests",
+          "count": 4
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationToolBootstrapMockTests",
+          "count": 32
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationToolBootstrapRealTests",
+          "count": 7
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationWrapperPropertiesMockTests",
+          "count": 47
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationWrapperPropertiesRealTests",
+          "count": 23
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.LegacyDesign023MethodMockTests",
+          "count": 118
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.LegacyDesign023MethodRealTests",
+          "count": 9
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.RendererRedirectBootstrapMockTests",
+          "count": 6
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.RendererRedirectBootstrapRealTests",
+          "count": 3
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.RendererRedirectProfileMockTests",
+          "count": 27
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.RendererRedirectProfileRealTests",
+          "count": 12
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.StandaloneNarrowReceiptMockTests",
+          "count": 21
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.Validation.GeneratedDesignValidationMockTests",
+          "count": 387
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.Validation.GeneratedDesignValidationRealTests",
+          "count": 387
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.Validation.RepositoryDocumentationCallerMockTests",
+          "count": 18
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.Validation.RepositoryDocumentationCallerRealTests",
+          "count": 4
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.Validation.RepositoryDocumentationMockTests",
+          "count": 68
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.Validation.RepositoryDocumentationRealTests",
+          "count": 29
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.Validation.RepositoryDocumentationTreeMockTests",
+          "count": 13
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.Validation.RepositoryDocumentationTreeRealTests",
+          "count": 5
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.Validation.RepositoryGitMetadataMockTests",
+          "count": 53
+        },
+        {
+          "class": "AndroidMcp.BuildTool.Tests.Documentation.Validation.RepositoryGitMetadataRealTests",
+          "count": 31
+        }
+      ],
+      "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/documentation/nuke-app/artifacts/tests/20261029T0133224607306-1b103aaac92e48cca481af70a32c6def/tests.trx",
+      "stagedPath": "evidence/affected-final1932.trx"
+    }
+  ],
+  "finalGate": {
+    "name": "affected-final1932",
+    "id": "20261029T0133224607306-1b103aaac92e48cca481af70a32c6def",
+    "sha256": "f6c74f14b631e515f6013dff03673a97d09122bd7c221b0c1e8f8877a20f7465",
+    "size": 2843137,
+    "passed": 1932,
+    "failed": 0,
+    "skipped": 0,
+    "executedClasses": [
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.DesignFullArchitectureRecipeMockTests",
+        "count": 15
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.DesignFullArchitectureRecipeRealTests",
+        "count": 9
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.DesignGradleAliasCliMockTests",
+        "count": 44
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.DesignGradleAliasCliRealTests",
+        "count": 11
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.DesignGradleCliPlanningMockTests",
+        "count": 49
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.DesignGradleCliPlanningRealTests",
+        "count": 21
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.DesignNarrowStageRecipeMockTests",
+        "count": 40
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.DesignNarrowStageRecipeRealTests",
+        "count": 29
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapAdmissionMockTests",
+        "count": 53
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapAdmissionRealTests",
+        "count": 22
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapCliMockTests",
+        "count": 138
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapCliRealTests",
+        "count": 9
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapFileEffectsMockTests",
+        "count": 21
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapFileEffectsRealTests",
+        "count": 12
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapHookMockTests",
+        "count": 22
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapHookRealTests",
+        "count": 12
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapLifecycleMockTests",
+        "count": 40
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationBootstrapLifecycleRealTests",
+        "count": 7
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationConfigurationRecipeMockTests",
+        "count": 32
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationConfigurationRecipeRealTests",
+        "count": 6
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationPackageSupportMockTests",
+        "count": 19
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationPackageSupportRealTests",
+        "count": 9
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationRuntimeMockTests",
+        "count": 8
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationRuntimeRealTests",
+        "count": 4
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationToolBootstrapMockTests",
+        "count": 32
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationToolBootstrapRealTests",
+        "count": 7
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationWrapperPropertiesMockTests",
+        "count": 47
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.DocumentationWrapperPropertiesRealTests",
+        "count": 23
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.LegacyDesign023MethodMockTests",
+        "count": 118
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.LegacyDesign023MethodRealTests",
+        "count": 9
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.RendererRedirectBootstrapMockTests",
+        "count": 6
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.RendererRedirectBootstrapRealTests",
+        "count": 3
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.RendererRedirectProfileMockTests",
+        "count": 27
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.RendererRedirectProfileRealTests",
+        "count": 12
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.StandaloneNarrowReceiptMockTests",
+        "count": 21
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.Validation.GeneratedDesignValidationMockTests",
+        "count": 387
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.Validation.GeneratedDesignValidationRealTests",
+        "count": 387
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.Validation.RepositoryDocumentationCallerMockTests",
+        "count": 18
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.Validation.RepositoryDocumentationCallerRealTests",
+        "count": 4
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.Validation.RepositoryDocumentationMockTests",
+        "count": 68
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.Validation.RepositoryDocumentationRealTests",
+        "count": 29
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.Validation.RepositoryDocumentationTreeMockTests",
+        "count": 13
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.Validation.RepositoryDocumentationTreeRealTests",
+        "count": 5
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.Validation.RepositoryGitMetadataMockTests",
+        "count": 53
+      },
+      {
+        "class": "AndroidMcp.BuildTool.Tests.Documentation.Validation.RepositoryGitMetadataRealTests",
+        "count": 31
+      }
+    ],
+    "source": "/home/sharpninja/github/2026-10-26/task-3/remediation/parallel-work/documentation/nuke-app/artifacts/tests/20261029T0133224607306-1b103aaac92e48cca481af70a32c6def/tests.trx",
+    "stagedPath": "evidence/affected-final1932.trx"
+  },
+  "nativeCli": [
+    {
+      "alias": "verifyToolchain",
+      "scenario": "GOOD",
+      "exitCode": 0,
+      "stagedPath": "evidence/cli/verifyToolchain-GOOD/invocation.json"
+    },
+    {
+      "alias": "verifyToolchain",
+      "scenario": "BAD-PROPERTIES",
+      "exitCode": 1,
+      "stagedPath": "evidence/cli/verifyToolchain-BAD-PROPERTIES/invocation.json"
+    },
+    {
+      "alias": "verifyToolchain",
+      "scenario": "MISSING-PROPERTIES",
+      "exitCode": 1,
+      "stagedPath": "evidence/cli/verifyToolchain-MISSING-PROPERTIES/invocation.json"
+    },
+    {
+      "alias": "generateUiAssets",
+      "scenario": "GOOD",
+      "exitCode": 0,
+      "stagedPath": "evidence/cli/generateUiAssets-GOOD/invocation.json"
+    },
+    {
+      "alias": "generateUiAssets",
+      "scenario": "BAD-PROPERTIES",
+      "exitCode": 1,
+      "stagedPath": "evidence/cli/generateUiAssets-BAD-PROPERTIES/invocation.json"
+    },
+    {
+      "alias": "generateUiAssets",
+      "scenario": "MISSING-PROPERTIES",
+      "exitCode": 1,
+      "stagedPath": "evidence/cli/generateUiAssets-MISSING-PROPERTIES/invocation.json"
+    },
+    {
+      "alias": "renderStoryboards",
+      "scenario": "GOOD",
+      "exitCode": 0,
+      "stagedPath": "evidence/cli/renderStoryboards-GOOD/invocation.json"
+    },
+    {
+      "alias": "renderStoryboards",
+      "scenario": "BAD-PROPERTIES",
+      "exitCode": 1,
+      "stagedPath": "evidence/cli/renderStoryboards-BAD-PROPERTIES/invocation.json"
+    },
+    {
+      "alias": "renderStoryboards",
+      "scenario": "MISSING-PROPERTIES",
+      "exitCode": 1,
+      "stagedPath": "evidence/cli/renderStoryboards-MISSING-PROPERTIES/invocation.json"
+    }
+  ],
+  "prior004HandoffSha256": "74d8d794d34d702d5b4f551009fbe36c8ce90bc151124fed7107d787caa03a2d",
+  "prior004SealSha256": "a0ce81b0ebe9fa791b1c62de47d1b7894788407f78bb1abead3d8a2077f273a2",
+  "prior004Unchanged": true,
+  "prior003Unchanged": true,
+  "implemented": [
+    "Optional SAME tree metadata-only .git target parent query",
+    "Original late wrapper-properties read after mode effects before PlantUML",
+    "Missing-to-created capture enters existing input manifest",
+    "Normal input pin/precommit recheck rejects drift",
+    "Profile/access/proof and retained tool pin revalidation without reacquisition"
+  ],
+  "rootBinding": "Pass SAME NativeArtifactWorkspace as fifth RepositoryDocumentationValidator constructor argument; four-argument/default remains unchanged",
+  "sourcePublishedFileClosureDelta": 0,
+  "authoritativeFileDispositionOwner": "Root",
+  "rootIntegrationAndActualThinCliPending": true,
+  "remaining": [
+    "Root guarded import/registry thin-caller binding and integrated/full/actualRootCLI proof",
+    "Existing unsupported-host/outside-root/symlink/nonportable and generic parent-IO admission exceptions",
+    "Broader original bootstrap User-Agent/60-second timeout and legacy receipt/summary compatibility"
+  ],
+  "compileCorrections": [
+    "Missing test namespace import corrected before native gate",
+    "An app project evaluation preceded a newly created facade source; stable-source mock/native rerun passed"
+  ],
+  "compileFailureTrxCreated": false,
+  "audit": {
+    "expectedFiles": 52,
+    "listedFiles": 52,
+    "guardProof": {
+      "negative": [
+        {
+          "scenario": "empty",
+          "refused": true,
+          "scannerCalls": 0
+        },
+        {
+          "scenario": "short",
+          "refused": true,
+          "scannerCalls": 0
+        },
+        {
+          "scenario": "long",
+          "refused": true,
+          "scannerCalls": 0
+        },
+        {
+          "scenario": "blank",
+          "refused": true,
+          "scannerCalls": 0
+        },
+        {
+          "scenario": "outside",
+          "refused": true,
+          "scannerCalls": 0
+        },
+        {
+          "scenario": "missing",
+          "refused": true,
+          "scannerCalls": 0
+        },
+        {
+          "scenario": "directory",
+          "refused": true,
+          "scannerCalls": 0
+        },
+        {
+          "scenario": "duplicate",
+          "refused": true,
+          "scannerCalls": 0
+        }
+      ],
+      "positiveScannerCalls": 1
+    },
+    "realScannerCalls": 1,
+    "indicatorFiles": 0,
+    "helper": {
+      "sha256": "df40227622ecfc1d4b5d0fd3ecd52bd08a8f58dc9dd9b956a1c84fef82759df9",
+      "size": 2703
+    },
+    "broadScan": false
+  },
+  "warnings": "Isolated SDK NU1900 vulnerability feed unavailable; no new code-analysis warnings",
+  "canonicalSourceChanged": false,
+  "coreChanged": false,
+  "registryChanged": false,
+  "hv": false,
+  "safeToDeleteOriginals": false,
+  "mcp": {
+    "status": "unavailable after prior health permission failure",
+    "retried": false,
+    "sessionId": null,
+    "requestId": null
+  }
+}

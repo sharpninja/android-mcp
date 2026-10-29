@@ -65,7 +65,7 @@ public sealed class DesignGradleAliasCliRealTests
     {
         // Retain all output and subprocess evidence in the calling workspace;
         // do not depend on quota-limited machine-private temporary directories.
-        var root=Path.Combine(DocumentationFixture.Current.Workspace,"remediation/nuke-app/artifacts/gradle-alias-cli-tests",Guid.NewGuid().ToString("N"));
+        var root=Path.Combine(Path.GetTempPath(),"gradle-alias-cli-tests",Guid.NewGuid().ToString("N"));
         var host=Environment.ProcessPath??throw new InvalidOperationException("Native dotnet host unavailable");
         Assert.Equal("dotnet",Path.GetFileNameWithoutExtension(host));
         await DesignAliasCliCases.AssertContract(new(test,root,host,typeof(Build).Assembly.Location),NativeDesignAliasCli.Run);

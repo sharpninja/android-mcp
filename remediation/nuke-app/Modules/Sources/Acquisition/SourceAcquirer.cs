@@ -29,24 +29,62 @@ public sealed class SourceAcquirer(IByteTransport transport,IArtifactStore store
         else
         {
             var url=pin.Url;
-            if(pin.Encoding==SourceWireEncoding.GitilesText&&!url.Query.TrimStart('?').Split('&').Contains("format=TEXT"))url=new Uri(url.AbsoluteUri+(url.Query.Length==0?"?":"&")+"format=TEXT");
+            var gitiles=pin.Encoding is SourceWireEncoding.GitilesText or SourceWireEncoding.SnapshotRestoreGitiles or SourceWireEncoding.SnapshotFetchGitiles;
+            if(gitiles&&!url.Query.TrimStart('?').Split('&').Contains("format=TEXT"))url=new Uri(url.AbsoluteUri+(url.Query.Length==0?"?":"&")+"format=TEXT");
             var response=await transport.SendAsync(new(url,pin.Revision,
-                pin.Encoding==SourceWireEncoding.Raw?pin.Sha256:null,
-                pin.Encoding==SourceWireEncoding.Raw?pin.SizeBytes:null,
+                gitiles?null:pin.Sha256,
+                gitiles?null:pin.SizeBytes,
                 Retry:pin.Compatibility==AcquisitionCompatibilityProfile.CanonicalRestore?TransportRetryPolicy.CanonicalRestore:TransportRetryPolicy.SingleAttempt),cancellationToken);
-            bytes=pin.Encoding==SourceWireEncoding.GitilesText?DecodeGitiles(response.Bytes.Span):response.Bytes;
+            bytes=gitiles?DecodeGitiles(response.Bytes.Span,pin.Encoding):response.Bytes;
         }
         Verify(bytes.Span,pin);
         var artifact=await store.WriteAsync(new(pin.LocalPath,bytes,"application/octet-stream"),cancellationToken);
         return new(artifact,"downloaded",pin.Url,pin.Revision,pin.GitBlob);
     }
-    public static byte[] DecodeGitiles(ReadOnlySpan<byte> bytes)
+    public static byte[] DecodeGitiles(ReadOnlySpan<byte> bytes)=>DecodeGitiles(bytes,SourceWireEncoding.GitilesText);
+    public static byte[] DecodeGitiles(ReadOnlySpan<byte> bytes,SourceWireEncoding encoding)
     {
-        var chars=new StringBuilder();
-        foreach(var value in bytes){if(value is 9 or 10 or 11 or 12 or 13 or 32)continue;if(value>127)throw new TransportException("BASE64","Gitiles TEXT is not ASCII base64.");chars.Append((char)value);}
-        var text=chars.ToString();
-        if(!Regex.IsMatch(text,"^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"))throw new TransportException("BASE64","Invalid Gitiles TEXT base64.");
+        string text;
+        if(encoding==SourceWireEncoding.GitilesText)
+        {
+            // Preserve the established generic whitespace-normalized contract.
+            var chars=new StringBuilder();
+            foreach(var value in bytes){if(value is 9 or 10 or 11 or 12 or 13 or 32)continue;if(value>127)throw new TransportException("BASE64","Gitiles TEXT is not ASCII base64.");chars.Append((char)value);}
+            text=chars.ToString();
+            if(!Regex.IsMatch(text,"^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"))throw new TransportException("BASE64","Invalid Gitiles TEXT base64.");
+        }
+        else if(encoding is SourceWireEncoding.SnapshotRestoreGitiles or SourceWireEncoding.SnapshotFetchGitiles)
+            text=NormalizeSnapshotBase64(bytes,encoding==SourceWireEncoding.SnapshotFetchGitiles);
+        else throw new TransportException("BASE64","Explicit Gitiles decoding policy required.");
+        // All policies use this sole byte decoder. The compatibility adapter
+        // only admits/normalizes alphabet and padding; it never decodes bits.
         try{return Convert.FromBase64String(text);}catch(FormatException){throw new TransportException("BASE64","Invalid Gitiles TEXT base64.");}
+    }
+    private static string NormalizeSnapshotBase64(ReadOnlySpan<byte> bytes,bool permissive)
+    {
+        var chars=new StringBuilder();var position=0;var pads=0;var paddingStarted=false;
+        for(var index=0;index<bytes.Length;index++)
+        {
+            var value=bytes[index];
+            if(value=='=')
+            {
+                if(!permissive&&position==0)Invalid();
+                paddingStarted=true;
+                if(position>=2&&position+ ++pads>=4)
+                {
+                    if(!permissive&&index+1!=bytes.Length)Invalid();
+                    chars.Append('=',4-position);return chars.ToString();
+                }
+                continue;
+            }
+            var alphabet=value is >=(byte)'A' and <=(byte)'Z' or >=(byte)'a' and <=(byte)'z' or >=(byte)'0' and <=(byte)'9' or (byte)'+' or (byte)'/';
+            if(!alphabet){if(!permissive)Invalid();continue;}
+            if(!permissive&&paddingStarted)Invalid();
+            pads=0;chars.Append((char)value);position=(position+1)%4;
+        }
+        if(position!=0)Invalid();
+        return chars.ToString();
+        static void Invalid()=>throw new TransportException("BASE64","Invalid Snapshot Gitiles base64.");
     }
     public static void Verify(ReadOnlySpan<byte> bytes,SourcePin pin)
     {

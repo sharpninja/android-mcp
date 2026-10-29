@@ -18,7 +18,8 @@ internal static class SourceSyntax
     internal static JsonArray Strings(IEnumerable<string> values) => new(values.Select(x => (JsonNode?)JsonValue.Create(x)).ToArray());
     internal static JsonArray Annotations(IEnumerable<SourceAnnotation> values) => Array(values.Select(x => x.Document));
 
-    internal static string Mask(string text, bool strings, SourceSyntaxProfile profile = SourceSyntaxProfile.DeclarationSource)
+    internal static string Mask(string text, bool strings, SourceSyntaxProfile profile = SourceSyntaxProfile.DeclarationSource,
+        bool preserveCommentCarriageReturns = true)
     {
         var result = text.ToCharArray();
         for (var i = 0; i < text.Length;)
@@ -47,21 +48,39 @@ internal static class SourceSyntax
             }
             else { i++; continue; }
             if (isComment || strings)
-                for (var j = start; j < i; j++) result[j] = text[j] is '\n' or '\r' ? text[j] : ' ';
+                for (var j = start; j < i; j++) result[j] = text[j] == '\n' || text[j] == '\r' && (!isComment || preserveCommentCarriageReturns) ? text[j] : ' ';
         }
         return new string(result);
     }
 
-    internal static AnnotatedSource ParseAnnotations(string text, SourceSyntaxProfile profile = SourceSyntaxProfile.DeclarationSource)
+    internal static AnnotatedSource ParseAnnotations(string text, SourceSyntaxProfile profile = SourceSyntaxProfile.DeclarationSource,
+        bool unicodeAlphanumericWords = false)
     {
         var clean = text.ToCharArray(); var annotations = new List<SourceAnnotation>();
         var code = Mask(text, true, profile);
         for (var i = 0; i < text.Length; i++)
         {
             if (code[i] != '@') continue;
-            var match = Rx(@"\G@([\w.$]+)").Match(text, i);
-            if (!match.Success || match.Groups[1].Value == "interface") continue;
-            var end = i + match.Length; var probe = end;
+            var end = i + 1; string name;
+            if (unicodeAlphanumericWords)
+            {
+                while (end < text.Length)
+                {
+                    var scalar = Rune.GetRuneAt(text, end);
+                    if (!SourceText.OriginalWord(scalar) && scalar.Value is not ('.' or '$')) break;
+                    end += scalar.Utf16SequenceLength;
+                }
+                if (end == i + 1) continue;
+                name = text[(i + 1)..end];
+            }
+            else
+            {
+                var match = Rx(@"\G@([\w.$]+)").Match(text, i);
+                if (!match.Success) continue;
+                name = match.Groups[1].Value; end = i + match.Length;
+            }
+            if (name == "interface") continue;
+            var probe = end;
             while (probe < text.Length && char.IsWhiteSpace(text[probe])) probe++;
             var arguments = "";
             if (probe < text.Length && text[probe] == '(')
@@ -72,7 +91,7 @@ internal static class SourceSyntax
             }
             var document = new JsonObject
             {
-                ["name"] = match.Groups[1].Value, ["arguments"] = arguments, ["raw"] = text[i..end],
+                ["name"] = name, ["arguments"] = arguments, ["raw"] = text[i..end],
                 ["start"] = CodePointOffset(text, i), ["end"] = CodePointOffset(text, end)
             };
             annotations.Add(new(i, end, document));
@@ -171,9 +190,10 @@ internal static class SourceSyntax
         return new string(chars);
     }
 
-    internal static string TypeName(string text, SourceSyntaxProfile profile = SourceSyntaxProfile.DeclarationSource)
+    internal static string TypeName(string text, SourceSyntaxProfile profile = SourceSyntaxProfile.DeclarationSource,
+        bool unicodeAlphanumericWords = false)
     {
-        var clean = ParseAnnotations(text, profile).Masked;
+        var clean = ParseAnnotations(text, profile, unicodeAlphanumericWords).Masked;
         clean = Rx(@"\b(final|optional)\s+").Replace(clean, "").Trim();
         clean = Rx(@"\s+").Replace(clean, " ");
         return Rx(@"\s*([<>,\[\]])\s*").Replace(clean, "$1");

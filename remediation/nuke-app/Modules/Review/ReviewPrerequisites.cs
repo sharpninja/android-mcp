@@ -91,10 +91,30 @@ public sealed class GitReviewPrerequisiteSource(IProcessRunner runner, IProcessC
             var kind = Text(project, "kind");
             if (test.GetBoolean())
             {
-                ReviewPrepareService.Require(kind is "unit" or "integration", "PROJECT_METADATA_UNRESOLVED", "Test kind is unresolved.");
-                (kind == "unit" ? units : integrations).Add(path);
+                ReviewPrepareService.Require(kind is "unit" or "integration" or "mixed", "PROJECT_METADATA_UNRESOLVED", "Test kind is unresolved.");
+                if (kind is "unit" or "mixed") units.Add(path);
+                if (kind is "integration" or "mixed") integrations.Add(path);
             }
             else ReviewPrepareService.Require(kind == "none", "PROJECT_METADATA_UNRESOLVED", "Non-test project classification is unresolved.");
+        }
+
+        // A mixed project is one definition and one full, unfiltered native run.
+        // The trusted native producer owns this provenance; no role/filename heuristic is used.
+        foreach (var project in units.Intersect(integrations, StringComparer.Ordinal))
+        {
+            const string code = "FULL_TEST_RUN_UNVERIFIED";
+            var runs = Array(e, "fullUnfilteredTrx", code).Where(x => Text(x, "project") == project).ToArray();
+            ReviewPrepareService.Require(runs.Length == 1, code, "Mixed project needs exactly one full native TRX origin.");
+            var run = runs[0];
+            ReviewPrepareService.Require(run.TryGetProperty("filter", out var filter) && filter.ValueKind == JsonValueKind.Null,
+                code, "A filtered/unknown run cannot establish both coverage roles.");
+            var evidence = snapshot.Evidence.Where(x => x.Kind is "unit-trx" or "integration-trx" && x.Project == project).ToArray();
+            ReviewPrepareService.Require(evidence.Length == 1, code, "Mixed project must reuse one full TRX body.");
+            var item = evidence[0];
+            ReviewPrepareService.Require(Text(run, "path") == item.Path && Text(run, "sha256") == item.Sha256 &&
+                Text(run, "head") == snapshot.Head && item.Head == snapshot.Head && Text(run, "runId") == item.RunId &&
+                Text(run, "host") == item.Host && Text(run, "command") == item.Command,
+                code, "The full native TRX origin differs from supplied evidence.");
         }
 
         var requirements = await ReceiptAsync(configuration.RequirementsReceipt, "REQUIREMENTS_INCOMPLETE");

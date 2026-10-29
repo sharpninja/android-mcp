@@ -86,7 +86,13 @@ public sealed class ReviewPrepareService(IArtifactStore store, IArtifactLeasePro
                     !string.IsNullOrWhiteSpace(item.RunId) && !string.IsNullOrWhiteSpace(item.Host) && !string.IsNullOrWhiteSpace(item.Command),
                     "TEST_EVIDENCE_INCOMPLETE", "TRX metadata needs project, run ID, host, head and command.");
                 ValidateTrx(body);
-                (item.Kind == "unit-trx" ? unitCoverage : integrationCoverage).Add(item.Project!);
+                if (trusted.UnitProjects.Contains(item.Project!, StringComparer.Ordinal) &&
+                    trusted.IntegrationProjects.Contains(item.Project!, StringComparer.Ordinal))
+                {
+                    unitCoverage.Add(item.Project!);
+                    integrationCoverage.Add(item.Project!);
+                }
+                else (item.Kind == "unit-trx" ? unitCoverage : integrationCoverage).Add(item.Project!);
             }
             if (item.Kind == "requirements")
             {

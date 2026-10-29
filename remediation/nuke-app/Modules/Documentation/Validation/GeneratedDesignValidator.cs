@@ -192,7 +192,7 @@ public sealed class GeneratedDesignValidator(IArchitectureViewIndexReader views,
     // A bounded start-tag reader for the six legacy asset tags. It preserves
     // duplicate attributes and raw entity text, skips comments and script/style
     // character data, and delegates decoding/classification to shared services.
-    private static IEnumerable<(string Tag,string Name,string Value)> AssetAttributes(string text)
+    internal static IEnumerable<(string Tag,string Name,string Value)> AssetAttributes(string text)
     {
         var position=0;
         while(position<text.Length)

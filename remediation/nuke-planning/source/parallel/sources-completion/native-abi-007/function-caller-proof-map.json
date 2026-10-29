@@ -1,0 +1,74 @@
+[
+  {
+    "Original": "parse.pairs",
+    "Limit": "Generic malformed JSON error wording and all mixed-fatal diagnostic precedence remain the shared native boundary, not arbitrary Python JSONDecodeError equivalence.",
+    "Native": "Existing StrictJsonInspector plus NativeAbiSourceFacts duplicate diagnostic mapping",
+    "Proof": "ABI-05 and four exact ABI-DUPLICATE-DIAGNOSTIC cases including decoded aliases, empty name and nested-before-parent ordering."
+  },
+  {
+    "Original": "parse.constant",
+    "Limit": "Native syntax diagnostics differ from original Non-finite JSON token text. Decimal/exponent overflow to infinity is rejected by native finite-number admission while original json.loads may retain infinity. No equivalence for that outside-admission domain.",
+    "Native": "Existing strict JSON admission, unchanged",
+    "Proof": "Original ORIG-ABI-06 status assertion plus existing ABI-06 fixture."
+  },
+  {
+    "Original": "parse root/record inventory",
+    "Limit": "Original uncaught AttributeError at nonarray bucket append is represented by the explicit C# ArgumentException operation diagnostic. No silent opaque-root reset.",
+    "Native": "NativeAbiSourceFacts.Parse",
+    "Proof": "All13 collection families across existing18 goldens; raw unknown/nonobject root fields, null/nonstr keys and names, original root order, new earlier/later bucket collision outcomes, codepoint duplicate sorting."
+  },
+  {
+    "Original": "parse.refs",
+    "Limit": "No source-to-runtime/wire/schema inference or corpus completeness claim.",
+    "Native": "NativeAbiSourceFacts.References",
+    "Proof": "Existing ABI01/02/03/13/17/18 and new raw parameter/nonstr reference recursion cases; explicit paths/status/counts with metadata fully retained."
+  },
+  {
+    "Original": "parse.function_target",
+    "Limit": "Structural callback candidates only, no lifecycle, registration, permission, wire or installed-version authority.",
+    "Native": "NativeAbiSourceFacts.FunctionTarget",
+    "Proof": "Existing direct/indirect target walk, pointer/qualified/lvalue/rvalue chains, missing/duplicate/cycle stops, new nonlist/nondict parameter admission guards and exact callback metadata."
+  },
+  {
+    "Original": "test_native_abi_facts.py fixture and seven test methods",
+    "Limit": "Exact original assertions and independently authored default json.dumps ASCII fixture spelling; stronger full-output tests are separate and do not replace these original assertion bodies.",
+    "Native": "NativeAbiOriginalContractCases + SAME native NativeAbiCompletionRealTests",
+    "Proof": [
+      {
+        "Case": "ORIG-ABI-01",
+        "Assertions": "Exactly one callback, parameter_index0, lifecycle false and wire/runtime false.",
+        "Method": "test_pointer_to_function_parameter_is_structural_callback_candidate"
+      },
+      {
+        "Case": "ORIG-ABI-02",
+        "Assertions": "Original fixture with pointer referenced_type MISSING; unresolved reference count exactly1.",
+        "Method": "test_missing_type_reference_is_retained"
+      },
+      {
+        "Case": "ORIG-ABI-03",
+        "Assertions": "Original fixture appended record_types CB collision; CB appears in duplicate keys and callback candidates empty.",
+        "Method": "test_duplicate_type_identity_not_silently_selected"
+      },
+      {
+        "Case": "ORIG-ABI-04",
+        "Assertions": "Exact future_collection raw input, opaque7 object list retained.",
+        "Method": "test_unknown_root_collection_preserved"
+      },
+      {
+        "Case": "ORIG-ABI-05",
+        "Assertions": "Exact duplicate functions raw input returns unsupported-json status.",
+        "Method": "test_duplicate_json_keys_preserved_as_unsupported_source"
+      },
+      {
+        "Case": "ORIG-ABI-06",
+        "Assertions": "Exact functions NaN raw input returns unsupported-json status.",
+        "Method": "test_nonfinite_json_is_not_a_valid_interchange_number"
+      },
+      {
+        "Case": "ORIG-ABI-07",
+        "Assertions": "Exactly two records, original set of local keys f_int/f_string despite identical display_name.",
+        "Method": "test_mangled_overloads_not_collapsed_by_display_name"
+      }
+    ]
+  }
+]

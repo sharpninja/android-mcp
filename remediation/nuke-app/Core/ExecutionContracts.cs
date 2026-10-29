@@ -1,10 +1,15 @@
+using System.Text.Json.Serialization;
 namespace AndroidMcp.BuildTool.Core;
 
 // Shared seams. Implementations must preserve argv boundaries and complete receipts.
 public sealed record ToolIdentity(string ExecutablePath, string Sha256, string Version);
+// Name-only, ordinal/case-sensitive prefix plus any token. Values are never inspected.
+public sealed record ProcessEnvironmentNameRule(string Prefix,IReadOnlyList<string> ContainsAny);
 public sealed record ProcessRequest(ToolIdentity Tool, IReadOnlyList<string> Arguments,
     string WorkingDirectory, IReadOnlyDictionary<string,string> PublicEnvironment,
-    string ReceiptDirectory, string? StandardInputPath = null, bool ClearEnvironment = false);
+    string ReceiptDirectory, string? StandardInputPath = null, bool ClearEnvironment = false,
+    [property:JsonIgnore(Condition=JsonIgnoreCondition.WhenWritingNull)] IReadOnlyList<string>? RemovedEnvironmentKeys=null,
+    [property:JsonIgnore(Condition=JsonIgnoreCondition.WhenWritingNull)] IReadOnlyList<ProcessEnvironmentNameRule>? RemovedEnvironmentNameRules=null);
 public sealed record ProcessResult(int ExitCode, string StandardOutputPath,
     string StandardErrorPath, DateTimeOffset StartedAt, DateTimeOffset EndedAt,
     bool Cancelled);

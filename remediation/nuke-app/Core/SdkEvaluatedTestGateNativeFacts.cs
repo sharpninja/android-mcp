@@ -93,12 +93,15 @@ public sealed partial class SdkEvaluatedTestGateNativeFacts
     private async Task<TestGateSdkEvaluation> EvaluateAsync(TestGateProducerRequest request,CancellationToken cancellationToken,
         TestGateSdkEvaluationPhase phase=TestGateSdkEvaluationPhase.SourceInputs)
     {
-        var result=await evaluator.EvaluateAsync(new(request,configuration.Sdk,configuration.Configuration,configuration.TargetFramework,phase),cancellationToken);
+        var evaluationRequest=new TestGateSdkEvaluationRequest(request,configuration.Sdk,configuration.Configuration,configuration.TargetFramework,phase,configuration.ProjectInventory);
+        NativeTestGateSdkEvaluator.ValidateInventoryRequest(evaluationRequest,configuration);
+        var result=await evaluator.EvaluateAsync(evaluationRequest,cancellationToken);
         if(!Bytes(result.SdkFiles).AsSpan().SequenceEqual(Bytes(configuration.Sdk.AssemblyFiles)))throw Error("SDK_PIN_MISMATCH");
         var projects=result.Projects.Select(project=>project.ProjectPath).ToHashSet(StringComparer.Ordinal);
         if(result.Projects.Count!=projects.Count||!projects.Contains(request.HostProject)||!projects.Contains(request.TestsProject)||
             result.Projects.Any(project=>project.Issues.Count!=0||project.ProjectReferences.Any(reference=>!projects.Contains(reference))))
             throw Error("SOURCE_INPUTS_UNRESOLVED");
+        NativeTestGateSdkEvaluator.ValidateInventoryResult(configuration.ProjectInventory,result.Projects);
         return result;
     }
     private static TestGateEvaluatedProject Project(TestGateSdkEvaluation evaluation,string project)

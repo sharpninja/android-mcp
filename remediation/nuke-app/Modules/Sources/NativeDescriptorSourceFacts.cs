@@ -1,14 +1,26 @@
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
+using System.Text;
 
 namespace AndroidMcp.BuildTool.Sources;
 
 /// <summary>Five retained Binder declaration token families, never compiled wire or runtime proof.</summary>
-public sealed class NativeDescriptorSourceFacts : INativeDescriptorSourceFacts
+public sealed class NativeDescriptorSourceFacts : INativeDescriptorSourceFacts, INativeDescriptorValueSourceFacts
 {
+    public JsonObject ParseValue(JsonNode? text, JsonNode? language)
+    {
+        if (language is not JsonValue scalar || !scalar.TryGetValue<string>(out var selected) || selected is not ("cpp" or "rust"))
+            throw new ArgumentException("Explicit source language required", nameof(language));
+        if (text is JsonValue source && source.TryGetValue<string>(out var characters)) return Parse(characters, selected);
+        // lex checks len before any string operation; mask joins an empty
+        // iterable into an empty string. Preserve that original accepted path.
+        if (text is JsonArray { Count: 0 } or JsonObject { Count: 0 }) return Parse("", selected);
+        throw new ArgumentException("Expected source text with original lexical operations", nameof(text));
+    }
     private readonly record struct LexicalSpan(int Start, int End, bool Comment);
     private const string CppFamilies = "IMPLEMENT_META_INTERFACE|IMPLEMENT_HYBRID_META_INTERFACE|IMPLEMENT_META_NESTED_INTERFACE|AIBinder_Class_define";
+    private const string Space = @"[\s\u001c-\u001f]";
     private const string RustRawStart = "(?:b|c)?r(#{0,255})\"";
     // The retained limit counts source characters, not UTF16 code units.
     // Atomic scalar pairs prevent backtracking from splitting a surrogate pair.
@@ -30,12 +42,13 @@ public sealed class NativeDescriptorSourceFacts : INativeDescriptorSourceFacts
         ArgumentNullException.ThrowIfNull(text);
         var (spans, issues) = Lex(text, language);
         var code = Mask(text, spans, true); var commentsOnly = Mask(text, spans, false); var facts = new JsonArray();
-        var pattern = language == "rust" ? @"\b(declare_binder_interface)\s*!\s*([({])" : @"\b(" + CppFamilies + @")\s*(\()";
+        var pattern = language == "rust" ? @"(declare_binder_interface)" + Space + @"*!" + Space + @"*([({])" : @"(" + CppFamilies + @")" + Space + @"*(\()";
         foreach (Match match in SourceSyntax.Rx(pattern).Matches(code))
         {
+            if (match.Index > 0 && SourceText.OriginalWord(Rune.GetRuneAt(code, char.IsLowSurrogate(code[match.Index - 1]) && match.Index > 1 && char.IsHighSurrogate(code[match.Index - 2]) ? match.Index - 2 : match.Index - 1))) continue;
             var family = match.Groups[1].Value; var opening = match.Index + match.Length - 1;
             var lineStart = code.LastIndexOf('\n', Math.Max(0, match.Index - 1), match.Index) + 1;
-            if (language == "cpp" && SourceSyntax.Rx(@"#\s*define\s*$").IsMatch(code[lineStart..match.Index])) continue;
+            if (language == "cpp" && SourceSyntax.Rx(@"#" + Space + @"*define" + Space + @"*$").IsMatch(code[lineStart..match.Index])) continue;
             var end = Balanced(code, opening);
             if (end < 0)
             {
@@ -49,12 +62,12 @@ public sealed class NativeDescriptorSourceFacts : INativeDescriptorSourceFacts
             string? symbol = null; string? expression = null;
             if (language == "rust")
             {
-                var prefix = SourceSyntax.Rx(@"\A\s*((?:r#)?[A-Za-z_]\w*)\s*\[").Match(code[(opening + 1)..end]);
-                if (prefix.Success)
+                var prefix = SourceSyntax.Rx(@"\A" + Space + @"*((?:r#)?[A-Za-z_][^\s\u001c-\u001f\[]*)" + Space + @"*\[").Match(code[(opening + 1)..end]);
+                if (prefix.Success && prefix.Groups[1].Value[(prefix.Groups[1].Value.StartsWith("r#", StringComparison.Ordinal) ? 2 : 0)..].EnumerateRunes().All(SourceText.OriginalWord))
                 {
                     var bracket = opening + prefix.Length; var closing = Balanced(code, bracket);
                     if (closing >= 0 && closing < end)
-                    { symbol = prefix.Groups[1].Value; expression = commentsOnly[(bracket + 1)..closing].Trim(); }
+                    { symbol = prefix.Groups[1].Value; expression = SourceText.Strip(commentsOnly[(bracket + 1)..closing]); }
                 }
             }
             else
@@ -62,7 +75,7 @@ public sealed class NativeDescriptorSourceFacts : INativeDescriptorSourceFacts
                 // The existing shared delimiter iterator consumes the already
                 // language-masked input, including nested call arguments.
                 var arguments = SourceSyntax.DelimiterSpans(text, opening + 1, end, ',', masked: code)
-                    .Select(span => commentsOnly[span.Start..span.End].Trim()).ToArray();
+                    .Select(span => SourceText.Strip(commentsOnly[span.Start..span.End])).ToArray();
                 expression = family == "AIBinder_Class_define" ? arguments[0] : arguments[^1];
                 if (family != "AIBinder_Class_define") symbol = arguments[0];
             }
@@ -168,7 +181,7 @@ public sealed class NativeDescriptorSourceFacts : INativeDescriptorSourceFacts
 
     private static string? Literal(string raw, string language)
     {
-        var value = raw.Trim();
+        var value = SourceText.Strip(raw);
         var matched = (language == "rust" ? RustRawLiteral : CppRawLiteral).Match(value);
         if (matched.Success) return matched.Groups[2].Value;
         matched = QuotedLiteral.Match(value);

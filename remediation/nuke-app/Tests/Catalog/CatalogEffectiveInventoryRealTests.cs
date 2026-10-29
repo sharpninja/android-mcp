@@ -34,14 +34,20 @@ public sealed class NativeCatalogEffectiveInventoryProvider:ICatalogEffectiveInv
             using var query=database.Command("SELECT entry_id,document_json,record_sha256 FROM registry_inventory ORDER BY registry_id,entry_id",active);using var rows=query.ExecuteReader();var values=new List<string>();
             while(rows.Read()) values.Add(rows.GetString(0)+"\n"+rows.GetString(1)+"\n"+rows.GetString(2));return string.Join("\n",values);
         }
-        void Overlay(JsonObject doc,string state="active",bool local=false)
+        string LocalRows(string table)
+        {
+            using var query=database.Command("SELECT * FROM "+table+" ORDER BY entry_id,revision");using var rows=query.ExecuteReader();var values=new List<object?[]>();
+            while(rows.Read()){var row=new object?[rows.FieldCount];for(var index=0;index<row.Length;index++)row[index]=rows.IsDBNull(index) ? null : rows.GetValue(index);values.Add(row);}return JsonSerializer.Serialize(values);
+        }
+        void Overlay(JsonObject doc,string state="active",bool local=false,string? rawDocument=null)
         {
             var key=doc["entry_id"]!.GetValue<string>();var registry=Scalar("SELECT registry_id FROM active_registry");
             var baseHash=local ? null : Scalar("SELECT record_sha256 FROM effective_entries WHERE entry_id=$id",("$id",key));
+            var document=rawDocument ?? Text(doc);
             using var transaction=database.Connection.BeginTransaction();
             using(var insert=database.Command("INSERT INTO overlays VALUES($id,$import,$signature,1,$registry,$base,$state,$doc,$time,$time)",transaction,
-                ("$id",key),("$import",local ? null : key),("$signature",doc["canonical_signature"]!.GetValue<string>()),("$registry",local ? null : registry),("$base",baseHash),("$state",state),("$doc",Text(doc)),("$time","2026-10-27T03:00:00Z")))insert.ExecuteNonQuery();
-            using(var history=database.Command("INSERT INTO entry_history VALUES($id,1,$operation,$doc,'fixture',$time)",transaction,("$id",key),("$operation",local ? "create" : state=="suppressed" ? "suppress" : "update"),("$doc",Text(doc)),("$time","2026-10-27T03:00:00Z")))history.ExecuteNonQuery();
+                ("$id",key),("$import",local ? null : key),("$signature",doc["canonical_signature"]!.GetValue<string>()),("$registry",local ? null : registry),("$base",baseHash),("$state",state),("$doc",document),("$time","2026-10-27T03:00:00Z")))insert.ExecuteNonQuery();
+            using(var history=database.Command("INSERT INTO entry_history VALUES($id,1,$operation,$doc,'fixture',$time)",transaction,("$id",key),("$operation",local ? "create" : state=="suppressed" ? "suppress" : "update"),("$doc",document),("$time","2026-10-27T03:00:00Z")))history.ExecuteNonQuery();
             transaction.Commit();
         }
         void RewriteImported(string signature,Action<JsonObject> mutate)
@@ -99,11 +105,36 @@ public sealed class NativeCatalogEffectiveInventoryProvider:ICatalogEffectiveInv
             }
             string? admission=null,noAuthority=null,changedAdmission=null;bool? schemaChanged=null,documentChanged=null,hashChanged=null;long? overlayDelta=null;string? dependencyState=null;
             if(call.Variant=="suppressed-binding") Overlay(method,"suppressed");
-            if(call.Variant=="local-addition")
+            var tombstone=call.Variant.StartsWith("tombstone-",StringComparison.Ordinal);
+            if(call.Variant=="local-addition" || tombstone)
             {
                 method["canonical_signature"]="aidl:a.I#added(int)";method["name"]="added";method["origin"]="local";method["overlay_revision"]=1;
                 key=ContentHash.Sha256(Encoding.UTF8.GetBytes(method["canonical_signature"]!.GetValue<string>()));method["entry_id"]=key;
-                method["arguments"]=new JsonArray(new JsonObject{["text"]="int",["status"]="primitive",["codec_status"]="unknown"});Overlay(method,local:true);
+                method["arguments"]=new JsonArray(new JsonObject{["text"]="int",["status"]="primitive",["codec_status"]="unknown"});
+                var state=tombstone ? call.Variant.Split('-')[1] : "active";
+                Overlay(method,state,local:true,rawDocument:tombstone ? CatalogTombstoneCases.Document(call).Raw : null);
+            }
+            if(tombstone)
+            {
+                var overlays=LocalRows("overlays");var history=LocalRows("entry_history");
+                var expectedHash=CatalogTombstoneCases.Document(call).CanonicalHash ?? ContentHash.Sha256(Encoding.UTF8.GetBytes(Text(method)));
+                captured=inventory.Capture();var tombstoneSnapshot=Resolve(captured);var tombstoneRow=Row(tombstoneSnapshot,key);
+                var item=captured.Inventory.Single(row=>row.GetProperty("entry_id").GetString()==key);
+                var keys=captured.Inventory.Select(row=>row.GetProperty("entry_id").GetString()!).ToArray();
+                var digestBytes=Encoding.UTF8.GetBytes(string.Concat(captured.Inventory.OrderBy(row=>row.GetProperty("entry_id").GetString(),StringComparer.Ordinal).Select(row=>Encoding.UTF8.GetString(canonical.Serialize(row))+"\n")));
+                var observation=new CatalogTombstoneObservation(item.GetProperty("entry_id").GetString()!,item.GetProperty("entity_kind").GetString()!,item.GetProperty("variants").GetArrayLength(),item.GetProperty("catalog_revision").GetInt64(),
+                    string.Join(";",tombstoneRow.GetProperty("reason_codes").EnumerateArray().Select(reason=>reason.GetString())),
+                    tombstoneRow.GetProperty("schema_hash").ValueKind==JsonValueKind.Null,tombstoneRow.GetProperty("contract_hash").ValueKind==JsonValueKind.Null,tombstoneRow.GetProperty("graph_digest").ValueKind==JsonValueKind.Null,tombstoneRow.GetProperty("dependencies").GetArrayLength(),
+                    item.GetProperty("catalog_document_sha256").GetString()==expectedHash && captured.DocumentHashes.GetValueOrDefault(key)==expectedHash,
+                    tombstoneRow.GetProperty("entry_id").GetString()==key && tombstoneRow.GetProperty("catalog_document_sha256").GetString()==expectedHash && tombstoneRow.GetProperty("catalog_revision").GetInt64()==1 && tombstoneRow.GetProperty("catalog_state").GetString()==call.Variant.Split('-')[1],
+                    captured.InventorySha256==ContentHash.Sha256(digestBytes),keys.SequenceEqual(keys.Order(StringComparer.Ordinal)),
+                    before.Inventory.All(row=>captured.Inventory.Any(value=>canonical.Serialize(value).AsSpan().SequenceEqual(canonical.Serialize(row)))),
+                    LocalRows("overlays")==overlays,LocalRows("entry_history")==history,captured.CatalogGeneration-before.CatalogGeneration,
+                    long.Parse(Scalar("SELECT CAST(overlay_generation AS TEXT) FROM catalog_view WHERE singleton=1"),System.Globalization.CultureInfo.InvariantCulture)-captured.OverlayGeneration);
+                using(var check=database.Connection.BeginTransaction(deferred:true))check.Rollback();
+                return new("ok",captured.Inventory.Count-captured.BaseInventoryCount,before.Inventory.All(row=>keys.Contains(row.GetProperty("entry_id").GetString()!,StringComparer.Ordinal)),tombstoneRow.GetProperty("state").GetString(),item.GetProperty("catalog_state").GetString(),
+                    InventoryHashChanged:captured.InventorySha256!=before.InventorySha256,OverlayGenerationDelta:captured.OverlayGeneration-before.OverlayGeneration,
+                    ImportedInventoryUnchanged:ImportedRows()==baseline,InputsRetained:built.OriginalInputsRetained && FileHash(original)==originalHash,Tombstone:observation);
             }
             if(call.Variant=="field-override"){var field=Doc("aidl:a.I.P#x");field["return_type"]!["text"]="long";Overlay(field);}
             if(call.Variant=="document-pin")

@@ -1,11 +1,17 @@
+using System.Text.Json.Serialization;
+
 namespace AndroidMcp.BuildTool.Core;
 
 public sealed record TestGateSdkPin(string SdkDirectory,IReadOnlyList<StoredArtifact> AssemblyFiles);
 public sealed record TestGateNativeFactsConfiguration(TestGateSdkPin Sdk,IReadOnlyList<string> ApprovedReadRoots,
-    string Configuration,string TargetFramework);
+    string Configuration,string TargetFramework,
+    [property:JsonIgnore(Condition=JsonIgnoreCondition.WhenWritingNull)] IReadOnlyList<string>? ProjectInventory=null);
 public enum TestGateSdkEvaluationPhase { SourceInputs,ResolvedBuildOutputs }
 public sealed record TestGateSdkEvaluationRequest(TestGateProducerRequest Run,TestGateSdkPin Sdk,
-    string Configuration,string TargetFramework,TestGateSdkEvaluationPhase Phase=TestGateSdkEvaluationPhase.SourceInputs);
+    string Configuration,string TargetFramework,TestGateSdkEvaluationPhase Phase=TestGateSdkEvaluationPhase.SourceInputs,
+    [property:JsonIgnore(Condition=JsonIgnoreCondition.WhenWritingNull)] IReadOnlyList<string>? ProjectInventory=null);
+// Raw observed native properties. Review owns classification; empty/unknown never means false.
+public sealed record TestGateProjectTestMetadata(string IsTestProject,string TestKind);
 public sealed record TestGateEvaluatedInput(string Kind,string AbsolutePath,string DefiningProject);
 public sealed record TestGateResolvedCopy(string SourcePath,string DestinationPath,string ReferencedProject,
     StoredArtifact NativeProof);
@@ -14,7 +20,8 @@ public sealed record TestGateResolvedCopyProof(string RunDirectory,string Projec
 public sealed record TestGateEvaluatedProject(string ProjectPath,string TargetPath,
     IReadOnlyList<TestGateEvaluatedInput> Inputs,IReadOnlyList<string> Imports,
     IReadOnlyList<string> ProjectReferences,IReadOnlyList<string> Issues,
-    IReadOnlyList<TestGateResolvedCopy>? ResolvedCopies=null);
+    IReadOnlyList<TestGateResolvedCopy>? ResolvedCopies=null,
+    [property:JsonIgnore(Condition=JsonIgnoreCondition.WhenWritingNull)] TestGateProjectTestMetadata? TestMetadata=null);
 public sealed record TestGateSdkEvaluation(IReadOnlyList<TestGateEvaluatedProject> Projects,
     IReadOnlyList<StoredArtifact> SdkFiles);
 public interface ITestGateSdkEvaluator

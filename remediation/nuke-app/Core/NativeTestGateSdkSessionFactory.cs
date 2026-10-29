@@ -166,7 +166,7 @@ public sealed class NativeTestGateSdkSessionFactory(string sdkDirectory,IPinnedA
                 if(string.IsNullOrEmpty(target))throw Error("SOURCE_INPUTS_UNRESOLVED","Native TargetPath is missing.");
                 cancellationToken.ThrowIfCancellationRequested();
                 return Task.FromResult(new TestGateSdkNativeProject(Full(projectPath),Full(tools),Property(project,"Configuration"),
-                    Property(project,"TargetFramework"),Full(target),items,imports,inputs,[]));
+                    Property(project,"TargetFramework"),Full(target),items,imports,inputs,[],ObserveTestMetadata(project)));
             }
             catch(Exception error)when(error is not OperationCanceledException){throw Translate(error);}
         }
@@ -229,6 +229,11 @@ public sealed class NativeTestGateSdkSessionFactory(string sdkDirectory,IPinnedA
         ??throw Error("SDK_API_UNSUPPORTED","Required native string member is unavailable: "+name);
     private static IEnumerable<object> Sequence(object instance,string name)=>(Member(instance,name) as IEnumerable)?.Cast<object>()
         ??throw Error("SDK_API_UNSUPPORTED","Required native collection member is unavailable: "+name);
+    internal static TestGateProjectTestMetadata? ObserveTestMetadata(object project)
+    {
+        var isTest=Property(project,"IsTestProject");var kind=Property(project,"AndroidMcpTestKind");
+        return isTest.Length==0&&kind.Length==0?null:new(isTest,kind);
+    }
     private static string Property(object project,string name)=>(project.GetType().GetMethod("GetPropertyValue",[typeof(string)])?.Invoke(project,[name]) as string)
         ??throw Error("SDK_API_UNSUPPORTED","Native property lookup is unavailable.");
     private static string Metadata(object item,string name)=>(item.GetType().GetMethod("GetMetadataValue",[typeof(string)])?.Invoke(item,[name]) as string)

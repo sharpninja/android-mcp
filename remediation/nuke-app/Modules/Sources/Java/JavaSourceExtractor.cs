@@ -51,7 +51,7 @@ public sealed class JavaSourceExtractor(JavaNativeParser parser) : ISourceExtrac
                 var range=issue["byte_range"]!.AsArray();var raw=issue["raw_excerpt"]?.GetValue<string>()??"";
                 var locator="["+range[0]+", "+range[1]+"]";
                 records.Add(SourceSyntax.Row("unsupported","unparsed-java:"+source.RelativePath+":"+locator+":"+ContentHash.Sha256(Encoding.UTF8.GetBytes(raw)),null,package,"unparsed",raw,
-                    issue["line"]!.GetValue<int>(),extras:new(){["parse_error"]=issue["reason"]!.DeepClone(),["source_byte_range"]=range.DeepClone(),["source_bytes_retained"]=true}));
+                    issue["line"]!.GetValue<int>(),extras:new(){["parse_error"]=issue["reason"]!.DeepClone(),["source_byte_range"]=range.DeepClone()}));
             }
             var metadata=new JsonObject{
                 ["package"]=package,["imports"]=new JsonObject(imports.Select(x=>KeyValuePair.Create<string,JsonNode?>(x.Key,JsonValue.Create(x.Value)))),
@@ -72,40 +72,71 @@ public sealed class JavaSourceExtractor(JavaNativeParser parser) : ISourceExtrac
             }
             issueDetails.Add(detail);
         }
-        private JsonArray Annotations(string value,JavaNativeParser.Node node)
+        private JsonArray Annotations(string value)
         {
-            AnnotatedSource parsed;
-            try{parsed=SourceSyntax.ParseAnnotations(SourceSyntax.Mask(value,false));}
-            catch(FormatException error){Issue(node,"Java annotation metadata: "+error.Message);return new();}
+            var masked=SourceSyntax.Mask(value,false,preserveCommentCarriageReturns:false);
+            var parsed=SourceSyntax.ParseAnnotations(masked,unicodeAlphanumericWords:true);
             var result=new JsonArray();
             foreach(var annotation in parsed.Annotations)
             {
-                var item=(JsonObject)annotation.Document.DeepClone();var raw=item["name"]!.GetValue<string>();var dot=raw.IndexOf('.');var first=dot<0?raw:raw[..dot];
+                var item=(JsonObject)annotation.Document.DeepClone();
+                item["start"]=SourceSyntax.CodePointOffset(value,annotation.Start);item["end"]=SourceSyntax.CodePointOffset(value,annotation.End);
+                var raw=item["name"]!.GetValue<string>();var dot=raw.IndexOf('.');var first=dot<0?raw:raw[..dot];
                 if(imports.TryGetValue(first,out var full)){item["name"]=full+(dot<0?"":raw[dot..]);item["name_resolution"]="explicit-import";}
                 else if(dot>=0)item["name_resolution"]="qualified-source-spelling";
                 else if(JavaLang.Contains(raw)){item["name"]="java.lang."+raw;item["name_resolution"]="java-lang";}
                 else if(wildcards.Contains("android.annotation",StringComparer.Ordinal)&&AndroidAnnotations.Contains(raw)){item["name"]="android.annotation."+raw;item["name_resolution"]="known-annotation-wildcard";}
                 else{item["name"]=(package.Length>0?package+".":"")+raw;item["name_resolution"]="package-candidate; unresolved wildcard imports retained";}
                 item["source_spelling"]=raw;item["source_raw"]=value[annotation.Start..annotation.End];
-                var args=item["arguments"]!.GetValue<string>();item["source_arguments"]=args;
-                foreach(var import in imports)args=SourceSyntax.Rx(@"(?<![\w.$])"+Regex.Escape(import.Key)+@"(?=\.)").Replace(args,_=>import.Value);
+                item["raw"]=CommentScalars(value[annotation.Start..annotation.End],masked[annotation.Start..annotation.End]);
+                var args=item["arguments"]!.GetValue<string>();
+                if(args.Length>0)args=CommentScalars(value[(annotation.End-1-args.Length)..(annotation.End-1)],args);
+                item["source_arguments"]=args;
+                foreach(var import in imports)args=ExpandImport(args,import.Key,import.Value,followedByDot:true);
                 item["arguments"]=args;result.Add(item);
             }
             return result;
         }
+        // Shared masking supplies lexical spans and keeps UTF16 indices. Only
+        // its masked supplementary comment scalars contract to one space in
+        // original Java metadata; literal scalars retain their exact spelling.
+        private static string CommentScalars(string original,string masked)
+        {
+            var result=new StringBuilder(masked.Length);var index=0;
+            foreach(var scalar in original.EnumerateRunes())
+            {
+                var width=scalar.Utf16SequenceLength;
+                result.Append(original.AsSpan(index,width).SequenceEqual(masked.AsSpan(index,width))?scalar.ToString():scalar.Value=='\n'?"\n":" ");
+                index+=width;
+            }
+            return result.ToString();
+        }
         private (string[] Modifiers,JsonArray Annotations) Modifiers(JavaNativeParser.Node node)
         {
-            var value=Text(tree.Children(node).FirstOrDefault(x=>Kind(x)=="modifiers"));var masked=SourceSyntax.Mask(value,false);string clean;
-            try{clean=SourceSyntax.ParseAnnotations(masked).Masked;}catch(FormatException){clean=SourceSyntax.Mask(masked,true);}
-            return (SourceSyntax.Rx(@"\b(public|protected|private|static|final|abstract|native|synchronized|strictfp|default|transient|volatile|sealed|non-sealed)\b").Matches(clean).Select(x=>x.Value).ToArray(),Annotations(value,node));
+            var value=Text(tree.Children(node).FirstOrDefault(x=>Kind(x)=="modifiers"));
+            var clean=SourceSyntax.ParseAnnotations(SourceSyntax.Mask(value,false,preserveCommentCarriageReturns:false),unicodeAlphanumericWords:true).Masked;
+            return (SourceSyntax.Rx(@"\b(public|protected|private|static|final|abstract|native|synchronized|strictfp|default|transient|volatile|sealed|non-sealed)\b").Matches(clean).Select(x=>x.Value).ToArray(),Annotations(value));
         }
         private string TypeText(JavaNativeParser.Node node,string extra="")
         {
-            var clean=SourceSyntax.TypeName(Text(node)+extra);
+            var clean=SourceSyntax.TypeName(Text(node)+extra,unicodeAlphanumericWords:true);
             foreach(var import in imports)
-                if(import.Value!="java.lang."+import.Key)clean=SourceSyntax.Rx(@"(?<![\w.$])"+Regex.Escape(import.Key)+@"(?![\w$])").Replace(clean,_=>import.Value);
+                if(import.Value!="java.lang."+import.Key)clean=ExpandImport(clean,import.Key,import.Value,followedByDot:false);
             return clean;
         }
+        private static string ExpandImport(string value,string simple,string full,bool followedByDot)=>
+            SourceSyntax.Rx(Regex.Escape(simple)).Replace(value,match=>
+            {
+                if(match.Index>0)
+                {
+                    var previous=match.Index-1;
+                    if(char.IsLowSurrogate(value[previous])&&previous>0&&char.IsHighSurrogate(value[previous-1]))previous--;
+                    if(value[previous] is '.' or '$'||SourceText.OriginalWord(Rune.GetRuneAt(value,previous)))return match.Value;
+                }
+                var end=match.Index+match.Length;
+                if(followedByDot?end>=value.Length||value[end]!='.':end<value.Length&&(value[end]=='$'||SourceText.OriginalWord(Rune.GetRuneAt(value,end))))return match.Value;
+                return full;
+            });
         private JsonObject Parameter(JavaNativeParser.Node node)
         {
             var type=tree.Field(node,"type");var name=tree.Field(node,"name");
@@ -116,7 +147,7 @@ public sealed class JavaSourceExtractor(JavaNativeParser parser) : ISourceExtrac
             }
             var dimensions=string.Concat(tree.Children(node).Where(x=>Kind(x)=="dimensions").Select(Text));
             return new(){["type"]=TypeText(type,(Kind(node)=="spread_parameter"?"...":"")+dimensions),["name"]=name.IsNull?null:Text(name),["direction"]=null,
-                ["annotations"]=Annotations(Text(node),node),["source_type"]=Text(type),["source_byte_range"]=Range(node)};
+                ["annotations"]=Annotations(Text(node)),["source_type"]=Text(type),["source_byte_range"]=Range(node)};
         }
         private JsonObject Row(JavaNativeParser.Node node,string kind,string? owner,string name,string? returnType=null,JsonArray? parameters=null,string? canonical=null,JsonArray? annotations=null,JsonObject? extra=null,string? raw=null)
         {
@@ -128,7 +159,7 @@ public sealed class JavaSourceExtractor(JavaNativeParser parser) : ISourceExtrac
                 ["owner_binary_name"]=owner is not null?binaryByOwner.GetValueOrDefault(owner):null,["public_sdk_membership"]="unknown until checked against published SDK metadata"};
             foreach(var field in extra)extras[field.Key]=field.Value?.DeepClone();
             var row=SourceSyntax.Row(kind,canonical??owner+"#"+name,owner,package,name,header,tree.Line(node),returnType,parameters,extras:extras);
-            row["annotations"]=(annotations??metadata).DeepClone();row["all_annotations"]=Annotations(header,node);return row;
+            row["annotations"]=(annotations??metadata).DeepClone();row["all_annotations"]=Annotations(header);return row;
         }
         private void Type(JavaNativeParser.Node node,string? outer,int depth,string? ownerKind=null)
         {

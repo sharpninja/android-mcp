@@ -11,6 +11,19 @@ public sealed class NativeProcessSessionFactory(IClock clock):IProcessSessionFac
         {"python","python3","py","pypy","node","npm","npx","bash","sh","zsh","fish","cmd","powershell","pwsh","mise"};
     public async Task<IProcessSession> StartAsync(ProcessRequest request,CancellationToken cancellationToken=default)
     {
+        // Admit the removal contract before any process/receipt effects. This uses only
+        // explicit names and later the single ProcessStartInfo's existing name collection.
+        var exact=request.RemovedEnvironmentKeys?.ToArray()??[];
+        var suppliedRules=request.RemovedEnvironmentNameRules?.ToArray()??[];
+        static bool ValidName(string? name)=>!string.IsNullOrWhiteSpace(name)&&name.IndexOfAny(['=','\0'])<0;
+        var environmentComparer=OperatingSystem.IsWindows()?StringComparer.OrdinalIgnoreCase:StringComparer.Ordinal;
+        if(exact.Any(name=>!ValidName(name))||exact.Distinct(environmentComparer).Count()!=exact.Length||
+            suppliedRules.Any(rule=>rule is null||!ValidName(rule.Prefix)||rule.ContainsAny is null||rule.ContainsAny.Count==0||rule.ContainsAny.Any(token=>!ValidName(token))))
+            throw new InvalidOperationException("ENVIRONMENT_REMOVAL_INVALID");
+        var rules=suppliedRules.Select(rule=>new ProcessEnvironmentNameRule(rule.Prefix,rule.ContainsAny.ToArray())).ToArray();
+        bool Selected(string name)=>exact.Contains(name,environmentComparer)||rules.Any(rule=>
+            name.StartsWith(rule.Prefix,StringComparison.Ordinal)&&rule.ContainsAny.Any(token=>name.Contains(token,StringComparison.Ordinal)));
+        if(request.PublicEnvironment.Keys.Any(Selected))throw new InvalidOperationException("ENVIRONMENT_REMOVAL_CONFLICT");
         var executable=Path.GetFullPath(request.Tool.ExecutablePath);var name=Path.GetFileNameWithoutExtension(executable);
         if(Forbidden.Contains(name)||name.StartsWith("python",StringComparison.OrdinalIgnoreCase)||
             new[]{".py",".js",".cjs",".mjs",".sh",".ps1",".cmd",".bat"}.Contains(Path.GetExtension(executable),StringComparer.OrdinalIgnoreCase))
@@ -23,6 +36,8 @@ public sealed class NativeProcessSessionFactory(IClock clock):IProcessSessionFac
         if(request.StandardInputPath is not null&&!File.Exists(request.StandardInputPath))throw new InvalidOperationException("Standard input artifact is absent.");
         var start=new ProcessStartInfo(executable){WorkingDirectory=request.WorkingDirectory,UseShellExecute=false,RedirectStandardOutput=true,RedirectStandardError=true,RedirectStandardInput=request.StandardInputPath is not null,CreateNoWindow=true};
         if(request.ClearEnvironment)start.Environment.Clear();
+        if(exact.Length>0||rules.Length>0)
+            foreach(var key in start.Environment.Keys.Where(Selected).ToArray())start.Environment.Remove(key);
         foreach(var argument in request.Arguments)start.ArgumentList.Add(argument);
         foreach(var item in request.PublicEnvironment)
         {

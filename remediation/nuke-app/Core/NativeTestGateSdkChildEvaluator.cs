@@ -48,6 +48,7 @@ public sealed class NativeTestGateSdkChildEvaluator(TestGateNativeFactsConfigura
         catch(ArgumentException){throw Error("INPUT_SCOPE_VIOLATION");}
         if(evaluation.Configuration!=configuration.Configuration||evaluation.TargetFramework!=configuration.TargetFramework)
             throw Error("SDK_CONFIGURATION_MISMATCH");
+        NativeTestGateSdkEvaluator.ValidateInventoryRequest(evaluation,configuration);
         if(!Same(evaluation.Sdk,configuration.Sdk)||!Same(native.ApprovedReadRoots,configuration.ApprovedReadRoots))throw Error("SDK_PIN_MISMATCH");
 
         var imagePin=new StoredArtifact(Relative(run.WorkspaceRoot,request.Monolith.AbsolutePath),request.Monolith.Sha256,
@@ -87,6 +88,7 @@ public sealed class NativeTestGateSdkChildEvaluator(TestGateNativeFactsConfigura
         try{result=JsonSerializer.Deserialize<TestGateSdkEvaluation>(canonical.Serialize(evaluatedBytes),Options);}
         catch(Exception error)when(error is JsonException or FormatException){throw Error("SDK_CHILD_EVALUATION_PIN_INVALID");}
         if(result?.SdkFiles is null||!Same(result.SdkFiles,evaluation.Sdk.AssemblyFiles))throw Error("SDK_PIN_MISMATCH");
+        NativeTestGateSdkEvaluator.ValidateInventoryResult(evaluation.ProjectInventory,result.Projects);
         return result;
     }
 

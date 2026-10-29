@@ -14,6 +14,7 @@ public sealed class ReleasePartsCodec(IStreamingArtifactReader reader,ICreateNew
     public const int MaximumParts=1000;
     private const string Format="android-mcp-release-parts-v1";
     private const int BufferBytes=65536;
+    private static readonly ILegacyJsonValueEquality ValueEquality=new LegacyJsonValueEquality();
 
     public async Task<ReleaseSplitResult> SplitAsync(ReleaseSplitRequest request,CancellationToken cancellationToken=default)
     {
@@ -161,18 +162,10 @@ public sealed class ReleasePartsCodec(IStreamingArtifactReader reader,ICreateNew
             &&value.TryGetInt64(out length);
     }
 
-    // The original whole-total check uses numeric equality, not isinstance.
-    // JSON floats use binary64; valid totals are at most1000*(2^31-1), below
-    // 2^41, hence their integer-to-double comparison is exact. Shared strict
-    // inspection remains responsible for rejecting nonfinite/ambiguous JSON.
-    private static bool WholeLengthEquals(JsonElement value,long total)=>value.ValueKind switch{
-        JsonValueKind.True=>total==1,
-        JsonValueKind.False=>total==0,
-        JsonValueKind.Number=>StrictJsonInspector.IsIntegerToken(value.GetRawText())
-            ?value.TryGetInt64(out var integer)&&integer==total
-            :value.TryGetDouble(out var number)&&double.IsFinite(number)&&number==total,
-        _=>false
-    };
+    // Whole totals use the same original loaded-JSON equality as source facts.
+    // Strict JSON admission and integer-only part-size conversion stay separate.
+    private static bool WholeLengthEquals(JsonElement value,long total)=>
+        ValueEquality.Equal(value,JsonSerializer.SerializeToElement(total));
 
     private async Task<IArtifactReadSession> OpenRegular(string path,string code,string message,CancellationToken token)
     {

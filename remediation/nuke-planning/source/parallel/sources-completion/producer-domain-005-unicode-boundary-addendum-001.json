@@ -1,0 +1,99 @@
+{
+  "At": "2026-10-29T01:04:15",
+  "AppendOnly": true,
+  "SupersedesPendingDispositionOnly": true,
+  "SealedHandoff": {
+    "Sha256": "fa0d2fe5898e9555e118cb992d83585f2c34f04bab2ec077be7676482b20ee93",
+    "Path": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/producer-domain-005/handoff.json"
+  },
+  "RootDecision": {
+    "Directive": "Preserve EXISTING strict native Unicode admission and current raw/expression-retained unresolved result, no decoder/admission change/no U+FFFD. Record explicit original difference/caller effects and keep visible to PR review.",
+    "At": "2026-10-29T01:00:17"
+  },
+  "ExactInputs": [
+    "quoted source literal containing escaped ud800",
+    "quoted source literal containing escaped dc00"
+  ],
+  "OriginalDifference": [
+    "Original native_descriptor_facts.literal calls json.loads on the quoted escape and returns a Python string containing the lone surrogate. parse therefore emits descriptor_literal as that non-null string and status literal-argument-candidate, while compiled_endpoint_proven stays false.",
+    "Original functional_source_facts.taxonomy likewise retains the decoded lone-surrogate string in service_string_literal; source_annotation.arguments remains the original quoted escape and service_symbol_expression remains null.",
+    "Native inner JSON decoding rejects the unpaired surrogate. Existing source helpers catch that decoder rejection: taxonomy retains the exact source annotation but service_string_literal is null; descriptor retains exact raw source/expression but descriptor_literal is null and status is computed-or-unresolved-argument. The existing decoded-value admission remains INVALID_UNICODE."
+  ],
+  "ObservedNativeEffects": [
+    {
+      "escape": "d800",
+      "literal_source": "\"\\ud800\"",
+      "decoder_exception": "System.Text.Json.JsonException",
+      "decoder_message": "The JSON value could not be converted to System.String. Path: $ | LineNumber: 0 | BytePositionInLine: 8.",
+      "inner_literal_admission_fatal": true,
+      "inner_literal_admission_diagnostics": [
+        "INVALID_UNICODE"
+      ],
+      "outer_document_admission_fatal": false,
+      "taxonomy_raw_preserved": true,
+      "taxonomy_literal_null": true,
+      "taxonomy_symbol_null": true,
+      "descriptor_raw_preserved": true,
+      "descriptor_expression_preserved": true,
+      "descriptor_literal_null": true,
+      "descriptor_status": "computed-or-unresolved-argument",
+      "descriptor_lexical_issues": []
+    },
+    {
+      "escape": "dc00",
+      "literal_source": "\"\\udc00\"",
+      "decoder_exception": "System.Text.Json.JsonException",
+      "decoder_message": "The JSON value could not be converted to System.String. Path: $ | LineNumber: 0 | BytePositionInLine: 8.",
+      "inner_literal_admission_fatal": true,
+      "inner_literal_admission_diagnostics": [
+        "INVALID_UNICODE"
+      ],
+      "outer_document_admission_fatal": false,
+      "taxonomy_raw_preserved": true,
+      "taxonomy_literal_null": true,
+      "taxonomy_symbol_null": true,
+      "descriptor_raw_preserved": true,
+      "descriptor_expression_preserved": true,
+      "descriptor_literal_null": true,
+      "descriptor_status": "computed-or-unresolved-argument",
+      "descriptor_lexical_issues": []
+    }
+  ],
+  "CallerEffects": [
+    "The outer JSON document containing escaped source spelling is admitted; it does not itself contain an unpaired decoded Unicode value.",
+    "The source metadata caller receives raw-preserved, unresolved native evidence for this exact inner literal. No U+FFFD replacement or newly admitted decoded surrogate is produced.",
+    "source_metadata_reference.produce_entry_metadata calls taxonomy and validates the metadata afterward; attach_occurrences obtains occurrence documents via json.loads(raw). Root/Catalog retain downstream schema/persistence responsibility. This addendum does not infer unspecified persistence outcomes.",
+    "Descriptor parsing has only its published test importer in the audited original source. This compatibility disposition does not establish arbitrary escaped-surrogate literal-return equivalence."
+  ],
+  "Evidence": {
+    "Source": "Tests/Sources/SourceUnicodeBoundaryDiagnosticTests.cs",
+    "Trx": "/home/sharpninja/github/2026-10-26/task-3/remediation/nuke-planning/source/parallel/sources-completion/producer-domain-005/isolation-effects-mock-diagnostic-005.trx",
+    "SharedContract": "Core/StrictJsonInspector.cs UnicodeIssue/IsUnicodeScalarString; INSPECT-23/24/25 and JSON-28-unpaired-surrogate",
+    "Sha256": "44d57384b62ed80c42d837526a9f5fadc2014e8b06a74c5ca59d6f6b95eb44e5"
+  },
+  "SourcePins": [
+    {
+      "Path": "tools/source_facts/native_descriptor_facts.py",
+      "Sha256": "7aac07fd9046f54e782726c3dbb3272e7145fd311d3fdd0237fb763adf3d4302",
+      "Size": 4945
+    },
+    {
+      "Path": "tools/source_facts/functional_source_facts.py",
+      "Sha256": "38ee75b78d6b8f56ddf047841e41a5498d84be04d617773f218dc0957d3e5520",
+      "Size": 1831
+    },
+    {
+      "Path": "remediation/catalog/tooling/functional_source_facts.py",
+      "Sha256": "38ee75b78d6b8f56ddf047841e41a5498d84be04d617773f218dc0957d3e5520",
+      "Size": 1831
+    }
+  ],
+  "RuntimeProfiles": "Existing current-candidate and release011 concerns keep the same strict native admission. No source/cache producer identity is relabeled.",
+  "SealedFilesEdited": false,
+  "DecoderChanged": false,
+  "AdmissionChanged": false,
+  "ReplacementCharacterAdded": false,
+  "ArbitraryLiteralEquivalenceClaimed": false,
+  "HvAcceptanceClaimed": false,
+  "OriginalsRetained": true
+}

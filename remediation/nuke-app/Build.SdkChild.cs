@@ -54,7 +54,7 @@ public sealed partial class Build
             foreach(var runtime in request.RuntimeFiles)await pins.ReadAsync(runtime);
             var sdkStore=new FileArtifactStore(evaluation.Sdk.SdkDirectory,value=>ContentHash.Sha256(value.Span));
             var configuration=new TestGateNativeFactsConfiguration(evaluation.Sdk,request.Native.ApprovedReadRoots,
-                evaluation.Configuration,evaluation.TargetFramework);
+                evaluation.Configuration,evaluation.TargetFramework,evaluation.ProjectInventory);
             var sessions=NativeTestGateSdkSessionFactory.CreateForDedicatedChild(evaluation.Sdk.SdkDirectory,new PinnedArtifactReader(sdkStore));
             var query=new NativeTestGateResolvedReferenceQuery(new NativeProcessRunner(new SystemClock()),new ProcessCaptureReader(root),store);
             var evaluated=await new NativeTestGateSdkEvaluator(configuration,sessions,query).EvaluateAsync(evaluation);

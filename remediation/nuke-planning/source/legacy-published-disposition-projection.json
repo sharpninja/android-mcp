@@ -1,24 +1,24 @@
 {
   "schemaVersion": "1.0.0",
-  "at": "2026-10-29T00:14:22",
+  "at": "2026-10-29T02:19:59",
   "authoritative": false,
   "projectionOnly": true,
   "derivedFrom": {
     "path": "remediation/nuke-planning/source/legacy-port-disposition-inventory.json",
-    "sha256": "5cb1b95bb118984b2178b8ec5a23556c851efa8cb10c37d86036e0c9ee35f7a8",
-    "totalNormalizedPaths": 1473,
-    "additionalLocalPathsRetained": 1275
+    "sha256": "77c0e98fefe310f830f436b255ff129eedb47d99e42741d97f2fad667435ec7f",
+    "totalNormalizedPaths": 1476,
+    "additionalLocalPathsRetained": 1278
   },
   "identityManifest": {
     "path": "remediation/nuke-planning/source/legacy-python-tracked-manifest.json",
-    "sha256": "d4462e1bef773bee6a2cf7c8cf3fbbd4f3736b08897d80684fbd960dc5725359",
+    "sha256": "fae66e25b01cedadcd6d5b38b4541b0b5a5d2b20ae8212b53dc75219eafbe0eb",
     "publishedPythonCount": 198,
-    "headAtIdentityRead": "ed98ec5e3559c9aee7506a02b3ff3ac29b5f792f"
+    "headAtIdentityRead": "dedaef65117cd8822d9a5286fa7238cbbb50201f"
   },
   "totals": {
     "entries": 198,
     "unmappedPrimaryOwners": 0,
-    "normalVerified": 51,
+    "normalVerified": 53,
     "executionRetired": 0,
     "normalVerifiedMethodScopes": 278,
     "acceptedComplete": 0,
@@ -30,7 +30,7 @@
     "This is a generated published-only projection of one authoritative union inventory, not a second maintained inventory.",
     "All 198 published paths and hashes were independently rechecked read-only against the current checkout.",
     "Responsibility allocation and bounded native test evidence are not whole-file equivalence, migration acceptance or permission to delete originals.",
-    "Additional 1275 local paths and repeated historical snapshot details remain retained in the full local inventory; omission from lean projection is not a scope waiver."
+    "Additional 1278 local paths and repeated historical snapshot details remain retained in the full local inventory; omission from lean projection is not a scope waiver."
   ],
   "entries": [
     {
@@ -5270,16 +5270,19 @@
         "Extract"
       ],
       "services": [
-        "Java helper-owned JavaSourceExtractor/JavaFileContext/JvmSourceLinker with pinned native runtime0.25.2+grammar0.23.5"
+        "Java helper-owned JavaSourceExtractor/JavaFileContext/JvmSourceLinker with pinned native runtime0.25.2+grammar0.23.5",
+        "JavaSourceExtractor over the existing pinned JavaNativeParser; shared SourceSyntax/SourceText services"
       ],
-      "migration_status": "partial-source-allocation",
+      "migration_status": "normal-native-producer-helper-body-and-callers-verified",
       "native_tests_or_pending": [
-        "85Java mocks passed within independently inspected162test TRX; native asset/build/real service gates pending; no Python wheel/system0.26 fallback"
+        "85Java mocks passed within independently inspected162test TRX; native asset/build/real service gates pending; no Python wheel/system0.26 fallback",
+        "Root full017: actual Java AST, boundary, complete row/report, Unicode comment/word, exception and Catalog cache/CLI classes listed by exactClassCounts"
       ],
-      "additional_responsibilities": [],
+      "additional_responsibilities": [
+        "Exact producer-helper bodies and required callers verified by owner body/fixture evidence. Supporting original test proofs are reused, not new producer-test methods. Parser unrestricted-input/corpus domains and HV remain separate."
+      ],
       "remaining": [
-        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "Canonical and release-011 original bodies are independently SHA-pinned. Both supported native profile routes reuse the same body. Native C# identity is distinct from historical Python/package/cache identity; this does not relabel historical cache bytes or claim unchanged historical producer-package execution."
       ],
       "artifact_role": "published-legacy-port-baseline",
       "primary_code_path": "remediation/catalog/tooling/java_source.py",
@@ -5287,11 +5290,72 @@
       "byte_identical_path_count": 12,
       "same_bytes_imply_profile_or_caller_parity": false,
       "standalone_nuke_target_required": false,
-      "normal_verified": false,
-      "normal_verification_status": "native-or-caller-method-verification-pending",
+      "normal_verified": true,
+      "normal_verification_status": "normal-producer-helper-body-and-callers-verified",
       "normal_verified_methods": [],
-      "normal_verified_functions": [],
-      "pending_methods": "<module-body-and-required-callers>",
+      "normal_verified_functions": [
+        {
+          "source_sha256": "ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": "parse"
+        },
+        {
+          "source_sha256": "ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": "txt"
+        },
+        {
+          "source_sha256": "ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": "mask_comments"
+        },
+        {
+          "source_sha256": "ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": "qualify_anns"
+        },
+        {
+          "source_sha256": "ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": "modifiers"
+        },
+        {
+          "source_sha256": "ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": "type_text"
+        },
+        {
+          "source_sha256": "ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": "parameter"
+        },
+        {
+          "source_sha256": "ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": "row"
+        },
+        {
+          "source_sha256": "ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": "excluded_node"
+        },
+        {
+          "source_sha256": "ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": "type_decl"
+        },
+        {
+          "source_sha256": "ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": "child"
+        },
+        {
+          "source_sha256": "ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": "errors"
+        }
+      ],
+      "pending_methods": null,
       "pending_method_list_basis": "Exact owner-supplied function/method anchors when available; module/caller closure is explicit. Lexical proposal anchors are not an AST or exhaustive branch inventory.",
       "execution_retired": false,
       "retention_normal_verified": false,
@@ -5302,7 +5366,7 @@
       "hv_acceptance": "Deferred by user until Ready; not used as a prerequisite to record normal implementation verification.",
       "decommissionable_from_pr": false,
       "decommissionable_scope": [
-        null
+        "Root may merge this normal producer execution closure after binding the supplied full017 proof; originals retained, no physical deletion or hostile acceptance."
       ],
       "decommissionable_means_physical_delete": false,
       "evidence_refs": [
@@ -5317,6 +5381,13 @@
           "evidence": "remediation/nuke-planning/source/legacy-disposition.jsonl",
           "owner": "Java",
           "role": "allocation",
+          "source_sha256": "ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
+          "method": null
+        },
+        {
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "owner": "Java",
+          "role": "explicit-source-normal-verification",
           "source_sha256": "ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
           "method": null
         }
@@ -12730,15 +12801,19 @@
         "Extract"
       ],
       "services": [
-        "Java helper-owned JavaSourceExtractor/JavaFileContext/JvmSourceLinker with pinned native runtime0.25.2+grammar0.23.5"
+        "Java helper-owned JavaSourceExtractor/JavaFileContext/JvmSourceLinker with pinned native runtime0.25.2+grammar0.23.5",
+        "JavaSourceExtractor over the existing pinned JavaNativeParser; shared SourceSyntax/SourceText services"
       ],
-      "migration_status": "partial-source-allocation",
+      "migration_status": "normal-native-producer-helper-body-and-callers-verified",
       "native_tests_or_pending": [
-        "85Java mocks passed within independently inspected162test TRX; native asset/build/real service gates pending; no Python wheel/system0.26 fallback"
+        "85Java mocks passed within independently inspected162test TRX; native asset/build/real service gates pending; no Python wheel/system0.26 fallback",
+        "Root full017: actual Java AST, boundary, complete row/report, Unicode comment/word, exception and Catalog cache/CLI classes listed by exactClassCounts"
       ],
-      "additional_responsibilities": [],
+      "additional_responsibilities": [
+        "Exact producer-helper bodies and required callers verified by owner body/fixture evidence. Supporting original test proofs are reused, not new producer-test methods. Parser unrestricted-input/corpus domains and HV remain separate."
+      ],
       "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "Canonical and release-011 original bodies are independently SHA-pinned. Both supported native profile routes reuse the same body. Native C# identity is distinct from historical Python/package/cache identity; this does not relabel historical cache bytes or claim unchanged historical producer-package execution."
       ],
       "artifact_role": "published-legacy-port-baseline",
       "primary_code_path": "remediation/catalog/tooling/java_source.py",
@@ -12746,11 +12821,72 @@
       "byte_identical_path_count": 12,
       "same_bytes_imply_profile_or_caller_parity": false,
       "standalone_nuke_target_required": false,
-      "normal_verified": false,
-      "normal_verification_status": "native-or-caller-method-verification-pending",
+      "normal_verified": true,
+      "normal_verification_status": "normal-producer-helper-body-and-callers-verified",
       "normal_verified_methods": [],
-      "normal_verified_functions": [],
-      "pending_methods": "<module-body-and-required-callers>",
+      "normal_verified_functions": [
+        {
+          "source_sha256": "ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": "parse"
+        },
+        {
+          "source_sha256": "ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": "txt"
+        },
+        {
+          "source_sha256": "ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": "mask_comments"
+        },
+        {
+          "source_sha256": "ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": "qualify_anns"
+        },
+        {
+          "source_sha256": "ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": "modifiers"
+        },
+        {
+          "source_sha256": "ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": "type_text"
+        },
+        {
+          "source_sha256": "ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": "parameter"
+        },
+        {
+          "source_sha256": "ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": "row"
+        },
+        {
+          "source_sha256": "ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": "excluded_node"
+        },
+        {
+          "source_sha256": "ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": "type_decl"
+        },
+        {
+          "source_sha256": "ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": "child"
+        },
+        {
+          "source_sha256": "ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "mapping": "errors"
+        }
+      ],
+      "pending_methods": null,
       "pending_method_list_basis": "Exact owner-supplied function/method anchors when available; module/caller closure is explicit. Lexical proposal anchors are not an AST or exhaustive branch inventory.",
       "execution_retired": false,
       "retention_normal_verified": false,
@@ -12761,7 +12897,7 @@
       "hv_acceptance": "Deferred by user until Ready; not used as a prerequisite to record normal implementation verification.",
       "decommissionable_from_pr": false,
       "decommissionable_scope": [
-        null
+        "Root may merge this normal producer execution closure after binding the supplied full017 proof; originals retained, no physical deletion or hostile acceptance."
       ],
       "decommissionable_means_physical_delete": false,
       "evidence_refs": [
@@ -12776,6 +12912,13 @@
           "evidence": "remediation/nuke-planning/source/legacy-disposition.jsonl",
           "owner": "Java",
           "role": "allocation",
+          "source_sha256": "ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
+          "method": null
+        },
+        {
+          "evidence": "remediation/nuke-planning/source/source-normal-verification-supplement.json",
+          "owner": "Java",
+          "role": "explicit-source-normal-verification",
           "source_sha256": "ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
           "method": null
         }
@@ -13711,7 +13854,7 @@
       "artifact_role": "published-legacy-port-baseline",
       "primary_code_path": "remediation/design-c4/tooling/bootstrap.py",
       "byte_identity_group": "92b77e3d2a09416a56f3f64beca23f3c2732e32ed777176fa9fadbd6bedc1ce1",
-      "byte_identical_path_count": 8,
+      "byte_identical_path_count": 9,
       "same_bytes_imply_profile_or_caller_parity": false,
       "standalone_nuke_target_required": false,
       "normal_verified": false,
@@ -15585,7 +15728,7 @@
       "artifact_role": "published-legacy-port-baseline",
       "primary_code_path": "remediation/tests_design023_contract.py",
       "byte_identity_group": "fb7976938a0c83b4acef176a99d6e1506d05c4b0bc8aa2d40c0146c5abf5340c",
-      "byte_identical_path_count": 3,
+      "byte_identical_path_count": 4,
       "same_bytes_imply_profile_or_caller_parity": false,
       "standalone_nuke_target_required": false,
       "normal_verified": false,
@@ -15767,7 +15910,7 @@
       "artifact_role": "published-legacy-port-baseline",
       "primary_code_path": "tools/check_documentation.py",
       "byte_identity_group": "4abd62deef22df29c323832ecfd094df9f27162bc9023fd913cb0954ceb417d3",
-      "byte_identical_path_count": 2,
+      "byte_identical_path_count": 3,
       "same_bytes_imply_profile_or_caller_parity": false,
       "standalone_nuke_target_required": false,
       "normal_verified": false,

@@ -61,13 +61,15 @@ public sealed partial class Build
             snapshot=await collector.CaptureAsync();captured=snapshot.Sources.Where(row=>row.Observation.Source.Role!=DocumentationInputRole.CanonicalContractOptional).Select(row=>row.Observation.Content!).ToArray();
         }
 
-        var profiles=new DocumentationRendererProfileReader();ArchitectureRendererContext? context=null;DocumentationRendererProfile? rendererProfile=null;
+        var profiles=new DocumentationRendererProfileReader();ArchitectureRendererContext? context=null;DocumentationRendererProfile? rendererProfile=null;Artifact? wrapperProperties=null;
         if(Has(DesignStage.Tools))
         {
             Artifact Lock(string path)=>captured?.Single(artifact=>artifact.RelativePath==path)??configuration.Single(artifact=>artifact.RelativePath==path);
             if(captured is null)
                 foreach(var descriptor in new DocumentationProjectSourceCatalog().DescribeProjectSources(selection).Where(item=>item.Kind is DocumentationProjectInputKind.ToolchainLock or DocumentationProjectInputKind.RendererLock))
                     configuration.Add(new(descriptor.Source.RelativePath,await source.ReadAsync(descriptor.Source.RelativePath),descriptor.Source.MediaType));
+            const string propertiesPath="gradle/wrapper/gradle-wrapper.properties";
+            wrapperProperties=new(propertiesPath,await source.ReadAsync(propertiesPath),"application/octet-stream");configuration.Add(wrapperProperties);
             var profile=rendererProfile=profiles.Read(Lock("toolchain-lock.json"),Lock("renderer-lock.json"));
             var jar=profile.Downloads.Single(pin=>pin.LocalPath==".tools/plantuml-"+profile.PlantUmlVersion+".jar");
             var docker=await ReadToolIdentity(DockerIdentity!,"Docker");
@@ -119,7 +121,9 @@ public sealed partial class Build
         var legacyReceipts=new DocumentationLegacyReceipts(canonical,strict,verifier);
         var composer=new ArchitectureProjectionComposer(Runtime(work,workStore),workStore,verifier,preparation,transport,
             new NativeRendererImageAdmission(processes,new ProcessCaptureReader(receiptRoot),transport,hashes),generation+"-work",legacyReceipts);
-        var bootstrap=new DocumentationToolBootstrap(new ToolArtifactAcquirer(HttpByteTransport.Create(clock),toolStore,new FileArtifactLeaseProvider(Path.Combine(cache,".leases")),canonical));
+        var toolWorkspace=Has(DesignStage.Tools)?new NativeArtifactWorkspace(cache):null;
+        var bootstrap=new DocumentationToolBootstrap(new ToolArtifactAcquirer(HttpByteTransport.Create(clock),toolStore,new FileArtifactLeaseProvider(Path.Combine(cache,".leases")),canonical),
+            toolWorkspace is null?null:new DocumentationBootstrapFileEffects(toolWorkspace,toolWorkspace,new DocumentationWrapperPropertiesValidator(),wrapperProperties!));
         var modules=new ModuleGraphValidator();var projector=new DocumentationProjector(new DocumentationModelReader());
         var preflight=new DocumentationModelPreflight(new DocumentationModelReader(),projector,new ModelContractValidator(hashes),modules,strict);
         var manifests=new DocumentationManifestBuilder(verifier);var packages=new DocumentationPackageBuilder(new PublicationChecker(canonical),verifier,manifests);
@@ -134,17 +138,7 @@ public sealed partial class Build
         // Configuration is captured by the same immutable runtime but is not
         // appended to the18 published documentation routes. Existing source
         // locks retain their normal recipe role and are pinned rather than stripped.
-        var basePaths=recipe.Sources.Select(spec=>spec.RelativePath).ToHashSet(StringComparer.Ordinal);
-        if(policy is not null&&basePaths.Contains(policy.RelativePath))throw new InvalidOperationException("Package policy cannot replace a declared documentation source.");
-        var identities=configuration.ToDictionary(artifact=>artifact.RelativePath,verifier.Describe,StringComparer.Ordinal);
-        var inner=recipe;
-        recipe=new(inner.Sources.Select(spec=>identities.TryGetValue(spec.RelativePath,out var identity)?spec with{ExpectedIdentity=identity}:spec)
-            .Concat(configuration.Where(artifact=>!basePaths.Contains(artifact.RelativePath)).Select(artifact=>new ArtifactSourceSpec(artifact.RelativePath,artifact.MediaType,identities[artifact.RelativePath]))).ToArray(),all=>
-        {
-            var prepared=inner.Prepare(all.Where(artifact=>basePaths.Contains(artifact.RelativePath)).ToArray());
-            if(policy is not null&&prepared.OutputPaths.Contains(policy.RelativePath,StringComparer.OrdinalIgnoreCase))throw new InvalidOperationException("Package policy is configuration and cannot be a published output.");
-            return prepared;
-        });
+        recipe=new DocumentationConfigurationRecipe(verifier).Bind(recipe,configuration,policy?.RelativePath);
         var result=await Runtime(output,finalStore).ExecuteAsync(generation,recipe);
         Console.WriteLine(JsonSerializer.Serialize(new{result.GenerationId,selection.Aliases,Stages=selection.Stages.Select(stage=>stage.ToString()),InputCount=result.Inputs.Count,OutputCount=result.Outputs.Count,result.Manifest,OutputRoot=output,
             Scope="Native Core alias union with bound selected validation and documentation-completion receipts; complete portable build-source payload remains open"}));

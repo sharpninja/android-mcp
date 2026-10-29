@@ -6,17 +6,23 @@ using AndroidMcp.BuildTool.Modules.Sources.Acquisition;
 namespace AndroidMcp.BuildTool.Publication;
 
 /// <summary>Pure recipe validation and operation references. Never acquisition or extraction.</summary>
-public sealed class RehydrationPlanner(ICanonicalJson canonical):IRehydrationSeedPlanner
+public sealed class RehydrationPlanner(ICanonicalJson canonical):IRehydrationSeedPlanner,IRehydrationSnapshotPlanner
 {
-    public RehydrationPlanResult Plan(RehydrationPlanRequest request) => PlanCore(request,out _);
+    public RehydrationPlanResult Plan(RehydrationPlanRequest request) => PlanCore(request,out _,out _);
     public RehydrationSeedPlanResult PlanSeed(RehydrationPlanRequest request)
     {
-        var baseline=PlanCore(request,out var seedProjection);
+        var baseline=PlanCore(request,out var seedProjection,out _);
         return new(baseline,seedProjection);
     }
-    private RehydrationPlanResult PlanCore(RehydrationPlanRequest request,out RehydrationSeedProjection? seedProjection)
+    public RehydrationSnapshotPlanResult PlanSnapshot(RehydrationPlanRequest request)
     {
-        seedProjection=null;
+        var baseline=PlanCore(request,out _,out var snapshotProjection,captureSnapshot:true);
+        return new(baseline,snapshotProjection);
+    }
+    private RehydrationPlanResult PlanCore(RehydrationPlanRequest request,out RehydrationSeedProjection? seedProjection,
+        out RehydrationSnapshotProjection? snapshotProjection,bool captureSnapshot=false)
+    {
+        seedProjection=null;snapshotProjection=null;
         try
         {
             if(!Enum.IsDefined(request.Profile))Fail("INVALID_PROFILE","");
@@ -52,6 +58,7 @@ public sealed class RehydrationPlanner(ICanonicalJson canonical):IRehydrationSee
             var seedSources=new Dictionary<int,RehydrationSeedSource>();
             var caches=new Dictionary<string,CacheProjectionState>(StringComparer.Ordinal);
             var projectedRows=new List<RehydrationSourceRow>();
+            var snapshotRows=new List<RehydrationSnapshotRow>();
             var snapshots=new List<SnapshotRequirement>();
             var archives=new List<ArchiveRequirement>();
             for(var rowIndex=0;rowIndex<rows.Length;rowIndex++)
@@ -126,6 +133,36 @@ public sealed class RehydrationPlanner(ICanonicalJson canonical):IRehydrationSee
                     snapshot=new(logical,local,bundle,sha,length);snapshots.Add(snapshot);
                 }
                 var sourcePin=new SourcePin(local,sourceUri,OptionalText(row,"revision")??"",sha,length,gitBlob,encoding,snapshot?.BundlePath,archive,request.Profile);
+                if(captureSnapshot)
+                {
+                    // Exact logical-row facts precede first/last physical pin
+                    // selection. Nonstring status is ineligible, not invalid.
+                    var statusPresent=row.TryGetProperty("status",out var statusValue);
+                    var statusKind=statusValue.ValueKind;
+                    var status=statusKind==JsonValueKind.String?statusValue.GetString():null;
+                    SnapshotRequirement[] currentSnapshots=snapshot is {} rowSnapshot?[rowSnapshot]:[];
+                    var rowSnapshots=Array.AsReadOnly(currentSnapshots);
+                    var rowIndices=Array.AsReadOnly(new[]{rowIndex});
+                    RehydrationCanonicalMetadataReference? metadataReference=null;
+                    if(OptionalText(transport,"kind")=="bounded-sdk-zip-range-member")
+                    {
+                        var receiptPresent=transport.TryGetProperty("metadata_receipt",out var receiptValue);
+                        var packagePresent=transport.TryGetProperty("package_path",out var packageValue);
+                        row.TryGetProperty("platform_api_version",out var rowPlatformValue);
+                        var platform=rowPlatformValue.ValueKind==JsonValueKind.String?rowPlatformValue.GetString():null;
+                        // Only the admitted nullable-string legacy domain is
+                        // represented. Unsupported nonstrings stay unresolved;
+                        // neither stringify nor substitute native platform_version.
+                        if(string.IsNullOrEmpty(platform) && (rowPlatformValue.ValueKind is JsonValueKind.Undefined or JsonValueKind.Null or JsonValueKind.String) &&
+                            transport.TryGetProperty("platform_api_version",out var legacyPlatformValue) && legacyPlatformValue.ValueKind==JsonValueKind.String)
+                            platform=legacyPlatformValue.GetString();
+                        metadataReference=new(receiptPresent,receiptValue.ValueKind,
+                            receiptValue.ValueKind==JsonValueKind.String?receiptValue.GetString():null,platform,
+                            packagePresent,packageValue.ValueKind,packageValue.ValueKind==JsonValueKind.String?packageValue.GetString():null);
+                    }
+                    snapshotRows.Add(new(rowIndex,status,sourcePin,rowSnapshots,
+                        SourcePrerequisites(sourcePin,rowSnapshots,rowIndices,request.Profile),statusPresent,statusKind,metadataReference));
+                }
                 SourceProjectionState state;
                 if(hasSource)
                 {
@@ -173,6 +210,7 @@ public sealed class RehydrationPlanner(ICanonicalJson canonical):IRehydrationSee
             var baseline=new RehydrationPlanResult(new(release!,digest,rows.Length,unique.Count,known,unknown,snapshots,flow,
                 new("rehydration-plan.json",manifest,"application/json"),false,false,false,caveats,archives,projection),[]);
             seedProjection=new(release!,digest,Array.AsReadOnly(seedSources.OrderBy(s=>s.Key).Select(s=>s.Value).ToArray()));
+            if(captureSnapshot)snapshotProjection=new(release!,digest,request.Profile,Array.AsReadOnly(snapshotRows.ToArray()),request.Resume);
             return baseline;
         }
         catch(PlanningFailure e){return new(null,[new(e.Code,e.Path)]);}
@@ -207,6 +245,21 @@ public sealed class RehydrationPlanner(ICanonicalJson canonical):IRehydrationSee
     }
     private static void GitPin(string value,string path)
     {if(value.Length!=40 || !value.All(c=>c is >= '0' and <= '9' or >= 'a' and <= 'f'))Fail("INVALID_GIT_BLOB",path);}
+    private static IReadOnlyList<RehydrationPrerequisite> SourcePrerequisites(SourcePin pin,
+        IReadOnlyList<SnapshotRequirement> snapshots,IReadOnlyList<int> indexes,AcquisitionCompatibilityProfile profile)
+    {
+        var prerequisites=new List<RehydrationPrerequisite>();
+        void Missing(RehydrationPrerequisiteCode code)=>prerequisites.Add(new(code,indexes,pin.LocalPath,"Missing pinned prerequisite; exact existing target may be reused."));
+        if(snapshots.Any(s=>s.BundlePath is null))Missing(RehydrationPrerequisiteCode.RequiredImmutableSnapshot);
+        if(profile==AcquisitionCompatibilityProfile.CanonicalRestore && pin.Archive is {ArchiveSha256:null} archive)
+        {
+            if(string.IsNullOrWhiteSpace(archive.ETag))Missing(RehydrationPrerequisiteCode.CanonicalArchiveETag);
+            if(string.IsNullOrWhiteSpace(archive.PlatformVersion))Missing(RehydrationPrerequisiteCode.CanonicalArchivePlatformVersion);
+            if(archive.RepositoryXml.IsEmpty)Missing(RehydrationPrerequisiteCode.CanonicalArchiveRepositoryXml);
+            if(archive.SizeBytes is null)Missing(RehydrationPrerequisiteCode.CanonicalArchiveSize);
+        }
+        return Array.AsReadOnly(prerequisites.ToArray());
+    }
     private sealed class SourceProjectionState(int index,SourcePin pin)
     {
         public int Index { get; }=index;
@@ -221,18 +274,10 @@ public sealed class RehydrationPlanner(ICanonicalJson canonical):IRehydrationSee
             var selectedPin=generic?LastPin:Pin;
             SnapshotRequirement[] selectedSnapshots = generic
                 ? (LastSnapshot is {} snapshot ? [snapshot] : []) : Snapshots.ToArray();
-            var indexes=Array.AsReadOnly(Rows.ToArray());var prerequisites=new List<RehydrationPrerequisite>();
-            void Missing(RehydrationPrerequisiteCode code)=>prerequisites.Add(new(code,indexes,selectedPin.LocalPath,"Missing pinned prerequisite; exact existing target may be reused."));
-            if(selectedSnapshots.Any(s=>s.BundlePath is null))Missing(RehydrationPrerequisiteCode.RequiredImmutableSnapshot);
-            if(profile==AcquisitionCompatibilityProfile.CanonicalRestore && selectedPin.Archive is {ArchiveSha256:null} archive)
-            {
-                if(string.IsNullOrWhiteSpace(archive.ETag))Missing(RehydrationPrerequisiteCode.CanonicalArchiveETag);
-                if(string.IsNullOrWhiteSpace(archive.PlatformVersion))Missing(RehydrationPrerequisiteCode.CanonicalArchivePlatformVersion);
-                if(archive.RepositoryXml.IsEmpty)Missing(RehydrationPrerequisiteCode.CanonicalArchiveRepositoryXml);
-                if(archive.SizeBytes is null)Missing(RehydrationPrerequisiteCode.CanonicalArchiveSize);
-            }
+            var indexes=Array.AsReadOnly(Rows.ToArray());
+            var prerequisites=SourcePrerequisites(selectedPin,selectedSnapshots,indexes,profile);
             var executable=!generic&&selectedSnapshots.Length>0?selectedPin with{RequiredLocalSnapshot=selectedSnapshots.Select(s=>s.BundlePath).FirstOrDefault(p=>p is not null)}:selectedPin;
-            return new(Index,executable,indexes,Array.AsReadOnly(selectedSnapshots),Array.AsReadOnly(prerequisites.ToArray()));
+            return new(Index,executable,indexes,Array.AsReadOnly(selectedSnapshots),prerequisites);
         }
     }
     private sealed class CacheProjectionState(int index,string path,string sha,string parser,string source,string? kind,int? count)

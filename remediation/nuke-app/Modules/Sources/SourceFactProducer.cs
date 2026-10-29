@@ -1,3 +1,4 @@
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
@@ -5,30 +6,42 @@ using AndroidMcp.BuildTool.Core;
 
 namespace AndroidMcp.BuildTool.Sources;
 
-public sealed class SourceFactProducer(IProfiledCanonicalJson canonical) : ICallbackSourceFacts, IFunctionalTaxonomySourceFacts, IInterfaceApplicabilitySourceFacts
+public sealed class SourceFactProducer(IProfiledCanonicalJson canonical, ILegacyJsonValueEquality? equality = null) : ICallbackSourceFacts, IFunctionalTaxonomySourceFacts, IInterfaceApplicabilitySourceFacts, ISourceFactValueProducer
 {
+    private readonly ILegacyJsonValueEquality values = equality ?? new LegacyJsonValueEquality();
     private static readonly Regex CallbackName = new(@"(?:Callback|Listener|Observer|DeathRecipient|OutcomeReceiver|ResultReceiver|Runnable|Callable|Consumer|Function|Predicate|Continuation)(?:$|[<$])", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
     private const string CallbackUnknown = "Callback invocation direction, registration effects, executor/threading, lifetime, cancellation, ordering, buffering and backpressure require contract evidence";
     private const string HashUnknown = "Published hashes require compiler hash-selection and source-schema equivalence evidence before activation";
 
+    public JsonObject TypeCandidateValue(JsonNode? declaration) => TypeCandidate(StrictObject(declaration));
+    public JsonObject EndpointMethodValue(JsonNode? declaration, JsonNode? owner = null) => EndpointMethod(StrictObject(declaration), Truthy(owner) ? StrictObject(owner) : null);
+    public JsonObject TaxonomyValue(JsonNode? declaration) => Taxonomy(StrictObject(declaration));
+    public JsonArray RegistrationCandidatesValue(JsonNode? declaration, JsonNode? resolvedTypes) => RegistrationCandidatesCore(StrictObject(declaration), key =>
+    {
+        var map = StrictObject(resolvedTypes);
+        return String(key) is { } id ? map[id] : null;
+    });
+
     public JsonObject TypeCandidate(JsonObject declaration)
     {
-        var extensions = Object(declaration["extensions"]); var reasons = new JsonArray();
+        var extensions = StrictObject(DefaultValue(declaration, "extensions", new JsonObject())); var reasons = new JsonArray();
+        var annotated = Iterable(DefaultValue(extensions, "annotations", new JsonArray())).Any(x => RequiredString(DefaultValue(StrictObject(x), "name", JsonValue.Create(""))).Split('.')[^1] == "FunctionalInterface");
         if (Named(declaration["name"])) reasons.Add("callback-like declared type name");
-        if (Objects(extensions["annotations"]).Any(x => String(x["name"])?.Split('.')[^1] == "FunctionalInterface"))
+        if (annotated)
             reasons.Add("FunctionalInterface annotation retained; invocation role not established");
         if ((String(extensions["language"]) is "aidl" or "hidl") && (String(declaration["kind"]) is "aidl-interface" or "interface"))
             reasons.Add("Binder/HIDL interface can be passed as an endpoint; callback direction unproven");
         return new()
         {
             ["is_candidate"] = reasons.Count > 0, ["role"] = reasons.Count > 0 ? "candidate" : "unknown", ["reasons"] = reasons,
-            ["callback_lifecycle_proven"] = false, ["inheritance"] = Property(Object(extensions["declared_type_shape"]), "supertypes", new JsonArray())
+            ["callback_lifecycle_proven"] = false, ["inheritance"] = Property(StrictObject(DefaultValue(extensions, "declared_type_shape", new JsonObject())), "supertypes", new JsonArray())
         };
     }
 
     public JsonObject EndpointMethod(JsonObject declaration, JsonObject? owner = null)
     {
-        var extension = Object(declaration["extensions"]); var ownerExtension = Object(owner?["extensions"]);
+        var extension = StrictObject(DefaultValue(declaration, "extensions", new JsonObject()));
+        var ownerExtension = owner is { Count: > 0 } ? StrictObject(DefaultValue(owner, "extensions", new JsonObject())) : new JsonObject();
         var own = extension["oneway"]; var inherited = extension.ContainsKey("interface_oneway") ? extension["interface_oneway"] : ownerExtension["oneway"];
         var language = String(extension["language"]);
         bool? asynchronous = language == "aidl" ? Boolean(own) == true || Boolean(inherited) == true ? true
@@ -38,29 +51,34 @@ public sealed class SourceFactProducer(IProfiledCanonicalJson canonical) : ICall
             ["entry_id"] = CopyRequired(declaration, "entry_id"), ["canonical_signature"] = CopyRequired(declaration, "canonical_signature"),
             ["parameters"] = Property(extension, "parameters", new JsonArray()), ["arguments"] = Property(declaration, "arguments", new JsonArray()),
             ["return_type"] = declaration["return_type"]?.DeepClone(), ["hidl_results"] = Property(extension, "results", new JsonArray()),
-            ["source_language"] = language, ["explicit_oneway"] = own?.DeepClone(), ["inherited_interface_oneway"] = inherited?.DeepClone(),
+            ["source_language"] = extension["language"]?.DeepClone(), ["explicit_oneway"] = own?.DeepClone(), ["inherited_interface_oneway"] = inherited?.DeepClone(),
             ["reply_mode"] = asynchronous == true ? "oneway" : asynchronous == false ? "synchronous" : "unknown",
             ["permission"] = declaration["permission"]?.DeepClone(), ["provenance"] = Property(declaration, "provenance", new JsonArray()),
             ["version_evidence"] = Property(extension, "device_resolution_variants", new JsonArray()), ["runtime_authority_proven"] = false
         };
     }
 
-    public JsonArray RegistrationCandidates(JsonObject declaration, IReadOnlyDictionary<string, JsonObject> resolvedTypes)
+    public JsonArray RegistrationCandidates(JsonObject declaration, IReadOnlyDictionary<string, JsonObject> resolvedTypes) => RegistrationCandidatesCore(declaration, key =>
     {
-        var result = new JsonArray(); var extensions = Object(declaration["extensions"]); var parameters = Array(extensions["parameters"]);
-        var arguments = Array(declaration["arguments"]);
-        for (var index = 0; index < arguments.Count; index++)
+        if (resolvedTypes is null) throw new ArgumentException("Expected source fact object");
+        return String(key) is { } id && resolvedTypes.TryGetValue(id, out var target) ? target : null;
+    });
+
+    private JsonArray RegistrationCandidatesCore(JsonObject declaration, Func<JsonNode?, JsonNode?> resolve)
+    {
+        var result = new JsonArray(); var extensions = StrictObject(DefaultValue(declaration, "extensions", new JsonObject()));
+        var parameters = DefaultValue(extensions, "parameters", new JsonArray()); var argumentIndex = 0;
+        foreach (var item in Iterable(DefaultValue(declaration, "arguments", new JsonArray())))
         {
-            var argument = Object(arguments[index]);
+            var index = argumentIndex++; var argument = StrictObject(item);
             if (String(argument["status"]) == "primitive") continue;
-            var parameter = index < parameters.Count ? Object(parameters[index]) : new JsonObject();
-            JsonObject? target = null;
-            if (String(argument["resolved_binding_id"]) is { } typeId) resolvedTypes.TryGetValue(typeId, out target);
-            var hasTarget = target is { Count: > 0 };
-            var classification = hasTarget ? TypeCandidate(target!) : null;
-            var spelled = Named(argument["text"]) || Named(parameter["name"]);
+            var parameter = index < Length(parameters) ? Indexed(parameters, index) : new JsonObject();
+            if (argument["resolved_binding_id"] is JsonArray or JsonObject) throw new ArgumentException("Expected hashable source fact key");
+            var target = resolve(argument["resolved_binding_id"]); var hasTarget = Truthy(target);
+            var classification = hasTarget ? TypeCandidate(StrictObject(target)) : null;
+            var spelled = Named(argument["text"]) || Named(StrictObject(parameter)["name"]);
             if (!spelled && Boolean(classification?["is_candidate"]) != true) continue;
-            var methodName = String(declaration["name"]) ?? "";
+            var methodName = OriginalIgnoreCase(RequiredString(DefaultValue(declaration, "name", JsonValue.Create(""))));
             var role = Regex.IsMatch(methodName, @"^(?:unregister|remove|clear|unset|unsubscribe|cancel)", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)
                 ? "unregistration-candidate" : Regex.IsMatch(methodName, @"^(?:register|add|set|subscribe|request|start|bind)", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)
                     ? "registration-candidate" : "callback-parameter-candidate";
@@ -72,13 +90,14 @@ public sealed class SourceFactProducer(IProfiledCanonicalJson canonical) : ICall
             var candidateId = canonical.Hash(JsonSerializer.SerializeToElement(identity), JsonSerializationProfile.LegacyAsciiIdentity);
             var reasons = classification?["reasons"] is JsonArray classified ? (JsonArray)classified.DeepClone() : new JsonArray();
             if (spelled) reasons.Add("callback-like parameter/type spelling");
+            var parameterObject = StrictObject(parameter);
             result.Add(new JsonObject
             {
                 ["candidate_id"] = candidateId, ["binding_id"] = identity["binding_id"]?.DeepClone(), ["parameter_index"] = index,
                 ["type_id"] = identity["type_id"]?.DeepClone(), ["type_spelling"] = identity["type_spelling"]?.DeepClone(),
-                ["owner"] = declaration["owner"]?.DeepClone(), ["language"] = extensions["language"]?.DeepClone(), ["parameter_name"] = parameter["name"]?.DeepClone(),
-                ["direction"] = Property(parameter, "direction", JsonValue.Create("unknown")),
-                ["parameter_annotations"] = parameter.ContainsKey("all_annotations") ? parameter["all_annotations"]?.DeepClone() : Property(parameter, "annotations", new JsonArray()),
+                ["owner"] = declaration["owner"]?.DeepClone(), ["language"] = extensions["language"]?.DeepClone(), ["parameter_name"] = parameterObject["name"]?.DeepClone(),
+                ["direction"] = Property(parameterObject, "direction", JsonValue.Create("unknown")),
+                ["parameter_annotations"] = parameterObject.ContainsKey("all_annotations") ? parameterObject["all_annotations"]?.DeepClone() : Property(parameterObject, "annotations", new JsonArray()),
                 ["role"] = role, ["confidence"] = hasTarget ? "source-structure-plus-role-heuristic" : "name-heuristic-unresolved-type",
                 ["evidence_reasons"] = reasons, ["lifecycle_proven"] = false, ["registration_guaranteed"] = false, ["matching_unregistration_guaranteed"] = false,
                 ["permission"] = declaration["permission"]?.DeepClone(), ["provenance"] = Property(declaration, "provenance", new JsonArray()),
@@ -88,12 +107,14 @@ public sealed class SourceFactProducer(IProfiledCanonicalJson canonical) : ICall
         return result;
     }
 
-    public JsonArray PossiblePairs(JsonArray candidates)
+    public JsonArray PossiblePairs(JsonArray candidates) => PossiblePairsValue(candidates);
+
+    public JsonArray PossiblePairsValue(JsonNode? candidates)
     {
-        var rows = Objects(candidates).ToArray(); var result = new JsonArray();
-        foreach (var registration in rows.Where(x => String(CopyRequired(x, "role")) == "registration-candidate"))
-            foreach (var removal in rows.Where(x => String(CopyRequired(x, "role")) == "unregistration-candidate"))
-                if (new[] { "owner", "language", "type_spelling", "type_id" }.All(key => JsonNode.DeepEquals(CopyRequired(registration, key), CopyRequired(removal, key))))
+        var rows = Iterable(candidates).ToArray(); var result = new JsonArray();
+        foreach (var registration in rows.Where(x => String(CopyRequired(StrictObject(x), "role")) == "registration-candidate").Select(StrictObject))
+            foreach (var removal in rows.Where(x => String(CopyRequired(StrictObject(x), "role")) == "unregistration-candidate").Select(StrictObject))
+                if (new[] { "owner", "language", "type_spelling", "type_id" }.All(key => values.Equal(JsonSerializer.SerializeToElement(CopyRequired(registration, key)), JsonSerializer.SerializeToElement(CopyRequired(removal, key)))))
                     result.Add(new JsonObject
                     {
                         ["registration_candidate_id"] = CopyRequired(registration, "candidate_id"), ["unregistration_candidate_id"] = CopyRequired(removal, "candidate_id"),
@@ -104,19 +125,19 @@ public sealed class SourceFactProducer(IProfiledCanonicalJson canonical) : ICall
 
     public JsonObject Taxonomy(JsonObject declaration)
     {
-        var extensions = Object(declaration["extensions"]); var rows = new JsonArray();
-        foreach (var annotation in Objects(extensions["annotations"]))
+        var extensions = StrictObject(DefaultValue(declaration, "extensions", new JsonObject())); var rows = new JsonArray();
+        foreach (var annotation in Iterable(DefaultValue(extensions, "annotations", new JsonArray())).Select(StrictObject))
         {
-            var name = String(annotation["name"]) ?? "";
+            var name = RequiredString(DefaultValue(annotation, "name", JsonValue.Create("")));
             if (name.Split('.')[^1] != "SystemService") continue;
             var qualified = name == "android.annotation.SystemService" || name == "SystemService" &&
-                Array(extensions["imports"]).Any(x => String(x) == "android.annotation.SystemService");
-            var value = Regex.Replace((String(annotation["arguments"]) ?? "").Trim(), @"^value\s*=\s*", "", RegexOptions.CultureInvariant);
+                ContainsImport(DefaultValue(extensions, "imports", new JsonArray()), "android.annotation.SystemService");
+            var value = Regex.Replace(SourceText.Strip(RequiredString(DefaultValue(annotation, "arguments", JsonValue.Create("")))), @"^value[\s\u001c-\u001f]*=[\s\u001c-\u001f]*", "", RegexOptions.CultureInvariant);
             string? literal = null;
             if (value.StartsWith('"'))
                 try { literal = JsonSerializer.Deserialize<string>(value); }
                 catch (JsonException) { }
-            var symbol = Regex.IsMatch(value, @"^[A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*)*$", RegexOptions.CultureInvariant) ? value : null;
+            var symbol = SymbolicService(value) ? value : null;
             rows.Add(new JsonObject
             {
                 ["dimension"] = "android-system-service-declaration", ["owner_entry_id"] = CopyRequired(declaration, "entry_id"), ["owner"] = declaration["owner"]?.DeepClone(),
@@ -194,7 +215,53 @@ public sealed class SourceFactProducer(IProfiledCanonicalJson canonical) : ICall
             if (!source.ContainsKey(key) || !proof.ContainsKey(key) || !JsonNode.DeepEquals(source[key], proof[key]))
                 throw new ArgumentException("Proof and declaration must share repository/revision");
     }
-    private static bool Named(JsonNode? value) => String(value) is { } name && CallbackName.IsMatch(name);
+    private static bool Named(JsonNode? value) => String(value) is { } name && CallbackName.IsMatch(OriginalIgnoreCase(name));
+    // These are the four additional Unicode equivalents used by original re.I
+    // when matching ASCII literals. Raw source spellings remain untouched.
+    private static string OriginalIgnoreCase(string value) => value.Replace('\u0130', 'i').Replace('\u0131', 'i').Replace('\u017f', 's').Replace('\u212a', 'k');
+    private bool Truthy(JsonNode? value) => value switch
+    {
+        null => false, JsonArray array => array.Count != 0, JsonObject map => map.Count != 0,
+        JsonValue scalar when scalar.TryGetValue<string>(out var text) => text.Length != 0,
+        _ => !values.Equal(JsonSerializer.SerializeToElement(value), JsonSerializer.SerializeToElement(0))
+    };
+    private static bool SymbolicService(string value)
+    {
+        foreach (var segment in value.Split('.'))
+        {
+            if (segment.Length == 0 || !(segment[0] is >= 'A' and <= 'Z' or >= 'a' and <= 'z' or '_' or '$')) return false;
+            if (segment.EnumerateRunes().Skip(1).Any(character => character.Value != '$' && !SourceText.OriginalWord(character))) return false;
+        }
+        return true;
+    }
+    private static JsonNode? DefaultValue(JsonObject value, string key, JsonNode fallback) => value.ContainsKey(key) ? value[key] : fallback;
+    private static JsonObject StrictObject(JsonNode? value) => value as JsonObject ?? throw new ArgumentException("Expected source fact object");
+    private static string RequiredString(JsonNode? value) => String(value) ?? throw new ArgumentException("Expected source fact string");
+    private static IEnumerable<JsonNode?> Iterable(JsonNode? value) => value switch
+    {
+        JsonArray array => array,
+        JsonObject map => map.Select(pair => (JsonNode?)JsonValue.Create(pair.Key)),
+        JsonValue scalar when scalar.TryGetValue<string>(out var text) => text.EnumerateRunes().Select(character => (JsonNode?)JsonValue.Create(character.ToString())),
+        _ => throw new ArgumentException("Expected source fact iterable")
+    };
+    private static int Length(JsonNode? value) => value switch
+    {
+        JsonArray array => array.Count, JsonObject map => map.Count,
+        JsonValue scalar when scalar.TryGetValue<string>(out var text) => text.EnumerateRunes().Count(),
+        _ => throw new ArgumentException("Expected source fact length")
+    };
+    private static JsonNode? Indexed(JsonNode? value, int index) => value switch
+    {
+        JsonArray array => array[index],
+        JsonValue scalar when scalar.TryGetValue<string>(out var text) => JsonValue.Create(text.EnumerateRunes().ElementAt(index).ToString()),
+        _ => throw new ArgumentException("Expected source fact index")
+    };
+    private static bool ContainsImport(JsonNode? value, string name) => value switch
+    {
+        JsonArray array => array.Any(item => String(item) == name), JsonObject map => map.ContainsKey(name),
+        JsonValue scalar when scalar.TryGetValue<string>(out var text) => text.Contains(name, StringComparison.Ordinal),
+        _ => throw new ArgumentException("Expected source fact membership")
+    };
     private static string? String(JsonNode? value) => value is JsonValue scalar && scalar.TryGetValue<string>(out var text) ? text : null;
     private static bool? Boolean(JsonNode? value) => value is JsonValue scalar && scalar.TryGetValue<bool>(out var boolean) ? boolean : null;
     private static JsonObject Object(JsonNode? value) => value is null ? new() : value as JsonObject ?? throw new ArgumentException("Expected source fact object");

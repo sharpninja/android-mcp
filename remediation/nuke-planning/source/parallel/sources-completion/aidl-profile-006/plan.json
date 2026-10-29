@@ -1,0 +1,74 @@
+{
+  "At": "2026-10-29T01:08:10",
+  "Owner": "Sources",
+  "RequirementIds": [
+    "FR-BUILD-004",
+    "TR-BUILD-004",
+    "TEST-BUILD-004"
+  ],
+  "RootApprovedAt": "2026-10-29T01:03:13",
+  "Originals": [
+    {
+      "Path": "remediation/catalog/tooling/build_catalog.py",
+      "Sha256": "35a2e0c775920224db2c75d2713ff4264ff1f4f99186867c406f771d80e93d35",
+      "Size": 37941
+    },
+    {
+      "Path": "publication/android-mcp-git/rehydration/producers/release-011/tooling/build_catalog.py",
+      "Sha256": "5194078b1dc21a95044e3c82d6d8d77616a39979bdcc1ac94e0db81bf4c59170",
+      "Size": 37917
+    },
+    {
+      "Path": "publication/android-mcp-git/rehydration/producers/release-011/tooling/parsers.py",
+      "Sha256": "d45a952b237eda29c199c2b6da82ca0edf3756c2bf14bf8ca2514657ea30ca70",
+      "Size": 13624
+    },
+    {
+      "Path": "publication/android-mcp-git/rehydration/producers/release-011/tooling/aidl_members.py",
+      "Sha256": "f9c4c0a90dd693a0dbe5c91da84cf9a6cb4d3c874e13c179ebbeccac577ac177",
+      "Size": 4464
+    }
+  ],
+  "PriorFiles": [
+    {
+      "Path": "Modules/Sources/AidlSourceExtractor.cs",
+      "Sha256": "cdc2a9b5e9e1048936cf817bb4df89746f6c8351c127ca682cb929a801b242b6",
+      "Size": 15437
+    },
+    {
+      "Path": "Modules/Sources/SourcesExtractionDispatcher.cs",
+      "Sha256": "d58856b564bcfddbaf545584cf5c9ea3957ee2277a93be7550c0f17af545113d",
+      "Size": 5814
+    },
+    {
+      "Path": "Tests/Sources/SourcesRuntimeContractCases.cs",
+      "Sha256": "9e63b8c12c7a411af315ee4b82ef5519e7551cdd627fc9ed0e4a388f5fe722c9",
+      "Size": 7613
+    },
+    {
+      "Path": "Tests/Sources/SourcesRuntimeMockGateTests.cs",
+      "Sha256": "6ec7c8850f86b19d44530d4503a88b7edc935f0b46d7791b7f21c1ab79fd3aea",
+      "Size": 7848
+    }
+  ],
+  "MinimalInputPins": [
+    {
+      "Text": "package a; oneway interface I { void ping(); }",
+      "Sha256": "d2f1352586f57ff0f412b8b6ef87c2b65691199d8bdc6603bcd4e02f34115bd6"
+    },
+    {
+      "Text": "package a; interface I { oneway void ping(); }",
+      "Sha256": "96e0f8b1f7fc73b9810c795d75b592c987f01a97c3977fd06f12a0e8891f6e72"
+    },
+    {
+      "Text": "package a; interface I { void ping(); }",
+      "Sha256": "2e9b854e0eb0d67fc15d4bcdda1c7897cca9cd11ce4dbdbe9d6982a27024c2c4"
+    }
+  ],
+  "ObservableOutcome": "Current adds bool interface_oneway to every member; release omits that key entirely. Declaration own oneway and method own oneway remain independent. All other records/schema/issues and source_identity fields retain their meaning; profile_id remains the selected existing profile.",
+  "Implementation": "One AidlSourceExtractor overload taking the existing SourceExtractionProfile. Existing default Extract(source) remains current. Existing dispatcher passes its own selected profile only to this extractor. No registry, factory, Core, SourceSyntax or schema changes.",
+  "MockFirst": "Exact current/release minimal witnesses plus original AIDL/nested/field/partial regression fixtures; discriminate false vs absent vs null, method/declaration own flags, all original asserted record properties, profile/source fingerprints and route/input preservation. Correct mock green before production, SAME cases native afterward.",
+  "Caller": "Catalog owns Entry/extensions and CatalogContracts.Project, including exact current/release witness downstream oneway contract. Source metadata preserves exact profile distinction and does not infer runtime authority.",
+  "FrozenGuarantee": "No historical Python producer/cache identity relabeling. No canonical edits; guarded minimal handoff after local applicable NUKE gate.",
+  "Guidance": "Complete local add-profile read repeated on resume. Prior Global/Workspace MCP memory/logging denial remains in force, no retry/bypass. No Python, Node, Bash, raw markers, credentials, Actions, provider or HV invocation."
+}

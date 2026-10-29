@@ -14,7 +14,7 @@ public sealed class ReviewAssessService(Func<ReadOnlyMemory<byte>, string> sha25
     {
         var models = new HashSet<string>(StringComparer.Ordinal);
         var efforts = new HashSet<string>(StringComparer.Ordinal);
-        var text = new List<string>();
+        var entries = new List<JsonObject>();
         var visible = new List<string>();
         JsonObject? result = null;
         var hidden = false;
@@ -47,9 +47,6 @@ public sealed class ReviewAssessService(Func<ReadOnlyMemory<byte>, string> sha25
             if (type == "assistant" && entry["message"] is JsonObject message)
             {
                 Add(message, "model", models); Add(message, "effort", efforts);
-                if (message["content"] is JsonArray content)
-                    foreach (var block in content.OfType<JsonObject>())
-                        if (String(block, "type") == "text") text.Add(String(block, "text"));
             }
             if (type == "system") { Add(entry, "model", models); Add(entry, "effort", efforts); }
             if (type == "result")
@@ -60,9 +57,9 @@ public sealed class ReviewAssessService(Func<ReadOnlyMemory<byte>, string> sha25
                 Add(entry, "model", models); Add(entry, "effort", efforts);
             }
             visible.Add(entry.ToJsonString());
+            entries.Add(entry);
         }
-        if (text.Count == 0 && result is not null && !string.IsNullOrEmpty(String(result, "result")))
-            text.Add(String(result, "result"));
+        var text = VisibleText(entries);
         var report = string.Join("\n\n", text);
         if (diagnostics.Length > 0)
         {
@@ -114,6 +111,23 @@ public sealed class ReviewAssessService(Func<ReadOnlyMemory<byte>, string> sha25
         return State("continue", stop.Length == 0 ? "Incomplete terminal response" : stop);
     }
 
+    /// <summary>Exact ordered visible text fragments from typed provider events. Assistant
+    /// fragments, including empty strings, suppress fallback; only the last result can supply it.</summary>
+    public static IReadOnlyList<string> VisibleText(IEnumerable<JsonObject> events)
+    {
+        var chunks = new List<string>();
+        JsonObject? result = null;
+        foreach (var entry in events)
+        {
+            if (String(entry, "type") == "assistant" && entry["message"] is JsonObject message && message["content"] is JsonArray content)
+                foreach (var block in content.OfType<JsonObject>())
+                    if (String(block, "type") == "text") chunks.Add(String(block, "text"));
+            if (String(entry, "type") == "result") result = entry;
+        }
+        if (chunks.Count == 0 && result is not null && !string.IsNullOrEmpty(String(result, "result"))) chunks.Add(String(result, "result"));
+        return chunks;
+    }
+
     private static bool Zero(JsonNode? value) => value is JsonArray array ? array.Count == 0 : value?.ToString() == "0";
     private static JsonObject? FinalObject(IReadOnlyList<string> chunks, string marker)
     {
@@ -127,6 +141,13 @@ public sealed class ReviewAssessService(Func<ReadOnlyMemory<byte>, string> sha25
             {
                 var firstNewline = candidate.IndexOf('\n');
                 if (firstNewline >= 0) candidate = candidate[(firstNewline + 1)..].TrimEnd().TrimEnd('`').Trim();
+                else
+                {
+                    candidate = candidate[3..];
+                    if (candidate.StartsWith("json", StringComparison.Ordinal)) candidate = candidate[4..];
+                    if (candidate.EndsWith("```", StringComparison.Ordinal)) candidate = candidate[..^3];
+                    candidate = candidate.Trim();
+                }
             }
             try { if (JsonNode.Parse(candidate) is JsonObject result) return result; }
             catch (JsonException) { }

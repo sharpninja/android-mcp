@@ -1,6 +1,6 @@
 namespace AndroidMcp.BuildTool.Core;
 
-public enum OperationExecutor { Pending, MockTests, Tests, DocumentationAssets, NativeParser, SourcesFetch, PublicationCheck, SourcesPlan, Architecture, CatalogBuild, BrowserQa, SourcesInventory, SdkReferenceCopy, SourcesExtract, CatalogBuildFromSources, SourcesSeed, GradleCompatibility, GradleProjection, CatalogValidation, CatalogPermissionExport, ReleaseSplit, ReleaseReassemble }
+public enum OperationExecutor { Pending, MockTests, Tests, DocumentationAssets, NativeParser, SourcesFetch, PublicationCheck, SourcesPlan, Architecture, CatalogBuild, BrowserQa, SourcesInventory, SdkReferenceCopy, SourcesExtract, CatalogBuildFromSources, SourcesSeed, GradleCompatibility, GradleProjection, CatalogValidation, CatalogPermissionExport, ReleaseSplit, ReleaseReassemble, RepositoryDocumentationCheck }
 public sealed record OperationDefinition(OperationKey Key, string Description,
     IReadOnlyList<string> RequiredParameters, IReadOnlyList<string> OptionalParameters,
     IReadOnlyList<PlannedStep> Steps, OperationExecutor Executor=OperationExecutor.Pending);
@@ -64,6 +64,7 @@ public sealed class OperationRegistry
             new("admit-pinned-workflow",[]),new("validate-catalog-readonly",["admit-pinned-workflow"]),
             new("emit-validation-receipt",["validate-catalog-readonly"]));
         Add(Category.Validate,Operation.Toolchain,[],["toolchain-check","project-root","pipeline-request","pipeline-request-sha256","pipeline-request-length"],OperationExecutor.SdkReferenceCopy,new PlannedStep("verify-toolchain",[]));
+        Add(Category.Validate,Operation.Design,["project-root"],[],OperationExecutor.RepositoryDocumentationCheck,new PlannedStep("check-repository-documentation",[]));
         Add(Category.Review,Operation.Prepare,["snapshot"],[],OperationExecutor.Pending,new("verify-review-evidence",[]),new("prepare-review",[]));
         Add(Category.Publish,Operation.Check,["git-checkout","git-identity","receipt-root"],["policy-relative-path"],OperationExecutor.PublicationCheck,new PlannedStep("check-deliverables",[]));
         Add(Category.Publish,Operation.Split,["project-root","source-artifact","generation","artifact-sha256"],["part-bytes"],OperationExecutor.ReleaseSplit,

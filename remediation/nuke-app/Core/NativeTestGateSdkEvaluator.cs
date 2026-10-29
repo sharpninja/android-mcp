@@ -20,12 +20,14 @@ public sealed class NativeTestGateSdkEvaluator(TestGateNativeFactsConfiguration 
     {
         if(request.Configuration!=configuration.Configuration||request.TargetFramework!=configuration.TargetFramework)
             throw Error("SDK_CONFIGURATION_MISMATCH");
+        ValidateInventoryRequest(request,configuration);
         if(!new CanonicalJson().Serialize(System.Text.Json.JsonSerializer.SerializeToElement(request.Sdk)).AsSpan().SequenceEqual(
             new CanonicalJson().Serialize(System.Text.Json.JsonSerializer.SerializeToElement(configuration.Sdk))))throw Error("SDK_PIN_MISMATCH");
         Admit(request.Run.HostProject,"HostProject",request.Run.HostProject);Admit(request.Run.TestsProject,"TestsProject",request.Run.TestsProject);
         var projects=new List<TestGateEvaluatedProject>();
         var pending=new Queue<string>();var seen=new HashSet<string>(StringComparer.Ordinal);
         pending.Enqueue(request.Run.HostProject);pending.Enqueue(request.Run.TestsProject);
+        foreach(var project in request.ProjectInventory??[])pending.Enqueue(project);
         await using(var session=await sessions.OpenAsync(new(request,configuration.ApprovedReadRoots),cancellationToken))
         {
             while(pending.TryDequeue(out var path))
@@ -67,8 +69,9 @@ public sealed class NativeTestGateSdkEvaluator(TestGateNativeFactsConfiguration 
                     if(string.IsNullOrWhiteSpace(property.Value))continue;
                     Admit(property.Value,"Property."+property.Key,path);inputs.Add(new(property.Key,property.Value,path));
                 }
-                projects.Add(new(path,native.TargetPath,inputs,imports,references,[],[]));
+                projects.Add(new(path,native.TargetPath,inputs,imports,references,[],[],native.TestMetadata));
             }
+            ValidateInventoryResult(request.ProjectInventory,projects);
             if(request.Phase==TestGateSdkEvaluationPhase.ResolvedBuildOutputs)
             {
                 var host=projects.Single(project=>project.ProjectPath==request.Run.HostProject);
@@ -87,7 +90,25 @@ public sealed class NativeTestGateSdkEvaluator(TestGateNativeFactsConfiguration 
         }
         return new(projects,request.Sdk.AssemblyFiles);
     }
-    private void Admit(string path,string role,string project)
+    internal static void ValidateInventoryRequest(TestGateSdkEvaluationRequest request,TestGateNativeFactsConfiguration configuration)
+    {
+        var expected=configuration.ProjectInventory;var selected=request.ProjectInventory;
+        if((expected is null)!=(selected is null)||expected is not null&&!expected.SequenceEqual(selected!,StringComparer.Ordinal))
+            throw Error("SOURCE_INPUTS_UNRESOLVED");
+        if(selected is null)return;
+        if(selected.Count==0||selected.Distinct(StringComparer.Ordinal).Count()!=selected.Count||
+            !selected.Contains(request.Run.HostProject,StringComparer.Ordinal)||!selected.Contains(request.Run.TestsProject,StringComparer.Ordinal))
+            throw Error("SOURCE_INPUTS_UNRESOLVED");
+        foreach(var project in selected)Admit(configuration,project,"ProjectInventory",project);
+    }
+    internal static void ValidateInventoryResult(IReadOnlyList<string>? inventory,IReadOnlyList<TestGateEvaluatedProject> projects)
+    {
+        if(inventory is null)return;
+        var observed=projects.Select(project=>project.ProjectPath).ToHashSet(StringComparer.Ordinal);
+        if(observed.Count!=projects.Count||!observed.SetEquals(inventory))throw Error("SOURCE_INPUTS_UNRESOLVED");
+    }
+    private void Admit(string path,string role,string project)=>Admit(configuration,path,role,project);
+    private static void Admit(TestGateNativeFactsConfiguration configuration,string path,string role,string project)
     {
         if(string.IsNullOrWhiteSpace(path)||!Path.IsPathFullyQualified(path))throw Error("SOURCE_INPUTS_UNRESOLVED");
         foreach(var root in configuration.ApprovedReadRoots)

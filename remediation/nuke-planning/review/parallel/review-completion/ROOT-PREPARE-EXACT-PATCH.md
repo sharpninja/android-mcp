@@ -17,11 +17,18 @@ Concrete lazy positive binding sequence, with no reviewer/provider call:
 5. Verify the nine actual head-bound self-review evidence pins named by GitReviewPrerequisiteSource.RequiredChecks. The old plan documents are not automatically completed checklist evidence for a new head. ScopeIntegrationProjects must equal the explicit plan. Store the resulting evaluation/requirements/checklist bytes immutably under the output store and form ReviewPrerequisiteConfiguration from those actual StoredArtifact identities.
 6. Construct the existing GitReviewPrerequisiteSource with that producer-issued configuration and the already observed Git discovery, then let the existing Prepare service validate exact inventories, full successful TRX, scope and public payload and freeze artifacts. Do not construct LaunchService or any reviewer audit/provider dependency.
 
-Exact current missing implementation dependencies:
+Private implementation contribution for the next integration batch:
 
-- Core SDK native/evaluated DTO test metadata and complete project-inventory seed, including child serialization round-trip and source-origin proof. Existing DTOs lack these fields; filling bool/kind from filenames would be false evidence.
+- The existing Core evaluator/child now carries nullable TestMetadata and an explicit complete ProjectInventory. Null additive members are ignored during serialization, preserving existing wire shapes. SDK metadata mock20 preceded production; SAME native20 and affected25 passed65. The immutable SDK handoff includes the exact seven production/two test files and prior hashes.
+- ReviewNativeProjectNormalizer consumes an already completed typed producer result, independently pinned SDK evaluation/source manifest/TRX/policy and the Git-observed definition hashes. It reuses the shared build/TRX/pin authorities, checks complete metadata and definition/source hashes, and produces the lower-camel Review projection without a source label. It never starts a build/test or acts as a second SDK evaluator. Its local positive proof uses the actual NativeTestGateEvidenceProducer with fake native/process boundaries, not an invented admitted=true result.
+- ReviewRequirementRecordNormalizer preserves documented direct records and explicit TEST/AC/TRX coverage claims, pending state and full unknown record members. It never manufactures a criterion Cartesian product or official source label. Unknown wrapper envelopes explicitly remain unavailable.
+- The explicit mixed role extension accepts one test-project row in both scope sets and requires one full unfiltered head/run/host/command-bound TRX body. Source-pinned csproj/property and non-test Gradle policy proposals are staged separately for Root, without canonical edits.
+
+Exact current missing implementation dependencies after those private contributions:
+
+- Root must integrate the proven Core metadata/query delta and the source-pinned explicit project properties/policy, then supply the complete Git-discovered MSBuild denominator to that same evaluator. No path heuristic supplies roles.
 - Reusable extraction of existing Git discovery observation, so producer normalization and existing prerequisite validation share one denominator.
-- Native producer-result -> Review evaluation/TRX normalization bound to the exact Git head. No existing factory emits the current Review prerequisite schema. ComposeNativeTestServices is the genuine fact origin, not a ready-made Review adapter.
+- The native normalization projection is locally implemented/proved, but Root must retain and bind an actual current-head completed producer request/result and exact Git observation in the trusted factory. A serialized public TestGateProducerResult or a consistent source label is not origin authority. ComposeNativeTestServices supplies genuine native facts; Prepare must not call ProduceAsync or start tests.
 - Actual official-plugin exact-ID bridge invocation/normalization/criterion-coverage proof. Installed API documentation is available; live capability/access and exact wrapper method mapping remain unavailable. No fallback to effective/list-all, raw REST or generic pwsh is allowed.
 - Actual nine-item checklist evidence at the eventual reviewed head and the explicit classification/integration policy decision. These cannot be fabricated as part of CLI wiring.
 

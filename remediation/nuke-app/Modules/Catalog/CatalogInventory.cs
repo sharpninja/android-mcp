@@ -54,14 +54,15 @@ public sealed class CatalogInventory(CatalogDatabase database,CatalogContracts c
             using(var query=database.Command("SELECT entry_id,state,revision,document_json FROM overlays ORDER BY entry_id",transaction))
             using(var rows=query.ExecuteReader()) while(rows.Read())
             {
-                var key=rows.GetString(0);var state=rows.GetString(1);var doc=JsonNode.Parse(rows.GetString(3))!.AsObject();states[key]=state;revisions[key]=rows.GetInt64(2);hashes[key]=canonical.Hash(Element(doc));
+                var key=rows.GetString(0);var state=rows.GetString(1);var document=JsonNode.Parse(rows.GetString(3));states[key]=state;revisions[key]=rows.GetInt64(2);hashes[key]=canonical.Hash(Element(document));
                 if(state=="active")
                 {
+                    var doc=document!.AsObject();
                     if(!entrySchema.Evaluate(Element(doc),new(){OutputFormat=OutputFormat.Flag}).IsValid) throw new InvalidDataException("Invalid local overlay Entry contract");
                     if(S(doc["entry_id"])!=key || ContentHash.Sha256(Encoding.UTF8.GetBytes(S(doc["canonical_signature"])))!=key) throw new InvalidDataException("Local overlay canonical identity mismatch");
                     changed.Add(key,doc);
                 }
-                if(!items.ContainsKey(key)) items.Add(key,new JsonObject{["entry_id"]=key,["entity_kind"]=state=="active" ? contracts.EntityKind(Element(doc)) : "other",["variants"]=new JsonArray()});
+                if(!items.ContainsKey(key)) items.Add(key,new JsonObject{["entry_id"]=key,["entity_kind"]=changed.TryGetValue(key,out var activeDocument) ? contracts.EntityKind(Element(activeDocument)) : "other",["variants"]=new JsonArray()});
             }
             JsonObject? Imported(string key)=>Scalar("SELECT document_json FROM registry_entries WHERE registry_id=$registry AND entry_id=$id",transaction,("$registry",registry),("$id",key)) is string raw ? JsonNode.Parse(raw)!.AsObject() : null;
             foreach(var item in changed.ToArray())

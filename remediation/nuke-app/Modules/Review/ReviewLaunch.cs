@@ -138,6 +138,11 @@ public sealed class ReviewLaunchService(IArtifactStore store, IArtifactLeaseProv
                     "--allowedTools", string.Join(',', bootstrap.Evidence.AllowedMcpTools), "--tools", "",
                     "--permission-mode", "dontAsk", "--no-session-persistence", "--print", "--output-format", "stream-json", "--verbose",
                     "--model", Model, "--effort", Effort };
+                // The legacy128000 value was an audited per-response request for its old
+                // profile, not a verified current Opus maximum or a global review budget.
+                // Adopt no inherited output/thinking request without current capability proof.
+                string[] removedEnvironmentKeys = ["CLAUDE_CODE_MAX_OUTPUT_TOKENS", "MAX_THINKING_TOKENS"];
+                ProcessEnvironmentNameRule[] removedEnvironmentNameRules = [new("HV_", ["MAX_", "DEADLINE", "TIMEOUT", "BUDGET"])];
                 var requestPath = relative + "/request.jsonl";
                 var priorRequest = resume ? await OptionalAsync(requestPath) : null;
                 ReviewAssessment assessment;
@@ -178,13 +183,16 @@ public sealed class ReviewLaunchService(IArtifactStore store, IArtifactLeaseProv
                     snapshot.ParentSessionId, snapshot.ParentRequestId, snapshot.Head, prepared.ManifestSha256,
                     requestedModel = Model, requestedEffort = Effort, capability.Tool, arguments = args,
                     prompt = body.ToString(), promptSha256 = sha256(promptBytes), units = assigned.Select(x => x with { Text = "" }),
-                    standardInputPath = absolutePrompt, unified, assistantCaps = (object?)null });
+                    standardInputPath = absolutePrompt, unified, assistantCaps = (object?)null,
+                    removedEnvironmentKeys, removedEnvironmentNameRules,
+                    providerOutputRequestProfile = "Current runtime profile unverified; inherited token overrides are not adopted." });
                 ProcessResult process;
                 try
                 {
                     process = await runner.RunAsync(new(capability.Tool, args, workingDirectory,
                         new Dictionary<string, string> { ["CLAUDE_CODE_EFFORT_LEVEL"] = Effort },
-                        ConfinedPath(artifactRoot, relative + "/private-raw"), absolutePrompt), cancellationToken);
+                        ConfinedPath(artifactRoot, relative + "/private-raw"), absolutePrompt,
+                        RemovedEnvironmentKeys: removedEnvironmentKeys, RemovedEnvironmentNameRules: removedEnvironmentNameRules), cancellationToken);
                 }
                 catch (Exception error) when (error is not OperationCanceledException)
                 {
@@ -291,7 +299,7 @@ public sealed class ReviewLaunchService(IArtifactStore store, IArtifactLeaseProv
         var left = string.Concat(runes.Take(at).Select(x => x.ToString()));
         var right = string.Concat(runes.Skip(at).Select(x => x.ToString()));
         return [new[] { unit with { Text = left, End = unit.Start + at } },
-            new[] { unit with { Text = right, Start = unit.Start + at } }];
+            new[] { unit with { Text = right, Start = unit.Start + at, End = unit.Start + runes.Length } }];
     }
 
     private static string ConfinedPath(string root, string path)

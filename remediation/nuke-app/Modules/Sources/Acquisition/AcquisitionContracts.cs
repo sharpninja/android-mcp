@@ -2,7 +2,7 @@ using AndroidMcp.BuildTool.Core;
 
 namespace AndroidMcp.BuildTool.Modules.Sources.Acquisition;
 
-public enum SourceWireEncoding { Raw, GitilesText }
+public enum SourceWireEncoding { Raw, GitilesText, SnapshotRestoreGitiles, SnapshotFetchGitiles }
 public sealed record SourcePin(string LocalPath,Uri Url,string Revision,string Sha256,long? SizeBytes=null,
     string? GitBlob=null,SourceWireEncoding Encoding=SourceWireEncoding.Raw,string? RequiredLocalSnapshot=null,
     SourceArchivePin? Archive=null,AcquisitionCompatibilityProfile Compatibility=AcquisitionCompatibilityProfile.CanonicalRestore);

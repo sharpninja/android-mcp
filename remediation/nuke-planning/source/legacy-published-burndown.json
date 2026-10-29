@@ -1,23 +1,23 @@
 {
-  "at": "2026-10-29T00:15:27",
+  "at": "2026-10-29T02:20:01",
   "projection_only": true,
   "authoritative_inventory": {
     "path": "remediation/nuke-planning/source/legacy-port-disposition-inventory.json",
-    "sha256": "5cb1b95bb118984b2178b8ec5a23556c851efa8cb10c37d86036e0c9ee35f7a8"
+    "sha256": "77c0e98fefe310f830f436b255ff129eedb47d99e42741d97f2fad667435ec7f"
   },
-  "scope": "Published 198 only. Additional 1275 local historical paths are retained in the sole union and are not inflated into independent published port tasks.",
+  "scope": "Published 198 only. Additional 1278 local historical paths are retained in the sole union and are not inflated into independent published port tasks.",
   "totals": {
     "published_paths": 198,
     "canonical_responsibility_groups": 134,
-    "normally_verified_files": 51,
+    "normally_verified_files": 53,
     "partially_verified_files": 4,
-    "files_without_normal_method_proof": 143,
+    "files_without_normal_method_proof": 141,
     "normal_method_bindings_by_file": 278,
     "unique_method_bindings_by_group": 201,
     "published_execution_retirements": 0,
     "pr_eligible_paths": 47,
-    "normally_closed_groups": 33,
-    "open_canonical_groups": 101,
+    "normally_closed_groups": 34,
+    "open_canonical_groups": 100,
     "safe_to_delete": 0,
     "hv_accepted": 0
   },
@@ -74,10 +74,10 @@
       ],
       "published_paths": 99,
       "canonical_responsibility_groups": 68,
-      "normal_file_proofs": 31,
+      "normal_file_proofs": 33,
       "normal_method_bindings_by_file": 155,
-      "normally_closed_groups": 17,
-      "open_canonical_groups": 51,
+      "normally_closed_groups": 18,
+      "open_canonical_groups": 50,
       "published_execution_retirements": 0,
       "pr_eligible_test_or_file_paths": 27
     },
@@ -3601,14 +3601,17 @@
         "release011"
       ],
       "services": [
-        "Java helper-owned JavaSourceExtractor/JavaFileContext/JvmSourceLinker with pinned native runtime0.25.2+grammar0.23.5"
+        "Java helper-owned JavaSourceExtractor/JavaFileContext/JvmSourceLinker with pinned native runtime0.25.2+grammar0.23.5",
+        "JavaSourceExtractor over the existing pinned JavaNativeParser; shared SourceSyntax/SourceText services"
       ],
-      "normally_verified_file_paths": [],
+      "normally_verified_file_paths": [
+        "rehydration/producers/release-011/tooling/java_source.py",
+        "remediation/catalog/tooling/java_source.py"
+      ],
       "normal_method_bindings": [],
-      "normally_closed_all_published_paths": false,
+      "normally_closed_all_published_paths": true,
       "remaining_caller_and_profile_duties": [
-        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "Canonical and release-011 original bodies are independently SHA-pinned. Both supported native profile routes reuse the same body. Native C# identity is distinct from historical Python/package/cache identity; this does not relabel historical cache bytes or claim unchanged historical producer-package execution."
       ]
     },
     {
@@ -13087,10 +13090,13 @@
       "primary_code_path": "remediation/catalog/tooling/java_source.py",
       "explicit_profiles": "release011",
       "services": [
-        "Java helper-owned JavaSourceExtractor/JavaFileContext/JvmSourceLinker with pinned native runtime0.25.2+grammar0.23.5"
+        "Java helper-owned JavaSourceExtractor/JavaFileContext/JvmSourceLinker with pinned native runtime0.25.2+grammar0.23.5",
+        "JavaSourceExtractor over the existing pinned JavaNativeParser; shared SourceSyntax/SourceText services"
       ],
-      "additional_responsibilities": [],
-      "normal_file_verified": false,
+      "additional_responsibilities": [
+        "Exact producer-helper bodies and required callers verified by owner body/fixture evidence. Supporting original test proofs are reused, not new producer-test methods. Parser unrestricted-input/corpus domains and HV remain separate."
+      ],
+      "normal_file_verified": true,
       "normal_verified_methods": [],
       "decommissionable_from_pr": false,
       "execution_retired": false,
@@ -13158,75 +13164,14 @@
           "indent": 1
         }
       ],
-      "pending_function_anchors": [
-        {
-          "name": "parse",
-          "line": 13,
-          "indent": 0
-        },
-        {
-          "name": "txt",
-          "line": 16,
-          "indent": 1
-        },
-        {
-          "name": "mask_comments",
-          "line": 24,
-          "indent": 1
-        },
-        {
-          "name": "qualify_anns",
-          "line": 26,
-          "indent": 1
-        },
-        {
-          "name": "modifiers",
-          "line": 43,
-          "indent": 1
-        },
-        {
-          "name": "type_text",
-          "line": 46,
-          "indent": 1
-        },
-        {
-          "name": "parameter",
-          "line": 53,
-          "indent": 1
-        },
-        {
-          "name": "row",
-          "line": 60,
-          "indent": 1
-        },
-        {
-          "name": "excluded_node",
-          "line": 69,
-          "indent": 1
-        },
-        {
-          "name": "type_decl",
-          "line": 70,
-          "indent": 1
-        },
-        {
-          "name": "child",
-          "line": 83,
-          "indent": 2
-        },
-        {
-          "name": "errors",
-          "line": 113,
-          "indent": 1
-        }
-      ],
-      "pending_owner_method_list": "<module-body-and-required-callers>",
+      "pending_function_anchors": [],
+      "pending_owner_method_list": null,
       "remaining": [
-        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "Canonical and release-011 original bodies are independently SHA-pinned. Both supported native profile routes reuse the same body. Native C# identity is distinct from historical Python/package/cache identity; this does not relabel historical cache bytes or claim unchanged historical producer-package execution."
       ],
       "bounded_service_test_evidence": [
-        "85Java mocks passed within independently inspected162test TRX; native asset/build/real service gates pending; no Python wheel/system0.26 fallback"
+        "85Java mocks passed within independently inspected162test TRX; native asset/build/real service gates pending; no Python wheel/system0.26 fallback",
+        "Root full017: actual Java AST, boundary, complete row/report, Unicode comment/word, exception and Catalog cache/CLI classes listed by exactClassCounts"
       ],
       "anchor_limit": "Lexical source-text anchors, not Python execution/AST or automatic proof each nested helper is an independent required feature. Same bytes share one implementation authority, but profile/caller obligations are retained.",
       "safe_to_delete": false,
@@ -22734,10 +22679,13 @@
       "primary_code_path": "remediation/catalog/tooling/java_source.py",
       "explicit_profiles": "canonical-or-explicit-owner-profile",
       "services": [
-        "Java helper-owned JavaSourceExtractor/JavaFileContext/JvmSourceLinker with pinned native runtime0.25.2+grammar0.23.5"
+        "Java helper-owned JavaSourceExtractor/JavaFileContext/JvmSourceLinker with pinned native runtime0.25.2+grammar0.23.5",
+        "JavaSourceExtractor over the existing pinned JavaNativeParser; shared SourceSyntax/SourceText services"
       ],
-      "additional_responsibilities": [],
-      "normal_file_verified": false,
+      "additional_responsibilities": [
+        "Exact producer-helper bodies and required callers verified by owner body/fixture evidence. Supporting original test proofs are reused, not new producer-test methods. Parser unrestricted-input/corpus domains and HV remain separate."
+      ],
+      "normal_file_verified": true,
       "normal_verified_methods": [],
       "decommissionable_from_pr": false,
       "execution_retired": false,
@@ -22805,74 +22753,14 @@
           "indent": 1
         }
       ],
-      "pending_function_anchors": [
-        {
-          "name": "parse",
-          "line": 13,
-          "indent": 0
-        },
-        {
-          "name": "txt",
-          "line": 16,
-          "indent": 1
-        },
-        {
-          "name": "mask_comments",
-          "line": 24,
-          "indent": 1
-        },
-        {
-          "name": "qualify_anns",
-          "line": 26,
-          "indent": 1
-        },
-        {
-          "name": "modifiers",
-          "line": 43,
-          "indent": 1
-        },
-        {
-          "name": "type_text",
-          "line": 46,
-          "indent": 1
-        },
-        {
-          "name": "parameter",
-          "line": 53,
-          "indent": 1
-        },
-        {
-          "name": "row",
-          "line": 60,
-          "indent": 1
-        },
-        {
-          "name": "excluded_node",
-          "line": 69,
-          "indent": 1
-        },
-        {
-          "name": "type_decl",
-          "line": 70,
-          "indent": 1
-        },
-        {
-          "name": "child",
-          "line": 83,
-          "indent": 2
-        },
-        {
-          "name": "errors",
-          "line": 113,
-          "indent": 1
-        }
-      ],
-      "pending_owner_method_list": "<module-body-and-required-callers>",
+      "pending_function_anchors": [],
+      "pending_owner_method_list": null,
       "remaining": [
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
+        "Canonical and release-011 original bodies are independently SHA-pinned. Both supported native profile routes reuse the same body. Native C# identity is distinct from historical Python/package/cache identity; this does not relabel historical cache bytes or claim unchanged historical producer-package execution."
       ],
       "bounded_service_test_evidence": [
-        "85Java mocks passed within independently inspected162test TRX; native asset/build/real service gates pending; no Python wheel/system0.26 fallback"
+        "85Java mocks passed within independently inspected162test TRX; native asset/build/real service gates pending; no Python wheel/system0.26 fallback",
+        "Root full017: actual Java AST, boundary, complete row/report, Unicode comment/word, exception and Catalog cache/CLI classes listed by exactClassCounts"
       ],
       "anchor_limit": "Lexical source-text anchors, not Python execution/AST or automatic proof each nested helper is an independent required feature. Same bytes share one implementation authority, but profile/caller obligations are retained.",
       "safe_to_delete": false,
@@ -31475,23 +31363,6 @@
       ],
       "remaining": [
         "Exact check() committed checksums, all repository markdown percent-decoded local links excluding .git, all SVG XML parse and full HTML remote-asset syntax remain unbound. main() CLI/root/JSON/exit pending."
-      ]
-    },
-    {
-      "derived_from_inventory": true,
-      "owner": "Java",
-      "category": "Sources",
-      "canonical_responsibility_key": "Java|Sources|ebc8f756771921d607ce7f30c20d66e69fd92d5a8a1a8fb9d52ff51b35064940",
-      "published_paths": [
-        "rehydration/producers/release-011/tooling/java_source.py",
-        "remediation/catalog/tooling/java_source.py"
-      ],
-      "services": [
-        "Java helper-owned JavaSourceExtractor/JavaFileContext/JvmSourceLinker with pinned native runtime0.25.2+grammar0.23.5"
-      ],
-      "remaining": [
-        "Frozen release011 profile must be bound explicitly; current-candidate basename/hash equality alone proves no profile parity.",
-        "Whole-path/profile/CLI integration and exact assertion completeness not established by a shared module name or hash."
       ]
     },
     {

@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace AndroidMcp.BuildTool.Core;
 
 // This is the native SDK API boundary, not another evaluator DTO authority. The
@@ -14,7 +16,8 @@ public sealed record TestGateSdkNativeImport(string ImportedProjectFullPath,stri
 public sealed record TestGateSdkNativeProject(string ProjectFullPath,string ToolsPath,
     string Configuration,string TargetFramework,string TargetPath,
     IReadOnlyList<TestGateSdkNativeItem> Items,IReadOnlyList<TestGateSdkNativeImport> Imports,
-    IReadOnlyDictionary<string,string> ParticipatingFileProperties,IReadOnlyList<string> EvaluationIssues);
+    IReadOnlyDictionary<string,string> ParticipatingFileProperties,IReadOnlyList<string> EvaluationIssues,
+    [property:JsonIgnore(Condition=JsonIgnoreCondition.WhenWritingNull)] TestGateProjectTestMetadata? TestMetadata=null);
 public interface ITestGateSdkNativeSession : IAsyncDisposable
 {
     // Project.LoadProject and actual evaluated items/Project.Imports only. No
